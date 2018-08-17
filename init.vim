@@ -1,24 +1,53 @@
+
+
 """""""""" HOUSEKEEPING """"""""""
 syntax on
 set nowrap
 set encoding=utf8
+set mouse=a
 " escape can blow me
 nnoremap <C-c> <Esc>
 " Gets rid of highlights after search
-nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+nnoremap <silent> <F7> :nohlsearch<CR><F7>
 " Line numbers
 set number
 " Toggle line numbers
 nnoremap <F6> :set nonumber!<CR>
+nnoremap <F9> :vsplit<CR>
+nnoremap <F10> :split<CR>
+nnoremap <F12> :only<CR>
+"if (has("termguicolors"))
+"  set termguicolors
+"endif
 
 if &compatible
   set nocompatible               " Be iMproved
 endif
+
 " Remap window switch
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" Remap terminal switch
+tnoremap <C-[> <C-\><C-n>
+tnoremap <C-c><Esc> <Esc>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" Enable Elite mode, No ARRRROWWS!!!!
+let g:elite_mode=1
+" Disable arrow movement, resize splits instead.
+if get(g:, 'elite_mode')
+	nnoremap <Up>    :resize -2<CR>
+	nnoremap <Down>  :resize +2<CR>
+	nnoremap <Left>  :vertical resize -2<CR>
+	nnoremap <Right> :vertical resize +2<CR>
+endif
+
 
 """""""""" END HOUSEKEEPING """"""""""
 
@@ -44,7 +73,7 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('ludovicchabant/vim-gutentags')
   " Tagbar
   call dein#add('majutsushi/tagbar')
-  " Add or remove your plugins here:
+  " Add or remove your plugins here: TODO
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   " Themes
@@ -53,6 +82,8 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('jiangmiao/auto-pairs')
   " NERDTree
   call dein#add('scrooloose/nerdtree')
+  " BufOnly use :BufOnly to unload all or pass it a single buffer
+  call dein#add('vim-scripts/BufOnly.vim')
   " For autocomplete
   call dein#add('Shougo/deoplete.nvim')
     " For vim 8+
@@ -92,20 +123,23 @@ colorscheme space-vim-dark
 "  hi SignColumn ctermbg=NONE guibg=NONE
 "endif
 
-"   Range:   233 (darkest) ~ 238 (lightest)
-"   Default: 235
+" Range:   233 (darkest) ~ 238 (lightest)
+" Default: 235
 let g:space_vim_dark_background = 233
 color space-vim-dark
 hi Comment guifg=#5C6370 ctermfg=59
 "hi Comment cterm=italic
 "set background=dark
 "set termguicolors
+" Enable highlighting of the current line
+set cursorline
 
 """""""""" END THEME """"""""""
 
+"""""""""" BEGIN CONFIGS """"""""""
+
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-
 " Startify
 let g:startify_custom_header = [                                                                                                                                                                                 
                 \ '                                ',                                                                                                                                            
@@ -119,10 +153,9 @@ let g:startify_custom_header = [
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
-
 " NERDTree
 nmap <F5> :NERDTreeToggle<CR>
 
+"""""""""" END CONFIGS """"""""""
 
-
-
+"TODO figure out cscope
