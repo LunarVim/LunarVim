@@ -13,6 +13,9 @@
 <Down>	init.vim	/^	nnoremap <Down>  :resize +2<CR>$/;"	m
 <F10>	init.vim	/^nnoremap <F10> :split<CR>$/;"	m
 <F12>	init.vim	/^nnoremap <F12> :only<CR>$/;"	m
+<F2>	init.vim	/^nnoremap <F2> :BuffergatorToggle<CR>$/;"	m
+<F3>	init.vim	/^nnoremap <F3> :SyntasticCheck<CR>$/;"	m
+<F4>	init.vim	/^nmap <F4> :SearchTasks *<CR>$/;"	m
 <F5>	init.vim	/^nmap <F5> :NERDTreeToggle<CR>$/;"	m
 <F6>	init.vim	/^nnoremap <F6> :set nonumber!<CR>$/;"	m
 <F7>	init.vim	/^nnoremap <silent> <F7> :nohlsearch<CR><F7>$/;"	m
@@ -22,8 +25,16 @@
 <Right>	init.vim	/^	nnoremap <Right> :vertical resize +2<CR>$/;"	m
 <TAB>	init.vim	/^inoremap <expr><TAB> pumvisible() ? "\\<C-n>" : "\\<TAB>"$/;"	m
 <Up>	init.vim	/^	nnoremap <Up>    :resize -2<CR>$/;"	m
+base16colorspace	init.vim	/^let base16colorspace=256  " Access colors present in 256 colorspace$/;"	v
+g:airline#extensions#tabline#enabled	init.vim	/^let g:airline#extensions#tabline#enabled = 1$/;"	v
+g:airline_powerline_fonts	init.vim	/^let g:airline_powerline_fonts = 1 $/;"	v
+g:airline_theme	init.vim	/^  let g:airline_theme='violet'$/;"	v
+g:ctrlp_cmd	init.vim	/^let g:ctrlp_cmd = 'CtrlP'$/;"	v
+g:ctrlp_map	init.vim	/^let g:ctrlp_map = '<c-p>'$/;"	v
 g:deoplete#enable_at_startup	init.vim	/^let g:deoplete#enable_at_startup = 1$/;"	v
 g:elite_mode	init.vim	/^let g:elite_mode=1$/;"	v
+g:hybrid_custom_term_colors	init.vim	/^let g:hybrid_custom_term_colors = 1$/;"	v
 g:space_vim_dark_background	init.vim	/^let g:space_vim_dark_background = 233$/;"	v
 g:startify_custom_header	init.vim	/^let g:startify_custom_header = [                                                                /;"	v
+g:syntastic_cpp_config_file	init.vim	/^let g:syntastic_cpp_config_file='.syntastic_cpp_config'$/;"	v
 nvim	README.md	/^# nvim$/;"	c
