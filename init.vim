@@ -109,6 +109,7 @@ if dein#load_state('~/chris/.cache/dein')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
   " For autocomplete
+  call dein#add('zchee/deoplete-jedi')
   call dein#add('Shougo/deoplete.nvim')
     " For vim 8+
     if !has('nvim')
@@ -133,7 +134,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:deoplete#enable_at_startup = 1
 """""""""" END PLUGINS """"""""""
 
 """""""""" SPACEVIM THEME """"""""""
@@ -149,7 +149,7 @@ else
   colorscheme space-vim-dark
 
 " Terminal Transparency
-"if $TERM_PROGRAM =~ 'terminator'
+"if $TERM_PROGRAM =~ 'Terminal'
 "  hi Normal     ctermbg=NONE guibg=NONE
 "  hi LineNr     ctermbg=NONE guibg=NONE
 "  hi SignColumn ctermbg=NONE guibg=NONE
@@ -214,5 +214,4 @@ let g:ctrlp_cmd = 'CtrlP'
 "TODO get my function keys sorted
 "TODO create function key section
 "TODO SYNTAX CHECKING
-
-let g:deoplete#enable_at_startup = 1
+"TODO figure out virtualenv for neovim
