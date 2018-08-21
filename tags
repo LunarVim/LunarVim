@@ -28,6 +28,8 @@
 base16colorspace	init.vim	/^let base16colorspace=256  " Access colors present in 256 colorspace$/;"	v
 g:airline#extensions#tabline#enabled	init.vim	/^let g:airline#extensions#tabline#enabled = 1$/;"	v
 g:airline_powerline_fonts	init.vim	/^let g:airline_powerline_fonts = 1 $/;"	v
+g:airline_symbols	init.vim	/^  let g:airline_symbols = {}$/;"	v
+g:airline_symbols	init.vim	/^let g:airline_symbols.space = "\\ua0"$/;"	v
 g:airline_theme	init.vim	/^  let g:airline_theme='violet'$/;"	v
 g:ale_c_gcc_options	init.vim	/^let g:ale_c_gcc_options='-Wall -Wextra'$/;"	v
 g:ale_cpp_gcc_options	init.vim	/^let g:ale_cpp_gcc_options='-Wall -Wextra'$/;"	v
