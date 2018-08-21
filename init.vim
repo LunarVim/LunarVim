@@ -198,8 +198,8 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 " ALE
 let g:ale_linters = {
-    \ 'cpp' : ['gcc']
-    \ 'c' : [gcc]
+    \ 'cpp' : ['gcc'],
+    \ 'c' : ['gcc']
     \}
 let g:ale_cpp_gcc_options='-Wall -Wextra'
 let g:ale_c_gcc_options='-Wall -Wextra'
