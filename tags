@@ -8,7 +8,10 @@
 <C-c>	init.vim	/^nnoremap <C-c> <Esc>$/;"	m
 <C-h>	init.vim	/^nnoremap <C-h> <C-w>h$/;"	m
 <C-j>	init.vim	/^nnoremap <C-j> <C-w>j$/;"	m
+<C-k>	init.vim	/^imap <C-k>     <Plug>(neosnippet_expand_or_jump)$/;"	m
 <C-k>	init.vim	/^nnoremap <C-k> <C-w>k$/;"	m
+<C-k>	init.vim	/^smap <C-k>     <Plug>(neosnippet_expand_or_jump)$/;"	m
+<C-k>	init.vim	/^xmap <C-k>     <Plug>(neosnippet_expand_target)$/;"	m
 <C-l>	init.vim	/^nnoremap <C-l> <C-w>l$/;"	m
 <Down>	init.vim	/^	nnoremap <Down>  :resize +2<CR>$/;"	m
 <F10>	init.vim	/^nnoremap <F10> :split<CR>$/;"	m
@@ -35,6 +38,9 @@ g:airline_theme	init.vim	/^  let g:airline_theme='violet'$/;"	v
 g:ale_c_gcc_options	init.vim	/^let g:ale_c_gcc_options='-Wall -Wextra'$/;"	v
 g:ale_cpp_gcc_options	init.vim	/^let g:ale_cpp_gcc_options='-Wall -Wextra'$/;"	v
 g:ale_linters	init.vim	/^let g:ale_linters = {$/;"	v
+g:chromatica#enable_at_startup	init.vim	/^let g:chromatica#enable_at_startup=1$/;"	v
+g:chromatica#libclang_path	init.vim	/^    let g:chromatica#libclang_path='\/usr\/lib\/llvm-6.0\/lib'$/;"	v
+g:chromatica#responsive_mode	init.vim	/^let g:chromatica#responsive_mode=1$/;"	v
 g:ctrlp_cmd	init.vim	/^let g:ctrlp_cmd = 'CtrlP'$/;"	v
 g:ctrlp_map	init.vim	/^let g:ctrlp_map = '<c-p>'$/;"	v
 g:deoplete#enable_at_startup	init.vim	/^let g:deoplete#enable_at_startup = 1$/;"	v
@@ -49,6 +55,7 @@ g:multi_cursor_skip_key	init.vim	/^let g:multi_cursor_skip_key            = '<C-
 g:multi_cursor_start_key	init.vim	/^let g:multi_cursor_start_key           = 'g<C-n>'$/;"	v
 g:multi_cursor_start_word_key	init.vim	/^let g:multi_cursor_start_word_key      = '<C-n>'$/;"	v
 g:multi_cursor_use_default_mapping	init.vim	/^let g:multi_cursor_use_default_mapping=0$/;"	v
+g:neosnippet#enable_completed_snippet	init.vim	/^let g:neosnippet#enable_completed_snippet = 1$/;"	v
 g:python3_host_prog	init.vim	/^    let g:python3_host_prog = '\/bin\/python3.6'$/;"	v
 g:python3_host_prog	init.vim	/^    let g:python3_host_prog = '\/usr\/bin\/python3.6'$/;"	v
 g:space_vim_dark_background	init.vim	/^let g:space_vim_dark_background = 233$/;"	v

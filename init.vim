@@ -92,17 +92,16 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('chriskempson/base16-vim')
   " Auto Pairs
   call dein#add('jiangmiao/auto-pairs')
-  " Buffergator use \b
+    " Buffergator use \b
   call dein#add('jeetsukumaran/vim-buffergator')
   " Ctrlp 
   call dein#add('ctrlpvim/ctrlp.vim')
+  " Searchtasks searches for TODO, FIXME, XXX and such run :SearchTasks .  
+  call dein#add('gilsondev/searchtasks.vim') 
+  "Syntax 
+  call dein#add('w0rp/ale') 
+  call dein#add('arakashic/chromatica.nvim') 
   "Git
-  call dein#add('tpope/vim-fugitive')
-  " Searchtasks searches for TODO, FIXME, XXX and such run :SearchTasks . 
-  call dein#add('gilsondev/searchtasks.vim')
-  " Syntax 
-  call dein#add('w0rp/ale')
-  " Git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
   " Multiple Cursors
@@ -114,9 +113,12 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('junegunn/fzf')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
+
   " For autocomplete
   call dein#add('zchee/deoplete-jedi')
   call dein#add('Shougo/deoplete.nvim')
+  " Auto flow
+  call dein#add('wokalski/autocomplete-flow') 
     " For vim 8+
     if !has('nvim')
       call dein#add('roxma/nvim-yarp')
@@ -175,6 +177,11 @@ set cursorline
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+" NeoSnippet
+let g:neosnippet#enable_completed_snippet = 1
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Startify
 let g:startify_custom_header = [                                                                                                                                                                                 
 	\ '     _   __                _         ',
@@ -223,12 +230,16 @@ if !empty(glob("/bin/python3.6"))
     let g:python3_host_prog = '/bin/python3.6'
 else
     " For Debian based   
+    let g:chromatica#libclang_path='/usr/lib/llvm-6.0/lib'
     let g:python3_host_prog = '/usr/bin/python3.6'
 endif
+" Chromatica
+let g:chromatica#enable_at_startup=1
+let g:chromatica#responsive_mode=1
 " FZF
 if !empty((glob("~/.fzf")))
     set rtp+=~/.fzf
-
+endif
 """"""""""" FUNCTION KEYS """"""""""""""
 "TODO figure out cscope
 "TODO create function key section
