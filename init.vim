@@ -96,14 +96,22 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('jeetsukumaran/vim-buffergator')
   " Ctrlp 
   call dein#add('ctrlpvim/ctrlp.vim')
+  "Git
+  call dein#add('tpope/vim-fugitive')
   " Searchtasks searches for TODO, FIXME, XXX and such run :SearchTasks . 
   call dein#add('gilsondev/searchtasks.vim')
   " Syntax 
   call dein#add('w0rp/ale')
+  " Git
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
   " Multiple Cursors
   call dein#add('terryma/vim-multiple-cursors')
   " NERDTree
   call dein#add('scrooloose/nerdtree')
+  " FZF
+  call dein#add('junegunn/fzf.vim')
+  call dein#add('junegunn/fzf')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
   " For autocomplete
@@ -137,7 +145,7 @@ endif
 """""""""" SPACEVIM THEME """"""""""
 
 " Set theme
-if strftime('%H') >= 7 && strftime('%H') < 10 
+if strftime('%H') >= 7 && strftime('%H') < 8 
   set background=light
   colorscheme stellarized
 else
@@ -175,11 +183,11 @@ let g:startify_custom_header = [
 	\ '  / /|  /  __/ /_/ / |/ / / / / / / /',
 	\ ' /_/ |_/\___/\____/|___/_/_/ /_/ /_/ ']
 
-let g:syntastic_cpp_config_file='.syntastic_cpp_config'
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 " NERDTree
 nmap <F5> :NERDTreeToggle<CR>
+let NERDTreeShowHidden = 1
 " SearchTasks
 nmap <F4> :SearchTasks *<CR>
 """""""""" END CONFIGS """"""""""
@@ -217,6 +225,9 @@ else
     " For Debian based   
     let g:python3_host_prog = '/usr/bin/python3.6'
 endif
+" FZF
+if !empty((glob("~/.fzf")))
+    set rtp+=~/.fzf
 
 """"""""""" FUNCTION KEYS """"""""""""""
 "TODO figure out cscope

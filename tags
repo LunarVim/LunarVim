@@ -25,6 +25,7 @@
 <Right>	init.vim	/^	nnoremap <Right> :vertical resize +2<CR>$/;"	m
 <TAB>	init.vim	/^inoremap <expr><TAB> pumvisible() ? "\\<C-n>" : "\\<TAB>"$/;"	m
 <Up>	init.vim	/^	nnoremap <Up>    :resize -2<CR>$/;"	m
+NERDTreeShowHidden	init.vim	/^let NERDTreeShowHidden = 1$/;"	v
 base16colorspace	init.vim	/^let base16colorspace=256  " Access colors present in 256 colorspace$/;"	v
 g:airline#extensions#tabline#enabled	init.vim	/^let g:airline#extensions#tabline#enabled = 1$/;"	v
 g:airline_powerline_fonts	init.vim	/^let g:airline_powerline_fonts = 1 $/;"	v
@@ -52,5 +53,4 @@ g:python3_host_prog	init.vim	/^    let g:python3_host_prog = '\/bin\/python3.6'$
 g:python3_host_prog	init.vim	/^    let g:python3_host_prog = '\/usr\/bin\/python3.6'$/;"	v
 g:space_vim_dark_background	init.vim	/^let g:space_vim_dark_background = 233$/;"	v
 g:startify_custom_header	init.vim	/^let g:startify_custom_header = [                                                                /;"	v
-g:syntastic_cpp_config_file	init.vim	/^let g:syntastic_cpp_config_file='.syntastic_cpp_config'$/;"	v
 nvim	README.md	/^# nvim$/;"	c
