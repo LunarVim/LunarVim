@@ -115,8 +115,8 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('scrooloose/nerdtree')
   call dein#add('scrooloose/nerdcommenter')
   " FZF
-  call dein#add('junegunn/fzf.vim')
-  call dein#add('junegunn/fzf')
+  call dein#add('junegunn/fzf.vim',  { 'dir': '~/.fzf', 'do': './install --all' })
+  "call dein#add('junegunn/fzf')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
   " For autocomplete
@@ -227,7 +227,6 @@ else
 
     "Airline
     set noshowmode
-    autocmd VimEnter AirlineRefresh
     let g:airline_theme='violet'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1 
