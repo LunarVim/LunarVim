@@ -7,6 +7,7 @@ set mouse=a
 set splitbelow
 set splitright
 set t_Co=256
+set autochdir
 " escape can blow me
 nnoremap <C-c> <Esc>
 " Set Proper Tabs
@@ -26,7 +27,8 @@ nnoremap <F9> :vsplit<CR>
 nnoremap <F10> :split<CR>
 nnoremap <F12> :only<CR>
 nnoremap <F2> :BuffergatorToggle<CR>
-nnoremap <F3> :SyntasticCheck<CR>
+nnoremap <F3> :Files<CR>
+nnoremap <F1> :10split term://bash<CR> 
 
 " Be iMproved
 if &compatible
@@ -56,7 +58,9 @@ if get(g:, 'elite_mode')
 	nnoremap <Left>  :vertical resize -2<CR>
 	nnoremap <Right> :vertical resize +2<CR>
 endif
-
+nnoremap <TAB> :bnext<CR>
+nnoremap <S-TAB> :bprevious<CR>
+let mapleader = ","
 """""""""" END HOUSEKEEPING """"""""""
 
 """""""""" PLUGINS """"""""""
@@ -88,6 +92,7 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('liuchengxu/space-vim-dark')
   call dein#add('nightsense/stellarized')
   call dein#add('vim-airline/vim-airline')
+  "call dein#add('itchyny/lightline.vim')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('chriskempson/base16-vim')
   " Auto Pairs
@@ -108,12 +113,12 @@ if dein#load_state('~/chris/.cache/dein')
   call dein#add('terryma/vim-multiple-cursors')
   " NERDTree
   call dein#add('scrooloose/nerdtree')
+  call dein#add('scrooloose/nerdcommenter')
   " FZF
   call dein#add('junegunn/fzf.vim')
   call dein#add('junegunn/fzf')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
-
   " For autocomplete
   call dein#add('zchee/deoplete-jedi')
   call dein#add('Shougo/deoplete.nvim')
@@ -151,23 +156,87 @@ if strftime('%H') >= 7 && strftime('%H') < 8
   set background=light
   colorscheme stellarized
 else
-  let g:airline_theme='violet'
   set background=dark
   colorscheme space-vim-dark
 
-" Range:   233 (darkest) ~ 238 (lightest)
-" Default: 235
-let g:space_vim_dark_background = 233
-color space-vim-dark
-hi Comment guifg=#5C6370 ctermfg=59
-let base16colorspace=256  " Access colors present in 256 colorspace
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1 
-let g:hybrid_custom_term_colors = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
+  " Range:   233 (darkest) ~ 238 (lightest)
+  " Default: 235
+  let g:space_vim_dark_background = 233
+  color space-vim-dark
+  hi Comment guifg=#5C6370 ctermfg=59
+  let base16colorspace=256  " Access colors present in 256 colorspace
+  if !empty(glob("/usr/lib/rpm/redhat"))
+    "Lightline
+    if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+  " unicode symbols
+  let g:airline_left_sep = '»'
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '«'
+  let g:airline_right_sep = '◀'
+  let g:airline_symbols.crypt = '🔒'
+  let g:airline_symbols.linenr = '☰'
+  let g:airline_symbols.linenr = '␊'
+  let g:airline_symbols.linenr = '␤'
+  let g:airline_symbols.linenr = '¶'
+  let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.maxlinenr = '㏑'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'ρ'
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.paste = '∥'
+  let g:airline_symbols.spell = 'Ꞩ'
+  let g:airline_symbols.notexists = 'Ɇ'
+  let g:airline_symbols.whitespace = 'Ξ'
+
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = '☰'
+  let g:airline_symbols.maxlinenr = ''
+
+  " old vim-powerline symbols
+  let g:airline_left_sep = '⮀'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_right_sep = '⮂'
+  let g:airline_right_alt_sep = '⮃'
+  let g:airline_symbols.branch = '⭠'
+  let g:airline_symbols.readonly = '⭤'
+  let g:airline_symbols.linenr = '⭡'
+
+    "let g:loaded_airline = 1
+    "set showtabline=2
+    "set noshowmode
+    "let g:lightline = {
+    "  \ 'colorscheme': 'jellybeans',
+    "  \ 'active': {
+    "  \   'left': [['mode', 'paste'],
+    "  \           ['gitbranch', 'readonly', 'filename', 'modified'] ]
+    "  \ },
+    "  \ 'component_function': {
+    "  \   'gitbranch': 'fugitive#head'
+    " \ },
+    "  \ }
+  else
+
+    "Airline
+    set noshowmode
+    autocmd VimEnter AirlineRefresh
+    let g:airline_theme='violet'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1 
+    let g:hybrid_custom_term_colors = 1
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+      let g:airline_symbols.space = "\ua0"
+    endif
+  endif
 endif
 " Enable highlighting of the current line
 set cursorline
@@ -205,7 +274,6 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " MULTI CURSOR
 let g:multi_cursor_use_default_mapping=0
-
 " Default mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -219,14 +287,19 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " ALE
 let g:ale_linters = {
     \ 'cpp' : ['gcc'],
-    \ 'c' : ['gcc']
+    \ 'c' : ['gcc'],
+    \ 'vim' : ['vint']
     \}
 let g:ale_cpp_gcc_options='-Wall -Wextra'
 let g:ale_c_gcc_options='-Wall -Wextra'
+let g:ale_vim_vint_executable = 'vint'
+let g:ale_vim_vint_show_style_issues = 1
+map <leader>a :ALEToggle<CR>
 
 " Python
-if !empty(glob("/bin/python3.6"))
+if !empty(glob("/usr/lib/rpm/redhat"))
     " For RHEL
+    let g:chromatica#libclang_path='/usr/lib64/llvm'
     let g:python3_host_prog = '/bin/python3.6'
 else
     " For Debian based   

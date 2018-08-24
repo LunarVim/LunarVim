@@ -14,3 +14,7 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 
 # run installer
 sh ./installer.sh ~/.cache/dein
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+~/.fzf/install
