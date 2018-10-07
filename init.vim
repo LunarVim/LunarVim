@@ -83,6 +83,9 @@ if dein#load_state('~/chris/.cache/dein')
   "call dein#add('Yggdroot/indentLine')
   " Gutentags
   call dein#add('ludovicchabant/vim-gutentags')
+  call dein#add('steffanc/cscopemaps.vim')
+  call dein#add('brookhong/cscope.vim')
+  call dein#add('vim-scripts/autoload_cscope.vim')
   " Tagbar
   call dein#add('majutsushi/tagbar')
   " Add or remove your plugins here: TODO
