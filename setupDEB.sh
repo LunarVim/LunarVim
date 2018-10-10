@@ -9,6 +9,9 @@ sudo apt install -y curl
 # used for clipboard
 sudo apt install -y xsel
 
+# pesky fonts
+sudo apt install -y powerline-fonts
+
 # pul sown installer
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 
