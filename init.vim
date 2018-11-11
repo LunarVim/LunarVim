@@ -311,8 +311,13 @@ let g:ale_linters = {
     \ 'c' : ['gcc'],
     \ 'vim' : ['vint'],
     \ 'python': ['flake8', 'pyre', 'vulture', 'prospector', 'pyflakes', 'mypy', 'pyls'],
-    \ 'javascript': ['eslint', 'flow', 'flow-language-server', 'jscs', 'jshint', 'standard', 'tsserver', 'xo']
+    \ 'javascript': ['eslint']
     \}
+
+"let g:LanguageClient_serverCommands = {
+"    \ 'javascript': ['flow-language-server', '--stdio'],
+"    \ }
+
 let g:ale_cpp_gcc_options='-Wall -Wextra'
 let g:ale_c_gcc_options='-Wall -Wextra'
 let g:ale_vim_vint_executable = 'vint'
