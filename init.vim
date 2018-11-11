@@ -299,11 +299,19 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 " ALE
+" Note pylint sucks
+" Note for javascript you need to:
+" npm install eslint --save-dev
+" ./node_modules/.bin/eslint --init
+" or for global
+" npm install -g eslint
+" eslint --init
 let g:ale_linters = {
     \ 'cpp' : ['gcc'],
     \ 'c' : ['gcc'],
     \ 'vim' : ['vint'],
-    \ 'python': ['flake8', 'pyre', 'vulture', 'prospector', 'pyflakes', 'mypy', 'pyls']
+    \ 'python': ['flake8', 'pyre', 'vulture', 'prospector', 'pyflakes', 'mypy', 'pyls'],
+    \ 'javascript': ['eslint', 'flow', 'flow-language-server', 'jscs', 'jshint', 'standard', 'tsserver', 'xo']
     \}
 let g:ale_cpp_gcc_options='-Wall -Wextra'
 let g:ale_c_gcc_options='-Wall -Wextra'
