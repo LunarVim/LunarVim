@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	0.0.0	/f76ed534/
+!_TAG_PROGRAM_VERSION	0.0.0	/15560853/
 <C-c>	init.vim	/^nnoremap <C-c> <Esc>$/;"	m
 <C-h>	init.vim	/^nnoremap <C-h> <C-w>h$/;"	m
 <C-j>	init.vim	/^nnoremap <C-j> <C-w>j$/;"	m
