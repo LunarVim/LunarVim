@@ -8,6 +8,9 @@ set splitbelow
 set splitright
 set t_Co=256
 set autochdir
+" saving
+nnoremap <C-s> :w<CR>
+nnoremap <C-Q> :wq!<CR>
 " escape can blow me
 nnoremap <C-c> <Esc>
 " Set Proper Tabs
@@ -29,6 +32,9 @@ nnoremap <F12> :only<CR>
 nnoremap <F2> :BuffergatorToggle<CR>
 nnoremap <F3> :Files<CR>
 nnoremap <F1> :10split term://bash<CR> 
+
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
 " Be iMproved
 if &compatible
@@ -296,7 +302,8 @@ let g:multi_cursor_quit_key            = '<Esc>'
 let g:ale_linters = {
     \ 'cpp' : ['gcc'],
     \ 'c' : ['gcc'],
-    \ 'vim' : ['vint']
+    \ 'vim' : ['vint'],
+    \ 'python': ['flake8', 'pyre', 'vulture', 'prospector', 'pyflakes', 'mypy', 'pyls']
     \}
 let g:ale_cpp_gcc_options='-Wall -Wextra'
 let g:ale_c_gcc_options='-Wall -Wextra'
@@ -304,19 +311,21 @@ let g:ale_vim_vint_executable = 'vint'
 let g:ale_vim_vint_show_style_issues = 1
 map <leader>a :ALEToggle<CR>
 
-" Python
+" Python TODO change this to point to virtual env with nevim support
 if !empty(glob("/usr/lib/rpm/redhat"))
     " For RHEL
-    let g:chromatica#libclang_path='/usr/lib64/llvm'
-    let g:python3_host_prog = '/bin/python3.6'
+    "let g:chromatica#libclang_path='/usr/lib64/llvm'
+    let g:python3_host_prog = 'home/$USER/.conda/envs/py37/bin/python3.6'
+    "let g:chromatica#enable_at_startup=1
+    "let g:chromatica#responsive_mode=1
 else
     " For Debian based   
     let g:chromatica#libclang_path='/usr/lib/llvm-6.0/lib'
     let g:python3_host_prog = '/usr/bin/python3.6'
+    let g:chromatica#enable_at_startup=1
+    let g:chromatica#responsive_mode=1
 endif
 " Chromatica
-let g:chromatica#enable_at_startup=1
-let g:chromatica#responsive_mode=1
 " FZF
 if !empty((glob("~/.fzf")))
     set rtp+=~/.fzf
