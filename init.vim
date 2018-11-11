@@ -125,6 +125,12 @@ if dein#load_state('~/chris/.cache/dein')
   " For autocomplete
   call dein#add('zchee/deoplete-jedi')
   call dein#add('Shougo/deoplete.nvim')
+  " For Web Development
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('elzr/vim-json')
+  call dein#add('mxw/vim-jsx')
+  call dein#add('mattn/emmet-vim')
+  call dein#add('prettier/vim-prettier', {'do': 'yarn install'})
   " Auto flow
   call dein#add('wokalski/autocomplete-flow') 
     " For vim 8+
@@ -154,8 +160,8 @@ endif
 
 """""""""" SPACEVIM THEME """"""""""
 
-" Set theme
-if strftime('%H') >= 7 && strftime('%H') < 8 
+" Set theme TODO kill this light theme
+if strftime('%H') >= 7 && strftime('%H') < 7
   set background=light
   colorscheme stellarized
 else
