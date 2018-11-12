@@ -21,18 +21,23 @@ set expandtab
 " Always display the status line
 set laststatus=2
 " Gets rid of highlights after search
-nnoremap <silent> <F7> :nohlsearch<CR><F7>
+"nnoremap <silent> <F7> :nohlsearch<CR><F7>
 " Line numbers
 set number
 " Toggle line numbers
+nnoremap <F1> :10split term://bash<CR> 
+nnoremap <F2> :BuffergatorToggle<CR>
+nnoremap <F3> :Files<CR>
+nnoremap <F4> :SearchTasks *<CR>
+nnoremap <F5> :NERDTreeToggle<CR>
 nnoremap <F6> :set nonumber!<CR>
+nnoremap <silent> <F7> :nohlsearch<CR><F7>
+nnoremap <F8> :TagbarToggle<CR>
 nnoremap <F9> :vsplit<CR>
 nnoremap <F10> :split<CR>
 nnoremap <F12> :only<CR>
-nnoremap <F2> :BuffergatorToggle<CR>
-nnoremap <F3> :Files<CR>
-nnoremap <F1> :10split term://bash<CR> 
 
+" insert mode for terminal
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
@@ -274,12 +279,12 @@ let g:startify_custom_header = [
 	\ ' /_/ |_/\___/\____/|___/_/_/ /_/ /_/ ']
 
 " Tagbar
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 " NERDTree
-nmap <F5> :NERDTreeToggle<CR>
+"nmap <F5> :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
 " SearchTasks
-nmap <F4> :SearchTasks *<CR>
+"nmap <F4> :SearchTasks *<CR>
 """""""""" END CONFIGS """"""""""
 
 " Ctrlp
@@ -345,7 +350,7 @@ if !empty((glob("~/.fzf")))
 endif
 """"""""""" FUNCTION KEYS """"""""""""""
 "TODO figure out cscope
-"TODO create function key section
 "TODO figure out virtualenv for neovim
+"TODO Split vim into ftp stuff rtp
 
 

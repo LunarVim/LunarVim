@@ -21,11 +21,11 @@
 <F1>	init.vim	/^nnoremap <F1> :10split term:\/\/bash<CR> $/;"	m
 <F2>	init.vim	/^nnoremap <F2> :BuffergatorToggle<CR>$/;"	m
 <F3>	init.vim	/^nnoremap <F3> :Files<CR>$/;"	m
-<F4>	init.vim	/^nmap <F4> :SearchTasks *<CR>$/;"	m
-<F5>	init.vim	/^nmap <F5> :NERDTreeToggle<CR>$/;"	m
+<F4>	init.vim	/^nnoremap <F4> :SearchTasks *<CR>$/;"	m
+<F5>	init.vim	/^nnoremap <F5> :NERDTreeToggle<CR>$/;"	m
 <F6>	init.vim	/^nnoremap <F6> :set nonumber!<CR>$/;"	m
 <F7>	init.vim	/^nnoremap <silent> <F7> :nohlsearch<CR><F7>$/;"	m
-<F8>	init.vim	/^nmap <F8> :TagbarToggle<CR>$/;"	m
+<F8>	init.vim	/^nnoremap <F8> :TagbarToggle<CR>$/;"	m
 <F9>	init.vim	/^nnoremap <F9> :vsplit<CR>$/;"	m
 <Left>	init.vim	/^	nnoremap <Left>  :vertical resize -2<CR>$/;"	m
 <Right>	init.vim	/^	nnoremap <Right> :vertical resize +2<CR>$/;"	m
