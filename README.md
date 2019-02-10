@@ -1,4 +1,4 @@
 # Nvim
 
 Follow my development her
-<chiarulli.me>
+<https://chiarulli.me>
