@@ -1,4 +1,5 @@
 # Nvim
 
-Follow my development her
+Follow my development here
+
 <https://chiarulli.me>
