@@ -19,7 +19,8 @@ if dein#load_state('~/.config/nvim/dein')
   " Start Screen
   call dein#add('mhinz/vim-startify')
   " For ctags
-  ""call dein#add('ludovicchabant/vim-gutentags')
+  call dein#add('ludovicchabant/vim-gutentags')
+  call dein#add('skywind3000/gutentags_plus')
   " Tagbar
   call dein#add('majutsushi/tagbar')
   " Auto Pairs
