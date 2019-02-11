@@ -14,6 +14,27 @@ if dein#load_state('~/.config/nvim/dein')
   " powerline
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
+  " File manager
+  call dein#add('scrooloose/NERDTree')
+  " Start Screen
+  call dein#add('mhinz/vim-startify')
+  " For ctags
+  call dein#add('ludovicchabant/vim-gutentags')
+  " Tagbar
+  call dein#add('majutsushi/tagbar')
+  " Auto Pairs
+  call dein#add('jiangmiao/auto-pairs')
+  " Buffergator use \b
+  call dein#add('jeetsukumaran/vim-buffergator')
+  " Ctrlp 
+  call dein#add('ctrlpvim/ctrlp.vim')
+  "Syntax 
+  call dein#add('w0rp/ale') 
+  "Git
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
+  " BufOnly use :BufOnly to unload all or pass it a single buffer
+  call dein#add('vim-scripts/BufOnly.vim')
 
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
@@ -25,7 +46,6 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#end()
   call dein#save_state()
 endif
-
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()

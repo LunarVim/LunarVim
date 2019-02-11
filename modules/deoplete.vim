@@ -1,3 +1,4 @@
-let g:python3_host_prog = '~/Miniconda/envs/neovim/bin/python3.7'
+" Enable deoplete
 let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = '~/Miniconda/envs/neovim/bin/python3.7'
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
