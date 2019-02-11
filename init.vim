@@ -7,4 +7,3 @@ source $HOME/.config/nvim/modules/airline.vim
 source $HOME/.config/nvim/modules/deoplete.vim
 source $HOME/.config/nvim/modules/nerdtree.vim
 source $HOME/.config/nvim/modules/startify.vim
-source $HOME/.config/nvim/modules/gutentags.vim

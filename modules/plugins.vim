@@ -19,7 +19,7 @@ if dein#load_state('~/.config/nvim/dein')
   " Start Screen
   call dein#add('mhinz/vim-startify')
   " For ctags
-  call dein#add('ludovicchabant/vim-gutentags')
+  ""call dein#add('ludovicchabant/vim-gutentags')
   " Tagbar
   call dein#add('majutsushi/tagbar')
   " Auto Pairs
@@ -35,6 +35,9 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('tpope/vim-fugitive')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
+  " Markdown viewer
+  "
+  call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
 
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
