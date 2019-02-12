@@ -1,7 +1,7 @@
 
 " Switch to whatever colorscheme you like
 "colorscheme onedark
-"colorscheme gruvbox
+""colorscheme gruvbox
 colorscheme tender
 
 " This chunk is just for spacevim theme

@@ -1,10 +1,5 @@
 
 
-nnoremap <F2> :BuffergatorToggle<CR>
-nnoremap <F3> :Files<CR>
-nnoremap <F4> :SearchTasks *<CR>
-nnoremap <F8> :TagbarToggle<CR>
-nnoremap <F12> :only<CR>
 
 
 

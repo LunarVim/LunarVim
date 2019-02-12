@@ -1,8 +1,13 @@
 " Add the dein installation directory into runtimepath
 set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
+function! DoRemote()
+    UpdateRemotePlugins
+endfunction
+
 if dein#load_state('~/.config/nvim/dein')
   call dein#begin('~/.config/nvim/dein')
+
   
   " Themes
   call dein#add('liuchengxu/space-vim-dark')
@@ -29,19 +34,27 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('jeetsukumaran/vim-buffergator')
   " Ctrlp 
   call dein#add('ctrlpvim/ctrlp.vim')
-  "Syntax 
+  "Linting 
   call dein#add('w0rp/ale') 
+  call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
+  " Fuzzy finder
+  call dein#add('junegunn/fzf.vim',  { 'dir': '~/.fzf', 'do': './install --all' })
+  call dein#add('junegunn/fzf')
+
+
   "Git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
-  " Markdown viewer
-  "
-  call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
+  " Markdown viewer TODO Fix this stupid thing
+  "call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
 
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'})
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -55,3 +68,7 @@ endif
 if dein#check_install()
   call dein#install()
 endif
+
+
+" TODO inside dein/repos/ somewhere there are cach and state files which keep
+" screwing me for installing new plugins

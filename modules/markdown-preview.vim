@@ -16,12 +16,12 @@ let g:mkdp_refresh_slow = 0
 " set to 1, the MarkdownPreview command can be use for all files,
 " by default it just can be use in markdown file
 " default: 0
-let g:mkdp_command_for_global = 1
+let g:mkdp_command_for_global = 0
 
 " set to 1, preview server available to others in your network
 " by default, the server only listens on localhost (127.0.0.1)
 " default: 0
-let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_to_the_world = 0
 
 " use custom IP to open preview page
 " useful when you work in remote vim and preview on local browser

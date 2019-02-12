@@ -31,15 +31,18 @@ set smarttab
 " Converts tabs to spaces
 set expandtab
 " Makes indenting smart
-set smartindent
+""set smartindent
 " Good auto indent
-set autoindent
+""set autoindent
 " Always display the status line
 set laststatus=2
 " Line numbers
 set number
 " Enable highlighting of the current line
 set cursorline
+" Get rid of annoying red highlights"
+let g:python_highlight_all = 0
+" Disable arrows"
 let g:elite_mode=1
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
@@ -56,22 +59,34 @@ nnoremap <C-Q> :wq!<CR>
 nnoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" F2 split vertical
-nnoremap <F2> :vsplit<CR>
-" F3 split horizontal
-nnoremap <F3> :split<CR>
-" Toggle Line numbers
-nnoremap <F4> :set nonumber!<CR>
-" Toggle NERDTree
-nnoremap <F5> :NERDTreeToggle<CR>
-" Get rid of highlights after search
-nnoremap <silent> <F7> :nohlsearch<CR><F7>
 " Open terminal with F1
-nnoremap <F1> :10split term://bash<CR>
+nnoremap <silent> <F1> :10split term://bash<CR>
 " insert mode for terminal
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
+" Toggle tagbar
+nnoremap <silent> <F2> :tagbar<CR>
+" Toggle Line numbers
+nnoremap <silent> <F4> :set nonumber!<CR>
+" Toggle NERDTree
+nnoremap <silent> <F5> :NERDTreeToggle<CR>
+" Startify
+nnoremap <silent> <F6> :Startify<CR>
+" Get rid of highlights after search
+nnoremap <silent> <F7> :nohlsearch<CR><F7>
+" Toggle open buffers
+nnoremap <silent> <F8> :BuffergatorToggle<CR>
+" For fuzzy finder
+nnoremap <silent> <F9> :Files<CR>
+" F10 split vertical
+nnoremap <silent> <F10> :vsplit<CR>
+" F11 split horizontal
+nnoremap <silent> <F11> :split<CR>
+" Make current buffer only buffer
+nnoremap <silent> <F12> :only<CR>
 " Remap window switch
+" Switch to rename for LSP to do add leader
+""nnoremap <F4> :SearchTasks *<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
