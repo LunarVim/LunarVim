@@ -10,6 +10,7 @@ source $HOME/.config/nvim/modules/startify.vim
 source $HOME/.config/nvim/modules/gutentags_plus.vim
 source $HOME/.config/nvim/modules/markdown-preview.vim
 source $HOME/.config/nvim/modules/language_server.vim
+source $HOME/.config/nvim/modules/ale.vim
 "install ripgrep"
 "install universal ctags"
-
+"install black"

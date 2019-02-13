@@ -3,8 +3,11 @@ let g:ale_linters = {
     \ 'cpp' : ['gcc'],
     \ 'c' : ['gcc'],
     \ 'vim' : ['vint'],
-    \ 'python': ['flake8', 'pyls'],
+    \ 'python': ['pyls', 'pydocstyle', 'pycodestyle', 'vulture'],
     \ 'javascript': ['eslint']
     \}
 
-"TODO add fixers"
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black'],
+\}
