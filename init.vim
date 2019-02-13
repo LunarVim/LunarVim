@@ -12,3 +12,4 @@ source $HOME/.config/nvim/modules/markdown-preview.vim
 source $HOME/.config/nvim/modules/language_server.vim
 "install ripgrep"
 "install universal ctags"
+
