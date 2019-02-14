@@ -10,10 +10,6 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls'], 
     \ 'sh': ['bash-language-server', 'start'],
     \ }
-" pyls doesn't need a path because it is defined in the neovim virtual
-" environment"
-" TODO add this to script npm i -g bash-language-server
-
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>

@@ -13,4 +13,6 @@ source $HOME/.config/nvim/modules/language_server.vim
 source $HOME/.config/nvim/modules/ale.vim
 "install ripgrep"
 "install universal ctags"
-"install black"
+"pip install 'python-language-server[all]'
+" pip install vim-vint
+" TODO add this to script npm i -g bash-language-server

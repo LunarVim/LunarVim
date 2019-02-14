@@ -2,6 +2,8 @@
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#auto_complete_delay = 0
+" let g:deoplete#ignore_sources = ['buffer']
+
 " <TAB>: completion.
 ""inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 "use TAB as the mapping

@@ -2,48 +2,38 @@
 if &compatible
   set nocompatible
 endif
-" Gives vim abilty to recognize filetypes
-filetype plugin indent on
-" Enables syntax highlighing
-syntax enable
-" display long lines as just one line
-set nowrap
-" The encoding displayed
-set encoding=utf-8
-" The encoding written to file
-set fileencoding=utf-8
-" Enable your mouse
-set mouse=a
-" Horizontal splits will automatically be below
-set splitbelow
-" Vertical splits will automatically be to the right
-set splitright
-" Support 256 colors
-set t_Co=256
-" Your working directory will always be the same as your working directory
-set autochdir
-" Insert 4 spaces for a tab
-set tabstop=4
-" Change the number of space characters inserted for indentation
-set shiftwidth=4
-" Makes tabbing smarter will realize you have 2 vs 4
-set smarttab
-" Converts tabs to spaces
-set expandtab
-" Makes indenting smart
-""set smartindent
-" Good auto indent
-""set autoindent
-" Always display the status line
-set laststatus=2
-" Line numbers
-set number
-" Enable highlighting of the current line
-set cursorline
-" Get rid of annoying red highlights"
-let g:python_highlight_all = 0
-" Disable arrows"
-let g:elite_mode=1
+
+" set leader key
+let g:mapleader="\\"
+" alias for leader key
+nmap <space> \
+xmap <space> \
+
+syntax enable                           " Enables syntax highlighing
+set nowrap                              " display long lines as just one line
+set encoding=utf-8                      " The encoding displayed 
+set fileencoding=utf-8                  " The encoding written to file
+set ruler              					" show the cursor position all the time
+set iskeyword+=-                      	" treat dash separated words as a word text object"
+set mouse=a                             " Enable your mouse
+set splitbelow                          " Horizontal splits will automatically be below
+set splitright                          " Vertical splits will automatically be to the right
+set t_Co=256                            " Support 256 colors
+set autochdir                           " Your working directory will always be the same as your working directory
+set tabstop=4                           " Insert 4 spaces for a tab
+set shiftwidth=4                        " Change the number of space characters inserted for indentation
+set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
+set expandtab                           " Converts tabs to spaces
+set smartindent                         " Makes indenting smart
+set autoindent                          " Good auto indent
+set laststatus=2                        " Always display the status line
+set number                              " Line numbers
+set cursorline                          " Enable highlighting of the current line
+set background=dark                     " tell vim what the background color looks like
+
+let g:python_highlight_all = 0          " Get rid of annoying red highlights"
+let g:elite_mode=1                      " Disable arrows"
+
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
     nnoremap <Up>    :resize -2<CR>
@@ -51,6 +41,9 @@ if get(g:, 'elite_mode')
     nnoremap <Left>  :vertical resize -2<CR>
     nnoremap <Right> :vertical resize +2<CR>
 endif
+
+" Gives vim abilty to recognize filetypes
+filetype plugin indent on                 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
@@ -65,7 +58,7 @@ nnoremap <silent> <F1> :10split term://bash<CR>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 " Toggle tagbar
-nnoremap <silent> <F2> :tagbar<CR>
+nnoremap <silent> <F2> :TagbarToggle<CR>
 " Toggle Line numbers
 nnoremap <silent> <F4> :set nonumber!<CR>
 " Toggle NERDTree
@@ -77,16 +70,35 @@ nnoremap <silent> <F7> :nohlsearch<CR><F7>
 " Toggle open buffers
 nnoremap <silent> <F8> :BuffergatorToggle<CR>
 " For fuzzy finder
-nnoremap <silent> <F9> :Files<CR>
+""nnoremap <silent> <F9> :Files<CR>
 " F10 split vertical
-nnoremap <silent> <F10> :vsplit<CR>
+nnoremap <silent> <F9> :vsplit<CR>
 " F11 split horizontal
-nnoremap <silent> <F11> :split<CR>
+nnoremap <silent> <F10> :split<CR>
 " Make current buffer only buffer
 nnoremap <silent> <F12> :only<CR>
 " Remap window switch
 " Switch to rename for LSP to do add leader
 ""nnoremap <F4> :SearchTasks *<CR>
+
+nnoremap <silent> <leader>n :NERDTreeToggle<return>
+nnoremap <silent> <leader>m :TagbarToggle<return>
+nnoremap <silent> <leader>l :set nonumber!<return>
+nnoremap <silent> <leader>s :Startify<return>
+nnoremap <silent> <leader>w :w<return>
+nnoremap <silent> <leader>b :<return>
+nnoremap <silent> <leader>p :pclose<return>
+
+" Split edit your vimrc. Type space, v, r in sequence to trigger
+    fun! OpenConfigFile(file)
+      if (&filetype ==? 'startify')
+        execute 'e ' . a:file
+      else
+        execute 'tabe ' . a:file
+      endif
+    endfun
+nnoremap <silent> <leader>in :call OpenConfigFile('~/.config/nvim/init.vim')<cr>
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -98,9 +110,7 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
-" TAB in general mode will mov to text buffer
+" TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
-" Map leader switch to whatever you want
-let mapleader = ","

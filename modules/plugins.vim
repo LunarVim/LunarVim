@@ -55,6 +55,7 @@ if dein#load_state('~/.config/nvim/dein')
 
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'})
+  call dein#add('Shougo/neoinclude.vim')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
