@@ -14,9 +14,13 @@ if dein#load_state('~/.config/nvim/dein')
   "  call dein#add('liuchengxu/space-vim-dark')
   "  call dein#add('joshdick/onedark.vim')
   "  call dein#add('morhetz/gruvbox')
+  call dein#add('jacoborus/tender.vim')
+  "Interface"
+  call dein#add('Shougo/denite.nvim')
   "  Neoterm
   call dein#add('kassio/neoterm')
-  call dein#add('jacoborus/tender.vim')
+  " Running tests in vim "
+  call dein#add('janko-m/vim-test')
   " Better Syntax Support
   call dein#add('sheerun/vim-polyglot')
   " powerline

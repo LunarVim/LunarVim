@@ -55,9 +55,10 @@ nnoremap <C-c> <Esc>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " Open terminal with F1
 nnoremap <silent> <F1> :10split term://bash<CR>
+nnoremap <silent> <F2> :bdelete! term://*<return>
 " insert mode for terminal
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
+""autocmd BufWinEnter,WinEnter term://* startinsert
+""autocmd BufLeave term://* stopinsert
 " Toggle tagbar
 "nnoremap <silent> <F2> :TagbarToggle<CR>
 " Toggle Line numbers
@@ -82,6 +83,7 @@ autocmd BufLeave term://* stopinsert
 " Switch to rename for LSP to do add leader
 ""nnoremap <F4> :SearchTasks *<CR>
 
+nnoremap <silent> <leader>q :q<return>
 nnoremap <silent> <leader>n :NERDTreeToggle<return>
 nnoremap <silent> <leader>m :TagbarToggle<return>
 nnoremap <silent> <leader>l :set nonumber!<return>
@@ -89,7 +91,7 @@ nnoremap <silent> <leader>o :only<return>
 nnoremap <silent> <leader>s :Startify<return>
 nnoremap <silent> <leader>w :w<return>
 nnoremap <silent> <leader>p :pclose<return>
-nnoremap <silent> <leader>bu :BuffergatorToggle<return>
+nnoremap <silent> <leader>b :BuffergatorToggle<return>
 nnoremap <silent> <leader>gy :Goyo<return>
 nnoremap <silent> <leader>hi :nohlsearch<return>
 nnoremap <silent> <leader>hs :split<return>
@@ -126,3 +128,5 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
+
+

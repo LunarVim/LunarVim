@@ -13,6 +13,7 @@ source $HOME/.config/nvim/modules/language_server.vim
 source $HOME/.config/nvim/modules/ale.vim
 source $HOME/.config/nvim/modules/goyo-limelight.vim
 source $HOME/.config/nvim/modules/relativenums.vim
+source $HOME/.config/nvim/modules/test.vim
 
 
 "npm i -g bash-language-server
