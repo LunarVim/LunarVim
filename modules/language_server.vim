@@ -9,8 +9,13 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ 'python': ['pyls'], 
     \ 'sh': ['bash-language-server', 'start'],
+    \ 'c' : ['cquery'],
+    \ 'cpp' : ['cquery'],
     \ }
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F3> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <leader>gh :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <leader>gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <leader>gr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <leader>gc :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> <leader>fr :call LanguageClient_textDocument_references()<CR>
+

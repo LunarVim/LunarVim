@@ -9,10 +9,13 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#begin('~/.config/nvim/dein')
 
   
-  " Themes
-  call dein#add('liuchengxu/space-vim-dark')
-  call dein#add('joshdick/onedark.vim')
-  call dein#add('morhetz/gruvbox')
+  " All the Themes
+  call dein#add('flazz/vim-colorschemes')
+  "  call dein#add('liuchengxu/space-vim-dark')
+  "  call dein#add('joshdick/onedark.vim')
+  "  call dein#add('morhetz/gruvbox')
+  "  Neoterm
+  call dein#add('kassio/neoterm')
   call dein#add('jacoborus/tender.vim')
   " Better Syntax Support
   call dein#add('sheerun/vim-polyglot')
@@ -21,6 +24,9 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline-themes')
   " File manager
   call dein#add('scrooloose/NERDTree')
+  " Icons
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
   " Start Screen
   call dein#add('mhinz/vim-startify')
   " For ctags
@@ -43,16 +49,20 @@ if dein#load_state('~/.config/nvim/dein')
   " Fuzzy finder
   call dein#add('junegunn/fzf.vim',  { 'dir': '~/.fzf', 'do': './install --all' })
   call dein#add('junegunn/fzf')
-
-
-  "Git
+  " Sneak mode "
+  call dein#add('justinmk/vim-sneak')
+  ""Git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
   " BufOnly use :BufOnly to unload all or pass it a single buffer
   call dein#add('vim-scripts/BufOnly.vim')
-  " Markdown viewer TODO Fix this stupid thing
-  "call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
-
+  " Distraction free writing "
+  call dein#add('junegunn/goyo.vim')
+  call dein#add('junegunn/limelight.vim')
+  "Markdown viewer TODO Fix this stupid thing
+  call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
+""  call dein#add('iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }})
+""  call dein#add('euclio/vim-markdown-composer')
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'})
   call dein#add('Shougo/neoinclude.vim')

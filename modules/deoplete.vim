@@ -4,7 +4,11 @@ let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#auto_complete_delay = 0
 " let g:deoplete#ignore_sources = ['buffer']
 
-" <TAB>: completion.
+"better nav for omnicomplete
+inoremap <expr> <c-j> ("\<C-n>")
+inoremap <expr> <c-k> ("\<C-p>")
+
+"<TAB>: completion.
 ""inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 "use TAB as the mapping
 inoremap <silent><expr> <TAB>

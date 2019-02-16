@@ -10,6 +10,7 @@ nmap <space> \
 xmap <space> \
 
 syntax enable                           " Enables syntax highlighing
+set hidden                              " Required for specific actions that require multiple buffers
 set nowrap                              " display long lines as just one line
 set encoding=utf-8                      " The encoding displayed 
 set fileencoding=utf-8                  " The encoding written to file
@@ -58,25 +59,25 @@ nnoremap <silent> <F1> :10split term://bash<CR>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 " Toggle tagbar
-nnoremap <silent> <F2> :TagbarToggle<CR>
+"nnoremap <silent> <F2> :TagbarToggle<CR>
 " Toggle Line numbers
-nnoremap <silent> <F4> :set nonumber!<CR>
+"nnoremap <silent> <F4> :set nonumber!<CR>
 " Toggle NERDTree
-nnoremap <silent> <F5> :NERDTreeToggle<CR>
+"nnoremap <silent> <F5> :NERDTreeToggle<CR>
 " Startify
-nnoremap <silent> <F6> :Startify<CR>
+"nnoremap <silent> <F6> :Startify<CR>
 " Get rid of highlights after search
-nnoremap <silent> <F7> :nohlsearch<CR><F7>
+"nnoremap <silent> <F7> :nohlsearch<CR><F7>
 " Toggle open buffers
-nnoremap <silent> <F8> :BuffergatorToggle<CR>
+" nnoremap <silent> <F8> :BuffergatorToggle<CR>
 " For fuzzy finder
 ""nnoremap <silent> <F9> :Files<CR>
 " F10 split vertical
-nnoremap <silent> <F9> :vsplit<CR>
+"nnoremap <silent> <F9> :vsplit<CR>
 " F11 split horizontal
-nnoremap <silent> <F10> :split<CR>
+"nnoremap <silent> <F10> :split<CR>
 " Make current buffer only buffer
-nnoremap <silent> <F12> :only<CR>
+"nnoremap <silent> <F12> :only<CR>
 " Remap window switch
 " Switch to rename for LSP to do add leader
 ""nnoremap <F4> :SearchTasks *<CR>
@@ -84,12 +85,22 @@ nnoremap <silent> <F12> :only<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<return>
 nnoremap <silent> <leader>m :TagbarToggle<return>
 nnoremap <silent> <leader>l :set nonumber!<return>
+nnoremap <silent> <leader>o :only<return>
 nnoremap <silent> <leader>s :Startify<return>
 nnoremap <silent> <leader>w :w<return>
-nnoremap <silent> <leader>b :<return>
 nnoremap <silent> <leader>p :pclose<return>
+nnoremap <silent> <leader>bu :BuffergatorToggle<return>
+nnoremap <silent> <leader>gy :Goyo<return>
+nnoremap <silent> <leader>hi :nohlsearch<return>
+nnoremap <silent> <leader>hs :split<return>
+nnoremap <silent> <leader>vs :vsplit<return>
+nnoremap <silent> <leader>gh :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <leader>gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <leader>gr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <leader>gc :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> <leader>fr :call LanguageClient_textDocument_references()<CR>
 
-" Split edit your vimrc. Type space, v, r in sequence to trigger
+" This is a funtion to open any file with <leader>(key sequence)
     fun! OpenConfigFile(file)
       if (&filetype ==? 'startify')
         execute 'e ' . a:file
@@ -98,6 +109,7 @@ nnoremap <silent> <leader>p :pclose<return>
       endif
     endfun
 nnoremap <silent> <leader>in :call OpenConfigFile('~/.config/nvim/init.vim')<cr>
+nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

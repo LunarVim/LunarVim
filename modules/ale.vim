@@ -3,7 +3,7 @@ let g:ale_linters = {
     \ 'cpp' : ['gcc'],
     \ 'c' : ['gcc'],
     \ 'vim' : ['vint'],
-    \ 'python': ['pyls', 'pydocstyle', 'pycodestyle', 'vulture'],
+    \ 'python': ['pydocstyle', 'pycodestyle', 'vulture'],
     \ 'javascript': ['eslint']
     \}
 

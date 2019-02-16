@@ -11,8 +11,11 @@ source $HOME/.config/nvim/modules/gutentags_plus.vim
 source $HOME/.config/nvim/modules/markdown-preview.vim
 source $HOME/.config/nvim/modules/language_server.vim
 source $HOME/.config/nvim/modules/ale.vim
-"install ripgrep"
+source $HOME/.config/nvim/modules/goyo-limelight.vim
+source $HOME/.config/nvim/modules/relativenums.vim
+
+
+"npm i -g bash-language-server
+"install ripgrep" for gutentags to ignore .gitignore
 "install universal ctags"
-"pip install 'python-language-server[all]'
-" pip install vim-vint
 " TODO add this to script npm i -g bash-language-server
