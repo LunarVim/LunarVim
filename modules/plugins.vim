@@ -15,6 +15,7 @@ if dein#load_state('~/.config/nvim/dein')
   "  call dein#add('joshdick/onedark.vim')
   "  call dein#add('morhetz/gruvbox')
   call dein#add('jacoborus/tender.vim')
+  call dein#add('luochen1990/rainbow')
   "Interface"
   call dein#add('Shougo/denite.nvim')
   "  Neoterm
@@ -28,6 +29,8 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline-themes')
   " File manager
   call dein#add('scrooloose/NERDTree')
+  " Comments "
+  call dein#add('scrooloose/nerdcommenter')
   " Icons
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
@@ -70,6 +73,15 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'})
   call dein#add('Shougo/neoinclude.vim')
+  " Snippets "
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('mattn/emmet-vim')
+  " Colorizer "
+  call dein#add('chrisbra/Colorizer')
+  " Python docstring "
+  call dein#add('heavenshell/vim-pydocstring')
+  
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')

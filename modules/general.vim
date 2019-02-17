@@ -14,15 +14,15 @@ set hidden                              " Required for specific actions that req
 set nowrap                              " display long lines as just one line
 set encoding=utf-8                      " The encoding displayed 
 set fileencoding=utf-8                  " The encoding written to file
-set ruler              					" show the cursor position all the time
+set ruler              					        " show the cursor position all the time
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
 set autochdir                           " Your working directory will always be the same as your working directory
-set tabstop=4                           " Insert 4 spaces for a tab
-set shiftwidth=4                        " Change the number of space characters inserted for indentation
+set tabstop=2                           " Insert 2 spaces for a tab
+set shiftwidth=2                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
@@ -92,6 +92,7 @@ nnoremap <silent> <leader>s :Startify<return>
 nnoremap <silent> <leader>w :w<return>
 nnoremap <silent> <leader>p :pclose<return>
 nnoremap <silent> <leader>b :BuffergatorToggle<return>
+nnoremap <silent> <leader>ch :ColorToggle<return>
 nnoremap <silent> <leader>gy :Goyo<return>
 nnoremap <silent> <leader>hi :nohlsearch<return>
 nnoremap <silent> <leader>hs :split<return>
@@ -112,6 +113,7 @@ nnoremap <silent> <leader>fr :call LanguageClient_textDocument_references()<CR>
     endfun
 nnoremap <silent> <leader>in :call OpenConfigFile('~/.config/nvim/init.vim')<cr>
 nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
+nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Support/Code/User/settings.json')<cr>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

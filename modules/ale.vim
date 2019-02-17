@@ -4,7 +4,7 @@ let g:ale_linters = {
     \ 'c' : ['gcc'],
     \ 'vim' : ['vint'],
     \ 'python': ['pydocstyle', 'pycodestyle', 'vulture'],
-    \ 'javascript': ['eslint']
+    \ 'javascript': []
     \}
 
 let g:ale_fixers = {

@@ -13,10 +13,18 @@ source $HOME/.config/nvim/modules/language_server.vim
 source $HOME/.config/nvim/modules/ale.vim
 source $HOME/.config/nvim/modules/goyo-limelight.vim
 source $HOME/.config/nvim/modules/relativenums.vim
+source $HOME/.config/nvim/modules/pydocstring.vim
+source $HOME/.config/nvim/modules/neosnippets.vim
+source $HOME/.config/nvim/modules/emmet.vim
+source $HOME/.config/nvim/modules/colorizer.vim
+source $HOME/.config/nvim/modules/rainbow.vim
+" Special test file "
 source $HOME/.config/nvim/modules/test.vim
 
-
+"TODO"
+"change install script to install pyls in base and clone base instead"
 "npm i -g bash-language-server
+"npm install -g javascript-typescript-langserver
 "install ripgrep" for gutentags to ignore .gitignore
 "install universal ctags"
 " TODO add this to script npm i -g bash-language-server
