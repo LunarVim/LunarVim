@@ -4,10 +4,9 @@ let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#auto_complete_delay = 0
 ""let g:deoplete#max_menu_width = 10
 " let g:deoplete#ignore_sources = ['buffer']
-"
 " Close previews immediately
-    autocmd CompleteDone * silent! pclose!
-"
+autocmd CompleteDone * silent! pclose!
+
 "better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
