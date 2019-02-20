@@ -13,6 +13,7 @@ syntax enable                           " Enables syntax highlighing
 set hidden                              " Required for specific actions that require multiple buffers
 set nowrap                              " display long lines as just one line
 set encoding=utf-8                      " The encoding displayed 
+set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler              					        " show the cursor position all the time
 set iskeyword+=-                      	" treat dash separated words as a word text object"
@@ -35,7 +36,8 @@ set background=dark                     " tell vim what the background color loo
 
 let g:python_highlight_all = 0          " Get rid of annoying red highlights"
 let g:elite_mode=1                      " Disable arrows"
-
+filetype plugin indent on               " Gives vim abilty to recognize filetypes
+                 
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
     nnoremap <Up>    :resize -2<CR>
@@ -44,8 +46,6 @@ if get(g:, 'elite_mode')
     nnoremap <Right> :vertical resize +2<CR>
 endif
 
-" Gives vim abilty to recognize filetypes
-filetype plugin indent on                 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
@@ -57,66 +57,7 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " Open terminal with F1
 nnoremap <silent> <F1> :10split term://bash<CR>
 nnoremap <silent> <F2> :bdelete! term://*<return>
-" insert mode for terminal
-""autocmd BufWinEnter,WinEnter term://* startinsert
-""autocmd BufLeave term://* stopinsert
-" Toggle tagbar
-"nnoremap <silent> <F2> :TagbarToggle<CR>
-" Toggle Line numbers
-"nnoremap <silent> <F4> :set nonumber!<CR>
-" Toggle NERDTree
-"nnoremap <silent> <F5> :NERDTreeToggle<CR>
-" Startify
-"nnoremap <silent> <F6> :Startify<CR>
-" Get rid of highlights after search
-"nnoremap <silent> <F7> :nohlsearch<CR><F7>
-" Toggle open buffers
-" nnoremap <silent> <F8> :BuffergatorToggle<CR>
-" For fuzzy finder
-""nnoremap <silent> <F9> :Files<CR>
-" F10 split vertical
-"nnoremap <silent> <F9> :vsplit<CR>
-" F11 split horizontal
-"nnoremap <silent> <F10> :split<CR>
-" Make current buffer only buffer
-"nnoremap <silent> <F12> :only<CR>
-" Remap window switch
-" Switch to rename for LSP to do add leader
-""nnoremap <F4> :SearchTasks *<CR>
 
-nnoremap <silent> <leader>q :q<return>
-nnoremap <silent> <leader>n :NERDTreeToggle<return>
-nnoremap <silent> <leader>m :TagbarToggle<return>
-nnoremap <silent> <leader>l :set nonumber!<return>
-nnoremap <silent> <leader>o :only<return>
-nnoremap <silent> <leader>s :Startify<return>
-nnoremap <silent> <leader>w :w<return>
-nnoremap <silent> <leader>p :pclose<return>
-nnoremap <silent> <leader>b :BuffergatorToggle<return>
-nnoremap <silent> <leader>ch :ColorToggle<return>
-nnoremap <silent> <leader>gy :Goyo<return>
-nnoremap <silent> <leader>hi :nohlsearch<return>
-nnoremap <silent> <leader>hs :split<return>
-nnoremap <silent> <leader>vs :vsplit<return>
-nnoremap <silent> <leader>gh :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> <leader>gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <leader>gr :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> <leader>gc :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> <leader>fr :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> <leader>fix :ALEFix<CR>
-nnoremap <silent> <leader>gi :ALEInfo<CR>
-
-" This is a funtion to open any file with <leader>(key sequence)
-    fun! OpenConfigFile(file)
-      if (&filetype ==? 'startify')
-        execute 'e ' . a:file
-      else
-        execute 'tabe ' . a:file
-      endif
-    endfun
-nnoremap <silent> <leader>in :call OpenConfigFile('~/.config/nvim/init.vim')<cr>
-nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
-nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Support/Code/User/settings.json')<cr>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

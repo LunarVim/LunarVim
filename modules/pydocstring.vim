@@ -1,2 +1,2 @@
-nmap <silent> <leader>doc <Plug>(pydocstring)
+"nmap <silent> <leader>doc <Plug>(pydocstring)
 

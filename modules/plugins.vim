@@ -10,12 +10,15 @@ if dein#load_state('~/.config/nvim/dein')
 
   
   " All the Themes
-  call dein#add('flazz/vim-colorschemes')
-  "  call dein#add('liuchengxu/space-vim-dark')
-  "  call dein#add('joshdick/onedark.vim')
-  "  call dein#add('morhetz/gruvbox')
+  ""call dein#add('flazz/vim-colorschemes')
+  call dein#add('liuchengxu/space-vim-dark')
+  call dein#add('tomasiser/vim-code-dark')
+  call dein#add('joshdick/onedark.vim')
+  call dein#add('morhetz/gruvbox')
   call dein#add('jacoborus/tender.vim')
   call dein#add('luochen1990/rainbow')
+  " key menu popup "
+  call dein#add('liuchengxu/vim-which-key')
   "Interface"
   call dein#add('Shougo/denite.nvim')
   "  Neoterm
@@ -39,12 +42,14 @@ if dein#load_state('~/.config/nvim/dein')
   " For ctags
   call dein#add('ludovicchabant/vim-gutentags')
   call dein#add('skywind3000/gutentags_plus')
+  " Better Previews "
+  call dein#add('skywind3000/vim-preview')
   " Tagbar
   call dein#add('majutsushi/tagbar')
   " Auto Pairs
   call dein#add('jiangmiao/auto-pairs')
   " Buffergator use \b
-  call dein#add('jeetsukumaran/vim-buffergator')
+""  call dein#add('jeetsukumaran/vim-buffergator')
   " Ctrlp 
   call dein#add('ctrlpvim/ctrlp.vim')
   "Linting 

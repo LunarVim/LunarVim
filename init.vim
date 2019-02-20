@@ -18,6 +18,7 @@ source $HOME/.config/nvim/modules/neosnippets.vim
 source $HOME/.config/nvim/modules/emmet.vim
 source $HOME/.config/nvim/modules/colorizer.vim
 source $HOME/.config/nvim/modules/rainbow.vim
+source $HOME/.config/nvim/modules/vim-which-key.vim
 " Special test file "
 source $HOME/.config/nvim/modules/test.vim
 

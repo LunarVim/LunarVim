@@ -2,7 +2,7 @@
 " Switch to whatever colorscheme you like
 "colorscheme onedark
 ""colorscheme gruvbox
-colorscheme tender
+colorscheme codedark
 
 " This chunk is just for spacevim theme
 "colorscheme space-vim-dark

@@ -1,6 +1,7 @@
 " Required for operations modifying multiple buffers like rename.
 set hidden
-
+" always show signcolumns
+set signcolumn=yes
 let g:LanguageClient_autoStart = 1
 
 let g:LanguageClient_serverCommands = {
