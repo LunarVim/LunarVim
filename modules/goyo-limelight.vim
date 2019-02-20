@@ -12,6 +12,7 @@ function! s:goyo_enter()
   call deoplete#custom#option('auto_complete', v:false)
   set spell spelllang=en_us
   set wrap
+  set conceallevel=0
   set tw=100
   set noshowcmd
   set scrolloff=999
