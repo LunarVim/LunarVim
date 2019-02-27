@@ -33,13 +33,14 @@ let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle','commenter' ]
 let g:which_key_map['p'] = [ 'pclose','close-preview' ]
 let g:which_key_map['q'] = [ 'q','quit' ]
 let g:which_key_map['s'] = [ 'w','save' ]
+let g:which_key_map['f'] = [ 'Denite file','files' ]
 
 let g:which_key_map.t = {
       \ 'name' : '+toggle' ,
-      \ 'f' : ['NERDTreeToggle'    , 'file-explorer']           ,
+      \ 'e' : ['NERDTreeToggle'    , 'file-explorer']           ,
       \ 'b' : ['TagbarToggle'      , 'tagbar']                  ,
-      \ 'l' : ['set nonumber!'     , 'line-numbers']            ,
-      \ 's' : ['nohlsearch'        , 'remove-search-highlight'] ,
+      \ 'n' : ['set nonumber!'         , 'line-numbers']            ,
+      \ 's' : [':nohlsearch'        , 'remove-search-highlight'] ,
       \ 'c' : ['ColorToggle'       , 'remove-color']            ,
       \ }
 
@@ -48,14 +49,15 @@ let g:which_key_map.h = {
       \ 's' : ['nohlsearch'     , 'remove-search-highlight'] ,
       \ 'c' : ['ColorToggle'    , 'remove-color']            ,
       \ }
-
+      "<Plug>(ale_hover)`
       "\ 'f' : ['LanguageClient#textDocument_formatting()'     , 'formatting']       ,
+      "\ 'h' : ['LanguageClient#textDocument_hover()'          , 'hover']            ,
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
       \ 'c' : ['LanguageClient_contextMenu()'                 , 'context_menu']     ,
       \ 'f' : ['ALEFix'                                       , 'formatting']       ,
       \ 'i' : ['ALEInfo'                                      , 'info']             ,
-      \ 'h' : ['LanguageClient#textDocument_hover()'          , 'hover']            ,
+      \ 'h' : ['<Plug>(ale_hover)'                            , 'hover']            ,
       \ 'r' : ['LanguageClient#textDocument_references()'     , 'references']       ,
       \ 'R' : ['LanguageClient#textDocument_rename()'         , 'rename']           ,
       \ 's' : ['LanguageClient#textDocument_documentSymbol()' , 'document-symbol']  ,
