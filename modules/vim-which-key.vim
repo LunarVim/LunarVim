@@ -37,11 +37,12 @@ let g:which_key_map['f'] = [ 'Denite file','files' ]
 
 let g:which_key_map.t = {
       \ 'name' : '+toggle' ,
-      \ 'e' : ['NERDTreeToggle'    , 'file-explorer']           ,
-      \ 'b' : ['TagbarToggle'      , 'tagbar']                  ,
-      \ 'n' : ['set nonumber!'         , 'line-numbers']            ,
-      \ 's' : [':nohlsearch'        , 'remove-search-highlight'] ,
-      \ 'c' : ['ColorToggle'       , 'remove-color']            ,
+      \ 'e' : ['NERDTreeToggle'         , 'file-explorer']           ,
+      \ 'b' : ['TagbarToggle'           , 'tagbar']                  ,
+      \ 'n' : [':set nonumber!'         , 'line-numbers']            ,
+      \ 'r' : [':set norelativenumber!' , 'rel-line-numbers']        ,
+      \ 's' : [':let @/ = ""'        , 'remove-search-highlight'] ,
+      \ 'c' : ['ColorToggle'            , 'remove-color']            ,
       \ }
 
 let g:which_key_map.h = {

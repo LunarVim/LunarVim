@@ -8,12 +8,11 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'python': ['pyls'], 
+    \ 'python': ['~/.miniconda/envs/neovim/bin/pyls'], 
     \ 'sh': ['bash-language-server', 'start'],
     \ 'c' : ['cquery'],
     \ 'cpp' : ['cquery'],
     \ }
-
 nnoremap <silent> <leader>gh :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <leader>gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <leader>gr :call LanguageClient_textDocument_rename()<CR>
