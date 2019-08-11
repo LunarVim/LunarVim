@@ -27,3 +27,13 @@ install universal ctags"
 
 make sure you open the language server module and point to the correct binaries such as pyls and vint
 
+## TODO 
+
+start using coc
+
+install this stuff
+
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'weirongxu/plantuml-previewer.vim'                                 " Plantuml-previewer
+https://github.com/voldikss/coc-todolist
+

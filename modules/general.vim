@@ -3,6 +3,8 @@ if &compatible
   set nocompatible
 endif
 
+set runtimepath^=~/.config/_vim
+
 " set leader key
 let g:mapleader="\\"
 " alias for leader key

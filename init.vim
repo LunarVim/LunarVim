@@ -24,8 +24,6 @@ source $HOME/.config/nvim/modules/echodoc.vim
 source $HOME/.config/nvim/modules/test.vim
 
 set conceallevel=0
-"TODO"
-"change install script to install pyls in base and clone base instead"
 "fix ctrl+l in python
 nnoremap <M-h> <C-w>h
 nnoremap <M-j> <C-w>j
