@@ -26,9 +26,11 @@ inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 
-call deoplete#custom#option('sources', {
-  \ 'python': ['file', 'LanguageClient', 'neosnippet'],
-  \ })
+" Only get completion candidates from these
+"call deoplete#custom#option('sources', {
+  "\ 'python': ['file', 'LanguageClient', 'neosnippet'],
+  "\ })
+
 " Sort matches alphabetically
 call deoplete#custom#source('_', 'sorters', ['sorter_word'])
 " Disable shorter or equal length matches

@@ -1,5 +1,23 @@
 # Nvim
 
+## Install 
+
+To install run the install script in the install folder
+
+```
+./install
+```
+
+## Post install
+
+After install open Neovim and run the following:
+
+```
+:UpdateRemotePlugins
+
+:checkhealth
+```
+
 Follow my development here
 
 <https://chiarulli.me>
@@ -18,7 +36,6 @@ pip install vim-vint
 npm i -g bash-language-server
 
 npm install -g javascript-typescript-langserver
-
 ```
 
 install ripgrep" for gutentags to ignore .gitignore
