@@ -23,9 +23,3 @@ source $HOME/.config/nvim/modules/echodoc.vim
 " Special test file "
 source $HOME/.config/nvim/modules/test.vim
 
-set conceallevel=0
-"fix ctrl+l in python
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
