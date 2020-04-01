@@ -12,6 +12,8 @@ if dein#load_state('~/.config/nvim/dein')
   "call dein#add('kevinhwang91/rnvimr', {'do': 'make sync'})
   call dein#add('francoiscabrol/ranger.vim')
   call dein#add('rbgrouleff/bclose.vim')
+  " Language support
+  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
   " All the Themes
   call dein#add('joshdick/onedark.vim')
   " key menu popup "
@@ -48,7 +50,7 @@ if dein#load_state('~/.config/nvim/dein')
   " Buffergator use \b
 ""  call dein#add('jeetsukumaran/vim-buffergator')
   " Ctrlp 
-  call dein#add('ctrlpvim/ctrlp.vim')
+  "call dein#add('ctrlpvim/ctrlp.vim')
   "Linting 
   call dein#add('w0rp/ale') 
   call dein#add('autozimu/LanguageClient-neovim', {
@@ -56,8 +58,8 @@ if dein#load_state('~/.config/nvim/dein')
     \ 'build': 'bash install.sh',
     \ })
   " Fuzzy finder
-  call dein#add('junegunn/fzf.vim',  { 'dir': '~/.fzf', 'do': './install --all' })
-  call dein#add('junegunn/fzf')
+  "call dein#add('junegunn/fzf.vim',  { 'dir': '~/.fzf', 'do': './install --all' })
+  "call dein#add('junegunn/fzf')
   " Sneak mode "
   call dein#add('justinmk/vim-sneak')
   ""Git

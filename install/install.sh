@@ -7,6 +7,7 @@ if [ "$(uname)" == "Darwin" ]; then
     echo " Grabbing a font to use foe devicons "
     brew tap homebrew/cask-fonts
     brew cask install font-hack-nerd-font
+    brew install ranger
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     echo 'Linux Detected'
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/.config/nvim/install/miniconda.sh

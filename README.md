@@ -25,17 +25,6 @@ Follow my development here
 ```
 conda create -n neovim python=3.7
 
-npm i -g neovim
-
-pip install 'python-language-server[all]'
-
-pip uninstall pycodestye
-
-pip install vim-vint
-
-npm i -g bash-language-server
-
-npm install -g javascript-typescript-langserver
 ```
 
 install ripgrep" for gutentags to ignore .gitignore
@@ -46,13 +35,16 @@ make sure you open the language server module and point to the correct binaries 
 
 ## TODO 
 
-start using coc
-
-install this stuff
-
-https://github.com/kevinhwang91/rnvimr
-VimWiki
-coc
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-https://github.com/voldikss/coc-todolist
+### Install this stuff
+- Document node nonsense in order to install coc
+- configure coc settings better 
+- need formatter for other languages
+- Java support
+- Need support for image in current ranger implementation
+- https://github.com/kevinhwang91/rnvimr (Note Ueberzug doesn't work on mac which sucks, also neither does this plugin)
+- Check out more coc extensions
+- https://github.com/voldikss/coc-todolist
+- VimWiki
+- fix tmux messing up my colors
+- figure out denite and give it a good shortcut
 

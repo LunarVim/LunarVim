@@ -32,6 +32,7 @@ nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Suppo
 let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle','commenter' ]
 let g:which_key_map['p'] = [ 'pclose','close-preview' ]
 let g:which_key_map['q'] = [ 'q','quit' ]
+let g:which_key_map['d'] = [ 'bd','delete-buffer' ]
 let g:which_key_map['s'] = [ 'w','save' ]
 "let g:which_key_map['f'] = [ 'Denite file','files' ]
 let g:which_key_map['f'] = [ 'Ranger','Ranger' ]
