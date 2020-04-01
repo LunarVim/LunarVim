@@ -3,8 +3,6 @@ if &compatible
   set nocompatible
 endif
 
-set runtimepath^=~/.config/_vim
-
 " set leader key
 let g:mapleader="\\"
 " alias for leader key
@@ -19,7 +17,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler              					        " show the cursor position all the time
-set cmdheight=2
+set cmdheight=1
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
