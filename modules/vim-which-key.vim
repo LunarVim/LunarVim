@@ -33,7 +33,8 @@ let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle','commenter' ]
 let g:which_key_map['p'] = [ 'pclose','close-preview' ]
 let g:which_key_map['q'] = [ 'q','quit' ]
 let g:which_key_map['s'] = [ 'w','save' ]
-let g:which_key_map['f'] = [ 'Denite file','files' ]
+"let g:which_key_map['f'] = [ 'Denite file','files' ]
+let g:which_key_map['f'] = [ 'Ranger','Ranger' ]
 
 let g:which_key_map.t = {
       \ 'name' : '+toggle' ,
@@ -111,3 +112,4 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 ""nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 ""nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+let g:which_key_use_floating_win = 0

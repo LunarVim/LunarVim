@@ -17,7 +17,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler              					        " show the cursor position all the time
-set cmdheight=1
+set cmdheight=2                         " always keep this at 2"
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
@@ -36,7 +36,7 @@ set number                              " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 
-let g:python_highlight_all = 0          " Get rid of annoying red highlights"
+let g:python_highlight_all = 0          " Get rid of annoying red highlights" look into polyglot python implementation to choose what you want to enable
 let g:elite_mode=1                      " Disable arrows"
 filetype plugin indent on               " Gives vim abilty to recognize filetypes
                  

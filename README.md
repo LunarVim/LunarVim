@@ -50,7 +50,9 @@ start using coc
 
 install this stuff
 
+https://github.com/kevinhwang91/rnvimr
+VimWiki
+coc
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'weirongxu/plantuml-previewer.vim'                                 " Plantuml-previewer
 https://github.com/voldikss/coc-todolist
 

@@ -7,16 +7,13 @@ endfunction
 
 if dein#load_state('~/.config/nvim/dein')
   call dein#begin('~/.config/nvim/dein')
-
   
+  " Ranger integration
+  "call dein#add('kevinhwang91/rnvimr', {'do': 'make sync'})
+  call dein#add('francoiscabrol/ranger.vim')
+  call dein#add('rbgrouleff/bclose.vim')
   " All the Themes
-  ""call dein#add('flazz/vim-colorschemes')
-  call dein#add('liuchengxu/space-vim-dark')
-  call dein#add('tomasiser/vim-code-dark')
   call dein#add('joshdick/onedark.vim')
-  call dein#add('morhetz/gruvbox')
-  call dein#add('jacoborus/tender.vim')
-  call dein#add('luochen1990/rainbow')
   " key menu popup "
   call dein#add('liuchengxu/vim-which-key')
   "Interface"
