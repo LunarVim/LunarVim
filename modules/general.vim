@@ -96,3 +96,4 @@ vnoremap < <gv
 vnoremap > >gv
 
 set conceallevel=0
+cmap w!! w !sudo tee %
