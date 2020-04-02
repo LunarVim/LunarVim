@@ -30,12 +30,13 @@ nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
 nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Support/Code/User/settings.json')<cr>
 
 let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle','commenter' ]
+let g:which_key_map['e'] = [ 'NERDTreeToggle', 'file-explorer' ]           
 let g:which_key_map['p'] = [ 'pclose','close-preview' ]
 let g:which_key_map['q'] = [ 'q','quit' ]
 let g:which_key_map['d'] = [ 'bd','delete-buffer' ]
 let g:which_key_map['s'] = [ 'w','save' ]
-"let g:which_key_map['f'] = [ 'Denite file','files' ]
-let g:which_key_map['f'] = [ 'Ranger','Ranger' ]
+let g:which_key_map['r'] = [ 'Ranger','ranger' ]
+let g:which_key_map['f'] = [ 'FZF','fzf' ]
 
 let g:which_key_map.t = {
       \ 'name' : '+toggle' ,

@@ -2,7 +2,7 @@
 source $HOME/.config/nvim/modules/pythonpath.vim " Eventually move to pyenv/virtualenv
 source $HOME/.config/nvim/modules/nodepath.vim " Make sure to set version here
 source $HOME/.config/nvim/modules/plugins.vim
-"source $HOME/.config/nvim/modules/denite.vim
+source $HOME/.config/nvim/modules/fzf.vim
 source $HOME/.config/nvim/modules/general.vim
 source $HOME/.config/nvim/modules/theme.vim
 source $HOME/.config/nvim/modules/airline.vim
@@ -24,4 +24,4 @@ source $HOME/.config/nvim/modules/rainbow.vim
 source $HOME/.config/nvim/modules/vim-which-key.vim
 source $HOME/.config/nvim/modules/echodoc.vim
 " Special test file "
-source $HOME/.config/nvim/modules/test.vim
+"source $HOME/.config/nvim/modules/test.vim
