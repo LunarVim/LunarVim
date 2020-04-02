@@ -23,3 +23,5 @@ source $HOME/.config/nvim/modules/vim_wiki.vim
 "source $HOME/.config/nvim/modules/ale.vim
 "source $HOME/.config/nvim/modules/pydocstring.vim
 "source $HOME/.config/nvim/modules/neosnippets.vim " I need to do my homework on snippets
+let g:sneak#label = 1
+
