@@ -46,6 +46,7 @@ let g:which_key_map.t = {
       \ 'r' : [':set norelativenumber!' , 'rel-line-numbers']        ,
       \ 's' : [':let @/ = ""'        , 'remove-search-highlight'] ,
       \ 'c' : ['ColorToggle'            , 'remove-color']            ,
+      \ 't' : [':6sp term://zsh'            , 'terminal']            ,
       \ }
 
 let g:which_key_map.h = {

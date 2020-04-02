@@ -1,12 +1,71 @@
 # Nvim
 
+Plugging my [blog](chrisatmachine.com)
+Plugging my [YouTube channel](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
+
 ## Install 
 
-To install run the install script in the install folder
+Dependencies:
+
+- neovim
+- Node
+- Python3
+- Ripgrep
+- fzf
+- ranger
+- hack-nerd-font
+- ranger
+- universal-ctags
+
+### Install dependencies On MacOS
 
 ```
-./install
+  brew install node
+  brew install neovim
+  brew install ripgrep
+  brew install fzf
+  brew tap homebrew/cask-fonts
+  brew cask install font-hack-nerd-font
+  brew install ranger
+  brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ```
+
+### Install dependencies on Linux
+
+I assume you can figure it out based on the requirements smart guy
+
+### Setting Node path and Python3 path
+
+#### pythonpath
+
+Open `modules/pythonpath.vim` and point it to a version of python that has neovim installed
+
+example:
+
+```
+let g:python3_host_prog = expand("~/.miniconda/envs/neovim/bin/python3.8")
+```
+
+#### nodepath for Coc
+
+Open `modules/nodepath.vim` and point it to a version of python that has neovim installed
+
+example:
+
+```
+let g:coc_node_path = expand("~/.nvm/versions/node/v12.16.1/bin/node")
+```
+
+## Set up plugin manager
+
+```
+sh ~/.config/nvim/install/utils/installer.sh ~/.config/nvim/dein
+```
+
+## Install nvim
+
+You should now run `nvim` and wait while the package manager installs your plugins
+
 
 ## Post install
 
@@ -18,20 +77,9 @@ After install open Neovim and run the following:
 :checkhealth
 ```
 
-Follow my development here
+## CoC Language support
 
-<https://chiarulli.me>
-
-```
-conda create -n neovim python=3.7
-
-```
-
-install ripgrep" for gutentags to ignore .gitignore
-
-install universal ctags"
-
-make sure you open the language server module and point to the correct binaries such as pyls and vint
+## ALE Linting
 
 ## TODO 
 
@@ -45,6 +93,7 @@ make sure you open the language server module and point to the correct binaries 
 - Check out more coc extensions
 - https://github.com/voldikss/coc-todolist
 - VimWiki
-- fix tmux messing up my colors
-- figure out denite and give it a good shortcut
 
+## Notes
+
+install ripgrep" for gutentags to ignore .gitignore
