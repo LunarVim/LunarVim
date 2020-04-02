@@ -20,14 +20,14 @@ Dependencies:
 ### Install dependencies On MacOS
 
 ```
-  brew install node
-  brew install neovim
-  brew install ripgrep
-  brew install fzf
-  brew tap homebrew/cask-fonts
-  brew cask install font-hack-nerd-font
-  brew install ranger
-  brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+brew install node
+brew install neovim
+brew install ripgrep
+brew install fzf
+brew tap homebrew/cask-fonts
+brew cask install font-hack-nerd-font
+brew install ranger
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ```
 
 ### Install dependencies on Linux

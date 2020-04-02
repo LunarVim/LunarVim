@@ -1,7 +1,7 @@
 let wiki_1 = {}
 let wiki_1.syntax = 'markdown'
 let wiki_1.ext = '.md'
-
+"set concealcursor=nc
 let g:vimwiki_list = [{'path': '~/wiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
@@ -10,6 +10,9 @@ nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 
+let g:indentLine_setConceal = 0
+let g:indentLine_concealcursor = ""
+set conceallevel=0
 
 
 "let g:vimwiki_list = [{'path': '~/wiki/', 'index': 'main'}]
