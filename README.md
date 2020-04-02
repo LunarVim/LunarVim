@@ -99,6 +99,7 @@ yarn install --frozen-lockfile
 - Document node nonsense in order to install coc
 - configure coc settings better 
 - need formatter for other languages
+- set up ale
 - Java support
 - Need support for image in current ranger implementation
 - https://github.com/kevinhwang91/rnvimr (Note Ueberzug doesn't work on mac which sucks, also neither does this plugin)
@@ -108,6 +109,7 @@ yarn install --frozen-lockfile
 - coc explorer and coc floating terminal are pretty cool
 - look into save vim sessions
 - create keymap file and move combinations from general
+- ultisnips for autogenerate front matter with data and stuff
 
 ## Notes
 
