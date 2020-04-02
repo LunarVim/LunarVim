@@ -11,7 +11,6 @@ xmap <space> \
 
 syntax enable                           " Enables syntax highlighing
 set hidden                              " Required for specific actions that require multiple buffers
-set conceallevel=0
 set nowrap                              " display long lines as just one line
 set encoding=utf-8                      " The encoding displayed 
 set pumheight=10                        " Makes popup menu smaller
@@ -24,7 +23,7 @@ set splitbelow                          " Horizontal splits will automatically b
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
 set autochdir                           " Your working directory will always be the same as your working directory
-:set conceallevel=0                     " So that I can see `` in markdown files
+set conceallevel=0                     " So that I can see `` in markdown files
 set tabstop=2                           " Insert 2 spaces for a tab
 set shiftwidth=2                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
@@ -78,11 +77,21 @@ nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
 
+" I think this does something on mac but I might be full of shit
 nnoremap <D-h> <C-w>h
 nnoremap <D-j> <C-w>j
 nnoremap <D-k> <C-w>k
 nnoremap <D-l> <C-w>l
 
+
+" TAB in general mode will move to text buffer
+nnoremap <C-TAB> :VimwikiNextLink<CR>
+" SHIFT-TAB will go back
+nnoremap <C-S-TAB> :VimwikiPrevLink<CR>
+
+nmap <Leader>wn <Plug>VimwikiNextLink
+nmap <Leader>wp <Plug>VimwikiPrevLink
+<
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back

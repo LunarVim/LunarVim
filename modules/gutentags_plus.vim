@@ -16,3 +16,9 @@ let g:gutentags_file_list_command = 'rg --files'
 "Install ripgrep"
 "Install ctags"
 ".notags will ignore everything"
+
+" I think this is built in but it's nice to know that if yo
+" have ripgrep ctags will ignore everyhting in your .gitignore
+if executable('rg')
+  let g:gutentags_file_list_command = 'rg --files'
+endif

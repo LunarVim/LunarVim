@@ -27,16 +27,18 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('janko-m/vim-test')
   " Better Syntax Support
   call dein#add('sheerun/vim-polyglot')
-  " powerline
+  " Powerline
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-  " File manager
+  " File explorer
   call dein#add('scrooloose/NERDTree')
   " Comments "
   call dein#add('scrooloose/nerdcommenter')
   " Icons
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
+  " Git support
+  call dein#add('Xuyuanp/nerdtree-git-plugin')
   " Start Screen
   call dein#add('mhinz/vim-startify')
   " For ctags
@@ -72,6 +74,8 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('mattn/emmet-vim')
+  " Vim Wiki
+  call dein#add('vimwiki/vimwiki')
   "echo doc 
   call dein#add('Shougo/echodoc.vim')
   "Colorizer "

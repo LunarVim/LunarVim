@@ -62,7 +62,7 @@ let g:coc_node_path = expand("~/.nvm/versions/node/v12.16.1/bin/node")
 sh ~/.config/nvim/install/utils/installer.sh ~/.config/nvim/dein
 ```
 
-## Install nvim
+## Install packages
 
 You should now run `nvim` and wait while the package manager installs your plugins
 
@@ -79,11 +79,23 @@ After install open Neovim and run the following:
 
 ## CoC Language support
 
+
+You may need to do this if CoC says it can't find Javascript:
+
+```
+cd ~/.cache/dein/repos/github.com/neoclide/coc.nvim
+git clean -xfd
+yarn install --frozen-lockfile
+```
+
+[Official installation page](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim)
+[Extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
+
 ## ALE Linting
 
 ## TODO 
 
-### Install this stuff
+- make better use of ftplugin
 - Document node nonsense in order to install coc
 - configure coc settings better 
 - need formatter for other languages
@@ -93,7 +105,11 @@ After install open Neovim and run the following:
 - Check out more coc extensions
 - https://github.com/voldikss/coc-todolist
 - VimWiki
+- coc explorer and coc floating terminal are pretty cool
+- look into save vim sessions
+- create keymap file and move combinations from general
 
 ## Notes
 
 install ripgrep" for gutentags to ignore .gitignore
+If you get an error like this: `gutentags: ctags job failed, returned:` remove the tags directory in `~/.cache`

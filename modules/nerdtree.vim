@@ -23,3 +23,8 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+" Original coloring
+highlight! link NERDTreeFlags NERDTreeDir
+" Get rid of help thing at the top
+"let NERDTreeMinimalUI=1
+
