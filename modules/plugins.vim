@@ -45,7 +45,7 @@ if dein#load_state('~/.config/nvim/dein')
   "call dein#add('ludovicchabant/vim-gutentags')
   "call dein#add('skywind3000/gutentags_plus')
   " Better Previews "
-  call dein#add('skywind3000/vim-preview')
+  "call dein#add('skywind3000/vim-preview')
   " Tagbar
   call dein#add('majutsushi/tagbar')
   " Auto Pairs

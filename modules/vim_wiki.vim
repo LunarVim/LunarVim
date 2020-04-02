@@ -1,3 +1,7 @@
+let wiki_1 = {}
+let wiki_1.syntax = 'markdown'
+let wiki_1.ext = '.md'
+
 let g:vimwiki_list = [{'path': '~/wiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
