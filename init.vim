@@ -19,7 +19,7 @@ source $HOME/.config/nvim/modules/vim-which-key.vim
 source $HOME/.config/nvim/modules/echodoc.vim         " I forget what this does
 source $HOME/.config/nvim/modules/vim_wiki.vim
 
-source $HOME/.config/nvim/modules/gutentags_plus.vim " disabled until 141 error is fixed
+"source $HOME/.config/nvim/modules/gutentags_plus.vim " disabled until 141 error is fixed
 "source $HOME/.config/nvim/modules/ale.vim
 "source $HOME/.config/nvim/modules/pydocstring.vim
 "source $HOME/.config/nvim/modules/neosnippets.vim " I need to do my homework on snippets
