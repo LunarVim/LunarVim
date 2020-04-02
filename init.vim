@@ -1,5 +1,5 @@
 " Activate Modules
-source $HOME/.config/nvim/modules/pythonpath.vim " Eventually move to pyenv/virtualenv
+source $HOME/.config/nvim/modules/pythonpath.vim 
 source $HOME/.config/nvim/modules/nodepath.vim " Make sure to set version here
 source $HOME/.config/nvim/modules/plugins.vim
 source $HOME/.config/nvim/modules/fzf.vim
@@ -12,7 +12,6 @@ source $HOME/.config/nvim/modules/nerdtree.vim
 source $HOME/.config/nvim/modules/startify.vim
 source $HOME/.config/nvim/modules/gutentags_plus.vim
 source $HOME/.config/nvim/modules/markdown-preview.vim
-"source $HOME/.config/nvim/modules/language_server.vim
 "source $HOME/.config/nvim/modules/ale.vim
 source $HOME/.config/nvim/modules/goyo-limelight.vim
 source $HOME/.config/nvim/modules/relativenums.vim
@@ -23,5 +22,3 @@ source $HOME/.config/nvim/modules/colorizer.vim
 source $HOME/.config/nvim/modules/rainbow.vim
 source $HOME/.config/nvim/modules/vim-which-key.vim
 source $HOME/.config/nvim/modules/echodoc.vim
-" Special test file "
-"source $HOME/.config/nvim/modules/test.vim
