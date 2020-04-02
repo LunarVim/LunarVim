@@ -89,7 +89,7 @@ yarn install --frozen-lockfile
 ```
 
 [Official installation page](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim)
-[Extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
+[CoC Extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
 
 ## ALE Linting
 
@@ -110,6 +110,7 @@ yarn install --frozen-lockfile
 - look into save vim sessions
 - create keymap file and move combinations from general
 - ultisnips for autogenerate front matter with data and stuff
+- setup blog with vimwiki
 
 ## Notes
 

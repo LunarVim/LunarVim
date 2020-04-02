@@ -53,14 +53,6 @@ let g:which_key_map.t = {
       \ 't' : [':6sp term://zsh'            , 'terminal']            ,
       \ }
 
-let g:which_key_map.h = {
-      \ 'name' : '+highlights' ,
-      \ 's' : ['nohlsearch'     , 'remove-search-highlight'] ,
-      \ 'c' : ['ColorToggle'    , 'remove-color']            ,
-      \ }
-      "<Plug>(ale_hover)`
-      "\ 'f' : ['LanguageClient#textDocument_formatting()'     , 'formatting']       ,
-      "\ 'h' : ['LanguageClient#textDocument_hover()'          , 'hover']            ,
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
       \ 'c' : ['LanguageClient_contextMenu()'                 , 'context_menu']     ,
@@ -72,28 +64,16 @@ let g:which_key_map.l = {
       \ 's' : ['LanguageClient#textDocument_documentSymbol()' , 'document-symbol']  ,
       \ 'S' : ['LanguageClient#workspace_symbol()'            , 'workspace-symbol'] ,
       \ 'g' : {
-        \ 'name': '+goto',
-        \ 'd' : ['LanguageClient#textDocument_definition()'     , 'definition']       ,
-        \ 't' : ['LanguageClient#textDocument_typeDefinition()' , 'type-definition']  ,
-        \ 'i' : ['LanguageClient#textDocument_implementation()'  , 'implementation']  ,
-        \ },
+      \ 'name': '+goto',
+      \ 'd' : ['LanguageClient#textDocument_definition()'     , 'definition']       ,
+      \ 't' : ['LanguageClient#textDocument_typeDefinition()' , 'type-definition']  ,
+      \ 'i' : ['LanguageClient#textDocument_implementation()'  , 'implementation']  ,
+      \ },
       \ 'p' : {
         \ 'name': '+python',
         \ 'd' : ['<Plug>(pydocstring)'  , 'python-docstring']  ,
         \ },
       \ }
-
-"let g:which_key_map.w = {
-      "\ 'name' : '+windows' ,
-      "\ 'v' : ['<C-W>v'     , 'split-window-right']    ,
-      "\ 'h' : ['<C-W>s'     , 'split-window-below']    ,
-      "\ 'w' : ['<C-W>w'     , 'other-window']          ,
-      "\ 'o' : ['only'       , 'close-all-other-windows']    ,
-      "\ 'd' : ['<C-W>c'     , 'delete-window']         ,
-      "\ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
-      "\ '=' : ['<C-W>='     , 'balance-window']        ,
-      "\ '?' : ['Windows'    , 'fzf-window']            ,
-      "\ }
 
 let g:which_key_map.b = {
        \ 'name' : '+buffer' ,
