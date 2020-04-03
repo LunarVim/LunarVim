@@ -25,9 +25,9 @@ fun! OpenConfigFile(file)
   endif
 endfun
 
-nnoremap <silent> <leader>in :call OpenConfigFile('~/.config/nvim/init.vim')<cr>
-nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
-nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Support/Code/User/settings.json')<cr>
+"nnoremap <silent> <leader>in :call OpenConfigFile('~/.config/nvim/init.vim')<cr>
+"nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
+"nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Support/Code/User/settings.json')<cr>
 
 let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle', 'commenter' ]
 let g:which_key_map['e'] = [ 'NERDTreeToggle', 'file-explorer' ]           
