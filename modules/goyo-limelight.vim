@@ -10,7 +10,7 @@ let g:goy_height=95
 function! s:goyo_enter()
   
   "call deoplete#custom#option('auto_complete', v:false)
-  set spell spelllang=en_us
+  "set spell spelllang=en_us
   set wrap
   set conceallevel=0
   set tw=100
@@ -25,7 +25,7 @@ endfunction
 function! s:goyo_leave()
 
   "call deoplete#custom#option('auto_complete', v:true)
-  set nospell
+  "set nospell
   set wrap!
   set showcmd
   set scrolloff=5

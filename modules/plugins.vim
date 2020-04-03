@@ -64,7 +64,9 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('junegunn/goyo.vim')
   call dein#add('junegunn/limelight.vim')
   "Markdown viewer TODO Fix this stupid thing
-  call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
+  "call dein#add('iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  })
+  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+					\ 'build': 'sh -c "cd app & yarn install"' })
 ""  call dein#add('iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }})
 ""  call dein#add('euclio/vim-markdown-composer')
   call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
@@ -75,7 +77,7 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('mattn/emmet-vim')
   " Vim Wiki
-  call dein#add('vimwiki/vimwiki')
+  "call dein#add('vimwiki/vimwiki')
   "echo doc 
   call dein#add('Shougo/echodoc.vim')
   "Colorizer "
@@ -96,7 +98,3 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-
-
-" TODO inside dein/repos/ somewhere there are cach and state files which keep
-" screwing me for installing new plugins

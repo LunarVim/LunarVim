@@ -93,6 +93,12 @@ yarn install --frozen-lockfile
 
 ## ALE Linting
 
+## Markdown Preview
+
+I had to cd into `dein/repos/github.com/iamcco/markdown-preview.nvim/`
+
+and run 'npx yarn install'
+
 ## TODO 
 
 - make better use of ftplugin
@@ -100,7 +106,7 @@ yarn install --frozen-lockfile
 - configure coc settings better 
 - need formatter for other languages
 - set up ale
-- Java support
+- Java support for Lombock, figured it out on work machine
 - Need support for image in current ranger implementation
 - https://github.com/kevinhwang91/rnvimr (Note Ueberzug doesn't work on mac which sucks, also neither does this plugin)
 - Check out more coc extensions
@@ -111,6 +117,8 @@ yarn install --frozen-lockfile
 - create keymap file and move combinations from general
 - ultisnips for autogenerate front matter with data and stuff
 - setup blog with vimwiki
+- vimwiki hijacks my TAB complete in md files so I'm disabling [link to issue](https://github.com/vimwiki/vimwiki/issues/353)
+- vimwiki also hijacks conceal level 
 
 ## Notes
 

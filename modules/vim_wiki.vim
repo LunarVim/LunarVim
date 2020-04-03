@@ -6,9 +6,9 @@ let g:vimwiki_list = [{'path': '~/wiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " TAB in general mode will move to text buffer
-nnoremap <TAB> :bnext<CR>
+"nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
-nnoremap <S-TAB> :bprevious<CR>
+"nnoremap <S-TAB> :bprevious<CR>
 
 let g:indentLine_setConceal = 0
 let g:indentLine_concealcursor = ""
