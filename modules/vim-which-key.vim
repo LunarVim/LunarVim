@@ -7,8 +7,6 @@ let g:which_key_sep = '→'
 " By default timeoutlen is 1000 ms
 set timeoutlen=100
 
-let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
 
 let g:which_key_map =  {}
 "let g:which_key_default_group_name = ''
@@ -29,18 +27,24 @@ endfun
 "nnoremap <silent> <leader>bashrc :call OpenConfigFile('~/.bashrc')<cr>
 "nnoremap <silent> <leader>code :call OpenConfigFile('~/Library/Application Support/Code/User/settings.json')<cr>
 
-let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle', 'commenter' ]
-let g:which_key_map['e'] = [ 'NERDTreeToggle', 'file-explorer' ]           
-let g:which_key_map['p'] = [ 'pclose'    , 'close-preview' ]
-let g:which_key_map['q'] = [ 'q'         , 'quit' ]
-let g:which_key_map['d'] = [ 'bd'        , 'delete-buffer' ]
-let g:which_key_map['s'] = [ 'w'         , 'save' ]
-let g:which_key_map['r'] = [ 'Ranger'    , 'ranger' ]
-let g:which_key_map['f'] = [ 'FZF'       , 'fzf' ]
-let g:which_key_map['z'] = [ 'Goyo'      , 'zen-mode' ]
-let g:which_key_map['v'] = ['<C-W>v'     , 'split-window-right']
-let g:which_key_map['h'] = ['<C-W>s'     , 'split-window-below']
-let g:which_key_map['o'] = ['only'       , 'close-all-other-windows']
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'commenter' ]
+let g:which_key_map['e'] = [ 'NERDTreeToggle'             , 'file-explorer' ]           
+let g:which_key_map['p'] = [ 'pclose'                     , 'close-preview' ]
+let g:which_key_map['q'] = [ 'q'                          , 'quit' ]
+let g:which_key_map['d'] = [ 'bd'                         , 'delete-buffer' ]
+let g:which_key_map['s'] = [ 'w'                          , 'save' ]
+let g:which_key_map['r'] = [ 'Ranger'                     , 'ranger' ]
+let g:which_key_map['f'] = [ 'FZF'                        , 'fzf' ]
+let g:which_key_map['z'] = [ 'Goyo'                       , 'zen-mode' ]
+let g:which_key_map['v'] = ['<C-W>v'                      , 'split-window-right']
+let g:which_key_map['h'] = ['<C-W>s'                      , 'split-window-below']
+let g:which_key_map['o'] = ['only'                        , 'close-all-other-windows']
+"let g:which_key_map[','] = ['vsplit $NVIMRC '             , 'open-init.vim']
+"let g:which_key_map['.'] = ['source $NVIMRC '             , 'source-init.vim']
+let g:which_key_map['"'] = ['viw<esc>a"<esc>bi"<esc>lel'  , 'surround']
+" Surround in \""
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 
 let g:which_key_map.t = {
       \ 'name' : '+toggle' ,
@@ -48,10 +52,11 @@ let g:which_key_map.t = {
       \ 'b' : ['TagbarToggle'           , 'tagbar']                  ,
       \ 'n' : [':set nonumber!'         , 'line-numbers']            ,
       \ 'r' : [':set norelativenumber!' , 'rel-line-numbers']        ,
-      \ 's' : [':let @/ = ""'        , 'remove-search-highlight'] ,
+      \ 's' : [':let @/ = ""'           , 'remove-search-highlight'] ,
       \ 'c' : ['ColorToggle'            , 'remove-color']            ,
-      \ 't' : [':6sp term://zsh'            , 'terminal']            ,
+      \ 't' : [':6sp term://zsh'        , 'terminal']                ,
       \ }
+
 
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
@@ -85,8 +90,8 @@ let g:which_key_map.b = {
        \ 'n' : ['bnext'     , 'next-buffer']     ,
        \ 'p' : ['bprevious' , 'previous-buffer'] ,
        \ '?' : ['Buffers'   , 'fzf-buffer']      ,
-       \ 's' : ['Startify'  , 'Startify']     ,
-       \ 'g' : ['Goyo'      , 'Goyo'] ,
+       \ 's' : ['Startify'  , 'Startify']        ,
+       \ 'g' : ['Goyo'      , 'Goyo']            ,
        \ }
 
 call which_key#register('<Space>', "g:which_key_map")

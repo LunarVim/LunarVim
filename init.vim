@@ -25,3 +25,5 @@ source $HOME/.config/nvim/modules/sneak.vim
 "source $HOME/.config/nvim/modules/pydocstring.vim
 "source $HOME/.config/nvim/modules/neosnippets.vim " I need to do my homework on snippets
 "source $HOME/.config/nvim/modules/vim_wiki.vim
+echo ">^.^<"
+

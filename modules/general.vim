@@ -4,10 +4,9 @@ if &compatible
 endif
 
 " set leader key
-let g:mapleader="\\"
-" alias for leader key
-nmap <space> \
-xmap <space> \
+let g:mapleader = "\<Space>"
+" set local leader key
+let g:maplocalleader = ','
 
 syntax enable                           " Enables syntax highlighing
 set hidden                              " Required for specific actions that require multiple buffers
@@ -23,7 +22,7 @@ set splitbelow                          " Horizontal splits will automatically b
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
 set autochdir                           " Your working directory will always be the same as your working directory
-set conceallevel=0                     " So that I can see `` in markdown files
+set conceallevel=0                      " So that I can see `` in markdown files
 set tabstop=2                           " Insert 2 spaces for a tab
 set shiftwidth=2                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
@@ -35,7 +34,6 @@ set number                              " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 
-let g:python_highlight_all = 0          " Get rid of annoying red highlights" look into polyglot python implementation to choose what you want to enable
 let g:elite_mode=1                      " Disable arrows"
 filetype plugin indent on               " Gives vim abilty to recognize filetypes
                  
@@ -83,15 +81,25 @@ nnoremap <D-j> <C-w>j
 nnoremap <D-k> <C-w>k
 nnoremap <D-l> <C-w>l
 
+" I hate escape more than anything else
+inoremap jk <Esc>
+inoremap kj <Esc>
+" This is how much I hate it
+inoremap <esc> <nop>
+
+" Easy CAPS
+inoremap <c-u> <ESC>viwUi
+nnoremap <c-u> viwU<Esc>
+
 
 " TAB in general mode will move to text buffer
 nnoremap <C-TAB> :VimwikiNextLink<CR>
 " SHIFT-TAB will go back
 nnoremap <C-S-TAB> :VimwikiPrevLink<CR>
 
-nmap <Leader>wn <Plug>VimwikiNextLink
-nmap <Leader>wp <Plug>VimwikiPrevLink
-<
+
+"nmap <Leader>wn <Plug>VimwikiNextLink
+"nmap <Leader>wp <Plug>VimwikiPrevLink
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
