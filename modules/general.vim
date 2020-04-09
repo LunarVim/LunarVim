@@ -57,6 +57,8 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 nnoremap <silent> <F1> :10split term://bash<CR>
 nnoremap <silent> <F2> :bdelete! term://*<return>
 
+inoremap K <c-d>
+nnoremap J <c-u>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -85,7 +87,7 @@ nnoremap <D-l> <C-w>l
 inoremap jk <Esc>
 inoremap kj <Esc>
 " This is how much I hate it
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 
 " Easy CAPS
 inoremap <c-u> <ESC>viwUi

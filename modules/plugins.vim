@@ -81,7 +81,7 @@ if dein#load_state('~/.config/nvim/dein')
   "echo doc 
   call dein#add('Shougo/echodoc.vim')
   "Colorizer "
-  call dein#add('chrisbra/Colorizer')
+  call dein#add('norcalli/nvim-colorizer.lua')
   " Python docstring "
   call dein#add('heavenshell/vim-pydocstring')
   
