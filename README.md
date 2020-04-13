@@ -38,7 +38,7 @@ I assume you can figure it out based on the requirements smart guy
 
 #### pythonpath
 
-Open `modules/pythonpath.vim` and point it to a version of python that has neovim installed
+Create `modules/pythonpath.vim` and point it to a version of python that has neovim installed
 
 example:
 
@@ -48,7 +48,7 @@ let g:python3_host_prog = expand("~/.miniconda/envs/neovim/bin/python3.8")
 
 #### nodepath for Coc
 
-Open `modules/nodepath.vim` and point it to a version of python that has neovim installed
+Create `modules/nodepath.vim` and point it to a version of python that has neovim installed
 
 example:
 
