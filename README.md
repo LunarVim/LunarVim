@@ -60,7 +60,7 @@ let g:node_host_prog = expand("~/.nvm/versions/node/v12.16.1/bin/node")
 ## Set up plugin manager
 
 ```
-sh ~/.config/nvim/install/utils/installer.sh ~/.config/nvim/dein
+sh ~/.config/nvim/utils/installer.sh ~/.config/nvim/dein
 ```
 
 ## Install packages

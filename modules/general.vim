@@ -9,7 +9,7 @@ let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 
 syntax enable                           " Enables syntax highlighing
-set hidden                              " Required for specific actions that require multiple buffers
+"set hidden                              " Required for specific actions that require multiple buffers
 set nowrap                              " display long lines as just one line
 set encoding=utf-8                      " The encoding displayed 
 set pumheight=10                        " Makes popup menu smaller
@@ -21,7 +21,7 @@ set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
-set autochdir                           " Your working directory will always be the same as your working directory
+"set autochdir                           " Your working directory will always be the same as your working directory
 set conceallevel=0                      " So that I can see `` in markdown files
 set tabstop=2                           " Insert 2 spaces for a tab
 set shiftwidth=2                        " Change the number of space characters inserted for indentation
@@ -114,5 +114,4 @@ set clipboard=unnamedplus
 vnoremap < <gv
 vnoremap > >gv
 
-set conceallevel=0
 cmap w!! w !sudo tee %

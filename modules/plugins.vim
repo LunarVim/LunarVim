@@ -83,7 +83,7 @@ if dein#load_state('~/.config/nvim/dein')
   "Colorizer "
   call dein#add('norcalli/nvim-colorizer.lua')
   " Python docstring "
-  call dein#add('heavenshell/vim-pydocstring')
+  "call dein#add('heavenshell/vim-pydocstring')
   
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')

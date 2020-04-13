@@ -60,17 +60,16 @@ let g:which_key_map.t = {
 
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
-      \ 'c' : ['LanguageClient_contextMenu()'                 , 'context_menu']     ,
-      \ 'f' : ['ALEFix'                                       , 'formatting']       ,
+      \ 'a' : ['<Plug>(coc-codeaction-selected)'              , 'rename symbol']     ,
+      \ 'r' : ['<Plug>(coc-rename)'                           , 'rename symbol']     ,
+      \ 'f' : ['<Plug>(coc-fix-current)'                      , 'fix']       ,
       \ 'i' : ['ALEInfo'                                      , 'info']             ,
       \ 'h' : ['<Plug>(ale_hover)'                            , 'hover']            ,
-      \ 'r' : ['LanguageClient#textDocument_references()'     , 'references']       ,
       \ 'R' : ['LanguageClient#textDocument_rename()'         , 'rename']           ,
       \ 's' : ['LanguageClient#textDocument_documentSymbol()' , 'document-symbol']  ,
       \ 'S' : ['LanguageClient#workspace_symbol()'            , 'workspace-symbol'] ,
       \ 'g' : {
       \ 'name': '+goto',
-      \ 'd' : ['LanguageClient#textDocument_definition()'     , 'definition']       ,
       \ 't' : ['LanguageClient#textDocument_typeDefinition()' , 'type-definition']  ,
       \ 'i' : ['LanguageClient#textDocument_implementation()'  , 'implementation']  ,
       \ },

@@ -1,5 +1,5 @@
 let NERDTreeShowHidden = 1              " show hidden files
-
+let g:NERDCreateDefaultMappings = 0
 " automatically close when you open a file"
 "let NERDTreeQuitOnOpen = 1
 
