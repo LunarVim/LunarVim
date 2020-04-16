@@ -1,7 +1,7 @@
 " Activate Modules
+source $HOME/.config/nvim/plugs/plugins.vim
 source $HOME/.config/nvim/modules/pythonpath.vim 
 source $HOME/.config/nvim/modules/nodepath.vim " Make sure to set version here
-source $HOME/.config/nvim/modules/plugins.vim
 source $HOME/.config/nvim/modules/theme.vim
 source $HOME/.config/nvim/modules/general.vim
 source $HOME/.config/nvim/modules/airline.vim
