@@ -18,10 +18,10 @@
     sudo pacman -S neovim
     ```
 
-## Clone this repo 
+## Clone this repo into your config
 
 ```
-git clone https://github.com/ChristianChiarulli/nvim.git
+git clone https://github.com/ChristianChiarulli/nvim.git ~/.config
 ```
 
 ## Install python & node support
