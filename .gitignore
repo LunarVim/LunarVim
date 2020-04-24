@@ -3,3 +3,4 @@ tags*
 .netrwhist
 pythonpath.vim
 nodepath.vim
+autoload/plugged/*

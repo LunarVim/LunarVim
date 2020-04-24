@@ -1,2 +1,0 @@
-lua require'colorizer'.setup()
-
