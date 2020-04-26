@@ -1,4 +1,4 @@
-# Chris's Neovim Config
+# Nvim Mach 2
 
 ## Install Neovim
 
