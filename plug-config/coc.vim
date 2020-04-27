@@ -124,17 +124,17 @@ let g:coc_explorer_global_presets = {
 \   'floatingLeftside': {
 \      'position': 'floating',
 \      'floating-position': 'left-center',
-\      'floating-width': 50,
+\      'floating-width': 30,
 \   },
 \   'floatingRightside': {
 \      'position': 'floating',
-\      'floating-position': 'left-center',
-\      'floating-width': 50,
+\      'floating-position': 'right-center',
+\      'floating-width': 30,
 \   },
 \   'simplify': {
 \     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
 \   }
 \ }
-nmap <space>e :CocCommand explorer<CR>
-nmap <space>f :CocCommand explorer --preset floating<CR>
+nmap <silent> <space>e :CocCommand explorer<CR>
+nmap <space>f :CocCommand explorer --preset floatingRightside<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

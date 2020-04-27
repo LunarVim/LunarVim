@@ -66,3 +66,7 @@ let g:node_host_prog = expand("~/.nvm/versions/node/v12.16.1/bin/node") " <- exa
 
 - ranger
 - ueberzug
+- ripgrep
+- silver_searcher
+- fd
+- universal-ctags
