@@ -70,3 +70,5 @@ let g:node_host_prog = expand("~/.nvm/versions/node/v12.16.1/bin/node") " <- exa
 - silver_searcher
 - fd
 - universal-ctags
+
+Explainations and installation instrucion can be found on my blog
