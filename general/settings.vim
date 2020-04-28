@@ -1,5 +1,6 @@
 " set leader key
 map <Space> <Leader>
+set iskeyword+=-                      	" treat dash separated words as a word text object"
 
 if !exists('g:vscode')
   syntax enable                           " Enables syntax highlighing
@@ -10,7 +11,6 @@ if !exists('g:vscode')
   set fileencoding=utf-8                  " The encoding written to file
   set ruler              			            " Show the cursor position all the time
   set cmdheight=2                         " More space for displaying messages
-  set iskeyword+=-                      	" treat dash separated words as a word text object"
   set mouse=a                             " Enable your mouse
   set splitbelow                          " Horizontal splits will automatically be below
   set splitright                          " Vertical splits will automatically be to the right

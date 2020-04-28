@@ -70,5 +70,20 @@ let g:node_host_prog = expand("~/.nvm/versions/node/v12.16.1/bin/node") " <- exa
 - silver_searcher
 - fd
 - universal-ctags
+- lazy git
+- lazy docker
 
 Explainations and installation instrucion can be found on my blog
+
+# TODO 
+- Map which key stuff
+- People asked about vimwiki I kinda hate it but maybe I'll add it
+- try this out https://github.com/asvetliakov/vim-easymotion
+- update startify
+- goyo zen mode
+- float term lazy git
+- vim-repeat
+- spectre, or async task/run
+- setup custom paths
+- install script envsubst is your friend
+- vim radical sounds cool

@@ -8,6 +8,12 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+  " Text Navigation
+  Plug 'justinmk/vim-sneak'
+  Plug 'unblevable/quick-scope'
+  " Change dates fast
+  Plug 'tpope/vim-speeddating'
+
   if !exists('g:vscode')
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
@@ -32,18 +38,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'junegunn/rainbow_parentheses.vim'
-    " Text Navigation
-    Plug 'justinmk/vim-sneak'
-    Plug 'unblevable/quick-scope'
     " Git
     Plug 'airblade/vim-gitgutter'
     " Terminal
     Plug 'voldikss/vim-floaterm'
     " Start Screen
     Plug 'mhinz/vim-startify'
-    " Tabs
+    " Surround
+    Plug 'tpope/vim-surround'
+    " Vista
+    Plug 'liuchengxu/vista.vim'
     " 
-
   endif
 
 
