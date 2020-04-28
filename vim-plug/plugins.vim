@@ -9,10 +9,11 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
   " Text Navigation
-  Plug 'justinmk/vim-sneak'
+  " Plug 'justinmk/vim-sneak'
   Plug 'unblevable/quick-scope'
   " Change dates fast
   Plug 'tpope/vim-speeddating'
+  Plug 'asvetliakov/vim-easymotion'
 
   if !exists('g:vscode')
     " Better Syntax Support
@@ -40,6 +41,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/rainbow_parentheses.vim'
     " Git
     Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
     " Terminal
     Plug 'voldikss/vim-floaterm'
     " Start Screen
@@ -48,7 +51,22 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'
     " Vista
     Plug 'liuchengxu/vista.vim'
-    " 
+    " Files
+    Plug 'tpope/vim-eunuch'
+    " Help
+    Plug 'liuchengxu/vim-which-key'
+    " Zen mode
+    Plug 'junegunn/goyo.vim'
+    " Repeat stuff
+    Plug 'tpope/vim-repeat'
+    " Convert binary, hex, etc..
+    Plug 'glts/vim-radical'
+    " Making stuff
+    Plug 'neomake/neomake'
+    " Snippets TODO fix TAB hijack
+    " Plug 'SirVer/ultisnips'
+    " Better Comments
+    Plug 'jbgutierrez/vim-better-comments'
   endif
 
 
