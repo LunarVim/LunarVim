@@ -9,8 +9,6 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
   if !exists('g:vscode')
-    " VSCode extension
-    " ordinary neovim
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " Auto pairs for '(' '[' '{' 
@@ -34,6 +32,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'junegunn/rainbow_parentheses.vim'
+    " Text Navigation
+    Plug 'justinmk/vim-sneak'
+    Plug 'unblevable/quick-scope'
+    " Git
+    Plug 'airblade/vim-gitgutter'
+    " Terminal
+    Plug 'voldikss/vim-floaterm'
+    " Start Screen
+    " Tabs
+    " 
+
   endif
 
 
