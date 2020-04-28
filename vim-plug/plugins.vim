@@ -40,6 +40,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Terminal
     Plug 'voldikss/vim-floaterm'
     " Start Screen
+    Plug 'mhinz/vim-startify'
     " Tabs
     " 
 
