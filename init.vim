@@ -25,8 +25,8 @@ else
   source $HOME/.config/nvim/plug-config/fzf.vim
   source $HOME/.config/nvim/plug-config/commentary.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
-  lua require'plug-colorizer'
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
+  luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
