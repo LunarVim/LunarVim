@@ -1,5 +1,15 @@
 
-if !exists('g:vscode')
+" Better indenting
+vnoremap < <gv
+vnoremap > >gv
+
+if exists('g:vscode')
+
+" Simulate same TAB behavior in VSCode
+nmap <Tab> :Tabnext<CR>
+nmap <S-Tab> :Tabprev<CR>
+
+else
   " Better nav for omnicomplete
   inoremap <expr> <c-j> ("\<C-n>")
   inoremap <expr> <c-k> ("\<C-p>")
@@ -40,6 +50,3 @@ if !exists('g:vscode')
   nnoremap <M-l>    :vertical resize +2<CR>
 endif
 
-" Better tabbing
-vnoremap < <gv
-vnoremap > >gv

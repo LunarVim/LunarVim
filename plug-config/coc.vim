@@ -135,6 +135,7 @@ let g:coc_explorer_global_presets = {
 \     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
 \   }
 \ }
-nmap <silent> <space>e :CocCommand explorer<CR>
+"nmap <silent> <space>e :CocCommand explorer<CR>
+nnoremap <leader>e :CocCommand explorer<CR>
 nmap <space>f :CocCommand explorer --preset floatingRightside<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

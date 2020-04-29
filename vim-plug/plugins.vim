@@ -8,14 +8,27 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
-  " Text Navigation
-  " Plug 'justinmk/vim-sneak'
-  Plug 'unblevable/quick-scope'
   " Change dates fast
   Plug 'tpope/vim-speeddating'
-  Plug 'asvetliakov/vim-easymotion'
+  " Convert binary, hex, etc..
+  Plug 'glts/vim-radical'
+  " Files
+  Plug 'tpope/vim-eunuch'
+  " Repeat stuff
+  Plug 'tpope/vim-repeat'
+  " Surround
+  Plug 'tpope/vim-surround'
+  " Better Comments
+  Plug 'tpope/vim-commentary'
 
-  if !exists('g:vscode')
+  if exists('g:vscode')
+    " Easy motion for VSCode
+    Plug 'asvetliakov/vim-easymotion'
+
+  else
+    " Add some color
+    Plug 'norcalli/nvim-colorizer.lua'
+    Plug 'junegunn/rainbow_parentheses.vim'
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " Auto pairs for '(' '[' '{' 
@@ -34,11 +47,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'airblade/vim-rooter'
-    " Better Comments
-    Plug 'tpope/vim-commentary'
-    " Add some color
-    Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'junegunn/rainbow_parentheses.vim'
     " Git
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
@@ -47,26 +55,21 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'voldikss/vim-floaterm'
     " Start Screen
     Plug 'mhinz/vim-startify'
-    " Surround
-    Plug 'tpope/vim-surround'
     " Vista
     Plug 'liuchengxu/vista.vim'
-    " Files
-    Plug 'tpope/vim-eunuch'
     " Help
     Plug 'liuchengxu/vim-which-key'
     " Zen mode
     Plug 'junegunn/goyo.vim'
-    " Repeat stuff
-    Plug 'tpope/vim-repeat'
-    " Convert binary, hex, etc..
-    Plug 'glts/vim-radical'
     " Making stuff
     Plug 'neomake/neomake'
     " Snippets TODO fix TAB hijack
     " Plug 'SirVer/ultisnips'
     " Better Comments
     Plug 'jbgutierrez/vim-better-comments'
+    " Text Navigation
+    Plug 'justinmk/vim-sneak'
+    Plug 'unblevable/quick-scope'
   endif
 
 
