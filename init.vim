@@ -28,5 +28,6 @@ else
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
+  source $HOME/.config/nvim/plug-config/start-screen.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
