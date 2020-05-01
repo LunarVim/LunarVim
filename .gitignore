@@ -5,4 +5,5 @@ pythonpath.vim
 nodepath.vim
 autoload/plugged/*
 session
+general/paths.vim
 
