@@ -49,7 +49,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     " Git
-    Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     " Terminal
