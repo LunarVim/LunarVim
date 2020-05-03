@@ -21,7 +21,7 @@ else
   source $HOME/.config/nvim/themes/syntax.vim
   source $HOME/.config/nvim/themes/onedark.vim
   source $HOME/.config/nvim/themes/airline.vim
-  source $HOME/.config/nvim/plug-config/rnvimr.vim
+  source $HOME/.config/nvim/plug-config/ranger.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
   source $HOME/.config/nvim/plug-config/commentary.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
@@ -29,5 +29,8 @@ else
   source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
   source $HOME/.config/nvim/plug-config/start-screen.vim
+  source $HOME/.config/nvim/plug-config/signify.vim
+  source $HOME/.config/nvim/plug-config/fugitive.vim
+  source $HOME/.config/nvim/plug-config/gv.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif

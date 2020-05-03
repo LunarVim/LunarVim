@@ -22,8 +22,8 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden"
-
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+"-g '!{node_modules,.git}'
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -49,7 +49,7 @@ command! -bang -nargs=? -complete=dir Files
 " Get text in files with Rg
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   "rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/**' ".shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " Ripgrep advanced

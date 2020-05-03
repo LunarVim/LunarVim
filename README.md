@@ -88,3 +88,4 @@ Explainations and installation instrucion can be found on my blog
 - spectre, or async task/run
 - setup custom paths
 - install script envsubst is your friend
+- add better whitespace pluginand a toggle, video about clean code maybe
