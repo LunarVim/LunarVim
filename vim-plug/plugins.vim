@@ -28,6 +28,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'asvetliakov/vim-easymotion'
 
   else
+    " Text Navigation
+    Plug 'justinmk/vim-sneak'
+    Plug 'unblevable/quick-scope'
+    " Plug 'easymotion/vim-easymotion'
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'junegunn/rainbow_parentheses.vim'
@@ -71,9 +75,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'SirVer/ultisnips'
     " Better Comments
     Plug 'jbgutierrez/vim-better-comments'
-    " Text Navigation
-    Plug 'justinmk/vim-sneak'
-    Plug 'unblevable/quick-scope'
   endif
 
 
