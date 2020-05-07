@@ -32,7 +32,5 @@ else
   "source $HOME/.config/nvim/plug-config/easymotion.vim
   source $HOME/.config/nvim/plug-config/start-screen.vim
   source $HOME/.config/nvim/plug-config/signify.vim
-  source $HOME/.config/nvim/plug-config/fugitive.vim
-  source $HOME/.config/nvim/plug-config/gv.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
