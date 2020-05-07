@@ -77,15 +77,14 @@ let g:node_host_prog = expand("~/.nvm/versions/node/v12.16.1/bin/node") " <- exa
 - lazy git
 - lazy docker
 
-Explainations and installation instrucion can be found on my blog
+Explanations and installation instruction can be found on my blog
 
 # TODO 
 - Map which key stuff
 - People asked about vimwiki I kinda hate it but maybe I'll add it
-- try this out https://github.com/asvetliakov/vim-easymotion
-- update startify
 - float term lazy git
 - spectre, or async task/run
 - setup custom paths
 - install script envsubst is your friend
 - add better whitespace pluginand a toggle, video about clean code maybe
+- Remember silent for which key
