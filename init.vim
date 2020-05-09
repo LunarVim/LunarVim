@@ -1,8 +1,8 @@
-"    ____      _ __        _         
-"   /  _/___  (_) /__   __(_)___ ___ 
+"    ____      _ __        _
+"   /  _/___  (_) /__   __(_)___ ___
 "   / // __ \/ / __/ | / / / __ `__ \
 " _/ // / / / / /__| |/ / / / / / / /
-"/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/ 
+"/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
 
 
 " Always source these
@@ -29,6 +29,8 @@ else
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
   source $HOME/.config/nvim/plug-config/sneak.vim
+  source $HOME/.config/nvim/plug-config/goyo.vim
+  source $HOME/.config/nvim/plug-config/vim-rooter.vim
   "source $HOME/.config/nvim/plug-config/easymotion.vim
   source $HOME/.config/nvim/plug-config/start-screen.vim
   source $HOME/.config/nvim/plug-config/signify.vim
