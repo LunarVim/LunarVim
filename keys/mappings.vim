@@ -1,3 +1,7 @@
+" Leader key
+let mapleader=" "
+let localleader=" "
+nnoremap <Space> <Nop>
 
 " Better indenting
 vnoremap < <gv

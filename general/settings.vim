@@ -1,8 +1,6 @@
 " set leader key
 "map <Space> <Leader>
 "nmap <space> <leader>
-let mapleader=" "
-nnoremap <Space> <Nop>
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 
 if !exists('g:vscode')

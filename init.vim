@@ -9,6 +9,7 @@
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/keys/mappings.vim
+source $HOME/.config/nvim/keys/which-key.vim
 source $HOME/.config/nvim/general/paths.vim
 
 " Source depending on if VSCode is our client
