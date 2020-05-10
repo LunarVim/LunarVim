@@ -15,10 +15,10 @@ let g:signify_sign_show_text = 1
 
 
 " Jump though hunks
-nmap <leader>j <plug>(signify-next-hunk)
-nmap <leader>k <plug>(signify-prev-hunk)
-nmap <leader>gJ 9999<leader>gj
-nmap <leader>gK 9999<leader>gk
+" nmap <leader>j <plug>(signify-next-hunk)
+" nmap <leader>k <plug>(signify-prev-hunk)
+" nmap <leader>gJ 9999<leader>gj
+" nmap <leader>gK 9999<leader>gk
 
 
 " If you like colors instead

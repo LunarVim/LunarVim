@@ -1,9 +1,3 @@
-" map leader to which_key
-" call which_key#register('<Space>', "g:which_key_map")
-
-nnoremap <silent> <leader> :silent WhichKey ' '<CR>
-vnoremap <silent> <leader> :silent WhichKeyVisual ' '<CR>
-
 let g:which_key_map =  {}
 let g:which_key_sep = '→'
 " set timeoutlen=100
@@ -21,6 +15,22 @@ highlight default link WhichKeyDesc      Function
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+
+" change to nerd commenter
+let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'commenter' ]
+let g:which_key_map['.'] = [ ':CocConfig'                 , 'CoC config' ]
+let g:which_key_map[';'] = [ ':Commands'                  , 'commands' ]
+let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
+let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
+let g:which_key_map['f'] = [ ':Files'                     , 'files' ]
+let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
+let g:which_key_map['q'] = [ 'q'                          , 'quit' ]
+let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
+let g:which_key_map['s'] = [ ':Startify'                  , 'start screen' ]
+let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
+let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
+" nmap <leader>r :RnvimrToggle<CR>
+" let g:which_key_map['"'] = ['viw<esc>a"<esc>bi"<esc>lel'  , 'surround']
 
 " f is for find
 let g:which_key_map.f = {
@@ -50,7 +60,35 @@ let g:which_key_map.f = {
       \ 'y' : [':Filetypes'    , 'file types'],
       \ 'z' : [':FZF'          , 'FZF'],
       \ }
-let g:fzf_buffers_jump = 1
+
+" g is for git
+let g:which_key_map.g = {
+      \ 'name' : '+git' ,
+      \ '/' : [':History/'     , 'history'],
+      \ ';' : [':Commands'     , 'commands'],
+      \ 'a' : [':Ag'           , 'text Ag'],
+      \ 'b' : [':BLines'       , 'current buffer'],
+      \ 'B' : [':Buffers'      , 'open buffers'],
+      \ 'c' : [':Commits'      , 'commits'],
+      \ 'C' : [':BCommits'     , 'buffer commits'],
+      \ 'f' : [':Files'        , 'files'],
+      \ 'g' : [':GFiles'       , 'git files'],
+      \ 'G' : [':GFiles?'      , 'modified git files'],
+      \ 'h' : [':History'      , 'file history'],
+      \ 'H' : [':History:'     , 'command history'],
+      \ 'l' : [':Lines'        , 'lines'] ,
+      \ 'm' : [':Marks'        , 'marks'] ,
+      \ 'M' : [':Maps'         , 'normal maps'] ,
+      \ 'p' : [':Helptags'     , 'help tags'] ,
+      \ 'r' : [':Rg'           , 'text Rg'],
+      \ 's' : [':Snippets'     , 'snippets'],
+      \ 'S' : [':Colors'       , 'color schemes'],
+      \ 't' : [':Tags'         , 'project tags'],
+      \ 'T' : [':BTags'        , 'buffer tags'],
+      \ 'w' : [':Windows'      , 'search windows'],
+      \ 'y' : [':Filetypes'    , 'file types'],
+      \ 'z' : [':FZF'          , 'FZF'],
+      \ }
 
 " l is for language server protocol
 let g:which_key_map.l = {
@@ -103,8 +141,8 @@ let g:which_key_map.t = {
       \ 'v' : [':Vista!!'                , 'tag viewer'],
       \ }
 
-
-
-
 call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :silent <c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :silent <c-u>WhichKeyVisual '<Space>'<CR>
+
 

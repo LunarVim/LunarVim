@@ -9,7 +9,7 @@ let g:rnvimr_pick_enable = 1
 " Make Neovim to wipe the buffers corresponding to the files deleted by Ranger
 let g:rnvimr_bw_enable = 1
 
-nmap <leader>r :RnvimrToggle<CR>
+" nmap <leader>r :RnvimrToggle<CR>
 
 let g:rnvimr_ranger_cmd = 'ranger --cmd="set column_ratios 1,1"
             \ --cmd="set draw_borders separators"'
