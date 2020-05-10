@@ -15,7 +15,7 @@ highlight Sneak guifg=black guibg=#00C7DF ctermfg=black ctermbg=cyan
 highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
 
 " Cool prompt
-let g:sneak#prompt = '🔎'
+let g:sneak#prompt = '🔎 '
 
 " I like quickscope better for this since it keeps me in the scope of a single line
 " map f <Plug>Sneak_f

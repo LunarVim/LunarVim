@@ -22,7 +22,6 @@ else
   source $HOME/.config/nvim/themes/syntax.vim
   source $HOME/.config/nvim/themes/onedark.vim
   source $HOME/.config/nvim/themes/airline.vim
-  " source $HOME/.config/nvim/themes/eleline.vim
   source $HOME/.config/nvim/plug-config/rnvimr.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
   source $HOME/.config/nvim/plug-config/commentary.vim
@@ -37,3 +36,10 @@ else
   source $HOME/.config/nvim/plug-config/signify.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
+
+let g:floaterm_wintype='normal'
+let g:floaterm_height=6
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
