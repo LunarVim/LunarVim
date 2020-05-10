@@ -1,3 +1,24 @@
+  " let g:coc_global_extensions = [
+  "   \ 'coc-snippets',
+  "   \ 'coc-actions',
+  "   \ 'coc-emmet',
+  "   \ 'coc-pairs',
+  "   \ 'coc-tsserver',
+  "   \ 'coc-floaterm',
+  "   \ 'coc-html',
+  "   \ 'coc-css',
+  "   \ 'coc-cssmodules',
+  "   \ 'coc-yaml',
+  "   \ 'coc-python',
+  "   \ 'coc-explorer',
+  "   \ 'coc-svg',
+  "   \ 'coc-prettier',
+  "   \ 'coc-vimlsp',
+  "   \ 'coc-xml',
+  "   \ 'coc-yank',
+  "   \ 'coc-json',
+  "   \ 'coc-vimtex',
+  "   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
@@ -132,3 +153,4 @@ let g:coc_explorer_global_presets = {
 " nnoremap <silent> <leader>e :CocCommand explorer<CR>
 " nmap <space>f :CocCommand explorer --preset floatingRightside<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
