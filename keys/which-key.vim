@@ -85,6 +85,7 @@ let g:which_key_map.l = {
       \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
       \ 'u' : [':CocListResume'                      , 'resume list'],
       \ 'U' : [':CocUpdate'                          , 'update CoC'],
+      \ 'v' : [':Vista!!'                            , 'tag viewer'],
       \ 'z' : [':CocDisable'                         , 'disable CoC'],
       \ 'Z' : [':CocEnable'                          , 'enable CoC'],
       \ }
@@ -93,12 +94,13 @@ let g:which_key_map.l = {
 " t is for toggle
 let g:which_key_map.t = {
       \ 'name' : '+toggle' ,
+      \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'e' : [':CocCommand explorer'    , 'explorer'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
-      \ 'r' : [':set norelativenumber!'  , 'rel-line-numbers'],
-      \ 's' : [':let @/ = ""'            , 'remove-search-highlight'],
-      \ 'c' : [':ColorizerToggle'        , 'colorizer'],
+      \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
+      \ 's' : [':let @/ = ""'            , 'remove search highlight'],
       \ 't' : [':FloatermToggle'         , 'terminal'],
+      \ 'v' : [':Vista!!'                , 'tag viewer'],
       \ }
 
 

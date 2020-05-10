@@ -22,6 +22,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'tpope/vim-commentary'
   " Have the file system follow you around
   Plug 'airblade/vim-rooter'
+  " auto set indent settings
+  Plug 'tpope/vim-sleuth'
 
   if exists('g:vscode')
     " Easy motion for VSCode
@@ -40,8 +42,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Cool Icons
     Plug 'ryanoasis/vim-devicons'
     " Auto pairs for '(' '[' '{' 
-    " Plug 'jiangmiao/auto-pairs'
-    Plug 'tmsvg/pear-tree'
+    Plug 'jiangmiao/auto-pairs'
+    " Closetags
+    Plug 'alvan/vim-closetag'
     " Themes
     Plug 'christianchiarulli/onedark.vim'
     " Plug 'kaicataldo/material.vim'
@@ -68,7 +71,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-startify'
     " Vista
     Plug 'liuchengxu/vista.vim'
-    " Help
+    " See what keys do like in emacs
     Plug 'liuchengxu/vim-which-key'
     " Zen mode
     Plug 'junegunn/goyo.vim'
@@ -78,6 +81,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'SirVer/ultisnips'
     " Better Comments
     Plug 'jbgutierrez/vim-better-comments'
+    " Echo doc
+    " Plug 'Shougo/echodoc.vim'
   endif
 
 

@@ -1,7 +1,5 @@
-" set leader key
-"map <Space> <Leader>
-"nmap <space> <leader>
 set iskeyword+=-                      	" treat dash separated words as a word text object"
+set formatoptions-=cro                  " Stop newline continution of comments
 
 if !exists('g:vscode')
   syntax enable                           " Enables syntax highlighing
@@ -35,7 +33,6 @@ if !exists('g:vscode')
   set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
   set updatetime=300                      " Faster completion
   set timeoutlen=100                      " By default timeoutlen is 1000 ms
-  set formatoptions-=cro                  " Stop newline continution of comments
   set clipboard=unnamedplus               " Copy paste between vim and everything else
   set incsearch
   set guifont=Hack\ Nerd\ Font
@@ -44,7 +41,7 @@ if !exists('g:vscode')
   " set autochdir                           " Your working directory will always be the same as your working directory
   " set foldcolumn=2                        " Folding abilities
 
-  au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+  " au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 
