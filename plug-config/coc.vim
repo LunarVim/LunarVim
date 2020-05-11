@@ -14,6 +14,7 @@
   "   \ 'coc-svg',
   "   \ 'coc-prettier',
   "   \ 'coc-vimlsp',
+  "   \ 'coc-flutter',
   "   \ 'coc-xml',
   "   \ 'coc-yank',
   "   \ 'coc-json',

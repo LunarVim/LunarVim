@@ -89,7 +89,6 @@ Explanations and installation instruction can be found on my blog
 - setup custom paths
 - install script envsubst is your friend
 - add better whitespace pluginand a toggle, video about clean code maybe
-- pear tree (jsx autocomplete would be nice)
 - echodoc and buitin support with CoC
 - snippets (coc snippets)
 - git messenger
