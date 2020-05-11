@@ -1,1 +1,1 @@
-nmap <silent> <leader>z :Goyo<CR>
+" nmap <silent> <leader>z :Goyo<CR>
