@@ -27,18 +27,18 @@ else
   " nnoremap <c-u> viwU<Esc>
 
   " TAB in general mode will move to text buffer
-  nnoremap <TAB> :bnext<CR>
+  nnoremap <silent> <TAB> :bnext<CR>
   " SHIFT-TAB will go back
-  nnoremap <S-TAB> :bprevious<CR>
+  nnoremap <silent> <S-TAB> :bprevious<CR>
 
   " Alternate way to save
-  nnoremap <C-s> :w<CR>
+  nnoremap <silent> <C-s> :w<CR>
   " Alternate way to quit
-  nnoremap <C-Q> :wq!<CR>
+  nnoremap <silent> <C-Q> :wq!<CR>
   " Use control-c instead of escape
-  nnoremap <C-c> <Esc>
+  nnoremap <silent> <C-c> <Esc>
   " <TAB>: completion.
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
   " Better window navigation
@@ -48,9 +48,9 @@ else
   nnoremap <C-l> <C-w>l
 
   " Use alt + hjkl to resize windows
-  nnoremap <M-j>    :resize -2<CR>
-  nnoremap <M-k>    :resize +2<CR>
-  nnoremap <M-h>    :vertical resize -2<CR>
-  nnoremap <M-l>    :vertical resize +2<CR>
+  nnoremap <silent> <M-j>    :resize -2<CR>
+  nnoremap <silent> <M-k>    :resize +2<CR>
+  nnoremap <silent> <M-h>    :vertical resize -2<CR>
+  nnoremap <silent> <M-l>    :vertical resize +2<CR>
 endif
 

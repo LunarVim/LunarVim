@@ -1,7 +1,12 @@
 {
-
   // suggestions
   // "suggest.echodocSupport": true,
+  // TODO add more labels and give them cool glyphs
+  "suggest.completionItemKindLabels": {
+    "text": "t",
+    "method": "m",
+    "function": "f"
+  },
 
   // diagnostics
   "diagnostic.errorSign": "✗",
@@ -18,7 +23,16 @@
   "list.selectedSignText": " ",
 
   // autoformat
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "graphql", "html", "yaml",  "json", "python"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "python"
+  ],
   "coc.preferences.hoverTarget": "float",
 
   // python config
@@ -26,23 +40,19 @@
   "python.linting.pylintEnabled": true,
 
   // snippets
-  "snippets.ultisnips.directories": 
-  [
-    "UltiSnips",
-    "~/.config/nvim/utils/snips"
-  ],
+  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"],
 
   // explorer
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
-  "explorer.icon.enableVimDevicons": true,
+  "explorer.icon.enableVimDevicons": false,
   "explorer.keyMappings": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   },
 
-  "languageserver":{
+  "languageserver": {
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
