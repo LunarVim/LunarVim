@@ -6,13 +6,13 @@ set -o errexit    # exit when command fails
 
 installnode() { \
   echo "Installing node..."
-  curl -sL install-node.now.sh/lts | bash
+  sudo curl -sL install-node.now.sh/lts | bash
   npm i -g neovim
 }
 
 installpip() { \
   echo "Installing pip..."
-  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   python3 get-pip.py
   rm get-pip.py
 }

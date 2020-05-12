@@ -49,6 +49,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'christianchiarulli/onedark.vim'
     " Plug 'kaicataldo/material.vim'
     " Plug 'NLKNguyen/papercolor-theme'
+    " Plug 'tomasiser/vim-code-dark'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
