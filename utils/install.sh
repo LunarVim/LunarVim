@@ -89,10 +89,12 @@ asktoinstallnode() { \
 }
 
 asktoinstallpip() { \
-  echo "pip not found"
-  echo -n "Would you like to install pip now (y/n)? "
-  read answer
-  [ "$answer" != "${answer#[Yy]}" ] && installpip
+  # echo "pip not found"
+  # echo -n "Would you like to install pip now (y/n)? "
+  # read answer
+  # [ "$answer" != "${answer#[Yy]}" ] && installpip
+  echo "Please install pip3 before continuing with install"
+  exit
 }
 
 installonmac() { \
@@ -150,3 +152,5 @@ read answer
 which nvim > /dev/null && installplugins
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
+
+echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
