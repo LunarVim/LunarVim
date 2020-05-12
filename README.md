@@ -1,8 +1,14 @@
 # Nvim Mach 2
 
-## VSCode integration
+## Install in one command
 
-We will be integrating with VSCode using [this](https://github.com/asvetliakov/vscode-neovim)
+The following will install this config if you have an existing config it will move it to `~/.config/nvim.old`
+
+This script only supports Mac, Ubuntu and Arch
+
+```
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/utils/install.sh)
+```
 
 ## Install Neovim
 
@@ -104,7 +110,7 @@ Example:
   }
   ```
 
-# TODO
+## TODO
 
 - People asked about vimwiki I kinda hate it but maybe I'll add it
 - float term lazy git
@@ -118,3 +124,7 @@ Example:
 - float term
 - neovide
 - setup global coc extensions to auto install
+
+## VSCode integration
+
+We will be integrating with VSCode using [this](https://github.com/asvetliakov/vscode-neovim)
