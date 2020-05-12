@@ -9,10 +9,12 @@ installnodemac() { \
 
 installnodeubuntu() { \
   sudo apt install nodejs
+  sudo apt install npm
 }
 
 installnodearch() { \
   sudo pacman -S nodejs
+  sudo pacman -S npm
 }
 
 installnode() { \
@@ -88,7 +90,7 @@ pipinstallueberzug() { \
 
 installonubuntu() { \
   sudo apt install ripgrep fzf ranger  
-  pipinstallueberzug
+  pip3 install ueberzug
 }
 
 
@@ -107,11 +109,13 @@ installextrapackages() { \
 # Welcome
 echo 'Installing Nvim Mach 2'
 
-# install node and neovim support
-which node > /dev/null && echo "node installed, moving on..."
-
+echo 'Please make sure you have pip installed'
 # install pip
 which pip3 > /dev/null && echo "pip installed, moving on..."
+
+# install node and neovim support
+which node > /dev/null && echo "node installed, moving on..." || installnode
+
 
 # install pynvim
 pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
@@ -129,3 +133,5 @@ read answer
 
 # install plugins
 which nvim > /dev/null && installplugins
+
+echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
