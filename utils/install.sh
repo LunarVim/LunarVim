@@ -109,12 +109,14 @@ installonubuntu() { \
   sudo apt install ripgrep fzf ranger  
   sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
   pip3 install ueberzug
+  pip3 install neovim-remote
 }
 
 
 installonarch() { \
   sudo pacman -S install ripgrep fzf ranger
   which yay > /dev/null && yay -S python-ueberzug-git || pipinstallueberzug
+  pip3 install neovim-remote
 }
 
 installextrapackages() { \
