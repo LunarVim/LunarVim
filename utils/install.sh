@@ -33,7 +33,7 @@ installpip() { \
 
 installpynvim() { \
   echo "Installing pynvim..."
-  pip install pynvim
+  pip3 install pynvim
 }
 
 installcocextensions() { \
@@ -83,7 +83,7 @@ installonmac() { \
 }
 
 pipinstallueberzug() { \
-  which pip > /dev/null && pip install ueberzug || echo "Not installing ueberzug pip not found"
+  which pip > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug pip not found"
 }
 
 installonubuntu() { \
@@ -111,10 +111,10 @@ echo 'Installing Nvim Mach 2'
 which node > /dev/null && echo "node installed, moving on..."
 
 # install pip
-which pip > /dev/null && echo "pip installed, moving on..."
+which pip3 > /dev/null && echo "pip installed, moving on..."
 
 # install pynvim
-pip list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
+pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
 
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim 
