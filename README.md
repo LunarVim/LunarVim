@@ -48,6 +48,18 @@ pip install pynvim
 npm i -g neovim
 ```
 
+## Install Neovim remote
+
+```
+pip install neovim-remote
+```
+
+This will install `nvr` to `~/.local/bin` so you will need to add the following to your `bashrc` or `zshrc`
+
+```
+export PATH=$HOME/.local/bin:$PATH
+```
+
 ## Install clipboard support
 
 - On mac pbcopy should be builtin
@@ -120,10 +132,8 @@ Example:
 - setup custom paths
 - install script envsubst is your friend
 - add better whitespace plugin and a toggle, video about clean code maybe
-- echodoc and buitin support with CoC
 - snippets (coc snippets)
 - git messenger
-- float term
 - neovide
 - setup global coc extensions to auto install
 
