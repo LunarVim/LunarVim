@@ -56,9 +56,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
     " Ranger
-    Plug 'francoiscabrol/ranger.vim'
-    Plug 'rbgrouleff/bclose.vim'
-    " Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+    " Plug 'francoiscabrol/ranger.vim'
+    " Plug 'rbgrouleff/bclose.vim'
+    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -83,7 +83,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Snippets TODO fix TAB hijack
     " Plug 'SirVer/ultisnips'
     " Better Comments
-    Plug 'jbgutierrez/vim-better-comments'
+    " Plug 'jbgutierrez/vim-better-comments'
     " Echo doc
     " Plug 'Shougo/echodoc.vim'
   endif
