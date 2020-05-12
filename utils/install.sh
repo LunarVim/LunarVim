@@ -108,10 +108,10 @@ installextrapackages() { \
 echo 'Installing Nvim Mach 2'
 
 # install node and neovim support
-which node > /dev/null && echo "node installed, moving on..." || echo "please install node first"
+which node > /dev/null && echo "node installed, moving on..."
 
 # install pip
-which pip > /dev/null && echo "pip installed, moving on..." || echo "please install pip first"
+which pip > /dev/null && echo "pip installed, moving on..."
 
 # install pynvim
 pip list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
