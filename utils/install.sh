@@ -26,11 +26,26 @@ installnode() { \
   npm i -g neovim
 }
 
-installpip() { \
-  echo "Installing pip..."
+installpiponmac() { \
   sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   python3 get-pip.py
   rm get-pip.py
+}
+
+installpiponubuntu() { \
+  sudo apt install python3-pip
+}
+
+installpiponarch() { \
+  pacman -S python-pip
+}
+
+installpip() { \
+  echo "Installing pip..."
+  [ "$(uname)" == "Darwin" ] && installpiponmac
+  [  -n "$(uname -a | grep Ubuntu)" ] && installpiponubuntu
+  [ -f "/etc/arch-release" ] && installpiponarch
+  [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
 installpynvim() { \
@@ -90,6 +105,7 @@ pipinstallueberzug() { \
 
 installonubuntu() { \
   sudo apt install ripgrep fzf ranger  
+  sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
   pip3 install ueberzug
 }
 
@@ -109,12 +125,11 @@ installextrapackages() { \
 # Welcome
 echo 'Installing Nvim Mach 2'
 
-echo 'Please make sure you have pip installed'
 # install pip
-which pip3 > /dev/null && echo "pip installed, moving on..."
+which pip3 > /dev/null && echo "pip installed, moving on..." || asktoinstallpip
 
 # install node and neovim support
-which node > /dev/null && echo "node installed, moving on..." || installnode
+which node > /dev/null && echo "node installed, moving on..." || asktoinstallnode
 
 
 # install pynvim
