@@ -33,7 +33,7 @@ installpiponmac() { \
 }
 
 installpiponubuntu() { \
-  sudo apt install python3-pip
+  sudo apt install python3-pip > /dev/null
 }
 
 installpiponarch() { \
