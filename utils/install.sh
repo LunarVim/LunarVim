@@ -3,10 +3,24 @@
 set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
 
+installnodemac() { \
+  brew install node
+}
+
+installnodeubuntu() { \
+  sudo apt install nodejs
+}
+
+installnodearch() { \
+  sudo pacman -S nodejs
+}
 
 installnode() { \
   echo "Installing node..."
-  sudo curl -sL install-node.now.sh/lts | bash
+  [ "$(uname)" == "Darwin" ] && installnodemac
+  [  -n "$(uname -a | grep Ubuntu)" ] && installnodeubuntu
+  [ -f "/etc/arch-release" ] && installnodearch
+  [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
   npm i -g neovim
 }
 
