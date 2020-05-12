@@ -83,7 +83,7 @@ installonmac() { \
 }
 
 pipinstallueberzug() { \
-  which pip > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug pip not found"
+  which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug pip not found"
 }
 
 installonubuntu() { \
