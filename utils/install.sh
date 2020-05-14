@@ -145,10 +145,10 @@ pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || 
 # clone config down
 cloneconfig
 
-echo "Nvim Mach 2 is better with at least ripgrep, ueberzug and ranger"
-echo -n "Would you like to install these now?  (y/n)? "
-read answer
-[ "$answer" != "${answer#[Yy]}" ] && installextrapackages || echo "not installing extra packages"
+# echo "Nvim Mach 2 is better with at least ripgrep, ueberzug and ranger"
+# echo -n "Would you like to install these now?  (y/n)? "
+# read answer
+# [ "$answer" != "${answer#[Yy]}" ] && installextrapackages || echo "not installing extra packages"
 
 # install plugins
 which nvim > /dev/null && installplugins
