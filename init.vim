@@ -40,3 +40,10 @@ else
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
   " source $HOME/.config/nvim/plug-config/easymotion.vim
 endif
+
+" Experimental
+let g:codi#rightalign=0
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_wintitle=0
+

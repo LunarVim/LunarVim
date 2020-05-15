@@ -86,6 +86,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'jbgutierrez/vim-better-comments'
     " Echo doc
     " Plug 'Shougo/echodoc.vim'
+    " Interactive code
+    Plug 'metakirby5/codi.vim'
   endif
 
 

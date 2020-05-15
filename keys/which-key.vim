@@ -43,6 +43,18 @@ let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
 
 " Group mappings
 
+" a is for actions
+let g:which_key_map.a = {
+      \ 'name' : '+actions' ,
+      \ 'c' : [':ColorizerToggle'        , 'colorizer'],
+      \ 'e' : [':CocCommand explorer'    , 'explorer'],
+      \ 'n' : [':set nonumber!'          , 'line-numbers'],
+      \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
+      \ 's' : [':let @/ = ""'            , 'remove search highlight'],
+      \ 't' : [':FloatermToggle'         , 'terminal'],
+      \ 'v' : [':Vista!!'                , 'tag viewer'],
+      \ }
+
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
@@ -93,7 +105,7 @@ let g:which_key_map.g = {
       \ 'A' : [':Git add %'                        , 'add current'],
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
-      \ 'c' : [':Git commit -m "autocommit"'       , 'commit'],
+      \ 'c' : [':Git commit'                       , 'commit'],
       \ 'd' : [':Git diff'                         , 'diff'],
       \ 'D' : [':Gdiffsplit'                       , 'diff split'],
       \ 'g' : [':GGrep'                            , 'git grep'],
@@ -151,18 +163,18 @@ let g:which_key_map.l = {
       \ 'Z' : [':CocEnable'                          , 'enable CoC'],
       \ }
 
-
 " t is for toggle
 let g:which_key_map.t = {
-      \ 'name' : '+toggle' ,
-      \ 'c' : [':ColorizerToggle'        , 'colorizer'],
+      \ 'name' : '+terminal' ,
+      \ 't' : [':CocCommand floaterm.toggle'         , 'toggle'],
       \ 'e' : [':CocCommand explorer'    , 'explorer'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
       \ 'v' : [':Vista!!'                , 'tag viewer'],
       \ }
+
+
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
