@@ -1,5 +1,5 @@
 " Map leader to which_key
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 " Create map to add keys to
@@ -25,7 +25,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 
 " Single mappings
-let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'comment' ]
+let g:which_key_map['/'] = [ ':Commentary'  , 'comment' ]
 let g:which_key_map['.'] = [ ':e $MYVIMRC'                , 'open init' ]
 let g:which_key_map[';'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
@@ -39,7 +39,7 @@ let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['w'] = [ 'w'                          , 'write' ]
+let g:which_key_map['W'] = [ 'w'                          , 'write' ]
 let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
 
 " Group mappings
@@ -180,6 +180,52 @@ let g:which_key_map.t = {
       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
+" w is for wiki
+let g:which_key_map.w = {
+      \ 'name' : '+wiki' ,
+      \ 'w' : ['<Plug>VimwikiIndex'                              , 'ncdu'],
+      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
+      \ 'j' : ['<plug>(wiki-journal)'                              , 'ncdu'],
+      \ 'R' : ['<plug>(wiki-reload)'                              , 'ncdu'],
+      \ 'c' : ['<plug>(wiki-code-run)'                              , 'ncdu'],
+      \ 'b' : ['<plug>(wiki-graph-find-backlinks)'                              , 'ncdu'],
+      \ 'g' : ['<plug>(wiki-graph-in)'                              , 'ncdu'],
+      \ 'G' : ['<plug>(wiki-graph-out)'                              , 'ncdu'],
+      \ 'l' : ['<plug>(wiki-link-toggle)'                              , 'ncdu'],
+      \ 'd' : ['<plug>(wiki-page-delete)'                              , 'ncdu'],
+      \ 'r' : ['<plug>(wiki-page-rename)'                              , 'ncdu'],
+      \ 't' : ['<plug>(wiki-page-toc)'                              , 'ncdu'],
+      \ 'T' : ['<plug>(wiki-page-toc-local)'                              , 'ncdu'],
+      \ 'e' : ['<plug>(wiki-export)'                              , 'ncdu'],
+      \ 'u' : ['<plug>(wiki-list-uniq)'                              , 'ncdu'],
+      \ 'U' : ['<plug>(wiki-list-uniq-local)'                              , 'ncdu'],
+      \ }
+
+" Global
+" <Plug>VimwikiIndex
+" <Plug>VimwikiTabIndex
+" <Plug>VimwikiUISelect
+" <Plug>VimwikiDiaryIndex
+" <Plug>VimwikiMakeDiaryNote
+" <Plug>VimwikiTabMakeDiaryNote
+" <Plug>VimwikiMakeYesterdayDiaryNote
+" <Plug>VimwikiMakeTomorrowDiaryNote
+"
+" " Local
+" <Plug>Vimwiki2HTML
+" <Plug>Vimwiki2HTMLBrowse
+" <Plug>VimwikiDiaryGenerateLinks
+" <Plug>VimwikiFollowLink
+" <Plug>VimwikiSplitLink
+" <Plug>VimwikiVSplitLink
+" <Plug>VimwikiTabnewLink
+" <Plug>VimwikiGoBackLink
+" <Plug>VimwikiNextLink
+" <Plug>VimwikiPrevLink
+" <Plug>VimwikiGoto
+" <Plug>VimwikiDeleteLink
+" <Plug>VimwikiRenameLink
+" <Plug>VimwikiAddHeaderLevel
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")

@@ -19,7 +19,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Surround
   Plug 'tpope/vim-surround'
   " Better Comments
-  Plug 'preservim/nerdcommenter'
+  Plug 'tpope/vim-commentary'
+  " Plug 'preservim/nerdcommenter'
   " Have the file system follow you around
   Plug 'airblade/vim-rooter'
   " auto set indent settings
@@ -88,6 +89,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'Shougo/echodoc.vim'
     " Interactive code
     Plug 'metakirby5/codi.vim'
+    Plug 'https://github.com/vimwiki/vimwiki.git'
   endif
 
 
