@@ -40,8 +40,8 @@
   "python.linting.pylintEnabled": true,
 
   // snippets
-  // "snippets.ultisnips.directories": ["UltiSnips"],
-  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
+  //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
 
   // emmet
   "emmet.includeLanguages": {
