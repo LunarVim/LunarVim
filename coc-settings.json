@@ -40,7 +40,14 @@
   "python.linting.pylintEnabled": true,
 
   // snippets
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"],
+  // "snippets.ultisnips.directories": ["UltiSnips"],
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+
+  // emmet
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  },
 
   // explorer
   "explorer.width": 30,

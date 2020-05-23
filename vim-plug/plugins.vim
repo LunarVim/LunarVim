@@ -81,6 +81,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Making stuff
     Plug 'neomake/neomake'
     " Snippets TODO fix TAB hijack
+    Plug 'honza/vim-snippets'
     " Plug 'SirVer/ultisnips'
     " Better Comments
     " Plug 'jbgutierrez/vim-better-comments'
@@ -88,6 +89,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'Shougo/echodoc.vim'
     " Interactive code
     Plug 'metakirby5/codi.vim'
+    Plug 'mattn/emmet-vim'
   endif
 
 
