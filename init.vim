@@ -28,6 +28,7 @@ else
   source $HOME/.config/nvim/plug-config/nerd-commenter.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
+  source $HOME/.config/nvim/plug-config/vim-wiki.vim
   source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/goyo.vim
@@ -42,4 +43,7 @@ else
 endif
 
 " Experimental
+
+" Codi
 let g:codi#rightalign=0
+

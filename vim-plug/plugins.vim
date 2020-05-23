@@ -19,7 +19,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Surround
   Plug 'tpope/vim-surround'
   " Better Comments
-  Plug 'preservim/nerdcommenter'
+  Plug 'tpope/vim-commentary'
+  " Plug 'preservim/nerdcommenter'
   " Have the file system follow you around
   Plug 'airblade/vim-rooter'
   " auto set indent settings
@@ -80,16 +81,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/goyo.vim'
     " Making stuff
     Plug 'neomake/neomake'
-    " Snippets TODO fix TAB hijack
+    " Snippets
     Plug 'honza/vim-snippets'
-    " Plug 'SirVer/ultisnips'
+    Plug 'mattn/emmet-vim'
     " Better Comments
     " Plug 'jbgutierrez/vim-better-comments'
     " Echo doc
     " Plug 'Shougo/echodoc.vim'
     " Interactive code
     Plug 'metakirby5/codi.vim'
-    Plug 'mattn/emmet-vim'
+    " Vim Wiki
+    Plug 'https://github.com/vimwiki/vimwiki.git'
   endif
 
 
