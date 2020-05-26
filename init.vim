@@ -46,7 +46,7 @@ endif
 if !empty(glob("./paths.vim"))
   source $HOME/.config/nvim/paths.vim
 endif
+let g:polyglot_disabled = ['csv']
 
 " Codi
-let g:codi#rightalign=0
-
+" let g:codi#rightalign=0
