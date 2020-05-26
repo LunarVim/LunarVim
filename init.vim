@@ -48,5 +48,6 @@ if !empty(glob("./paths.vim"))
 endif
 let g:polyglot_disabled = ['csv']
 
-" Codi
-" let g:codi#rightalign=0
+" Python
+" https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
+" also look into profiling as well
