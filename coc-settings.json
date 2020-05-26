@@ -5,14 +5,16 @@
   "suggest.completionItemKindLabels": {
     "text": "t",
     "method": "m",
-    "function": "f"
+    "function": ""
   },
 
   // diagnostics
-  "diagnostic.errorSign": "✗",
-  "diagnostic.warningSign": "⚠",
+  "diagnostic.errorSign": " ",
+  "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
+  "diagnostic.virtualText": true, // this won't work with codelens when error on same line
+
   // "diagnostic.displayByAle": true,
 
   // codelens TODO what does this get me?
@@ -38,7 +40,12 @@
   // python config
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  // "python.linting.pylintPath": "~/.local/bin/pylint",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.miniconda/envs/neovim/bin/black",
+  // "python.linting.pylintPath": "~/.miniconda/envs/neovim/bin/pylint",
+  "python.condaPath": "~/.miniconda/bin/conda",
+  "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
+  "python.jediPath": "~/.miniconda/envs/neovim/lib/python3.8/site-packages",
 
   // snippets
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
@@ -69,8 +76,6 @@
     }
   }
 
-  // TODO language servers
-  // TODO g:coc_global_extensions
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path
 }

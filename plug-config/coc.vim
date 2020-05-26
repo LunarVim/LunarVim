@@ -17,7 +17,7 @@
     \ 'coc-xml',
     \ 'coc-yank',
     \ 'coc-json',
-    \ 'coc-vimtex',
+    \ 'coc-marketplace',
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
