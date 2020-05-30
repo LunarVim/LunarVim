@@ -52,3 +52,4 @@ let g:polyglot_disabled = ['csv']
 " Python
 " https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
 " also look into profiling as well
+" let g:python_highlight_all=1
