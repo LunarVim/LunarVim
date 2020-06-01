@@ -2,44 +2,48 @@
 -- @module l.settings
 
 local plug = require("c.plug")
-local keybind = require("c.keybind")
-local edit_mode = require("c.edit_mode")
+local bind_cmd = require("c.keybind").bind_command
+local mode = require("c.edit_mode")
 local autocmd = require("c.autocmd")
 local util = require("c.util")
 
-local layer_man = require("l.settings.layer_man")
-
-local vg = vim.g
-local vo = vim.o
-local api = vim.api
+local vg = vim.g      -- vim (global) variables table
+local vo = vim.o      -- vim options table
+local api = vim.api   -- exposed vim API for running nvim commands
 
 local layer = {}
 
 --- Returns plugins required for this layer
-function layer.register_plugins()
-  -- N/A
-end
+function layer.register_plugins() --[[ N/A ]] end
 
 --- Configures vim and plugins for this layer
 function layer.init_config()
+  --[[
+    Options currently not set, but under consideration:
+      vo.autochdir  = true -- Your working directory will always be the same as your working directory
+      vo.mmp = 1300 -- Maximum amount of memory (in Kbyte) to use for pattern matching
+      vg["$NVIM_TUI_ENABLE_TRUE_COLOR"] = true  -- Enable true color
+      util.set_win_opt("foldcolumn", "2") -- Folding abilities
+  --]]
 
-  -- Space for leader, backslash for local leader
-  vg.mapleader = " "
-  vg.maplocalleader = "\\"
 
+  -- Format
   local format = vo.formatoptions
   vo.formatoptions = string.gsub(format, "cro", "") -- Stop newline continution of comments
-  vo.iskeyword = vo.iskeyword.."-"                  -- treat dash separated words as a word text object"
+  vo.iskeyword = vo.iskeyword.."-"                  -- Treat dash separated words as a word text object"
   
   if not vg.vscode then
     -- Enables syntax highlighing
     autocmd.bind_vim_enter(function()
       api.nvim_command("syntax enable")
     end)
+
+    -- Attempt to force write even if user does not have permission
+    bind_cmd(mode.COMMAND, "w!!", "w !sudo tee %")
     
     -- Set general opts
     vo.autoindent    = true               -- Good auto indent
-    vo.background    = "dark"             -- tell vim what the background color looks like
+    vo.background    = "dark"             -- Tell vim what the background color looks like
     vo.backup        = false              -- This is recommended by coc
     vo.clipboard     = "unnamedplus"      -- Copy paste between vim and everything else
     vo.cmdheight     = 2                  -- More space for displaying messages
@@ -78,33 +82,7 @@ function layer.init_config()
     util.set_win_opt("signcolumn", "yes")      -- Always show the signcolumn, otherwise it would shift the text each time
     util.set_win_opt("t_Co", "256")            -- Support 256 colors
     util.set_win_opt("wrap", false)            -- Display long lines as just one line
-
-    --[[
-      Options under consideration:
-
-      Your working directory will always be the same as your working directory
-        vo.autochdir  = true
-
-      Maximum amount of memory (in Kbyte) to use for pattern matching
-        vo.mmp = 1300
-
-      Enable true color
-        vg["$NVIM_TUI_ENABLE_TRUE_COLOR"] = true 
-
-      Folding abilities
-        util.set_win_opt("foldcolumn", "2")
-    --]]
-
-
-    -- au! BufWritePost $MYVIMRC source %   -- auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-    -- autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-  
-  
-    -- -- You can't stop me
-    -- cmap w!! w !sudo tee %
   end
-  
-  layer_man.init_config()
 end
 
 return layer

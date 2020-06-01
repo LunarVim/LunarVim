@@ -14,17 +14,13 @@ end
 
 function keybind.post_init()
   local leader = vim.g.mapleader
-  local local_leader = vim.g.maplocalleader
 
   local escaped_leader = leader:gsub("'", "\\'")
-  local escaped_local_leader = local_leader:gsub("'", "\\'")
 
   local leader_cmd = ":WhichKey '" .. escaped_leader .. "'<CR>"
-  local local_leader_cmd = ":WhichKey '" .. escaped_local_leader .. "'<CR>"
 
-  -- Bind leader/localleader to show which key
+  -- Bind leader to show which key
   keybind.bind_command(edit_mode.NORMAL, leader, leader_cmd, { noremap = true, silent = true })
-  keybind.bind_command(edit_mode.NORMAL, local_leader, local_leader_cmd, { noremap = true, silent = true })
 
   -- Register the leader key info dict
   vim.g.c_keybind_leader_info = keybind._leader_info

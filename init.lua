@@ -12,6 +12,11 @@ keybind.register_plugins()
 autocmd.init()
 
 layer.add_layer("l.settings")
+layer.add_layer("l.mappings")
+layer.add_layer("l.functions")
+layer.add_layer("l.theme")
+layer.add_layer("l.goyo")
+
 
 layer.finish_layer_registration()
 
