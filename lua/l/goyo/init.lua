@@ -2,7 +2,7 @@
 -- @module l.goyo
 
 local plug = require("c.plug")
-local bind_cmd = require("c.keybind").bind_command
+local keybind = require("c.keybind")
 local mode = require("c.edit_mode")
 
 local layer = {}
@@ -14,7 +14,7 @@ end
 
 --- Configures vim and plugins for this layer
 function layer.init_config()
-  bind_cmd(mode.NORMAL, "<silent> <leader>z", ":Goyo<CR>")
+  keybind.bind_command(mode.NORMAL, "<leader>z", ":Goyo<CR>", { noremap = true, silent = true }, "zen")
 end
 
 return layer

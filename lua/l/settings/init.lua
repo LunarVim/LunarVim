@@ -2,7 +2,7 @@
 -- @module l.settings
 
 local plug = require("c.plug")
-local bind_cmd = require("c.keybind").bind_command
+local kb = require("c.keybind")
 local mode = require("c.edit_mode")
 local autocmd = require("c.autocmd")
 local util = require("c.util")
@@ -20,14 +20,13 @@ function layer.register_plugins() --[[ N/A ]] end
 function layer.init_config()
   --[[
     Options currently not set, but under consideration:
+
       vo.autochdir  = true -- Your working directory will always be the same as your working directory
       vo.mmp = 1300 -- Maximum amount of memory (in Kbyte) to use for pattern matching
       vg["$NVIM_TUI_ENABLE_TRUE_COLOR"] = true  -- Enable true color
       util.set_win_opt("foldcolumn", "2") -- Folding abilities
   --]]
 
-
-  -- Format
   local format = vo.formatoptions
   vo.formatoptions = string.gsub(format, "cro", "") -- Stop newline continution of comments
   vo.iskeyword = vo.iskeyword.."-"                  -- Treat dash separated words as a word text object"
@@ -39,7 +38,7 @@ function layer.init_config()
     end)
 
     -- Attempt to force write even if user does not have permission
-    bind_cmd(mode.COMMAND, "w!!", "w !sudo tee %")
+    kb.bind_command(mode.COMMAND, "w!!", "w !sudo tee %")
     
     -- Set general opts
     vo.autoindent    = true               -- Good auto indent

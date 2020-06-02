@@ -78,7 +78,6 @@ function layer.init_config()
     bind_cmd(mode.NORMAL, "<silent> <M-k>", ":resize +2<CR>", { noremap = true })
     bind_cmd(mode.NORMAL, "<silent> <M-h>", ":vertical resize -2<CR>", { noremap = true })
     bind_cmd(mode.NORMAL, "<silent> <M-l>", ":vertical resize +2<CR>", { noremap = true })
-
   end
 end
 

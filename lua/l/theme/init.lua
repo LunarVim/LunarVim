@@ -53,24 +53,25 @@ function layer.init_config()
   vg.airline_right_alt_sep = ""             -- Clear out airline separators
   vg.airline_theme = "onedark"              -- Switch to your current theme  
 
-  -- Set global variable prefix for vim-airline to keep things dry
-  local tabline = "airline#extensions#tabline#"
-  vg[tabline.."enabled"] = 1                -- Enable tabline
-  vg[tabline.."left_sep"] = ""              -- Clear out left separator
-  vg[tabline.."left_alt_sep"] = ""          -- Clear out left alt separator
-  vg[tabline.."right_sep"] = ""             -- Clear out right separator
-  vg[tabline.."right_alt_sep"] = ""         -- Clear out right alt separator
-  vg[tabline.."show_splits"] = 0            -- Disables the buffer name that displays on the right of the tabline
-  vg[tabline.."tabs_label"] = ""            -- Prefix for denoting Tabs
-  vg[tabline.."buffers_label"] = ""         -- Prefix for denoting Buffers
-  vg[tabline.."show_close_button"] = 0      -- Disable close button at end of the tabline
-  vg[tabline.."formatter"] = "unique_tail"  -- Algorithm for displaying filename
-  vg[tabline.."show_tab_type"] = 0          -- Disables the arrow on the tabline
-  vg[tabline.."show_tab_nr"] = 0            -- Disable tab numbers
-  vg[tabline.."fnamecollapse"] = 1          -- Collapse parent directories in buffer name
-  vg[tabline.."fnamemod"] = ":t"            -- Just show the file name
+  -- Set vim-airline tabline properties in a dry manner
+  local function set_tabline_var(key, value)
+    vg["airline#extensions#tabline#"..key] = value
+  end
 
-
+  set_tabline_var("enabled", 1)               -- Enable tabline
+  set_tabline_var("left_sep", "")             -- Clear out left separator
+  set_tabline_var("left_alt_sep", "")         -- Clear out left alt separator
+  set_tabline_var("right_sep", "")            -- Clear out right separator
+  set_tabline_var("right_alt_sep", "")        -- Clear out right alt separator
+  set_tabline_var("show_splits", 0)           -- Disables the buffer name that displays on the right of the tabline
+  set_tabline_var("tabs_label", "")           -- Prefix for denoting Tabs
+  set_tabline_var("buffers_label", "")        -- Prefix for denoting Buffers
+  set_tabline_var("show_close_button", 0 )    -- Disable close button at end of the tabline
+  set_tabline_var("formatter", "unique_tail") -- Algorithm for displaying filename
+  set_tabline_var("show_tab_type", 0)         -- Disables the arrow on the tabline
+  set_tabline_var("show_tab_nr", 0)           -- Disable tab numbers
+  set_tabline_var("fnamecollapse", 1)         -- Collapse parent directories in buffer name
+  set_tabline_var("fnamemod", ":t")           -- Just show the file name
 
   --[[
   Airline section formats guide
@@ -86,8 +87,6 @@ function layer.init_config()
   --]]
   vg.airline_section_a = "Mach 2"
   vg.airline_section_y = ""
-
-  
 end
 
 return layer

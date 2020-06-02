@@ -10,22 +10,15 @@ local util = require("c.util")
 local layer = {}
 
 --- Returns plugins required for this layer
-function layer.register_plugins()
-  -- N/A
-end
+function layer.register_plugins() end
 
 --- Configures vim and plugins for this layer
--- TODO: Confirm these actually work, I dodn't believe they do yet
 function layer.init_config()
-  -- Turn spellcheck on for markdown files
+  -- TODO: Confirm this actually work, I don't believe they do just yet
+  -- Turn spellcheck on for markdown files  
   autocmd.bind("BufNewFile,BufRead *.md", function()
     vim.wo.spell = true
   end)
-
-  -- -- Remove trailing whitespaces automatically before save
-  -- autocmd.bind("BufWritePre *", function()
-  --   vim.call('utils#stripTrailingWhitespaces')
-  -- end)
 end
 
 return layer

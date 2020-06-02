@@ -8,31 +8,6 @@ local keybind = {}
 
 keybind._leader_info = {}
 
-function keybind.register_plugins()
-  plug.add_plugin("liuchengxu/vim-which-key")
-end
-
-function keybind.post_init()
-  local leader = vim.g.mapleader
-
-  local escaped_leader = leader:gsub("'", "\\'")
-
-  local leader_cmd = ":WhichKey '" .. escaped_leader .. "'<CR>"
-
-  -- Bind leader to show which key
-  keybind.bind_command(edit_mode.NORMAL, leader, leader_cmd, { noremap = true, silent = true })
-
-  -- Register the leader key info dict
-  vim.g.c_keybind_leader_info = keybind._leader_info
-  vim.fn["which_key#register"](leader, "g:c_keybind_leader_info")
-
-  -- Center which key better
-  vim.g.which_key_floating_opts = {
-    col = -2,
-    width = -1,
-  }
-end
-
 --- Split a key sequence string like "fed" into { "f", "e", "d" }
 local function split_keys(keys)
   local keys_split = {}
@@ -70,6 +45,13 @@ local function add_info(keys, name)
   end
 
   t[final_key] = name
+
+  --[[
+    Go ahead and update the global whichkey map with each binding
+    so we don't have to "initialize" this property after all
+    layers have finished `init_config()` 
+  --]]
+  vim.g.which_key_map = keybind._leader_info
 end
 
 --- Map a key sequence to a Vim command

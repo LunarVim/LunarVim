@@ -8,9 +8,11 @@ local autocmd = {}
 
 autocmd._bound_signals = {}
 
+local group_name = 'mach2'
+
 --- Clears out autocommands set by this module
 function autocmd.init()
-  vim.api.nvim_command("augroup c_autocmd")
+  vim.api.nvim_command("augroup "..group_name)
   vim.api.nvim_command("autocmd!")
   vim.api.nvim_command("augroup END")
 end
@@ -26,7 +28,7 @@ function autocmd.bind(trigger, func)
     autocmd._bound_signals[trigger] = cmd_signal
 
     local cmd = "autocmd " .. trigger .. " lua require('c.autocmd')._bound_signals['" .. trigger .."']:emit()"
-    vim.api.nvim_command("augroup c_autocmd")
+    vim.api.nvim_command("augroup "..group_name)
     vim.api.nvim_command(cmd)
     vim.api.nvim_command("augroup END")
   end
