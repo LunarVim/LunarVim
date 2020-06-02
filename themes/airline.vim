@@ -6,7 +6,6 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let airline#extensions#tabline#show_splits = 0
 let airline#extensions#tabline#tabs_label = ''
-le
 
 " Disable tabline close button
 let g:airline#extensions#tabline#show_close_button = 0
