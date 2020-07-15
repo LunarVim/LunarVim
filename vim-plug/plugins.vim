@@ -8,6 +8,10 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+  " jsx syntax support
+  Plug 'maxmellon/vim-jsx-pretty'
+  
+  Plug 'suy/vim-context-commentstring'
   " Change dates fast
   Plug 'tpope/vim-speeddating'
   " Convert binary, hex, etc..
