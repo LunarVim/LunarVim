@@ -24,7 +24,8 @@ else
   source $HOME/.config/nvim/themes/airline.vim
   source $HOME/.config/nvim/plug-config/rnvimr.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
-  source $HOME/.config/nvim/plug-config/nerd-commenter.vim
+  "source $HOME/.config/nvim/plug-config/nerd-commenter.vim switching to vim-commentary
+  source $HOME/.config/nvim/plug-config/vim-commentary.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
   source $HOME/.config/nvim/plug-config/codi.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
