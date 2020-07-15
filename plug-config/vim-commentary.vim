@@ -1,3 +1,4 @@
+" this function check whether vim is in normal mode or not and comment appropriately
 function! Comment()
   if (mode() == "n" )
     execute "Commentary"
@@ -5,5 +6,5 @@ function! Comment()
     execute "'<,'>Commentary"
   endif
  endfunction
-vnoremap <silent> <space>/ :call Comment()
+vnoremap <silent> <space>/ :call Comment()  
 autocmd filetype javascript.jsx setlocal commentstring={/*\ %s\ */}
