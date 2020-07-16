@@ -75,6 +75,12 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
+  },
+
+  "eslint": {
+    "packageManager": "yarn",
+    "executeAutofix": true,
+    "autoFixOnSave": true
   }
 
   // TODO b:coc_suggest_disable=1 GOYO
