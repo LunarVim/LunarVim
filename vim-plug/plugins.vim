@@ -10,7 +10,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " jsx syntax support
   Plug 'maxmellon/vim-jsx-pretty'
-  
+
   Plug 'suy/vim-context-commentstring'
   " Change dates fast
   Plug 'tpope/vim-speeddating'
@@ -46,7 +46,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'sheerun/vim-polyglot'
     " Cool Icons
     Plug 'ryanoasis/vim-devicons'
-    " Auto pairs for '(' '[' '{' 
+    " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
     " Closetags
     Plug 'alvan/vim-closetag'
@@ -96,6 +96,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ChristianChiarulli/codi.vim'
     " Vim Wiki
     " Plug 'https://github.com/vimwiki/vimwiki.git'
+
+    " ansible vault
+    Plug 'arouene/vim-ansible-vault'
   endif
 
 

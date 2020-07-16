@@ -20,6 +20,7 @@
     \ 'coc-yank',
     \ 'coc-json',
     \ 'coc-marketplace',
+    \ 'coc-eslint',
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
