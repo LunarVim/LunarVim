@@ -173,10 +173,7 @@ let g:which_key_map.t = {
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'h' : [':FloatermNew htop'                              , 'htop'],
       \ 'n' : [':FloatermNew ncdu'                              , 'ncdu'],
-      \ 'N' : [':FloatermNext'                                  , 'next float terminal'],
-      \ 'P' : [':FloatermPrev'                                  , 'previous float terminal'],
-      \ 'H' : [':FloatermHide'                                  , 'hide float terminal'],
-      \ 'S' : [':FloatermShow'                                  , 'show float terminal'],
+      \ 'n' : [':CocList floaterm'                              , 'floaterm'],
       \ }
 
 " w is for wiki

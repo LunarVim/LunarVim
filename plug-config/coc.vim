@@ -21,6 +21,7 @@
     \ 'coc-json',
     \ 'coc-marketplace',
     \ 'coc-eslint',
+    \ 'coc-floaterm',
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
