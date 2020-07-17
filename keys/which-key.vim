@@ -174,6 +174,7 @@ let g:which_key_map.t = {
       \ 'n' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ 'z' : [':CocList floaterm'                              , 'floaterm'],
       \ 's' : [':FloattermShow'                                 , 'floaterm-show'],
+      \ 'k' : [':FloattermKill!'                                , 'floaterm-kill'],
       \ }
 
 " w is for wiki
