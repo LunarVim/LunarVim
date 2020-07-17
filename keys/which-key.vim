@@ -24,12 +24,11 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 " Single mappings
 let g:which_key_map['#'] = [ ':call Comment()'  , 'comment' ]
-let g:which_key_map['.'] = [ ':e $MYVIMRC'                , 'open init' ]
-let g:which_key_map['c'] = [ ':Commands'                  , 'commands' ]
+let g:which_key_map['-'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 let g:which_key_map[','] = [ 'Startify'                   , 'start screen' ]
 let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
-let g:which_key_map['d'] = [ ':bd!'                        , 'delete buffer']
+let g:which_key_map['d'] = [ ':bd!'                       , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
@@ -125,12 +124,12 @@ let g:which_key_map.g = {
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
       \ '.' : [':CocConfig'                          , 'config'],
-      \ '-' : ['<Plug>(coc-refactor)'                , 'refactor'],
+      \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
       \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
       \ 'b' : [':CocNext'                            , 'next action'],
       \ 'B' : [':CocPrev'                            , 'prev action'],
-      \ 'c' : [':CocList commands'                   , 'commands'],
+      \ '-' : [':CocList commands'                   , 'commands'],
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
@@ -165,7 +164,7 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ 'c' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ '-' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
@@ -173,6 +172,10 @@ let g:which_key_map.t = {
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'h' : [':FloatermNew htop'                              , 'htop'],
       \ 'n' : [':FloatermNew ncdu'                              , 'ncdu'],
+      \ 'N' : [':FloatermNext'                                  , 'next float terminal'],
+      \ 'P' : [':FloatermPrev'                                  , 'previous float terminal'],
+      \ 'H' : [':FloatermHide'                                  , 'hide float terminal'],
+      \ 'S' : [':FloatermShow'                                  , 'show float terminal'],
       \ }
 
 " w is for wiki
