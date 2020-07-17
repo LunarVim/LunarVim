@@ -23,7 +23,15 @@
     \ 'coc-eslint',
     \ 'coc-floaterm',
     \ 'coc-sh',
-    \ 'coc-diagnostic'
+    \ 'coc-diagnostic',
+    \ 'coc-go',
+    \ 'coc-gitignore',
+    \ 'coc-git',
+    \ 'coc-markdownlint',
+    \ 'coc-webpack',
+    \ 'coc-docker',
+    \ 'coc-styled-components',
+    \ 'coc-github'
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
