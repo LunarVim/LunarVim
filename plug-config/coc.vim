@@ -22,6 +22,7 @@
     \ 'coc-marketplace',
     \ 'coc-eslint',
     \ 'coc-floaterm',
+    \ 'coc-sh'
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
