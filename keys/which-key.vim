@@ -173,7 +173,8 @@ let g:which_key_map.t = {
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'h' : [':FloatermNew htop'                              , 'htop'],
       \ 'n' : [':FloatermNew ncdu'                              , 'ncdu'],
-      \ 'n' : [':CocList floaterm'                              , 'floaterm'],
+      \ 'z' : [':CocList floaterm'                              , 'floaterm'],
+      \ 'z' : [':FloattermShow'                                 , 'floaterm-show'],
       \ }
 
 " w is for wiki
