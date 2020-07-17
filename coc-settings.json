@@ -74,6 +74,27 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
+    },
+    "eslint": {
+      "filetypes": ["js", "json", "ts", "jsx", "tsx"],
+      "command": "./node_modules/.bin/eslint", // this will find local eslint first, if local eslint not found, it
+      "rootPatterns": [".git"],
+      "debounce": 100,
+      "args": ["--stdin", "--stdin-filename", "%filepath", "--format", "json"],
+      "sourceName": "eslint",
+      "parseJson": {
+        "errorsRoot": "[0].messages",
+        "line": "line",
+        "column": "column",
+        "endLine": "endLine",
+        "endColumn": "endColumn",
+        "message": "${message} [${ruleId}]",
+        "security": "severity"
+      },
+      "securities": {
+        "2": "error",
+        "1": "warning"
+      }
     }
   },
 
@@ -81,9 +102,8 @@
   "eslint.autoFixOnSave": true,
   "eslint.executeAutofix": true,
 
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": false
 
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path
 }
-
