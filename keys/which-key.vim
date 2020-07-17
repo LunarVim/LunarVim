@@ -141,7 +141,6 @@ let g:which_key_map.l = {
       \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
       \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
-      \ 'L' : [':CocCommand eslint.executeAutofix'   , 'lint'],
       \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
       \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
       \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
