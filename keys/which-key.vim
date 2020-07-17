@@ -164,7 +164,8 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ '-' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ '-' : [':FloatermNew --wintype=popup --height=10'       , 'terminal'],
+      \ '.' : [':FloatermNew'                                   , 'terminal over the top'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
