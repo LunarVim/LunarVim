@@ -8,7 +8,6 @@ let g:which_key_map =  {}
 let g:which_key_sep = '→'
 " set timeoutlen=100
 
-
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
 
@@ -23,15 +22,14 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-
 " Single mappings
-let g:which_key_map['/'] = [ ':call Comment()'  , 'comment' ]
+let g:which_key_map['#'] = [ ':call Comment()'  , 'comment' ]
 let g:which_key_map['.'] = [ ':e $MYVIMRC'                , 'open init' ]
-let g:which_key_map[';'] = [ ':Commands'                  , 'commands' ]
+let g:which_key_map['-'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 let g:which_key_map[','] = [ 'Startify'                   , 'start screen' ]
 let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
-let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
+let g:which_key_map['d'] = [ ':bd!'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
@@ -60,22 +58,17 @@ let g:which_key_map.a = {
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , 'buffer 1']        ,
-      \ '2' : ['b2'        , 'buffer 2']        ,
-      \ 'd' : ['bd'        , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'    , 'first-buffer']    ,
-      \ 'h' : ['Startify'  , 'home-buffer']     ,
-      \ 'l' : ['blast'     , 'last-buffer']     ,
+      \ 'd' : ['bd!'        , 'delete-buffer']   ,
       \ 'n' : ['bnext'     , 'next-buffer']     ,
       \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ '-' : ['Buffers'   , 'fzf-buffer']      ,
       \ }
 
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'              , 'history'],
-      \ ';' : [':Commands'              , 'commands'],
+      \ '-' : [':Commands'              , 'commands'],
       \ 'a' : [':Ag'                    , 'text Ag'],
       \ 'b' : [':BLines'                , 'current buffer'],
       \ 'B' : [':Buffers'               , 'open buffers'],
@@ -132,7 +125,7 @@ let g:which_key_map.g = {
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
       \ '.' : [':CocConfig'                          , 'config'],
-      \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
+      \ '-' : ['<Plug>(coc-refactor)'                , 'refactor'],
       \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
       \ 'b' : [':CocNext'                            , 'next action'],
@@ -170,39 +163,36 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ '-' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
-      \ 'n' : [':FloatermNew node'                              , 'node'],
-      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
-      \ 'p' : [':FloatermNew python'                            , 'python'],
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
-      \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
-      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
+      \ 'h' : [':FloatermNew htop'                              , 'htop'],
+      \ 'n' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
 " w is for wiki
-let g:which_key_map.w = {
-      \ 'name' : '+wiki' ,
-      \ 'w' : ['<Plug>VimwikiIndex'                              , 'ncdu'],
-      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
-      \ 'j' : ['<plug>(wiki-journal)'                              , 'ncdu'],
-      \ 'R' : ['<plug>(wiki-reload)'                              , 'ncdu'],
-      \ 'c' : ['<plug>(wiki-code-run)'                              , 'ncdu'],
-      \ 'b' : ['<plug>(wiki-graph-find-backlinks)'                              , 'ncdu'],
-      \ 'g' : ['<plug>(wiki-graph-in)'                              , 'ncdu'],
-      \ 'G' : ['<plug>(wiki-graph-out)'                              , 'ncdu'],
-      \ 'l' : ['<plug>(wiki-link-toggle)'                              , 'ncdu'],
-      \ 'd' : ['<plug>(wiki-page-delete)'                              , 'ncdu'],
-      \ 'r' : ['<plug>(wiki-page-rename)'                              , 'ncdu'],
-      \ 't' : ['<plug>(wiki-page-toc)'                              , 'ncdu'],
-      \ 'T' : ['<plug>(wiki-page-toc-local)'                              , 'ncdu'],
-      \ 'e' : ['<plug>(wiki-export)'                              , 'ncdu'],
-      \ 'u' : ['<plug>(wiki-list-uniq)'                              , 'ncdu'],
-      \ 'U' : ['<plug>(wiki-list-uniq-local)'                              , 'ncdu'],
-      \ }
+"let g:which_key_map.w = {
+"      \ 'name' : '+wiki' ,
+"      \ 'w' : ['<Plug>VimwikiIndex'                              , 'ncdu'],
+"      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
+"      \ 'j' : ['<plug>(wiki-journal)'                              , 'ncdu'],
+"      \ 'R' : ['<plug>(wiki-reload)'                              , 'ncdu'],
+"      \ 'c' : ['<plug>(wiki-code-run)'                              , 'ncdu'],
+"      \ 'b' : ['<plug>(wiki-graph-find-backlinks)'                              , 'ncdu'],
+"      \ 'g' : ['<plug>(wiki-graph-in)'                              , 'ncdu'],
+"      \ 'G' : ['<plug>(wiki-graph-out)'                              , 'ncdu'],
+"      \ 'l' : ['<plug>(wiki-link-toggle)'                              , 'ncdu'],
+"      \ 'd' : ['<plug>(wiki-page-delete)'                              , 'ncdu'],
+"      \ 'r' : ['<plug>(wiki-page-rename)'                              , 'ncdu'],
+"      \ 't' : ['<plug>(wiki-page-toc)'                              , 'ncdu'],
+"      \ 'T' : ['<plug>(wiki-page-toc-local)'                              , 'ncdu'],
+"      \ 'e' : ['<plug>(wiki-export)'                              , 'ncdu'],
+"      \ 'u' : ['<plug>(wiki-list-uniq)'                              , 'ncdu'],
+"      \ 'U' : ['<plug>(wiki-list-uniq-local)'                              , 'ncdu'],
+"      \ }
 
 " Global
 " <Plug>VimwikiIndex

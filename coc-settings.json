@@ -77,11 +77,9 @@
     }
   },
 
-  "eslint": {
-    "packageManager": "yarn",
-    "executeAutofix": true,
-    "autoFixOnSave": true
-  }
+  "eslint.packageManager": "yarn",
+  "eslint.autoFixOnSave": true,
+  "eslint.executeAutofix": true
 
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path
