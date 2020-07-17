@@ -79,8 +79,11 @@
 
   "eslint.packageManager": "yarn",
   "eslint.autoFixOnSave": true,
-  "eslint.executeAutofix": true
+  "eslint.executeAutofix": true,
+
+  "prettier.eslintIntegration": true
 
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path
 }
+
