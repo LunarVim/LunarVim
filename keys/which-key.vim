@@ -25,7 +25,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " Single mappings
 let g:which_key_map['#'] = [ ':call Comment()'  , 'comment' ]
 let g:which_key_map['.'] = [ ':e $MYVIMRC'                , 'open init' ]
-let g:which_key_map['-'] = [ ':Commands'                  , 'commands' ]
+let g:which_key_map['c'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 let g:which_key_map[','] = [ 'Startify'                   , 'start screen' ]
 let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
@@ -61,7 +61,7 @@ let g:which_key_map.b = {
       \ 'd' : ['bd!'        , 'delete-buffer']   ,
       \ 'n' : ['bnext'     , 'next-buffer']     ,
       \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '-' : ['Buffers'   , 'fzf-buffer']      ,
+      \ 'b' : ['Buffers'   , 'fzf-buffer']      ,
       \ }
 
 " s is for search
@@ -134,13 +134,15 @@ let g:which_key_map.l = {
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
-      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
+      \ 'f' : ['<Plug>(coc-format-selected)'         , 'organize'],
       \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
+      \ 'g' : [':OR'                                 , 'organize imports'],
       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
       \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
       \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
       \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
+      \ 'L' : [':EF'                                 , 'lint'],
       \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
       \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
       \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
@@ -163,7 +165,7 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ '-' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ 'c' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
