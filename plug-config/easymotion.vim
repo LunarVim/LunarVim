@@ -23,6 +23,11 @@ if exists('g:vscode')
   nmap s <Plug>(easymotion-overwin-f2)
 endif
 
+nmap f <Plug>(easymotion-f)
+nmap F <Plug>(easymotion-F)
+nmap t <Plug>(easymotion-t)
+nmap T <Plug>(easymotion-T)
+
 " Move to line
 if exists('g:vscode')
   map <Leader>l <Plug>(easymotion-bd-jk)

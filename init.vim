@@ -28,7 +28,7 @@ else
   source $HOME/.config/nvim/plug-config/vim-commentary.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
   source $HOME/.config/nvim/plug-config/codi.vim
-  source $HOME/.config/nvim/plug-config/quickscope.vim
+  " source $HOME/.config/nvim/plug-config/quickscope.vim
   source $HOME/.config/nvim/plug-config/vim-wiki.vim
   " source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/coc.vim
