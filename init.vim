@@ -30,7 +30,7 @@ else
   source $HOME/.config/nvim/plug-config/codi.vim
   source $HOME/.config/nvim/plug-config/quickscope.vim
   source $HOME/.config/nvim/plug-config/vim-wiki.vim
-  source $HOME/.config/nvim/plug-config/sneak.vim
+  " source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/goyo.vim
   source $HOME/.config/nvim/plug-config/vim-rooter.vim
@@ -40,7 +40,6 @@ else
   source $HOME/.config/nvim/plug-config/floaterm.vim
   source $HOME/.config/nvim/plug-config/vista.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
-  " source $HOME/.config/nvim/plug-config/easymotion.vim
 endif
 
 " Experimental
