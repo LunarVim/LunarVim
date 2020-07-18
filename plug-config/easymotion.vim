@@ -17,15 +17,16 @@
 " s{char}{char} to move to {char}{char}
 if exists('g:vscode')
   " VSCode extension
-  nmap s <Plug>(easymotion-f2)
-  nmap S <Plug>(easymotion-F2)
+  nmap s <Plug>(easymotion-f3)
+  nmap <Leader>s <Plug>(easymotion-f2)
 else
   " ordinary neovim
   nmap s <Plug>(easymotion-overwin-f2)
-  nmap S <Plug>(easymotion-overwin-F2)
 endif
 
 " nmap X <Plug>(easymotion-overwin-t)
+map f <Plug>(easymotion-lineforward)
+nmap F <Plug>(easymotion-linebackward)
 
 " Move to line
 if exists('g:vscode')
