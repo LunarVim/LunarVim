@@ -30,13 +30,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " auto set indent settings
   Plug 'tpope/vim-sleuth'
 
+  " Easy motion for VSCode
+  Plug 'asvetliakov/vim-easymotion'
+
+
   if exists('g:vscode')
     " Easy motion for VSCode
-    Plug 'asvetliakov/vim-easymotion'
+    " Plug 'asvetliakov/vim-easymotion'
 
   else
     " Text Navigation
-    Plug 'justinmk/vim-sneak'
+    " Plug 'justinmk/vim-sneak'
     Plug 'unblevable/quick-scope'
     " Plug 'easymotion/vim-easymotion'
     " Add some color
