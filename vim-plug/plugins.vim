@@ -29,14 +29,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'airblade/vim-rooter'
   " auto set indent settings
   Plug 'tpope/vim-sleuth'
-
   " Easy motion for VSCode
   Plug 'asvetliakov/vim-easymotion'
 
-
   if exists('g:vscode')
-    " Easy motion for VSCode
-    " Plug 'asvetliakov/vim-easymotion'
 
   else
     " Text Navigation
