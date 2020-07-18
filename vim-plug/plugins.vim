@@ -38,7 +38,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Text Navigation
     " Plug 'justinmk/vim-sneak'
     Plug 'unblevable/quick-scope'
-    " Plug 'easymotion/vim-easymotion'
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'junegunn/rainbow_parentheses.vim'
