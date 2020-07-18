@@ -35,7 +35,7 @@ if !exists('g:vscode')
   set timeoutlen=100                      " By default timeoutlen is 1000 ms
   set clipboard=unnamedplus               " Copy paste between vim and everything else
   set incsearch
-  set guifont=Hack\ Nerd\ Font
+  set guifont=Fira\ Code\ Nerd\ Font
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " set mmp=1300
   " set autochdir                           " Your working directory will always be the same as your working directory
