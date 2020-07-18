@@ -15,7 +15,14 @@
 " nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+if exists('g:vscode')
+  " VSCode extension
+  nmap s <Plug>(easymotion-prefix)
+else
+  " ordinary neovim
+  nmap s <Plug>(easymotion-overwin-f2)
+endif
+
 " nmap X <Plug>(easymotion-overwin-t)
 
 " Move to line
