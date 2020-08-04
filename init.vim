@@ -24,7 +24,6 @@ else
   source $HOME/.config/nvim/themes/airline.vim
   source $HOME/.config/nvim/plug-config/rnvimr.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
-  "source $HOME/.config/nvim/plug-config/nerd-commenter.vim switching to vim-commentary
   source $HOME/.config/nvim/plug-config/vim-commentary.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
   source $HOME/.config/nvim/plug-config/codi.vim
@@ -40,7 +39,6 @@ else
   source $HOME/.config/nvim/plug-config/floaterm.vim
   source $HOME/.config/nvim/plug-config/vista.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
-  " source $HOME/.config/nvim/plug-config/easymotion.vim
 endif
 
 " Experimental
@@ -53,4 +51,4 @@ let g:polyglot_disabled = ['csv']
 " Python
 " https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
 " also look into profiling as well
-" let g:python_highlight_all=1
+let g:python_highlight_all=1
