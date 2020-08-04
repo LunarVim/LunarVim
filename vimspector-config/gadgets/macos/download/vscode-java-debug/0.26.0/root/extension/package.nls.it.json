@@ -1,0 +1,9 @@
+{
+    "java.debugger.configuration.title": "Java Debugger",
+    "java.debugger.configuration.logLevel.description": "Livello dei log di debug minimo inviato a VS Code.",
+    "java.debugger.configuration.showHex.description": "Mostra numeri in formato esadecimale nella scheda \"variabili\".",
+    "java.debugger.configuration.showStaticVariables.description": "Mostra variabili statiche nella scheda \"variabili\".",
+    "java.debugger.configuration.showQualifiedNames.description": "Mostra nome completo delle classi nella scheda \"variabili\".",
+    "java.debugger.configuration.maxStringLength.description": "Lunghezza massima delle stringhe visualizzate nella scheda \"Variabili\" o \"Console di Debug\", stringhe più lunghe di questo numero verranno tagliate, se 0 nessun taglio viene eseguito.",
+    "java.debugger.configuration.enableRunDebugCodeLens.description": "Abilitare i provider di lenti di codice run e debug sui metodi principali."
+}

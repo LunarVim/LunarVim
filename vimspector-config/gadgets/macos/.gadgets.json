@@ -1,0 +1,12 @@
+{
+  "adapters": {
+    "multi-session": {
+      "host": "${host}",
+      "port": "${port}"
+    },
+    "vscode-java": {
+      "name": "vscode-java",
+      "port": "${DAPPort}"
+    }
+  }
+}

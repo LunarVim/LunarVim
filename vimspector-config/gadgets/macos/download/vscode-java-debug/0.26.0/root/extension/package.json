@@ -1,0 +1,626 @@
+{
+  "name": "vscode-java-debug",
+  "displayName": "Debugger for Java",
+  "description": "A lightweight Java debugger for Visual Studio Code",
+  "version": "0.26.0",
+  "publisher": "vscjava",
+  "preview": true,
+  "aiKey": "26e39823-0967-4af2-acc9-4d111ffda880",
+  "icon": "logo.png",
+  "keywords": [
+    "java",
+    "debug",
+    "debugging",
+    "debugger"
+  ],
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-java-debug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Microsoft/vscode-java-debug/issues"
+  },
+  "homepage": "https://github.com/Microsoft/vscode-java-debug/blob/master/README.md",
+  "categories": [
+    "Debuggers",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:java",
+    "onDebugInitialConfigurations",
+    "onDebugResolve:java",
+    "onCommand:JavaDebug.SpecifyProgramArgs",
+    "onCommand:java.debug.runJavaFile",
+    "onCommand:java.debug.debugJavaFile"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "breakpoints": [
+      {
+        "language": "java"
+      }
+    ],
+    "javaExtensions": [
+      "./server/com.microsoft.java.debug.plugin-0.26.0.jar"
+    ],
+    "commands": [
+      {
+        "command": "java.debug.hotCodeReplace",
+        "title": "Hot Code Replace",
+        "icon": {
+          "dark": "images/commands/hot_code_replace.svg",
+          "light": "images/commands/hot_code_replace.svg"
+        }
+      },
+      {
+        "command": "java.debug.runJavaFile",
+        "title": "Run"
+      },
+      {
+        "command": "java.debug.debugJavaFile",
+        "title": "Debug"
+      },
+      {
+        "command": "java.debug.continueAll",
+        "title": "Continue All"
+      },
+      {
+        "command": "java.debug.continueOthers",
+        "title": "Continue Others"
+      },
+      {
+        "command": "java.debug.pauseAll",
+        "title": "Pause All"
+      },
+      {
+        "command": "java.debug.pauseOthers",
+        "title": "Pause Others"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "java.debug.runJavaFile",
+          "when": "resourceExtname == .java",
+          "group": "javadebug@1"
+        },
+        {
+          "command": "java.debug.debugJavaFile",
+          "when": "resourceExtname == .java",
+          "group": "javadebug@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "java.debug.runJavaFile",
+          "when": "editorLangId == java && resourceExtname == .java",
+          "group": "javadebug@1"
+        },
+        {
+          "command": "java.debug.debugJavaFile",
+          "when": "editorLangId == java && resourceExtname == .java",
+          "group": "javadebug@2"
+        }
+      ],
+      "debug/toolBar": [
+        {
+          "command": "java.debug.hotCodeReplace",
+          "group": "navigation@100",
+          "when": "inDebugMode && debugType == java && javaHotReload == 'manual'"
+        }
+      ],
+      "debug/callstack/context": [
+        {
+          "command": "java.debug.continueAll",
+          "when": "inDebugMode && debugType == java && callStackItemType == 'thread'"
+        },
+        {
+          "command": "java.debug.continueOthers",
+          "when": "inDebugMode && debugType == java && callStackItemType == 'thread'"
+        },
+        {
+          "command": "java.debug.pauseAll",
+          "when": "inDebugMode && debugType == java && callStackItemType == 'thread'"
+        },
+        {
+          "command": "java.debug.pauseOthers",
+          "when": "inDebugMode && debugType == java && callStackItemType == 'thread'"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "java.debug.hotCodeReplace",
+          "when": "false"
+        },
+        {
+          "command": "java.debug.runJavaFile",
+          "when": "false"
+        },
+        {
+          "command": "java.debug.debugJavaFile",
+          "when": "false"
+        },
+        {
+          "command": "java.debug.continueAll",
+          "when": "false"
+        },
+        {
+          "command": "java.debug.continueOthers",
+          "when": "false"
+        },
+        {
+          "command": "java.debug.pauseAll",
+          "when": "false"
+        },
+        {
+          "command": "java.debug.pauseOthers",
+          "when": "false"
+        }
+      ]
+    },
+    "debuggers": [
+      {
+        "type": "java",
+        "label": "Java",
+        "languages": [
+          "java"
+        ],
+        "variables": {
+          "SpecifyProgramArgs": "JavaDebug.SpecifyProgramArgs"
+        },
+        "configurationAttributes": {
+          "launch": {
+            "required": [
+              "mainClass"
+            ],
+            "properties": {
+              "projectName": {
+                "type": "string",
+                "description": "%java.debugger.launch.projectName.description%",
+                "default": ""
+              },
+              "mainClass": {
+                "type": "string",
+                "description": "%java.debugger.launch.mainClass.description%",
+                "default": ""
+              },
+              "args": {
+                "type": [
+                  "array",
+                  "string"
+                ],
+                "description": "%java.debugger.launch.args.description%",
+                "default": ""
+              },
+              "vmArgs": {
+                "type": [
+                  "array",
+                  "string"
+                ],
+                "description": "%java.debugger.launch.vmArgs.description%",
+                "default": ""
+              },
+              "modulePaths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "%java.debugger.launch.modulePaths.description%",
+                "default": []
+              },
+              "classPaths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "%java.debugger.launch.classPaths.description%",
+                "default": []
+              },
+              "sourcePaths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "%java.debugger.launch.sourcePaths.description%",
+                "default": []
+              },
+              "encoding": {
+                "type": "string",
+                "description": "%java.debugger.launch.encoding.description%",
+                "default": "UTF-8"
+              },
+              "cwd": {
+                "type": "string",
+                "description": "%java.debugger.launch.cwd.description%",
+                "default": "${workspaceFolder}"
+              },
+              "env": {
+                "type": "object",
+                "description": "%java.debugger.launch.env.description%",
+                "default": {}
+              },
+              "stopOnEntry": {
+                "type": "boolean",
+                "description": "%java.debugger.launch.stopOnEntry.description%",
+                "default": true
+              },
+              "console": {
+                "type": "string",
+                "enum": [
+                  "internalConsole",
+                  "integratedTerminal",
+                  "externalTerminal"
+                ],
+                "enumDescriptions": [
+                  "%java.debugger.launch.internalConsole.description%",
+                  "%java.debugger.launch.integratedTerminal.description%",
+                  "%java.debugger.launch.externalTerminal.description%"
+                ],
+                "description": "%java.debugger.launch.console.description%",
+                "default": "integratedTerminal"
+              },
+              "shortenCommandLine": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "jarmanifest",
+                  "argfile",
+                  "auto"
+                ],
+                "enumDescriptions": [
+                  "%java.debugger.launch.shortenCommandLine.none%",
+                  "%java.debugger.launch.shortenCommandLine.jarmanifest%",
+                  "%java.debugger.launch.shortenCommandLine.argfile%",
+                  "%java.debugger.launch.shortenCommandLine.auto%"
+                ],
+                "description": "%java.debugger.launch.shortenCommandLine.description%",
+                "default": "auto"
+              },
+              "stepFilters": {
+                "type": "object",
+                "description": "%java.debugger.launch.stepFilters.description%",
+                "default": {
+                  "classNameFilters": [
+                    "java.*",
+                    "javax.*",
+                    "com.sun.*",
+                    "sun.*",
+                    "sunw.*",
+                    "org.omg.*"
+                  ],
+                  "skipSynthetics": false,
+                  "skipStaticInitializers": false,
+                  "skipConstructors": false
+                },
+                "properties": {
+                  "classNameFilters": {
+                    "type": "array",
+                    "description": "%java.debugger.launch.classNameFilters.description%",
+                    "item": {
+                      "type": "string"
+                    },
+                    "default": [
+                      "java.*",
+                      "javax.*",
+                      "com.sun.*",
+                      "sun.*",
+                      "sunw.*",
+                      "org.omg.*"
+                    ]
+                  },
+                  "skipSynthetics": {
+                    "type": "boolean",
+                    "description": "%java.debugger.launch.skipSynthetics.description%",
+                    "default": true
+                  },
+                  "skipStaticInitializers": {
+                    "type": "boolean",
+                    "description": "%java.debugger.launch.skipStaticInitializers.description%",
+                    "default": true
+                  },
+                  "skipConstructors": {
+                    "type": "boolean",
+                    "description": "%java.debugger.launch.skipConstructors.description%",
+                    "default": true
+                  }
+                }
+              }
+            }
+          },
+          "attach": {
+            "properties": {
+              "hostName": {
+                "type": "string",
+                "default": "localhost",
+                "description": "%java.debugger.attach.hostName.description%"
+              },
+              "port": {
+                "type": "number",
+                "description": "%java.debugger.attach.port.description%"
+              },
+              "processId": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "${command:PickJavaProcess}"
+                    ],
+                    "description": "%java.debugger.attach.processPicker.description%",
+                    "default": "${command:PickJavaProcess}"
+                  },
+                  {
+                    "type": "integer",
+                    "description": "%java.debugger.attach.processId.description%"
+                  }
+                ]
+              },
+              "timeout": {
+                "type": "number",
+                "default": 30000,
+                "description": "%java.debugger.attach.timeout.description%"
+              },
+              "sourcePaths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [],
+                "description": "%java.debugger.launch.sourcePaths.description%"
+              },
+              "projectName": {
+                "type": "string",
+                "description": "%java.debugger.attach.projectName.description%",
+                "default": ""
+              },
+              "stepFilters": {
+                "type": "object",
+                "description": "%java.debugger.launch.stepFilters.description%",
+                "default": {
+                  "classNameFilters": [
+                    "java.*",
+                    "javax.*",
+                    "com.sun.*",
+                    "sun.*",
+                    "sunw.*",
+                    "org.omg.*"
+                  ],
+                  "skipSynthetics": false,
+                  "skipStaticInitializers": false,
+                  "skipConstructors": false
+                },
+                "properties": {
+                  "classNameFilters": {
+                    "type": "array",
+                    "description": "%java.debugger.launch.classNameFilters.description%",
+                    "item": {
+                      "type": "string"
+                    },
+                    "default": [
+                      "java.*",
+                      "javax.*",
+                      "com.sun.*",
+                      "sun.*",
+                      "sunw.*",
+                      "org.omg.*"
+                    ]
+                  },
+                  "skipSynthetics": {
+                    "type": "boolean",
+                    "description": "%java.debugger.launch.skipSynthetics.description%",
+                    "default": false
+                  },
+                  "skipStaticInitializers": {
+                    "type": "boolean",
+                    "description": "%java.debugger.launch.skipStaticInitializers.description%",
+                    "default": false
+                  },
+                  "skipConstructors": {
+                    "type": "boolean",
+                    "description": "%java.debugger.launch.skipConstructors.description%",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "configurationSnippets": [
+          {
+            "label": "Java: Launch Program",
+            "description": "%java.debugger.snippet.launch.description%",
+            "body": {
+              "type": "java",
+              "name": "Debug (Launch)",
+              "request": "launch",
+              "mainClass": ""
+            }
+          },
+          {
+            "label": "Java: Launch Program in External Terminal",
+            "description": "%java.debugger.snippet.launchInExternalTerminal.description%",
+            "body": {
+              "type": "java",
+              "name": "Debug (Launch) - External Terminal",
+              "request": "launch",
+              "console": "externalTerminal",
+              "mainClass": ""
+            }
+          },
+          {
+            "label": "Java: Launch Program in Current File",
+            "description": "%java.debugger.snippet.launchCurrentFile.description%",
+            "body": {
+              "type": "java",
+              "name": "Debug (Launch) - Current File",
+              "request": "launch",
+              "mainClass": "^\"\\${file}\""
+            }
+          },
+          {
+            "label": "Java: Launch Program with Arguments Prompt",
+            "description": "%java.debugger.snippet.launchWithArgumentsPrompt.description%",
+            "body": {
+              "type": "java",
+              "name": "Debug (Launch) with Arguments Prompt",
+              "request": "launch",
+              "mainClass": "",
+              "args": "^\"\\${command:SpecifyProgramArgs}\""
+            }
+          },
+          {
+            "label": "Java: Attach",
+            "description": "%java.debugger.snippet.attach.description%",
+            "body": {
+              "type": "java",
+              "name": "Debug (Attach)",
+              "request": "attach",
+              "hostName": "localhost",
+              "port": "<debug port of the debuggee>"
+            }
+          },
+          {
+            "label": "Java: Attach to Process",
+            "description": "%java.debugger.snippet.attachProcess.description%",
+            "body": {
+              "type": "java",
+              "request": "attach",
+              "name": "Attach by Process ID",
+              "processId": "^\"\\${command:PickJavaProcess}\""
+            }
+          },
+          {
+            "label": "Java: Attach to Remote Program",
+            "description": "%java.debugger.snippet.attachRemote.description%",
+            "body": {
+              "type": "java",
+              "name": "Debug (Attach) - Remote",
+              "request": "attach",
+              "hostName": "<The host name or ip address of remote debuggee>",
+              "port": "<debug port of remote debuggee>"
+            }
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "%java.debugger.configuration.title%",
+      "properties": {
+        "java.debug.logLevel": {
+          "type": "string",
+          "default": "warn",
+          "description": "%java.debugger.configuration.logLevel.description%",
+          "enum": [
+            "error",
+            "warn",
+            "info",
+            "verbose"
+          ]
+        },
+        "java.debug.settings.showHex": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.showHex.description%",
+          "default": false
+        },
+        "java.debug.settings.showStaticVariables": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.showStaticVariables.description%",
+          "default": false
+        },
+        "java.debug.settings.showQualifiedNames": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.showQualifiedNames.description%",
+          "default": false
+        },
+        "java.debug.settings.showLogicalStructure": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.showLogicalStructure.description%",
+          "default": true
+        },
+        "java.debug.settings.showToString": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.showToString.description%",
+          "default": true
+        },
+        "java.debug.settings.maxStringLength": {
+          "type": "number",
+          "description": "%java.debugger.configuration.maxStringLength.description%",
+          "default": 0
+        },
+        "java.debug.settings.numericPrecision": {
+          "type": "number",
+          "description": "%java.debugger.configuration.numericPrecision.description%",
+          "default": 0
+        },
+        "java.debug.settings.hotCodeReplace": {
+          "type": "string",
+          "default": "manual",
+          "description": "%java.debugger.configuration.hotCodeReplace.description%",
+          "enum": [
+            "auto",
+            "manual",
+            "never"
+          ]
+        },
+        "java.debug.settings.enableRunDebugCodeLens": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.enableRunDebugCodeLens.description%",
+          "default": true
+        },
+        "java.debug.settings.forceBuildBeforeLaunch": {
+          "type": "boolean",
+          "description": "%java.debugger.configuration.forceBuildBeforeLaunch%",
+          "default": true
+        },
+        "java.debug.settings.console": {
+          "type": "string",
+          "enum": [
+            "internalConsole",
+            "integratedTerminal",
+            "externalTerminal"
+          ],
+          "enumDescriptions": [
+            "%java.debugger.launch.internalConsole.description%",
+            "%java.debugger.launch.integratedTerminal.description%",
+            "%java.debugger.launch.externalTerminal.description%"
+          ],
+          "description": "%java.debugger.configuration.console%",
+          "default": "integratedTerminal"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "compile": "tsc -p . && webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch --info-verbosity verbose",
+    "build": "webpack --config webpack.config.js --mode=\"production\"",
+    "test": "npm run compile && node ./out/test/index.js"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.137",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^8.10.51",
+    "@types/vscode": "1.38.0",
+    "cross-env": "^5.2.0",
+    "gulp": "^4.0.2",
+    "gulp-tslint": "^8.1.4",
+    "mocha": "^7.1.1",
+    "shelljs": "^0.8.3",
+    "ts-loader": "^5.4.5",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "vscode-test": "^1.2.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "vscode-extension-telemetry": "^0.1.6",
+    "vscode-extension-telemetry-wrapper": "^0.8.0"
+  }
+}

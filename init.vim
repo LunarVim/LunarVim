@@ -52,3 +52,6 @@ let g:polyglot_disabled = ['csv']
 " https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
 " also look into profiling as well
 let g:python_highlight_all=1
+
+let g:vimspector_base_dir=expand( '$HOME/.config/nvim/vimspector-config' )
+let g:vimspector_enable_mappings='HUMAN'
