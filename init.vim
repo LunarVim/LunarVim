@@ -38,20 +38,21 @@ else
   source $HOME/.config/nvim/plug-config/closetags.vim
   source $HOME/.config/nvim/plug-config/floaterm.vim
   source $HOME/.config/nvim/plug-config/vista.vim
+  source $HOME/.config/nvim/plug-config/xtabline.vim
+  source $HOME/.config/nvim/plug-config/polyglot.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
-
-" Experimental
 
 if !empty(glob("~/.config/nvim/paths.vim"))
   source $HOME/.config/nvim/paths.vim
 endif
-let g:polyglot_disabled = ['csv']
+
+" Experimental
+
 
 " Python
 " https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
 " also look into profiling as well
-let g:python_highlight_all=1
 
-let g:vimspector_base_dir=expand( '$HOME/.config/nvim/vimspector-config' )
-let g:vimspector_enable_mappings='HUMAN'
+" let g:vimspector_base_dir=expand( '$HOME/.config/nvim/vimspector-config' )
+" let g:vimspector_enable_mappings='HUMAN'

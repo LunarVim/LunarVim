@@ -42,7 +42,7 @@
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.local/bin/black",
+  // "python.formatting.blackPath": "~/.local/bin/black",
   // "python.linting.pylintPath": "~/.miniconda/envs/neovim/bin/pylint",
   "python.condaPath": "~/.miniconda/bin/conda",
   "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
@@ -62,7 +62,7 @@
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
-  "explorer.icon.enableVimDevicons": false,
+  "explorer.icon.enableVimDevicons": true,
   "explorer.keyMappings": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
@@ -75,7 +75,10 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
-  }
+  },
+
+  //coc-emoji
+  "coc.source.emoji.filetypes": ["markdown"]
 
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path

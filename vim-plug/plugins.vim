@@ -98,7 +98,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'metakirby5/codi.vim'
     " Vim Wiki
     " Plug 'https://github.com/vimwiki/vimwiki.git'
+    " Debugging
     Plug 'puremourning/vimspector'
+    " Better tabline
+    Plug 'mg979/vim-xtabline'
+    Plug 'mbbill/undotree'
+    Plug 'RRethy/vim-illuminate'
   endif
 
 
