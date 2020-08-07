@@ -147,6 +147,16 @@ Example:
 - maybe better jsx highlighting
 - neovide
 - move coc to coc.old in install script
+- multiple cursors
+- pywright
+- later manually link pylance
+- ale
+- spaceline
+
+## 0.5
+
+- native lsp
+- treesitter
 
 ## VSCode integration
 
