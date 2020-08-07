@@ -38,11 +38,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Text Navigation
     Plug 'justinmk/vim-sneak'
     Plug 'unblevable/quick-scope'
-    " Plug 'easymotion/vim-easymotion'
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
-    " Plug 'junegunn/rainbow_parentheses.vim'
-
     Plug 'luochen1990/rainbow'
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
@@ -54,24 +51,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " Themes
     Plug 'christianchiarulli/onedark.vim'
-    " Plug 'kaicataldo/material.vim'
-    " Plug 'NLKNguyen/papercolor-theme'
-    " Plug 'tomasiser/vim-code-dark'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
     Plug 'vim-airline/vim-airline'
-    " Plug 'hardcoreplayers/spaceline.vim'
-    " Plug 'vim-airline/vim-airline-themes'
-    " Ranger
-    " Plug 'francoiscabrol/ranger.vim'
-    " Plug 'rbgrouleff/bclose.vim'
     Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     " Git
-    " Plug 'mhinz/vim-signify'
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
@@ -86,19 +74,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vim-which-key'
     " Zen mode
     Plug 'junegunn/goyo.vim'
-    " Making stuff
-    Plug 'neomake/neomake'
     " Snippets
     Plug 'honza/vim-snippets'
     Plug 'mattn/emmet-vim'
-    " Better Comments
-    " Plug 'jbgutierrez/vim-better-comments'
-    " Echo doc
-    " Plug 'Shougo/echodoc.vim'
     " Interactive code
     Plug 'metakirby5/codi.vim'
-    " Vim Wiki
-    " Plug 'https://github.com/vimwiki/vimwiki.git'
     " Debugging
     Plug 'puremourning/vimspector'
     " Better tabline
@@ -115,6 +95,36 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'turbio/bracey.vim'
     " Typescript syntax
     Plug 'HerringtonDarkholme/yats.vim'
+    " Smooth scroll
+    Plug 'psliwka/vim-smoothie'
+    " asynt tasks
+    Plug 'skywind3000/asynctasks.vim'
+    Plug 'skywind3000/asyncrun.vim'
+    " Swap windows
+    Plug 'wesQ3/vim-windowswap'
+    " Markdown Preview
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
+    " Better Whitespace
+    Plug 'ntpeters/vim-better-whitespace'
+    " Plugin Graveyard
+    " Plug 'kaicataldo/material.vim'
+    " Plug 'NLKNguyen/papercolor-theme'
+    " Plug 'tomasiser/vim-code-dark'
+    " Vim Wiki
+    " Plug 'https://github.com/vimwiki/vimwiki.git'
+    " Better Comments
+    " Plug 'jbgutierrez/vim-better-comments'
+    " Echo doc
+    " Plug 'Shougo/echodoc.vim'
+    " Plug 'hardcoreplayers/spaceline.vim'
+    " Plug 'vim-airline/vim-airline-themes'
+    " Ranger
+    " Plug 'francoiscabrol/ranger.vim'
+    " Plug 'rbgrouleff/bclose.vim'
+    " Making stuff
+    " Plug 'neomake/neomake'
+    " Plug 'mhinz/vim-signify'
+    " Plug 'easymotion/vim-easymotion'
   endif
 
 

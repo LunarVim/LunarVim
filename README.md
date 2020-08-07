@@ -124,23 +124,29 @@ Example:
   }
   ```
 
+## TabNine
+
+To use tabnine enter the following in a buffer:
+
+```
+TabNine::config
+```
+
 ## TODO
 
 - async task/run
 - vimspector
-- markdown preview
-- neomake
 - ale
 - multiple cursors
 - git messenger
 - markdown table
 - spaceline (add colorscheme for mach 2)
-- add better whitespace plugin and a toggle
 - People asked about vimwiki I kinda hate it but maybe I'll add it
 - neovide
 - move coc to coc.old in install script
 - later manually link pylance
 - lazynpm for floaterm
+- tpope/vim-dadbod
 
 ## coc additions to check out
 
