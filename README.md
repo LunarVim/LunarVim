@@ -126,16 +126,13 @@ Example:
 
 ## TODO
 
-- People asked about vimwiki I kinda hate it but maybe I'll add it
-- float term lazy git
-- spectre, or async task/run
-- setup custom paths
-- install script envsubst is your friend
-- add better whitespace plugin and a toggle, video about clean code maybe
-- snippets (coc snippets)
+- async task/run
+- vimspector
 - git messenger
+- FAR
 - neovide
-- setup global coc extensions to auto install
+- add better whitespace plugin and a toggle, video about clean code maybe
+- People asked about vimwiki I kinda hate it but maybe I'll add it
 
 ## VSCode integration
 
