@@ -133,9 +133,20 @@ Example:
 - markdown preview
 - neomake
 - markdown table
-- neovide
-- add better whitespace plugin and a toggle, video about clean code maybe
+- add better whitespace plugin and a toggle
 - People asked about vimwiki I kinda hate it but maybe I'll add it
+- tagalong
+- ctrlspace
+- coc-fzf
+- coc-async-tasks
+- coc-stylelintplus
+- coc-highlight (just for pick color, highlight is too slow)
+- coc-floaterm
+- coc-actions
+- coc-bookmark
+- maybe better jsx highlighting
+- neovide
+- move coc to coc.old in install script
 
 ## VSCode integration
 
