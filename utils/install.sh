@@ -6,7 +6,7 @@ set -o errexit    # exit when command fails
 installnodemac() { \
   brew install lua
   brew install node
-  brew install yarm
+  brew install yarn
 }
 
 installnodeubuntu() { \
