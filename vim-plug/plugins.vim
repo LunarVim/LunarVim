@@ -104,6 +104,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mg979/vim-xtabline'
     Plug 'mbbill/undotree'
     Plug 'RRethy/vim-illuminate'
+    Plug 'brooth/far.vim'
   endif
 
 

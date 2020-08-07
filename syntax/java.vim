@@ -32,7 +32,6 @@ let cyan = "#56B6C2"
 let white = "#ABB2BF"
 
 
-
 " you may chage the color according to your will :)
 
 
@@ -51,7 +50,6 @@ execute "highlight class ctermfg=4  guifg=".blue
 "execute "highlight names which contains numbers
 syn match main "\v(\a)\w*\d"
 execute "highlight main ctermfg=4  guifg=".red
-
 
 "all regrex works
 " /^import (+);$/mg 

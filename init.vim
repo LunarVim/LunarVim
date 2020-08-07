@@ -40,6 +40,7 @@ else
   source $HOME/.config/nvim/plug-config/vista.vim
   source $HOME/.config/nvim/plug-config/xtabline.vim
   source $HOME/.config/nvim/plug-config/polyglot.vim
+  source $HOME/.config/nvim/plug-config/far.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
 
