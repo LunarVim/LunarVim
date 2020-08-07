@@ -129,7 +129,10 @@ Example:
 - async task/run
 - vimspector
 - git messenger
-- FAR
+- live server (bracey)
+- markdown preview
+- neomake
+- markdown table
 - neovide
 - add better whitespace plugin and a toggle, video about clean code maybe
 - People asked about vimwiki I kinda hate it but maybe I'll add it
