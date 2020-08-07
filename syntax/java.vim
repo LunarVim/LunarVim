@@ -88,8 +88,8 @@ highlight link ClassName Identifier
 execute "highlight ClassName ctermfg=4  guifg=".yellow
 
 " Just some special color, why not?  
-syn match print " System.out."
-execute "highlight print ctermfg=4  guifg=".yellow
+" syn match print " System.out."
+" execute "highlight print ctermfg=4  guifg=".yellow
 
 "objects (ex: String) 
 execute "highlight Constant ctermfg=4  guifg=".yellow
