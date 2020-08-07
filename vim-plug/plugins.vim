@@ -61,6 +61,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
     Plug 'vim-airline/vim-airline'
+    " Plug 'hardcoreplayers/spaceline.vim'
     " Plug 'vim-airline/vim-airline-themes'
     " Ranger
     " Plug 'francoiscabrol/ranger.vim'
@@ -102,9 +103,18 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'puremourning/vimspector'
     " Better tabline
     Plug 'mg979/vim-xtabline'
+    " undo time travel
     Plug 'mbbill/undotree'
+    " highlight all matches under cursor
     Plug 'RRethy/vim-illuminate'
+    " Find and replace
     Plug 'brooth/far.vim'
+    " Auto change html tags
+    Plug 'AndrewRadev/tagalong.vim'
+    " live server
+    Plug 'turbio/bracey.vim'
+    " Typescript syntax
+    Plug 'HerringtonDarkholme/yats.vim'
   endif
 
 

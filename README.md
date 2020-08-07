@@ -128,15 +128,22 @@ Example:
 
 - async task/run
 - vimspector
-- git messenger
-- live server (bracey)
 - markdown preview
 - neomake
+- ale
+- multiple cursors
+- git messenger
 - markdown table
+- spaceline (add colorscheme for mach 2)
 - add better whitespace plugin and a toggle
 - People asked about vimwiki I kinda hate it but maybe I'll add it
-- tagalong
-- ctrlspace
+- neovide
+- move coc to coc.old in install script
+- later manually link pylance
+- lazynpm for floaterm
+
+## coc additions to check out
+
 - coc-fzf
 - coc-async-tasks
 - coc-stylelintplus
@@ -144,14 +151,6 @@ Example:
 - coc-floaterm
 - coc-actions
 - coc-bookmark
-- maybe better jsx highlighting
-- neovide
-- move coc to coc.old in install script
-- multiple cursors
-- pywright
-- later manually link pylance
-- ale
-- spaceline
 
 ## 0.5
 

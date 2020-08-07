@@ -41,6 +41,9 @@ else
   source $HOME/.config/nvim/plug-config/xtabline.vim
   source $HOME/.config/nvim/plug-config/polyglot.vim
   source $HOME/.config/nvim/plug-config/far.vim
+  source $HOME/.config/nvim/plug-config/tagalong.vim
+  source $HOME/.config/nvim/plug-config/illuminate.vim
+  source $HOME/.config/nvim/plug-config/bracey.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
 
@@ -57,3 +60,4 @@ endif
 
 " let g:vimspector_base_dir=expand( '$HOME/.config/nvim/vimspector-config' )
 " let g:vimspector_enable_mappings='HUMAN'
+" let g:spaceline_colorscheme = 'one'

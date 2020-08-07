@@ -50,6 +50,8 @@ let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'e' : [':CocCommand explorer'    , 'explorer'],
+      \ 'l' : [':Bracey'                 , 'start live server'],
+      \ 'L' : [':BraceyStop'             , 'stop live server'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
