@@ -4,7 +4,9 @@ set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
 
 installnodemac() { \
+  brew install lua
   brew install node
+  brew install yarm
 }
 
 installnodeubuntu() { \
