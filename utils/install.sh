@@ -75,7 +75,7 @@ moveoldnvim() { \
   mv $HOME/.config/nvim $HOME/.config/nvim.old
 }
 
-moveoldncoc() { \
+moveoldcoc() { \
   echo "Moving your coc to coc.old"
   mv $HOME/.config/coc $HOME/.config/coc.old
 }
