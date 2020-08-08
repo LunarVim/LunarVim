@@ -162,6 +162,8 @@ TabNine::config
 - native lsp
 - treesitter
 
-## VSCode integration
+## Things to look into
 
-We will be integrating with VSCode using [this](https://github.com/asvetliakov/vscode-neovim)
+**Python**
+https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
+also look into profiling as well

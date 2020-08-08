@@ -97,7 +97,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'HerringtonDarkholme/yats.vim'
     " Smooth scroll
     Plug 'psliwka/vim-smoothie'
-    " asynt tasks
+    " async tasks
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     " Swap windows
@@ -106,6 +106,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
     " Better Whitespace
     Plug 'ntpeters/vim-better-whitespace'
+    " Multiple Cursors
+    Plug 'terryma/vim-multiple-cursors'
+    " Async Linting Engine
+    Plug 'dense-analysis/ale'
     " Plugin Graveyard
     " Plug 'kaicataldo/material.vim'
     " Plug 'NLKNguyen/papercolor-theme'
