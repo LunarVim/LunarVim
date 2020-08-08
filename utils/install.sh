@@ -75,6 +75,11 @@ moveoldnvim() { \
   mv $HOME/.config/nvim $HOME/.config/nvim.old
 }
 
+moveoldncoc() { \
+  echo "Moving your coc to coc.old"
+  mv $HOME/.config/coc $HOME/.config/coc.old
+}
+
 installplugins() { \
   mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.tmp
   mv $HOME/.config/nvim/utils/init.vim $HOME/.config/nvim/init.vim
@@ -109,7 +114,7 @@ pipinstallueberzug() { \
 }
 
 installonubuntu() { \
-  sudo apt install ripgrep fzf ranger  
+  sudo apt install ripgrep fzf ranger
   sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
   pip3 install ueberzug
   pip3 install neovim-remote
@@ -143,7 +148,10 @@ which node > /dev/null && echo "node installed, moving on..." || asktoinstallnod
 pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
 
 # move old nvim directory if it exists
-[ -d "$HOME/.config/nvim" ] && moveoldnvim 
+[ -d "$HOME/.config/nvim" ] && moveoldnvim
+
+# move old nvim directory if it exists
+[ -d "$HOME/.config/coc" ] && moveoldcoc
 
 # clone config down
 cloneconfig
