@@ -124,6 +124,12 @@ Example:
   }
   ```
 
+## For FAR to work
+
+```
+:UpdateRemotePlugins
+```
+
 ## TabNine
 
 To use tabnine enter the following in a buffer:
