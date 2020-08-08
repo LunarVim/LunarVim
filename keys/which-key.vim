@@ -142,6 +142,7 @@ let g:which_key_map.g = {
       \ 'G' : [':Gstatus'                          , 'status'],
       \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
       \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
+      \ 'i' : [':Gist -b'                          , 'post gist'],
       \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
       \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
       \ 'l' : [':Git log'                          , 'log'],
@@ -154,6 +155,19 @@ let g:which_key_map.g = {
       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
       \ 'v' : [':GV'                               , 'view commits'],
       \ 'V' : [':GV!'                              , 'view buffer commits'],
+      \ }
+
+let g:which_key_map.G = {
+      \ 'name' : '+gist' ,
+      \ 'a' : [':Gist -a'                          , 'post gist anon'],
+      \ 'b' : [':Gist -b'                          , 'post gist browser'],
+      \ 'd' : [':Gist -d'                          , 'delete gist'],
+      \ 'e' : [':Gist -e'                          , 'edit gist'],
+      \ 'l' : [':Gist -l'                          , 'list public gists'],
+      \ 's' : [':Gist -ls'                         , 'list starred gists'],
+      \ 'm' : [':Gist -m'                          , 'post gist all buffers'],
+      \ 'p' : [':Gist -P'                          , 'post public gist '],
+      \ 'P' : [':Gist -p'                          , 'post private gist '],
       \ }
 
 " l is for language server protocol

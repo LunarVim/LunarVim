@@ -132,15 +132,23 @@ To use tabnine enter the following in a buffer:
 TabNine::config
 ```
 
+## Vim Gists
+
+To use **vim-gists** you will need to configure the following:
+
+```
+git config --global github.user <username>
+```
+
 ## TODO
 
 - vimspector
 - ale
-- multiple cursors
 
 ## LOW PRIORITY
 
 - git messenger
+- multiple cursors
 - markdown table
 - People asked about vimwiki I kinda hate it but maybe I'll add it
 - spaceline (add colorscheme for mach2)
