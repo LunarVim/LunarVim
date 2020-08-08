@@ -137,16 +137,18 @@ TabNine::config
 - vimspector
 - ale
 - multiple cursors
+
+## LOW PRIORITY
+
 - git messenger
-- move coc to coc.old in install script
 - markdown table
 - People asked about vimwiki I kinda hate it but maybe I'll add it
 - spaceline (add colorscheme for mach2)
-- neovide
 - tpope/vim-dadbod
 - later manually link pylance
+- neovide
 
-## coc additions to check out
+## CoC extensions to check out
 
 - coc-fzf
 - coc-stylelintplus
