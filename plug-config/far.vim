@@ -1,4 +1,5 @@
-let g:far#source='rgnvim'
+" let g:far#source='rgnvim'
+let g:far#source='vimgrep'
 
 let g:far#file_mask_favorites=['%', '**/*.*', '**/*.html', '**/*.js', '**/*.css', '**/*.vim']
 

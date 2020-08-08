@@ -8,7 +8,6 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
-
   Plug 'suy/vim-context-commentstring'
   " Change dates fast
   Plug 'tpope/vim-speeddating'
@@ -22,7 +21,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'tpope/vim-surround'
   " Better Comments
   Plug 'tpope/vim-commentary'
-  " Plug 'preservim/nerdcommenter'
   " Have the file system follow you around
   Plug 'airblade/vim-rooter'
   " auto set indent settings
@@ -95,14 +93,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'wesQ3/vim-windowswap'
   " Markdown Preview
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-  " Better Whitespace
-  Plug 'ntpeters/vim-better-whitespace'
   " Easily Create Gists
   Plug 'mattn/vim-gist'
   Plug 'mattn/webapi-vim'
 
   " Plugin Graveyard
 
+  " Better Whitespace
+  " Plug 'ntpeters/vim-better-whitespace'
   " jsx syntax support
   " Plug 'maxmellon/vim-jsx-pretty'
   " Typescript syntax
@@ -130,7 +128,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Plug 'neomake/neomake'
   " Plug 'mhinz/vim-signify'
   " Plug 'easymotion/vim-easymotion'
-
+  " Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
