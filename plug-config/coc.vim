@@ -3,6 +3,7 @@
     \ 'coc-actions',
     \ 'coc-lists',
     \ 'coc-emmet',
+    \ 'coc-tasks',
     \ 'coc-pairs',
     \ 'coc-tsserver',
     \ 'coc-floaterm',

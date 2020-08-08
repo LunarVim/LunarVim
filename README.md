@@ -134,24 +134,21 @@ TabNine::config
 
 ## TODO
 
-- async task/run
 - vimspector
 - ale
 - multiple cursors
 - git messenger
-- markdown table
-- spaceline (add colorscheme for mach 2)
-- People asked about vimwiki I kinda hate it but maybe I'll add it
-- neovide
 - move coc to coc.old in install script
-- later manually link pylance
-- lazynpm for floaterm
+- markdown table
+- People asked about vimwiki I kinda hate it but maybe I'll add it
+- spaceline (add colorscheme for mach2)
+- neovide
 - tpope/vim-dadbod
+- later manually link pylance
 
 ## coc additions to check out
 
 - coc-fzf
-- coc-async-tasks
 - coc-stylelintplus
 - coc-highlight (just for pick color, highlight is too slow)
 - coc-floaterm
