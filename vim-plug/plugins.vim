@@ -79,7 +79,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " highlight all matches under cursor
   Plug 'RRethy/vim-illuminate'
   " Find and replace
-  Plug 'brooth/far.vim'
+  Plug 'ChristianChiarulli/far.vim'
   " Auto change html tags
   Plug 'AndrewRadev/tagalong.vim'
   " live server
@@ -129,6 +129,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Plug 'mhinz/vim-signify'
   " Plug 'easymotion/vim-easymotion'
   " Plug 'preservim/nerdcommenter'
+  " Plug 'brooth/far.vim'
+  " Plug 'atishay/far.vim'
 
 call plug#end()
 
