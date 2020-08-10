@@ -26,6 +26,7 @@
     \ 'coc-json',
     \ 'coc-marketplace',
     \ 'coc-tabnine',
+    \ 'coc-highlight',
     \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
