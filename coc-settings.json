@@ -13,9 +13,8 @@
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
-  // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
-
   // "diagnostic.displayByAle": true,
+  // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
 
   // codelens TODO what does this get me?
   // "codeLens.enable": true,
