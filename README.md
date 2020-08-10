@@ -148,25 +148,12 @@ git config --global github.user <username>
 
 ## TODO
 
-- vimspector
-- ale
-
-## LOW PRIORITY
-
-- git messenger
-- multiple cursors
-- markdown table
-- People asked about vimwiki I kinda hate it but maybe I'll add it
-- spaceline (add colorscheme for mach2)
-- tpope/vim-dadbod
-- later manually link pylance
-- neovide
+- Better Documentation
 
 ## CoC extensions to check out
 
 - coc-fzf
 - coc-stylelintplus
-- coc-highlight (just for pick color, highlight is too slow)
 - coc-floaterm
 - coc-actions
 - coc-bookmark
@@ -176,8 +163,19 @@ git config --global github.user <username>
 - native lsp
 - treesitter
 
-## Things to look into
+## LOW PRIORITY TODO
 
-**Python**
-https://realpython.com/python-debugging-pdb/ " breakpoint syntax is really cool
-also look into profiling as well
+If anyone reading this has any suggestions about implementing any of the following I will accept a PR, but these are not priority.
+
+- ale
+- multiple cursors
+- markdown table
+- spaceline (add colorscheme for mach2)
+- tpope/vim-dadbod
+- neovide
+- People asked about vimwiki I kinda hate it but maybe I'll add it
+- vimspector this is included but I don't plan on using it much
+  - can be used with jdb, pdb, gdb, etc...
+- later manually link pylance
+- resize with arrows in addition to meta
+- how to support meta key on for macOS?
