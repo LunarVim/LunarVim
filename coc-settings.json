@@ -68,15 +68,6 @@
     "v": "open:vsplit"
   },
 
-  "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    }
-  },
-
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"]
 

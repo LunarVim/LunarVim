@@ -96,20 +96,20 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Easily Create Gists
   Plug 'mattn/vim-gist'
   Plug 'mattn/webapi-vim'
+  " Async Linting Engine
+  " TODO make sure to add ale config before plugin
+  Plug 'dense-analysis/ale'
+  " Better Whitespace
+  Plug 'ntpeters/vim-better-whitespace'
 
   " Plugin Graveyard
 
-  " Better Whitespace
-  " Plug 'ntpeters/vim-better-whitespace'
   " jsx syntax support
   " Plug 'maxmellon/vim-jsx-pretty'
   " Typescript syntax
   " Plug 'HerringtonDarkholme/yats.vim'
   " Multiple Cursors
   " Plug 'terryma/vim-multiple-cursors'
-  " Async Linting Engine
-  " TODO make sure to add ale config before plugin
-  " Plug 'dense-analysis/ale'
   " Plug 'kaicataldo/material.vim'
   " Plug 'NLKNguyen/papercolor-theme'
   " Plug 'tomasiser/vim-code-dark'
