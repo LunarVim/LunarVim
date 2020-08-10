@@ -55,6 +55,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
   Plug 'junegunn/gv.vim'
+  Plug 'rhysd/git-messenger.vim'
   " Terminal
   Plug 'voldikss/vim-floaterm'
   " Start Screen
@@ -71,7 +72,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Interactive code
   Plug 'metakirby5/codi.vim'
   " Debugging
-  Plug 'puremourning/vimspector'
+  " Plug 'puremourning/vimspector'
   " Better tabline
   Plug 'mg979/vim-xtabline'
   " undo time travel
@@ -98,9 +99,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'mattn/webapi-vim'
   " Async Linting Engine
   " TODO make sure to add ale config before plugin
-  Plug 'dense-analysis/ale'
+  " Plug 'dense-analysis/ale'
   " Better Whitespace
   Plug 'ntpeters/vim-better-whitespace'
+  " Multiple Cursors
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
   " Plugin Graveyard
 
