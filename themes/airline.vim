@@ -17,6 +17,7 @@ let g:airline_extensions = ['branch', 'hunks', 'coc']
 
 let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#tabs_label = ''
+let g:airline#extensions#coc#enabled = 1
 
 " Just show the file name
 let g:airline#extensions#tabline#fnamemod = ':t'
