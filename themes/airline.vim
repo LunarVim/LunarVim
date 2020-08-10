@@ -13,6 +13,8 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#fnamecollapse = 1
 
+let g:airline_extensions = ['branch', 'hunks', 'coc']
+
 let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#tabs_label = ''
 
@@ -27,6 +29,11 @@ let g:airline_right_alt_sep = ''
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
+" let g:airline_skip_empty_sections = 1
+
+let g:airline_section_c = airline#section#create([''])
+" let g:airline_section_z = airline#section#create(['linenr'])
 
 " Switch to your current theme
 " let g:airline_theme = 'onedark'
