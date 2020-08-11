@@ -104,7 +104,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'ntpeters/vim-better-whitespace'
   " Multiple Cursors
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
+  Plug 'moll/vim-bbye'
   " Plugin Graveyard
 
   " jsx syntax support
