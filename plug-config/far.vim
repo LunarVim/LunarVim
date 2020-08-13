@@ -1,6 +1,5 @@
 let g:far#source='rgnvim'
 " let g:far#source='rg'
-" let g:far#source='rg'
 " let g:far#source='ag'
 set lazyredraw            " improve scrolling performance when navigating through large results
 
@@ -8,6 +7,7 @@ let g:far#file_mask_favorites=['%', '**/*.*', '**/*.js', '**/*.py', '**/*.java',
 
 let g:far#enable_undo=1
 
+let g:far#debug = 1
 " let g:far#ignore_files=['$HOME/.config/nvim/utils/farignore']
 " let g:far#ignore_files=['node_modules/']
 
