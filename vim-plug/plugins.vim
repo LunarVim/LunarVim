@@ -46,7 +46,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Status Line
   Plug 'vim-airline/vim-airline'
-  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+  Plug 'kevinhwang91/rnvimr'
   " FZF
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
@@ -81,6 +81,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'RRethy/vim-illuminate'
   " Find and replace
   Plug 'ChristianChiarulli/far.vim'
+  " Plug 'brooth/far.vim'
   " Auto change html tags
   Plug 'AndrewRadev/tagalong.vim'
   " live server

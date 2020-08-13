@@ -36,7 +36,7 @@ let g:which_key_map[';'] = [ ':Commands'                          , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                             , 'balance windows' ]
 let g:which_key_map['d'] = [ ':Bdelete'                           , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'               , 'explorer' ]
-let g:which_key_map['f'] = [ ':Farr --win-width=30'               , 'find and replace' ]
+" let g:which_key_map['f'] = [ ':Farr'                              , 'find and replace' ]
 let g:which_key_map['h'] = [ '<C-W>s'                             , 'split below']
 let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'  , 'move window' ]
 let g:which_key_map['p'] = [ ':Files'                             , 'search files' ]
@@ -70,15 +70,22 @@ let g:which_key_map.a = {
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , 'buffer 1']        ,
-      \ '2' : ['b2'        , 'buffer 2']        ,
-      \ 'd' : [':Bdelete'        , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'    , 'first-buffer']    ,
-      \ 'h' : ['Startify'  , 'home-buffer']     ,
-      \ 'l' : ['blast'     , 'last-buffer']     ,
-      \ 'n' : ['bnext'     , 'next-buffer']     ,
-      \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ '1' : ['b1'        , 'buffer 1'],
+      \ '2' : ['b2'        , 'buffer 2'],
+      \ 'd' : [':Bdelete'  , 'delete-buffer'],
+      \ 'f' : ['bfirst'    , 'first-buffer'],
+      \ 'h' : ['Startify'  , 'home-buffer'],
+      \ 'l' : ['blast'     , 'last-buffer'],
+      \ 'n' : ['bnext'     , 'next-buffer'],
+      \ 'p' : ['bprevious' , 'previous-buffer'],
+      \ '?' : ['Buffers'   , 'fzf-buffer'],
+      \ }
+
+" f is for find and replace
+let g:which_key_map.f = {
+      \ 'name' : '+find & replace' ,
+      \ 'b' : [':Farr --source=vimgrep'    , 'buffer'],
+      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
       \ }
 
 " k is for task
