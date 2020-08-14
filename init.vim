@@ -53,4 +53,3 @@ luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 if !empty(glob("~/.config/nvim/paths.vim"))
   source $HOME/.config/nvim/paths.vim
 endif
-

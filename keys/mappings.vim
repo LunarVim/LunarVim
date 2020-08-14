@@ -13,10 +13,6 @@ nnoremap <Space> <Nop>
 vnoremap < <gv
 vnoremap > >gv
 
-" Better nav for omnicomplete
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
-
 " I hate escape more than anything else
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -68,3 +64,6 @@ nnoremap <silent> <M-k>    :resize +2<CR>
 nnoremap <silent> <M-h>    :vertical resize -2<CR>
 nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
+" Better nav for omnicomplete
+inoremap <expr> <c-j> ("\<C-n>")
+inoremap <expr> <c-k> ("\<C-p>")
