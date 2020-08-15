@@ -179,7 +179,7 @@ function! s:define_commands()
   endif
   if has('win32')
   \ && &shellslash
-  \ && (&shell =~# 'cmd\.exe' || &shell =~# 'powershell\.exe')
+  \ && (&shell =~# 'cmd\(\.exe\)\?$' || &shell =~# 'powershell\(\.exe\)\?$')
     return s:err('vim-plug does not support shell, ' . &shell . ', when shellslash is set.')
   endif
   if !has('nvim')
@@ -419,7 +419,7 @@ if s:is_win
     let batchfile = s:plug_tempname().'.bat'
     call writefile(s:wrap_cmds(a:cmd), batchfile)
     let cmd = plug#shellescape(batchfile, {'shell': &shell, 'script': 0})
-    if &shell =~# 'powershell\.exe'
+    if &shell =~# 'powershell\(\.exe\)\?$'
       let cmd = '& ' . cmd
     endif
     return [batchfile, cmd]
@@ -632,17 +632,39 @@ function! plug#(repo, ...)
     let g:plugs[name] = spec
     let s:loaded[name] = get(s:loaded, name, 0)
   catch
-    return s:err(v:exception)
+    return s:err(repo . ' ' . v:exception)
   endtry
 endfunction
 
 function! s:parse_options(arg)
   let opts = copy(s:base_spec)
   let type = type(a:arg)
+  let opt_errfmt = 'Invalid argument for "%s" option of :Plug (expected: %s)'
   if type == s:TYPE.string
+    if empty(a:arg)
+      throw printf(opt_errfmt, 'tag', 'string')
+    endif
     let opts.tag = a:arg
   elseif type == s:TYPE.dict
     call extend(opts, a:arg)
+    for opt in ['branch', 'tag', 'commit', 'rtp', 'dir', 'as']
+      if has_key(opts, opt)
+      \ && (type(opts[opt]) != s:TYPE.string || empty(opts[opt]))
+        throw printf(opt_errfmt, opt, 'string')
+      endif
+    endfor
+    for opt in ['on', 'for']
+      if has_key(opts, opt)
+      \ && type(opts[opt]) != s:TYPE.list
+      \ && (type(opts[opt]) != s:TYPE.string || empty(opts[opt]))
+        throw printf(opt_errfmt, opt, 'string or list')
+      endif
+    endfor
+    if has_key(opts, 'do')
+      \ && type(opts.do) != s:TYPE.funcref
+      \ && (type(opts.do) != s:TYPE.string || empty(opts.do))
+        throw printf(opt_errfmt, 'do', 'string or funcref')
+    endif
     if has_key(opts, 'dir')
       let opts.dir = s:dirpath(s:plug_expand(opts.dir))
     endif
@@ -868,9 +890,9 @@ function! s:chsh(swap)
     set shell=sh
   endif
   if a:swap
-    if &shell =~# 'powershell\.exe' || &shell =~# 'pwsh$'
+    if &shell =~# 'powershell\(\.exe\)\?$' || &shell =~# 'pwsh$'
       let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s'
-    elseif &shell =~# 'sh' || &shell =~# 'cmd\.exe'
+    elseif &shell =~# 'sh' || &shell =~# 'cmd\(\.exe\)\?$'
       set shellredir=>%s\ 2>&1
     endif
   endif
@@ -942,6 +964,7 @@ function! s:do(pull, force, todo)
         endif
       elseif type == s:TYPE.funcref
         try
+          call s:load_plugin(spec)
           let status = installed ? 'installed' : (updated ? 'updated' : 'unchanged')
           call spec.do({ 'name': name, 'status': status, 'force': a:force })
         catch
@@ -2105,9 +2128,9 @@ function! plug#shellescape(arg, ...)
   let opts = a:0 > 0 && type(a:1) == s:TYPE.dict ? a:1 : {}
   let shell = get(opts, 'shell', s:is_win ? 'cmd.exe' : 'sh')
   let script = get(opts, 'script', 1)
-  if shell =~# 'cmd\.exe'
+  if shell =~# 'cmd\(\.exe\)\?$'
     return s:shellesc_cmd(a:arg, script)
-  elseif shell =~# 'powershell\.exe' || shell =~# 'pwsh$'
+  elseif shell =~# 'powershell\(\.exe\)\?$' || shell =~# 'pwsh$'
     return s:shellesc_ps1(a:arg)
   endif
   return s:shellesc_sh(a:arg)
@@ -2159,7 +2182,7 @@ function! s:system(cmd, ...)
         return system(a:cmd)
       endif
       let cmd = join(map(copy(a:cmd), 'plug#shellescape(v:val, {"shell": &shell, "script": 0})'))
-      if &shell =~# 'powershell\.exe'
+      if &shell =~# 'powershell\(\.exe\)\?$'
         let cmd = '& ' . cmd
       endif
     else
@@ -2248,7 +2271,7 @@ endfunction
 
 function! s:rm_rf(dir)
   if isdirectory(a:dir)
-    call s:system(s:is_win
+    return s:system(s:is_win
     \ ? 'rmdir /S /Q '.plug#shellescape(a:dir)
     \ : ['rm', '-rf', a:dir])
   endif
@@ -2332,6 +2355,7 @@ endfunction
 function! s:delete(range, force)
   let [l1, l2] = a:range
   let force = a:force
+  let err_count = 0
   while l1 <= l2
     let line = getline(l1)
     if line =~ '^- ' && isdirectory(line[2:])
@@ -2340,11 +2364,22 @@ function! s:delete(range, force)
       let answer = force ? 1 : s:ask('Delete '.line[2:].'?', 1)
       let force = force || answer > 1
       if answer
-        call s:rm_rf(line[2:])
+        let err = s:rm_rf(line[2:])
         setlocal modifiable
-        call setline(l1, '~'.line[1:])
-        let s:clean_count += 1
-        call setline(4, printf('Removed %d directories.', s:clean_count))
+        if empty(err)
+          call setline(l1, '~'.line[1:])
+          let s:clean_count += 1
+        else
+          delete _
+          call append(l1 - 1, s:format_message('x', line[1:], err))
+          let l2 += len(s:lines(err))
+          let err_count += 1
+        endif
+        let msg = printf('Removed %d directories.', s:clean_count)
+        if err_count > 0
+          let msg .= printf(' Failed to remove %d directories.', err_count)
+        endif
+        call setline(4, msg)
         setlocal nomodifiable
       endif
     endif

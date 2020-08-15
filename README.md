@@ -124,19 +124,58 @@ Example:
   }
   ```
 
+## For FAR to work
+
+```
+:UpdateRemotePlugins
+```
+
+## TabNine
+
+To use tabnine enter the following in a buffer:
+
+```
+TabNine::config
+```
+
+## Vim Gists
+
+To use **vim-gists** you will need to configure the following:
+
+```
+git config --global github.user <username>
+```
+
 ## TODO
 
-- People asked about vimwiki I kinda hate it but maybe I'll add it
-- float term lazy git
-- spectre, or async task/run
-- setup custom paths
-- install script envsubst is your friend
-- add better whitespace plugin and a toggle, video about clean code maybe
-- snippets (coc snippets)
-- git messenger
+- Better Documentation
+
+## CoC extensions to check out
+
+- coc-fzf
+- coc-stylelintplus
+- coc-floaterm
+- coc-actions
+- coc-bookmark
+
+## 0.5
+
+- native lsp
+- treesitter
+
+## LOW PRIORITY TODO
+
+If anyone reading this has any suggestions about implementing any of the following I will accept a PR, but these are not priority.
+
+- ale
+- multiple cursors
+- markdown table
+- spaceline (add colorscheme for mach2)
+- tpope/vim-dadbod
 - neovide
-- setup global coc extensions to auto install
-
-## VSCode integration
-
-We will be integrating with VSCode using [this](https://github.com/asvetliakov/vscode-neovim)
+- People asked about vimwiki I kinda hate it but maybe I'll add it
+- vimspector this is included but I don't plan on using it much
+  - can be used with jdb, pdb, gdb, etc...
+- later manually link pylance
+- resize with arrows in addition to meta
+- how to support meta key on for macOS?

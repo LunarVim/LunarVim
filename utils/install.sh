@@ -4,7 +4,9 @@ set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
 installnodemac() {
+  brew install lua
   brew install node
+  brew install yarn
 }
 
 installnodeubuntu() {
@@ -71,6 +73,11 @@ cloneconfig() {
 moveoldnvim() {
   echo "Moving your config to nvim.old"
   mv $HOME/.config/nvim $HOME/.config/nvim.old
+}
+
+moveoldcoc() {
+  echo "Moving your coc to coc.old"
+  mv $HOME/.config/coc $HOME/.config/coc.old
 }
 
 installplugins() {
@@ -140,6 +147,9 @@ pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || i
 
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
+
+# move old nvim directory if it exists
+[ -d "$HOME/.config/coc" ] && moveoldcoc
 
 # clone config down
 cloneconfig
