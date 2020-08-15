@@ -36,7 +36,7 @@
     \ 'coc-webpack',
     \ 'coc-docker',
     \ 'coc-styled-components',
-    \ 'coc-github'
+    \ 'coc-github',
     \ 'coc-tabnine',
     \ 'coc-highlight',
     \ ]
