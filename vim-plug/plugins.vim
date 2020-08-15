@@ -35,7 +35,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " else
     " Text Navigation
     " Plug 'justinmk/vim-sneak'
-    Plug 'unblevable/quick-scope'
+    " Plug 'unblevable/quick-scope'
     " Add some color
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'luochen1990/rainbow'
