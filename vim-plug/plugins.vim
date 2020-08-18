@@ -30,9 +30,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'tpope/vim-sleuth'
   " Easy motion for VSCode
   Plug 'asvetliakov/vim-easymotion'
+  " Find and replace
+  Plug 'ChristianChiarulli/far.vim'
+  " undo time travel
+  Plug 'mbbill/undotree'
 
-  " if exists('g:vscode')
-  " else
+  if exists('g:vscode')
+  else
     " Text Navigation
     " Plug 'justinmk/vim-sneak'
     " Plug 'unblevable/quick-scope'
@@ -75,46 +79,42 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Snippets
     Plug 'honza/vim-snippets'
     Plug 'mattn/emmet-vim'
- " Interactive code
-  Plug 'metakirby5/codi.vim'
-  " Debugging
-  " Plug 'puremourning/vimspector'
-  " Better tabline
-  Plug 'mg979/vim-xtabline'
-  " undo time travel
-  Plug 'mbbill/undotree'
-  " highlight all matches under cursor
-  Plug 'RRethy/vim-illuminate'
-  " Find and replace
-  Plug 'ChristianChiarulli/far.vim'
-  " Plug 'brooth/far.vim'
-  " Auto change html tags
-  Plug 'AndrewRadev/tagalong.vim'
-  " live server
-  Plug 'turbio/bracey.vim'
-  " Smooth scroll
-  Plug 'psliwka/vim-smoothie'
-  " async tasks
-  Plug 'skywind3000/asynctasks.vim'
-  Plug 'skywind3000/asyncrun.vim'
-  " Swap windows
-  Plug 'wesQ3/vim-windowswap'
-  " Markdown Preview
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-  " Easily Create Gists
-  Plug 'mattn/vim-gist'
-  Plug 'mattn/webapi-vim'
-  " Async Linting Engine
-  " TODO make sure to add ale config before plugin
-  " Plug 'dense-analysis/ale'
-  " Better Whitespace
-  Plug 'ntpeters/vim-better-whitespace'
-  " Multiple Cursors
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-  Plug 'moll/vim-bbye'
-  " ansible vault
-  Plug 'arouene/vim-ansible-vault'
-  " endif
+    " Interactive code
+    Plug 'metakirby5/codi.vim'
+    " Debugging
+    " Plug 'puremourning/vimspector'
+    " Better tabline
+    Plug 'mg979/vim-xtabline'
+    " highlight all matches under cursor
+    Plug 'RRethy/vim-illuminate'
+    " Plug 'brooth/far.vim'
+    " Auto change html tags
+    Plug 'AndrewRadev/tagalong.vim'
+    " live server
+    Plug 'turbio/bracey.vim'
+    " Smooth scroll
+    Plug 'psliwka/vim-smoothie'
+    " async tasks
+    Plug 'skywind3000/asynctasks.vim'
+    Plug 'skywind3000/asyncrun.vim'
+    " Swap windows
+    Plug 'wesQ3/vim-windowswap'
+    " Markdown Preview
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
+    " Easily Create Gists
+    Plug 'mattn/vim-gist'
+    Plug 'mattn/webapi-vim'
+    " Async Linting Engine
+    " TODO make sure to add ale config before plugin
+    " Plug 'dense-analysis/ale'
+    " Better Whitespace
+    Plug 'ntpeters/vim-better-whitespace'
+    " Multiple Cursors
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    Plug 'moll/vim-bbye'
+    " ansible vault
+    Plug 'arouene/vim-ansible-vault'
+  endif
 
   " Plugin Graveyard
   " jsx syntax support
