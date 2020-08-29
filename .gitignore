@@ -8,4 +8,5 @@ vimspector-config/*
 paths.vim
 session
 wiki/
+pack/
 
