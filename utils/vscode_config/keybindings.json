@@ -122,7 +122,7 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+j",
+    "key": "cmd+j",
     "command": "workbench.action.terminal.focus",
     "when": "!terminalFocus"
   }

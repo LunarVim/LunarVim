@@ -6,6 +6,12 @@
   "whichkey.sortOrder": "alphabetically",
   "whichkey.bindings": [
     {
+      "key": ";",
+      "name": "commands",
+      "type": "command",
+      "command": "workbench.action.showCommands"
+    },
+    {
       "key": "/",
       "name": "comment",
       "type": "command",
@@ -199,6 +205,32 @@
       "command": "workbench.action.toggleSidebarVisibility"
     },
     {
+      "key": "f",
+      "name": "Find & Replace...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "f",
+          "name": "File",
+          "type": "command",
+          "command": "editor.action.startFindReplaceAction"
+        },
+        {
+          "key": "s",
+          "name": "Symbol",
+          "type": "command",
+          "command": "editor.action.rename",
+          "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+        },
+        {
+          "key": "p",
+          "name": "Project",
+          "type": "command",
+          "command": "workbench.action.replaceInFiles"
+        }
+      ]
+    },
+    {
       "key": "g",
       "name": "Git...",
       "type": "bindings",
@@ -296,96 +328,29 @@
         }
       ]
     },
+
+    {
+      "key": "m",
+      "name": "minimap",
+      "type": "command",
+      "command": "editor.action.toggleMinimap"
+    },
     {
       "key": "s",
       "name": "Search...",
       "type": "bindings",
       "bindings": [
         {
-          "key": "e",
-          "name": "Edit symbol",
+          "key": "f",
+          "name": "files",
           "type": "command",
-          "command": "editor.action.rename"
+          "command": "workbench.action.quickOpen"
         },
         {
-          "key": "h",
-          "name": "Highlight symbol",
-          "type": "transient",
-          "command": "editor.action.wordHighlight.trigger",
-          "bindings": [
-            {
-              "key": "p",
-              "name": "Previous occurrence",
-              "type": "command",
-              "command": "editor.action.wordHighlight.prev"
-            },
-            {
-              "key": "N",
-              "name": "Previous occurrence",
-              "type": "command",
-              "command": "editor.action.wordHighlight.prev"
-            },
-            {
-              "key": "n",
-              "name": "Next occurrence",
-              "type": "command",
-              "command": "editor.action.wordHighlight.next"
-            },
-            {
-              "key": "/",
-              "name": "Search in a project with a selection",
-              "type": "commands",
-              "commands": [
-                "editor.action.addSelectionToNextFindMatch",
-                "workbench.action.findInFiles"
-              ]
-            }
-          ]
-        },
-        {
-          "key": "j",
-          "name": "Jump to symbol in file",
-          "type": "command",
-          "command": "workbench.action.gotoSymbol"
-        },
-        {
-          "key": "J",
-          "name": "Jump to symbol in workspace",
-          "type": "command",
-          "command": "workbench.action.showAllSymbols"
-        },
-        {
-          "key": "p",
-          "name": "Search in a project",
+          "key": "t",
+          "name": "text",
           "type": "command",
           "command": "workbench.action.findInFiles"
-        },
-        {
-          "key": "P",
-          "name": "Search in a project with a selection",
-          "type": "commands",
-          "commands": [
-            "editor.action.addSelectionToNextFindMatch",
-            "workbench.action.findInFiles"
-          ]
-        },
-        {
-          "key": "r",
-          "name": "Search all references",
-          "type": "command",
-          "command": "editor.action.referenceSearch.trigger"
-        },
-        {
-          "key": "R",
-          "name": "Search all references in side bar",
-          "type": "command",
-          "command": "references-view.find"
-        },
-        {
-          "key": "s",
-          "name": "Search in current file",
-          "type": "command",
-          "command": "actions.find"
         }
       ]
     },
@@ -612,7 +577,6 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "python.pythonPath": "/Users/chris/.miniconda/bin/python",
   "java.semanticHighlighting.enabled": true,
-  "workbench.iconTheme": "material-icon-theme",
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/chris/.vscode-oss/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
   "workbench.list.automaticKeyboardNavigation": false,
   "oneDarkPro.editorTheme": "onedarkPro",
@@ -623,11 +587,18 @@
   "kite.showWelcomeNotificationOnStartup": false,
   "python.terminal.activateEnvironment": false,
   "editor.cursorBlinking": "solid",
-  "editor.fontFamily": "Fira, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
   "files.exclude": {
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true
-  }
+  },
+  "terminal.external.osxExec": "iTerm.app",
+  "editor.minimap.enabled": false,
+  "workbench.activityBar.visible": false,
+  "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
+  "leetcode.defaultLanguage": "python3",
+  "leetcode.hint.configWebviewMarkdown": false,
+  "leetcode.hint.commentDescription": false
 }
