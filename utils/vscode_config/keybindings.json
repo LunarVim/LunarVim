@@ -1,19 +1,19 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
   {
-    "key": "shift+cmd+e",
+    "key": "shift+ctrl+e",
     "command": "actions.findWithSelection"
   },
   {
-    "key": "cmd+e",
+    "key": "ctrl+e",
     "command": "-actions.findWithSelection"
   },
   {
-    "key": "cmd+e",
+    "key": "ctrl+e",
     "command": "workbench.view.explorer"
   },
   {
-    "key": "shift+cmd+e",
+    "key": "shift+ctrl+e",
     "command": "-workbench.view.explorer"
   },
   {
@@ -122,8 +122,26 @@
     "when": "terminalFocus"
   },
   {
-    "key": "cmd+j",
+    "key": "ctrl+shift+t",
     "command": "workbench.action.terminal.focus",
     "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-editor.action.insertLineAfter",
+    "when": "editorTextFocus && neovim.ctrlKeysInsert && !neovim.recording && neovim.mode == 'insert'"
+  },
+  {
+    "key": "alt+j",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
   }
 ]

@@ -598,7 +598,9 @@
   "editor.minimap.enabled": false,
   "workbench.activityBar.visible": false,
   "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
-  "leetcode.defaultLanguage": "python3",
+  "leetcode.defaultLanguage": "javascript",
   "leetcode.hint.configWebviewMarkdown": false,
-  "leetcode.hint.commentDescription": false
+  "leetcode.hint.commentDescription": false,
+  "window.zoomLevel": 3,
+  "window.menuBarVisibility": "toggle"
 }
