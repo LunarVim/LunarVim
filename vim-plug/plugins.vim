@@ -10,32 +10,34 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Better Comments
     Plug 'tpope/vim-commentary'
+    " Change dates fast
+    Plug 'tpope/vim-speeddating'
+    " Convert binary, hex, etc..
+    Plug 'glts/vim-radical'
+    " Repeat stuff
+    Plug 'tpope/vim-repeat'
+    " Text Navigation
+    Plug 'unblevable/quick-scope'
+    " Useful for React Commenting 
+    Plug 'suy/vim-context-commentstring'
+    " highlight all matches under cursor
+    Plug 'RRethy/vim-illuminate'
 
   if exists('g:vscode')
     " Easy motion for VSCode
     Plug 'asvetliakov/vim-easymotion'
   else
 
-    " Change dates fast
-    Plug 'tpope/vim-speeddating'
-    " Convert binary, hex, etc..
-    Plug 'glts/vim-radical'
-    " Files
-    Plug 'tpope/vim-eunuch'
-    " Repeat stuff
-    Plug 'tpope/vim-repeat'
+    " Sneak
+    Plug 'justinmk/vim-sneak'
     " Surround
     Plug 'tpope/vim-surround'
+    " Files
+    Plug 'tpope/vim-eunuch'
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
     " auto set indent settings
     Plug 'tpope/vim-sleuth'
-    " Text Navigation
-    Plug 'justinmk/vim-sneak'
-    Plug 'unblevable/quick-scope'
-    " Add some color
-    Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'luochen1990/rainbow'
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " Cool Icons
@@ -82,8 +84,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mg979/vim-xtabline'
     " undo time travel
     Plug 'mbbill/undotree'
-    " highlight all matches under cursor
-    Plug 'RRethy/vim-illuminate'
     " Find and replace
     Plug 'ChristianChiarulli/far.vim'
     " Plug 'brooth/far.vim'
@@ -103,6 +103,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Easily Create Gists
     Plug 'mattn/vim-gist'
     Plug 'mattn/webapi-vim'
+    " Colorizer
+    Plug 'norcalli/nvim-colorizer.lua'
+    " Rainbow brackets
+    Plug 'luochen1990/rainbow'
     " Async Linting Engine
     " TODO make sure to add ale config before plugin
     " Plug 'dense-analysis/ale'
@@ -112,8 +116,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " TODO add this back in change from C-n
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'moll/vim-bbye'
-    " Useful for React Commenting 
-    Plug 'suy/vim-context-commentstring'
     " Plugin Graveyard
 
     " jsx syntax support
