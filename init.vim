@@ -24,6 +24,7 @@ else
   source $HOME/.config/nvim/themes/onedark.vim
   source $HOME/.config/nvim/themes/airline.vim
   " source $HOME/.config/nvim/themes/material.vim
+  " source $HOME/.config/nvim/themes/nord.vim
 
   " Plugin Configuration
   source $HOME/.config/nvim/keys/which-key.vim
