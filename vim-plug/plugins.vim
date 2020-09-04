@@ -47,9 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Closetags
     Plug 'alvan/vim-closetag'
     " Themes
-    Plug 'christianchiarulli/onedark.vim'
-    Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-    Plug 'arcticicestudio/nord-vim'
+    Plug 'christianchiarulli/nvcode.vim'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
@@ -117,10 +115,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " TODO add this back in change from C-n
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'moll/vim-bbye'
+    Plug 'yuezk/vim-js'
+    Plug 'maxmellon/vim-jsx-pretty'
+    Plug 'jelera/vim-javascript-syntax'
     " Plugin Graveyard
 
     " jsx syntax support
-    " Plug 'maxmellon/vim-jsx-pretty'
     " Typescript syntax
     " Plug 'HerringtonDarkholme/yats.vim'
     " Multiple Cursors
@@ -136,6 +136,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'Shougo/echodoc.vim'
     " Plug 'hardcoreplayers/spaceline.vim'
     " Plug 'vim-airline/vim-airline-themes'
+    " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    " Plug 'arcticicestudio/nord-vim'
     " Ranger
     " Plug 'francoiscabrol/ranger.vim'
     " Plug 'rbgrouleff/bclose.vim'
