@@ -26,7 +26,7 @@ else
 
   " Plugin Configuration
   source $HOME/.config/nvim/keys/which-key.vim
-  source $HOME/.config/nvim/plug-config/rainbow.vim
+  " source $HOME/.config/nvim/plug-config/rainbow.vim
   source $HOME/.config/nvim/plug-config/rnvimr.vim
   source $HOME/.config/nvim/plug-config/better-whitespace.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
@@ -46,7 +46,7 @@ else
   source $HOME/.config/nvim/plug-config/polyglot.vim
   source $HOME/.config/nvim/plug-config/far.vim
   source $HOME/.config/nvim/plug-config/tagalong.vim
-  source $HOME/.config/nvim/plug-config/illuminate.vim
+  " source $HOME/.config/nvim/plug-config/illuminate.vim
   source $HOME/.config/nvim/plug-config/bracey.vim
   source $HOME/.config/nvim/plug-config/asynctask.vim
   source $HOME/.config/nvim/plug-config/window-swap.vim

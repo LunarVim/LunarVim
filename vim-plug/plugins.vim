@@ -21,7 +21,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Useful for React Commenting 
     Plug 'suy/vim-context-commentstring'
     " highlight all matches under cursor
-    Plug 'RRethy/vim-illuminate'
+    " Plug 'RRethy/vim-illuminate'
 
   if exists('g:vscode')
     " Easy motion for VSCode
@@ -39,6 +39,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " auto set indent settings
     Plug 'tpope/vim-sleuth'
     " Better Syntax Support
+    " Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'sheerun/vim-polyglot'
     " Cool Icons
     Plug 'ryanoasis/vim-devicons'
@@ -48,6 +49,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " Themes
     Plug 'christianchiarulli/nvcode.vim'
+    " Plug 'ChristianChiarulli/nv-code'
+    " Plug 'kyazdani42/blue-moon'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
@@ -105,7 +108,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Colorizer
     Plug 'norcalli/nvim-colorizer.lua'
     " Rainbow brackets
-    Plug 'luochen1990/rainbow'
+    " Plug 'luochen1990/rainbow'
     " Async Linting Engine
     " TODO make sure to add ale config before plugin
     " Plug 'dense-analysis/ale'
@@ -115,9 +118,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " TODO add this back in change from C-n
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'moll/vim-bbye'
-    Plug 'yuezk/vim-js'
-    Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'jelera/vim-javascript-syntax'
+    " Plug 'yuezk/vim-js'
+    " Plug 'maxmellon/vim-jsx-pretty'
+    " Plug 'jelera/vim-javascript-syntax'
     " Plugin Graveyard
 
     " jsx syntax support

@@ -19,6 +19,13 @@
       "args": "<C-/>"
     },
     {
+      "key": "?",
+      "name": "View All References",
+      "type": "command",
+      "command": "references-view.find",
+      "when": "editorHasReferenceProvider"
+    },
+    {
       "key": "b",
       "name": "Buffers/Editors...",
       "type": "bindings",
@@ -236,10 +243,29 @@
       "type": "bindings",
       "bindings": [
         {
+          "key": "/",
+          "name": "Search Commits",
+          "command": "gitlens.showCommitSearch",
+          "type": "command",
+          "when": "gitlens:enabled && config.gitlens.keymap == 'alternate'"
+        },
+        {
+          "key": "a",
+          "name": "Stage",
+          "type": "command",
+          "command": "git.stage"
+        },
+        {
           "key": "b",
           "name": "Checkout",
           "type": "command",
           "command": "git.checkout"
+        },
+        {
+          "key": "B",
+          "name": "Browse",
+          "type": "command",
+          "command": "gitlens.openFileInRemote"
         },
         {
           "key": "c",
@@ -248,10 +274,28 @@
           "command": "git.commit"
         },
         {
+          "key": "C",
+          "name": "Cherry Pick",
+          "type": "command",
+          "command": "gitlens.views.cherryPick"
+        },
+        {
           "key": "d",
           "name": "Delete Branch",
           "type": "command",
           "command": "git.deleteBranch"
+        },
+        {
+          "key": "g",
+          "name": "Graph",
+          "type": "command",
+          "command": "git-graph.view"
+        },
+        {
+          "key": "h",
+          "name": "Heatmap",
+          "type": "command",
+          "command": "gitlens.toggleFileHeatmap"
         },
         {
           "key": "f",
@@ -260,10 +304,30 @@
           "command": "git.fetch"
         },
         {
+          "key": "F",
+          "name": "Pull From",
+          "type": "command",
+          "command": "git.pullFrom"
+        },
+        {
           "key": "i",
           "name": "Init",
           "type": "command",
           "command": "git.init"
+        },
+        {
+          "key": "l",
+          "name": "Toggle Line Blame",
+          "type": "command",
+          "command": "gitlens.toggleLineBlame",
+          "when": "editorTextFocus && gitlens:canToggleCodeLens && gitlens:enabled && config.gitlens.keymap == 'alternate'"
+        },
+        {
+          "key": "L",
+          "name": "Toggle GitLens",
+          "type": "command",
+          "command": "gitlens.toggleCodeLens",
+          "when": "editorTextFocus && gitlens:canToggleCodeLens && gitlens:enabled && config.gitlens.keymap == 'alternate'"
         },
         {
           "key": "m",
@@ -273,9 +337,15 @@
         },
         {
           "key": "p",
-          "name": "Publish",
+          "name": "Push",
           "type": "command",
-          "command": "git.publish"
+          "command": "git.push"
+        },
+        {
+          "key": "P",
+          "name": "Push",
+          "type": "command",
+          "command": "git.pull"
         },
         {
           "key": "s",
@@ -285,9 +355,22 @@
         },
         {
           "key": "S",
-          "name": "Stage",
+          "name": "Status",
           "type": "command",
-          "command": "git.stage"
+          "command": "gitlens.showQuickRepoStatus",
+          "when": "gitlens:enabled && config.gitlens.keymap == 'alternate'"
+        },
+        {
+          "key": "t",
+          "name": "Create Tag",
+          "type": "command",
+          "command": "git.createTag"
+        },
+        {
+          "key": "T",
+          "name": "Delete Tag",
+          "type": "command",
+          "command": "git.deleteTag"
         },
         {
           "key": "U",
@@ -328,19 +411,198 @@
         }
       ]
     },
-
+    {
+      "key": "l",
+      "name": "LSP...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": ";",
+          "name": "Refactor",
+          "type": "command",
+          "command": "editor.action.refactor",
+          "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+        },
+        {
+          "key": "a",
+          "name": "Auto Fix",
+          "type": "command",
+          "command": "editor.action.autoFix",
+          "when": "editorTextFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
+        },
+        {
+          "key": "d",
+          "name": "Definition",
+          "type": "command",
+          "command": "editor.action.revealDefinition",
+          "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+        },
+        {
+          "key": "D",
+          "name": "Declaration",
+          "type": "command",
+          "command": "editor.action.revealDeclaration"
+        },
+        {
+          "key": "e",
+          "name": "Errors",
+          "type": "command",
+          "command": "workbench.actions.view.problems"
+        },
+        {
+          "key": "f",
+          "name": "Format",
+          "type": "command",
+          "command": "editor.action.formatDocument",
+          "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+        },
+        {
+          "key": "i",
+          "name": "Implementation",
+          "type": "command",
+          "command": "editor.action.goToImplementation",
+          "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+        },
+        {
+          "key": "l",
+          "name": "Code Lens",
+          "type": "command",
+          "command": "codelens.showLensesInCurrentLine"
+        },
+        {
+          "key": "n",
+          "name": "Next Problem",
+          "type": "command",
+          "command": "editor.action.marker.next",
+          "when": "editorFocus"
+        },
+        {
+          "key": "N",
+          "name": "Next Problem (Proj)",
+          "type": "command",
+          "command": "editor.action.marker.nextInFiles",
+          "when": "editorFocus"
+        },
+        {
+          "key": "o",
+          "name": "Outline",
+          "type": "command",
+          "command": "outline.focus"
+        },
+        {
+          "key": "p",
+          "name": "Prev Problem",
+          "type": "command",
+          "command": "editor.action.marker.prevInFiles",
+          "when": "editorFocus"
+        },
+        {
+          "key": "P",
+          "name": "Prev Problem (Proj)",
+          "type": "command",
+          "command": "editor.action.marker.prev",
+          "when": "editorFocus"
+        },
+        {
+          "key": "q",
+          "name": "Quick Fix",
+          "type": "command",
+          "command": "editor.action.quickFix",
+          "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+        },
+        {
+          "key": "r",
+          "name": "References",
+          "type": "command",
+          "command": "editor.action.goToReferences",
+          "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+        },
+        {
+          "key": "R",
+          "name": "Rename",
+          "type": "command",
+          "command": "editor.action.rename",
+          "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+        },
+        {
+          "key": "v",
+          "name": "View All References",
+          "type": "command",
+          "command": "references-view.find",
+          "when": "editorHasReferenceProvider"
+        },
+        {
+          "key": "s",
+          "name": "Go to Symbol (Editor)",
+          "type": "command",
+          "command": "workbench.action.gotoSymbol"
+        },
+        {
+          "key": "S",
+          "name": "Go to Symbol (Workspace)",
+          "type": "command",
+          "command": "workbench.action.showAllSymbols"
+        }
+      ]
+    },
     {
       "key": "m",
-      "name": "minimap",
+      "name": "Minimap",
       "type": "command",
       "command": "editor.action.toggleMinimap"
     },
     {
       "key": "n",
-      "name": "highlight",
+      "name": "No Highlight",
       "type": "command",
       "command": "vscode-neovim.send",
       "args": ":noh<CR>"
+    },
+    {
+      "key": "p",
+      "name": "Peek...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "d",
+          "name": "Definition",
+          "type": "command",
+          "command": "editor.action.peekDefinition",
+          "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+        },
+        {
+          "key": "D",
+          "name": "Declaration",
+          "type": "command",
+          "command": "editor.action.peekDeclaration"
+        },
+        {
+          "key": "i",
+          "name": "Implementation",
+          "type": "command",
+          "command": "editor.action.peekImplementation",
+          "when": "editorHasImplementationProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+        },
+        {
+          "key": "p",
+          "name": "Toggle Focus",
+          "type": "command",
+          "command": "togglePeekWidgetFocus",
+          "when": "inReferenceSearchEditor || referenceSearchVisible"
+        },
+        {
+          "key": "r",
+          "name": "References",
+          "type": "command",
+          "command": "editor.action.referenceSearch.trigger"
+        },
+        {
+          "key": "t",
+          "name": "Type Definition",
+          "type": "command",
+          "command": "editor.action.peekTypeDefinition"
+        }
+      ]
     },
     {
       "key": "s",
@@ -349,13 +611,13 @@
       "bindings": [
         {
           "key": "f",
-          "name": "files",
+          "name": "Files",
           "type": "command",
           "command": "workbench.action.quickOpen"
         },
         {
           "key": "t",
-          "name": "text",
+          "name": "Text",
           "type": "command",
           "command": "workbench.action.findInFiles"
         }
@@ -432,14 +694,27 @@
           "name": "Toggle Terminal",
           "type": "command",
           "command": "workbench.action.togglePanel"
+        },
+        {
+          "key": "T",
+          "name": "Focus Terminal",
+          "type": "command",
+          "command": "workbench.action.terminal.toggleTerminal",
+          "when": "!terminalFocus"
         }
       ]
     },
     {
-      "key": "T",
+      "key": "U",
       "name": "UI toggles...",
       "type": "bindings",
       "bindings": [
+        {
+          "key": "a",
+          "name": "Toggle tool/activity bar visibility",
+          "type": "command",
+          "command": "workbench.action.toggleActivityBarVisibility"
+        },
         {
           "key": "b",
           "name": "Toggle side bar visibility",
@@ -469,12 +744,6 @@
           "name": "Toggle maximized panel",
           "type": "command",
           "command": "workbench.action.toggleMaximizedPanel"
-        },
-        {
-          "key": "t",
-          "name": "Toggle tool/activity bar visibility",
-          "type": "command",
-          "command": "workbench.action.toggleActivityBarVisibility"
         },
         {
           "key": "T",
@@ -570,6 +839,31 @@
       ]
     },
     {
+      "key": "x",
+      "name": "Extensions",
+      "type": "command",
+      "command": "workbench.view.extensions"
+    },
+    {
+      "key": "y",
+      "name": "Sync...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "d",
+          "name": "Download Settings",
+          "type": "command",
+          "command": "extension.downloadSettings"
+        },
+        {
+          "key": "u",
+          "name": "Upload Settings",
+          "type": "command",
+          "command": "extension.updateSettings"
+        }
+      ]
+    },
+    {
       "key": "z",
       "name": "Toggle zen mode",
       "type": "command",
@@ -578,7 +872,6 @@
   ],
   "workbench.editor.showTabs": true,
   "sync.gist": "939951904a077b97f8001bc35f6b5948",
-  "gitlens.currentLine.enabled": false,
   "gitlens.hovers.currentLine.over": "line",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
@@ -601,7 +894,7 @@
     "**/.factorypath": true
   },
   "terminal.external.osxExec": "iTerm.app",
-  "editor.minimap.enabled": true,
+  "editor.minimap.enabled": false,
   "workbench.activityBar.visible": false,
   "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
   "leetcode.defaultLanguage": "javascript",
@@ -689,32 +982,37 @@
 
   "workbench.colorCustomizations": {
     "[Default Dark+]": {
-       "statusBar.background" : "#2E2E2E",
-       "statusBar.foreground" : "#569CD6",
-       "statusBarItem.remoteBackground": "#2E2E2E",
-       "statusBarItem.remoteForeground": "#569CD6",
-       "activityBar.background": "#2E2E2E",
-       "tab.inactiveBackground": "#2E2E2E"
+      "statusBar.background": "#2E2E2E",
+      "statusBar.foreground": "#8C8C8C",
+      "statusBarItem.remoteBackground": "#2E2E2E",
+      "statusBarItem.remoteForeground": "#8C8C8C",
+      "activityBar.background": "#2E2E2E",
+      "tab.inactiveBackground": "#2E2E2E"
     },
     "[One Dark Pro]": {
-    "editor.background": "#1e2127",
-    "terminal.foreground": "#abb2bf",
-    "terminal.ansiBlack": "#1e2127",
-    "terminal.ansiBlue": "#61afef",
-    "terminal.ansiCyan": "#56b6c2",
-    "terminal.ansiGreen": "#98C379",
-    "terminal.ansiMagenta": "#c678dd",
-    "terminal.ansiRed": "#e06c75",
-    "terminal.ansiWhite": "#abb2bf",
-    "terminal.ansiYellow": "#d19a66",
-    "terminal.ansiBrightBlack": "#5c6370",
-    "terminal.ansiBrightBlue": "#61afef",
-    "terminal.ansiBrightCyan": "#56b6c2",
-    "terminal.ansiBrightGreen": "#98c379",
-    "terminal.ansiBrightMagenta": "#c678dd",
-    "terminal.ansiBrightRed": "#e06c75",
-    "terminal.ansiBrightWhite": "#ffffff",
-    "terminal.ansiBrightYellow": "#d19a66",
-    },
+      "editor.background": "#1e2127",
+      "terminal.foreground": "#abb2bf",
+      "terminal.ansiBlack": "#1e2127",
+      "terminal.ansiBlue": "#61afef",
+      "terminal.ansiCyan": "#56b6c2",
+      "terminal.ansiGreen": "#98C379",
+      "terminal.ansiMagenta": "#c678dd",
+      "terminal.ansiRed": "#e06c75",
+      "terminal.ansiWhite": "#abb2bf",
+      "terminal.ansiYellow": "#d19a66",
+      "terminal.ansiBrightBlack": "#5c6370",
+      "terminal.ansiBrightBlue": "#61afef",
+      "terminal.ansiBrightCyan": "#56b6c2",
+      "terminal.ansiBrightGreen": "#98c379",
+      "terminal.ansiBrightMagenta": "#c678dd",
+      "terminal.ansiBrightRed": "#e06c75",
+      "terminal.ansiBrightWhite": "#ffffff",
+      "terminal.ansiBrightYellow": "#d19a66"
+    }
   },
+  "gitlens.advanced.telemetry.enabled": false,
+  "gitlens.currentLine.enabled": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
