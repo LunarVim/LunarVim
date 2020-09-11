@@ -52,7 +52,7 @@ installpip() { \
 
 installpynvim() { \
   echo "Installing pynvim..."
-  pip3 install pynvim
+  pip3 install pynvim --user
 }
 
 installcocextensions() { \
