@@ -1,6 +1,6 @@
-# Nvim Mach 2
+# NVCode
 
-![Nvim Mach 2 pic](./utils/images/nvim.png)
+![NVCode pic](./utils/images/nvim.png)
 
 ## Install in one command
 
@@ -14,7 +14,7 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 
 ## Install Neovim
 
-- On Mac
+- Mac
 
   ```
   brew install neovim
@@ -62,15 +62,15 @@ export PATH=$HOME/.local/bin:$PATH
 
 ## Install clipboard support
 
-- On mac pbcopy should be builtin
+- On Mac pbcopy should be builtin
 
-- On Ubuntu
+- Ubuntu
 
   ```
   sudo apt install xsel
   ```
 
-- On Arch Linux
+- Arch
 
   ```
   sudo pacman -S xsel
@@ -132,11 +132,13 @@ Example:
 
 ## TabNine
 
-To use tabnine enter the following in a buffer:
+To use TabNine enter the following in a buffer:
 
 ```
 TabNine::config
 ```
+
+**NOTE** This extension can take up a ton of memory
 
 ## Vim Gists
 
@@ -146,9 +148,40 @@ To use **vim-gists** you will need to configure the following:
 git config --global github.user <username>
 ```
 
+## VSCodium & Neo Vim Extension
+
+[VSCodium](https://github.com/VSCodium/vscodium) contains build files to generate free release binaries of Microsoft's VS Code.
+
+You can install it on multiple platforms:
+
+- Mac
+
+  ```
+  brew cask install vscodium
+  ```
+
+- Arch
+
+  ```
+  yay -s vscodium-bin
+  ```
+
+- Snap
+
+  ```
+  snap install codium
+  ```
+
+[The Neo Vim Extension](https://github.com/asvetliakov/vscode-neovim) is available in the VSCode marketplace
+
+I recommend using this alongside the VSCode `which-key` extension
+
+Along with some of my config files you can find in `utils/vscode_config`
+
 ## TODO
 
 - Better Documentation
+- Improve VSCode which-key config
 
 ## CoC extensions to check out
 

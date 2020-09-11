@@ -8,42 +8,40 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
-  " jsx syntax support
-  Plug 'maxmellon/vim-jsx-pretty'
+    " Better Comments
+    Plug 'tpope/vim-commentary'
+    " Change dates fast
+    Plug 'tpope/vim-speeddating'
+    " Convert binary, hex, etc..
+    Plug 'glts/vim-radical'
+    " Repeat stuff
+    Plug 'tpope/vim-repeat'
+    " Text Navigation
+    Plug 'unblevable/quick-scope'
+    " Useful for React Commenting
+    Plug 'suy/vim-context-commentstring'
+    " highlight all matches under cursor
+    " Plug 'RRethy/vim-illuminate'
 
-  Plug 'suy/vim-context-commentstring'
-  " Change dates fast
-  Plug 'tpope/vim-speeddating'
-  " Convert binary, hex, etc..
-  Plug 'glts/vim-radical'
-  " Files
-  Plug 'tpope/vim-eunuch'
-  " Repeat stuff
-  Plug 'tpope/vim-repeat'
-  " Surround
-  Plug 'tpope/vim-surround'
-  " Better Comments
-  Plug 'tpope/vim-commentary'
-  " Have the file system follow you around
-  Plug 'airblade/vim-rooter'
-  " auto set indent settings
-  Plug 'tpope/vim-sleuth'
-  " Easy motion for VSCode
-  Plug 'asvetliakov/vim-easymotion'
-  " Find and replace
-  Plug 'ChristianChiarulli/far.vim'
-  " undo time travel
-  Plug 'mbbill/undotree'
+    " Easy motion for VSCode
+    Plug 'asvetliakov/vim-easymotion'
 
   if exists('g:vscode')
+
   else
-    " Text Navigation
+
+    " Sneak
     " Plug 'justinmk/vim-sneak'
-    " Plug 'unblevable/quick-scope'
-    " Add some color
-    Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'luochen1990/rainbow'
+    " Surround
+    Plug 'tpope/vim-surround'
+    " Files
+    Plug 'tpope/vim-eunuch'
+    " Have the file system follow you around
+    Plug 'airblade/vim-rooter'
+    " auto set indent settings
+    Plug 'tpope/vim-sleuth'
     " Better Syntax Support
+    " Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'sheerun/vim-polyglot'
     " Cool Icons
     Plug 'ryanoasis/vim-devicons'
@@ -52,12 +50,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Closetags
     Plug 'alvan/vim-closetag'
     " Themes
-    Plug 'christianchiarulli/onedark.vim'
+    Plug 'christianchiarulli/nvcode.vim'
+    " Plug 'ChristianChiarulli/nv-code'
+    " Plug 'kyazdani42/blue-moon'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
     Plug 'vim-airline/vim-airline'
-    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+    Plug 'kevinhwang91/rnvimr'
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -66,6 +66,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'junegunn/gv.vim'
+    Plug 'rhysd/git-messenger.vim'
     " Terminal
     Plug 'voldikss/vim-floaterm'
     " Start Screen
@@ -85,8 +86,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'puremourning/vimspector'
     " Better tabline
     Plug 'mg979/vim-xtabline'
-    " highlight all matches under cursor
-    Plug 'RRethy/vim-illuminate'
+    " undo time travel
+    Plug 'mbbill/undotree'
+    " Find and replace
+    Plug 'ChristianChiarulli/far.vim'
     " Plug 'brooth/far.vim'
     " Auto change html tags
     Plug 'AndrewRadev/tagalong.vim'
@@ -104,46 +107,57 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Easily Create Gists
     Plug 'mattn/vim-gist'
     Plug 'mattn/webapi-vim'
+    " Colorizer
+    Plug 'norcalli/nvim-colorizer.lua'
+    " Rainbow brackets
+    " Plug 'luochen1990/rainbow'
     " Async Linting Engine
     " TODO make sure to add ale config before plugin
     " Plug 'dense-analysis/ale'
     " Better Whitespace
     Plug 'ntpeters/vim-better-whitespace'
     " Multiple Cursors
-    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    " TODO add this back in change from C-n
+    " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'moll/vim-bbye'
+    " Plug 'yuezk/vim-js'
+    " Plug 'maxmellon/vim-jsx-pretty'
+    " Plug 'jelera/vim-javascript-syntax'
+    " Plugin Graveyard
+
+    " jsx syntax support
+    " Typescript syntax
+    " Plug 'HerringtonDarkholme/yats.vim'
+    " Multiple Cursors
+    " Plug 'terryma/vim-multiple-cursors'
+    " Plug 'kaicataldo/material.vim'
+    " Plug 'NLKNguyen/papercolor-theme'
+    " Plug 'tomasiser/vim-code-dark'
+    " Vim Wiki
+    " Plug 'https://github.com/vimwiki/vimwiki.git'
+    " Better Comments
+    " Plug 'jbgutierrez/vim-better-comments'
+    " Echo doc
+    " Plug 'Shougo/echodoc.vim'
+    " Plug 'hardcoreplayers/spaceline.vim'
+    " Plug 'vim-airline/vim-airline-themes'
+    " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    " Plug 'arcticicestudio/nord-vim'
+    " Ranger
+    " Plug 'francoiscabrol/ranger.vim'
+    " Plug 'rbgrouleff/bclose.vim'
+    " Making stuff
+    " Plug 'neomake/neomake'
+    " Plug 'mhinz/vim-signify'
+    " Plug 'easymotion/vim-easymotion'
+    " Plug 'preservim/nerdcommenter'
+    " Plug 'brooth/far.vim'
+    " Plug 'atishay/far.vim'
+
+    " MY PLUGINS
     " ansible vault
     Plug 'arouene/vim-ansible-vault'
   endif
-
-  " Plugin Graveyard
-  " jsx syntax support
-  " Plug 'maxmellon/vim-jsx-pretty'
-  " Typescript syntax
-  " Plug 'HerringtonDarkholme/yats.vim'
-  " Multiple Cursors
-  " Plug 'terryma/vim-multiple-cursors'
-  " Plug 'kaicataldo/material.vim'
-  " Plug 'NLKNguyen/papercolor-theme'
-  " Plug 'tomasiser/vim-code-dark'
-  " Vim Wiki
-  " Plug 'https://github.com/vimwiki/vimwiki.git'
-  " Better Comments
-  " Plug 'jbgutierrez/vim-better-comments'
-  " Echo doc
-  " Plug 'Shougo/echodoc.vim'
-  " Plug 'hardcoreplayers/spaceline.vim'
-  " Plug 'vim-airline/vim-airline-themes'
-  " Ranger
-  " Plug 'francoiscabrol/ranger.vim'
-  " Plug 'rbgrouleff/bclose.vim'
-  " Making stuff
-  " Plug 'neomake/neomake'
-  " Plug 'mhinz/vim-signify'
-  " Plug 'easymotion/vim-easymotion'
-  " Plug 'preservim/nerdcommenter'
-  " Plug 'brooth/far.vim'
-  " Plug 'atishay/far.vim'
 
 call plug#end()
 
