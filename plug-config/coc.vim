@@ -37,11 +37,9 @@
     \ 'coc-docker',
     \ 'coc-styled-components',
     \ 'coc-github',
-    " \ 'coc-tabnine',
-    " \ 'coc-highlight',
     \ ]
-    " \ 'coc-tabnine',
     " \ 'coc-highlight',
+    " \ 'coc-tabnine',
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
