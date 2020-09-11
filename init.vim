@@ -6,6 +6,9 @@
 
 
 " General Settings
+if !exists('g:vscode')
+  source $HOME/.config/nvim/plug-config/polyglot.vim
+endif
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/functions.vim
@@ -43,7 +46,6 @@ else
   source $HOME/.config/nvim/plug-config/floaterm.vim
   " source $HOME/.config/nvim/plug-config/vista.vim
   source $HOME/.config/nvim/plug-config/xtabline.vim
-  source $HOME/.config/nvim/plug-config/polyglot.vim
   source $HOME/.config/nvim/plug-config/far.vim
   source $HOME/.config/nvim/plug-config/tagalong.vim
   " source $HOME/.config/nvim/plug-config/illuminate.vim
