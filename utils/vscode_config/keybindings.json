@@ -67,11 +67,6 @@
   },
   {
     "key": "shift+tab",
-    "command": "selectPrevSuggestion",
-    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
-  },
-  {
-    "key": "shift+tab",
     "command": "workbench.action.quickOpenNavigatePrevious",
     "when": "inQuickOpen"
   },
