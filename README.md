@@ -18,6 +18,8 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 
   ```
   brew install neovim
+
+  brew install --HEAD neovim # Latest
   ```
 
 - Ubuntu
@@ -30,6 +32,8 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 
   ```
   sudo pacman -S neovim
+
+  yay -S neovim-git # Latest
   ```
 
 ## Clone this repo into your config
