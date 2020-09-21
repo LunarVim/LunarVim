@@ -29,7 +29,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   if exists('g:vscode')
 
   else
-
+    Plug 'machakann/vim-highlightedyank'
     " Sneak
     " Plug 'justinmk/vim-sneak'
     " Surround

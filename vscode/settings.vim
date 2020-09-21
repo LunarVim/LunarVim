@@ -27,6 +27,48 @@ function! s:manageEditorSize(...)
     endfor
 endfunction
 
+function! s:vscodeCommentary(...) abort
+    if !a:0
+        let &operatorfunc = matchstr(expand('<sfile>'), '[^. ]*$')
+        return 'g@'
+    elseif a:0 > 1
+        let [line1, line2] = [a:1, a:2]
+    else
+        let [line1, line2] = [line("'["), line("']")]
+    endif
+
+    call VSCodeCallRange("editor.action.commentLine", line1, line2, 0)
+endfunction
+
+function! s:openVSCodeCommandsInVisualMode()
+    normal! gv
+    let visualmode = visualmode()
+    if visualmode == "V"
+        let startLine = line("v")
+        let endLine = line(".")
+        call VSCodeNotifyRange("workbench.action.showCommands", startLine, endLine, 1)
+    else
+        let startPos = getpos("v")
+        let endPos = getpos(".")
+        call VSCodeNotifyRangePos("workbench.action.showCommands", startPos[1], endPos[1], startPos[2], endPos[2], 1)
+    endif
+endfunction
+
+function! s:openWhichKeyInVisualMode()
+    normal! gv
+    let visualmode = visualmode()
+    if visualmode == "V"
+        let startLine = line("v")
+        let endLine = line(".")
+        call VSCodeNotifyRange("whichkey.show", startLine, endLine, 1)
+    else
+        let startPos = getpos("v")
+        let endPos = getpos(".")
+        call VSCodeNotifyRangePos("whichkey.show", startPos[1], endPos[1], startPos[2], endPos[2], 1)
+    endif
+endfunction
+
+
 command! -complete=file -nargs=? Split call <SID>split('h', <q-args>)
 command! -complete=file -nargs=? Vsplit call <SID>split('v', <q-args>)
 command! -complete=file -nargs=? New call <SID>split('h', '__vscode_new__')
@@ -66,10 +108,18 @@ nnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
 xnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
 
 " Bind C-/ to vscode commentary since calling from vscode produces double comments due to multiple cursors
-xnoremap <silent> <C-/> :call Comment()<CR>
-nnoremap <silent> <C-/> :call Comment()<CR>
+xnoremap <expr> <C-/> <SID>vscodeCommentary()
+nnoremap <expr> <C-/> <SID>vscodeCommentary() . '_'
 
 nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorWidths')<CR>
 
 nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 xnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
+
+xnoremap <silent> <C-P> :<C-u>call <SID>openVSCodeCommandsInVisualMode()<CR>
+xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
+
+xmap gc  <Plug>VSCodeCommentary
+nmap gc  <Plug>VSCodeCommentary
+omap gc  <Plug>VSCodeCommentary
+nmap gcc <Plug>VSCodeCommentaryLine
