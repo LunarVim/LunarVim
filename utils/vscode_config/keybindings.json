@@ -1,13 +1,5 @@
 [
   {
-    "key": "shift+ctrl+e",
-    "command": "actions.findWithSelection"
-  },
-  {
-    "key": "ctrl+e",
-    "command": "-actions.findWithSelection"
-  },
-  {
     "key": "ctrl+e",
     "command": "workbench.view.explorer"
   },
@@ -59,11 +51,6 @@
     "key": "tab",
     "command": "workbench.action.quickOpenNavigateNext",
     "when": "inQuickOpen"
-  },
-  {
-    "key": "shit+tab",
-    "command": "selectPrevSuggestion",
-    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
   },
   {
     "key": "shift+tab",
