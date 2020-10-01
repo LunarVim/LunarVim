@@ -1,4 +1,5 @@
 " TODO there is a more contemporary version of this file
+" TODO Also some of it is redundant
 "VSCode
 function! s:split(...) abort
     let direction = a:1
@@ -75,28 +76,6 @@ command! -complete=file -nargs=? New call <SID>split('h', '__vscode_new__')
 command! -complete=file -nargs=? Vnew call <SID>split('v', '__vscode_new__')
 command! -bang Only if <q-bang> == '!' | call <SID>closeOtherEditors() | else | call VSCodeNotify('workbench.action.joinAllGroups') | endif
 
-nnoremap <silent> <C-w>s :call <SID>split('h')<CR>
-xnoremap <silent> <C-w>s :call <SID>split('h')<CR>
-
-nnoremap <silent> <C-w>v :call <SID>split('v')<CR>
-xnoremap <silent> <C-w>v :call <SID>split('v')<CR>
-
-nnoremap <silent> <C-w>n :call <SID>splitNew('h', '__vscode_new__')<CR>
-xnoremap <silent> <C-w>n :call <SID>splitNew('h', '__vscode_new__')<CR>
-
-
-nnoremap <silent> <C-w>= :<C-u>call VSCodeNotify('workbench.action.evenEditorWidths')<CR>
-xnoremap <silent> <C-w>= :<C-u>call VSCodeNotify('workbench.action.evenEditorWidths')<CR>
-
-nnoremap <silent> <C-w>> :<C-u>call <SID>manageEditorSize(v:count, 'increase')<CR>
-xnoremap <silent> <C-w>> :<C-u>call <SID>manageEditorSize(v:count, 'increase')<CR>
-nnoremap <silent> <C-w>+ :<C-u>call <SID>manageEditorSize(v:count, 'increase')<CR>
-xnoremap <silent> <C-w>+ :<C-u>call <SID>manageEditorSize(v:count, 'increase')<CR>
-nnoremap <silent> <C-w>< :<C-u>call <SID>manageEditorSize(v:count, 'decrease')<CR>
-xnoremap <silent> <C-w>< :<C-u>call <SID>manageEditorSize(v:count, 'decrease')<CR>
-nnoremap <silent> <C-w>- :<C-u>call <SID>manageEditorSize(v:count, 'decrease')<CR>
-xnoremap <silent> <C-w>- :<C-u>call <SID>manageEditorSize(v:count, 'decrease')<CR>
-
 " Better Navigation
 nnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
 xnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
@@ -107,6 +86,8 @@ xnoremap <silent> <C-h> :call VSCodeNotify('workbench.action.navigateLeft')<CR>
 nnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
 xnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
 
+nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+
 " Bind C-/ to vscode commentary since calling from vscode produces double comments due to multiple cursors
 xnoremap <expr> <C-/> <SID>vscodeCommentary()
 nnoremap <expr> <C-/> <SID>vscodeCommentary() . '_'
@@ -114,10 +95,9 @@ nnoremap <expr> <C-/> <SID>vscodeCommentary() . '_'
 nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorWidths')<CR>
 
 nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
-xnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
+xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
 
 xnoremap <silent> <C-P> :<C-u>call <SID>openVSCodeCommandsInVisualMode()<CR>
-xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
 
 xmap gc  <Plug>VSCodeCommentary
 nmap gc  <Plug>VSCodeCommentary
