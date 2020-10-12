@@ -193,4 +193,4 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 call coc#util#install()
-call coc#util#install_extensions(g:coc_global_extensions)
+call coc#util#install_extensions(coc_global_extensions)
