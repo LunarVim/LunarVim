@@ -244,7 +244,7 @@ let g:which_key_map.t = {
       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
-" T is for terminal
+" T is for tab
 let g:which_key_map.T = {
       \ 'name' : '+tabline' ,
       \ 'b' : [':XTabListBuffers'         , 'list buffers'],
