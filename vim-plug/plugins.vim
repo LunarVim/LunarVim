@@ -25,7 +25,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   if exists('g:vscode')
     " Easy motion for VSCode
-    Plug 'asvetliakov/vim-easymotion'
+    " Plug 'asvetliakov/vim-easymotion'
+    Plug 'ChristianChiarulli/vscode-easymotion'
     Plug 'machakann/vim-highlightedyank'
   else
 
@@ -34,7 +35,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'mfussenegger/nvim-dap'
     " Plug 'nvim-dap-virtual-text'
     " Sneak
-    Plug 'justinmk/vim-sneak'
+    " Plug 'justinmk/vim-sneak'
+    " Easymotion
+    Plug 'easymotion/vim-easymotion'
     " Surround
     Plug 'tpope/vim-surround'
     " Files
@@ -158,7 +161,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Making stuff
     " Plug 'neomake/neomake'
     " Plug 'mhinz/vim-signify'
-    " Plug 'easymotion/vim-easymotion'
     " Plug 'preservim/nerdcommenter'
     " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
