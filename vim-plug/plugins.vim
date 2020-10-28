@@ -40,8 +40,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " auto set indent settings
     Plug 'tpope/vim-sleuth'
     " Better Syntax Support
-    " Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'sheerun/vim-polyglot'
+    " Treesitter
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'nvim-treesitter/playground'
+    Plug 'romgrk/nvim-treesitter-context'
+
     " Cool Icons
     Plug 'ryanoasis/vim-devicons'
     " Auto pairs for '(' '[' '{'
