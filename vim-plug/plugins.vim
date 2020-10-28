@@ -47,7 +47,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     Plug 'nvim-treesitter/playground'
     Plug 'romgrk/nvim-treesitter-context'
-
     " Cool Icons
     Plug 'ryanoasis/vim-devicons'
     " Auto pairs for '(' '[' '{'
@@ -56,8 +55,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " Themes
     Plug 'christianchiarulli/nvcode.vim'
-    " Plug 'ChristianChiarulli/nv-code'
-    " Plug 'kyazdani42/blue-moon'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
@@ -87,10 +84,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/emmet-vim'
     " Interactive code
     Plug 'metakirby5/codi.vim'
-    " Debugging
-    " Plug 'puremourning/vimspector'
     " Better tabline
-    Plug 'mg979/vim-xtabline'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'romgrk/lib.kom'
+    Plug 'romgrk/barbar.nvim'
     " undo time travel
     Plug 'mbbill/undotree'
     " Find and replace
@@ -138,6 +135,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'kaicataldo/material.vim'
     " Plug 'NLKNguyen/papercolor-theme'
     " Plug 'tomasiser/vim-code-dark'
+    " Plug 'mg979/vim-xtabline'
     " Vim Wiki
     " Plug 'https://github.com/vimwiki/vimwiki.git'
     " Better Comments
@@ -158,6 +156,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'preservim/nerdcommenter'
     " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
+    " Debugging
+    " Plug 'puremourning/vimspector'
   endif
 
 call plug#end()

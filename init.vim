@@ -47,7 +47,8 @@ else
   source $HOME/.config/nvim/plug-config/closetags.vim
   source $HOME/.config/nvim/plug-config/floaterm.vim
   " source $HOME/.config/nvim/plug-config/vista.vim
-  source $HOME/.config/nvim/plug-config/xtabline.vim
+  " source $HOME/.config/nvim/plug-config/xtabline.vim
+  source $HOME/.config/nvim/plug-config/barbar.vim
   source $HOME/.config/nvim/plug-config/far.vim
   source $HOME/.config/nvim/plug-config/tagalong.vim
   " source $HOME/.config/nvim/plug-config/illuminate.vim
@@ -68,3 +69,6 @@ endif
 " Better nav for omnicomplete TODO figure out why this is being overridden
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
+
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()

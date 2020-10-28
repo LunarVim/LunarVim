@@ -14,3 +14,22 @@ require "nvim-treesitter.configs".setup {
     persist_queries = false -- Whether the query persists across vim sessions
   }
 }
+
+require'nvim-treesitter.configs'.setup {
+  refactor = {
+    highlight_current_scope = { enable = false },
+  },
+}
+
+require'nvim-treesitter.configs'.setup {
+  refactor = {
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "grr",
+      },
+    },
+  },
+}
+
+
