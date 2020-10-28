@@ -36,6 +36,7 @@ else
   source $HOME/.config/nvim/plug-config/sneak.vim
   source $HOME/.config/nvim/plug-config/codi.vim
   source $HOME/.config/nvim/plug-config/vim-wiki.vim
+  luafile $HOME/.config/nvim/lua/web-devicons-config.lua
   luafile $HOME/.config/nvim/lua/treesitter.lua
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/goyo.vim
@@ -69,6 +70,4 @@ endif
 " Better nav for omnicomplete TODO figure out why this is being overridden
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
-
-hi VimDevIcon guifg=#569cd6 ctermfg=249 guibg=#1e1e1e ctermbg=234 gui=NONE cterm=NONE
 
