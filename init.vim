@@ -70,5 +70,5 @@ endif
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
+hi VimDevIcon guifg=#569cd6 ctermfg=249 guibg=#1e1e1e ctermbg=234 gui=NONE cterm=NONE
+

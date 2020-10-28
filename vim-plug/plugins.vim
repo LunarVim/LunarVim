@@ -29,6 +29,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'machakann/vim-highlightedyank'
   else
 
+
+    " Debug
+    " Plug 'mfussenegger/nvim-dap'
+    " Plug 'nvim-dap-virtual-text'
     " Sneak
     Plug 'justinmk/vim-sneak'
     " Surround
