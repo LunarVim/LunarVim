@@ -13,7 +13,6 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/functions.vim
 source $HOME/.config/nvim/keys/mappings.vim
-source $HOME/.config/nvim/plug-config/quickscope.vim
 
 if exists('g:vscode')
   " VS Code extension
@@ -60,6 +59,7 @@ else
   " source $HOME/.config/nvim/plug-config/vimspector.vim " Uncomment if you want to use Vimspector
   " source $HOME/.config/nvim/plug-config/ale.vim
 endif
+source $HOME/.config/nvim/plug-config/quickscope.vim
 
 " Add paths to node and python here
 if !empty(glob("~/.config/nvim/paths.vim"))

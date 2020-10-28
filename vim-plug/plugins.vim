@@ -48,6 +48,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-treesitter/playground'
     Plug 'romgrk/nvim-treesitter-context'
     " Cool Icons
+    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
@@ -85,7 +86,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Interactive code
     Plug 'metakirby5/codi.vim'
     " Better tabline
-    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'romgrk/lib.kom'
     Plug 'romgrk/barbar.nvim'
     " undo time travel
