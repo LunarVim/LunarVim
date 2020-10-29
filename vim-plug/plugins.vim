@@ -68,7 +68,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
-    Plug 'vim-airline/vim-airline'
+    Plug 'glepnir/galaxyline.nvim'
+    " Plug 'vim-airline/vim-airline'
     Plug 'kevinhwang91/rnvimr'
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

@@ -24,7 +24,7 @@ else
   " Themes
   source $HOME/.config/nvim/themes/syntax.vim
   source $HOME/.config/nvim/themes/nvcode.vim
-  source $HOME/.config/nvim/themes/airline.vim
+  " source $HOME/.config/nvim/themes/airline.vim
 
   " Plugin Configuration
   source $HOME/.config/nvim/keys/which-key.vim
@@ -34,7 +34,7 @@ else
   source $HOME/.config/nvim/plug-config/fzf.vim
   source $HOME/.config/nvim/plug-config/codi.vim
   source $HOME/.config/nvim/plug-config/vim-wiki.vim
-  luafile $HOME/.config/nvim/lua/web-devicons-config.lua
+  luafile $HOME/.config/nvim/lua/galaxy-line.lua
   luafile $HOME/.config/nvim/lua/treesitter.lua
   source $HOME/.config/nvim/plug-config/coc.vim
   source $HOME/.config/nvim/plug-config/easymotion.vim
