@@ -48,6 +48,21 @@ gls.left[2] = {
     highlight = {colors.grey,colors.purple,'bold'},
   },
 }
+-- gls.left[2] = {
+--   ViMode = {
+--     provider = function()
+--       -- auto change color according the vim mode
+--       local mode_color = {n = colors.magenta, i = colors.green,v=colors.blue,[''] = colors.blue,V=colors.blue,
+--                           c = colors.red,no = colors.magenta,s = colors.orange,S=colors.orange,
+--                           [''] = colors.orange,ic = colors.yellow,R = colors.purple,Rv = colors.purple,
+--                           cv = colors.red,ce=colors.red, r = colors.cyan,rm = colors.cyan, ['r?'] = colors.cyan,
+--                           ['!']  = colors.red,t = colors.red}
+--       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
+--       return '  '
+--     end,
+--     highlight = {colors.red,colors.line_bg,'bold'},
+--   },
+-- }
 -- gls.left[3] ={
 --   FileIcon = {
 --     separator = ' ',
