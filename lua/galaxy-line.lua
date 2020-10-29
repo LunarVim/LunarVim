@@ -180,6 +180,14 @@ gls.right[4] = {
 --   }
 -- }
 
+gls.short_line_left[1] = {
+  LeftEnd = {
+    provider = function() return ' ' end,
+    separator = ' ',
+    separator_highlight = {colors.purple,colors.bg},
+    highlight = {colors.purple,colors.bg}
+  }
+}
 
 -- gls.short_line_right[1] = {
 --   BufferIcon = {
