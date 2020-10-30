@@ -2,7 +2,6 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
   },
 }
 
@@ -15,21 +14,20 @@ require "nvim-treesitter.configs".setup {
   }
 }
 
-require'nvim-treesitter.configs'.setup {
-  refactor = {
-    highlight_current_scope = { enable = false },
-  },
-}
+-- require'nvim-treesitter.configs'.setup {
+--   refactor = {
+--     highlight_current_scope = { enable = false },
+--   },
+-- }
 
-require'nvim-treesitter.configs'.setup {
-  refactor = {
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        smart_rename = "grr",
-      },
-    },
-  },
-}
-
+-- require'nvim-treesitter.configs'.setup {
+--   refactor = {
+--     smart_rename = {
+--       enable = true,
+--       keymaps = {
+--         smart_rename = "grr",
+--       },
+--     },
+--   },
+-- }
 

@@ -31,17 +31,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   else
 
 
-    " Debug
-    " Plug 'mfussenegger/nvim-dap'
-    " Plug 'nvim-dap-virtual-text'
-    " Sneak
-    " Plug 'justinmk/vim-sneak'
     " Easymotion
     Plug 'easymotion/vim-easymotion'
     " Surround
     Plug 'tpope/vim-surround'
-    " Files
-    Plug 'tpope/vim-eunuch'
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
     " auto set indent settings
@@ -50,12 +43,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'sheerun/vim-polyglot'
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'nvim-treesitter/nvim-treesitter-refactor'
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     Plug 'nvim-treesitter/playground'
-    Plug 'romgrk/nvim-treesitter-context'
-    " Minimap
-    " Plug 'wfxr/minimap.vim'
     " Cool Icons
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
@@ -96,20 +84,18 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Interactive code
     Plug 'metakirby5/codi.vim'
     " Better tabline
-    Plug 'romgrk/lib.kom'
     Plug 'romgrk/barbar.nvim'
     " undo time travel
     Plug 'mbbill/undotree'
     " Find and replace
     Plug 'ChristianChiarulli/far.vim'
-    " Plug 'brooth/far.vim'
     " Auto change html tags
     Plug 'AndrewRadev/tagalong.vim'
     " live server
     Plug 'turbio/bracey.vim'
     " Smooth scroll
     Plug 'psliwka/vim-smoothie'
-    " async tasks
+    " " async tasks
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     " Swap windows
@@ -121,22 +107,33 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/webapi-vim'
     " Colorizer
     Plug 'norcalli/nvim-colorizer.lua'
+    " Intuitive buffer closing
+    Plug 'moll/vim-bbye'
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine
     " TODO make sure to add ale config before plugin
     " Plug 'dense-analysis/ale'
     " Better Whitespace
-    Plug 'ntpeters/vim-better-whitespace'
+    " Plug 'ntpeters/vim-better-whitespace'
     " Multiple Cursors
     " TODO add this back in change from C-n
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-    Plug 'moll/vim-bbye'
     " Plug 'yuezk/vim-js'
     " Plug 'maxmellon/vim-jsx-pretty'
     " Plug 'jelera/vim-javascript-syntax'
     " Plugin Graveyard
 
+    " Debug
+    " Plug 'mfussenegger/nvim-dap'
+    " Plug 'nvim-dap-virtual-text'
+    " Sneak
+    " Plug 'justinmk/vim-sneak'
+    " Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    " Plug 'romgrk/nvim-treesitter-context'
+    " Minimap
+    " Plug 'wfxr/minimap.vim'
     " jsx syntax support
     " Typescript syntax
     " Plug 'HerringtonDarkholme/yats.vim'
@@ -146,6 +143,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'NLKNguyen/papercolor-theme'
     " Plug 'tomasiser/vim-code-dark'
     " Plug 'mg979/vim-xtabline'
+    " Files
+    " Plug 'tpope/vim-eunuch'
     " Vim Wiki
     " Plug 'https://github.com/vimwiki/vimwiki.git'
     " Better Comments
@@ -165,6 +164,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'preservim/nerdcommenter'
     " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
+    " Plug 'romgrk/lib.kom'
+    " Plug 'brooth/far.vim'
     " Debugging
     " Plug 'puremourning/vimspector'
   endif

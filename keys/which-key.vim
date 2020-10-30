@@ -40,6 +40,7 @@ let g:which_key_map['n'] = [ ':let @/ = ""'                       , 'no highligh
 let g:which_key_map['p'] = [ ':Files'                             , 'search files' ]
 let g:which_key_map['q'] = [ 'q'                                  , 'quit' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                      , 'ranger' ]
+let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'    , 'treesitter highlight' ]
 let g:which_key_map['u'] = [ ':UndotreeToggle'                    , 'undo tree']
 let g:which_key_map['v'] = [ '<C-W>v'                             , 'split right']
 let g:which_key_map['W'] = [ 'w'                                  , 'write' ]
@@ -255,23 +256,23 @@ let g:which_key_map.t = {
       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
-" T is for terminal
-let g:which_key_map.T = {
-      \ 'name' : '+tabline' ,
-      \ 'b' : [':XTabListBuffers'         , 'list buffers'],
-      \ 'd' : [':XTabCloseBuffer'         , 'close buffer'],
-      \ 'D' : [':XTabDeleteTab'           , 'close tab'],
-      \ 'h' : [':XTabHideBuffer'          , 'hide buffer'],
-      \ 'i' : [':XTabInfo'                , 'info'],
-      \ 'l' : [':XTabLock'                , 'lock tab'],
-      \ 'm' : [':XTabMode'                , 'toggle mode'],
-      \ 'n' : [':tabNext'                 , 'next tab'],
-      \ 'N' : [':XTabMoveBufferNext'      , 'buffer->'],
-      \ 't' : [':tabnew'                  , 'new tab'],
-      \ 'p' : [':tabprevious'             , 'prev tab'],
-      \ 'P' : [':XTabMoveBufferPrev'      , '<-buffer'],
-      \ 'x' : [':XTabPinBuffer'           , 'pin buffer'],
-      \ }
+" " T is for terminal
+" let g:which_key_map.T = {
+"       \ 'name' : '+tabline' ,
+"       \ 'b' : [':XTabListBuffers'         , 'list buffers'],
+"       \ 'd' : [':XTabCloseBuffer'         , 'close buffer'],
+"       \ 'D' : [':XTabDeleteTab'           , 'close tab'],
+"       \ 'h' : [':XTabHideBuffer'          , 'hide buffer'],
+"       \ 'i' : [':XTabInfo'                , 'info'],
+"       \ 'l' : [':XTabLock'                , 'lock tab'],
+"       \ 'm' : [':XTabMode'                , 'toggle mode'],
+"       \ 'n' : [':tabNext'                 , 'next tab'],
+"       \ 'N' : [':XTabMoveBufferNext'      , 'buffer->'],
+"       \ 't' : [':tabnew'                  , 'new tab'],
+"       \ 'p' : [':tabprevious'             , 'prev tab'],
+"       \ 'P' : [':XTabMoveBufferPrev'      , '<-buffer'],
+"       \ 'x' : [':XTabPinBuffer'           , 'pin buffer'],
+"       \ }
 
 " w is for wiki
 let g:which_key_map.w = {
