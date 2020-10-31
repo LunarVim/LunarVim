@@ -152,6 +152,13 @@ gls.left[11] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
+    highlight = {colors.yellow,colors.bg},
+  }
+}
+gls.left[12] = {
+  DiagnosticHint = {
+    provider = 'DiagnosticHint',
+    icon = '   ',
     highlight = {colors.blue,colors.bg},
   }
 }
