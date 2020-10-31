@@ -113,6 +113,8 @@ gls.left[3] = {
 gls.left[4] = {
   GitBranch = {
     provider = 'GitBranch',
+    separator = ' ',
+    separator_highlight = {colors.purple,colors.bg},
     condition = buffer_not_empty,
     highlight = {colors.grey,colors.bg},
   }
@@ -130,7 +132,9 @@ gls.left[5] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = checkwidth,
-    icon = '   ',
+    -- separator = ' ',
+    -- separator_highlight = {colors.purple,colors.bg},
+    icon = '  ',
     highlight = {colors.green,colors.bg},
   }
 }
@@ -138,6 +142,8 @@ gls.left[6] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = checkwidth,
+    -- separator = ' ',
+    -- separator_highlight = {colors.purple,colors.bg},
     icon = '  ',
     highlight = {colors.blue,colors.bg},
   }
@@ -146,6 +152,8 @@ gls.left[7] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
+    -- separator = ' ',
+    -- separator_highlight = {colors.purple,colors.bg},
     icon = '  ',
     highlight = {colors.red,colors.bg},
   }
