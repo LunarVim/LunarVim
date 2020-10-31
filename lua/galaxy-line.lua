@@ -81,14 +81,14 @@ gls.left[2] = {
 --   }
 -- }
 
-gls.left[5] = {
+gls.left[3] = {
   GitIcon = {
     provider = function() return '  ' end,
     condition = buffer_not_empty,
     highlight = {colors.orange,colors.bg},
   }
 }
-gls.left[6] = {
+gls.left[4] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = buffer_not_empty,
@@ -104,31 +104,31 @@ local checkwidth = function()
   return false
 end
 
--- gls.left[7] = {
---   DiffAdd = {
---     provider = 'DiffAdd',
---     condition = checkwidth,
---     icon = ' ',
---     highlight = {colors.green,colors.purple},
---   }
--- }
--- gls.left[8] = {
---   DiffModified = {
---     provider = 'DiffModified',
---     condition = checkwidth,
---     icon = ' ',
---     highlight = {colors.orange,colors.purple},
---   }
--- }
--- gls.left[9] = {
---   DiffRemove = {
---     provider = 'DiffRemove',
---     condition = checkwidth,
---     icon = ' ',
---     highlight = {colors.red,colors.purple},
---   }
--- }
-gls.left[10] = {
+gls.left[5] = {
+  DiffAdd = {
+    provider = 'DiffAdd',
+    condition = checkwidth,
+    icon = '  ',
+    highlight = {colors.green,colors.bg},
+  }
+}
+gls.left[6] = {
+  DiffModified = {
+    provider = 'DiffModified',
+    condition = checkwidth,
+    icon = '  ',
+    highlight = {colors.blue,colors.bg},
+  }
+}
+gls.left[7] = {
+  DiffRemove = {
+    provider = 'DiffRemove',
+    condition = checkwidth,
+    icon = '  ',
+    highlight = {colors.red,colors.bg},
+  }
+}
+gls.left[8] = {
   LeftEnd = {
     provider = function() return ' ' end,
     separator = ' ',
@@ -136,19 +136,19 @@ gls.left[10] = {
     highlight = {colors.purple,colors.bg}
   }
 }
-gls.left[11] = {
+gls.left[9] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {colors.red,colors.bg}
   }
 }
-gls.left[12] = {
+gls.left[10] = {
   Space = {
     provider = function () return '' end
   }
 }
-gls.left[13] = {
+gls.left[11] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
