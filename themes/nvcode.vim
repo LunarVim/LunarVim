@@ -5,6 +5,7 @@ syntax on
 " colorscheme nord
 colorscheme nvcode
 " colorscheme onedark
+" colorscheme TSnazzy
 
 
 " checks if your terminal has 24-bit color support

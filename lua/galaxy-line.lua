@@ -108,7 +108,7 @@ gls.left[5] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = checkwidth,
-    icon = '  ',
+    icon = '   ',
     highlight = {colors.green,colors.bg},
   }
 }
