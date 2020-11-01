@@ -6,6 +6,7 @@ syntax on
 colorscheme nvcode
 " colorscheme onedark
 " colorscheme TSnazzy
+" colorscheme aurora
 
 
 " checks if your terminal has 24-bit color support

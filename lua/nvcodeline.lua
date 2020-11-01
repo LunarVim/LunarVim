@@ -192,6 +192,13 @@ gls.left[12] = {
     highlight = {colors.blue,colors.bg},
   }
 }
+gls.left[13] = {
+  DiagnosticInfo = {
+    provider = 'DiagnosticInfo',
+    icon = '   ',
+    highlight = {colors.orange,colors.bg},
+  }
+}
 gls.right[1]= {
   FileFormat = {
     provider = 'FileFormat',
