@@ -30,7 +30,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'machakann/vim-highlightedyank'
   else
 
-
     " Easymotion
     Plug 'easymotion/vim-easymotion'
     " Surround
@@ -57,7 +56,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
     Plug 'glepnir/galaxyline.nvim'
-    " Plug 'vim-airline/vim-airline'
     Plug 'kevinhwang91/rnvimr'
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -140,7 +138,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Multiple Cursors
     " Plug 'terryma/vim-multiple-cursors'
     " Plug 'kaicataldo/material.vim'
-    " Plug 'NLKNguyen/papercolor-theme'
     " Plug 'tomasiser/vim-code-dark'
     " Plug 'mg979/vim-xtabline'
     " Files
@@ -152,9 +149,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Echo doc
     " Plug 'Shougo/echodoc.vim'
     " Plug 'hardcoreplayers/spaceline.vim'
+    " Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
-    " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-    " Plug 'arcticicestudio/nord-vim'
     " Ranger
     " Plug 'francoiscabrol/ranger.vim'
     " Plug 'rbgrouleff/bclose.vim'
