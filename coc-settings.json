@@ -58,6 +58,12 @@
     "javascript": "javascriptreact"
   },
 
+  // CSS (disable since I'm also using stylelintplus)
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "wxss.validate": false,
+
   // explorer
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
@@ -68,6 +74,7 @@
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   },
+  "bookmark.sign": "",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"]
