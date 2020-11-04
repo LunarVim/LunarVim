@@ -19,7 +19,7 @@
   // codelens
   "codeLens.enable": true,
   "java.referencesCodeLens.enabled": true,
-  "java.jdt.ls.vmargs": "-javaagent:/$HOME/.config/utils/java/lombok.jar -Xbootclasspath/a:/$HOME/.config/utils/java/lombok.jar",
+  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar -Xbootclasspath/a:/usr/local/share/lombok/lombok.jar",
 
   // list
   "list.indicator": ">",
@@ -67,6 +67,7 @@
 
   // explorer
   "explorer.width": 30,
+  "explorer.file.root.template": "[icon] [git] [hidden & 1][root]",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
@@ -75,6 +76,7 @@
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   },
+
   "bookmark.sign": "",
 
   //coc-emoji
