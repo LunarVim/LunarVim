@@ -19,6 +19,7 @@
   // codelens
   "codeLens.enable": true,
   "java.referencesCodeLens.enabled": true,
+  "java.jdt.ls.vmargs": "-javaagent:/$HOME/.config/utils/java/lombok.jar -Xbootclasspath/a:/$HOME/.config/utils/java/lombok.jar",
 
   // list
   "list.indicator": ">",

@@ -9,4 +9,5 @@ paths.vim
 session
 wiki/
 pack/
+utils/java/*
 
