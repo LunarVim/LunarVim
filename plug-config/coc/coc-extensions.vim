@@ -10,6 +10,7 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-tsserver',
   \ 'coc-floaterm',
+  \ 'coc-fzf-preview',
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-cssmodules',
