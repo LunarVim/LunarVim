@@ -76,6 +76,20 @@ else
   nnoremap <silent> <M-h>    :vertical resize -2<CR>
   nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
+  nnoremap <silent> <C-Up>    :resize -2<CR>
+  nnoremap <silent> <C-Down>  :resize +2<CR>
+  nnoremap <silent> <C-Left>  :vertical resize -2<CR>
+  nnoremap <silent> <C-Right> :vertical resize +2<CR>
+
+  let g:elite_mode=1                      " Disable arrows"
+  " Disable arrow movement, resize splits instead.
+  if get(g:, 'elite_mode')
+      nnoremap <silent> <C-Up>    :resize -2<CR>
+      nnoremap <silent> <C-Down>  :resize +2<CR>
+      nnoremap <silent> <C-Left>  :vertical resize -2<CR>
+      nnoremap <silent> <C-Right> :vertical resize +2<CR>
+  endif
+
 endif
 
 " Better nav for omnicomplete
