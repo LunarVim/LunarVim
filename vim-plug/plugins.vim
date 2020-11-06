@@ -108,6 +108,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
     " Intuitive buffer closing
     Plug 'moll/vim-bbye'
+    " Debugging
+    Plug 'puremourning/vimspector'
+    Plug 'szw/vim-maximizer'
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine
@@ -164,7 +167,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'romgrk/lib.kom'
     " Plug 'brooth/far.vim'
     " Debugging
-    " Plug 'puremourning/vimspector'
   endif
 
 call plug#end()
