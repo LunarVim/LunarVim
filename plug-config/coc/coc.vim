@@ -2,8 +2,6 @@
     \ 'coc-snippets',
     \ 'coc-actions',
     \ 'coc-sh',
-    \ 'coc-java-debug',
-    \ 'coc-java',
     \ 'coc-lists',
     \ 'coc-emmet',
     \ 'coc-tasks',
@@ -12,13 +10,11 @@
     \ 'coc-floaterm',
     \ 'coc-html',
     \ 'coc-css',
-    \ 'coc-emoji',
     \ 'coc-cssmodules',
     \ 'coc-yaml',
     \ 'coc-python',
     \ 'coc-pyright',
     \ 'coc-explorer',
-    \ 'coc-svg',
     \ 'coc-prettier',
     \ 'coc-vimlsp',
     \ 'coc-xml',
@@ -27,7 +23,6 @@
     \ 'coc-marketplace',
     \ 'coc-eslint',
     \ 'coc-floaterm',
-    \ 'coc-sh',
     \ 'coc-diagnostic',
     \ 'coc-go',
     \ 'coc-gitignore',
@@ -111,12 +106,6 @@ xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-" nmap <silent> <TAB> <Plug>(coc-range-select)
-" xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

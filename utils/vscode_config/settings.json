@@ -4,6 +4,7 @@
   "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/init.vim",
   "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/init.vim",
   "whichkey.sortOrder": "alphabetically",
+  "whichkey.delay": 0,
   "whichkey.bindings": [
     {
       "key": ";",
@@ -286,18 +287,6 @@
           "command": "git.deleteBranch"
         },
         {
-          "key": "g",
-          "name": "Graph",
-          "type": "command",
-          "command": "git-graph.view"
-        },
-        {
-          "key": "h",
-          "name": "Heatmap",
-          "type": "command",
-          "command": "gitlens.toggleFileHeatmap"
-        },
-        {
           "key": "f",
           "name": "Fetch",
           "type": "command",
@@ -310,10 +299,40 @@
           "command": "git.pullFrom"
         },
         {
+          "key": "g",
+          "name": "Graph",
+          "type": "command",
+          "command": "git-graph.view"
+        },
+        {
+          "key": "h",
+          "name": "Heatmap",
+          "type": "command",
+          "command": "gitlens.toggleFileHeatmap"
+        },
+        {
+          "key": "H",
+          "name": "History",
+          "type": "command",
+          "command": "git.viewFileHistory"
+        },
+        {
           "key": "i",
           "name": "Init",
           "type": "command",
           "command": "git.init"
+        },
+        {
+          "key": "j",
+          "name": "Next Change",
+          "type": "command",
+          "command": "workbench.action.editor.nextChange"
+        },
+        {
+          "key": "k",
+          "name": "Previous Change",
+          "type": "command",
+          "command": "workbench.action.editor.previousChange"
         },
         {
           "key": "l",
@@ -533,13 +552,13 @@
         },
         {
           "key": "s",
-          "name": "Go to Symbol (Editor)",
+          "name": "Go To Symbol",
           "type": "command",
           "command": "workbench.action.gotoSymbol"
         },
         {
           "key": "S",
-          "name": "Go to Symbol (Workspace)",
+          "name": "Show All Symbols",
           "type": "command",
           "command": "workbench.action.showAllSymbols"
         }
@@ -547,6 +566,59 @@
     },
     {
       "key": "m",
+      "name": "Mark...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "c",
+          "name": "Clear Bookmarks",
+          "type": "command",
+          "command": "bookmarks.clear"
+        },
+        {
+          "key": "j",
+          "name": "Next Bookmark",
+          "type": "command",
+          "command": "bookmarks.jumpToNext",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "k",
+          "name": "Previous Bookmark",
+          "type": "command",
+          "command": "bookmarks.jumpToPrevious",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "l",
+          "name": "List Bookmarks",
+          "type": "command",
+          "command": "bookmarks.listFromAllFiles",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "r",
+          "name": "Refresh Bookmarks",
+          "type": "command",
+          "command": "bookmarks.refresh"
+        },
+        {
+          "key": "t",
+          "name": "Toggle Bookmark",
+          "type": "command",
+          "command": "bookmarks.toggle",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "s",
+          "name": "Show Bookmarks",
+          "type": "command",
+          "command": "workbench.view.extension.bookmarks"
+        }
+      ]
+    },
+    {
+      "key": "M",
       "name": "Minimap",
       "type": "command",
       "command": "editor.action.toggleMinimap"
@@ -557,6 +629,31 @@
       "type": "command",
       "command": "vscode-neovim.send",
       "args": ":noh<CR>"
+    },
+    {
+      "key": "o",
+      "name": "Open...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "d",
+          "name": "Directory",
+          "type": "command",
+          "command": "workbench.action.files.openFolder"
+        },
+        {
+          "key": "r",
+          "name": "Recent",
+          "type": "command",
+          "command": "workbench.action.openRecent"
+        },
+        {
+          "key": "f",
+          "name": "File",
+          "type": "command",
+          "command": "workbench.action.files.openFile"
+        }
+      ]
     },
     {
       "key": "p",
@@ -705,7 +802,7 @@
       ]
     },
     {
-      "key": "U",
+      "key": "u",
       "name": "UI toggles...",
       "type": "bindings",
       "bindings": [
@@ -875,18 +972,18 @@
   "gitlens.hovers.currentLine.over": "line",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "python.pythonPath": "/Users/chris/.miniconda/bin/python",
+  "python.pythonPath": "/home/chris/.miniconda/envs/ds/bin/python",
   "java.semanticHighlighting.enabled": true,
-  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/chris/.vscode-oss/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/home/chris/.vscode-oss/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
   "workbench.list.automaticKeyboardNavigation": false,
   "oneDarkPro.editorTheme": "onedarkPro",
-  "python.languageServer": "Microsoft",
+  "python.languageServer": "Pylance",
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "kite.showWelcomeNotificationOnStartup": false,
   "python.terminal.activateEnvironment": false,
   "editor.cursorBlinking": "solid",
-  "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "FiraCode Nerd Font Mono, Hack, Menlo, Monaco, 'Courier New', monospace",
   "files.exclude": {
     "**/.classpath": true,
     "**/.project": true,
@@ -895,19 +992,24 @@
   },
   "terminal.external.osxExec": "iTerm.app",
   "editor.minimap.enabled": false,
-  "workbench.activityBar.visible": false,
+  "workbench.activityBar.visible": true,
   "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
   "leetcode.defaultLanguage": "javascript",
   "leetcode.hint.configWebviewMarkdown": false,
   "leetcode.hint.commentDescription": false,
-  "window.zoomLevel": 3,
+  "window.zoomLevel": 2,
   "window.menuBarVisibility": "toggle",
   "python.dataScience.alwaysTrustNotebooks": true,
   "python.condaPath": "$HOME/.miniconda/bin/conda",
   "python.formatting.provider": "black",
-  "python.insidersChannel": "daily",
+  "python.insidersChannel": "off",
   "terminal.integrated.shell.linux": "/bin/zsh",
   "terminal.external.linuxExec": "/usr/bin/alacritty",
+  "code-runner.executorMap": {
+    "python": "$pythonPath $fileName",
+    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+  },
   "editor.tokenColorCustomizations": {
     "[One Dark Pro]": {
       "textMateRules": [
@@ -1014,5 +1116,13 @@
   "gitlens.currentLine.enabled": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "material-icon-theme.showWelcomeMessage": false,
+  "gitlens.codeLens.enabled": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "git.autofetch": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "python.showStartPage": false,
+  "editor.snippetSuggestions": "bottom"
 }

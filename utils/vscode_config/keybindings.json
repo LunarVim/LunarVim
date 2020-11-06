@@ -61,7 +61,7 @@
     "when": "inQuickOpen"
   },
   {
-    "key": "shit+tab",
+    "key": "shift+tab",
     "command": "selectPrevSuggestion",
     "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
   },
@@ -151,11 +151,6 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+shift+t",
-    "command": "workbench.action.terminal.focus",
-    "when": "!terminalFocus"
-  },
-  {
     "key": "ctrl+j",
     "command": "-editor.action.insertLineAfter",
     "when": "editorTextFocus && neovim.ctrlKeysInsert && !neovim.recording && neovim.mode == 'insert'"
@@ -166,7 +161,7 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "ctrl+shift+t",
+    "key": "ctrl+t",
     "command": "workbench.action.togglePanel"
   },
   {
@@ -176,7 +171,7 @@
   {
     "key": "shift+k",
     "command": "editor.action.showHover",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && neovim.mode != 'insert'"
   },
   {
     "key": "ctrl+k ctrl+i",
@@ -197,5 +192,31 @@
     "key": "shift+delete",
     "command": "-deleteFile",
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasSelection && !editorHoverVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasSelection && !editorHoverVisible"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "workbench.action.increaseViewSize"
+  },
+  {
+    "key": "ctrl+shift+h",
+    "command": "workbench.action.decreaseViewSize"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "-workbench.action.reopenClosedEditor"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.toggleMaximizedPanel"
   }
 ]

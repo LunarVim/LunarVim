@@ -16,8 +16,10 @@
   // "diagnostic.displayByAle": true,
   // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
 
-  // codelens TODO what does this get me?
-  // "codeLens.enable": true,
+  // codelens
+  "codeLens.enable": true,
+  "java.referencesCodeLens.enabled": true,
+  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
 
   // list
   "list.indicator": ">",
@@ -58,12 +60,20 @@
     "javascript": "javascriptreact"
   },
 
+  // CSS (disable since I'm also using stylelintplus)
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "wxss.validate": false,
+
   // explorer
   "explorer.width": 30,
+  "explorer.file.root.template": "[icon] [git] [hidden & 1][root]",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
-  "explorer.keyMappings": {
+  "explorer.file.showHiddenFiles": false,
+  "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   },
@@ -103,6 +113,7 @@
   "eslint.executeAutofix": true,
 
   "prettier.eslintIntegration": true,
+  "bookmark.sign": "",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"]
