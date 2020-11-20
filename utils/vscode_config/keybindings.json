@@ -219,4 +219,10 @@
     "key": "ctrl+shift+t",
     "command": "workbench.action.toggleMaximizedPanel"
   }
+  {
+    "key": "space",
+    "command": "whichkey.show",
+    "when": "neovim.mode != 'insert'"
+  },
+
 ]
