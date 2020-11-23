@@ -18,7 +18,6 @@ let g:coc_global_extensions = [
   \ 'coc-emoji',
   \ 'coc-bookmark',
   \ 'coc-yaml',
-  \ 'coc-python',
   \ 'coc-pyright',
   \ 'coc-explorer',
   \ 'coc-svg',
