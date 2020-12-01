@@ -56,3 +56,12 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " You can't stop me
 cmap w!! w !sudo tee %
+
+map ^[[1~ ^
+map ^[[4~ $
+map ^[[2~ i
+map ^[[3~ x
+map ^[[5~ 1G
+map ^[[G ^[
+map ^[[6~ G
+
