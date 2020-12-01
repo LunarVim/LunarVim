@@ -17,7 +17,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Repeat stuff
     Plug 'tpope/vim-repeat'
     " Text Navigation
-    Plug 'unblevable/quick-scope'
+    " Plug 'unblevable/quick-scope'
     " Useful for React Commenting
     Plug 'suy/vim-context-commentstring'
     " highlight all matches under cursor
