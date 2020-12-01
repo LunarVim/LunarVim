@@ -1,4 +1,5 @@
 " auto-install vim-plug
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -167,16 +168,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'preservim/nerdcommenter'
     " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
-<<<<<<< HEAD
 
     " MY PLUGINS
     " ansible vault
     Plug 'arouene/vim-ansible-vault'
-=======
     " Plug 'romgrk/lib.kom'
     " Plug 'brooth/far.vim'
     " Debugging
->>>>>>> 86366002e29ccac58bf99ac24ae16cbf77d2c093
   endif
 
 call plug#end()
