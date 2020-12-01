@@ -14,12 +14,12 @@ let g:EasyMotion_do_shade = 0
 " s{char}{char} to move to {char}{char}
 if exists('g:vscode')
   " VSCode extension
-  nnoremap s <Plug>(easymotion-f2)
-  nnoremap q <Plug>(easymotion-F2)
+  nmap s <Plug>(easymotion-f2)
+  nmap S <Plug>(easymotion-F2)
   else
   " ordinary neovim
-  nnoremap s <Plug>(easymotion-overwin-f2)
-  nnoremap q <Plug>(easymotion-overwin-F2)
+  nmap s <Plug>(easymotion-overwin-f2)
+  nmap S <Plug>(easymotion-overwin-F2)
 endif
 
 nmap f <Plug>(easymotion-f)

@@ -53,6 +53,7 @@ else
   source $HOME/.config/nvim/plug-config/neovide.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
   source $HOME/.config/nvim/plug-config/vimspector.vim
+  source $HOME/.config/nvim/plug-config/surround.vim
 endif
 
 " Add paths to node and python here
