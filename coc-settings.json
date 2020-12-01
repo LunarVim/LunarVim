@@ -7,6 +7,12 @@
     "method": "m",
     "function": ""
   },
+  "snippets.priority": 1,
+  //"yank.priority": 1,
+  "suggest.languageSourcePriority": 99,
+  "coc.source.file.priority": 2,
+  "coc.source.around.priority": 3,
+  "coc.source.buffer.priority": 4,
 
   // diagnostics
   "diagnostic.errorSign": " ",
@@ -19,6 +25,8 @@
   // codelens
   "codeLens.enable": true,
   "java.referencesCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.completion.enabled": true,
   "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
 
   // list
@@ -26,29 +34,39 @@
   "list.selectedSignText": " ",
 
   // autoformat
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "typescript",
-    "graphql",
-    "html",
-    "yaml",
-    "json",
-    "python",
-    "java"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript", "graphql", "html", "yaml", "json", "python", "java"],
   "coc.preferences.hoverTarget": "float",
 
   // python config
-  "python.linting.enabled": false,
-  "python.linting.pylintEnabled": false,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.stubPath": "typings",
+  "python.analysis.typeshedPaths": [],
+  "python.analysis.diagnosticSeverityOverrides": {},
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.pythonPath": "python",
+  "python.venvPath": "",
   "python.formatting.provider": "black",
-  // "python.formatting.blackPath": "~/.local/bin/black",
-  // "python.linting.pylintPath": "~/.miniconda/envs/neovim/bin/pylint",
-  // "python.condaPath": "~/.miniconda/bin/conda",
-  // "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
-  // "python.jediPath": "~/.miniconda/envs/neovim/lib/python3.8/site-packages",
+  "python.formatting.blackPath": "black",
+  "python.formatting.blackArgs": [],
+  "python.formatting.autopep8Path": "autopep8",
+  "python.formatting.autopep8Args": [],
+  "python.formatting.yapfPath": "yapf",
+  "python.formatting.yapfArgs": [],
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": false,
+  "python.linting.banditEnabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.pytypeEnabled": false,
+  "python.linting.prospectorEnabled": false,
+  "python.linting.pydocstyleEnabled": false,
+  "python.linting.pylamaEnabled": false,
+  "python.linting.pylintEnabled": false,
+  "pyright.disableCompletion": false,
+  "pyright.disableLanguageServices": false,
+  "pyright.disableOrganizeImports": false,
 
   // snippets
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
@@ -113,10 +131,27 @@
   "eslint.executeAutofix": true,
 
   "prettier.eslintIntegration": true,
+
+  "lua": {
+    "command": "/home/chris/.luambenvs/neovim4/bin/lua-lsp",
+    "filetypes": ["lua"],
+    "trace.server": "verbose"
+  },
+
   "bookmark.sign": "",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"]
+
+  // lua
+  //"lua.useSumnekoLs": true,
+  //"lua.commandPath": "/home/chris/.luambenvs/neovim3/bin/lua-lsp"
+  //"lua.enable": true,
+  //"Lua.completion.enable": true,
+  //"Lua.runtime.version": "Lua 5.1",
+  //"Lua.runtime.path": ["?.lua", "?/init.lua", "?/?.lua"],
+  //"lua.version": "5.1"
+  //"lua.commandPath": "/home/chris/.vscode-insiders/extensions/sumneko.lua-1.0.5/server/bin/Linux/lua-language-server"
 
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path

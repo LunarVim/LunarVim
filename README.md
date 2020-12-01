@@ -17,9 +17,7 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 - Mac
 
   ```
-  brew install neovim
-
-  brew install --HEAD neovim # Latest
+  brew install --HEAD neovim # Nightly version
 
   brew upgrade neovim --fetch-HEAD # Sometimes you need to update
   ```
@@ -27,7 +25,11 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 - Ubuntu
 
   ```
-  sudo apt install neovim # This may not provide the newest version
+  curl -l https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > /tmp/nvim.appimage
+
+  sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
+
+  chmod +x /usr/local/bin/nvim
   ```
 
 - Arch

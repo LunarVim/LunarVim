@@ -1,5 +1,10 @@
 [
   {
+    "key": "space",
+    "command": "whichkey.show",
+    "when": "neovim.mode != 'insert' && !inputFocus"
+  },
+  {
     "key": "shift+ctrl+e",
     "command": "actions.findWithSelection"
   },
