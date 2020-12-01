@@ -15,11 +15,11 @@ let g:EasyMotion_do_shade = 0
 if exists('g:vscode')
   " VSCode extension
   nmap s <Plug>(easymotion-f2)
-  nmap S <Plug>(easymotion-F2)
+  nmap g <Plug>(easymotion-F2)
   else
   " ordinary neovim
   nmap s <Plug>(easymotion-overwin-f2)
-  nmap S <Plug>(easymotion-overwin-F2)
+  nmap g <Plug>(easymotion-overwin-F2)
 endif
 
 nmap f <Plug>(easymotion-f)
