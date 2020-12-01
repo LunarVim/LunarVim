@@ -18,7 +18,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Repeat stuff
     Plug 'tpope/vim-repeat'
     " Text Navigation
-    " Plug 'unblevable/quick-scope'
     " Useful for React Commenting
     Plug 'suy/vim-context-commentstring'
     " highlight all matches under cursor
@@ -115,8 +114,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'szw/vim-maximizer'
     " Neovim in Browser
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    " whitespaces
-    Plug 'vim-scripts/ShowTrailingWhitespace'
+
+    " MY PLUGINS
+    " ansible vault
+    Plug 'arouene/vim-ansible-vault'
 
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
@@ -171,10 +172,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'preservim/nerdcommenter'
     " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
-
-    " MY PLUGINS
-    " ansible vault
-    Plug 'arouene/vim-ansible-vault'
     " Plug 'romgrk/lib.kom'
     " Plug 'brooth/far.vim'
     " Debugging

@@ -13,7 +13,7 @@ let g:rainbow_conf = {
 \	'separately': {
 \		'*': {},
 \		'markdown': {
-\			'parentheses_options': 'containedin=markdownCode contained', 
+\			'parentheses_options': 'containedin=markdownCode contained',
 \		},
 \		'lisp': {
 \	    'guifgs': ['#858580', '#8FBCBB', '#D08770', '#A3BE8C', '#EBCB8B', '#B48EAD', '#80a880', '#887070'],
@@ -25,15 +25,15 @@ let g:rainbow_conf = {
 \			'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold'],
 \		},
 \		'vim': {
-\			'parentheses_options': 'containedin=vimFuncBody', 
+\			'parentheses_options': 'containedin=vimFuncBody',
 \		},
 \		'perl': {
-\			'syn_name_prefix': 'perlBlockFoldRainbow', 
+\			'syn_name_prefix': 'perlBlockFoldRainbow',
 \		},
 \		'stylus': {
-\			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
+\			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'],
 \		},
-\		'css': 0, 
+\		'css': 0,
 \	}
 \}
 
