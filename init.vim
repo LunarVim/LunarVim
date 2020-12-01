@@ -12,6 +12,7 @@ source $HOME/.config/nvim/general/functions.vim
 source $HOME/.config/nvim/keys/mappings.vim
 source $HOME/.config/nvim/plug-config/easymotion.vim
 source $HOME/.config/nvim/plug-config/highlightyank.vim
+source $HOME/.config/nvim/plug-config/surround.vim
 
 if exists('g:vscode')
   " VS Code extension
@@ -53,7 +54,7 @@ else
   source $HOME/.config/nvim/plug-config/neovide.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
   source $HOME/.config/nvim/plug-config/vimspector.vim
-  source $HOME/.config/nvim/plug-config/surround.vim
+
 endif
 
 " Add paths to node and python here

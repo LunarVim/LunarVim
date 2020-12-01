@@ -26,15 +26,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Easymotion
     Plug 'easymotion/vim-easymotion'
 
+    " Surround
+    Plug 'tpope/vim-surround'
+
   if exists('g:vscode')
 
     " highlight yank
     Plug 'ChristianChiarulli/vscode-easymotion'
     Plug 'machakann/vim-highlightedyank'
   else
-
-    " Surround
-    Plug 'tpope/vim-surround'
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
     " auto set indent settings
