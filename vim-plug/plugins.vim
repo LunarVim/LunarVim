@@ -115,6 +115,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'szw/vim-maximizer'
     " Neovim in Browser
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    " whitespaces
+    Plug 'vim-scripts/ShowTrailingWhitespace'
+    Plug 'inkarkat/vim-DeleteTrailingWhitespace'
+
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine

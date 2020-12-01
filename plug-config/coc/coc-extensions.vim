@@ -36,6 +36,7 @@
     \ 'coc-docker',
     \ 'coc-styled-components',
     \ 'coc-github',
+    \ 'coc-react-refactor',
     \ ]
     " \ 'coc-highlight',
     " \ 'coc-tabnine',
