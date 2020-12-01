@@ -8,4 +8,5 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 
-autocmd BufWritePre *.rb,*.php,*.py,*.js,*.txt,*.hs,*.java,*.md,*.jsx,*.js,*.ts,*.tsx call <SID>StripTrailingWhitespaces()
+" autocmd BufWritePre *.rb,*.php,*.py,*.js,*.txt,*.hs,*.java,*.md,*.jsx,*.js,*.ts,*.tsx call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
