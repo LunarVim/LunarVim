@@ -116,11 +116,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
     " MY PLUGINS
-    " ansible vault
     Plug 'arouene/vim-ansible-vault'
     Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
-
-    " Comment stuff
+    Plug 'ntpeters/vim-better-whitespace'
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
     " Rainbow brackets
@@ -129,7 +127,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " TODO make sure to add ale config before plugin
     " Plug 'dense-analysis/ale'
     " Better Whitespace
-    " Plug 'ntpeters/vim-better-whitespace'
     " Multiple Cursors
     " TODO add this back in change from C-n
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
