@@ -57,11 +57,16 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " You can't stop me
 cmap w!! w !sudo tee %
 
-map ^[[1~ ^
-map ^[[4~ $
-map ^[[2~ i
-map ^[[3~ x
-map ^[[5~ 1G
-map ^[[G ^[
-map ^[[6~ G
-
+""""""""""""""
+" tmux fixes "
+""""""""""""""
+" Handle tmux $TERM quirks in vim
+if $TERM =~ '^screen-256color'
+  map <Esc>OH <Home>
+  map! <Esc>OH <Home>
+  map <Esc>OF <End>
+  map! <Esc>OF <End>
+endif
+""""""""""""""
+"
+""""""""""""""
