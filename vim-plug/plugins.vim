@@ -119,6 +119,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " ansible vault
     Plug 'arouene/vim-ansible-vault'
 
+    " Comment stuff
+    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine
