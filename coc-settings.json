@@ -68,6 +68,8 @@
   "pyright.disableLanguageServices": false,
   "pyright.disableOrganizeImports": false,
 
+  "yaml.validate": false,
+
   // snippets
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
   //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",

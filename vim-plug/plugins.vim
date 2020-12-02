@@ -118,6 +118,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " MY PLUGINS
     " ansible vault
     Plug 'arouene/vim-ansible-vault'
+    Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 
     " Comment stuff
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
