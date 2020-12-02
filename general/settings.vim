@@ -61,10 +61,8 @@ cmap w!! w !sudo tee %
 " tmux fixes "
 """"""""""""""
 " Handle tmux $TERM quirks in vim
-map <Esc>OH <Home>
-map! <Esc>OH <Home>
-map <Esc>OF <End>
-map! <Esc>OF <End>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
 """"""""""""""
 "
 """"""""""""""
