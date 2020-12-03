@@ -50,8 +50,7 @@ let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 ,
 let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree']
 let g:which_key_map['W'] = [ ':call WindowSwap#EasyWindowSwap()'               , 'move window' ]
 let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
-let g:which_key_map['q'] = [ 'c'                                               , 'close' ]
-let g:which_key_map['Q'] = [ 'q'                                               , 'quit' ]
+let g:which_key_map['q'] = [ 'q'                                               , 'quit' ]
 let g:which_key_map['c'] = [':Bdelete'                                         , 'buffer-delete']
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
 " Group mappings
