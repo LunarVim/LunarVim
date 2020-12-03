@@ -45,6 +45,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/playground'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
     " Cool Icons
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
