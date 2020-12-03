@@ -181,6 +181,7 @@ let g:which_key_map.S = {
       \ 'l' : [':SLoad'           , 'Load Session']     ,
       \ 's' : [':Startify'        , 'Start Page']     ,
       \ 'S' : [':SSave'           , 'Save Session']   ,
+      \ 'L' : [':CocList session' , 'List Session']   ,
       \ }
 
 " g is for git
@@ -247,13 +248,13 @@ let g:which_key_map.l = {
       \ 'e' : [':CocList extensions'                 , 'extensions'],
       \ 'f' : ['<Plug>(coc-format-selected)'         , 'organize'],
       \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
-      \ 'L' : [':CocCommand eslint.executeAutofix'   , 'lint'],
       \ 'g' : [':CocCommand editor.action.organizeImport', 'organize imports'],
       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
       \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
       \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
       \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
+      \ 'L' : [':CocList'                            , 'coc-list'],
       \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
       \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
       \ 'o' : [':Vista!!'                            , 'outline'],
