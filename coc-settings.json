@@ -87,12 +87,13 @@
   "wxss.validate": false,
 
   // explorer
-  "explorer.width": 30,
+  "explorer.width": 45,
+  "explorer.quitOnOpen": false,
   "explorer.file.root.template": "[icon] [git] [hidden & 1][root]",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
-  "explorer.file.showHiddenFiles": false,
+  "explorer.file.showHiddenFiles": true,
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
