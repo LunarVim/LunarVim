@@ -34,11 +34,11 @@ else
   " nnoremap <c-u> viwU<Esc>
 
   " TAB in general mode will move to text buffer
-  nnoremap <silent> <Leader><Right> :bnext<CR>
-  nnoremap <silent> <Leader><Up> :Tabnext<CR>
+  nnoremap <silent> <Leader><Right> :bprevious<CR>
+  nnoremap <silent> <Leader><Up> :tabnext<CR>
   " SHIFT-TAB will go back
-  nnoremap <silent> <Leader><Left> :bprevious<CR>
-  nnoremap <silent> <Leader><Down> :Tabprev<CR>
+  nnoremap <silent> <Leader><Left> :bnext<CR>
+  nnoremap <silent> <Leader><Down> :tabprevious<CR>
 
   " Move selected line / block of text in visual mode
   " shift + k to move up
@@ -51,10 +51,8 @@ else
   " Alternate way to quit
   nnoremap <silent> <C-Q> :wq!<CR>
   " Use control-c instead of escape
-  nnoremap <silent> <C-c> <Esc>
+  noremap <silent> <C-c> <Esc>
 
-  " use l for ctrl i
-  nnoremap <C-l> <C-i>
   " <TAB>: completion.
   inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
