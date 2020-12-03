@@ -19,15 +19,13 @@
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
+  "diagnostic.checkCurrentLine": true,
   // "diagnostic.displayByAle": true,
-  // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
+  // "diagnostic.virtualText": true,
+  // this won't work with codelens when error on same line
 
   // codelens
   "codeLens.enable": true,
-  "java.referencesCodeLens.enabled": true,
-  "java.implementationsCodeLens.enabled": true,
-  "java.completion.enabled": true,
-  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
 
   // list
   "list.indicator": ">",
@@ -36,6 +34,10 @@
   // autoformat
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript", "graphql", "html", "yaml", "json", "python", "java"],
   "coc.preferences.hoverTarget": "float",
+  // some coc settings
+  "signature.target": "float",
+  "coc.preferences.enableFloatHighlight": true,
+  "git.enableGutters": false,
 
   // python config
   "python.analysis.autoImportCompletions": true,
