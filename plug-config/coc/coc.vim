@@ -166,3 +166,6 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 hi CocHighlightText guifg=#121212 guibg=#F8DE7E gui=none
+hi CocErrorHighlight guifg=#efefef  guibg=#f4384b gui=undercurl term=undercurl
+hi CocWarningHighlight guifg=#efefef guibg=#F4ab39 gui=undercurl term=undercurl
+
