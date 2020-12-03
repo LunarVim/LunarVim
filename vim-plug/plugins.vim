@@ -35,6 +35,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ChristianChiarulli/vscode-easymotion'
     Plug 'machakann/vim-highlightedyank'
   else
+    Plug 'sainnhe/sonokai'
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
     " auto set indent settings
@@ -42,8 +43,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " Treesitter
-    " Plug 'nvim-treesitter/nvim-treesitter'
-    " Plug 'nvim-treesitter/playground'
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/playground'
     " Cool Icons
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
@@ -120,6 +121,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+    Plug 'joshdick/onedark.vim'
 
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'

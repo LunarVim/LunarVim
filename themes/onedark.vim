@@ -9,11 +9,11 @@
 
 "autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
 
-hi Comment cterm=italic
 let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
 let g:onedark_termcolors=256
 
+hi Comment cterm=italic
 syntax on
 colorscheme onedark
 
