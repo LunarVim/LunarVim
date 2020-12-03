@@ -54,7 +54,6 @@ let g:which_key_map['q'] = [ 'c'                                               ,
 let g:which_key_map['Q'] = [ 'q'                                               , 'quit' ]
 let g:which_key_map['c'] = [':Bdelete'                                         , 'buffer-delete']
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
-let g:which_key_map['l'] = [ ':set nonumber!'                                  , 'relative line nums' ]
 " Group mappings
 
 " a is for actions
