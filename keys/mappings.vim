@@ -34,9 +34,11 @@ else
   " nnoremap <c-u> viwU<Esc>
 
   " TAB in general mode will move to text buffer
-  nnoremap <silent> <TAB> :bnext<CR>
+  nnoremap <silent> <Leader><Right> :bnext<CR>
+  nnoremap <silent> <Leader><Up> :Tabnext<CR>
   " SHIFT-TAB will go back
-  nnoremap <silent> <S-TAB> :bprevious<CR>
+  nnoremap <silent> <Leader><Left> :bprevious<CR>
+  nnoremap <silent> <Leader><Down> :Tabprev<CR>
 
   " Move selected line / block of text in visual mode
   " shift + k to move up
@@ -50,6 +52,9 @@ else
   nnoremap <silent> <C-Q> :wq!<CR>
   " Use control-c instead of escape
   nnoremap <silent> <C-c> <Esc>
+
+  " use l for ctrl i
+  nnoremap <C-l> <C-i>
   " <TAB>: completion.
   inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -71,25 +76,32 @@ else
   tnoremap <Esc> <C-\><C-n>
 
   " Use alt + hjkl to resize windows
-  " nnoremap <silent> <M-j>    :resize -2<CR>
-  " nnoremap <silent> <M-k>    :resize +2<CR>
-  " nnoremap <silent> <M-h>    :vertical resize -2<CR>
-  " nnoremap <silent> <M-l>    :vertical resize +2<CR>
+  nnoremap <silent> <M-j>    :resize -2<CR>
+  nnoremap <silent> <M-k>    :resize +2<CR>
+  nnoremap <silent> <M-h>    :vertical resize -2<CR>
+  nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
-  nnoremap <silent> <C-Up>    :resize -2<CR>
-  nnoremap <silent> <C-Down>  :resize +2<CR>
-  nnoremap <silent> <C-Left>  :vertical resize -2<CR>
-  nnoremap <silent> <C-Right> :vertical resize +2<CR>
+  " nnoremap <C-ü> :resize -2<CR>
+  " nnoremap <C-ö> :resize +2<CR>
+  " nnoremap <C-ä> :vertical resize -2<CR>
+  " nnoremap <C-#> :vertical resize +2<CR>
 
   let g:elite_mode=0                      " Disable arrows"
   " Disable arrow movement, resize splits instead.
   if get(g:, 'elite_mode')
-      nnoremap <C-Up>    :resize -2<CR>
-      nnoremap <C-Down>  :resize +2<CR>
-      nnoremap <C-Left>  :vertical resize -2<CR>
-      nnoremap <C-Right> :vertical resize +2<CR>
+    nnoremap <C-ü> :resize -2<CR>
+    nnoremap <C-ö> :resize +2<CR>
+    nnoremap <C-ä> :vertical resize -2<CR>
+    nnoremap <C-#> :vertical resize +2<CR>
   endif
 
+  nmap ü o<ESC>
+  nmap Ü O<ESC>
+  nmap ö {
+  nmap ä }
+  nmap Ö [{
+  nmap Ä ]}
+  nmap ß /
 endif
 
 " Better nav for omnicomplete
