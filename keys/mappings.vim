@@ -35,10 +35,8 @@ else
 
   " TAB in general mode will move to text buffer
   nnoremap <silent> <Leader><Right> :bprevious<CR>
-  nnoremap <silent> <Leader><Up> :tabnext<CR>
   " SHIFT-TAB will go back
   nnoremap <silent> <Leader><Left> :bnext<CR>
-  nnoremap <silent> <Leader><Down> :tabprevious<CR>
 
   " Move selected line / block of text in visual mode
   " shift + k to move up
@@ -47,7 +45,7 @@ else
   xnoremap J :move '>+1<CR>gv-gv
 
   " Alternate way to save
-  nnoremap <silent> <C-s> :w<CR>
+  noremap <silent> <C-s> :w<CR>
   " Alternate way to quit
   nnoremap <silent> <C-Q> :wq!<CR>
   " Use control-c instead of escape

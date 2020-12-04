@@ -24,7 +24,7 @@ endif
 " GoTo code navigation.
 nmap <silent> gf <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gb <Plug>(coc-implementation)
+nmap <silent> gv <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.

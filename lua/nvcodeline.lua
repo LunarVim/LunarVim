@@ -52,7 +52,7 @@ gls.left[2] = {
   ViMode = {
     provider = function()
       -- auto change color according the vim mode
-      local mode_color = {n = colors.purple, 
+      local mode_color = {n = colors.purple,
                           i = colors.green,
                           v = colors.blue,
                           [''] = colors.blue,
@@ -66,14 +66,35 @@ gls.left[2] = {
                           R = colors.red,
                           Rv = colors.red,
                           cv = colors.red,
-                          ce=colors.red, 
+                          ce=colors.red,
                           r = colors.cyan,
-                          rm = colors.cyan, 
+                          rm = colors.cyan,
                           ['r?'] = colors.cyan,
                           ['!']  = colors.red,
                           t = colors.red}
+
+                          local mode_name = {
+                          c  = 'COMMAND',
+                          i  = 'INSERT',
+                          ic = 'INSERT COMP',
+                          ix = 'INSERT COMP',
+                          multi = 'MULTI',
+                          n  = 'NORMAL',
+                          ni = '(INSERT)',
+                          no = 'OP PENDING',
+                          R  = 'REPLACE',
+                          Rv = 'V REPLACE',
+                          s  = 'SELECT',
+                          S  = 'S-LINE',
+                          [''] = 'S-BLOCK',
+                          t  = 'TERMINAL',
+                          v  = 'VISUAL',
+                          V  = 'V-LINE',
+                          [''] = 'V-BLOCK'
+                          }
+
       vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
-      return '  NVCode '
+      return '  NEOVIM - ' ..mode_name[vim.fn.mode()]
     end,
     separator = ' ',
     separator_highlight = {colors.yellow,function()
