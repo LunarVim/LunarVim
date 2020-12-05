@@ -181,7 +181,7 @@ let g:which_key_map.S = {
       \ 'l' : [':SLoad'           , 'Load Session']     ,
       \ 's' : [':Startify'        , 'Start Page']     ,
       \ 'S' : [':SSave'           , 'Save Session']   ,
-      \ 'L' : [':CocList session' , 'List Session']   ,
+      \ 'L' : [':CocList sessions' , 'List Session']   ,
       \ }
 
 " g is for git
