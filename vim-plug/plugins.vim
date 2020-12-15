@@ -1,3 +1,4 @@
+
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -5,6 +6,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   "autocmd VimEnter * PlugInstall
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
+let g:coc_global_extensions = ['coc-snippets', 'coc-explorer', 'coc-eslint', 'coc-yaml', 'coc-vimtex', 'coc-tsserver', 'coc-pyright', 'coc-json', 'coc-html', 'coc-css'] 
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
@@ -53,7 +56,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Themes
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
     " Intellisense
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install() } }
     " Status Line
     Plug 'glepnir/galaxyline.nvim'
     Plug 'kevinhwang91/rnvimr'
