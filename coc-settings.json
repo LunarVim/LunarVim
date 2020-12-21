@@ -19,15 +19,13 @@
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
+  "diagnostic.checkCurrentLine": true,
   // "diagnostic.displayByAle": true,
-  // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
+  // "diagnostic.virtualText": true,
+  // this won't work with codelens when error on same line
 
   // codelens
   "codeLens.enable": true,
-  "java.referencesCodeLens.enabled": true,
-  "java.implementationsCodeLens.enabled": true,
-  "java.completion.enabled": true,
-  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
 
   // list
   "list.indicator": ">",
@@ -36,6 +34,10 @@
   // autoformat
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript", "graphql", "html", "yaml", "json", "python", "java"],
   "coc.preferences.hoverTarget": "float",
+  // some coc settings
+  "signature.target": "float",
+  "coc.preferences.enableFloatHighlight": true,
+  "git.enableGutters": false,
 
   // python config
   "python.analysis.autoImportCompletions": true,
@@ -87,12 +89,13 @@
   "wxss.validate": false,
 
   // explorer
-  "explorer.width": 30,
+  "explorer.width": 45,
+  "explorer.quitOnOpen": false,
   "explorer.file.root.template": "[icon] [git] [hidden & 1][root]",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
-  "explorer.file.showHiddenFiles": false,
+  "explorer.file.showHiddenFiles": true,
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"

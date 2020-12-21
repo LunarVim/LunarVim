@@ -4,6 +4,10 @@
 " _/ // / / / / /__| |/ / / / / / / /
 "/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
 
+" load first for errors
+if !exists('g:vscode')
+  source $HOME/.config/nvim/plug-config/polyglot.vim
+endif
 
 " General Settings
 source $HOME/.config/nvim/vim-plug/plugins.vim
@@ -18,8 +22,6 @@ if exists('g:vscode')
   " VS Code extension
   source $HOME/.config/nvim/vscode/settings.vim
 else
-  source $HOME/.config/nvim/plug-config/polyglot.vim
-
   " Themes
   source $HOME/.config/nvim/themes/syntax.vim
   source $HOME/.config/nvim/themes/onedark.vim
@@ -33,7 +35,7 @@ else
   source $HOME/.config/nvim/plug-config/codi.vim
   source $HOME/.config/nvim/plug-config/vim-wiki.vim
   luafile $HOME/.config/nvim/lua/nvcodeline.lua
-  " luafile $HOME/.config/nvim/lua/treesitter.lua
+  luafile $HOME/.config/nvim/lua/treesitter.lua
   source $HOME/.config/nvim/plug-config/coc/coc.vim
   source $HOME/.config/nvim/plug-config/coc/coc-extensions.vim
   source $HOME/.config/nvim/plug-config/easymotion.vim
@@ -54,7 +56,7 @@ else
   source $HOME/.config/nvim/plug-config/neovide.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
   source $HOME/.config/nvim/plug-config/vimspector.vim
-
+  source $HOME/.config/nvim/plug-config/nerd-tree.vim
 endif
 
 " Add paths to node and python here

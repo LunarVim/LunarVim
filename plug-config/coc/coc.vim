@@ -22,9 +22,9 @@ else
 endif
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gf <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gv <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
@@ -164,3 +164,8 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+hi CocHighlightText guifg=#121212 guibg=#F8DE7E gui=none
+hi CocErrorHighlight guifg=#efefef  guibg=#f4384b gui=undercurl term=undercurl
+hi CocWarningHighlight guifg=#efefef guibg=#F4ab39 gui=undercurl term=undercurl
+
