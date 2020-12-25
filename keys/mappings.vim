@@ -97,9 +97,11 @@ else
   nmap Ü O<ESC>
   nmap ö {
   nmap ä }
-  nmap Ö [{
-  nmap Ä ]}
+  nmap Ö [m
+  nmap Ä ]m
   nmap ß /
+  nmap # /(
+  nmap + ?(
 endif
 
 " Better nav for omnicomplete
