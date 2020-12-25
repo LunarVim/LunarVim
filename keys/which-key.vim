@@ -110,10 +110,8 @@ let g:which_key_map.d = {
 " f is for find and replace
 let g:which_key_map.f = {
       \ 'name' : '+find & replace' ,
-      \ 'f' : [':Farf --source=vimgrep'    , 'find in buffer'],
-      \ 'F' : [':Farf --source=rgnvim'    , 'find in project'],
-      \ 'r' : [':Farr --source=vimgrep'     , 'replace in buffer'],
-      \ 'R' : [':Farr --source=rgnvim'     , 'replace in project'],
+      \ 'f' : [':Farf --source=vimgrep'                        , 'find in buffer'],
+      \ 'r' : [':Farr --source=vimgrep'                        , 'replace in buffer'],
       \ }
 
 " k is for task

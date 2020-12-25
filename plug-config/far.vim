@@ -1,18 +1,20 @@
-let g:far#source='rgnvim'
+" let g:far#source='rgnvim'
 " let g:far#source='rg'
 " let g:far#source='vimgrep'
 " let g:far#source='ag'
 
 set lazyredraw            " improve scrolling performance when navigating through large results
 
-let g:far#window_width=75
+let g:far#window_width=150
 " Use %:p with buffer option only
-let g:far#file_mask_favorites=['%:p', '**/*.*', '**/*.js', '**/*.py', '**/*.java', '**/*.css', '**/*.html', '**/*.vim', '**/*.cpp', '**/*.c', '**/*.h', ]
-let g:far#window_min_content_width=30
+let g:far#file_mask_favorites=['%:p', '**/*.*', '**/README.md', '**/package.json' , '**/*.js', '**/*.ts', '**/*.tsx', '**/*.py', '**/*.css', '**/*.html', '**/*.vim', ]
+let g:far#window_min_content_width=50
 let g:far#enable_undo=1
 
+set wildignore+=**/node_modules/**,yarn.lock,package-lock.json
+
 " let g:far#ignore_files=['$HOME/.config/nvim/utils/farignore']
-let g:far#ignore_files=['node_modules/']
+let g:far#ignore_files=['**/node_modules/**']
 
 "     Below are the default mappings and corresponding variable names in
 
