@@ -79,6 +79,8 @@ let g:which_key_map.b = {
       \ 'b' : [':BufferPick'            , 'pick buffer'],
       \ 'd' : [':Bdelete'               , 'delete-buffer'],
       \ 'C' : [':%bd'                   , 'close-all'],
+      \ 'X' : [':BufferCloseAllButCurrent' , 'close-all but current'],
+      \ 'Y' : [':BufferCloseBuffersRight'  , 'close-all to right'],
       \ 'D' : [':BufferOrderByDirectory', 'order by directory'],
       \ 'h' : ['bfirst'                 , 'first-buffer'],
       \ 'e' : ['blast'                  , 'last buffer'],
