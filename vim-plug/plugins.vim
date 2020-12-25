@@ -35,7 +35,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ChristianChiarulli/vscode-easymotion'
     Plug 'machakann/vim-highlightedyank'
   else
-    Plug 'sainnhe/sonokai'
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
     " auto set indent settings
@@ -122,9 +121,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
-    Plug 'joshdick/onedark.vim'
+    Plug 'meain/vim-package-info', { 'do': 'npm install'   }
+    Plug 'christianchiarulli/nvcode-color-schemes.vim'
+    " Plug 'tjdevries/colorbuddy.vim'
+    " Plug 'Th3Whit3Wolf/onebuddy'
 
-    Plug 'HerringtonDarkholme/yats.vim'
+    " Plug 'HerringtonDarkholme/yats.vim'
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
   endif

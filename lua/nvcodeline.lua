@@ -94,7 +94,7 @@ gls.left[2] = {
                           }
 
       vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
-      return '  NEOVIM - '..mode_name[vim.fn.mode()]..' '
+      return '  '..mode_name[vim.fn.mode()]..'  '
     end,
     separator = ' ',
     separator_highlight = {colors.yellow,function()
