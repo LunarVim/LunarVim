@@ -100,8 +100,8 @@ else
   nmap Ö [m
   nmap Ä ]m
   nmap ß /
-  nmap # /(
-  nmap + ?(
+  nmap # /(<CR>
+  nmap + ?(<CR>
 endif
 
 " Better nav for omnicomplete
