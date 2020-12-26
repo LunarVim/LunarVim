@@ -19,7 +19,16 @@ colorscheme onedark
 
 set termguicolors
 
-hi Visual  guifg=#121212 guibg=#9BA2AF gui=none
+hi CocHighlightText guibg=#31353f gui=none
+hi CocErrorHighlight guifg=#efefef  guibg=#f4384b
+hi CursorLine guibg=#22282f
+" gui=undercurl term=undercurl
+hi CocWarningHighlight guifg=#efefef guibg=#F4ab39
+" gui=undercurl term=undercurl
+
+hi Visual guibg=#38404b gui=none
+
+highlight Cursor guibg=#6c778d
 
 highlight TSType guifg=#e5c07b
 highlight TSTypeBuiltin guifg=#e5c07b

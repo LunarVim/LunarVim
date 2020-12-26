@@ -140,7 +140,7 @@ let g:which_key_map.m = {
       \ 'n' : [':CocCommand bookmark.next', 'next bookmark'],
       \ 'p' : [':CocCommand bookmark.prev', 'prev bookmark'],
       \ 't' : [':CocCommand bookmark.toggle', 'toggle bookmark'],
-      \ 'f'  : ['CocList bookmark', 'list bookmarks']
+      \ 'f'  :[':CocList bookmark', 'list bookmarks']
       \ }
       " CoC throws an error
       " \ 'a' : [':CocCommand bookmark.annotate', 'annotate bookmark'],
@@ -245,6 +245,8 @@ let g:which_key_map.l = {
       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
       \ 'b' : [':CocNext'                            , 'next action'],
       \ 'B' : [':CocPrev'                            , 'prev action'],
+      \ 'c' : [':CocCommand docthis.documentThis'    , 'prev action'],
+      \ 'C' : [':CocList filetypes'                  , 'select language'],
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
@@ -279,7 +281,7 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=popup --height=10'       , 'terminal'],
+      \ ';' : [':FloatermNew --wintype=normal --height=10'       , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],

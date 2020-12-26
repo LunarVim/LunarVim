@@ -16,8 +16,8 @@ vnoremap > >gv
 if exists('g:vscode')
 
   " Simulate same TAB behavior in VSCode
-  nmap <Tab> :Tabnext<CR>
-  nmap <S-Tab> :Tabprev<CR>
+  " nmap <Tab> :Tabnext<CR>
+  " nmap <S-Tab> :Tabprev<CR>
 
 else
 
@@ -93,15 +93,15 @@ else
     nnoremap <C-#> :vertical resize +2<CR>
   endif
 
-  nmap ü o<ESC>
-  nmap Ü O<ESC>
+  nmap ü o<ESC>k
+  nmap Ü O<ESC>j
   nmap ö {
   nmap ä }
   nmap Ö [m
   nmap Ä ]m
   nmap ß /
-  nmap # /(<CR>
-  nmap + ?(<CR>
+  nmap # /(<CR>:let @/ = ""<CR>
+  nmap ' ?(<CR>:let @/ = ""<CR>
 endif
 
 " Better nav for omnicomplete

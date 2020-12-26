@@ -37,6 +37,7 @@
     \ 'coc-styled-components',
     \ 'coc-github',
     \ 'coc-react-refactor',
+    \ 'coc-docthis'
     \ ]
     " \ 'coc-highlight',
     " \ 'coc-tabnine',

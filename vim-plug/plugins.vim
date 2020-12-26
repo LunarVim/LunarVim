@@ -120,11 +120,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'arouene/vim-ansible-vault'
     Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
     Plug 'ntpeters/vim-better-whitespace'
-    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+    " Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
     Plug 'meain/vim-package-info', { 'do': 'npm install'   }
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
-    " Plug 'tjdevries/colorbuddy.vim'
-    " Plug 'Th3Whit3Wolf/onebuddy'
+    Plug 'pseewald/anyfold'
 
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
