@@ -100,8 +100,8 @@ else
   nmap Ö [m
   nmap Ä ]m
   nmap ß /
-  nmap + /(<CR>:let @/ = ""<CR>
-  nmap * ?(<CR>:let @/ = ""<CR>
+  nmap + /}<CR>:let @/ = ""<CR>
+  nmap * ?}<CR>:let @/ = ""<CR>
   nmap # /)<CR>:let @/ = ""<CR>
   nmap ' ?)<CR>:let @/ = ""<CR>
 endif
