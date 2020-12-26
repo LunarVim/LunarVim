@@ -71,6 +71,7 @@
   "pyright.disableOrganizeImports": false,
 
   "yaml.validate": false,
+  "yaml.format.singleQuote": true,
 
   // snippets
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
@@ -136,6 +137,15 @@
   "eslint.executeAutofix": true,
 
   "prettier.eslintIntegration": true,
+  "prettier.tabWidth": 2,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "none",
+  "prettier.bracketSpacing": true,
+  "prettier.arrowParens": "always",
+  "prettier.proseWrap": "never",
+  "prettier.endOfLine": "lf",
+  "prettier.printWidth": 180,
 
   "lua": {
     "command": "/home/chris/.luambenvs/neovim4/bin/lua-lsp",
