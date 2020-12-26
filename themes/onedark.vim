@@ -20,10 +20,10 @@ colorscheme onedark
 set termguicolors
 
 hi CocHighlightText guibg=#31353f gui=none
-hi CocErrorHighlight guifg=#efefef  guibg=#f4384b
+hi CocErrorHighlight guibg=#1F0E0E
+hi CocWarningHighlight guibg=#1E1C06
 hi CursorLine guibg=#22282f
-" gui=undercurl term=undercurl
-hi CocWarningHighlight guifg=#efefef guibg=#F4ab39
+
 " gui=undercurl term=undercurl
 
 hi Visual guibg=#38404b gui=none

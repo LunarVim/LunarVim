@@ -28,7 +28,6 @@ else
   " I hate escape more than anything else
   inoremap jk <Esc>
   inoremap kj <Esc>
-  inoremap <S-CR> <Esc>
 
   " Easy CAPS
   " inoremap <c-u> <ESC>viwUi
@@ -101,8 +100,10 @@ else
   nmap Ö [m
   nmap Ä ]m
   nmap ß /
-  nmap # /(<CR>:let @/ = ""<CR>
-  nmap ' ?(<CR>:let @/ = ""<CR>
+  nmap + /(<CR>:let @/ = ""<CR>
+  nmap * ?(<CR>:let @/ = ""<CR>
+  nmap # /)<CR>:let @/ = ""<CR>
+  nmap ' ?)<CR>:let @/ = ""<CR>
 endif
 
 " Better nav for omnicomplete
