@@ -11,7 +11,7 @@ let g:far#file_mask_favorites=['%:p', '**/*.*', '**/README.md', '**/package.json
 let g:far#window_min_content_width=50
 let g:far#enable_undo=1
 
-set wildignore+=**/node_modules/**,yarn.lock,package-lock.json
+set wildignore+=**/node_modules/**,yarn.lock,package-lock.json,**/dist/**
 
 " let g:far#ignore_files=['$HOME/.config/nvim/utils/farignore']
 let g:far#ignore_files=['**/node_modules/**']
