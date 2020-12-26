@@ -126,7 +126,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'tjdevries/colorbuddy.vim'
     " Plug 'Th3Whit3Wolf/onebuddy'
 
-    " Plug 'HerringtonDarkholme/yats.vim'
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
   endif

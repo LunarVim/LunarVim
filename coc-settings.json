@@ -91,8 +91,10 @@
 
   // explorer
   "explorer.width": 45,
+  "explorer.contentWidth": -15,
   "explorer.quitOnOpen": false,
-  "explorer.file.root.template": "[icon] [git] [hidden & 1][root]",
+  "explorer.file.root.template": "[icon] [git] [hidden & 1] [root]",
+  "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1]",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
