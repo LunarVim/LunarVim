@@ -66,6 +66,13 @@ function! RipgrepFzf(query, fullscreen, arguments)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
+function! RipgrepInteractive()
+  call inputsave()
+  let args = input('Pass in ripgrep arguments: ')
+  call inputrestore()
+  call RipgrepFzf('', 0, args)
+endfunction
+
 command! -nargs=* -bang RG call RipgrepFzf('', <bang>0, <q-args>)
 
 " Git grep
