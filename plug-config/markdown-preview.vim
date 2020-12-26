@@ -1,6 +1,6 @@
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 
 " set to 1, the nvim will auto close current preview window when change
 " from markdown buffer to another buffer
@@ -27,7 +27,7 @@ let g:mkdp_open_to_the_world = 1
 " useful when you work in remote vim and preview on local browser
 " more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
 " default empty
-let g:mkdp_open_ip = ''
+let g:mkdp_open_ip = '0.0.0.0'
 
 " specify browser to open preview page
 " default: ''
