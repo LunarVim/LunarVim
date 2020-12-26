@@ -58,6 +58,8 @@ augroup TerminalStuff
   autocmd TermOpen * setlocal nonumber norelativenumber
 augroup END
 
+set sessionoptions=buffers,curdir,folds,help,tabpages,winsize
+
 " You can't stop me
 cmap w!! w !sudo tee %
 
