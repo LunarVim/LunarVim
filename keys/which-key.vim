@@ -179,7 +179,7 @@ let g:which_key_map.s = {
 let g:which_key_map.S = {
       \ 'name' : '+Session' ,
       \ 'c' : [':SClose'          , 'Close Session']  ,
-      \ 'd' : [':SDelete'         , 'Delete Session'] ,
+      \ 'd' : [':SDelete!'         , 'Delete Session'] ,
       \ 'l' : [':SLoad'           , 'Load Session']     ,
       \ 's' : [':Startify'        , 'Start Page']     ,
       \ 'S' : [':SSave'           , 'Save Session']   ,

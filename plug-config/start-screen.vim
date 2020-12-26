@@ -30,4 +30,6 @@ let g:startify_bookmarks = [
             \ { 'w': '/root/development/work' },
             \ ]
 
-let g:startify_enable_special = 0
+let g:startify_enable_special = 1
+
+autocmd BufEnter * if line2byte('.') == -1 && len(tabpagebuflist()) == 1 | Startify | endif
