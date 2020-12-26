@@ -25,9 +25,10 @@ function! StartifyEntryFormat()
     endfunction
 
 let g:startify_bookmarks = [
-            \ { 'p': '/root/docker' },
-            \ { 'd': '/root/development' },
-            \ { 'w': '/root/development/work' },
+            \ { 'p': '~/docker' },
+            \ { 'd': '~/development' },
+            \ { 'w': '~/development/work' },
+            \ { 'c': '~/.config/nvim' }
             \ ]
 
 let g:startify_enable_special = 1

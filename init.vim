@@ -59,6 +59,7 @@ else
   source $HOME/.config/nvim/plug-config/vimspector.vim
   source $HOME/.config/nvim/plug-config/nerd-tree.vim
   source $HOME/.config/nvim/plug-config/anyfold.vim
+  source $HOME/.config/nvim/plug-config/maximizer.vim
 endif
 
 " Add paths to node and python here

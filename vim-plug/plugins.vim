@@ -124,6 +124,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'meain/vim-package-info', { 'do': 'npm install'   }
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
     Plug 'pseewald/anyfold'
+    Plug 'szw/vim-maximizer'
 
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
