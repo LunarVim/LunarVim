@@ -153,7 +153,7 @@ let g:which_key_map.s = {
       \ '/' : [':History/'              , 'history'],
       \ ';' : [':FzfPreviewCommandPalette' , 'commands'],
       \ 'a' : [':Ag'                    , 'text Ag'],
-      \ 'b' : [':CocList lines' , 'current buffer'],
+      \ 'b' : [':CocList lines', 'current buffer'],
       \ 'B' : [':CocCommand fzf-preview.Buffers'     , 'open buffers'],
       \ 'c' : [':Commits'               , 'commits'],
       \ 'C' : [':BCommits'              , 'buffer commits'],
