@@ -39,7 +39,7 @@
   "coc.preferences.enableFloatHighlight": true,
   "git.enableGutters": false,
   "session.directory": "~/.config/vimsession",
-  "session.saveOnVimLeave": true,
+  "session.saveOnVimLeave": false,
   "session.restartOnSessionLoad": false,
 
   // python config
