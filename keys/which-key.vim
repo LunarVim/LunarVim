@@ -172,7 +172,7 @@ let g:which_key_map.s = {
       \ 'y' : [':Filetypes'             , 'file types'],
       \ }
 "
-let g:which_key_map.S = {
+let g:which_key_map.w = {
       \ 'name' : '+Session' ,
       \ 'c' : [':SClose'          , 'Close Session']  ,
       \ 'd' : [':SDelete!'         , 'Delete Session'] ,
