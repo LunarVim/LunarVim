@@ -32,6 +32,10 @@ let g:startify_bookmarks = [
             \ { 'c': '~/.config/nvim' }
             \ ]
 
+let g:startify_session_before_save = [
+    \ ':CocCommand explorer --quit'
+    \ ]
+
 let g:startify_enable_special = 1
 
 autocmd BufEnter * if line2byte('.') == -1 && len(tabpagebuflist()) == 1 | Startify | endif

@@ -1,28 +1,20 @@
 {
-  // suggestions
-  // "suggest.echodocSupport": true,
-  // TODO add more labels and give them cool glyphs
   "suggest.completionItemKindLabels": {
     "text": "t",
     "method": "m",
     "function": ""
   },
   "snippets.priority": 1,
-  //"yank.priority": 1,
   "suggest.languageSourcePriority": 99,
   "coc.source.file.priority": 2,
   "coc.source.around.priority": 3,
   "coc.source.buffer.priority": 4,
 
-  // diagnostics
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
   "diagnostic.checkCurrentLine": true,
-  // "diagnostic.displayByAle": true,
-  // "diagnostic.virtualText": true,
-  // this won't work with codelens when error on same line
 
   // codelens
   "codeLens.enable": true,
@@ -38,6 +30,8 @@
   "signature.target": "float",
   "coc.preferences.enableFloatHighlight": true,
   "git.enableGutters": false,
+
+  // sessions
   "session.directory": "~/.config/vimsession",
   "session.saveOnVimLeave": false,
   "session.restartOnSessionLoad": false,
@@ -139,7 +133,6 @@
 
   "eslint.packageManager": "yarn",
   "eslint.autoFixOnSave": true,
-  "eslint.executeAutofix": true,
 
   "prettier.eslintIntegration": true,
   "prettier.tabWidth": 2,
@@ -162,19 +155,6 @@
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],
-
-  // lua
-  //"lua.useSumnekoLs": true,
-  //"lua.commandPath": "/home/chris/.luambenvs/neovim3/bin/lua-lsp"
-  //"lua.enable": true,
-  //"Lua.completion.enable": true,
-  //"Lua.runtime.version": "Lua 5.1",
-  //"Lua.runtime.path": ["?.lua", "?/init.lua", "?/?.lua"],
-  //"lua.version": "5.1"
-  //"lua.commandPath": "/home/chris/.vscode-insiders/extensions/sumneko.lua-1.0.5/server/bin/Linux/lua-language-server"
-
-  // TODO b:coc_suggest_disable=1 GOYO
-  // TODO add to paths.vim g:coc_node_path
 
   "markdownlint.config": {
     "default": true,

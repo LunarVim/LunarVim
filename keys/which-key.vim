@@ -50,9 +50,7 @@ let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                         ,
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree']
 let g:which_key_map['W'] = [ ':call WindowSwap#EasyWindowSwap()'               , 'move window' ]
-let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
-let g:which_key_map['Q'] = [ 'q'                                               , 'quit' ]
-let g:which_key_map['c'] = [':Bdelete'                                         , 'buffer-delete']
+let g:which_key_map['Z'] = [ 'Goyo'                                            , 'zen' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
 " Group mappings
 
@@ -60,13 +58,11 @@ let g:which_key_map['r'] = [ ':RnvimrToggle'                                   ,
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
-      \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
+      \ 'f' : [':CocList filetypes'      , 'select filetype language'],
       \ 'm' : [':MarkdownPreview'        , 'markdown preview'],
       \ 'M' : [':MarkdownPreviewStop'    , 'markdown preview stop'],
       \ 'l' : [':messages'               , 'vim logs'],
       \ 'L' : [':set nonumber!'          , 'line-numbers'],
-      \ 's' : [':s/\%V\(.*\)\%V/"\1"/'   , 'surround'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
@@ -80,9 +76,6 @@ let g:which_key_map.b = {
       \ '<' : [':BufferMovePrevious'    , 'move prev'],
       \ 'b' : [':BufferPick'            , 'pick buffer'],
       \ 'd' : [':Bdelete'               , 'delete-buffer'],
-      \ 'C' : [':%bd'                   , 'close-all'],
-      \ 'X' : [':BufferCloseAllButCurrent' , 'close-all but current'],
-      \ 'Y' : [':BufferCloseBuffersRight'  , 'close-all to right'],
       \ 'D' : [':BufferOrderByDirectory', 'order by directory'],
       \ 'h' : ['bfirst'                 , 'first-buffer'],
       \ 'e' : ['blast'                  , 'last buffer'],
@@ -90,6 +83,9 @@ let g:which_key_map.b = {
       \ 'n' : ['bnext'                  , 'next-buffer'],
       \ 'p' : ['bprevious'              , 'previous-buffer'],
       \ 'f' : ['Buffers'                , 'fzf-buffer'],
+      \ 'C' : [':%bd'                   , 'close-all'],
+      \ 'X' : [':BufferCloseAllButCurrent' , 'close-all but current'],
+      \ 'Y' : [':BufferCloseBuffersRight'  , 'close-all to right'],
       \ }
 
 " d is for debug
@@ -132,7 +128,6 @@ let g:which_key_map.k = {
       \ 'p' : [':AsyncTask project-run'       , 'run project'],
       \ 'x' : [':cclose'                      , 'close task view'],
       \ }
-      " \ 'l' : [':AsyncTaskList'               , 'list tasks'],
 
 " m is for mark
 let g:which_key_map.m = {
@@ -144,14 +139,12 @@ let g:which_key_map.m = {
       \ 't' : [':CocCommand bookmark.toggle', 'toggle bookmark'],
       \ 'f'  :[':CocList bookmark', 'list bookmarks']
       \ }
-      " CoC throws an error
-      " \ 'a' : [':CocCommand bookmark.annotate', 'annotate bookmark'],
 
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
-      \ '/' : [':History/'              , 'history'],
       \ ';' : [':FzfPreviewCommandPalette' , 'commands'],
+      \ '/' : [':History/'              , 'history'],
       \ 'a' : [':Ag'                    , 'text Ag'],
       \ 'b' : [':CocList lines', 'current buffer'],
       \ 'B' : [':CocCommand fzf-preview.Buffers'     , 'open buffers'],
@@ -184,9 +177,9 @@ let g:which_key_map.S = {
       \ 'c' : [':SClose'          , 'Close Session']  ,
       \ 'd' : [':SDelete!'         , 'Delete Session'] ,
       \ 'l' : [':SLoad'           , 'Load Session']     ,
-      \ 's' : [':Startify'        , 'Start Page']     ,
-      \ 'S' : [':SSave'           , 'Save Session']   ,
-      \ 'L' : [':CocList sessions' , 'List Session']   ,
+      \ 'h' : [':Startify'        , 'Start Page']     ,
+      \ 's' : [':SSave'           , 'Save Session']   ,
+      \ 'f' : [':CocList sessions' , 'List Session']   ,
       \ }
 
 " g is for git
@@ -219,11 +212,6 @@ let g:which_key_map.g = {
       \ 'v' : [':GV'                               , 'view commits'],
       \ 'V' : [':GV!'                              , 'view buffer commits'],
       \ }
-      " \ 'A' : [':Git add %'                        , 'add current'],
-      " \ 'S' : [':!git status'                      , 'status'],
-"
-"
-"
 
 let g:which_key_map.G = {
       \ 'name' : '+gist' ,
@@ -241,15 +229,14 @@ let g:which_key_map.G = {
 " l is for language server protocol
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
+      \ ';' : [':CocList commands'                   , 'commands'],
       \ '.' : [':CocConfig'                          , 'config'],
       \ ',' : ['<Plug>(coc-refactor)'                , 'refactor'],
-      \ ';' : [':CocList commands'                   , 'commands'],
       \ 'a' : ['<Plug>(coc-codeaction)'              , 'code action'],
       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
       \ 'b' : [':CocNext'                            , 'next action'],
       \ 'B' : [':CocPrev'                            , 'prev action'],
       \ 'c' : [':CocCommand docthis.documentThis'    , 'prev action'],
-      \ 'C' : [':CocList filetypes'                  , 'select language'],
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
@@ -262,10 +249,10 @@ let g:which_key_map.l = {
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
       \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
       \ 'L' : [':CocList'                            , 'coc-list'],
-      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
-      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
       \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'O' : [':CocList outline'                    , 'search outline'],
+      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
+      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
       \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
       \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
       \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
@@ -285,15 +272,16 @@ let g:which_key_map.l = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=normal --height=10'       , 'terminal'],
+      \ ';' : [':FloatermNew --wintype=normal --height=10'      , 'terminal on bottom'],
+      \ '.' : [':FloatermNew'                                   , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
-      \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'h' : [':FloatermNew htop'                              , 'htop'],
       \ 'n' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ 'c' : [':CocList floaterm'                              , 'floaterm'],
+      \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 's' : [':FloattermShow'                                 , 'floaterm-show'],
       \ 'k' : [':FloattermKill!'                                , 'floaterm-kill'],
       \ }

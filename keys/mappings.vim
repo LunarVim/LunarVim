@@ -40,6 +40,8 @@ else
   nnoremap <silent> <Leader><Right> :BufferNext<CR>
   nnoremap <silent> <Leader><Down> :BufferMoveNext<CR>
 
+  " delete buffer with ctrl+w c to replicate behaviour of close
+
   " Move selected line / block of text in visual mode
   " shift + k to move up
   " shift + j to move down
@@ -49,7 +51,7 @@ else
   " Alternate way to save
   noremap <silent> <C-s> :w<CR>
   " Alternate way to quit
-  nnoremap <silent> <C-Q> :wq!<CR>
+  nnoremap <silent> <C-t> :BufferClose<CR>
   " Use control-c instead of escape
   noremap <silent> <C-c> <Esc>
 
@@ -97,9 +99,12 @@ else
   nmap Ü O<ESC>j
   nmap ö {
   nmap ä }
+
   nmap Ö [m
   nmap Ä ]m
   nmap ß /
+
+  " run through function parantheses and curly braceces
   nmap + /}<CR>:let @/ = ""<CR>
   nmap * ?}<CR>:let @/ = ""<CR>
   nmap # /)<CR>:let @/ = ""<CR>
