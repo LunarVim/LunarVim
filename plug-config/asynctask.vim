@@ -1,10 +1,18 @@
 let g:asyncrun_open = 6
-let g:asynctasks_term_pos = 'bottom'
-" let g:asynctasks_term_pos = 'top'
-" let g:asynctasks_term_pos = 'tab'
-" let g:asynctasks_term_pos = 'external'
 let g:asynctasks_extra_config = ['~/.config/nvim/utils/tasks.ini']
-" let current_tasks = asynctasks#list("")
+
+function! s:run_floaterm(opts)
+  let curr_bufnr = floaterm#curr()
+  if has_key(a:opts, 'silent') && a:opts.silent == 1
+    FloatermHide!
+  endif
+  let cmd = 'cd ' . shellescape(getcwd()) . ' && ' . a:opts.cmd
+  call floaterm#terminal#send(curr_bufnr, [cmd])
+endfunction
+
+let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+let g:asyncrun_runner.floaterm = function('s:run_floaterm')
+let g:asynctasks_term_pos = 'floaterm'
 
 function! s:fzf_sink(what)
 	let p1 = stridx(a:what, '<')
