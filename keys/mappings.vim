@@ -51,7 +51,8 @@ else
   " Alternate way to save
   noremap <silent> <C-s> :w<CR>
   " Alternate way to quit
-  nnoremap <silent> <C-t> :BufferClose<CR>
+  nnoremap <silent> <C-y> :BufferClose<CR>
+  nnoremap <silent> <C-t> <C-w>T
   " Use control-c instead of escape
   noremap <silent> <C-c> <Esc>
 
