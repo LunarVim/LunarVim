@@ -64,6 +64,7 @@ let g:which_key_map.a = {
       \ 'l' : [':messages'               , 'vim logs'],
       \ 'L' : [':set nonumber!'          , 'line-numbers'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
+      \ 'R' : [':CocCommand workspace.renameCurrentFile'  , 'rename current file'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
       \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
