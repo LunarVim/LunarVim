@@ -236,7 +236,7 @@ let g:which_key_map.l = {
       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
       \ 'b' : [':CocNext'                            , 'next action'],
       \ 'B' : [':CocPrev'                            , 'prev action'],
-      \ 'c' : [':CocCommand docthis.documentThis'    , 'prev action'],
+      \ 'c' : [':CocCommand docthis.documentThis'    , 'document this function'],
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
