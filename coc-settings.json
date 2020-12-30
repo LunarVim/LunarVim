@@ -22,6 +22,8 @@
   // list
   "list.indicator": ">",
   "list.selectedSignText": " ",
+  "list.source.words.defaultOptions": ["--interactive", "--ignore-case"],
+  "list.source.mru.ignoreGitIgnore": true,
 
   // autoformat
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript", "graphql", "html", "yaml", "json", "python", "java"],
