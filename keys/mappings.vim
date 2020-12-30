@@ -106,10 +106,10 @@ else
   nmap ß /
 
   " run through function parantheses and curly braceces
-  nmap + /}<CR>:let @/ = ""<CR>
-  nmap * ?}<CR>:let @/ = ""<CR>
-  nmap # /)<CR>:let @/ = ""<CR>
-  nmap ' ?)<CR>:let @/ = ""<CR>
+  nmap + /{<CR>:let @/ = ""<CR>
+  nmap * ?{<CR>:let @/ = ""<CR>
+  nmap # /(<CR>:let @/ = ""<CR>
+  nmap ' ?(<CR>:let @/ = ""<CR>
 endif
 
 " Better nav for omnicomplete

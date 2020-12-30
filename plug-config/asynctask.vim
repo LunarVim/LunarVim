@@ -6,7 +6,8 @@ function! s:run_floaterm(opts)
   if has_key(a:opts, 'silent') && a:opts.silent == 1
     FloatermHide!
   endif
-  let cmd = 'cd ' . shellescape(getcwd()) . ' && ' . a:opts.cmd
+  " let cmd = 'cd ' . shellescape(getcwd()) . ' && ' . a:opts.cmd
+  let cmd = a:opts.cmd
   call floaterm#terminal#send(curr_bufnr, [cmd])
 endfunction
 
