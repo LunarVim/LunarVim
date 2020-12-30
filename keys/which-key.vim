@@ -52,6 +52,7 @@ let g:which_key_map['u'] = [ ':UndotreeToggle'                                 ,
 let g:which_key_map['W'] = [ ':call WindowSwap#EasyWindowSwap()'               , 'move window' ]
 let g:which_key_map['Z'] = [ 'Goyo'                                            , 'zen' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+let g:which_key_map['Q'] = [ ':q!'                                             , 'quit' ]
 " Group mappings
 
 " a is for actions
