@@ -31,6 +31,7 @@ hi Visual guibg=#38404b gui=none
 highlight Cursor guibg=#6c778d
 
 highlight TSType guifg=#e5c07b
+highlight TSNamespace guifg=#e06c75
 highlight TSTypeBuiltin guifg=#e5c07b
 highlight TSProperty guifg=#e06c75
 highlight TSVariable guifg=#e06c75
