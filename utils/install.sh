@@ -66,8 +66,8 @@ installcocextensions() {
 }
 
 cloneconfig() {
-  echo "Cloning Nvim Mach 2 configuration"
-  git clone https://github.com/cenk1cenk2/nvim.git ~/.config/nvim
+  echo "Cloning neovim configuration."
+  git clone git@github.com:cenk1cenk2/ansible-playbooks.git ~/.config/nvim
 }
 
 moveoldnvim() {
@@ -163,7 +163,3 @@ cloneconfig
 which nvim >/dev/null && installplugins
 
 installcocextensions
-
-echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
-
-echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
