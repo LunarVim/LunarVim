@@ -1,0 +1,49 @@
+snippet nest-module "nest.js default module" b
+import { Module } from '@nestjs/common'
+
+@Module({
+  imports: [],
+  providers: []
+})
+export class $1Module {}
+endsnippet
+
+snippet nest-dynamic-module "nest.js dynamic module" b
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
+
+@Module({
+	providers: [],
+	imports: []
+	})
+export class $1Module implements NestModule {
+	async configure (consumer: MiddlewareConsumer): Promise<void> {
+	}
+}
+endsnippet
+
+snippet nest-service "nest.js service" b
+import { Injectable, Logger } from '@nestjs/common'
+
+@Injectable()
+export class $1Service {
+	private logger: Logger = new Logger(this.constructor.name)
+
+  constructor () {}
+}
+endsnippet
+
+snippet nest-resolver "nest.js resolver" b
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+
+@Resolver()
+export class $1Resolver {
+  constructor () {}
+
+  @Query(() => String)
+  public someFunction (
+      @Args() args: SomeInput
+  ): Promise<SomeOutput> {
+    return this.someService.someFunction(args)
+  }	
+}
+endsnippet
