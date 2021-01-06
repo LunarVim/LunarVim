@@ -61,7 +61,7 @@ installcocextensions() {
   cd ~/.config/coc/extensions
   [ ! -f package.json ] && echo '{"dependencies":{}}' >package.json
   # Change extension names to the extensions you need
-  EXTENSIONS="coc-snippets coc-actions coc-sh  coc-lists coc-emmet coc-tasks coc-pairs coc-tsserver coc-floaterm coc-fzf-preview coc-html coc-css coc-cssmodules coc-stylelintplus coc-yaml coc-python coc-pyright coc-explorer coc-svg coc-prettier coc-vimlsp coc-xml coc-yank coc-json coc-marketplace coc-eslint coc-floaterm coc-diagnostic coc-go coc-gitignore coc-git coc-markdownlint coc-webpack coc-docker coc-styled-components coc-github coc-react-refactor coc-docthis"
+  EXTENSIONS="coc-snippets coc-actions coc-sh coc-bookmark coc-lists coc-emmet coc-tasks coc-pairs coc-tsserver coc-floaterm coc-fzf-preview coc-html coc-css coc-cssmodules coc-stylelintplus coc-yaml coc-python coc-pyright coc-explorer coc-svg coc-prettier coc-vimlsp coc-xml coc-yank coc-json coc-marketplace coc-eslint coc-floaterm coc-diagnostic coc-go coc-gitignore coc-git coc-markdownlint coc-webpack coc-docker coc-styled-components coc-github coc-react-refactor coc-docthis"
   sudo npm i ${EXTENSIONS} --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod --legacy-peer-deps
 }
 
