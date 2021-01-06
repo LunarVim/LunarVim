@@ -133,6 +133,10 @@ installextrapackages() {
   [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
+compileTreesitter() {
+  nvim --headless +TSUpdate +qall
+}
+
 # Welcome
 echo 'Installing Nvim Mach 2'
 
@@ -163,3 +167,5 @@ cloneconfig
 which nvim >/dev/null && installplugins
 
 installcocextensions
+
+compileTreesitter

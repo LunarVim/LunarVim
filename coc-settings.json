@@ -104,12 +104,6 @@
   },
 
   "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
     "eslint": {
       "filetypes": ["js", "json", "ts", "jsx", "tsx"],
       "command": "./node_modules/.bin/eslint", // this will find local eslint first, if local eslint not found, it
