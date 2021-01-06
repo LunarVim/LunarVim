@@ -167,7 +167,6 @@ let g:which_key_map.f = {
       \ 'T' : [':BTags'                 , 'buffer tags'],
       \ 'o' : [':CocList outline'       , 'search outline'],
       \ 'w' : [':Windows'               , 'search windows'],
-      \ 'y' : [':CocCommand fzf-preview.Yankround' , 'yank history'],
       \ 'Y' : [':Filetypes'             , 'file types'],
       \ }
 "
@@ -194,8 +193,8 @@ let g:which_key_map.g = {
       \ 'f' : [':CocCommand fzf-preview.GitStatus' , 'find-action'],
       \ 'g' : [':GGrep'                            , 'git grep'],
       \ 'G' : [':Gstatus'                          , 'status'],
-      \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
       \ 'h' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
+      \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
       \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
       \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
       \ 'l' : [':0Glog'                            , 'log'],

@@ -125,7 +125,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
     Plug 'pseewald/anyfold'
     Plug 'szw/vim-maximizer'
-    Plug 'LeafCage/yankround.vim'
+    Plug 'junegunn/vim-peekaboo'
 
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
