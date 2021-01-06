@@ -96,8 +96,8 @@ else
     nnoremap <C-#> :vertical resize +2<CR>
   endif
 
-  nmap ü o<ESC>k
-  nmap Ü O<ESC>j
+  nmap Ü o<ESC>k
+  nmap ü O<ESC>j
   nmap ö {
   nmap ä }
 
@@ -110,6 +110,8 @@ else
   nmap * ?{<CR>:let @/ = ""<CR>
   nmap # /(<CR>:let @/ = ""<CR>
   nmap ' ?(<CR>:let @/ = ""<CR>
+
+  nnoremap <silent> <C-\> :call Comment()<CR>
 endif
 
 " Better nav for omnicomplete

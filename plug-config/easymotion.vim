@@ -39,17 +39,17 @@ if exists('g:vscode')
 
 endif
 
-hi link EasyMotionTarget ErrorMsg
+" hi link EasyMotionTarget ErrorMsg
 
-hi link EasyMotionTarget2First MatchParen
+" hi link EasyMotionTarget2First MatchParen
 
-hi link EasyMotionMoveHL Search
+" hi link EasyMotionMoveHL Search
 
-hi link EasyMotionTarget ErrorMsg
+" hi link EasyMotionTarget ErrorMsg
 
-hi link EasyMotionTarget2First MatchParen
+" hi link EasyMotionTarget2First MatchParen
 
-hi link EasyMotionMoveHL Search
+" hi link EasyMotionMoveHL Search
 
 let g:EasyMotion_prompt = '🔎 '
 

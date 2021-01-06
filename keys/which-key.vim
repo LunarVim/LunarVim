@@ -37,7 +37,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-let g:which_key_map['#'] = [ ':call Comment()'                                 , 'comment' ]
+" let g:which_key_map['#'] = [ ':call Comment()'                                 , 'comment' ]
 let g:which_key_map[';'] = [ ':Commands'                                       , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                                          , 'balance windows' ]
 let g:which_key_map['e'] = [ ':CocCommand explorer --toggle --sources=file+'   , 'explorer' ]
@@ -108,10 +108,12 @@ let g:which_key_map.d = {
       \ }
 
 " f is for find and replace
-let g:which_key_map.f = {
+let g:which_key_map.s = {
       \ 'name' : '+find & replace' ,
       \ 'f' : [':Farf --source=vimgrep'                        , 'find in buffer'],
+      \ 'F' : [':Farf --source=rgnvim'                         , 'find in workspace'],
       \ 'r' : [':Farr --source=vimgrep'                        , 'replace in buffer'],
+      \ 'R' : [':Farr --source=rgnvim'                         , 'replace in workspace'],
       \ }
 
 " k is for task
@@ -141,12 +143,12 @@ let g:which_key_map.m = {
       \ }
 
 " s is for search
-let g:which_key_map.s = {
+let g:which_key_map.f = {
       \ 'name' : '+search' ,
       \ ';' : [':FzfPreviewCommandPalette' , 'commands'],
       \ '/' : [':History/'              , 'history'],
       \ 'a' : [':Ag'                    , 'text Ag'],
-      \ 'b' : [':CocList lines', 'current buffer'],
+      \ 'b' : [':CocCommand fzf-preview.BufferLines'                , 'current buffer'],
       \ 'B' : [':CocCommand fzf-preview.Buffers'     , 'open buffers'],
       \ 'c' : [':Commits'               , 'commits'],
       \ 'C' : [':BCommits'              , 'buffer commits'],
