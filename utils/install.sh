@@ -133,18 +133,8 @@ installextrapackages() {
   [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
-compileTreesitter() {
-  nvim --headless +TSUpdate +qall
-}
-
 # Welcome
-echo 'Installing Nvim Mach 2'
-
-# install pip
-which pip3 >/dev/null && echo "pip installed, moving on..." || asktoinstallpip
-
-# install node and neovim support
-which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
+echo 'Installing Nvim configuration.'
 
 # install pynvim
 pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
@@ -168,4 +158,3 @@ which nvim >/dev/null && installplugins
 
 installcocextensions
 
-compileTreesitter
