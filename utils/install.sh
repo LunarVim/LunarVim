@@ -67,7 +67,7 @@ installcocextensions() {
 
 cloneconfig() {
   echo "Cloning neovim configuration."
-  git clone git@github.com:cenk1cenk2/ansible-playbooks.git ~/.config/nvim
+  git clone git@github.com:cenk1cenk2/nvim.git ~/.config/nvim
 }
 
 moveoldnvim() {
