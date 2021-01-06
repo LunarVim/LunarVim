@@ -127,7 +127,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'szw/vim-maximizer'
     Plug 'junegunn/vim-peekaboo'
 
-    Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
+    Plug 'z0mbix/vim-shfmt', { 'for': 'sh', 'do': 'GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt' }
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
   endif
