@@ -1,0 +1,7 @@
+node_modules/
+yarn.lock
+package-lock.json
+dist/
+.git/
+*.pyc
+__pycache__/

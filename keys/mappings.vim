@@ -96,22 +96,26 @@ else
     nnoremap <C-#> :vertical resize +2<CR>
   endif
 
-  nmap Ü o<ESC>k
-  nmap ü O<ESC>j
-  nmap ö {
-  nmap ä }
+  " create space on top and bottom
+  nmap <silent> Ü o<ESC>k
+  nmap <silent> ü O<ESC>j
 
-  nmap Ö [m
-  nmap Ä ]m
-  nmap ß /
+  " jump between gaps
+  nmap <silent> ö {
+  nmap <silent> ä }
+
+  " jump between methods
+  nmap <silent> Ö [m
+  nmap <silent> Ä ]m
 
   " run through function parantheses and curly braceces
-  nmap + /{<CR>:let @/ = ""<CR>
-  nmap * ?{<CR>:let @/ = ""<CR>
-  nmap # /(<CR>:let @/ = ""<CR>
-  nmap ' ?(<CR>:let @/ = ""<CR>
+  nmap <silent> + /{<CR>:let @/ = ""<CR>
+  nmap <silent> * ?{<CR>:let @/ = ""<CR>
+  nmap <silent> # /(<CR>:let @/ = ""<CR>
+  nmap <silent> ' ?(<CR>:let @/ = ""<CR>
 
-  nnoremap <silent> <C-\> :call Comment()<CR>
+  " comment with ctrl+#
+  noremap <silent> <C-\> :call Comment()<CR>
 endif
 
 " Better nav for omnicomplete

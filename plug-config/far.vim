@@ -13,8 +13,7 @@ let g:far#enable_undo=1
 
 set wildignore+=**/node_modules/**,yarn.lock,package-lock.json,**/dist/**
 
-" let g:far#ignore_files=['$HOME/.config/nvim/utils/farignore']
-let g:far#ignore_files=['**/node_modules/**']
+let g:far#ignore_files=['$HOME/.config/nvim/utils/farignore']
 
 "     Below are the default mappings and corresponding variable names in
 
