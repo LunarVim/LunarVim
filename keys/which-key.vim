@@ -105,9 +105,9 @@ let g:which_key_map.d = {
 " f is for find and replace
 let g:which_key_map.s = {
       \ 'name' : '+find & replace' ,
-      \ 'f' : [':Farf --source=vimgrep --file-mask="%"'                        , 'find in buffer'],
+      \ 'f' : [':Farf --source=vimgrep --file-mask="%:p"'                        , 'find in buffer'],
       \ 'F' : [':Farf --source=rgnvim'                                         , 'find in workspace'],
-      \ 'r' : [':Farr --source=vimgrep --file-mask="%"'                        , 'replace in buffer'],
+      \ 'r' : [':Farr --source=vimgrep --file-mask="%:p"'                        , 'replace in buffer'],
       \ 'R' : [':Farr --source=rgnvim'                                         , 'replace in workspace'],
       \ }
 

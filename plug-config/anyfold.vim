@@ -1,4 +1,4 @@
-let ftToIgnore = ['coc-explorer']
+let ftToIgnore = []
 autocmd Filetype * if index(ftToIgnore, &ft) < 0 | AnyFoldActivate
 
 let g:anyfold_fold_comments=1
