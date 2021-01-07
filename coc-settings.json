@@ -151,6 +151,9 @@
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],
+  "coc.source.floaterm.enable": false,
+  "coc.source.coc-cssmodules.priority": 50,
+  "coc.source.docthis.priority": 60,
 
   "markdownlint.config": {
     "default": true,
