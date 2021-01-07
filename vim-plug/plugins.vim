@@ -29,11 +29,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Surround
     Plug 'tpope/vim-surround'
 
+    " highlight yanks
+    Plug 'machakann/vim-highlightedyank'
   if exists('g:vscode')
-
     " highlight yank
     Plug 'ChristianChiarulli/vscode-easymotion'
-    Plug 'machakann/vim-highlightedyank'
   else
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
@@ -42,8 +42,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " Treesitter
-    Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'nvim-treesitter/playground', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     " Cool Icons
     Plug 'kyazdani42/nvim-web-devicons'
@@ -112,21 +112,22 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'moll/vim-bbye'
     " Debugging
     Plug 'puremourning/vimspector'
-    Plug 'szw/vim-maximizer'
-    " Neovim in Browser
-    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
     " MY PLUGINS
+    " ansible related
     Plug 'arouene/vim-ansible-vault'
     Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
+    " whitespace clean
     Plug 'ntpeters/vim-better-whitespace'
-    " Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
-    Plug 'meain/vim-package-info', { 'do': 'npm install'   }
-    Plug 'christianchiarulli/nvcode-color-schemes.vim'
+    " npm package versions, not working reliable
+    Plug 'meain/vim-package-info', { 'do': 'npm install' }
+    " folding code
     Plug 'pseewald/anyfold'
+    " maximize windows temporarary
     Plug 'szw/vim-maximizer'
+    " show yank macro stuff on "
     Plug 'junegunn/vim-peekaboo'
-
+    " shell format
     Plug 'z0mbix/vim-shfmt', { 'for': 'sh', 'do': 'GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt' }
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'

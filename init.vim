@@ -62,6 +62,7 @@ else
   source $HOME/.config/nvim/plug-config/maximizer.vim
   source $HOME/.config/nvim/plug-config/peekaboo.vim
   source $HOME/.config/nvim/plug-config/shellfmt.vim
+  source $HOME/.config/nvim/plug-config/auto-pairs.vim
 endif
 
 " Add paths to node and python here
