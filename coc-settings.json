@@ -127,6 +127,8 @@
     }
   },
 
+  "tsserver.npm": "/usr/bin/npm",
+
   "eslint.packageManager": "yarn",
   "eslint.autoFixOnSave": true,
 
