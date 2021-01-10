@@ -59,6 +59,8 @@ let g:which_key_map['Q'] = [ ':q!'                                             ,
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
+      \ 'd' : [':! ansible-vault decrypt %:p'        , 'ansible-vault decrypt'],
+      \ 'D' : [':! ansible-vault encrypt %:p'        , 'ansible-vault encrypt'],
       \ 'f' : [':CocList filetypes'      , 'select filetype language'],
       \ 'm' : [':MarkdownPreview'        , 'markdown preview'],
       \ 'M' : [':MarkdownPreviewStop'    , 'markdown preview stop'],
