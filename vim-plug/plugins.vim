@@ -10,11 +10,11 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Better Comments
-    Plug 'tpope/vim-commentary'
+    " Plug 'tpope/vim-commentary'
     " Change dates fast
-    Plug 'tpope/vim-speeddating'
+    " Plug 'tpope/vim-speeddating'
     " Convert binary, hex, etc..
-    Plug 'glts/vim-radical'
+    " Plug 'glts/vim-radical'
     " Repeat stuff
     Plug 'tpope/vim-repeat'
     " Text Navigation
@@ -31,10 +31,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " highlight yanks
     Plug 'machakann/vim-highlightedyank'
+
   if exists('g:vscode')
     " highlight yank
     Plug 'ChristianChiarulli/vscode-easymotion'
   else
+    " See what keys do like in emacs
+    Plug 'liuchengxu/vim-which-key'
     " Have the file system follow you around
     Plug 'airblade/vim-rooter'
     " auto set indent settings
@@ -75,8 +78,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-startify'
     " Vista
     Plug 'liuchengxu/vista.vim'
-    " See what keys do like in emacs
-    Plug 'liuchengxu/vim-which-key'
     " Zen mode
     Plug 'junegunn/goyo.vim'
     " Snippets
@@ -131,6 +132,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'z0mbix/vim-shfmt', { 'for': 'sh', 'do': 'GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt' }
     " Multiple Cursors
     Plug 'terryma/vim-multiple-cursors'
+    " Rainbow parenthesis
+    Plug 'luochen1990/rainbow'
+    " comments
+    Plug 'preservim/nerdcommenter'
   endif
 
 call plug#end()

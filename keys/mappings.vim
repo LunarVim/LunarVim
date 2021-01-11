@@ -97,8 +97,8 @@ else
   endif
 
   " create space on top and bottom
-  nmap <silent> Ü o<ESC>k
-  nmap <silent> ü O<ESC>j
+  nmap <silent> ü o<ESC>k
+  nmap <silent> Ü O<ESC>j
 
   " jump between gaps
   nmap <silent> ö {zz
@@ -114,8 +114,6 @@ else
   nmap <silent> # /(<CR>:let @/ = ""<CR>zz
   nmap <silent> ' ?(<CR>:let @/ = ""<CR>zz
 
-  " comment with ctrl+#
-  noremap <silent> <C-\> :call Comment()<CR>
 endif
 
 " Better nav for omnicomplete

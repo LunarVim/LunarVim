@@ -29,7 +29,7 @@ else
 
   " Plugin Configuration
   source $HOME/.config/nvim/keys/which-key.vim
-  source $HOME/.config/nvim/plug-config/vim-commentary.vim
+  " source $HOME/.config/nvim/plug-config/vim-commentary.vim
   source $HOME/.config/nvim/plug-config/rnvimr.vim
   source $HOME/.config/nvim/plug-config/better-whitespace.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
@@ -58,17 +58,21 @@ else
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
   source $HOME/.config/nvim/plug-config/vimspector.vim
   source $HOME/.config/nvim/plug-config/nerd-tree.vim
+  source $HOME/.config/nvim/plug-config/nerd-commenter.vim
   source $HOME/.config/nvim/plug-config/anyfold.vim
   source $HOME/.config/nvim/plug-config/maximizer.vim
   source $HOME/.config/nvim/plug-config/peekaboo.vim
   source $HOME/.config/nvim/plug-config/shellfmt.vim
   source $HOME/.config/nvim/plug-config/auto-pairs.vim
+  source $HOME/.config/nvim/plug-config/rainbow.vim
+  luafile $HOME/.config/nvim/lua/rainbow.lua
 endif
 
 " Add paths to node and python here
 if !empty(glob("~/.config/nvim/paths.vim"))
   source $HOME/.config/nvim/paths.vim
 endif
+
 
 " Better nav for omnicomplete TODO figure out why this is being overridden
 inoremap <expr> <c-j> ("\<C-n>")

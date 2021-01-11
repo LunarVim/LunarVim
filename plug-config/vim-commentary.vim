@@ -5,4 +5,4 @@ function! Comment()
     execute "'<,'>Commentary"
   endif
  endfunction
-vnoremap <silent> <space># :call Comment()
+noremap <silent> <C-\> :call Comment()<CR>
