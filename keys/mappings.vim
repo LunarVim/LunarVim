@@ -101,8 +101,8 @@ else
   nmap <silent> ü O<ESC>j
 
   " jump between gaps
-  nmap <silent> ö {
-  nmap <silent> ä }
+  nmap <silent> ö {zz
+  nmap <silent> ä }zz
 
   " jump between methods
   nmap <silent> Ö ?{<CR>:let @/ = ""<CR>zz
