@@ -105,14 +105,14 @@ else
   nmap <silent> ä }
 
   " jump between methods
-  nmap <silent> Ö ?{<CR>:let @/ = ""<CR>zz<CR>
-  nmap <silent> Ä /{<CR>:let @/ = ""<CR>zz<CR>
+  nmap <silent> Ö ?{<CR>:let @/ = ""<CR>zz
+  nmap <silent> Ä /{<CR>:let @/ = ""<CR>zz
 
   " run through function parantheses and curly braceces
-  nmap <silent> + /)<CR>:let @/ = ""<CR>zz<CR>
-  nmap <silent> * ?)<CR>:let @/ = ""<CR>zz<CR>
-  nmap <silent> # /(<CR>:let @/ = ""<CR>zz<CR>
-  nmap <silent> ' ?(<CR>:let @/ = ""<CR>zz<CR>
+  nmap <silent> + /)<CR>:let @/ = ""<CR>zz
+  nmap <silent> * ?)<CR>:let @/ = ""<CR>zz
+  nmap <silent> # /(<CR>:let @/ = ""<CR>zz
+  nmap <silent> ' ?(<CR>:let @/ = ""<CR>zz
 
   " comment with ctrl+#
   noremap <silent> <C-\> :call Comment()<CR>
