@@ -114,10 +114,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Debugging
     Plug 'puremourning/vimspector'
 
-    " MY PLUGINS
     " ansible related
-    Plug 'arouene/vim-ansible-vault'
-    Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
+    " Plug 'arouene/vim-ansible-vault'
+    " Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
     " whitespace clean
     Plug 'ntpeters/vim-better-whitespace'
     " npm package versions, not working reliable
@@ -136,6 +135,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'luochen1990/rainbow'
     " comments
     Plug 'preservim/nerdcommenter'
+    " jinja
+    Plug 'glench/vim-jinja2-syntax'
   endif
 
 call plug#end()
