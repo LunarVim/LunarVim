@@ -44,3 +44,4 @@ highlight TSOperator guifg=#56b6c2
 highlight TSLabel guifg=#e06c75
 highlight TSPunctSpecial guifg=#c678dd
 highlight TSTagDelimiter guifg=#b0b0b0
+highlight TSDelimiter guifg=#b0b0b0
