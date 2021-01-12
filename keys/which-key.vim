@@ -83,6 +83,7 @@ let g:which_key_map.b = {
       \ 'e' : ['blast'                  , 'last buffer'],
       \ 'L' : [':BufferOrderByLanguage' , 'order by language'],
       \ 'f' : ['Buffers'                , 'fzf-buffer'],
+      \ 's' : [':edit #'                , 'go-to-last'],
       \ 'C' : [':%bd'                   , 'close-all'],
       \ 'X' : [':BufferCloseAllButCurrent' , 'close-all but current'],
       \ 'Y' : [':BufferCloseBuffersRight'  , 'close-all to right'],
