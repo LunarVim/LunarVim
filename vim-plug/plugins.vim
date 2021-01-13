@@ -136,7 +136,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " comments
     Plug 'preservim/nerdcommenter'
     " jinja
-    Plug 'glench/vim-jinja2-syntax'
+    Plug 'lepture/vim-jinja'
   endif
 
 call plug#end()

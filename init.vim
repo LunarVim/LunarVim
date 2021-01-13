@@ -67,6 +67,7 @@ else
   source $HOME/.config/nvim/plug-config/rainbow.vim
   source $HOME/.config/nvim/plug-config/fzf-preview.vim
   luafile $HOME/.config/nvim/lua/rainbow.lua
+  source $HOME/.config/nvim/plug-config/jinja.vim
 endif
 
 " Add paths to node and python here
