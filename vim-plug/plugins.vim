@@ -137,6 +137,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'preservim/nerdcommenter'
     " jinja
     Plug 'lepture/vim-jinja'
+
+    " conflict motions for git conflicts
+    " Plug 'vim-scripts/ConflictMotions'
+    " Plug 'inkarkat/vim-CountJump'
+    " Plug 'inkarkat/vim-ingo-library'
   endif
 
 call plug#end()
