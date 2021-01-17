@@ -77,7 +77,7 @@ let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 
 " use a custom port to start server or random for empty
-let g:mkdp_port = ''
+let g:mkdp_port = '15000'
 
 " preview page title
 " ${name} will be replace with the file name
