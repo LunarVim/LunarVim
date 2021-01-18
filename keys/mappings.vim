@@ -105,10 +105,14 @@ else
   nmap <silent> ä }zz
 
   " jump between methods
+  nmap <silent> äö [m
+  nmap <silent> öä ]m
+
+  " jump between curly braces
   nmap <silent> Ö ?{<CR>:let @/ = ""<CR>zz
   nmap <silent> Ä /{<CR>:let @/ = ""<CR>zz
 
-  " run through function parantheses and curly braceces
+  " run through function parantheses
   nmap <silent> + /)<CR>:let @/ = ""<CR>zz
   nmap <silent> * ?)<CR>:let @/ = ""<CR>zz
   nmap <silent> # /(<CR>:let @/ = ""<CR>zz
