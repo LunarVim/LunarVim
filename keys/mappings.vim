@@ -114,6 +114,9 @@ else
   nmap <silent> # /(<CR>:let @/ = ""<CR>zz
   nmap <silent> ' ?(<CR>:let @/ = ""<CR>zz
 
+  " copy last register
+  nmap <silent> pü diw"0P
+
 endif
 
 " Better nav for omnicomplete
