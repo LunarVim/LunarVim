@@ -4,11 +4,7 @@
     "method": "m",
     "function": ""
   },
-  "snippets.priority": 1,
   "suggest.languageSourcePriority": 99,
-  "coc.source.file.priority": 2,
-  "coc.source.around.priority": 3,
-  "coc.source.buffer.priority": 4,
 
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
@@ -35,7 +31,7 @@
 
   // sessions
   "session.directory": "~/.config/vimsession",
-  "session.saveOnVimLeave": false,
+  "session.saveOnVimLeave": true,
   "session.restartOnSessionLoad": false,
 
   // python config
@@ -157,6 +153,11 @@
   "coc.source.floaterm.enable": false,
   "coc.source.coc-cssmodules.priority": 50,
   "coc.source.docthis.priority": 60,
+  "snippets.priority": 1,
+  "coc.source.file.priority": 2,
+  "coc.source.around.priority": 3,
+  "coc.source.buffer.priority": 4,
+  "tabnine.priority": 75,
 
   "markdownlint.config": {
     "default": true,
