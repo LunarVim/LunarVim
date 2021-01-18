@@ -65,8 +65,8 @@ else
   source $HOME/.config/nvim/plug-config/shellfmt.vim
   source $HOME/.config/nvim/plug-config/auto-pairs.vim
   source $HOME/.config/nvim/plug-config/rainbow.vim
-  source $HOME/.config/nvim/plug-config/fzf-preview.vim
   luafile $HOME/.config/nvim/lua/rainbow.lua
+  source $HOME/.config/nvim/plug-config/fzf-preview.vim
   source $HOME/.config/nvim/plug-config/jinja.vim
   source $HOME/.config/nvim/plug-config/fugitive.vim
 endif

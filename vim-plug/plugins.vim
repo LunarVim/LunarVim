@@ -56,7 +56,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Closetags
     Plug 'alvan/vim-closetag'
     " Themes
-    Plug 'christianchiarulli/nvcode-color-schemes.vim'
+    " Plug 'christianchiarulli/nvcode-color-schemes.vim'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Status Line
@@ -137,6 +137,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'preservim/nerdcommenter'
     " jinja
     Plug 'lepture/vim-jinja'
+
+    " one dark
+    Plug 'joshdick/onedark.vim'
 
     " conflict motions for git conflicts
     " Plug 'vim-scripts/ConflictMotions'
