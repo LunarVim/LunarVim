@@ -1,5 +1,5 @@
 let g:startify_custom_header = [
-        \ '      @cenk1cenk2/nvim',
+        \ '    @cenk1cenk2/nvim',
         \]
 
 let g:startify_lists = [
@@ -32,9 +32,9 @@ let g:startify_bookmarks = [
             \ { 'c': '~/.config/nvim' }
             \ ]
 
-" let g:startify_session_before_save = [
-"     \ ':CocCommand explorer --quit'
-"     \ ]
+let g:startify_session_before_save = [
+    \ ':CocCommand explorer --quit'
+    \ ]
 
 let g:startify_enable_special = 1
 
