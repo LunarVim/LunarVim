@@ -80,9 +80,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vista.vim'
     " Zen mode
     Plug 'junegunn/goyo.vim'
-    " Snippets
-    Plug 'honza/vim-snippets'
-    Plug 'mattn/emmet-vim'
     " Interactive code
     Plug 'metakirby5/codi.vim'
     " Better tabline
@@ -141,8 +138,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " one dark
     Plug 'joshdick/onedark.vim'
 
-    " snippets
+    " snippet engines
     Plug 'SirVer/ultisnips'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'tomtom/tlib_vim'
+    Plug 'garbas/vim-snipmate'
+
+    " snippets themselves
+    Plug 'mattn/emmet-vim'
+    Plug 'honza/vim-snippets'
 
     " conflict motions for git conflicts
     " Plug 'vim-scripts/ConflictMotions'

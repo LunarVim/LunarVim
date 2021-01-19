@@ -68,9 +68,6 @@
   "yaml.validate": false,
   "yaml.format.singleQuote": true,
 
-  // snippets
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
-  //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
 
   // emmet
   "emmet.includeLanguages": {
@@ -149,6 +146,12 @@
 
   "tsserver.npm": "/usr/bin/npm",
   "npm.binPath": "/usr/bin/npm",
+
+  // snippets
+  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
+  //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+  "snippets.ultisnips.enabled": true,
+  "snippets.snipmate.enable": true,
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],
