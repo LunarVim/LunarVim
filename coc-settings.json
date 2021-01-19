@@ -123,7 +123,6 @@
     }
   },
 
-  "tsserver.npm": "/usr/bin/npm",
   "tsserver.log": "verbose",
 
   "eslint.packageManager": "yarn",
@@ -147,6 +146,9 @@
   },
 
   "bookmark.sign": "",
+
+  "tsserver.npm": "/usr/bin/npm",
+  "npm.binPath": "/usr/bin/npm",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],
