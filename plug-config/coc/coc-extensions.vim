@@ -31,6 +31,7 @@
     \ 'coc-go',
     \ 'coc-gitignore',
     \ 'coc-git',
+    \ 'coc-gist',
     \ 'coc-markdownlint',
     \ 'coc-webpack',
     \ 'coc-docker',
