@@ -151,13 +151,13 @@
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],
   "coc.source.floaterm.enable": false,
-  "coc.source.coc-cssmodules.priority": 50,
-  "coc.source.docthis.priority": 60,
-  "snippets.priority": 1,
-  "coc.source.file.priority": 2,
-  "coc.source.around.priority": 3,
-  "coc.source.buffer.priority": 4,
-  "tabnine.priority": 75,
+  "coc.source.coc-cssmodules.priority": 60,
+  "coc.source.docthis.priority": 10,
+  "snippets.priority": 20,
+  "coc.source.file.priority": 30,
+  "coc.source.around.priority": 40,
+  "coc.source.buffer.priority": 50,
+  "tabnine.priority": 70,
 
   "markdownlint.config": {
     "default": true,
