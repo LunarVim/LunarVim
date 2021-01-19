@@ -68,6 +68,7 @@ let g:which_key_map.a = {
       \ 'L' : [':set nonumber!'          , 'line-numbers'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 'R' : [':CocCommand workspace.renameCurrentFile'  , 'rename current file'],
+      \ 't' : [':!markdown-toc %:p --bullets="-" -i', 'markdown-toc'],
       \ 'T' : [':echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") "> trans<" . synIDattr(synID(line("."),col("."),0),"name") "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") ">"', 'show theme color'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
