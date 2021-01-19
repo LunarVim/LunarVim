@@ -4,6 +4,9 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_verbose = 0
 let g:EasyMotion_do_shade = 0
 
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd silent! CocEnable
+
 " " JK motions: Line motions
 " map <Leader>j <Plug>(easymotion-j)
 " map <Leader>k <Plug>(easymotion-k)
