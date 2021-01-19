@@ -142,7 +142,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'joshdick/onedark.vim'
 
     " snippets
-    Plugin 'SirVer/ultisnips'
+    Plug 'SirVer/ultisnips'
 
     " conflict motions for git conflicts
     " Plug 'vim-scripts/ConflictMotions'
