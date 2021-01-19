@@ -161,6 +161,9 @@
   "coc.source.buffer.priority": 50,
   "tabnine.priority": 70,
 
+  "tsserver.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+
   "markdownlint.config": {
     "default": true,
     "line_length": false
