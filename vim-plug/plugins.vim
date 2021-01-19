@@ -141,6 +141,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " one dark
     Plug 'joshdick/onedark.vim'
 
+    " snippets
+    Plugin 'SirVer/ultisnips'
+
     " conflict motions for git conflicts
     " Plug 'vim-scripts/ConflictMotions'
     " Plug 'inkarkat/vim-CountJump'
