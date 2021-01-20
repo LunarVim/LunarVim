@@ -134,6 +134,10 @@ else
   " x to blackhole
   noremap  x "_x
   vnoremap x "_x
+
+  " c to blackhole
+  noremap  c "_c
+  vnoremap c "_c
 endif
 
 " Better nav for omnicomplete

@@ -171,6 +171,7 @@
   "markdownlint.config": {
     "default": true,
     "line_length": false,
-    "single-h1": false
+    "single-h1": false,
+    "no-inline-html": false
   }
 }
