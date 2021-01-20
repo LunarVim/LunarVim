@@ -122,12 +122,8 @@ else
   nmap <silent> pü diw"*P
 
   " copy paste from system clipboard only
-  noremap  y "*y
-  noremap  Y "*Y
   noremap  p "*p
   noremap  P "*P
-  vnoremap y "*y
-  vnoremap Y "*Y
   vnoremap p "*p
   vnoremap P "*P
 
