@@ -151,7 +151,8 @@
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
   //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
   "snippets.ultisnips.enabled": true,
-  "snippets.snipmate.enable": true,
+  "snippets.snipmate.enable": false,
+  "snippets.snipmate.author": "Cenk Kılıç",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],

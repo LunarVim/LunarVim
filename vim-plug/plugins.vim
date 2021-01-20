@@ -140,9 +140,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " snippet engines
     Plug 'SirVer/ultisnips'
-    Plug 'MarcWeber/vim-addon-mw-utils'
-    Plug 'tomtom/tlib_vim'
-    Plug 'garbas/vim-snipmate'
+    " Plug 'MarcWeber/vim-addon-mw-utils'
+    " Plug 'tomtom/tlib_vim'
+    " Plug 'garbas/vim-snipmate'
 
     " snippets themselves
     Plug 'mattn/emmet-vim'
