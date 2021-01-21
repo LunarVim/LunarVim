@@ -153,11 +153,11 @@
   "npm.binPath": "/usr/bin/npm",
 
   // snippets
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
+  "snippets.ultisnips.directories": ["~/.config/nvim/snips"],
   //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
   "snippets.ultisnips.enabled": true,
-  "snippets.snipmate.enable": false,
-  "snippets.snipmate.author": "Cenk Kılıç",
+  "snippets.snipmate.enable": true,
+  "snippets.snipmate.author": "Cenk Kılıç <cenk@kilic.dev>",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"],

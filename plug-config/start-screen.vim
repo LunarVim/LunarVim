@@ -21,6 +21,8 @@ let g:startify_session_dir = '~/.config/vimsession'
 
 let g:webdevicons_enable_startify = 1
 
+let g:startify_enable_special = 0
+
 function! StartifyEntryFormat()
         return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
     endfunction
@@ -32,12 +34,7 @@ let g:startify_bookmarks = [
             \ { 'c': '~/.config/nvim' }
             \ ]
 
-let g:startify_session_before_save = [
-    \ ':CocCommand explorer --quit',
-    \ ':CocCommand explorer --quit',
-    \ ':CocCommand explorer --quit',
-    \ ]
+" let g:startify_session_before_save = [
+"     \ ]
 
-let g:startify_enable_special = 1
-
-autocmd BufEnter * if line2byte('.') == -1 && len(tabpagebuflist()) == 1 | Startify | endif
+autocmd BufEnter * if line2byte('.') == -1 && len(tabpagebuflist()) == 1 | Startify | exec 'BufferCloseAllButCurrent' | endif
