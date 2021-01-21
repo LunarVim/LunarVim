@@ -172,6 +172,7 @@
     "default": true,
     "line_length": false,
     "single-h1": false,
-    "no-inline-html": false
+    "no-inline-html": false,
+    "first-line-h1": false
   }
 }
