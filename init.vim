@@ -69,6 +69,7 @@ else
   source $HOME/.config/nvim/plug-config/fzf-preview.vim
   source $HOME/.config/nvim/plug-config/jinja.vim
   source $HOME/.config/nvim/plug-config/fugitive.vim
+  source $HOME/.config/nvim/plug-config/vim-go.vim
 endif
 
 " Add paths to node and python here

@@ -33,7 +33,9 @@ let g:startify_bookmarks = [
             \ ]
 
 let g:startify_session_before_save = [
-    \ ':CocCommand explorer --quit'
+    \ ':CocCommand explorer --quit',
+    \ ':CocCommand explorer --quit',
+    \ ':CocCommand explorer --quit',
     \ ]
 
 let g:startify_enable_special = 1
