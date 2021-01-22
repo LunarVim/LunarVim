@@ -118,22 +118,17 @@ else
   nmap <silent> # /(<CR>:let @/ = ""<CR>zz
   nmap <silent> ' ?(<CR>:let @/ = ""<CR>zz
 
-  " copy last register
-  nmap <silent> pü diw"*P
+  " copy last clipboard register
+  nmap <silent> po diw"*P
 
-  " copy paste from system clipboard only
-  noremap  p "*p
-  noremap  P "*P
-  vnoremap p "*p
-  vnoremap P "*P
+  " copy last yank register
+  nmap <silent> pü diw"0P
+
 
   " x to blackhole
   noremap  x "_x
   vnoremap x "_x
 
-  " c to blackhole
-  noremap  c "_c
-  vnoremap c "_c
 endif
 
 " Better nav for omnicomplete

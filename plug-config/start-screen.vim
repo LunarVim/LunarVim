@@ -37,4 +37,4 @@ let g:startify_bookmarks = [
 " let g:startify_session_before_save = [
 "     \ ]
 
-autocmd BufEnter * if line2byte('.') == -1 && len(tabpagebuflist()) == 1 | Startify | exec 'BufferCloseAllButCurrent' | endif
+autocmd BufEnter !gitcommit if line2byte('.') == -1 && len(tabpagebuflist()) == 1 | Startify | exec 'BufferCloseAllButCurrent' | endif
