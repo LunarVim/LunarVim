@@ -112,7 +112,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'puremourning/vimspector'
     Plug 'szw/vim-maximizer'
     " Neovim in Browser
-    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine

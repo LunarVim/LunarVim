@@ -59,7 +59,7 @@
   "python.pythonPath": "python",
   "python.venvPath": "",
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "black",
+  "python.formatting.blackPath": "~/.local/bin/black",
   "python.formatting.blackArgs": [],
   "python.formatting.autopep8Path": "autopep8",
   "python.formatting.autopep8Args": [],
