@@ -106,13 +106,13 @@
     "v": "open:vsplit"
   },
 
-  "languageserver": {
-    "lua": {
-      "command": "/home/chris/.luambenvs/neovim4/bin/lua-lsp",
-      "filetypes": ["lua"],
-      "trace.server": "verbose"
-    }
-  },
+  /* "languageserver": { */
+  /*   "lua": { */
+  /*     "command": "/home/chris/.luambenvs/neovim4/bin/lua-lsp", */
+  /*     "filetypes": ["lua"], */
+  /*     "trace.server": "verbose" */
+  /*   } */
+  /* }, */
 
   "bookmark.sign": "",
 
