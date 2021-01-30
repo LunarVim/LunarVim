@@ -340,6 +340,16 @@ let g:which_key_map.t = {
       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
+" L is for LaTeX
+let g:which_key_map.L = {
+      \ 'name' : '+LaTeX' ,
+      \ 'i' : ['<plug>(vimtex-info-full)'        , 'Full Info'],
+      \ 't' : ['<plug>(vimtex-toc-toggle)'       , 'TOC toggle'],
+      \ 'v' : ['<plug>(vimtex-view)'             , 'View'],
+      \ 'q' : ['<plug>(vimtex-log)'              , 'Log'],
+      \ 'L' : ['<plug>(vimtex-compile)'          , 'Compile'],
+      \ }
+
 " w is for wiki
 " let g:which_key_map.w = {
 "       \ 'name' : '+wiki' ,
