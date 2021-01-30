@@ -27,7 +27,11 @@ let g:coc_global_extensions = [
   \ 'coc-yank',
   \ 'coc-json',
   \ 'coc-marketplace',
+  \ 'coc-vimtex',
+  \ 'coc-texlab',
+  \ 'coc-bibtex'
   \ ]
+  " \ 'coc-bookmark',
   " \ 'coc-tabnine',
   " \ 'coc-highlight',
 
