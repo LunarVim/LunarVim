@@ -33,4 +33,5 @@ let g:coc_global_extensions = [
   " \ 'coc-bookmark',
   " \ 'coc-tabnine',
   " \ 'coc-highlight',
+  " \ 'coc-bookmark',
 
