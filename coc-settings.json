@@ -22,7 +22,7 @@
   "list.source.mru.ignoreGitIgnore": true,
 
   // autoformat
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript", "graphql", "html", "yaml", "yaml.ansible", "ansible", "json", "jsonc", "python", "java", "dockerfile", "go", "javascriptreact", "typescriptreact", "yaml.ansible"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript", "graphql", "html", "yaml", "yaml.ansible", "ansible", "json", "jsonc", "python", "java", "dockerfile", "go", "javascriptreact", "typescriptreact", "yaml.ansible", "vue", "vue-html"],
   "coc.preferences.hoverTarget": "float",
   // some coc settings
   "signature.target": "float",
