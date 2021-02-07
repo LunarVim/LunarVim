@@ -40,6 +40,6 @@
     \ 'coc-react-refactor',
     \ 'coc-docthis',
     \ 'coc-vetur',
-    \ 'https://.com/rodrigore/coc-tailwind-intellisense' ]
+    \ 'https://github.com/rodrigore/coc-tailwind-intellisense' ]
     " \ 'coc-highlight',
 
