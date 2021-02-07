@@ -135,12 +135,13 @@ let g:which_key_map.k = {
 " m is for mark
 let g:which_key_map.m = {
       \ 'name' : '+mark' ,
-      \ 'c' : [':CocCommand bookmark.clearForCurrentFile', 'clear file'],
-      \ 'C' : [':CocCommand bookmark.clearForAllFiles', 'clear project'],
-      \ 'n' : [':CocCommand bookmark.next', 'next bookmark'],
-      \ 'p' : [':CocCommand bookmark.prev', 'prev bookmark'],
-      \ 't' : [':CocCommand bookmark.toggle', 'toggle bookmark'],
-      \ 'f'  :[':CocList bookmark', 'list bookmarks']
+      \ 'c' : [':BookmarkClear', 'clear file'],
+      \ 'C' : [':BookmarkClearAll', 'clear project'],
+      \ 'n' : [':BookmarkNext', 'next bookmark'],
+      \ 'p' : [':BookmarkPrev', 'prev bookmark'],
+      \ 't' : [':BookmarkToggle', 'toggle bookmark'],
+      \ 'a' : [':BookmarkAnnotate', 'add annotated bookmark'],
+      \ 'f'  :[':CocCommand fzf-preview.Bookmarks', 'list bookmarks']
       \ }
 
 " s is for search

@@ -151,6 +151,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " go lang
     Plug 'fatih/vim-go', { 'do': 'GO111MODULE=on go get golang.org/x/tools/gopls@latest' }
 
+    " bookmarks
+    Plug 'MattesGroeger/vim-bookmarks'
+
     " conflict motions for git conflicts
     " Plug 'vim-scripts/ConflictMotions'
     " Plug 'inkarkat/vim-CountJump'

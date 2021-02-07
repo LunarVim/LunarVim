@@ -13,7 +13,6 @@
     \ 'coc-css',
     \ 'coc-cssmodules',
     \ 'coc-stylelintplus',
-    \ 'coc-bookmark@1.2.6',
     \ 'coc-yaml',
     \ 'coc-python',
     \ 'coc-pyright',
