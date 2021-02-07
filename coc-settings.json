@@ -179,5 +179,11 @@
     "single-h1": false,
     "no-inline-html": false,
     "first-line-h1": false
+  },
+
+  // vue
+  "tailwindCSS.includeLanguages": {
+    "vue": "html",
+    "vue-html": "html"
   }
 }

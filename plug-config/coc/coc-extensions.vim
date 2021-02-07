@@ -39,7 +39,7 @@
     \ 'coc-github',
     \ 'coc-react-refactor',
     \ 'coc-docthis',
-    \ 'coc-tabnine',
-    \ ]
+    \ 'coc-vetur',
+    \ 'https://.com/rodrigore/coc-tailwind-intellisense' ]
     " \ 'coc-highlight',
 
