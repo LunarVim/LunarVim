@@ -9,6 +9,10 @@
 if !exists('g:vscode')
   source $HOME/.config/nvim/plug-config/polyglot.vim
 endif
+
+" MINE Add this before the plugins are loaded!
+let g:ale_disable_lsp = 1
+
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/functions.vim
@@ -60,7 +64,7 @@ else
   " source $HOME/.config/nvim/plug-config/illuminate.vim
   " source $HOME/.config/nvim/plug-config/vista.vim
   " source $HOME/.config/nvim/plug-config/xtabline.vim
-  " source $HOME/.config/nvim/plug-config/ale.vim
+  source $HOME/.config/nvim/plug-config/ale.vim
   source $HOME/.config/nvim/plug-config/vimtex.vim
 endif
 source $HOME/.config/nvim/plug-config/quickscope.vim

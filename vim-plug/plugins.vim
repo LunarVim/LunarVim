@@ -119,7 +119,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine
     " TODO make sure to add ale config before plugin
-    " Plug 'dense-analysis/ale'
+    Plug 'dense-analysis/ale'
     " Better Whitespace
     " Plug 'ntpeters/vim-better-whitespace'
     " Multiple Cursors
