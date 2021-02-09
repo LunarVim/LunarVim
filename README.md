@@ -25,7 +25,7 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 - Ubuntu
 
   ```
-  curl -l https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > /tmp/nvim.appimage
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o /tmp/nvim.appimage
 
   sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
 
