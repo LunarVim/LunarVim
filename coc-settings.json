@@ -3,7 +3,7 @@
   // "suggest.echodocSupport": true,
 /* https://code.visualstudio.com/docs/editor/intellisense  reference for vscode symbols*/
 /* https://www.nerdfonts.com/cheat-sheet  reference to find some other symbols*/
-    /* some symbols you might like:                  */
+    /* some symbols you might like: פּ                  */
     /* fb44 this is the hex for nf-mdi-file_tree, should be good for class*/
   "suggest.completionItemKindLabels": {
     "method": "  ",
@@ -12,7 +12,7 @@
     "field": "  ",
     "typeParameter": "<>",
     "constant": "  ",
-    "class": "פּ ",
+    "class": "  ",
     "interface": " 蘒",
     "struct": "  ",
     "event": "  ",
@@ -23,14 +23,15 @@
     "reference": "  ",
     "keyword": "  ",
     "file": "  ",
-    "folder": " ﱮ ",
+    "folder": " ﱮ",
     "color": "  ",
     "unit": " 塞 ",
     "snippet": "  ",
     "text": "  ",
     "constructor": "  ",
     "value": "  ",
-    "enumMember": "  "
+    "enumMember": "  ",
+    "default": "  "
   },
   "snippets.priority": 1,
   //"yank.priority": 1,
