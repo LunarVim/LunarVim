@@ -178,7 +178,10 @@
     "line_length": false,
     "single-h1": false,
     "no-inline-html": false,
-    "first-line-h1": false
+    "first-line-h1": false,
+    "no-emphasis-as-header": false,
+    "no-duplicate-header": false,
+    "no-bare-urls": false
   },
 
   // vue
