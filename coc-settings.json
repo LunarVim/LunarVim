@@ -143,7 +143,7 @@
   "bookmark.sign": "",
 
   //coc-emoji
-  "coc.source.emoji.filetypes": ["markdown"]
+  "coc.source.emoji.filetypes": ["markdown"],
 
   // lua
   //"lua.useSumnekoLs": true,
@@ -157,4 +157,7 @@
 
   // TODO b:coc_suggest_disable=1 GOYO
   // TODO add to paths.vim g:coc_node_path
+
+  //MINE for ale config:w
+  "diagnostic.displayByAle": true
 }
