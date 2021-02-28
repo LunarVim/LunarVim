@@ -1,8 +1,37 @@
 {
+  // suggestions
+  // "suggest.echodocSupport": true,
+  /* https://code.visualstudio.com/docs/editor/intellisense  reference for vscode symbols*/
+  /* https://www.nerdfonts.com/cheat-sheet  reference to find some other symbols*/
+  /* some symbols you might like: פּ                  */
+  /* fb44 this is the hex for nf-mdi-file_tree, should be good for class*/
   "suggest.completionItemKindLabels": {
-    "text": "t",
-    "method": "m",
-    "function": ""
+    "method": "  ",
+    "function": "  ",
+    "variable": "[]",
+    "field": "  ",
+    "typeParameter": "<>",
+    "constant": "  ",
+    "class": "  ",
+    "interface": " 蘒",
+    "struct": "  ",
+    "event": "  ",
+    "operator": "  ",
+    "module": "  ",
+    "property": "  ",
+    "enum": " 練",
+    "reference": "  ",
+    "keyword": "  ",
+    "file": "  ",
+    "folder": " ﱮ",
+    "color": "  ",
+    "unit": " 塞 ",
+    "snippet": "  ",
+    "text": "  ",
+    "constructor": "  ",
+    "value": "  ",
+    "enumMember": "  ",
+    "default": "  "
   },
   "suggest.languageSourcePriority": 99,
 
@@ -46,7 +75,7 @@
   "python.pythonPath": "python",
   "python.venvPath": "",
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "black",
+  "python.formatting.blackPath": "~/.local/bin/black",
   "python.formatting.blackArgs": [],
   "python.formatting.autopep8Path": "autopep8",
   "python.formatting.autopep8Args": [],

@@ -166,3 +166,8 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 autocmd VimEnter * call CocActionAsync('runCommand', 'explorer.doAction', 'closest', {'name': 'cd', 'args': [ getcwd() ]})
+augroup MyCocExplorer
+  autocmd!
+  autocmd VimEnter * sil! au! FileExplorer *
+  autocmd BufEnter * let d = expand('%') | if isdirectory(d) | silent! bd | exe 'CocCommand explorer ' . d | endif
+augroup END
