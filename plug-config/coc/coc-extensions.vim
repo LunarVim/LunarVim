@@ -26,6 +26,8 @@ let g:coc_global_extensions = [
   \ 'coc-yank',
   \ 'coc-json',
   \ 'coc-marketplace',
+  \ 'coc-go',
+  \ 'coc-powershell',
   \ ]
   " \ 'coc-tabnine',
   " \ 'coc-highlight',

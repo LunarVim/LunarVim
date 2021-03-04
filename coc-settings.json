@@ -48,12 +48,12 @@
   // "diagnostic.displayByAle": true,
   // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
 
-  // codelens
-  "codeLens.enable": true,
-  "java.referencesCodeLens.enabled": true,
-  "java.implementationsCodeLens.enabled": true,
-  "java.completion.enabled": true,
-  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
+  /* // codelens */
+  /* "codeLens.enable": true, */
+  /* "java.referencesCodeLens.enabled": true, */
+  /* "java.implementationsCodeLens.enabled": true, */
+  /* "java.completion.enabled": true, */
+  /* "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar", */
 
   // list
   "list.indicator": ">",
@@ -69,7 +69,8 @@
     "yaml",
     "json",
     "python",
-    "java"
+    "go",
+    "powershell"
   ],
   "coc.preferences.hoverTarget": "float",
 

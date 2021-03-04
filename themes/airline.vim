@@ -9,6 +9,7 @@
 
 " Disable tabline close button
 let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#fnamecollapse = 1
@@ -43,11 +44,11 @@ let g:airline_theme = 'one'
 set showtabline=2
 
 " We don't need to see things like -- INSERT -- anymore
-set noshowmode
+" set noshowmode
 
 " Sections
 " let g:airline_section_c = ''
-let g:airline_section_a = " NVCode"
+" let g:airline_section_a = " NVCode"
 " let g:airline_section_a = ""
 let g:airline_section_y = ''
 let g:webdevicons_enable_airline_tabline = 1
