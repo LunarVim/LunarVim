@@ -200,6 +200,7 @@ Along with some of my config files you can find in `utils/vscode_config`
   https://github.com/b3nj5m1n/kommentary
   https://github.com/glepnir/lspsaga.nvim
   https://github.com/nvim-lua/completion-nvim
+  https://github.com/nvim-telescope/telescope-frecency.nvim
 
 ## CoC extensions to check out
 
