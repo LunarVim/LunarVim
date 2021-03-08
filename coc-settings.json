@@ -100,9 +100,6 @@
   "python.linting.pydocstyleEnabled": false,
   "python.linting.pylamaEnabled": false,
   "python.linting.pylintEnabled": false,
-  "pyright.disableCompletion": false,
-  "pyright.disableLanguageServices": false,
-  "pyright.disableOrganizeImports": false,
 
   // snippets
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
@@ -139,8 +136,6 @@
   /*     "trace.server": "verbose" */
   /*   } */
   /* }, */
-
-  "bookmark.sign": "",
 
   //coc-emoji
   "coc.source.emoji.filetypes": ["markdown"]
