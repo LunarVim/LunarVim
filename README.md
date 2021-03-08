@@ -136,6 +136,9 @@ Example:
 :UpdateRemotePlugins
 ```
 
+To replace in file make sure to specify `%:p`
+To replace across project specify `**/*.<your_extension>`
+
 ## TabNine
 
 To use TabNine enter the following in a buffer:
@@ -187,6 +190,17 @@ Along with some of my config files you can find in `utils/vscode_config`
 ## TODO
 
 - Better Documentation
+  https://github.com/gennaro-tedesco/nvim-jqx
+  https://github.com/nathunsmitty/nvim-ale-diagnostic
+  https://github.com/mattn/efm-langserver
+  https://github.com/windwp/nvim-ts-closetag
+  https://github.com/nvim-telescope/telescope-media-files.nvim
+  https://github.com/kosayoda/nvim-lightbulb
+  https://github.com/ms-jpq/chadtree
+  https://github.com/b3nj5m1n/kommentary
+  https://github.com/glepnir/lspsaga.nvim
+  https://github.com/nvim-lua/completion-nvim
+  https://github.com/nvim-telescope/telescope-frecency.nvim
 
 ## CoC extensions to check out
 

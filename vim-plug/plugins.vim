@@ -59,7 +59,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'kevinhwang91/rnvimr'
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
+    " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
     Plug 'junegunn/fzf.vim'
     " Git
     Plug 'airblade/vim-gitgutter'
@@ -87,7 +87,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " undo time travel
     Plug 'mbbill/undotree'
     " Find and replace
-    Plug 'ChristianChiarulli/far.vim'
+    " Plug 'ChristianChiarulli/far.vim'
+    Plug 'brooth/far.vim'
     " Auto change html tags
     Plug 'AndrewRadev/tagalong.vim'
     " live server
@@ -115,6 +116,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
     " LaTeX plugin
     Plug 'lervag/vimtex'
+    " Telescope
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine
@@ -166,7 +171,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'neomake/neomake'
     " Plug 'mhinz/vim-signify'
     " Plug 'preservim/nerdcommenter'
-    " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
     " Plug 'romgrk/lib.kom'
     " Plug 'brooth/far.vim'
