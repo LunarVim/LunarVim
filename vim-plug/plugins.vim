@@ -87,7 +87,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " undo time travel
     Plug 'mbbill/undotree'
     " Find and replace
-    Plug 'ChristianChiarulli/far.vim'
+    " Plug 'ChristianChiarulli/far.vim'
+    Plug 'brooth/far.vim'
     " Auto change html tags
     Plug 'AndrewRadev/tagalong.vim'
     " live server
@@ -168,7 +169,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'neomake/neomake'
     " Plug 'mhinz/vim-signify'
     " Plug 'preservim/nerdcommenter'
-    " Plug 'brooth/far.vim'
     " Plug 'atishay/far.vim'
     " Plug 'romgrk/lib.kom'
     " Plug 'brooth/far.vim'

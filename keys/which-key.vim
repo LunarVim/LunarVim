@@ -119,6 +119,7 @@ let g:which_key_map.d = {
       \ }
 
 " f is for find and replace
+      " \ 'f' : [':Farr'                     , 'file'],
 let g:which_key_map.f = {
       \ 'name' : '+find & replace' ,
       \ 'f' : [':Farr --source=vimgrep'    , 'file'],

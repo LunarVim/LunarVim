@@ -136,6 +136,9 @@ Example:
 :UpdateRemotePlugins
 ```
 
+To replace in file make sure to specify `%:p`
+To replace across project specify `**/*.<your_extension>`
+
 ## TabNine
 
 To use TabNine enter the following in a buffer:
