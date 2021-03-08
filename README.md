@@ -187,6 +187,16 @@ Along with some of my config files you can find in `utils/vscode_config`
 ## TODO
 
 - Better Documentation
+  https://github.com/gennaro-tedesco/nvim-jqx
+  https://github.com/nathunsmitty/nvim-ale-diagnostic
+  https://github.com/mattn/efm-langserver
+  https://github.com/windwp/nvim-ts-closetag
+  https://github.com/nvim-telescope/telescope-media-files.nvim
+  https://github.com/kosayoda/nvim-lightbulb
+  https://github.com/ms-jpq/chadtree
+  https://github.com/b3nj5m1n/kommentary
+  https://github.com/glepnir/lspsaga.nvim
+  https://github.com/nvim-lua/completion-nvim
 
 ## CoC extensions to check out
 
@@ -200,10 +210,6 @@ Along with some of my config files you can find in `utils/vscode_config`
 - treesitter
 
 ## LOW PRIORITY TODO
-
-https://github.com/gennaro-tedesco/nvim-jqx
-https://github.com/nathunsmitty/nvim-ale-diagnostic
-https://github.com/mattn/efm-langserver
 
 If anyone reading this has any suggestions about implementing any of the following I will accept a PR, but these are not priority.
 
