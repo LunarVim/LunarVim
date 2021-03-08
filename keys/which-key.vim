@@ -185,6 +185,7 @@ let g:which_key_map.m = {
 "       \ }
       " \ 's' : [':Snippets'     , 'snippets'],
 
+" TODO fix FZF preview or just move to Telescope
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
