@@ -201,6 +201,10 @@ Along with some of my config files you can find in `utils/vscode_config`
 
 ## LOW PRIORITY TODO
 
+https://github.com/gennaro-tedesco/nvim-jqx
+https://github.com/nathunsmitty/nvim-ale-diagnostic
+https://github.com/mattn/efm-langserver
+
 If anyone reading this has any suggestions about implementing any of the following I will accept a PR, but these are not priority.
 
 - ale
