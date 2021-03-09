@@ -201,17 +201,17 @@ Along with some of my config files you can find in `utils/vscode_config`
   https://github.com/glepnir/lspsaga.nvim
   https://github.com/nvim-lua/completion-nvim
   https://github.com/nvim-telescope/telescope-frecency.nvim
+  https://github.com/cohama/lexima.vim
 
 ## CoC extensions to check out
 
-- coc-fzf-preview
-  - https://github.com/yuki-ycino/fzf-preview.vim/
-- coc-floaterm
+null
+
 
 ## 0.5
 
-- native lsp
-- treesitter
+- native lsp (in progress)
+- treesitter (in progress)
 
 ## LOW PRIORITY TODO
 

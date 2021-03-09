@@ -35,7 +35,7 @@ set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set incsearch
-set guifont=JetBrainsMono\ Nerd\ Font\ Mono
+set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h22
 
 " New stuff
 " set notimeout nottimeout
