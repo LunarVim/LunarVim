@@ -46,8 +46,9 @@ else
   source ~/.config/nvim/plug-config/window-swap.vim
   source ~/.config/nvim/plug-config/markdown-preview.vim
   source ~/.config/nvim/plug-config/vimspector.vim
-  " source $HOME/.config/nvim/plug-config/ale.vim
+  source ~/.config/nvim/plug-config/nvimtree-config.vim
   luafile ~/.config/nvim/lua/plugins/galaxyline-config.lua
+  luafile ~/.config/nvim/lua/plugins/nvimtree-config.lua
   luafile ~/.config/nvim/lua/plugins/treesitter-config.lua
   luafile ~/.config/nvim/lua/plugins/colorizer-config.lua
   luafile ~/.config/nvim/lua/plugins/telescope-config.lua
@@ -103,6 +104,12 @@ nnoremap <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " Lightbulb
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+
+" TODO
+
+" configure tree
+" wrapper around native lsp
+" fix space and tab triggering completion all the time
 
 " add these to colorschemes
     " LspDiagnosticsUnderlineError
