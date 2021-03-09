@@ -45,7 +45,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-treesitter/playground'
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-    Plug 'romgrk/nvim-treesitter-context'
+    " Plug 'romgrk/nvim-treesitter-context'
     " Cool Icons
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
@@ -122,6 +122,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
+    Plug 'glepnir/lspsaga.nvim'
+    Plug 'onsails/lspkind-nvim'
+    Plug 'kosayoda/nvim-lightbulb'
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " File Explorer
+    Plug 'kyazdani42/nvim-tree.lua'
     " Rainbow brackets
     " Plug 'luochen1990/rainbow'
     " Async Linting Engine

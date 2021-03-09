@@ -109,26 +109,8 @@ Explanations and installation instruction can be found on my blog
 
 ## Language Servers
 
-Since CoC doesn't support all languages in there extensions
-I recommend installing some language servers from scratch
-and adding them to your `coc-settings.json` file
+TODO update for native lsp
 
-Example:
-
-- bash
-
-  `npm i -g bash-language-server`
-
-  ```
-  "languageserver": {
-  "bash": {
-    "command": "bash-language-server",
-    "args": ["start"],
-    "filetypes": ["sh"],
-    "ignoredRootPaths": ["~"]
-    }
-  }
-  ```
 
 ## For FAR to work
 
@@ -191,16 +173,27 @@ Along with some of my config files you can find in `utils/vscode_config`
 
 - Better Documentation
   https://github.com/gennaro-tedesco/nvim-jqx
+
   https://github.com/nathunsmitty/nvim-ale-diagnostic
+
   https://github.com/mattn/efm-langserver
+
   https://github.com/windwp/nvim-ts-closetag
+
   https://github.com/nvim-telescope/telescope-media-files.nvim
+
   https://github.com/kosayoda/nvim-lightbulb
+  
   https://github.com/ms-jpq/chadtree
+
   https://github.com/b3nj5m1n/kommentary
+
   https://github.com/glepnir/lspsaga.nvim
+
   https://github.com/nvim-lua/completion-nvim
+
   https://github.com/nvim-telescope/telescope-frecency.nvim
+
   https://github.com/cohama/lexima.vim
 
 ## CoC extensions to check out

@@ -4,7 +4,6 @@
 " _/ // / / / / /__| |/ / / / / / / /
 "/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
 
-
 " General Settings
 if !exists('g:vscode')
   source ~/.config/nvim/plug-config/polyglot.vim
@@ -52,9 +51,10 @@ else
   luafile ~/.config/nvim/lua/plugins/treesitter-config.lua
   luafile ~/.config/nvim/lua/plugins/colorizer-config.lua
   luafile ~/.config/nvim/lua/plugins/telescope-config.lua
+  luafile ~/.config/nvim/lua/lsp/lsp-kind.lua
   luafile ~/.config/nvim/lua/plugins/compe-config.lua
+  luafile ~/.config/nvim/lua/plugins/lspsaga-config.lua
   " LSP
-  " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   luafile ~/.config/nvim/lua/lsp/lsp-config.lua
   luafile ~/.config/nvim/lua/lsp/lua-ls.lua
   luafile ~/.config/nvim/lua/lsp/python-ls.lua
@@ -67,6 +67,7 @@ else
   luafile ~/.config/nvim/lua/lsp/json-ls.lua
   luafile ~/.config/nvim/lua/lsp/vim-ls.lua
   luafile ~/.config/nvim/lua/lsp/yaml-ls.lua
+  " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 endif
 source $HOME/.config/nvim/plug-config/quickscope.vim
 
@@ -80,3 +81,31 @@ inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
 " TODO highlight groups for native LSP diagnostics
+" add back other docs for compe
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+
+" -- scroll down hover doc or scroll in definition preview
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" -- scroll up hover doc
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+" signature
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+
+" LSP config (the mappings used in the default file don't quite work right)
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+" Lightbulb
+autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+
+" add these to colorschemes
+    " LspDiagnosticsUnderlineError
+    " LspDiagnosticsUnderlineWarning
+    " LspDiagnosticsUnderlineInformation
+    " LspDiagnosticsUnderlineHint
