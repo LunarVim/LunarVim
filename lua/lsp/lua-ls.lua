@@ -1,3 +1,4 @@
+-- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 -- TODO fix for different systems and put variable for user
 
 -- local system_name

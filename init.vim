@@ -58,6 +58,15 @@ else
   luafile ~/.config/nvim/lua/lsp/lsp-config.lua
   luafile ~/.config/nvim/lua/lsp/lua-ls.lua
   luafile ~/.config/nvim/lua/lsp/python-ls.lua
+  luafile ~/.config/nvim/lua/lsp/bash-ls.lua
+  luafile ~/.config/nvim/lua/lsp/css-ls.lua
+  luafile ~/.config/nvim/lua/lsp/docker-ls.lua
+  luafile ~/.config/nvim/lua/lsp/graphql-ls.lua
+  luafile ~/.config/nvim/lua/lsp/html-ls.lua
+  luafile ~/.config/nvim/lua/lsp/javascript-ls.lua
+  luafile ~/.config/nvim/lua/lsp/json-ls.lua
+  luafile ~/.config/nvim/lua/lsp/vim-ls.lua
+  luafile ~/.config/nvim/lua/lsp/yaml-ls.lua
 endif
 source $HOME/.config/nvim/plug-config/quickscope.vim
 
