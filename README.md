@@ -8,39 +8,29 @@ The following will install this config if you have an existing config it will mo
 
 This script only supports Mac, Ubuntu and Arch
 
-```
+```bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/utils/install.sh)
 ```
 
 ## Install Neovim
 
-- Mac
 
-  ```
-  brew install --HEAD neovim # Nightly version
+To get the latest and greatest:
 
-  brew upgrade neovim --fetch-HEAD # Sometimes you need to update
-  ```
+```bash
+cd ~
+sudo rm -r neovim
+git clone https://github.com/neovim/neovim
+cd neovim
+sudo make CMAKE_BUILD_TYPE=Release install
+cd ~
+sudo rm -r neovim
+```
 
-- Ubuntu
-
-  ```
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o /tmp/nvim.appimage
-
-  sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
-
-  chmod +x /usr/local/bin/nvim
-  ```
-
-- Arch
-
-  ```
-  yay -S neovim-git # Latest
-  ```
 
 ## Clone this repo into your config
 
-```
+```bash
 git clone https://github.com/ChristianChiarulli/nvim.git ~/.config/nvim
 ```
 
@@ -104,13 +94,13 @@ let g:node_host_prog = expand("~/.nvm/versions/node/v12.16.1/bin/neovim-node-hos
 - universal-ctags
 - lazy git
 - lazy docker
+- ninja (for lua lsp)
 
 Explanations and installation instruction can be found on my blog
 
 ## Language Servers
 
-TODO update for native lsp
-
+Go [here](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
 
 ## For FAR to work
 
@@ -120,16 +110,6 @@ TODO update for native lsp
 
 To replace in file make sure to specify `%:p`
 To replace across project specify `**/*.<your_extension>`
-
-## TabNine
-
-To use TabNine enter the following in a buffer:
-
-```
-TabNine::config
-```
-
-**NOTE** This extension can take up a ton of memory
 
 ## Vim Gists
 
@@ -174,32 +154,15 @@ Along with some of my config files you can find in `utils/vscode_config`
 - Better Documentation
   https://github.com/gennaro-tedesco/nvim-jqx
 
-  https://github.com/nathunsmitty/nvim-ale-diagnostic
-
   https://github.com/mattn/efm-langserver
-
-  https://github.com/windwp/nvim-ts-closetag
 
   https://github.com/nvim-telescope/telescope-media-files.nvim
 
-  https://github.com/kosayoda/nvim-lightbulb
-  
-  https://github.com/ms-jpq/chadtree
-
   https://github.com/b3nj5m1n/kommentary
-
-  https://github.com/glepnir/lspsaga.nvim
 
   https://github.com/nvim-lua/completion-nvim
 
   https://github.com/nvim-telescope/telescope-frecency.nvim
-
-  https://github.com/cohama/lexima.vim
-
-## CoC extensions to check out
-
-null
-
 
 ## 0.5
 
@@ -210,9 +173,7 @@ null
 
 If anyone reading this has any suggestions about implementing any of the following I will accept a PR, but these are not priority.
 
-- ale
 - multiple cursors
-- markdown table
 - galaxyline automatically grab colors from colorscheme
 - tpope/vim-dadbod
 - neovide
@@ -220,6 +181,6 @@ If anyone reading this has any suggestions about implementing any of the followi
 - vimspector this is included but I don't plan on using it much
   - can be used with jdb, pdb, gdb, etc...
 - nvim-dap and nvim-dap-virtual-text (ALL DEBUGGING IN NEOVIM IS CONFUSING AND HARD TO GET WORKING OR I'M JUST DUMB)
-- later manually link pylance
+- potentially manually link pylance
 - resize with arrows in addition to meta
 - how to support meta key on for macOS?
