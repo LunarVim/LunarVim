@@ -10,4 +10,5 @@ session
 wiki/
 pack/
 utils/java/*
+lua-language-server/
 
