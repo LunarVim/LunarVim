@@ -74,6 +74,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'glepnir/lspsaga.nvim'
     Plug 'onsails/lspkind-nvim'
     Plug 'kosayoda/nvim-lightbulb'
+    Plug 'mfussenegger/nvim-jdtls'
+    Plug 'mfussenegger/nvim-dap'
     " File Explorer
     Plug 'kyazdani42/nvim-tree.lua'
 
