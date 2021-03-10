@@ -82,3 +82,4 @@ endif
   " autoimport jsx
   " https://github.com/mfussenegger/nvim-jdtls
   " fix space and tab triggering completion all the time
+  " Provide diagnostics for nvim tree 
