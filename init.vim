@@ -44,6 +44,8 @@ else
   source ~/.config/nvim/plug-config/bracey.vim
   source ~/.config/nvim/plug-config/markdown-preview.vim
   source ~/.config/nvim/plug-config/nvimtree-config.vim
+  source ~/.config/nvim/plug-config/lsp-saga.vim
+  source ~/.config/nvim/plug-config/lightbulb.vim
   source ~/.config/nvim/lua/lsp-wrapper.vim
   luafile ~/.config/nvim/lua/plugins/galaxyline-config.lua
   luafile ~/.config/nvim/lua/plugins/nvimtree-config.lua
@@ -53,7 +55,7 @@ else
   luafile ~/.config/nvim/lua/lsp/lsp-kind.lua
   luafile ~/.config/nvim/lua/plugins/compe-config.lua
   luafile ~/.config/nvim/lua/plugins/lspsaga-config.lua
-  " LSP
+  " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
   source ~/.config/nvim/plug-config/lsp-config.vim
   luafile ~/.config/nvim/lua/lsp/lsp-config.lua
   luafile ~/.config/nvim/lua/lsp/lua-ls.lua
@@ -67,28 +69,6 @@ else
   luafile ~/.config/nvim/lua/lsp/json-ls.lua
   luafile ~/.config/nvim/lua/lsp/vim-ls.lua
   luafile ~/.config/nvim/lua/lsp/yaml-ls.lua
-  " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-
-  " TODO highlight groups for native LSP diagnostics
-  " add back other docs for compe
-  nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
-
-  " -- scroll down hover doc or scroll in definition preview
-  nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-  " -- scroll up hover doc
-  nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-  " signature
-  nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
-
-
-  " Lightbulb
-  autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-          
-  "TODO
-  " fix space and tab triggering completion all the time
-  " autoimport jsx
-  " snippets
-  " https://github.com/mfussenegger/nvim-jdtls
 endif
 source $HOME/.config/nvim/plug-config/quickscope.vim
 
@@ -97,7 +77,8 @@ if !empty(glob("~/.config/nvim/paths.vim"))
   source $HOME/.config/nvim/paths.vim
 endif
 
-" Better nav for omnicomplete TODO figure out why this is being overridden
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
-
+  " TODO
+  " snippets
+  " autoimport jsx
+  " https://github.com/mfussenegger/nvim-jdtls
+  " fix space and tab triggering completion all the time
