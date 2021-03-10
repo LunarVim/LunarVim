@@ -74,14 +74,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'glepnir/lspsaga.nvim'
     Plug 'onsails/lspkind-nvim'
     Plug 'kosayoda/nvim-lightbulb'
+    Plug 'mfussenegger/nvim-jdtls'
+    Plug 'mfussenegger/nvim-dap'
     " File Explorer
     Plug 'kyazdani42/nvim-tree.lua'
-
     " Themes
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
-
     " Git
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
@@ -91,7 +91,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Easily Create Gists
     Plug 'mattn/vim-gist'
     Plug 'mattn/webapi-vim'
-
+    " Neovim in Browser
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
     " Webdev
     " Auto change html tags
     Plug 'AndrewRadev/tagalong.vim'
