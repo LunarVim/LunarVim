@@ -14,7 +14,6 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/
 
 ## Install Neovim
 
-
 To get the latest and greatest:
 
 ```bash
@@ -36,17 +35,17 @@ git clone https://github.com/ChristianChiarulli/nvim.git ~/.config/nvim
 
 ## Install python & node support
 
-```
+```bash
 pip install pynvim
 ```
 
-```
+```bash
 npm i -g neovim
 ```
 
 ## Install Neovim remote
 
-```
+```bash
 pip install neovim-remote
 ```
 
@@ -62,13 +61,13 @@ export PATH=$HOME/.local/bin:$PATH
 
 - Ubuntu
 
-  ```
+  ```bash
   sudo apt install xsel
   ```
 
 - Arch
 
-  ```
+  ```bash
   sudo pacman -S xsel
   ```
 
@@ -100,11 +99,28 @@ Explanations and installation instruction can be found on my blog
 
 ## Language Servers
 
+Some example language servers, if you just install them they will work with this config
+
+```bash
+npm i -g pyright
+npm i -g bash-language-server
+npm install -g vscode-css-languageserver-bin
+npm install -g dockerfile-language-server-nodejs
+npm install -g graphql-language-service-cli
+npm install -g vscode-html-languageserver-bin
+npm install -g typescript typescript-language-server
+npm install -g vscode-json-languageserver
+npm install -g vim-language-server
+npm install -g yaml-language-server
+```
+
 Go [here](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
+
+How to install the lua language server: [link](https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone))
 
 ## For FAR to work
 
-```
+```vim
 :UpdateRemotePlugins
 ```
 
@@ -115,7 +131,7 @@ To replace across project specify `**/*.<your_extension>`
 
 To use **vim-gists** you will need to configure the following:
 
-```
+```bash
 git config --global github.user <username>
 ```
 
@@ -127,19 +143,19 @@ You can install it on multiple platforms:
 
 - Mac
 
-  ```
+  ```bash
   brew cask install vscodium
   ```
 
 - Arch
 
-  ```
+  ```bash
   yay -s vscodium-bin
   ```
 
 - Snap
 
-  ```
+  ```bash
   snap install codium
   ```
 

@@ -250,33 +250,37 @@ let g:which_key_map.G = {
       \ 'P' : [':Gist -p'                          , 'post private gist '],
       \ }
 
-" \ 'd' : [':Telescope lsp_document_diagnostics' , 'document_diagnostics'],
-
 " l is for language server protocol
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
       \ 'a' : [':Lspsaga code_action'                , 'code action'],
       \ 'A' : [':Lspsaga range_code_action'          , 'selected action'],
-      \ 'd' : [':Greet'                              , 'definition'],
-      \ 'D' : [':Telescope lsp_workspace_diagnostics', 'workspace_diagnostics'],
-      \ 'f' : [':call LSPDefinition()'                                    , 'format selected'],
-      \ 'F' : [''                                    , 'format'],
+      \ 'd' : [':LspDefinition'                      , 'definition'],
+      \ 'D' : [':LspDeclaration'                     , 'workspace_diagnostics'],
+      \ 'f' : [':LspFormatting'                      , 'format'],
       \ 'h' : [':Lspsaga hover_doc'                  , 'hover_doc'],
       \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
-      \ 'i' : [':LspInfo'                            , 'lsp_info'],
+      \ 'K' : [':LspHover'                           , 'hover'],
+      \ 'i' : [':LspImplementation'                  , 'lsp_info'],
+      \ 'I' : [':LspInfo'                            , 'lsp_info'],
       \ 'l' : [':Lspsaga lsp_finder'                 , 'lsp_finder'],
       \ 'L' : [':Lspsaga show_line_diagnostics'      , 'line_diagnostics'],
       \ 'n' : [':Lspsaga diagnostic_jump_next'       , 'next_diagnostic'],
       \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'p' : [':Lspsaga diagnostic_jump_prev'       , 'prev diagnostic'],
       \ 'q' : [':Lspsaga code_action'                , 'quickfix'],
-      \ 'R' : [':Lspsaga rename'                     , 'rename'],
+      \ 'r' : [':LspReferences'                      , 'references'],
+      \ 'R' : [':LspRename'                          , 'rename'],
+      \ 'T' : [':LspTypeDefinition'                  , 'type defintion'],
+      \ 'x' : [':cclose'                             , 'close quickfix'],
+      \ 'y' : [':LspDocumentSymbol'                  , 'document symbols'],
+      \ 'Y' : [':LspWorkspaceSymbol'                 , 'workspace symbols'],
       \ }
 
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=normal --height=6'        , 'terminal'],
+      \ ';' : [':FloatermNew --wintype=normal --height=6'       , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
