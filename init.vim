@@ -94,14 +94,8 @@ nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<
 
 " Lightbulb
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-
-" TODO
+        
+"TODO
 " fix space and tab triggering completion all the time
 " autoimport jsx
 " snippets
-
-" add these to colorschemes
-    " LspDiagnosticsUnderlineError
-    " LspDiagnosticsUnderlineWarning
-    " LspDiagnosticsUnderlineInformation
-    " LspDiagnosticsUnderlineHint
