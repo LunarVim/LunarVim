@@ -47,6 +47,7 @@ else
   source ~/.config/nvim/plug-config/markdown-preview.vim
   source ~/.config/nvim/plug-config/vimspector.vim
   source ~/.config/nvim/plug-config/nvimtree-config.vim
+  source ~/.config/nvim/lua/lsp-wrapper.vim
   luafile ~/.config/nvim/lua/plugins/galaxyline-config.lua
   luafile ~/.config/nvim/lua/plugins/nvimtree-config.lua
   luafile ~/.config/nvim/lua/plugins/treesitter-config.lua
@@ -101,15 +102,17 @@ nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" autoformat
+autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 
 " Lightbulb
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
 " TODO
-
-" configure tree
-" wrapper around native lsp
 " fix space and tab triggering completion all the time
+" autoimport jsx
 
 " add these to colorschemes
     " LspDiagnosticsUnderlineError

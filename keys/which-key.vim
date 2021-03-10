@@ -1,7 +1,4 @@
 " Leader Key Maps
-
-command! Greet lua require 'test'.hello_world()
-
 let @s = 'veS"'
 
 " Timeout
