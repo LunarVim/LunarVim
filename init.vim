@@ -83,3 +83,4 @@ endif
   " https://github.com/mfussenegger/nvim-jdtls
   " fix space and tab triggering completion all the time
   " Provide diagnostics for nvim tree 
+  " port everything possible to lua
