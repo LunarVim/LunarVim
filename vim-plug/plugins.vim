@@ -70,6 +70,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-media-files.nvim'
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
@@ -78,6 +79,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'mfussenegger/nvim-jdtls'
     Plug 'mfussenegger/nvim-dap'
+    " https://github.com/mhartington/formatter.nvim look into this
     " File Explorer
     Plug 'kyazdani42/nvim-tree.lua'
     " Themes
@@ -104,6 +106,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
     " live server
     Plug 'turbio/bracey.vim'
+    " Better quickfix
+    Plug 'kevinhwang91/nvim-bqf'
   endif
 
 call plug#end()

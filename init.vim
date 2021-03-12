@@ -25,7 +25,6 @@ else
   source ~/.config/nvim/themes/nvcode.vim
 
   " Plugin Configuration
-  luafile ~/.config/nvim/lua/lsp/general-ls.lua
   source ~/.config/nvim/keys/which-key.vim
   source ~/.config/nvim/plug-config/vim-commentary.vim
   source ~/.config/nvim/plug-config/rnvimr.vim
@@ -48,6 +47,8 @@ else
   source ~/.config/nvim/plug-config/lsp-saga.vim
   source ~/.config/nvim/plug-config/lightbulb.vim
   source ~/.config/nvim/lua/lsp-wrapper.vim
+  source ~/.config/nvim/plug-config/lsp-config.vim
+  luafile ~/.config/nvim/lua/lsp/general-ls.lua
   luafile ~/.config/nvim/lua/plugins/galaxyline-config.lua
   luafile ~/.config/nvim/lua/plugins/nvimtree-config.lua
   luafile ~/.config/nvim/lua/plugins/treesitter-config.lua
@@ -57,7 +58,6 @@ else
   luafile ~/.config/nvim/lua/plugins/compe-config.lua
   luafile ~/.config/nvim/lua/plugins/lspsaga-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-  source ~/.config/nvim/plug-config/lsp-config.vim
   luafile ~/.config/nvim/lua/lsp/lsp-config.lua
   luafile ~/.config/nvim/lua/lsp/lua-ls.lua
   luafile ~/.config/nvim/lua/lsp/python-ls.lua

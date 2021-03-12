@@ -177,10 +177,10 @@ let g:which_key_map.s = {
       \ 'a' : [':Telescope lsp_code_actions'            , 'code_actions'],
       \ 'A' : [':Telescope builtin'                     , 'all'],
       \ 'b' : [':Telescope buffers'                     , 'buffers'],
-      \ 'B' : [':Telescope git_branches'                , 'git_branches'],
+      \ 'B' : [':Telescope git_branches'                , 'git branches'],
       \ 'd' : [':Telescope lsp_document_diagnostics'    , 'document_diagnostics'],
       \ 'D' : [':Telescope lsp_workspace_diagnostics'   , 'workspace_diagnostics'],
-      \ 'c' : [':Telescope git_bcommits'                , 'git_bcommits'],
+      \ 'c' : [':Telescope git_commits'                 , 'git_commits'],
       \ 'C' : [':Telescope git_bcommits'                , 'git_bcommits'],
       \ 'f' : [':Telescope find_files'                  , 'files'],
       \ 'F' : [':Telescope git_files'                   , 'git_files'],
@@ -188,12 +188,13 @@ let g:which_key_map.s = {
       \ 'G' : [':Telescope current_buffer_tags'         , 'buffer_tags'],
       \ 'h' : [':Telescope command_history'             , 'history'],
       \ 'H' : [':Telescope help_tags'                   , 'help_tags'],
+      \ 'i' : [':Telescope media_files'                 , 'media files'],
       \ 'k' : [':Telescope keymaps'                     , 'keymaps'],
       \ 'l' : [':Telescope loclist'                     , 'loclist'],
       \ 'm' : [':Telescope marks'                       , 'marks'],
+      \ 'M' : [':Telescope man_pages'                   , 'man_pages'],
       \ 'o' : [':Telescope vim_options'                 , 'vim_options'],
       \ 'O' : [':Telescope oldfiles'                    , 'oldfiles'],
-      \ 'M' : [':Telescope man_pages'                   , 'man_pages'],
       \ 'p' : [':Telescope fd'                          , 'fd'],
       \ 'P' : [':Telescope spell_suggest'               , 'spell_suggest'],
       \ 's' : [':Telescope git_status'                  , 'git_status'],
@@ -248,9 +249,6 @@ let g:which_key_map.g = {
       \ }
       " \ 'A' : [':Git add %'                        , 'add current'],
       " \ 'S' : [':!git status'                      , 'status'],
-" 
-" 
-" 
 
 let g:which_key_map.G = {
       \ 'name' : '+gist' ,
@@ -268,29 +266,32 @@ let g:which_key_map.G = {
 " l is for language server protocol
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
-      \ 'a' : [':Lspsaga code_action'                , 'code action'],
+      \ 'a' : [':Lspsaga code_action'                , 'quickfix'],
       \ 'A' : [':Lspsaga range_code_action'          , 'selected action'],
-      \ 'd' : [':LspDefinition'                      , 'definition'],
-      \ 'D' : [':LspDeclaration'                     , 'workspace_diagnostics'],
+      \ 'd' : [':Telescope lsp_document_diagnostics' , 'document diagnostics'],
+      \ 'D' : [':Telescope lsp_workspace_diagnostics', 'workspace diagnostics'],
       \ 'f' : [':LspFormatting'                      , 'format'],
-      \ 'h' : [':Lspsaga hover_doc'                  , 'hover_doc'],
       \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
-      \ 'K' : [':LspHover'                           , 'hover'],
-      \ 'i' : [':LspImplementation'                  , 'lsp_info'],
       \ 'I' : [':LspInfo'                            , 'lsp_info'],
       \ 'l' : [':Lspsaga lsp_finder'                 , 'lsp_finder'],
       \ 'L' : [':Lspsaga show_line_diagnostics'      , 'line_diagnostics'],
-      \ 'n' : [':Lspsaga diagnostic_jump_next'       , 'next_diagnostic'],
       \ 'o' : [':Vista!!'                            , 'outline'],
-      \ 'p' : [':Lspsaga diagnostic_jump_prev'       , 'prev diagnostic'],
-      \ 'q' : [':Lspsaga code_action'                , 'quickfix'],
-      \ 'r' : [':LspReferences'                      , 'references'],
-      \ 'R' : [':LspRename'                          , 'rename'],
+      \ 'p' : [':Lspsaga preview_definition'         , 'preview definition'],
+      \ 'q' : [':Telescope quickfix'                 , 'quickfix'],
+      \ 'r' : [':LspRename'                          , 'rename'],
       \ 'T' : [':LspTypeDefinition'                  , 'type defintion'],
       \ 'x' : [':cclose'                             , 'close quickfix'],
-      \ 'y' : [':LspDocumentSymbol'                  , 'document symbols'],
-      \ 'Y' : [':LspWorkspaceSymbol'                 , 'workspace symbols'],
+      \ 's' : [':Telescope lsp_document_symbols'     , 'document symbols'],
+      \ 'S' : [':Telescope lsp_workspace_symbols'    , 'workspace symbols'],
       \ }
+      " \ 'D' : [':LspDeclaration'                     , 'workspace_diagnostics'],
+      " \ 'r' : [':Telescope lsp_references'           , 'references'],
+      " \ 'p' : [':Lspsaga diagnostic_jump_prev'       , 'prev diagnostic'],
+      " \ 'n' : [':Lspsaga diagnostic_jump_next'       , 'next_diagnostic'],
+      " \ 'q' : [':Lspsaga code_action'                , 'quickfix'],
+      " \ 'i' : [':LspImplementation'                  , 'lsp_info'],
+      " \ 'h' : [':Lspsaga hover_doc'                  , 'hover_doc'],
+      " \ 'K' : [':LspHover'                           , 'hover'],
 
 " t is for terminal
 let g:which_key_map.t = {
@@ -309,52 +310,4 @@ let g:which_key_map.t = {
       \ 'u' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
-" w is for wiki
-" let g:which_key_map.w = {
-"       \ 'name' : '+wiki' ,
-"       \ 'w' : ['<Plug>VimwikiIndex'                              , 'ncdu'],
-"       \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
-"       \ 'j' : ['<plug>(wiki-journal)'                              , 'ncdu'],
-"       \ 'R' : ['<plug>(wiki-reload)'                              , 'ncdu'],
-"       \ 'c' : ['<plug>(wiki-code-run)'                              , 'ncdu'],
-"       \ 'b' : ['<plug>(wiki-graph-find-backlinks)'                              , 'ncdu'],
-"       \ 'g' : ['<plug>(wiki-graph-in)'                              , 'ncdu'],
-"       \ 'G' : ['<plug>(wiki-graph-out)'                              , 'ncdu'],
-"       \ 'l' : ['<plug>(wiki-link-toggle)'                              , 'ncdu'],
-"       \ 'd' : ['<plug>(wiki-page-delete)'                              , 'ncdu'],
-"       \ 'r' : ['<plug>(wiki-page-rename)'                              , 'ncdu'],
-"       \ 't' : ['<plug>(wiki-page-toc)'                              , 'ncdu'],
-"       \ 'T' : ['<plug>(wiki-page-toc-local)'                              , 'ncdu'],
-"       \ 'e' : ['<plug>(wiki-export)'                              , 'ncdu'],
-"       \ 'u' : ['<plug>(wiki-list-uniq)'                              , 'ncdu'],
-"       \ 'U' : ['<plug>(wiki-list-uniq-local)'                              , 'ncdu'],
-"       \ }
-
-" Global
-" <Plug>VimwikiIndex
-" <Plug>VimwikiTabIndex
-" <Plug>VimwikiUISelect
-" <Plug>VimwikiDiaryIndex
-" <Plug>VimwikiMakeDiaryNote
-" <Plug>VimwikiTabMakeDiaryNote
-" <Plug>VimwikiMakeYesterdayDiaryNote
-" <Plug>VimwikiMakeTomorrowDiaryNote
-"
-" " Local
-" <Plug>Vimwiki2HTML
-" <Plug>Vimwiki2HTMLBrowse
-" <Plug>VimwikiDiaryGenerateLinks
-" <Plug>VimwikiFollowLink
-" <Plug>VimwikiSplitLink
-" <Plug>VimwikiVSplitLink
-" <Plug>VimwikiTabnewLink
-" <Plug>VimwikiGoBackLink
-" <Plug>VimwikiNextLink
-" <Plug>VimwikiPrevLink
-" <Plug>VimwikiGoto
-" <Plug>VimwikiDeleteLink
-" <Plug>VimwikiRenameLink
-" <Plug>VimwikiAddHeaderLevel
-
-" Register which key map
 call which_key#register('<Space>', "g:which_key_map")
