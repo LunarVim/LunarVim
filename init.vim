@@ -29,7 +29,6 @@ else
   source ~/.config/nvim/plug-config/vim-commentary.vim
   source ~/.config/nvim/plug-config/rnvimr.vim
   source ~/.config/nvim/plug-config/codi.vim
-  source ~/.config/nvim/plug-config/vim-wiki.vim
   source ~/.config/nvim/plug-config/easymotion.vim
   source ~/.config/nvim/plug-config/goyo.vim
   source ~/.config/nvim/plug-config/vim-rooter.vim
@@ -47,6 +46,8 @@ else
   source ~/.config/nvim/plug-config/lsp-saga.vim
   source ~/.config/nvim/plug-config/lightbulb.vim
   source ~/.config/nvim/lua/lsp-wrapper.vim
+  source ~/.config/nvim/plug-config/lsp-config.vim
+  luafile ~/.config/nvim/lua/lsp/general-ls.lua
   luafile ~/.config/nvim/lua/plugins/galaxyline-config.lua
   luafile ~/.config/nvim/lua/plugins/nvimtree-config.lua
   luafile ~/.config/nvim/lua/plugins/treesitter-config.lua
@@ -56,7 +57,6 @@ else
   luafile ~/.config/nvim/lua/plugins/compe-config.lua
   luafile ~/.config/nvim/lua/plugins/lspsaga-config.lua
   " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-  source ~/.config/nvim/plug-config/lsp-config.vim
   luafile ~/.config/nvim/lua/lsp/lsp-config.lua
   luafile ~/.config/nvim/lua/lsp/lua-ls.lua
   luafile ~/.config/nvim/lua/lsp/python-ls.lua
@@ -83,3 +83,4 @@ endif
   " https://github.com/mfussenegger/nvim-jdtls
   " fix space and tab triggering completion all the time
   " Provide diagnostics for nvim tree 
+  " port everything possible to lua

@@ -82,3 +82,4 @@
     " Plug 'romgrk/nvim-treesitter-context'
     " Neovim in Browser
     " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
+    " Plug 'glepnir/indent-guides.nvim'

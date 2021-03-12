@@ -16,6 +16,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'unblevable/quick-scope'
     " Useful for React Commenting 
     Plug 'suy/vim-context-commentstring'
+    " While I'm learning Lua
+    Plug 'nanotee/nvim-lua-guide'
+    Plug 'rafcamlet/nvim-luapad'
 
   if exists('g:vscode')
     " Easy motion for VSCode
@@ -30,6 +33,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'airblade/vim-rooter'
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/playground'
+    Plug 'p00f/nvim-ts-rainbow'
     " Cool Icons
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'ryanoasis/vim-devicons'
@@ -68,6 +73,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-media-files.nvim'
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
@@ -76,6 +82,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'mfussenegger/nvim-jdtls'
     Plug 'mfussenegger/nvim-dap'
+    " https://github.com/mhartington/formatter.nvim look into this
     " File Explorer
     Plug 'kyazdani42/nvim-tree.lua'
     " Themes
@@ -102,6 +109,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
     " live server
     Plug 'turbio/bracey.vim'
+    " Better quickfix
+    Plug 'kevinhwang91/nvim-bqf'
   endif
 
 call plug#end()

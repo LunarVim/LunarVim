@@ -1,4 +1,4 @@
-highlight CodiVirtualText guifg='#98C379'
+highlight CodiVirtualText guifg='#6495ed'
 
 let g:codi#virtual_text_prefix = "❯ "
 
