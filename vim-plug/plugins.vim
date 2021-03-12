@@ -111,6 +111,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'turbio/bracey.vim'
     " Better quickfix
     Plug 'kevinhwang91/nvim-bqf'
+    " Vim TeX for LaTeX
+    Plug 'lervag/vimtex'
   endif
 
 call plug#end()

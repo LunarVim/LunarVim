@@ -1,6 +1,3 @@
-"""""""""""
-" VimTex  "
-"""""""""""
 " Choose pdf viewer skim (easier for MacOS) or Zathura (primarily Linux but works also on MacOS)
 let g:latex_view_general_viewer = "zathura"
 " let g:latex_view_general_viewer = "skim"
