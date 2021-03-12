@@ -25,6 +25,7 @@ else
   source ~/.config/nvim/themes/nvcode.vim
 
   " Plugin Configuration
+  luafile ~/.config/nvim/lua/lsp/general-ls.lua
   source ~/.config/nvim/keys/which-key.vim
   source ~/.config/nvim/plug-config/vim-commentary.vim
   source ~/.config/nvim/plug-config/rnvimr.vim
