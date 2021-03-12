@@ -115,6 +115,21 @@ let g:which_key_map.d = {
       \ 's' : ['<Plug>VimspectorStop'                          , 'stop'],
       \ }
 
+" F is for fold
+let g:which_key_map.F = {
+    \ 'name': '+fold',
+    \ 'O' : [':set foldlevel=20', 'open all'],
+    \ 'C' : [':set foldlevel=0', 'close all'],
+    \ 'c' : [':foldclose', 'close'],
+    \ 'o' : [':foldopen', 'open'],
+    \ '1' : [':set foldlevel=1', 'level1'],
+    \ '2' : [':set foldlevel=2', 'level2'],
+    \ '3' : [':set foldlevel=3', 'level3'],
+    \ '4' : [':set foldlevel=4', 'level4'],
+    \ '5' : [':set foldlevel=5', 'level5'],
+    \ '6' : [':set foldlevel=6', 'level6']
+    \ }
+
 " f is for find and replace
       " \ 'f' : [':Farr'                     , 'file'],
 let g:which_key_map.f = {
