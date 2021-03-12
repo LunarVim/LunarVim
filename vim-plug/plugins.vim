@@ -16,6 +16,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'unblevable/quick-scope'
     " Useful for React Commenting 
     Plug 'suy/vim-context-commentstring'
+    " While I'm learning Lua
+    Plug 'nanotee/nvim-lua-guide'
+    Plug 'rafcamlet/nvim-luapad'
 
   if exists('g:vscode')
     " Easy motion for VSCode
