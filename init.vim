@@ -29,7 +29,6 @@ else
   source ~/.config/nvim/plug-config/vim-commentary.vim
   source ~/.config/nvim/plug-config/rnvimr.vim
   source ~/.config/nvim/plug-config/codi.vim
-  source ~/.config/nvim/plug-config/vim-wiki.vim
   source ~/.config/nvim/plug-config/easymotion.vim
   source ~/.config/nvim/plug-config/goyo.vim
   source ~/.config/nvim/plug-config/vim-rooter.vim
