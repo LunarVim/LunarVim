@@ -36,6 +36,9 @@ set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set incsearch
 set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h18
+set ignorecase smartcase                "Find match upper and low case, but If find only uppercase, only match uppercase
+set matchpairs+=<:>                     "Press %, Match < and > as well.
+set noundofile                          "Don't save undo's after file closes.
 
 " New stuff
 " set notimeout nottimeout
