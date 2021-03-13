@@ -5,6 +5,6 @@ function! Comment()
     execute "'<,'>Commentary"
   endif
  endfunction
-vnoremap <silent> <space>/ :call Comment()
+vnoremap <silent> <space>/ :call Comment()<cr>
 autocmd! BufRead,BufNewFile *.{jsx,jx,js} setlocal filetype=javascript.jsx
 autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
