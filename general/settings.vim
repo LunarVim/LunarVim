@@ -53,6 +53,8 @@ set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h18
 " au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+autocmd FileType markdown set wrap
+
 " You can't stop me
 cmap w!! w !sudo tee %
 

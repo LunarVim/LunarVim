@@ -11,6 +11,7 @@ endif
 source ~/.config/nvim/vim-plug/plugins.vim
 source ~/.config/nvim/general/settings.vim
 source ~/.config/nvim/general/functions.vim
+source ~/.config/nvim/general/theme.vim
 source ~/.config/nvim/keys/mappings.vim
 
 if exists('g:vscode')
@@ -19,10 +20,6 @@ if exists('g:vscode')
   source ~/.config/nvim/plug-config/easymotion.vim
   source ~/.config/nvim/plug-config/highlightyank.vim
 else
-
-  " Themes
-  source ~/.config/nvim/themes/syntax.vim
-  source ~/.config/nvim/themes/nvcode.vim
 
   " Plugin Configuration
   source ~/.config/nvim/keys/which-key.vim
