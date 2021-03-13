@@ -61,6 +61,7 @@ else
   luafile ~/.config/nvim/lua/lsp/lua-ls.lua
   luafile ~/.config/nvim/lua/lsp/python-ls.lua
   luafile ~/.config/nvim/lua/lsp/bash-ls.lua
+  autocmd FileType java luafile ~/.config/nvim/lua/lsp/java-ls.lua
   luafile ~/.config/nvim/lua/lsp/css-ls.lua
   luafile ~/.config/nvim/lua/lsp/docker-ls.lua
   luafile ~/.config/nvim/lua/lsp/graphql-ls.lua
@@ -84,3 +85,7 @@ endif
   " fix space and tab triggering completion all the time
   " Provide diagnostics for nvim tree 
   " port everything possible to lua
+  " augroup lsp
+  "   au!
+  "   au FileType java lua require('jdtls').start_or_attach({cmd = {'java-linux-ls'}})
+  " augroup end

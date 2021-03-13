@@ -25,3 +25,13 @@ command! LspShowLineDiagnostics lua require 'lsp-wrapper'.show_line_diagnostics(
 " command! LspIncomingCalls lua require 'lsp-wrapper'.incoming_calls()
 " command! LspOutGoingCalls lua require 'lsp-wrapper'.outgoing_calls()
 " command! LspDocumentHighlight lua require 'lsp-wrapper'.document_highlight()
+
+" Java
+
+" command! FileType java LspCodeAction <Esc><Cmd>lua require('jdtls').code_action(true)<CR>
+" command! FileType java LspCodeAction <Esc><Cmd>lua require('jdtls').code_action(false, 'refactor')<CR>
+
+" nnoremap <A-o> <Cmd>lua require'jdtls'.organize_imports()<CR>
+" nnoremap crv <Cmd>lua require('jdtls').extract_variable()<CR>
+" vnoremap crv <Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>
+" vnoremap crm <Esc><Cmd>lua require('jdtls').extract_method(true)<CR>

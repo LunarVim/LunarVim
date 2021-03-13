@@ -138,6 +138,29 @@ let g:which_key_map.f = {
       \ 'p' : [':Farr --source=rgnvim'     , 'project'],
       \ }
 
+" command! -buffer JdtCompile lua require('jdtls').compile()
+" command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()
+" command! -buffer JdtJol lua require('jdtls').jol()
+" command! -buffer JdtBytecode lua require('jdtls').javap()
+" command! -buffer JdtJshell lua require('jdtls').jshell()
+
+" j is for java
+let g:which_key_map.j = {
+      \ 'name' : '+java' ,
+      \ 'c' : [':AsyncTask file-compile'      , 'compile file'],
+      \ 'b' : [':AsyncTask project-build'     , 'build project'],
+      \ 'e' : [':AsyncTaskEdit'               , 'edit local tasks'],
+      \ 'f' : [':AsyncTaskFzf'                , 'find task'],
+      \ 'g' : [':AsyncTaskEdit!'              , 'edit global tasks'],
+      \ 'h' : [':AsyncTaskList!'              , 'list hidden tasks'],
+      \ 'l' : [':CocList tasks'               , 'list tasks'],
+      \ 'm' : [':AsyncTaskMacro'              , 'macro help'],
+      \ 'o' : [':copen'                       , 'open task view'],
+      \ 'r' : [':AsyncTask file-run'          , 'run file'],
+      \ 'p' : [':AsyncTask project-run'       , 'run project'],
+      \ 'x' : [':cclose'                      , 'close task view'],
+      \ }
+
 " k is for task
 let g:which_key_map.k = {
       \ 'name' : '+task' ,
@@ -147,7 +170,6 @@ let g:which_key_map.k = {
       \ 'f' : [':AsyncTaskFzf'                , 'find task'],
       \ 'g' : [':AsyncTaskEdit!'              , 'edit global tasks'],
       \ 'h' : [':AsyncTaskList!'              , 'list hidden tasks'],
-      \ 'l' : [':CocList tasks'               , 'list tasks'],
       \ 'm' : [':AsyncTaskMacro'              , 'macro help'],
       \ 'o' : [':copen'                       , 'open task view'],
       \ 'r' : [':AsyncTask file-run'          , 'run file'],
