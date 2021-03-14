@@ -66,4 +66,5 @@ return require('packer').startup(function()
   use 'kevinhwang91/nvim-bqf'
   use 'unblevable/quick-scope'
   use 'airblade/vim-rooter'
+  use 'b3nj5m1n/kommentary'
 end)

@@ -12,6 +12,7 @@ require('nv-galaxyline')
 require('nv-bufferline')
 require('nv-gitsigns')
 require('nv-nvim-autopairs')
+require('nv-kommentary')
 
 -- LSP
 require('lsp.lua-ls')
