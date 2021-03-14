@@ -13,6 +13,5 @@ require('nv-bufferline')
 require('nv-gitsigns')
 require('nv-nvim-autopairs')
 
-
 -- LSP
 require('lsp.lua-ls')
