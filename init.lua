@@ -11,6 +11,7 @@ require('nv-treesitter')
 require('nv-galaxyline')
 require('nv-bufferline')
 require('nv-gitsigns')
+require('nv-nvim-autopairs')
 
 
 -- LSP
