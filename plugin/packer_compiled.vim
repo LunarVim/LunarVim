@@ -48,6 +48,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/chris/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
+  neogit = {
+    loaded = true,
+    path = "/home/chris/.local/share/nvim/site/pack/packer/start/neogit"
+  },
   ["nvcode-color-schemes.vim"] = {
     loaded = true,
     path = "/home/chris/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"

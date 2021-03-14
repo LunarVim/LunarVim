@@ -36,6 +36,8 @@ return require('packer').startup(function()
   use 'nvim-treesitter/playground'
   use 'p00f/nvim-ts-rainbow'
 
+  -- Icons
+  use 'kyazdani42/nvim-web-devicons'
 
   -- Status Line and Bufferline
   use 'glepnir/galaxyline.nvim'
@@ -50,8 +52,6 @@ return require('packer').startup(function()
   -- Explorer
   use 'kyazdani42/nvim-tree.lua'
 
-  -- Icons
-  use 'kyazdani42/nvim-web-devicons'
 
   -- Color
   use 'christianchiarulli/nvcode-color-schemes.vim'
@@ -66,5 +66,4 @@ return require('packer').startup(function()
   use 'kevinhwang91/nvim-bqf'
   use 'unblevable/quick-scope'
   use 'airblade/vim-rooter'
-}
 end)
