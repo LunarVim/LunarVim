@@ -12,7 +12,7 @@ end
 
 return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
-  use {'wbthomason/packer.nvim', opt = true}
+  use {'wbthomason/packer.nvim'}
 
   -- Information
   use 'nanotee/nvim-lua-guide'
@@ -61,10 +61,24 @@ return require('packer').startup(function()
   use 'TimUntersberger/neogit'
   use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
+  -- Easily Create Gists
+  use 'mattn/vim-gist'
+  use 'mattn/webapi-vim'
+
   -- General Plugins
   use 'windwp/nvim-autopairs'
   use 'kevinhwang91/nvim-bqf'
   use 'unblevable/quick-scope'
   use 'airblade/vim-rooter'
   use 'b3nj5m1n/kommentary'
+  use 'kevinhwang91/rnvimr'
+  use 'mhinz/vim-startify'
+  use 'metakirby5/codi.vim'
+  use 'psliwka/vim-smoothie'
+  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+  use 'moll/vim-bbye'
+  use 'turbio/bracey.vim'
+  use 'AndrewRadev/tagalong.vim'
+  use 'alvan/vim-closetag'
+  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](1) end }
 end)
