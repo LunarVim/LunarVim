@@ -8,6 +8,8 @@ If you are looking for my old configs checkout the two snapshot branches on this
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
 ```
 
+After running you will have access to the `nv` command, this WILL NOT overwite your nvim config. So you can have both installed at the same time
+
 ## Get the latest version of Neovim 
 
 ```bash
