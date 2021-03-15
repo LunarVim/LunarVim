@@ -13,6 +13,9 @@ require('nv-bufferline')
 require('nv-gitsigns')
 require('nv-nvim-autopairs')
 require('nv-kommentary')
+require('nv-quickscope')
+require('nv-rnvimr')
+require('nv-startify')
 
 -- LSP
 require('lsp')

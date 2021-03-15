@@ -81,4 +81,5 @@ return require('packer').startup(function()
   use 'AndrewRadev/tagalong.vim'
   use 'alvan/vim-closetag'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](1) end }
+  use 'liuchengxu/vim-which-key'
 end)
