@@ -88,4 +88,5 @@ return require('packer').startup(function()
   use 'liuchengxu/vim-which-key'
   use 'tpope/vim-sleuth'
   use 'voldikss/vim-floaterm'
+  use 'phaazon/hop.nvim'
 end)
