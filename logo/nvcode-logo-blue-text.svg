@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="713.74158"
+   height="212.22731"
+   viewBox="0 0 713.74157 212.22731"
+   version="1.1"
+   id="svg43"
+   sodipodi:docname="nvcode-logo-blue-text.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   inkscape:export-filename="nvcode-logo-blue-text.png"
+   inkscape:export-xdpi="55"
+   inkscape:export-ydpi="55">
+  <metadata
+     id="metadata47">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>nvcode-logo</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
+        <dc:source>http://neovim.org/logos/neovim-logos.zip</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Gauthier C.</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:date>2021-03-15</dc:date>
+        <dc:description>Author of the original work : Jason Long</dc:description>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:prohibits
+           rdf:resource="http://creativecommons.org/ns#CommercialUse" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     id="namedview45"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.433273"
+     inkscape:cx="340.28294"
+     inkscape:cy="146.59389"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg43"
+     inkscape:document-rotation="0" />
+  <title
+     id="title2">nvcode-logo-blue-text</title>
+  <description>Created with Inkscape</description>
+  <defs
+     id="defs19">
+    <rect
+       x="265.63556"
+       y="292.4595"
+       width="405.98318"
+       height="158.10284"
+       id="rect923" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient917">
+      <stop
+         style="stop-color:#d45500;stop-opacity:1;"
+         offset="0"
+         id="stop913" />
+      <stop
+         style="stop-color:#d45500;stop-opacity:0;"
+         offset="1"
+         id="stop915" />
+    </linearGradient>
+    <linearGradient
+       x1="49.021549"
+       y1="-0.079835393"
+       x2="49.021549"
+       y2="97.845657"
+       id="linearGradient-1"
+       gradientTransform="matrix(0.46153974,0,0,2.1666607,1,1)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#16B0ED"
+         stop-opacity="0.800235524"
+         offset="0%"
+         id="stop4" />
+      <stop
+         stop-color="#0F59B2"
+         stop-opacity="0.83700023"
+         offset="100%"
+         id="stop6"
+         style="stop-color:#0a3e7b;stop-opacity:0.88194895" />
+    </linearGradient>
+    <linearGradient
+       x1="326.17365"
+       y1="-0.069164939"
+       x2="326.17365"
+       y2="98.851547"
+       id="linearGradient-2"
+       gradientTransform="matrix(-0.46628455,0,0,2.1446132,303.97286,0.17297621)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#7DB643"
+         offset="0%"
+         id="stop9" />
+      <stop
+         stop-color="#367533"
+         offset="100%"
+         id="stop11" />
+    </linearGradient>
+    <linearGradient
+       x1="103.88479"
+       y1="-0.11508821"
+       x2="103.88479"
+       y2="178.55785"
+       id="linearGradient-3"
+       gradientTransform="matrix(0.84203823,0,0,1.1875945,-0.0271406,0.17297621)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#88C649"
+         stop-opacity="0.8"
+         offset="0%"
+         id="stop14" />
+      <stop
+         stop-color="#439240"
+         stop-opacity="0.84"
+         offset="100%"
+         id="stop16" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient917"
+       id="linearGradient919"
+       x1="46.223644"
+       y1="212.99834"
+       x2="46.394325"
+       y2="-56.845833"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-1.0271406,-0.82702379)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient-1"
+       id="linearGradient1564"
+       x1="590.97491"
+       y1="347.02493"
+       x2="273.194"
+       y2="347.31805"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     id="g1556">
+    <path
+       d="M 0,45.63152 45.196506,0 45.196505,212.17131 0,167.06682 Z"
+       id="Left---green"
+       fill="url(#linearGradient-1)"
+       sketch:type="MSShapeGroup"
+       style="fill:url(#linearGradient919);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1" />
+    <path
+       d="M 174.63615,46.062337 128.82052,0.02464417 129.74921,212.17131 174.94572,167.06682 Z"
+       id="Right---blue"
+       fill="url(#linearGradient-2)"
+       sketch:type="MSShapeGroup"
+       style="fill:url(#linearGradient-2);fill-rule:evenodd;stroke:none;stroke-width:1" />
+    <path
+       d="M 45.16637,0.03629807 162.67255,179.34636 129.79078,212.22731 12.223103,33.314149 Z"
+       id="Cross---blue"
+       fill="url(#linearGradient-3)"
+       sketch:type="MSShapeGroup"
+       style="fill:url(#linearGradient-3);fill-rule:evenodd;stroke:none;stroke-width:1" />
+    <path
+       d="m 45.206807,83.205081 -0.0625,7.0625 L 8.8637285,36.705081 12.223103,33.2829 Z"
+       id="Shadow"
+       fill-opacity="0.13"
+       fill="#000000"
+       sketch:type="MSShapeGroup"
+       style="fill-rule:evenodd;stroke:none;stroke-width:1" />
+  </g>
+  <text
+     xml:space="preserve"
+     id="text921"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:0;font-family:sans-serif;white-space:pre;shape-inside:url(#rect923);fill:url(#linearGradient1564);fill-opacity:1;stroke:none;"
+     transform="matrix(1.4899082,0,0,1.5209879,-190.54017,-421.77338)"><tspan
+       x="265.63477"
+       y="386.83428"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:106.667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';fill:url(#linearGradient1564);fill-opacity:1">VCode</tspan></tspan></text>
+</svg>
