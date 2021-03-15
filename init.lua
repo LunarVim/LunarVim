@@ -22,6 +22,7 @@ require('nv-vim-rooter')
 require('nv-lspkind')
 require('nv-hop')
 require('nv-compe')
+require('nv-closetag')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')

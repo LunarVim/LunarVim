@@ -26,12 +26,12 @@ sudo rm -r neovim
 
 **HIGH PRIORITY**
 - snippet support
-- auto close tags
 - configure git blame
 - react commenting
 - better autoimport
 - add lots of lsp
 - add vscode support
+- toggle virtual text diagnostics
 
 **LOW PRIORITY**
 - move language servers not installed with npm to neovim local share location
