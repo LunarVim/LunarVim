@@ -1,10 +1,12 @@
---vim.o.iskeyword="+=-"                     --treat dash separated words as a word text object"
---vim.o.shortmess="c"                        --Don't pass messages to |ins-completion-menu|.
-
---vim.o.formatoptions="cro"                  --Stop newline continution of comments
+vim.cmd('set iskeyword+=-')                  --treat dash separated words as a word text object"
+vim.cmd('set shortmess+=c')                 --Don't pass messages to |ins-completion-menu|.
+-- vim.cmd('set formatoptions-=cro')            -- Stop newline continution of comments
+-- vim.cmd('set fo-=ro')
+-- vim.api.nvim_set_option('set fo-=ro', false)
+-- vim.wo.formatoptions=""                              --Required to keep multiple buffers open multiple buffers
 vim.o.hidden=true                              --Required to keep multiple buffers open multiple buffers
-vim.o.wrap=false                              --Display long lines as just one line
---vim.o.whichwrap="+=<,>,[,],h,l"
+vim.wo.wrap=false                              --Display long lines as just one line
+vim.cmd('set whichwrap+=<,>,[,],h,l')
 vim.o.encoding="utf-8"                      --The encoding displayed
 vim.o.pumheight=10                        --Makes popup menu smaller
 vim.o.fileencoding="utf-8"                  --The encoding written to file
@@ -23,7 +25,6 @@ vim.o.expandtab=true                           --Converts tabs to spaces
 vim.o.smartindent=true                         --Makes indenting smart
 vim.o.autoindent=true                          --Good auto indent
 vim.o.laststatus=2                        --Always display the status line
---vim.o.number=true                              --Line numbers
 vim.wo.number = true
 vim.o.cursorline=true                          --Enable highlighting of the current line
 vim.o.background="dark"                     --tell vim what the background color looks like
