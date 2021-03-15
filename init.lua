@@ -17,6 +17,9 @@ require('nv-quickscope')
 require('nv-rnvimr')
 require('nv-startify')
 
+-- Which Key (Hope to replace with Lua plugin someday)
+vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')
+
 -- LSP
 require('lsp')
 require('utils')
