@@ -69,6 +69,7 @@ return require('packer').startup(function()
   -- Git
   use 'TimUntersberger/neogit'
   use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use 'f-person/git-blame.nvim'
 
   -- Easily Create Gists
   use 'mattn/vim-gist'

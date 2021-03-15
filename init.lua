@@ -23,6 +23,7 @@ require('nv-lspkind')
 require('nv-hop')
 require('nv-compe')
 require('nv-closetag')
+require('nv-gitblame')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')
@@ -33,4 +34,4 @@ require('utils')
 require('lsp.lua-ls')
 require('lsp.bash-ls')
 require('lsp.js-ts-ls')
-
+vim.cmd('highlight default link gitblame SpecialComment')

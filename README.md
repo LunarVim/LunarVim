@@ -25,12 +25,11 @@ sudo rm -r neovim
 ## TODO
 
 **HIGH PRIORITY**
+- add vscode support
 - snippet support
-- configure git blame
+- add lots of lsp
 - react commenting
 - better autoimport
-- add lots of lsp
-- add vscode support
 - toggle virtual text diagnostics
 
 **LOW PRIORITY**
