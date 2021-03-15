@@ -26,4 +26,5 @@ vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')
 require('lsp')
 require('utils')
 require('lsp.lua-ls')
+require('lsp.bash-ls')
 

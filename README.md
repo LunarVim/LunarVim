@@ -2,6 +2,22 @@
 
 If you are looking for my old configs checkout the two snapshot branches on this repo, there is one for CoC and one for Native LSP
 
+## Install in one command
+
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
+
+## Get the latest version of Neovim 
+
+```bash
+cd ~
+sudo rm -r neovim
+git clone https://github.com/neovim/neovim
+cd neovim
+sudo make CMAKE_BUILD_TYPE=Release install
+cd ~
+sudo rm -r neovim
+```
+
 ## TODO
 - Fix quickscope colors
 - fix annyoing comment nonsense
