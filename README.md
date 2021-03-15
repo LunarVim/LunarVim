@@ -38,3 +38,4 @@ sudo rm -r neovim
 - potentially custom colorscheme
 - get logo
 - look into autoinstall lsp
+- prefer single line comments kommentary
