@@ -16,3 +16,4 @@ If you are looking for my old configs checkout the two snapshot branches on this
 - potentially custom colorscheme
 - add vscode support
 - snippet support
+- move language servers not installed with npm to neovim local share location
