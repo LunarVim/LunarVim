@@ -22,19 +22,31 @@ cd ~
 sudo rm -r neovim
 ```
 
+## VSCode support
+
+After installing the Neovim extension in VSCode
+
+Point the nvim path to your `nvim` binary
+
+Point your `init.vim` path to:
+
+```vim
+$HOME/.config/nvim/lua/nv-vscode/init.vim
+```
+
 ## TODO
 
 **HIGH PRIORITY**
-- add vscode support
 - snippet support
+- update whichkey bindings
 - add lots of lsp
 - react commenting
 - better autoimport
 - toggle virtual text diagnostics
 
 **LOW PRIORITY**
+- improve VSCode support
 - move language servers not installed with npm to neovim local share location
-- update whichkey bindings
 - more handsome/modern galaxyline
 - potentially custom colorscheme
 - look into autoinstall lsp
