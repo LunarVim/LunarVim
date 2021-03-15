@@ -26,11 +26,15 @@ sudo rm -r neovim
 - change colors for LspDiagnostics/ virtual text
 - snippet support
 - add lots of lsp
+- configure neogit
+- configure git blame
 - move language servers not installed with npm to neovim local share location
 - add vscode support
 - react commenting
 - add lisence
 - add icons to startify
+- update whichkey bindings
 - more handsome/modern galaxyline
 - potentially custom colorscheme
 - get logo
+- look into autoinstall lsp
