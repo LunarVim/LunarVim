@@ -34,6 +34,12 @@ Point your `init.vim` path to:
 $HOME/.config/nvim/lua/nv-vscode/init.vim
 ```
 
+or if you are using this config alongside your own:
+
+```vim
+$HOME/.config/nvim/lua/nv-vscode/init.vim
+```
+
 ## TODO
 
 **HIGH PRIORITY**
