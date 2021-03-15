@@ -24,18 +24,18 @@ sudo rm -r neovim
 
 ## TODO
 - snippet support
-- add lots of lsp
-- configure neogit
 - configure git blame
+- add lots of lsp
 - move language servers not installed with npm to neovim local share location
-- add vscode support
-- react commenting
 - add lisence
 - add icons to startify
+- add vscode support
+- react commenting
 - update whichkey bindings
 - more handsome/modern galaxyline
-- potentially custom colorscheme
 - get logo
 - look into autoinstall lsp
 - prefer single line comments kommentary
 - fix ctrl-k
+- maximizer plugin
+- configure neogit
