@@ -31,9 +31,11 @@ let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 ,
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
 let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+" TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
-let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
+" Add Zen mode, play nice with status line
+" let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
 
 " Group mappings
 

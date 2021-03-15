@@ -33,6 +33,10 @@ return require('packer').startup(function()
   -- Autocomplete
   use 'hrsh7th/nvim-compe'
   use 'hrsh7th/vim-vsnip'
+  use 'honza/vim-snippets'
+  use 'norcalli/snippets.nvim'
+
+  -- use 'SirVer/ultisnips'
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -41,6 +45,7 @@ return require('packer').startup(function()
 
   -- Icons
   use 'kyazdani42/nvim-web-devicons'
+  use 'ryanoasis/vim-devicons'
 
   -- Status Line and Bufferline
   use 'glepnir/galaxyline.nvim'
@@ -64,6 +69,7 @@ return require('packer').startup(function()
   -- Git
   use 'TimUntersberger/neogit'
   use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use 'f-person/git-blame.nvim'
 
   -- Easily Create Gists
   use 'mattn/vim-gist'
