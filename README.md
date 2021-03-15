@@ -43,13 +43,13 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 ## TODO
 
 **HIGH PRIORITY**
-- snippet support
 - update whichkey bindings
-- add lots of lsp
+- snippet support
 - react commenting
 - toggle virtual text diagnostics
 
 **LOW PRIORITY**
+- add lots of lsp
 - improve VSCode support
 - move language servers not installed with npm to neovim local share location
 - more handsome/modern galaxyline
