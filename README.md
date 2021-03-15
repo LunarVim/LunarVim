@@ -23,13 +23,9 @@ sudo rm -r neovim
 ```
 
 ## TODO
-- Fix quickscope colors
-- fix annyoing comment nonsense
 - add lots of lsp
 - add icons to startify
 - remove bufferline bar at top of startify menu
-- readme
-- custom executable and config `nv` put scripts in utils
 - add lisence
 - get logo
 - more handsome/modern galaxyline
@@ -37,5 +33,4 @@ sudo rm -r neovim
 - add vscode support
 - snippet support
 - move language servers not installed with npm to neovim local share location
-- easy install script
 - hop.nvim
