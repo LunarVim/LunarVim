@@ -23,16 +23,16 @@ sudo rm -r neovim
 ```
 
 ## TODO
-- add lots of lsp
-- add icons to startify
-- remove bufferline bar at top of startify menu
-- add lisence
-- get logo
+- hop.nvim
+- change colors for LspDiagnostics/ virtual text
 - more handsome/modern galaxyline
 - potentially custom colorscheme
-- add vscode support
 - snippet support
+- add lots of lsp
 - move language servers not installed with npm to neovim local share location
-- hop.nvim
-- lspkind
+- add vscode support
 - react commenting
+- install script for newest neovim
+- add icons to startify
+- add lisence
+- get logo
