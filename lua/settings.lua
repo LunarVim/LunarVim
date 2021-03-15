@@ -1,9 +1,5 @@
 vim.cmd('set iskeyword+=-')                  --treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c')                 --Don't pass messages to |ins-completion-menu|.
--- vim.cmd('set formatoptions-=cro')            -- Stop newline continution of comments
--- vim.cmd('set fo-=ro')
--- vim.api.nvim_set_option('set fo-=ro', false)
--- vim.wo.formatoptions=""                              --Required to keep multiple buffers open multiple buffers
 vim.o.hidden=true                              --Required to keep multiple buffers open multiple buffers
 vim.wo.wrap=false                              --Display long lines as just one line
 vim.cmd('set whichwrap+=<,>,[,],h,l')
