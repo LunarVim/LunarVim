@@ -5,7 +5,6 @@ require('settings')
 require('colorscheme')
 
 -- Plugins
-require('nv-compe')
 require('nv-colorizer')
 require('nv-nvimtree')
 require('nv-treesitter')
@@ -22,6 +21,7 @@ require('nv-floaterm')
 require('nv-vim-rooter')
 require('nv-lspkind')
 require('nv-hop')
+require('nv-compe')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')

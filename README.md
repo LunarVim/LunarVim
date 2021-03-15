@@ -23,15 +23,21 @@ sudo rm -r neovim
 ```
 
 ## TODO
+
+**HIGH PRIORITY**
 - snippet support
+- auto close tags
 - configure git blame
-- add lots of lsp
-- move language servers not installed with npm to neovim local share location
 - react commenting
+- better autoimport
+- add lots of lsp
+- add vscode support
+
+**LOW PRIORITY**
+- move language servers not installed with npm to neovim local share location
 - update whichkey bindings
 - more handsome/modern galaxyline
 - potentially custom colorscheme
-- add vscode support
 - look into autoinstall lsp
 - get logo
 - configure neogit

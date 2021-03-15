@@ -33,6 +33,10 @@ return require('packer').startup(function()
   -- Autocomplete
   use 'hrsh7th/nvim-compe'
   use 'hrsh7th/vim-vsnip'
+  use 'honza/vim-snippets'
+  use 'norcalli/snippets.nvim'
+
+  -- use 'SirVer/ultisnips'
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
