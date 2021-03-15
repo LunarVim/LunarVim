@@ -23,7 +23,6 @@ sudo rm -r neovim
 ```
 
 ## TODO
-- change colors for LspDiagnostics/ virtual text
 - snippet support
 - add lots of lsp
 - configure neogit
