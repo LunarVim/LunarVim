@@ -1,3 +1,4 @@
+-- General mappings
 require('plugins')
 require('keymappings')
 require('settings')
@@ -16,6 +17,7 @@ require('nv-kommentary')
 require('nv-quickscope')
 require('nv-rnvimr')
 require('nv-startify')
+require('nv-telescope')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')
