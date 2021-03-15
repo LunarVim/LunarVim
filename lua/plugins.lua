@@ -17,6 +17,9 @@ return require('packer').startup(function()
   -- Information
   use 'nanotee/nvim-lua-guide'
 
+  -- Quality of life improvements
+  use 'norcalli/nvim_utils'
+
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'glepnir/lspsaga.nvim'
