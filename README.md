@@ -38,3 +38,4 @@ sudo rm -r neovim
 - snippet support
 - move language servers not installed with npm to neovim local share location
 - easy install script
+- hop.nvim
