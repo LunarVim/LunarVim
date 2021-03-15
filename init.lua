@@ -27,4 +27,5 @@ require('lsp')
 require('utils')
 require('lsp.lua-ls')
 require('lsp.bash-ls')
+require('lsp.js-ts-ls')
 
