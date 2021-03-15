@@ -27,7 +27,6 @@ sudo rm -r neovim
 - add lots of lsp
 - configure neogit
 - configure git blame
-- prefer single line comments kommentary
 - move language servers not installed with npm to neovim local share location
 - react commenting
 - add license
