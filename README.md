@@ -15,4 +15,4 @@ If you are looking for my old configs checkout the two snapshot branches on this
 - more handsome/modern galaxyline
 - potentially custom colorscheme
 - add vscode support
-
+- snippet support
