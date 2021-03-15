@@ -18,6 +18,8 @@ require('nv-quickscope')
 require('nv-rnvimr')
 require('nv-startify')
 require('nv-telescope')
+require('nv-floaterm')
+require('nv-vim-rooter')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')
