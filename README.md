@@ -4,7 +4,9 @@ If you are looking for my old configs checkout the two snapshot branches on this
 
 ## Install in one command
 
-```bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)```
+```
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
+```
 
 ## Get the latest version of Neovim 
 
