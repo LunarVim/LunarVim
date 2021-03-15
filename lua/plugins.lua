@@ -44,7 +44,8 @@ return require('packer').startup(function()
 
   -- Status Line and Bufferline
   use 'glepnir/galaxyline.nvim'
-  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
+  -- use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
+  use 'romgrk/barbar.nvim'
 
   -- Telescope
   use 'nvim-lua/popup.nvim'
