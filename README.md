@@ -47,13 +47,13 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - update whichkey bindings
 - add lots of lsp
 - react commenting
-- better autoimport
 - toggle virtual text diagnostics
 
 **LOW PRIORITY**
 - improve VSCode support
 - move language servers not installed with npm to neovim local share location
 - more handsome/modern galaxyline
+- better autoimport
 - potentially custom colorscheme
 - look into autoinstall lsp
 - get logo
