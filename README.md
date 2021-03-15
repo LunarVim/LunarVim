@@ -34,3 +34,5 @@ sudo rm -r neovim
 - snippet support
 - move language servers not installed with npm to neovim local share location
 - hop.nvim
+- lspkind
+- react commenting

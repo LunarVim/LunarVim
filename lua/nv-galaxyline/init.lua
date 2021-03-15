@@ -25,29 +25,6 @@ local buffer_not_empty = function()
   return false
 end
 
--- gls.left[1] = {
---   FirstElement = {
---     -- provider = function() return '▋' end,
---     provider = function() return ' ' end,
---     highlight = {colors.bg,colors.bg}
---   },
--- }
--- gls.left[2] = {
---   ViMode = {
---     provider = function()
---       local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',V= 'VISUAL', [''] = 'VISUAL'}
---       return alias[vim.fn.mode()]
---     end,
---     separator = ' ',
---     separator_highlight = {colors.yellow,function()
---       if not buffer_not_empty() then
---         return colors.purple
---       end
---       return colors.purple
---     end},
---     highlight = {colors.grey,colors.purple,'bold'},
---   },
--- }
 gls.left[2] = {
   ViMode = {
     provider = function()
