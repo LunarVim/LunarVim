@@ -85,4 +85,5 @@ return require('packer').startup(function()
   use 'alvan/vim-closetag'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](1) end }
   use 'liuchengxu/vim-which-key'
+  use 'tpope/vim-sleuth'
 end)
