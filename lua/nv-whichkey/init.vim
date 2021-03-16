@@ -28,6 +28,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 let g:which_key_map['/'] = 'which_key_ignore'
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
+let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
 let g:which_key_map['m'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
 let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
@@ -89,41 +90,41 @@ let g:which_key_map.F = {
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
       \ '.' : [':Telescope filetypes'                   , 'filetypes'],
-      \ ';' : [':Telescope commands'                    , 'commands'],
-      \ 'a' : [':Telescope lsp_code_actions'            , 'code_actions'],
-      \ 'A' : [':Telescope builtin'                     , 'all'],
-      \ 'b' : [':Telescope buffers'                     , 'buffers'],
       \ 'B' : [':Telescope git_branches'                , 'git branches'],
       \ 'd' : [':Telescope lsp_document_diagnostics'    , 'document_diagnostics'],
       \ 'D' : [':Telescope lsp_workspace_diagnostics'   , 'workspace_diagnostics'],
-      \ 'c' : [':Telescope git_commits'                 , 'git_commits'],
-      \ 'C' : [':Telescope git_bcommits'                , 'git_bcommits'],
       \ 'f' : [':Telescope find_files'                  , 'files'],
-      \ 'F' : [':Telescope git_files'                   , 'git_files'],
-      \ 'g' : [':Telescope tags'                        , 'tags'],
-      \ 'G' : [':Telescope current_buffer_tags'         , 'buffer_tags'],
       \ 'h' : [':Telescope command_history'             , 'history'],
-      \ 'H' : [':Telescope help_tags'                   , 'help_tags'],
       \ 'i' : [':Telescope media_files'                 , 'media files'],
-      \ 'k' : [':Telescope keymaps'                     , 'keymaps'],
-      \ 'l' : [':Telescope loclist'                     , 'loclist'],
       \ 'm' : [':Telescope marks'                       , 'marks'],
       \ 'M' : [':Telescope man_pages'                   , 'man_pages'],
       \ 'o' : [':Telescope vim_options'                 , 'vim_options'],
-      \ 'O' : [':Telescope oldfiles'                    , 'oldfiles'],
-      \ 'p' : [':Telescope fd'                          , 'fd'],
-      \ 'P' : [':Telescope spell_suggest'               , 'spell_suggest'],
-      \ 's' : [':Telescope git_status'                  , 'git_status'],
-      \ 'S' : [':Telescope grep_string'                 , 'grep_string'],
       \ 't' : [':Telescope live_grep'                   , 'text'],
-      \ 'y' : [':Telescope symbols'                     , 'symbols'],
-      \ 'Y' : [':Telescope lsp_workspace_symbols'       , 'lsp_workspace_symbols'],
       \ 'r' : [':Telescope registers'                   , 'registers'],
-      \ 'R' : [':Telescope reloader'                    , 'reloader'],
       \ 'w' : [':Telescope file_browser'                , 'buf_fuz_find'],
       \ 'u' : [':Telescope colorscheme'                 , 'colorschemes'],
-      \ 'z' : [':Telescope current_buffer_fuzzy_find'   , 'buf_fuz_find'],
       \ }
+      " \ 'A' : [':Telescope builtin'                     , 'all'],
+      " \ 's' : [':Telescope git_status'                  , 'git_status'],
+      " \ 'b' : [':Telescope buffers'                     , 'buffers'],
+      " \ ';' : [':Telescope commands'                    , 'commands'],
+      " \ 'a' : [':Telescope lsp_code_actions'            , 'code_actions'],
+      " \ 'c' : [':Telescope git_commits'                 , 'git_commits'],
+      " \ 'C' : [':Telescope git_bcommits'                , 'git_bcommits'],
+      " \ 'g' : [':Telescope tags'                        , 'tags'],
+      " \ 'F' : [':Telescope git_files'                   , 'git_files'],
+      " \ 'G' : [':Telescope current_buffer_tags'         , 'buffer_tags'],
+      " \ 'k' : [':Telescope keymaps'                     , 'keymaps'],
+      " \ 'H' : [':Telescope help_tags'                   , 'help_tags'],
+      " \ 'l' : [':Telescope loclist'                     , 'loclist'],
+      " \ 'O' : [':Telescope oldfiles'                    , 'oldfiles'],
+      " \ 'p' : [':Telescope fd'                          , 'fd'],
+      " \ 'S' : [':Telescope grep_string'                 , 'grep_string'],
+      " \ 'y' : [':Telescope symbols'                     , 'symbols'],
+      " \ 'Y' : [':Telescope lsp_workspace_symbols'       , 'lsp_workspace_symbols'],
+      " \ 'R' : [':Telescope reloader'                    , 'reloader'],
+      " \ 'z' : [':Telescope current_buffer_fuzzy_find'   , 'buf_fuz_find'],
+      " \ 'P' : [':Telescope spell_suggest'               , 'spell_suggest'],
 
 let g:which_key_map.S = {
       \ 'name' : '+Session' ,
@@ -210,10 +211,10 @@ let g:which_key_map.t = {
       \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
       \ 'p' : [':FloatermNew python'                            , 'python'],
       \ 'm' : [':FloatermNew lazynpm'                           , 'npm'],
-      \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
       \ 'u' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
+      " \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
 
 call which_key#register('<Space>', "g:which_key_map")
