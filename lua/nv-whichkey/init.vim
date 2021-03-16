@@ -58,7 +58,7 @@ let g:which_key_map.a = {
       \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
       \ }
 
-b is for buffer
+" b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
       \ '>' : [':BufferMoveNext'        , 'move next'],
