@@ -1,13 +1,15 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 
 if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
   execute 'packadd packer.nvim'
 end
+
+-- vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 
 
 return require('packer').startup(function()
@@ -33,9 +35,13 @@ return require('packer').startup(function()
   -- Autocomplete
   use 'hrsh7th/nvim-compe'
   use 'hrsh7th/vim-vsnip'
-  use 'hrsh7th/vim-vsnip-integ'
+  use 'honza/vim-snippets'
+  -- use 'cstrap/python-snippets'
+  -- use 'ylcnfrht/vscode-python-snippet-pack'
+  -- use 'xabikos/vscode-javascript'
+  -- use 'golang/vscode-go'
+  -- use 'rust-lang/vscode-rust'
   -- use 'SirVer/ultisnips'
-  -- use 'honza/vim-snippets'
   -- use 'norcalli/snippets.nvim'
 
 
@@ -97,4 +103,5 @@ return require('packer').startup(function()
   use 'voldikss/vim-floaterm'
   use 'phaazon/hop.nvim'
   use 'liuchengxu/vista.vim'
+  use { 'npxbr/glow.nvim', run = ':GlowInstall' }
 end)

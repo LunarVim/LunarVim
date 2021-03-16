@@ -4,7 +4,7 @@ If you are looking for my old configs checkout the two snapshot branches on this
 
 ## Install in one command
 
-```
+```bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
 ```
 
@@ -43,6 +43,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 ## TODO
 
 **HIGH PRIORITY**
+- neovim lightbulb config
 - update whichkey bindings
 - snippet support
 - react commenting
