@@ -48,9 +48,10 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - toggle virtual text diagnostics
 - improve VSCode support
 - formatting using efm server for python
+- formatting using efm server for prettier/eslint
 
 **LOW PRIORITY**
-- redo barbar highligh groups
+- redo barbar highlight groups
 - wrap all whichkey lsp in functions
 - make java code actions prettier
 - figure out how to format java

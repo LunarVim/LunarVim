@@ -1,3 +1,6 @@
+
+vim.cmd [[packadd packer.nvim]]
+
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
@@ -14,7 +17,7 @@ end
 
 return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
-  use {'wbthomason/packer.nvim'}
+  use {'wbthomason/packer.nvim', opt = true}
 
   -- Information
   use 'nanotee/nvim-lua-guide'
@@ -35,10 +38,12 @@ return require('packer').startup(function()
   -- Autocomplete
   use 'hrsh7th/nvim-compe'
   use 'hrsh7th/vim-vsnip'
-  use 'honza/vim-snippets'
+  use 'hrsh7th/vim-vsnip-integ'
+  -- use 'honza/vim-snippets'
+  -- use 'epilande/vim-react-snippets'
+  -- use 'xabikos/vscode-javascript'
   -- use 'cstrap/python-snippets'
   -- use 'ylcnfrht/vscode-python-snippet-pack'
-  -- use 'xabikos/vscode-javascript'
   -- use 'golang/vscode-go'
   -- use 'rust-lang/vscode-rust'
   -- use 'SirVer/ultisnips'
@@ -89,7 +94,6 @@ return require('packer').startup(function()
   use 'kevinhwang91/nvim-bqf'
   use 'unblevable/quick-scope'
   use 'airblade/vim-rooter'
-  use 'b3nj5m1n/kommentary'
   use 'kevinhwang91/rnvimr'
   use 'mhinz/vim-startify'
   use 'metakirby5/codi.vim'
@@ -106,5 +110,9 @@ return require('packer').startup(function()
   use 'phaazon/hop.nvim'
   use 'liuchengxu/vista.vim'
   use { 'npxbr/glow.nvim', run = ':GlowInstall' }
+  -- figure out how to disable or configure for things with tags like <div></div> because it will highlight all divs
   use 'RRethy/vim-illuminate'
+  -- use 'tpope/vim-commentary'
+  -- use 'suy/vim-context-commentstring'
+  use 'b3nj5m1n/kommentary'
 end)
