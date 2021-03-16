@@ -29,3 +29,6 @@ define_augroups(
         },
     }
 )
+
+-- Add this to lightbulb, java makes this annoying tho
+-- autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
