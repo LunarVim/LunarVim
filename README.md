@@ -50,6 +50,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - formatting using efm server for python
 
 **LOW PRIORITY**
+- redo barbar highligh groups
 - wrap all whichkey lsp in functions
 - make java code actions prettier
 - figure out how to format java
