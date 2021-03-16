@@ -96,4 +96,5 @@ return require('packer').startup(function()
   use 'tpope/vim-sleuth'
   use 'voldikss/vim-floaterm'
   use 'phaazon/hop.nvim'
+  use 'liuchengxu/vista.vim'
 end)
