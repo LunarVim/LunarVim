@@ -43,7 +43,6 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 ## TODO
 
 **HIGH PRIORITY**
-- neovim lightbulb config
 - update whichkey bindings
 - snippet support
 - react commenting
@@ -51,6 +50,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 
 **LOW PRIORITY**
 - add lots of lsp
+- neovim lightbulb config
 - improve VSCode support
 - move language servers not installed with npm to neovim local share location
 - more handsome/modern galaxyline

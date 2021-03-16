@@ -58,34 +58,18 @@ let g:which_key_map.a = {
       \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
       \ }
 
-" b is for buffer
-" let g:which_key_map.b = {
-"       \ 'name' : '+buffer' ,
-"       \ '>' : [':BufferMoveNext'        , 'move next'],
-"       \ '<' : [':BufferMovePrevious'    , 'move prev'],
-"       \ 'b' : [':BufferPick'            , 'pick buffer'],
-"       \ 'd' : [':Bdelete'               , 'delete-buffer'],
-"       \ 'n' : ['bnext'                  , 'next-buffer'],
-"       \ 'p' : ['bprevious'              , 'previous-buffer'],
-"       \ '?' : ['Buffers'                , 'fzf-buffer'],
-"       \ }
+b is for buffer
+let g:which_key_map.b = {
+      \ 'name' : '+buffer' ,
+      \ '>' : [':BufferMoveNext'        , 'move next'],
+      \ '<' : [':BufferMovePrevious'    , 'move prev'],
+      \ 'b' : [':BufferPick'            , 'pick buffer'],
+      \ 'd' : [':Bdelete'               , 'delete-buffer'],
+      \ 'n' : ['bnext'                  , 'next-buffer'],
+      \ 'p' : ['bprevious'              , 'previous-buffer'],
+      \ '?' : ['Buffers'                , 'fzf-buffer'],
+      \ }
 
-" d is for debug
-" let g:which_key_map.d = {
-"       \ 'name' : '+debug' ,
-"       \ 'b' : ['<Plug>VimspectorToggleBreakpoint'              , 'breakpoint'],
-"       \ 'B' : ['<Plug>VimspectorToggleConditionalBreakpoint'   , 'conditional breakpoint'],
-"       \ 'c' : ['<Plug>VimspectorRunToCursor'                   , 'run to cursor'],
-"       \ 'd' : ['<Plug>VimspectorContinue'                      , 'continue'],
-"       \ 'f' : ['<Plug>VimspectorAddFunctionBreakpoint'         , 'function breakpoint'],
-"       \ 'm' : [':MaximizerToggle'                              , 'maximize window'],
-"       \ 'o' : ['<Plug>VimspectorStepOver'                      , 'step over'],
-"       \ 'O' : ['<Plug>VimspectorStepOut'                       , 'step out'],
-"       \ 'i' : ['<Plug>VimspectorStepInto'                      , 'step into'],
-"       \ 'p' : ['<Plug>VimspectorPause'                         , 'pause'],
-"       \ 'r' : ['<Plug>VimspectorRestart'                       , 'restart'],
-"       \ 's' : ['<Plug>VimspectorStop'                          , 'stop'],
-"       \ }
 
 " F is for fold
 let g:which_key_map.F = {
@@ -152,49 +136,47 @@ let g:which_key_map.S = {
       \ }
 
 " g is for git
-" let g:which_key_map.g = {
-"       \ 'name' : '+git' ,
-"       \ 'a' : [':Git add .'                        , 'add all'],
-"       \ 'A' : [':CocCommand fzf-preview.GitStatus' , 'actions'],
-"       \ 'b' : [':Git blame'                        , 'blame'],
-"       \ 'B' : [':GBrowse'                          , 'browse'],
-"       \ 'c' : [':Git commit'                       , 'commit'],
-"       \ 'd' : [':Git diff'                         , 'diff'],
-"       \ 'D' : [':Gdiffsplit'                       , 'diff split'],
-"       \ 'g' : [':GGrep'                            , 'git grep'],
-"       \ 'G' : [':Gstatus'                          , 'status'],
-"       \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
-"       \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
-"       \ 'i' : [':Gist -b'                          , 'post gist'],
-"       \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
-"       \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
-"       \ 'l' : [':Git log'                          , 'log'],
-"       \ 'm' : ['<Plug>(git-messenger)'             , 'message'],
-"       \ 'p' : [':Git push'                         , 'push'],
-"       \ 'P' : [':Git pull'                         , 'pull'],
-"       \ 'r' : [':GRemove'                          , 'remove'],
-"       \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage hunk'],
-"       \ 'S' : [':CocCommand fzf-preview.GitStatus' , 'status'],
-"       \ 't' : [':GitGutterSignsToggle'             , 'toggle signs'],
-"       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
-"       \ 'v' : [':GV'                               , 'view commits'],
-"       \ 'V' : [':GV!'                              , 'view buffer commits'],
-"       \ }
+let g:which_key_map.g = {
+      \ 'name' : '+git' ,
+      \ 'b' : [':GitBlameToggle'                   , 'blame'],
+      \ 'B' : [':GBrowse'                          , 'browse'],
+      \ 'd' : [':Git diff'                         , 'diff'],
+      \ 'i' : [':Gist -b'                          , 'post gist'],
+      \ 'l' : [':Git log'                          , 'log'],
+      \ 'S' : [':Gstatus'                          , 'status'],
+      \ }
+      " set these up for git signs
+      "     ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
+      "     ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
+
+      "     ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+      "     ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+      "     ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+      "     ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+      "     ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+      "     ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+      " \ 'p' : [':Git push'                         , 'push'],
+      " \ 'P' : [':Git pull'                         , 'pull'],
+      " \ 'g' : [':GGrep'                            , 'git grep'],
+      " \ 'D' : [':Gdiffsplit'                       , 'diff split'],
+      " \ 'c' : [':Git commit'                       , 'commit'],
+      " \ 'A' : [':CocCommand fzf-preview.GitStatus' , 'actions'],
+      " \ 'a' : [':Git add .'                        , 'add all'],
       " \ 'A' : [':Git add %'                        , 'add current'],
       " \ 'S' : [':!git status'                      , 'status'],
 
-" let g:which_key_map.G = {
-"       \ 'name' : '+gist' ,
-"       \ 'a' : [':Gist -a'                          , 'post gist anon'],
-"       \ 'b' : [':Gist -b'                          , 'post gist browser'],
-"       \ 'd' : [':Gist -d'                          , 'delete gist'],
-"       \ 'e' : [':Gist -e'                          , 'edit gist'],
-"       \ 'l' : [':Gist -l'                          , 'list public gists'],
-"       \ 's' : [':Gist -ls'                         , 'list starred gists'],
-"       \ 'm' : [':Gist -m'                          , 'post gist all buffers'],
-"       \ 'p' : [':Gist -P'                          , 'post public gist '],
-"       \ 'P' : [':Gist -p'                          , 'post private gist '],
-"       \ }
+let g:which_key_map.G = {
+      \ 'name' : '+gist' ,
+      \ 'b' : [':Gist -b'                          , 'post gist browser'],
+      \ 'd' : [':Gist -d'                          , 'delete gist'],
+      \ 'e' : [':Gist -e'                          , 'edit gist'],
+      \ 'l' : [':Gist -l'                          , 'list public gists'],
+      \ 's' : [':Gist -ls'                         , 'list starred gists'],
+      \ 'm' : [':Gist -m'                          , 'post gist all buffers'],
+      \ 'p' : [':Gist -P'                          , 'post public gist '],
+      \ 'P' : [':Gist -p'                          , 'post private gist '],
+      \ }
+      " \ 'a' : [':Gist -a'                          , 'post gist anon'],
 
 " l is for language server protocol
 let g:which_key_map.l = {
