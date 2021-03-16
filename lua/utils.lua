@@ -27,9 +27,11 @@ define_augroups(
             {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
+            {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
         },
     }
 )
+
 
 -- Add this to lightbulb, java makes this annoying tho
 -- autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()

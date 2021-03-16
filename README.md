@@ -48,6 +48,11 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - toggle virtual text diagnostics
 
 **LOW PRIORITY**
+- wrap all whichkey lsp in functions
+- make java code actions prettier
+- figure out how to format java
+- formatting using efm server for python
+- setup junit tests for java
 - add git signs to whichkey (This will require wrapping in Lua commands)
 - add lots of lsp
 - neovim lightbulb config
