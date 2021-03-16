@@ -94,7 +94,7 @@ return require('packer').startup(function()
   use 'mhinz/vim-startify'
   use 'metakirby5/codi.vim'
   use 'psliwka/vim-smoothie'
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+  use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install' }
   use 'moll/vim-bbye'
   use 'turbio/bracey.vim'
   use 'AndrewRadev/tagalong.vim'

@@ -6,6 +6,7 @@ else
   require('keymappings')
   require('settings')
   require('colorscheme')
+  require('utils')
 
   -- Plugins
   require('nv-compe')
@@ -34,7 +35,6 @@ else
 
   -- LSP
   require('lsp')
-  require('utils')
   require('lsp.lua-ls')
   require('lsp.bash-ls')
   require('lsp.js-ts-ls')
