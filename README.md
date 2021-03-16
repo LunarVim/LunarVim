@@ -56,6 +56,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - setup junit tests for java
 - add git signs to whichkey (This will require wrapping in Lua commands)
 - add lots of lsp
+- configure illuminate according to readme
 - neovim lightbulb config
 - move language servers not installed with npm to neovim local share location
 - more handsome/modern galaxyline

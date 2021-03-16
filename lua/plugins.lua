@@ -106,4 +106,5 @@ return require('packer').startup(function()
   use 'phaazon/hop.nvim'
   use 'liuchengxu/vista.vim'
   use { 'npxbr/glow.nvim', run = ':GlowInstall' }
+  use 'RRethy/vim-illuminate'
 end)
