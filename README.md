@@ -46,17 +46,17 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - snippet support
 - react commenting
 - toggle virtual text diagnostics
+- improve VSCode support
+- formatting using efm server for python
 
 **LOW PRIORITY**
 - wrap all whichkey lsp in functions
 - make java code actions prettier
 - figure out how to format java
-- formatting using efm server for python
 - setup junit tests for java
 - add git signs to whichkey (This will require wrapping in Lua commands)
 - add lots of lsp
 - neovim lightbulb config
-- improve VSCode support
 - move language servers not installed with npm to neovim local share location
 - more handsome/modern galaxyline
 - better autoimport
