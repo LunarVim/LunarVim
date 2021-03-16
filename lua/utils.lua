@@ -26,6 +26,7 @@ define_augroups(
             {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
+            {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
         },
     }
 )

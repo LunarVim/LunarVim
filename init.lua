@@ -38,4 +38,8 @@ else
   require('lsp.lua-ls')
   require('lsp.bash-ls')
   require('lsp.js-ts-ls')
+  -- require('lsp.java-ls')
+  require('lsp.python-ls')
+  require('lsp.json-ls')
+  require('lsp.yaml-ls')
 end
