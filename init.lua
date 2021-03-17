@@ -1,3 +1,4 @@
+vim.cmd('set rtp+=~/.config/nvcode')
 if vim.g.vscode then
   vim.cmd('source ~/.config/nvim/vimscript/nv-vscode/init.vim')
   require('settings')
@@ -47,4 +48,3 @@ else
   require('lsp.json-ls')
   require('lsp.yaml-ls')
 end
-
