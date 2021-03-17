@@ -46,13 +46,15 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 
 **HIGH PRIORITY**
 - formatting using efm server for python
+- formatting using efm server for lua
 - formatting using efm server for prettier/eslint
-- snippet support
 - learn what opt is
 - better install script
+- snippet support
 
 **LOW PRIORITY**
 - redo barbar highlight groups
+- more handsome/modern galaxyline
 - make java code actions prettier
 - figure out how to format java
 - setup junit tests for java
@@ -60,9 +62,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - configure illuminate according to readme
 - neovim lightbulb config
 - move language servers not installed with npm to neovim local share location
-- more handsome/modern galaxyline
 - better autoimport
-- potentially custom colorscheme
 - look into autoinstall lsp
 - get logo
 - configure neogit
