@@ -181,7 +181,7 @@ baseInstall() { \
   which nvim > /dev/null && echo "neovim installed, moving on..." || asktoinstallneovim
   # install pynvim
   pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || installpynvim
-  which tree-sitter > /dev/null && sudo npm i -g tree-sitter-clir
+  which tree-sitter > /dev/null && sudo npm i -g tree-sitter-cli
   # clone config down
   cloneconfig
 
