@@ -45,6 +45,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 **HIGH PRIORITY**
 - formatting using efm server for python
 - formatting using efm server for prettier/eslint
+- add git signs to whichkey (This will require wrapping in Lua commands)
 - wrap all whichkey lsp in functions
 - snippet support
 
@@ -53,7 +54,6 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - make java code actions prettier
 - figure out how to format java
 - setup junit tests for java
-- add git signs to whichkey (This will require wrapping in Lua commands)
 - add lots of lsp
 - configure illuminate according to readme
 - neovim lightbulb config

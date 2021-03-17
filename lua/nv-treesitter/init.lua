@@ -11,6 +11,11 @@ require'nvim-treesitter.configs'.setup {
   },
   rainbow = {
     enable = false
-  }
+  },
+  refactor = {
+      highlight_definitions = {
+        enable = true
+      }
+   }
 }
 
