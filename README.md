@@ -1,13 +1,11 @@
 # NVCode
 
-If you are looking for my old configs checkout the two snapshot branches on this repo, there is one for CoC and one for Native LSP
-
 ## Install in one command
 
 **WARNING** Still very experimental will not woek without some configuation
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
+bash <(curl -s https://raw.githubusercontent.com/mjcc30/nvcode/master/utils/installer/install-nv-code.sh)
 ```
 
 After running you will have access to the `nv` command, this WILL NOT overwite your nvim config. So you can have both installed at the same time
@@ -41,30 +39,3 @@ or if you are using this config alongside your own:
 ```vim
 $HOME/.config/nvim/lua/nv-vscode/init.vim
 ```
-
-## TODO
-
-**HIGH PRIORITY**
-- formatting using efm server for python
-- formatting using efm server for lua
-- formatting using efm server for prettier/eslint
-- learn what opt is
-- better install script
-- snippet support
-
-**LOW PRIORITY**
-- redo barbar highlight groups
-- more handsome/modern galaxyline
-- make java code actions prettier
-- figure out how to format java
-- setup junit tests for java
-- add lots of lsp
-- configure illuminate according to readme
-- neovim lightbulb config
-- move language servers not installed with npm to neovim local share location
-- better autoimport
-- look into autoinstall lsp
-- get logo
-- configure neogit
-- toggle virtual text diagnostics
-- learn nvim-dap in depth
