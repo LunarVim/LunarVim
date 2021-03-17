@@ -125,11 +125,11 @@ pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || 
 # clone config down
 cloneconfig
 
-echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc
-echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc
+echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc
+echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 
 echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
 
-echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH appending to zshrc/bashrc'
+echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH appending to zshrc/bashrc'
