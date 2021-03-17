@@ -117,4 +117,5 @@ return require('packer').startup(function()
   --use 'suy/vim-context-commentstring'
   -- use 'b3nj5m1n/kommentary'
   use 'andymass/vim-matchup'
+  use 'sheerun/vim-polyglot'
 end)

@@ -26,8 +26,8 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
 " let g:which_key_map['/'] = { 'name' : 'comment' }
 
-let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
-"let g:which_key_map['/'] = 'which_key_ignore'
+"let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
+let g:which_key_map['/'] = 'which_key_ignore'
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
 let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]

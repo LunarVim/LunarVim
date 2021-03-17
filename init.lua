@@ -1,11 +1,13 @@
 if vim.g.vscode then
   vim.cmd('source ~/.config/nvim/vimscript/nv-vscode/init.vim')
+  require('settings')
 else
   -- General mappings
   require('plugins')
   require('keymappings')
   require('settings')
   require('colorscheme')
+  require('utils')
 
   -- Plugins
   require('nv-compe')
@@ -14,11 +16,11 @@ else
   require('nv-treesitter')
   require('nv-galaxyline')
   require('nv-barbar')
+  require('nv-quickscope')
   require('nv-gitsigns')
   require('nv-nvim-autopairs')
   require('nv-neogit')
-  require('nv-kommentary')
-  require('nv-quickscope')
+  require('nv-comment')
   require('nv-rnvimr')
   require('nv-startify')
   require('nv-telescope')
@@ -42,6 +44,5 @@ else
   require('lsp.python-ls')
   require('lsp.json-ls')
   require('lsp.yaml-ls')
-  require('utils')
-  vim.cmd([[autocmd BufRead * lua print("hi")]])
 end
+

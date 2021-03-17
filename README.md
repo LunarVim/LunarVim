@@ -43,16 +43,13 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 ## TODO
 
 **HIGH PRIORITY**
-- snippet support
-- react commenting
-- toggle virtual text diagnostics
-- improve VSCode support
 - formatting using efm server for python
 - formatting using efm server for prettier/eslint
+- wrap all whichkey lsp in functions
+- snippet support
 
 **LOW PRIORITY**
 - redo barbar highlight groups
-- wrap all whichkey lsp in functions
 - make java code actions prettier
 - figure out how to format java
 - setup junit tests for java
@@ -67,3 +64,4 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - look into autoinstall lsp
 - get logo
 - configure neogit
+- toggle virtual text diagnostics
