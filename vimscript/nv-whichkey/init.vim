@@ -21,26 +21,35 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-
+" " delete without yanking
+" nnoremap <leader>d "_d
+" vnoremap <leader>d "_d
+" 
+" " replace currently selected text with default register
+" " without yanking it
+" vnoremap <leader>p "_dP
+" vnoremap <leader>p "_dP
+map <leader>p <Plug>(miniyank-startput)
+map <leader>P <Plug>(miniyank-startPut)
 " Single mappings
-" let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
-" let g:which_key_map['/'] = { 'name' : 'comment' }
-
-"let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
 let g:which_key_map['/'] = 'which_key_ignore'
+let g:which_key_map['p'] = 'which_key_ignore'
+let g:which_key_map['P'] = 'which_key_ignore'
+let g:which_key_map['n'] = 'which_key_ignore'
+let g:which_key_map['N'] = 'which_key_ignore'
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
 let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
 let g:which_key_map['m'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
-let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
+let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
-let g:which_key_map['p'] = [ '"0p'                                             , 'paste' ]
+" let g:which_key_map['p'] = [ '"0p'                                             , 'paste' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
 " Add Zen mode, play nice with status line
-" let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
+let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
 
 " Group mappings
 
@@ -205,5 +214,11 @@ let g:which_key_map.t = {
       \ 'u' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
       " \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+
+let g:which_key_map.R = {
+      \ 'name' : '+Find_Replace' ,
+      \ 'f' : [':Farr --source=vimgrep'    , 'file'],
+      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+      \ }
 
 call which_key#register('<Space>', "g:which_key_map")
