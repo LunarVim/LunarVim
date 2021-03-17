@@ -1,4 +1,6 @@
-local function define_augroups(definitions) -- {{{1
+local function_wrapper = {}
+
+function function_wrapper.define_augroups(definitions) -- {{{1
     -- Create autocommand groups based on the passed definitions
     --
     -- The key will be the name of the group, and each definition
@@ -19,8 +21,7 @@ local function define_augroups(definitions) -- {{{1
         vim.cmd('augroup END')
     end
 end
-
-define_augroups(
+function_wrapper.define_augroups(
     {_general_settings = {
             {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'IncSearch\', timeout = 200})'},
             {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
@@ -36,3 +37,132 @@ define_augroups(
 
 -- Add this to lightbulb, java makes this annoying tho
 -- autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+
+-- lsp
+
+function function_wrapper.add_to_workspace_folder()
+    vim.lsp.buf.add_workspace_folder()
+end
+
+function function_wrapper.clear_references()
+    vim.lsp.buf.clear_references()
+end
+
+function function_wrapper.code_action()
+    vim.lsp.buf.code_action()
+end
+
+function function_wrapper.declaration()
+    vim.lsp.buf.declaration()
+    vim.lsp.buf.clear_references()
+end
+
+function function_wrapper.definition()
+    vim.lsp.buf.definition()
+    vim.lsp.buf.clear_references()
+end
+
+function function_wrapper.document_highlight()
+    vim.lsp.buf.document_highlight()
+end
+
+function function_wrapper.document_symbol()
+    vim.lsp.buf.document_symbol()
+end
+
+function function_wrapper.formatting()
+    vim.lsp.buf.formatting()
+end
+
+function function_wrapper.formatting_sync()
+    vim.lsp.buf.formatting_sync()
+end
+
+function function_wrapper.hover()
+    vim.lsp.buf.hover()
+end
+
+function function_wrapper.implementation()
+    vim.lsp.buf.implementation()
+end
+
+function function_wrapper.incoming_calls()
+    vim.lsp.buf.incoming_calls()
+end
+
+function function_wrapper.list_workspace_folders()
+    vim.lsp.buf.list_workspace_folders()
+end
+
+function function_wrapper.outgoing_calls()
+    vim.lsp.buf.outgoing_calls()
+end
+
+function function_wrapper.range_code_action()
+    vim.lsp.buf.range_code_action()
+end
+
+function function_wrapper.range_formatting()
+    vim.lsp.buf.range_formatting()
+end
+
+function function_wrapper.references()
+    vim.lsp.buf.references()
+    vim.lsp.buf.clear_references()
+end
+
+function function_wrapper.remove_workspace_folder()
+    vim.lsp.buf.remove_workspace_folder()
+end
+
+function function_wrapper.rename()
+    vim.lsp.buf.rename()
+end
+
+function function_wrapper.signature_help()
+    vim.lsp.buf.signature_help()
+end
+
+function function_wrapper.type_definition()
+    vim.lsp.buf.type_definition()
+end
+
+function function_wrapper.workspace_symbol()
+    vim.lsp.buf.workspace_symbol()
+end
+
+-- diagnostic
+
+function function_wrapper.get_all()
+    vim.lsp.diagnostic.get_all()
+end
+
+function function_wrapper.get_next()
+    vim.lsp.diagnostic.get_next()
+end
+
+function function_wrapper.get_prev()
+    vim.lsp.diagnostic.get_prev()
+end
+
+function function_wrapper.goto_next()
+    vim.lsp.diagnostic.goto_next()
+end
+
+function function_wrapper.goto_prev()
+    vim.lsp.diagnostic.goto_prev()
+end
+
+function function_wrapper.show_line_diagnostics()
+    vim.lsp.diagnostic.show_line_diagnostics()
+end
+
+-- git signs
+
+-- misc
+
+
+-- autoformat
+-- autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+return function_wrapper

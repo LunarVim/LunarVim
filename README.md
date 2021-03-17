@@ -46,7 +46,6 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - formatting using efm server for python
 - formatting using efm server for prettier/eslint
 - add git signs to whichkey (This will require wrapping in Lua commands)
-- wrap all whichkey lsp in functions
 - snippet support
 
 **LOW PRIORITY**

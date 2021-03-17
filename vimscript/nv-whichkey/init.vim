@@ -47,17 +47,14 @@ let g:which_key_map['v'] = [ '<C-W>v'                                          ,
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
       \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
       \ 'l' : [':Bracey'                 , 'start live server'],
       \ 'L' : [':BraceyStop'             , 'stop live server'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 's' : [':s/\%V\(.*\)\%V/"\1"/'   , 'surround'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
-      \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
       \ }
 
 " b is for buffer
@@ -188,19 +185,19 @@ let g:which_key_map.l = {
       \ 'd' : [':Telescope lsp_document_diagnostics' , 'document diagnostics'],
       \ 'D' : [':Telescope lsp_workspace_diagnostics', 'workspace diagnostics'],
       \ 'f' : [':LspFormatting'                      , 'format'],
-      \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
       \ 'I' : [':LspInfo'                            , 'lsp info'],
       \ 'l' : [':Lspsaga lsp_finder'                 , 'lsp finder'],
       \ 'L' : [':Lspsaga show_line_diagnostics'      , 'line_diagnostics'],
       \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'p' : [':Lspsaga preview_definition'         , 'preview definition'],
       \ 'q' : [':Telescope quickfix'                 , 'quickfix'],
-      \ 'r' : [':LspRename'                          , 'rename'],
+      \ 'r' : [':Lspsaga rename'                          , 'rename'],
       \ 'T' : [':LspTypeDefinition'                  , 'type defintion'],
       \ 'x' : [':cclose'                             , 'close quickfix'],
       \ 's' : [':Telescope lsp_document_symbols'     , 'document symbols'],
       \ 'S' : [':Telescope lsp_workspace_symbols'    , 'workspace symbols'],
       \ }
+      " \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
 
 " t is for terminal
 let g:which_key_map.t = {
