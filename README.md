@@ -67,3 +67,4 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - get logo
 - configure neogit
 - toggle virtual text diagnostics
+- learn nvim-dap in depth
