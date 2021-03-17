@@ -114,6 +114,7 @@ return require('packer').startup(function(use)
   use 'andymass/vim-matchup'
   use 'tpope/vim-sleuth'
   use 'phaazon/hop.nvim'
+  use 'gennaro-tedesco/nvim-jqx'
   -- use 'RRethy/vim-illuminate'
   -- use 'b3nj5m1n/kommentary'
 end)

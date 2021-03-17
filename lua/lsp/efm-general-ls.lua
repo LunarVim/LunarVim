@@ -6,10 +6,11 @@ require"lspconfig".efm.setup {
         languages = {
             lua = {
                 {
-                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
+                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=100",
                     formatStdin = true
                 }
             }
         }
     }
 }
+

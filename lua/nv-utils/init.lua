@@ -21,21 +21,21 @@ function nv_utils.define_augroups(definitions) -- {{{1
         vim.cmd('augroup END')
     end
 end
-nv_utils.define_augroups(
-    {_general_settings = {
-            {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'QuickScopePrimary\', timeout = 200})'},
-            {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-            {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-            {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-            {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
-            {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
-            {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
-            -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
-            -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
-        },
+nv_utils.define_augroups({
+    _general_settings = {
+        {
+            'TextYankPost', '*',
+            'lua require(\'vim.highlight\').on_yank({higroup = \'QuickScopePrimary\', timeout = 200})'
+        }, {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
+        {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
+        {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
+        {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
+        {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
+        {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
+        -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
+        -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     }
-)
-
+})
 
 -- Add this to lightbulb, java makes this annoying tho
 -- autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
@@ -44,6 +44,7 @@ nv_utils.define_augroups(
 
 function nv_utils.add_to_workspace_folder()
     vim.lsp.buf.add_workspace_folder()
+
 end
 
 function nv_utils.clear_references()
@@ -193,9 +194,7 @@ function nv_utils.blame_line()
     require('gitsigns').blame_line()
 end
 
-
 -- misc
-
 
 -- autoformat
 -- autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
