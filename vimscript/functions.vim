@@ -23,3 +23,23 @@ command! ResetHunk lua require 'nv-utils'.reset_hunk()
 command! ResetBuffer lua require 'nv-utils'.reset_buffer()
 command! PreviewHunk lua require 'nv-utils'.preview_hunk()
 command! BlameLine lua require 'nv-utils'.blame_line()
+
+" TODO this really shouldn't be here
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': ""
+    \   },
+    \ 'folder': {
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   }
+    \ }
