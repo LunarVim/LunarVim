@@ -1,6 +1,6 @@
-local function_wrapper = {}
+local nv_utils = {}
 
-function function_wrapper.define_augroups(definitions) -- {{{1
+function nv_utils.define_augroups(definitions) -- {{{1
     -- Create autocommand groups based on the passed definitions
     --
     -- The key will be the name of the group, and each definition
@@ -21,7 +21,7 @@ function function_wrapper.define_augroups(definitions) -- {{{1
         vim.cmd('augroup END')
     end
 end
-function_wrapper.define_augroups(
+nv_utils.define_augroups(
     {_general_settings = {
             {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'QuickScopePrimary\', timeout = 200})'},
             {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
@@ -42,154 +42,154 @@ function_wrapper.define_augroups(
 
 -- lsp
 
-function function_wrapper.add_to_workspace_folder()
+function nv_utils.add_to_workspace_folder()
     vim.lsp.buf.add_workspace_folder()
 end
 
-function function_wrapper.clear_references()
+function nv_utils.clear_references()
     vim.lsp.buf.clear_references()
 end
 
-function function_wrapper.code_action()
+function nv_utils.code_action()
     vim.lsp.buf.code_action()
 end
 
-function function_wrapper.declaration()
+function nv_utils.declaration()
     vim.lsp.buf.declaration()
     vim.lsp.buf.clear_references()
 end
 
-function function_wrapper.definition()
+function nv_utils.definition()
     vim.lsp.buf.definition()
     vim.lsp.buf.clear_references()
 end
 
-function function_wrapper.document_highlight()
+function nv_utils.document_highlight()
     vim.lsp.buf.document_highlight()
 end
 
-function function_wrapper.document_symbol()
+function nv_utils.document_symbol()
     vim.lsp.buf.document_symbol()
 end
 
-function function_wrapper.formatting()
+function nv_utils.formatting()
     vim.lsp.buf.formatting()
 end
 
-function function_wrapper.formatting_sync()
+function nv_utils.formatting_sync()
     vim.lsp.buf.formatting_sync()
 end
 
-function function_wrapper.hover()
+function nv_utils.hover()
     vim.lsp.buf.hover()
 end
 
-function function_wrapper.implementation()
+function nv_utils.implementation()
     vim.lsp.buf.implementation()
 end
 
-function function_wrapper.incoming_calls()
+function nv_utils.incoming_calls()
     vim.lsp.buf.incoming_calls()
 end
 
-function function_wrapper.list_workspace_folders()
+function nv_utils.list_workspace_folders()
     vim.lsp.buf.list_workspace_folders()
 end
 
-function function_wrapper.outgoing_calls()
+function nv_utils.outgoing_calls()
     vim.lsp.buf.outgoing_calls()
 end
 
-function function_wrapper.range_code_action()
+function nv_utils.range_code_action()
     vim.lsp.buf.range_code_action()
 end
 
-function function_wrapper.range_formatting()
+function nv_utils.range_formatting()
     vim.lsp.buf.range_formatting()
 end
 
-function function_wrapper.references()
+function nv_utils.references()
     vim.lsp.buf.references()
     vim.lsp.buf.clear_references()
 end
 
-function function_wrapper.remove_workspace_folder()
+function nv_utils.remove_workspace_folder()
     vim.lsp.buf.remove_workspace_folder()
 end
 
-function function_wrapper.rename()
+function nv_utils.rename()
     vim.lsp.buf.rename()
 end
 
-function function_wrapper.signature_help()
+function nv_utils.signature_help()
     vim.lsp.buf.signature_help()
 end
 
-function function_wrapper.type_definition()
+function nv_utils.type_definition()
     vim.lsp.buf.type_definition()
 end
 
-function function_wrapper.workspace_symbol()
+function nv_utils.workspace_symbol()
     vim.lsp.buf.workspace_symbol()
 end
 
 -- diagnostic
 
-function function_wrapper.get_all()
+function nv_utils.get_all()
     vim.lsp.diagnostic.get_all()
 end
 
-function function_wrapper.get_next()
+function nv_utils.get_next()
     vim.lsp.diagnostic.get_next()
 end
 
-function function_wrapper.get_prev()
+function nv_utils.get_prev()
     vim.lsp.diagnostic.get_prev()
 end
 
-function function_wrapper.goto_next()
+function nv_utils.goto_next()
     vim.lsp.diagnostic.goto_next()
 end
 
-function function_wrapper.goto_prev()
+function nv_utils.goto_prev()
     vim.lsp.diagnostic.goto_prev()
 end
 
-function function_wrapper.show_line_diagnostics()
+function nv_utils.show_line_diagnostics()
     vim.lsp.diagnostic.show_line_diagnostics()
 end
 
 -- git signs
 
-function function_wrapper.next_hunk()
+function nv_utils.next_hunk()
     require('gitsigns').next_hunk()
 end
 
-function function_wrapper.prev_hunk()
+function nv_utils.prev_hunk()
     require('gitsigns').prev_hunk()
 end
 
-function function_wrapper.stage_hunk()
+function nv_utils.stage_hunk()
     require('gitsigns').stage_hunk()
 end
 
-function function_wrapper.undo_stage_hunk()
+function nv_utils.undo_stage_hunk()
     require('gitsigns').undo_stage_hunk()
 end
 
-function function_wrapper.reset_hunk()
+function nv_utils.reset_hunk()
     require('gitsigns').reset_hunk()
 end
 
-function function_wrapper.reset_buffer()
+function nv_utils.reset_buffer()
     require('gitsigns').reset_buffer()
 end
 
-function function_wrapper.preview_hunk()
+function nv_utils.preview_hunk()
     require('gitsigns').preview_hunk()
 end
 
-function function_wrapper.blame_line()
+function nv_utils.blame_line()
     require('gitsigns').blame_line()
 end
 
@@ -200,5 +200,5 @@ end
 -- autoformat
 -- autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
-return function_wrapper
+return nv_utils
 
