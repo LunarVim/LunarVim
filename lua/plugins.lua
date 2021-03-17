@@ -12,7 +12,7 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
--- vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 
 
 return require('packer').startup(function(use)
@@ -39,7 +39,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-compe'
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
-  -- use 'honza/vim-snippets'
+  use 'honza/vim-snippets'
   -- use 'epilande/vim-react-snippets'
   -- use 'xabikos/vscode-javascript'
   -- use 'cstrap/python-snippets'
