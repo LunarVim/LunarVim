@@ -109,10 +109,12 @@ return require('packer').startup(function()
   use 'voldikss/vim-floaterm'
   use 'phaazon/hop.nvim'
   use 'liuchengxu/vista.vim'
-  use { 'npxbr/glow.nvim', run = ':GlowInstall' }
+  -- use { 'npxbr/glow.nvim', run = ':GlowInstall' }
   -- figure out how to disable or configure for things with tags like <div></div> because it will highlight all divs
   use 'RRethy/vim-illuminate'
-  -- use 'tpope/vim-commentary'
-  -- use 'suy/vim-context-commentstring'
-  use 'b3nj5m1n/kommentary'
+  use 'terrortylor/nvim-comment'
+  --use 'tpope/vim-commentary'
+  --use 'suy/vim-context-commentstring'
+  -- use 'b3nj5m1n/kommentary'
+  use 'andymass/vim-matchup'
 end)

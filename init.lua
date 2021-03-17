@@ -1,12 +1,11 @@
 if vim.g.vscode then
-  vim.cmd('source ~/.config/nvim/lua/nv-vscode/init.vim')
+  vim.cmd('source ~/.config/nvim/vimscript/nv-vscode/init.vim')
 else
   -- General mappings
   require('plugins')
   require('keymappings')
   require('settings')
   require('colorscheme')
-  require('utils')
 
   -- Plugins
   require('nv-compe')
@@ -31,7 +30,8 @@ else
   require('nv-gitblame')
 
   -- Which Key (Hope to replace with Lua plugin someday)
-  vim.cmd('source ~/.config/nvim/lua/nv-whichkey/init.vim')
+  vim.cmd('source ~/.config/nvim/vimscript/nv-whichkey/init.vim')
+--  vim.cmd('source ~/.config/nvim/vimscript/nv-commentary/init.vim')
 
   -- LSP
   require('lsp')
@@ -42,4 +42,6 @@ else
   require('lsp.python-ls')
   require('lsp.json-ls')
   require('lsp.yaml-ls')
+  require('utils')
+  vim.cmd([[autocmd BufRead * lua print("hi")]])
 end

@@ -26,8 +26,15 @@ define_augroups(
             {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
+
             {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
             {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
+            {'FileType', 'lua', 'lua print("hi")'},
+            --{'BufRead', '*', 'lua vim.api.nvim_buf_set_option(0, "commentstring", "{/*%s*/}")'},
+            --{'BufNewFile', '*', 'lua vim.api.nvim_buf_set_option(0, "commentstring", "{/*%s*/}")'},
+            {'BufNewFile', '*', 'verbose setlocal commentstring="{/*%s*/}"'},
+            {'BufRead', '*', 'verbose setlocal commentstring="{/*%s*/}"'},
+
         },
     }
 )
