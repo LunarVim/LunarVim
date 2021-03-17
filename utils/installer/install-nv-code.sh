@@ -43,7 +43,7 @@ installpiponarch() { \
 }
 
 installpip() { \
-  echo "Installing pip..."
+  echo "Installing pip..."ls
   [ "$(uname)" == "Darwin" ] && installpiponmac
   [  -n "$(uname -a | grep Ubuntu)" ] && installpiponubuntu
   [ -f "/etc/arch-release" ] && installpiponarch
@@ -69,11 +69,10 @@ asktoinstallnode() { \
 }
 
 asktoinstallpip() { \
-  # echo "pip not found"
-  # echo -n "Would you like to install pip now (y/n)? "
-  # read answer
-  # [ "$answer" != "${answer#[Yy]}" ] && installpip
-  echo "Please install pip3 before continuing with install"
+  echo "pip not found"
+  echo -n "Would you like to install pip now (y/n)? "
+  read answer
+  [ "$answer" != "${answer#[Yy]}" ] && installpip
   exit
 }
 
