@@ -57,7 +57,7 @@ installpynvim() { \
 
 cloneconfig() { \
   echo "Cloning NVCode configuration"
-  git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode
+  git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode
   nvim --headless +PackSync +qall > /dev/null 2>&1
 }
 
