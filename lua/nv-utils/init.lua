@@ -161,7 +161,7 @@ end
 
 -- git signs
 
-function function_wrapper.next_hunk() 
+function function_wrapper.next_hunk()
     require('gitsigns').next_hunk()
 end
 
