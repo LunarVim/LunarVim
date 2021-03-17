@@ -23,7 +23,7 @@ function function_wrapper.define_augroups(definitions) -- {{{1
 end
 function_wrapper.define_augroups(
     {_general_settings = {
-            {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'IncSearch\', timeout = 200})'},
+            {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'QuickScopePrimary\', timeout = 200})'},
             {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
             {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
