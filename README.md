@@ -4,6 +4,8 @@ If you are looking for my old configs checkout the two snapshot branches on this
 
 ## Install in one command
 
+**WARNING** Still very experimental will not woek without some configuation
+
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
 ```
@@ -47,6 +49,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - formatting using efm server for prettier/eslint
 - snippet support
 - learn what opt is
+- better install script
 
 **LOW PRIORITY**
 - redo barbar highlight groups
