@@ -35,6 +35,7 @@ let g:which_key_map['h'] = [ '<C-W>s'                                          ,
 let g:which_key_map['m'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
 let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+let g:which_key_map['p'] = [ '"0p'                                             , 'paste' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
@@ -140,30 +141,18 @@ let g:which_key_map.g = {
       \ 'b' : [':GitBlameToggle'                   , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
       \ 'd' : [':Git diff'                         , 'diff'],
-      \ 'i' : [':Gist -b'                          , 'post gist'],
+      \ 'j' : [':NextHunk'                         , 'next hunk'],
+      \ 'k' : [':PrevHunk'                         , 'prev hunk'],
       \ 'l' : [':Git log'                          , 'log'],
+      \ 'p' : [':PreviewHunk'                      , 'preview hunk'],
+      \ 'r' : [':ResetHunk'                        , 'reset hunk'],
+      \ 'r' : [':ResetBuffer'                      , 'reset buffer'],
+      \ 's' : [':StageHunk'                        , 'stage hunk'],
       \ 'S' : [':Gstatus'                          , 'status'],
+      \ 'u' : [':UndoStageHunk'                    , 'undo stage hunk'],
       \ }
-      " set these up for git signs
-      "     ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
-      "     ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
 
-      "     ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-      "     ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-      "     ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-      "     ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-      "     ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-      "     ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-      " \ 'p' : [':Git push'                         , 'push'],
-      " \ 'P' : [':Git pull'                         , 'pull'],
-      " \ 'g' : [':GGrep'                            , 'git grep'],
-      " \ 'D' : [':Gdiffsplit'                       , 'diff split'],
-      " \ 'c' : [':Git commit'                       , 'commit'],
-      " \ 'A' : [':CocCommand fzf-preview.GitStatus' , 'actions'],
-      " \ 'a' : [':Git add .'                        , 'add all'],
-      " \ 'A' : [':Git add %'                        , 'add current'],
-      " \ 'S' : [':!git status'                      , 'status'],
-
+" G is for gist
 let g:which_key_map.G = {
       \ 'name' : '+gist' ,
       \ 'b' : [':Gist -b'                          , 'post gist browser'],

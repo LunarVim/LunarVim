@@ -159,6 +159,39 @@ end
 
 -- git signs
 
+function function_wrapper.next_hunk() 
+    require('gitsigns').next_hunk()
+end
+
+function function_wrapper.prev_hunk()
+    require('gitsigns').prev_hunk()
+end
+
+function function_wrapper.stage_hunk()
+    require('gitsigns').stage_hunk()
+end
+
+function function_wrapper.undo_stage_hunk()
+    require('gitsigns').undo_stage_hunk()
+end
+
+function function_wrapper.reset_hunk()
+    require('gitsigns').reset_hunk()
+end
+
+function function_wrapper.reset_buffer()
+    require('gitsigns').reset_buffer()
+end
+
+function function_wrapper.preview_hunk()
+    require('gitsigns').preview_hunk()
+end
+
+function function_wrapper.blame_line()
+    require('gitsigns').blame_line()
+end
+
+
 -- misc
 
 
@@ -166,3 +199,4 @@ end
 -- autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 return function_wrapper
+

@@ -7,7 +7,7 @@ else
   require('keymappings')
   require('settings')
   require('colorscheme')
-  require('utils')
+  require('nv-utils')
 
   -- Plugins
   require('nv-compe')
