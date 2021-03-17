@@ -35,8 +35,8 @@ else
   require('nv-galaxyline')
 
   -- Which Key (Hope to replace with Lua plugin someday)
-  vim.cmd('source ~/.config/nvim/vimscript/nv-whichkey/init.vim')
-  vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
+  vim.cmd('source ~/.config/nvcode/vimscript/nv-whichkey/init.vim')
+  vim.cmd('source ~/.config/nvcode/vimscript/functions.vim')
 
   -- LSP
   require('lsp')
