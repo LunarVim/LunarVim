@@ -47,7 +47,6 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - formatting using efm server for prettier/eslint
 - snippet support
 - learn what opt is
-- nvimtree dots instead of stars
 
 **LOW PRIORITY**
 - redo barbar highlight groups
