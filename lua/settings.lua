@@ -17,6 +17,7 @@ vim.cmd('set sw=4')                        --Change the number of space characte
 vim.bo.expandtab=true                           --Converts tabs to spaces
 vim.bo.smartindent=true                         --Makes indenting smart
 vim.wo.number = true
+vim.o.laststatus = 2
 vim.wo.cursorline=true                          --Enable highlighting of the current line
 vim.o.showtabline=2                       --Always show tabs
 vim.o.showmode=false                          --We don't need to see things like -- INSERT -- anymore

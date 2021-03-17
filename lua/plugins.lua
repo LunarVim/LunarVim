@@ -105,19 +105,15 @@ return require('packer').startup(function(use)
   use 'alvan/vim-closetag'
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](1) end }
   use 'liuchengxu/vim-which-key'
-  use 'tpope/vim-sleuth'
   use 'voldikss/vim-floaterm'
-  use 'phaazon/hop.nvim'
   use 'liuchengxu/vista.vim'
-  -- use { 'npxbr/glow.nvim', run = ':GlowInstall' }
-  -- figure out how to disable or configure for things with tags like <div></div> because it will highlight all divs
-  use 'RRethy/vim-illuminate'
   use 'terrortylor/nvim-comment'
-  --use 'tpope/vim-commentary'
-  --use 'suy/vim-context-commentstring'
-  -- use 'b3nj5m1n/kommentary'
-  use 'andymass/vim-matchup'
-  use 'junegunn/goyo.vim'
   use 'bfredl/nvim-miniyank'
   use 'brooth/far.vim'
+  use 'junegunn/goyo.vim'
+  use 'andymass/vim-matchup'
+  use 'tpope/vim-sleuth'
+  use 'phaazon/hop.nvim'
+  -- use 'RRethy/vim-illuminate'
+  -- use 'b3nj5m1n/kommentary'
 end)

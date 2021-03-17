@@ -14,7 +14,6 @@ else
   require('nv-colorizer')
   require('nv-nvimtree')
   require('nv-treesitter')
-  require('nv-galaxyline')
   require('nv-barbar')
   require('nv-quickscope')
   require('nv-gitsigns')
@@ -28,17 +27,19 @@ else
   require('nv-floaterm')
   require('nv-vim-rooter')
   require('nv-closetag')
+  require('nv-matchup')
   require('nv-lspkind')
   require('nv-hop')
   require('nv-gitblame')
+  require('nv-galaxyline')
 
   -- Which Key (Hope to replace with Lua plugin someday)
   vim.cmd('source ~/.config/nvim/vimscript/nv-whichkey/init.vim')
   vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
---  vim.cmd('source ~/.config/nvim/vimscript/nv-commentary/init.vim')
 
   -- LSP
   require('lsp')
+  require('lsp.efm-general-ls')
   require('lsp.lua-ls')
   require('lsp.bash-ls')
   require('lsp.js-ts-ls')
