@@ -59,6 +59,15 @@ parse_options() {
     -u|--update)
       update
       ;;
+    -i|--init)
+      freshInstall
+      ;;
+    -n|--node)
+      installnode
+      ;;
+    -e|--extra)
+      installextrapackages
+      ;;
     *)
       # CALL MENU
       menu
@@ -94,10 +103,11 @@ show_menus(){
  | /_/ |_/  |___/\\\____/\___/\\\__,_/\\\___/  |
  |__________________________________________|
 
-  $(ColorGreen '1)') Help : see commandes
+  $(ColorGreen 'i)') Init : Fresh install of Nvcode
+  $(ColorGreen '1)') Help : see commands
   $(ColorGreen '2)') Update : Update your pc
   $(ColorGreen '3)') Nodejs : Install Nodejs
-  $(ColorGreen 'i)') Init : freshInstall of Nvcode
+  $(ColorGreen '4)') Extra : Install Extra package for Nvcode
   $(ColorGreen '0)') Exit"
 }
 
@@ -108,10 +118,11 @@ read_options(){
  local option
 	  read -p "$(ColorBlue 'Choose option:') " option
     case $option in
+      i) freshInstall ; menu ;;
       1) help_list ; menu ;;
       2) update ; menu ;;
       3) installnode ; menu ;;
-      i) freshInstall ; menu ;;
+      4) installextrapackages ; menu ;;
       0) exit 0 ;;
       *) echo -e "${RED}Wrong option...${STD}" && sleep 1;  WrongCommand;;
     esac
@@ -137,6 +148,10 @@ help_list() {
   Options:
     -h, --help
       see commands
+    -i, --init
+      Run fresh Nvcode installation
+    -n, --node
+      Run Node installation
     "
     pause 'Press [Enter] to continue...'
 }
@@ -226,7 +241,7 @@ installpip() {
     echo "Would you install pip ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo apt-get install --fix-broken --assume-yes python3-pip
+      sudo apt-get install --fix-broken --assume-yes python3-pip -y
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
@@ -319,7 +334,7 @@ installdepsforneovim(){
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get update
-      sudo apt-get upgrade
+      sudo apt-get upgrade -y
       sudo apt install cmake libtool-bin lua5.3 gettext libgettextpo-dev -y > /dev/null
       which pip3 > /dev/null && pip3 install argparse || installpip
     fi
@@ -399,35 +414,33 @@ function freshInstall(){
     npm list -g tree-sitter-cli > /dev/null && echo "tree-sitter-cli node module installed, moving on..." || sudo npm i -g tree-sitter-cli --unsafe-perm
     npm list -g express > /dev/null && echo "neovim node module istalled, moving on..." || sudo npm i -g neovim
     cloneconfig
-    nvim --headless +PackSync +qall > /dev/null 2>&1
-    installextrapackages
-    cd $HOME
-    [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
-    [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
-    nvim -es -c ':PackerInstall' -u ~/.config/nvcode/init.lua
-    nvim -es -c ':PackerUpdate' -u ~/.config/nvcode/init.lua
-    nvim -es -u ~/.config/nvcode/init.lua
-    clear
-    echo "Nvcode install done"
-    echo
-    echo "After please run 'nv' or 'nvim' and do ':PackerInstall' ':UpdateRemotePlugins' inside nv"
-    pause 'Press [Enter] to continue...'
   fi
   exec bash
 }
 
 cloneconfig() { \
   echo "Cloning NVCode configuration"
-  echo "Wich version ? : 'Y' "
+  echo "Would you install nvcode, which version ? : 'Y' "
   echo "1: master"
   echo "2: stable-lsp"
   echo "3: stable-coc"
+  echo "other: exit"
   read choice
   cd ~/.config
   if [[ "$choice" ==  [1] ]]; then
   [ -d "nvcode" ] && asktodelnvcode
   git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode || installgit
-  echo "git nvcode done"
+  nvim --headless +PackSync +qall > /dev/null 2>&1
+  cd $HOME
+  [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+  [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
+  nvim -es -c ':PackerInstall' -u ~/.config/nvcode/init.lua
+  nvim -es -c ':PackerUpdate' -u ~/.config/nvcode/init.lua
+  nvim -es -u ~/.config/nvcode/init.lua
+  clear
+  echo "Nvcode install done"
+  echo
+  echo "After please run 'nv' and do ':PackerInstall' and ':UpdateRemotePlugins' inside nv"
   fi
   if [[ "$choice" ==  [2] ]]; then
   [ -d "nvim" ] && asktodelnvcode
@@ -435,7 +448,9 @@ cloneconfig() { \
   cd nvim
   git checkout stable-snapshot-Native-LSP-1
   git pull
+  clear
   echo "git nvim stable-lsp done"
+  echo "Now you can run 'nvim' and do ':UpdateRemotePlugins' inside nvim"
   fi
   if [[ "$choice" ==  [3] ]]; then
   [ -d "nvim" ] && asktodelnvcode
@@ -443,10 +458,12 @@ cloneconfig() { \
   cd nvim
   git checkout stable-snapshot-CoC
   git pull
+  clear
   echo "git nvim stable-coc done"
+  echo "Now you can run 'nvim' and do ':UpdateRemotePlugins' inside nvim"
   fi
   cd ~
-  echo "cloneconfig done"
+  pause 'Press [Enter] to continue...'
 }
 
 installextrapackages() {
@@ -459,7 +476,7 @@ installextrapackages() {
       echo "apt packages installation"
       sudo add-apt-repository ppa:lazygit-team/release
       sudo apt-get update
-      sudo apt install -y ripgrep fzf ranger build-essential libreadline-dev ninja-build lazygit lazydocker universal-ctags silversearcher-ag libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
+      sudo apt install -y ripgrep xsel fzf ranger build-essential libreadline-dev ninja-build lazygit lazydocker universal-ctags silversearcher-ag libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
       echo "################################"
       echo "################################"
       echo "################################"
