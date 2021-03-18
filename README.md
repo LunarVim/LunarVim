@@ -53,25 +53,24 @@ go get github.com/mattn/efm-langserver@HEAD
 ## TODO
 
 **HIGH PRIORITY**
-- formatting using efm server for python
 - formatting using efm server for prettier/eslint
 - learn what opt is
 - better install script
 - learn nvim-dap in depth
 - snippet support
+- for vsnip :h vim-vsnip, also figure out what integr does
 
 **LOW PRIORITY**
 - redo barbar highlight groups
 - more handsome/modern galaxyline
 - make java code actions prettier
-- figure out how to format java
+- figure out how to customize java formatting
 - setup junit tests for java
-- add lots of lsp
-- configure illuminate according to readme
 - neovim lightbulb config
-- move language servers not installed with npm to neovim local share location
 - better autoimport
+- keep and eye on indent guides plugin for thin lines
 - look into autoinstall lsp
 - get logo
 - configure neogit
 - toggle virtual text diagnostics
+- move language servers not installed with npm to neovim local share location
