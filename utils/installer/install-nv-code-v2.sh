@@ -552,8 +552,8 @@ installextrapackages() {
 
 aptextrapackages() {
   clear
-  echo "ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev"
-  list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" "libxtst-dev")
+  echo "ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev ninja-build"
+  list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" "libxtst-dev" "ninja-build")
   menuitems() {
     for i in ${!list[@]}; do
         printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
