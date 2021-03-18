@@ -182,7 +182,10 @@ installnode() {
     echo "Would you install Nodejs with nvm ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
+      sudo timedatectl set-local-rtc 1
       which curl > /dev/null && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - || sudo apt install curl -y && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+      sudo apt-get install -y nodejs
+      sudo timedatectl set-local-rtc 0
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
