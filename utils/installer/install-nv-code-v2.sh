@@ -383,7 +383,7 @@ installgit(){
 function freshInstall(){
   clear
   echo
-  echo " Welcome to frash installation of NVCODE  !!!" 
+  echo " Welcome to fresh installation of NVCODE  !!!" 
   echo "Would you start ? : 'Y' "
   read choice
   if [[ "$choice" ==  [yY] ]]; then
