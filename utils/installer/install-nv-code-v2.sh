@@ -397,8 +397,9 @@ function freshInstall(){
     which tree-sitter > /dev/null && sudo npm i -g neovim
     cloneconfig
     nvim --headless +PackSync +qall > /dev/null 2>&1
-    [ -f "~/.bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
-    [ -f "~/.zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
+    cd $HOME
+    [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+    [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
   fi
  echo "Nvcode install done"
  pause 'Press [Enter] to continue...'
