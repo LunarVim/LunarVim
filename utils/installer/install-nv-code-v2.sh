@@ -397,6 +397,8 @@ function freshInstall(){
     cd $HOME
     [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
     [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
+    nvim -es -c ':PackerInstall' -u ~/.config/nvcode/init.lua
+    nvim -es -c ':PackerUpdate' -u ~/.config/nvcode/init.lua
   fi
  echo "Nvcode install done"
  pause 'Press [Enter] to continue...'
