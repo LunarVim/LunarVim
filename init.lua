@@ -39,7 +39,6 @@ else
 
   -- LSP
   require('lsp')
-  require('lsp.efm-general-ls')
   require('lsp.lua-ls')
   require('lsp.bash-ls')
   require('lsp.js-ts-ls')
@@ -51,5 +50,6 @@ else
   require('lsp.css-ls')
   require('lsp.docker-ls')
   require('lsp.html-ls')
+  require('lsp.efm-general-ls')
 end
 

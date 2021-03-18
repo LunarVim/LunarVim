@@ -55,14 +55,13 @@ go get github.com/mattn/efm-langserver@HEAD
 **HIGH PRIORITY**
 - formatting using efm server for prettier/eslint
 - learn what opt is
-- better install script
+- better install script, support both nvim and nvcode paths
 - learn nvim-dap in depth
 - snippet support
 - for vsnip :h vim-vsnip, also figure out what integr does
 
 **LOW PRIORITY**
 - redo barbar highlight groups
-- more handsome/modern galaxyline
 - make java code actions prettier
 - figure out how to customize java formatting
 - setup junit tests for java
