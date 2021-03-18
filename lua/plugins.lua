@@ -107,9 +107,16 @@ return require('packer').startup(function(use)
     use 'andymass/vim-matchup'
     use 'phaazon/hop.nvim'
     use 'gennaro-tedesco/nvim-jqx'
+	-- TODO put this back when stable for indent lines
+-- 	use { 'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+-- 	vim.g.indent_blankline_space_char = ' '
+-- 	vim.g.indent_blankline_buftype_exclude = {'terminal'}
+-- 	vim.g.indent_blankline_filetype_exclude = {'help', 'startify'}
+-- 	vim.g.indent_blankline_char = '▏'
+-- 	vim.g.indent_blankline_use_treesitter=true
     -- use 'RRethy/vim-illuminate'
     -- use 'b3nj5m1n/kommentary'
-    -- use 'tpope/vim-sleuth'
+    use 'tpope/vim-sleuth'
     -- use {
     --     'glacambre/firenvim',
     --     run = function()
