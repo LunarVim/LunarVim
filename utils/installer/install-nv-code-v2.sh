@@ -393,8 +393,8 @@ function freshInstall(){
     which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
     which nvim > /dev/null && echo "neovim installed, moving on..." || installneovim
     pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || pip3 install pynvim --user
-    which tree-sitter > /dev/null && sudo npm i -g tree-sitter-cli
-    which tree-sitter > /dev/null && sudo npm i -g neovim
+    sudo npm i -g tree-sitter-cli
+    sudo npm i -g neovim
     cloneconfig
     nvim --headless +PackSync +qall > /dev/null 2>&1
     cd $HOME
