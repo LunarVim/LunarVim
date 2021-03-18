@@ -186,8 +186,8 @@ installnode() {
       cd ~
       [ -f ".bashrc" ] && source .bashrc || echo '.bashrc nok'
       [ -f ".zshrc" ] && source .zshrc || echo '.zshrc nok'
-      which nvm > /dev/null && nvm install node || echo 'nvm nok'
-      which nvm > /dev/null && nvm use node || echo 'nvm nok'
+      command -v nvm > /dev/null && nvm install node || echo 'nvm nok'
+      command -v nvm > /dev/null && nvm use node || echo 'nvm nok'
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
