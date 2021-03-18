@@ -54,7 +54,6 @@ go get github.com/mattn/efm-langserver@HEAD
 
 **HIGH PRIORITY**
 - formatting using efm server for prettier/eslint
-- redo barbar highlight groups
 - learn what opt is
 - better install script, support both nvim and nvcode paths
 - learn nvim-dap in depth
@@ -62,6 +61,7 @@ go get github.com/mattn/efm-langserver@HEAD
 - for vsnip :h vim-vsnip, also figure out what integr does
 - list all binaries needed for functionality
 - potentially switch to dashboard
+- fix tabstop for files (maybe sleuth?)
 
 **LOW PRIORITY**
 - make java code actions prettier
