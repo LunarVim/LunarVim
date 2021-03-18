@@ -183,6 +183,8 @@ installnode() {
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || sudo apt install curl -y && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
+      [ -f ".bashrc" ] && source ~/.bashrc
+      [ -f ".zshrc" ] && source ~/.zshrc
       nvm install node
       nvm use node
     fi
