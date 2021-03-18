@@ -184,26 +184,11 @@ installnode() {
     if [[ "$choice" ==  [yY] ]]; then
       which curl > /dev/null && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - || sudo apt install curl -y && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
       sudo timedatectl set-local-rtc 1
-      node -v > /dev/null || sudo apt-get install -y nodejs npm
-      echo "########################################################"
-      echo "########################################################"
-      echo "########################################################"
+      node -v > /dev/null || sudo apt-get install -y nodejs
+      npm -v > /dev/null && echo "npm installed, moving on" || sudo apt install>
       npm -v > /dev/null && sudo npm install latest || sudo apt install npm -y
-      echo "########################################################"
-      echo "########################################################"
-      echo "########################################################"
-      npm -v > /dev/null && sudo npm install -g npm || sudo apt install npm -y
-      echo "########################################################"
-      echo "########################################################"
-      echo "########################################################"
       npm -v > /dev/null && sudo npm cache clean -f || sudo apt install npm -y
-      echo "########################################################"
-      echo "########################################################"
-      echo "########################################################"
       npm -v > /dev/null && sudo npm install -g n || sudo apt install npm -y
-      echo "########################################################"
-      echo "########################################################"
-      echo "########################################################"
       sudo timedatectl set-local-rtc 0
     fi
   fi
