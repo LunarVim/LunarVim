@@ -482,12 +482,11 @@ installextrapackages() {
       aptextrapackages
       npmextrapackages
       pipextrapackages
-      echo "################################"
-      echo "################################"
-      echo "################################"
+      clear
       echo "lua-language-server installation"
-      cd ~.config
-      [ -d "nvim" ] && cd nvim || cd nvcode
+      cd $HOME/.config
+      [ -d "nvim" ] && cd nvim || echo "nvim folder not found"
+      [ -d "nvcode" ] && cd nvcode || echo "nvcode folder not found"
       git clone https://github.com/sumneko/lua-language-server
       cd lua-language-server
       git submodule update --init --recursive
@@ -496,9 +495,8 @@ installextrapackages() {
       cd ../..
       ./3rd/luamake/luamake rebuild
       cd
-      echo "################################"
-      echo "################################"
-      echo "################################"
+      pause 'Press [Enter] to continue...'
+      clear
       echo "luarocks installation"
       wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
       tar zxpf luarocks-3.3.1.tar.gz
@@ -507,9 +505,8 @@ installextrapackages() {
       make
       cd
       luarocks install --server=https://luarocks.org/dev luaformatter
-      echo "################################"
-      echo "################################"
-      echo "################################"
+      pause 'Press [Enter] to continue...'
+      clear
       echo "luarocks installation"
       wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
       [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
