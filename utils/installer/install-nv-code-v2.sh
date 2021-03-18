@@ -312,12 +312,12 @@ installdepsforneovim(){
  echo "Installing neovim dependencies..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install neovim dependencies  ? : 'Y' "
-    echo "This will install cmake libtool-bin lua5.4 gettext libgettextpo-dev argparse"
+    echo "This will install cmake libtool-bin lua5.3 gettext libgettextpo-dev argparse"
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get update
       sudo apt-get upgrade
-      sudo apt install cmake libtool-bin lua5.4 gettext libgettextpo-dev -y > /dev/null
+      sudo apt install cmake libtool-bin lua5.3 gettext libgettextpo-dev -y > /dev/null
       pip install argparse
     fi
   fi
