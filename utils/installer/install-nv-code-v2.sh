@@ -503,16 +503,23 @@ installextrapackages() {
       pause 'Press [Enter] to continue...'
       clear
       echo "luarocks installation"
+      cd /tmp
+      sudo apt install build-essential libreadline-dev
+      curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
+      tar -zxf lua-5.3.5.tar.gz
+      cd lua-5.3.5
+      make linux test
+      sudo make install
       wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
       tar zxpf luarocks-3.3.1.tar.gz
       cd luarocks-3.3.1
       ./configure --with-lua-include=/usr/local/include
-      make
+      sudo make install
       cd
       luarocks install --server=https://luarocks.org/dev luaformatter
       pause 'Press [Enter] to continue...'
       clear
-      echo "luarocks installation"
+      echo "go installation"
       wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
       [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
       [ -f ".zshrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
@@ -558,7 +565,7 @@ installextrapackages() {
 aptextrapackages() {
   clear
   echo "ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev ninja-build"
-  list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" "libxtst-dev" "ninja-build" "luarocks" "xsel")
+  list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" "libxtst-dev" "ninja-build" "xsel" "ruby")
   menuitems() {
     for i in ${!list[@]}; do
         printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
