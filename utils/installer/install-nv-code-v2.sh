@@ -477,7 +477,6 @@ installextrapackages() {
  echo "Extra packages for Nvcode..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install extra packages ? : 'Y' "
-    echo "This will install 
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       aptextrapackages
