@@ -176,17 +176,21 @@ function update(){
 }
 
 installnode() { 
-  echo "Installing Node..."
+  echo "Installing Nvm..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Would you install Nodejs ? : 'Y' "
+    echo "Would you install Nodejs with nvm ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-      sudo apt-get install -y nodejs
-      sudo apt install npm
-      sudo npm cache clean -f
-      sudo npm install -g n
-      sudo n stable
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+      nvm install node
+      nvm use node
+      cd ~
+      [ -f ".bashrc" ] && echo 'export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> .bashrc && source .bashrc
+      [ -f ".zshrc" ] && echo 'export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> .zshrc && source .zshrc
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
