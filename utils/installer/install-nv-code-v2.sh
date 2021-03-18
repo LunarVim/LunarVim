@@ -554,12 +554,27 @@ installextrapackages() {
 }
 
 aptextrapackages() {
-echo "ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev Quit"
- 
+  clear
+  echo "ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev"
+  list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" "libxtst-dev")
+  menuitems() {
+    for i in ${!list[@]}; do
+        printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+    done
+  }
+
+  while menuitems && read -rp "choose a package: " num && [[ "$num" ]]; do
+    clear
+    [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || continue
+    ((num--));
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+  done
   echo "apt packages installation"
   sudo add-apt-repository ppa:lazygit-team/release
   sudo apt-get update
-  #sudo apt install -y $msg
+  for i in ${!list[@]}; do
+    [[ "${choices[i]}" ]] && { sudo apt install -y "${list[i]}"; }
+  done
   echo "Extra packages install done"
   pause 'Press [Enter] to continue...'
 }
@@ -568,10 +583,24 @@ npmextrapackages() {
   clear
   echo "npm packages installation"
   echo "vscode-html-languageserver-bin typescript typescript-language-server pyright bash-language-server vscode-css-languageserver-bin dockerfile-language-server-nodejs vim-language-server yaml-language-server graphql-language-service-cli vscode-json-languageserver"
-  
-  #sudo npm i -g $msg
+  list=("vscode-html-languageserver-bin" "typescript" "typescript-language-server" "pyright" "bash-language-server" "vscode-css-languageserver-bin" "dockerfile-language-server-nodejs" "vim-language-server" "yaml-language-server" "graphql-language-service-cli" "vscode-json-languageserver")
+  menuitems() {
+    for i in ${!list[@]}; do
+        printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+    done
+  }
+
+  while menuitems && read -rp "choose a package: " num && [[ "$num" ]]; do
+    clear
+    [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || continue
+    ((num--));
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+  done
+  echo "npm packages installation"
+  for i in ${!list[@]}; do
+    [[ "${choices[i]}" ]] && { sudo npm i -g "${list[i]}"; }
+  done
   echo "Extra packages install done"
-  echo "$msg"
  pause 'Press [Enter] to continue...'
 }
 
@@ -579,9 +608,23 @@ pipextrapackages() {
   clear
   echo "pip3 packages installation"
   echo "ueberzug neovim-remote fd"
- 
+  list=("ueberzug" "neovim-remote" "fd")
+  menuitems() {
+    for i in ${!list[@]}; do
+        printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+    done
+  }
+
+  while menuitems && read -rp "choose a package: " num && [[ "$num" ]]; do
+    clear
+    [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || continue
+    ((num--));
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+  done
   echo "pip3 packages installation"
- # sudo pip3 install $msg
+  for i in ${!list[@]}; do
+    [[ "${choices[i]}" ]] && { sudo pip3 install "${list[i]}"; }
+  done
   echo "Extra packages install done"
   pause 'Press [Enter] to continue...'
 }
