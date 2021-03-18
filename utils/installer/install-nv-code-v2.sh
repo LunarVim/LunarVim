@@ -259,7 +259,7 @@ installneovim(){
     echo "Would you install neovim 0.5 ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-       which cmake > /dev/null && echo "neovim installed, moving on..." || installdepsforneovim
+       which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
        cd /tmp
        [ -d "neovim" ] && sudo rm -rf neovim
        git clone https://github.com/neovim/neovim
@@ -273,7 +273,7 @@ installneovim(){
     echo "Would you install neovim 0.5 ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      which cmake > /dev/null && echo "neovim installed, moving on..." || installdepsforneovim
+      which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
       cd /tmp
       [ -d "neovim" ] && sudo rm -rf neovim
       git clone https://github.com/neovim/neovim
@@ -287,7 +287,7 @@ installneovim(){
     echo "Would you install neovim 0.5 ? : si oui répondre avec la touche 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      which cmake > /dev/null && echo "neovim installed, moving on..." || installdepsforneovim
+      which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
       cd /tmp
       [ -d "neovim" ] && sudo rm -rf neovim
       git clone https://github.com/neovim/neovim
