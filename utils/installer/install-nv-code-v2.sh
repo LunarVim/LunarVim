@@ -182,7 +182,7 @@ installnode() {
     echo "Would you install Nodejs with nvm ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || sudo apt install curl -y && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
+      which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
       cd ~
       [ -f ".bashrc" ] && source .bashrc || echo '.bashrc nok'
       [ -f ".zshrc" ] && source .zshrc || echo '.zshrc nok'
