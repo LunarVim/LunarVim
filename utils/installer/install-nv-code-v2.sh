@@ -400,12 +400,14 @@ function freshInstall(){
     npm list -g express > /dev/null && echo "neovim node module istalled, moving on..." || sudo npm i -g neovim
     cloneconfig
     nvim --headless +PackSync +qall > /dev/null 2>&1
+    installextrapackages
     cd $HOME
     [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
     [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
     nvim -es -c ':PackerInstall' -u ~/.config/nvcode/init.lua
     nvim -es -c ':PackerUpdate' -u ~/.config/nvcode/init.lua
     nvim -es -u ~/.config/nvcode/init.lua
+    echo "please run 'nv' and do ':PackerInstall' inside nv"
     bash
   fi
  echo "Nvcode install done"
@@ -419,10 +421,50 @@ installextrapackages() {
     echo "This will install ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev ueberzug neovim-remote"
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo apt install ripgrep fzf ranger
+      sudo apt install ripgrep fzf ranger silversearcher-ag
       sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
       pip3 install ueberzug
       pip3 install neovim-remote
+      pip3 install fd
+      sudo apt install universal-ctags
+      sudo add-apt-repository ppa:lazygit-team/release
+      sudo apt-get update
+      sudo apt-get install lazygit
+      sudo apt-get install lazydocker
+      sudo apt install ninja-build
+      cd .config/nvcode
+      git clone https://github.com/sumneko/lua-language-server
+      cd lua-language-server
+      git submodule update --init --recursive
+      cd 3rd/luamake
+      ninja -f ninja/linux.ninja
+      cd ../..
+      ./3rd/luamake/luamake rebuild
+      cd
+      sudo apt install build-essential libreadline-dev
+      wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
+      tar zxpf luarocks-3.3.1.tar.gz
+      cd luarocks-3.3.1
+      ./configure --with-lua-include=/usr/local/include
+      make
+      cd
+      luarocks install --server=https://luarocks.org/dev luaformatter
+      wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+      [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+      source ~/.profile
+      go get github.com/mattn/efm-langserver
+      npm i -g pyright
+      npm i -g bash-language-server
+      npm install -g vscode-css-languageserver-bin
+      npm install -g dockerfile-language-server-nodejs
+      npm install -g graphql-language-service-cli
+      npm install -g vscode-html-languageserver-bin
+      npm install -g typescript typescript-language-server
+      npm install -g vscode-json-languageserver
+      npm install -g vim-language-server
+      npm install -g yaml-language-server
+      [ -f ".bashrc" ] && echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+      [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
