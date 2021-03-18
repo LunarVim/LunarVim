@@ -182,12 +182,12 @@ installnode() {
     echo "Would you install Nodejs with nvm ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo timedatectl set-local-rtc 1
       which curl > /dev/null && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - || sudo apt install curl -y && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+      sudo timedatectl set-local-rtc 1
       node -v > /dev/null || sudo apt-get install -y nodejs
-      npm -v > /dev/null && npm install latest || sudo apt install npm -y && npm install latest
-      npm -v > /dev/null && npm install -g npm || sudo apt install npm -y && npm install -g npm
-      npm -v > /dev/null && npm cache clean -f && npm install -g n
+      npm -v > /dev/null && sudo npm install latest || sudo apt install npm -y && sudo npm install latest
+      npm -v > /dev/null && sudo npm install -g npm || sudo apt install npm -y && sudo npm install -g npm
+      npm -v > /dev/null && sudo npm cache clean -f && sudo npm install -g n
       sudo timedatectl set-local-rtc 0
     fi
   fi
