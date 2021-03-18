@@ -318,7 +318,7 @@ installdepsforneovim(){
       sudo apt-get update
       sudo apt-get upgrade
       sudo apt install cmake libtool-bin lua5.3 gettext libgettextpo-dev -y > /dev/null
-      pip install argparse
+      which pip3 > /dev/null && pip3 install argparse || installpip
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
