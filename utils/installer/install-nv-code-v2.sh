@@ -184,10 +184,26 @@ installnode() {
     if [[ "$choice" ==  [yY] ]]; then
       which curl > /dev/null && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - || sudo apt install curl -y && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
       sudo timedatectl set-local-rtc 1
-      node -v > /dev/null || sudo apt-get install -y nodejs
-      npm -v > /dev/null && sudo npm install latest || sudo apt install npm -y && sudo npm install latest
-      npm -v > /dev/null && sudo npm install -g npm || sudo apt install npm -y && sudo npm install -g npm
-      npm -v > /dev/null && sudo npm cache clean -f && sudo npm install -g n
+      node -v > /dev/null || sudo apt-get install -y nodejs npm
+      echo "########################################################"
+      echo "########################################################"
+      echo "########################################################"
+      npm -v > /dev/null && sudo npm install latest || sudo apt install npm -y
+      echo "########################################################"
+      echo "########################################################"
+      echo "########################################################"
+      npm -v > /dev/null && sudo npm install -g npm || sudo apt install npm -y
+      echo "########################################################"
+      echo "########################################################"
+      echo "########################################################"
+      npm -v > /dev/null && sudo npm cache clean -f || sudo apt install npm -y
+      echo "########################################################"
+      echo "########################################################"
+      echo "########################################################"
+      npm -v > /dev/null && sudo npm install -g n || sudo apt install npm -y
+      echo "########################################################"
+      echo "########################################################"
+      echo "########################################################"
       sudo timedatectl set-local-rtc 0
     fi
   fi
@@ -404,6 +420,8 @@ function freshInstall(){
     [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
     nvim -es -c ':PackerInstall' -u ~/.config/nvcode/init.lua
     nvim -es -c ':PackerUpdate' -u ~/.config/nvcode/init.lua
+    nvim -es -u ~/.config/nvcode/init.lua
+    bash
   fi
  echo "Nvcode install done"
  pause 'Press [Enter] to continue...'
