@@ -430,6 +430,7 @@ cloneconfig() { \
   if [[ "$choice" ==  [2] ]]; then
   [ -d "nvim" ] && asktodelnvcode
   git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvim || installgit
+  cd nvim
   git checkout stable-snapshot-Native-LSP-1
   git pull
   echo "git nvim stable-lsp done"
@@ -437,6 +438,7 @@ cloneconfig() { \
   if [[ "$choice" ==  [3] ]]; then
   [ -d "nvim" ] && asktodelnvcode
   git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvim || installgit
+  cd nvim
   git checkout stable-snapshot-CoC
   git pull
   echo "git nvim stable-coc done"
@@ -548,6 +550,18 @@ delnvcode(){
  cloneconfig
 }
 
+asktodelnvim(){
+  echo "nvim folder found"
+  echo -n "Would you like to delete folder now (y/n)? "
+  read answer
+  [ "$answer" != "${answer#[Yy]}" ] && delnvim
+}
+
+delnvim(){
+ sudo rm -rf $HOME/.config/nvim
+ echo "delete nvim folder done"
+ cloneconfig
+}
 ## ----------------------------------
 # #8: Fonction launch by the script
 ## ----------------------------------
