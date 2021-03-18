@@ -69,6 +69,9 @@ parse_options() {
     -e|--extra)
       installextrapackages
       ;;
+    -f|--font)
+      installnerdfont
+      ;;
     *)
       # CALL MENU
       menu
@@ -109,6 +112,7 @@ show_menus(){
   $(ColorGreen '2)') Update : Update your pc
   $(ColorGreen '3)') Nodejs : Install Nodejs
   $(ColorGreen '4)') Extra : Install Extra package for Nvcode
+  $(ColorGreen '5)') Extra : Install Nerd fonts for Nvcode
   $(ColorGreen '0)') Exit"
 }
 
@@ -124,6 +128,7 @@ read_options(){
       2) update ; menu ;;
       3) installnode ; menu ;;
       4) installextrapackages ; menu ;;
+      5) installnerdfont ; menu ;;
       0) exit 0 ;;
       *) echo -e "${RED}Wrong option...${STD}" && sleep 1;  WrongCommand;;
     esac
@@ -625,6 +630,15 @@ pipextrapackages() {
   echo "Extra packages install done"
   pause 'Press [Enter] to continue...'
 }
+
+installnerdfont(){
+cd /tmp
+git clone https://github.com/ryanoasis/nerd-fonts.git
+cd nerd-fonts
+./install.sh
+cd
+}
+
 
 ## ----------------------------------
 # #7: Extra Fonction
