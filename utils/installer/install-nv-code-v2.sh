@@ -480,44 +480,9 @@ installextrapackages() {
     echo "This will install 
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" libxtst-dev" "Quit")
-      menuitems() {
-        echo "Avaliable options:"
-        for i in ${!list[@]}; do
-          printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
-        done
-        [[ "$msg" ]] && echo "$msg"; :
-      }
-      prompt="Enter an option (enter again to uncheck, press RETURN when done): "
-      while menuitems && read -rp "$prompt" num && [[ "$num" ]]; do
-        [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || {
-          msg="Invalid option: $num"; continue
-        }
-        if [ $num == ${#list[@]} ];then
-          exit
-        fi
-        ((num--)); msg="${list[num]} was ${choices[num]:+un-}selected"
-        [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
-      done
-      printf "You selected"; msg=" nothing"
-      for i in ${!files[@]}; do
-        [[ "${choices[i]}" ]] && { printf " %s" "${files[i]}"; msg=""; }
-      done
-      echo "$msg"
-      echo "apt packages installation"
-      sudo add-apt-repository ppa:lazygit-team/release
-      sudo apt-get update
-      sudo apt install -y ripgrep xsel fzf ranger build-essential libreadline-dev ninja-build lazygit lazydocker universal-ctags silversearcher-ag libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
-      echo "################################"
-      echo "################################"
-      echo "################################"
-      echo "pip3 packages installation"
-      pip3 install ueberzug neovim-remote fd
-      echo "################################"
-      echo "################################"
-      echo "################################"
-      echo "npm packages installation"
-      sudo npm i -g pyright bash-language-server vscode-css-languageserver-bin dockerfile-language-server-nodejs graphql-language-service-cli vscode-html-languageserver-bin typescript typescript-language-server vscode-json-languageserver vim-language-server yaml-language-server
+      aptextrapackages
+      npmextrapackages
+      pipextrapackages
       echo "################################"
       echo "################################"
       echo "################################"
@@ -587,6 +552,105 @@ installextrapackages() {
   fi
  echo "Extra packages install done"
  pause 'Press [Enter] to continue...'
+}
+
+aptextrapackages() {
+list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" "libxtst-dev" "Quit")
+  menuitems() {
+    echo "Avaliable options:"
+    for i in ${!list[@]}; do
+      printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+    done
+    [[ "$msg" ]] && echo "$msg"; :
+  }
+  prompt="Enter an option (enter again to uncheck, press RETURN when done): "
+  while menuitems && read -rp "$prompt" num && [[ "$num" ]]; do
+    [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || {
+      msg="Invalid option: $num"; continue
+    }
+    if [ $num == ${#list[@]} ];then
+      exit
+    fi
+    ((num--)); msg="${list[num]} was ${choices[num]:+un-}selected"
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+  done
+  printf "You selected"; msg=" nothing"
+  for i in ${!files[@]}; do
+    [[ "${choices[i]}" ]] && { printf " %s" "${files[i]}"; msg=""; }
+  done
+  echo "$msg"
+  echo "apt packages installation"
+  sudo add-apt-repository ppa:lazygit-team/release
+  sudo apt-get update
+  sudo apt install -y $msg
+  echo "Extra packages install done"
+  echo "$msg"
+  pause 'Press [Enter] to continue...'
+}
+
+npmextrapackages() {
+  clear
+  echo "npm packages installation"
+  list=("vscode-html-languageserver-bin" "typescript" "typescript-language-server" "pyright" "bash-language-server" "vscode-css-languageserver-bin" "dockerfile-language-server-nodejs" "vim-language-server" "yaml-language-server" "graphql-language-service-cli" "vscode-json-languageserver" "Quit")
+  menuitems() {
+    echo "Avaliable options:"
+    for i in ${!list[@]}; do
+      printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+    done
+    [[ "$msg" ]] && echo "$msg"; :
+  }
+  prompt="Enter an option (enter again to uncheck, press RETURN when done): "
+  while menuitems && read -rp "$prompt" num && [[ "$num" ]]; do
+    [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || {
+      msg="Invalid option: $num"; continue
+    }
+    if [ $num == ${#list[@]} ];then
+      exit
+    fi
+    ((num--)); msg="${list[num]} was ${choices[num]:+un-}selected"
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+  done
+  printf "You selected"; msg=" nothing"
+  for i in ${!files[@]}; do
+    [[ "${choices[i]}" ]] && { printf " %s" "${files[i]}"; msg=""; }
+  done
+  sudo npm i -g $msg
+  echo "Extra packages install done"
+  echo "$msg"
+ pause 'Press [Enter] to continue...'
+}
+
+pipextrapackages() {
+  cler
+  echo "pip3 packages installation"
+list=("ueberzug" "neovim-remote" "fd" "Quit")
+  menuitems() {
+    echo "Avaliable options:"
+    for i in ${!list[@]}; do
+      printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+    done
+    [[ "$msg" ]] && echo "$msg"; :
+  }
+  prompt="Enter an option (enter again to uncheck, press RETURN when done): "
+  while menuitems && read -rp "$prompt" num && [[ "$num" ]]; do
+    [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || {
+      msg="Invalid option: $num"; continue
+    }
+    if [ $num == ${#list[@]} ];then
+      exit
+    fi
+    ((num--)); msg="${list[num]} was ${choices[num]:+un-}selected"
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+  done
+  printf "You selected"; msg=" nothing"
+  for i in ${!files[@]}; do
+    [[ "${choices[i]}" ]] && { printf " %s" "${files[i]}"; msg=""; }
+  done
+  echo "pip3 packages installation"
+  sudo pip3 install $msg
+  echo "Extra packages install done"
+  echo "$msg"
+  pause 'Press [Enter] to continue...'
 }
 
 ## ----------------------------------
