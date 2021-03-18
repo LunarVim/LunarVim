@@ -2,40 +2,38 @@
 # init
 
 ## ----------------------------------
-# Descrtiption du script
-# Auteur: Maxime Cordeiro
-#   - Aide : affiche les commandes possible
-#   - Mise à jour du system
-#   - Installation : installation de Nvcode
+# Descrtiption
+# Maintainer: Maxime Cordeiro
+#   - Help : List all commands
+#   - Update
+#   - Node Install
+#   - Fresh Installation
 ## ----------------------------------
 
 ## ----------------------------------
-# #1: Fonction initialiser au debut du script
+# #1: Function init at the begining of script
 ## ----------------------------------
 function pause(){
    read -p "$*"
 }
-
 ## ----------------------------------
-# #2: Constantes
+# #2: Constant
 ## ----------------------------------
 server_name=$(hostname)
 DIR="${PWD}"
 USER_SCRIPT=$USER
 args=("$@")
 ## ----------------------------------
-# #3: Constantes couleurs
+# #3: Colors constant
 ## ----------------------------------
 GREEN='\e[32m'
 BLUE='\e[34m'
 NOCOLOR='\e[0;m'
 RED='\033[0;41;30m'
 STD='\033[0;0;39m'
-
 ## ----------------------------------
-# #4: Fonction couleurs
+# #4: Colors fonctions
 ## ----------------------------------
-
 ColorGreen(){
 	echo -ne $GREEN$1$NOCOLOR
 }
@@ -43,15 +41,14 @@ ColorGreen(){
 ColorBlue(){
 	echo -ne $BLUE$1$NOCOLOR
 }
-
 ## ----------------------------------
-# #5: Fonctions Principales
+# #5: Main functions
 # ----------------------------------
 
 ## ----------------------------------
-# Fonction : parse_options
-# permet l'utilisation d'argument ex: ./initscript.sh -h
-# si aucun argument on lance le menu interactif
+# Function : parse_options
+# permit using argument ex: ./initscript.sh -h
+# if no argument, interactif menu is starting
 ## ----------------------------------
 parse_options() {
   case ${args[0]} in
@@ -63,13 +60,13 @@ parse_options() {
       update
       ;;
     *)
-      # APPELLE DU MENU
+      # CALL MENU
       menu
   esac
 }
 
 # -----------------------------------
-# Menu - Boucle infini
+# Menu - infinite loop for menu
 # ------------------------------------
 menu(){
 clear
@@ -81,13 +78,13 @@ done
 }
 
 # -----------------------------------
-# Menu - Affichage
+# Menu - Screen
 # ------------------------------------
 show_menus(){
   clear
   echo "
             ~~~~~~~~~~~~~~~~~~~~~	
-             - - - NVCODE - - -
+             - - - MENU - - -
             ~~~~~~~~~~~~~~~~~~~~~
   _________________________________________
  |     _   ___    ________           __     |
@@ -97,26 +94,26 @@ show_menus(){
  | /_/ |_/  |___/\\\____/\___/\\\__,_/\\\___/  |
  |__________________________________________|
 
-  $(ColorGreen '1)') Aide : affiche les commandes possible
-  $(ColorGreen '2)') Update : Mettre a jour votre pc
-  $(ColorGreen '3)') Nodejs : Installer Nodejs
-  $(ColorGreen '4)') Init : script initialisation pour une freshInstall
-  $(ColorGreen '0)') Quitter"
+  $(ColorGreen '1)') Help : see commandes
+  $(ColorGreen '2)') Update : Update your pc
+  $(ColorGreen '3)') Nodejs : Install Nodejs
+  $(ColorGreen 'i)') Init : freshInstall of Nvcode
+  $(ColorGreen '0)') Exit"
 }
 
 # -----------------------------------
-# Menu - Choix
+# Menu - Choice
 # ------------------------------------
 read_options(){
  local option
-	  read -p "$(ColorBlue 'Choisir une option:') " option
+	  read -p "$(ColorBlue 'Choose option:') " option
     case $option in
       1) help_list ; menu ;;
       2) update ; menu ;;
       3) installnode ; menu ;;
-      4) freshInstall ; menu ;;
-		  0) exit 0 ;;
-		  *) echo -e "${RED}Mauvaise option...${STD}" && sleep 1;  WrongCommand;;
+      i) freshInstall ; menu ;;
+      0) exit 0 ;;
+      *) echo -e "${RED}Wrong option...${STD}" && sleep 1;  WrongCommand;;
     esac
 }
 
@@ -125,62 +122,60 @@ read_options(){
 # ------------------------------------
 help_list() {
   clear
-  echo "Utilisation
+  echo "How to use
 
-  Lancer ./${0##*/} sans arguments pour passer par le menu intercatif
-  ou 
+  - Launch ./${0##*/} without arguments intercatif menu
+  
+  - You can passe arguments like this
   ./${0##*/} [-h]
-  ou
+  or
   ./${0##*/} [--help]
 
   Options:
-
     -h, --help
-      affiche les commandes possible
+      see commands
     "
-    pause 'Presse [Entrer] pour continuer...'
+    pause 'Press [Enter] to continue...'
 }
 
 # -----------------------------------
-# #6: Les Fonctions du script
+# #6: Script functions
 # ------------------------------------
 
 function update(){
-    #MISE A JOUR
+    #UPDATE
     clear
-    echo
+    echo "Update for Arch and Ubuntu users"
     if [ -n "$(uname -a | grep Ubuntu)" ]; then
-      echo "Voulez vous faire les mise à jour ? : si oui répondre avec la touche 'Y' "
+      echo "Would you update you pc ? : 'Y' "
       read choice
       if [[ "$choice" ==  [yY] ]]; then
         sudo apt update && sudo apt upgrade -y
         clear
-        echo "La mise à jour à était effectuer avec la commande suivante :"
+        echo "Update done with command :"
         echo
         echo "sudo apt update && sudo apt upgrade -y"
-        echo
-        pause 'Presse [Entrer] pour continuer...'
       fi
     fi
     if [ -f "/etc/arch-release" ]; then
-      echo "Voulez vous faire les mise à jour ? : si oui répondre avec la touche 'Y' "
+      echo "Would you update you pc ? 'Y' "
       read choice
       if [[ "$choice" ==  [yY] ]]; then
         Sudo pacman -Syyu
         clear
-        echo "La mise à jour à était effectuer avec la commande suivante :"
+        echo "Update done with command :"
         echo
         echo "Sudo pacman -Syyu"
-        echo
-        pause 'Presse [Entrer] pour continuer...'
       fi
     fi
+    echo
+    pause 'Press [Enter] to continue...'
 }
 
 installnode() { 
-  echo "Installation de node..."
+  echo "Installing Node..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Voulez vous faire les mise à jour ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Nodejs ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
@@ -192,7 +187,7 @@ installnode() {
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
-    echo "Voulez vous faire les mise à jour ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Nodejs ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       brew install lua
@@ -201,7 +196,7 @@ installnode() {
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
-    echo "Voulez vous faire les mise à jour ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Nodejs ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo pacman -S nodejs
@@ -209,27 +204,27 @@ installnode() {
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    echo "Voulez vous faire les mise à jour ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Nodejs ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       set dir=%cd% && "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Start-Process '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''));choco upgrade -y nodejs-lts ;  Read-Host ''Type ENTER to exit'' ' -Verb RunAs
     fi
   fi
- echo "Node est installé"
- pause 'Presse [Entrer] pour continuer...'
+ echo "Node install done"
+ pause 'Press [Enter] to continue...'
 }
 
 installpip() { 
-  echo "Installation de pip..."
+  echo "Installing pip..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Voulez vous Installer pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install pip ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get install --fix-broken --assume-yes python3-pip
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
-    echo "Voulez vous installer pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install pip ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -238,27 +233,27 @@ installpip() {
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
-    echo "Voulez vous pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install pip ? :  'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo pacman -S python-pip
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    echo "Voulez vous pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install pip ? :  'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       echo "under construct"
     fi
   fi
-  echo "pip est installé"
-  pause 'Presse [Entrer] pour continuer...'
+  echo "pip install done"
+  pause 'Press [Enter] to continue...'
 }
 
 installneovim(){
-  echo "Installation de neovim 0.5 ..."
+  echo "Installing neovim 0.5 ..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Voulez vous Installer neovim 0.5 ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim 0.5 ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
        which cmake > /dev/null && echo "neovim installed, moving on..." || installdepsforneovim
@@ -272,7 +267,7 @@ installneovim(){
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
-    echo "Voulez vous installer neovim 0.5 ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim 0.5 ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       which cmake > /dev/null && echo "neovim installed, moving on..." || installdepsforneovim
@@ -286,7 +281,7 @@ installneovim(){
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
-    echo "Voulez vous installer neovim 0.5 ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim 0.5 ? : si oui répondre avec la touche 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       which cmake > /dev/null && echo "neovim installed, moving on..." || installdepsforneovim
@@ -300,20 +295,21 @@ installneovim(){
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    echo "Voulez vous installer neovim 0.5 ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim 0.5 ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       echo "under construct"
     fi
   fi
-  echo "neovim est installer"
-  pause 'Presse [Entrer] pour continuer...'
+  echo "neovim install done"
+  pause 'Press [Enter] to continue...'
 }
 
 installdepsforneovim(){
- echo "Installation de dependence pour neovim..."
+ echo "Installing neovim dependencies..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Voulez vous installer  ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim dependencies  ? : 'Y' "
+    echo "This will install cmake libtool-bin lua5.4 gettext libgettextpo-dev argparse"
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get update
@@ -323,70 +319,69 @@ installdepsforneovim(){
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
-    echo "Voulez vous installer pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "NOK"
+      echo "Under construct"
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
-    echo "Voulez vous pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "NOK"
+      echo "Under construct"
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    echo "Voulez vous pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install neovim dependencies ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "NOK"
+      echo "Under construct"
     fi
   fi
-  echo "les deépendences pour l'installation de neovim sont installées"
-  pause 'Presse [Entrer] pour continuer...'
+  echo "neovim dependencies install done"
+  pause 'Press [Enter] to continue...'
 }
 
 installgit(){
- echo "Installation de git..."
+ echo "Installing git..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Voulez vous installer Git ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Git ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get install git
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
-    echo "Voulez vous installer pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Git ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "NOK"
+      echo "Under construct"
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
-    echo "Voulez vous pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Git ? : 'Y'"
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo pacman -S git
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    echo "Voulez vous pip ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install Git ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       set dir=%cd% && "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Start-Process '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''));choco upgrade -y git --params "/GitAndUnixToolsOnPath /NoAutoCrlf";  Read-Host ''Type ENTER to exit'' ' -Verb RunAs
     fi
   fi
-  echo "git est installé"
-  pause 'Presse [Entrer] pour continuer...'
+  echo "git install done"
+  pause 'Press [Enter] to continue...'
 }
 
 function freshInstall(){
-  init= "true"
   clear
   echo
-  echo " Bienvenu  dans L'installation de NVCODE  !!!" 
-  echo "Voulez vous commencer ? : si oui répondre avec la touche 'Y' "
+  echo " Welcome to frash installation of NVCODE  !!!" 
+  echo "Would you start ? : 'Y' "
   read choice
   if [[ "$choice" ==  [yY] ]]; then
     update
@@ -402,14 +397,15 @@ function freshInstall(){
     [ -f "~/.bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
     [ -f "~/.zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
   fi
- echo "L'installation de Nvcode est terminé"
- pause 'Presse [Entrer] pour continuer...'
+ echo "Nvcode install done"
+ pause 'Press [Enter] to continue...'
 }
 
 installextrapackages() {
- echo "Installation de paquet extra pour Nvcode..."
+ echo "Extra packages for Nvcode..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    echo "Voulez vous installer ripgrep,fzf,ranger,etc ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install extra packages ? : 'Y' "
+    echo "This will install ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev ueberzug neovim-remote"
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt install ripgrep fzf ranger
@@ -419,14 +415,16 @@ installextrapackages() {
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
-    echo "Voulez vous installer ripgrep,fzf,ranger ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install extra packages ? : 'Y' "
+    echo "This will install ripgrep fzf ranger "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       brew install ripgrep fzf ranger
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
-    echo "Voulez vous installer ripgrep,fzf,ranger ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install extra packages ? : 'Y' "
+    echo "This will install ripgrep fzf ranger python-ueberzug-git neovim-remote "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo pacman -S install ripgrep fzf ranger
@@ -435,14 +433,14 @@ installextrapackages() {
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    echo "Voulez vous ripgrep,fzf,ranger ? : si oui répondre avec la touche 'Y' "
+    echo "Would you install extra packages ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "NOK"
+      echo "Under construct"
     fi
   fi
- echo "l'installation des paquets extra est terminé"
- pause 'Presse [Entrer] pour continuer...'
+ echo "Extra packages install done"
+ pause 'Press [Enter] to continue...'
 }
 
 ## ----------------------------------
@@ -450,7 +448,7 @@ installextrapackages() {
 ## ----------------------------------
 
 pipinstallueberzug() { \
-  which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug pip not found"
+  which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug => pip not found"
 }
 
 cloneconfig() { \
@@ -477,6 +475,6 @@ delnvcode(){
 }
 
 ## ----------------------------------
-# #8: Fonction lancé par le script
+# #8: Fonction launch by the script
 ## ----------------------------------
 parse_options $@
