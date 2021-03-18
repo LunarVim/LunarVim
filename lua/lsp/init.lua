@@ -1,4 +1,4 @@
--- TODO figure out why this don't work
+vim.cmd('highlight! link LspDiagnosticsDefaultError WarningMsg')
 vim.fn.sign_define("LspDiagnosticsSignError", {
     texthl = "LspDiagnosticsSignError",
     text = "",
