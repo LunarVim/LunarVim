@@ -261,7 +261,7 @@ installneovim(){
        cd /tmp
        [ -d "neovim" ] && sudo rm -rf neovim
        which git > /dev/null && git clone https://github.com/neovim/neovim || sudo apt-get install git -y
-       cd neovim
+       [ -d "neovim" ] && cd neovim || git clone https://github.com/neovim/neovim && cd neovim
        sudo make CMAKE_BUILD_TYPE=Release install
        cd ..
        [ -d "neovim" ] && sudo rm -r neovim
