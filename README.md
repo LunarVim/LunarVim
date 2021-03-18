@@ -10,6 +10,13 @@ You need `curl`to download the script
 sudo apt install curl
 ```
 
+If you don't want curl use wget 
+```
+wget https://raw.githubusercontent.com/mjcc30/nvcode/master/utils/installer/install-nv-code-v2.sh \
+&& chmod +x install-nv-code-v2.sh \
+&& ./install-nv-code-v2.sh
+```
+
 Les commandes suivantes vont automatiquement installer nvm avec `curl`
 
 ```bash
