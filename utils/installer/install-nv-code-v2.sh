@@ -265,8 +265,8 @@ installneovim(){
        which git > /dev/null && git clone https://github.com/neovim/neovim || sudo apt-get install git -y
        cd neovim
        sudo make CMAKE_BUILD_TYPE=Release install
-       cd /tmp
-       sudo rm -r neovim
+       cd ..
+       [ -d "neovim" ] && sudo rm -r neovim
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
@@ -279,8 +279,8 @@ installneovim(){
       which git > /dev/null && git clone https://github.com/neovim/neovim || sudo apt-get install git -y
       cd neovim
       sudo make CMAKE_BUILD_TYPE=Release install
-      cd /tmp
-      sudo rm -r neovim
+      cd ..
+      [ -d "neovim" ] && sudo rm -r neovim
     fi
   fi
   if [ -f "/etc/arch-release" ]; then
@@ -293,8 +293,8 @@ installneovim(){
       which git > /dev/null && git clone https://github.com/neovim/neovim || sudo apt-get install git -y
       cd neovim
       sudo make CMAKE_BUILD_TYPE=Release install
-      cd /tmp
-      sudo rm -r neovim
+      cd ..
+      [ -d "neovim" ] && sudo rm -r neovim
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
