@@ -177,17 +177,12 @@ function update(){
 
 installnode() { 
   clear
-  echo "Installing Nvm..."
+  echo "Installing Nodejs..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install Nodejs with nvm ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-      cd ~
-      [ -f ".bashrc" ] && source .bashrc || echo '.bashrc nok'
-      [ -f ".zshrc" ] && source .zshrc || echo '.zshrc nok'
-      command -v nvm > /dev/null && nvm install node || echo 'nvm nok'
-      command -v nvm > /dev/null && nvm use node || echo 'nvm nok'
+      which curl > /dev/null && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash - || sudo apt install curl -y && curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
