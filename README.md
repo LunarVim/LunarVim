@@ -4,6 +4,14 @@
 
 **WARNING** Still very experimental will not woek without some configuation
 
+You need `curl`to download the script
+
+```
+sudo apt install curl
+```
+
+Les commandes suivantes vont automatiquement installer nvm avec `curl`
+
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/mjcc30/nvcode/master/utils/installer/install-nv-code-v2.sh)
 ```
