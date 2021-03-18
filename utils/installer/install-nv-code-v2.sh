@@ -183,10 +183,11 @@ installnode() {
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || sudo apt install curl -y && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
-      [ -f ".bashrc" ] && source ~/.bashrc
-      [ -f ".zshrc" ] && source ~/.zshrc
-      nvm install node
-      nvm use node
+      cd ~
+      [ -f ".bashrc" ] && source .bashrc || echo '.bashrc nok'
+      [ -f ".zshrc" ] && source .zshrc || echo '.zshrc nok'
+      which nvm > /dev/null && nvm install node || echo 'nvm nok'
+      which nvm > /dev/null && nvm use node || echo 'nvm nok'
     fi
   fi
   if [ "$(uname)" == "Darwin" ]; then
