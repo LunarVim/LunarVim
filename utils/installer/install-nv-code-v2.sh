@@ -176,12 +176,13 @@ function update(){
 }
 
 installnode() { 
+  clear
   echo "Installing Nvm..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install Nodejs with nvm ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || sudo apt install curl
+      which curl > /dev/null && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash || sudo apt install curl -y
       nvm install node
       nvm use node
     fi
