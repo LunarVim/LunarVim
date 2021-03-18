@@ -46,5 +46,10 @@ else
   require('lsp.python-ls')
   require('lsp.json-ls')
   require('lsp.yaml-ls')
+  require('lsp.vim-ls')
+  require('lsp.graphql-ls')
+  require('lsp.css-ls')
+  require('lsp.docker-ls')
+  require('lsp.html-ls')
 end
 

@@ -4,7 +4,7 @@ If you are looking for my old configs checkout the two snapshot branches on this
 
 ## Install in one command
 
-**WARNING** Still very experimental will not woek without some configuation
+**WARNING** Still very experimental will not work without some configuation
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
@@ -42,14 +42,22 @@ or if you are using this config alongside your own:
 $HOME/.config/nvim/lua/nv-vscode/init.vim
 ```
 
+## efm server is slow on close
+
+Install the latest with:
+
+```
+go get github.com/mattn/efm-langserver@HEAD
+```
+
 ## TODO
 
 **HIGH PRIORITY**
 - formatting using efm server for python
-- formatting using efm server for lua
 - formatting using efm server for prettier/eslint
 - learn what opt is
 - better install script
+- learn nvim-dap in depth
 - snippet support
 
 **LOW PRIORITY**
@@ -67,4 +75,3 @@ $HOME/.config/nvim/lua/nv-vscode/init.vim
 - get logo
 - configure neogit
 - toggle virtual text diagnostics
-- learn nvim-dap in depth

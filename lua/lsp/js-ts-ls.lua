@@ -7,4 +7,4 @@
 -- require'completion'.on_attach(client)
 -- require'illuminate'.on_attach(client)
 -- end
-require'lspconfig'.tsserver.setup {}
+require'lspconfig'.tsserver.setup {on_attach = require'lsp'.common_on_attach}
