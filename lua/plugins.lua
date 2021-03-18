@@ -98,23 +98,22 @@ return require('packer').startup(function(use)
     use 'turbio/bracey.vim'
     use 'AndrewRadev/tagalong.vim'
     use 'alvan/vim-closetag'
-    use {
-        'glacambre/firenvim',
-        run = function()
-            vim.fn['firenvim#install'](1)
-        end
-    }
     use 'liuchengxu/vim-which-key'
     use 'voldikss/vim-floaterm'
     use 'liuchengxu/vista.vim'
     use 'terrortylor/nvim-comment'
     use 'bfredl/nvim-miniyank'
-    use 'brooth/far.vim'
     use 'junegunn/goyo.vim'
     use 'andymass/vim-matchup'
-    use 'tpope/vim-sleuth'
     use 'phaazon/hop.nvim'
     use 'gennaro-tedesco/nvim-jqx'
     -- use 'RRethy/vim-illuminate'
     -- use 'b3nj5m1n/kommentary'
+    -- use 'tpope/vim-sleuth'
+    -- use {
+    --     'glacambre/firenvim',
+    --     run = function()
+    --         vim.fn['firenvim#install'](1)
+    --     end
+    -- }
 end)
