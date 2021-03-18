@@ -414,6 +414,37 @@ function freshInstall(){
  pause 'Press [Enter] to continue...'
 }
 
+cloneconfig() { \
+  echo "Cloning NVCode configuration"
+  echo "Wich version ? : 'Y' "
+  echo "1: master"
+  echo "2: stable-lsp"
+  echo "3: stable-coc"
+  read choice
+  cd ~/.config
+  if [[ "$choice" ==  [1] ]]; then
+  [ -d "nvcode" ] && asktodelnvcode
+  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode || installgit
+  echo "git nvcode done"
+  fi
+  if [[ "$choice" ==  [2] ]]; then
+  [ -d "nvim" ] && asktodelnvcode
+  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvim || installgit
+  git checkout stable-snapshot-Native-LSP-1
+  git pull
+  echo "git nvim stable-lsp done"
+  fi
+  if [[ "$choice" ==  [3] ]]; then
+  [ -d "nvim" ] && asktodelnvcode
+  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvim || installgit
+  git checkout stable-snapshot-CoC
+  git pull
+  echo "git nvim stable-coc done"
+  fi
+  cd ~
+  echo "cloneconfig done"
+}
+
 installextrapackages() {
  echo "Extra packages for Nvcode..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
@@ -502,16 +533,6 @@ installextrapackages() {
 
 pipinstallueberzug() { \
   which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug => pip not found"
-}
-
-cloneconfig() { \
-  echo "Cloning NVCode configuration"
-  cd ~/.config
-  [ -d "nvcode" ] && asktodelnvcode
-  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode || installgit
-  echo "git nvcode done"
-  cd ~
-  echo "cloneconfig done"
 }
 
 asktodelnvcode(){
