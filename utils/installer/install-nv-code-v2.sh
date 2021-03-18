@@ -8,6 +8,7 @@
 #   - Update
 #   - Node Install
 #   - Fresh Installation
+#   - Extra packages for Nvcode
 ## ----------------------------------
 
 ## ----------------------------------
@@ -236,6 +237,7 @@ installnode() {
 }
 
 installpip() { 
+  clear
   echo "Installing pip..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install pip ? : 'Y' "
@@ -272,6 +274,7 @@ installpip() {
 }
 
 installneovim(){
+  clear
   echo "Installing neovim 0.5 ..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install neovim 0.5 ? : 'Y' "
@@ -327,6 +330,7 @@ installneovim(){
 }
 
 installdepsforneovim(){
+ clear
  echo "Installing neovim dependencies..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install neovim dependencies  ? : 'Y' "
@@ -365,6 +369,7 @@ installdepsforneovim(){
 }
 
 installgit(){
+ clear
  echo "Installing git..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install Git ? : 'Y' "
@@ -418,7 +423,8 @@ function freshInstall(){
   exec bash
 }
 
-cloneconfig() { \
+cloneconfig() { 
+  clear
   echo "Cloning NVCode configuration"
   echo "Would you install nvcode, which version ? : 'Y' "
   echo "1: master"
@@ -467,12 +473,37 @@ cloneconfig() { \
 }
 
 installextrapackages() {
+ clear
  echo "Extra packages for Nvcode..."
   if [ -n "$(uname -a | grep Ubuntu)" ]; then
     echo "Would you install extra packages ? : 'Y' "
-    echo "This will install ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev ueberzug neovim-remote"
+    echo "This will install 
     read choice
     if [[ "$choice" ==  [yY] ]]; then
+      list=("ripgrep" "fzf" "ranger" "libjpeg8-dev" "zlib1g-dev" "python-dev" "python3-dev" libxtst-dev" "Quit")
+      menuitems() {
+        echo "Avaliable options:"
+        for i in ${!list[@]}; do
+          printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
+        done
+        [[ "$msg" ]] && echo "$msg"; :
+      }
+      prompt="Enter an option (enter again to uncheck, press RETURN when done): "
+      while menuitems && read -rp "$prompt" num && [[ "$num" ]]; do
+        [[ "$num" != *[![:digit:]]* ]] && (( num > 0 && num <= ${#list[@]} )) || {
+          msg="Invalid option: $num"; continue
+        }
+        if [ $num == ${#list[@]} ];then
+          exit
+        fi
+        ((num--)); msg="${list[num]} was ${choices[num]:+un-}selected"
+        [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="x"
+      done
+      printf "You selected"; msg=" nothing"
+      for i in ${!files[@]}; do
+        [[ "${choices[i]}" ]] && { printf " %s" "${files[i]}"; msg=""; }
+      done
+      echo "$msg"
       echo "apt packages installation"
       sudo add-apt-repository ppa:lazygit-team/release
       sudo apt-get update
@@ -562,7 +593,7 @@ installextrapackages() {
 # #7: Extra Fonction
 ## ----------------------------------
 
-pipinstallueberzug() { \
+pipinstallueberzug() {
   which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug => pip not found"
 }
 
