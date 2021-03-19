@@ -21,25 +21,35 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-
+" " delete without yanking
+" nnoremap <leader>d "_d
+" vnoremap <leader>d "_d
+" 
+" " replace currently selected text with default register
+" " without yanking it
+" vnoremap <leader>p "_dP
+" vnoremap <leader>p "_dP
+map <leader>p <Plug>(miniyank-startput)
+map <leader>P <Plug>(miniyank-startPut)
 " Single mappings
-" let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
-" let g:which_key_map['/'] = { 'name' : 'comment' }
-
-let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
-"let g:which_key_map['/'] = 'which_key_ignore'
+let g:which_key_map['/'] = 'which_key_ignore'
+let g:which_key_map['p'] = 'which_key_ignore'
+let g:which_key_map['P'] = 'which_key_ignore'
+let g:which_key_map['n'] = 'which_key_ignore'
+let g:which_key_map['N'] = 'which_key_ignore'
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
 let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
 let g:which_key_map['m'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
-let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
+let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+" let g:which_key_map['p'] = [ '"0p'                                             , 'paste' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
 " Add Zen mode, play nice with status line
-" let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
+let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
 
 " Group mappings
 
@@ -47,17 +57,14 @@ let g:which_key_map['v'] = [ '<C-W>v'                                          ,
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
       \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
       \ 'l' : [':Bracey'                 , 'start live server'],
       \ 'L' : [':BraceyStop'             , 'stop live server'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 's' : [':s/\%V\(.*\)\%V/"\1"/'   , 'surround'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
-      \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
       \ }
 
 " b is for buffer
@@ -143,30 +150,19 @@ let g:which_key_map.g = {
       \ 'b' : [':GitBlameToggle'                   , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
       \ 'd' : [':Git diff'                         , 'diff'],
-      \ 'i' : [':Gist -b'                          , 'post gist'],
+      \ 'j' : [':NextHunk'                         , 'next hunk'],
+      \ 'k' : [':PrevHunk'                         , 'prev hunk'],
       \ 'l' : [':Git log'                          , 'log'],
+      \ 'n' : [':Neogit'                           , 'neogit'],
+      \ 'p' : [':PreviewHunk'                      , 'preview hunk'],
+      \ 'r' : [':ResetHunk'                        , 'reset hunk'],
+      \ 'R' : [':ResetBuffer'                      , 'reset buffer'],
+      \ 's' : [':StageHunk'                        , 'stage hunk'],
       \ 'S' : [':Gstatus'                          , 'status'],
+      \ 'u' : [':UndoStageHunk'                    , 'undo stage hunk'],
       \ }
-      " set these up for git signs
-      "     ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
-      "     ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
 
-      "     ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-      "     ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-      "     ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-      "     ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-      "     ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-      "     ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-      " \ 'p' : [':Git push'                         , 'push'],
-      " \ 'P' : [':Git pull'                         , 'pull'],
-      " \ 'g' : [':GGrep'                            , 'git grep'],
-      " \ 'D' : [':Gdiffsplit'                       , 'diff split'],
-      " \ 'c' : [':Git commit'                       , 'commit'],
-      " \ 'A' : [':CocCommand fzf-preview.GitStatus' , 'actions'],
-      " \ 'a' : [':Git add .'                        , 'add all'],
-      " \ 'A' : [':Git add %'                        , 'add current'],
-      " \ 'S' : [':!git status'                      , 'status'],
-
+" G is for gist
 let g:which_key_map.G = {
       \ 'name' : '+gist' ,
       \ 'b' : [':Gist -b'                          , 'post gist browser'],
@@ -188,19 +184,20 @@ let g:which_key_map.l = {
       \ 'd' : [':Telescope lsp_document_diagnostics' , 'document diagnostics'],
       \ 'D' : [':Telescope lsp_workspace_diagnostics', 'workspace diagnostics'],
       \ 'f' : [':LspFormatting'                      , 'format'],
-      \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
       \ 'I' : [':LspInfo'                            , 'lsp info'],
+      \ 'v' : [':LspVirtualTextToggle'               , 'lsp toggle virtual text'],
       \ 'l' : [':Lspsaga lsp_finder'                 , 'lsp finder'],
       \ 'L' : [':Lspsaga show_line_diagnostics'      , 'line_diagnostics'],
       \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'p' : [':Lspsaga preview_definition'         , 'preview definition'],
       \ 'q' : [':Telescope quickfix'                 , 'quickfix'],
-      \ 'r' : [':LspRename'                          , 'rename'],
+      \ 'r' : [':Lspsaga rename'                          , 'rename'],
       \ 'T' : [':LspTypeDefinition'                  , 'type defintion'],
       \ 'x' : [':cclose'                             , 'close quickfix'],
       \ 's' : [':Telescope lsp_document_symbols'     , 'document symbols'],
       \ 'S' : [':Telescope lsp_workspace_symbols'    , 'workspace symbols'],
       \ }
+      " \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
 
 " t is for terminal
 let g:which_key_map.t = {
@@ -218,5 +215,11 @@ let g:which_key_map.t = {
       \ 'u' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
       " \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+
+let g:which_key_map.R = {
+      \ 'name' : '+Find_Replace' ,
+      \ 'f' : [':Farr --source=vimgrep'    , 'file'],
+      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+      \ }
 
 call which_key#register('<Space>', "g:which_key_map")

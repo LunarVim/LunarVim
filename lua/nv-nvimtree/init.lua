@@ -9,6 +9,7 @@ let g:nvim_tree_show_icons = {
     \ 'folders': 1,
     \ 'files': 1,
     \ }
+
 "If 0, do not show the icons for one of 'git' 'folder' and 'files'
 "1 by default, notice that if 'files' is 1, it will only display
 "if nvim-web-devicons is installed and on your runtimepath ]]
@@ -51,3 +52,4 @@ vim.g.nvim_tree_bindings = {
     ["-"] = tree_cb("dir_up"),
     ["q"] = tree_cb("close")
 }
+vim.cmd([[source ~/.config/nvim/vimscript/nv-nvimtree/init.vim]])

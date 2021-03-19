@@ -12,4 +12,8 @@ elseif vim.fn.has("unix") == 1 then
 else
     print("Unsupported system")
 end
-require('jdtls').start_or_attach({cmd = {JAVA_LS_EXECUTABLE}, root_dir = require('jdtls.setup').find_root({'gradle.build', 'pom.xml'})})
+require('jdtls').start_or_attach({
+    on_attach = require'lsp'.common_on_attach,
+    cmd = {JAVA_LS_EXECUTABLE},
+    root_dir = require('jdtls.setup').find_root({'gradle.build', 'pom.xml'})
+})
