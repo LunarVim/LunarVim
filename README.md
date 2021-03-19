@@ -1,5 +1,13 @@
 # NVCode
 
+
+
+```bash
+wget -q https://raw.githubusercontent.com/mjcc30/nvcode/perso/utils/installer/interactive-install.sh \
+&& chmod +x interactive-install.sh \
+&& ./interactive-install.sh
+```
+
 If you are looking for my old configs checkout the two snapshot branches on this repo, there is one for CoC and one for Native LSP
 
 ## Get the latest version of Neovim 
