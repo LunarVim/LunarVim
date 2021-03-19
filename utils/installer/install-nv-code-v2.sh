@@ -326,13 +326,12 @@ installneovim(){
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
-      cd /tmp
-      [ -d "neovim" ] && sudo rm -rf neovim
-      which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git
-      cd neovim
-      sudo make CMAKE_BUILD_TYPE=Release install
-      cd ..
-      [ -d "neovim" ] && sudo rm -r neovim
+      which yay >/dev/null && yay -Sa neovim-nightly-bin || cd /tmp && \
+      && [ -d "neovim" ] && sudo rm -rf neovim \
+      && which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git \
+      && cd neovim \
+      && sudo make CMAKE_BUILD_TYPE=Release install && cd .. \
+      && [ -d "neovim" ] && sudo rm -r neovim
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
