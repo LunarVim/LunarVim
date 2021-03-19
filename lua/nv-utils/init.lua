@@ -195,6 +195,10 @@ function nv_utils.blame_line()
 end
 
 -- misc
+function nv_utils.file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
 
 -- autoformat
 -- autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
