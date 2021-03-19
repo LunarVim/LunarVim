@@ -58,7 +58,7 @@ installpynvim() {
 cloneconfig() {
 	echo "Cloning NVCode configuration"
 	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode
-	nvim --headless +PackSync +qall >/dev/null 2>&1
+	nvim --headless +PackerInstall +qall >/dev/null 2>&1
 }
 
 asktoinstallnode() {
@@ -123,8 +123,8 @@ pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || i
 # clone config down
 cloneconfig
 
-echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
-echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
+echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
+echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 
