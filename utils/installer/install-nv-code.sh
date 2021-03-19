@@ -63,7 +63,7 @@ installpacker() {
 cloneconfig() {
 	echo "Cloning NVCode configuration"
 	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode
-	nvim --headless +PackerInstall +qall >/dev/null 2>&1
+	nvim --headless +PackerSync +qall
 }
 
 asktoinstallnode() {
