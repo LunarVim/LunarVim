@@ -32,11 +32,13 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 map <leader>p <Plug>(miniyank-startput)
 map <leader>P <Plug>(miniyank-startPut)
 " Single mappings
+
 let g:which_key_map['/'] = 'which_key_ignore'
 let g:which_key_map['p'] = 'which_key_ignore'
 let g:which_key_map['P'] = 'which_key_ignore'
 let g:which_key_map['n'] = 'which_key_ignore'
 let g:which_key_map['N'] = 'which_key_ignore'
+let g:which_key_map['"'] = [ '<Plug>PeekupOpen'                                , 'registers' ]
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
 let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
