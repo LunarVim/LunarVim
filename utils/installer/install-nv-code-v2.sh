@@ -526,9 +526,19 @@ installextrapackages() {
       [ -f ".bashrc" ] && echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
       [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
       source ~/.profile
-      echo "go is installed we have to reload the terminal"
-      echo "please copy the following command to install efm-langserver:"
-      echo "go get github.com/mattn/efm-langserver"
+      echo "efm-langserver"
+      which go > /dev/null && echo "go is installed" \
+      &&  cd /tmp/ \
+      && git clone https://github.com/mattn/efm-langserver.git \
+      && make \
+      && sudo mv efm-langserver /usr/bin/ \
+      || echo "go not found" \
+      && cd /tmp \
+      && wget https://github.com/mattn/efm-langserver/releases/download/v0.0.26/efm-langserver_v0.0.26_linux_amd64.tar.gz \
+      && tar xzf efm-langserver_*.tar.gz \
+      && cd efm-langserver_*/ \
+      && sudo mv efm-langserver /usr/bin/
+      cd
       pause 'Press [Enter] to continue...'
       exec bash
     fi
