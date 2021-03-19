@@ -8,7 +8,8 @@
 -- require'illuminate'.on_attach(client)
 -- end
 require'lspconfig'.tsserver.setup {
-    -- on_attach = function(client)
-    -- on_attach_common(client)
-    -- end,
+    on_attach = require'lsp'.tsserver_on_attach,
+    -- This makes sure tsserver is not used for formatting (I prefer prettier)
+    -- on_attach = require'lsp'.common_on_attach,
+    settings = {documentFormatting = false}
 }

@@ -2,6 +2,7 @@ vim.cmd('set rtp+=~/.config/nvcode')
 if vim.g.vscode then
   vim.cmd('source ~/.config/nvim/vimscript/nv-vscode/init.vim')
   require('settings')
+  require('nv-quickscope')
 else
   -- General mappings
   require('plugins')
@@ -40,12 +41,18 @@ else
 
   -- LSP
   require('lsp')
-  require('lsp.efm-general-ls')
   require('lsp.lua-ls')
   require('lsp.bash-ls')
   require('lsp.js-ts-ls')
   require('lsp.python-ls')
   require('lsp.json-ls')
   require('lsp.yaml-ls')
+  require('lsp.vim-ls')
+  require('lsp.graphql-ls')
+  require('lsp.css-ls')
+  require('lsp.docker-ls')
+  require('lsp.html-ls')
+  require('lsp.efm-general-ls')
+  require('lsp.virtual_text')
 end
 
