@@ -326,16 +326,7 @@ installneovim(){
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
-      which yay >/dev/null && yay -Sa neovim-nightly-bin || yay="false"
-      if [[ "$yay" ==  "false" ]]; then
-      cd ~
-      [ -d "neovim" ] && sudo rm -r neovim
-      which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git
-      cd neovim
-      sudo make CMAKE_BUILD_TYPE=Release install
-      cd ~
-      [ -d "neovim" ] && sudo rm -r neovim
-      fi
+      which yay >/dev/null && yay -Sa neovim-nightly-bin || sudo pacman -S yay && yay -Sa neovim-nightly-bin
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
@@ -467,7 +458,7 @@ cloneconfig() {
   clear
   echo "Cloning NVCode configuration"
   echo "Would you install nvcode, which version ? : 'Y' "
-  echo "1: master"
+  echo "1: lua"
   echo "2: stable-lsp"
   echo "3: stable-coc"
   echo "other: exit"
@@ -475,7 +466,9 @@ cloneconfig() {
   cd ~/.config
   if [[ "$choice" ==  [1] ]]; then
   [ -d "nvcode" ] && asktodelnvcode
-  git --version > /dev/null && git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode || installgit
+  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode || installgit
+  git checkout perso
+  git pull
   nvim --headless +PackSync +qall > /dev/null 2>&1
   cd $HOME
   [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ] && echo 'packer already installed' || git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
