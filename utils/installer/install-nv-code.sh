@@ -132,7 +132,7 @@ else
 fi
 
 if [ -a "$HOME/.config/nvcode/init.lua" ]; then
-    echo 'packer already installed'
+    echo 'nvcode already installed'
 else
     # clone config down
     cloneconfig
