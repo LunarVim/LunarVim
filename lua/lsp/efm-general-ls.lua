@@ -24,17 +24,29 @@ local eslint = {
     formatStdin = true
 }
 
+local shellcheck = {
+    LintCommand = 'shellcheck -f gcc -x',
+    lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
+}
+
+local shfmt = {
+  formatCommand = 'shfmt -ci -s -bn',
+  formatStdin = true
+}
+
+
 require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
     init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "python", "javascriptreact", "javascript"},
+    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
             lua = {luaFormat},
             python = {isort, yapf},
             javascriptreact = {prettier, eslint},
-            javascript = {prettier, eslint}
+            javascript = {prettier, eslint},
+            sh = {shellcheck, shfmt}
         }
     }
 }
