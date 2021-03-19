@@ -6,6 +6,8 @@ If you are looking for my old configs checkout the two snapshot branches on this
 
 **WARNING** Still very experimental will not work without some configuation
 
+You will need to run `nv` then `:PackerInstall` ignore the errors that are presented 
+
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvcode/master/utils/installer/install-nv-code.sh)
 ```
@@ -95,7 +97,6 @@ git config --global github.user <username>
 ## TODO
 
 **HIGH PRIORITY**
-- formatting using efm server for prettier/eslint
 - list all binaries needed for functionality
 - learn what opt is
 - better install script, support both nvim and nvcode paths

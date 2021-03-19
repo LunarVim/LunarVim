@@ -23,3 +23,5 @@ command! ResetHunk lua require 'nv-utils'.reset_hunk()
 command! ResetBuffer lua require 'nv-utils'.reset_buffer()
 command! PreviewHunk lua require 'nv-utils'.preview_hunk()
 command! BlameLine lua require 'nv-utils'.blame_line()
+command! W noa w
+
