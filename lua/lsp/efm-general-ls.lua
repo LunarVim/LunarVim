@@ -15,6 +15,8 @@ local luaFormat = {
 -- JavaScript/React/TypeScript
 local prettier = {formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}", formatStdin = true}
 
+local prettier_yaml = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
+
 local eslint = {
     lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
     lintIgnoreExitCode = true,
@@ -39,7 +41,7 @@ local shfmt = {
 require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
     init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh", "html", "css", "json"},
+    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh", "html", "css", "json", "yaml"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
@@ -50,7 +52,8 @@ require"lspconfig".efm.setup {
             sh = {shellcheck, shfmt},
             html = {prettier},
             css = {prettier},
-            json = {prettier}
+            json = {prettier},
+            yaml = {prettier_yaml},
         }
     }
 }
