@@ -9,7 +9,8 @@ require'nvim-treesitter.configs'.setup {
         updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false -- Whether the query persists across vim sessions
     },
-    rainbow = {enable = false},
+    autotag = {enable = true},
+    rainbow = {enable = false}
     -- refactor = {highlight_definitions = {enable = true}}
 }
 
