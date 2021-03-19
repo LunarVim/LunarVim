@@ -57,7 +57,7 @@ installpynvim() {
 
 installpacker() {
     git clone https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/opt/packer.nvim
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 }
 
 cloneconfig() {
@@ -125,7 +125,7 @@ pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || i
 # move old nvim directory if it exists
 # [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
-if [ -a "$HOME/.local/share/nvim/site/pack/packer/opt/packer.nvim" ]; then
+if [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
     echo 'packer already installed'
 else
     installpacker
