@@ -659,10 +659,9 @@ luaextrapackages() {
   clear
   echo "lua-language-server installation"
   cd $HOME/.config
-  [ -d "nvim" ] && cd nvim || echo "nvim folder not found"
-  [ -d "nvcode" ] && cd nvcode || echo "nvcode folder not found"
-  git clone https://github.com/sumneko/lua-language-server
-  cd lua-language-server
+  [ -d "nvim" ] && cd nvim || mkdir nvim && cd nvim
+  mkdir ls && cd ls
+  git clone https://github.com/sumneko/lua-language-server && cd lua-language-server
   git submodule update --init --recursive
   cd 3rd/luamake
   ninja -f ninja/linux.ninja
@@ -672,6 +671,9 @@ luaextrapackages() {
   pause 'Press [Enter] to continue...'
   clear
   echo "luarocks installation"
+  if [ -f "/etc/arch-release" ]; then
+  echo "lua installed, move on"
+  else
   cd /tmp
   sudo apt install build-essential libreadline-dev
   curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
@@ -679,6 +681,7 @@ luaextrapackages() {
   cd lua-5.3.5
   make linux test
   sudo make install
+  fi
   wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
   tar zxpf luarocks-3.3.1.tar.gz
   cd luarocks-3.3.1
@@ -686,7 +689,7 @@ luaextrapackages() {
   sudo make install
   cd
   luarocks install --server=https://luarocks.org/dev luaformatter
-   pause 'Press [Enter] to continue...'
+  pause 'Press [Enter] to continue...'
 }
 
 installnerdfont(){
