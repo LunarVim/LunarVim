@@ -1,4 +1,4 @@
-vim.cmd [[packadd packer.nvim]]
+--vim.cmd [[packadd packer.nvim]]
 
 local execute = vim.api.nvim_command
 local fn = vim.fn

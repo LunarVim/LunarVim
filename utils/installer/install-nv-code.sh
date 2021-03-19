@@ -55,6 +55,11 @@ installpynvim() {
 	pip3 install pynvim --user
 }
 
+installpacker() {
+    git clone https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/opt/packer.nvim
+}
+
 cloneconfig() {
 	echo "Cloning NVCode configuration"
 	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode
@@ -119,6 +124,8 @@ pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || i
 
 # move old nvim directory if it exists
 # [ -d "$HOME/.config/nvim" ] && moveoldnvim
+
+[ -f "~/.local/share/nvim/site/pack/packer/opt/packer.nvim" ] || installpacker
 
 # clone config down
 cloneconfig
