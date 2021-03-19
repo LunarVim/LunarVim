@@ -185,11 +185,11 @@ function update(){
       echo "Would you update you pc ? 'Y' "
       read choice
       if [[ "$choice" ==  [yY] ]]; then
-        Sudo pacman -Syyu
+        sudo pacman -Syyu
         clear
         echo "Update done with command :"
         echo
-        echo "Sudo pacman -Syyu"
+        echo "sudo pacman -Syyu"
       fi
     fi
     echo
@@ -316,7 +316,7 @@ installneovim(){
       which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
       cd /tmp
       [ -d "neovim" ] && sudo rm -rf neovim
-      which git > /dev/null && git clone https://github.com/neovim/neovim || sudo apt-get install git -y
+      which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git
       cd neovim
       sudo make CMAKE_BUILD_TYPE=Release install
       cd ..
@@ -359,7 +359,7 @@ installdepsforneovim(){
     echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "Under construct"
+      sudo pacman -S base-devel cmake unzip ninja tree-sitter lua
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
@@ -421,8 +421,8 @@ function freshInstall(){
     which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
     which nvim > /dev/null && echo "neovim installed, moving on..." || installneovim
     pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || pip3 install pynvim --user
-    npm list -g tree-sitter-cli > /dev/null && echo "tree-sitter-cli node module installed, moving on..." || sudo npm i -g tree-sitter-cli --unsafe-perm
-    npm list -g express > /dev/null && echo "neovim node module istalled, moving on..." || sudo npm i -g neovim
+    tree-sitter > /dev/null && echo "tree-sitter-cli node module installed, moving on..." || sudo npm i -g tree-sitter-cli --unsafe-perm
+    npm list -g neovim > /dev/null && echo "neovim node module istalled, moving on..." || sudo npm i -g neovim
     cloneconfig
   fi
   exec bash
@@ -440,9 +440,10 @@ cloneconfig() {
   cd ~/.config
   if [[ "$choice" ==  [1] ]]; then
   [ -d "nvcode" ] && asktodelnvcode
-  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode || installgit
+  git --version > /dev/null && git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode || installgit
   nvim --headless +PackSync +qall > /dev/null 2>&1
   cd $HOME
+  [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ] && echo 'packer already installed' || git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
   [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
   nvim -es -c ':PackerInstall' -u ~/.config/nvcode/init.lua
@@ -455,7 +456,7 @@ cloneconfig() {
   fi
   if [[ "$choice" ==  [2] ]]; then
   [ -d "nvim" ] && asktodelnvcode
-  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvim || installgit
+  git --version > /dev/null && git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvim || installgit
   cd nvim
   git checkout stable-snapshot-Native-LSP-1
   git pull
@@ -465,7 +466,7 @@ cloneconfig() {
   fi
   if [[ "$choice" ==  [3] ]]; then
   [ -d "nvim" ] && asktodelnvcode
-  git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvim || installgit
+  git --version > /dev/null && git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvim || installgit
   cd nvim
   git checkout stable-snapshot-CoC
   git pull
