@@ -356,7 +356,7 @@ installdepsforneovim(){
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get update
       sudo apt-get upgrade -y
-      sudo apt install cmake libtool-bin gettext libgettextpo-dev gettext argparse -y
+      sudo apt install cmake libtool-bin gettext libgettextpo-dev gettext -y
       which pip3 > /dev/null && pip3 install argparse || installpip
       cd /tmp
       wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
@@ -370,7 +370,9 @@ installdepsforneovim(){
     echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo apt install cmake libtool-bin gettext lua libgettextpo-dev argparse -y
+      sudo apt install cmake libtool-bin gettext lua libgettextpo-dev -y
+      which pip3 > /dev/null && pip3 install argparse || installpip
+      cd /tmp
       wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
       tar xvfz lua-5.3.5.tar.gz
       cd lua-5.3.5
@@ -382,7 +384,14 @@ installdepsforneovim(){
     echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo pacman -S base-devel cmake unzip ninja tree-sitter lua libtool-bin gettext libgettextpo-dev argparse
+      sudo pacman -S base-devel cmake unzip ninja tree-sitter lua gettext -y
+      which pip3 > /dev/null && pip3 install argparse || installpip
+      cd /tmp
+      wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
+      tar xvfz lua-5.3.5.tar.gz
+      cd lua-5.3.5
+      sudo make linux install INSTALL_TOP=/usr/local/lua/5_3_5 MYLIBS="-lncurses"
+      cd
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
