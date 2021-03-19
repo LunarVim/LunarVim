@@ -65,7 +65,12 @@ cloneconfig() {
 	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode
     mv $HOME/.config/nvcode/init.lua $HOME/.config/nvcode/init.lua.tmp
     mv $HOME/.config/nvcode/utils/init.lua $HOME/.config/nvcode/init.lua
+    mv $HOME/.config/nvcode/lua/plugins.lua $HOME/.config/nvcode/utils/plugins.lua
+    mkdir $HOME/.config/nvcode/utils/tmp/
+    mv $HOME/.config/nvcode/lua/* $HOME/.config/nvcode/utils/tmp/
+    mv $HOME/.config/nvcode/utils/plugins.lua $HOME/.config/nvcode/lua/
 	nvim -u $HOME/.config/nvcode/init.lua --headless +PackerSync +qall
+    mv $HOME/.config/nvcode/utils/tmp/* $HOME/.config/nvcode/lua/
     rm $HOME/.config/nvcode/init.lua
     mv $HOME/.config/nvcode/init.lua.tmp $HOME/.config/nvcode/init.lua
 }
