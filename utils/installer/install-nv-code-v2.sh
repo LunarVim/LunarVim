@@ -330,6 +330,7 @@ installneovim(){
       && [ -d "neovim" ] && sudo rm -rf neovim \
       && which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git \
       && cd neovim \
+      && make CMAKE_BUILD_TYPE=Release install \
       && sudo make CMAKE_BUILD_TYPE=Release install && cd .. \
       && [ -d "neovim" ] && sudo rm -r neovim
     fi
