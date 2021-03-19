@@ -7,6 +7,10 @@
 #   - Help : List all commands
 #   - Update
 #   - Node Install
+#   - Git Install
+#   - Pip Install
+#   - Neovim Install
+#   - Nvcode Install
 #   - Fresh Installation
 #   - Extra packages for Nvcode
 ## ----------------------------------
@@ -111,8 +115,12 @@ show_menus(){
   $(ColorGreen '1)') Help : see commands
   $(ColorGreen '2)') Update : Update your pc
   $(ColorGreen '3)') Nodejs : Install Nodejs
-  $(ColorGreen '4)') Extra : Install Extra package for Nvcode
-  $(ColorGreen '5)') Extra : Install Nerd fonts for Nvcode
+  $(ColorGreen '4)') Git : Install Git
+  $(ColorGreen '5)') Pip : Install Pip
+  $(ColorGreen '6)') Neovim : Install Neovim
+  $(ColorGreen '7)') Nvcode: Get Nvcode
+  $(ColorGreen '8)') Extra : Install Extra package for Nvcode
+  $(ColorGreen '9)') Extra : Install Nerd fonts for Nvcode
   $(ColorGreen '0)') Exit"
 }
 
@@ -127,8 +135,12 @@ read_options(){
       1) help_list ; menu ;;
       2) update ; menu ;;
       3) installnode ; menu ;;
-      4) installextrapackages ; menu ;;
-      5) installnerdfont ; menu ;;
+      4) installgit ; menu ;;
+      5) installpip ; menu ;;
+      6) installneovim ; menu ;;
+      7) cloneconfig ; menu ;;
+      8) installextrapackages ; menu ;;
+      9) installnerdfont ; menu ;;
       0) exit 0 ;;
       *) echo -e "${RED}Wrong option...${STD}" && sleep 1;  WrongCommand;;
     esac
@@ -344,7 +356,7 @@ installdepsforneovim(){
     if [[ "$choice" ==  [yY] ]]; then
       sudo apt-get update
       sudo apt-get upgrade -y
-      sudo apt install cmake libtool-bin gettext libgettextpo-dev -y
+      sudo apt install cmake libtool-bin gettext libgettextpo-dev gettext argparse -y
       which pip3 > /dev/null && pip3 install argparse || installpip
       cd /tmp
       wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
@@ -358,7 +370,7 @@ installdepsforneovim(){
     echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo apt install cmake libtool-bin gettext libgettextpo-dev -y
+      sudo apt install cmake libtool-bin gettext lua libgettextpo-dev argparse -y
       wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
       tar xvfz lua-5.3.5.tar.gz
       cd lua-5.3.5
@@ -370,7 +382,7 @@ installdepsforneovim(){
     echo "Would you install neovim dependencies  ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo pacman -S base-devel cmake unzip ninja tree-sitter lua
+      sudo pacman -S base-devel cmake unzip ninja tree-sitter lua libtool-bin gettext libgettextpo-dev argparse
       cd /tmp
       wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
       tar xvfz lua-5.3.5.tar.gz
