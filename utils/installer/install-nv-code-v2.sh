@@ -383,12 +383,6 @@ installdepsforneovim(){
     read choice
     if [[ "$choice" ==  [yY] ]]; then
       sudo pacman -S base-devel cmake unzip ninja tree-sitter lua libtool-bin gettext libgettextpo-dev argparse
-      cd /tmp
-      wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
-      tar xvfz lua-5.3.5.tar.gz
-      cd lua-5.3.5
-      sudo make linux install INSTALL_TOP=/usr/local/lua/5_3_5 MYLIBS="-lncurses"
-      cd
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
