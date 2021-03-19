@@ -35,10 +35,11 @@ local shfmt = {
 }
 
 
+
 require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
     init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh"},
+    filetypes = {"lua", "python", "javascriptreact", "javascript", "sh", "html", "css", "json"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
@@ -46,7 +47,10 @@ require"lspconfig".efm.setup {
             python = {isort, yapf},
             javascriptreact = {prettier, eslint},
             javascript = {prettier, eslint},
-            sh = {shellcheck, shfmt}
+            sh = {shellcheck, shfmt},
+            html = {prettier},
+            css = {prettier},
+            json = {prettier}
         }
     }
 }
