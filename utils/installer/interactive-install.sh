@@ -507,6 +507,31 @@ cloneconfig() {
   pause 'Press [Enter] to continue...'
 }
 
+goextrapackages() {
+clear
+  echo "go installation"
+  wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+  [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+  [ -f ".zshrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
+  [ -f ".bashrc" ] && echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+  [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
+  source ~/.profile
+  echo "efm-langserver"
+  which go > /dev/null && echo "go is installed" \
+  &&  cd /tmp/ \
+  && git clone https://github.com/mattn/efm-langserver.git \
+  && make \
+  && sudo mv efm-langserver /usr/bin/ \
+  || echo "go not found" \
+  && cd /tmp \
+  && wget https://github.com/mattn/efm-langserver/releases/download/v0.0.26/efm-langserver_v0.0.26_linux_amd64.tar.gz \
+  && tar xzf efm-langserver_*.tar.gz \
+  && cd efm-langserver_*/ \
+  && sudo mv efm-langserver /usr/bin/
+  cd
+  pause 'Press [Enter] to continue...'
+}
+
 installextrapackages() {
  clear
  echo "Extra packages for Nvcode..."
@@ -517,59 +542,8 @@ installextrapackages() {
       aptextrapackages
       npmextrapackages
       pipextrapackages
-      clear
-      echo "lua-language-server installation"
-      cd $HOME/.config
-      [ -d "nvim" ] && cd nvim || echo "nvim folder not found"
-      [ -d "nvcode" ] && cd nvcode || echo "nvcode folder not found"
-      git clone https://github.com/sumneko/lua-language-server
-      cd lua-language-server
-      git submodule update --init --recursive
-      cd 3rd/luamake
-      ninja -f ninja/linux.ninja
-      cd ../..
-      ./3rd/luamake/luamake rebuild
-      cd
-      pause 'Press [Enter] to continue...'
-      clear
-      echo "luarocks installation"
-      cd /tmp
-      sudo apt install build-essential libreadline-dev
-      curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
-      tar -zxf lua-5.3.5.tar.gz
-      cd lua-5.3.5
-      make linux test
-      sudo make install
-      wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
-      tar zxpf luarocks-3.3.1.tar.gz
-      cd luarocks-3.3.1
-      ./configure --with-lua-include=/usr/local/include
-      sudo make install
-      cd
-      luarocks install --server=https://luarocks.org/dev luaformatter
-      pause 'Press [Enter] to continue...'
-      clear
-      echo "go installation"
-      wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-      [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-      [ -f ".zshrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
-      [ -f ".bashrc" ] && echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
-      [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
-      source ~/.profile
-      echo "efm-langserver"
-      which go > /dev/null && echo "go is installed" \
-      &&  cd /tmp/ \
-      && git clone https://github.com/mattn/efm-langserver.git \
-      && make \
-      && sudo mv efm-langserver /usr/bin/ \
-      || echo "go not found" \
-      && cd /tmp \
-      && wget https://github.com/mattn/efm-langserver/releases/download/v0.0.26/efm-langserver_v0.0.26_linux_amd64.tar.gz \
-      && tar xzf efm-langserver_*.tar.gz \
-      && cd efm-langserver_*/ \
-      && sudo mv efm-langserver /usr/bin/
-      cd
-      pause 'Press [Enter] to continue...'
+      luaextrapackages
+      goextrapackages
       exec bash
     fi
   fi
@@ -586,9 +560,12 @@ installextrapackages() {
     echo "This will install ripgrep fzf ranger python-ueberzug-git neovim-remote "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      sudo pacman -S install ripgrep fzf ranger
-      which yay > /dev/null && yay -S python-ueberzug-git || pipinstallueberzug
-      pip3 install neovim-remote
+      sudo pacman -S ripgrep fzf ranger neovim-remote
+      npmextrapackages
+      pipextrapackages
+      luaextrapackages
+      goextrapackages
+      exec bash
     fi
   fi
   if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
@@ -657,7 +634,7 @@ pipextrapackages() {
   clear
   echo "pip3 packages installation"
   echo "ueberzug neovim-remote fd"
-  list=("ueberzug" "neovim-remote" "fd")
+  list=("ueberzug" "neovim-remote" "fd" "pyright" "flake8" "yapf")
   menuitems() {
     for i in ${!list[@]}; do
         printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${list[i]}"
@@ -676,6 +653,40 @@ pipextrapackages() {
   done
   echo "Extra packages install done"
   pause 'Press [Enter] to continue...'
+}
+
+luaextrapackages() {
+  clear
+  echo "lua-language-server installation"
+  cd $HOME/.config
+  [ -d "nvim" ] && cd nvim || echo "nvim folder not found"
+  [ -d "nvcode" ] && cd nvcode || echo "nvcode folder not found"
+  git clone https://github.com/sumneko/lua-language-server
+  cd lua-language-server
+  git submodule update --init --recursive
+  cd 3rd/luamake
+  ninja -f ninja/linux.ninja
+  cd ../..
+  ./3rd/luamake/luamake rebuild
+  cd
+  pause 'Press [Enter] to continue...'
+  clear
+  echo "luarocks installation"
+  cd /tmp
+  sudo apt install build-essential libreadline-dev
+  curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
+  tar -zxf lua-5.3.5.tar.gz
+  cd lua-5.3.5
+  make linux test
+  sudo make install
+  wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
+  tar zxpf luarocks-3.3.1.tar.gz
+  cd luarocks-3.3.1
+  ./configure --with-lua-include=/usr/local/include
+  sudo make install
+  cd
+  luarocks install --server=https://luarocks.org/dev luaformatter
+   pause 'Press [Enter] to continue...'
 }
 
 installnerdfont(){
