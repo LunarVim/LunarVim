@@ -34,13 +34,13 @@ $HOME/.config/nvim/lua/nv-vscode/init.lua
 
 Install the latest with:
 
-```
+```bash
 go get github.com/mattn/efm-langserver@HEAD
 ```
 
 ## Useful Programs
 
-```
+```bash
 ranger
 ueberzug
 fd
@@ -54,7 +54,7 @@ ncdu
 
 **Python**
 
-```
+```bash
 pyright
 flake8
 yapf
@@ -62,7 +62,7 @@ yapf
 
 **Lua**
 
-```
+```bash
 ninja
 lua-format
 sumneko-lua
@@ -72,7 +72,7 @@ sumneko-lua
 
 To use vim-gists you will need to configure the following:
 
-```
+```bash
 git config --global github.user <username>
 ```
 
@@ -86,8 +86,10 @@ git config --global github.user <username>
 - for vsnip :h vim-vsnip, also figure out what integr does
 - add utf8 line col and spaces (maybe blame)
 - potentially switch to dashboard
+- update Vista symbols
 
 **LOW PRIORITY**
+- configure nvim-peekup
 - better install script, support both nvim and nvcode paths
 - make java code actions prettier
 - figure out how to customize java formatting
@@ -96,6 +98,7 @@ git config --global github.user <username>
 - better autoimport
 - keep and eye on indent guides plugin for thin lines
 - look into autoinstall lsp
+- json config file (luajson)
 - get logo
 - configure neogit
 - toggle virtual text diagnostics
