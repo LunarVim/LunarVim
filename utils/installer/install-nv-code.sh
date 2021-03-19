@@ -63,7 +63,11 @@ installpacker() {
 cloneconfig() {
 	echo "Cloning NVCode configuration"
 	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvcode
+    mv $HOME/.config/nvcode/init.lua init.lua.tmp
+    mv $HOME/.config/nvcode/utils/init.lua $HOME/.config/nvcode/init.lua
 	nvim --headless +PackerSync +qall
+    rm $HOME/.config/nvcode/init.lua
+    mv $HOME/.config/nvcode/init.lua.tmp $HOME/.config/nvcode/init.lua
 }
 
 asktoinstallnode() {
