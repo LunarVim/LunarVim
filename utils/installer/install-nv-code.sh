@@ -125,13 +125,22 @@ pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || i
 # move old nvim directory if it exists
 # [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
-[ -f "~/.local/share/nvim/site/pack/packer/opt/packer.nvim" ] || installpacker
+if [ -a "$HOME/.local/share/nvim/site/pack/packer/opt/packer.nvim" ]; then
+    echo 'packer already installed'
+else
+    installpacker
+fi
 
-# clone config down
-cloneconfig
+if [ -a "$HOME/.config/nvcode/init.lua" ]; then
+    echo 'packer already installed'
+else
+    # clone config down
+    cloneconfig
+    echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
+    echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
+fi
 
-echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
-echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
+
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 
