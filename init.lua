@@ -1,6 +1,7 @@
 if vim.g.vscode then
   vim.cmd('source ~/.config/nvim/vimscript/nv-vscode/init.vim')
   require('settings')
+  require('nv-quickscope')
 else
   -- General mappings
   require('plugins')

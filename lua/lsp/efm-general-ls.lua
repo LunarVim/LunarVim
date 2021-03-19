@@ -1,25 +1,40 @@
 -- Example configuations here: https://github.com/mattn/efm-langserver
+-- python
+local flake8 = {
+    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
+    lintStdin = true,
+    lintFormats = {"%f:%l:%c: %m"}
+}
+local isort = {formatCommand = "isort --quiet -", formatStdin = true}
+local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
+-- lua
+local luaFormat = {
+    formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=120",
+    formatStdin = true
+}
+-- JavaScript/React/TypeScript
+local prettier = {formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}", formatStdin = true}
+
+local eslint = {
+    lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
+    lintIgnoreExitCode = true,
+    lintStdin = true,
+    lintFormats = {"%f:%l:%c: %m"},
+    formatCommand = "./node_modules/.bin/eslint --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+    formatStdin = true
+}
+
 require"lspconfig".efm.setup {
-    init_options = {documentFormatting = true},
-    filetypes = {"lua", "python"},
+    -- init_options = {initializationOptions},
+    init_options = {documentFormatting = true, codeAction = false},
+    filetypes = {"lua", "python", "javascriptreact", "javascript"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
-            lua = {
-                {
-                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=100",
-                    formatStdin = true
-                }
-            },
-            python = {
-                {
-                    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
-                    lintStdin = true,
-                    lintFormats = {"%f:%l:%c: %m"},
-                    formatCommand = "yapf --quiet",
-                    formatStdin = true
-                }
-            }
+            lua = {luaFormat},
+            python = {isort, yapf},
+            javascriptreact = {prettier, eslint},
+            javascript = {prettier, eslint}
         }
     }
 }
@@ -28,32 +43,3 @@ require"lspconfig".efm.setup {
 -- TODO also shellcheck and shell formatting
 -- Also find way to toggle format on save
 -- maybe this will help: https://superuser.com/questions/439078/how-to-disable-autocmd-or-augroup-in-vim
--- {
---   lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
---   lintIgnoreExitCode = true,
---   lintStdin = true,
---   lintFormats = {"%f:%l:%c: %m"},
--- }
-
-
--- local eslint = {
---   lintCommand = './node_modules/.bin/eslint -f compact --stdin',
---   lintStdin = true,
---   lintFormats = {'%f: line %l, col %c, %trror - %m', '%f: line %l, col %c, %tarning - %m'},
---   lintIgnoreExitCode = true,
---   formatCommand = './node_modules/.bin/prettier-eslint --stdin --single-quote --print-width 120',
---   formatStdin = true,
--- }
---
--- nvim_lsp.efm.setup({
---     init_options = { documentFormatting = true },
---     root_dir = nvim_lsp.util.root_pattern('.git/'),
---     filetypes = {'javascript', 'javascriptreact'},
---     settings = {
---       rootMarkers = {'.git/'},
---       languages = {
---         javascript = {eslint},
---         javascriptreact = {eslint},
---       }
---     }
--- })

@@ -55,6 +55,8 @@ gls.left[1] = {
         highlight = {colors.red, colors.bg, 'bold'}
     }
 }
+print(vim.fn.getbufvar(0,'ts'))
+vim.fn.getbufvar(0,'ts')
 
 gls.left[2] = {
     GitIcon = {
