@@ -1,2 +1,0 @@
-setlocal commentstring={/*%s*/}
-
