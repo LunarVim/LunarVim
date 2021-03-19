@@ -328,12 +328,13 @@ installneovim(){
       which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
       which yay >/dev/null && yay -Sa neovim-nightly-bin || yay="false"
       if [[ "$yay" ==  "false" ]]; then
-        cd /tmp
-        [ -d "neovim" ] && sudo rm -rf neovim
-        which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git
-        cd neovim
-	make CMAKE_BUILD_TYPE=Release install
-        [ -d "neovim" ] && sudo rm -r neovim
+      cd ~
+      [ -d "neovim" ] && sudo rm -r neovim
+      which git > /dev/null && git clone https://github.com/neovim/neovim || sudo pacman -S git
+      cd neovim
+      sudo make CMAKE_BUILD_TYPE=Release install
+      cd ~
+      [ -d "neovim" ] && sudo rm -r neovim
       fi
     fi
   fi
