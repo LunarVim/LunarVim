@@ -458,7 +458,7 @@ cloneconfig() {
   clear
   echo "Cloning NVCode configuration"
   echo "Would you install nvcode, which version ? : 'Y' "
-  echo "1: lua"
+  echo "1: latest (git checkout perso on mjcc30/nvcode.git code line 472)"
   echo "2: stable-lsp"
   echo "3: stable-coc"
   echo "other: exit"
@@ -467,9 +467,10 @@ cloneconfig() {
   if [[ "$choice" ==  [1] ]]; then
   [ -d "nvcode" ] && asktodelnvcode
   git --version > /dev/null && git clone https://github.com/mjcc30/nvcode.git ~/.config/nvcode || installgit
+  nvim --headless +PackSync +qall > /dev/null 2>&1
+  cd nvcode
   git checkout perso
   git pull
-  nvim --headless +PackSync +qall > /dev/null 2>&1
   cd $HOME
   [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ] && echo 'packer already installed' || git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
