@@ -43,6 +43,43 @@ Point your `init.lua` path to:
 $HOME/.config/nvim/lua/nv-vscode/init.lua
 ```
 
+## Clipboard Support
+
+- On Mac `pbcopy` should be builtin
+
+- Ubuntu
+
+	```bash
+    sudo apt install xsel
+	```
+
+- Arch
+
+	```bash
+    sudo pacman -S xsel
+	```
+
+## LSP
+
+Some example language servers, if you just install them they will work with this config
+
+```bash
+npm i -g pyright
+npm i -g bash-language-server
+npm install -g vscode-css-languageserver-bin
+npm install -g dockerfile-language-server-nodejs
+npm install -g graphql-language-service-cli
+npm install -g vscode-html-languageserver-bin
+npm install -g typescript typescript-language-server
+npm install -g vscode-json-languageserver
+npm install -g vim-language-server
+npm install -g yaml-language-server
+```
+
+For a more in depth LSP support: [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
+
+
+
 ## efm server is slow on close
 
 Install the latest with:
@@ -63,6 +100,8 @@ fzf
 lazygit
 lazydocker
 ncdu
+pynvim
+neovim-remote
 ```
 
 **Python**
@@ -81,6 +120,12 @@ lua-format
 sumneko-lua
 ```
 
+**Yaml, Json, Javascript, HTML, CSS**
+
+```bash
+prettier
+```
+
 ## Vim Gists
 
 To use vim-gists you will need to configure the following:
@@ -89,30 +134,34 @@ To use vim-gists you will need to configure the following:
 git config --global github.user <username>
 ```
 
+## Snippets
+
+If you are looking for snippets checkout this github topic: [Snippet Topic](https://github.com/topics/vscode-snippets)
+
 ## TODO
 
+
 **HIGH PRIORITY**
-- list all binaries needed for functionality
-- learn what opt is
 - learn nvim-dap in depth
-- snippet support
-- for vsnip :h vim-vsnip, also figure out what integr does
 - add utf8 line col and spaces (maybe blame)
 - potentially switch to dashboard
-- update Vista symbols
+- vim ult test
+- learn what opt is
 
 **LOW PRIORITY**
-- configure nvim-peekup
-- better install script, support both nvim and nvcode paths
-- make java code actions prettier
-- figure out how to customize java formatting
+- Implement what I can from this java config: [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
+    - better ui for code actions
+    - formatting
 - setup junit tests for java
 - neovim lightbulb config
 - better autoimport
+- list all binaries needed for functionality
 - keep and eye on indent guides plugin for thin lines
 - look into autoinstall lsp
-- json config file (luajson)
+- update Vista symbols
 - get logo
 - configure neogit
 - toggle virtual text diagnostics
 - move language servers not installed with npm to neovim local share location
+- json config file (luajson)
+- better install script, support both nvim and nvcode paths
