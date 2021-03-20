@@ -83,7 +83,6 @@ If you are looking for snippets checkout this github topic: [Snippet Topic](http
 ## TODO
 
 **HIGH PRIORITY**
-- lsp kind for snippets
 - list all binaries needed for functionality
 - learn what opt is
 - learn nvim-dap in depth
