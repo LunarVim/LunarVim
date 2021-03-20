@@ -70,4 +70,3 @@ vim.g.nvim_tree_icons = {
         symlink = ""
     }
 }
-vim.cmd([[source ~/.config/nvim/vimscript/nv-nvimtree/init.vim]])
