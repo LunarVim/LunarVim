@@ -76,20 +76,23 @@ To use vim-gists you will need to configure the following:
 git config --global github.user <username>
 ```
 
+## Snippets
+
+If you are looking for snippets checkout this github topic: [Snippet Topic](https://github.com/topics/vscode-snippets)
+
 ## TODO
 
 **HIGH PRIORITY**
+- lsp kind for snippets
 - list all binaries needed for functionality
 - learn what opt is
 - learn nvim-dap in depth
-- snippet support
-- for vsnip :h vim-vsnip, also figure out what integr does
 - add utf8 line col and spaces (maybe blame)
 - potentially switch to dashboard
 - update Vista symbols
+- vim ult test
 
 **LOW PRIORITY**
-- configure nvim-peekup
 - better install script, support both nvim and nvcode paths
 - make java code actions prettier
 - figure out how to customize java formatting
@@ -100,6 +103,7 @@ git config --global github.user <username>
 - look into autoinstall lsp
 - json config file (luajson)
 - get logo
+- configure nvim-peekup
 - configure neogit
 - toggle virtual text diagnostics
 - move language servers not installed with npm to neovim local share location
