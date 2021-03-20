@@ -8,6 +8,11 @@ wget -q https://raw.githubusercontent.com/mjcc30/nvcode/perso/utils/installer/in
 && ./interactive-install.sh
 ```
 
+for windows install you need git installed then run in cmd :
+```bash
+bash <(curl -s https://raw.githubusercontent.com/mjcc30/nvcode/perso/utils/installer/interactive-install.sh)
+```
+
 If you are looking for my old configs checkout the two snapshot branches on this repo, there is one for CoC and one for Native LSP
 
 ## Get the latest version of Neovim 
