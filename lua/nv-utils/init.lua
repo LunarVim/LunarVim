@@ -31,7 +31,8 @@ nv_utils.define_augroups({
         {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
-        {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
+        {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
+        {'FileType', 'markdown', 'set wrap'}
         -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     }

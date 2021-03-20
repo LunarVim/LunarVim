@@ -17,6 +17,7 @@ else
   require('nv-nvimtree')
   require('nv-treesitter')
   require('nv-barbar')
+  require('nv-emmet')
   require('nv-quickscope')
   require('nv-gitsigns')
   require('nv-nvim-autopairs')

@@ -1,0 +1,3 @@
+-- After you have what you want press C-Y and , at the same time
+-- autocmd FileType html,css EmmetInstall
+-- vim.g.user_emmet_leader_key='<C-Z>'

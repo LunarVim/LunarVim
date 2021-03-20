@@ -34,15 +34,17 @@ return require('packer').startup(function(use)
 
     -- Autocomplete
     use 'hrsh7th/nvim-compe'
+    use 'christianchiarulli/emmet-vim'
     use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-    use 'honza/vim-snippets'
-    -- use 'epilande/vim-react-snippets'
-    -- use 'xabikos/vscode-javascript'
+    use 'xabikos/vscode-javascript'
+    use 'dsznajder/vscode-es7-javascript-react-snippets'
+    use 'golang/vscode-go'
+    use 'rust-lang/vscode-rust'
+    use 'ChristianChiarulli/html-snippets'
+    use 'ChristianChiarulli/java-snippets'
+    use 'ChristianChiarulli/python-snippets'
     -- use 'cstrap/python-snippets'
     -- use 'ylcnfrht/vscode-python-snippet-pack'
-    -- use 'golang/vscode-go'
-    -- use 'rust-lang/vscode-rust'
     -- use 'SirVer/ultisnips'
     -- use 'norcalli/snippets.nvim'
 
