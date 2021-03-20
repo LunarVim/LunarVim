@@ -246,7 +246,14 @@ installnode() {
     echo "Would you install Nodejs ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      set dir=%cd% && "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Start-Process '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''));choco upgrade -y nodejs-lts ;  Read-Host ''Type ENTER to exit'' ' -Verb RunAs
+      echo
+      echo "for install node in command line run copy and past the following line in cmd"
+      echo "or you can download it from the site : https://nodejs.org/en/download/"
+      echo
+      echo "this will install nodejs from chocolatey :"
+      echo
+      echo `set dir=%cd% && "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Start-Process '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''));choco upgrade -y nodejs-lts ;  Read-Host ''Type ENTER to exit'' ' -Verb RunAs`
+      pause 'Press [Enter] to continue...'
     fi
   fi
  echo "Node install done"
@@ -283,7 +290,19 @@ installpip() {
     echo "Would you install pip ? :  'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
-      echo "under construct"
+       echo
+      echo "for install python and pip in command line run copy and past the following line in cmd"
+      echo "or you can download the Windows installer version from the site : https://www.python.org/downloads/windows/"
+      ech " you need to have python installed to install pip"
+      echo
+      echo "this line will install python from chocolatey :"
+      echo
+      echo `set dir=%cd% && "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Start-Process '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''));choco upgrade -y python ;  Read-Host ''Type ENTER to exit'' ' -Verb RunAs`
+      echo
+      pause 'Press [Enter] to continue...'
+      curl -sO https://bootstrap.pypa.io/get-pip.py
+      which py > /dev/null && py get-pip.py || echo "python not found"
+      which py > /dev/null && py -m pip install --upgrade pip || echo "python not found"
     fi
   fi
   echo "pip install done"
@@ -427,6 +446,12 @@ installgit(){
     echo "Would you install Git ? : 'Y' "
     read choice
     if [[ "$choice" ==  [yY] ]]; then
+      echo
+      echo "for install git in command line run copy and past the following line in cmd"
+      echo "or you can download it from the site :https://git-scm.com/download/win"
+      echo
+      echo "this will install git from chocolatey :"
+      echo
       set dir=%cd% && "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command Start-Process '%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''));choco upgrade -y git --params "/GitAndUnixToolsOnPath /NoAutoCrlf";  Read-Host ''Type ENTER to exit'' ' -Verb RunAs
     fi
   fi
