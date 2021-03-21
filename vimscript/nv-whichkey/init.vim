@@ -21,23 +21,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-" " delete without yanking
-" nnoremap <leader>d "_d
-" vnoremap <leader>d "_d
-" 
-" " replace currently selected text with default register
-" " without yanking it
-" vnoremap <leader>p "_dP
-" vnoremap <leader>p "_dP
-map <leader>p <Plug>(miniyank-startput)
-map <leader>P <Plug>(miniyank-startPut)
-" Single mappings
-
-let g:which_key_map['/'] = 'which_key_ignore'
-let g:which_key_map['p'] = 'which_key_ignore'
-let g:which_key_map['P'] = 'which_key_ignore'
-let g:which_key_map['n'] = 'which_key_ignore'
-let g:which_key_map['N'] = 'which_key_ignore'
+let g:which_key_map[','] = [ '<Plug>(emmet-expand-abbr)'                       , 'exapnd tags' ]
 let g:which_key_map['"'] = [ '<Plug>PeekupOpen'                                , 'registers' ]
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
@@ -46,14 +30,33 @@ let g:which_key_map['h'] = [ '<C-W>s'                                          ,
 let g:which_key_map['m'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
 let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
-" let g:which_key_map['p'] = [ '"0p'                                             , 'paste' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
-" Add Zen mode, play nice with status line
+" TODO play nice with status line
 let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
 
 " Group mappings
+
+" . is for emmet
+let g:which_key_map['.'] = {
+      \ 'name' : '+emmet' ,
+      \ ',' : ['<Plug>(emmet-expand-abbr)'        , 'expand abbr'],
+      \ ';' : ['<plug>(emmet-expand-word)'        , 'expand word'],
+      \ 'u' : ['<plug>(emmet-update-tag)'        , 'update tag'],
+      \ 'd' : ['<plug>(emmet-balance-tag-inward)'        , 'balance tag in'],
+      \ 'D' : ['<plug>(emmet-balance-tag-outward)'        , 'balance tag out'],
+      \ 'n' : ['<plug>(emmet-move-next)'        , 'move next'],
+      \ 'N' : ['<plug>(emmet-move-prev)'        , 'move prev'],
+      \ 'i' : ['<plug>(emmet-image-size)'        , 'image size'],
+      \ '/' : ['<plug>(emmet-toggle-comment)'        , 'toggle comment'],
+      \ 'j' : ['<plug>(emmet-split-join-tag)'        , 'split join tag'],
+      \ 'k' : ['<plug>(emmet-remove-tag)'        , 'remove tag'],
+      \ 'a' : ['<plug>(emmet-anchorize-url)'        , 'anchorize url'],
+      \ 'A' : ['<plug>(emmet-anchorize-summary)'        , 'anchorize summary'],
+      \ 'm' : ['<plug>(emmet-merge-lines)'        , 'merge lines'],
+      \ 'c' : ['<plug>(emmet-code-pretty)'        , 'code pretty'],
+      \ }
 
 " a is for actions
 let g:which_key_map.a = {
@@ -115,27 +118,6 @@ let g:which_key_map.s = {
       \ 'w' : [':Telescope file_browser'                , 'buf_fuz_find'],
       \ 'u' : [':Telescope colorscheme'                 , 'colorschemes'],
       \ }
-      " \ 'A' : [':Telescope builtin'                     , 'all'],
-      " \ 's' : [':Telescope git_status'                  , 'git_status'],
-      " \ 'b' : [':Telescope buffers'                     , 'buffers'],
-      " \ ';' : [':Telescope commands'                    , 'commands'],
-      " \ 'a' : [':Telescope lsp_code_actions'            , 'code_actions'],
-      " \ 'c' : [':Telescope git_commits'                 , 'git_commits'],
-      " \ 'C' : [':Telescope git_bcommits'                , 'git_bcommits'],
-      " \ 'g' : [':Telescope tags'                        , 'tags'],
-      " \ 'F' : [':Telescope git_files'                   , 'git_files'],
-      " \ 'G' : [':Telescope current_buffer_tags'         , 'buffer_tags'],
-      " \ 'k' : [':Telescope keymaps'                     , 'keymaps'],
-      " \ 'H' : [':Telescope help_tags'                   , 'help_tags'],
-      " \ 'l' : [':Telescope loclist'                     , 'loclist'],
-      " \ 'O' : [':Telescope oldfiles'                    , 'oldfiles'],
-      " \ 'p' : [':Telescope fd'                          , 'fd'],
-      " \ 'S' : [':Telescope grep_string'                 , 'grep_string'],
-      " \ 'y' : [':Telescope symbols'                     , 'symbols'],
-      " \ 'Y' : [':Telescope lsp_workspace_symbols'       , 'lsp_workspace_symbols'],
-      " \ 'R' : [':Telescope reloader'                    , 'reloader'],
-      " \ 'z' : [':Telescope current_buffer_fuzzy_find'   , 'buf_fuz_find'],
-      " \ 'P' : [':Telescope spell_suggest'               , 'spell_suggest'],
 
 let g:which_key_map.S = {
       \ 'name' : '+Session' ,
