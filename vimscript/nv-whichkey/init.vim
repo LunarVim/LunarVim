@@ -41,21 +41,21 @@ let g:which_key_map['z'] = [ 'Goyo'                                            ,
 " . is for emmet
 let g:which_key_map['.'] = {
       \ 'name' : '+emmet' ,
-      \ ',' : ['<Plug>(emmet-expand-abbr)'        , 'expand abbr'],
-      \ ';' : ['<plug>(emmet-expand-word)'        , 'expand word'],
-      \ 'u' : ['<plug>(emmet-update-tag)'        , 'update tag'],
+      \ ',' : ['<Plug>(emmet-expand-abbr)'               , 'expand abbr'],
+      \ ';' : ['<plug>(emmet-expand-word)'               , 'expand word'],
+      \ 'u' : ['<plug>(emmet-update-tag)'                , 'update tag'],
       \ 'd' : ['<plug>(emmet-balance-tag-inward)'        , 'balance tag in'],
-      \ 'D' : ['<plug>(emmet-balance-tag-outward)'        , 'balance tag out'],
-      \ 'n' : ['<plug>(emmet-move-next)'        , 'move next'],
-      \ 'N' : ['<plug>(emmet-move-prev)'        , 'move prev'],
-      \ 'i' : ['<plug>(emmet-image-size)'        , 'image size'],
-      \ '/' : ['<plug>(emmet-toggle-comment)'        , 'toggle comment'],
-      \ 'j' : ['<plug>(emmet-split-join-tag)'        , 'split join tag'],
-      \ 'k' : ['<plug>(emmet-remove-tag)'        , 'remove tag'],
-      \ 'a' : ['<plug>(emmet-anchorize-url)'        , 'anchorize url'],
-      \ 'A' : ['<plug>(emmet-anchorize-summary)'        , 'anchorize summary'],
-      \ 'm' : ['<plug>(emmet-merge-lines)'        , 'merge lines'],
-      \ 'c' : ['<plug>(emmet-code-pretty)'        , 'code pretty'],
+      \ 'D' : ['<plug>(emmet-balance-tag-outward)'       , 'balance tag out'],
+      \ 'n' : ['<plug>(emmet-move-next)'                 , 'move next'],
+      \ 'N' : ['<plug>(emmet-move-prev)'                 , 'move prev'],
+      \ 'i' : ['<plug>(emmet-image-size)'                , 'image size'],
+      \ '/' : ['<plug>(emmet-toggle-comment)'            , 'toggle comment'],
+      \ 'j' : ['<plug>(emmet-split-join-tag)'            , 'split join tag'],
+      \ 'k' : ['<plug>(emmet-remove-tag)'                , 'remove tag'],
+      \ 'a' : ['<plug>(emmet-anchorize-url)'             , 'anchorize url'],
+      \ 'A' : ['<plug>(emmet-anchorize-summary)'         , 'anchorize summary'],
+      \ 'm' : ['<plug>(emmet-merge-lines)'               , 'merge lines'],
+      \ 'c' : ['<plug>(emmet-code-pretty)'               , 'code pretty'],
       \ }
 
 " a is for actions
@@ -88,16 +88,16 @@ let g:which_key_map.b = {
 " F is for fold
 let g:which_key_map.F = {
     \ 'name': '+fold',
-    \ 'O' : [':set foldlevel=20', 'open all'],
-    \ 'C' : [':set foldlevel=0', 'close all'],
-    \ 'c' : [':foldclose', 'close'],
-    \ 'o' : [':foldopen', 'open'],
-    \ '1' : [':set foldlevel=1', 'level1'],
-    \ '2' : [':set foldlevel=2', 'level2'],
-    \ '3' : [':set foldlevel=3', 'level3'],
-    \ '4' : [':set foldlevel=4', 'level4'],
-    \ '5' : [':set foldlevel=5', 'level5'],
-    \ '6' : [':set foldlevel=6', 'level6']
+    \ 'O' : [':set foldlevel=20'  , 'open all'],
+    \ 'C' : [':set foldlevel=0'   , 'close all'],
+    \ 'c' : [':foldclose'         , 'close'],
+    \ 'o' : [':foldopen'          , 'open'],
+    \ '1' : [':set foldlevel=1'   , 'level1'],
+    \ '2' : [':set foldlevel=2'   , 'level2'],
+    \ '3' : [':set foldlevel=3'   , 'level3'],
+    \ '4' : [':set foldlevel=4'   , 'level4'],
+    \ '5' : [':set foldlevel=5'   , 'level5'],
+    \ '6' : [':set foldlevel=6'   , 'level6']
     \ }
 
 " s is for search powered by telescope
@@ -121,11 +121,11 @@ let g:which_key_map.s = {
 
 let g:which_key_map.S = {
       \ 'name' : '+Session' ,
-      \ 'c' : [':SClose'          , 'Close Session']  ,
-      \ 'd' : [':SDelete'         , 'Delete Session'] ,
-      \ 'l' : [':SLoad'           , 'Load Session']     ,
-      \ 's' : [':Startify'        , 'Start Page']     ,
-      \ 'S' : [':SSave'           , 'Save Session']   ,
+      \ 'c' : [':SClose'          , 'Close Session'],
+      \ 'd' : [':SDelete'         , 'Delete Session'],
+      \ 'l' : [':SLoad'           , 'Load Session'],
+      \ 's' : [':Startify'        , 'Start Page'],
+      \ 'S' : [':SSave'           , 'Save Session'],
       \ }
 
 " g is for git
@@ -175,7 +175,7 @@ let g:which_key_map.l = {
       \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'p' : [':Lspsaga preview_definition'         , 'preview definition'],
       \ 'q' : [':Telescope quickfix'                 , 'quickfix'],
-      \ 'r' : [':Lspsaga rename'                          , 'rename'],
+      \ 'r' : [':Lspsaga rename'                     , 'rename'],
       \ 'T' : [':LspTypeDefinition'                  , 'type defintion'],
       \ 'x' : [':cclose'                             , 'close quickfix'],
       \ 's' : [':Telescope lsp_document_symbols'     , 'document symbols'],
