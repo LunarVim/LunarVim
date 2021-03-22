@@ -659,8 +659,10 @@ luaextrapackages() {
   if [[ "$choice" ==  [yY] ]]; then
     cd $HOME/.config
     [ -d "nvim" ] && cd nvim || mkdir nvim && cd nvim
-    mkdir ls && cd ls
-    git clone https://github.com/sumneko/lua-language-server && cd lua-language-server
+    mkdir .language-servers
+    cd .language-servers
+    git clone https://github.com/sumneko/lua-language-server
+    cd lua-language-server
     git submodule update --init --recursive
     cd 3rd/luamake
     ninja -f ninja/linux.ninja
