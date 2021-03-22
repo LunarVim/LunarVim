@@ -155,8 +155,6 @@ Topic](https://github.com/topics/vscode-snippets)
 
 - look into autoinstall lsp
 - get logo
-- move language servers not installed with npm to neovim local share
-  location
 - json config file (luajson)
 - look into emmet-ls
 - better install script, support both nvim and nvcode paths
@@ -167,6 +165,7 @@ Topic](https://github.com/topics/vscode-snippets)
 - configure kshenoy/vim-signature
 - vim ult test
 - what is `fzy`
+- https://github.com/pwntester/octo.nvim
 
 **PLUGIN BUGS**
 
