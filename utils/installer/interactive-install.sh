@@ -673,7 +673,7 @@ luaextrapackages() {
     clear
     echo "luarocks installation"
   if [[ "$ARCH" ==  "Archlinux" ]]; then
-    echo "lua installed, move on"
+    sudo pacman -S luarocks
   else
     cd /tmp
     sudo apt install build-essential libreadline-dev
@@ -682,13 +682,13 @@ luaextrapackages() {
     cd lua-5.3.5
     make linux test
     sudo make install
-  fi
     wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
     tar zxpf luarocks-3.3.1.tar.gz
     cd luarocks-3.3.1
     ./configure --with-lua-include=/usr/local/include
     sudo make install
     cd
+  fi
     sudo luarocks install --server=https://luarocks.org/dev luaformatter
     pause 'Press [Enter] to continue...'
   fi
