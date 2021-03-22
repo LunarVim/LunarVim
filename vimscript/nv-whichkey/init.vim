@@ -21,7 +21,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-let g:which_key_map[','] = [ '<Plug>(emmet-expand-abbr)'                       , 'exapnd tags' ]
+let g:which_key_map[','] = [ '<Plug>(emmet-expand-abbr)'                       , 'expand tags' ]
 let g:which_key_map['"'] = [ '<Plug>PeekupOpen'                                , 'registers' ]
 let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
