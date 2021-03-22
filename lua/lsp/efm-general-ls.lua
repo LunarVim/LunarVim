@@ -60,8 +60,10 @@ require"lspconfig".efm.setup {
         languages = {
             lua = {luaFormat},
             python = {isort, yapf},
-            javascriptreact = {prettier, eslint},
-            javascript = {prettier, eslint},
+            -- javascriptreact = {prettier, eslint},
+            -- javascript = {prettier, eslint},
+            javascriptreact = {prettier},
+            javascript = {prettier},
             sh = {shellcheck, shfmt},
             html = {prettier},
             css = {prettier},
