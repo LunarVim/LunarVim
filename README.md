@@ -1,5 +1,8 @@
 ![NVCode Logo](./utils/media/nvcode_logo.png)
 
+
+![NVCode Demo](./utils/media/demo.png)
+
 If you are looking for my old configs checkout the two snapshot branches
 on this repo, there is one for CoC and one for Native LSP
 
