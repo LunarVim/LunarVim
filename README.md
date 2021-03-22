@@ -1,4 +1,4 @@
-# NVCode
+![NVCode Logo](./utils/media/nvcode_logo.png)
 
 If you are looking for my old configs checkout the two snapshot branches
 on this repo, there is one for CoC and one for Native LSP
@@ -166,6 +166,7 @@ Topic](https://github.com/topics/vscode-snippets)
 
 **PLUGIN BUGS**
 
+- finding files from dashboard sometimes number not set
 - spell not activated in readme Markdown
 - better autoimport
 - can't find global binary for markdownlint
