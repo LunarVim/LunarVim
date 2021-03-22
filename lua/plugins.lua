@@ -102,7 +102,7 @@ return require('packer').startup(function(use)
     use 'airblade/vim-rooter'
     use 'kevinhwang91/rnvimr'
     -- use 'mhinz/vim-startify'
-    use 'glepnir/dashboard-nvim'
+    use 'ChristianChiarulli/dashboard-nvim'
     use 'metakirby5/codi.vim'
     use 'psliwka/vim-smoothie'
     use 'moll/vim-bbye'

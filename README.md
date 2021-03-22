@@ -166,6 +166,7 @@ Topic](https://github.com/topics/vscode-snippets)
 - html snippets in react (maybe)
 - configure kshenoy/vim-signature
 - vim ult test
+- what is `fzy`
 
 **PLUGIN BUGS**
 
