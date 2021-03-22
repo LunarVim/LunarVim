@@ -35,7 +35,7 @@ nv_utils.define_augroups({
         {'FileType', 'markdown', 'setlocal wrap'},
         -- {'BufWinEnter', '.sol', 'setlocal filetype=solidity'},
 
-        -- { 'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
+        { 'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
         {'BufRead', '*.sol', 'setlocal filetype=solidity'},
         {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
         -- autocmd! BufRead,BufNewFile *.{jsx,jx,js} setlocal filetype=javascript.jsx

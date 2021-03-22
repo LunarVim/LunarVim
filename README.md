@@ -139,7 +139,6 @@ Topic](https://github.com/topics/vscode-snippets)
 
 **HIGH PRIORITY**
 
-- configure vim-bookmarks
 - learn nvim-dap in depth
 - vim ult test
 - Implement what I can from this java config:
