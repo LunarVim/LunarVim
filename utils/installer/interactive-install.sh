@@ -431,6 +431,18 @@ installneovim(){
      "Archlinux")
        which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
        which yay >/dev/null && yay -Sa neovim-nightly-bin || sudo pacman -S yay && yay -Sa neovim-nightly-bin
+       if [[ "$install" ==  1 ]] then
+         if [ -d "neovim" ]; then
+           cd neovim
+         else 
+           git clone https://github.com/neovim/neovim
+           cd neovim
+         fi
+         sudo make CMAKE_BUILD_TYPE=Release install
+         cd ..
+         which nvim >/dev/null && echo "neovim install done" || installneovim
+         sudo rm -rf neovim
+       fi
        which nvim >/dev/null && echo "neovim install done" || installneovim
      ;;
      *)
@@ -695,28 +707,33 @@ luaextrapackages() {
 }
 
 goextrapackages() {
-clear
-  echo "go installation"
-  wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
-  [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-  [ -f ".zshrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
-  [ -f ".bashrc" ] && echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
-  [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
-  source ~/.profile
-  echo "efm-langserver"
-  which go > /dev/null && echo "go is installed" \
-  &&  cd /tmp/ \
-  && git clone https://github.com/mattn/efm-langserver.git \
-  && make \
-  && sudo mv efm-langserver /usr/bin/ \
-  || echo "go not found" \
-  && cd /tmp \
-  && wget https://github.com/mattn/efm-langserver/releases/download/v0.0.26/efm-langserver_v0.0.26_linux_amd64.tar.gz \
-  && tar xzf efm-langserver_*.tar.gz \
-  && cd efm-langserver_*/ \
-  && sudo mv efm-langserver /usr/bin/
-  cd
-  pause 'Press [Enter] to continue...'
+  clear
+  echo "Extra go packages ..."
+  echo "Would you install go packages ? : 'Y' "
+  read choice
+  if [[ "$choice" ==  [yY] ]]; then
+    echo "go installation"
+    wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+    [ -f ".bashrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+    [ -f ".zshrc" ] && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
+    [ -f ".bashrc" ] && echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+    [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && source ~/.zshrc
+    source ~/.profile
+    echo "efm-langserver"
+    which go > /dev/null && echo "go is installed" \
+    &&  cd /tmp/ \
+    && git clone https://github.com/mattn/efm-langserver.git \
+    && make \
+    && sudo mv efm-langserver /usr/bin/ \
+    || echo "go not found" \
+    && cd /tmp \
+    && wget https://github.com/mattn/efm-langserver/releases/download/v0.0.26/efm-langserver_v0.0.26_linux_amd64.tar.gz \
+    && tar xzf efm-langserver_*.tar.gz \
+    && cd efm-langserver_*/ \
+    && sudo mv efm-langserver /usr/bin/
+    cd
+    pause 'Press [Enter] to continue...'
+  fi
 }
 
 
