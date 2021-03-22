@@ -166,6 +166,7 @@ Topic](https://github.com/topics/vscode-snippets)
 - vim ult test
 - what is `fzy`
 - https://github.com/pwntester/octo.nvim
+- configure surround
 
 **PLUGIN BUGS**
 
