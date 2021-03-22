@@ -67,3 +67,10 @@ vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
 -- map <leader>n <Plug>(miniyank-cycle)
 -- map <leader>N <Plug>(miniyank-cycleback)
 -- ]])
+
+-- Alternate way to save
+vim.cmd('nnoremap <silent> <C-s> :w<CR>')
+-- Alternate way to quit
+vim.cmd('nnoremap <silent> <C-Q> :wq!<CR>')
+-- Use control-c instead of escape
+vim.cmd('nnoremap <silent> <C-c> <Esc>')
