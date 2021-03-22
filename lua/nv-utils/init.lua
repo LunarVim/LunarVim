@@ -37,6 +37,7 @@ nv_utils.define_augroups({
 
         { 'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
         { 'FileType', 'dashboard', 'setlocal nonumber'},
+        { 'FileType', 'dashboard', 'setlocal nocursorline'},
         -- { 'FileType', 'dashboard', 'set nonumber | autocmd WinLeave <buffer> set number'},
         {'BufRead', '*.sol', 'setlocal filetype=solidity'},
         {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
