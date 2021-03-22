@@ -140,12 +140,12 @@ Topic](https://github.com/topics/vscode-snippets)
 **HIGH PRIORITY**
 
 - learn nvim-dap in depth
-- vim ult test
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
   - setup junit tests for java
 - neovim lightbulb config
+- better vscode support
 
 
 **LOW PRIORITY**
@@ -162,10 +162,11 @@ Topic](https://github.com/topics/vscode-snippets)
 - list all binaries needed for functionality
 - html snippets in react (maybe)
 - configure kshenoy/vim-signature
+- vim ult test
 
 **PLUGIN BUGS**
 
 - spell not activated in readme Markdown
 - better autoimport
-- can't find global bianry for markdownlint
+- can't find global binary for markdownlint
 - keep and eye on indent guides plugin for thin lines
