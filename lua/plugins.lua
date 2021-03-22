@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
 
     -- Autocomplete
     use 'hrsh7th/nvim-compe'
-    use 'christianchiarulli/emmet-vim'
+    use 'mattn/emmet-vim'
     use 'hrsh7th/vim-vsnip'
     use 'xabikos/vscode-javascript'
     use 'dsznajder/vscode-es7-javascript-react-snippets'
