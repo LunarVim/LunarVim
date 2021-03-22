@@ -37,7 +37,7 @@ $HOME/.config/nvim/lua/nv-vscode/init.lua
 
 ## Clipboard Support
 
-- On Mac `pbcopy` should be builtin
+- On Mac `pbcopy` should be built-in
 
 - Ubuntu
 
@@ -147,17 +147,17 @@ Topic](https://github.com/topics/vscode-snippets)
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
   - setup junit tests for java
-- neovim lightbulb config
+- neovim light-bulb config
 - better vscode support
 
 
 **LOW PRIORITY**
 
-- look into autoinstall lsp
-- get logo
+- look into auto-install lsp
 - json config file (luajson)
-- look into emmet-ls
 - better install script, support both nvim and nvcode paths
+- get logo
+- look into emmet-ls
 - toggle virtual text diagnostics
 - configure neogit
 - list all binaries needed for functionality
@@ -171,6 +171,6 @@ Topic](https://github.com/topics/vscode-snippets)
 
 - finding files from dashboard sometimes number not set
 - spell not activated in readme Markdown
-- better autoimport
-- can't find global binary for markdownlint
+- better auto-import
+- can't find global binary for markdown-lint
 - keep and eye on indent guides plugin for thin lines
