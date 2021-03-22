@@ -116,6 +116,7 @@ return require('packer').startup(function(use)
     use 'phaazon/hop.nvim'
     use 'tpope/vim-sleuth'
     use 'sheerun/vim-polyglot'
+    use 'monaqa/dial.nvim'
 
 	-- TODO put this back when stable for indent lines
 -- 	use { 'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
