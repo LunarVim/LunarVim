@@ -140,26 +140,31 @@ Topic](https://github.com/topics/vscode-snippets)
 **HIGH PRIORITY**
 
 - learn nvim-dap in depth
-- potentially switch to dashboard
 - vim ult test
+- potentially switch to dashboard
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
   - setup junit tests for java
 - neovim lightbulb config
-- list all binaries needed for functionality
-- configure neogit
-- toggle virtual text diagnostics
 
 **LOW PRIORITY**
 
-- spell not activated in readme Markdown
-- better autoimport
-- can' find global bianry for markdownlint
-- keep and eye on indent guides plugin for thin lines
 - look into autoinstall lsp
 - get logo
 - move language servers not installed with npm to neovim local share
   location
 - json config file (luajson)
+- look into emmet-ls
 - better install script, support both nvim and nvcode paths
+- toggle virtual text diagnostics
+- configure neogit
+- list all binaries needed for functionality
+- html snippets in react (maybe)
+
+**PLUGIN BUGS**
+
+- spell not activated in readme Markdown
+- better autoimport
+- can't find global bianry for markdownlint
+- keep and eye on indent guides plugin for thin lines
