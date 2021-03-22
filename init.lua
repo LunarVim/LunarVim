@@ -36,6 +36,7 @@ else
   require('nv-gitblame')
   require('nv-galaxyline')
   require('nv-nvim-peekup')
+  require('nv-dashboard')
   require('nv-dial')
 
   -- Which Key (Hope to replace with Lua plugin someday)

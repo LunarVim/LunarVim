@@ -139,14 +139,15 @@ Topic](https://github.com/topics/vscode-snippets)
 
 **HIGH PRIORITY**
 
+- configure vim-bookmarks
 - learn nvim-dap in depth
 - vim ult test
-- potentially switch to dashboard
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
   - setup junit tests for java
 - neovim lightbulb config
+
 
 **LOW PRIORITY**
 
@@ -161,6 +162,7 @@ Topic](https://github.com/topics/vscode-snippets)
 - configure neogit
 - list all binaries needed for functionality
 - html snippets in react (maybe)
+- configure kshenoy/vim-signature
 
 **PLUGIN BUGS**
 
