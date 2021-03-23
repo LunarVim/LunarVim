@@ -165,15 +165,15 @@ help_list() {
   clear
   echo "How to use
 
-  - Launch ./install-nv-code-v2.sh without arguments intercatif menu
+  - Launch ./interactive-install.sh without arguments intercatif menu
   
   - You can also download script : 
-    wget https://raw.githubusercontent.com/mjcc30/nvcode/master/utils/installer/install-nv-code-v2.sh
-    Add execution : chmod +x install-nv-code-v2.sh
+    wget -q https://raw.githubusercontent.com/mjcc30/nvcode/interactive-install/utils/installer/interactive-install.sh
+    Add execution : chmod +x interactive-install.sh
     And passe arguments like this :
-    ./install-nv-code-v2.sh [-h]
+    ./interactive-install.sh [-h]
     or
-    ./install-nv-code-v2.sh [--help]
+    ./interactive-install.sh [--help]
 
   Options:
     -h, --help
@@ -504,7 +504,7 @@ cloneconfig() {
     case $option in
       1)
         cd ~/.config
-        [ -d "nvim" ] && asktodelnvcode
+        [ -d "nvim" ] && asktodelnvim
         echo "Cloning NVCode configuration"
         git --version > /dev/null && git clone $URL ~/.config/nvim || installgit
         cd
@@ -536,7 +536,7 @@ cloneconfig() {
       ;;
       2)
         cd ~/.config
-        [ -d "nvim" ] && asktodelnvcode
+        [ -d "nvim" ] && asktodelnvim
         git --version > /dev/null && git clone $URL ~/.config/nvim || installgit
         cd nvim
         git checkout stable-snapshot-Native-LSP-1
@@ -548,7 +548,7 @@ cloneconfig() {
       ;;
       3)
         cd ~/.config
-        [ -d "nvim" ] && asktodelnvcode
+        [ -d "nvim" ] && asktodelnvim
         git --version > /dev/null && git clone $URL ~/.config/nvim || installgit
         cd nvim
         git checkout stable-snapshot-CoC
