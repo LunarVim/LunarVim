@@ -31,25 +31,17 @@ local shellcheck = {
     lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
 }
 
-local shfmt = {
-  formatCommand = 'shfmt -ci -s -bn',
-  formatStdin = true
-}
+local shfmt = {formatCommand = 'shfmt -ci -s -bn', formatStdin = true}
 
 local markdownlint = {
     -- TODO default to global lintrc
     -- lintcommand = 'markdownlint -s -c ./markdownlintrc',
     lintCommand = 'markdownlint -s',
     lintStdin = true,
-    lintFormats = { '%f:%l %m', '%f:%l:%c %m', '%f: %l: %m' }
+    lintFormats = {'%f:%l %m', '%f:%l:%c %m', '%f: %l: %m'}
 }
 
-local markdownPandocFormat = {
-  formatCommand = 'pandoc -f markdown -t gfm -sp --tab-stop=2',
-  formatStdin = true
-}
-
-
+local markdownPandocFormat = {formatCommand = 'pandoc -f markdown -t gfm -sp --tab-stop=2', formatStdin = true}
 
 require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
@@ -63,14 +55,14 @@ require"lspconfig".efm.setup {
             -- javascriptreact = {prettier, eslint},
             -- javascript = {prettier, eslint},
             javascriptreact = {prettier},
-            javascript = {prettier},
+            javascript = {prettier_global},
             sh = {shellcheck, shfmt},
             html = {prettier_global},
             css = {prettier_global},
             json = {prettier_global},
             yaml = {prettier_global},
             -- markdown = {markdownPandocFormat, markdownlint},
-            markdown = {markdownPandocFormat},
+            markdown = {markdownPandocFormat}
         }
     }
 }
