@@ -32,6 +32,7 @@ require('nv-dashboard')
 require('nv-dial')
 require('nv-nvim-dap')
 require('nv-lightbulb')
+-- require('nv-lspinstall')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/.config/nvim/vimscript/nv-whichkey/init.vim')
@@ -52,4 +53,3 @@ require('lsp.docker-ls')
 require('lsp.html-ls')
 require('lsp.efm-general-ls')
 require('lsp.virtual_text')
-
