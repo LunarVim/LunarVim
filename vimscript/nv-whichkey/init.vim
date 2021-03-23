@@ -85,6 +85,19 @@ let g:which_key_map.b = {
       \ '?' : ['Buffers'                , 'fzf-buffer'],
       \ }
 
+" d is for debug
+let g:which_key_map.d = {
+      \ 'name' : '+debug' ,
+      \ 'b' : ['DebugToggleBreakpoint '        , 'toggle breakpoint'],
+      \ 'c' : ['DebugContinue'                 , 'continue'],
+      \ 'i' : ['DebugStepInto'                 , 'step into'],
+      \ 'o' : ['DebugStepOver'                 , 'step over'],
+      \ 'r' : ['DebugToggleRepl'               , 'toggle repl'],
+      \ 's' : ['DebugStart'                    , 'start'],
+      \ }
+      " \ 'O' : ['DebugStepOut'                  , 'next-buffer'],
+      " \ 'S' : ['DebugGetSession '              , 'fzf-buffer'],
+
 
 " F is for fold
 let g:which_key_map.F = {
