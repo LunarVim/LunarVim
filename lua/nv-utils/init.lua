@@ -21,35 +21,27 @@ function nv_utils.define_augroups(definitions) -- {{{1
         vim.cmd('augroup END')
     end
 end
+
 nv_utils.define_augroups({
     _general_settings = {
-        {
-            'TextYankPost', '*',
-            'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'
-        }, {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
+        {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
+        {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
         {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'},
-        {'FileType', 'markdown', 'setlocal wrap'},
-        {'FileType', 'markdown', 'setlocal spell'},
-        -- {'BufWinEnter', '.sol', 'setlocal filetype=solidity'},
+        {'FileType', 'markdown', 'setlocal wrap'}, {'FileType', 'markdown', 'setlocal spell'},
+        {'BufWinEnter', '.sol', 'setlocal filetype=solidity'},
 
-        { 'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
-        -- { 'FileType', '*', 'setlocal number'},
-        -- { 'FileType', 'NeogitStatus', 'setlocal nonumber'},
-        -- { 'FileType', 'dashboard', 'setlocal nonumber'},
-        -- { 'FileType', 'qf', 'setlocal nonumber'},
-        -- { 'FileType', 'floaterm', 'setlocal nonumber'},
-        -- { 'FileType', 'NvimTree', 'setlocal nonumber'},
-        -- { 'FileType', 'rnvimr', 'setlocal nonumber'},
-        -- { 'FileType', 'TelescopePrompt', 'setlocal nonumber'},
-        -- { 'FileType', 'dashboard', 'setlocal nocursorline'},
-        -- { 'FileType', 'dashboard', 'set nonumber | autocmd WinLeave <buffer> set number'},
+        {'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
         {'BufRead', '*.sol', 'setlocal filetype=solidity'},
-        {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
-        -- autocmd! BufRead,BufNewFile *.{jsx,jx,js} setlocal filetype=javascript.jsx
+        {'BufNewFile', '*.sol', 'setlocal filetype=solidity'},
+        {'BufWritePre', '*.jsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
+        {'BufWritePre', '*.js', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
+        {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
+        {'BufWritePre', '*.lua', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
+        {'BufWritePre', '*.json', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
         -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     }
@@ -214,12 +206,14 @@ end
 
 -- misc
 function nv_utils.file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
+    local f = io.open(name, "r")
+    if f ~= nil then
+        io.close(f)
+        return true
+    else
+        return false
+    end
 end
-
--- autoformat
--- autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 return nv_utils
 
