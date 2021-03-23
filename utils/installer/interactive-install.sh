@@ -504,16 +504,16 @@ cloneconfig() {
     case $option in
       1)
         cd ~/.config
-        [ -d "nvcode" ] && asktodelnvcode
+        [ -d "nvim" ] && asktodelnvcode
         echo "Cloning NVCode configuration"
-        git --version > /dev/null && git clone $URL ~/.config/nvcode || installgit
+        git --version > /dev/null && git clone $URL ~/.config/nvim || installgit
         cd
         [ -a ".local/share/nvim/site/pack/packer/start/packer.nvim" ] && echo 'packer already installed' || git clone https://github.com/wbthomason/packer.nvim .local/share/nvim/site/pack/packer/start/packer.nvim
-        [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.bashrc
+        [ -f ".bashrc" ] && echo 'export PATH=$HOME/.config/nvim/utils/bin:$PATH' >> ~/.bashrc
         [ -f ".bashrc" ] && source ~/.bashrc
-        [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >> ~/.zshrc
+        [ -f ".zshrc" ] &&  echo 'export PATH=$HOME/.config/nvim/utils/bin:$PATH' >> ~/.zshrc
         [ -f ".zshrc" ] && source ~/.zshrc
-        cd $HOME/.config/nvcode
+        cd $HOME/.config/nvim
         mv init.lua init.lua.tmp # backup init.Lua
         mv lua/plugins.lua utils/ # moving plugins.lua from lua folder to utils folder
         mkdir utils/tmp # create tmp folder
@@ -528,8 +528,6 @@ cloneconfig() {
         rm init.lua
         mv init.lua.tmp init.lua
         sed -i "s/-- vim/vim/" init.lua
-        sed -i "s/nvim\/vimscript\/nv-whichkey/nvcode\/vimscript\/nv-whichkey/" init.lua
-        sed -i "s/nvim\/vimscript\/functions/nvcode\/vimscript\/functions/" init.lua
         nvim -es -u init.lua -c :PackerInstall > /dev/null
         echo "Nvcode install done"
         echo "Please run 'nv' and do :PackerInstall command"
@@ -774,18 +772,6 @@ installnerdfont(){
 ## ----------------------------------
 pipinstallueberzug() {
   which pip3 > /dev/null && pip3 install ueberzug || echo "Not installing ueberzug => pip not found"
-}
-
-asktodelnvcode(){
-  echo "nvcode folder found"
-  echo -n "Would you like to delete folder now (y/n)? "
-  read answer
-  [ "$answer" != "${answer#[Yy]}" ] && delnvcode
-}
-
-delnvcode(){
- sudo rm -rf $HOME/.config/nvcode
- echo "delete nvcode folder done"
 }
 
 asktodelnvim(){
