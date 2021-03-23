@@ -56,7 +56,6 @@ vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silen
 -- Alternative ways
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-q>', ':q!<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-c>', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-w>', ':bdelete<CR>', { noremap = true, silent = true })
 
 
