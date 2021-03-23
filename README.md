@@ -60,21 +60,10 @@ $HOME/.config/nvim/vimscript/nv-vscode/init.vim
 
 ## LSP
 
-Some example language servers, if you just install them they will work
-with this config
+To install a supported language server:
 
-``` bash
-npm i -g pyright
-npm i -g bash-language-server
-npm install -g vscode-css-languageserver-bin
-npm install -g dockerfile-language-server-nodejs
-npm install -g graphql-language-service-cli
-npm install -g vscode-html-languageserver-bin
-npm install -g typescript typescript-language-server
-npm install -g vscode-json-languageserver
-npm install -g vim-language-server
-npm install -g yaml-language-server
-npm install markdownlint --save-dev
+```
+:LspInstall <your_language_server>
 ```
 
 For a more in depth LSP support:
@@ -104,26 +93,25 @@ pynvim
 neovim-remote
 ```
 
+## Formatters and Linters
+
 **Python**
 
 ``` bash
-pyright
-flake8
-yapf
+pip3 install --user flake8
+pip3 install --user yapf
 ```
 
 **Lua**
 
 ``` bash
-ninja
-lua-format
-sumneko-lua
+luarocks install --server=https://luarocks.org/dev luaformatter
 ```
 
 **Yaml, Json, Javascript, HTML, CSS**
 
 ``` bash
-prettier
+npm install -g prettier
 ```
 
 **Markdown**
