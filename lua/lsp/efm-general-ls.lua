@@ -15,7 +15,7 @@ local luaFormat = {
 -- JavaScript/React/TypeScript
 local prettier = {formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}", formatStdin = true}
 
-local prettier_yaml = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
+local prettier_global = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
 
 local eslint = {
     lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
@@ -65,10 +65,10 @@ require"lspconfig".efm.setup {
             javascriptreact = {prettier},
             javascript = {prettier},
             sh = {shellcheck, shfmt},
-            html = {prettier},
-            css = {prettier},
-            json = {prettier},
-            yaml = {prettier_yaml},
+            html = {prettier_global},
+            css = {prettier_global},
+            json = {prettier_global},
+            yaml = {prettier_global},
             -- markdown = {markdownPandocFormat, markdownlint},
             markdown = {markdownPandocFormat},
         }
