@@ -150,6 +150,7 @@ To set up your particular debugger, look here:
 
 - better install script, simple install just support `~/.config/nvim`
   path
+- add badges to readme
 
 **LOW PRIORITY**
 
