@@ -4,7 +4,7 @@ local gl = require('galaxyline')
 local colors = {
     bg = '#2E2E2E',
     yellow = '#DCDCAA',
-	dark_yellow = '#D7BA7D',
+    dark_yellow = '#D7BA7D',
     cyan = '#4EC9B0',
     green = '#608B4E',
     light_green = '#B5CEA8',
@@ -15,9 +15,9 @@ local colors = {
     grey = '#858585',
     blue = '#569CD6',
     vivid_blue = '#4FC1FF',
-	light_blue = '#9CDCFE',
+    light_blue = '#9CDCFE',
     red = '#D16969',
-	error_red = '#F44747'
+    error_red = '#F44747'
 }
 local condition = require('galaxyline.condition')
 local gls = gl.section
@@ -55,8 +55,8 @@ gls.left[1] = {
         highlight = {colors.red, colors.bg}
     }
 }
-print(vim.fn.getbufvar(0,'ts'))
-vim.fn.getbufvar(0,'ts')
+print(vim.fn.getbufvar(0, 'ts'))
+vim.fn.getbufvar(0, 'ts')
 
 gls.left[2] = {
     GitIcon = {
@@ -106,35 +106,13 @@ gls.left[6] = {
 }
 
 gls.right[1] = {
-    DiagnosticError = {
-        provider = 'DiagnosticError',
-        icon = '  ',
-        highlight = {colors.error_red, colors.bg}
-    }
+    DiagnosticError = {provider = 'DiagnosticError', icon = '  ', highlight = {colors.error_red, colors.bg}}
 }
-gls.right[2] = {
-    DiagnosticWarn = {
-        provider = 'DiagnosticWarn',
-        icon = '  ',
-        highlight = {colors.orange, colors.bg}
-    }
-}
+gls.right[2] = {DiagnosticWarn = {provider = 'DiagnosticWarn', icon = '  ', highlight = {colors.orange, colors.bg}}}
 
-gls.right[3] = {
-    DiagnosticHint = {
-        provider = 'DiagnosticHint',
-        icon = '  ',
-        highlight = {colors.blue, colors.bg}
-    }
-}
+gls.right[3] = {DiagnosticHint = {provider = 'DiagnosticHint', icon = '  ', highlight = {colors.blue, colors.bg}}}
 
-gls.right[4] = {
-    DiagnosticInfo = {
-        provider = 'DiagnosticInfo',
-        icon = '  ',
-        highlight = {colors.blue, colors.bg}
-    }
-}
+gls.right[4] = {DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.blue, colors.bg}}}
 
 gls.right[5] = {
     ShowLspClient = {
@@ -170,7 +148,7 @@ gls.right[7] = {
 gls.right[8] = {
     Tabstop = {
         provider = function()
-            return "Spaces: " .. vim.api.nvim_buf_get_option(0, "tabstop") .. " "
+            return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
         end,
         condition = condition.hide_in_width,
         separator = ' ',
@@ -190,13 +168,13 @@ gls.right[9] = {
 }
 
 gls.right[10] = {
-  FileEncode = {
-    provider = 'FileEncode',
-    condition = condition.hide_in_width,
-    separator = ' ',
-    separator_highlight = {'NONE',colors.bg},
-    highlight = {colors.grey, colors.bg}
-  }
+    FileEncode = {
+        provider = 'FileEncode',
+        condition = condition.hide_in_width,
+        separator = ' ',
+        separator_highlight = {'NONE', colors.bg},
+        highlight = {colors.grey, colors.bg}
+    }
 }
 
 gls.right[11] = {
@@ -210,7 +188,6 @@ gls.right[11] = {
     }
 }
 
-
 gls.short_line_left[1] = {
     BufferType = {
         provider = 'FileTypeName',
@@ -221,13 +198,7 @@ gls.short_line_left[1] = {
 }
 
 gls.short_line_left[2] = {
-    SFileName = {
-        provider = 'SFileName',
-        condition = condition.buffer_not_empty,
-        highlight = {colors.grey, colors.bg}
-    }
+    SFileName = {provider = 'SFileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
 }
 
-gls.short_line_right[1] = {
-    BufferIcon = {provider = 'BufferIcon', highlight = {colors.grey, colors.bg}}
-}
+gls.short_line_right[1] = {BufferIcon = {provider = 'BufferIcon', highlight = {colors.grey, colors.bg}}}
