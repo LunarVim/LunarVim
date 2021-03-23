@@ -153,6 +153,7 @@ To set up your particular debugger, look here:
 
 **LOW PRIORITY**
 
+- move to ultisnips
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
