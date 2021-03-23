@@ -5,6 +5,12 @@
 If you are looking for my old configs checkout the two snapshot branches
 on this repo, there is one for CoC and one for Native LSP
 
+## Install In One Command!
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/utils/installer/install.sh)
+```
+
 ## Get the latest version of Neovim
 
 ``` bash
