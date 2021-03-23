@@ -27,6 +27,7 @@ return require('packer').startup(function(use)
     use 'onsails/lspkind-nvim'
     use 'kosayoda/nvim-lightbulb'
     use 'mfussenegger/nvim-jdtls'
+    use 'kabouzeid/nvim-lspinstall'
 
     -- Debugging
     use 'mfussenegger/nvim-dap'

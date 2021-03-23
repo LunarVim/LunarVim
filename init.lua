@@ -1,6 +1,7 @@
 -- General mappings
 require('plugins')
 require('nv-utils')
+require('nv-globals')
 require('settings')
 require('keymappings')
 require('colorscheme')

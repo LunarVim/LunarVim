@@ -35,8 +35,8 @@ nv_utils.define_augroups({
         {'BufWinEnter', '.sol', 'setlocal filetype=solidity'},
 
         {'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
-        {'BufRead', '*.sol', 'setlocal filetype=solidity'},
-        {'BufNewFile', '*.sol', 'setlocal filetype=solidity'},
+        {'BufRead', '*.sol', 'setlocal filetype=solidity'}, {'BufNewFile', '*.sol', 'setlocal filetype=solidity'},
+
         {'BufWritePre', '*.jsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
         {'BufWritePre', '*.js', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
         {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'},
