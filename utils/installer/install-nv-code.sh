@@ -13,7 +13,9 @@ installnodeubuntu() {
 }
 
 moveoldnvim() {
-	echo "Not installing NVCode: \n Please move your ~/.config/nvim folder before installing"
+	echo "Not installing NVCode"
+	echo "Please move your ~/.config/nvim folder before installing"
+	exit
 }
 
 installnodearch() {
@@ -119,6 +121,9 @@ installextrapackages() {
 # Welcome
 echo 'Installing NVCode'
 
+# move old nvim directory if it exists
+[ -d "$HOME/.config/nvim" ] && moveoldnvim
+
 # install pip
 which pip3 >/dev/null && echo "pip installed, moving on..." || asktoinstallpip
 
@@ -128,8 +133,6 @@ which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
 # install pynvim
 pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
 
-# move old nvim directory if it exists
-[ -d "$HOME/.config/nvim" ] && moveoldnvim
 
 if [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
     echo 'packer already installed'
