@@ -515,12 +515,11 @@ cloneconfig() {
         [ -f ".zshrc" ] && source ~/.zshrc
         cd $HOME/.config/nvim
         mv init.lua init.lua.tmp # backup init.Lua
+	echo "require('plugins')" >> init.lua
         mv lua/plugins.lua utils/ # moving plugins.lua from lua folder to utils folder
         mkdir utils/tmp # create tmp folder
         mv lua/* utils/tmp/ # moving all lua file from lua folder to tmp folder
         mv utils/plugins.lua lua/  # plugins.lua to lua folder
-        echo "vim.cmd('set rtp+=~/.config/nvcode')" > init.lua
-        echo "require('plugins')" >> init.lua
         nvim -es -u init.lua -c :PackerInstall > /dev/null
 	    nvim -es -u init.lua -c :PackerSync > /dev/null
 	    echo
