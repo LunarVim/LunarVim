@@ -150,6 +150,8 @@ To set up your particular debugger, look here:
 
 **HIGH PRIORITY**
 
+Move user config into `config.lua`
+
 From here I will update for bug fixes and implement low priority
 features when I have time
 
@@ -175,7 +177,5 @@ features when I have time
 **PLUGIN BUGS**
 
 - html snippets are broken with vsnip
-- finding files from dashboard sometimes number not set (using startify
-  for now)
 - keep and eye on indent guides plugin for thin lines
 - better auto-import (jsx)

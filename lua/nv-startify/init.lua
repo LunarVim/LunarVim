@@ -22,7 +22,7 @@ vim.api.nvim_exec(
     true)
 
 vim.api.nvim_exec(
-    'let startify_bookmarks = [ { \'b\': \'~/Blog\' }, { \'i\': \'~/.config/nvim/init.lua\' }, { \'z\': \'~/.zshrc\' }, { \'r\': \'.config/nvim/README.md\' }]',
+    'let startify_bookmarks = [ { \'b\': \'~/Blog\' }, { \'c\': \'~/.config/nvim/lua/config.lua\' }, { \'z\': \'~/.zshrc\' }, { \'r\': \'~/.config/nvim/README.md\' }]',
     true)
 
 vim.cmd([[
