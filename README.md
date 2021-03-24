@@ -165,11 +165,10 @@ To set up your particular debugger, look here:
 - https://github.com/pwntester/octo.nvim
 - configure surround
 - move to ultisnips
-- keep and eye on indent guides plugin for thin lines
 
 **PLUGIN BUGS**
 
 - html snippets are broken with vsnip
-- finding files from dashboard sometimes number not set
-
+- finding files from dashboard sometimes number not set (using startify for now)
+- keep and eye on indent guides plugin for thin lines
 - better auto-import (jsx)
