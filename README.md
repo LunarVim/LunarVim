@@ -146,33 +146,30 @@ To set up your particular debugger, look here:
 
 **HIGH PRIORITY**
 
-- better install script, simple install just support `~/.config/nvim`
-  path
+- list all binaries needed for formatters and linters
 - add badges to readme
+- json config file (luajson)
 
 **LOW PRIORITY**
 
-- move to ultisnips
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
   - setup junit tests for java
-- look into auto-install lsp
-- json config file (luajson)
-- get logo
 - look into emmet-ls
 - toggle virtual text diagnostics
 - configure neogit
-- list all binaries needed for functionality
-- html snippets in react (maybe)
 - configure kshenoy/vim-signature
 - vim ult test
 - what is `fzy`
 - https://github.com/pwntester/octo.nvim
 - configure surround
+- move to ultisnips
+- keep and eye on indent guides plugin for thin lines
 
 **PLUGIN BUGS**
 
+- html snippets are broken with vsnip
 - finding files from dashboard sometimes number not set
+
 - better auto-import (jsx)
-- keep and eye on indent guides plugin for thin lines
