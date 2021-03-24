@@ -9,7 +9,7 @@ on this repo, there is one for CoC and one for Native LSP
 
 Make sure you have the newest version of Neovim
 
-```bash
+``` bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/utils/installer/install.sh)
 ```
 
@@ -66,9 +66,13 @@ $HOME/.config/nvim/vimscript/nv-vscode/init.vim
 
 To install a supported language server:
 
+``` bash
+  :LspInstall <your_language_server>
 ```
-:LspInstall <your_language_server>
-```
+
+The only Language servers supported this way currently are `Python`,
+`Javascript` and `Lua` the rest you will need to globally install and
+configure under `lua/lsp/<your_lang.lua>`
 
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
@@ -169,6 +173,7 @@ To set up your particular debugger, look here:
 **PLUGIN BUGS**
 
 - html snippets are broken with vsnip
-- finding files from dashboard sometimes number not set (using startify for now)
+- finding files from dashboard sometimes number not set (using startify
+  for now)
 - keep and eye on indent guides plugin for thin lines
 - better auto-import (jsx)
