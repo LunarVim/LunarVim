@@ -150,12 +150,14 @@ To set up your particular debugger, look here:
 
 **HIGH PRIORITY**
 
-- list all binaries needed for formatters and linters
-- add badges to readme
-- json config file (luajson)
+From here I will update for bug fixes and implement low priority
+features when I have time
 
 **LOW PRIORITY**
 
+- list all binaries needed for formatters and linters
+- add badges to readme
+- json config file (luajson)
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
