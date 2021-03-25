@@ -92,6 +92,7 @@ asktoinstallpip() {
 
 installonmac() {
 	brew install ripgrep fzf ranger
+	npm install -g tree-sitter-cli
 }
 
 pipinstallueberzug() {
@@ -103,12 +104,14 @@ installonubuntu() {
 	sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
 	pip3 install ueberzug
 	pip3 install neovim-remote
+	npm install -g tree-sitter-cli
 }
 
 installonarch() {
 	sudo pacman -S install ripgrep fzf ranger
 	which yay >/dev/null && yay -S python-ueberzug-git || pipinstallueberzug
 	pip3 install neovim-remote
+	npm install -g tree-sitter-cli
 }
 
 installextrapackages() {
