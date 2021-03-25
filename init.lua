@@ -33,6 +33,7 @@ require('nv-dashboard')
 require('nv-dial')
 require('nv-nvim-dap')
 require('nv-lightbulb')
+require('nv-indentline')
 -- require('nv-lspinstall')
 
 -- Which Key (Hope to replace with Lua plugin someday)

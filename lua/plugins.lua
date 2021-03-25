@@ -116,15 +116,8 @@ return require('packer').startup(function(use)
     use 'blackcauldron7/surround.nvim'
 
     -- TODO put this back when stable for indent lines
-    -- 	use { 'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
-    -- 	vim.g.indent_blankline_space_char = ' '
-    -- 	vim.g.indent_blankline_buftype_exclude = {'terminal'}
-    -- 	vim.g.indent_blankline_filetype_exclude = {'help', 'startify'}
-    -- 	vim.g.indent_blankline_char = '▏'
-    -- 	vim.g.indent_blankline_use_treesitter=true
-    -- use 'AndrewRadev/tagalong.vim'
-    -- use 'alvan/vim-closetag'
-    -- use 'RRethy/vim-illuminate'
+    	use { 'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    	-- vim.g.indent_blankline_space_char = ''
     -- use 'b3nj5m1n/kommentary'
     -- use {
     --     'glacambre/firenvim',
@@ -132,7 +125,6 @@ return require('packer').startup(function(use)
     --         vim.fn['firenvim#install'](1)
     --     end
     -- }
-    -- use 'tpope/vim-sleuth'
     -- use 'glepnir/dashboard-nvim'
     -- use 'mhinz/vim-startify'
     -- use 'cstrap/python-snippets'

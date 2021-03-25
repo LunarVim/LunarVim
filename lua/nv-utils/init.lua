@@ -34,9 +34,8 @@ nv_utils.define_augroups({
         {'FileType', 'markdown', 'setlocal wrap'}, {'FileType', 'markdown', 'setlocal spell'},
         {'BufWinEnter', '.sol', 'setlocal filetype=solidity'},
 
-  -- "       \ nocursorline
         -- seems to be nobuflisted that makes my stuff disapear will do more testing
-        {'FileType', 'dashboard', 'setlocal noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= '},
+        {'FileType', 'dashboard', 'setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= '},
         {'FileType', 'dashboard', 'set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2'},
         {'BufRead', '*.sol', 'setlocal filetype=solidity'}, {'BufNewFile', '*.sol', 'setlocal filetype=solidity'},
 
@@ -57,7 +56,6 @@ nv_utils.define_augroups({
 
 function nv_utils.add_to_workspace_folder()
     vim.lsp.buf.add_workspace_folder()
-
 end
 
 function nv_utils.clear_references()
