@@ -151,6 +151,8 @@ To set up your particular debugger, look here:
 **HIGH PRIORITY**
 
 Move user config into `config.lua`
+ts-comment string for react
+update lang-servers to use LspInstall
 
 From here I will update for bug fixes and implement low priority
 features when I have time
@@ -159,7 +161,6 @@ features when I have time
 
 - list all binaries needed for formatters and linters
 - add badges to readme
-- json config file (luajson)
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
@@ -172,10 +173,8 @@ features when I have time
 - what is `fzy`
 - https://github.com/pwntester/octo.nvim
 - configure surround
-- move to ultisnips
+- maybe incorporate ultisnips
 
 **PLUGIN BUGS**
 
 - html snippets are broken with vsnip
-- keep and eye on indent guides plugin for thin lines
-- better auto-import (jsx)

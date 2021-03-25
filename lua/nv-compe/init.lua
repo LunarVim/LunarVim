@@ -23,9 +23,10 @@ require'compe'.setup {
         nvim_lua = {kind = "  "},
         spell = {kind = "  "},
         tags = false,
-        snippets_nvim = {kind = "  "},
+        -- snippets_nvim = {kind = "  "},
+        -- ultisnips = {kind = "  "},
         treesitter = {kind = "  "},
-        emoji = {kind = " ﲃ "}
+        emoji = {kind = " ﲃ ", filetypes={"markdown"}}
         -- for emoji press : (idk if that in compe tho)
     }
 }
