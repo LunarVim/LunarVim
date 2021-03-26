@@ -33,13 +33,13 @@ function findarch() {
 findarch
 
 ## ----------------------------------
-# #2: Constant
+# #2: Constant of the script
 ## ----------------------------------
 args=("$@")
 URL="https://github.com/ChristianChiarulli/nvcode.git"
 install=0
 ## ----------------------------------
-# #3: Colors constant
+# #3: Colors constant for menu
 ## ----------------------------------
 GREEN='\e[32m'
 BLUE='\e[34m'
@@ -48,7 +48,7 @@ RED='\033[0;41;30m'
 STD='\033[0;0;39m'
 
 ## ----------------------------------
-# #4: Colors fonctions
+# #4: Colors fonctions for menu
 ## ----------------------------------
 ColorGreen(){
 	echo -ne $GREEN$1$NOCOLOR
@@ -73,20 +73,32 @@ parse_options() {
       help_list
       exit
       ;;
-    -u|--update)
-      update
+    -c|--check)
+      checknvcodedeps
       ;;
-    -i|--init)
-      freshInstall
+    -e|--extra)
+      installnerdfont
+      ;;
+    -f|--font)
+      installnerdfont
+      ;;
+    -g|--git)
+      installgit
       ;;
     -n|--node)
       installnode
       ;;
-    -e|--extra)
-      installextrapackages
+    -p|--pip)
+      installpip
       ;;
-    -f|--font)
-      installnerdfont
+    -u|--update)
+      update
+      ;;
+    -nc|--nvcode)
+      cloneconfig
+      ;;
+    -nv|--nvim)
+      installneovim
       ;;
     *)
       # CALL MENU
@@ -95,7 +107,7 @@ parse_options() {
 }
 
 # -----------------------------------
-# Menu - infinite loop for menu
+# Menu - infinite loop to display menu
 # ------------------------------------
 menu(){
 clear
@@ -122,8 +134,11 @@ show_menus(){
  |  / /|  / | |/ / /___/ /_/ // /_/ /  __/  |
  | /_/ |_/  |___/\\\____/\___/\\\__,_/\\\___/  |
  |__________________________________________|
+ 
+   This script might be under construction, 
+     but you can still modify as you want
 
-  $(ColorGreen 'i)') Init : Fresh install of Nvcode
+  $(ColorGreen 'i)') Check : Check dependencies for NVCODE
   $(ColorGreen '1)') Help : see commands
   $(ColorGreen '2)') Update : Update your pc
   $(ColorGreen '3)') Nodejs : Install Nodejs
@@ -137,13 +152,13 @@ show_menus(){
 }
 
 # -----------------------------------
-# Menu - Choice
+# Menu - Choice for 
 # ------------------------------------
 read_options(){
  local option
-	  read -p "$(ColorBlue 'Choose option:') " option
+ read -p "$(ColorBlue 'Choose option:') " option
     case $option in
-      i) freshInstall ; menu ;;
+      c) checknvcodedeps ; menu ;;
       1) help_list ; menu ;;
       2) update ; menu ;;
       3) installnode ; menu ;;
@@ -159,7 +174,7 @@ read_options(){
 }
 
 # -----------------------------------
-# Menu - Help
+# Menu - Help list
 # ------------------------------------
 help_list() {
   clear
@@ -176,12 +191,26 @@ help_list() {
     ./interactive-install.sh [--help]
 
   Options:
+    -c, --check
+      Run fCheck dependencies for NVCODE
+    -e, --extra
+      Run Extra packages installation
+    -f, --font
+      Run Nerd-font installation
+    -g, --git
+      Run Git installation
     -h, --help
       see commands
-    -i, --init
-      Run fresh Nvcode installation
     -n, --node
       Run Node installation
+    -p, --pip
+      Run Git installation
+    -u, --update
+      Run Update
+    -nc, --nvcode
+      Run nvcode installation
+    -nv, --nvim
+      Run nvim installation
     "
     pause 'Press [Enter] to continue...'
 }
@@ -189,17 +218,15 @@ help_list() {
 # -----------------------------------
 # #6: Script functions
 # ------------------------------------
-freshInstall(){
+checknvcodedeps(){
   clear
   echo
-  echo " Welcome to fresh installation of NVCODE  !!!" 
+  echo " Check dependencies for NVCODE  " 
   echo "Would you start ? : 'Y' "
   read choice
   if [[ "$choice" ==  [yY] ]]; then
-    update
     which node > /dev/null && echo "node installed, moving on..." || installnode
     which pip3 > /dev/null && echo "pip installed, moving on..." || installpip
-    installdepsforneovim
     nvim -v | grep v0.5 > /dev/null && echo "nvim 0.5 installed, moving on..." || installneovim
     pip3 list | grep pynvim > /dev/null && echo "pynvim installed, moving on..." || pip3 install pynvim --user
     if [[ "$ARCH" ==  "Archlinux" ]]; then
@@ -208,8 +235,6 @@ freshInstall(){
       npm list -g tree-sitter-cli > /dev/null && echo "tree-sitter-cli node module installed, moving on..." || sudo npm i -g tree-sitter-cli --unsafe-perm
     fi
     npm list -g neovim > /dev/null && echo "neovim node module istalled, moving on..." || sudo npm i -g neovim
-    installextrapackages
-    cloneconfig
   fi
   exec bash
 }
@@ -292,7 +317,11 @@ installpip() {
   if [[ "$choice" ==  [yY] ]]; then
     case "${ARCH}" in
       "Ubuntu")
-        sudo apt-get install --fix-broken --assume-yes python3-pip -y
+        which python3 > /dev/null && curl -O https://bootstrap.pypa.io/get-pip.py || sudo apt-get install python3 -y
+        python3 get-pip.py --user
+        export PATH=.local/bin:$PATH
+        pip install --upgrade pip
+	rm get-pip.py
       ;;
       "Darwin")
         sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -431,7 +460,7 @@ installneovim(){
      "Archlinux")
        which cmake > /dev/null && echo "cmake installed, moving on..." || installdepsforneovim
        which yay >/dev/null && yay -Sa neovim-nightly-bin || sudo pacman -S yay && yay -Sa neovim-nightly-bin
-       if [[ "$install" ==  1 ]] then
+       if [[ "$install" ==  1 ]]; then
          if [ -d "neovim" ]; then
            cd neovim
          else 
@@ -803,4 +832,4 @@ listloop(){
 ## ----------------------------------
 # #8: Fonction launch by the script
 ## ----------------------------------
-parse_options $@
+parse_options $@ # run the parse_options function ( $@ is for an argument if you want to add one )
