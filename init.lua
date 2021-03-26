@@ -42,6 +42,7 @@ vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
 
 -- LSP
 require('lsp')
+require('lsp.clangd')
 require('lsp.lua-ls')
 require('lsp.bash-ls')
 require('lsp.js-ts-ls')
