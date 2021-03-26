@@ -61,7 +61,7 @@ $HOME/.config/nvim/vimscript/nv-vscode/init.vim
     ```bash
     sudo pacman -S xsel
     ```
-    
+
 - WSL2
 
     Make sure ~/bin is in your path in this case.
@@ -176,13 +176,13 @@ features when I have time
 - look into emmet-ls
 - toggle virtual text diagnostics
 - configure neogit
-- configure kshenoy/vim-signature
 - vim ult test
 - what is `fzy`
 - https://github.com/pwntester/octo.nvim
 - configure surround
 - maybe incorporate ultisnips
 - switch back to `nvim-autopairs` when/if it doesn't break snippets 
+- Implement this for typescript https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
 
 **PLUGIN BUGS**
 

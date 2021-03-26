@@ -117,6 +117,9 @@ return require('packer').startup(function(use)
     use 'junegunn/goyo.vim'
     use 'andymass/vim-matchup'
     use 'cohama/lexima.vim'
+    use 'MattesGroeger/vim-bookmarks'
+    -- use 'kshenoy/vim-signature'
+    -- use 'nelstrom/vim-visual-star-search'
 	-- TODO switch back when config support snips
     -- use 'windwp/nvim-autopairs'
 
