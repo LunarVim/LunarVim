@@ -77,14 +77,6 @@ configure under `lua/lsp/<your_lang.lua>`
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
 
-## efm server is slow on close
-
-Install the latest with:
-
-``` bash
-go get github.com/mattn/efm-langserver@HEAD
-```
-
 ## Useful Programs
 
 ``` bash
@@ -99,6 +91,15 @@ lazydocker
 ncdu
 pynvim
 neovim-remote
+```
+
+## EFM server
+
+In order for linters and formatters to work you will need to install
+`efm-langserver`
+
+```vim
+:LspInstall efm
 ```
 
 ## Formatters and Linters
@@ -150,9 +151,7 @@ To set up your particular debugger, look here:
 
 **HIGH PRIORITY**
 
-Move user config into `config.lua`
-ts-comment string for react
-update lang-servers to use LspInstall
+Move user config into `config.lua` ts-comment string for react
 
 From here I will update for bug fixes and implement low priority
 features when I have time
