@@ -182,7 +182,8 @@ features when I have time
 - https://github.com/pwntester/octo.nvim
 - configure surround
 - maybe incorporate ultisnips
+- switch back to `nvim-autopairs` when/if it doesn't break snippets 
 
 **PLUGIN BUGS**
 
-- html snippets are broken with vsnip
+REACT COMMENTING IS A NIGHTMARE (the filetype is just not recognized idk why)

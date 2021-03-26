@@ -116,7 +116,9 @@ return require('packer').startup(function(use)
     use 'monaqa/dial.nvim'
     use 'junegunn/goyo.vim'
     use 'andymass/vim-matchup'
-    use 'windwp/nvim-autopairs'
+    use 'cohama/lexima.vim'
+	-- TODO switch back when config support snips
+    -- use 'windwp/nvim-autopairs'
 
     -- TODO put this back when stable for indent lines
     -- vim.g.indent_blankline_space_char = ''
