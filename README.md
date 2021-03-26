@@ -70,9 +70,7 @@ To install a supported language server:
   :LspInstall <your_language_server>
 ```
 
-The only Language servers supported this way currently are `Python`,
-`Javascript` and `Lua` the rest you will need to globally install and
-configure under `lua/lsp/<your_lang.lua>`
+Most common languages should be supported out of the box, if your's is not I would welcome a PR
 
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
