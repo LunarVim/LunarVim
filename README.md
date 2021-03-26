@@ -70,7 +70,7 @@ To install a supported language server:
   :LspInstall <your_language_server>
 ```
 
-Most common languages should be supported out of the box, if your's is not I would welcome a PR
+Most common languages should be supported out of the box, if yours is not I would welcome a PR
 
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
