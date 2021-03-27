@@ -6,14 +6,24 @@ O = {
         linter = '',
         formatter = '',
         autoformat = false,
+        isort = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    javascript = {linter = '', formatter = '', autoformat = false, virtual_text = true},
-    javascriptreact = {linter = '', formatter = '', autoformat = false, virtual_text = true},
     lua = {formatter = '', autoformat = false, virtual_text = true},
-    bash = {linter = '', formatter = '', autoformat = false, virtual_text = true},
-    css = {formatter = '', autoformat = false, virtual_text = true},
-    json = {formatter = '', autoformat = false, virtual_text = true}
+    sh = {
+        linter = '',
+        formatter = '',
+        autoformat = false,
+        diagnostics = {virtual_text = true, signs = true, underline = true}
+    },
+    tsserver = {
+        linter = '',
+        formatter = '',
+        autoformat = false,
+        diagnostics = {virtual_text = true, signs = true, underline = true}
+    },
+    -- css = {formatter = '', autoformat = false, virtual_text = true},
+    -- json = {formatter = '', autoformat = false, virtual_text = true}
 
 }
 

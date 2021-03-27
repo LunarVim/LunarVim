@@ -53,6 +53,7 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/playground'
     use 'p00f/nvim-ts-rainbow'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+	use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
