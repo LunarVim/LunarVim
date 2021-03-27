@@ -65,6 +65,7 @@ let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
+      \ 'i' : [':IndentBlanklineToggle'  , 'toggle indent lines'],
       \ 'l' : [':Bracey'                 , 'start live server'],
       \ 'L' : [':BraceyStop'             , 'stop live server'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
