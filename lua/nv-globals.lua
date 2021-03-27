@@ -6,7 +6,7 @@ O = {
         linter = '',
         formatter = '',
         autoformat = false,
-        diagnostics = {virtual_text = false, signs = false, underline = false}
+        diagnostics = {virtual_text = true, signs = true, underline = true}
     },
     javascript = {linter = '', formatter = '', autoformat = false, virtual_text = true},
     javascriptreact = {linter = '', formatter = '', autoformat = false, virtual_text = true},
