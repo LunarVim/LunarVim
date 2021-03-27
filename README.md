@@ -1,5 +1,7 @@
 ![NVCode Logo](./utils/media/nvcode_logo.png)
 
+[![Support Server](https://img.shields.io/discord/591914197219016707.svg?color=7289da&label=TestingMeme&logo=discord&style=flat-square)](https://discord.gg/Xb9B4Ny)
+
 ![NVCode Demo](./utils/media/demo.png)
 
 If you are looking for my old configs checkout the two snapshot branches
