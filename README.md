@@ -3,6 +3,8 @@
 [![Support Server](https://img.shields.io/discord/591914197219016707.svg?color=7289da&label=AtMachine&logo=discord&style=flat-square)](https://discord.gg/Xb9B4Ny)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/ChristianChiarulli/nvcode/blob/master/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/ChristianChiarulli/nvcode/graphs/contributors)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
+
 
 
 
