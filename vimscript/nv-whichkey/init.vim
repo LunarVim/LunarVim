@@ -21,6 +21,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+let g:which_key_map['/'] = 'comment toggle'
 let g:which_key_map[';'] = [ ':Dashboard'                                      , 'home screen' ]
 let g:which_key_map[','] = [ '<Plug>(emmet-expand-abbr)'                       , 'expand tags' ]
 let g:which_key_map['"'] = [ '<Plug>PeekupOpen'                                , 'registers' ]

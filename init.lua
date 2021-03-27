@@ -2,6 +2,7 @@
 require('plugins')
 require('nv-utils')
 require('nv-globals')
+require('config')
 require('settings')
 require('keymappings')
 require('colorscheme')
@@ -58,6 +59,5 @@ require('lsp.efm-general-ls')
 require('lsp.virtual_text')
 
 -- Source config last
-require('config')
 -- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] = nil

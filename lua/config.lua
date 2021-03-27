@@ -14,4 +14,5 @@ O.colorscheme = 'nvcode'
 O.python.formatter = 'yapf'
 O.python.linter = nil
 O.python.autoformat = false
+O.python.virtual_text = false
 

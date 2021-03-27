@@ -2,13 +2,13 @@ O = {
 
     auto_complete = true,
     colorscheme = 'nvcode',
-    python = {linter = nil, formatter = nil, autoformat = false},
-    javascript = {linter = nil, formatter = nil, autoformat = false},
-    javascriptreact = {linter = nil, formatter = nil, autoformat = false},
-    lua = {formatter = nil, autoformat = false},
-    bash = {linter = nil, formatter = nil, autoformat = false},
-    css = {formatter = nil, autoformat = false},
-    json = {formatter = nil, autoformat = false},
+    python = {linter = '', formatter = '', autoformat = false, virtual_text=true},
+    javascript = {linter = '', formatter = '', autoformat = false, virtual_text=true},
+    javascriptreact = {linter = '', formatter = '', autoformat = false, virtual_text=true},
+    lua = {formatter = '', autoformat = false, virtual_text=true},
+    bash = {linter = '', formatter = '', autoformat = false, virtual_text=true},
+    css = {formatter = '', autoformat = false, virtual_text=true},
+    json = {formatter = '', autoformat = false, virtual_text=true},
 
 }
 
