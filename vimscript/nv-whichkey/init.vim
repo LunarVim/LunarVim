@@ -154,6 +154,7 @@ let g:which_key_map.S = {
 " g is for git
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
+      \ 'a' : [':Gwrite'                           , 'add'],
       \ 'b' : [':GitBlameToggle'                   , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
       \ 'd' : [':Git diff'                         , 'diff'],
