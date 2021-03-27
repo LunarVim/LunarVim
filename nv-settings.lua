@@ -8,7 +8,7 @@ an executable
 ]]
 
 
-O.auto_complete = true
+O.auto_complete = false
 O.colorscheme = 'nvcode'
 
 O.python.formatter = 'yapf'
