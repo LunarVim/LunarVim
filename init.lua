@@ -58,3 +58,4 @@ require('lsp.html-ls')
 require('lsp.efm-general-ls')
 require('lsp.virtual_text')
 
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = nil

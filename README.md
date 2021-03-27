@@ -183,6 +183,8 @@ features when I have time
 - maybe incorporate ultisnips
 - switch back to `nvim-autopairs` when/if it doesn't break snippets 
 - Implement this for typescript https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+- look into tabnine
+
 
 **PLUGIN BUGS**
 
