@@ -1,21 +1,17 @@
-AUTO_COMPLETE=true
--- make list of languages
-AUTO_FORMAT=true
-
-COLORSCHEME='nvcode'
-
--- ideas
-
 --[[
+O is the global options object
 
-nv.lint.python='flake8'
-nv.format.python='black'
-nv.format.python='yapf'
-nv.format.python='autopep8'
-nv.format.tsserver='prettier'
-nv.format.tsserver='eslint'
-
-
+Formatters and linters should be
+filled in as strings with either
+a global executable or a path to
+an executable
 ]]
 
+
+O.auto_complete = true
+O.colorscheme = 'nvcode'
+
+O.python.formatter = 'yapf'
+O.python.linter = nil
+O.python.autoformat = false
 

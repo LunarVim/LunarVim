@@ -1,7 +1,7 @@
 vim.o.completeopt = "menuone,noselect"
 
 require'compe'.setup {
-    enabled = AUTO_COMPLETE,
+    enabled = O.auto_complete,
     autocomplete = true,
     debug = false,
     min_length = 1,
