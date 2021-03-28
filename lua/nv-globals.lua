@@ -1,6 +1,5 @@
 O = {
-
-	auto_close_tree = 0,
+    auto_close_tree = 0,
     auto_complete = true,
     colorscheme = 'nvcode',
     python = {
@@ -10,7 +9,15 @@ O = {
         isort = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    lua = {formatter = '', autoformat = false, virtual_text = true},
+
+    lua = {
+
+        -- @usage can be lua-format
+        formatter = '',
+
+        autoformat = false,
+        diagnostics = {virtual_text = true, signs = true, underline = true}
+    },
     sh = {
         linter = '',
         formatter = '',
@@ -23,9 +30,9 @@ O = {
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
+    json = {formatter = '', autoformat = false, diagnostics = {virtual_text = true, signs = true, underline = true}}
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
-
 }
 
 DATA_PATH = vim.fn.stdpath('data')

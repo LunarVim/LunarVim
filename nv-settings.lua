@@ -5,14 +5,10 @@ Formatters and linters should be
 filled in as strings with either
 a global executable or a path to
 an executable
-]]
-
-
--- general
+]] -- general
 O.auto_complete = true
 O.colorscheme = 'nvcode'
 O.auto_close_tree = 0
-
 
 -- python
 -- add things like O.python.formatter.yapf.exec_path
@@ -21,15 +17,20 @@ O.auto_close_tree = 0
 O.python.formatter = 'yapf'
 O.python.linter = 'flake8'
 O.python.isort = true
-O.python.autoformat = false
+O.python.autoformat = true
 O.python.diagnostics.virtual_text = true
 O.python.diagnostics.signs = true
 O.python.diagnostics.underline = true
 
 -- lua
 O.lua.formatter = 'lua-format'
+-- O.lua.formatter = 'lua-format'
+O.lua.autoformat = true
 
 -- javascript
 O.tsserver.formatter = 'prettier'
 O.tsserver.linter = nil
-O.tsserver.autoformat = false
+O.tsserver.autoformat = true
+
+-- json
+O.json.autoformat = true

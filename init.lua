@@ -1,8 +1,9 @@
 -- General mappings
 require('plugins')
-require('nv-utils')
 require('nv-globals')
+require('nv-utils')
 vim.cmd('luafile ~/.config/nvim/nv-settings.lua')
+require('nv-autocommands')
 -- require('config')
 require('settings')
 require('keymappings')
@@ -59,6 +60,5 @@ require('lsp.html-ls')
 require('lsp.efm-general-ls')
 require('lsp.virtual_text')
 
--- Source config last
 -- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] = nil
