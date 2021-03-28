@@ -39,13 +39,14 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-compe'
     use 'mattn/emmet-vim'
     use 'hrsh7th/vim-vsnip'
-    use 'xabikos/vscode-javascript'
-    use 'dsznajder/vscode-es7-javascript-react-snippets'
-    use 'golang/vscode-go'
-    use 'rust-lang/vscode-rust'
-    use 'ChristianChiarulli/html-snippets'
     use 'ChristianChiarulli/java-snippets'
-    use 'ChristianChiarulli/python-snippets'
+	use "rafamadriz/friendly-snippets"
+    -- use 'xabikos/vscode-javascript'
+    -- use 'dsznajder/vscode-es7-javascript-react-snippets'
+    -- use 'golang/vscode-go'
+    -- use 'rust-lang/vscode-rust'
+    -- use 'ChristianChiarulli/html-snippets'
+    -- use 'ChristianChiarulli/python-snippets'
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
