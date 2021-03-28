@@ -4,6 +4,7 @@ O = {
     colorscheme = 'nvcode',
     python = {
         linter = '',
+        -- @usage can be 'yapf'
         formatter = '',
         autoformat = false,
         isort = false,
@@ -11,26 +12,33 @@ O = {
     },
 
     lua = {
-
-        -- @usage can be lua-format
+        -- @usage can be 'lua-format'
         formatter = '',
-
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
     sh = {
+        -- @usage can be 'shellcheck'
         linter = '',
+        -- @usage can be 'shfmt'
         formatter = '',
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
     tsserver = {
+        -- @usage can be 'eslint'
         linter = '',
+        -- @usage can be 'prettier'
         formatter = '',
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    json = {formatter = '', autoformat = false, diagnostics = {virtual_text = true, signs = true, underline = true}}
+    json = {
+        -- @usage can be 'prettier'
+        formatter = '',
+        autoformat = false,
+        diagnostics = {virtual_text = true, signs = true, underline = true}
+    }
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 }
