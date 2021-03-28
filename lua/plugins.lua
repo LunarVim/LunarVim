@@ -112,6 +112,7 @@ return require('packer').startup(function(use)
     use 'andymass/vim-matchup'
     use 'MattesGroeger/vim-bookmarks'
     use 'windwp/nvim-autopairs'
+    use 'brooth/far.vim'
 
     -- TODO put this back when stable for indent lines
     -- vim.g.indent_blankline_space_char = ''
