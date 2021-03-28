@@ -36,10 +36,9 @@
 --     return npairs.check_break_line_char()
 --   end
 -- end
--- 
--- 
+--
+--
 -- remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
-
 -- TODO switch to lua plugin when possible
 vim.cmd([[
 let g:lexima_no_default_rules = v:true
