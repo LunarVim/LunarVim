@@ -4,7 +4,7 @@ O = {
     colorscheme = 'nvcode',
     python = {
         linter = '',
-        -- @usage can be 'yapf'
+        -- @usage can be 'yapf', 'black'
         formatter = '',
         autoformat = false,
         isort = false,
