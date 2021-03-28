@@ -21,6 +21,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+let g:which_key_map['/'] = 'comment toggle'
 let g:which_key_map[';'] = [ ':Dashboard'                                      , 'home screen' ]
 let g:which_key_map[','] = [ '<Plug>(emmet-expand-abbr)'                       , 'expand tags' ]
 let g:which_key_map['"'] = [ '<Plug>PeekupOpen'                                , 'registers' ]
@@ -28,7 +29,7 @@ let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               ,
 let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
 let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
-let g:which_key_map['m'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
+let g:which_key_map['M'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
 let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
 " TODO create entire treesitter section
@@ -64,6 +65,7 @@ let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
+      \ 'i' : [':IndentBlanklineToggle'  , 'toggle indent lines'],
       \ 'l' : [':Bracey'                 , 'start live server'],
       \ 'L' : [':BraceyStop'             , 'stop live server'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
@@ -114,6 +116,15 @@ let g:which_key_map.F = {
     \ '6' : [':set foldlevel=6'   , 'level6']
     \ }
 
+" m is for mark
+" I'd rather use regular marks but they never clear
+let g:which_key_map.m = {
+    \ 'name': '+fold',
+    \ 't' : [':BookmarkToggle'   , 'toggle'],
+    \ 'j' : [':BookmarkNext'   , 'next mark'],
+    \ 'k' : [':BookmarkPrev'   , 'prev mark']
+    \ }
+
 " s is for search powered by telescope
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
@@ -133,6 +144,7 @@ let g:which_key_map.s = {
       \ 'u' : [':Telescope colorscheme'                 , 'colorschemes'],
       \ }
 
+" S is for Session
 let g:which_key_map.S = {
       \ 'name' : '+Session' ,
       \ 's' : [':SessionSave'           , 'save session'],

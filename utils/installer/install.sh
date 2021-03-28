@@ -1,3 +1,5 @@
+#!/bin/sh
+
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
@@ -60,18 +62,17 @@ installpynvim() {
 }
 
 installpacker() {
-    git clone https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 }
 
 cloneconfig() {
 	echo "Cloning NVCode configuration"
 	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvim
-    mv $HOME/.config/nvim/init.lua $HOME/.config/nvim/init.lua.tmp
-    mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
-	nvim -u $HOME/.config/nvim/init.lua --headless --noplugin +PackerInstall +qall
-    rm $HOME/.config/nvim/init.lua
-    mv $HOME/.config/nvim/init.lua.tmp $HOME/.config/nvim/init.lua
+	mv $HOME/.config/nvim/init.lua $HOME/.config/nvim/init.lua.tmp
+	mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
+	# nvim -u $HOME/.config/nvim/init.lua --headless --noplugin +PackerInstall +qall
+	rm $HOME/.config/nvim/init.lua
+	mv $HOME/.config/nvim/init.lua.tmp $HOME/.config/nvim/init.lua
 }
 
 asktoinstallnode() {
@@ -92,6 +93,7 @@ asktoinstallpip() {
 
 installonmac() {
 	brew install ripgrep fzf ranger
+	npm install -g tree-sitter-cli
 }
 
 pipinstallueberzug() {
@@ -103,12 +105,14 @@ installonubuntu() {
 	sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
 	pip3 install ueberzug
 	pip3 install neovim-remote
+	npm install -g tree-sitter-cli
 }
 
 installonarch() {
 	sudo pacman -S install ripgrep fzf ranger
 	which yay >/dev/null && yay -S python-ueberzug-git || pipinstallueberzug
 	pip3 install neovim-remote
+	npm install -g tree-sitter-cli
 }
 
 installextrapackages() {
@@ -133,23 +137,20 @@ which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
 # install pynvim
 pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
 
-
 if [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
-    echo 'packer already installed'
+	echo 'packer already installed'
 else
-    installpacker
+	installpacker
 fi
 
 if [ -a "$HOME/.config/nvcode/init.lua" ]; then
-    echo 'nvcode already installed'
+	echo 'nvcode already installed'
 else
-    # clone config down
-    cloneconfig
-    echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
-    echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
+	# clone config down
+	cloneconfig
+	echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
+	echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
 fi
-
-
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 

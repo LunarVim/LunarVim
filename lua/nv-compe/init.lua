@@ -1,7 +1,7 @@
 vim.o.completeopt = "menuone,noselect"
 
 require'compe'.setup {
-    enabled = AUTO_COMPLETE,
+    enabled = O.auto_complete,
     autocomplete = true,
     debug = false,
     min_length = 1,
@@ -20,12 +20,14 @@ require'compe'.setup {
         calc = {kind = "  "},
         vsnip = {kind = "  "},
         nvim_lsp = {kind = "  "},
-        nvim_lua = {kind = "  "},
+        -- nvim_lua = {kind = "  "},
+		nvim_lua = false,
         spell = {kind = "  "},
         tags = false,
-        snippets_nvim = {kind = "  "},
-        treesitter = {kind = "  "},
-        emoji = {kind = " ﲃ "}
+        -- snippets_nvim = {kind = "  "},
+        -- ultisnips = {kind = "  "},
+        -- treesitter = {kind = "  "},
+        emoji = {kind = " ﲃ ", filetypes={"markdown"}}
         -- for emoji press : (idk if that in compe tho)
     }
 }

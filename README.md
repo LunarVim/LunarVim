@@ -1,5 +1,13 @@
 ![NVCode Logo](./utils/media/nvcode_logo.png)
 
+[![Support Server](https://img.shields.io/discord/591914197219016707.svg?color=7289da&label=AtMachine&logo=discord&style=flat-square)](https://discord.gg/Xb9B4Ny)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/ChristianChiarulli/nvcode/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/ChristianChiarulli/nvcode/graphs/contributors)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
+
+
+
+
 ![NVCode Demo](./utils/media/demo.png)
 
 If you are looking for my old configs checkout the two snapshot branches
@@ -62,6 +70,17 @@ $HOME/.config/nvim/vimscript/nv-vscode/init.vim
     sudo pacman -S xsel
     ```
 
+- WSL2
+
+    Make sure ~/bin is in your path in this case.
+    
+    ```bash
+    curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+    unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+    chmod +x /tmp/win32yank.exe
+    mv /tmp/win32yank.exe ~/bin
+    ```
+
 ## LSP
 
 To install a supported language server:
@@ -70,20 +89,10 @@ To install a supported language server:
   :LspInstall <your_language_server>
 ```
 
-The only Language servers supported this way currently are `Python`,
-`Javascript` and `Lua` the rest you will need to globally install and
-configure under `lua/lsp/<your_lang.lua>`
+Most common languages should be supported out of the box, if yours is not I would welcome a PR
 
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
-
-## efm server is slow on close
-
-Install the latest with:
-
-``` bash
-go get github.com/mattn/efm-langserver@HEAD
-```
 
 ## Useful Programs
 
@@ -99,6 +108,15 @@ lazydocker
 ncdu
 pynvim
 neovim-remote
+```
+
+## EFM server
+
+In order for linters and formatters to work you will need to install
+`efm-langserver`
+
+```vim
+:LspInstall efm
 ```
 
 ## Formatters and Linters
@@ -150,7 +168,7 @@ To set up your particular debugger, look here:
 
 **HIGH PRIORITY**
 
-Move user config into `config.lua`
+Move user config into `config.lua` ts-comment string for react
 
 From here I will update for bug fixes and implement low priority
 features when I have time
@@ -159,7 +177,6 @@ features when I have time
 
 - list all binaries needed for formatters and linters
 - add badges to readme
-- json config file (luajson)
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
@@ -167,15 +184,16 @@ features when I have time
 - look into emmet-ls
 - toggle virtual text diagnostics
 - configure neogit
-- configure kshenoy/vim-signature
 - vim ult test
 - what is `fzy`
 - https://github.com/pwntester/octo.nvim
 - configure surround
-- move to ultisnips
+- maybe incorporate ultisnips
+- switch back to `nvim-autopairs` when/if it doesn't break snippets 
+- Implement this for typescript https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+- look into tabnine
+
 
 **PLUGIN BUGS**
 
-- html snippets are broken with vsnip
-- keep and eye on indent guides plugin for thin lines
-- better auto-import (jsx)
+REACT COMMENTING IS A NIGHTMARE (the filetype is just not recognized idk why)
