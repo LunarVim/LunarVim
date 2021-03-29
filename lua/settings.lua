@@ -1,3 +1,15 @@
+vim.o.backupdir = vim.fn.stdpath('data') .. '/backup'    -- set backup directory to be a subdirectory of data to ensure that backups are not written to git repos
+vim.o.directory = vim.fn.stdpath('data') .. '/directory' -- Configure 'directory' to ensure that Neovim swap files are not written to repos.
+vim.o.undodir = vim.fn.stdpath('data') .. '/undo'        -- set undodir to ensure that the undofiles are not saved to git repos.
+
+-- ensure the above directories exist
+os.execute("mkdir -p " .. vim.o.backupdir)
+os.execute("mkdir -p " .. vim.o.directory)
+os.execute("mkdir -p " .. vim.o.undodir)
+
+vim.o.backup = true -- enable backups so if Neovim crashes or you lose power you do not lose your work.
+vim.o.writebackup = true -- enable writing of the backup files
+vim.o.undofile = true -- enable persistent undo (meaning if you quit Neovim and come back to a file and want to undo previous changes you can)
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
