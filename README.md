@@ -12,6 +12,8 @@
 
 This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
 
+This is also a community project, if you would like to see support for a feature or language consider make a PR.
+
 ## Install In One Command!
 
 Make sure you have the newest version of Neovim
