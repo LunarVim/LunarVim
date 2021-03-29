@@ -219,7 +219,7 @@ let g:which_key_map.t = {
       \ 'p' : [':FloatermNew python'                            , 'python'],
       \ 'm' : [':FloatermNew lazynpm'                           , 'npm'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
-      \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
+      \ 'y' : [':FloatermNew bottom'                            , 'bottom'],
       \ 'u' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
       " \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
