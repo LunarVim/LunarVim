@@ -10,8 +10,7 @@
 
 ![NVCode Demo](./utils/media/demo.png)
 
-If you are looking for my old configs checkout the two snapshot branches
-on this repo, there is one for CoC and one for Native LSP
+This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
 
 ## Install In One Command!
 
@@ -36,6 +35,10 @@ sudo rm -r neovim
 ```
 
 ## VSCode support
+
+I recommend you support open source versions if you plan to use VSCode:
+
+- [VSCodium](https://vscodium.com/)
 
 After installing the [Neovim
 extension](https://github.com/asvetliakov/vscode-neovim) in VSCode
