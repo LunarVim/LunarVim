@@ -40,6 +40,7 @@ return require('packer').startup(function(use)
     use 'mattn/emmet-vim'
     use 'hrsh7th/vim-vsnip'
     use "rafamadriz/friendly-snippets"
+    use 'ChristianChiarulli/html-snippets'
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
@@ -112,11 +113,8 @@ return require('packer').startup(function(use)
     use 'monaqa/dial.nvim'
     use 'junegunn/goyo.vim'
     use 'andymass/vim-matchup'
-    -- use 'cohama/lexima.vim'
     use 'MattesGroeger/vim-bookmarks'
-    -- use 'kshenoy/vim-signature'
-    -- use 'nelstrom/vim-visual-star-search'
-    -- TODO switch back when config support snips
+	use 'brooth/far.vim'
     use 'windwp/nvim-autopairs'
 
     -- TODO put this back when stable for indent lines
@@ -145,6 +143,9 @@ return require('packer').startup(function(use)
     -- use 'dsznajder/vscode-es7-javascript-react-snippets'
     -- use 'golang/vscode-go'
     -- use 'rust-lang/vscode-rust'
-    -- use 'ChristianChiarulli/html-snippets'
     -- use 'ChristianChiarulli/python-snippets'
+    -- use 'kshenoy/vim-signature'
+    -- use 'nelstrom/vim-visual-star-search'
+    -- TODO switch back when config support snips
+    -- use 'cohama/lexima.vim'
 end)
