@@ -38,7 +38,7 @@ sudo rm -r neovim
 
 ## VSCode support
 
-I recommend you support open source versions if you plan to use VSCode:
+I recommend you support Free/Libre versions if you plan to use VSCode:
 
 - [VSCodium](https://vscodium.com/)
 
