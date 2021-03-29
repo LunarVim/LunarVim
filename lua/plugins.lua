@@ -36,11 +36,11 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
 
     -- Autocomplete
-    use 'hrsh7th/nvim-compe'
-    use 'mattn/emmet-vim'
-    use 'hrsh7th/vim-vsnip'
     use "rafamadriz/friendly-snippets"
-    use 'ChristianChiarulli/html-snippets'
+    use 'ChristianChiarulli/java-snippets'
+    use 'hrsh7th/nvim-compe'
+    use 'hrsh7th/vim-vsnip'
+    use 'mattn/emmet-vim'
 
     -- Treesitter
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
