@@ -2,6 +2,7 @@ O = {
     auto_close_tree = 0,
     auto_complete = true,
     colorscheme = 'nvcode',
+    relativenumber = true,
     shell = "bash",
     python = {
         linter = '',
