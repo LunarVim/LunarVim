@@ -42,6 +42,8 @@ I recommend you support Free/Libre versions if you plan to use VSCode:
 
 - [VSCodium](https://vscodium.com/)
 
+- Article to get you set up with VSCodium: [link](https://www.chrisatmachine.com/Neovim/22-vscodium-neovim/) 
+
 After installing the [Neovim
 extension](https://github.com/asvetliakov/vscode-neovim) in VSCode
 
