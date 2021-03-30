@@ -9,6 +9,7 @@ an executable
 O.auto_complete = true
 O.colorscheme = 'nvcode'
 O.auto_close_tree = 0
+O.dashboard = "dashboard"  -- Which dashboard to use. Options are startify or dashboard
 
 -- python
 -- add things like O.python.formatter.yapf.exec_path

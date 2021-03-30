@@ -96,6 +96,8 @@ return require('packer').startup(function(use)
     use 'unblevable/quick-scope'                                                    -- (vimscript) Provides an overlay when using the 'f', 'F', 't' and 'T' motions to help with jumping to characters.
 
     -- General Plugins
+    if O.dashboard == "dashboard" then use 'ChristianChiarulli/dashboard-nvim' end  -- (vimscript) A startup dashboard to enable easily opening previously used files using telescope.
+    if O.dashboard == "startify" then use 'mhinz/vim-startify' end                  -- (vimscript) Adds a startup dashboard that allows quickly opening previously opened files.
     use 'windwp/nvim-autopairs'                                                     -- (lua) automatically create closing brackets/tags
     use 'MattesGroeger/vim-bookmarks'                                               -- (vimscript) This vim plugin allows toggling bookmarks per line. A quickfix window gives access to all bookmarks. Annotations can be added as well. These are special bookmarks with a comment attached.
     use 'airblade/vim-rooter'                                                       -- (vimscript) Ensures that the current working directory is the git root
@@ -110,7 +112,6 @@ return require('packer').startup(function(use)
     use 'liuchengxu/vista.vim'                                                      -- (vimscript) LSP search for symbols and tags
     use 'machakann/vim-sandwich'                                                    -- (vimscript) Adds operators and mappings for adding / deleting / changing surrounding text.
     use 'metakirby5/codi.vim'                                                       -- (vimscript) A scratch pad interpretter for many languages.
-    use 'mhinz/vim-startify'                                                        -- (vimscript) Adds a startup dashboard that allows quickly opening previously opened files.
     use 'moll/vim-bbye'                                                             -- (vimscript) Allows removing / deleting buffers without closing their windows.
     use 'monaqa/dial.nvim'                                                          -- (lua) Upgrades Ctrl-a and Ctrl-x to increment dates, alphabet and other types in addition to just numbers
     use 'nvim-lua/plenary.nvim'                                                     -- (lua) A library of Lua code used by many Neovim lua plugins.
