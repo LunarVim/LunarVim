@@ -66,14 +66,14 @@ let g:which_key_map.a = {
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
       \ 'i' : [':IndentBlanklineToggle'  , 'toggle indent lines'],
-      \ 'l' : [':Bracey'                 , 'start live server'],
-      \ 'L' : [':BraceyStop'             , 'stop live server'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 's' : [':s/\%V\(.*\)\%V/"\1"/'   , 'surround'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
       \ }
+      " \ 'l' : [':Bracey'                 , 'start live server'],
+      " \ 'L' : [':BraceyStop'             , 'stop live server'],
 
 " b is for buffer
 let g:which_key_map.b = {
@@ -81,7 +81,7 @@ let g:which_key_map.b = {
       \ '>' : [':BufferMoveNext'        , 'move next'],
       \ '<' : [':BufferMovePrevious'    , 'move prev'],
       \ 'b' : [':BufferPick'            , 'pick buffer'],
-      \ 'd' : [':Bdelete'               , 'delete-buffer'],
+      \ 'd' : [':BufferClose'               , 'delete-buffer'],
       \ 'n' : ['bnext'                  , 'next-buffer'],
       \ 'p' : ['bprevious'              , 'previous-buffer'],
       \ '?' : ['Buffers'                , 'fzf-buffer'],
@@ -160,7 +160,6 @@ let g:which_key_map.g = {
       \ 'j' : [':NextHunk'                         , 'next hunk'],
       \ 'k' : [':PrevHunk'                         , 'prev hunk'],
       \ 'l' : [':Git log'                          , 'log'],
-      \ 'n' : [':Neogit'                           , 'neogit'],
       \ 'p' : [':PreviewHunk'                      , 'preview hunk'],
       \ 'r' : [':ResetHunk'                        , 'reset hunk'],
       \ 'R' : [':ResetBuffer'                      , 'reset buffer'],
@@ -168,6 +167,7 @@ let g:which_key_map.g = {
       \ 'S' : [':Gstatus'                          , 'status'],
       \ 'u' : [':UndoStageHunk'                    , 'undo stage hunk'],
       \ }
+      " \ 'n' : [':Neogit'                           , 'neogit'],
 
 " G is for gist
 let g:which_key_map.G = {
@@ -195,7 +195,6 @@ let g:which_key_map.l = {
       \ 'v' : [':LspVirtualTextToggle'               , 'lsp toggle virtual text'],
       \ 'l' : [':Lspsaga lsp_finder'                 , 'lsp finder'],
       \ 'L' : [':Lspsaga show_line_diagnostics'      , 'line_diagnostics'],
-      \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'p' : [':Lspsaga preview_definition'         , 'preview definition'],
       \ 'q' : [':Telescope quickfix'                 , 'quickfix'],
       \ 'r' : [':Lspsaga rename'                     , 'rename'],
@@ -205,6 +204,7 @@ let g:which_key_map.l = {
       \ 'S' : [':Telescope lsp_workspace_symbols'    , 'workspace symbols'],
       \ }
       " \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
+      " \ 'o' : [':Vista!!'                            , 'outline'],
 
 " t is for terminal
 let g:which_key_map.t = {
@@ -223,10 +223,10 @@ let g:which_key_map.t = {
       \ }
       " \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
 
-let g:which_key_map.R = {
-      \ 'name' : '+Find_Replace' ,
-      \ 'f' : [':Farr --source=vimgrep'    , 'file'],
-      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
-      \ }
+" let g:which_key_map.R = {
+"       \ 'name' : '+Find_Replace' ,
+"       \ 'f' : [':Farr --source=vimgrep'    , 'file'],
+"       \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+"       \ }
 
 call which_key#register('<Space>', "g:which_key_map")

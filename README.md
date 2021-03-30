@@ -26,7 +26,7 @@ After installation run `nvim` and then `:PackerInstall`
 
 ## Get the latest version of Neovim
 
-``` bash
+```bash
 cd ~
 sudo rm -r neovim
 git clone https://github.com/neovim/neovim
