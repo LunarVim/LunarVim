@@ -1,9 +1,8 @@
 ![NVCode Logo](./utils/media/nvcode_logo.png)
 
 
-[![Discord Server](https://img.shields.io/discord/591914197219016707.svg?color=7289da&label=AtMachine&logo=discord&style=flat-square)](https://discord.gg/Xb9B4Ny)
+<a href="https://discord.gg/Xb9B4Ny"><img src="https://img.shields.io/discord/308323056592486420?logo=discord" alt="chat on Discord"></a>
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/ChristianChiarulli/nvcode/blob/master/LICENSE)
-[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/ChristianChiarulli/nvcode/graphs/contributors)
 [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/ChristianChiarulli/nvcode)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
