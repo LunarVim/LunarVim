@@ -113,6 +113,11 @@ return require('packer').startup(function(use)
     use 'MattesGroeger/vim-bookmarks'
     use 'windwp/nvim-autopairs'
 
+    -- Database
+    use 'tpope/vim-dadbod'
+    use 'kristijanhusak/vim-dadbod-ui'
+    use 'kristijanhusak/vim-dadbod-completion'
+
     -- TODO put this back when stable for indent lines
     -- vim.g.indent_blankline_space_char = ''
     -- use 'b3nj5m1n/kommentary'
