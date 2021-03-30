@@ -62,6 +62,7 @@ return require('packer').startup(function(use)
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-project.nvim'                                     -- (lua) Adds the ability to add git projects to Telescope and immediately switch to them using it's fuzzy finding.
     use 'nvim-telescope/telescope-media-files.nvim'
 
     -- Explorer

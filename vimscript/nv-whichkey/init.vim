@@ -148,6 +148,7 @@ let g:which_key_map.s = {
       \ 'm' : [':Telescope marks'                       , 'marks'],
       \ 'M' : [':Telescope man_pages'                   , 'man_pages'],
       \ 'o' : [':Telescope vim_options'                 , 'vim_options'],
+      \ 'p' : [':lua require''telescope''.extensions.project.project{}', 'projects'],
       \ 't' : [':Telescope live_grep'                   , 'text'],
       \ 'r' : [':Telescope registers'                   , 'registers'],
       \ 'w' : [':Telescope file_browser'                , 'buf_fuz_find'],
