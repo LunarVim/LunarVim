@@ -87,6 +87,9 @@ return require('packer').startup(function(use)
     -- use 'gennaro-tedesco/nvim-jqx'
     -- use 'turbio/bracey.vim'
 
+    -- Flutter
+    use 'thosakwe/vim-flutter'
+
     -- Registers
     -- use 'gennaro-tedesco/nvim-peekup'
 
