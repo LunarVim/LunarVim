@@ -32,6 +32,7 @@ let g:which_key_map['h'] = [ '<C-W>s'                                          ,
 let g:which_key_map['M'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
 let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+let g:which_key_map['*'] = [ ':DogeGenerate'                                   , 'documentation generator' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
@@ -99,6 +100,15 @@ let g:which_key_map.d = {
       \ }
       " \ 'O' : ['DebugStepOut'                  , 'next-buffer'],
       " \ 'S' : ['DebugGetSession '              , 'fzf-buffer'],
+
+" D is for database
+let g:which_key_map.D = {
+      \ 'name' : '+database' ,
+      \ 'u' : ['DBUIToggle '        , 'db ui toggle'],
+      \ 'f' : ['DBUIFindBuffer'     , 'db find buffer'],
+      \ 'r' : ['DBUIRenameBuffer'   , 'db rename buffer'],
+      \ 'l' : ['DBUILastQueryInfo'  , 'db last query'],
+      \ }
 
 
 " F is for fold
