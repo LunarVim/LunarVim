@@ -1,8 +1,10 @@
+local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
 
-configs['tailwindls'] = {default_config = {}}
+-- Check if tailwindls server already defined.
+if not lspconfig.tailwindls then configs['tailwindls'] = {default_config = {}} end
 
-require'lspconfig'.tailwindls.setup {
+lspconfig.tailwindls.setup {
     cmd = {
         "node", DATA_PATH .. "/lspinstall/tailwindcss/tailwindcss-intellisense/extension/dist/server/index.js",
         "--stdio"
