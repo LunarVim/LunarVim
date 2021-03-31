@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'p00f/nvim-ts-rainbow'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use 'nvim-treesitter/playground'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'windwp/nvim-ts-autotag'
 

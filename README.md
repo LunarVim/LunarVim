@@ -185,6 +185,7 @@ features when I have time
 
 **LOW PRIORITY**
 
+- vim vsnips dir should be co-located with config
 - list all binaries needed for formatters and linters
 - add badges to readme
 - Implement what I can from this java config:
