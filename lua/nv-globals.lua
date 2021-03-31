@@ -4,7 +4,10 @@ O = {
     colorscheme = 'nvcode',
     relative_number = true,
     shell = 'bash',
-    db_ui_save_location = '~/.config/nvcode_db',
+    database = {
+        save_location = '~/.config/nvcode_db',
+        auto_execute = 1
+    },
     python = {
         linter = '',
         -- @usage can be 'yapf', 'black'
