@@ -13,7 +13,9 @@ O = {
         isort = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    dart = {sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'},
+    dart = {
+        sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'
+    },
     lua = {
         -- @usage can be 'lua-format'
         formatter = '',
@@ -42,7 +44,9 @@ O = {
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    tailwindls = {filetypes = {'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}}
+    tailwindls = {
+        filetypes = {'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}
+    }
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 }
