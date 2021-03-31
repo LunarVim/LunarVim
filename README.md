@@ -38,6 +38,10 @@ sudo make CMAKE_BUILD_TYPE=Release install
 cd ~
 sudo rm -r neovim
 ```
+or if you are on Arch you can get it from the AUR
+```bash
+yay -S neovim-nightly-git
+```
 
 ## VSCode support
 
