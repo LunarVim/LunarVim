@@ -2,6 +2,9 @@ O = {
     auto_close_tree = 0,
     auto_complete = true,
     colorscheme = 'nvcode',
+    hidden_files = true,
+    wrap_lines = true,
+    number = true,
     relative_number = true,
     shell = 'bash',
     database = {
@@ -46,6 +49,9 @@ O = {
         formatter = '',
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
+    },
+    tailwindls = {
+        filetypes = {'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}
     }
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}

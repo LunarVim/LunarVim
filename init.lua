@@ -38,6 +38,7 @@ require('nv-indentline')
 require('nv-bookmark')
 require('nv-dadbod')
 require('nv-doge')
+require('nv-dependency')
 -- require('nv-lspinstall')
 
 -- Which Key (Hope to replace with Lua plugin someday)
@@ -66,6 +67,7 @@ require('lsp.efm-general-ls')
 require('lsp.virtual_text')
 require('lsp.latex-ls')
 require('lsp.svelte-ls')
+require('lsp.tailwindcss-ls')
 
 -- vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] = nil

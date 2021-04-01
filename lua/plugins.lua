@@ -88,8 +88,14 @@ return require('packer').startup(function(use)
     -- use 'gennaro-tedesco/nvim-jqx'
     -- use 'turbio/bracey.vim'
 
+    -- Php
+    use 'phpactor/phpactor'
+
     -- Flutter
     use 'thosakwe/vim-flutter'
+
+    -- Dependency assistent
+    use 'akinsho/dependency-assist.nvim'
 
     -- Registers
     -- use 'gennaro-tedesco/nvim-peekup'
@@ -113,6 +119,7 @@ return require('packer').startup(function(use)
     use 'andymass/vim-matchup'
     use 'MattesGroeger/vim-bookmarks'
     use 'windwp/nvim-autopairs'
+    use 'mbbill/undotree'
 
     -- Database
     use 'tpope/vim-dadbod'
