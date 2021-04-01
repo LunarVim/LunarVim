@@ -4,6 +4,7 @@ O = {
     colorscheme = 'nvcode',
     hidden_files = true,
     wrap_lines = true,
+    scroll_off = 0,
     number = true,
     relative_number = true,
     shell = 'bash',
