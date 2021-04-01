@@ -3,6 +3,7 @@ local actions = require('telescope.actions')
 ------------------------------
 -- '--color=never',
 require('telescope').load_extension('media_files')
+require'telescope'.load_extension('project')
 require('telescope').setup {
     defaults = {
         vimgrep_arguments = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
@@ -43,7 +44,7 @@ require('telescope').setup {
                 -- To disable a keymap, put [map] = false
                 -- So, to not map "<C-n>", just put
                 -- ["<c-x>"] = false,
-                ["<esc>"] = actions.close,
+                -- ["<esc>"] = actions.close, -- Remove Esc for telescope project functionality (need Normal mode)
 
                 -- Otherwise, just set the mapping to the function that you want it to be.
                 -- ["<C-i>"] = actions.select_horizontal,
