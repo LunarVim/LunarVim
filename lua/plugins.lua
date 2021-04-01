@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
 
     -- Autocomplete
     use 'hrsh7th/nvim-compe'
+    use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
     use 'mattn/emmet-vim'
     use 'hrsh7th/vim-vsnip'
     use "rafamadriz/friendly-snippets"
