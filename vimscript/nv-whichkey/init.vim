@@ -33,6 +33,7 @@ let g:which_key_map['M'] = [ ':MarkdownPreviewToggle'                          ,
 let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
 let g:which_key_map['*'] = [ ':DogeGenerate'                                   , 'documentation generator' ]
+let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
@@ -109,7 +110,6 @@ let g:which_key_map.D = {
       \ 'r' : ['DBUIRenameBuffer'   , 'db rename buffer'],
       \ 'l' : ['DBUILastQueryInfo'  , 'db last query'],
       \ }
-
 
 " F is for fold
 let g:which_key_map.F = {
