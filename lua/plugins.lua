@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'p00f/nvim-ts-rainbow'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use 'nvim-treesitter/playground'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'windwp/nvim-ts-autotag'
 
@@ -117,6 +118,9 @@ return require('packer').startup(function(use)
     use 'tpope/vim-dadbod'
     use 'kristijanhusak/vim-dadbod-ui'
     use 'kristijanhusak/vim-dadbod-completion'
+
+    -- Documentation Generator 
+    use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
     -- TODO put this back when stable for indent lines
     -- vim.g.indent_blankline_space_char = ''
