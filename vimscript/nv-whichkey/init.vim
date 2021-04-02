@@ -93,15 +93,17 @@ let g:which_key_map.b = {
 " d is for debug
 let g:which_key_map.d = {
       \ 'name' : '+debug' ,
-      \ 'b' : ['DebugToggleBreakpoint '        , 'toggle breakpoint'],
-      \ 'c' : ['DebugContinue'                 , 'continue'],
-      \ 'i' : ['DebugStepInto'                 , 'step into'],
-      \ 'o' : ['DebugStepOver'                 , 'step over'],
-      \ 'r' : ['DebugToggleRepl'               , 'toggle repl'],
-      \ 's' : ['DebugStart'                    , 'start'],
+      \ 'b' : ['<Plug>VimspectorToggleBreakpoint'     , 'toggle breakpoint'],
+      \ 's' : ['<Plug>VimspectorContinue'             , 'start / continue'],
+      \ 'f' : ['<Plug>VimspectorStop'                 , 'stop'],
+      \ 'r' : ['VimspectorReset'                      , 'reset'],
+      \ 'R' : ['<Plug>VimspectorRestart'              , 'restart'],
+      \ 'p' : ['<Plug>VimspectorPause'                , 'pause'],
+      \ 'o' : ['<Plug>VimspectorStepOver'             , 'step over'],
+      \ 'i' : ['<Plug>VimspectorStepInto'             , 'step into'],
+      \ 'O' : ['<Plug>VimspectorStepOut'              , 'step out'],
+      \ 'c' : ['<Plug>VimspectorRunToCursor'          , 'run to cursor'],
       \ }
-      " \ 'O' : ['DebugStepOut'                  , 'next-buffer'],
-      " \ 'S' : ['DebugGetSession '              , 'fzf-buffer'],
 
 " D is for database
 let g:which_key_map.D = {

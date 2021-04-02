@@ -33,7 +33,8 @@ return require('packer').startup(function(use)
     use 'kabouzeid/nvim-lspinstall'
 
     -- Debugging
-    use 'mfussenegger/nvim-dap'
+    -- use 'mfussenegger/nvim-dap'
+    use 'puremourning/vimspector'
 
     -- Autocomplete
     use 'hrsh7th/nvim-compe'
