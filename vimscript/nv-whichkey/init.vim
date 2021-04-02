@@ -34,6 +34,7 @@ let g:which_key_map['h'] = [ ':let @/ = ""'                                    ,
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
 let g:which_key_map['*'] = [ ':DogeGenerate'                                   , 'documentation generator' ]
 let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree' ]
+let g:which_key_map['p'] = [ ':Telescope project'                              , 'telescope project' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
