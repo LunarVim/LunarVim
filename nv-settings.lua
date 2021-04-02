@@ -9,6 +9,7 @@ an executable
 O.auto_complete = true
 O.colorscheme = 'nvcode'
 O.auto_close_tree = 0
+O.wrap_lines = false
 
 O.clang.diagnostics.virtual_text = false
 O.clang.diagnostics.signs = false
@@ -27,9 +28,10 @@ O.python.diagnostics.signs = true
 O.python.diagnostics.underline = true
 
 -- lua
+-- TODO look into stylua
 O.lua.formatter = 'lua-format'
 -- O.lua.formatter = 'lua-format'
-O.lua.autoformat = true
+O.lua.autoformat = false
 
 -- javascript
 O.tsserver.formatter = 'prettier'
