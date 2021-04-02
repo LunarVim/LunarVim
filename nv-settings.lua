@@ -10,6 +10,10 @@ O.auto_complete = true
 O.colorscheme = 'nvcode'
 O.auto_close_tree = 0
 
+O.clang.diagnostics.virtual_text = false
+O.clang.diagnostics.signs = false
+O.clang.diagnostics.underline = false
+
 -- python
 -- add things like O.python.formatter.yapf.exec_path
 -- add things like O.python.linter.flake8.exec_path
