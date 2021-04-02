@@ -44,5 +44,10 @@ utils.define_augroups({
         {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
         {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
     },
+    _buffer_bindings = {
+        {'FileType', 'dashboard', 'nnoremap <silent> <buffer> q :q<CR>'},
+        {'FileType', 'lspinfo', 'nnoremap <silent> <buffer> q :q<CR>'},
+        {'FileType', 'floaterm', 'nnoremap <silent> <buffer> q :q<CR>'}
+    },
     _auto_formatters = auto_formatters
 })
