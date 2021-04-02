@@ -7,6 +7,9 @@ O = {
     number = true,
     relative_number = true,
     shell = 'bash',
+    telescope = {
+        ignore_patterns = {}
+    },
     database = {
         save_location = '~/.config/nvcode_db',
         auto_execute = 1
