@@ -5,10 +5,21 @@ Formatters and linters should be
 filled in as strings with either
 a global executable or a path to
 an executable
-]] -- general
+]]
+
+-- general
 O.auto_complete = true
-O.colorscheme = 'nvcode'
+O.colorscheme = 'lunar'
 O.auto_close_tree = 0
+O.wrap_lines = false
+
+-- @usage pass a table with your desired languages
+O.treesitter.ensure_installed = "all"
+O.treesitter.ignore_install = {"haskell"}
+O.treesitter.highlight.enabled = true
+O.treesitter.playground.enabled = true
+O.treesitter.rainbow.enabled = false
+
 
 O.clang.diagnostics.virtual_text = false
 O.clang.diagnostics.signs = false
@@ -27,9 +38,10 @@ O.python.diagnostics.signs = true
 O.python.diagnostics.underline = true
 
 -- lua
+-- TODO look into stylua
 O.lua.formatter = 'lua-format'
 -- O.lua.formatter = 'lua-format'
-O.lua.autoformat = true
+O.lua.autoformat = false
 
 -- javascript
 O.tsserver.formatter = 'prettier'
