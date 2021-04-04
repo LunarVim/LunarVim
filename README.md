@@ -186,25 +186,23 @@ Move user config into `config.lua` ts-comment string for react
 
 From here I will update for bug fixes and implement low priority
 features when I have time
+highlight EndOfBuffer ctermfg=black ctermbg=black set to background color for lunar
+
 
 **LOW PRIORITY**
 
 - vim vsnips dir should be co-located with config
-- list all binaries needed for formatters and linters
-- add badges to readme
+- list all binaries needed for formatters and linters (one day add in wiki)
 - Implement what I can from this java config:
   [link](https://github.com/mfussenegger/nvim-jdtls/wiki/Sample-Configurations)
   - better ui for code actions - formatting
   - setup junit tests for java
 - look into emmet-ls
-- toggle virtual text diagnostics
-- configure neogit
 - vim ult test
+- which-key all in lua
 - what is `fzy`
 - https://github.com/pwntester/octo.nvim
 - configure surround
-- maybe incorporate ultisnips
-- switch back to `nvim-autopairs` when/if it doesn't break snippets 
 - Implement this for typescript https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
 - look into tabnine
 
