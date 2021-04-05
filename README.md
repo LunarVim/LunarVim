@@ -183,10 +183,9 @@ To set up your particular debugger, look here:
 **HIGH PRIORITY**
 
 Move user config into `config.lua` ts-comment string for react
-
 From here I will update for bug fixes and implement low priority
 features when I have time
-highlight EndOfBuffer ctermfg=black ctermbg=black set to background color for lunar
+highlight EndOfBuffer ctermfg=black ctermbg=black set to background color for lunar to Hide `~`s in 
 
 
 **LOW PRIORITY**
