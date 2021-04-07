@@ -107,6 +107,7 @@ return require('packer').startup(function(use)
     use 'unblevable/quick-scope' -- hop may replace you
     use 'phaazon/hop.nvim'
     use 'kevinhwang91/rnvimr' -- telescope may fully replace you
+    use 'nacro90/numb.nvim' -- peek to number you are going to jump to
 
     -- General Plugins
     use 'liuchengxu/vim-which-key'
