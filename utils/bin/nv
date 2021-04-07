@@ -1,2 +1,19 @@
 #!/bin/bash
-nvim -u ~/.config/nvcode/init.lua
+
+GLOBAL=1
+
+source /opt/nvcode/nvim/utils/bin/nvcode-env.sh
+
+export LV_BASE=${NVCODE_BASE}
+
+nvim -u ${NVCODE_BASE_CONFIG} ${NVCODE_SYNC} $@
+
+if [ -v NVCODE_SYNC ]; then
+  touch ${NVCODE_USER}/.packer_sync
+fi
+
+if [ -v NVCODE_CONFIG_INIT ]; then
+  mkdir -p ${NVCODE_USER_CONFIG}
+  cp ${NVCODE_CONFIG_DIR}/nv-settings.lua ${NVCODE_USER_CONFIG}/nvim/nv-settings.lua
+  touch ${NVCODE_USER_CONFIG}/nvim/init.lua
+fi

@@ -57,6 +57,28 @@ LunarVim provides neovim configuration files that take advantage of
 tree-sitter and language server protocol. The configuration is written
 in lua.
 
+# Global Install
+
+To install globally:
+
+```
+git clone https://github.com/jameswalmsley/nvcode.git -b global-install nvcode.global
+cd nvcode.global/utils/bin
+sudo ./nvcode-upgrade.sh -g
+```
+
+This install a copy of the nvcode config into `/usr/local/share/nvcode/nvim`, and installs the nv,
+starter script to `/usr/local/bin`
+
+The script will use sudo to run nvim as the calling user to sync plugins to `~/.local/share/nvcode/data/nvim`.
+
+It leaves nvim open, simply exit nvim when finished. (Couldn't get headless nvim to not quit early on packer).
+
+Once completed you should be able to run nv without interfering with the main .config/nvim config.
+
+NOTE.. This global install will use `.config/nvcode/nvim`
+
+
 ## Why do I want tree-sitter and LSP?
 
 - Normally, an editor uses regular expression parsing for things like
