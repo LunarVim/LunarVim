@@ -123,6 +123,7 @@ return require('packer').startup(function(use)
     use 'MattesGroeger/vim-bookmarks'
     use 'windwp/nvim-autopairs'
     use 'mbbill/undotree'
+	use 'nacro90/numb.nvim'
 
     -- Database
     use 'tpope/vim-dadbod'
