@@ -1,2 +1,2 @@
 #!/bin/bash
-nvim -u ~/.config/nvcode/init.lua
+nvim -u ~/AppData/Local/nvcode/init.lua

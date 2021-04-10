@@ -15,7 +15,7 @@ end
 
 local bundles = {
     vim.fn.glob(
-        "~/.config/nvim/.debuggers/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
+        "~/AppData/Local/nvim/.debuggers/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
 };
 
 local on_attach = function(client, bufr)

@@ -29,7 +29,7 @@ utils.define_augroups({
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     },
     _java = {
-        {'FileType', 'java', 'luafile ~/.config/nvim/lua/lsp/java-ls.lua'},
+        {'FileType', 'java', 'luafile ~/AppData/Local/nvim/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
     },
     _dashboard = {

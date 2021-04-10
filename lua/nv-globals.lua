@@ -17,7 +17,7 @@ O = {
         rainbow = {enabled = false}
     },
 
-    database = {save_location = '~/.config/nvcode_db', auto_execute = 1},
+    database = {save_location = '~/AppData/Local/nvcode_db', auto_execute = 1},
     python = {
         linter = '',
         -- @usage can be 'yapf', 'black'

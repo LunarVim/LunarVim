@@ -1,8 +1,8 @@
 {
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
-  "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
-  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/AppData/Local/nvim/vimscript/nv-vscode/init.vim",
+  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/AppData/Local/nvim/vimscript/nv-vscode/init.vim",
   "whichkey.sortOrder": "alphabetically",
   "whichkey.delay": 0,
   "whichkey.bindings": [
@@ -995,7 +995,7 @@
   "workbench.activityBar.visible": true,
   "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
   "leetcode.defaultLanguage": "javascript",
-  "leetcode.hint.configWebviewMarkdown": false,
+  "leetcode.hintAppData/LocalWebviewMarkdown": false,
   "leetcode.hint.commentDescription": false,
   "window.zoomLevel": 2,
   "window.menuBarVisibility": "toggle",
