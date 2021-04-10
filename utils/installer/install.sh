@@ -109,7 +109,7 @@ installonubuntu() {
 }
 
 installonarch() {
-	sudo pacman -S install ripgrep fzf ranger
+	sudo pacman -S ripgrep fzf ranger
 	which yay >/dev/null && yay -S python-ueberzug-git || pipinstallueberzug
 	pip3 install neovim-remote
 	npm install -g tree-sitter-cli

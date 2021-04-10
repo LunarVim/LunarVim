@@ -2,7 +2,8 @@ local gl = require('galaxyline')
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
-    bg = '#2E2E2E',
+    -- bg = '#2E2E2E',
+    bg = '#292D38',
     yellow = '#DCDCAA',
     dark_yellow = '#D7BA7D',
     cyan = '#4EC9B0',
@@ -17,7 +18,8 @@ local colors = {
     vivid_blue = '#4FC1FF',
     light_blue = '#9CDCFE',
     red = '#D16969',
-    error_red = '#F44747'
+    error_red = '#F44747',
+    info_yellow = '#FFCC66'
 }
 local condition = require('galaxyline.condition')
 local gls = gl.section
@@ -110,9 +112,11 @@ gls.right[1] = {
 }
 gls.right[2] = {DiagnosticWarn = {provider = 'DiagnosticWarn', icon = '  ', highlight = {colors.orange, colors.bg}}}
 
-gls.right[3] = {DiagnosticHint = {provider = 'DiagnosticHint', icon = '  ', highlight = {colors.blue, colors.bg}}}
+gls.right[3] = {
+    DiagnosticHint = {provider = 'DiagnosticHint', icon = '  ', highlight = {colors.vivid_blue, colors.bg}}
+}
 
-gls.right[4] = {DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.blue, colors.bg}}}
+gls.right[4] = {DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.info_yellow, colors.bg}}}
 
 gls.right[5] = {
     ShowLspClient = {

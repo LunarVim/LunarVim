@@ -3,7 +3,7 @@
 " Timeout
 let g:which_key_timeout = 100
 
-let g:which_key_display_names = {'<CR>': '↵', '<TAB>': '⇆'}
+let g:which_key_display_names = {'<CR>': '↵', '<TAB>': '⇆', " ": 'SPC'}
 
 " Map leader to which_key
 nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
@@ -21,6 +21,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+let g:which_key_map['/'] = 'comment toggle'
 let g:which_key_map[';'] = [ ':Dashboard'                                      , 'home screen' ]
 let g:which_key_map[','] = [ '<Plug>(emmet-expand-abbr)'                       , 'expand tags' ]
 let g:which_key_map['"'] = [ '<Plug>PeekupOpen'                                , 'registers' ]
@@ -29,8 +30,10 @@ let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 ,
 let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
 let g:which_key_map['M'] = [ ':MarkdownPreviewToggle'                          , 'markdown preview']
-let g:which_key_map['h'] = [ ':let @/ = ""'                                    , 'no highlight' ]
+let g:which_key_map['H'] = [ ':let @/ = ""'                                    , 'no highlight' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+let g:which_key_map['*'] = [ ':DogeGenerate'                                   , 'documentation generator' ]
+let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree' ]
 " TODO create entire treesitter section
 let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
@@ -64,14 +67,15 @@ let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 'l' : [':Bracey'                 , 'start live server'],
-      \ 'L' : [':BraceyStop'             , 'stop live server'],
+      \ 'i' : [':IndentBlanklineToggle'  , 'toggle indent lines'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 's' : [':s/\%V\(.*\)\%V/"\1"/'   , 'surround'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
       \ }
+      " \ 'l' : [':Bracey'                 , 'start live server'],
+      " \ 'L' : [':BraceyStop'             , 'stop live server'],
 
 " b is for buffer
 let g:which_key_map.b = {
@@ -79,7 +83,7 @@ let g:which_key_map.b = {
       \ '>' : [':BufferMoveNext'        , 'move next'],
       \ '<' : [':BufferMovePrevious'    , 'move prev'],
       \ 'b' : [':BufferPick'            , 'pick buffer'],
-      \ 'd' : [':Bdelete'               , 'delete-buffer'],
+      \ 'd' : [':BufferClose'               , 'delete-buffer'],
       \ 'n' : ['bnext'                  , 'next-buffer'],
       \ 'p' : ['bprevious'              , 'previous-buffer'],
       \ '?' : ['Buffers'                , 'fzf-buffer'],
@@ -98,6 +102,14 @@ let g:which_key_map.d = {
       " \ 'O' : ['DebugStepOut'                  , 'next-buffer'],
       " \ 'S' : ['DebugGetSession '              , 'fzf-buffer'],
 
+" D is for database
+let g:which_key_map.D = {
+      \ 'name' : '+database' ,
+      \ 'u' : ['DBUIToggle '        , 'db ui toggle'],
+      \ 'f' : ['DBUIFindBuffer'     , 'db find buffer'],
+      \ 'r' : ['DBUIRenameBuffer'   , 'db rename buffer'],
+      \ 'l' : ['DBUILastQueryInfo'  , 'db last query'],
+      \ }
 
 " F is for fold
 let g:which_key_map.F = {
@@ -117,7 +129,7 @@ let g:which_key_map.F = {
 " m is for mark
 " I'd rather use regular marks but they never clear
 let g:which_key_map.m = {
-    \ 'name': '+fold',
+\ 'name': '+mark',
     \ 't' : [':BookmarkToggle'   , 'toggle'],
     \ 'j' : [':BookmarkNext'   , 'next mark'],
     \ 'k' : [':BookmarkPrev'   , 'prev mark']
@@ -158,7 +170,6 @@ let g:which_key_map.g = {
       \ 'j' : [':NextHunk'                         , 'next hunk'],
       \ 'k' : [':PrevHunk'                         , 'prev hunk'],
       \ 'l' : [':Git log'                          , 'log'],
-      \ 'n' : [':Neogit'                           , 'neogit'],
       \ 'p' : [':PreviewHunk'                      , 'preview hunk'],
       \ 'r' : [':ResetHunk'                        , 'reset hunk'],
       \ 'R' : [':ResetBuffer'                      , 'reset buffer'],
@@ -166,6 +177,7 @@ let g:which_key_map.g = {
       \ 'S' : [':Gstatus'                          , 'status'],
       \ 'u' : [':UndoStageHunk'                    , 'undo stage hunk'],
       \ }
+      " \ 'n' : [':Neogit'                           , 'neogit'],
 
 " G is for gist
 let g:which_key_map.G = {
@@ -193,7 +205,6 @@ let g:which_key_map.l = {
       \ 'v' : [':LspVirtualTextToggle'               , 'lsp toggle virtual text'],
       \ 'l' : [':Lspsaga lsp_finder'                 , 'lsp finder'],
       \ 'L' : [':Lspsaga show_line_diagnostics'      , 'line_diagnostics'],
-      \ 'o' : [':Vista!!'                            , 'outline'],
       \ 'p' : [':Lspsaga preview_definition'         , 'preview definition'],
       \ 'q' : [':Telescope quickfix'                 , 'quickfix'],
       \ 'r' : [':Lspsaga rename'                     , 'rename'],
@@ -203,6 +214,7 @@ let g:which_key_map.l = {
       \ 'S' : [':Telescope lsp_workspace_symbols'    , 'workspace symbols'],
       \ }
       " \ 'H' : [':Lspsaga signature_help'             , 'signature_help'],
+      " \ 'o' : [':Vista!!'                            , 'outline'],
 
 " t is for terminal
 let g:which_key_map.t = {
@@ -221,10 +233,10 @@ let g:which_key_map.t = {
       \ }
       " \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
 
-let g:which_key_map.R = {
-      \ 'name' : '+Find_Replace' ,
-      \ 'f' : [':Farr --source=vimgrep'    , 'file'],
-      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
-      \ }
+" let g:which_key_map.R = {
+"       \ 'name' : '+Find_Replace' ,
+"       \ 'f' : [':Farr --source=vimgrep'    , 'file'],
+"       \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+"       \ }
 
 call which_key#register('<Space>', "g:which_key_map")
