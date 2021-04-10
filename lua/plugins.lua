@@ -75,6 +75,10 @@ return require('packer').startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
     use 'sheerun/vim-polyglot'
 
+    -- theme
+    use 'aloussase/cyberpunk'
+    use {'challenger-deep-theme/vim', as = 'challenger-deep'}
+
     -- Git
     -- use 'TimUntersberger/neogit'
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
@@ -92,10 +96,10 @@ return require('packer').startup(function(use)
     -- use 'turbio/bracey.vim'
 
     -- Php
-    use 'phpactor/phpactor'
+    -- use 'phpactor/phpactor'
 
     -- Flutter
-    use 'thosakwe/vim-flutter'
+    -- use 'thosakwe/vim-flutter'
 
     -- Dependency assistent
     use 'akinsho/dependency-assist.nvim'
@@ -107,6 +111,7 @@ return require('packer').startup(function(use)
     use 'unblevable/quick-scope' -- hop may replace you
     use 'phaazon/hop.nvim'
     use 'kevinhwang91/rnvimr' -- telescope may fully replace you
+    use 'easymotion/vim-easymotion'
 
     -- General Plugins
     use 'liuchengxu/vim-which-key'
@@ -124,13 +129,15 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-autopairs'
     use 'mbbill/undotree'
 	use 'nacro90/numb.nvim'
+    use 'fastfold'
+    use 'sickill/vim-pasta'
 
     -- Database
     use 'tpope/vim-dadbod'
     use 'kristijanhusak/vim-dadbod-ui'
     use 'kristijanhusak/vim-dadbod-completion'
 
-    -- Documentation Generator 
+    -- Documentation Generator
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
     -- TODO put this back when stable for indent lines
@@ -153,7 +160,7 @@ return require('packer').startup(function(use)
     -- vim.g.UltiSnipsExpandTrigger="<CR>"
     -- vim.g.UltiSnipsJumpForwardTrigger="<Tab>"
     -- vim.g.UltiSnipsJumpBackwardTrigger="<S-Tab>"
-    -- use 'blackcauldron7/surround.nvim'
+    use 'blackcauldron7/surround.nvim'
     -- use 'ChristianChiarulli/java-snippets'
     -- use 'xabikos/vscode-javascript'
     -- use 'dsznajder/vscode-es7-javascript-react-snippets'
@@ -164,11 +171,18 @@ return require('packer').startup(function(use)
     -- use 'nelstrom/vim-visual-star-search'
     -- TODO switch back when config support snips
     -- use 'cohama/lexima.vim'
-    -- use 'bfredl/nvim-miniyank'
+    use 'bfredl/nvim-miniyank'
     -- use 'brooth/far.vim'
     -- use 'liuchengxu/vista.vim'
     -- use 'psliwka/vim-smoothie'
     -- use 'nvim-treesitter/nvim-treesitter-refactor'
     -- use 'nvim-treesitter/playground'
     -- use 'moll/vim-bbye'
+    use 'ianva/vim-youdao-translater'
+    use 'tpope/vim-eunuch'
+    use 'junegunn/vim-peekaboo'
+    use 'tpope/vim-repeat'
+    use 'ntpeters/vim-better-whitespace'
+    use 'asins/vimcdoc'
+    use 'pechorin/any-jump.vim'
 end)

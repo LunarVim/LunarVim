@@ -14,7 +14,7 @@ vim.g.dashboard_custom_section = {
     b = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
     c = {description = {'  Load Last Session  '}, command = 'SessionLoad'},
     d = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
-    e = {description = {'  Settings           '}, command = ':e ~/AppData/Local/nvim/nv-settings.lua'}
+    e = {description = {'  Settings           '}, command = ':e ~/.config/nvim/nv-settings.lua'}
     -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
 }
 
@@ -30,4 +30,4 @@ vim.g.dashboard_custom_section = {
 -- find_history = 'SPC f h',
 
 -- vim.g.dashboard_session_directory = '~/.cache/nvim/session'
-vim.g.dashboard_custom_footer = {'chrisatmachine.com'}
+vim.g.dashboard_custom_footer = {'I Love You, 小璇同学❤❤❤'}

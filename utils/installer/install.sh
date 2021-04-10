@@ -16,7 +16,7 @@ installnodeubuntu() {
 
 moveoldnvim() {
 	echo "Not installing NVCode"
-	echo "Please move your ~/AppData/Local/nvim folder before installing"
+	echo "Please move your ~/.config/nvim folder before installing"
 	exit
 }
 
@@ -67,12 +67,12 @@ installpacker() {
 
 cloneconfig() {
 	echo "Cloning NVCode configuration"
-	git clone https://github.com/ChristianChiarulli/nvcode.git ~/AppData/Local/nvim
-	mv $HOME/AppData/Local/nvim/init.lua $HOME/AppData/Local/nvim/init.lua.tmp
-	mv $HOME/AppData/Local/nvim/utils/init.lua $HOME/AppData/Local/nvim/init.lua
-	# nvim -u $HOME/AppData/Local/nvim/init.lua --headless --noplugin +PackerInstall +qall
-	rm $HOME/AppData/Local/nvim/init.lua
-	mv $HOME/AppData/Local/nvim/init.lua.tmp $HOME/AppData/Local/nvim/init.lua
+	git clone https://github.com/ChristianChiarulli/nvcode.git ~/.config/nvim
+	mv $HOME/.config/nvim/init.lua $HOME/.config/nvim/init.lua.tmp
+	mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
+	# nvim -u $HOME/.config/nvim/init.lua --headless --noplugin +PackerInstall +qall
+	rm $HOME/.config/nvim/init.lua
+	mv $HOME/.config/nvim/init.lua.tmp $HOME/.config/nvim/init.lua
 }
 
 asktoinstallnode() {
@@ -126,7 +126,7 @@ installextrapackages() {
 echo 'Installing NVCode'
 
 # move old nvim directory if it exists
-[ -d "$HOME/AppData/Local/nvim" ] && moveoldnvim
+[ -d "$HOME/.config/nvim" ] && moveoldnvim
 
 # install pip
 which pip3 >/dev/null && echo "pip installed, moving on..." || asktoinstallpip
@@ -143,17 +143,17 @@ else
 	installpacker
 fi
 
-if [ -a "$HOME/AppData/Local/nvcode/init.lua" ]; then
+if [ -a "$HOME/.config/nvcode/init.lua" ]; then
 	echo 'nvcode already installed'
 else
 	# clone config down
 	cloneconfig
-	echo 'export PATH=$HOME/AppData/Local/nvcode/utils/bin:$PATH' >>~/.zshrc
-	echo 'export PATH=$HOME/AppData/Local/nvcode/utils/bin:$PATH' >>~/.bashrc
+	echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.zshrc
+	echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
 fi
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 
-echo "I also recommend you add 'set preview_images_method ueberzug' to ~/AppData/Local/ranger/rc.conf"
+echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
 
-echo 'export PATH=/home/$USER/AppData/Local/nvcode/utils/bin:$PATH appending to zshrc/bashrc'
+echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH appending to zshrc/bashrc'

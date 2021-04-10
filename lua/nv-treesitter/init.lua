@@ -1,4 +1,4 @@
-require'nvim-treesitterAppData/Locals'.setup {
+require'nvim-treesitter.configs'.setup {
     ensure_installed = O.treesitter.ensure_installed, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     -- TODO seems to be broken
     ignore_install = O.treesitter.ignore_install,

@@ -2,7 +2,7 @@
 " TODO Also some of it is redundant
 packadd quickscope
 
-luafile ~/AppData/Local/nvim/lua/settings.lua
+luafile ~/.config/nvim/lua/settings.lua
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 

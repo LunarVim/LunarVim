@@ -2,7 +2,7 @@
 require('plugins')
 require('nv-globals')
 require('nv-utils')
-vim.cmd('luafile ~/AppData/Local/nvim/nv-settings.lua')
+vim.cmd('luafile ~/.config/nvim/nv-settings.lua')
 require('nv-autocommands')
 -- require('config')
 require('settings')
@@ -43,8 +43,8 @@ require('nv-dependency')
 -- require('nv-lspinstall')
 
 -- Which Key (Hope to replace with Lua plugin someday)
-vim.cmd('source ~/AppData/Local/nvim/vimscript/nv-whichkey/init.vim')
-vim.cmd('source ~/AppData/Local/nvim/vimscript/functions.vim')
+vim.cmd('source ~/.config/nvim/vimscript/nv-whichkey/init.vim')
+vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
 
 -- LSP
 require('lsp')

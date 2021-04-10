@@ -4,7 +4,7 @@ dial.augends["custom#boolean"] = dial.common.enum_cyclic{
     name = "boolean",
     strlist = {"true", "false"},
 }
-table.insert(dialAppData/Local.searchlist.normal, "custom#boolean")
+table.insert(dial.config.searchlist.normal, "custom#boolean")
 vim.cmd([[
 nmap <C-a> <Plug>(dial-increment)
 nmap <C-x> <Plug>(dial-decrement)
