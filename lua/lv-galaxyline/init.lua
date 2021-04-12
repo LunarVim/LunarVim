@@ -107,6 +107,15 @@ gls.left[6] = {
     }
 }
 
+gls.left[7] = {
+    MetalsStatus = {
+      provider = function()
+        return "  " .. (vim.g["metals_status"] or "")
+      end,
+      highlight = { colors.line_bg, colors.bg },
+    }
+}
+
 gls.right[1] = {
     DiagnosticError = {provider = 'DiagnosticError', icon = '  ', highlight = {colors.error_red, colors.bg}}
 }
