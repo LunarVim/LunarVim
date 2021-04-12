@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
 
     -- Status Line and Bufferline
-    use { 'glepnir/galaxyline.nvim', config = my('nv-galaxyline') }
+    use { 'glepnir/galaxyline.nvim' }
     -- use { 'glepnir/galaxyline.nvim', config = function() require'nv-galaxyline' end } -- inline fn alternative
     use 'romgrk/barbar.nvim'
 
