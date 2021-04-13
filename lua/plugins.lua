@@ -124,13 +124,14 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-autopairs'
     use 'mbbill/undotree'
 	use 'nacro90/numb.nvim'
+	use 'turbio/bracey.vim'
 
     -- Database
     use 'tpope/vim-dadbod'
     use 'kristijanhusak/vim-dadbod-ui'
     use 'kristijanhusak/vim-dadbod-completion'
 
-    -- Documentation Generator 
+    -- Documentation Generator
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
     -- TODO put this back when stable for indent lines
