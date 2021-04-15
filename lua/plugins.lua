@@ -38,7 +38,6 @@ return require("packer").startup(
         -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
         use {"neovim/nvim-lspconfig", opt = true}
         use {"glepnir/lspsaga.nvim", opt = true}
-        use {"onsails/lspkind-nvim", opt = true}
         use {"kabouzeid/nvim-lspinstall", opt = true}
 
         -- Tlescope
@@ -103,6 +102,5 @@ return require("packer").startup(
         require_plugin("nvim-web-devicons")
         require_plugin("galaxyline.nvim")
         require_plugin("barbar.nvim")
-        -- require_plugin("lspkind-nvim")
     end
 )
