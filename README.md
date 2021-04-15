@@ -1,28 +1,33 @@
-![NVCode Logo](./utils/media/nvcode_logo.png)
+```
+   _..._                             
+ .'   (_`.    _                         __     ___           
+:  .      :  | |   _   _ _ __   __ _ _ _\ \   / (_)_ __ ___  
+:)    ()  :  | |  | | | | '_ \ / _` | '__\ \ / /| | '_ ` _ \ 
+`.   .   .'  | |__| |_| | | | | (_| | |   \ V / | | | | | | |
+  `-...-'    |_____\__,_|_| |_|\__,_|_|    \_/  |_|_| |_| |_|
+```
 
 
-<a href="https://discord.gg/Xb9B4Ny"><img src="https://img.shields.io/discord/308323056592486420?logo=discord" alt="chat on Discord"></a>
-[![GitHub license](https://img.shields.io/github/license/ChristianChiarulli/nvcode)](https://github.com/ChristianChiarulli/nvcode/blob/master/LICENSE)
-[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/ChristianChiarulli/nvcode)
+[![GitHub license](https://img.shields.io/github/license/ChristianChiarulli/lunarvim)](https://github.com/ChristianChiarulli/lunarvim/blob/master/LICENSE)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/ChristianChiarulli/lunarvim)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://twitter.com/intent/follow?screen_name=chrisatmachine"><img src="https://img.shields.io/twitter/follow/chrisatmachine?style=social&logo=twitter" alt="follow on Twitter"></a>
 
+![LunarVim Demo](./utils/media/demo.png)
 
+1. This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
 
+2. This is also a community project, if you would like to see support for a feature or [language](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) consider making a PR.
 
-![NVCode Demo](./utils/media/demo.png)
-
-This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
-
-This is also a community project, if you would like to see support for a feature or language consider making a PR.
+3. This project will do it's best to include core features you would expect from a modern IDE, while making it easy to add or remove what the user wants.
 
 ## Install In One Command!
 
 Make sure you have the newest version of Neovim
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
 After installation run `nvim` and then `:PackerInstall`
@@ -43,30 +48,6 @@ or if you are on Arch you can get it from the AUR
 yay -S neovim-nightly-git
 ```
 
-## VSCode support
-
-I recommend you support Free/Libre versions if you plan to use VSCode:
-
-- [VSCodium](https://vscodium.com/)
-
-- Article to get you set up with VSCodium: [link](https://www.chrisatmachine.com/Neovim/22-vscodium-neovim/) 
-
-After installing the [Neovim
-extension](https://github.com/asvetliakov/vscode-neovim) in VSCode
-
-I recommend using this alongside the VSCode
-[which-key](https://github.com/VSpaceCode/vscode-which-key) extension
-
-You will also need `settings.json` and `keybindings.json` which can be
-found in utils/vscode\_config
-
-Point the nvim path to your `nvim` binary
-
-Point your `init.vim` path to:
-
-``` vim
-$HOME/.config/nvim/vimscript/nv-vscode/init.vim
-```
 
 ## Clipboard Support
 
@@ -110,16 +91,12 @@ For a more in depth LSP support:
 
 ## Useful Programs
 
+LunarVim depends on the following:
+
 ``` bash
 ranger
 ueberzug
-fd
 ripgrep
-jq
-fzf
-lazygit
-lazydocker
-ncdu
 pynvim
 neovim-remote
 ```
@@ -160,23 +137,35 @@ npm install -g prettier
 pandoc
 ```
 
-## Vim Gists
-
-To use vim-gists you will need to configure the following:
-
-``` bash
-git config --global github.user <username>
-```
-
-## Snippets
-
-If you are looking for snippets checkout this github topic: [Snippet
-Topic](https://github.com/topics/vscode-snippets)
-
 ## De-bugging
 
 To set up your particular debugger, look here:
 [link](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
+
+## VSCodium
+
+I recommend you support Free/Libre versions if you plan to use VSCode:
+
+- [VSCodium](https://vscodium.com/)
+
+- Article to get you set up with VSCodium: [link](https://www.chrisatmachine.com/Neovim/22-vscodium-neovim/) 
+
+After installing the [Neovim
+extension](https://github.com/asvetliakov/vscode-neovim) in VSCode
+
+I recommend using this alongside the VSCode
+[which-key](https://github.com/VSpaceCode/vscode-which-key) extension
+
+You will also need `settings.json` and `keybindings.json` which can be
+found in utils/vscode\_config
+
+Point the nvim path to your `nvim` binary
+
+Point your `init.vim` path to:
+
+``` vim
+$HOME/.config/nvim/vimscript/lv-vscode/init.vim
+```
 
 ## TODO
 
