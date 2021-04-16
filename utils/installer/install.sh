@@ -25,11 +25,17 @@ installnodearch() {
 	sudo pacman -S npm
 }
 
+installnodefedora() {
+    sudo dnf install -y nodejs 
+    sudo dnf install -y npm
+}
+
 installnode() {
 	echo "Installing node..."
 	[ "$(uname)" == "Darwin" ] && installnodemac
 	[ -n "$(uname -a | grep Ubuntu)" ] && installnodeubuntu
 	[ -f "/etc/arch-release" ] && installnodearch
+	[ -f "/etc/fedora-release" ] && installnodefedora
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
 }
@@ -48,11 +54,16 @@ installpiponarch() {
 	pacman -S python-pip
 }
 
+installpiponfedora() {
+	sudo dnf install -y pip >/dev/nul
+}
+
 installpip() {
 	echo "Installing pip..."
 	[ "$(uname)" == "Darwin" ] && installpiponmac
 	[ -n "$(uname -a | grep Ubuntu)" ] && installpiponubuntu
 	[ -f "/etc/arch-release" ] && installpiponarch
+	[ -f "/etc/fedora-release" ] && installpiponfedora
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
@@ -115,10 +126,17 @@ installonarch() {
 	npm install -g tree-sitter-cli
 }
 
+installonfedora() {
+    sudo dnf groupinstall "X Software Development"
+    sudo dnf install -y fzf ripgrep ranger
+    pip3 install wheel ueberzug
+}
+
 installextrapackages() {
 	[ "$(uname)" == "Darwin" ] && installonmac
 	[ -n "$(uname -a | grep Ubuntu)" ] && installonubuntu
 	[ -f "/etc/arch-release" ] && installonarch
+	[ -f "/etc/fedora-release" ] && installonfedora
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 

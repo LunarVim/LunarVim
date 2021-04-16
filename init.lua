@@ -48,3 +48,5 @@ require('lsp.latex-ls')
 require('lsp.svelte-ls')
 require('lsp.tailwindcss-ls')
 require('lsp.ruby-ls')
+require('lsp.kotlin-ls')
+
