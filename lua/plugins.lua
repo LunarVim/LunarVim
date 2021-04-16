@@ -40,24 +40,24 @@ return require("packer").startup(
         use {"glepnir/lspsaga.nvim", opt = true}
         use {"kabouzeid/nvim-lspinstall", opt = true}
 
-        -- Tlescope
+        -- Telescope
         use {"nvim-lua/popup.nvim", opt = true}
         use {"nvim-lua/plenary.nvim", opt = true}
         use {"nvim-telescope/telescope.nvim", opt = true}
 
-        -- Dbugging
+        -- Debugging
         use {"mfussenegger/nvim-dap", opt = true}
 
-        -- Atocomplete
+        -- Autocomplete
         use {"hrsh7th/nvim-compe", opt = true}
         use {"hrsh7th/vim-vsnip", opt = true}
         use {"rafamadriz/friendly-snippets", opt = true}
 
-        -- Teesitter
+        -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
         use {"windwp/nvim-ts-autotag", opt = true}
 
-        -- Eplorer
+        -- Explorer
         use "kyazdani42/nvim-tree.lua"
         -- TODO remove when open on dir is supported by nvimtree
         use "kevinhwang91/rnvimr"
