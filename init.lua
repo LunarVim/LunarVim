@@ -16,7 +16,6 @@ require('lv-gitsigns')
 require('lv-nvimtree')
 require('lv-treesitter')
 require('lv-autopairs')
-require('lv-barbar')
 require('lv-rnvimr')
 
 -- Which Key (Hope to replace with Lua plugin someday)
