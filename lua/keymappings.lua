@@ -1,6 +1,9 @@
 vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
 vim.g.mapleader = ' '
 
+-- reload init.vim
+-- vim.api.nvim_set_keymap('n', '<Leader>sv', ':luafile%<CR>', {noremap = true, silent = true})
+
 -- no hl
 vim.api.nvim_set_keymap('n', '<Leader>h', ':set hlsearch!<CR>', {noremap = true, silent = true})
 
@@ -36,6 +39,7 @@ vim.cmd([[
   nnoremap <silent> <C-Left>  :vertical resize -2<CR>
   nnoremap <silent> <C-Right> :vertical resize +2<CR>
 ]])
+
 
 -- better indenting
 vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
