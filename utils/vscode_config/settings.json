@@ -1,4 +1,130 @@
 {
+  "workbench.editor.enablePreview": false,
+  "workbench.list.keyboardNavigation": "simple",
+  "workbench.colorTheme": "One Dark Pro",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.scrollBeyondLastLine": false,
+  "files.autoSave": "onFocusChange",
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "workbench.startupEditor": "newUntitledFile",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "colorize.colorized_colors": ["BROWSERS_COLORS", "HEXA", "RGB", "HSL"],
+  "colorize.colorized_variables": ["SASS", "CSS", "LESS", "STYLUS"],
+  "colorize.exclude": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/.git",
+    "**/node_modules",
+    "**/bower_components",
+    "**/tmp",
+    "**/dist",
+    "**/tests"
+  ],
+  "colorize.languages": [
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg",
+    "javascript"
+  ],
+  "bracket-pair-colorizer-2.excludedLanguages": [],
+  "files.insertFinalNewline": true,
+  "terraform.languageServer": {
+    "external": false,
+    "args": ["serve"]
+  },
+  "todo-tree.tree.showScanModeButton": false,
+  "go.useLanguageServer": true,
+  "markdown.extension.toc.levels": "2..6",
+  "markdown.extension.katex.macros": {},
+  "markdownlint.config": {
+    "MD041": false,
+    "MD033": false,
+    "MD034": false
+  },
+  "markdown.trace": "verbose",
+  "markdown.extension.toc.omittedFromToc": {},
+  "editor.wordWrap": "bounded",
+  "prettier.printWidth": 80,
+  "editor.wrappingIndent": "same",
+  "editor.wordWrapColumn": 120,
+  "editor.rulers": [80, 120],
+  "cSpell.diagnosticLevel": "Hint",
+  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?=-=-",
+  "emmet.showAbbreviationSuggestions": true,
+  "emmet.showExpandedAbbreviation": "always",
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "vetur.experimental.templateInterpolationService": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "python.languageServer": "Microsoft",
+  "python.formatting.provider": "black",
+  "terminal.integrated.inheritEnv": false,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "material-icon-theme.showWelcomeMessage": false,
+  "gitlens.codeLens.enabled": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "python.showStartPage": false,
+  "editor.snippetSuggestions": "top",
+  "tailwindCSS.includeLanguages": {
+    "typescript": "html",
+    "typescriptvue": "html"
+  },
+  "importCost.typescriptExtensions": ["\\.tsx?$", "\\.ts?$"],
+  "importCost.vueExtensions": ["\\.vue$"],
+  "python.pythonPath": "/usr/local/miniconda3/bin//python",
+  "workbench.list.automaticKeyboardNavigation": false,
+  "python.terminal.activateEnvironment": false,
+  "editor.cursorBlinking": "solid",
+  "editor.fontFamily": "FiraCode Nerd Font Mono, Hack, Menlo, Monaco, 'Courier New', monospace",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "terminal.external.osxExec": "iTerm.app",
+  "python.condaPath": "$HOME/.miniconda/bin/conda",
+  "python.insidersChannel": "off",
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "code-runner.executorMap": {
+    "python": "$pythonPath $fileName",
+    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+  },
+  "editor.minimap.enabled": false,
+  "prettier.requireConfig": true,
+  "eslint.format.enable": true,
+  "window.zoomLevel": 2,
+  "go.toolsManagement.autoUpdate": true,
+  // LUNARVIM
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
@@ -967,49 +1093,9 @@
       "command": "workbench.action.toggleZenMode"
     }
   ],
-  "workbench.editor.showTabs": true,
-  "sync.gist": "939951904a077b97f8001bc35f6b5948",
   "gitlens.hovers.currentLine.over": "line",
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "python.pythonPath": "/home/chris/.miniconda/envs/ds/bin/python",
-  "java.semanticHighlighting.enabled": true,
-  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/home/chris/.vscode-oss/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
-  "workbench.list.automaticKeyboardNavigation": false,
-  "oneDarkPro.editorTheme": "onedarkPro",
-  "python.languageServer": "Pylance",
-  "editor.scrollbar.horizontal": "hidden",
-  "editor.scrollbar.vertical": "hidden",
-  "kite.showWelcomeNotificationOnStartup": false,
-  "python.terminal.activateEnvironment": false,
-  "editor.cursorBlinking": "solid",
-  "editor.fontFamily": "JetBrainsMono Nerd Font, Hack, Menlo, Monaco, 'Courier New', monospace",
-  "files.exclude": {
-    "**/.classpath": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true
-  },
-  "terminal.external.osxExec": "iTerm.app",
-  "editor.minimap.enabled": false,
-  "workbench.activityBar.visible": true,
-  "leetcode.workspaceFolder": "/Users/chris/Repos/leetcode",
-  "leetcode.defaultLanguage": "javascript",
-  "leetcode.hint.configWebviewMarkdown": false,
-  "leetcode.hint.commentDescription": false,
-  "window.zoomLevel": 2,
-  "window.menuBarVisibility": "toggle",
-  "python.dataScience.alwaysTrustNotebooks": true,
-  "python.condaPath": "$HOME/.miniconda/bin/conda",
-  "python.formatting.provider": "black",
-  "python.insidersChannel": "off",
-  "terminal.integrated.shell.linux": "/bin/zsh",
-  "terminal.external.linuxExec": "/usr/bin/alacritty",
-  "code-runner.executorMap": {
-    "python": "$pythonPath $fileName",
-    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
-  },
+  "workbench.activityBar.visible": false,
   "editor.tokenColorCustomizations": {
     "[One Dark Pro]": {
       "textMateRules": [
@@ -1081,7 +1167,6 @@
       ]
     }
   },
-
   "workbench.colorCustomizations": {
     "[Default Dark+]": {
       "statusBar.background": "#2E2E2E",
@@ -1112,17 +1197,6 @@
       "terminal.ansiBrightYellow": "#d19a66"
     }
   },
-  "gitlens.advanced.telemetry.enabled": false,
-  "gitlens.currentLine.enabled": false,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "emmet.showSuggestionsAsSnippets": true,
-  "material-icon-theme.showWelcomeMessage": false,
-  "gitlens.codeLens.enabled": false,
-  "workbench.iconTheme": "material-icon-theme",
-  "git.autofetch": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "python.showStartPage": false,
-  "editor.snippetSuggestions": "bottom"
+  "gitlens.currentLine.enabled": true,
+  "workbench.editor.showTabs": false
 }
