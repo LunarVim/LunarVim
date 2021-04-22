@@ -52,4 +52,4 @@ vim.g.dashboard_custom_section = {
 -- find_history = 'SPC f h',
 
 -- vim.g.dashboard_session_directory = '~/.cache/nvim/session'
-vim.g.dashboard_custom_footer = {'chrisatmachine.com'}
+-- vim.g.dashboard_custom_footer = {'chrisatmachine.com'}
