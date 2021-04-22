@@ -13,6 +13,11 @@ require('gitsigns').setup {
     -- Default keymap options
     noremap = true,
     buffer = true,
+        ['n <leader>ps'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+        ['n <leader>pu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+        ['n <leader>pr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+        ['n <leader>pp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+        ['n <leader>pb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
   },
   watch_index = {
     interval = 1000
