@@ -7,7 +7,7 @@ require('gitsigns').setup {
     topdelete    = {hl = 'GitSignsDelete', text = '契', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
-  numhl = false,
+  numhl = true,
   linehl = false,
   keymaps = {
     -- Default keymap options
@@ -22,6 +22,7 @@ require('gitsigns').setup {
   watch_index = {
     interval = 1000
   },
+  current_line_blame = true,
   sign_priority = 6,
   update_debounce = 200,
   status_formatter = nil, -- Use default
