@@ -12,6 +12,7 @@ O.auto_complete = true
 O.colorscheme = 'lunar'
 O.auto_close_tree = 0
 O.wrap_lines = false
+O.colorcolumn = '80,120'
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"

@@ -7,6 +7,7 @@ O = {
     number = true,
     relative_number = true,
     shell = 'bash',
+    colorcolumn = '80,120',
 
     -- @usage pass a table with your desired languages
     treesitter = {
