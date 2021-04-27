@@ -83,6 +83,7 @@ return require("packer").startup(
         require_plugin("nvim-lspconfig")
         require_plugin("lspsaga.nvim")
         require_plugin("nvim-lspinstall")
+        require_plugin("friendly-snippets")
         require_plugin("popup.nvim")
         require_plugin("plenary.nvim")
         require_plugin("telescope.nvim")
