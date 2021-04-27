@@ -18,6 +18,9 @@ if O.lua.autoformat then table.insert(auto_formatters, lua_format) end
 local json_format = {'BufWritePre', '*.json', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
 if O.json.autoformat then table.insert(auto_formatters, json_format) end
 
+local ruby_format = {'BufWritePre', '*.rb', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
+if O.ruby.autoformat then table.insert(auto_formatters, ruby_format) end
+
 utils.define_augroups({
     _general_settings = {
         {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
