@@ -101,7 +101,7 @@ require"lspconfig".efm.setup {
             sh = sh_arguments,
             javascript = tsserver_args,
             javascriptreact = tsserver_args,
-			typescript = tsserver_args,
+			      typescript = tsserver_args,
             html = {prettier},
             css = {prettier},
             json = {prettier},

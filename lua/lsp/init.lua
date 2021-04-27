@@ -47,7 +47,7 @@ vim.lsp.protocol.CompletionItemKind = {
     "   (Value)",
     " 練 (Enum)",
     "   (Keyword)",
-    " ﬌  (Snippet)",
+    "   (Snippet)",
     "   (Color)",
     "   (File)",
     "   (Reference)",
