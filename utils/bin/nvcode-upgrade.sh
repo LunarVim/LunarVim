@@ -145,7 +145,7 @@ global_cmd=""
 [ -v GLOBAL ] && global_cmd="sudo"
 
 update_nv_script() {
-	${global_cmd} rm /usr/local/bin/nv
+	[ -f "/usr/local/bin/nv" ] && ${global_cmd} rm /usr/local/bin/nv
 	${global_cmd} ln -s ${NVCODE_CONFIG_DIR}/utils/bin/nv /usr/local/bin/nv
 	${global_cmd} sed -i "s:source.*:source ${NVCODE_CONFIG_DIR}/utils/bin/nvcode-env.sh:g" ${NVCODE_CONFIG_DIR}/utils/bin/nv
 }
