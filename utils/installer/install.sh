@@ -35,6 +35,7 @@ installnode() {
 	[ "$(uname)" == "Darwin" ] && installnodemac
 	[ -n "$(uname -a | grep Ubuntu)" ] && installnodeubuntu
 	[ -f "/etc/arch-release" ] && installnodearch
+	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
@@ -136,6 +137,7 @@ installextrapackages() {
 	[ "$(uname)" == "Darwin" ] && installonmac
 	[ -n "$(uname -a | grep Ubuntu)" ] && installonubuntu
 	[ -f "/etc/arch-release" ] && installonarch
+	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
