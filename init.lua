@@ -1,7 +1,7 @@
 require('plugins')
 require('lv-globals')
 require('lv-utils')
-vim.cmd('luafile ~/.config/nvim/lv-settings.lua')
+vim.cmd('luafile ~/AppData/Local/nvim/lv-settings.lua')
 require('lv-autocommands')
 require('settings')
 require('keymappings')
@@ -14,13 +14,14 @@ require('lv-dashboard')
 require('lv-telescope')
 require('lv-gitsigns')
 require('lv-nvimtree')
-require('lv-treesitter')
+-- TODO fix treesitter it's currently unstable
+-- require('lv-treesitter')
 require('lv-autopairs')
 require('lv-rnvimr')
 
 -- Which Key (Hope to replace with Lua plugin someday)
-vim.cmd('source ~/.config/nvim/vimscript/lv-whichkey/init.vim')
-vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
+vim.cmd('source ~/AppData/Local/nvim/vimscript/lv-whichkey/init.vim')
+vim.cmd('source ~/AppData/Local/vimscript/functions.vim')
 
 -- LSP
 require('lsp')
