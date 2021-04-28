@@ -14,7 +14,9 @@
      /    |    \        
           |             
 ```
->> This project aims to port LunarVim to Windows. It is not yet usable
+> This project aims to port LunarVim to Windows natively without the use of WSL.
+> It's mostly working! Just use the one line installer!
+> You don't even need neovim installed because the installer does that!!
 
 [![GitHub license](https://img.shields.io/github/license/ChristianChiarulli/LunarVim)](https://github.com/ChristianChiarulli/LunarVim/blob/master/LICENSE)
 [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/ChristianChiarulli/lunarvim)
@@ -34,55 +36,11 @@
 
 Make sure you have the newest version of Neovim
 
-``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+``` pwsh
+iwr -useb https://raw.githubusercontent.com/irishgreencitrus/SolarVim/master/utils/installer/install.ps1 | iex
 ```
 
 After installation run `nvim` and then `:PackerInstall`
-
-## Get the latest version of Neovim
-
-```bash
-cd ~
-sudo rm -r neovim
-git clone https://github.com/neovim/neovim
-cd neovim
-sudo make CMAKE_BUILD_TYPE=Release install
-cd ~
-sudo rm -r neovim
-```
-or if you are on Arch you can get it from the AUR
-```bash
-yay -S neovim-git
-```
-
-
-## Clipboard Support
-
-- On Mac `pbcopy` should be built-in
-
-- Ubuntu
-
-    ```bash
-    sudo apt install xclip
-    ```
-
-- Arch
-
-    ```bash
-    sudo pacman -S xclip
-    ```
-
-- WSL2
-
-    Make sure ~/bin is in your path in this case.
-    
-    ```bash
-    curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-    unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
-    chmod +x /tmp/win32yank.exe
-    mv /tmp/win32yank.exe ~/bin
-    ```
 
 ## LSP
 
