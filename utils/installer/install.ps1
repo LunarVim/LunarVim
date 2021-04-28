@@ -4,9 +4,11 @@ if (!$iswin) {
     exit
 }
 Write-Host "Scoop is being installed"
-$script = Invoke-WebRequest -Uri https://get.scoop.sh/ -UseBasicParsing
-Invoke-Expression $script
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+if (!(Test-Path "$HOME\scoop\shims")) {
+    $script = Invoke-WebRequest -Uri https://get.scoop.sh/ -UseBasicParsing
+    Invoke-Expression $script
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+}
 scoop install nodejs python llvm
 scoop bucket add versions
 scoop install neovim-nightly
