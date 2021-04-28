@@ -92,7 +92,7 @@ require"lspconfig".efm.setup {
     -- init_options = {initializationOptions},
     cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
     init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "python", "javascriptreact", "javascript", "typescript","sh", "html", "css", "json", "yaml", "markdown", "vue"},
+    filetypes = {"lua", "python", "javascriptreact", "javascript", "typescript","typescriptreact","sh", "html", "css", "json", "yaml", "markdown", "vue"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
@@ -101,7 +101,8 @@ require"lspconfig".efm.setup {
             sh = sh_arguments,
             javascript = tsserver_args,
             javascriptreact = tsserver_args,
-			      typescript = tsserver_args,
+			typescript = tsserver_args,
+			typescriptreact = tsserver_args,
             html = {prettier},
             css = {prettier},
             json = {prettier},
