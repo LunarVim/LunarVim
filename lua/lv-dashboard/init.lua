@@ -54,8 +54,8 @@ vim.g.dashboard_custom_section = {
     b = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
     c = {description = {'  Load Last Session  '}, command = 'SessionLoad'},
     d = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
-    e = {description = {'  Edit Colourscheme  '}, command = 'Telescope colorscheme'}
-	f = {description = {'  Settings           '}, command = ':e ~/AppData/Local/nvim/lv-settings.lua'}
+    e = {description = {'  Edit Colourscheme  '}, command = 'Telescope colorscheme'},
+    f = {description = {'  Settings           '}, command = ':e ~/AppData/Local/nvim/lv-settings.lua'}
     -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
 }
 
