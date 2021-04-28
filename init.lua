@@ -21,7 +21,7 @@ require('lv-rnvimr')
 
 -- Which Key (Hope to replace with Lua plugin someday)
 vim.cmd('source ~/AppData/Local/nvim/vimscript/lv-whichkey/init.vim')
-vim.cmd('source ~/AppData/Local/vimscript/functions.vim')
+vim.cmd('source ~/AppData/Local/nvim/vimscript/functions.vim')
 
 -- LSP
 require('lsp')
