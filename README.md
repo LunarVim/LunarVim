@@ -1,12 +1,20 @@
 ```
-   _..._                             
- .'   (_`.    _                         __     ___           
-:  .      :  | |   _   _ _ __   __ _ _ _\ \   / (_)_ __ ___  
-:)    ()  :  | |  | | | | '_ \ / _` | '__\ \ / /| | '_ ` _ \ 
-`.   .   .'  | |__| |_| | | | | (_| | |   \ V / | | | | | | |
-  `-...-'    |_____\__,_|_| |_|\__,_|_|    \_/  |_|_| |_| |_|
+          |             
+     \    |    /        
+ `.   \   |   /   .'    
+   `.  \  |  /  .'      
+`-.  `. \d8b/ .'  .-'    ____        _          __     ___           
+   `-. do0o88b .-'      / ___|  ___ | | __ _ _ _\ \   / (_)_ __ ___  
+<~~~~ 8o0O0o888 ~~~~>   \___ \ / _ \| |/ _` | '__\ \ / /| | '_ ` _ \ 
+<~~~~ 8o00o8888 ~~~~>    ___) | (_) | | (_| | |   \ V / | | | | | | |
+   _-' qoo888p '-_      |____/ \___/|_|\__,_|_|    \_/  |_|_| |_| |_|
+,-'  ,' /q8p\ `.  `-.   
+   ,'  /  |  \  `.      
+ ,'   /   |   \   `.    
+     /    |    \        
+          |             
 ```
-
+>> This project aims to port LunarVim to Windows. It is not yet usable
 
 [![GitHub license](https://img.shields.io/github/license/ChristianChiarulli/LunarVim)](https://github.com/ChristianChiarulli/LunarVim/blob/master/LICENSE)
 [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/ChristianChiarulli/lunarvim)
