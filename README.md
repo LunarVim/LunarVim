@@ -16,17 +16,48 @@
 
 ![LunarVim Demo](./utils/media/demo.png)
 
-1. This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
+# Table of contents
+- [Project Goals](#project-goals)
+- [What's included?](#whats-included)
+  - [Why do I want tree-sitter and LSP?](#why-do-i-want-tree-sitter-and-lsp)
+- [Install In One Command!](#install-in-one-command)
+  - [Get the latest version of Neovim](#get-the-latest-version-of-neovim)
+- [Getting started](#getting-started)
+  - [Home screen](#home-screen)
+  - [Leader and Whichkey](#leader-and-whichkey)
+  - [Important Configuration files](#important-configuration-files)
+- [Clipboard Support](#clipboard-support)
+- [LSP](#lsp)
+- [Useful Programs](#useful-programs)
+- [EFM server](#efm-server)
+- [Formatters and Linters](#formatters-and-linters)
+- [De-bugging](#de-bugging)
+- [VSCodium](#vscodium)
+- [Useful commands for troubleshooting](#useful-commands-for-troubleshooting)
+- [TODO](#todo)
 
-2. This is also a community project, if you would like to see support for a feature or [language](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) consider making a PR.
+# Project Goals
+*  This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
 
-3. This project will do it's best to include core features you would expect from a modern IDE, while making it easy to add or remove what the user wants.
+* This is also a community project, if you would like to see support for a feature or [language](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) consider making a PR.
 
-## Install In One Command!
+* This project will do it's best to include core features you would expect from a modern IDE, while making it easy to add or remove what the user wants.
 
-Make sure you have the newest version of Neovim
+# What's included?
 
-``` bash
+LunarVim provides neovim configuration files that take advantage of tree-sitter and language server protocol. The configuration is written in lua. 
+
+## Why do I want tree-sitter and LSP?
+
+* Normally, an editor uses regular expression parsing for things like highlighting and checking the syntax of your file.  Each time you make a change, the editor must re-parse the entire file.  Tree-sitter, on the other hand, transforms text into a syntax tree.  Each time you make a change, only the parts of the code that change need to be parsed.  This greatly improves the speed of parsing. This can make a huge difference when editing large files.
+
+* Neovim 0.5 including language server protocol means your editor can provide: code actions, completions, formatting, navigating to definitions, renaming, etc.  The language server only has to be written once and will work on any editor that supports LSP.  Any improvements made to the language server will immediately be used by all editors that support LSP.
+
+# Install In One Command!
+
+Make sure you have the newest version of Neovim. 
+
+```bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
@@ -34,6 +65,17 @@ After installation run `nvim` and then `:PackerInstall`
 
 ## Get the latest version of Neovim
 
+Some operating systems package versions of Neovim 0.5.  You can install those or you can follow the steps below to compile from source.  Compiling from source is the recommended method.
+
+First, get the dependencies. For distributions other than Ubuntu or Arch go [here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites)
+```bash
+#Ubuntu
+sudo apt-get install gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip build-essential
+#Arch
+sudo pacman -S base-devel cmake unzip ninja tree-sitter
+```
+
+Download and compile Neovim
 ```bash
 cd ~
 sudo rm -r neovim
@@ -48,8 +90,34 @@ or if you are on Arch you can get it from the AUR
 yay -S neovim-git
 ```
 
+# Getting started
 
-## Clipboard Support
+## Home screen
+The home screen is a plugin called dashboard.  It uses the Telescope plugin to find files or find words within files.  The home  screen provides a link to load saved Sessions.  The home screen links to the settings file located at this path: ~/.config/nvim/lv-settings.lua
+
+## Leader and Whichkey
+The default leader key is set to \<Space>.  Pressing it will also open up whichkey.  Whichkey will help you easily access many of the default keybindings.  
+
+## Other key bindings
+Other key bindings can be found in ~/.config/nvim/lua/keymappings.lua
+
+If you already have a set of keybindings in vimscript that you prefer, source your vimscript file from ~/.config/nvim/init.lua  
+
+Example:
+```lua
+vim.cmd('source ~/.config/nvim/vimscript/keymappings.vim')
+```
+
+Or you can translate your old bindings to lua and keep them in the provided keymappings file.  Follow the lua guide available [here](https://github.com/nanotee/nvim-lua-guide)
+
+## Important Configuration files
+| Path | Description |
+|------|-------------|
+|~/.config/nvim/lv-settings.lua      | The main settings file            |
+|~/.config/nvim/lua/keymappings.lua  |  Key bindings           |
+|~/.config/nvim/lua/plugins.lua      |  Add or remove plugins here           |
+
+# Clipboard Support
 
 - On Mac `pbcopy` should be built-in
 
@@ -76,7 +144,7 @@ yay -S neovim-git
     mv /tmp/win32yank.exe ~/bin
     ```
 
-## LSP
+# LSP
 
 To install a supported language server:
 
@@ -89,7 +157,7 @@ Most common languages should be supported out of the box, if yours is not I woul
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
 
-## Useful Programs
+# Useful Programs
 
 LunarVim depends on the following:
 
@@ -101,7 +169,7 @@ pynvim
 neovim-remote
 ```
 
-## EFM server
+# EFM server
 
 In order for linters and formatters to work you will need to install
 `efm-langserver`
@@ -110,7 +178,7 @@ In order for linters and formatters to work you will need to install
 :LspInstall efm
 ```
 
-## Formatters and Linters
+# Formatters and Linters
 
 **Python**
 
@@ -137,12 +205,12 @@ npm install -g prettier
 pandoc
 ```
 
-## De-bugging
+# De-bugging
 
 To set up your particular debugger, look here:
 [link](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
 
-## VSCodium
+# VSCodium
 
 I recommend you support Free/Libre versions if you plan to use VSCode:
 
@@ -167,7 +235,36 @@ Point your `init.vim` path to:
 $HOME/.config/nvim/vimscript/lv-vscode/init.vim
 ```
 
-## TODO
+# Useful commands for troubleshooting
+Whether you plan on using LunarVim as is or as a base to configure your own neovim, the following commands may be useful.  Any command that includes the symbol ':' is meant to be typed as a command in neovim. Make sure you're in normal mode not insert mode. 
+
+| Command | Description |
+|------|-------------|
+| :checkhealth | Check the health of your neovim install            |
+| :checkhealth \<pluginname>  |  Check the health of a plugin |
+| nvim -v |   checks your neovim version           |
+| nvim -V | vebose output when running neovim.  Prints out every event |
+| :PackerCompile | Must be run when you make plugin changes. (or, alternately run :PackerSync) |
+| :PackerInstall  | Only install missing plugins|
+| :PackerUpdate | Update and install plugins |
+|:PackerClean | Remove any disabled or unused plugins |
+|:PackerSync | Performs 'PackerClean' then 'PackerUpdate' |
+|:PackerStatus | List the status of your plugins |
+|:LspInstall \<language> | Install a language server for a specific programming language |
+| :LspInfo | List the status of active and configured language servers|
+|:LspStart \<language> |     Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass autostart = false to your .setup{} call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.  |
+|:LspStop | Stops all buffer clients|
+|:LspRestart | Restarts all buffer clients|
+|:map | List keybindings |
+|:nmap | List normal mode keybindings |
+|:vmap | List visual mode keybindings |
+|:imap | List insert mode keybindings |
+|:verbose imap \<keybinding> | Print out what a particular keybinding is mapped to|
+|:messages | Print error messages.  Useful when messages get cut off|
+|:scriptnames | List all sourced files|
+
+
+# TODO
 
 **HIGH PRIORITY**
 
