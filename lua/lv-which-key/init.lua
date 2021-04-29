@@ -36,8 +36,6 @@ require("which-key").setup {
 
 local opts = {
     mode = "n", -- NORMAL mode
-    -- prefix: use "<leader>f" for example for mapping everything related to finding files
-    -- the prefix is prepended to every mapping part of `mappings`
     prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
@@ -82,7 +80,7 @@ local mappings = {
         i = {"<cmd>DebugStepInto<cr>", "Step Into"},
         o = {"<cmd>DebugStepOver<cr>", "Step Over"},
         r = {"<cmd>DebugToggleRepl<cr>", "Toggle Repl"},
-        s = {"<cmd>DebugStart<cr>", "Start"},
+        s = {"<cmd>DebugStart<cr>", "Start"}
     },
     g = {
         name = "+Git",
@@ -92,7 +90,7 @@ local mappings = {
         r = {"<cmd>ResetHunk<cr>", "Reset Hunk"},
         R = {"<cmd>ResetBuffer<cr>", "Reset Buffer"},
         s = {"<cmd>StageHunk<cr>", "Stage Hunk"},
-        u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"},
+        u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"}
     },
     l = {
         name = "+LSP",
@@ -110,7 +108,7 @@ local mappings = {
         t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
         x = {"<cmd>cclose<cr>", "Close Quickfix"},
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
+        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"}
     },
 
     s = {
@@ -124,13 +122,9 @@ local mappings = {
         M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
-        t = {"<cmd>Telescope live_grep<cr>", "Text"},
+        t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
-    S = {
-        name = "+Session",
-        s = {"<cmd>SessionSave<cr>", "Save Session"},
-        l = {"<cmd>SessionLoad<cr>", "Load Session"},
-    },
+    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}}
 }
 
 local wk = require("which-key")
