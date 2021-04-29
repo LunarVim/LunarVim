@@ -19,8 +19,7 @@ require('lv-autopairs')
 require('lv-rnvimr')
 require('lv-which-key')
 
--- Which Key (Hope to replace with Lua plugin someday)
--- vim.cmd('source ~/.config/nvim/vimscript/lv-whichkey/init.vim')
+-- TODO is there a way to do this without vimscript
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
 
 -- LSP
