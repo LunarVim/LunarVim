@@ -976,7 +976,7 @@
   "java.semanticHighlighting.enabled": true,
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/home/chris/.vscode-oss/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
   "workbench.list.automaticKeyboardNavigation": false,
-  "oneDarkPro.editorTheme": "onedarkPro",
+  "oneDarkPro.editorTheme": "oneDarkPro",
   "python.languageServer": "Pylance",
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
