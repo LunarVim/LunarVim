@@ -49,4 +49,5 @@ require('lsp.tailwindcss-ls')
 require('lsp.ruby-ls')
 require('lsp.kotlin-ls')
 require('lsp.vue-ls')
+require('lsp.angular-ls')
 
