@@ -18,10 +18,10 @@ require('lv-nvimtree')
 -- require('lv-treesitter')
 require('lv-autopairs')
 require('lv-rnvimr')
+require('lv-which-key')
 
--- Which Key (Hope to replace with Lua plugin someday)
-vim.cmd('source ~/AppData/Local/nvim/vimscript/lv-whichkey/init.vim')
-vim.cmd('source ~/AppData/Local/nvim/vimscript/functions.vim')
+-- TODO is there a way to do this without vimscript
+vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
 
 -- LSP
 require('lsp')
@@ -50,4 +50,3 @@ require('lsp.tailwindcss-ls')
 require('lsp.ruby-ls')
 require('lsp.kotlin-ls')
 require('lsp.vue-ls')
-

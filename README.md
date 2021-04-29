@@ -5,7 +5,7 @@
    `.  \  |  /  .'      
 `-.  `. \d8b/ .'  .-'    ____        _          __     ___           
    `-. do0o88b .-'      / ___|  ___ | | __ _ _ _\ \   / (_)_ __ ___  
-<~~~~ 8o0O0o888 ~~~~>   \___ \ / _ \| |/ _` | '__\ \ / /| | '_ ` _ \ 
+<~~~~ 8o0O0o888 ~~~~>   \___ \ / _ \| |/ _` | '__\ \ / /| | '_ ` _ \
 <~~~~ 8o00o8888 ~~~~>    ___) | (_) | | (_| | |   \ V / | | | | | | |
    _-' qoo888p '-_      |____/ \___/|_|\__,_|_|    \_/  |_|_| |_| |_|
 ,-'  ,' /q8p\ `.  `-.   
@@ -26,15 +26,34 @@
 
 ![LunarVim Demo](./utils/media/demo.png)
 
-1. This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
+# Table of contents
+- [Project Goals](#project-goals)
+- [What's included?](#whats-included)
+  - [Why do I want tree-sitter and LSP?](#why-do-i-want-tree-sitter-and-lsp)
+- [Install In One Command!](#install-in-one-command)
+  - [Get the latest version of Neovim](#get-the-latest-version-of-neovim)
+- [Getting started](#getting-started)
+  - [Home screen](#home-screen)
+  - [Leader and Whichkey](#leader-and-whichkey)
+  - [Important Configuration files](#important-configuration-files)
+- [Clipboard Support](#clipboard-support)
+- [LSP](#lsp)
+- [Useful Programs](#useful-programs)
+- [EFM server](#efm-server)
+- [Formatters and Linters](#formatters-and-linters)
+- [De-bugging](#de-bugging)
+- [VSCodium](#vscodium)
+- [Useful commands for troubleshooting](#useful-commands-for-troubleshooting)
+- [TODO](#todo)
 
-2. This is also a community project, if you would like to see support for a feature or [language](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) consider making a PR.
+# Project Goals
+*  This project aims to help one transition away from VSCode, and into a superior text editing experience. (Just making this clear)
 
-3. This project will do it's best to include core features you would expect from a modern IDE, while making it easy to add or remove what the user wants.
+* This is also a community project, if you would like to see support for a feature or [language](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) consider making a PR.
 
-## Install In One Command!
+* This project will do it's best to include core features you would expect from a modern IDE, while making it easy to add or remove what the user wants.
 
-Make sure you have the newest version of Neovim
+# What's included?
 
 ``` pwsh
 iwr -useb https://raw.githubusercontent.com/irishgreencitrus/SolarVim/master/utils/installer/install.ps1 | iex
@@ -55,7 +74,7 @@ Most common languages should be supported out of the box, if yours is not I woul
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
 
-## Useful Programs
+# Useful Programs
 
 LunarVim depends on the following:
 
@@ -67,7 +86,7 @@ pynvim
 neovim-remote
 ```
 
-## EFM server
+# EFM server
 
 In order for linters and formatters to work you will need to install
 `efm-langserver`
@@ -76,7 +95,7 @@ In order for linters and formatters to work you will need to install
 :LspInstall efm
 ```
 
-## Formatters and Linters
+# Formatters and Linters
 
 **Python**
 
@@ -103,18 +122,18 @@ npm install -g prettier
 pandoc
 ```
 
-## De-bugging
+# De-bugging
 
 To set up your particular debugger, look here:
 [link](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
 
-## VSCodium
+# VSCodium
 
 I recommend you support Free/Libre versions if you plan to use VSCode:
 
 - [VSCodium](https://vscodium.com/)
 
-- Article to get you set up with VSCodium: [link](https://www.chrisatmachine.com/Neovim/22-vscodium-neovim/) 
+- Article to get you set up with VSCodium: [link](https://www.chrisatmachine.com/Neovim/22-vscodium-neovim/)
 
 After installing the [Neovim
 extension](https://github.com/asvetliakov/vscode-neovim) in VSCode
@@ -133,7 +152,36 @@ Point your `init.vim` path to:
 $HOME/.config/nvim/vimscript/lv-vscode/init.vim
 ```
 
-## TODO
+# Useful commands for troubleshooting
+Whether you plan on using LunarVim as is or as a base to configure your own neovim, the following commands may be useful.  Any command that includes the symbol ':' is meant to be typed as a command in neovim. Make sure you're in normal mode not insert mode.
+
+| Command | Description |
+|------|-------------|
+| :checkhealth | Check the health of your neovim install            |
+| :checkhealth \<pluginname>  |  Check the health of a plugin |
+| nvim -v |   checks your neovim version           |
+| nvim -V | vebose output when running neovim.  Prints out every event |
+| :PackerCompile | Must be run when you make plugin changes. (or, alternately run :PackerSync) |
+| :PackerInstall  | Only install missing plugins|
+| :PackerUpdate | Update and install plugins |
+|:PackerClean | Remove any disabled or unused plugins |
+|:PackerSync | Performs 'PackerClean' then 'PackerUpdate' |
+|:PackerStatus | List the status of your plugins |
+|:LspInstall \<language> | Install a language server for a specific programming language |
+| :LspInfo | List the status of active and configured language servers|
+|:LspStart \<language> |     Start the requested server name. Will only succesfully start if the command detects a root directory matching the current config. Pass autostart = false to your .setup{} call for a language server if you would like to launch clients solely with this command. Defaults to all servers matching current buffer filetype.  |
+|:LspStop | Stops all buffer clients|
+|:LspRestart | Restarts all buffer clients|
+|:map | List keybindings |
+|:nmap | List normal mode keybindings |
+|:vmap | List visual mode keybindings |
+|:imap | List insert mode keybindings |
+|:verbose imap \<keybinding> | Print out what a particular keybinding is mapped to|
+|:messages | Print error messages.  Useful when messages get cut off|
+|:scriptnames | List all sourced files|
+
+
+# TODO
 
 **HIGH PRIORITY**
 
