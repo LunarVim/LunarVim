@@ -1,10 +1,4 @@
 ```
-   _..._                             
- .'   (_`.    _                         __     ___           
-:  .      :  | |   _   _ _ __   __ _ _ _\ \   / (_)_ __ ___  
-:)    ()  :  | |  | | | | '_ \ / _` | '__\ \ / /| | '_ ` _ \ 
-`.   .   .'  | |__| |_| | | | | (_| | |   \ V / | | | | | | |
-  `-...-'    |_____\__,_|_| |_|\__,_|_|    \_/  |_|_| |_| |_|
 ```
 
 [![GitHub
@@ -91,7 +85,6 @@ in lua.
   expect from a modern IDE, while making it easy to add or remove what
   the user wants.
 
-# Install In One Command!
 
 Make sure you have the newest version of Neovim (0.5).
 
@@ -99,7 +92,11 @@ Make sure you have the newest version of Neovim (0.5).
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
-After installation run `nvim` and then `:PackerInstall`
+Then open neovim and run:
+```bash
+:PackerCompile
+:PackerInstall
+```
 
 ## Get the latest version of Neovim
 
@@ -388,18 +385,6 @@ sudo rm -R ~/.local/share/nvim
 
 For a more in depth LSP support:
 [link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
-
-# Useful Programs
-
-LunarVim depends on the following:
-
-``` bash
-ranger
-ueberzug
-ripgrep
-pynvim
-neovim-remote
-```
 
 # EFM server
 
