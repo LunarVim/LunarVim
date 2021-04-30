@@ -35,9 +35,8 @@ return require("packer").startup(
         -- Packer can manage itself as an optional plugin
         use "wbthomason/packer.nvim"
 
-        -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
+        -- LSP
         use {"neovim/nvim-lspconfig", opt = true}
-        use {"glepnir/lspsaga.nvim", opt = true}
         use {"kabouzeid/nvim-lspinstall", opt = true}
 
         -- Telescope
@@ -53,6 +52,7 @@ return require("packer").startup(
         use {"hrsh7th/nvim-compe", opt = true}
         use {"hrsh7th/vim-vsnip", opt = true}
         use {"rafamadriz/friendly-snippets", opt = true}
+        use {"windwp/nvim-autopairs", opt = true}
 
         -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
@@ -80,30 +80,16 @@ return require("packer").startup(
 
         -- Status Line and Bufferline
         use {"glepnir/galaxyline.nvim", opt = true}
-        use {"romgrk/barbar.nvim", opt = true}
 
         require_plugin("nvim-lspconfig")
-        require_plugin("lspsaga.nvim")
         require_plugin("nvim-lspinstall")
-        require_plugin("friendly-snippets")
-        require_plugin("popup.nvim")
-        require_plugin("plenary.nvim")
-        require_plugin("telescope.nvim")
-        require_plugin("nvim-dap")
-        require_plugin("nvim-compe")
-        require_plugin("vim-vsnip")
+        require_plugin("nvim-comment")
         require_plugin("nvim-treesitter")
         require_plugin("nvim-ts-autotag")
-        require_plugin("nvim-tree.lua")
-        require_plugin("gitsigns.nvim")
-        require_plugin("which-key.nvim")
-        require_plugin("dashboard-nvim")
+        require_plugin("friendly-snippets")
+        require_plugin("nvim-compe")
         require_plugin("nvim-autopairs")
-        require_plugin("nvim-comment")
-        require_plugin("nvim-bqf")
-        require_plugin("nvcode-color-schemes.vim")
-        require_plugin("nvim-web-devicons")
+        require_plugin("vim-vsnip")
         require_plugin("galaxyline.nvim")
-        require_plugin("barbar.nvim")
     end
 )
