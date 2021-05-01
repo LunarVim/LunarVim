@@ -61,5 +61,11 @@ require('telescope').setup {
                 -- ["<C-i>"] = my_cool_custom_action,
             }
         }
+    },
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
     }
 }
