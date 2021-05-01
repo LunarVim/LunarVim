@@ -114,7 +114,7 @@ local mappings = {
 
     s = {
         name = "+Search",
-        b = {"<cmd>Telescope git_branches<cr>", "File"},
+        b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
