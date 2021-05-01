@@ -24,14 +24,14 @@ O = {
         formatter = '',
         autoformat = false,
         isort = false,
-        diagnostics = {virtual_text = true, signs = true, underline = true}
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
     },
     dart = {sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'},
     lua = {
         -- @usage can be 'lua-format'
         formatter = '',
         autoformat = false,
-        diagnostics = {virtual_text = true, signs = true, underline = true}
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
     },
     sh = {
         -- @usage can be 'shellcheck'
@@ -39,7 +39,7 @@ O = {
         -- @usage can be 'shfmt'
         formatter = '',
         autoformat = false,
-        diagnostics = {virtual_text = true, signs = true, underline = true}
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
     },
     tsserver = {
         -- @usage can be 'eslint'
@@ -47,18 +47,18 @@ O = {
         -- @usage can be 'prettier'
         formatter = '',
         autoformat = false,
-        diagnostics = {virtual_text = true, signs = true, underline = true}
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
     },
     json = {
         -- @usage can be 'prettier'
         formatter = '',
         autoformat = false,
-        diagnostics = {virtual_text = true, signs = true, underline = true}
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
     },
     tailwindls = {filetypes = {'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}},
-    clang = {diagnostics = {virtual_text = true, signs = true, underline = true}},
+    clang = {diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}},
 	ruby = {
-		diagnostics = {virtualtext = true, signs = true, underline = true},
+		diagnostics = {virtualtext = {spacing = 0, prefix = ""}, signs = true, underline = true},
 		filetypes = {'rb', 'erb', 'rakefile'}
 	}
     -- css = {formatter = '', autoformat = false, virtual_text = true},
