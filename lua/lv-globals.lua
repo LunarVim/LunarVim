@@ -7,6 +7,17 @@ O = {
     number = true,
     relative_number = true,
     shell = 'bash',
+	-- Plugin settings
+	-- ========================================
+    dashboard = {
+        enable = true,
+    },
+	whichkey = {
+		enable = true,
+	},
+
+	-- LSP settings
+	-- ========================================
 
     -- @usage pass a table with your desired languages
     treesitter = {
@@ -60,7 +71,7 @@ O = {
 	ruby = {
 		diagnostics = {virtualtext = true, signs = true, underline = true},
 		filetypes = {'rb', 'erb', 'rakefile'}
-	}
+	},
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 }
