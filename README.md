@@ -41,6 +41,9 @@
 - [Formatters and Linters](#formatters-and-linters)
 - [De-bugging](#de-bugging)
 - [VSCodium](#vscodium)
+- [Color Schemes](#color-schemes)
+  - [Available colorschemes](#available-colorschemes)
+  - [Switching colors](#switching-colors)
 - [Useful commands for troubleshooting](#useful-commands-for-troubleshooting)
 - [TODO](#todo)
 
@@ -220,8 +223,7 @@ sudo rm -R ~/.local/share/nvim
     ```
 
 # LSP
-
-To install a supported language server:
+Neovim comes bundled with a language client but not a language server.  To install a supported language server:
 
 ```md
   :LspInstall <your_language_server>
@@ -353,10 +355,37 @@ Point the nvim path to your `nvim` binary
 
 Point your `init.vim` path to:
 
-``` vim
+```vim
 $HOME/.config/nvim/vimscript/lv-vscode/init.vim
 ```
+# Color schemes
 
+Color schemes are provided by [this repository](https://github.com/ChristianChiarulli/nvcode-color-schemes.vim). Follow that link for information about editing specific colors for a color scheme. The provided color schemes are compatible with tree-sitter highlight groups. Color schemes are installed to ~/.local/share/nvim/site/pack/packer/opt/nvcode-color-schemes.vim. If you edit files in that directory, they will be overwritten the next time Packer compiles your plugins.
+
+## Available colorschemes:
+```bash
+    nvcode (basically just dark+)
+    onedark
+    nord
+    aurora (more colorful nord)
+    gruvbox
+    palenight
+    snazzy (Based on hyper-snazzy by Sindre Sorhus)
+```
+
+## Switching colors
+
+To switch color schemes on the fly, type the following command:
+
+```vim
+:Telescope colorscheme
+```
+
+To change the color scheme permanently, modify ~/.config/nvim/lv-settings.lua
+
+```lua
+O.colorscheme = 'lunar'
+```
 # Useful commands for troubleshooting
 Whether you plan on using LunarVim as is or as a base to configure your own neovim, the following commands may be useful.  Any command that includes the symbol ':' is meant to be typed as a command in neovim. Make sure you're in normal mode not insert mode. 
 
