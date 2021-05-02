@@ -1,34 +1,6 @@
-" TODO there is a more contemporary version of this file
-" TODO Also some of it is redundant
 " packadd quickscope
 
 luafile ~/.config/nvim/lua/settings.lua
-
-" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
-" highlight QuickScopeSecondary guifg='#eF5F70' gui=underline ctermfg=81 cterm=underline
-" let g:qs_max_chars=150
-
-"VSCode
-function! s:split(...) abort
-    let direction = a:1
-    let file = a:2
-    call VSCodeCall(direction == 'h' ? 'workbench.action.splitEditorDown' : 'workbench.action.splitEditorRight')
-    if file != ''
-        call VSCodeExtensionNotify('open-file', expand(file), 'all')
-    endif
-endfunction
-
-function! s:splitNew(...)
-    let file = a:2
-    call s:split(a:1, file == '' ? '__vscode_new__' : file)
-endfunction
-
-function! s:closeOtherEditors()
-    call VSCodeNotify('workbench.action.closeEditorsInOtherGroups')
-    call VSCodeNotify('workbench.action.closeOtherEditors')
-endfunction
 
 function! s:manageEditorSize(...)
     let count = a:1
@@ -78,13 +50,6 @@ function! s:openWhichKeyInVisualMode()
         call VSCodeNotifyRangePos("whichkey.show", startPos[1], endPos[1], startPos[2], endPos[2], 1)
     endif
 endfunction
-
-
-command! -complete=file -nargs=? Split call <SID>split('h', <q-args>)
-command! -complete=file -nargs=? Vsplit call <SID>split('v', <q-args>)
-command! -complete=file -nargs=? New call <SID>split('h', '__vscode_new__')
-command! -complete=file -nargs=? Vnew call <SID>split('v', '__vscode_new__')
-command! -bang Only if <q-bang> == '!' | call <SID>closeOtherEditors() | else | call VSCodeNotify('workbench.action.joinAllGroups') | endif
 
 " Better Navigation
 nnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
