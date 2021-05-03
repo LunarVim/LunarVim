@@ -91,7 +91,11 @@ local mappings = {
         r = {"<cmd>ResetHunk<cr>", "Reset Hunk"},
         R = {"<cmd>ResetBuffer<cr>", "Reset Buffer"},
         s = {"<cmd>StageHunk<cr>", "Stage Hunk"},
-        u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"}
+        u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"},
+        o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
+        b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
+        c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
+        C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
     },
     l = {
         name = "+LSP",
