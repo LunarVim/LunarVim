@@ -24,7 +24,8 @@ O = {
         formatter = '',
         autoformat = false,
         isort = false,
-        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true},
+		analysis = {type_checking = "basic", auto_search_paths = true, use_library_code_types = true}
     },
     dart = {sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'},
     lua = {
