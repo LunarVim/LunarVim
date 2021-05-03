@@ -1,5 +1,3 @@
--- File search will ignore this file because it's in your .gitignore.  Remove it from .gitignore for it to be listed in file search results
-
 --[[
 O is the global options object
 
@@ -54,10 +52,3 @@ O.json.autoformat = true
 -- ruby
 O.ruby.autoformat = true
 -- create custom autocommand field (This would be easy with lua)
-
--- Plugin Settings
--- ==========================================================
--- Dashboard
--- File search will ignore this file because it's in your .gitignore.  Remove it from .gitignore for it to be listed in file search results
-O.dashboard.enable = true
-O.whichkey.enable = true
