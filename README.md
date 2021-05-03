@@ -45,6 +45,7 @@
   - [Available colorschemes](#available-colorschemes)
   - [Switching colors](#switching-colors)
 - [Useful commands for troubleshooting](#useful-commands-for-troubleshooting)
+- [Uninstalling](#uninstalling)
 - [TODO](#todo)
 
 
@@ -105,10 +106,10 @@ yay -S neovim-git
 # Getting started
 
 ## Home screen
-The home screen is a plugin called dashboard.  It uses the Telescope plugin to find files or find words within files.  The home  screen provides a link to load saved Sessions.  The home screen links to the settings file located at this path: ~/.config/nvim/lv-settings.lua
+The home screen is a plugin called [Dashboard](https://github.com/glepnir/dashboard-nvim).  It uses the [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin to find files or find words within files.  The home  screen provides a link to load saved Sessions.  The home screen links to the settings file located at this path: ~/.config/nvim/lv-settings.lua
 
 ## Leader and Whichkey
-The default leader key is set to \<Space>.  Pressing it will also open up whichkey.  Whichkey will help you easily access many of the default keybindings.  
+The default leader key is set to \<Space>.  Pressing it will also open up [Whichkey](https://github.com/folke/which-key.nvim).  Whichkey will help you easily access many of the default keybindings.  
 
 ## Other key bindings
 Other key bindings can be found in ~/.config/nvim/lua/keymappings.lua
@@ -163,7 +164,7 @@ require('lv-colorizer')
 ```
 
 # Using Packer
-Packer manages your installed plugins.  Any time you make changes to your list of plugins in ~/.config/nvim/lua/plugins.lua you must first run the command :PackerCompile then :PackerInstall. 
+[Packer](https://github.com/wbthomason/packer.nvim) manages your installed plugins.  Any time you make changes to your list of plugins in ~/.config/nvim/lua/plugins.lua you must first run the command :PackerCompile then :PackerInstall. 
 ## Packer commands
 
 ```bash
@@ -228,6 +229,8 @@ Neovim comes bundled with a language client but not a language server.  To insta
 ```md
   :LspInstall <your_language_server>
 ```
+
+See [LspInstall](https://github.com/kabouzeid/nvim-lspinstall) for more info.  
 
 Most common languages should be supported out of the box, if yours is not I would welcome a PR
 
@@ -414,6 +417,18 @@ Whether you plan on using LunarVim as is or as a base to configure your own neov
 |:messages | Print error messages.  Useful when messages get cut off|
 |:scriptnames | List all sourced files|
 
+# Uninstalling
+Changed your mind about LunarVim?  To remove it entirely:
+```lua
+# Delete the configuration files
+sudo rm -R ~/.config/nvim
+
+# Delete the plugins
+sudo rm -R ~/.local/share/nvim
+
+# Delete the logs
+sudo rm -R ~/.cache/nvim
+```
 
 # TODO
 
