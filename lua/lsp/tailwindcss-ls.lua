@@ -2,7 +2,7 @@ local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
 
 -- Check if tailwindls server already defined.
-if not lspconfig.tailwindls then configs['tailwindls'] = {default_config = {}} end
+if not configs.tailwindls then configs['tailwindls'] = {default_config = {}} end
 
 lspconfig.tailwindls.setup {
     cmd = {
