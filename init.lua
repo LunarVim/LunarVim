@@ -21,7 +21,8 @@ require('lv-which-key')
 
 -- TODO is there a way to do this without vimscript
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
-
+vim.cmd('source ~/.config/nvim/vimscript/lv-syntax/gdscript.vim')
+vim.cmd('source ~/.config/nvim/vimscript/lv-syntax/gsl.vim')
 -- LSP
 require('lsp')
 require('lsp.clangd')
