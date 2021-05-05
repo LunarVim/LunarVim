@@ -126,7 +126,7 @@ gls.right[5] = {
             if tbl[vim.bo.filetype] then return false end
             return true
         end,
-        icon = ' ',
+        icon = '  ',
         highlight = {colors.grey, colors.bg}
     }
 }
