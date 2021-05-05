@@ -61,9 +61,21 @@ O = {
 	ruby = {
 		diagnostics = {virtualtext = {spacing = 0, prefix = ""}, signs = true, underline = true},
 		filetypes = {'rb', 'erb', 'rakefile'}
-	}
+	},
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
+
+	dashboard = {
+		custom_header = {
+'                 _..._                                                                           ',
+'               .\'   (_`.    _                         __     ___           ',
+'              :  .      :  | |   _   _ _ __   __ _ _ _\\ \\   / (_)_ __ ___  ',
+'              :)    ()  :  | |  | | | | \'_ \\ / _` | \'__\\ \\ / /| | \'_ ` _ \\ ',
+'              `.   .   .\'  | |__| |_| | | | | (_| | |   \\ V / | | | | | | |',
+'                `-...-\'    |_____\\__,_|_| |_|\\__,_|_|    \\_/  |_|_| |_| |_|',
+		},
+		footer= {'chrisatmachine.com'}
+	}
 }
 
 DATA_PATH = vim.fn.stdpath('data')
