@@ -25,8 +25,8 @@ vim.cmd([[
 vim.cmd([[
   nnoremap <silent> <C-Up>    :resize -2<CR>
   nnoremap <silent> <C-Down>  :resize +2<CR>
-  nnoremap <silent> <C-Left>  :vertical resize -2<CR>
-  nnoremap <silent> <C-Right> :vertical resize +2<CR>
+  nnoremap <silent> <C-Left>  :vertical resize +2<CR>
+  nnoremap <silent> <C-Right> :vertical resize -2<CR>
 ]])
 
 -- better indenting
@@ -34,9 +34,9 @@ vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
 
 -- I hate escape
--- vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap = true, silent = true})
--- vim.api.nvim_set_keymap('i', 'kj', '<ESC>', {noremap = true, silent = true})
--- vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', 'kj', '<ESC>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {noremap = true, silent = true})
 
 -- Tab switch buffer
 vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', {noremap = true, silent = true})
