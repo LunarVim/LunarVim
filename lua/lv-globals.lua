@@ -7,6 +7,7 @@ O = {
     number = true,
     relative_number = true,
     shell = 'bash',
+	timeoutlen = 100,
 
     -- @usage pass a table with your desired languages
     treesitter = {
