@@ -157,13 +157,13 @@ which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
 # install pynvim
 pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
 
-if [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
 	echo 'packer already installed'
 else
 	installpacker
 fi
 
-if [ -a "$HOME/.config/nvim/init.lua" ]; then
+if [ -e "$HOME/.config/nvim/init.lua" ]; then
 	echo 'nvcode already installed'
 else
 	# clone config down
