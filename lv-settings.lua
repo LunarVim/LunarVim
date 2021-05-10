@@ -12,6 +12,7 @@ O.auto_complete = true
 O.colorscheme = 'lunar'
 O.auto_close_tree = 0
 O.wrap_lines = false
+O.timeoutlen = 100
 
 -- dashboard 
 -- O.dashboard.custom_header = {""}
