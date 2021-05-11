@@ -1,4 +1,3 @@
--- npm i -g bash-language-server
 require'lspconfig'.elmls.setup {
     cmd = {DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server"},
 	init_options= {
