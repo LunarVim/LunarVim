@@ -251,7 +251,7 @@ If you get an error message about missing plugins and the above commands
 do not work, remove the plugin directory and reinstall from scratch.
 
 ``` bash
-sudo rm -R ~/.local/share/nvim
+sudo rm -R ~/.local/share/nvim/site/pack/packer
 :PackerCompile
 :PackerInstall
 ```
