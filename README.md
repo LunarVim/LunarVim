@@ -250,7 +250,7 @@ If you get an error message about missing plugins and the above commands
 do not work, remove the plugin directory and reinstall from scratch.
 
 ``` bash
-rm -rf ~/.local/share/nvim/site/pack/packer
+rm -rf ~/.local/share/nvim/site
 :PackerCompile
 :PackerInstall
 ```
@@ -378,7 +378,7 @@ out plugin problems with the following. This reinstalls your plugins and
 language servers.
 
 ``` md
-rm -rf ~/.local/share/nvim/site/pack/packer
+rm -rf ~/.local/share/nvim/site
 :PackerCompile
 :PackerInstall
 :LspInstall python   <-- REPLACE WITH YOUR OWN LANGUAGE
