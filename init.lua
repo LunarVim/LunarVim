@@ -1,5 +1,5 @@
-require('plugins')
 require('lv-globals')
+require('plugins')
 require('lv-utils')
 require('lv-autocommands')
 require('settings')

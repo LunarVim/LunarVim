@@ -1,3 +1,5 @@
+vim.g.nvim_tree_disable_netrw = 0 -- "1 by default, disables netrw (must be set before plugin's packadd)
+
 O = {
     auto_close_tree = 0,
     auto_complete = true,
