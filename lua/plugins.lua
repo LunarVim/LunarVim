@@ -44,6 +44,7 @@ return require("packer").startup(
         use {"nvim-lua/popup.nvim", opt = true}
         use {"nvim-lua/plenary.nvim", opt = true}
         use {"nvim-telescope/telescope.nvim", opt = true}
+        use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
 
         -- Debugging
         use {"mfussenegger/nvim-dap", opt = true}
@@ -58,7 +59,7 @@ return require("packer").startup(
         use {"windwp/nvim-ts-autotag", opt = true}
 
         -- Explorer
-        use "kyazdani42/nvim-tree.lua"
+        use {"kyazdani42/nvim-tree.lua", opt = true}
         -- TODO remove when open on dir is supported by nvimtree
         use "kevinhwang91/rnvimr"
 

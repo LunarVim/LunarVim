@@ -33,7 +33,7 @@ installnodefedora() {
 installnode() {
 	echo "Installing node..."
 	[ "$(uname)" == "Darwin" ] && installnodemac
-	[ -n "$(uname -a | grep Ubuntu)" ] && installnodeubuntu
+	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installnodeubuntu
 	[ -f "/etc/arch-release" ] && installnodearch
 	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
@@ -52,7 +52,7 @@ installpiponubuntu() {
 }
 
 installpiponarch() {
-	pacman -S python-pip
+    sudo pacman -S python-pip
 }
 
 installpiponfedora() {
@@ -62,7 +62,7 @@ installpiponfedora() {
 installpip() {
 	echo "Installing pip..."
 	[ "$(uname)" == "Darwin" ] && installpiponmac
-	[ -n "$(uname -a | grep Ubuntu)" ] && installpiponubuntu
+	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
 	[ -f "/etc/arch-release" ] && installpiponarch
 	[ -f "/etc/fedora-release" ] && installpiponfedora
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
@@ -135,7 +135,7 @@ installonfedora() {
 
 installextrapackages() {
 	[ "$(uname)" == "Darwin" ] && installonmac
-	[ -n "$(uname -a | grep Ubuntu)" ] && installonubuntu
+	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installonubuntu
 	[ -f "/etc/arch-release" ] && installonarch
 	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
@@ -157,13 +157,13 @@ which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
 # install pynvim
 pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
 
-if [ -a "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
 	echo 'packer already installed'
 else
 	installpacker
 fi
 
-if [ -a "$HOME/.config/nvim/init.lua" ]; then
+if [ -e "$HOME/.config/nvim/init.lua" ]; then
 	echo 'nvcode already installed'
 else
 	# clone config down
