@@ -1,8 +1,8 @@
-require('plugins')
 require('lv-globals')
+require('settings')
+require('plugins')
 require('lv-utils')
 require('lv-autocommands')
-require('settings')
 vim.cmd('luafile ~/.config/nvim/lv-settings.lua')
 require('keymappings')
 require('lv-nvimtree') -- This plugin must be required somewhere before colorscheme.  Placing it after will break navigation keymappings

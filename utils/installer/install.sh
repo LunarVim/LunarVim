@@ -52,7 +52,7 @@ installpiponubuntu() {
 }
 
 installpiponarch() {
-	pacman -S python-pip
+    sudo pacman -S python-pip
 }
 
 installpiponfedora() {
