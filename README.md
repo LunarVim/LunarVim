@@ -182,10 +182,11 @@ provided keymappings file. Follow the lua guide available
 
 # Install your own plugins
 
-The steps for configuring your own plugin are: 1. Add the plugin to
-plugins.lua 2. If the plugin requires configuration. Create a
-configuration file for it 3. If you created a configuration, require the
-file in init.lua 4. Use Packer to download and install the plugin
+The steps for configuring your own plugin are: 
+1. Add the plugin to `plugins.lua`
+2. If the plugin requires configuration, create a configuration file for it
+3. If you created a configuration, require the file in `init.lua`
+4. Use Packer to download and install the plugin
 
 ## An example installation of the colorizer plugin
 
