@@ -1,3 +1,12 @@
+vim.cmd('set noerrorbells')
+vim.cmd('set guicursor=')
+vim.cmd('set noswapfile')
+vim.cmd('set undofile')
+vim.cmd('set undodir=~/.vim/undodir')
+vim.cmd('set incsearch')
+vim.cmd('set scrolloff=8')
+
+------ Defaults
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
@@ -25,8 +34,8 @@ vim.cmd('set expandtab') -- Converts tabs to spaces
 vim.bo.smartindent = true -- Makes indenting smart
 vim.wo.number = O.number -- set numbered lines
 vim.wo.relativenumber = O.relative_number -- set relative number
-vim.wo.cursorline = true -- Enable highlighting of the current line
-vim.o.showtabline = 2 -- Always show tabs
+vim.wo.cursorline = false -- Enable highlighting of the current line
+vim.o.showtabline = 0 -- Always show tabs
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore
 vim.o.backup = false -- This is recommended by coc
 vim.o.writebackup = false -- This is recommended by coc

@@ -10,7 +10,6 @@ require('colorscheme') -- This plugin must be required somewhere after nvimtree.
 require('lv-galaxyline')
 require('lv-comment')
 require('lv-compe')
-require('lv-barbar')
 require('lv-dashboard')
 require('lv-telescope')
 require('lv-gitsigns')

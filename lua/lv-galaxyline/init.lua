@@ -2,8 +2,8 @@ local gl = require('galaxyline')
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
-    -- bg = '#2E2E2E',
-    bg = '#292D38',
+    bg = 'NONE',
+    -- bg = '#292D38',
     yellow = '#DCDCAA',
     dark_yellow = '#D7BA7D',
     cyan = '#4EC9B0',
@@ -13,7 +13,7 @@ local colors = {
     orange = '#FF8800',
     purple = '#C586C0',
     magenta = '#D16D9E',
-    grey = '#858585',
+    grey = '#928374',
     blue = '#569CD6',
     vivid_blue = '#4FC1FF',
     light_blue = '#9CDCFE',
@@ -24,6 +24,17 @@ local colors = {
 local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree', 'vista', 'dbui', 'packer'}
+
+local function buffer_not_empty()
+    if vim.fn.empty(vim.fn.expand '%:t') ~= 1 then return true end
+    return false
+end
+
+local function wide_enough()
+    local squeeze_width = vim.fn.winwidth(0)
+    if squeeze_width > 80 then return true end
+    return false
+end
 
 gls.left[1] = {
     ViMode = {
@@ -59,6 +70,8 @@ gls.left[1] = {
 }
 print(vim.fn.getbufvar(0, 'ts'))
 vim.fn.getbufvar(0, 'ts')
+
+
 
 gls.left[2] = {
     GitIcon = {
@@ -106,6 +119,61 @@ gls.left[6] = {
         highlight = {colors.red, colors.bg}
     }
 }
+
+local function convertHexCode(code)
+    if type(code) == 'string' then code = tonumber('0x' .. code) end
+    local c = string.char
+    if code <= 0x7f then return c(code) end
+    local t = {}
+    if code <= 0x07ff then
+        t[1] = c(bit.bor(0xc0, bit.rshift(code, 6)))
+        t[2] = c(bit.bor(0x80, bit.band(code, 0x3f)))
+    elseif code <= 0xffff then
+        t[1] = c(bit.bor(0xe0, bit.rshift(code, 12)))
+        t[2] = c(bit.bor(0x80, bit.band(bit.rshift(code, 6), 0x3f)))
+        t[3] = c(bit.bor(0x80, bit.band(code, 0x3f)))
+    else
+        t[1] = c(bit.bor(0xf0, bit.rshift(code, 18)))
+        t[2] = c(bit.bor(0x80, bit.band(bit.rshift(code, 12), 0x3f)))
+        t[3] = c(bit.bor(0x80, bit.band(bit.rshift(code, 6), 0x3f)))
+        t[4] = c(bit.bor(0x80, bit.band(code, 0x3f)))
+    end
+    return table.concat(t)
+end
+
+local icons = {
+    locker = convertHexCode('f023'),
+    unsaved = convertHexCode('f693'),
+    dos = convertHexCode('e70f'),
+    unix = convertHexCode('f17c'),
+    mac = convertHexCode('f179'),
+    lsp_warn = convertHexCode('f071'),
+    lsp_error = convertHexCode('f46e'),
+}
+
+gls.left[7] = {
+    FileName = {
+        provider = function()
+            if not buffer_not_empty() then return '' end
+            local fname
+            if wide_enough() then
+                fname = vim.fn.fnamemodify(vim.fn.expand '%', ':~:.')
+            else
+                fname = vim.fn.expand '%:t'
+            end
+            if #fname == 0 then return '' end
+            if vim.bo.readonly then
+                fname = fname .. ' ' .. icons.locker
+            end
+            if vim.bo.modified then
+                fname = fname .. ' ' .. icons.unsaved
+            end
+            return ' ' .. fname .. ' '
+            end,
+            highlight = {colors.grey, colors.bg},
+        },
+}
+
 
 gls.right[1] = {
     DiagnosticError = {provider = 'DiagnosticError', icon = '  ', highlight = {colors.error_red, colors.bg}}
