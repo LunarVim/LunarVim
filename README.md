@@ -121,13 +121,12 @@ sudo pacman -S base-devel cmake unzip ninja tree-sitter
 Download and compile Neovim
 
 ``` bash
-cd ~
-sudo rm -r neovim
-git clone https://github.com/neovim/neovim
+cd $(mktemp -d)
+git clone https://github.com/neovim/neovim --depth 1
 cd neovim
 sudo make CMAKE_BUILD_TYPE=Release install
-cd ~
-sudo rm -r neovim
+cd ..
+rm -rf neovim
 ```
 
 or if you are on Arch you can get it from the AUR
@@ -252,7 +251,7 @@ If you get an error message about missing plugins and the above commands
 do not work, remove the plugin directory and reinstall from scratch.
 
 ``` bash
-sudo rm -R ~/.local/share/nvim
+rm -rf ~/.local/share/nvim/site
 :PackerCompile
 :PackerInstall
 ```
@@ -380,7 +379,7 @@ out plugin problems with the following. This reinstalls your plugins and
 language servers.
 
 ``` md
-sudo rm -R ~/.local/share/nvim
+rm -rf ~/.local/share/nvim/site
 :PackerCompile
 :PackerInstall
 :LspInstall python   <-- REPLACE WITH YOUR OWN LANGUAGE
@@ -545,13 +544,13 @@ Changed your mind about LunarVim? To remove it entirely:
 
 ``` lua
 # Delete the configuration files
-sudo rm -R ~/.config/nvim
+rm -R ~/.config/nvim
 
 # Delete the plugins
-sudo rm -R ~/.local/share/nvim
+rm -Rf ~/.local/share/nvim
 
 # Delete the logs
-sudo rm -R ~/.cache/nvim
+rm -R ~/.cache/nvim
 ```
 
 # TODO
