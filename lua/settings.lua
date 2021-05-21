@@ -21,7 +21,7 @@ vim.o.t_Co = "256" -- Support 256 colors
 vim.o.conceallevel = 0 -- So that I can see `` in markdown files
 vim.cmd('set ts=4') -- Insert 2 spaces for a tab
 vim.cmd('set sw=4') -- Change the number of space characters inserted for indentation
-vim.bo.expandtab = true -- Converts tabs to spaces
+vim.cmd('set expandtab') -- Converts tabs to spaces
 vim.bo.smartindent = true -- Makes indenting smart
 vim.wo.number = O.number -- set numbered lines
 vim.wo.relativenumber = O.relative_number -- set relative number
@@ -34,6 +34,7 @@ vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shif
 vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = O.timeoutlen -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
+vim.g.nvim_tree_disable_netrw = O.nvim_tree_disable_netrw
 -- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
 -- vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 -- vim.o.guifont = "SauceCodePro Nerd Font:h17"
