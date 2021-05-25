@@ -119,6 +119,18 @@ gls.right[3] = {
 gls.right[4] = {DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.info_yellow, colors.bg}}}
 
 gls.right[5] = {
+    TreesitterIcon = {
+        provider = function()
+            if next(vim.treesitter.highlighter.active) ~= nil then return ' ' end
+            return ''
+        end,
+        separator = ' ',
+        separator_highlight = {'NONE', colors.bg},
+        highlight = {colors.green, colors.bg}
+    }
+}
+
+gls.right[6] = {
     ShowLspClient = {
         provider = 'GetLspClient',
         condition = function()
@@ -131,7 +143,7 @@ gls.right[5] = {
     }
 }
 
-gls.right[6] = {
+gls.right[7] = {
     LineInfo = {
         provider = 'LineColumn',
         separator = '  ',
@@ -140,7 +152,7 @@ gls.right[6] = {
     }
 }
 
-gls.right[7] = {
+gls.right[8] = {
     PerCent = {
         provider = 'LinePercent',
         separator = ' ',
@@ -149,7 +161,7 @@ gls.right[7] = {
     }
 }
 
-gls.right[8] = {
+gls.right[9] = {
     Tabstop = {
         provider = function()
             return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
@@ -161,7 +173,7 @@ gls.right[8] = {
     }
 }
 
-gls.right[9] = {
+gls.right[10] = {
     BufferType = {
         provider = 'FileTypeName',
         condition = condition.hide_in_width,
@@ -171,7 +183,7 @@ gls.right[9] = {
     }
 }
 
-gls.right[10] = {
+gls.right[11] = {
     FileEncode = {
         provider = 'FileEncode',
         condition = condition.hide_in_width,
@@ -181,7 +193,7 @@ gls.right[10] = {
     }
 }
 
-gls.right[11] = {
+gls.right[12] = {
     Space = {
         provider = function()
             return ' '
