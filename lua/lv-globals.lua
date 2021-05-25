@@ -1,3 +1,7 @@
+CONFIG_PATH = vim.fn.stdpath('config')
+DATA_PATH = vim.fn.stdpath('data')
+CACHE_PATH = vim.fn.stdpath('cache')
+
 O = {
     auto_close_tree = 0,
     auto_complete = true,
@@ -80,7 +84,4 @@ O = {
 		footer= {'chrisatmachine.com'}
 	}
 }
-
-DATA_PATH = vim.fn.stdpath('data')
-CACHE_PATH = vim.fn.stdpath('cache')
 
