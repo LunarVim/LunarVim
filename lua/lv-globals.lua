@@ -11,8 +11,8 @@ O = {
     number = true,
     relative_number = true,
     shell = 'bash',
-	timeoutlen = 100,
-    nvim_tree_disable_netrw = 0, -- "1 by default, disables netrw (must be set before plugin's packadd)
+	  timeoutlen = 100,
+    nvim_tree_disable_netrw = 0, 
 
     -- @usage pass a table with your desired languages
     treesitter = {
