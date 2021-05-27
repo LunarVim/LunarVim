@@ -70,4 +70,4 @@ function! QuickFixToggle()
     else
         cclose
     endif
-function
+endfunction
