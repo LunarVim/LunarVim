@@ -82,14 +82,11 @@ config = function() require('nvim-ts-autotag').setup() end,
         use {'f-person/git-blame.nvim', opt = true}        
         use {"folke/which-key.nvim", event = {"VimEnter", "BufReadPre"}, config = function() require('lv-which-key') end}
         use {"ChristianChiarulli/dashboard-nvim", event = "VimEnter", config = function() require('lv-dashboard') end }
-        use {"windwp/nvim-autopairs", after = "nvim-treesitter", config = function() require("lv-autopairs") end}
-        use {"kevinhwang91/nvim-bqf", event = "BufReadPre"}
-
-    -- Comments
+        use {"windwp/nvim-autopairs", config = function() require("lv-autopairs") end}
         use {"terrortylor/nvim-comment", cmd = "CommentToggle", keys ="gcc", config = function() require("lv-comment") end}
-        use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
-    
-    -- Color
+        use {"kevinhwang91/nvim-bqf", event = "BufReadPost"}
+
+        -- Color
         use {"christianchiarulli/nvcode-color-schemes.vim", event = "VimEnter"}
 
         -- Status Line and Bufferline
