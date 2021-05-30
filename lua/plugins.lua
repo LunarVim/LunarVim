@@ -46,20 +46,25 @@ return require("packer").startup(function(use)
             cmd = "Telescope",
             module = {"plenary.nvim", "popup.nvim"},
             config = function() require("lv-telescope") end,
-            after = "trouble.nvim",
             requires = {
                 {"nvim-lua/popup.nvim"},
                 {"nvim-lua/plenary.nvim"},
                 {"nvim-telescope/telescope-fzy-native.nvim"},
                 {"nvim-telescope/telescope-project.nvim"},
-                {"folke/trouble.nvim", cmd = {"Telescope","Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh"}, requires = "kyazdani42/nvim-web-devicons" }
             } }
+        use  {"folke/trouble.nvim",
+                cmd = {"Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh"},
+                ft = "dashboard",
+                event = "BufReadPost",
+                requires = "kyazdani42/nvim-web-devicons" }
 
         -- Debugging
         use {"mfussenegger/nvim-dap", opt = true}
 
         -- Autocomplete
-        use {"hrsh7th/nvim-compe", event = "InsertEnter", config = function() require("lv-compe") end}
+        use {"hrsh7th/nvim-compe", 
+            event = "InsertEnter", 
+            config = function() require("lv-compe") end}
         use {"hrsh7th/vim-vsnip", after = "nvim-compe"}
         use {"rafamadriz/friendly-snippets", after = "nvim-compe"}
 
@@ -72,34 +77,62 @@ return require("packer").startup(function(use)
                      end 
             }
         use {"andymass/vim-matchup", keys = "%"}
+
         -- Explorer
-        use {"kyazdani42/nvim-tree.lua", cmd = {"NvimTreeToggle","NvimTreeRefresh", "NvimTreeFindFile"}, event = {"VimEnter", "BufReadPost"}, config = function() require('lv-nvimtree') end, requires = {"kyazdani42/nvim-web-devicons"}}
+        use {"kyazdani42/nvim-tree.lua", 
+            cmd = {"NvimTreeToggle","NvimTreeRefresh", "NvimTreeFindFile"},
+            event = {"VimEnter", "BufReadPost"},
+            config = function() require('lv-nvimtree') end,
+            requires = {"kyazdani42/nvim-web-devicons"}}
         use {"ahmedkhalf/lsp-rooter.nvim", after = "nvim-tree.lua"} -- with this nvim-tree will follow you        
         -- TODO remove when open on dir is supported by nvimtree
         -- use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"VimEnter"},config = function() require("lv-rnvimr") end }
         use "kevinhwang91/rnvimr"
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
-        use {"lewis6991/gitsigns.nvim", event = "BufReadPre", config = function() require("lv-gitsigns") end}
-        use {'f-person/git-blame.nvim', cmd = "GitBlameToggle", config = function() require("lv-gitblame") end}        
-        use {"folke/which-key.nvim", event = {"VimEnter", "BufReadPost"}, config = function() require('lv-which-key') end}
-        use {"ChristianChiarulli/dashboard-nvim", event = "VimEnter", config = function() require('lv-dashboard') end }
-        use {"windwp/nvim-autopairs", event = "InsertEnter", config = function() require("lv-autopairs") end, requires = {"nvim-treesitter/nvim-treesitter"}}
+        use {"lewis6991/gitsigns.nvim", 
+            event = "BufReadPre",
+            config = function() require("lv-gitsigns") end}
+        use {'f-person/git-blame.nvim',
+            cmd = "GitBlameToggle",
+            config = function() require("lv-gitblame") end}        
+        use {"folke/which-key.nvim",
+            event = {"VimEnter", "BufReadPost"},
+            config = function() require('lv-which-key') end}
+        use {"ChristianChiarulli/dashboard-nvim",
+            event = "VimEnter",
+            config = function() require('lv-dashboard') end }
+        use {"windwp/nvim-autopairs",
+            event = "InsertEnter",
+            config = function() require("lv-autopairs") end,
+            requires = {"nvim-treesitter/nvim-treesitter"}}
         use {"kevinhwang91/nvim-bqf", event = "BufReadPost"}
 
         -- Comments
-        use {"terrortylor/nvim-comment", cmd = "CommentToggle", keys ="gcc", config = function() require("lv-comment") end}
-        use {'JoosepAlviste/nvim-ts-context-commentstring', event = "BufReadPost", requires = "nvim-treesitter"}
+        use {"terrortylor/nvim-comment",
+            cmd = "CommentToggle",
+            keys ="gcc",
+            config = function() require("lv-comment") end}
+        use {'JoosepAlviste/nvim-ts-context-commentstring',
+            event = "BufReadPost",
+            requires = "nvim-treesitter"}
 
         -- Color
         use {"christianchiarulli/nvcode-color-schemes.vim", event = "VimEnter"}
 
         -- Status Line and Bufferline
-        use {"glepnir/galaxyline.nvim", event = "VimEnter", config = function() require("lv-galaxyline") end}
-        use {"romgrk/barbar.nvim", event = "VimEnter",config = function() require("lv-barbar") end, requires = {"kyazdani42/nvim-web-devicons"}}
+        use {"glepnir/galaxyline.nvim", 
+            event = "VimEnter",
+            config = function() require("lv-galaxyline") end}
+        use {"romgrk/barbar.nvim",
+            event = "VimEnter",
+            config = function() require("lv-barbar") end,
+            requires = {"kyazdani42/nvim-web-devicons"}}
 
         -- Zen Mode
-        use {"Pocco81/TrueZen.nvim", cmd = {"TZMinimalist", "TZFocus", "TZAtaraxis"}, config = function() require('lv-zen') end}
+        use {"Pocco81/TrueZen.nvim",
+            cmd = {"TZMinimalist", "TZFocus", "TZAtaraxis"},
+            config = function() require('lv-zen') end}
 
         require_plugin("nvim-dap")
 
