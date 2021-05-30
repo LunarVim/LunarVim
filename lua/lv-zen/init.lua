@@ -35,8 +35,8 @@ require("true-zen").setup({
 	},
 	ataraxis = {
 		just_do_it_for_me = false,
-		left_padding = 10,
-		right_padding = 10,
+		left_padding = 5,
+		right_padding = 5,
 		top_padding = 1,
 		bottom_padding = 1
 	},
