@@ -97,7 +97,7 @@ return require("packer").startup(function(use)
             cmd = "GitBlameToggle",
             config = function() require("lv-gitblame") end}        
         use {"folke/which-key.nvim",
-            event = { "BufReadPost"},
+            event = {"VimEnter", "BufReadPost"},
             ft = {"dashboard"},
             config = function() require('lv-which-key') end}
         use {"ChristianChiarulli/dashboard-nvim",
