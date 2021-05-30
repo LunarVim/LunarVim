@@ -63,22 +63,23 @@ return require("packer").startup(function(use)
         use {"rafamadriz/friendly-snippets", after = "nvim-compe"}
 
         -- Treesitter
-        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate", event = "BufRead"}
-        use {"windwp/nvim-ts-autotag", ft = {  'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue'},
-config = function() require('nvim-ts-autotag').setup() end,
-    }
-    use {'andymass/vim-matchup', opt = true}
-
+        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+        use {"windwp/nvim-ts-autotag",
+            ft = {  'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue'},
+            config = function() 
+                        require('nvim-ts-autotag').setup()
+                     end, 
+            }
         -- Explorer
         use {"kyazdani42/nvim-tree.lua", cmd = {"NvimTreeToggle","NvimTreeRefresh", "NvimTreeFindFile"}, event = {"VimEnter", "BufReadPost"}, config = function() require('lv-nvimtree') end, requires = {"kyazdani42/nvim-web-devicons"}}
         use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you        
         -- TODO remove when open on dir is supported by nvimtree
-        use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"BufReadPost"},config = function() require("lv-rnvimr") end }
+        use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"VimEnter"},config = function() require("lv-rnvimr") end }
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
         use {"lewis6991/gitsigns.nvim", event = "BufReadPre", config = function() require("lv-gitsigns") end}
         use {'f-person/git-blame.nvim', opt = true}        
-        use {"folke/which-key.nvim", event = {"VimEnter", "BufReadPre"}, config = function() require('lv-which-key') end}
+        use {"folke/which-key.nvim", event = {"VimEnter", "BufReadPost"}, config = function() require('lv-which-key') end}
         use {"ChristianChiarulli/dashboard-nvim", event = "VimEnter", config = function() require('lv-dashboard') end }
         use {"windwp/nvim-autopairs", event = "InsertEnter", config = function() require("lv-autopairs") end, requires = {"nvim-treesitter/nvim-treesitter"}}
         use {"terrortylor/nvim-comment", cmd = "CommentToggle", keys ="gcc", config = function() require("lv-comment") end}
