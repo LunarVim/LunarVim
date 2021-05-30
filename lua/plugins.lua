@@ -33,31 +33,29 @@ return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
         -- LSP
-        use {"neovim/nvim-lspconfig" }
-        use {"glepnir/lspsaga.nvim", cmd = "Lspsaga" }
+        use {"neovim/nvim-lspconfig"}
+        use {"glepnir/lspsaga.nvim", cmd = "Lspsaga", requires = {"neovim/nvim-lspconfig"}}
         use {"kabouzeid/nvim-lspinstall", 
-        cmd = "LspInstall",
-        after = "nvim-lspconfig", 
-        config = function ()
-          require('lv-lspinstall')
-        end }
+            cmd = "LspInstall",
+            config = function ()
+              require('lv-lspinstall')
+            end }
         use {"folke/trouble.nvim", opt = true}
 
         -- Telescope
         use {"nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
-        event = "BufReadPre",
-        module = {"plenary.nvim", "popup.nvim"},
-        config = function() require("lv-telescope") end,
-        requires = {
-            {"nvim-lua/popup.nvim"},
-            {"nvim-lua/plenary.nvim"},
-            {"nvim-telescope/telescope-fzy-native.nvim"}
-        } }
+            cmd = "Telescope",
+            module = {"plenary.nvim", "popup.nvim"},
+            config = function() require("lv-telescope") end,
+            requires = {
+                {"nvim-lua/popup.nvim"},
+                {"nvim-lua/plenary.nvim"},
+                {"nvim-telescope/telescope-fzy-native.nvim"}
+            } }
         use {"nvim-telescope/telescope-project.nvim", opt = true}
 
-    -- Debugging
-    use {"mfussenegger/nvim-dap", opt = true}
+        -- Debugging
+        use {"mfussenegger/nvim-dap", opt = true}
 
         -- Autocomplete
         use {"hrsh7th/nvim-compe", event = "InsertEnter", config = function() require("lv-compe") end}
@@ -72,10 +70,10 @@ config = function() require('nvim-ts-autotag').setup() end,
     use {'andymass/vim-matchup', opt = true}
 
         -- Explorer
-        use {"kyazdani42/nvim-tree.lua", cmd = "NvimTreeToggle", event = {"BufReadPre","ColorScheme"}, config = function() require('lv-nvimtree') end}
-        use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you
+        use {"kyazdani42/nvim-tree.lua", cmd = {"NvimTreeToggle","NvimTreeRefresh", "NvimTreeFindFile"}, event = {"VimEnter", "BufReadPost"}, config = function() require('lv-nvimtree') end, requires = {"kyazdani42/nvim-web-devicons"}}
+        use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you        
         -- TODO remove when open on dir is supported by nvimtree
-        use {"kevinhwang91/rnvimr", cmd = "RnvimrToggle", config = function() require("lv-rnvimr") end }
+        use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"BufReadPost"},config = function() require("lv-rnvimr") end }
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
         use {"lewis6991/gitsigns.nvim", event = "BufReadPre", config = function() require("lv-gitsigns") end}
@@ -91,7 +89,7 @@ config = function() require('nvim-ts-autotag').setup() end,
 
         -- Status Line and Bufferline
         use {"glepnir/galaxyline.nvim", event = "VimEnter", config = function() require("lv-galaxyline") end}
-        use {"romgrk/barbar.nvim", event = "VimEnter",config = function() require("lv-barbar") end, requires = {"kyazdani42/nvim-web-devicons",event = "ColorScheme"}}
+        use {"romgrk/barbar.nvim", event = "VimEnter",config = function() require("lv-barbar") end, requires = {"kyazdani42/nvim-web-devicons"}}
 
     -- Icons
     use {"kyazdani42/nvim-web-devicons", opt = true}
