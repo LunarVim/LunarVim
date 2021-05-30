@@ -82,7 +82,7 @@ config = function() require('nvim-ts-autotag').setup() end,
         use {'f-person/git-blame.nvim', opt = true}        
         use {"folke/which-key.nvim", event = {"VimEnter", "BufReadPre"}, config = function() require('lv-which-key') end}
         use {"ChristianChiarulli/dashboard-nvim", event = "VimEnter", config = function() require('lv-dashboard') end }
-        use {"windwp/nvim-autopairs", config = function() require("lv-autopairs") end}
+        use {"windwp/nvim-autopairs", event = "InsertEnter", config = function() require("lv-autopairs") end, requires = {"nvim-treesitter/nvim-treesitter"}}
         use {"terrortylor/nvim-comment", cmd = "CommentToggle", keys ="gcc", config = function() require("lv-comment") end}
         use {"kevinhwang91/nvim-bqf", event = "BufReadPost"}
 
