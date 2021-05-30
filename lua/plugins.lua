@@ -74,7 +74,8 @@ return require("packer").startup(function(use)
         use {"kyazdani42/nvim-tree.lua", cmd = {"NvimTreeToggle","NvimTreeRefresh", "NvimTreeFindFile"}, event = {"VimEnter", "BufReadPost"}, config = function() require('lv-nvimtree') end, requires = {"kyazdani42/nvim-web-devicons"}}
         use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you        
         -- TODO remove when open on dir is supported by nvimtree
-        use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"VimEnter"},config = function() require("lv-rnvimr") end }
+        -- use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"VimEnter"},config = function() require("lv-rnvimr") end }
+        use {"kevinhwang91/rnvimr"}
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
         use {"lewis6991/gitsigns.nvim", event = "BufReadPre", config = function() require("lv-gitsigns") end}
