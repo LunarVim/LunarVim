@@ -5,8 +5,6 @@ require('plugins')
 require('lv-utils')
 require('lv-autocommands')
 require('keymappings')
-require('colorscheme')
-require('lv-rnvimr')
 
 -- extras
 if O.extras then
@@ -15,8 +13,6 @@ if O.extras then
     require('lv-hop')
     require('lv-colorizer')
 end
-
-
 
 -- TODO is there a way to do this without vimscript
 vim.cmd('source '..CONFIG_PATH..'/vimscript/functions.vim')

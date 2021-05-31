@@ -55,15 +55,15 @@ return require("packer").startup(function(use)
         use  {"folke/trouble.nvim",
                 cmd = {"Trouble", "TroubleClose", "TroubleToggle", "TroubleRefresh"},
                 ft = "dashboard",
-                event = "BufReadPost",
+                event = {"BufEnter"},
                 requires = "kyazdani42/nvim-web-devicons" }
 
         -- Debugging
         use {"mfussenegger/nvim-dap", opt = true}
 
         -- Autocomplete
-        use {"hrsh7th/nvim-compe", 
-            event = "InsertEnter", 
+        use {"hrsh7th/nvim-compe",
+            event = "InsertEnter",
             config = function() require("lv-compe") end}
         use {"hrsh7th/vim-vsnip", after = "nvim-compe"}
         use {"rafamadriz/friendly-snippets", after = "nvim-compe"}
@@ -72,42 +72,41 @@ return require("packer").startup(function(use)
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
         use {"windwp/nvim-ts-autotag",
             ft = {  'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue'},
-            config = function() 
+            config = function()
                         require('nvim-ts-autotag').setup()
-                     end 
+                     end
             }
         use {"andymass/vim-matchup", keys = "%"}
 
         -- Explorer
-        use {"kyazdani42/nvim-tree.lua", 
+        use {"kyazdani42/nvim-tree.lua",
             cmd = {"NvimTreeToggle","NvimTreeRefresh", "NvimTreeFindFile"},
-            event = {"VimEnter", "BufReadPost"},
+            event = {"BufEnter"},
             config = function() require('lv-nvimtree') end,
             requires = {"kyazdani42/nvim-web-devicons"}}
         use {"ahmedkhalf/lsp-rooter.nvim", after = "nvim-tree.lua"} -- with this nvim-tree will follow you        
         -- TODO remove when open on dir is supported by nvimtree
-        -- use {"kevinhwang91/rnvimr", cmd = {"RnvimrResize", "RnvimrToggle"}, event = {"VimEnter"},config = function() require("lv-rnvimr") end }
         use {"kevinhwang91/rnvimr", config = function() require('lv-rnvimr') end}
 
         -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
-        use {"lewis6991/gitsigns.nvim", 
+        use {"lewis6991/gitsigns.nvim",
             event = "BufReadPre",
             config = function() require("lv-gitsigns") end}
         use {'f-person/git-blame.nvim',
             cmd = "GitBlameToggle",
-            config = function() require("lv-gitblame") end}        
+            config = function() require("lv-gitblame") end}
         use {"folke/which-key.nvim",
-            event = {"VimEnter", "BufReadPost"},
+            event = {"BufEnter", "BufReadPost"},
             ft = {"dashboard"},
             config = function() require('lv-which-key') end}
         use {"ChristianChiarulli/dashboard-nvim",
-            event = "VimEnter",
+            event = "BufEnter",
             config = function() require('lv-dashboard') end }
         use {"windwp/nvim-autopairs",
             event = "InsertEnter",
             config = function() require("lv-autopairs") end,
             requires = {"nvim-treesitter/nvim-treesitter"}}
-        use {"kevinhwang91/nvim-bqf", event = "BufReadPost"}
+        use {"kevinhwang91/nvim-bqf", event = "QuickFixCmdPre"}
 
         -- Comments
         use {"terrortylor/nvim-comment",
@@ -119,14 +118,14 @@ return require("packer").startup(function(use)
             requires = "nvim-treesitter"}
 
         -- Color
-        use {"christianchiarulli/nvcode-color-schemes.vim", event = "VimEnter"}
+        use {"christianchiarulli/nvcode-color-schemes.vim", event = "BufEnter", config = function() require('colorscheme')end}
 
         -- Status Line and Bufferline
-        use {"glepnir/galaxyline.nvim", 
-            event = "VimEnter",
+        use {"glepnir/galaxyline.nvim",
+            event = "BufEnter",
             config = function() require("lv-galaxyline") end}
         use {"romgrk/barbar.nvim",
-            event = "VimEnter",
+            event = "BufEnter",
             config = function() require("lv-barbar") end,
             requires = {"kyazdani42/nvim-web-devicons"}}
 
@@ -141,8 +140,7 @@ return require("packer").startup(function(use)
         if O.extras then
             use {'metakirby5/codi.vim', opt = true}
             require_plugin('codi.vim')
-            use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', opt = true}
-            require_plugin('markdown-preview.nvim')
+            use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install',ft = "markdown" }
             use {'numToStr/FTerm.nvim', opt = true}
             require_plugin('numToStr/FTerm.nvim')
             use {'monaqa/dial.nvim', opt = true}
