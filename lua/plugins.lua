@@ -71,7 +71,8 @@ return require("packer").startup(function(use)
         -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
         use {"windwp/nvim-ts-autotag",
-            ft = {  'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue'},
+            ft = {  'html', 'javascript', 'javascriptreact', 
+            'typescriptreact', 'svelte', 'vue'},
             config = function()
                         require('nvim-ts-autotag').setup()
                      end
@@ -118,7 +119,9 @@ return require("packer").startup(function(use)
             requires = "nvim-treesitter"}
 
         -- Color
-        use {"christianchiarulli/nvcode-color-schemes.vim", event = "BufEnter", config = function() require('colorscheme')end}
+        use {"christianchiarulli/nvcode-color-schemes.vim",
+            event = "BufEnter",
+            config = function() require('colorscheme')end}
 
         -- Status Line and Bufferline
         use {"glepnir/galaxyline.nvim",
@@ -140,7 +143,10 @@ return require("packer").startup(function(use)
         if O.extras then
             use {'metakirby5/codi.vim', opt = true}
             require_plugin('codi.vim')
-            use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install',ft = "markdown" }
+            use {'iamcco/markdown-preview.nvim', 
+                run = 'cd app && npm install',
+             -- run = 'call mkdp#util#install()', -- use this line if the above doesn't work for you
+                ft = "markdown" }
             use {'numToStr/FTerm.nvim', opt = true}
             require_plugin('numToStr/FTerm.nvim')
             use {'monaqa/dial.nvim', opt = true}
