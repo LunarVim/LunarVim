@@ -70,6 +70,12 @@ O = {
 		filetypes = {'rb', 'erb', 'rakefile'}
 	},
     go = {},
+    rust = {
+        linter = '',
+        formatter = '',
+        autoformat = false,
+        diagnostics = {virtual_text = {spacing = 0, prefix = ""}, signs = true, underline = true}
+    },
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 
