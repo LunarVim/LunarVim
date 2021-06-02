@@ -64,6 +64,9 @@ O.ruby.autoformat = true
 
 -- go
 O.go.autoformat = true
+
+-- rust
+O.rust.autoformat = true
 -- create custom autocommand field (This would be easy with lua)
 
 -- Turn off relative_numbers
