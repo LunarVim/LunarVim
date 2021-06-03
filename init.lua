@@ -31,6 +31,7 @@ if O.extras then
     require('lv-hop')
     require('lv-colorizer')
     require('lv-rust-tools')
+    require('lv-symbols-outline')
 end
 
 
