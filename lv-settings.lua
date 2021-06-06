@@ -1,3 +1,20 @@
+require('lv-visual-multi')
+
+-- vim settings
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.cursorline = true
+vim.cmd[[highlight vCursor guifg=white guibg=steelblue]]
+vim.o.guicursor = 'a:block-blinkwait175-blinkoff150-blinkon175-vCursor'
+vim.o.whichwrap = 'b,s,h,l'
+
+-- Rust
+vim.cmd[[autocmd BufNewFile,BufRead *.rs setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2]]
+
+
 --[[
 O is the global options object
 
@@ -7,14 +24,13 @@ a global executable or a path to
 an executable
 ]]
 
--- general
+-- general.
 O.auto_complete = true
-O.colorscheme = 'lunar'
+O.colorscheme = 'gruvbox'
 O.auto_close_tree = 0
 O.wrap_lines = false
 O.timeoutlen = 100
 O.document_highlight = true
-O.extras = true
 
 -- dashboard
 -- O.dashboard.custom_header = {""}
