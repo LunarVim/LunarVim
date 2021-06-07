@@ -89,6 +89,9 @@ return require("packer").startup(function(use)
     -- Zen Mode
     use {"Pocco81/TrueZen.nvim", opt = true}
 
+    -- VimWiki
+    use {"vimwiki/vimwiki", opt = true}
+
     require_plugin("nvim-lspconfig")
     require_plugin("lspsaga.nvim")
     require_plugin("nvim-lspinstall")
@@ -119,6 +122,7 @@ return require("packer").startup(function(use)
     require_plugin('lsp-rooter.nvim')
     require_plugin("TrueZen.nvim")
     require_plugin("nvim-ts-context-commentstring")
+    require_plugin("vimwiki")
 
     -- Extras
     if O.extras then
