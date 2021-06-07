@@ -71,3 +71,10 @@ function! QuickFixToggle()
         cclose
     endif
 endfunction
+
+" I don't know much lua so I added this here,
+" This command helps preserve the cursor position of a file.
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
