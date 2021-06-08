@@ -2,21 +2,24 @@ local gl = require('galaxyline')
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
-    bg = '#282828',
-    yellow = '#fabd2f',
-    dark_yellow = '#D79921',
-    green = '#98971a',
-    light_green = '#B9bb26',
-    string_orange = '#fe8019',
-    orange = '#d65d0e',
-    purple = '#b16286',
-    magenta = '#d3869b',
-    grey = '#928374',
-    blue = '#458588',
-    light_blue = '#83a598',
-    red = '#cc241d',
-    error_red = '#fb4934',
-    info_yellow = '#fabd2f'
+    -- bg = '#2E2E2E',
+    bg = '#292D38',
+    yellow = '#DCDCAA',
+    dark_yellow = '#D7BA7D',
+    cyan = '#4EC9B0',
+    green = '#608B4E',
+    light_green = '#B5CEA8',
+    string_orange = '#CE9178',
+    orange = '#FF8800',
+    purple = '#C586C0',
+    magenta = '#D16D9E',
+    grey = '#858585',
+    blue = '#569CD6',
+    vivid_blue = '#4FC1FF',
+    light_blue = '#9CDCFE',
+    red = '#D16969',
+    error_red = '#F44747',
+    info_yellow = '#FFCC66'
 }
 local condition = require('galaxyline.condition')
 local gls = gl.section
@@ -27,13 +30,13 @@ table.insert(gls.left, {
         provider = function()
             -- auto change color according the vim mode
             local mode_color = {
-                n = colors.grey,
+                n = colors.blue,
                 i = colors.green,
-                v = colors.orange,
+                v = colors.purple,
                 [''] = colors.purple,
-                V = colors.string_orange,
-                c = colors.blue,
-                no = colors.light_blue,
+                V = colors.purple,
+                c = colors.magenta,
+                no = colors.blue,
                 s = colors.orange,
                 S = colors.orange,
                 [''] = colors.orange,
@@ -60,7 +63,7 @@ vim.fn.getbufvar(0, 'ts')
 table.insert(gls.left, {
     GitIcon = {
         provider = function()
-            return ' '
+            return ' '
         end,
         condition = condition.check_git_workspace,
         separator = ' ',
