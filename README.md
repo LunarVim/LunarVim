@@ -538,6 +538,12 @@ Make sure you’re in normal mode not insert mode.
 | :messages                        | Print error messages. Useful when messages get cut off                                                                                                                                                                                                                                                                       |
 | :scriptnames                     | List all sourced files                                                                                                                                                                                                                                                                                                       |
 
+# Getting Help
+   
+* Check out the `#neovim` channel on the [Discord](https://discord.gg/Xb9B4Ny) or [lMatrix](https://matrix.to/#/+atmachine:matrix.org) server. There is a bridge between the Discord and Matrix server, so you only need to join one or the other! 
+* Check out the repos and communities specific to the plug-in in question. A lot of what LunarVim does is tie various plug-ins together
+* If all else fails, submit an issue.
+   
 # Uninstalling
 
 Changed your mind about LunarVim? To remove it entirely:
