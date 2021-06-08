@@ -15,6 +15,7 @@ O.wrap_lines = false
 O.timeoutlen = 100
 O.document_highlight = true
 O.extras = true
+O.leader_key = ' '
 
 -- dashboard
 -- O.dashboard.custom_header = {""}

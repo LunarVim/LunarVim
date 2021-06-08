@@ -1,5 +1,15 @@
 require('lv-globals')
 vim.cmd('luafile '..CONFIG_PATH..'/lv-settings.lua')
+
+-- Set leader
+if O.leader_key == ' ' or O.leader_key == 'space' then
+    vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
+    vim.g.mapleader = ' '
+else
+    vim.api.nvim_set_keymap('n', O.leader_key, '<NOP>', {noremap = true, silent = true})
+    vim.g.mapleader = O.leader_key
+end
+
 require('settings')
 require('lv-gitblame')
 require('plugins')
@@ -32,8 +42,6 @@ if O.extras then
     require('lv-colorizer')
     require('lv-symbols-outline')
 end
-
-
 
 -- TODO is there a way to do this without vimscript
 vim.cmd('source '..CONFIG_PATH..'/vimscript/functions.vim')
