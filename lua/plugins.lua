@@ -71,6 +71,7 @@ return require("packer").startup(function(use)
     use {"ChristianChiarulli/dashboard-nvim", opt = true}
     use {"windwp/nvim-autopairs", opt = true}
     use {"kevinhwang91/nvim-bqf", opt = true}
+    use {"ethanholz/nvim-lastplace", opt = false}
 
     -- Comments
     use {"terrortylor/nvim-comment", opt = true}
@@ -119,6 +120,7 @@ return require("packer").startup(function(use)
     require_plugin('lsp-rooter.nvim')
     require_plugin("TrueZen.nvim")
     require_plugin("nvim-ts-context-commentstring")
+    require_plugin("nvim-lastplace")
 
     -- Extras
     if O.extras then
