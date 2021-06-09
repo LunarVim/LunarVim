@@ -89,6 +89,9 @@ return require("packer").startup(function(use)
     -- Zen Mode
     use {"Pocco81/TrueZen.nvim", opt = true}
 
+		-- Sane gx for netrw_gx bug
+    use {"felipec/vim-sanegx"}
+
     require_plugin("nvim-lspconfig")
     require_plugin("lspsaga.nvim")
     require_plugin("nvim-lspinstall")
