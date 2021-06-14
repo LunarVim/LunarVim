@@ -58,6 +58,9 @@ return require("packer").startup(
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
         use {"windwp/nvim-ts-autotag", opt = true}
 
+        -- Fugitive
+        use {"tpope/vim-fugitive", opt = true}
+
         -- Explorer
         use {"kyazdani42/nvim-tree.lua", opt = true}
         -- TODO remove when open on dir is supported by nvimtree
@@ -93,6 +96,7 @@ return require("packer").startup(
         require_plugin("nvim-compe")
         require_plugin("vim-vsnip")
         require_plugin("nvim-treesitter")
+        require_plugin("vim-fugitive")
         require_plugin("nvim-ts-autotag")
         require_plugin("nvim-tree.lua")
         require_plugin("gitsigns.nvim")

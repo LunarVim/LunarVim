@@ -15,8 +15,8 @@ O.wrap_lines = false
 O.timeoutlen = 100
 
 -- dashboard
--- O.dashboard.custom_header = {""}
--- O.dashboard.footer = {""}
+O.dashboard.custom_header = {""}
+O.dashboard.footer = {""}
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
@@ -51,8 +51,8 @@ O.lua.autoformat = false
 
 -- javascript
 O.tsserver.formatter = 'prettier'
-O.tsserver.linter = 'eslint'
-O.tsserver.diagnostics.virtual_text = false
+O.tsserver.linter = 'eslint_d'
+O.tsserver.diagnostics.virtual_text = true 
 O.tsserver.autoformat = true
 
 -- json

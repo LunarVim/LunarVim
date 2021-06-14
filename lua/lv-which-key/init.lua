@@ -55,6 +55,8 @@ vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>r', ':Telescope oldfiles<CR>', {noremap = true, silent = true})
+
 
 -- dashboard
 vim.api.nvim_set_keymap('n', '<Leader>;', ':Dashboard<CR>', {noremap = true, silent = true})
@@ -73,6 +75,7 @@ local mappings = {
     ["c"] = "Close Buffer",
     ["e"] = "Explorer",
     ["f"] = "Find File",
+    ["r"] = "Recent Files",
     ["h"] = "No Highlight",
     d = {
         name = "+Debug",
@@ -92,7 +95,7 @@ local mappings = {
         R = {"<cmd>ResetBuffer<cr>", "Reset Buffer"},
         s = {"<cmd>StageHunk<cr>", "Stage Hunk"},
         u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"},
-        o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
+        o = {"<cmd>:G<cr>", "Git Status"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
         C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
