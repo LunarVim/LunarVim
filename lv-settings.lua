@@ -13,6 +13,8 @@ O.colorscheme = 'gruvbox-material'
 O.auto_close_tree = 0
 O.wrap_lines = false
 O.timeoutlen = 100
+O.document_highlight = true
+O.extras = true
 
 -- dashboard
 O.dashboard.custom_header = {""}
@@ -60,6 +62,9 @@ O.json.autoformat = true
 
 -- ruby
 O.ruby.autoformat = true
+
+-- go
+O.go.autoformat = true
 -- create custom autocommand field (This would be easy with lua)
 
 -- Turn off relative_numbers
