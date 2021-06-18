@@ -30,6 +30,16 @@ installnodefedora() {
     sudo dnf install -y npm
 }
 
+installnodegentoo() {
+	echo "Printing current node status..."
+	emerge -pqv net-libs/nodejs
+	echo "Make sure the npm USE flag is enabled for net-libs/nodejs"
+	echo "If it isn't enabled, would you like to enable it with flaggie? (Y/N)"
+	read answer
+        [ "$answer" != "${answer#[Yy]}" ] && sudo flaggie net-libs/nodejs +npm
+	sudo emerge -avnN net-libs/nodejs
+}
+
 installnode() {
 	echo "Installing node..."
 	[ "$(uname)" == "Darwin" ] && installnodemac
@@ -37,6 +47,7 @@ installnode() {
 	[ -f "/etc/arch-release" ] && installnodearch
 	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
+	[ -f "/etc/gentoo-release" ] && installnodegentoo
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
 }
@@ -59,18 +70,28 @@ installpiponfedora() {
 	sudo dnf install -y pip >/dev/nul
 }
 
+installpipongentoo() {
+	sudo emerge -avn dev-python/pip
+}
+
 installpip() {
 	echo "Installing pip..."
 	[ "$(uname)" == "Darwin" ] && installpiponmac
 	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
 	[ -f "/etc/arch-release" ] && installpiponarch
 	[ -f "/etc/fedora-release" ] && installpiponfedora
+	[ -f "/etc/gentoo-release" ] && installpipongentoo
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
 installpynvim() {
 	echo "Installing pynvim..."
-	pip3 install pynvim --user
+	if [ -f "/etc/gentoo-release" ]; then
+		echo "Installing using Portage"
+		sudo emerge -avn dev-python/pynvim
+	else
+		pip3 install pynvim --user
+	fi
 }
 
 installpacker() {
@@ -133,12 +154,19 @@ installonfedora() {
     pip3 install wheel ueberzug
 }
 
+installongentoo() {
+	sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/ranger dev-python/neovim-remote virtual/jpeg sys-libs/zlib
+	pipinstallueberzug
+	npm install -g tree-sitter-cli
+}
+
 installextrapackages() {
 	[ "$(uname)" == "Darwin" ] && installonmac
 	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installonubuntu
 	[ -f "/etc/arch-release" ] && installonarch
 	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
+	[ -f "/etc/gentoo-release" ] && installongentoo
 	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
