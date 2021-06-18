@@ -130,7 +130,7 @@ return require("packer").startup(function(use)
         use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', opt = true}
         require_plugin('markdown-preview.nvim')
         use {'numToStr/FTerm.nvim', opt = true}
-        require_plugin('numToStr/FTerm.nvim')
+        require_plugin('FTerm.nvim')
         use {'monaqa/dial.nvim', opt = true}
         require_plugin('dial.nvim')
         use {'nacro90/numb.nvim', opt = true}
