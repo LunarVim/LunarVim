@@ -1,3 +1,1 @@
-setlocal commentstring={/*%s*/}
-set ts=2
-set sw=2             
+setl commentstring={/*%s*/} ts=2 sw=2             
