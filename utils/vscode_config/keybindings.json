@@ -165,7 +165,7 @@
   },
   {
     "key": "space",
-    "command": "whichkey.show",
+    "command": "whichkey.show && !inputFocus",
     "when": "neovim.mode != 'insert'"
   }
 ]
