@@ -89,8 +89,11 @@ return require("packer").startup(function(use)
     -- Zen Mode
     use {"Pocco81/TrueZen.nvim", opt = true}
 
-		-- Sane gx for netrw_gx bug
+	-- Sane gx for netrw_gx bug
     use {"felipec/vim-sanegx"}
+
+    -- Latex
+    use {"lervag/vimtex", opt = true}
 
     require_plugin("nvim-lspconfig")
     require_plugin("lspsaga.nvim")
@@ -122,6 +125,7 @@ return require("packer").startup(function(use)
     require_plugin('lsp-rooter.nvim')
     require_plugin("TrueZen.nvim")
     require_plugin("nvim-ts-context-commentstring")
+    require_plugin("vimtex")
 
     -- Extras
     if O.extras then
