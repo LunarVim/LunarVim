@@ -73,7 +73,11 @@ local opts = {
 
 require('rust-tools').setup(opts)
 
-vim.api.nvim_set_keymap("n", "<leader>lm", "<cmd>RustExpandMacro<CR>", {noremap = true, silent =  true})
-vim.api.nvim_set_keymap("n", "<leader>lH", "<cmd>RustToggleInlayHints<CR>", {noremap = true, silent =  true})
-vim.api.nvim_set_keymap("n", "<leader>le", "<cmd>RustRunnables<CR>", {noremap = true, silent =  true})
-vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>RustHoverActions<CR>", {noremap = true, silent =  true})
+vim.api.nvim_exec(
+    [[
+    autocmd Filetype rust nnoremap <leader>lm <Cmd>RustExpandMacro<CR>
+    autocmd Filetype rust nnoremap <leader>lH <Cmd>RustToggleInlayHints<CR>
+    autocmd Filetype rust nnoremap <leader>le <Cmd>RustRunnables<CR>
+    autocmd Filetype rust nnoremap <leader>lh <Cmd>RustHoverActions<CR>
+    ]], true)
+
