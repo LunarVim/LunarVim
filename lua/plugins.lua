@@ -92,9 +92,6 @@ return require("packer").startup(function(use)
 	-- Sane gx for netrw_gx bug
     use {"felipec/vim-sanegx"}
 
-    -- Latex
-    use {"lervag/vimtex", opt = true}
-
     require_plugin("nvim-lspconfig")
     require_plugin("lspsaga.nvim")
     require_plugin("nvim-lspinstall")
@@ -125,32 +122,46 @@ return require("packer").startup(function(use)
     require_plugin('lsp-rooter.nvim')
     require_plugin("TrueZen.nvim")
     require_plugin("nvim-ts-context-commentstring")
-    require_plugin("vimtex")
 
     -- Extras
     if O.extras then
+        -- Interactive scratchpad
         use {'metakirby5/codi.vim', opt = true}
         require_plugin('codi.vim')
+        -- Markdown preview
         use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', opt = true}
         require_plugin('markdown-preview.nvim')
+        -- Floating terminal
         use {'numToStr/FTerm.nvim', opt = true}
         require_plugin('FTerm.nvim')
+        -- Enhanced increment/decrement
         use {'monaqa/dial.nvim', opt = true}
         require_plugin('dial.nvim')
+        -- Peek lines
         use {'nacro90/numb.nvim', opt = true}
         require_plugin('numb.nvim')
+        -- HTML preview
         use {'turbio/bracey.vim', run = 'npm install --prefix server', opt = true}
         require_plugin('bracey.vim')
+        -- Better motions
         use {'phaazon/hop.nvim', opt = true}
         require_plugin('hop.nvim')
+        -- Colorizer
         use {'norcalli/nvim-colorizer.lua', opt = true}
         require_plugin('nvim-colorizer.lua')
+        -- Search & Replace
         use {'windwp/nvim-spectre', opt = true}
         require_plugin('windwp/nvim-spectre')
+        -- Symbols tree
         use {'simrat39/symbols-outline.nvim', opt = true}
         require_plugin('symbols-outline.nvim')
+        -- Treesitter playground
         use {'nvim-treesitter/playground', opt = true}
         require_plugin('playground')
+        -- Latex
+        use {"lervag/vimtex", opt = true}
+        require_plugin("vimtex")
+
         -- folke/todo-comments.nvim
         -- gennaro-tedesco/nvim-jqx
         -- TimUntersberger/neogit

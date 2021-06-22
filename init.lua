@@ -23,7 +23,6 @@ require('lv-rnvimr')
 require('lv-which-key')
 require('lv-lsp-rooter')
 require('lv-zen')
-require('lv-vimtex')
 
 -- extras
 if O.extras then
@@ -32,6 +31,7 @@ if O.extras then
     require('lv-hop')
     require('lv-colorizer')
     require('lv-symbols-outline')
+    require('lv-vimtex')
 end
 
 
