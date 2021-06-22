@@ -90,6 +90,7 @@ table.insert(gls.left, {
         highlight = {colors.green, colors.bg}
     }
 })
+
 table.insert(gls.left, {
     DiffModified = {
         provider = 'DiffModified',
@@ -98,6 +99,7 @@ table.insert(gls.left, {
         highlight = {colors.blue, colors.bg}
     }
 })
+
 table.insert(gls.left, {
     DiffRemove = {
         provider = 'DiffRemove',
