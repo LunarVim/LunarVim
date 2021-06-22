@@ -51,7 +51,7 @@ vim.g.mapleader = ' '
 vim.api.nvim_set_keymap('n', '<Leader>h', ':set hlsearch!<CR>', {noremap = true, silent = true})
 
 -- explorer
-vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>e', ":lua require'lv-nvimtree'.toggle_tree()<CR>", {noremap = true, silent = true})
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>', {noremap = true, silent = true})
@@ -78,6 +78,16 @@ local mappings = {
     ["f"] = "Find File",
     ["h"] = "No Highlight",
     ["p"] = "Projects",
+    b = {
+      name = "+Buffers",
+      j = {"<cmd>BufferPick<cr>", "jump to buffer"},
+      w = {"<cmd>BufferWipeout<cr>", "wipeout buffer"},
+      e = {"<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer"},
+      h = {"<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left"},
+      l = {"<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right"},
+      D = {"<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory"},
+      L = {"<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language"},
+    },
     d = {
         name = "+Diagnostics",
         t = {"<cmd>TroubleToggle<cr>", "trouble"},
