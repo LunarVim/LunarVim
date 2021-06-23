@@ -128,15 +128,6 @@ local mappings = {
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
     },
-    L = {
-        name = "+Latex",
-        c = {"<cmd>VimtexCompile<cr>", "Toggle Compilation Mode"},
-        f = {"<cmd>call vimtex#fzf#run()<cr>", "Fzf Find"},
-        i = {"<cmd>VimtexInfo<cr>", "Project Information"},
-        s = {"<cmd>VimtexStop<cr>", "Stop Project Compilation"},
-        t = {"<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content"},
-        v = {"<cmd>VimtexView<cr>", "View PDF"}
-    },
     s = {
         name = "+Search",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
@@ -160,6 +151,18 @@ local mappings = {
         z = {"<cmd>TZAtaraxis<cr>", "toggle zen"},
     }
 }
+
+if O.extras then
+    mappings["L"] = {
+        name = "+Latex",
+        c = {"<cmd>VimtexCompile<cr>", "Toggle Compilation Mode"},
+        f = {"<cmd>call vimtex#fzf#run()<cr>", "Fzf Find"},
+        i = {"<cmd>VimtexInfo<cr>", "Project Information"},
+        s = {"<cmd>VimtexStop<cr>", "Stop Project Compilation"},
+        t = {"<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content"},
+        v = {"<cmd>VimtexView<cr>", "View PDF"}
+    }
+end
 
 local wk = require("which-key")
 wk.register(mappings, opts)
