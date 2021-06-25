@@ -25,6 +25,7 @@ Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-squ
 - [Project Goals](#project-goals)
 - [Install In One Command!](#install-in-one-command)
   * [Get the latest version of Neovim](#get-the-latest-version-of-neovim)
+  * [Manual Install](#manual-install)
   * [Troubleshooting installation
     problems](#troubleshooting-installation-problems)
 - [Getting started](#getting-started)
@@ -138,7 +139,72 @@ or if you are on Arch you can get it from the AUR
 yay -S neovim-git
 ```
 
+
 If you are on Gentoo you have to emerge the 9999 neovim version with luajit as the lua single target
+
+## Manual install 
+
+First make sure you have version [0.5 of
+neovim](#get-the-latest-version-of-neovim).
+
+Back up your current configuration files
+
+```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+```
+
+Install xclip, python3, ripgrep, fzf, npm, nodejs, pip, and ranger with the package manager for your distribution.
+
+```bash
+# Ubuntu
+sudo apt install xclip python3-pip nodejs npm ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev python3-pip
+
+# Arch
+sudo pacman -S xclip python python-pip nodejs npm ripgrep fzf ranger
+
+# Fedora
+sudo dnf groupinstall "X Software Development"
+sudo dnf install -y xclip python3-devel pip nodejs npm ripgrep fzf ranger 
+pip3 install wheel ueberzug
+
+# Gentoo
+sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/ranger dev-python/neovim-remote virtual/jpeg sys-libs/zlib
+sudo emerge -avn dev-python/pip
+# Optional.   Enable npm USE flag with flaggie
+sudo flaggie net-libs/nodejs +npm
+sudo emerge -avnN net-libs/nodejs
+
+# Mac
+brew install lua node yarn ripgrep fzf ranger
+sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+rm get-pip.py
+```
+
+Install tree-sitter.  To globally install packages without the need for sudo
+follow [this guide](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+
+```bash
+npm install -g tree-sitter-cli
+```
+
+Install ueberzug, neovim-remote, and pynvim with pip3
+
+```bash
+pip3 install ueberzug neovim neovim-remote pynvim --user
+```
+
+Clone LunarVim and Packer
+
+```bash
+git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
+```
+
+Install plugins
+```
+nvim -u $HOME/.config/nvim/init.lua +PackerInstall
+```
 
 ## Troubleshooting installation problems
 If you encounter problems with the installation check the following: 
@@ -148,7 +214,7 @@ If you encounter problems with the installation check the following:
   # The output of version information should include a line for: LuaJIT 
   nvim -v
   ```
-3. If you installed using sudo, follow the steps to [uninstall](#uninstalling) and try again without sudo. 
+3. If you ran the [quick-install script](#install-in-one-command) using sudo, follow the steps to [uninstall](#uninstalling) and try again without sudo. 
 4. Make sure the [dependencies](#useful-programs) were installed.  
 5. Make sure your plugins are installed and updated. Run :PackerSync
 
