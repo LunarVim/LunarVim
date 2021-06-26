@@ -47,6 +47,7 @@ local opts = {
 vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
 vim.g.mapleader = ' '
 
+
 -- no hl
 vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>', {noremap = true, silent = true})
 
@@ -69,26 +70,28 @@ vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", {noremap = true, s
 -- open projects
 vim.api.nvim_set_keymap('n', '<leader>p', ":lua require'telescope'.extensions.project.project{}<CR>",
                         {noremap = true, silent = true})
+
 -- TODO create entire treesitter section
 
 local mappings = {
-    ["/"] = "Comment",
-    ["c"] = "Close Buffer",
-    ["e"] = "Explorer",
-    ["f"] = "Find File",
-    ["h"] = "No Highlight",
-    ["p"] = "Projects",
+    ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
+    [";"] = {"<cmd>Dashboard<cr>", "Dashboard"},
+    ["c"] = {"<cmd>BufferClose<cr>", "Close Buffer"},
+    ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
+    ["f"] = {"<cmd>Telescope find_files<cr>", "Find File"},
+    ["h"] = {"<cmd>set hlsearch!<cr>", "No Highlight"},
+    ["p"] = {"<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects"},
     d = {
-        name = "+Diagnostics",
+        name = "Diagnostics",
         t = {"<cmd>TroubleToggle<cr>", "trouble"},
         w = {"<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace"},
         d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
         q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
         l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
-        r = {"<cmd>TroubleToggle lsp_references<cr>", "references"},
+        r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
     },
     D = {
-        name = "+Debug",
+        name = "Debug",
         b = {"<cmd>DebugToggleBreakpoint<cr>", "Toggle Breakpoint"},
         c = {"<cmd>DebugContinue<cr>", "Continue"},
         i = {"<cmd>DebugStepInto<cr>", "Step Into"},
@@ -97,7 +100,7 @@ local mappings = {
         s = {"<cmd>DebugStart<cr>", "Start"}
     },
     g = {
-        name = "+Git",
+        name = "Git",
         j = {"<cmd>NextHunk<cr>", "Next Hunk"},
         k = {"<cmd>PrevHunk<cr>", "Prev Hunk"},
         p = {"<cmd>PreviewHunk<cr>", "Preview Hunk"},
@@ -108,10 +111,10 @@ local mappings = {
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
-        C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
+        C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"}
     },
     l = {
-        name = "+LSP",
+        name = "LSP",
         a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
         A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
@@ -128,8 +131,13 @@ local mappings = {
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
     },
+    r = {
+        name = "Replace",
+        f = {"<cmd>lua require('spectre').open_file_search()<cr>", "Current File"},
+        p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
+    },
     s = {
-        name = "+Search",
+        name = "Search",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
@@ -141,16 +149,39 @@ local mappings = {
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
-    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}},
-
+    S = {
+        name = "Session",
+        s = {"<cmd>SessionSave<cr>", "Save Session"},
+        l = {"<cmd>SessionLoad<cr>", "Load Session"}
+    },
     -- extras
     z = {
-        name = "+Zen",
+        name = "Zen",
         s = {"<cmd>TZBottom<cr>", "toggle status line"},
         t = {"<cmd>TZTop<cr>", "toggle tab bar"},
-        z = {"<cmd>TZAtaraxis<cr>", "toggle zen"},
+        z = {"<cmd>TZAtaraxis<cr>", "toggle zen"}
+    }
+}
+
+local visualOpts = {
+    mode = "v", -- Visual mode
+    prefix = "<leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false -- use `nowait` when creating keymaps
+}
+
+local visualMappings = {
+    ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
+    r = {
+        name = "Replace",
+        f = {"<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%')})<cr>", "File"},
+        p = {"<cmd>lua require('spectre').open_visual()<cr>", "Project"}
     }
 }
 
 local wk = require("which-key")
 wk.register(mappings, opts)
+wk.register(visualMappings, visualOpts)
+

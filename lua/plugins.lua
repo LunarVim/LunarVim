@@ -142,7 +142,7 @@ return require("packer").startup(function(use)
         use {'norcalli/nvim-colorizer.lua', opt = true}
         require_plugin('nvim-colorizer.lua')
         use {'windwp/nvim-spectre', opt = true}
-        require_plugin('windwp/nvim-spectre')
+        require_plugin('nvim-spectre')
         use {'simrat39/symbols-outline.nvim', opt = true}
         require_plugin('symbols-outline.nvim')
         use {'nvim-treesitter/playground', opt = true}
