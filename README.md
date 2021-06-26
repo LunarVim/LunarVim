@@ -296,6 +296,8 @@ To install a supported language server:
 See [LspInstall](https://github.com/kabouzeid/nvim-lspinstall) for more
 info.
 
+In order for Java LSP to work, edit `~/.local/share/nvim/lspinstall/java/jdtls.sh` and replace `WORKSPACE="$1"` with `WORKSPACE="$HOME/workspace"`
+
 Most common languages should be supported out of the box, if yours is
 not I would welcome a PR
 
