@@ -31,6 +31,7 @@ if O.extras then
     require('lv-colorizer')
     require('lv-spectre')
     require('lv-symbols-outline')
+    require('lv-vimtex')
 end
 
 
