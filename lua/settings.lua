@@ -25,17 +25,19 @@ vim.cmd('set expandtab') -- Converts tabs to spaces
 vim.bo.smartindent = true -- Makes indenting smart
 vim.wo.number = O.number -- set numbered lines
 vim.wo.relativenumber = O.relative_number -- set relative number
-vim.wo.cursorline = true -- Enable highlighting of the current line
+vim.wo.cursorline = O.cursorline -- set highlighting of the current line
 vim.o.showtabline = 2 -- Always show tabs
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore
 vim.o.backup = false -- This is recommended by coc
 vim.o.writebackup = false -- This is recommended by coc
+vim.o.swapfile = false -- Do not write any swp files
+vim.o.undodir = CACHE_PATH .. '/undo' -- Set undo directory
+vim.o.undofile = true -- Enable persistent undo
 vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = O.timeoutlen -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.g.nvim_tree_disable_netrw = O.nvim_tree_disable_netrw -- enable netrw for remote gx gf support (must be set before plugin's packadd)
-vim.g.loaded_netrwPlugin = 1 -- needed for netrw gx command to open remote links in browser
 vim.cmd('filetype plugin on') -- filetype detection
 -- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
 -- vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"

@@ -25,6 +25,9 @@ Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-squ
 - [Project Goals](#project-goals)
 - [Install In One Command!](#install-in-one-command)
   * [Get the latest version of Neovim](#get-the-latest-version-of-neovim)
+  * [Manual Install](#manual-install)
+  * [Troubleshooting installation
+    problems](#troubleshooting-installation-problems)
 - [Getting started](#getting-started)
   * [Home screen](#home-screen)
   * [Leader and Whichkey](#leader-and-whichkey)
@@ -52,6 +55,7 @@ Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-squ
 - [Useful commands for
   troubleshooting](#useful-commands-for-troubleshooting)
 - [Uninstalling](#uninstalling)
+- [Community links](#community-links)
 - [TODO](#todo)
 
 # What’s included?
@@ -126,7 +130,7 @@ git clone https://github.com/neovim/neovim --depth 1
 cd neovim
 sudo make CMAKE_BUILD_TYPE=Release install
 cd ..
-rm -rf neovim
+sudo rm -r neovim
 ```
 
 or if you are on Arch you can get it from the AUR
@@ -134,6 +138,85 @@ or if you are on Arch you can get it from the AUR
 ``` bash
 yay -S neovim-git
 ```
+
+
+If you are on Gentoo you have to emerge the 9999 neovim version with luajit as the lua single target
+
+## Manual install 
+
+First make sure you have version [0.5 of
+neovim](#get-the-latest-version-of-neovim).
+
+Back up your current configuration files
+
+```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+```
+
+Install xclip, python3, ripgrep, fzf, npm, nodejs, pip, and ranger with the package manager for your distribution.
+
+```bash
+# Ubuntu
+sudo apt install xclip python3-pip nodejs npm ripgrep fzf ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev python3-pip
+
+# Arch
+sudo pacman -S xclip python python-pip nodejs npm ripgrep fzf ranger
+
+# Fedora
+sudo dnf groupinstall "X Software Development"
+sudo dnf install -y xclip python3-devel pip nodejs npm ripgrep fzf ranger 
+pip3 install wheel ueberzug
+
+# Gentoo
+sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/ranger dev-python/neovim-remote virtual/jpeg sys-libs/zlib
+sudo emerge -avn dev-python/pip
+# Optional.   Enable npm USE flag with flaggie
+sudo flaggie net-libs/nodejs +npm
+sudo emerge -avnN net-libs/nodejs
+
+# Mac
+brew install lua node yarn ripgrep fzf ranger
+sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+rm get-pip.py
+```
+
+Install tree-sitter.  To globally install packages without the need for sudo
+follow [this guide](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+
+```bash
+npm install -g tree-sitter-cli
+```
+
+Install ueberzug, neovim-remote, and pynvim with pip3
+
+```bash
+pip3 install ueberzug neovim neovim-remote pynvim --user
+```
+
+Clone LunarVim and Packer
+
+```bash
+git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
+```
+
+Install plugins
+```
+nvim -u $HOME/.config/nvim/init.lua +PackerInstall
+```
+
+## Troubleshooting installation problems
+If you encounter problems with the installation check the following: 
+1. Make sure you have at least version 0.5 of neovim. 
+2. Make sure neovim was compiled with luajit. 
+  ```bash
+  # The output of version information should include a line for: LuaJIT 
+  nvim -v
+  ```
+3. If you ran the [quick-install script](#install-in-one-command) using sudo, follow the steps to [uninstall](#uninstalling) and try again without sudo. 
+4. Make sure the [dependencies](#useful-programs) were installed.  
+5. Make sure your plugins are installed and updated. Run :PackerSync
 
 # Getting started
 
@@ -187,24 +270,49 @@ The steps for configuring your own plugin are:
 3. If you created a configuration, require the file in `init.lua`
 4. Use Packer to download and install the plugin
 
+Please note that every plugin will require different configuration steps. 
+Follow the instructions provided by the README of plugin you're interested in.  If 
+those instructions are written in lua, copy and paste the code they provide.  
+If the instructions are written in vimscript, either translate the code to 
+lua or wrap the vimscript in this lua function:
+
+```lua
+vim.cmd([[ 
+YOUR_VIMSCRIPT_GOES_HERE
+]])
+```
+
 ## An example installation of the colorizer plugin
 
-- \~/.config/nvim/lua/plugins.lua
+'use' is a function provided by the Packer plugin.  In the example below, 
+we tell Packer to optionally load the plugin. This means the plugin will not 
+start unless some other function manually loads it.
+
+The 'require_plugin' function is part of LunarVim.  It loads the plugin.
 
 ``` lua
+# ~/.config/nvim/lua/plugins.lua
 use {"norcalli/nvim-colorizer.lua", opt = true}
 require_plugin("nvim-colorizer.lua")
 ```
 
-- \~/.config/nvim/lua/lv-colorizer/init.lua
+From the [ README ](https://github.com/norcalli/nvim-colorizer.lua) we find out [ Colorizer ](https://github.com/norcalli/nvim-colorizer.lua) is written and configured in lua. 
+Colorizer provides a setup function which must be called for the plugin to work correctly. So we create a folder 'lv-colorizer' and
+a file 'init.lua'. And populate the file with the configuration mentioned in the
+[ README ](https://github.com/norcalli/nvim-colorizer.lua)
+
 
 ``` lua
+# ~/.config/nvim/lua/lv-colorizer/init.lua
 require'colorizer'.setup()
 ```
 
-- \~/.config/nvim/init.lua
+We created the lua/lv-colorizer/init.lua file.  Creating this file means that we've created a module.  Now we need to make sure this module 
+gets loaded when we start neovim.  'require' is a lua function that loads
+a module.  
 
 ``` lua
+# ~/.config/nvim/init.lua
 require('lv-colorizer')
 ```
 
@@ -212,6 +320,8 @@ require('lv-colorizer')
 :PackerCompile
 :PackerInstall
 ```
+
+The example above loads the plugin when neovim starts.  If you want to take advantage of Packer's built-in lazy loading, do not use the 'require_plugin' function.  Instead, define the loading strategy in Packer's 'use' method. For a more in-depth explantion, read the [Packer docs](https://github.com/wbthomason/packer.nvim)
 
 ## Finding plugins
 
@@ -295,6 +405,8 @@ To install a supported language server:
 See [LspInstall](https://github.com/kabouzeid/nvim-lspinstall) for more
 info.
 
+In order for Java LSP to work, edit `~/.local/share/nvim/lspinstall/java/jdtls.sh` and replace `WORKSPACE="$1"` with `WORKSPACE="$HOME/workspace"`
+
 Most common languages should be supported out of the box, if yours is
 not I would welcome a PR
 
@@ -313,15 +425,17 @@ says ‘No client connected’ use :LspInfo to troubleshoot.
 4.  ‘cmd’ must be populated. This is the language server executable. If
     the ‘cmd’ isn’t set or if it’s not executable you won’t be able to
     run the language server.  
-    \* In the example below ‘efm-langserver’ is the name of the binary
+    * In the example below ‘efm-langserver’ is the name of the binary
     that acts as the langserver. If we run ‘which efm-langserver’ and we
     get a location to the executable, it means the langauge server is
-    installed and available globally. \* If you know the command is
-    installed AND you don’t want to install it globally you’ll need to
-    manually set the cmd in the language server settings. Configurations
-    are stored in \~/.config/nvim/lua/lsp/ The settings will be stored
-    in a file that matches the name of the language.
-    e.g. python-ls.lua \* ‘identified root’ must also be populated. Most
+    installed and available globally. 
+    * If you know the command is installed AND you don’t want to install 
+    it globally you’ll need to manually set 'cmd' in the language server 
+    settings. 
+    * Configurations are stored in ~/.config/nvim/lua/lsp/ 
+    The settings will be stored in a file that matches the name of the language.
+    e.g. python-ls.lua 
+    * ‘identified root’ must also be populated. Most
     language servers require you be inside a git repository for the root
     to be detected. If you don’t want to initialize the directory as a
     git repository, an empty .git/ folder will also work.  
@@ -552,6 +666,24 @@ rm -Rf ~/.local/share/nvim
 # Delete the logs
 rm -R ~/.cache/nvim
 ```
+
+# Community links
+
+🕸️ Website: https://www.chrisatmachine.com
+
+🐦 Twitter: https://twitter.com/chrisatmachine
+
+💻 Github: https://github.com/ChristianChiarulli
+
+📺 YouTube: https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA
+
+📺 Odysee: https://odysee.com/@chrisatmachine:f
+
+📺 Twitch: https://www.twitch.tv/chrisatmachine
+
+🗨️ Matrix: https://matrix.to/#/+atmachine:matrix
+
+🗨️ Discord: https://discord.gg/Xb9B4Ny
 
 # TODO
 
