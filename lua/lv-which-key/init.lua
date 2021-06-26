@@ -52,7 +52,7 @@ vim.g.mapleader = ' '
 vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>', {noremap = true, silent = true})
 
 -- explorer
-vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>e', ":lua require'lv-nvimtree'.toggle_tree()<CR>", {noremap = true, silent = true})
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>', {noremap = true, silent = true})
@@ -74,6 +74,24 @@ vim.api.nvim_set_keymap('n', '<leader>p', ":lua require'telescope'.extensions.pr
 -- TODO create entire treesitter section
 
 local mappings = {
+
+    ["/"] = "Comment",
+    ["c"] = "Close Buffer",
+    ["e"] = "Explorer",
+    ["f"] = "Find File",
+    ["h"] = "No Highlight",
+    ["p"] = "Projects",
+    b = {
+      name = "+Buffers",
+      j = {"<cmd>BufferPick<cr>", "jump to buffer"},
+      w = {"<cmd>BufferWipeout<cr>", "wipeout buffer"},
+      e = {"<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer"},
+      h = {"<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left"},
+      l = {"<cmd>BufferCloseBuffersRight<cr>", "close all BufferLines to the right"},
+      D = {"<cmd>BufferOrderByDirectory<cr>", "sort BufferLines automatically by directory"},
+      L = {"<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language"},
+    },
+
     ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
     [";"] = {"<cmd>Dashboard<cr>", "Dashboard"},
     ["c"] = {"<cmd>BufferClose<cr>", "Close Buffer"},
@@ -81,6 +99,7 @@ local mappings = {
     ["f"] = {"<cmd>Telescope find_files<cr>", "Find File"},
     ["h"] = {"<cmd>set hlsearch!<cr>", "No Highlight"},
     ["p"] = {"<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects"},
+
     d = {
         name = "Diagnostics",
         t = {"<cmd>TroubleToggle<cr>", "trouble"},
