@@ -68,3 +68,6 @@ O.go.autoformat = true
 
 -- Turn off relative_numbers
 -- O.relative_number = false
+
+-- Turn off cursorline
+-- O.cursorline = false

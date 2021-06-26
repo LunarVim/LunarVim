@@ -89,8 +89,10 @@ return require("packer").startup(function(use)
     -- Zen Mode
     use {"Pocco81/TrueZen.nvim", opt = true}
 
+
 	-- Sane gx for netrw_gx bug
     use {"felipec/vim-sanegx"}
+
 
     require_plugin("nvim-lspconfig")
     require_plugin("lspsaga.nvim")
@@ -151,8 +153,7 @@ return require("packer").startup(function(use)
         require_plugin('nvim-colorizer.lua')
         -- Search & Replace
         use {'windwp/nvim-spectre', opt = true}
-        require_plugin('windwp/nvim-spectre')
-        -- Symbols tree
+        require_plugin('nvim-spectre')
         use {'simrat39/symbols-outline.nvim', opt = true}
         require_plugin('symbols-outline.nvim')
         -- Treesitter playground
