@@ -15,13 +15,13 @@ require'lspconfig/configs'.jdtls = nil -- important, unset the loaded config aga
 --     uninstall_script = nil -- can be omitted
 -- })
 
-require'lspinstall/servers'.kotlin = vim.tbl_extend('error', config, {
-    install_script = [[
-      git clone https://github.com/fwcd/kotlin-language-server.git language-server
-      cd language-server
-	  ./gradlew :server:installDist
-  ]],
-    uninstall_script = nil -- can be omitted
-})
+-- require'lspinstall/servers'.kotlin = vim.tbl_extend('error', config, {
+--     install_script = [[
+--       git clone https://github.com/fwcd/kotlin-language-server.git language-server
+--       cd language-server
+-- 	  ./gradlew :server:installDist
+--   ]],
+--     uninstall_script = nil -- can be omitted
+-- })
 
 require'lspinstall'.setup()
