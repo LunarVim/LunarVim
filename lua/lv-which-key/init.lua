@@ -92,13 +92,13 @@ local mappings = {
       L = {"<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language"},
     },
 
-    ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
+    -- ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
     [";"] = {"<cmd>Dashboard<cr>", "Dashboard"},
-    ["c"] = {"<cmd>BufferClose<cr>", "Close Buffer"},
-    ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
-    ["f"] = {"<cmd>Telescope find_files<cr>", "Find File"},
-    ["h"] = {"<cmd>set hlsearch!<cr>", "No Highlight"},
-    ["p"] = {"<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects"},
+    -- ["c"] = {"<cmd>BufferClose<cr>", "Close Buffer"},
+    -- ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
+    -- ["f"] = {"<cmd>Telescope find_files<cr>", "Find File"},
+    -- ["h"] = {"<cmd>set hlsearch!<cr>", "No Highlight"},
+    -- ["p"] = {"<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects"},
 
     d = {
         name = "Diagnostics",
@@ -182,25 +182,26 @@ local mappings = {
     }
 }
 
-local visualOpts = {
-    mode = "v", -- Visual mode
-    prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false -- use `nowait` when creating keymaps
-}
+-- TODO come back and fix visual mappings
+-- local visualOpts = {
+--     mode = "v", -- Visual mode
+--     prefix = "<leader>",
+--     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+--     silent = true, -- use `silent` when creating keymaps
+--     noremap = true, -- use `noremap` when creating keymaps
+--     nowait = false -- use `nowait` when creating keymaps
+-- }
 
-local visualMappings = {
-    ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
-    r = {
-        name = "Replace",
-        f = {"<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%')})<cr>", "File"},
-        p = {"<cmd>lua require('spectre').open_visual()<cr>", "Project"}
-    }
-}
+-- local visualMappings = {
+    -- ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
+    -- r = {
+        -- name = "Replace",
+        -- f = {"<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%')})<cr>", "File"},
+        -- p = {"<cmd>lua require('spectre').open_visual()<cr>", "Project"}
+    -- }
+-- }
 
 local wk = require("which-key")
 wk.register(mappings, opts)
-wk.register(visualMappings, visualOpts)
+-- wk.register(visualMappings, visualOpts)
 
