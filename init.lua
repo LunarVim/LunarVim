@@ -30,6 +30,7 @@ if O.extras then
     require('lv-dial')
     require('lv-hop')
     require('lv-colorizer')
+    require('lv-spectre')
     require('lv-symbols-outline')
 end
 
@@ -40,6 +41,7 @@ vim.cmd('source '..CONFIG_PATH..'/vimscript/functions.vim')
 
 -- LSP
 require('lsp')
+require('lsp.java-ls')
 require('lsp.angular-ls')
 require('lsp.bash-ls')
 require('lsp.clangd')
