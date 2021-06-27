@@ -35,12 +35,12 @@ return require("packer").startup(function(use)
 
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {"neovim/nvim-lspconfig", event = "BufRead", opt = true}
-    use {"glepnir/lspsaga.nvim", opt = true}
+    use {"glepnir/lspsaga.nvim", event = "BufRead", opt = true}
     use {"kabouzeid/nvim-lspinstall", opt = true}
     -- Telescope
     use {"nvim-lua/popup.nvim", opt = true}
     use {"nvim-lua/plenary.nvim", opt = true}
-    use {"nvim-telescope/telescope.nvim", opt = true}
+    use {"nvim-telescope/telescope.nvim", cmd = "Telescope", opt = true}
 
     -- Autocomplete
     use {"hrsh7th/nvim-compe", event = "InsertEnter", opt = true}
@@ -68,6 +68,7 @@ return require("packer").startup(function(use)
     -- Comments
     use {
         "terrortylor/nvim-comment",
+        cmd = "CommentToggle",
         config = require_plugin("nvim-comment"),
         opt = true
     }
