@@ -14,7 +14,7 @@ O.auto_close_tree = 0
 O.wrap_lines = false
 O.timeoutlen = 100
 O.document_highlight = true
-O.extras = true
+O.extras = false
 O.leader_key = ' '
 
 -- dashboard

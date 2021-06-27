@@ -1,10 +1,6 @@
 require('lv-globals')
 vim.cmd('luafile '..CONFIG_PATH..'/lv-settings.lua')
-
-
 require('settings')
-require('lv-gitblame')
-require('lv-matchup')
 require('plugins')
 require('lv-utils')
 require('lv-autocommands')
@@ -15,18 +11,17 @@ require('lv-galaxyline')
 require('lv-comment')
 require('lv-compe')
 require('lv-barbar')
-require('lv-dashboard')
 require('lv-telescope')
 require('lv-gitsigns')
 require('lv-treesitter')
 require('lv-autopairs')
-require('lv-rnvimr')
 require('lv-which-key')
-require('lv-lsp-rooter')
-require('lv-zen')
 
 -- extras
 if O.extras then
+    require('lv-rnvimr')
+    require('lv-gitblame')
+    require('lv-matchup')
     require('lv-numb')
     require('lv-dial')
     require('lv-hop')
@@ -34,6 +29,9 @@ if O.extras then
     require('lv-spectre')
     require('lv-symbols-outline')
     require('lv-vimtex')
+    require('lv-zen')
+    require('lv-dashboard')
+    require('lv-lsp-rooter')
 end
 
 -- TODO is there a way to do this without vimscript
