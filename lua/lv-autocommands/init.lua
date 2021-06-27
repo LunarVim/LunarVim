@@ -44,6 +44,10 @@ utils.define_augroups({
         -- will cause split windows to be resized evenly if main window is resized
         {'VimResized ', '*', 'wincmd ='},
     },
+    _auto_reload = {
+        -- will check for external file changes on cursor hold
+        {'CursorHold', '*', 'silent! checktime'},
+    },
     _java = {
         -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
