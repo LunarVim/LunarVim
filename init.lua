@@ -1,5 +1,5 @@
 require('lv-globals')
-vim.cmd('luafile '..CONFIG_PATH..'/lv-settings.lua')
+vim.cmd('luafile ' .. CONFIG_PATH .. '/lv-settings.lua')
 require('settings')
 require('plugins')
 require('lv-utils')
@@ -35,7 +35,7 @@ if O.extras then
 end
 
 -- TODO is there a way to do this without vimscript
-vim.cmd('source '..CONFIG_PATH..'/vimscript/functions.vim')
+vim.cmd('source ' .. CONFIG_PATH .. '/vimscript/functions.vim')
 
 -- LSP
 require('lsp')

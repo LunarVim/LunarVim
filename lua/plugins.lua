@@ -33,20 +33,21 @@ return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
-    use {"neovim/nvim-lspconfig", event = "BufRead", opt = true}
-    use {"kabouzeid/nvim-lspinstall", opt = true}
+    use {"neovim/nvim-lspconfig", config = require_plugin("nvim-lspconfig"), opt = true}
+    use {"kabouzeid/nvim-lspinstall", config = require_plugin("nvim-lspinstall"), opt = true}
 
     -- Telescope
-    use {"nvim-lua/popup.nvim", opt = true}
-    use {"nvim-lua/plenary.nvim", opt = true}
-    use {"nvim-telescope/telescope.nvim", opt = true}
+    use {"nvim-lua/popup.nvim", config = require_plugin("popup.nvim"), opt = true}
+    use {"nvim-lua/plenary.nvim", config = require_plugin("plenary.nvim"), opt = true}
+    use {"nvim-telescope/telescope.nvim", config = require_plugin("telescope.nvim"), opt = true}
 
     -- Autocomplete
-    use {"hrsh7th/nvim-compe", event = "InsertEnter", opt = true}
+    use {"hrsh7th/nvim-compe", config = require_plugin("nvim-compe"), event = "InsertEnter", opt = true}
 
     -- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
+        config = require_plugin("nvim-treesitter"),
         event = "BufRead"
 
         --  run = ":TSUpdate"
@@ -56,53 +57,28 @@ return require("packer").startup(function(use)
     -- Explorer
     -- use {"kyazdani42/nvim-tree.lua", opt = true}
 
-    use {
-        "kyazdani42/nvim-tree.lua",
-        opt = true,
-        cmd = "NvimTreeToggle",
-        config = function()
-            require("nvimTree").config()
-        end
-    }
+    use {"kyazdani42/nvim-tree.lua", opt = true, cmd = "NvimTreeToggle", config = require_plugin("nvim-tree.lua")}
 
     -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
-    use {"lewis6991/gitsigns.nvim", event = "BufRead", opt = true}
+    use {"lewis6991/gitsigns.nvim", config = require_plugin("gitsigns.nvim"), event = "BufRead", opt = true}
 
-    use {"folke/which-key.nvim", opt = true}
-    use {"windwp/nvim-autopairs", event = "InsertEnter", opt = true}
+    use {"folke/which-key.nvim", config = require_plugin("which-key.nvim"), opt = true}
+    use {"windwp/nvim-autopairs", config = require_plugin("nvim-autopairs"), event = "InsertEnter", opt = true}
 
     -- Comments
-    use {"terrortylor/nvim-comment", opt = true}
+    use {"terrortylor/nvim-comment", config = require_plugin("nvim-comment"), opt = true}
 
     -- Color
-    use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
+    use {"christianchiarulli/nvcode-color-schemes.vim", config = require_plugin("nvcode-color-schemes.vim"), opt = true}
 
     -- Icons
-    use {"kyazdani42/nvim-web-devicons", opt = true}
+    use {"kyazdani42/nvim-web-devicons", config = require_plugin("nvim-web-devicons"), opt = true}
 
     -- Status Line and Bufferline
-    use {"glepnir/galaxyline.nvim", opt = true}
-    use {"romgrk/barbar.nvim", opt = true}
+    use {"glepnir/galaxyline.nvim", config = require_plugin("galaxyline.nvim"), opt = true}
+    use {"romgrk/barbar.nvim", config = require_plugin("barbar.nvim"), opt = true}
 
-    use {"hrsh7th/vim-vsnip", opt = true}
-    require_plugin("vim-vsnip")
-
-    require_plugin("nvim-lspconfig")
-    require_plugin("nvim-lspinstall")
-    require_plugin("popup.nvim")
-    require_plugin("plenary.nvim")
-    require_plugin("telescope.nvim")
-    require_plugin("nvim-compe")
-    require_plugin("nvim-treesitter")
-    require_plugin("nvim-tree.lua")
-    require_plugin("gitsigns.nvim")
-    require_plugin("which-key.nvim")
-    require_plugin("nvim-autopairs")
-    require_plugin("nvim-comment")
-    require_plugin("nvcode-color-schemes.vim")
-    require_plugin("nvim-web-devicons")
-    require_plugin("galaxyline.nvim")
-    require_plugin("barbar.nvim")
+    use {"hrsh7th/vim-vsnip", config = require_plugin("vim-vsnip"), opt = true}
 
     -- Extras
     if O.extras then
