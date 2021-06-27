@@ -40,6 +40,10 @@ utils.define_augroups({
         -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     },
+    _auto_resize = {
+        -- will cause split windows to be resized evenly if main window is resized
+        {'VimResized ', '*', 'wincmd ='},
+    },
     _java = {
         -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
