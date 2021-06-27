@@ -33,24 +33,22 @@ return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
-    use {"neovim/nvim-lspconfig", config = require_plugin("nvim-lspconfig"), opt = true}
-    use {"kabouzeid/nvim-lspinstall", config = require_plugin("nvim-lspinstall"), opt = true}
-
+    use {"neovim/nvim-lspconfig", opt = true}
+    use {"kabouzeid/nvim-lspinstall", opt = true}
     -- Telescope
-    use {"nvim-lua/popup.nvim", config = require_plugin("popup.nvim"), opt = true}
-    use {"nvim-lua/plenary.nvim", config = require_plugin("plenary.nvim"), opt = true}
-    use {"nvim-telescope/telescope.nvim", config = require_plugin("telescope.nvim"), opt = true}
+    use {"nvim-lua/popup.nvim", opt = true}
+    use {"nvim-lua/plenary.nvim", opt = true}
+    use {"nvim-telescope/telescope.nvim", opt = true}
 
     -- Autocomplete
-    use {"hrsh7th/nvim-compe", config = require_plugin("nvim-compe"), event = "InsertEnter", opt = true}
+    use {"hrsh7th/nvim-compe", event = "InsertEnter", opt = true}
 
     -- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
-        config = require_plugin("nvim-treesitter"),
-        event = "BufRead"
+        -- event = "BufRead"
 
-        --  run = ":TSUpdate"
+         run = ":TSUpdate"
 
     }
 
@@ -79,6 +77,15 @@ return require("packer").startup(function(use)
     use {"romgrk/barbar.nvim", config = require_plugin("barbar.nvim"), opt = true}
 
     use {"hrsh7th/vim-vsnip", config = require_plugin("vim-vsnip"), opt = true}
+
+    require_plugin("nvim-lspconfig")
+    require_plugin("nvim-lspinstall")
+    require_plugin("popup.nvim")
+    require_plugin("plenary.nvim")
+    require_plugin("telescope.nvim")
+    require_plugin("nvim-compe")
+    require_plugin("nvim-treesitter")
+
 
     -- Extras
     if O.extras then
