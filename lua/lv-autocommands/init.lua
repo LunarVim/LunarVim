@@ -48,6 +48,13 @@ utils.define_augroups({
         -- will check for external file changes on cursor hold
         {'CursorHold', '*', 'silent! checktime'},
     },
+    _mode_switching = {
+        -- will switch between absolute and relative line numbers depending on mode
+        {'InsertEnter', '*', 'setlocal number norelativenumber nocursorline'},
+        {'InsertLeave ', '*', 'setlocal relativenumber cursorline'},
+        {'WinEnter', '*', 'setlocal cursorline'},
+        {'WinLeave', '*', 'setlocal nocursorline'},
+    },
     _java = {
         -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
         {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
