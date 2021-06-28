@@ -1,5 +1,5 @@
-require('lv-globals')
-vim.cmd('luafile ' .. CONFIG_PATH .. '/lv-settings.lua')
+require('default-config')
+vim.cmd('luafile ' .. CONFIG_PATH .. '/lv-config.lua')
 require('settings')
 require('plugins')
 require('lv-utils')
@@ -13,24 +13,8 @@ require('lv-autopairs')
 require('lv-which-key')
 
 
--- extras
-if O.extras then
-    require('lv-rnvimr')
-    require('lv-gitblame')
-    require('lv-matchup')
-    require('lv-numb')
-    require('lv-dial')
-    require('lv-hop')
-    require('lv-colorizer')
-    require('lv-spectre')
-    require('lv-symbols-outline')
-    require('lv-vimtex')
-    require('lv-zen')
-    require('lv-dashboard')
-    require('lv-lsp-rooter')
-end
 
--- TODO is there a way to do this without vimscript
+-- TODO gotta get rid of this for speed
 vim.cmd('source ' .. CONFIG_PATH .. '/vimscript/functions.vim')
 
 -- LSP

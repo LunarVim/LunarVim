@@ -27,44 +27,44 @@ O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
 
 
-O.clang.diagnostics.virtual_text = false
-O.clang.diagnostics.signs = false
-O.clang.diagnostics.underline = false
+O.lang.clang.diagnostics.virtual_text = false
+O.lang.clang.diagnostics.signs = false
+O.lang.clang.diagnostics.underline = false
 
 -- python
 -- add things like O.python.formatter.yapf.exec_path
 -- add things like O.python.linter.flake8.exec_path
 -- add things like O.python.formatter.isort.exec_path
-O.python.formatter = 'yapf'
+O.lang.python.formatter = 'yapf'
 -- O.python.linter = 'flake8'
-O.python.isort = true
-O.python.autoformat = true
-O.python.diagnostics.virtual_text = true
-O.python.diagnostics.signs = true
-O.python.diagnostics.underline = true
-O.python.analysis.type_checking = "off"
-O.python.analysis.auto_search_paths = true
-O.python.analysis.use_library_code_types = true
+O.lang.python.isort = true
+O.lang.python.autoformat = true
+O.lang.python.diagnostics.virtual_text = true
+O.lang.python.diagnostics.signs = true
+O.lang.python.diagnostics.underline = true
+O.lang.python.analysis.type_checking = "off"
+O.lang.python.analysis.auto_search_paths = true
+O.lang.python.analysis.use_library_code_types = true
 
 -- lua
 -- TODO look into stylua
-O.lua.formatter = 'lua-format'
+O.lang.lua.formatter = 'lua-format'
 -- O.lua.formatter = 'lua-format'
-O.lua.autoformat = false
+O.lang.lua.autoformat = false
 
 -- javascript
-O.tsserver.formatter = 'prettier'
-O.tsserver.linter = nil
-O.tsserver.autoformat = true
+O.lang.tsserver.formatter = 'prettier'
+O.lang.tsserver.linter = nil
+O.lang.tsserver.autoformat = true
 
 -- json
-O.json.autoformat = true
+O.lang.json.autoformat = true
 
 -- ruby
-O.ruby.autoformat = true
+O.lang.ruby.autoformat = true
 
 -- go
-O.go.autoformat = true
+O.lang.go.autoformat = true
 -- create custom autocommand field (This would be easy with lua)
 
 -- Turn off relative_numbers
