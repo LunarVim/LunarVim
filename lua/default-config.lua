@@ -52,6 +52,10 @@ O = {
         lsp_colors = {active = false},
         git_blame = {active = false},
         gitlinker = {active = false},
+        lazygit = {active = false},
+        octo = {active = false},
+        diffview = {active = false},
+        bracey = {active = false},
         telescope_project = {active = false}
 
     },
