@@ -36,8 +36,8 @@ return require("packer").startup(function(use)
 
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {"neovim/nvim-lspconfig"}
-    use {"glepnir/lspsaga.nvim"}
-    use {"kabouzeid/nvim-lspinstall"}
+    use {"glepnir/lspsaga.nvim", event = "BufRead"}
+    use {"kabouzeid/nvim-lspinstall", event = "BufRead"}
     -- Telescope
     use {"nvim-lua/popup.nvim"}
     use {"nvim-lua/plenary.nvim"}
@@ -49,7 +49,7 @@ return require("packer").startup(function(use)
         event = "InsertEnter",
         config = function()
             require("lv-compe").config()
-        end,
+        end
     }
 
     use {"hrsh7th/vim-vsnip", event = "InsertCharPre"}
