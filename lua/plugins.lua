@@ -35,7 +35,7 @@ return require("packer").startup(function(use)
 
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {
-        "neovim/nvim-lspconfig",
+        "neovim/nvim-lspconfig"
 
         -- event = "BufRead", 
         -- config = function()
@@ -43,14 +43,14 @@ return require("packer").startup(function(use)
         -- end
     }
     use {
-        "glepnir/lspsaga.nvim",
+        "glepnir/lspsaga.nvim"
 
         -- event = "BufRead", 
 
         -- opt = true
     }
     use {
-        "kabouzeid/nvim-lspinstall",
+        "kabouzeid/nvim-lspinstall"
 
         -- event = "BufRead", 
         -- opt = true
@@ -70,7 +70,7 @@ return require("packer").startup(function(use)
 
     }
     use {
-        "nvim-telescope/telescope.nvim",
+        "nvim-telescope/telescope.nvim"
 
         -- cmd = "Telescope",
 
@@ -81,12 +81,9 @@ return require("packer").startup(function(use)
     use {
         "hrsh7th/nvim-compe",
         config = function()
-            -- require_plugin("nvim-compe")
             require("lv-compe").config()
         end,
---        event = "InsertEnter",
-
- --       opt = true
+        event = "InsertEnter"
     }
 
     -- Treesitter
@@ -123,7 +120,7 @@ return require("packer").startup(function(use)
             -- require_plugin("nvim-compe")
             require("lv-gitsigns").config()
         end,
-        -- event = "BufRead"
+        event = "BufRead"
 
         -- opt = true
 
@@ -136,7 +133,7 @@ return require("packer").startup(function(use)
 
     }
     use {
-        "windwp/nvim-autopairs",
+        "windwp/nvim-autopairs"
         -- event = "InsertEnter", 
 
         -- opt = true
