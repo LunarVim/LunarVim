@@ -44,7 +44,7 @@ M.config = function()
         },
         e = {
             description = {'  Settings           '},
-            command = ':e ' .. CONFIG_PATH .. '/lv-settings.lua'
+            command = ':e ' .. CONFIG_PATH .. '/lv-config.lua'
         }
         -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
     }
