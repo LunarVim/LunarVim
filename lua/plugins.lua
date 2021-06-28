@@ -229,8 +229,8 @@ return require("packer").startup(function(use)
 
     -- Rust tools
     if O.lang.rust.active then
-        use {'simrat39/rust-tools.nvim', opt = true}
-        require_plugin('rust-tools.nvim')
+        -- TODO: use lazy loading maybe?
+        use {'simrat39/rust-tools.nvim'}
     end
     -- Extras
     if O.extras then
