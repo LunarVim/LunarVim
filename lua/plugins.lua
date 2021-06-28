@@ -128,18 +128,15 @@ return require("packer").startup(function(use)
         disable = not O.plugin.dashboard.active,
         opt = true
     }
-    -- Zen Mode TODO this don't work with whichkey might gave to make this built in, may have to replace with folke zen
+    -- Zen Mode
     use {
         "folke/zen-mode.nvim",
         cmd = "ZenMode",
+        -- event = "BufRead",
         config = function()
-            require("zen-mode").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
+            require('lv-zen').config()
         end,
-        disable = not O.plugin.zen.active,
+        disable = not O.plugin.zen.active
     }
     -- matchup
     use {
