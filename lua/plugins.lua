@@ -110,53 +110,133 @@ return require("packer").startup(function(use)
     }
 
     use {"hrsh7th/vim-vsnip"}
+
+    -- extras, these do not load by default
+
+    -- Better motions
     use {
-        event = 'BufRead',
         'phaazon/hop.nvim',
+        event = 'BufRead',
         config = function()
             require('lv-hop').config()
         end,
-        disable = not O.plugins.hop.active,
+        disable = not O.plugin.hop.active,
         opt = true
     }
+    -- Enhanced increment/decrement
+    use {
+        'monaqa/dial.nvim',
+        event = 'BufRead',
+        config = function()
+            require('lv-dial').config()
+        end,
+        disable = not O.plugin.dial.active,
+        opt = true
+    }
+    -- Dashboard
+    use {
+        "ChristianChiarulli/dashboard-nvim",
+        event = 'BufWinEnter',
+        cmd = {"Dashboard", "DashboardNewFile", "DashboardJumpMarks"},
+        config = function()
+            require('lv-dashboard').config()
+        end,
+        disable = not O.plugin.dashboard.active,
+        opt = true
+    }
+    -- Zen Mode
+    -- use {
+    --     "Pocco81/TrueZen.nvim",
+    --     cmd = {"TZAtaraxis", "TZMinimalist"},
+    --     config = function()
+    --         require('lv-zen').config()
+    --     end,
+    --     disable = not O.plugin.zen.active,
+    --     opt = true
+    -- }
 
-    -- extras
-    -- if O.matchup then require('lv-matchup') end
-    --     require('lv-rnvimr')
-    --     require('lv-gitblame')
-    --     require('lv-numb')
-    --     require('lv-dial')
-    --     require('lv-hop')
-    --     require('lv-colorizer')
-    --     require('lv-spectre')
-    --     require('lv-symbols-outline')
-    --     require('lv-vimtex')
-    --     require('lv-zen')
-    --     require('lv-dashboard')
-    --     require('lv-lsp-rooter')
-    -- end
+    -- -- matchup
+    -- use {'andymass/vim-matchup', opt = true}
+    -- require_plugin('vim-matchup')
+
+    --     -- Snippets
+    --     use {"rafamadriz/friendly-snippets", opt = true}
+    --     require_plugin("friendly-snippets")
+
+    --     -- Colorizer
+    --     use {'norcalli/nvim-colorizer.lua', opt = true}
+    --     require_plugin('nvim-colorizer.lua')
+
+    --     -- Peek lines
+    --     use {'nacro90/numb.nvim', opt = true}
+    --     require_plugin('numb.nvim')
+    -- 
+    --     -- Treesitter playground
+    --     use {'nvim-treesitter/playground', opt = true}
+    --     require_plugin('playground')
+    -- 
+    -- 
+    -- 
+    --     -- Latex
+    --     use {"lervag/vimtex", opt = true}
+    --     require_plugin("vimtex")
+    -- 
+    --     -- comments in context
+    --     use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
+    --     require_plugin("nvim-ts-context-commentstring")
+    -- 
+    -- 
+    --     -- Git extras
+    --     use {'f-person/git-blame.nvim', opt = true}
+    --     require_plugin("git-blame.nvim")
+    -- 
+    -- 
+    --     -- diagnostics
+    --     use {"folke/trouble.nvim", opt = true}
+    --     require_plugin('trouble.nvim')
+    -- 
+    --     -- Debugging
+    --     use {"mfussenegger/nvim-dap", opt = true}
+    --     require_plugin("nvim-dap")
+    -- 
+    -- 
+    --     -- Better quickfix
+    --     use {"kevinhwang91/nvim-bqf", opt = true}
+    --     require_plugin("nvim-bqf")
+    -- 
+    --     -- Search & Replace
+    --     use {'windwp/nvim-spectre', opt = true}
+    --     require_plugin('nvim-spectre')
+    -- 
+    --     -- Symbol Outline
+    --     use {'simrat39/symbols-outline.nvim', opt = true}
+    --     require_plugin('symbols-outline.nvim')
+    -- 
+    --     -- Interactive scratchpad
+    --     use {'metakirby5/codi.vim', opt = true}
+    --     require_plugin('codi.vim')
+    -- 
+    --     -- Markdown preview
+    --     use {
+    --         'iamcco/markdown-preview.nvim',
+    --         run = 'cd app && npm install',
+    --         opt = true
+    --     }
+    --     require_plugin('markdown-preview.nvim')
+    -- 
+    --     -- Floating terminal
+    --     use {'numToStr/FTerm.nvim', opt = true}
+    --     require_plugin('FTerm.nvim')
+    -- 
+    --     -- Sane gx for netrw_gx bug
+    --     use {"felipec/vim-sanegx", opt = true}
+
+    -- lsp root
+    -- use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you
+    -- require_plugin('lsp-rooter.nvim')
 
     -- Extras
     if O.extras then
-        -- Interactive scratchpad
-        use {'metakirby5/codi.vim', opt = true}
-        require_plugin('codi.vim')
-        -- Markdown preview
-        use {
-            'iamcco/markdown-preview.nvim',
-            run = 'cd app && npm install',
-            opt = true
-        }
-        require_plugin('markdown-preview.nvim')
-        -- Floating terminal
-        use {'numToStr/FTerm.nvim', opt = true}
-        require_plugin('FTerm.nvim')
-        -- Enhanced increment/decrement
-        use {'monaqa/dial.nvim', opt = true}
-        require_plugin('dial.nvim')
-        -- Peek lines
-        use {'nacro90/numb.nvim', opt = true}
-        require_plugin('numb.nvim')
         -- HTML preview
         use {
             'turbio/bracey.vim',
@@ -164,62 +244,11 @@ return require("packer").startup(function(use)
             opt = true
         }
         require_plugin('bracey.vim')
-        -- Better motions
-        use {'phaazon/hop.nvim', opt = true}
-        require_plugin('hop.nvim')
-        -- Colorizer
-        use {'norcalli/nvim-colorizer.lua', opt = true}
-        require_plugin('nvim-colorizer.lua')
-        -- Search & Replace
-        use {'windwp/nvim-spectre', opt = true}
-        require_plugin('nvim-spectre')
-        use {'simrat39/symbols-outline.nvim', opt = true}
-        require_plugin('symbols-outline.nvim')
-        -- Treesitter playground
-        use {'nvim-treesitter/playground', opt = true}
-        require_plugin('playground')
-        -- Latex
-        use {"lervag/vimtex", opt = true}
-        require_plugin("vimtex")
-        -- matchup
-        use {'andymass/vim-matchup', opt = true}
-        require_plugin('vim-matchup')
-        -- comments in context
-        use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
-        require_plugin("nvim-ts-context-commentstring")
-        -- Zen Mode
-        use {"Pocco81/TrueZen.nvim", opt = true}
-        require_plugin("TrueZen.nvim")
-        -- Git extras
-        use {'f-person/git-blame.nvim', opt = true}
-        require_plugin("git-blame.nvim")
-        -- TODO remove when open on dir is supported by nvimtree
-        --  use "kevinhwang91/rnvimr"
+
         use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
         use {"nvim-telescope/telescope-project.nvim", opt = true}
         require_plugin('telescope-project.nvim')
 
-        -- Debugging
-        use {"mfussenegger/nvim-dap", opt = true}
-        require_plugin("nvim-dap")
-
-        use {"rafamadriz/friendly-snippets", opt = true}
-        require_plugin("friendly-snippets")
-
-        use {"kevinhwang91/nvim-bqf", opt = true}
-        require_plugin("nvim-bqf")
-
-        use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you
-        require_plugin('lsp-rooter.nvim')
-
-        use {"ChristianChiarulli/dashboard-nvim", opt = true}
-        require_plugin("dashboard-nvim")
-
-        use {"folke/trouble.nvim", opt = true}
-        require_plugin('trouble.nvim')
-
-        -- Sane gx for netrw_gx bug
-        use {"felipec/vim-sanegx", opt = true}
         -- Autotag
         -- use {"windwp/nvim-ts-autotag", opt = true}
         -- require_plugin("nvim-ts-autotag")

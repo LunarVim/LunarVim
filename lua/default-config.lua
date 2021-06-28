@@ -27,7 +27,14 @@ O = {
 
     database = {save_location = '~/.config/nvcode_db', auto_execute = 1},
 
-    plugins = {hop = {active = false}},
+    plugin = {
+        hop = {active = false},
+        dial = {active = false},
+        dashboard = {active = false},
+        zen = {active = false}
+
+
+    },
 
     lang = {
         python = {

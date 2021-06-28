@@ -17,7 +17,9 @@ O.extras = false
 O.leader_key = ' '
 
 -- After changing plugin config it is recommended to run :PackerCompile
-O.plugins.hop.active = true
+O.plugin.hop.active = true
+O.plugin.dial.active = true
+O.plugin.dashboard.active = true
 
 -- dashboard
 -- O.dashboard.custom_header = {""}
