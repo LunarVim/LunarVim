@@ -159,7 +159,7 @@ O = {
             filetypes = {'rb', 'erb', 'rakefile'}
         },
         go = {active = false},
-        elixer = {active = false},
+        elixir = {active = false},
         vim = {active = false},
         yaml = {active = false},
         terraform = {active = false},
