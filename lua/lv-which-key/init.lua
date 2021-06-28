@@ -89,6 +89,7 @@ local mappings = {
     ["h"] = "No Highlight",
     ["p"] = "Projects",
     ["z"] = "Zen",
+    [";"] = "Dashboard",
     b = {
       name = "+Buffers",
       j = {"<cmd>BufferPick<cr>", "jump to buffer"},
@@ -100,13 +101,6 @@ local mappings = {
       L = {"<cmd>BufferOrderByLanguage<cr>", "sort BufferLines automatically by language"},
     },
 
-    -- ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
-    [";"] = {"<cmd>Dashboard<cr>", "Dashboard"},
-    -- ["c"] = {"<cmd>BufferClose<cr>", "Close Buffer"},
-    -- ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
-    -- ["f"] = {"<cmd>Telescope find_files<cr>", "Find File"},
-    -- ["h"] = {"<cmd>set hlsearch!<cr>", "No Highlight"},
-    -- ["p"] = {"<cmd>lua require'telescope'.extensions.project.project{}<cr>", "Projects"},
 
     d = {
         name = "Diagnostics",
@@ -117,6 +111,24 @@ local mappings = {
         l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
         r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
     },
+
+-- " Available Debug Adapters:
+-- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
+-- " 
+-- " Adapter configuration and installation instructions:
+-- "   https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+-- " 
+-- " Debug Adapter protocol:
+-- "   https://microsoft.github.io/debug-adapter-protocol/
+-- " Debugging
+-- command! DebugToggleBreakpoint lua require'dap'.toggle_breakpoint()
+-- command! DebugStart lua require'dap'.continue()
+-- command! DebugContinue lua require'dap'.continue()
+-- command! DebugStepOver lua require'dap'.step_over()
+-- command! DebugStepOut lua require'dap'.step_out()
+-- command! DebugStepInto lua require'dap'.step_into()
+-- command! DebugToggleRepl lua require'dap'.repl.toggle()
+-- command! DebugGetSession lua require'dap'.session()
     D = {
         name = "Debug",
         b = {"<cmd>DebugToggleBreakpoint<cr>", "Toggle Breakpoint"},
@@ -128,13 +140,14 @@ local mappings = {
     },
     g = {
         name = "Git",
-        j = {"<cmd>NextHunk<cr>", "Next Hunk"},
-        k = {"<cmd>PrevHunk<cr>", "Prev Hunk"},
-        p = {"<cmd>PreviewHunk<cr>", "Preview Hunk"},
-        r = {"<cmd>ResetHunk<cr>", "Reset Hunk"},
-        R = {"<cmd>ResetBuffer<cr>", "Reset Buffer"},
-        s = {"<cmd>StageHunk<cr>", "Stage Hunk"},
-        u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"},
+        j = {"<cmd>lua require 'lv-utils'.next_hunk()<cr>", "Next Hunk"},
+        k = {"<cmd>lua require 'lv-utils'.prev_hunk()<cr>", "Prev Hunk"},
+        l = {"<cmd>lua require 'lv-utils'.blame_line()<cr>", "Blame"},
+        p = {"<cmd>lua require 'lv-utils'.preview_hunk()<cr>", "Preview Hunk"},
+        r = {"<cmd>lua require 'lv-utils'.reset_hunk()<cr>", "Reset Hunk"},
+        R = {"<cmd>lua require 'lv-utils'.reset_buffer()<cr>", "Reset Buffer"},
+        s = {"<cmd>lua require 'lv-utils'.stage_hunk()<cr>", "Stage Hunk"},
+        u = {"<cmd>lua require 'lv-utils'.undo_stage_hunk()<cr>", "Undo Stage Hunk"},
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
@@ -146,7 +159,7 @@ local mappings = {
         A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
-        f = {"<cmd>LspFormatting<cr>", "Format"},
+        f = {"<cmd>lua require 'lv-utils'.formatting()<cr>", "Format"},
         h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Doc"},
         i = {"<cmd>LspInfo<cr>", "Info"},
         l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},

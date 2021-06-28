@@ -81,3 +81,16 @@ O.lang.rust.autoformat = true
 
 -- Turn off cursorline
 -- O.cursorline = false
+
+-- Neovim turns the default cursor to 'Block' 
+-- when switched back into terminal.
+-- This below line fixes that. Uncomment if needed.
+
+-- vim.cmd('autocmd VimLeave,VimSuspend * set guicursor=a:ver90') -- Beam
+-- vim.cmd('autocmd VimLeave,VimSuspend * set guicursor=a:hor20') -- Underline
+
+-- NOTE: Above code doesn't take a value from the terminal's cursor and
+--       replace it. It hardcodes the cursor shape.
+--       And I think `ver` means vertical and `hor` means horizontal.
+--       The numbers didn't make a difference in alacritty. Please change
+--       the number to something that suits your needs if it looks weird.

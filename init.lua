@@ -12,9 +12,6 @@ require('lv-treesitter')
 require('lv-autopairs')
 require('lv-which-key')
 
--- TODO gotta get rid of this for speed
-vim.cmd('source ' .. CONFIG_PATH .. '/vimscript/functions.vim')
-
 -- LSP
 require('lsp')
 -- TODO should I put this in the filetype files?
