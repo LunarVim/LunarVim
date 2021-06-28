@@ -46,11 +46,14 @@ return require("packer").startup(function(use)
     -- Autocomplete
     use {
         "hrsh7th/nvim-compe",
+        event = "InsertEnter",
         config = function()
             require("lv-compe").config()
         end,
-        event = "InsertEnter"
     }
+
+    use {"hrsh7th/vim-vsnip", event = "InsertCharPre"}
+    use {"rafamadriz/friendly-snippets", event = "InsertEnter"}
 
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
@@ -108,7 +111,7 @@ return require("packer").startup(function(use)
 
     }
 
-    use {"hrsh7th/vim-vsnip"}
+    -- use {"hrsh7th/vim-vsnip"}
 
     -- extras, these do not load by default
 
@@ -143,19 +146,22 @@ return require("packer").startup(function(use)
         disable = not O.plugin.dashboard.active,
         opt = true
     }
+
     -- Zen Mode TODO this don't work with whichkey might gave to make this built in
     use {
         "Pocco81/TrueZen.nvim",
-        event = 'BufRead',
-        -- cmd = {"TZAtaraxis", "TZMinimalist"},
+        -- event = 'BufEnter',
+        cmd = {"TZAtaraxis"},
         config = function()
             require('lv-zen').config()
-        end,
+        end
+        -- event = "BufEnter"
         -- disable = not O.plugin.zen.active,
     }
 
     -- matchup
-    use {'andymass/vim-matchup', 
+    use {
+        'andymass/vim-matchup',
         event = "CursorMoved",
         config = function()
             require('lv-matchup').config()
@@ -163,9 +169,6 @@ return require("packer").startup(function(use)
         disable = not O.plugin.matchup.active,
         opt = true
     }
-
-    --     -- Snippets
-    --     use {"rafamadriz/friendly-snippets", opt = true}
 
     --     -- Colorizer
     --     use {'norcalli/nvim-colorizer.lua', opt = true}
