@@ -8,10 +8,10 @@ require('keymappings')
 require('colorscheme') -- This plugin must be required somewhere after nvimtree. Placing it before will break navigation keymappings
 require('lv-galaxyline')
 require('lv-telescope')
-require('lv-gitsigns')
 require('lv-treesitter')
 require('lv-autopairs')
 require('lv-which-key')
+
 
 -- extras
 if O.extras then
@@ -34,7 +34,7 @@ end
 vim.cmd('source ' .. CONFIG_PATH .. '/vimscript/functions.vim')
 
 -- LSP
-require('lsp')
+--require('lsp')
 require('lsp.java-ls')
 require('lsp.angular-ls')
 require('lsp.bash-ls')

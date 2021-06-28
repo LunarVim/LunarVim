@@ -27,7 +27,7 @@ local function require_plugin(plugin)
     return ok, err, code
 end
 
-vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
+-- vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
@@ -38,8 +38,9 @@ return require("packer").startup(function(use)
         "neovim/nvim-lspconfig",
 
         -- event = "BufRead", 
-
-        -- opt = true
+        -- config = function()
+        --     require("lsp").config()
+        -- end
     }
     use {
         "glepnir/lspsaga.nvim",
@@ -48,26 +49,30 @@ return require("packer").startup(function(use)
 
         -- opt = true
     }
-    use {"kabouzeid/nvim-lspinstall", 
+    use {
+        "kabouzeid/nvim-lspinstall",
 
-    -- opt = true
+        -- event = "BufRead", 
+        -- opt = true
 
-}
+    }
     -- Telescope
-    use {"nvim-lua/popup.nvim", 
+    use {
+        "nvim-lua/popup.nvim"
 
-    -- opt = true
+        -- opt = true
 
-}
-    use {"nvim-lua/plenary.nvim", 
+    }
+    use {
+        "nvim-lua/plenary.nvim"
 
-    -- opt = true
+        -- opt = true
 
-}
+    }
     use {
         "nvim-telescope/telescope.nvim",
 
-        -- cmd = "Telescope", 
+        -- cmd = "Telescope",
 
         -- opt = true
     }
@@ -79,9 +84,9 @@ return require("packer").startup(function(use)
             -- require_plugin("nvim-compe")
             require("lv-compe").config()
         end,
-        -- event = "InsertEnter",
+--        event = "InsertEnter",
 
-        -- opt = true
+ --       opt = true
     }
 
     -- Treesitter
@@ -89,6 +94,9 @@ return require("packer").startup(function(use)
         "nvim-treesitter/nvim-treesitter",
 
         -- event = "BufRead",
+        -- config = function()
+        --     require('lv-treesitter').config()
+        -- end,
 
         run = ":TSUpdate"
     }
@@ -98,36 +106,37 @@ return require("packer").startup(function(use)
 
     use {
         "kyazdani42/nvim-tree.lua",
-        -- cmd = "NvimTreeToggle",
+        cmd = "NvimTreeToggle",
         config = function()
             -- require_plugin("lv-nvimtree")
             require("lv-nvimtree").config()
-        end,
+        end
 
         -- opt = true
     }
 
     -- use {'lukas-reineke/indent-blankline.nvim', opt=true, branch = 'lua'}
-    use {"lewis6991/gitsigns.nvim",
+    use {
+        "lewis6991/gitsigns.nvim",
 
-        -- event = "BufRead",
-
-
-        -- opt = true
-
-    }
-
-    use {"folke/which-key.nvim", 
-
-        -- opt = true
-
-    }
-    use {"windwp/nvim-autopairs", 
         config = function()
-            -- require_plugin("lv-nvimtree")
-            require("lv-autopairs").config()
+            -- require_plugin("nvim-compe")
+            require("lv-gitsigns").config()
         end,
+        -- event = "BufRead"
 
+        -- opt = true
+
+    }
+
+    use {
+        "folke/which-key.nvim"
+
+        -- opt = true
+
+    }
+    use {
+        "windwp/nvim-autopairs",
         -- event = "InsertEnter", 
 
         -- opt = true
@@ -140,7 +149,7 @@ return require("packer").startup(function(use)
         cmd = "CommentToggle",
         config = function()
             require('nvim_comment').setup()
-        end,
+        end
         -- opt = true
     }
 
@@ -148,31 +157,38 @@ return require("packer").startup(function(use)
     use {"christianchiarulli/nvcode-color-schemes.vim", opt = true}
 
     -- Icons
-    use {"kyazdani42/nvim-web-devicons", 
+    use {
+        "kyazdani42/nvim-web-devicons"
         -- opt = true
 
     }
 
     -- Status Line and Bufferline
-    use {"glepnir/galaxyline.nvim", 
+    use {
+        "glepnir/galaxyline.nvim"
 
         -- opt = true
     }
 
-    use {"romgrk/barbar.nvim",
+    use {
+        "romgrk/barbar.nvim",
 
         config = function()
             -- require_plugin("barbar.nvim")
-            vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<S-x>', ':BufferClose<CR>', { noremap = true, silent = true })
-        end,
+            vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>',
+                                    {noremap = true, silent = true})
+            vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>',
+                                    {noremap = true, silent = true})
+            vim.api.nvim_set_keymap('n', '<S-x>', ':BufferClose<CR>',
+                                    {noremap = true, silent = true})
+        end
 
         -- opt = true
 
     }
 
-    use {"hrsh7th/vim-vsnip", 
+    use {
+        "hrsh7th/vim-vsnip"
 
         -- opt = true
 
