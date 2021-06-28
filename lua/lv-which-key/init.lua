@@ -75,6 +75,9 @@ vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", {noremap = true, s
 vim.api.nvim_set_keymap('n', '<leader>p', ":lua require'telescope'.extensions.project.project{}<CR>",
                         {noremap = true, silent = true})
 
+vim.api.nvim_set_keymap("n", "<leader>z", ":TZAtaraxis<CR>", {noremap = true, silent = true})
+-- z = {"<cmd>TZAtaraxis<cr>", "toggle zen"}
+
 -- TODO create entire treesitter section
 
 local mappings = {
@@ -85,6 +88,7 @@ local mappings = {
     ["f"] = "Find File",
     ["h"] = "No Highlight",
     ["p"] = "Projects",
+    ["z"] = "Zen",
     b = {
       name = "+Buffers",
       j = {"<cmd>BufferPick<cr>", "jump to buffer"},
@@ -180,12 +184,12 @@ local mappings = {
         l = {"<cmd>SessionLoad<cr>", "Load Session"}
     },
     -- extras
-    z = {
-        name = "Zen",
-        s = {"<cmd>TZBottom<cr>", "toggle status line"},
-        t = {"<cmd>TZTop<cr>", "toggle tab bar"},
-        z = {"<cmd>TZAtaraxis<cr>", "toggle zen"}
-    }
+    -- z = {
+    --     name = "Zen",
+    --     s = {"<cmd>TZBottom<cr>", "toggle status line"},
+    --     t = {"<cmd>TZTop<cr>", "toggle tab bar"},
+    --     z = {"<cmd>TZAtaraxis<cr>", "toggle zen"}
+    -- }
 }
 
 if O.extras then

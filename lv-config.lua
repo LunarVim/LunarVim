@@ -20,6 +20,7 @@ O.leader_key = ' '
 O.plugin.hop.active = true
 O.plugin.dial.active = true
 O.plugin.dashboard.active = true
+O.plugin.matchup.active = true
 
 -- dashboard
 -- O.dashboard.custom_header = {""}
