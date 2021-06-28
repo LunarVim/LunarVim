@@ -33,10 +33,26 @@ O = {
         matchup = {active = false},
         colorizer = {active = false},
         numb = {active = false},
+        zen = {active = false},
         ts_playground = {active = false},
         indent_line = {active = false},
-        ts_context_commentstring = {active = false}
-
+        ts_context_commentstring = {active = false},
+        symbol_outline = {active = false},
+        debug = {active = false},
+        bqf = {active = false},
+        trouble = {active = false},
+        floatterm = {active = false},
+        spectre = {active = false},
+        lsp_rooter = {active = false},
+        markdown_preview = {active = false},
+        codi = {active = false},
+        telescope_fzy = {active = false},
+        sanegx = {active = false},
+        todo_comments = {active = false},
+        lsp_colors = {active = false},
+        git_blame = {active = false},
+        gitlinker = {active = false},
+        telescope_project = {active = false}
 
     },
 

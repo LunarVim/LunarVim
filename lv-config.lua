@@ -25,6 +25,8 @@ O.plugin.colorizer.active = false
 O.plugin.numb.active = false
 O.plugin.ts_playground.active = false
 O.plugin.indent_line.active = false
+O.plugin.gitlinker.active = true
+O.plugin.zen.active = true
 
 -- dashboard
 -- O.dashboard.custom_header = {""}

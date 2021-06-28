@@ -87,7 +87,7 @@
                             ":lua require'telescope'.extensions.project.project{}<CR>",
                             {noremap = true, silent = true})
 
-    vim.api.nvim_set_keymap("n", "<leader>z", ":TZAtaraxis<CR>",
+    vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>",
                             {noremap = true, silent = true})
     -- z = {"<cmd>TZAtaraxis<cr>", "toggle zen"}
 
@@ -102,6 +102,7 @@
         ["h"] = "No Highlight",
         ["p"] = "Projects",
         ["z"] = "Zen",
+        ["gy"] = "Gitlink",
         [";"] = "Dashboard",
         b = {
             name = "+Buffers",
