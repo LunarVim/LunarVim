@@ -29,6 +29,7 @@ O = {
 
     lang = {
         python = {
+            active = false,
             linter = '',
             -- @usage can be 'yapf', 'black'
             formatter = '',
@@ -46,9 +47,11 @@ O = {
             }
         },
         dart = {
+            active = false,
             sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'
         },
         lua = {
+            active = false,
             -- @usage can be 'lua-format'
             formatter = '',
             autoformat = false,
@@ -59,6 +62,7 @@ O = {
             }
         },
         sh = {
+            active = false,
             -- @usage can be 'shellcheck'
             linter = '',
             -- @usage can be 'shfmt'
@@ -71,6 +75,7 @@ O = {
             }
         },
         tsserver = {
+            active = false,
             -- @usage can be 'eslint'
             linter = '',
             -- @usage can be 'prettier'
@@ -83,6 +88,7 @@ O = {
             }
         },
         json = {
+            active = false,
             -- @usage can be 'prettier'
             formatter = '',
             autoformat = false,
@@ -92,13 +98,15 @@ O = {
                 underline = true
             }
         },
-        tailwindls = {
+        tailwindcss = {
+            active = false,
             filetypes = {
                 'html', 'css', 'scss', 'javascript', 'javascriptreact',
                 'typescript', 'typescriptreact'
             }
         },
         clang = {
+            active = false,
             diagnostics = {
                 virtual_text = {spacing = 0, prefix = ""},
                 signs = true,
@@ -106,6 +114,7 @@ O = {
             }
         },
         ruby = {
+            active = false,
             diagnostics = {
                 virtualtext = {spacing = 0, prefix = ""},
                 signs = true,
@@ -113,9 +122,31 @@ O = {
             },
             filetypes = {'rb', 'erb', 'rakefile'}
         },
-        go = {}
-        -- css = {formatter = '', autoformat = false, virtual_text = true},
-        -- json = {formatter = '', autoformat = false, virtual_text = true}
+        go = {active = false},
+        elixer = {active = false},
+        vim = {active = false},
+        yaml = {active = false},
+        terraform = {active = false},
+        rust = {active = false},
+        svelte = {active = false},
+        php = {active = false},
+        latex = {active = false},
+        kotlin = {active = false},
+        html = {active = false},
+        elm = {active = false},
+        emmet = {active = false},
+        graphql = {active = false},
+        efm = {active = true},
+        docker = {active = false},
+        cmake = {active = false},
+        java = {active = false},
+        css = {
+            active = false,
+
+            formatter = '', autoformat = false, virtual_text = true},
+        json = {
+            active = false,
+            formatter = '', autoformat = false, virtual_text = true}
 
     },
 

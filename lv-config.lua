@@ -5,8 +5,7 @@ Formatters and linters should be
 filled in as strings with either
 a global executable or a path to
 an executable
-]]
-
+]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
 O.auto_complete = true
 O.colorscheme = 'lunar'
@@ -26,7 +25,6 @@ O.treesitter.ensure_installed = "all"
 O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
 
-
 O.lang.clang.diagnostics.virtual_text = false
 O.lang.clang.diagnostics.signs = false
 O.lang.clang.diagnostics.underline = false
@@ -37,6 +35,7 @@ O.lang.clang.diagnostics.underline = false
 -- add things like O.python.formatter.isort.exec_path
 O.lang.python.formatter = 'yapf'
 -- O.python.linter = 'flake8'
+O.lang.python.active = true
 O.lang.python.isort = true
 O.lang.python.autoformat = true
 O.lang.python.diagnostics.virtual_text = true
@@ -48,6 +47,7 @@ O.lang.python.analysis.use_library_code_types = true
 
 -- lua
 -- TODO look into stylua
+O.lang.lua.active = true
 O.lang.lua.formatter = 'lua-format'
 -- O.lua.formatter = 'lua-format'
 O.lang.lua.autoformat = false
