@@ -53,6 +53,7 @@ O = {
         todo_comments = {active = false},
         lsp_colors = {active = false},
         git_blame = {active = false},
+        gist = {active = false},
         gitlinker = {active = false},
         lazygit = {active = false},
         octo = {active = false},
