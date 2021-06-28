@@ -15,6 +15,8 @@ O.timeoutlen = 100
 O.document_highlight = true
 O.extras = false
 O.leader_key = ' '
+O.ignore_case = true
+O.smart_case = true
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.hop.active = false
