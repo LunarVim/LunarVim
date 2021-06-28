@@ -1,6 +1,3 @@
-local M = {}
-
-M.config = function()
     require("which-key").setup {
         plugins = {
             marks = true, -- shows a list of your marks on ' and `
@@ -298,7 +295,4 @@ M.config = function()
     local wk = require("which-key")
     wk.register(mappings, opts)
     -- wk.register(visualMappings, visualOpts)
-end
-
-return M
 

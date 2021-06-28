@@ -33,7 +33,7 @@ return require("packer").startup(function(use)
         end
     }
 
-    use {"hrsh7th/vim-vsnip", event = "InsertCharPre"}
+    use {"hrsh7th/vim-vsnip", event = "InsertEnter"}
     use {"rafamadriz/friendly-snippets", event = "InsertEnter"}
 
     -- Treesitter
@@ -41,7 +41,7 @@ return require("packer").startup(function(use)
 
     use {
         "kyazdani42/nvim-tree.lua",
-        cmd = "NvimTreeToggle",
+        -- cmd = "NvimTreeToggle",
         config = function()
             require("lv-nvimtree").config()
         end
@@ -59,9 +59,6 @@ return require("packer").startup(function(use)
     -- whichkey
     use {
         "folke/which-key.nvim",
-        config = function()
-            require('lv-which-key').config()
-        end
     }
 
     -- Autopairs
@@ -206,10 +203,15 @@ return require("packer").startup(function(use)
         disable = not O.plugin.indent_line.active
     }
 
+    use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        event = "BufRead",
+        disable = not O.plugin.ts_context_commentstring.active
+    }
+
     -- use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
     -- use {"nvim-telescope/telescope-project.nvim", opt = true}
     --     -- comments in context
-    --     use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
     --     -- Git extras
     -- Git
     -- use {'tpope/vim-fugitive', opt = true}
