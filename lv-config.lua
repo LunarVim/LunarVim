@@ -93,3 +93,5 @@ O.lang.go.autoformat = true
 --       And I think `ver` means vertical and `hor` means horizontal.
 --       The numbers didn't make a difference in alacritty. Please change
 --       the number to something that suits your needs if it looks weird.
+
+

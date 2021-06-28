@@ -64,7 +64,6 @@ return require("packer").startup(function(use)
         config = function()
             require('lv-which-key').config()
         end,
-        event = "BufRead"
     }
 
     -- Autopairs

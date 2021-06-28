@@ -33,7 +33,7 @@ O = {
         dashboard = {active = false},
         matchup = {active = false},
         colorizer = {active = false},
-        numb = {active = false}
+        numb = {active = false},
 
 
     },
