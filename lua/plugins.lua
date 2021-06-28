@@ -63,7 +63,7 @@ return require("packer").startup(function(use)
         "folke/which-key.nvim",
         config = function()
             require('lv-which-key').config()
-        end,
+        end
     }
 
     -- Autopairs
@@ -181,8 +181,12 @@ return require("packer").startup(function(use)
         disable = not O.plugin.numb.active
     }
 
-    --     -- Treesitter playground
-    --     use {'nvim-treesitter/playground', opt = true}
+    -- Treesitter playground
+    use {
+        'nvim-treesitter/playground',
+        event = "BufRead",
+        disable = not O.plugin.ts_playground.active
+    }
     --     -- Latex
     --     use {"lervag/vimtex", opt = true}
     --     -- comments in context

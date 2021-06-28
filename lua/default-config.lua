@@ -34,6 +34,7 @@ O = {
         matchup = {active = false},
         colorizer = {active = false},
         numb = {active = false},
+        ts_playground = {active = false},
 
 
     },
