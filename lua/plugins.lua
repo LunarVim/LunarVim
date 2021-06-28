@@ -227,6 +227,11 @@ return require("packer").startup(function(use)
     -- lsp root
     -- use {"ahmedkhalf/lsp-rooter.nvim", opt = true} -- with this nvim-tree will follow you
 
+    -- Rust tools
+    if O.lang.rust.active then
+        use {'simrat39/rust-tools.nvim', opt = true}
+        require_plugin('rust-tools.nvim')
+    end
     -- Extras
     if O.extras then
         -- HTML preview

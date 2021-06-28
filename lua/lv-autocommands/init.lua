@@ -28,6 +28,9 @@ if O.lang.ruby.autoformat then table.insert(auto_formatters, ruby_format) end
 local go_format = {'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
 if O.lang.go.autoformat then table.insert(auto_formatters, go_format) end
 
+local rust_format = {'BufWritePre', '*.rs', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
+if O.lang.rust.autoformat then table.insert(auto_formatters, rust_format) end
+
 utils.define_augroups({
     _general_settings = {
         {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
