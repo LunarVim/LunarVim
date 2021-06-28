@@ -27,6 +27,8 @@ O = {
 
     database = {save_location = '~/.config/nvcode_db', auto_execute = 1},
 
+    plugins = {hop = {active = false}},
+
     lang = {
         python = {
             active = false,
@@ -143,10 +145,10 @@ O = {
         css = {
             active = false,
 
-            formatter = '', autoformat = false, virtual_text = true},
-        json = {
-            active = false,
-            formatter = '', autoformat = false, virtual_text = true}
+            formatter = '',
+            autoformat = false,
+            virtual_text = true
+        }
 
     },
 

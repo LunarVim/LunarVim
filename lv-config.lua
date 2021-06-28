@@ -16,6 +16,9 @@ O.document_highlight = true
 O.extras = false
 O.leader_key = ' '
 
+-- After changing plugin config it is recommended to run :PackerCompile
+O.plugins.hop.active = true
+
 -- dashboard
 -- O.dashboard.custom_header = {""}
 -- O.dashboard.footer = {""}

@@ -27,7 +27,8 @@ local function require_plugin(plugin)
     return ok, err, code
 end
 
--- vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
+vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
+-- vim.cmd "autocmd BufWritePost lv-config.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
@@ -109,6 +110,15 @@ return require("packer").startup(function(use)
     }
 
     use {"hrsh7th/vim-vsnip"}
+    use {
+        event = 'BufRead',
+        'phaazon/hop.nvim',
+        config = function()
+            require('lv-hop').config()
+        end,
+        disable = not O.plugins.hop.active,
+        opt = true
+    }
 
     -- extras
     -- if O.matchup then require('lv-matchup') end
