@@ -31,7 +31,9 @@ O = {
         hop = {active = false},
         dial = {active = false},
         dashboard = {active = false},
-        matchup = {active = false}
+        matchup = {active = false},
+        colorizer = {active = false},
+        numb = {active = false}
 
 
     },

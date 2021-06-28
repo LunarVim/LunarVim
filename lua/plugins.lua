@@ -9,24 +9,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     execute "packadd packer.nvim"
 end
 
---- Check if a file or directory exists in this path
-local function require_plugin(plugin)
-    local plugin_prefix = fn.stdpath("data") .. "/site/pack/packer/opt/"
-
-    local plugin_path = plugin_prefix .. plugin .. "/"
-    --	print('test '..plugin_path)
-    local ok, err, code = os.rename(plugin_path, plugin_path)
-    if not ok then
-        if code == 13 then
-            -- Permission denied, but it exists
-            return true
-        end
-    end
-    --	print(ok, err, code)
-    if ok then vim.cmd("packadd " .. plugin) end
-    return ok, err, code
-end
-
 vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 -- vim.cmd "autocmd BufWritePost lv-config.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
@@ -76,7 +58,16 @@ return require("packer").startup(function(use)
         event = "BufRead"
     }
 
-    use {"folke/which-key.nvim"}
+    -- whichkey
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            require('lv-which-key').config()
+        end,
+        event = "BufRead"
+    }
+
+    -- Autopairs
     use {"windwp/nvim-autopairs"}
 
     -- Comments
@@ -107,13 +98,12 @@ return require("packer").startup(function(use)
                                     {noremap = true, silent = true})
             vim.api.nvim_set_keymap('n', '<S-x>', ':BufferClose<CR>',
                                     {noremap = true, silent = true})
-        end
+        end,
+        event = "BufRead"
 
     }
 
-    -- use {"hrsh7th/vim-vsnip"}
-
-    -- extras, these do not load by default
+    -- Extras, these do not load by default
 
     -- Better motions
     use {
@@ -147,7 +137,7 @@ return require("packer").startup(function(use)
         opt = true
     }
 
-    -- Zen Mode TODO this don't work with whichkey might gave to make this built in
+    -- Zen Mode TODO this don't work with whichkey might gave to make this built in, may have to replace with folke zen
     use {
         "Pocco81/TrueZen.nvim",
         -- event = 'BufEnter',
@@ -170,57 +160,56 @@ return require("packer").startup(function(use)
         opt = true
     }
 
-    --     -- Colorizer
-    --     use {'norcalli/nvim-colorizer.lua', opt = true}
+    use {
+        "norcalli/nvim-colorizer.lua",
+        event = "BufRead",
+        config = function()
+            require("colorizer").setup()
+            vim.cmd("ColorizerReloadAllBuffers")
+        end,
+        disable = not O.plugin.colorizer.active
+    }
 
-    --     -- Peek lines
-    --     use {'nacro90/numb.nvim', opt = true}
-    -- 
+    use {
+        "nacro90/numb.nvim",
+        event = "BufRead",
+        config = function()
+            require('numb').setup {
+                show_numbers = true, -- Enable 'number' for the window while peeking
+                show_cursorline = true -- Enable 'cursorline' for the window while peeking
+            }
+        end,
+        disable = not O.plugin.numb.active
+    }
+
     --     -- Treesitter playground
     --     use {'nvim-treesitter/playground', opt = true}
-    -- 
-    -- 
-    -- 
     --     -- Latex
     --     use {"lervag/vimtex", opt = true}
-    -- 
     --     -- comments in context
     --     use {'JoosepAlviste/nvim-ts-context-commentstring', opt = true}
-    -- 
-    -- 
     --     -- Git extras
     --     use {'f-person/git-blame.nvim', opt = true}
-    -- 
-    -- 
     --     -- diagnostics
     --     use {"folke/trouble.nvim", opt = true}
-    -- 
     --     -- Debugging
     --     use {"mfussenegger/nvim-dap", opt = true}
-    -- 
-    -- 
     --     -- Better quickfix
     --     use {"kevinhwang91/nvim-bqf", opt = true}
-    -- 
     --     -- Search & Replace
     --     use {'windwp/nvim-spectre', opt = true}
-    -- 
     --     -- Symbol Outline
     --     use {'simrat39/symbols-outline.nvim', opt = true}
-    -- 
     --     -- Interactive scratchpad
     --     use {'metakirby5/codi.vim', opt = true}
-    -- 
     --     -- Markdown preview
     --     use {
     --         'iamcco/markdown-preview.nvim',
     --         run = 'cd app && npm install',
     --         opt = true
     --     }
-    -- 
     --     -- Floating terminal
     --     use {'numToStr/FTerm.nvim', opt = true}
-    -- 
     --     -- Sane gx for netrw_gx bug
     --     use {"felipec/vim-sanegx", opt = true}
 
@@ -235,11 +224,9 @@ return require("packer").startup(function(use)
             run = 'npm install --prefix server',
             opt = true
         }
-        require_plugin('bracey.vim')
 
         use {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
         use {"nvim-telescope/telescope-project.nvim", opt = true}
-        require_plugin('telescope-project.nvim')
 
         -- Autotag
         -- use {"windwp/nvim-ts-autotag", opt = true}
