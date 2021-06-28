@@ -1,13 +1,17 @@
 local actions = require('telescope.actions')
--- local trouble = require("trouble.providers.telescope")
+-- if O.plugin.trouble.active then
+--     local trouble = require("trouble.providers.telescope")
+-- end
 -- Global remapping
 ------------------------------
 -- '--color=never',
 require('telescope').setup {
     defaults = {
-        find_command = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
+        find_command = {
+            'rg', '--no-heading', '--with-filename', '--line-number',
+            '--column', '--smart-case'
+        },
         prompt_position = "bottom",
-        -- prompt_prefix = " ",
         prompt_prefix = " ",
         selection_caret = " ",
         entry_prefix = "  ",
@@ -15,7 +19,10 @@ require('telescope').setup {
         selection_strategy = "reset",
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
-        layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
+        layout_defaults = {
+            horizontal = {mirror = false},
+            vertical = {mirror = false}
+        },
         file_sorter = require'telescope.sorters'.get_fzy_sorter,
         file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
@@ -66,7 +73,12 @@ require('telescope').setup {
             }
         }
     },
-    extensions = {fzy_native = {override_generic_sorter = false, override_file_sorter = true}}
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true
+        }
+    }
 }
 
 -- require'telescope'.load_extension('project')
