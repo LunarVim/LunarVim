@@ -66,14 +66,14 @@ utils.define_augroups({
         }, {'FileType', 'dashboard', 'set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2'}
     },
     _markdown = {{'FileType', 'markdown', 'setlocal wrap'}, {'FileType', 'markdown', 'setlocal spell'}},
-    _solidity = {
-        {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
-        {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
-    },
-    _gemini = {
-        {'BufWinEnter', '.gmi', 'setlocal filetype=markdown'}, {'BufRead', '*.gmi', 'setlocal filetype=markdown'},
-        {'BufNewFile', '*.gmi', 'setlocal filetype=markdown'}
-    },
+    -- _solidity = {
+    --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
+    --     {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
+    -- },
+    -- _gemini = {
+    --     {'BufWinEnter', '.gmi', 'setlocal filetype=markdown'}, {'BufRead', '*.gmi', 'setlocal filetype=markdown'},
+    --     {'BufNewFile', '*.gmi', 'setlocal filetype=markdown'}
+    -- },
     _buffer_bindings = {
         {'FileType', 'dashboard', 'nnoremap <silent> <buffer> q :q<CR>'},
         {'FileType', 'lspinfo', 'nnoremap <silent> <buffer> q :q<CR>'},

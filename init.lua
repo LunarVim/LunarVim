@@ -5,7 +5,6 @@ require('plugins')
 require('lv-utils')
 require('lv-autocommands')
 require('keymappings')
-require('colorscheme') -- This plugin must be required somewhere after nvimtree. Placing it before will break navigation keymappings
 require('lv-galaxyline')
 require('lv-telescope')
 require('lv-treesitter')
