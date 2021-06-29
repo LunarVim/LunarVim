@@ -331,25 +331,50 @@ return require("packer").startup(function(use)
 
     }
     -- Rust tools
-    if O.lang.rust.active then
-        -- TODO: use lazy loading maybe?
-        use {'simrat39/rust-tools.nvim'}
-    end
-    -- Git
-    -- https://github.com/kdheepak/lazygit.nvim
-    -- pwntester/octo.nvim
-    -- use 'sindrets/diffview.nvim'
+    -- TODO: use lazy loading maybe?
+    use {
+        "simrat39/rust-tools.nvim",
+        disable = not O.lang.rust.active
+    }
+    -- Lazygit
+    use {
+        "kdheepak/lazygit.nvim",
+        cmd = "LazyGit",
+        disable = not O.plugin.lazygit.active
+    }
+    -- Lazygit
+    use {
+        "pwntester/octo.nvim",
+        event = "BufRead",
+        disable = not O.plugin.octo.active
+    }
+    -- Diffview
+    use {
+        "sindrets/diffview.nvim",
+        event = "BufRead",
+        disable = not O.plugin.diffview.active
+    }
     -- Easily Create Gists
-    -- use {'mattn/vim-gist', opt = true}
-    -- use {'mattn/webapi-vim', opt = true}
-
-    -- Not sure yet
+    use {
+        "mattn/vim-gist",
+        event = "BufRead",
+        disable = not O.plugin.gist.active,
+        requires = 'mattn/webapi-vim'
+    }
     -- HTML preview
-    -- use {
-    --     'turbio/bracey.vim',
-    --     run = 'npm install --prefix server',
-    --     opt = true
-    -- }
+    use {
+        'turbio/bracey.vim',
+        event = "BufRead",
+        run = 'npm install --prefix server',
+        disable = not O.plugin.bracey.active
+    }
+
+    -- LANGUAGE SPECIFIC GOES HERE
+
     -- Latex TODO what filetypes should this be active for?
-    -- use {"lervag/vimtex", opt = true}
+    use {
+        "lervag/vimtex",
+        ft = "latex",
+        disable = not O.lang.latex.active
+    }
 end)

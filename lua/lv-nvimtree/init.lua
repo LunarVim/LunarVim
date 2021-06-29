@@ -6,9 +6,9 @@ M.config = function()
     vim.o.termguicolors = true
 
     g.nvim_tree_side = "left"
-    g.nvim_tree_width = 25
+    g.nvim_tree_width = 30
     g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
-    g.nvim_tree_auto_open = 0
+    g.nvim_tree_auto_open = 1
     g.nvim_tree_auto_close = 0
     g.nvim_tree_quit_on_open = 0
     g.nvim_tree_follow = 1
@@ -18,46 +18,50 @@ M.config = function()
     g.nvim_tree_root_folder_modifier = ":t"
     g.nvim_tree_tab_open = 0
     g.nvim_tree_allow_resize = 1
+    g.nvim_tree_lsp_diagnostics = 1
+    g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
 
     g.nvim_tree_show_icons = {
         git = 1,
         folders = 1,
-        files = 1
+        files = 1,
+        folder_arrows = 0
     }
 
-    g.nvim_tree_icons = {
-        default = "",
-        symlink = "",
+    vim.g.nvim_tree_icons = {
+        default = '',
+        symlink = '',
         git = {
-            unstaged = "✗",
-            staged = "✓",
+            unstaged = "",
+            staged = "S",
             unmerged = "",
             renamed = "➜",
-            untracked = "★",
             deleted = "",
+            untracked = "U",
             ignored = "◌"
         },
         folder = {
-            default = "",
-            open = "",
-            symlink = "",
-            empty = "",
-            empty_open = "",
-            symlink_open = ""
+            default = "",
+            open = "",
+            empty = "",
+            empty_open = "",
+            symlink = ""
         }
     }
 
-    local tree_cb = require "nvim-tree.config".nvim_tree_callback
+    local tree_cb = require"nvim-tree.config".nvim_tree_callback
 
     g.nvim_tree_bindings = {
         ["u"] = ":lua require'some_module'.some_function()<cr>",
-        -- default mappings
         ["<CR>"] = tree_cb("edit"),
+        ["l"] = tree_cb("edit"),
         ["o"] = tree_cb("edit"),
+        ["h"] = tree_cb("close_node"),
         ["<2-LeftMouse>"] = tree_cb("edit"),
         ["<2-RightMouse>"] = tree_cb("cd"),
         ["<C-]>"] = tree_cb("cd"),
         ["<C-v>"] = tree_cb("vsplit"),
+        ["v"] = tree_cb("vsplit"),
         ["<C-x>"] = tree_cb("split"),
         ["<C-t>"] = tree_cb("tabnew"),
         ["<"] = tree_cb("prev_sibling"),

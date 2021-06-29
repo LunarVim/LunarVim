@@ -15,6 +15,8 @@ O = {
     timeoutlen = 100,
     nvim_tree_disable_netrw = 0,
     extras = false,
+    ignore_case = true,
+    smart_case = true,
 
     -- @usage pass a table with your desired languages
     treesitter = {
@@ -51,7 +53,12 @@ O = {
         todo_comments = {active = false},
         lsp_colors = {active = false},
         git_blame = {active = false},
+        gist = {active = false},
         gitlinker = {active = false},
+        lazygit = {active = false},
+        octo = {active = false},
+        diffview = {active = false},
+        bracey = {active = false},
         telescope_project = {active = false}
 
     },
