@@ -72,6 +72,7 @@ O.lang.tsserver.linter = nil
 O.lang.tsserver.autoformat = true
 
 -- json
+O.lang.json.active = true
 O.lang.json.autoformat = true
 
 -- ruby
