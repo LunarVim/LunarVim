@@ -21,14 +21,14 @@ O.smart_case = true
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.hop.active = false
 O.plugin.dial.active = false
-O.plugin.dashboard.active = true
+O.plugin.dashboard.active = false
 O.plugin.matchup.active = false
 O.plugin.colorizer.active = false
 O.plugin.numb.active = false
 O.plugin.ts_playground.active = false
 O.plugin.indent_line.active = false
-O.plugin.gitlinker.active = true
-O.plugin.zen.active = true
+O.plugin.gitlinker.active = false
+O.plugin.zen.active = false
 
 -- dashboard
 -- O.dashboard.custom_header = {""}
@@ -49,7 +49,7 @@ O.lang.clang.diagnostics.underline = false
 -- add things like O.python.formatter.isort.exec_path
 O.lang.python.formatter = 'yapf'
 -- O.python.linter = 'flake8'
-O.lang.python.active = true
+O.lang.python.active = false
 O.lang.python.isort = true
 O.lang.python.autoformat = true
 O.lang.python.diagnostics.virtual_text = true
@@ -61,7 +61,7 @@ O.lang.python.analysis.use_library_code_types = true
 
 -- lua
 -- TODO look into stylua
-O.lang.lua.active = true
+O.lang.lua.active = false
 O.lang.lua.formatter = 'lua-format'
 -- O.lua.formatter = 'lua-format'
 O.lang.lua.autoformat = false
@@ -72,7 +72,7 @@ O.lang.tsserver.linter = nil
 O.lang.tsserver.autoformat = true
 
 -- json
-O.lang.json.active = true
+O.lang.json.active = false
 O.lang.json.autoformat = true
 
 -- ruby
@@ -91,7 +91,7 @@ O.lang.rust.autoformat = true
 -- Turn off cursorline
 -- O.cursorline = false
 
--- Neovim turns the default cursor to 'Block' 
+-- Neovim turns the default cursor to 'Block'
 -- when switched back into terminal.
 -- This below line fixes that. Uncomment if needed.
 
@@ -104,4 +104,7 @@ O.lang.rust.autoformat = true
 --       The numbers didn't make a difference in alacritty. Please change
 --       the number to something that suits your needs if it looks weird.
 
-
+-- TODO
+-- custom autocommands
+-- user defined plugin config
+-- custom settings
