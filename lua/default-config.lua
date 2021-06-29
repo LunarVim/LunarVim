@@ -163,7 +163,17 @@ O = {
         vim = {active = false},
         yaml = {active = false},
         terraform = {active = false},
-        rust = {active = false},
+        rust = {
+            active = false,
+            linter = '',
+            formatter = '',
+            autoformat = false,
+            diagnostics = {
+                virtual_text = {spacing = 0, prefix = ""},
+                signs = true,
+                underline = true
+            }
+        },
         svelte = {active = false},
         php = {active = false},
         latex = {active = false},

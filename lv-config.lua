@@ -80,6 +80,9 @@ O.lang.ruby.autoformat = true
 
 -- go
 O.lang.go.autoformat = true
+
+-- rust
+O.lang.rust.autoformat = true
 -- create custom autocommand field (This would be easy with lua)
 
 -- Turn off relative_numbers
