@@ -41,7 +41,7 @@ if O.lang.terraform.active then require('lsp.terraform-ls') end
 if O.lang.tailwindcss.active then require('lsp.tailwindcss-ls') end
 if O.lang.vim.active then require('lsp.vim-ls') end
 if O.lang.yaml.active then require('lsp.yaml-ls') end
-if O.lang.elixer.active then require('lsp.elixer-ls') end
+if O.lang.elixir.active then require('lsp.elixir-ls') end
 if O.lang.tsserver.active then
     require('lsp.js-ts-ls')
     require('lsp.angular-ls')
