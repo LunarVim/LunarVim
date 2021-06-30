@@ -293,6 +293,7 @@ return require("packer").startup(function(use)
     use {
         "nvim-telescope/telescope-project.nvim",
         event = "BufRead",
+        after = "telescope.nvim",
         disable = not O.plugin.telescope_project.active
     }
     -- Sane gx for netrw_gx bug
