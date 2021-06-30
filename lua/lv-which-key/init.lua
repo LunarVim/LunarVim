@@ -92,7 +92,7 @@ local mappings = {
     ["f"] = "Find File",
     ["h"] = "No Highlight",
     b = {
-        name = "+Buffers",
+        name = "Buffers",
         j = {"<cmd>BufferPick<cr>", "jump to buffer"},
         w = {"<cmd>BufferWipeout<cr>", "wipeout buffer"},
         e = {
@@ -113,22 +113,31 @@ local mappings = {
         }
     },
 
-    d = {
-        name = "Diagnostics",
-        t = {"<cmd>TroubleToggle<cr>", "trouble"},
-        w = {"<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace"},
-        d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
-        q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
-        l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
-        r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
-    },
+-- diagnostics vanilla nvim
+-- -- diagnostic
+-- function lv_utils.get_all()
+--     vim.lsp.diagnostic.get_all()
+-- end
+-- function lv_utils.get_next()
+--     vim.lsp.diagnostic.get_next()
+-- end
+-- function lv_utils.get_prev()
+--     vim.lsp.diagnostic.get_prev()
+-- end
+-- function lv_utils.goto_next()
+--     vim.lsp.diagnostic.goto_next()
+-- end
+-- function lv_utils.goto_prev()
+--     vim.lsp.diagnostic.goto_prev()
+-- end
+-- function lv_utils.show_line_diagnostics()
+--     vim.lsp.diagnostic.show_line_diagnostics()
+-- end
 
     -- " Available Debug Adapters:
     -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
-    -- " 
     -- " Adapter configuration and installation instructions:
     -- "   https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-    -- " 
     -- " Debug Adapter protocol:
     -- "   https://microsoft.github.io/debug-adapter-protocol/
     -- " Debugging
@@ -151,15 +160,15 @@ local mappings = {
     -- },
     g = {
         name = "Git",
-        j = {"<cmd>lua require 'lv-utils'.next_hunk()<cr>", "Next Hunk"},
-        k = {"<cmd>lua require 'lv-utils'.prev_hunk()<cr>", "Prev Hunk"},
-        l = {"<cmd>lua require 'lv-utils'.blame_line()<cr>", "Blame"},
-        p = {"<cmd>lua require 'lv-utils'.preview_hunk()<cr>", "Preview Hunk"},
-        r = {"<cmd>lua require 'lv-utils'.reset_hunk()<cr>", "Reset Hunk"},
-        R = {"<cmd>lua require 'lv-utils'.reset_buffer()<cr>", "Reset Buffer"},
-        s = {"<cmd>lua require 'lv-utils'.stage_hunk()<cr>", "Stage Hunk"},
+        j = {"<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk"},
+        k = {"<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk"},
+        l = {"<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame"},
+        p = {"<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk"},
+        r = {"<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk"},
+        R = {"<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer"},
+        s = {"<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk"},
         u = {
-            "<cmd>lua require 'lv-utils'.undo_stage_hunk()<cr>",
+            "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
             "Undo Stage Hunk"
         },
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
@@ -182,7 +191,7 @@ local mappings = {
             "<cmd>Telescope lsp_workspace_diagnostics<cr>",
             "Workspace Diagnostics"
         },
-        f = {"<cmd>lua require 'lv-utils'.formatting()<cr>", "Format"},
+        f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
         h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Doc"},
         i = {"<cmd>LspInfo<cr>", "Info"},
         l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
@@ -209,17 +218,17 @@ local mappings = {
         name = "Search",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
-        d = {
-            "<cmd>Telescope lsp_document_diagnostics<cr>",
-            "Document Diagnostics"
-        },
-        D = {
-            "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-            "Workspace Diagnostics"
-        },
+        -- d = {
+        --     "<cmd>Telescope lsp_document_diagnostics<cr>",
+        --     "Document Diagnostics"
+        -- },
+        -- D = {
+        --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+        --     "Workspace Diagnostics"
+        -- },
         f = {"<cmd>Telescope find_files<cr>", "Find File"},
         h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
-        m = {"<cmd>Telescope marks<cr>", "Marks"},
+        -- m = {"<cmd>Telescope marks<cr>", "Marks"},
         M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
@@ -231,6 +240,18 @@ local mappings = {
         l = {"<cmd>SessionLoad<cr>", "Load Session"}
     }
 }
+
+if O.plugin.trouble.active then
+    mappings['d'] = {
+        name = "Diagnostics",
+        t = {"<cmd>TroubleToggle<cr>", "trouble"},
+        w = {"<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace"},
+        d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
+        q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
+        l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
+        r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
+    }
+end
 
 if O.plugin.gitlinker.active then mappings["gy"] = "Gitlink" end
 if O.plugin.zen.active then

@@ -1,54 +1,103 @@
+-- TODO when autocommands are better in lua, scope these to plugins and langs
 local utils = require('lv-utils')
 
-local auto_formatters = {            }
+local auto_formatters = {}
 
-local python_autoformat = {'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.lang.python.autoformat then table.insert(auto_formatters, python_autoformat) end
-
-local javascript_autoformat = {'BufWritePre', '*.js', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-local javascriptreact_autoformat = {'BufWritePre', '*.jsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-local typescript_autoformat = {'BufWritePre', '*.ts', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-local typescriptreact_autoformat = {'BufWritePre', '*.tsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.lang.tsserver.autoformat then
-    table.insert(auto_formatters, javascript_autoformat)
-    table.insert(auto_formatters, javascriptreact_autoformat)
-	table.insert(auto_formatters, typescript_autoformat)
-	table.insert(auto_formatters, typescriptreact_autoformat)
+if O.lang.python.active then
+    local python_autoformat = {
+        'BufWritePre', '*.py', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    if O.lang.python.autoformat then
+        table.insert(auto_formatters, python_autoformat)
+    end
 end
 
-local lua_format = {'BufWritePre', '*.lua', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.lang.lua.autoformat then table.insert(auto_formatters, lua_format) end
+if O.lang.tsserver.active then
+    local javascript_autoformat = {
+        'BufWritePre', '*.js', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    local javascriptreact_autoformat = {
+        'BufWritePre', '*.jsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    local typescript_autoformat = {
+        'BufWritePre', '*.ts', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    local typescriptreact_autoformat = {
+        'BufWritePre', '*.tsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    if O.lang.tsserver.autoformat then
+        table.insert(auto_formatters, javascript_autoformat)
+        table.insert(auto_formatters, javascriptreact_autoformat)
+        table.insert(auto_formatters, typescript_autoformat)
+        table.insert(auto_formatters, typescriptreact_autoformat)
+    end
+end
 
-local json_format = {'BufWritePre', '*.json', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'}
-if O.lang.json.autoformat then table.insert(auto_formatters, json_format) end
+if O.lang.lua.active then
+    local lua_format = {
+        'BufWritePre', '*.lua', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    if O.lang.lua.autoformat then table.insert(auto_formatters, lua_format) end
+end
 
-local ruby_format = {'BufWritePre', '*.rb', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
-if O.lang.ruby.autoformat then table.insert(auto_formatters, ruby_format) end
+if O.lang.json.active then
+    local json_format = {
+        'BufWritePre', '*.json', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+    }
+    if O.lang.json.autoformat then table.insert(auto_formatters, json_format) end
+end
 
-local go_format = {'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
-if O.lang.go.autoformat then table.insert(auto_formatters, go_format) end
+if O.lang.ruby.active then
+    local ruby_format = {
+        'BufWritePre', '*.rb', 'lua vim.lsp.buf.formatting_sync(nil,1000)'
+    }
+    if O.lang.ruby.autoformat then table.insert(auto_formatters, ruby_format) end
+end
 
-local rust_format = {'BufWritePre', '*.rs', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
-if O.lang.rust.autoformat then table.insert(auto_formatters, rust_format) end
+if O.lang.go.active then
+    local go_format = {
+        'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1000)'
+    }
+    if O.lang.go.autoformat then table.insert(auto_formatters, go_format) end
+end
+
+if O.lang.rust.active then
+    local rust_format = {
+        'BufWritePre', '*.rs', 'lua vim.lsp.buf.formatting_sync(nil,1000)'
+    }
+    if O.lang.rust.autoformat then table.insert(auto_formatters, rust_format) end
+end
 
 utils.define_augroups({
     _general_settings = {
-        {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
-        {'BufWinEnter', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-        {'BufRead', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-        {'BufNewFile', '*', 'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'},
-        {'VimLeavePre', '*', 'set title set titleold='},
+        {
+            'TextYankPost', '*',
+            'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'
+        }, {
+            'BufWinEnter', '*',
+            'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
+        },
+        {
+            'BufRead', '*',
+            'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
+        }, {
+            'BufNewFile', '*',
+            'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
+        }, {'VimLeavePre', '*', 'set title set titleold='},
         {'FileType', 'qf', 'set nobuflisted'},
-        {'BufWinEnter', 'lv-config.lua', 'PackerCompile'},
-        {'BufWinLeave', 'lv-config.lua', 'PackerCompile'},
-        {'BufWritePost', 'lv-config.lua', 'PackerCompile'}
+        -- {'BufWinEnter', 'lv-config.lua', 'PackerCompile'},
+        -- {'BufWinLeave', 'lv-config.lua', 'PackerCompile'},
+        -- {'BufWritePost', 'lv-config.lua', 'PackerCompile'}
 
         -- {'User', 'GoyoLeave', 'lua require(\'galaxyline\').disable_galaxyline()'},
         -- {'User', 'GoyoEnter', 'lua require(\'galaxyline\').galaxyline_augroup()'},
     },
     _java = {
         -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
-        {'FileType', 'java', 'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'}
+        {
+            'FileType', 'java',
+            'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'
+        }
     },
 
     _go = {
@@ -56,16 +105,22 @@ utils.define_augroups({
         {'FileType', 'go', 'setlocal tabstop=4'},
         {'FileType', 'go', 'setlocal shiftwidth=4'},
         {'FileType', 'go', 'setlocal softtabstop=4'},
-        {'FileType', 'go', 'setlocal noexpandtab'},
+        {'FileType', 'go', 'setlocal noexpandtab'}
     },
     _dashboard = {
         -- seems to be nobuflisted that makes my stuff disapear will do more testing
         {
             'FileType', 'dashboard',
             'setlocal nocursorline noswapfile synmaxcol& signcolumn=no norelativenumber nocursorcolumn nospell  nolist  nonumber bufhidden=wipe colorcolumn= foldcolumn=0 matchpairs= '
-        }, {'FileType', 'dashboard', 'set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2'}
+        }, {
+            'FileType', 'dashboard',
+            'set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2'
+        }
     },
-    _markdown = {{'FileType', 'markdown', 'setlocal wrap'}, {'FileType', 'markdown', 'setlocal spell'}},
+    _markdown = {
+        {'FileType', 'markdown', 'setlocal wrap'},
+        {'FileType', 'markdown', 'setlocal spell'}
+    },
     -- _solidity = {
     --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
     --     {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
@@ -77,7 +132,7 @@ utils.define_augroups({
     _buffer_bindings = {
         {'FileType', 'dashboard', 'nnoremap <silent> <buffer> q :q<CR>'},
         {'FileType', 'lspinfo', 'nnoremap <silent> <buffer> q :q<CR>'},
-        {'FileType', 'floaterm', 'nnoremap <silent> <buffer> q :q<CR>'},
+        {'FileType', 'floaterm', 'nnoremap <silent> <buffer> q :q<CR>'}
     },
     _auto_formatters = auto_formatters
 })

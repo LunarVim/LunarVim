@@ -23,7 +23,7 @@ O.smart_case = true
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.hop.active = false
 O.plugin.dial.active = false
-O.plugin.dashboard.active = false
+O.plugin.dashboard.active = true
 O.plugin.matchup.active = false
 O.plugin.colorizer.active = false
 O.plugin.numb.active = false
@@ -51,7 +51,7 @@ O.lang.clang.diagnostics.underline = false
 -- add things like O.python.formatter.isort.exec_path
 O.lang.python.formatter = 'yapf'
 -- O.python.linter = 'flake8'
-O.lang.python.active = false
+O.lang.python.active = true
 O.lang.python.isort = true
 O.lang.python.autoformat = true
 O.lang.python.diagnostics.virtual_text = true
@@ -63,7 +63,7 @@ O.lang.python.analysis.use_library_code_types = true
 
 -- lua
 -- TODO look into stylua
-O.lang.lua.active = false
+O.lang.lua.active = true
 O.lang.lua.formatter = 'lua-format'
 -- O.lua.formatter = 'lua-format'
 O.lang.lua.autoformat = false
