@@ -5,7 +5,7 @@
       <img alt="Latest release" src="https://img.shields.io/github/v/release/ChristianChiarulli/LunarVim" />
     </a>
     <a href="https://github.com/ChristianChiarulli/sniprun/releases">
-      <img alt="Total downloads" src="https://img.shields.io/github/downloads/ChristianChiarulli/sniprun/total" />
+      <img alt="Total downloads" src="https://img.shields.io/github/downloads/ChristianChiarulli/LunarVim/total" />
     </a>
     <a href="https://github.com/ChristianChiarulli/LunarVim/pulse">
       <img alt="Last commit" src="https://img.shields.io/github/last-commit/ChristianChiarulli/LunarVim"/>
