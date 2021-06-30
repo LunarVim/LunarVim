@@ -380,4 +380,10 @@ return require("packer").startup(function(use)
     -- Rust tools
     -- TODO: use lazy loading maybe?
     use {"simrat39/rust-tools.nvim", disable = not O.lang.rust.active}
+
+    -- Elixir
+    use {"elixir-editors/vim-elixir",
+        ft = {"elixir", "eelixir"},
+        disable = not O.lang.elixir.active
+    }
 end)
