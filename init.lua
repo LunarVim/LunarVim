@@ -4,7 +4,6 @@ require('settings')
 require('plugins')
 require('colorscheme')
 require('lv-utils')
-require('lv-autocommands')
 require('keymappings')
 require('lv-galaxyline')
 require('lv-telescope')
@@ -35,10 +34,7 @@ if O.lang.lua.active then require('lsp.lua-ls') end
 if O.lang.php.active then require('lsp.php-ls') end
 if O.lang.python.active then require('lsp.python-ls') end
 if O.lang.ruby.active then require('lsp.ruby-ls') end
-if O.lang.rust.active then
-    require('lsp.rust-ls')
-    require('lv-rust-tools')
-end
+if O.lang.rust.active then require('lsp.rust-ls') end
 if O.lang.svelte.active then require('lsp.svelte-ls') end
 if O.lang.terraform.active then require('lsp.terraform-ls') end
 if O.lang.tailwindcss.active then require('lsp.tailwindcss-ls') end
