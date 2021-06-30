@@ -9,8 +9,6 @@ an executable
 -- general
 O.auto_complete = true
 O.colorscheme = 'lunar'
--- TODO is there a lua native way to do this?
-vim.cmd('colorscheme ' .. O.colorscheme)
 O.auto_close_tree = 0
 O.wrap_lines = false
 O.timeoutlen = 100

@@ -60,8 +60,12 @@ vim.api.nvim_set_keymap('n', '<Leader>n', ':let @/=""<CR>',
 
 -- explorer
 
+-- TODO this introduces some bugs unfortunately
+-- vim.api.nvim_set_keymap('n', '<Leader>e',
+--                         ":lua require'lv-nvimtree'.toggle_tree()<CR>",
+--                         {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>e',
-                        ":lua require'lv-nvimtree'.toggle_tree()<CR>",
+                        ":NvimTreeToggle<CR>",
                         {noremap = true, silent = true})
 
 -- telescope
@@ -116,6 +120,7 @@ local mappings = {
     b = {
         name = "Buffers",
         j = {"<cmd>BufferPick<cr>", "jump to buffer"},
+        f = {"<cmd>Telescope buffers<cr>", "Find buffer"},
         w = {"<cmd>BufferWipeout<cr>", "wipeout buffer"},
         e = {
             "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer"
