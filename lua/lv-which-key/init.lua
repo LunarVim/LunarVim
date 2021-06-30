@@ -60,8 +60,12 @@ vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>',
 
 -- explorer
 
+-- TODO this introduces some bugs unfortunately
+-- vim.api.nvim_set_keymap('n', '<Leader>e',
+--                         ":lua require'lv-nvimtree'.toggle_tree()<CR>",
+--                         {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>e',
-                        ":lua require'lv-nvimtree'.toggle_tree()<CR>",
+                        ":NvimTreeToggle<CR>",
                         {noremap = true, silent = true})
 
 -- telescope
