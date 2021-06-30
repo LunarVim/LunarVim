@@ -1,11 +1,4 @@
-```
-   _..._                             
- .'   (_`.    _                         __     ___           
-:  .      :  | |   _   _ _ __   __ _ _ _\ \   / (_)_ __ ___  
-:)    ()  :  | |  | | | | '_ \ / _` | '__\ \ / /| | '_ ` _ \ 
-`.   .   .'  | |__| |_| | | | | (_| | |   \ V / | | | | | | |
-  `-...-'    |_____\__,_|_| |_|\__,_|_|    \_/  |_|_| |_| |_|
-```
+![LunarVim Demo](./utils/media/lunarvim_logo_dark.png)
 
 [![GitHub
 license](https://img.shields.io/github/license/ChristianChiarulli/LunarVim)](https://github.com/ChristianChiarulli/LunarVim/blob/master/LICENSE)
