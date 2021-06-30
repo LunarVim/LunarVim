@@ -22,8 +22,11 @@ return require("packer").startup(function(use)
     -- Telescope
     use {"nvim-lua/popup.nvim"}
     use {"nvim-lua/plenary.nvim"}
-    use {"nvim-telescope/telescope.nvim"}
-
+    use {
+        "nvim-telescope/telescope.nvim", 
+        config = [[require('lv-telescope')]],    
+        cmd = "Telescope"
+    }
     -- Autocomplete
     use {
         "hrsh7th/nvim-compe",
@@ -290,6 +293,7 @@ return require("packer").startup(function(use)
     use {
         "nvim-telescope/telescope-project.nvim",
         event = "BufRead",
+        after = "telescope.nvim",
         disable = not O.plugin.telescope_project.active
     }
     -- Sane gx for netrw_gx bug
