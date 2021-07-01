@@ -25,31 +25,43 @@ require'lspconfig'.tsserver.setup {
                                                       "jsconfig.json", ".git"),
     settings = {documentFormatting = false},
     handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic
-                                                               .on_publish_diagnostics,
-                                                           {
-            virtual_text = O.lang.tsserver.diagnostics.virtual_text,
-            signs = O.lang.tsserver.diagnostics.signs,
-            underline = O.lang.tsserver.diagnostics.underline,
-            update_in_insert = true
+        ["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics, {
+                virtual_text = O.lang.tsserver.diagnostics.virtual_text,
+                signs = O.lang.tsserver.diagnostics.signs,
+                underline = O.lang.tsserver.diagnostics.underline,
+                update_in_insert = true
 
-        })
+            })
     }
 }
 
 if O.lang.tsserver.autoformat then
     require('lv-utils').define_augroups({
         _javascript_autoformat = {
-            'BufWritePre', '*.js', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            {
+
+                'BufWritePre', '*.js',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            }
         },
         _javascriptreact_autoformat = {
-            'BufWritePre', '*.jsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            {
+                'BufWritePre', '*.jsx',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            }
         },
         _typescript_autoformat = {
-            'BufWritePre', '*.ts', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            {
+                'BufWritePre', '*.ts',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            }
         },
         _typescriptreact_autoformat = {
-            'BufWritePre', '*.tsx', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            {
+                'BufWritePre', '*.tsx',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            }
         }
     })
 end

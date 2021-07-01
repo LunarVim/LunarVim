@@ -9,7 +9,7 @@ require'lspconfig'.gopls.setup {
 if O.lang.go.autoformat then
     require('lv-utils').define_augroups({
         _go_format = {
-            'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1000)'
+            {'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
         },
         _go = {
             -- Go generally requires Tabs instead of spaces.
