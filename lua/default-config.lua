@@ -144,12 +144,13 @@ O = {
             }
         },
         clang = {
-            active = false,
+            active = false, -- make this true for activating clang
             diagnostics = {
                 virtual_text = {spacing = 0, prefix = ""},
                 signs = true,
                 underline = true
-            }
+            },
+            autoformat = false -- make this true for autoformatting.
         },
         ruby = {
             active = false,
