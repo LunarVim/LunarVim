@@ -266,6 +266,11 @@ if O.plugin.zen.active then
                             {noremap = true, silent = true})
     mappings["z"] = "Zen"
 end
+if O.plugin.lazygit.active then
+    vim.api.nvim_set_keymap("n", "<leader>gg", ":LazyGit<CR>",
+                            {noremap = true, silent = true})
+    mappings["gg"] = "LazyGit"
+end
 if O.plugin.telescope_project then
     -- open projects
     vim.api.nvim_set_keymap('n', '<leader>p',
