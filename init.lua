@@ -7,7 +7,6 @@ require('lv-utils')
 require('keymappings')
 require('lv-galaxyline')
 require('lv-treesitter')
-require('lv-autopairs')
 require('lv-which-key')
 
 -- LSP

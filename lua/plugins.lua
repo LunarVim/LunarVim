@@ -47,7 +47,6 @@ return require("packer").startup(function(use)
     -- Autocomplete
     use {
         "hrsh7th/nvim-compe",
-        event = "InsertEnter",
         config = function()
             require("lv-compe").config()
         end
@@ -80,7 +79,9 @@ return require("packer").startup(function(use)
     use {"folke/which-key.nvim"}
 
     -- Autopairs
-    use {"windwp/nvim-autopairs"}
+    use {"windwp/nvim-autopairs",
+        config = function() require'lv-autopairs' end
+    }
 
     -- Comments
     use {
