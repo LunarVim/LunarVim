@@ -1,9 +1,11 @@
 require('default-config')
 vim.cmd('luafile ' .. CONFIG_PATH .. '/lv-config.lua')
+if require('lv-utils').file_exists(CONFIG_PATH .. '/lv-settings.lua') then
+    vim.cmd('luafile' .. CONFIG_PATH .. '/lv-settings.lua')
+end
 require('settings')
 require('plugins')
 require('colorscheme')
-require('lv-utils')
 require('keymappings')
 require('lv-galaxyline')
 require('lv-treesitter')

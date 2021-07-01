@@ -35,6 +35,7 @@
   * [Home screen](#home-screen)
   * [Leader and Whichkey](#leader-and-whichkey)
   * [Important Configuration files](#important-configuration-files)
+  * [Customize Configurations](#customize-configurations)
 - [Install your own plugins](#install-your-own-plugins)
   * [An example installation of the colorizer plugin](#an-example-installation-of-the-colorizer-plugin)
   * [Finding plugins](#finding-plugins)
@@ -259,11 +260,54 @@ provided keymappings file. Follow the lua guide available
 
 ## Important Configuration files
 
-| Path                                | Description                |
-|-------------------------------------|----------------------------|
-| \~/.config/nvim/lv-settings.lua     | The main settings file     |
-| \~/.config/nvim/lua/keymappings.lua | Key bindings               |
-| \~/.config/nvim/lua/plugins.lua     | Add or remove plugins here |
+| Path                                | Description                 |
+|-------------------------------------|-----------------------------|
+| \~/.config/nvim/lv-config.lua       | The main settings file      |
+| \~/.config/nvim/lv-settings.lua     | Your own customized settings|
+| \~/.config/nvim/lua/keymappings.lua | Key bindings                |
+| \~/.config/nvim/lua/plugins.lua     | Add or remove plugins here  |
+
+## Customize Configurations
+
+If you want to tweak some of the settings, change `lv-settings` file to keep
+your repository clean and up to date with master. An example settings would be:
+```lua
+-- General
+O.timeoutlen = 500
+O.extras = true
+O.wrap_lines = true
+
+-- Languages
+O.lang.go.active=true
+O.lang.rust.active = true
+O.lang.sh.active = true
+O.lang.sh.linter = 'shellcheck'
+O.lang.sh.formatter = 'shfmt'
+O.lang.cmake.active = true
+
+-- Plugins
+O.plugin.hop.active = true
+O.plugin.matchup.active = true
+O.plugin.colorizer.active = true
+O.plugin.symbol_outline.active = true
+O.plugin.trouble.active = true
+O.plugin.floatterm.active = true
+O.plugin.telescope_fzy.active=true
+O.plugin.telescope_project.active=true
+O.plugin.lsp_colors.active=true
+O.plugin.gitlinker.active = true
+O.plugin.lazygit.active=true
+O.plugin.bracey.active=true
+O.plugin.zen.active = true
+O.plugin.todo_comments.active =true
+
+-- Keybindings
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+map('n', 'T', '<CMD>lua require("FTerm").toggle()<CR>', opts)
+map('t', 'T', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
+```
 
 # Install your own plugins
 
