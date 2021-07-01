@@ -100,14 +100,23 @@ local function documentHighlight(client, bufnr)
 end
 local lsp_config = {}
 
-function lsp_config.common_on_attach(client, bufnr)
-    documentHighlight(client, bufnr)
+if O.document_highlight then
+    function lsp_config.common_on_attach(client, bufnr)
+        documentHighlight(client, bufnr)
+    end
 end
 
 function lsp_config.tsserver_on_attach(client, bufnr)
     lsp_config.common_on_attach(client, bufnr)
     client.resolved_capabilities.document_formatting = false
 end
+
+
+require('lv-utils').define_augroups({
+    _general_lsp = {
+        {'FileType', 'lspinfo', 'nnoremap <silent> <buffer> q :q<CR>'},
+    }
+})
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches

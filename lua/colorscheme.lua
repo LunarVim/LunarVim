@@ -1,3 +1,2 @@
-vim.cmd('let g:nvcode_termcolors=256')
-
+-- TODO is there a lua native way to do this?
 vim.cmd('colorscheme ' .. O.colorscheme)
