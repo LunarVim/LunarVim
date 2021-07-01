@@ -271,7 +271,7 @@ if O.plugin.lazygit.active then
                             {noremap = true, silent = true})
     mappings["gg"] = "LazyGit"
 end
-if O.plugin.telescope_project then
+if O.plugin.telescope_project.active then
     -- open projects
     vim.api.nvim_set_keymap('n', '<leader>p',
                             ":lua require'telescope'.extensions.project.project{}<CR>",
