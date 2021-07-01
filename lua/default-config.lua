@@ -58,6 +58,7 @@ O = {
         gitlinker = {active = false},
         lazygit = {active = false},
         octo = {active = false},
+        lush = {active = false},
         diffview = {active = false},
         bracey = {active = false},
         telescope_project = {active = false}
