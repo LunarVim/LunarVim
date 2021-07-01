@@ -61,7 +61,8 @@ O = {
         lush = {active = false},
         diffview = {active = false},
         bracey = {active = false},
-        telescope_project = {active = false}
+        telescope_project = {active = false},
+        dap_install = {active = false}
 
     },
 

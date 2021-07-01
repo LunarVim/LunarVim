@@ -399,6 +399,12 @@ return require("packer").startup(function(use)
         run = 'npm install --prefix server',
         disable = not O.plugin.bracey.active
     }
+    -- Debugger management
+    use {
+        'Pocco81/DAPInstall.nvim',
+        event = "BufRead",
+        disable = not O.plugin.dap_install.active
+    }
 
     -- LANGUAGE SPECIFIC GOES HERE
 
