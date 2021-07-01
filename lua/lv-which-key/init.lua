@@ -61,12 +61,12 @@ vim.api.nvim_set_keymap('n', '<Leader>n', ':let @/=""<CR>',
 -- explorer
 
 -- TODO this introduces some bugs unfortunately
--- vim.api.nvim_set_keymap('n', '<Leader>e',
---                         ":lua require'lv-nvimtree'.toggle_tree()<CR>",
---                         {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>e',
-                        ":NvimTreeToggle<CR>",
+                        ":lua require'lv-nvimtree'.toggle_tree()<CR>",
                         {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('n', '<Leader>e',
+--                         ":NvimTreeToggle<CR>",
+--                         {noremap = true, silent = true})
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>',
@@ -221,6 +221,8 @@ local mappings = {
         f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
         h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Doc"},
         i = {"<cmd>LspInfo<cr>", "Info"},
+        j = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic"},
+        k = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic"},
         l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
         L = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
         p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
@@ -285,6 +287,11 @@ if O.plugin.zen.active then
     vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>",
                             {noremap = true, silent = true})
     mappings["z"] = "Zen"
+end
+if O.plugin.lazygit.active then
+    vim.api.nvim_set_keymap("n", "<leader>gg", ":LazyGit<CR>",
+                            {noremap = true, silent = true})
+    mappings["gg"] = "LazyGit"
 end
 if O.plugin.telescope_project then
     -- open projects

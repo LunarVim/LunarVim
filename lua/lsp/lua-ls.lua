@@ -19,9 +19,23 @@ require'lspconfig'.sumneko_lua.setup {
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                },
                 maxPreload = 10000
             }
         }
     }
 }
+if O.lang.lua.autoformat then
+    require('lv-utils').define_augroups({
+        _lua_autoformat = {
+            {
+                'BufWritePre', '*.lua',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            }
+        }
+    })
+end
+

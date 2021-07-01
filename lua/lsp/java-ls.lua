@@ -39,3 +39,12 @@ require'lspconfig'.jdtls.setup {
 --     root_dir = require('jdtls.setup').find_root({'build.gradle', 'pom.xml', '.git'}),
 --     init_options = {bundles = bundles}
 -- })
+
+-- TODO setup autoformat stuff later
+    -- _java = {
+    --     -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
+    --     {
+    --         'FileType', 'java',
+    --         'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'
+    --     }
+    -- }
