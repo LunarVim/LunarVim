@@ -262,7 +262,7 @@ end
 
 if O.plugin.gitlinker.active then mappings["gy"] = "Gitlink" end
 if O.plugin.zen.active then
-    vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>",
+    vim.api.nvim_set_keymap("n", "<leader>z", ":TZAtaraxis<CR>",
                             {noremap = true, silent = true})
     mappings["z"] = "Zen"
 end

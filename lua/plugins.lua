@@ -151,8 +151,9 @@ return require("packer").startup(function(use)
     }
     -- Zen Mode
     use {
-        "folke/zen-mode.nvim",
-        cmd = "ZenMode",
+        "Pocco81/TrueZen.nvim",
+        opt = true,
+        cmd = {"TZAtaraxis","TZMinimalist", "TZFocus"},
         -- event = "BufRead",
         config = function()
             require('lv-zen').config()
