@@ -699,7 +699,7 @@ rm -R ~/.cache/nvim
 
 **LOW PRIORITY**
 
-- vim vsnips dir should be co-located with config
+- vim luasnips dir should be co-located with config
 - list all binaries needed for formatters and linters (one day add in
   wiki)
 - Implement what I can from this java config:
