@@ -1,3 +1,52 @@
+local python_arguments = {}
+
+-- TODO replace with path argument
+local flake8 = {
+    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
+    lintStdin = true,
+    lintFormats = {"%f:%l:%c: %m"}
+}
+
+local isort = {formatCommand = "isort --quiet -", formatStdin = true}
+
+local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
+local black = {formatCommand = "black --quiet -", formatStdin = true}
+
+if O.lang.python.linter == 'flake8' then table.insert(python_arguments, flake8) end
+
+if O.lang.python.isort then table.insert(python_arguments, isort) end
+
+if O.lang.python.formatter == 'yapf' then
+    table.insert(python_arguments, yapf)
+elseif O.lang.python.formatter == 'black' then
+    table.insert(python_arguments, black)
+end
+
+require"lspconfig".efm.setup {
+    -- init_options = {initializationOptions},
+    cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
+    init_options = {documentFormatting = true, codeAction = false},
+    filetypes = {"lua", "python", "javascriptreact", "javascript", "typescript","typescriptreact","sh", "html", "css", "yaml", "markdown", "vue"},
+    settings = {
+        rootMarkers = {".git/", "requirements.txt"},
+        languages = {
+            python = python_arguments,
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- npm i -g pyright
 require'lspconfig'.pyright.setup {
     cmd = {

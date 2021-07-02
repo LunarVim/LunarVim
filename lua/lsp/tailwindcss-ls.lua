@@ -1,3 +1,4 @@
+-- TODO what is a tailwindcss filetype
 local lspconfig = require 'lspconfig'
 
 lspconfig.tailwindcss.setup {

@@ -1,62 +1,4 @@
 -- Example configuations here: https://github.com/mattn/efm-langserver
--- TODO this file needs to be refactored eache lang should be it's own file
--- python
-local python_arguments = {}
-
--- TODO replace with path argument
-local flake8 = {
-    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
-    lintStdin = true,
-    lintFormats = {"%f:%l:%c: %m"}
-}
-
-local isort = {formatCommand = "isort --quiet -", formatStdin = true}
-
-local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
-local black = {formatCommand = "black --quiet -", formatStdin = true}
-
-if O.lang.python.linter == 'flake8' then table.insert(python_arguments, flake8) end
-
-if O.lang.python.isort then table.insert(python_arguments, isort) end
-
-if O.lang.python.formatter == 'yapf' then
-    table.insert(python_arguments, yapf)
-elseif O.lang.python.formatter == 'black' then
-    table.insert(python_arguments, black)
-end
-
--- lua
-local lua_arguments = {}
-
-local luaFormat = {
-    formatCommand = "lua-format -i --no-keep-simple-function-one-line --column-limit=80",
-    formatStdin = true
-}
-
-local lua_fmt = {
-    formatCommand = "luafmt --indent-count 2 --line-width 120 --stdin",
-    formatStdin = true
-}
-
-if O.lang.lua.formatter == 'lua-format' then
-  table.insert(lua_arguments, luaFormat)
-elseif O.lang.lua.formatter == 'lua-fmt' then
-  table.insert(lua_arguments, lua_fmt)
-end
-
--- sh
-local sh_arguments = {}
-
-local shfmt = {formatCommand = 'shfmt -ci -s -bn', formatStdin = true}
-
-local shellcheck = {
-    LintCommand = 'shellcheck -f gcc -x',
-    lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
-}
-
-if O.lang.sh.formatter == 'shfmt' then table.insert(sh_arguments, shfmt) end
-
-if O.lang.sh.linter == 'shellcheck' then table.insert(sh_arguments, shellcheck) end
 
 -- tsserver/web javascript react, vue, json, html, css, yaml
 local prettier = {formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true}
@@ -96,9 +38,6 @@ require"lspconfig".efm.setup {
     settings = {
         rootMarkers = {".git/"},
         languages = {
-            python = python_arguments,
-            lua = lua_arguments,
-            sh = sh_arguments,
             javascript = tsserver_args,
             javascriptreact = tsserver_args,
 			typescript = tsserver_args,

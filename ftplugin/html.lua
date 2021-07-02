@@ -7,3 +7,4 @@ require'lspconfig'.html.setup {
     on_attach = require'lsp'.common_on_attach,
     capabilities = capabilities
 }
+vim.cmd("setl ts=2 sw=2")
