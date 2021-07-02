@@ -79,7 +79,7 @@ local theme = lush(function()
         QuickFixLine {CursorLine},
         PmenuSbar {bg = c.bg2.li(15), fg = "NONE", gui = "NONE"},
         PmenuThumb {bg = c.white, fg = "NONE", gui = "NONE"},
-        MatchParen {CursorLine, fg = "NONE", gui = "underline"},
+        MatchParen {CursorLine, fg = "NONE", gui = "NONE"},
         Cursor {fg = "NONE", bg = "NONE", gui = "reverse"}, 
         lCursor {Cursor},
         CursorIM {Cursor}, 
@@ -226,9 +226,9 @@ local theme = lush(function()
         LspDiagnosticsInformation {LspDiagnosticsSignInformation},
         LspDiagnosticsHint {LspDiagnosticsSignHint},
 
-        LspReferenceText {bg = c.bg1, fg = "NONE", gui = "underline"},
-        LspReferenceRead {bg = c.bg1, fg = "NONE", gui = "underline"},
-        LspReferenceWrite {bg = c.bg1, fg = "NONE", gui = "underline"},
+        -- LspReferenceText {bg = c.bg1, fg = "NONE", gui = "underline"},
+        -- LspReferenceRead {bg = c.bg1, fg = "NONE", gui = "underline"},
+        -- LspReferenceWrite {bg = c.bg1, fg = "NONE", gui = "underline"},
 
         LspDiagnosticsUnderlineError {fg = "NONE", gui = "underline", sp = c.red},
         LspDiagnosticsUnderlineWarning {fg = "NONE", gui = "underline", sp = c.yellow}, 
