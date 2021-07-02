@@ -87,6 +87,7 @@ O = {
         dart = {
             sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'
         },
+        deno = {active = false},
         lua = {
             -- @usage can be 'lua-format'
             formatter = '',

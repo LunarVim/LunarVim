@@ -293,5 +293,10 @@ if O.lang.latex.active then
     }
 end
 
+if O.lang.deno.active then
+    mappings["l"]["c"] = {"<cmd>DenolsCache<cr>", "DenolsCache"}
+end
+
+
 local wk = require("which-key")
 wk.register(mappings, opts)
