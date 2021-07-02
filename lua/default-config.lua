@@ -38,6 +38,7 @@ O = {
         numb = {active = false},
         zen = {active = false},
         ts_playground = {active = false},
+        ts_fold = {active = false},
         indent_line = {active = false},
         ts_context_commentstring = {active = false},
         symbol_outline = {active = false},

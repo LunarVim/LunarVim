@@ -27,6 +27,7 @@ O.plugin.matchup.active = false
 O.plugin.colorizer.active = false
 O.plugin.numb.active = false
 O.plugin.ts_playground.active = false
+O.plugin.ts_fold.active = false
 O.plugin.indent_line.active = false
 O.plugin.gitlinker.active = false
 O.plugin.zen.active = false
