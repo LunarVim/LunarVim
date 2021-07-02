@@ -406,6 +406,15 @@ return require("packer").startup(function(use)
         event = "BufRead",
         disable = not O.plugin.dap_install.active
     }
+    -- Surround
+    use {
+        'blackCauldron7/surround.nvim',
+        event = "BufRead",
+        config = function()
+          require "surround".setup {}
+        end,
+        disable = not O.plugin.surround.active
+    }
 
     -- LANGUAGE SPECIFIC GOES HERE
 
