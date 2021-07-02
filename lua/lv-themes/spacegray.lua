@@ -201,10 +201,10 @@ local theme = lush(function()
         -- use these groups, or use their own. Consult your LSP client's
         -- documentation.
 
-        LspDiagnosticsDefaultError {bg = "NONE", fg = c.error_red, gui = "underline"},
-        LspDiagnosticsDefaultWarning {bg = "NONE", fg = c.warning_orange, gui = "underline"},
-        LspDiagnosticsDefaultInformation {bg = "NONE", fg = c.info_yellow, gui = "underline"},
-        LspDiagnosticsDefaultHint {bg = "NONE", fg = c.hint_blue, gui = "underline"},
+        LspDiagnosticsDefaultError {bg = "NONE", fg = c.error_red, gui = "NONE"},
+        LspDiagnosticsDefaultWarning {bg = "NONE", fg = c.warning_orange, gui = "NONE"},
+        LspDiagnosticsDefaultInformation {bg = "NONE", fg = c.info_yellow, gui = "NONE"},
+        LspDiagnosticsDefaultHint {bg = "NONE", fg = c.hint_blue, gui = "NONE"},
 
         LspDiagnosticsVirtualTextError {LspDiagnosticsDefaultError},
         LspDiagnosticsVirtualTextWarning {LspDiagnosticsDefaultWarning},

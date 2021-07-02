@@ -127,10 +127,10 @@ highlight TSField guifg=#C7C8D1 guibg=NONE guisp=NONE gui=NONE blend=NONE
 highlight Search guifg=#C7C8D1 guibg=#67899E guisp=NONE gui=NONE blend=NONE
 highlight! link TSFunction Function
 highlight! link TSFuncBuiltin Function
-highlight LspDiagnosticsDefaultHint guifg=#4DC1FF guibg=NONE guisp=NONE gui=underline blend=NONE
-highlight LspDiagnosticsDefaultError guifg=#F44848 guibg=NONE guisp=NONE gui=underline blend=NONE
-highlight LspDiagnosticsDefaultWarning guifg=#FF8800 guibg=NONE guisp=NONE gui=underline blend=NONE
-highlight LspDiagnosticsDefaultInformation guifg=#FFCC66 guibg=NONE guisp=NONE gui=underline blend=NONE
+highlight LspDiagnosticsDefaultHint guifg=#4DC1FF guibg=NONE guisp=NONE gui=NONE blend=NONE
+highlight LspDiagnosticsDefaultError guifg=#F44848 guibg=NONE guisp=NONE gui=NONE blend=NONE
+highlight LspDiagnosticsDefaultWarning guifg=#FF8800 guibg=NONE guisp=NONE gui=NONE blend=NONE
+highlight LspDiagnosticsDefaultInformation guifg=#FFCC66 guibg=NONE guisp=NONE gui=NONE blend=NONE
 highlight! link LspDiagnosticsVirtualTextHint LspDiagnosticsDefaultHint
 highlight! link LspDiagnosticsVirtualTextError LspDiagnosticsDefaultError
 highlight! link LspDiagnosticsVirtualTextWarning LspDiagnosticsDefaultWarning
