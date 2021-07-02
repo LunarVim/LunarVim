@@ -17,6 +17,7 @@ O = {
     extras = false,
     ignore_case = true,
     smart_case = true,
+    lushmode = false,
 
     -- @usage pass a table with your desired languages
     treesitter = {
