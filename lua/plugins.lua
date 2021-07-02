@@ -414,4 +414,11 @@ return require("packer").startup(function(use)
         ft = {"elixir", "eelixir"},
         disable = not O.lang.elixir.active
     }
+
+    -- loads user-defined custom script, lv--custom
+    if O.custom_hooks then
+        -- use the plugins callback to install custom plugins
+        O.hooks.plugins(use, {O=O})
+    end
+
 end)

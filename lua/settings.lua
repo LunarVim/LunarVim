@@ -1,3 +1,7 @@
+if O.custom_hooks then
+    O.hooks.pre_settings({O=O})
+end
+
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
@@ -48,3 +52,7 @@ vim.o.guifont = "FiraCode Nerd Font:h17"
 -- vim.o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"
 vim.o.ignorecase = O.ignore_case
 vim.o.smartcase = O.smart_case
+
+if O.custom_hooks then
+    O.hooks.post_settings({O=O})
+end

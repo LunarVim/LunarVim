@@ -6,6 +6,7 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+
 -- general
 O.auto_complete = true
 O.colorscheme = 'lunar'
@@ -109,3 +110,13 @@ O.lang.rust.autoformat = true
 -- user defined plugin config
 -- custom settings
 
+
+O.custom_hooks = true
+if O.custom_hooks then
+    local ok, hooks = pcall(require, 'lv--custom')
+    if ok then
+        O.hooks = hooks
+        -- allows isolated configuration
+        hooks.configure({O=O})
+    end
+end
