@@ -34,12 +34,19 @@ M.config = function()
         }
         -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
     }
+    vim.cmd(
+        "let g:dashboard_session_directory = $HOME..'/.config/nvim/.sessions'")
+    vim.cmd(
+        "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))")
+
+    vim.api.nvim_exec([[
+    let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' plugins']
+]], false)
 
     -- file_browser = {description = {' File Browser'}, command = 'Telescope find_files'},
 
-
     -- vim.g.dashboard_session_directory = CACHE_PATH..'/session'
-    vim.g.dashboard_custom_footer = O.dashboard.footer
+    -- vim.g.dashboard_custom_footer = O.dashboard.footer
 end
 
 require('lv-utils').define_augroups({
