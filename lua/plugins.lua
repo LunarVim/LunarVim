@@ -45,6 +45,15 @@ return require("packer").startup(function(use)
         config = [[require('lv-telescope')]],
         cmd = "Telescope"
     }
+    -- Snap
+    use {
+        "camspiers/snap",
+        rocks = "fzy",
+        config = function()
+          require("lv-snap").config()
+        end,
+        disable = not O.plugin.snap.active,
+    }
     -- Autocomplete
     use {
         "hrsh7th/nvim-compe",
