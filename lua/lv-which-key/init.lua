@@ -68,9 +68,14 @@ vim.api.nvim_set_keymap('n', '<Leader>e',
 --                         ":NvimTreeToggle<CR>",
 --                         {noremap = true, silent = true})
 
--- telescope
-vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>',
-                        {noremap = true, silent = true})
+-- telescope or snap
+if O.plugin.snap.active then
+    vim.api.nvim_set_keymap('n', '<Leader>f', ':Snap find_files<CR>',
+                            {noremap = true, silent = true})
+else
+    vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>',
+                            {noremap = true, silent = true})
+end
 
 -- dashboard
 vim.api.nvim_set_keymap('n', '<Leader>;', ':Dashboard<CR>',
@@ -98,7 +103,7 @@ local mappings = {
     b = {
         name = "Buffers",
         j = {"<cmd>BufferPick<cr>", "jump to buffer"},
-        f = {"<cmd>Telescope buffers<cr>", "Find buffer"},
+        f = {O.plugin.snap.active and "<cmd>Snap buffers<cr>" or "<cmd>Telescope buffers<cr>", "Find buffer"},
         w = {"<cmd>BufferWipeout<cr>", "wipeout buffer"},
         e = {
             "<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer"
@@ -226,13 +231,13 @@ local mappings = {
         --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
         --     "Workspace Diagnostics"
         -- },
-        f = {"<cmd>Telescope find_files<cr>", "Find File"},
+        f = {O.plugin.snap.active and "<cmd>Snap find_files<cr>" or "<cmd>Telescope find_files<cr>", "Find File"},
         h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
         -- m = {"<cmd>Telescope marks<cr>", "Marks"},
         M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
-        r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
+        r = {O.plugin.snap.active and "<cmd>Snap oldfiles<cr>" or "<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
-        t = {"<cmd>Telescope live_grep<cr>", "Text"}
+        t = {O.plugin.snap.active and "<cmd>Snap live_grep<cr>" or "<cmd>Telescope live_grep<cr>", "Text"}
     },
     S = {
         name = "Session",
