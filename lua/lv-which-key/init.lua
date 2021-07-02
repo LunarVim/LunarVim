@@ -245,6 +245,7 @@ local mappings = {
     }
 }
 
+
 if O.plugin.spectre.active then
     mappings['r'] = {
         name = "Replace",
@@ -312,6 +313,7 @@ if O.lushmode then
     mappings["L"] = {
         name = "+Lush",
         l = {":Lushify<cr>", "Lushify"},
+        x = {":lua require('lush').export_to_buffer(require('lush_theme.cool_name'))", "Lush Export"},
         t = {":LushRunTutorial<cr>", "Lush Tutorial"},
         q = {":LushRunQuickstart<cr>", "Lush Quickstart"}
     }

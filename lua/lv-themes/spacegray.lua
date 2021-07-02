@@ -18,7 +18,7 @@ local theme = lush(function()
         info_yellow = hsl("#ffcc66"),
         hint_blue = hsl("#4fc1ff"),
 
-        red = hsl("#f07178"),
+        red = hsl("#b04b57"),
 
         blue = hsl("#5486c0"),
         gray_blue = hsl("#66899d"),

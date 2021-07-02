@@ -8,7 +8,7 @@ an executable
 ]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
 O.auto_complete = true
-O.colorscheme = 'lunar'
+O.colorscheme = 'spacegray'
 O.auto_close_tree = 0
 O.wrap_lines = false
 O.timeoutlen = 100
@@ -17,6 +17,7 @@ O.extras = false
 O.leader_key = ' '
 O.ignore_case = true
 O.smart_case = true
+O.lushmode = false
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.hop.active = false
