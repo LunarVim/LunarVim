@@ -118,5 +118,9 @@ if O.custom_hooks then
         O.hooks = hooks
         -- allows isolated configuration
         hooks.configure({O=O})
+    else
+        -- was unable to load hoooks, disable it altogether
+        O.custom_hooks = false
+        print('error loading custom hooks, hooks disabled')
     end
 end
