@@ -2,7 +2,8 @@ require('default-config')
 vim.cmd('luafile ' .. CONFIG_PATH .. '/lv-config.lua')
 require('settings')
 require('plugins')
-require('colorscheme')
+vim.g.colors_name = O.colorscheme
+vim.g.syntax = true
 require('lv-utils')
 require('keymappings')
 require('lv-galaxyline')
