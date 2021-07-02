@@ -1,2 +1,2 @@
--- TODO is there a lua native way to do this?
-vim.cmd('colorscheme ' .. O.colorscheme)
+vim.g.colors_name = O.colorscheme
+vim.g.syntax = true
