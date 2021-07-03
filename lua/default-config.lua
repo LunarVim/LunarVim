@@ -188,7 +188,8 @@ O = {
             formatter = '',
             autoformat = false,
             virtual_text = true
-        }
+        },
+        zig = {}
 
     },
 
