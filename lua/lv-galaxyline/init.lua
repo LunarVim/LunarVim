@@ -103,7 +103,7 @@ table.insert(gls.left, {
         highlight = {colors.red, colors.bg}
     }
 })
-print(vim.fn.getbufvar(0, 'ts'))
+-- print(vim.fn.getbufvar(0, 'ts'))
 vim.fn.getbufvar(0, 'ts')
 
 table.insert(gls.left, {
@@ -189,13 +189,13 @@ local get_lsp_client = function (msg)
     for _,client in ipairs(clients) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, buf_ft) ~=1 then
-            print(client.name)
+            -- print(client.name)
             if lsps == "" then
-                print("first", lsps)
+                -- print("first", lsps)
                 lsps = client.name
             else
                 lsps = lsps .. ", " .. client.name
-                print("more", lsps)
+                -- print("more", lsps)
             end
         end
     end
