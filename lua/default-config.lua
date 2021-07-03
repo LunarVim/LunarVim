@@ -145,9 +145,9 @@ O = {
                 virtual_text = {spacing = 0, prefix = ""},
                 signs = true,
                 underline = true,
-                cross_file_rename = true,
-                header_insertion = 'never'
-            }
+            },
+            cross_file_rename = true,
+            header_insertion = 'never'
         },
         ruby = {
             diagnostics = {
