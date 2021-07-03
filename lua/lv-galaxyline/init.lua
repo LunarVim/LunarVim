@@ -103,7 +103,7 @@ table.insert(gls.left, {
         highlight = {colors.red, colors.bg}
     }
 })
-print(vim.fn.getbufvar(0, 'ts'))
+-- print(vim.fn.getbufvar(0, 'ts'))
 vim.fn.getbufvar(0, 'ts')
 
 table.insert(gls.left, {
@@ -178,9 +178,38 @@ table.insert(gls.right, {
     }
 })
 
+local get_lsp_client = function (msg)
+    msg = msg or "No Active LSP Client"
+    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+        return msg
+    end
+    local lsps = ""
+    for _,client in ipairs(clients) do
+        local filetypes = client.config.filetypes
+        if filetypes and vim.fn.index(filetypes, buf_ft) ~=1 then
+            -- print(client.name)
+            if lsps == "" then
+                -- print("first", lsps)
+                lsps = client.name
+            else
+                lsps = lsps .. ", " .. client.name
+                -- print("more", lsps)
+            end
+        end
+    end
+    if lsps == "" then
+        return msg
+    else
+        return lsps
+    end
+end
+
+
 table.insert(gls.right, {
     ShowLspClient = {
-        provider = 'GetLspClient',
+        provider = get_lsp_client,
         condition = function()
             local tbl = {['dashboard'] = true, [' '] = true}
             if tbl[vim.bo.filetype] then return false end
