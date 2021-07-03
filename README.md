@@ -23,16 +23,8 @@
 
 Make sure you have the newest version of Neovim (0.5).
 
-Stable Version:
-
 ``` bash
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/stable/utils/installer/install.sh)
-```
-
-Rolling Version:
-
-``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
 ## Installing LSP for your language
