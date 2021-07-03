@@ -84,7 +84,6 @@ O.lang.go.autoformat = true
 O.lang.rust.autoformat = true
 
 -- clang
-O.lang.clang.active = false -- Set to true to enable clang support in C/C++ files.
 O.lang.clang.autoformat = false -- Set to true to enable auto-format in C/C++ files.
 
 
