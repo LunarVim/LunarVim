@@ -19,3 +19,13 @@ require'lspconfig'.clangd.setup {
         })
     }
 }
+
+if O.lang.clang.autoformat then
+    require('lv-utils').define_augroups({
+      _clang_autoformat = {
+      {
+        'BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil,1000)'
+
+      }
+    } })
+end

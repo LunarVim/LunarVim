@@ -149,7 +149,8 @@ O = {
                 underline = true,
             },
             cross_file_rename = true,
-            header_insertion = 'never'
+            header_insertion = 'never',
+            autoformat = true
         },
         ruby = {
             diagnostics = {
