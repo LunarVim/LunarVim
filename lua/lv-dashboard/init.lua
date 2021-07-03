@@ -30,7 +30,7 @@ M.config = function()
         },
         f = {
             description = {'  Neovim Config Files'},
-            command = 'lua require(\'telescope.builtin\').find_files({search_dirs = {"~/.config/nvim"}})'
+            command = 'Telescope find_files cwd=' .. CONFIG_PATH
         }
         -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
     }
