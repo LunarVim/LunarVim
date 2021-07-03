@@ -1,8 +1,11 @@
 -- better window movement
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
+--- only when tmux-navigator is not installed, since it defines the same keymappings
+if not O.plugin.tmux_navigator.active then
+    vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
+    vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {silent = true})
+    vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
+    vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
+end
 
 -- TODO fix this
 -- Terminal window navigation

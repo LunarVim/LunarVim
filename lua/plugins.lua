@@ -428,4 +428,10 @@ return require("packer").startup(function(use)
 
     -- Elixir
     use {"elixir-editors/vim-elixir", ft = {"elixir", "eelixir", "euphoria3"}}
+
+    -- Tmux navigator
+    use {
+        'christoomey/vim-tmux-navigator',
+        disable = not O.plugin.tmux_navigator.active
+    }
 end)
