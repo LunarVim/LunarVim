@@ -221,7 +221,6 @@ return require("packer").startup(function(use)
 
     use {
         "lukas-reineke/indent-blankline.nvim",
-        branch = "lua",
         event = "BufRead",
         setup = function()
 
