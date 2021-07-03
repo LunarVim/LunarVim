@@ -82,6 +82,13 @@ O.lang.go.autoformat = true
 
 -- rust
 O.lang.rust.autoformat = true
+
+-- clang
+O.lang.clang.active = false -- make this true to enable clang support
+O.lang.clang.autoformat = false -- make this true to enable auto complete in C, C++ files
+
+
+
 -- create custom autocommand field (This would be easy with lua)
 
 -- Turn off relative_numbers
