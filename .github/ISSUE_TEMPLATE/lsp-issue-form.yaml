@@ -31,6 +31,8 @@ body:
         required: true
       - label: I restarted Neovim after running :LspInstall
         required: true
+      - label: I have a valid language configuration (~/.config/nvim/ftplugin/)
+        required: true
       - label: I checked the options (~/.config/nvim/lv-config.lua)
         required: true
       - label: The programs specified by the config are installed
@@ -52,6 +54,7 @@ body:
     attributes:
       label: Relevant log output
       placeholder: |
+        :echo &ft
         :LspInfo
 
         :LspStart <language>
