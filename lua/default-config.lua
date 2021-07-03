@@ -1,6 +1,7 @@
 CONFIG_PATH = vim.fn.stdpath('config')
 DATA_PATH = vim.fn.stdpath('data')
 CACHE_PATH = vim.fn.stdpath('cache')
+TERMINAL = vim.fn.expand('$TERMINAL')
 
 O = {
     auto_close_tree = 0,
@@ -18,6 +19,7 @@ O = {
     ignore_case = true,
     smart_case = true,
     lushmode = false,
+    hl_search = false,
     leader_key = "space";
 
     -- @usage pass a table with your desired languages
@@ -188,8 +190,7 @@ O = {
             formatter = '',
             autoformat = false,
             virtual_text = true
-        },
-        zig = {}
+        }
 
     },
 
