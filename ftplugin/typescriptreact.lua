@@ -66,23 +66,3 @@ if O.lang.tsserver.autoformat then
     })
 end
 vim.cmd("setl ts=2 sw=2")
-
-local nvim_lsp = require'lspconfig'
-local configs = require'lspconfig/configs'
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-configs.emmet_ls = {
-  default_config = {
-    cmd = {'emmet-ls', '--stdio'};
-    filetypes = {'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'};
-    root_dir = function()
-      return vim.loop.cwd()
-    end;
-    settings = {};
-  };
-}
-
-nvim_lsp.emmet_ls.setup{
-  -- on_attach = on_attach;
-}

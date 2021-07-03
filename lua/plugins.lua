@@ -16,6 +16,7 @@ end
 
 packer.init {
   -- compile_path = vim.fn.stdpath('data')..'/site/pack/loader/start/packer.nvim/plugin/packer_compiled.vim',
+  compile_path = require("packer.util").join_paths(vim.fn.stdpath('config'), 'plugin', 'packer_compiled.vim'),
   git = {
     clone_timeout = 300
   },
@@ -220,7 +221,6 @@ return require("packer").startup(function(use)
 
     use {
         "lukas-reineke/indent-blankline.nvim",
-        branch = "lua",
         event = "BufRead",
         setup = function()
 
