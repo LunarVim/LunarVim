@@ -20,6 +20,7 @@ O = {
     smart_case = true,
     lushmode = false,
     hl_search = false,
+    transparent_window = false;
     leader_key = "space";
 
     -- @usage pass a table with your desired languages

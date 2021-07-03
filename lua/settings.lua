@@ -13,7 +13,9 @@ cmd('let &titleold="'..TERMINAL..'"')
 cmd('set inccommand=split')             -- show what you are substituting in real time
 cmd('set iskeyword+=-')                 -- treat dash as a separate word
 cmd('set whichwrap+=<,>,[,],h,l')       -- move to next line with theses keys
-
+if O.transparent_window then
+    cmd('au ColorScheme * hi Normal ctermbg=none guibg=none')
+ end
 
 ---  SETTINGS  ---
 
