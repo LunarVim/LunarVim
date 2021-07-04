@@ -1,0 +1,9 @@
+blank_issues_enabled: true
+
+contact_links:
+  - name: Matrix community
+    url: https://matrix.to/#/+atmachine:matrix
+    about: Please ask and answer questions on Matrix.
+  - name: Discord community
+    url: https://discord.gg/Xb9B4Ny
+    about: Please ask and answer questions on Discord.
