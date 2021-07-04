@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = function()
-require'compe'.setup {
+opt = {
     enabled = O.auto_complete,
     autocomplete = true,
     debug = false,
@@ -33,6 +33,12 @@ require'compe'.setup {
         -- for emoji press : (idk if that in compe tho)
     }
 }
+
+if O.plugin.tabnine.active then
+    opt.source.tabnine = {kind = " ", priority=200, max_reslts=6}
+end
+
+require'compe'.setup(opt)
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
