@@ -148,7 +148,36 @@ O = {
       },
     },
     kotlin = {},
-    latex = {},
+    latex = {
+      filetypes = {'tex', 'bib'},
+      aux_directory = ".",
+      bibtex_formatter = "texlab",
+      diagnostics_delay = 300,
+      formatter_line_length = 80,
+      latex_formatter = "latexindent",
+      diagnostics = {
+        virtual_text = {spacing = 0, prefix = ""},
+        signs = true,
+        underline = true
+      },
+      build = {
+        args = {'-pdf', '-interaction=nonstopmode', '-synctex=1', '%f'},
+        executable = "latexmk",
+        forward_search_after = false,
+        on_save = false
+      },
+      chktex = {
+        on_edit = false,
+        on_open_and_save = false
+      },
+      forward_search = {
+        args = {},
+        executable = ""
+      },
+      latexindent = {
+        modify_line_breaks = false
+        }
+      },
     lua = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
