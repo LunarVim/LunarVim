@@ -296,6 +296,15 @@ return require("packer").startup(function(use)
         end,
         disable = not O.plugin.lsp_rooter.active
     }
+    -- Function signature popup/suggestions
+    use {
+        "ray-x/lsp_signature.nvim",
+        event = "BufRead",
+        config = function()
+            require("lv-lsp_signature").config()
+        end,
+        disable = not O.plugin.lsp_signature.active
+    }
     -- Markdown preview
     use {
         'iamcco/markdown-preview.nvim',

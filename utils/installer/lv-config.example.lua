@@ -31,6 +31,7 @@ O.plugin.ts_playground.active = false
 O.plugin.indent_line.active = false
 O.plugin.gitlinker.active = false
 O.plugin.zen.active = false
+O.plugin.lsp_signature.active = false
 
 -- dashboard
 -- O.dashboard.custom_header = {""}
