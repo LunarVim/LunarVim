@@ -29,6 +29,7 @@ move_old_nvim() {
 #
 # User Interaction
 #
+
 ask_to_install_node() {
 	if which node >/dev/null; then
 		echo "node installed, moving on..."
@@ -58,6 +59,7 @@ ask_to_install_pip() {
 #
 # Node Installation
 #
+
 install_node() {
 	echo "Installing node..."
 	[ "$(uname)" == "Darwin" ] && install_mac_node
@@ -105,6 +107,7 @@ install_gentoo_node() {
 #
 # Pip Installation
 #
+
 install_pip() {
 	echo "Installing pip..."
 	[ "$(uname)" == "Darwin" ] && install_mac_pip
@@ -139,8 +142,9 @@ install_gentoo_pip() {
 }
 
 #
-# Install Components
+# Component Installation
 #
+
 install_pynvim() {
 	if pip3 list | grep pynvim >/dev/null; then
 		echo "pynvim installed, moving on..."
@@ -177,6 +181,7 @@ pip_install_ueberzug() {
 # Extra Package Installation
 #
 # FIXME: this is never called!
+
 install_extra_packages() {
 	[ "$(uname)" == "Darwin" ] && install_mac_extras
 	grep -q "Ubuntu" /etc/os-release && install_ubuntu_extras
@@ -227,8 +232,9 @@ install_gentoo_extras() {
 }
 
 #
-# Config Management
+# NVim Config / Bootstrap
 #
+
 lunarvim_clone_config() {
 	if [ -e "$HOME/.config/nvim/init.lua" ]; then
 		echo 'LunarVim already installed'
