@@ -45,6 +45,14 @@ vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silen
 vim.api.nvim_set_keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
 
+-- Move current line / block with Alt-j/k ala vscode.
+vim.api.nvim_set_keymap('n', '<A-j>', ':m .+1<CR>==', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('x', '<A-j>', ':m \'>+1<CR>gv-gv', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('x', '<A-k>', ':m \'<-2<CR>gv-gv', {noremap = true, silent = true})
+
 -- Better nav for omnicomplete
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
 vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')

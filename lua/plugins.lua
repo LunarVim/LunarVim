@@ -33,8 +33,8 @@ return require("packer").startup(function(use)
 
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {"neovim/nvim-lspconfig"}
-    use {"glepnir/lspsaga.nvim"}
-    use {"kabouzeid/nvim-lspinstall"}
+    use {"glepnir/lspsaga.nvim", cmd = "Lspsaga"}
+    use {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"}
     -- Telescope
     use {"nvim-lua/popup.nvim"}
     use {"nvim-lua/plenary.nvim"}
@@ -56,6 +56,7 @@ return require("packer").startup(function(use)
     -- Autocomplete
     use {
         "hrsh7th/nvim-compe",
+        event = "InsertEnter",
         config = function()
             require("lv-compe").config()
         end
@@ -90,6 +91,8 @@ return require("packer").startup(function(use)
     -- Autopairs
     use {
         "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        after = {"telescope.nvim", "nvim-compe"},
         config = function()
             require 'lv-autopairs'
         end
@@ -222,9 +225,8 @@ return require("packer").startup(function(use)
             vim.g.indentLine_enabled = 1
             vim.g.indent_blankline_char = "▏"
 
-            vim.g.indent_blankline_filetype_exclude = {
-                "help", "terminal", "dashboard"
-            }
+            vim.g.indent_blankline_filetype_exclude =
+                {"help", "terminal", "dashboard"}
             vim.g.indent_blankline_buftype_exclude = {"terminal"}
 
             vim.g.indent_blankline_show_trailing_blankline_indent = false
@@ -419,14 +421,22 @@ return require("packer").startup(function(use)
 
     -- Rust tools
     -- TODO: use lazy loading maybe?
-    use {"simrat39/rust-tools.nvim", disable = not O.lang.rust.rust_tools.active}
+    use {
+        "simrat39/rust-tools.nvim",
+        disable = not O.lang.rust.rust_tools.active
+    }
 
     -- Elixir
     use {"elixir-editors/vim-elixir", ft = {"elixir", "eelixir", "euphoria3"}}
 
-    -- Tmux navigator
     use {
         'christoomey/vim-tmux-navigator',
         disable = not O.plugin.tmux_navigator.active
+    }
+    use {
+        "tzachar/compe-tabnine",
+        run = "./install.sh",
+        requires = "hrsh7th/nvim-compe",
+        disable = not O.plugin.tabnine.active
     }
 end)
