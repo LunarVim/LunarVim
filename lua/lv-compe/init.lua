@@ -4,6 +4,8 @@
 
 local M = {}
 
+vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets"
+
 M.config = function()
 opt = {
     enabled = O.auto_complete,
