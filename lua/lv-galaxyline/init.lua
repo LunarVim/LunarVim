@@ -168,7 +168,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {DiagnosticWarn = {provider = 'DiagnosticWarn', icon = '  ', 
 
 
-        highlight = 'StatusLineLspDiagnosticsWarning'
+    highlight = 'StatusLineLspDiagnosticsWarning'
 
 
 }})

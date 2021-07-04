@@ -22,6 +22,4 @@ function lv_utils.define_augroups(definitions) -- {{{1
     end
 end
 
-
 return lv_utils
-

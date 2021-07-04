@@ -33,14 +33,14 @@ vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      prefix = "",
-      spacing = 0,
-    },
-    signs = true,
-    underline = true,
-  }
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = {
+            prefix = "⎨",
+            spacing = 0,
+        },
+        signs = true,
+        underline = true,
+    }
 )
 
 -- symbols for autocomplete
@@ -84,15 +84,15 @@ local function documentHighlight(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(
             [[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
+            hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
+            hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
+            hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+            augroup lsp_document_highlight
+            autocmd! * <buffer>
+            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+            augroup END
+            ]],
             false
         )
     end

@@ -41,11 +41,11 @@ require("which-key").setup {
 -- Set leader
 if O.leader_key == ' ' or O.leader_key == 'space' then
     vim.api.nvim_set_keymap('n', '<Space>', '<NOP>',
-                            {noremap = true, silent = true})
+        {noremap = true, silent = true})
     vim.g.mapleader = ' '
 else
     vim.api.nvim_set_keymap('n', O.leader_key, '<NOP>',
-                            {noremap = true, silent = true})
+        {noremap = true, silent = true})
     vim.g.mapleader = O.leader_key
 end
 
@@ -60,14 +60,14 @@ local opts = {
 
 -- no hl
 vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>',
-                        {noremap = true, silent = true})
+    {noremap = true, silent = true})
 
 -- explorer
 
 -- TODO this introduces some bugs unfortunately
 vim.api.nvim_set_keymap('n', '<Leader>e',
-                        ":lua require'lv-nvimtree'.toggle_tree()<CR>",
-                        {noremap = true, silent = true})
+    ":lua require'lv-nvimtree'.toggle_tree()<CR>",
+{noremap = true, silent = true})
 -- vim.api.nvim_set_keymap('n', '<Leader>e',
 --                         ":NvimTreeToggle<CR>",
 --                         {noremap = true, silent = true})
@@ -75,25 +75,25 @@ vim.api.nvim_set_keymap('n', '<Leader>e',
 -- telescope or snap
 if O.plugin.snap.active then
     vim.api.nvim_set_keymap('n', '<Leader>f', ':Snap find_files<CR>',
-                            {noremap = true, silent = true})
+        {noremap = true, silent = true})
 else
     vim.api.nvim_set_keymap('n', '<Leader>f', ':Telescope find_files<CR>',
-                            {noremap = true, silent = true})
+        {noremap = true, silent = true})
 end
 
 -- dashboard
 vim.api.nvim_set_keymap('n', '<Leader>;', ':Dashboard<CR>',
-                        {noremap = true, silent = true})
+    {noremap = true, silent = true})
 
 -- Comments
 vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>",
-                        {noremap = true, silent = true})
+    {noremap = true, silent = true})
 vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>",
-                        {noremap = true, silent = true})
+    {noremap = true, silent = true})
 
 -- close buffer
 vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>",
-                        {noremap = true, silent = true})
+    {noremap = true, silent = true})
 
 -- TODO create entire treesitter section
 
@@ -282,26 +282,26 @@ if O.plugin.gitlinker.active then mappings["gy"] = "Gitlink" end
 
 if O.plugin.ts_playground.active then
     vim.api.nvim_set_keymap("n", "<leader>Th",
-                            ":TSHighlightCapturesUnderCursor<CR>",
-                            {noremap = true, silent = true})
+        ":TSHighlightCapturesUnderCursor<CR>",
+        {noremap = true, silent = true})
     mappings[""] = "Highlight Capture"
 end
 
 if O.plugin.zen.active then
     vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>",
-                            {noremap = true, silent = true})
+        {noremap = true, silent = true})
     mappings["z"] = "Zen"
 end
 if O.plugin.lazygit.active then
     vim.api.nvim_set_keymap("n", "<leader>gg", ":LazyGit<CR>",
-                            {noremap = true, silent = true})
+        {noremap = true, silent = true})
     mappings["gg"] = "LazyGit"
 end
 if O.plugin.telescope_project.active then
     -- open projects
     vim.api.nvim_set_keymap('n', '<leader>p',
-                            ":lua require'telescope'.extensions.project.project{}<CR>",
-                            {noremap = true, silent = true})
+        ":lua require'telescope'.extensions.project.project{}<CR>",
+        {noremap = true, silent = true})
     mappings["p"] = "Projects"
 end
 

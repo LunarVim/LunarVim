@@ -3,7 +3,6 @@
 local cmd = vim.cmd
 local opt = vim.opt
 
-
 ---  VIM ONLY COMMANDS  ---
 
 cmd('filetype plugin on')               -- filetype detection
@@ -58,4 +57,3 @@ opt.number          = O.number                  -- set numbered lines
 opt.relativenumber  = O.relative_number         -- set relative numbered lines
 opt.signcolumn      = "yes"                     -- always show the sign column, otherwise it would shift the text each time
 opt.wrap            = O.wrap_lines              -- display lines as one long line
-

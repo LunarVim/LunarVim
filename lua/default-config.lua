@@ -4,7 +4,6 @@ CACHE_PATH = vim.fn.stdpath('cache')
 TERMINAL = vim.fn.expand('$TERMINAL')
 
 O = {
-    auto_close_tree = 0,
     auto_complete = true,
     colorscheme = 'lunar',
     hidden_files = true,
@@ -12,9 +11,7 @@ O = {
     number = true,
     relative_number = true,
     cursorline = true,
-    shell = 'bash',
     timeoutlen = 100,
-    nvim_tree_disable_netrw = 0,
     extras = false,
     ignore_case = true,
     smart_case = true,
@@ -28,11 +25,8 @@ O = {
     treesitter = {
         ensure_installed = "all",
         ignore_install = {"haskell"},
-        highlight = {enabled = true},
-        rainbow = {enabled = false}
+        highlight = {enabled = true}
     },
-
-    database = {save_location = '~/.config/nvcode_db', auto_execute = 1},
 
     plugin = {
         hop = {active = false},
@@ -71,7 +65,6 @@ O = {
         telescope_project = {active = false},
         dap_install = {active = false},
         tabnine = {active = false}
-
     },
 
     lang = {
@@ -82,7 +75,7 @@ O = {
             autoformat = false,
             isort = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             },
@@ -100,7 +93,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -112,7 +105,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -124,7 +117,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -134,7 +127,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -147,7 +140,7 @@ O = {
         },
         clang = {
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true,
             },
@@ -157,7 +150,7 @@ O = {
         },
         ruby = {
             diagnostics = {
-                virtualtext = {spacing = 0, prefix = ""},
+                virtualtext = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             },
@@ -176,7 +169,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -191,10 +184,10 @@ O = {
             },
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
-                },
+            },
             filetypes = {'php', 'phtml'}
         },
         latex = {},
@@ -207,11 +200,7 @@ O = {
         docker = {},
         cmake = {},
         java = {},
-        css = {
-            formatter = '',
-            autoformat = false,
-            virtual_text = true
-        }
+        css = {}
 
     },
 

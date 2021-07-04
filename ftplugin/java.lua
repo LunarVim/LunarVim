@@ -41,10 +41,10 @@ require'lspconfig'.jdtls.setup {
 -- })
 
 -- TODO setup autoformat stuff later
-    -- _java = {
-    --     -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
-    --     {
-    --         'FileType', 'java',
-    --         'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'
-    --     }
-    -- }
+-- _java = {
+--     -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
+--     {
+--         'FileType', 'java',
+--         'nnoremap ca <Cmd>lua require(\'jdtls\').code_action()<CR>'
+--     }
+-- }

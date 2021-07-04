@@ -210,7 +210,7 @@ local theme = lush(function()
         LspDiagnosticsVirtualTextWarning {LspDiagnosticsDefaultWarning},
         LspDiagnosticsVirtualTextInformation {LspDiagnosticsDefaultInformation},
         LspDiagnosticsVirtualTextHint {LspDiagnosticsDefaultHint},
-        
+
         LspDiagnosticsFloatingError {fg = c.error_red, gui = "NONE"},
         LspDiagnosticsFloatingWarning {fg = c.warning_orange, gui = "NONE"},
         LspDiagnosticsFloatingInformation {fg = c.info_yellow, gui = "NONE"},

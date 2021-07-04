@@ -21,8 +21,8 @@ require'lspconfig'.tsserver.setup {
     -- This makes sure tsserver is not used for formatting (I prefer prettier)
     -- on_attach = require'lsp'.common_on_attach,
     root_dir = require('lspconfig/util').root_pattern("package.json",
-                                                      "tsconfig.json",
-                                                      "jsconfig.json", ".git"),
+        "tsconfig.json",
+        "jsconfig.json", ".git"),
     settings = {documentFormatting = false},
     handlers = {
         ["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -31,7 +31,6 @@ require'lspconfig'.tsserver.setup {
                 signs = O.lang.tsserver.diagnostics.signs,
                 underline = O.lang.tsserver.diagnostics.underline,
                 update_in_insert = true
-
             })
     }
 }
@@ -42,7 +41,6 @@ if O.lang.tsserver.autoformat then
     require('lv-utils').define_augroups({
         _javascript_autoformat = {
             {
-
                 'BufWritePre', '*.js',
                 'lua vim.lsp.buf.formatting_sync(nil, 1000)'
             }

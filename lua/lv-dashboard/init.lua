@@ -41,7 +41,7 @@ M.config = function()
 
     vim.api.nvim_exec([[
     let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' plugins']
-]], false)
+        ]], false)
 
     -- file_browser = {description = {' File Browser'}, command = 'Telescope find_files'},
 

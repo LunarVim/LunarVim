@@ -1,7 +1,7 @@
 local clangd_flags = {"--background-index"};
 
 if O.lang.clang.cross_file_rename then
-   table.insert(clangd_flags, "--cross-file-rename")
+    table.insert(clangd_flags, "--cross-file-rename")
 end
 
 table.insert(clangd_flags, "--header-insertion=" .. O.lang.clang.header_insertion)
@@ -22,10 +22,10 @@ require'lspconfig'.clangd.setup {
 
 if O.lang.clang.autoformat then
     require('lv-utils').define_augroups({
-      _clang_autoformat = {
-         {'BufWritePre *.c lua vim.lsp.buf.formatting_sync(nil,1000)'},
-         {'BufWritePre *.h lua vim.lsp.buf.formatting_sync(nil,1000)'},
-         {'BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil,1000)'},
-         {'BufWritePre *.hpp lua vim.lsp.buf.formatting_sync(nil,1000)'},
-    }})
+        _clang_autoformat = {
+            {'BufWritePre *.c lua vim.lsp.buf.formatting_sync(nil,1000)'},
+            {'BufWritePre *.h lua vim.lsp.buf.formatting_sync(nil,1000)'},
+            {'BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil,1000)'},
+            {'BufWritePre *.hpp lua vim.lsp.buf.formatting_sync(nil,1000)'},
+        }})
 end

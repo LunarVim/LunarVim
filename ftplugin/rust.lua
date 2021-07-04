@@ -68,25 +68,22 @@ if O.lang.rust.rust_tools.active then
         } -- rust-analyser options
     }
     require('rust-tools').setup(opts)
-
 else
-
     require'lspconfig'.rust_analyzer.setup {
         cmd = {DATA_PATH .. "/lspinstall/rust/rust-analyzer"},
         on_attach = require'lsp'.common_on_attach,
         filetypes = {"rust"},
         root_dir = require'lspconfig.util'.root_pattern("Cargo.toml",
-                                                         "rust-project.json")
+            "rust-project.json")
     }
-
 end
 
 -- TODO fix these mappings
 vim.api.nvim_exec([[
-    autocmd Filetype rust nnoremap <leader>lm <Cmd>RustExpandMacro<CR>
-    autocmd Filetype rust nnoremap <leader>lH <Cmd>RustToggleInlayHints<CR>
-    autocmd Filetype rust nnoremap <leader>le <Cmd>RustRunnables<CR>
-    autocmd Filetype rust nnoremap <leader>lh <Cmd>RustHoverActions<CR>
+autocmd Filetype rust nnoremap <leader>lm <Cmd>RustExpandMacro<CR>
+autocmd Filetype rust nnoremap <leader>lH <Cmd>RustToggleInlayHints<CR>
+autocmd Filetype rust nnoremap <leader>le <Cmd>RustRunnables<CR>
+autocmd Filetype rust nnoremap <leader>lh <Cmd>RustHoverActions<CR>
     ]], true)
 
 if O.lang.rust.autoformat then
@@ -96,4 +93,3 @@ if O.lang.rust.autoformat then
         }
     })
 end
-

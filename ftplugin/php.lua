@@ -8,18 +8,17 @@ require'lspconfig'.intelephense.setup {
                 signs = O.lang.php.diagnostics.signs,
                 underline = O.lang.php.diagnostics.underline,
                 update_in_insert = true
-
             })
     },
-	filetypes = O.lang.php.filetypes,
-	settings = {
-		intelephense = {
-			format = {
-				braces = O.lang.php.format.braces
-			},
-			environment = {
-				phpVersion = O.lang.php.environment.php_version
-			},
+    filetypes = O.lang.php.filetypes,
+    settings = {
+        intelephense = {
+            format = {
+                braces = O.lang.php.format.braces
+            },
+            environment = {
+                phpVersion = O.lang.php.environment.php_version
+            }
         }
-	};
+    }
 }
