@@ -22,6 +22,7 @@ O = {
     hl_search = false,
     transparent_window = false;
     leader_key = "space";
+    vnsip_dir = vim.fn.stdpath('config') .. "/snippets",
 
     -- @usage pass a table with your desired languages
     treesitter = {
@@ -68,7 +69,8 @@ O = {
         diffview = {active = false},
         bracey = {active = false},
         telescope_project = {active = false},
-        dap_install = {active = false}
+        dap_install = {active = false},
+        tabnine = {active = false}
 
     },
 
@@ -180,7 +182,21 @@ O = {
             }
         },
         svelte = {},
-        php = {},
+        php = {
+            format = {
+                braces = "psr12"
+            },
+            environment = {
+                php_version = "7.4"
+            },
+            autoformat = false,
+            diagnostics = {
+                virtual_text = {spacing = 0, prefix = ""},
+                signs = true,
+                underline = true
+                },
+            filetypes = {'php', 'phtml'}
+        },
         latex = {},
         kotlin = {},
         html = {},
