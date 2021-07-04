@@ -1,5 +1,5 @@
 if not package.loaded['which-key'] then
-    return
+  return
 end
 
 require("which-key").setup {

@@ -1,5 +1,5 @@
 if not package.loaded['nvim-treesitter'] then
-    return
+  return
 end
 
 require'nvim-treesitter.configs'.setup {
