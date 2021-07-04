@@ -111,4 +111,3 @@ cd ~/.config/nvim && git pull
 - [Twitter](https://twitter.com/chrisatmachine)
 
 
-
