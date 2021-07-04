@@ -68,7 +68,8 @@ O = {
         diffview = {active = false},
         bracey = {active = false},
         telescope_project = {active = false},
-        dap_install = {active = false}
+        dap_install = {active = false},
+        tabnine = {active = false}
 
     },
 
