@@ -87,7 +87,14 @@ O.lang.rust.autoformat = true
 -- clang
 O.lang.clang.autoformat = false -- Set to true to enable auto-format in C/C++ files.
 
-
+-- php
+O.lang.php.format.braces = "k&r" -- options: psr12, allman, k&r
+O.lang.php.environment.php_version = "7.4"
+-- TODO: autoformat seems not to work at the moment
+O.lang.php.autoformat = false
+O.lang.php.diagnostics.signs = true
+O.lang.php.diagnostics.underline = true
+O.lang.php.filetypes = { "php", "phtml"  }
 
 -- TODO Autocommands
 -- https://neovim.io/doc/user/autocmd.html
