@@ -378,7 +378,7 @@ return require("packer").startup(function(use)
         cmd = "LazyGit",
         disable = not O.plugin.lazygit.active
     }
-    -- Lazygit
+    -- Octo
     use {
         "pwntester/octo.nvim",
         event = "BufRead",
