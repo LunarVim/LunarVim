@@ -167,6 +167,9 @@ O = {
         yaml = {},
         terraform = {},
         rust = {
+            rust_tools = {
+                active = false
+            },
             linter = '',
             formatter = '',
             autoformat = false,
