@@ -150,7 +150,8 @@ O = {
                 underline = true,
             },
             cross_file_rename = true,
-            header_insertion = 'never'
+            header_insertion = 'never',
+            autoformat = false  -- update this to true for enabling autoformat
         },
         ruby = {
             diagnostics = {
