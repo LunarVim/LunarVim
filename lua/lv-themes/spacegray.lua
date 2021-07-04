@@ -307,18 +307,28 @@ local theme = lush(function()
         markdownItalic {fg = "NONE", gui = "italic"}, -- flutter-tools.nvim
         FlutterWidgetGuides {fg = c.gray.li(10)}, -- statusline
 
-        StatusLine {bg = c.bg1, fg = c.white},
-        StatusLineNC {bg = c.bg1, fg = c.gray},
-        StatusLineMode {bg = c.gray, fg = c.bg, gui = "bold"},
-        StatusLineDeco {bg = c.bg2, fg = c.yellow},
-        StatusLineLCol {bg = c.bg2, fg = c.white},
-        StatusLineLColAlt {bg = c.bg1, fg = c.white},
-        StatusLineFT {bg = c.bg2, fg = c.white},
-        StatusLineFTAlt {bg = c.bg2, fg = c.white},
-        StatusLineGit {bg = c.gray, fg = c.bg},
-        StatusLineGitAlt {bg = c.gray, fg = c.bg},
-        StatusLineLSP {bg = c.bg1, fg = c.gray.li(25)},
-        StatusLineFileName {bg = c.bg1, fg = c.white, gui = "bold"},
+        StatusLine {bg = c.bg1, fg = c.white}, -- status line of current window
+        StatusLineNC {bg = c.bg1, fg = c.light_gray}, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+        StatusLineSeparator {bg = c.bg1, fg = "NONE"},
+        StatusLineGit {bg = c.bg1, fg = c.orange},
+        StatusLineGitAdd {bg = c.bg1, fg = c.green},
+        StatusLineGitChange {bg = c.bg1, fg = c.blue},
+        StatusLineGitDelete {bg = c.bg1, fg = c.red},
+        StatusLineLspDiagnosticsError {bg = c.bg1, fg = c.error_red, gui = "NONE"},
+        StatusLineLspDiagnosticsWarning {bg = c.bg1, fg = c.warning_orange, gui = "NONE"},
+        StatusLineLspDiagnosticsInformation {bg = c.bg1, fg = c.info_yellow, gui = "NONE"},
+        StatusLineLspDiagnosticsHint {bg = c.bg1, fg = c.hint_blue, gui = "NONE"},
+        StatusLineTreeSitter {bg = c.bg1, fg = c.green},
+
+        -- StatusLineMode {bg = c.gray, fg = c.bg, gui = "bold"},
+        -- StatusLineDeco {bg = c.bg2, fg = c.yellow},
+        -- StatusLineLCol {bg = c.bg2, fg = c.white},
+        -- StatusLineLColAlt {bg = c.bg1, fg = c.white},
+        -- StatusLineFT {bg = c.bg2, fg = c.white},
+        -- StatusLineFTAlt {bg = c.bg2, fg = c.white},
+        -- StatusLineGitAlt {bg = c.gray, fg = c.bg},
+        -- StatusLineLSP {bg = c.bg1, fg = c.gray.li(25)},
+        -- StatusLineFileName {bg = c.bg1, fg = c.white, gui = "bold"},
 
 
         -- lsp-trouble.nvim
