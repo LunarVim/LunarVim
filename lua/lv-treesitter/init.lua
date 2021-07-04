@@ -31,6 +31,18 @@ require'nvim-treesitter.configs'.setup {
             goto_node = '<cr>',
             show_help = '?'
         }
+    },
+
+    textobjects = {
+        select = {
+            enable = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner"
+            }
+        }
     }
 }
 

@@ -67,6 +67,8 @@ return require("packer").startup(function(use)
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
+    use {"nvim-treesitter/nvim-treesitter-textobjects"}
+
     use {
         "kyazdani42/nvim-tree.lua",
         -- cmd = "NvimTreeToggle",
