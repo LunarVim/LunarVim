@@ -20,7 +20,7 @@ O.smart_case = true
 O.lushmode = false
 O.transparent_window = false
 
--- After changing plugin config it is recommended to run :PackerCompile
+-- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.hop.active = false
 O.plugin.dial.active = false
 O.plugin.dashboard.active = true
@@ -89,29 +89,10 @@ O.lang.clang.autoformat = false -- Set to true to enable auto-format in C/C++ fi
 
 
 
--- create custom autocommand field (This would be easy with lua)
+-- TODO Autocommands
+-- https://neovim.io/doc/user/autocmd.html
 
--- Turn off relative_numbers
--- O.relative_number = false
+-- TODO Additional Plugins
 
--- Turn off cursorline
--- O.cursorline = false
-
--- Neovim turns the default cursor to 'Block'
--- when switched back into terminal.
--- This below line fixes that. Uncomment if needed.
-
--- vim.cmd('autocmd VimLeave,VimSuspend * set guicursor=a:ver90') -- Beam
--- vim.cmd('autocmd VimLeave,VimSuspend * set guicursor=a:hor20') -- Underline
-
--- NOTE: Above code doesn't take a value from the terminal's cursor and
---       replace it. It hardcodes the cursor shape.
---       And I think `ver` means vertical and `hor` means horizontal.
---       The numbers didn't make a difference in alacritty. Please change
---       the number to something that suits your needs if it looks weird.
-
--- TODO
--- custom autocommands
--- user defined plugin config
--- custom settings
+-- TODO User Config for plugins
 
