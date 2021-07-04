@@ -182,7 +182,21 @@ O = {
             }
         },
         svelte = {},
-        php = {},
+        php = {
+            format = {
+                braces = "psr12"
+            },
+            environment = {
+                php_version = "7.4"
+            },
+            autoformat = false,
+            diagnostics = {
+                virtual_text = {spacing = 0, prefix = ""},
+                signs = true,
+                underline = true
+                },
+            filetypes = {'php', 'phtml'}
+        },
         latex = {},
         kotlin = {},
         html = {},
