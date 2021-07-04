@@ -4,7 +4,7 @@
 
 local M = {}
 
-vim.g.vsnip_snippet_dir = O.vsnip_dir
+vim.g.vsnip_snippet_dir = O.vnsip_dir
 
 M.config = function()
 opt = {
