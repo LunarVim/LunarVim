@@ -429,6 +429,25 @@ return require("packer").startup(function(use)
     -- Elixir
     use {"elixir-editors/vim-elixir", ft = {"elixir", "eelixir", "euphoria3"}}
 
+    -- Javascript / Typescript
+    use {
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        ft = {
+            "javascript", "javascriptreact", "javascript.jsx", "typescript",
+            "typescriptreact", "typescript.tsx"
+        }
+    }
+    use {
+        "jose-elias-alvarez/null-ls.nvim",
+        ft = {
+            "javascript", "javascriptreact", "javascript.jsx", "typescript",
+            "typescriptreact", "typescript.tsx"
+        },
+        config = function()
+            require('null-ls').setup()
+        end
+    }
+
     -- Tabnine
     use {
         "tzachar/compe-tabnine",
