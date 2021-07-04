@@ -22,6 +22,7 @@ O = {
     hl_search = false,
     transparent_window = false;
     leader_key = "space";
+    vnsip_dir = vim.fn.stdpath('config') .. "/snippets",
 
     -- @usage pass a table with your desired languages
     treesitter = {
