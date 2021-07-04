@@ -1,0 +1,18 @@
+#!/bin/bash
+
+GLOBAL=1
+
+source /opt/nvcode/nvim/utils/bin/lunarvim-env.sh
+
+export LV_BASE=${LV_BASE}
+
+nvim -u ${LV_BASE_CONFIG} ${LV_SYNC} $@
+
+if [ -v LV_SYNC ]; then
+  touch ${LV_USER}/.packer_sync
+fi
+
+if [ -v LV_CONFIG_INIT ]; then
+  mkdir -p ${LV_USER_CONFIG}
+  touch ${LV_USER_CONFIG}/nvim/init.lua
+fi

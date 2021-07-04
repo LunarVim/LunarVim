@@ -1,9 +1,12 @@
 require "default-config"
 require "keymappings"
-local status_ok, _ = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
-if not status_ok then
-  print "something is wrong with your lv-config"
+if io.open(CONFIG_PATH .. '/lv-config.lua', 'r') then
+  local status_ok, _ = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
+  if not status_ok then
+    print "something is wrong with your lv-config"
+  end
 end
+require "environment"
 require "plugins"
 vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 require "settings"
