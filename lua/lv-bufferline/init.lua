@@ -9,14 +9,14 @@ M.config = function()
             buffer_close_icon = '',
             modified_icon = '●',
             close_icon = '',
-            close_command = "Bdelete %d",
-            right_mouse_command = "Bdelete! %d",
+            close_command = "bdelete %d",
+            right_mouse_command = "bdelete! %d",
             left_trunc_marker = '',
             right_trunc_marker = '',
             offsets = {
                 {
                     filetype = "NvimTree",
-                    text = "EXPLORER",
+                    text = "",
                     text_align = "center",
                     padding = 1
                 }

@@ -50,6 +50,10 @@ vim.api.nvim_set_keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', {noremap = true, si
 vim.api.nvim_set_keymap('x', '<A-j>', ':m \'>+1<CR>gv-gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('x', '<A-k>', ':m \'<-2<CR>gv-gv', {noremap = true, silent = true})
 
+-- QuickFix
+vim.api.nvim_set_keymap('n', ']q', ':cnext<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '[q', ':cprev<CR>', {noremap = true, silent = true})
+
 -- Better nav for omnicomplete
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
 vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
