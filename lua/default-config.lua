@@ -160,7 +160,7 @@ O = {
                 signs = true,
                 underline = true
             },
-            filetypes = {'rb', 'erb', 'rakefile'}
+            filetypes = {'rb', 'erb', 'rakefile', 'ruby'}
         },
         go = {},
         elixir = {},
@@ -168,6 +168,9 @@ O = {
         yaml = {},
         terraform = {},
         rust = {
+            rust_tools = {
+                active = false
+            },
             linter = '',
             formatter = '',
             autoformat = false,

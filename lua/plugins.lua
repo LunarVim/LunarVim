@@ -46,12 +46,12 @@ return require("packer").startup(function(use)
     }
     -- Snap TODO disable for now, need to only install fzy when user specifies they want to use snap
     -- use {
-        -- "camspiers/snap",
-        -- rocks = "fzy",
-        -- config = function()
-        --    require("lv-snap").config()
-        -- end,
-        -- disable = not O.plugin.snap.active
+    -- "camspiers/snap",
+    -- rocks = "fzy",
+    -- config = function()
+    --    require("lv-snap").config()
+    -- end,
+    -- disable = not O.plugin.snap.active
     -- }
     -- Autocomplete
     use {
@@ -114,15 +114,9 @@ return require("packer").startup(function(use)
     use {"glepnir/galaxyline.nvim"}
 
     use {
-        "romgrk/barbar.nvim",
-
+        "akinsho/nvim-bufferline.lua",
         config = function()
-            vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>',
-                                    {noremap = true, silent = true})
-            vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>',
-                                    {noremap = true, silent = true})
-            vim.api.nvim_set_keymap('n', '<S-x>', ':BufferClose<CR>',
-                                    {noremap = true, silent = true})
+            require("lv-bufferline").config()
         end,
         event = "BufRead"
 
@@ -228,8 +222,9 @@ return require("packer").startup(function(use)
             vim.g.indentLine_enabled = 1
             vim.g.indent_blankline_char = "▏"
 
-            vim.g.indent_blankline_filetype_exclude =
-                {"help", "terminal", "dashboard"}
+            vim.g.indent_blankline_filetype_exclude = {
+                "help", "terminal", "dashboard"
+            }
             vim.g.indent_blankline_buftype_exclude = {"terminal"}
 
             vim.g.indent_blankline_show_trailing_blankline_indent = false
@@ -378,7 +373,7 @@ return require("packer").startup(function(use)
         cmd = "LazyGit",
         disable = not O.plugin.lazygit.active
     }
-    -- Lazygit
+    -- Octo
     use {
         "pwntester/octo.nvim",
         event = "BufRead",
@@ -401,7 +396,7 @@ return require("packer").startup(function(use)
     use {
         "rktjmp/lush.nvim",
         -- cmd = {"LushRunQuickstart", "LushRunTutorial", "Lushify"},
-        disable = not O.plugin.lush.active,
+        disable = not O.plugin.lush.active
     }
     -- HTML preview
     use {
@@ -424,7 +419,7 @@ return require("packer").startup(function(use)
 
     -- Rust tools
     -- TODO: use lazy loading maybe?
-    use {"simrat39/rust-tools.nvim", ft = "rust"}
+    use {"simrat39/rust-tools.nvim", disable = not O.lang.rust.rust_tools.active}
 
     -- Elixir
     use {"elixir-editors/vim-elixir", ft = {"elixir", "eelixir", "euphoria3"}}
