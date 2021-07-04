@@ -411,6 +411,12 @@ return require("packer").startup(function(use)
         event = "BufRead",
         disable = not O.plugin.dap_install.active
     }
+    -- Startup profiler
+    use {
+        'tweekmonster/startuptime.vim',
+        cmd = "StartupTime",
+        disable = not O.plugin.startuptime.active
+    }
 
     -- LANGUAGE SPECIFIC GOES HERE
 
