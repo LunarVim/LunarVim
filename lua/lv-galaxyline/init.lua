@@ -1,6 +1,6 @@
-if not package.loaded['galaxyline'] then
-  return
-end
+-- if not package.loaded['galaxyline'] then
+--   return
+-- end
 
 local gl = require('galaxyline')
 -- get my theme in galaxyline repo
