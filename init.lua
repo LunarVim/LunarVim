@@ -1,4 +1,5 @@
 require('default-config')
+require('compile')
 vim.cmd('luafile ' .. CONFIG_PATH .. '/lv-config.lua')
 require('settings')
 require('plugins')

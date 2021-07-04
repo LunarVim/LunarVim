@@ -102,6 +102,11 @@ cloneconfig() {
 	echo "Cloning LunarVim configuration"
 	git clone https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
 	mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
+
+    # Used by hook to run PackerCompile after nvim +PackerInstall
+    [ ! -d "${HOME}/.cache/nvim" ] && mkdir -p "${HOME}"/.cache/nvim
+    touch $HOME/.cache/nvim/first_run
+
 	# mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
 	nvim -u $HOME/.config/nvim/init.lua +PackerInstall
 	# rm $HOME/.config/nvim/init.lua
