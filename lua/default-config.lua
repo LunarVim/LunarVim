@@ -1,6 +1,7 @@
 CONFIG_PATH = vim.fn.stdpath('config')
 DATA_PATH = vim.fn.stdpath('data')
 CACHE_PATH = vim.fn.stdpath('cache')
+TERMINAL = vim.fn.expand('$TERMINAL')
 
 O = {
     auto_close_tree = 0,
@@ -18,6 +19,8 @@ O = {
     ignore_case = true,
     smart_case = true,
     lushmode = false,
+    hl_search = false,
+    transparent_window = false;
     leader_key = "space";
 
     -- @usage pass a table with your desired languages
@@ -145,9 +148,10 @@ O = {
                 virtual_text = {spacing = 0, prefix = ""},
                 signs = true,
                 underline = true,
-                cross_file_rename = true,
-                header_insertion = 'never'
-            }
+            },
+            cross_file_rename = true,
+            header_insertion = 'never',
+            autoformat = false  -- update this to true for enabling autoformat
         },
         ruby = {
             diagnostics = {
@@ -155,7 +159,7 @@ O = {
                 signs = true,
                 underline = true
             },
-            filetypes = {'rb', 'erb', 'rakefile'}
+            filetypes = {'rb', 'erb', 'rakefile', 'ruby'}
         },
         go = {},
         elixir = {},
@@ -163,6 +167,9 @@ O = {
         yaml = {},
         terraform = {},
         rust = {
+            rust_tools = {
+                active = false
+            },
             linter = '',
             formatter = '',
             autoformat = false,
@@ -188,8 +195,7 @@ O = {
             formatter = '',
             autoformat = false,
             virtual_text = true
-        },
-        zig = {}
+        }
 
     },
 

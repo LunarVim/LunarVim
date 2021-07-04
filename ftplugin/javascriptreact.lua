@@ -36,6 +36,8 @@ require'lspconfig'.tsserver.setup {
     }
 }
 
+require'lsp.ts-fmt-lint'.setup()
+
 if O.lang.tsserver.autoformat then
     require('lv-utils').define_augroups({
         _javascript_autoformat = {

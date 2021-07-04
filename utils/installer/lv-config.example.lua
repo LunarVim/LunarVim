@@ -18,6 +18,7 @@ O.leader_key = ' '
 O.ignore_case = true
 O.smart_case = true
 O.lushmode = false
+O.transparent_window = false
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.hop.active = false
@@ -82,6 +83,12 @@ O.lang.go.autoformat = true
 
 -- rust
 O.lang.rust.autoformat = true
+
+-- clang
+O.lang.clang.autoformat = false -- Set to true to enable auto-format in C/C++ files.
+
+
+
 -- create custom autocommand field (This would be easy with lua)
 
 -- Turn off relative_numbers
