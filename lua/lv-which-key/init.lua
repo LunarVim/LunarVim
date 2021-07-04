@@ -88,7 +88,7 @@ vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>",
                         {noremap = true, silent = true})
 
 -- close buffer
-vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>",
+vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>",
                         {noremap = true, silent = true})
 
 -- TODO create entire treesitter section
