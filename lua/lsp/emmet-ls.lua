@@ -1,6 +1,6 @@
-if not package.loaded['lspconfig'] then
-  return
-end
+-- if not package.loaded['lspconfig'] then
+--   return
+-- end
 
 local nvim_lsp = require'lspconfig'
 local configs = require'lspconfig/configs'

@@ -1,6 +1,6 @@
-if not package.loaded['which-key'] then
-  return
-end
+-- if not package.loaded['which-key'] then
+--  return
+-- end
 
 require("which-key").setup {
     plugins = {

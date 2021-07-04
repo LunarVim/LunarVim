@@ -1,6 +1,6 @@
-if not package.loaded['nvim-autopairs'] then
-  return
-end
+-- if not package.loaded['nvim-autopairs'] then
+--   return
+-- end
 
 local npairs = require('nvim-autopairs')
 local Rule = require('nvim-autopairs.rule')

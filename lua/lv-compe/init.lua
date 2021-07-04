@@ -1,6 +1,6 @@
-if not package.loaded['compe'] then
-  return
-end
+--if not package.loaded['compe'] then
+--   return
+-- end
 
 local M = {}
 

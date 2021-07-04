@@ -1,6 +1,6 @@
-if not package.loaded['nvim-tree.view'] then
-  return
-end
+--if not package.loaded['nvim-tree.view'] then
+--  return
+--end
 
 local M = {}
 
