@@ -425,5 +425,11 @@ return require("packer").startup(function(use)
     use {"elixir-editors/vim-elixir", ft = {"elixir", "eelixir", "euphoria3"}}
 
     -- Flutter
-    use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+    use {
+        'akinsho/flutter-tools.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('lv-flutter-tools')
+        end
+    }
 end)

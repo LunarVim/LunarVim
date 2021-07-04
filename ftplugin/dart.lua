@@ -10,7 +10,7 @@ require'lspconfig'.dartls.setup{
     }
 }
 
-if O.lang.python.autoformat then
+if O.lang.dart.autoformat then
     require('lv-utils').define_augroups({
         _dart_autoformat = {
             {
