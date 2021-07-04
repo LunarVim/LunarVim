@@ -1,3 +1,7 @@
+if not package.loaded['which-key'] then
+  return
+end
+
 require("which-key").setup {
     plugins = {
         marks = true, -- shows a list of your marks on ' and `
