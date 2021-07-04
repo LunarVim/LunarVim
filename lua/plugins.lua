@@ -90,8 +90,9 @@ return require("packer").startup(function(use)
 
     -- Autopairs
     use {
-        -- event = "InsertEnter",
         "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        after = {"telescope.nvim", "nvim-compe"},
         config = function()
             require 'lv-autopairs'
         end
