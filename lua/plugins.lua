@@ -416,8 +416,8 @@ return require("packer").startup(function(use)
 
     -- LANGUAGE SPECIFIC GOES HERE
 
-    -- Latex TODO what filetypes should this be active for?
-    use {"lervag/vimtex", ft = "latex"}
+    use {"lervag/vimtex", ft = "tex"   }
+    
 
     -- Rust tools
     -- TODO: use lazy loading maybe?
