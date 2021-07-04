@@ -11,3 +11,4 @@ require('lv-treesitter')
 require('lv-which-key')
 require('lsp')
 if O.lang.emmet.active then require('lsp.emmet-ls') end
+require('lv-flutter-tools')

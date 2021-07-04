@@ -91,7 +91,8 @@ O = {
             }
         },
         dart = {
-            sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'
+            sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot',
+            autoformat = false
         },
         lua = {
             -- @usage can be 'lua-format'

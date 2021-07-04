@@ -9,3 +9,14 @@ require'lspconfig'.dartls.setup{
       suggestFromUnimportedLibraries = true
     }
 }
+
+if O.lang.python.autoformat then
+    require('lv-utils').define_augroups({
+        _dart_autoformat = {
+            {
+                'BufWritePre', '*.dart',
+                'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+            }
+        }
+    })
+end
