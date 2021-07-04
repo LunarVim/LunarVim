@@ -1,6 +1,7 @@
 if not package.loaded['compe'] then
   return
 end
+
 local M = {}
 
 M.config = function()
