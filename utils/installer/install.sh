@@ -12,6 +12,7 @@ main() {
 	install_pynvim
 	install_packer
 	lunarvim_clone_config
+	lunarvim_bootstrap
 	echo
 	echo "It is recommended to install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 	echo
@@ -19,7 +20,7 @@ main() {
 
 # Handle existing nvim installations
 move_old_nvim() {
-	[ -d "$HOME/.config/nvim" ] && return
+	[ ! -d "${HOME}/.config/nvim" ] && return
 	echo "Not installing LunarVim"
 	echo "Please move your ~/.config/nvim folder before installing"
 	exit
@@ -34,7 +35,7 @@ ask_to_install_node() {
 		return
 	fi
 
-	echo "Node not found"
+	echo "node not found"
 	echo -n "Would you like to install node now (y/n)? "
 	read -r answer
 	[ "$answer" != "${answer#[Yy]}" ] && install_node
@@ -241,8 +242,11 @@ lunarvim_clone_config() {
 	git clone https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
 	mv "${HOME}/.config/nvim/utils/installer/lv-config.example.lua" \
 		"${HOME}/.config/nvim/lv-config.lua"
+}
+
+lunarvim_bootstrap() {
 	# mv "${HOME}/.config/nvim/utils/init.lua" "${HOME}/.config/nvim/init.lua"
-	nvim -u "${HOME}/.config/nvim/init.lua +PackerInstall"
+	nvim -u "${HOME}/.config/nvim/init.lua" "+PackerInstall"
 	# rm "${HOME}/.config/nvim/init.lua"
 	# mv "${HOME}/.config/nvim/init.lua.tmp" "${HOME}/.config/nvim/init.lua"
 }
