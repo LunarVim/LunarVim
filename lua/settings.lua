@@ -1,12 +1,10 @@
 ---  HELPERS  ---
 
-
 local cmd = vim.cmd
 local opt = vim.opt
 
 
 ---  VIM ONLY COMMANDS  ---
-
 
 cmd('filetype plugin on')               -- filetype detection
 cmd('let &titleold="'..TERMINAL..'"')   
@@ -17,8 +15,11 @@ if O.transparent_window then
     cmd('au ColorScheme * hi Normal ctermbg=none guibg=none')
  end
 
----  SETTINGS  ---
+--- COLORSCHEME ---
 
+vim.g.colors_name = O.colorscheme
+
+---  SETTINGS  ---
 
 opt.backup          = false                     -- creates a backup file
 opt.clipboard       = "unnamedplus"             -- allows neovim to access the system clipboard
