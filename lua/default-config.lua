@@ -159,7 +159,7 @@ O = {
                 signs = true,
                 underline = true
             },
-            filetypes = {'rb', 'erb', 'rakefile'}
+            filetypes = {'rb', 'erb', 'rakefile', 'ruby'}
         },
         go = {},
         elixir = {},
