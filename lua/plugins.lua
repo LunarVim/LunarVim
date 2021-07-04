@@ -1,6 +1,6 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
-
+require('customPlugin')
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -31,6 +31,8 @@ return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
     use "wbthomason/packer.nvim"
 
+    -- Add customPlugin 
+    for _, plugin in pairs(customPlugin) do packer.use(plugin) end
     -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {"neovim/nvim-lspconfig"}
     use {"glepnir/lspsaga.nvim"}
@@ -46,12 +48,12 @@ return require("packer").startup(function(use)
     }
     -- Snap TODO disable for now, need to only install fzy when user specifies they want to use snap
     -- use {
-        -- "camspiers/snap",
-        -- rocks = "fzy",
-        -- config = function()
-        --    require("lv-snap").config()
-        -- end,
-        -- disable = not O.plugin.snap.active
+    -- "camspiers/snap",
+    -- rocks = "fzy",
+    -- config = function()
+    --    require("lv-snap").config()
+    -- end,
+    -- disable = not O.plugin.snap.active
     -- }
     -- Autocomplete
     use {
@@ -228,8 +230,9 @@ return require("packer").startup(function(use)
             vim.g.indentLine_enabled = 1
             vim.g.indent_blankline_char = "▏"
 
-            vim.g.indent_blankline_filetype_exclude =
-                {"help", "terminal", "dashboard"}
+            vim.g.indent_blankline_filetype_exclude = {
+                "help", "terminal", "dashboard"
+            }
             vim.g.indent_blankline_buftype_exclude = {"terminal"}
 
             vim.g.indent_blankline_show_trailing_blankline_indent = false
@@ -401,7 +404,7 @@ return require("packer").startup(function(use)
     use {
         "rktjmp/lush.nvim",
         -- cmd = {"LushRunQuickstart", "LushRunTutorial", "Lushify"},
-        disable = not O.plugin.lush.active,
+        disable = not O.plugin.lush.active
     }
     -- HTML preview
     use {
