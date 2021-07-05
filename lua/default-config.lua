@@ -32,13 +32,10 @@ O = {
     rainbow = { enabled = false },
   },
 
-<<<<<<< HEAD
-=======
   lsp = {
     popup_border = "single",
   },
 
->>>>>>> 786d7f8... Add forma_on_save on option
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
 
   plugin = {
@@ -99,7 +96,6 @@ O = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
     },
     lua = {
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -270,11 +266,8 @@ require("lv-utils").define_augroups {
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
-<<<<<<< HEAD
-=======
   _auto_resize = {
     -- will cause split windows to be resized evenly if main window is resized
     { "VimResized ", "*", "wincmd =" },
   },
->>>>>>> 786d7f8... Add forma_on_save on option
 }
