@@ -31,6 +31,10 @@ O = {
     rainbow = { enabled = false },
   },
 
+  lsp = {
+    popup_border = "single"
+  },
+
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
 
   plugin = {
@@ -283,6 +287,10 @@ require("lv-utils").define_augroups {
   },
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
+  },
+  _auto_resize = {
+    -- will cause split windows to be resized evenly if main window is resized
+    {'VimResized ', '*', 'wincmd ='},
   },
   _mode_switching = {
     -- will switch between absolute and relative line numbers depending on mode
