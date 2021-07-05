@@ -70,7 +70,9 @@ O = {
     telescope_project = { active = false },
     dap_install = { active = false },
     tabnine = { active = false },
-    quickscope = { active = false },
+    quickscope = { active = false, 
+        on_keys = {'f', 'F', 't', 'T'} -- Comment this line to have it always visible
+    },
   },
 
   lang = {

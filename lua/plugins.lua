@@ -463,8 +463,11 @@ return require("packer").startup(function(use)
   -- Vim quick-scope See jumpable characters
   use {
     "unblevable/quick-scope",
-    event = "BufRead",
+    keys = O.plugin.quickscope.on_keys,
+    event = (O.plugin.quickscope.on_keys ~= nil) and "BufRead" or nil,
+    config = function()
+        vim.g.qs_highlight_on_keys = O.plugin.quickscope.on_keys
+    end,
     disable = not O.plugin.quickscope.active,
   }
-
 end)
