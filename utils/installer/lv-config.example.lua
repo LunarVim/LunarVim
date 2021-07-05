@@ -55,6 +55,24 @@ O.lang.rust.formatter = {
 --     }
 -- }
 
+--LaTeX
+O.lang.latex.aux_directory = "."
+O.lang.latex.bibtex_formatter = "texlab"
+--TODO build args are hardcoded; args are not passed through to ftplugin/tex.lua
+O.lang.latex.build.executable = "latexmk" 
+O.lang.latex.build.forward_search_after = false
+O.lang.latex.build.on_save = false
+O.lang.latex.chktex.on_edit = false
+O.lang.latex.chktex.on_open_and_save = false
+O.lang.latex.diagnostics_delay = 300
+O.lang.latex.formatter_line_length = 80
+-- ForwardSearch for preview;
+-- see https://github.com/latex-lsp/texlab/blob/master/docs/previewing.md for options
+-- insert the executable as referenced in previewng.md; lunarvim will make the rest
+O.lang.latex.forward_search.executable = "zathura"
+O.lang.latex.latex_formatter = "latexindent"
+O.lang.latex.latexindent.modify_line_breaks = false
+
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
 
