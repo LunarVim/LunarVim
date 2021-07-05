@@ -459,4 +459,12 @@ return require("packer").startup(function(use)
     requires = "hrsh7th/nvim-compe",
     disable = not O.plugin.tabnine.active,
   }
+
+
+  -- Lightspeed navigation plugin
+  use {
+    "ggandor/lightspeed.nvim",
+    config = require("lv-lightspeed").config,
+    disable = not O.plugin.lightspeed.active,
+  }
 end)

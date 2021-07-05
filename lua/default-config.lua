@@ -70,6 +70,7 @@ O = {
     telescope_project = { active = false },
     dap_install = { active = false },
     tabnine = { active = false },
+    lightspeed = { active = false },
   },
 
   lang = {
