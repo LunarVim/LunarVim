@@ -301,7 +301,7 @@ return require("packer").startup(function(use)
         "ray-x/lsp_signature.nvim",
         event = "BufRead",
         config = function()
-            require("lv-lsp_signature").config()
+            require("lsp/lsp_signature").config()
         end,
         disable = not O.plugin.lsp_signature.active
     }
