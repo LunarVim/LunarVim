@@ -422,6 +422,9 @@ return require("packer").startup(function(use)
     disable = not O.lang.rust.rust_tools.active,
   }
 
+  -- KMonad
+  use { "kmonad/kmonad-vim", ft = "kmonad" }
+
   -- Elixir
   use { "elixir-editors/vim-elixir", ft = { "elixir", "eelixir", "euphoria3" } }
 
