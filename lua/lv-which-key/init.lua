@@ -121,7 +121,14 @@ local mappings = {
       "sort BufferLines automatically by language",
     },
   },
-
+    p = {
+        name = "Packer",
+        c = {"<cmd>PackerCompile<cr>", "Compile"},
+        i = {"<cmd>PackerInstall<cr>", "Install"},
+        r = {":luafile %<cr>", "Reload"},
+        s = {"<cmd>PackerSync<cr>", "Sync"},
+        u = {"<cmd>PackerUpdate<cr>", "Update"}
+    },
   -- diagnostics vanilla nvim
   -- -- diagnostic
   -- function lv_utils.get_all()
@@ -200,8 +207,8 @@ local mappings = {
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
-    j = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    k = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+    j = { "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>", "Next Diagnostic" },
+    k = { "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>", "Prev Diagnostic" },
     q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = {

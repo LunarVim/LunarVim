@@ -4,6 +4,7 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 
 O = {
+
   auto_close_tree = 0,
   auto_complete = true,
   colorscheme = "lunar",
@@ -29,6 +30,10 @@ O = {
     ignore_install = { "haskell" },
     highlight = { enabled = true },
     rainbow = { enabled = false },
+  },
+
+  lsp = {
+    popup_border = "single"
   },
 
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
@@ -70,6 +75,10 @@ O = {
     telescope_project = { active = false },
     dap_install = { active = false },
     tabnine = { active = false },
+  },
+
+  user_autocommands = {
+    { "FileType", "qf", "set nobuflisted" },
   },
 
   lang = {
@@ -243,45 +252,4 @@ O = {
   },
 }
 
--- TODO find a new home for these autocommands
-require("lv-utils").define_augroups {
-  _general_settings = {
-    {
-      "TextYankPost",
-      "*",
-      "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
-    },
-    {
-      "BufWinEnter",
-      "*",
-      "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-    },
-    {
-      "BufRead",
-      "*",
-      "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-    },
-    {
-      "BufNewFile",
-      "*",
-      "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-    },
-    { "VimLeavePre", "*", "set title set titleold=" },
-    { "FileType", "qf", "set nobuflisted" },
-  },
-  -- _solidity = {
-  --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
-  --     {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
-  -- },
-  -- _gemini = {
-  --     {'BufWinEnter', '.gmi', 'setlocal filetype=markdown'}, {'BufRead', '*.gmi', 'setlocal filetype=markdown'},
-  --     {'BufNewFile', '*.gmi', 'setlocal filetype=markdown'}
-  -- },
-  _markdown = {
-    { "FileType", "markdown", "setlocal wrap" },
-    { "FileType", "markdown", "setlocal spell" },
-  },
-  _buffer_bindings = {
-    { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
-  },
-}
+

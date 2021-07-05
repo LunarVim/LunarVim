@@ -97,6 +97,8 @@ O.lang.php.filetypes = { "php", "phtml" }
 
 -- TODO Autocommands
 -- https://neovim.io/doc/user/autocmd.html
+-- local test = { "BufWinEnter", "*", "echo \"hi again\""}
+-- table.insert(O.user_autocommands, test)
 
 -- TODO Additional Plugins
 
