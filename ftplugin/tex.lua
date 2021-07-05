@@ -2,48 +2,67 @@ if require("lv-utils").check_lsp_client_active "texlab" then
   return
 end
 
+local preview_settings = {}
+
+local sumatrapdf_args = { "-reuse-instance", "%p", "-forward-search", "%f", "%l" }
+local evince_args = { "-f", "%l", "%p", "\"code -g %f:%l\"" }
+local okular_args = { "--unique", "file:%p#src:%l%f" }
+local zathura_args = { "--synctex-forward", "%l:1:%f", "%p" }
+local qpdfview_args = { "--unique", "%p#src:%f:%l:1" }
+local skim_args = { "%l", "%p", "%f" }
+
+if O.lang.latex.forward_search.executable == "C:/Users/{User}/AppData/Local/SumatraPDF/SumatraPDF.exe" then
+  preview_settings = sumatrapdf_args
+elseif O.lang.latex.forward_search.executable == "evince-synctex" then
+  preview_settings = evince_args
+elseif O.lang.latex.forward_search.executable == "okular" then
+  preview_settings = okular_args
+elseif O.lang.latex.forward_search.executable == "zathura" then
+  preview_settings = zathura_args
+elseif O.lang.latex.forward_search.executable == "qpdfview" then
+  preview_settings = qpdfview_args
+elseif O.lang.latex.forward_search.executable == "/Applications/Skim.app/Contents/SharedSupport/displayline" then
+  preview_settings = skim_args
+end
+
 require("lspconfig").texlab.setup {
   cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
   on_attach = require("lsp").common_on_attach,
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-                virtual_text = O.lang.latex.diagnostics.virtual_text,
-                signs = O.lang.latex.diagnostics.signs,
-                underline = O.lang.latex.diagnostics.underline,
-                update_in_insert = true
-
-            })
+  handlers = {
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = O.lang.latex.diagnostics.virtual_text,
+      signs = O.lang.latex.diagnostics.signs,
+      underline = O.lang.latex.diagnostics.underline,
+       update_in_insert = true,
+    }),
+  },
+  filetypes = { "tex", "bib" },
+  settings = {
+    texlab = {
+      auxDirectory = O.lang.latex.aux_directory,
+      bibtexFormatter = O.lang.latex.bibtex_formatter,
+      build = {
+        args = O.lang.latex.build.args,
+        executable = O.lang.latex.build.executable,
+        forwardSearchAfter = O.lang.latex.build.forward_search_after,
+        onSave = O.lang.latex.build.on_save,
+      },
+      chktex = {
+        onEdit = O.lang.latex.chktex.on_edit,
+        onOpenAndSave = O.lang.latex.chktex.on_open_and_save,
+      },
+      diagnosticsDelay = O.lang.latex.diagnostics_delay,
+      formatterLineLength = O.lang.latex.formatter_line_length,
+      forwardSearch = {
+        args = preview_settings,
+        executable = O.lang.latex.forward_search.executable,
+      },
+      latexFormatter = O.lang.latex.latex_formatter,
+      latexindent = {
+         modifyLineBreaks = O.lang.latex.latexindent.modify_line_breaks,
+      },
     },
-    -- filetypes = O.lang.latex.filetypes,
-    settings = {
-        texlab = {
-            auxDirectory = O.lang.latex.aux_directory,
-            bibtexFormatter = O.lang.latex.bibtex_formatter,
-            build = {
-                args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
-                -- args = O.lang.latex.build.args,
-                executable = O.lang.latex.build.executable,
-                forwardSearchAfter = O.lang.latex.build.forward_search_after,
-                onSave = O.lang.latex.build.on_save
-            },
-            chktex = {
-                onEdit = O.lang.latex.chktex.on_edit,
-                onOpenAndSave = O.lang.latex.chktex.on_open_and_save
-            },
-            diagnosticsDelay = O.lang.latex.diagnostics_delay,
-            formatterLineLength = O.lang.latex.formatter_line_length,
-            forwardSearch = {
-                -- args = O.lang.latex.forward_search.args,
-                args = {},
-                executable = O.lang.latex.forward_search.executable
-            },
-            latexFormatter = O.lang.latex.latex_formatter,
-            latexindent = {
-                modifyLineBreaks = O.lang.latex.latexindent.modify_line_breaks
-            }
-        }
-    }
+  },
 }
 
 vim.g.vimtex_compiler_method = "latexmk"
