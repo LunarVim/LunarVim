@@ -87,7 +87,7 @@ vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>", { noremap = true
 vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { noremap = true, silent = true })
 
 -- close buffer
-vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete!<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
 
 -- TODO create entire treesitter section
 
@@ -121,14 +121,14 @@ local mappings = {
       "sort BufferLines automatically by language",
     },
   },
-    p = {
-        name = "Packer",
-        c = {"<cmd>PackerCompile<cr>", "Compile"},
-        i = {"<cmd>PackerInstall<cr>", "Install"},
-        r = {":luafile %<cr>", "Reload"},
-        s = {"<cmd>PackerSync<cr>", "Sync"},
-        u = {"<cmd>PackerUpdate<cr>", "Update"}
-    },
+  p = {
+    name = "Packer",
+    c = { "<cmd>PackerCompile<cr>", "Compile" },
+    i = { "<cmd>PackerInstall<cr>", "Install" },
+    r = { ":luafile %<cr>", "Reload" },
+    s = { "<cmd>PackerSync<cr>", "Sync" },
+    u = { "<cmd>PackerUpdate<cr>", "Update" },
+  },
   -- diagnostics vanilla nvim
   -- -- diagnostic
   -- function lv_utils.get_all()
@@ -158,20 +158,20 @@ local mappings = {
   -- "   https://microsoft.github.io/debug-adapter-protocol/
   -- " Debugging
   d = {
-      name = "Debug",
-      t = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint"},
-      b = {"<cmd>lua require'dap'.step_back()<cr>", "Step Back"},
-      c = {"<cmd>lua require'dap'.continue()<cr>", "Continue"},
-      C = {"<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor"},
-      d = {"<cmd>lua require'dap'.disconnect()<cr>", "Disconnect"},
-      g = {"<cmd>lua require'dap'.session()<cr>", "Get Session"},
-      i = {"<cmd>lua require'dap'.step_into()<cr>", "Step Into"},
-      o = {"<cmd>lua require'dap'.step_over()<cr>", "Step Over"},
-      u = {"<cmd>lua require'dap'.step_out()<cr>", "Step Out"},
-      p = {"<cmd>lua require'dap'.pause.toggle()<cr>", "Pause"},
-      r = {"<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl"},
-      s = {"<cmd>lua require'dap'.continue()<cr>", "Start"},
-      q = {"<cmd>lua require'dap'.stop()<cr>", "Quit"}
+    name = "Debug",
+    t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+    b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
+    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+    C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
+    d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
+    g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+    o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+    u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+    p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
+    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+    s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
+    q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
   },
   g = {
     name = "Git",
