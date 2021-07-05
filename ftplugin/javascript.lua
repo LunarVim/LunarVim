@@ -44,28 +44,28 @@ if O.lang.tsserver.autoformat then
 
         "BufWritePre",
         "*.js",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+        "lua vim.lsp.buf.formatting_seq_sync(nil, 1000)",
       },
     },
     _javascriptreact_autoformat = {
       {
         "BufWritePre",
         "*.jsx",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+        "lua vim.lsp.buf.formatting_seq_sync(nil, 1000)",
       },
     },
     _typescript_autoformat = {
       {
         "BufWritePre",
         "*.ts",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+        "lua vim.lsp.buf.formatting_seq_sync(nil, 1000)",
       },
     },
     _typescriptreact_autoformat = {
       {
         "BufWritePre",
         "*.tsx",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+        "lua vim.lsp.buf.formatting_seq_sync(nil, 1000)",
       },
     },
   }

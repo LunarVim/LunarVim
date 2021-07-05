@@ -7,14 +7,9 @@ require("lspconfig").jsonls.setup {
   },
   on_attach = require("lsp").common_on_attach,
 
-  commands = {
-    Format = {
-      function()
-        vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
-      end,
-    },
-  },
 }
+
+require("lsp.ts-fmt-lint").setup()
 
 if O.lang.json.autoformat then
   require("lv-utils").define_augroups {
@@ -22,7 +17,7 @@ if O.lang.json.autoformat then
       {
         "BufWritePre",
         "*.json",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+        "lua vim.lsp.buf.formatting_seq_sync(nil, 1000)",
       },
     },
   }
