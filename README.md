@@ -110,5 +110,9 @@ cd ~/.config/nvim && git pull
 
 - [Twitter](https://twitter.com/chrisatmachine)
 
+## Testimonials
+
+> "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
+> - @juanCortelezzi, LunarVim user.
 
 

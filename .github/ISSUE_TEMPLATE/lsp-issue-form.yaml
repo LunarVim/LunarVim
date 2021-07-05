@@ -1,7 +1,7 @@
-name: General Issue
-description: File a bug report
+name: LSP Issue
+description: File a LSP related bug report
 title: "[Bug]: "
-labels: [bug]
+labels: [bug, lsp]
 # assignees:
 #   - ChristianChiarulli 
 body:
@@ -22,6 +22,20 @@ body:
         4. See error
     validations:
       required: true
+  - type: checkboxes
+    id: generic-checks
+    attributes:
+      label: Check the following
+      options:
+      - label: I am in a git managed directory
+        required: true
+      - label: I restarted Neovim after running :LspInstall
+        required: true
+      - label: I have a valid language configuration (~/.config/nvim/ftplugin/)
+        required: true
+      - label: I checked the options (~/.config/nvim/lv-config.lua)
+        required: true
+      - label: The programs specified by the config are installed
   - type: input
     id: lunar-vim-version
     attributes:
@@ -40,9 +54,13 @@ body:
     attributes:
       label: Relevant log output
       placeholder: |
-        nvim -v
-        :checkhealth
+        :echo &ft
+        :LspInfo
+
+        :LspStart <language>
         :messages
+        :checkhealth
+        grep ERROR ~/.cache/nvim/lsp.log
       render: shell
   - type: textarea
     id: screenshots
@@ -50,7 +68,7 @@ body:
       label: Screenshots
       description: If applicable, add screenshots to help explain your problem
   - type: checkboxes
-    id: checks
+    id: documentation-checks
     attributes:
       label: I have
       options:
@@ -60,4 +78,3 @@ body:
         required: true
       - label: Searched for similar issues
         required: true
-
