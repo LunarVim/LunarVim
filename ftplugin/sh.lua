@@ -15,10 +15,6 @@ local shellcheck = {
   lintFormats = { "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m", "%f:%l:%c: %tote: %m" },
 }
 
-if O.lang.sh.formatter == "shfmt" then
-  table.insert(sh_arguments, shfmt)
-end
-
 if O.lang.sh.linter == "shellcheck" then
   table.insert(sh_arguments, shellcheck)
 end

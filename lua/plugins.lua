@@ -32,7 +32,7 @@ return require("packer").startup(function(use)
 
   -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
-  use { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" }
+  use { "kabouzeid/nvim-lspinstall" }
   -- Telescope
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
@@ -65,6 +65,9 @@ return require("packer").startup(function(use)
 
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+
+  -- Neoformat
+  use { "sbdchd/neoformat", event = "BufEnter" }
 
   use {
     "kyazdani42/nvim-tree.lua",
@@ -115,12 +118,20 @@ return require("packer").startup(function(use)
   use { "glepnir/galaxyline.nvim" }
 
   use {
-    "akinsho/nvim-bufferline.lua",
+    "romgrk/barbar.nvim",
     config = function()
-      require("lv-bufferline").config()
+      vim.api.nvim_set_keymap("n", "<TAB>", ":BufferNext<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<S-TAB>", ":BufferPrevious<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<S-x>", ":BufferClose<CR>", { noremap = true, silent = true })
     end,
-    event = "BufRead",
+    -- event = "BufRead",
   }
+
+  -- use {
+  --     "akinsho/nvim-bufferline.lua",
+  --     config = function() require("lv-bufferline").config() end,
+  --     event = "BufRead"
+  -- }
 
   -- Extras, these do not load by default
 
@@ -221,7 +232,11 @@ return require("packer").startup(function(use)
       vim.g.indentLine_enabled = 1
       vim.g.indent_blankline_char = "▏"
 
-      vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard" }
+      vim.g.indent_blankline_filetype_exclude = {
+        "help",
+        "terminal",
+        "dashboard",
+      }
       vim.g.indent_blankline_buftype_exclude = { "terminal" }
 
       vim.g.indent_blankline_show_trailing_blankline_indent = false
@@ -253,9 +268,14 @@ return require("packer").startup(function(use)
   use {
     "mfussenegger/nvim-dap",
     config = function()
-        require('dap')
-        vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-        require('dap').defaults.fallback.terminal_win_cmd = '50vsplit new'
+      require "dap"
+      vim.fn.sign_define("DapBreakpoint", {
+        text = "",
+        texthl = "LspDiagnosticsSignError",
+        linehl = "",
+        numhl = "",
+      })
+      require("dap").defaults.fallback.terminal_win_cmd = "50vsplit new"
     end,
     disable = not O.plugin.debug.active,
   }
@@ -412,8 +432,7 @@ return require("packer").startup(function(use)
   }
 
   -- LANGUAGE SPECIFIC GOES HERE
-
-  use { "lervag/vimtex", ft = "tex" }
+  use { "lervag/vimtex", ft = "tex", config = function() require("lv-vimtex") end }
 
   -- Rust tools
   -- TODO: use lazy loading maybe?
@@ -435,7 +454,7 @@ return require("packer").startup(function(use)
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-    }
+    },
   }
   -- use {
   --   "jose-elias-alvarez/null-ls.nvim",
@@ -477,4 +496,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.ts_hintobjects.active,
   }
 
+  for _, plugin in pairs(O.custom_plugins) do
+    packer.use(plugin)
+  end
 end)
