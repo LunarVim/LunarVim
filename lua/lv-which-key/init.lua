@@ -321,3 +321,8 @@ end
 
 local wk = require "which-key"
 wk.register(mappings, opts)
+
+if O.plugin.lightspeed.active then
+  local ops = { mode = "o" }
+  wk.register({ ["z"] = "Light speed", ["Z"] = "Light speed bwd" }, ops)
+end
