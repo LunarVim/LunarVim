@@ -292,4 +292,11 @@ require("lv-utils").define_augroups {
     -- will cause split windows to be resized evenly if main window is resized
     {'VimResized ', '*', 'wincmd ='},
   },
+  _mode_switching = {
+    -- will switch between absolute and relative line numbers depending on mode
+    {'InsertEnter', '*', 'if &relativenumber | let g:ms_relativenumberoff = 1 | setlocal number norelativenumber | endif'},
+    {'InsertLeave', '*', 'if exists("g:ms_relativenumberoff") | setlocal relativenumber | endif'},
+    {'InsertEnter', '*', 'if &cursorline | let g:ms_cursorlineoff = 1 | setlocal nocursorline | endif'},
+    {'InsertLeave', '*', 'if exists("g:ms_cursorlineoff") | setlocal cursorline | endif'},
+  },
 }
