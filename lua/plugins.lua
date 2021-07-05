@@ -432,8 +432,7 @@ return require("packer").startup(function(use)
   }
 
   -- LANGUAGE SPECIFIC GOES HERE
-
-  use { "lervag/vimtex", ft = "tex" }
+  use { "lervag/vimtex", ft = "tex", config = function() require("lv-vimtex") end }
 
   -- Rust tools
   -- TODO: use lazy loading maybe?
