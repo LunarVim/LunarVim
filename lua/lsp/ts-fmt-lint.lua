@@ -17,7 +17,7 @@ M.setup = function()
         lintFormats = {"%f:%l:%c: %m"},
     }
 
-    if vim.fn.glob("node_modules/.bin/prettier") then
+    if vim.fn.glob("node_modules/.bin/prettier") ≃ "" then
         prettier = {
             formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
             formatStdin = true
