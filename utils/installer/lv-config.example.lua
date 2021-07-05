@@ -20,8 +20,9 @@ O.smart_case = true
 O.lushmode = false
 O.transparent_window = false
 
+-- TODO User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-O.plugin.hop.active = false
+O.bultin_plugin.hop.active = false
 O.plugin.dial.active = false
 O.plugin.dashboard.active = true
 O.plugin.matchup.active = false
@@ -95,11 +96,9 @@ O.lang.php.diagnostics.signs = true
 O.lang.php.diagnostics.underline = true
 O.lang.php.filetypes = { "php", "phtml" }
 
--- TODO Autocommands
--- https://neovim.io/doc/user/autocmd.html
--- local test = { "BufWinEnter", "*", "echo \"hi again\""}
--- table.insert(O.user_autocommands, test)
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
 
--- TODO Additional Plugins
+-- Additional Plugins
+-- O.custom_plugins = {{"windwp/nvim-ts-autotag"}}
 
--- TODO User Config for plugins

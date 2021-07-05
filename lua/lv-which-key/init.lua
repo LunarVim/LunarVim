@@ -299,7 +299,7 @@ if O.plugin.telescope_project.active then
     ":lua require'telescope'.extensions.project.project{}<CR>",
     { noremap = true, silent = true }
   )
-  mappings["p"] = "Projects"
+  mappings["P"] = "Projects"
 end
 
 -- [";"] = "Dashboard",

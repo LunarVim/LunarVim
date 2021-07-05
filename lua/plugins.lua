@@ -459,4 +459,6 @@ return require("packer").startup(function(use)
     requires = "hrsh7th/nvim-compe",
     disable = not O.plugin.tabnine.active,
   }
+  for _, plugin in pairs(O.custom_plugins) do packer.use(plugin) end
+
 end)
