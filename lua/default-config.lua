@@ -70,8 +70,10 @@ O = {
     telescope_project = { active = false },
     dap_install = { active = false },
     tabnine = { active = false },
-    quickscope = { active = false, 
-        on_keys = {'f', 'F', 't', 'T'} -- Comment this line to have it always visible
+    quickscope = {
+      active = false,
+      event = "BufRead", -- Comment out this line to only load quickscope when keys are pressed. Then run :PackerSync
+      on_keys = { "f", "F", "t", "T" }, -- Comment this line to have it always visible
     },
   },
 

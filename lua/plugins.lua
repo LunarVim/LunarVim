@@ -464,10 +464,11 @@ return require("packer").startup(function(use)
   use {
     "unblevable/quick-scope",
     keys = O.plugin.quickscope.on_keys,
-    event = (O.plugin.quickscope.on_keys ~= nil) and "BufRead" or nil,
+    event = O.plugin.quickscope.event,
     config = function()
         vim.g.qs_highlight_on_keys = O.plugin.quickscope.on_keys
     end,
     disable = not O.plugin.quickscope.active,
   }
+
 end)
