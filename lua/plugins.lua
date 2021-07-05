@@ -422,6 +422,9 @@ return require("packer").startup(function(use)
     disable = not O.lang.rust.rust_tools.active,
   }
 
+  -- Justfile
+  use { "NoahTheDuke/vim-just", ft = "just" }
+
   -- Elixir
   use { "elixir-editors/vim-elixir", ft = { "elixir", "eelixir", "euphoria3" } }
 
