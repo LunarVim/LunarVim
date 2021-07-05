@@ -459,4 +459,12 @@ return require("packer").startup(function(use)
     requires = "hrsh7th/nvim-compe",
     disable = not O.plugin.tabnine.active,
   }
+
+  -- Vim quick-scope See jumpable characters
+  use {
+    "unblevable/quick-scope",
+    disable = not O.plugin.quickscope.active,
+    event = "BufRead",
+  }
+
 end)
