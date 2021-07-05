@@ -12,11 +12,3 @@ require("lspconfig").solargraph.setup {
   },
   filetypes = O.lang.ruby.filetypes,
 }
-
-if O.lang.ruby.autoformat then
-  require("lv-utils").define_augroups {
-    _ruby_format = {
-      { "BufWritePre", "*.rb", "lua vim.lsp.buf.formatting_sync(nil,1000)" },
-    },
-  }
-end
