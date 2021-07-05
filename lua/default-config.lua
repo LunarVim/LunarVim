@@ -176,7 +176,7 @@ O = {
       filetypes = { "rb", "erb", "rakefile", "ruby" },
     },
     go = {},
-    elixir = {},
+    elixir = { autoformat = false },
     vim = {},
     yaml = {},
     terraform = {},
