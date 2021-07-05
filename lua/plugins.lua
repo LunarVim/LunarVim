@@ -412,6 +412,17 @@ return require("packer").startup(function(use)
         disable = not O.plugin.dap_install.active
     }
 
+    -- Editorconfig support
+    use {
+        event = "BufRead",
+        "editorconfig/editorconfig-vim",
+        config = function()
+            require 'lv-editorconfig'
+        end,
+        disable = not O.plugin.editorconfig.active,
+        opt = true
+    }
+
     -- LANGUAGE SPECIFIC GOES HERE
 
     -- Latex TODO what filetypes should this be active for?
