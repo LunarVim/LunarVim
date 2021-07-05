@@ -31,6 +31,10 @@ O = {
     rainbow = { enabled = false },
   },
 
+  lsp = {
+    popup_border = "single"
+  },
+
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
 
   plugin = {
