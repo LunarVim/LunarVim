@@ -432,22 +432,22 @@ return require("packer").startup(function(use)
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-    },
+    }
   }
-  use {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-    },
-    config = function()
-      require("null-ls").setup()
-    end,
-  }
+  -- use {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   ft = {
+  --     "javascript",
+  --     "javascriptreact",
+  --     "javascript.jsx",
+  --     "typescript",
+  --     "typescriptreact",
+  --     "typescript.tsx",
+  --   },
+  --   config = function()
+  --     require("null-ls").setup()
+  --   end,
+  -- }
 
   -- Tabnine
   use {
