@@ -422,6 +422,13 @@ return require("packer").startup(function(use)
     disable = not O.lang.rust.rust_tools.active,
   }
 
+  -- Flutter tools
+  use {
+    "akinsho/flutter-tools.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    disable = not O.lang.dart.flutter_tools.active,
+  }
+
   -- Elixir
   use { "elixir-editors/vim-elixir", ft = { "elixir", "eelixir", "euphoria3" } }
 
