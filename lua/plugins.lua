@@ -419,7 +419,6 @@ return require("packer").startup(function(use)
       require 'lv-editorconfig'
     end,
     disable = not O.plugin.editorconfig.active,
-    opt = true
   }
 
   -- LANGUAGE SPECIFIC GOES HERE
