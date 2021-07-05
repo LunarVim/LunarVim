@@ -290,10 +290,7 @@ return require("packer").startup(function(use)
     "numToStr/FTerm.nvim",
     event = "BufRead",
     config = function()
-      require("FTerm").setup {
-        dimensions = { height = 0.8, width = 0.8, x = 0.5, y = 0.5 },
-        border = "single", -- or 'double'
-      }
+        require('lv-floatterm').config()
     end,
     disable = not O.plugin.floatterm.active,
   }
@@ -385,12 +382,6 @@ return require("packer").startup(function(use)
     end,
     disable = not O.plugin.gitlinker.active,
     requires = "nvim-lua/plenary.nvim",
-  }
-  -- Lazygit
-  use {
-    "kdheepak/lazygit.nvim",
-    cmd = "LazyGit",
-    disable = not O.plugin.lazygit.active,
   }
   -- Octo
   use {
