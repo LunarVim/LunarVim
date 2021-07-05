@@ -101,7 +101,7 @@ installpacker() {
 cloneconfig() {
 	echo "Cloning LunarVim configuration"
 	git clone https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
-	# mv $HOME/.config/nvim/init.lua $HOME/.config/nvim/init.lua.tmp
+	mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
 	# mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
 	nvim -u $HOME/.config/nvim/init.lua +PackerInstall
 	# rm $HOME/.config/nvim/init.lua
@@ -192,16 +192,16 @@ else
 fi
 
 if [ -e "$HOME/.config/nvim/init.lua" ]; then
-	echo 'nvcode already installed'
+	echo 'LunarVim already installed'
 else
 	# clone config down
 	cloneconfig
 	# echo 'export PATH=$HOME/.config/nvim/utils/bin:$PATH' >>~/.zshrc
-	# echo 'export PATH=$HOME/.config/nvcode/utils/bin:$PATH' >>~/.bashrc
+	# echo 'export PATH=$HOME/.config/lunarvim/utils/bin:$PATH' >>~/.bashrc
 fi
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 
 # echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
 
-# echo 'export PATH=/home/$USER/.config/nvcode/utils/bin:$PATH appending to zshrc/bashrc'
+# echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'

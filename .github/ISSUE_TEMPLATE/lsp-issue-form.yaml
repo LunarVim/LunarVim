@@ -1,0 +1,80 @@
+name: LSP Issue
+description: File a LSP related bug report
+title: "[Bug]: "
+labels: [bug, lsp]
+# assignees:
+#   - ChristianChiarulli 
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve !
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem description
+      description: Also tell us, what did you expect to happen?
+      placeholder: |
+        Steps to reproduce the behavior:
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: checkboxes
+    id: generic-checks
+    attributes:
+      label: Check the following
+      options:
+      - label: I am in a git managed directory
+        required: true
+      - label: I restarted Neovim after running :LspInstall
+        required: true
+      - label: I have a valid language configuration (~/.config/nvim/ftplugin/)
+        required: true
+      - label: I checked the options (~/.config/nvim/lv-config.lua)
+        required: true
+      - label: The programs specified by the config are installed
+  - type: input
+    id: lunar-vim-version
+    attributes:
+      label: LunarVim version
+    validations:
+      required: true
+  - type: input
+    id: nvim-version
+    attributes:
+      label: Neovim version (>= 0.5)
+      placeholder: nvim --version
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      placeholder: |
+        :echo &ft
+        :LspInfo
+
+        :LspStart <language>
+        :messages
+        :checkhealth
+        grep ERROR ~/.cache/nvim/lsp.log
+      render: shell
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem
+  - type: checkboxes
+    id: documentation-checks
+    attributes:
+      label: I have
+      options:
+      - label: Read the readme
+        required: true
+      - label: Read the wiki
+        required: true
+      - label: Searched for similar issues
+        required: true
