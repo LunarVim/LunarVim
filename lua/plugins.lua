@@ -256,9 +256,9 @@ return require("packer").startup(function(use)
   use {
     "mfussenegger/nvim-dap",
     config = function()
-      require "dap"
-      vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
-      require("dap").defaults.fallback.terminal_win_cmd = "50vsplit new"
+        require('dap')
+        vim.fn.sign_define('DapBreakpoint', {text='', texthl='LspDiagnosticsSignError', linehl='', numhl=''})
+        require('dap').defaults.fallback.terminal_win_cmd = '50vsplit new'
     end,
     disable = not O.plugin.debug.active,
   }
@@ -462,4 +462,6 @@ return require("packer").startup(function(use)
     requires = "hrsh7th/nvim-compe",
     disable = not O.plugin.tabnine.active,
   }
+  for _, plugin in pairs(O.custom_plugins) do packer.use(plugin) end
+
 end)

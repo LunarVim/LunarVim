@@ -104,7 +104,7 @@ table.insert(gls.left, {
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
       return "▊"
     end,
-    -- highlight = 'TabLineSel'
+    highlight = 'StatusLineNC'
     -- highlight = {colors.red, colors.bg}
   },
 })

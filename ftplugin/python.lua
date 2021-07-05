@@ -58,7 +58,8 @@ require("lspconfig").pyright.setup {
     },
   },
 }
-if O.plugin.dap_install.active then
-  local dap_install = require "dap-install"
+
+if O.plugin.debug.active and O.plugin.dap_install.active then
+  local dap_install = require("dap-install")
   dap_install.config("python_dbg", {})
 end

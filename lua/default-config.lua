@@ -39,42 +39,59 @@ O = {
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
 
   plugin = {
-    hop = { active = false },
-    dial = { active = false },
+    -- TODO remove non built-ins
+    -- Builtins
     dashboard = { active = false },
-    matchup = { active = false },
     colorizer = { active = false },
-    numb = { active = false },
     zen = { active = false },
     ts_playground = { active = false },
-    indent_line = { active = false },
     ts_context_commentstring = { active = false },
+    telescope_fzy = { active = false },
+    telescope_project = { active = false },
+    indent_line = { active = false },
     symbol_outline = { active = false },
     debug = { active = false },
+    dap_install = { active = false },
+    lazygit = { active = false },
+    lush = { active = false },
+    diffview = { active = false },
+
+    ----------------------------------------------------------------------
+    -- Non builtins
+
+    octo = { active = false },
+    gitlinker = { active = false },
+    todo_comments = { active = false },
+    gist = { active = false },
+    git_blame = { active = false },
+    lsp_colors = { active = false },
+    ranger = { active = false },
+    hop = { active = false },
+    dial = { active = false },
+    matchup = { active = false },
+    numb = { active = false },
     bqf = { active = false },
     trouble = { active = false },
     floatterm = { active = false },
     spectre = { active = false },
     lsp_rooter = { active = false },
     markdown_preview = { active = false },
+    bracey = { active = false },
     codi = { active = false },
-    telescope_fzy = { active = false },
     sanegx = { active = false },
     snap = { active = false },
-    ranger = { active = false },
-    todo_comments = { active = false },
-    lsp_colors = { active = false },
-    git_blame = { active = false },
-    gist = { active = false },
-    gitlinker = { active = false },
-    lazygit = { active = false },
-    octo = { active = false },
-    lush = { active = false },
-    diffview = { active = false },
-    bracey = { active = false },
-    telescope_project = { active = false },
-    dap_install = { active = false },
     tabnine = { active = false },
+
+
+
+  },
+
+  custom_plugins = {
+    -- use lv-config.lua for this not put here
+  },
+
+  user_autocommands = {
+    { "FileType", "qf", "set nobuflisted" },
   },
 
   lang = {
@@ -222,52 +239,5 @@ O = {
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠁⠀⠀⠈⠉⠉⠀⠉⠀⠀⠈⠉⠀⠀⠀⠉⠉⠀⠀⠀⠉⠉⠁⠈⠉⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠁⠀⠉⠁⠀⠉⠁⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
     },
     footer = { "chrisatmachine.com" },
-  },
-}
-
--- TODO find a new home for these autocommands
-require("lv-utils").define_augroups {
-  _general_settings = {
-    {
-      "TextYankPost",
-      "*",
-      "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
-    },
-    {
-      "BufWinEnter",
-      "*",
-      "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-    },
-    {
-      "BufRead",
-      "*",
-      "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-    },
-    {
-      "BufNewFile",
-      "*",
-      "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-    },
-    { "VimLeavePre", "*", "set title set titleold=" },
-    { "FileType", "qf", "set nobuflisted" },
-  },
-  -- _solidity = {
-  --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
-  --     {'BufNewFile', '*.sol', 'setlocal filetype=solidity'}
-  -- },
-  -- _gemini = {
-  --     {'BufWinEnter', '.gmi', 'setlocal filetype=markdown'}, {'BufRead', '*.gmi', 'setlocal filetype=markdown'},
-  --     {'BufNewFile', '*.gmi', 'setlocal filetype=markdown'}
-  -- },
-  _markdown = {
-    { "FileType", "markdown", "setlocal wrap" },
-    { "FileType", "markdown", "setlocal spell" },
-  },
-  _buffer_bindings = {
-    { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
-  },
-  _auto_resize = {
-    -- will cause split windows to be resized evenly if main window is resized
-    { "VimResized ", "*", "wincmd =" },
   },
 }
