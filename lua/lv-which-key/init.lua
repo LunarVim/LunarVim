@@ -150,23 +150,22 @@ local mappings = {
   -- " Debug Adapter protocol:
   -- "   https://microsoft.github.io/debug-adapter-protocol/
   -- " Debugging
-  -- command! DebugToggleBreakpoint lua require'dap'.toggle_breakpoint()
-  -- command! DebugStart lua require'dap'.continue()
-  -- command! DebugContinue lua require'dap'.continue()
-  -- command! DebugStepOver lua require'dap'.step_over()
-  -- command! DebugStepOut lua require'dap'.step_out()
-  -- command! DebugStepInto lua require'dap'.step_into()
-  -- command! DebugToggleRepl lua require'dap'.repl.toggle()
-  -- command! DebugGetSession lua require'dap'.session()
-  -- D = {
-  --     name = "Debug",
-  --     b = {"<cmd>DebugToggleBreakpoint<cr>", "Toggle Breakpoint"},
-  --     c = {"<cmd>DebugContinue<cr>", "Continue"},
-  --     i = {"<cmd>DebugStepInto<cr>", "Step Into"},
-  --     o = {"<cmd>DebugStepOver<cr>", "Step Over"},
-  --     r = {"<cmd>DebugToggleRepl<cr>", "Toggle Repl"},
-  --     s = {"<cmd>DebugStart<cr>", "Start"}
-  -- },
+  d = {
+      name = "Debug",
+      t = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint"},
+      b = {"<cmd>lua require'dap'.step_back()<cr>", "Step Back"},
+      c = {"<cmd>lua require'dap'.continue()<cr>", "Continue"},
+      C = {"<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor"},
+      d = {"<cmd>lua require'dap'.disconnect()<cr>", "Disconnect"},
+      g = {"<cmd>lua require'dap'.session()<cr>", "Get Session"},
+      i = {"<cmd>lua require'dap'.step_into()<cr>", "Step Into"},
+      o = {"<cmd>lua require'dap'.step_over()<cr>", "Step Over"},
+      u = {"<cmd>lua require'dap'.step_out()<cr>", "Step Out"},
+      p = {"<cmd>lua require'dap'.pause.toggle()<cr>", "Pause"},
+      r = {"<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl"},
+      s = {"<cmd>lua require'dap'.continue()<cr>", "Start"},
+      q = {"<cmd>lua require'dap'.stop()<cr>", "Quit"}
+  },
   g = {
     name = "Git",
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -263,17 +262,17 @@ if O.plugin.spectre.active then
   }
 end
 
-if O.plugin.trouble.active then
-  mappings["d"] = {
-    name = "Diagnostics",
-    t = { "<cmd>TroubleToggle<cr>", "trouble" },
-    w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
-    d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document" },
-    q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-    l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-    r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
-  }
-end
+-- if O.plugin.trouble.active then
+--   mappings["d"] = {
+--     name = "Diagnostics",
+--     t = { "<cmd>TroubleToggle<cr>", "trouble" },
+--     w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
+--     d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document" },
+--     q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+--     l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+--     r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+--   }
+-- end
 
 if O.plugin.gitlinker.active then
   mappings["gy"] = "Gitlink"

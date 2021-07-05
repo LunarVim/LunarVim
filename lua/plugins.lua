@@ -253,7 +253,11 @@ return require("packer").startup(function(use)
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
-    event = "BufRead",
+    config = function()
+        require('dap')
+        vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+        require('dap').defaults.fallback.terminal_win_cmd = '50vsplit new'
+    end,
     disable = not O.plugin.debug.active,
   }
   -- Better quickfix
@@ -404,7 +408,7 @@ return require("packer").startup(function(use)
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
-    event = "BufRead",
+    -- event = "BufRead",
     disable = not O.plugin.dap_install.active,
   }
 
