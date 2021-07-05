@@ -284,4 +284,8 @@ require("lv-utils").define_augroups {
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
+  _auto_reload = {
+    -- will check for external file changes on cursor hold
+    {'CursorHold', '*', 'silent! checktime'},
+  },
 }
