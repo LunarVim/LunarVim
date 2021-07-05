@@ -5,8 +5,7 @@ Linters should be
 filled in as strings with either
 a global executable or a path to
 an executable
-]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
 O.format_on_save = true
 O.auto_complete = true
@@ -23,7 +22,7 @@ O.transparent_window = false
 
 -- TODO User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-O.bultin_plugin.hop.active = false
+O.plugin.hop.active = false
 O.plugin.dial.active = false
 O.plugin.dashboard.active = true
 O.plugin.matchup.active = false
@@ -40,7 +39,7 @@ O.plugin.zen.active = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
-O.treesitter.ignore_install = { "haskell" }
+O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
 
 O.lang.clang.diagnostics.virtual_text = true
@@ -65,7 +64,7 @@ O.lang.tsserver.linter = nil
 O.lang.php.environment.php_version = "7.4"
 O.lang.php.diagnostics.signs = true
 O.lang.php.diagnostics.underline = true
-O.lang.php.filetypes = { "php", "phtml" }
+O.lang.php.filetypes = {"php", "phtml"}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
