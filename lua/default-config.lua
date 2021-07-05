@@ -29,6 +29,29 @@ O = {
     ignore_install = { "haskell" },
     highlight = { enabled = true },
     rainbow = { enabled = false },
+    -- The below are for treesitter-textobjects plugin
+    textobj_prefixes = {
+      goto_next = "]", -- Go to next
+      goto_previous = "[", -- Go to previous
+      inner = "i", -- Select inside
+      outer = "a", -- Selct around
+      swap = "<leader>a", -- Swap with next
+    },
+    textobj_suffixes = {
+      -- Start and End respectively for the goto keys
+      -- for other keys it only uses the first
+      ["function"] = { "f", "F" },
+      ["class"] = { "m", "M" },
+      ["parameter"] = { "a", "A" },
+      ["block"] = { "k", "K" },
+      ["conditional"] = { "i", "I" },
+      ["call"] = { "c", "C" },
+      ["loop"] = { "l", "L" },
+      ["statement"] = { "s", "S" },
+      ["comment"] = { "/", "?" },
+    },
+    -- The below is for treesitter hint textobjects plugin
+    hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
   },
 
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
@@ -70,6 +93,9 @@ O = {
     telescope_project = { active = false },
     dap_install = { active = false },
     tabnine = { active = false },
+    ts_hintobjects = { active = false },
+    ts_textobjects = { active = false },
+    ts_textsubjects = { active = false },
   },
 
   lang = {
