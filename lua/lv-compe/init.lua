@@ -31,7 +31,6 @@ M.config = function()
       nvim_lua = false,
       spell = { kind = "   (Spell)" },
       tags = false,
-      vim_dadbod_completion = true,
       -- snippets_nvim = {kind = "  "},
       -- ultisnips = {kind = "  "},
       -- treesitter = {kind = "  "},
