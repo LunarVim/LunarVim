@@ -478,6 +478,24 @@ return require("packer").startup(function(use)
     requires = "hrsh7th/nvim-compe",
     disable = not O.plugin.tabnine.active,
   }
+
+  -- Custom semantic text objects
+  use {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    disable = not O.plugin.ts_textobjects.active,
+  }
+  -- Smart text objects
+  use {
+    "RRethy/nvim-treesitter-textsubjects",
+    disable = not O.plugin.ts_textsubjects.active,
+  }
+  -- Text objects using hint labels
+  use {
+    "mfussenegger/nvim-ts-hint-textobject",
+    event = "BufRead",
+    disable = not O.plugin.ts_hintobjects.active,
+  }
+
   for _, plugin in pairs(O.custom_plugins) do
     packer.use(plugin)
   end

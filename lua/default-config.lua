@@ -30,6 +30,29 @@ O = {
     ignore_install = { "haskell" },
     highlight = { enabled = true },
     rainbow = { enabled = false },
+    -- The below are for treesitter-textobjects plugin
+    textobj_prefixes = {
+      goto_next = "]", -- Go to next
+      goto_previous = "[", -- Go to previous
+      inner = "i", -- Select inside
+      outer = "a", -- Selct around
+      swap = "<leader>a", -- Swap with next
+    },
+    textobj_suffixes = {
+      -- Start and End respectively for the goto keys
+      -- for other keys it only uses the first
+      ["function"] = { "f", "F" },
+      ["class"] = { "m", "M" },
+      ["parameter"] = { "a", "A" },
+      ["block"] = { "k", "K" },
+      ["conditional"] = { "i", "I" },
+      ["call"] = { "c", "C" },
+      ["loop"] = { "l", "L" },
+      ["statement"] = { "s", "S" },
+      ["comment"] = { "/", "?" },
+    },
+    -- The below is for treesitter hint textobjects plugin
+    hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
   },
 
   lsp = {
@@ -46,6 +69,9 @@ O = {
     zen = { active = false },
     ts_playground = { active = false },
     ts_context_commentstring = { active = false },
+    ts_hintobjects = { active = false },
+    ts_textobjects = { active = false },
+    ts_textsubjects = { active = false },
     telescope_fzy = { active = false },
     telescope_project = { active = false },
     indent_line = { active = false },
@@ -81,9 +107,6 @@ O = {
     sanegx = { active = false },
     snap = { active = false },
     tabnine = { active = false },
-
-
-
   },
 
   custom_plugins = {
