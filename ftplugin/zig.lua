@@ -8,7 +8,6 @@ require("lspconfig").zls.setup {
 }
 require("lv-utils").define_augroups {
   _zig_autoformat = {
-    { "BufWritePre", "*.zig", "lua vim.lsp.buf.formatting_sync(nil, 1000)" },
     { "BufEnter", "*.zig", ':lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")' },
   },
 }

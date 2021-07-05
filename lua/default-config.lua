@@ -4,7 +4,7 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 
 O = {
-
+  format_on_save = true,
   auto_close_tree = 0,
   auto_complete = true,
   colorscheme = "lunar",
@@ -33,7 +33,7 @@ O = {
   },
 
   lsp = {
-    popup_border = "single"
+    popup_border = "single",
   },
 
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
@@ -97,9 +97,6 @@ O = {
   lang = {
     python = {
       linter = "",
-      -- @usage can be 'yapf', 'black'
-      formatter = "",
-      autoformat = false,
       isort = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -116,9 +113,6 @@ O = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
     },
     lua = {
-      -- @usage can be 'lua-format'
-      formatter = "",
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -129,8 +123,6 @@ O = {
       -- @usage can be 'shellcheck'
       linter = "",
       -- @usage can be 'shfmt'
-      formatter = "",
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -140,9 +132,6 @@ O = {
     tsserver = {
       -- @usage can be 'eslint'
       linter = "",
-      -- @usage can be 'prettier'
-      formatter = "",
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -150,9 +139,6 @@ O = {
       },
     },
     json = {
-      -- @usage can be 'prettier'
-      formatter = "",
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -178,7 +164,6 @@ O = {
       },
       cross_file_rename = true,
       header_insertion = "never",
-      autoformat = false, -- update this to true for enabling autoformat
     },
     ruby = {
       diagnostics = {
@@ -198,8 +183,6 @@ O = {
         active = false,
       },
       linter = "",
-      formatter = "",
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -208,13 +191,9 @@ O = {
     },
     svelte = {},
     php = {
-      format = {
-        braces = "psr12",
-      },
       environment = {
         php_version = "7.4",
       },
-      autoformat = false,
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
@@ -233,8 +212,6 @@ O = {
     cmake = {},
     java = {},
     css = {
-      formatter = "",
-      autoformat = false,
       virtual_text = true,
     },
   },
@@ -264,5 +241,3 @@ O = {
     footer = { "chrisatmachine.com" },
   },
 }
-
-

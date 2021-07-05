@@ -91,11 +91,3 @@ vim.api.nvim_exec(
     ]],
   true
 )
-
-if O.lang.rust.autoformat then
-  require("lv-utils").define_augroups {
-    _rust_format = {
-      { "BufWritePre", "*.rs", "lua vim.lsp.buf.formatting_sync(nil,1000)" },
-    },
-  }
-end
