@@ -17,6 +17,6 @@ end
 local user_init = nvim_user_init_root() .. "/init-user.lua"
 
 if vim.fn.filereadable(user_init) == 1 then
-    package.path = package.path .. ';' .. nvim_user_init_root() .. '/?.lua'
+    package.path = package.path .. ';' .. nvim_user_init_root() .. '/init-user.lua'
     require('init-user')
 end
