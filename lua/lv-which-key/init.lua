@@ -121,7 +121,14 @@ local mappings = {
       "sort BufferLines automatically by language",
     },
   },
-
+    p = {
+        name = "Packer",
+        c = {"<cmd>PackerCompile<cr>", "Compile"},
+        i = {"<cmd>PackerInstall<cr>", "Install"},
+        r = {":luafile %<cr>", "Reload"},
+        s = {"<cmd>PackerSync<cr>", "Sync"},
+        u = {"<cmd>PackerUpdate<cr>", "Update"}
+    },
   -- diagnostics vanilla nvim
   -- -- diagnostic
   -- function lv_utils.get_all()
