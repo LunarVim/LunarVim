@@ -1,5 +1,6 @@
--- Permit loading vim config from outside the LunarVim managed nvim dir
--- but default to loading CONFIG_PATH/init-user.lua, if it exists..
+-- Permit loading vim config from outside the LunarVim managed nvim dir but
+-- default to loading CONFIG_PATH/init-user.lua (i.e: ~/.config/nvim/init-user)
+-- if it exists
 local function nvim_user_init_root()
     local _nvim_user_init_root = os.getenv("NVIM_USER_INIT_ROOT")
 
