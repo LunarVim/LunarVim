@@ -116,7 +116,7 @@ O = {
                 underline = true
             }
         },
-        tsserver = { 
+        tsserver = {
             -- @usage can be 'eslint'
             linter = '',
             -- @usage can be 'prettier'
