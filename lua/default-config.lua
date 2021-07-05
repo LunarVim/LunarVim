@@ -284,4 +284,11 @@ require("lv-utils").define_augroups {
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
+  _mode_switching = {
+    -- will switch between absolute and relative line numbers depending on mode
+    {'InsertEnter', '*', 'if &relativenumber | let g:backtorelative = 1 | setlocal number norelativenumber nocursorline | endif'},
+    {'InsertLeave', '*', 'if exists("g:backtorelative") | setlocal relativenumber cursorline | endif'},
+    {'WinEnter', '*', 'setlocal cursorline'},
+    {'WinLeave', '*', 'setlocal nocursorline'},
+  },
 }
