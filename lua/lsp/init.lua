@@ -20,14 +20,12 @@ vim.cmd("nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>")
 vim.cmd("nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>")
 vim.cmd("nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>")
 vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
+vim.cmd("nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>")
 -- vim.cmd('nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>')
-vim.cmd("nnoremap <silent> <C-p> :Lspsaga diagnostic_jump_prev<CR>")
-vim.cmd("nnoremap <silent> <C-n> :Lspsaga diagnostic_jump_next<CR>")
+vim.cmd("nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev()<CR>")
+vim.cmd("nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next()<CR>")
 -- scroll down hover doc or scroll in definition preview
-vim.cmd("nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
 -- scroll up hover doc
-vim.cmd("nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
 -- Set Default Prefix.
@@ -106,8 +104,48 @@ if O.document_highlight then
 end
 
 function lsp_config.tsserver_on_attach(client, bufnr)
-    lsp_config.common_on_attach(client, bufnr)
+    -- lsp_config.common_on_attach(client, bufnr)
     client.resolved_capabilities.document_formatting = false
+
+    local ts_utils = require("nvim-lsp-ts-utils")
+
+    -- defaults
+    ts_utils.setup {
+        debug = false,
+        disable_commands = false,
+        enable_import_on_completion = false,
+        import_all_timeout = 5000, -- ms
+
+        -- eslint
+        eslint_enable_code_actions = true,
+        eslint_enable_disable_comments = true,
+        eslint_bin = O.lang.tsserver.linter,
+        eslint_config_fallback = nil,
+        eslint_enable_diagnostics = true,
+
+        -- formatting
+        enable_formatting = O.lang.tsserver.autoformat,
+        formatter = O.lang.tsserver.formatter,
+        formatter_config_fallback = nil,
+
+        -- parentheses completion
+        complete_parens = false,
+        signature_help_in_parens = false,
+
+        -- update imports on file move
+        update_imports_on_move = false,
+        require_confirmation_on_move = false,
+        watch_dir = nil,
+    }
+
+    -- required to fix code action ranges
+    ts_utils.setup_client(client)
+
+    -- TODO: keymap these?
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {silent = true})
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "qq", ":TSLspFixCurrent<CR>", {silent = true})
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", {silent = true})
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", {silent = true})
 end
 
 

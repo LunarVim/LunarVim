@@ -10,7 +10,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 configs.emmet_ls = {
   default_config = {
     cmd = {'emmet-ls', '--stdio'};
-    filetypes = {'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'};
+    filetypes = {'html', 'css', 'javascript', 'typescript'};
     root_dir = function()
       return vim.loop.cwd()
     end;
