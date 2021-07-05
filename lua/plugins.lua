@@ -463,8 +463,8 @@ return require("packer").startup(function(use)
   -- Vim quick-scope See jumpable characters
   use {
     "unblevable/quick-scope",
-    disable = not O.plugin.quickscope.active,
     event = "BufRead",
+    disable = not O.plugin.quickscope.active,
   }
 
 end)
