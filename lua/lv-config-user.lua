@@ -15,5 +15,5 @@ end
 
 if vim.fn.filereadable(lv_config_file()) == 1 then
     package.path = lv_config_file() .. ';' .. package.path
-    require('lv-config')
+    vim.cmd("luafile " .. lv_config_file())
 end
