@@ -1,5 +1,5 @@
 if O.lang.dart.flutter_tools.active then
-  require("flutter-tools").setup{}
+  require('lv-flutter-tools')
 else
   require("lspconfig").dartls.setup {
     cmd = { "dart", O.lang.dart.sdk_path, "--lsp" },
