@@ -32,7 +32,6 @@ return require("packer").startup(function(use)
 
   -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
-  use { "glepnir/lspsaga.nvim", cmd = "Lspsaga" }
   use { "kabouzeid/nvim-lspinstall", cmd = "LspInstall" }
   -- Telescope
   use { "nvim-lua/popup.nvim" }
@@ -253,7 +252,11 @@ return require("packer").startup(function(use)
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
-    event = "BufRead",
+    config = function()
+        require('dap')
+        vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+        require('dap').defaults.fallback.terminal_win_cmd = '50vsplit new'
+    end,
     disable = not O.plugin.debug.active,
   }
   -- Better quickfix
@@ -404,7 +407,7 @@ return require("packer").startup(function(use)
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
-    event = "BufRead",
+    -- event = "BufRead",
     disable = not O.plugin.dap_install.active,
   }
 
@@ -432,22 +435,22 @@ return require("packer").startup(function(use)
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-    },
+    }
   }
-  use {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-    },
-    config = function()
-      require("null-ls").setup()
-    end,
-  }
+  -- use {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   ft = {
+  --     "javascript",
+  --     "javascriptreact",
+  --     "javascript.jsx",
+  --     "typescript",
+  --     "typescriptreact",
+  --     "typescript.tsx",
+  --   },
+  --   config = function()
+  --     require("null-ls").setup()
+  --   end,
+  -- }
 
   -- Tabnine
   use {

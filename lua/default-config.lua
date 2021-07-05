@@ -15,7 +15,6 @@ O = {
   shell = "bash",
   timeoutlen = 100,
   nvim_tree_disable_netrw = 0,
-  extras = false,
   ignore_case = true,
   smart_case = true,
   lushmode = false,
@@ -30,6 +29,10 @@ O = {
     ignore_install = { "haskell" },
     highlight = { enabled = true },
     rainbow = { enabled = false },
+  },
+
+  lsp = {
+    popup_border = "single"
   },
 
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
@@ -284,5 +287,9 @@ require("lv-utils").define_augroups {
   },
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
+  },
+  _auto_resize = {
+    -- will cause split windows to be resized evenly if main window is resized
+    {'VimResized ', '*', 'wincmd ='},
   },
 }

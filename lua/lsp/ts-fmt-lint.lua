@@ -11,13 +11,31 @@ M.setup = function()
     }
 
     local eslint = {
-        lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
+        lintCommand = "eslint -f unix --stdin --stdin-filename ${INPUT}",
         lintIgnoreExitCode = true,
         lintStdin = true,
         lintFormats = {"%f:%l:%c: %m"},
     }
 
-    if vim.fn.glob("node_modules/.bin/prettier") ≃ "" then
+    if vim.fn.glob("node_modules/.bin/eslint") ~= "" then
+        eslint = {
+            lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
+            lintIgnoreExitCode = true,
+            lintStdin = true,
+            lintFormats = {"%f:%l:%c: %m"},
+        }
+    end
+
+    if vim.fn.glob("node_modules/.bin/eslint_d") ~= "" then
+        eslint = {
+            lintCommand = "./node_modules/.bin/eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+            lintIgnoreExitCode = true,
+            lintStdin = true,
+            lintFormats = {"%f:%l:%c: %m"},
+        }
+    end
+
+    if vim.fn.glob("node_modules/.bin/prettier") ~= "" then
         prettier = {
             formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
             formatStdin = true
@@ -27,8 +45,8 @@ M.setup = function()
     require"lspconfig".efm.setup {
         -- init_options = {initializationOptions},
         cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
-        init_options = {documentFormatting = true, codeAction = true},
-        filetypes = {"html", "json", "css", "yaml", "javascript"},
+        init_options = {documentFormatting = true, codeAction = false},
+        filetypes = {"html", "css", "yaml", "vue", "json", "javascript", "javascriptreact", "typescript", "typescriptreact"},
         settings = {
             rootMarkers = {".git/", "package.json"},
             languages = {

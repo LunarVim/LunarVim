@@ -75,3 +75,8 @@ if O.lang.python.autoformat then
     },
   }
 end
+
+if O.plugin.dap_install.active then
+  local dap_install = require("dap-install")
+  dap_install.config("python_dbg", {})
+end
