@@ -285,7 +285,7 @@ require("lv-utils").define_augroups {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
   _auto_resize = {
-      -- will cause split windows to be resized evenly if main window is resized
-      {'VimResized ', '*', 'wincmd ='},
+    -- will cause split windows to be resized evenly if main window is resized
+    {'VimResized ', '*', 'wincmd ='},
   },
 }
