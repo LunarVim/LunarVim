@@ -11,4 +11,3 @@ require "lsp"
 if O.lang.emmet.active then
   require "lsp.emmet-ls"
 end
-require('local-init')
