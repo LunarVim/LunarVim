@@ -100,11 +100,6 @@ To update LunarVim:
 cd ~/.config/nvim && git pull
 ```
 
-## Testimonials
-
-> "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
-> - @juanCortelezzi, LunarVim user.
-
 ## Resources
 
 - [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
@@ -115,4 +110,8 @@ cd ~/.config/nvim && git pull
 
 - [Twitter](https://twitter.com/chrisatmachine)
 
+## Testimonials
+
+> "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
+> - @juanCortelezzi, LunarVim user.
 
