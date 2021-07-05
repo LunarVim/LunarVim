@@ -66,6 +66,9 @@ return require("packer").startup(function(use)
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
+  -- Neoformat
+  use { "sbdchd/neoformat", event = "BufEnter" }
+
   use {
     "kyazdani42/nvim-tree.lua",
     -- cmd = "NvimTreeToggle",
@@ -253,9 +256,9 @@ return require("packer").startup(function(use)
   use {
     "mfussenegger/nvim-dap",
     config = function()
-        require('dap')
-        vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-        require('dap').defaults.fallback.terminal_win_cmd = '50vsplit new'
+      require "dap"
+      vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+      require("dap").defaults.fallback.terminal_win_cmd = "50vsplit new"
     end,
     disable = not O.plugin.debug.active,
   }
@@ -435,7 +438,7 @@ return require("packer").startup(function(use)
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-    }
+    },
   }
   -- use {
   --   "jose-elias-alvarez/null-ls.nvim",
