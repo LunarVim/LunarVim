@@ -26,15 +26,6 @@ M.setup = function()
         }
     end
 
-    if vim.fn.glob("node_modules/.bin/eslint_d") ~= "" then
-        eslint = {
-            lintCommand = "./node_modules/.bin/eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-            lintIgnoreExitCode = true,
-            lintStdin = true,
-            lintFormats = {"%f:%l:%c: %m"},
-        }
-    end
-
     if vim.fn.glob("node_modules/.bin/prettier") ~= "" then
         prettier = {
             formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
