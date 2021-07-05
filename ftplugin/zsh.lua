@@ -15,16 +15,10 @@ require("lspconfig").bashls.setup {
 -- sh
 local sh_arguments = {}
 
-local shfmt = { formatCommand = "shfmt -ci -s -bn", formatStdin = true }
-
 local shellcheck = {
   LintCommand = "shellcheck -f gcc -x",
   lintFormats = { "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m", "%f:%l:%c: %tote: %m" },
 }
-
-if O.lang.sh.formatter == "shfmt" then
-  table.insert(sh_arguments, shfmt)
-end
 
 if O.lang.sh.linter == "shellcheck" then
   table.insert(sh_arguments, shellcheck)

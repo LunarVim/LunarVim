@@ -66,6 +66,9 @@ return require("packer").startup(function(use)
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
+  -- Neoformat
+  use { "sbdchd/neoformat", event = "BufEnter" }
+
   use {
     "kyazdani42/nvim-tree.lua",
     -- cmd = "NvimTreeToggle",
@@ -435,7 +438,7 @@ return require("packer").startup(function(use)
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-    }
+    },
   }
   -- use {
   --   "jose-elias-alvarez/null-ls.nvim",

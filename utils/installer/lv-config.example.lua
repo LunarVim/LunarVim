@@ -1,13 +1,14 @@
 --[[
 O is the global options object
 
-Formatters and linters should be
+Linters should be
 filled in as strings with either
 a global executable or a path to
 an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
+O.format_on_save = true
 O.auto_complete = true
 O.colorscheme = "spacegray"
 O.auto_close_tree = 0
@@ -47,13 +48,9 @@ O.lang.clang.diagnostics.signs = true
 O.lang.clang.diagnostics.underline = true
 
 -- python
--- add things like O.python.formatter.yapf.exec_path
 -- add things like O.python.linter.flake8.exec_path
--- add things like O.python.formatter.isort.exec_path
-O.lang.python.formatter = "yapf"
 -- O.python.linter = 'flake8'
 O.lang.python.isort = true
-O.lang.python.autoformat = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.diagnostics.signs = true
 O.lang.python.diagnostics.underline = true
@@ -61,37 +58,11 @@ O.lang.python.analysis.type_checking = "off"
 O.lang.python.analysis.auto_search_paths = true
 O.lang.python.analysis.use_library_code_types = true
 
--- lua
--- TODO look into stylua
-O.lang.lua.formatter = "lua-format"
--- O.lua.formatter = 'lua-format'
-O.lang.lua.autoformat = false
-
 -- javascript
-O.lang.tsserver.formatter = "prettier"
 O.lang.tsserver.linter = nil
-O.lang.tsserver.autoformat = true
-
--- json
-O.lang.json.autoformat = true
-
--- ruby
-O.lang.ruby.autoformat = true
-
--- go
-O.lang.go.autoformat = true
-
--- rust
-O.lang.rust.autoformat = true
-
--- clang
-O.lang.clang.autoformat = false -- Set to true to enable auto-format in C/C++ files.
 
 -- php
-O.lang.php.format.braces = "k&r" -- options: psr12, allman, k&r
 O.lang.php.environment.php_version = "7.4"
--- TODO: autoformat seems not to work at the moment
-O.lang.php.autoformat = false
 O.lang.php.diagnostics.signs = true
 O.lang.php.diagnostics.underline = true
 O.lang.php.filetypes = { "php", "phtml" }
