@@ -246,55 +246,6 @@ return require("packer").startup(function(use)
     disable = not O.plugin.sanegx.active,
   }
 
-  -- Sane gx for netrw_gx bug
-  use {
-    "folke/todo-comments.nvim",
-    event = "BufRead",
-    disable = not O.plugin.todo_comments.active,
-  }
-
-  -- LSP Colors
-  use {
-    "folke/lsp-colors.nvim",
-    event = "BufRead",
-    disable = not O.plugin.lsp_colors.active,
-  }
-
-  -- Git Blame
-  use {
-    "f-person/git-blame.nvim",
-    event = "BufRead",
-    disable = not O.plugin.git_blame.active,
-  }
-
-  use {
-    "ruifm/gitlinker.nvim",
-    event = "BufRead",
-    config = function()
-      require("gitlinker").setup {
-        opts = {
-          -- remote = 'github', -- force the use of a specific remote
-          -- adds current line nr in the url for normal mode
-          add_current_line_on_normal_mode = true,
-          -- callback for what to do with the url
-          action_callback = require("gitlinker.actions").open_in_browser,
-          -- print the url after performing the action
-          print_url = false,
-          -- mapping to call url generation
-          mappings = "<leader>gy",
-        },
-      }
-    end,
-    disable = not O.plugin.gitlinker.active,
-    requires = "nvim-lua/plenary.nvim",
-  }
-  -- Octo
-  use {
-    "pwntester/octo.nvim",
-    event = "BufRead",
-    disable = not O.plugin.octo.active,
-  }
-
   -- Diffview
   use {
     "sindrets/diffview.nvim",
