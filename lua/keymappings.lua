@@ -21,10 +21,10 @@ vim.cmd [[
 -- TODO fix this
 -- resize with arrows
 if vim.fn.has("mac") == 1 then
-  vim.api.nvim_set_keymap("n", "<A-Up>", ":resize -2<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<A-Down>", ":resize +2<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<A-Left>", ":vertical resize -2<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<A-Right>", ":vertical resize +2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-->", ":resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-=>", ":resize +2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-,>", ":vertical resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-.>", ":vertical resize +2<CR>", { silent = true })
 else
   vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { silent = true })
   vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<CR>", { silent = true })
