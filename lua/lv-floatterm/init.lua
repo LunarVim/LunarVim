@@ -21,13 +21,13 @@ M.config = function()
         }
     })
 
-    local function is_lazygit_available()
-        return vim.fn.executable("lazygit") == 1
+    local function is_installed(exe)
+        return vim.fn.executable(exe) == 1
     end
 
      -- Use this to toggle gitui in a floating terminal
     function _G.__fterm_lazygit()
-        if is_lazygit_available() ~= true then
+        if is_installed("lazygit") ~= true then
             print("Please install lazygit. Check documentation for more information")
             return
         end
