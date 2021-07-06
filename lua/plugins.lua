@@ -315,6 +315,7 @@ return require("packer").startup(function(use)
     end,
     disable = not O.plugin.lsp_rooter.active,
   }
+
   -- Markdown preview
   use {
     "iamcco/markdown-preview.nvim",
@@ -322,18 +323,21 @@ return require("packer").startup(function(use)
     ft = "markdown",
     disable = not O.plugin.markdown_preview.active,
   }
+
   -- Interactive scratchpad
   use {
     "metakirby5/codi.vim",
     cmd = "Codi",
     disable = not O.plugin.codi.active,
   }
+
   -- Use fzy for telescope
   use {
     "nvim-telescope/telescope-fzy-native.nvim",
     event = "BufRead",
     disable = not O.plugin.telescope_fzy.active,
   }
+
   -- Use project for telescope
   use {
     "nvim-telescope/telescope-project.nvim",
@@ -347,24 +351,28 @@ return require("packer").startup(function(use)
     event = "BufRead",
     disable = not O.plugin.sanegx.active,
   }
+
   -- Sane gx for netrw_gx bug
   use {
     "folke/todo-comments.nvim",
     event = "BufRead",
     disable = not O.plugin.todo_comments.active,
   }
+
   -- LSP Colors
   use {
     "folke/lsp-colors.nvim",
     event = "BufRead",
     disable = not O.plugin.lsp_colors.active,
   }
+
   -- Git Blame
   use {
     "f-person/git-blame.nvim",
     event = "BufRead",
     disable = not O.plugin.git_blame.active,
   }
+
   use {
     "ruifm/gitlinker.nvim",
     event = "BufRead",
@@ -386,24 +394,28 @@ return require("packer").startup(function(use)
     disable = not O.plugin.gitlinker.active,
     requires = "nvim-lua/plenary.nvim",
   }
+
   -- Lazygit
   use {
     "kdheepak/lazygit.nvim",
     cmd = "LazyGit",
     disable = not O.plugin.lazygit.active,
   }
+
   -- Octo
   use {
     "pwntester/octo.nvim",
     event = "BufRead",
     disable = not O.plugin.octo.active,
   }
+
   -- Diffview
   use {
     "sindrets/diffview.nvim",
     event = "BufRead",
     disable = not O.plugin.diffview.active,
   }
+
   -- Easily Create Gists
   use {
     "mattn/vim-gist",
@@ -411,12 +423,14 @@ return require("packer").startup(function(use)
     disable = not O.plugin.gist.active,
     requires = "mattn/webapi-vim",
   }
+
   -- Lush Create Color Schemes
   use {
     "rktjmp/lush.nvim",
     -- cmd = {"LushRunQuickstart", "LushRunTutorial", "Lushify"},
     disable = not O.plugin.lush.active,
   }
+
   -- HTML preview
   use {
     "turbio/bracey.vim",
@@ -432,7 +446,13 @@ return require("packer").startup(function(use)
   }
 
   -- LANGUAGE SPECIFIC GOES HERE
-  use { "lervag/vimtex", ft = "tex", config = function() require("lv-vimtex") end }
+  use {
+    "lervag/vimtex",
+    ft = "tex",
+    config = function()
+      require "lv-vimtex"
+    end,
+  }
 
   -- Rust tools
   -- TODO: use lazy loading maybe?
@@ -479,16 +499,31 @@ return require("packer").startup(function(use)
     disable = not O.plugin.tabnine.active,
   }
 
+  -- Pretty parentheses
+  use {
+    "p00f/nvim-ts-rainbow",
+    disable = not O.plugin.ts_rainbow.active,
+  }
+
+  -- Autotags <div>|</div>
+  use {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    disable = not O.plugin.ts_autotag.active,
+  }
+
   -- Custom semantic text objects
   use {
     "nvim-treesitter/nvim-treesitter-textobjects",
     disable = not O.plugin.ts_textobjects.active,
   }
+
   -- Smart text objects
   use {
     "RRethy/nvim-treesitter-textsubjects",
     disable = not O.plugin.ts_textsubjects.active,
   }
+
   -- Text objects using hint labels
   use {
     "mfussenegger/nvim-ts-hint-textobject",

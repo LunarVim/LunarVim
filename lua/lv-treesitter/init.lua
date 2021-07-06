@@ -1,3 +1,4 @@
+-- TODO refacor this whole file and treesitter in general
 -- if not package.loaded['nvim-treesitter'] then return end
 --
 -- Custom parsers
@@ -99,7 +100,7 @@ require("nvim-treesitter.configs").setup {
   -- indent = {enable = true, disable = {"python", "html", "javascript"}},
   -- TODO seems to be broken
   indent = { enable = { "javascriptreact" } },
-  -- autotag = { enable = O.plugin.ts_autotag.active },
+  autotag = { enable = O.plugin.ts_autotag.active },
   textobjects = {
     swap = {
       enable = O.plugin.ts_textobjects,
@@ -133,9 +134,9 @@ require("nvim-treesitter.configs").setup {
       show_help = "?",
     },
   },
-  -- rainbow = {
-  --  enable = O.plugin.ts_rainbow.active,
-  --   extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  --  max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  -- },
+  rainbow = {
+    enable = O.plugin.ts_rainbow.active,
+    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+  },
 }
