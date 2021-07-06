@@ -295,7 +295,7 @@ if O.plugin.telescope_project.active then
   -- open projects
   vim.api.nvim_set_keymap(
     "n",
-    "<leader>p",
+    "<leader>P",
     ":lua require'telescope'.extensions.project.project{}<CR>",
     { noremap = true, silent = true }
   )
