@@ -65,6 +65,12 @@ O.lang.php.environment.php_version = "7.4"
 O.lang.php.diagnostics.signs = true
 O.lang.php.diagnostics.underline = true
 O.lang.php.filetypes = {"php", "phtml"}
+O.lang.php.format = {
+  format = {
+    default = "psr12"
+  }
+}
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
