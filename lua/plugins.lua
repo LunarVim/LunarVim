@@ -14,8 +14,6 @@ if not packer_ok then
 end
 
 packer.init {
-  -- compile_path = vim.fn.stdpath('data')..'/site/pack/loader/start/packer.nvim/plugin/packer_compiled.vim',
-  compile_path = require("packer.util").join_paths(vim.fn.stdpath "config", "plugin", "packer_compiled.vim"),
   git = { clone_timeout = 300 },
   display = {
     open_fn = function()
@@ -32,7 +30,7 @@ return require("packer").startup(function(use)
 
   -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
-  use { "kabouzeid/nvim-lspinstall" }
+  use { "kabouzeid/nvim-lspinstall", event = "BufRead" }
   -- Telescope
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
@@ -40,17 +38,9 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     config = [[require('lv-telescope')]],
-    cmd = "Telescope",
+    event = "BufEnter",
   }
-  -- Snap TODO disable for now, need to only install fzy when user specifies they want to use snap
-  -- use {
-  -- "camspiers/snap",
-  -- rocks = "fzy",
-  -- config = function()
-  --    require("lv-snap").config()
-  -- end,
-  -- disable = not O.plugin.snap.active
-  -- }
+
   -- Autocomplete
   use {
     "hrsh7th/nvim-compe",
@@ -67,7 +57,7 @@ return require("packer").startup(function(use)
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
   -- Neoformat
-  use { "sbdchd/neoformat", event = "BufEnter" }
+  use { "sbdchd/neoformat" }
 
   use {
     "kyazdani42/nvim-tree.lua",
@@ -93,7 +83,7 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    after = { "telescope.nvim", "nvim-compe" },
+    after = { "telescope.nvim" },
     config = function()
       require "lv-autopairs"
     end,
@@ -127,34 +117,8 @@ return require("packer").startup(function(use)
     -- event = "BufRead",
   }
 
-  -- use {
-  --     "akinsho/nvim-bufferline.lua",
-  --     config = function() require("lv-bufferline").config() end,
-  --     event = "BufRead"
-  -- }
+  -- Builtins, these do not load by default
 
-  -- Extras, these do not load by default
-
-  -- Better motions
-  use {
-    "phaazon/hop.nvim",
-    event = "BufRead",
-    config = function()
-      require("lv-hop").config()
-    end,
-    disable = not O.plugin.hop.active,
-    opt = true,
-  }
-  -- Enhanced increment/decrement
-  use {
-    "monaqa/dial.nvim",
-    event = "BufRead",
-    config = function()
-      require("lv-dial").config()
-    end,
-    disable = not O.plugin.dial.active,
-    opt = true,
-  }
   -- Dashboard
   use {
     "ChristianChiarulli/dashboard-nvim",
@@ -176,25 +140,6 @@ return require("packer").startup(function(use)
     end,
     disable = not O.plugin.zen.active,
   }
-  -- Ranger
-  use {
-    "kevinhwang91/rnvimr",
-    cmd = "Rnvimr",
-    config = function()
-      require("lv-rnvimr").config()
-    end,
-    disable = not O.plugin.ranger.active,
-  }
-
-  -- matchup
-  use {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      require("lv-matchup").config()
-    end,
-    disable = not O.plugin.matchup.active,
-  }
 
   use {
     "norcalli/nvim-colorizer.lua",
@@ -204,18 +149,6 @@ return require("packer").startup(function(use)
       vim.cmd "ColorizerReloadAllBuffers"
     end,
     disable = not O.plugin.colorizer.active,
-  }
-
-  use {
-    "nacro90/numb.nvim",
-    event = "BufRead",
-    config = function()
-      require("numb").setup {
-        show_numbers = true, -- Enable 'number' for the window while peeking
-        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-      }
-    end,
-    disable = not O.plugin.numb.active,
   }
 
   -- Treesitter playground
@@ -264,6 +197,7 @@ return require("packer").startup(function(use)
     cmd = "TroubleToggle",
     disable = not O.plugin.trouble.active,
   }
+
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
@@ -279,12 +213,7 @@ return require("packer").startup(function(use)
     end,
     disable = not O.plugin.debug.active,
   }
-  -- Better quickfix
-  use {
-    "kevinhwang91/nvim-bqf",
-    event = "BufRead",
-    disable = not O.plugin.bqf.active,
-  }
+
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
@@ -293,39 +222,6 @@ return require("packer").startup(function(use)
         require('lv-floatterm').config()
     end,
     disable = not O.plugin.floatterm.active,
-  }
-  -- Search & Replace
-  use {
-    "windwp/nvim-spectre",
-    event = "BufRead",
-    config = function()
-      require("spectre").setup()
-    end,
-    disable = not O.plugin.spectre.active,
-  }
-  -- lsp root with this nvim-tree will follow you
-  use {
-    "ahmedkhalf/lsp-rooter.nvim",
-    event = "BufRead",
-    config = function()
-      require("lsp-rooter").setup()
-    end,
-    disable = not O.plugin.lsp_rooter.active,
-  }
-
-  -- Markdown preview
-  use {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    ft = "markdown",
-    disable = not O.plugin.markdown_preview.active,
-  }
-
-  -- Interactive scratchpad
-  use {
-    "metakirby5/codi.vim",
-    cmd = "Codi",
-    disable = not O.plugin.codi.active,
   }
 
   -- Use fzy for telescope
@@ -342,6 +238,7 @@ return require("packer").startup(function(use)
     after = "telescope.nvim",
     disable = not O.plugin.telescope_project.active,
   }
+
   -- Sane gx for netrw_gx bug
   use {
     "felipec/vim-sanegx",
@@ -405,14 +302,6 @@ return require("packer").startup(function(use)
     disable = not O.plugin.diffview.active,
   }
 
-  -- Easily Create Gists
-  use {
-    "mattn/vim-gist",
-    event = "BufRead",
-    disable = not O.plugin.gist.active,
-    requires = "mattn/webapi-vim",
-  }
-
   -- Lush Create Color Schemes
   use {
     "rktjmp/lush.nvim",
@@ -420,13 +309,6 @@ return require("packer").startup(function(use)
     disable = not O.plugin.lush.active,
   }
 
-  -- HTML preview
-  use {
-    "turbio/bracey.vim",
-    event = "BufRead",
-    run = "npm install --prefix server",
-    disable = not O.plugin.bracey.active,
-  }
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
@@ -479,14 +361,6 @@ return require("packer").startup(function(use)
   --     require("null-ls").setup()
   --   end,
   -- }
-
-  -- Tabnine
-  use {
-    "tzachar/compe-tabnine",
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-compe",
-    disable = not O.plugin.tabnine.active,
-  }
 
   -- Pretty parentheses
   use {

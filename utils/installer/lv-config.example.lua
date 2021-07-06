@@ -22,15 +22,10 @@ O.transparent_window = false
 
 -- TODO User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-O.plugin.hop.active = false
-O.plugin.dial.active = false
 O.plugin.dashboard.active = true
-O.plugin.matchup.active = false
 O.plugin.colorizer.active = false
-O.plugin.numb.active = false
 O.plugin.ts_playground.active = false
 O.plugin.indent_line.active = false
-O.plugin.gitlinker.active = false
 O.plugin.zen.active = false
 
 -- dashboard
@@ -65,6 +60,12 @@ O.lang.php.environment.php_version = "7.4"
 O.lang.php.diagnostics.signs = true
 O.lang.php.diagnostics.underline = true
 O.lang.php.filetypes = {"php", "phtml"}
+O.lang.php.format = {
+  format = {
+    default = "psr12"
+  }
+}
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
