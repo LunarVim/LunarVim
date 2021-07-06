@@ -288,7 +288,7 @@ return require("packer").startup(function(use)
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
-    event = "BufRead",
+    event = "BufWinEnter",
     config = function()
         require('lv-floatterm').config()
     end,
