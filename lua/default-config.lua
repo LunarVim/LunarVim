@@ -78,7 +78,6 @@ O = {
     symbol_outline = { active = false },
     debug = { active = false },
     dap_install = { active = false },
-    lazygit = { active = false },
     lush = { active = false },
     diffview = { active = false },
     floatterm = { active = false },

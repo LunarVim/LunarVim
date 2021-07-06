@@ -217,12 +217,9 @@ return require("packer").startup(function(use)
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
-    event = "BufRead",
+    event = "BufWinEnter",
     config = function()
-      require("FTerm").setup {
-        dimensions = { height = 0.8, width = 0.8, x = 0.5, y = 0.5 },
-        border = "single", -- or 'double'
-      }
+        require('lv-floatterm').config()
     end,
     disable = not O.plugin.floatterm.active,
   }
@@ -247,13 +244,6 @@ return require("packer").startup(function(use)
     "felipec/vim-sanegx",
     event = "BufRead",
     disable = not O.plugin.sanegx.active,
-  }
-
-  -- Lazygit
-  use {
-    "kdheepak/lazygit.nvim",
-    cmd = "LazyGit",
-    disable = not O.plugin.lazygit.active,
   }
 
   -- Diffview
