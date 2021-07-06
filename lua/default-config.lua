@@ -4,35 +4,37 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 
 O = {
-  format_on_save = true,
   auto_close_tree = 0,
   auto_complete = true,
   colorscheme = "lunar",
-  hidden_files = true,
-  wrap_lines = false,
-  number = true,
-  relative_number = true,
   cursorline = true,
-  shell = "bash",
-  timeoutlen = 100,
-  nvim_tree_disable_netrw = 0,
-  ignore_case = true,
-  smart_case = true,
-  lushmode = false,
+  format_on_save = true,
+  hidden_files = true,
   hl_search = false,
-  transparent_window = false,
+  ignore_case = true,
   leader_key = "space",
+  lushmode = false,
+  number = true,
+  nvim_tree_disable_netrw = 0,
+  relative_number = true,
+  shell = "bash",
+  smart_case = true,
+  timeoutlen = 100,
+  transparent_window = false,
   vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
+  wrap_lines = false,
 
   -- @usage pass a table with your desired languages
   treesitter = {
     ensure_installed = "all",
-    ignore_install = { "haskell" },
     highlight = { enabled = true },
+    -- The below is for treesitter hint textobjects plugin
+    hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
+    ignore_install = { "haskell" },
     -- The below are for treesitter-textobjects plugin
     textobj_prefixes = {
-      goto_next = "]", -- Go to next
       goto_previous = "[", -- Go to previous
+      goto_next = "]", -- Go to next
       inner = "i", -- Select inside
       outer = "a", -- Selct around
       swap = "<leader>a", -- Swap with next
@@ -40,50 +42,48 @@ O = {
     textobj_suffixes = {
       -- Start and End respectively for the goto keys
       -- for other keys it only uses the first
-      ["function"] = { "f", "F" },
-      ["class"] = { "m", "M" },
-      ["parameter"] = { "a", "A" },
       ["block"] = { "k", "K" },
-      ["conditional"] = { "i", "I" },
       ["call"] = { "c", "C" },
-      ["loop"] = { "l", "L" },
-      ["statement"] = { "s", "S" },
+      ["class"] = { "m", "M" },
       ["comment"] = { "/", "?" },
+      ["conditional"] = { "i", "I" },
+      ["function"] = { "f", "F" },
+      ["loop"] = { "l", "L" },
+      ["parameter"] = { "a", "A" },
+      ["statement"] = { "s", "S" },
     },
-    -- The below is for treesitter hint textobjects plugin
-    hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
   },
 
   lsp = {
     popup_border = "single",
   },
 
-  database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
+  database = { auto_execute = 1, save_location = "~/.config/nvcode_db" },
 
   plugin = {
     -- Builtins
-    dashboard = { active = false },
     colorizer = { active = false },
-    zen = { active = false },
-    ts_playground = { active = false },
+    dap_install = { active = false },
+    dashboard = { active = false },
+    debug = { active = false },
+    diffview = { active = false },
+    floatterm = { active = false },
+    indent_line = { active = false },
+    lazygit = { active = false },
+    lush = { active = false },
+    telescope_fzy = { active = false },
+    telescope_project = { active = false },
+    trouble = { active = false },
+    ts_autotag = { active = false },
     ts_context_commentstring = { active = false },
     ts_hintobjects = { active = false },
-    ts_autotag = { active = false },
+    ts_playground = { active = false },
     ts_rainbow = { active = false },
     ts_textobjects = { active = false },
     ts_textsubjects = { active = false },
-    telescope_fzy = { active = false },
-    telescope_project = { active = false },
-    indent_line = { active = false },
-    symbol_outline = { active = false },
-    debug = { active = false },
-    dap_install = { active = false },
-    lazygit = { active = false },
-    lush = { active = false },
-    diffview = { active = false },
-    floatterm = { active = false },
-    trouble = { active = false },
     sanegx = { active = false },
+    symbol_outline = { active = false },
+    zen = { active = false },
   },
 
   custom_plugins = {
@@ -95,130 +95,129 @@ O = {
   },
 
   lang = {
-    python = {
-      linter = "",
-      isort = false,
+    clang = {
+      cross_file_rename = true,
       diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
       },
-      analysis = {
-        type_checking = "basic",
-        auto_search_paths = true,
-        use_library_code_types = true,
-      },
+      header_insertion = "never",
+    },
+    cmake = {},
+    css = {
+      virtual_text = true,
     },
     dart = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
     },
-    lua = {
+    docker = {},
+    efm = {},
+    elixir = {},
+    elm = {},
+    emmet = { active = true },
+    go = {},
+    graphql = {},
+    html = {},
+    java = {},
+    json = {
       diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
+      },
+    },
+    kotlin = {},
+    latex = {},
+    lua = {
+      diagnostics = {
+        signs = true,
+        underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
+      },
+    },
+    php = {
+      diagnostics = {
+        signs = true,
+        underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
+      },
+      environment = {
+        php_version = "7.4",
+      },
+      filetypes = { "php", "phtml" },
+    },
+    python = {
+      analysis = {
+        auto_search_paths = true,
+        type_checking = "basic",
+        use_library_code_types = true,
+      },
+      diagnostics = {
+        signs = true,
+        underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
+      },
+      isort = false,
+      linter = "",
+    },
+    ruby = {
+      diagnostics = {
+        signs = true,
+        underline = true,
+        virtualtext = { prefix = "", spacing = 0 },
+      },
+      filetypes = { "erb", "rakefile", "rb", "ruby" },
+    },
+    rust = {
+      diagnostics = {
+        virtual_text = { prefix = "", spacing = 0 },
+        signs = true,
+        underline = true,
+      },
+      linter = "",
+      rust_tools = {
+        active = false,
       },
     },
     sh = {
-      -- @usage can be 'shellcheck'
-      linter = "",
       -- @usage can be 'shfmt'
       diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
       },
-    },
-    tsserver = {
-      -- @usage can be 'eslint'
+      -- @usage can be 'shellcheck'
       linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
     },
-    json = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
+    svelte = {},
     tailwindcss = {
       active = false,
       filetypes = {
-        "html",
         "css",
-        "scss",
+        "html",
         "javascript",
         "javascriptreact",
+        "scss",
         "typescript",
         "typescriptreact",
       },
     },
-    clang = {
+    terraform = {},
+    tsserver = {
       diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+        virtual_text = { prefix = "", spacing = 0 },
       },
-      cross_file_rename = true,
-      header_insertion = "never",
+      -- @usage can be 'eslint'
+      linter = "",
     },
-    ruby = {
-      diagnostics = {
-        virtualtext = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "rb", "erb", "rakefile", "ruby" },
-    },
-    go = {},
-    elixir = {},
     vim = {},
     yaml = {},
-    terraform = {},
-    rust = {
-      rust_tools = {
-        active = false,
-      },
-      linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    svelte = {},
-    php = {
-      environment = {
-        php_version = "7.4",
-      },
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "php", "phtml" },
-    },
-    latex = {},
-    kotlin = {},
-    html = {},
-    elm = {},
-    emmet = { active = true },
-    graphql = {},
-    efm = {},
-    docker = {},
-    cmake = {},
-    java = {},
-    css = {
-      virtual_text = true,
-    },
   },
 
   dashboard = {
-
     custom_header = {
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣶⣾⠿⠿⠟⠛⠛⠛⠛⠿⠿⣿⣷⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
