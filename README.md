@@ -115,3 +115,8 @@ cd ~/.config/nvim && git pull
 > "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
 > - @juanCortelezzi, LunarVim user.
 
+<div align="center">
+	
+[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)]()
+	
+</div>
