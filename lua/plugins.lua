@@ -315,6 +315,7 @@ return require("packer").startup(function(use)
     end,
     disable = not O.plugin.lsp_rooter.active,
   }
+
   -- Markdown preview
   use {
     "iamcco/markdown-preview.nvim",
