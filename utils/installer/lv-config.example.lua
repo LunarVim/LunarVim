@@ -56,6 +56,7 @@ O.lang.rust.formatter = {
 -- }
 
 --LaTeX
+-- Reference: https://github.com/latex-lsp/texlab/blob/master/docs/options.md
 O.lang.latex.aux_directory = "."
 O.lang.latex.bibtex_formatter = "texlab"
 --TODO build args are hardcoded; args are not passed through to ftplugin/tex.lua
