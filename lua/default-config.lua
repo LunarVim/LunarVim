@@ -29,7 +29,6 @@ O = {
     ensure_installed = "all",
     ignore_install = { "haskell" },
     highlight = { enabled = true },
-    rainbow = { enabled = false },
     -- The below are for treesitter-textobjects plugin
     textobj_prefixes = {
       goto_next = "]", -- Go to next
@@ -62,7 +61,6 @@ O = {
   database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
 
   plugin = {
-    -- TODO remove non built-ins
     -- Builtins
     dashboard = { active = false },
     colorizer = { active = false },
@@ -83,32 +81,9 @@ O = {
     lazygit = { active = false },
     lush = { active = false },
     diffview = { active = false },
-
-    ----------------------------------------------------------------------
-    -- Non builtins
-
-    octo = { active = false },
-    gitlinker = { active = false },
-    todo_comments = { active = false },
-    gist = { active = false },
-    git_blame = { active = false },
-    lsp_colors = { active = false },
-    ranger = { active = false },
-    hop = { active = false },
-    dial = { active = false },
-    matchup = { active = false },
-    numb = { active = false },
-    bqf = { active = false },
-    trouble = { active = false },
     floatterm = { active = false },
-    spectre = { active = false },
-    lsp_rooter = { active = false },
-    markdown_preview = { active = false },
-    bracey = { active = false },
-    codi = { active = false },
+    trouble = { active = false },
     sanegx = { active = false },
-    snap = { active = false },
-    tabnine = { active = false },
   },
 
   custom_plugins = {
