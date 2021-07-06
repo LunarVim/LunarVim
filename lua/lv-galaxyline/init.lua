@@ -59,6 +59,7 @@ table.insert(gls.left, {
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
       return "▊"
     end,
+    separator_highlight = "StatusLineSeparator",
     highlight = "StatusLineNC",
   },
 })
@@ -114,6 +115,15 @@ table.insert(gls.left, {
   },
 })
 
+table.insert(gls.left, {
+  Filler = {
+    provider = function()
+      return " "
+    end,
+    highlight = "StatusLineGitDelete",
+  },
+})
+
 table.insert(gls.right, {
   DiagnosticError = {
     provider = "DiagnosticError",
@@ -163,7 +173,7 @@ table.insert(gls.right, {
 })
 
 local get_lsp_client = function(msg)
-  msg = msg or "No Active LSP Client"
+  msg = msg or "LSP Inactive"
   local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
   local clients = vim.lsp.get_active_clients()
   if next(clients) == nil then
