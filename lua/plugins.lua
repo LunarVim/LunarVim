@@ -238,7 +238,7 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope-project.nvim",
     event = "BufRead",
-    after = "telescope.nvim",
+    setup = function () vim.cmd[[packadd telescope.nvim]] end,
     disable = not O.plugin.telescope_project.active,
   }
 
