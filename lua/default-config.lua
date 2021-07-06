@@ -103,7 +103,6 @@ O = {
     floatterm = { active = false },
     spectre = { active = false },
     lsp_rooter = { active = false },
-    lsp_signature = {active = false},
     markdown_preview = { active = false },
     bracey = { active = false },
     codi = { active = false },

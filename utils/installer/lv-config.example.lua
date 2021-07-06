@@ -32,7 +32,6 @@ O.plugin.ts_playground.active = false
 O.plugin.indent_line.active = false
 O.plugin.gitlinker.active = false
 O.plugin.zen.active = false
-O.plugin.lsp_signature.active = false
 
 -- dashboard
 -- O.dashboard.custom_header = {""}
@@ -71,5 +70,12 @@ O.lang.php.filetypes = {"php", "phtml"}
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
 
 -- Additional Plugins
--- O.custom_plugins = {{"windwp/nvim-ts-autotag"}}
+-- O.custom_plugins = {
+--     -- {"windwp/nvim-ts-autotag"}, -- double comment because it produces error (plugin used twice)
+--     {
+--         "ray-x/lsp_signature.nvim",
+--         config = function() require"lsp_signature".on_attach() end,
+--         event = "BufRead"
+--     }
+-- }
 
