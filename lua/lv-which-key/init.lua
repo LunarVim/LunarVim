@@ -274,6 +274,11 @@ end
 --   }
 -- end
 
+if O.plugin.symbol_outline.active then
+    vim.api.nvim_set_keymap("n", "<leader>o", ":SymbolsOutline<CR>", { noremap = true, silent = true })
+    mappings["o"] = "Symbols outline"
+end
+
 if O.plugin.gitlinker.active then
   mappings["gy"] = "Gitlink"
 end
