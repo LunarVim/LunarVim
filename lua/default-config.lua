@@ -69,7 +69,6 @@ O = {
     diffview = { active = false },
     floatterm = { active = false },
     indent_line = { active = false },
-    lazygit = { active = false },
     lush = { active = false },
     telescope_fzy = { active = false },
     telescope_project = { active = false },

@@ -53,9 +53,6 @@ O.timeoutlen = 100
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.colorizer.active = true
-O.plugin.hop.active = true
-O.plugin.lazygit.active = true
-O.plugin.markdown_preview.active = true
 O.plugin.trouble.active = true
 O.plugin.zen.active = true
 
