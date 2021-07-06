@@ -202,14 +202,18 @@ return require("packer").startup(function(use)
   use {
     "mfussenegger/nvim-dap",
     config = function()
-      require "dap"
+      local status_ok, dap = pcall(require, "dap")
+      if not status_ok then
+        return
+      end
+      -- require "dap"
       vim.fn.sign_define("DapBreakpoint", {
         text = "",
         texthl = "LspDiagnosticsSignError",
         linehl = "",
         numhl = "",
       })
-      require("dap").defaults.fallback.terminal_win_cmd = "50vsplit new"
+      dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
     end,
     disable = not O.plugin.debug.active,
   }
@@ -219,7 +223,7 @@ return require("packer").startup(function(use)
     "numToStr/FTerm.nvim",
     event = "BufWinEnter",
     config = function()
-        require('lv-floatterm').config()
+      require("lv-floatterm").config()
     end,
     disable = not O.plugin.floatterm.active,
   }
@@ -235,7 +239,9 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope-project.nvim",
     event = "BufRead",
-    setup = function () vim.cmd[[packadd telescope.nvim]] end,
+    setup = function()
+      vim.cmd [[packadd telescope.nvim]]
+    end,
     disable = not O.plugin.telescope_project.active,
   }
 

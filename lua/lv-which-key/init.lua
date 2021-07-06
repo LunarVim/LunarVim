@@ -120,7 +120,7 @@ local mappings = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
     i = { "<cmd>PackerInstall<cr>", "Install" },
-    r = { ":luafile %<cr>", "Reload" },
+    r = { "<cmd>lua require('lv-utils').reload_lv_config()<cr>", "Reload" },
     s = { "<cmd>PackerSync<cr>", "Sync" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
@@ -266,9 +266,19 @@ end
 if O.plugin.floatterm.active then
   vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(
+    "t",
+    "<A-i>",
+    "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
+    { noremap = true, silent = true }
+  )
   vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("t", "<A-l>", "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(
+    "t",
+    "<A-l>",
+    "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>",
+    { noremap = true, silent = true }
+  )
   mappings["gg"] = "LazyGit"
 end
 if O.plugin.telescope_project.active then
