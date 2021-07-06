@@ -426,6 +426,7 @@ return require("packer").startup(function(use)
   use {
     "akinsho/flutter-tools.nvim",
     requires = "nvim-lua/plenary.nvim",
+    config = function() require("flutter-tools").setup{} end,
     disable = not O.lang.dart.flutter_tools.active,
   }
 

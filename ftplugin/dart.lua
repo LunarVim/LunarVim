@@ -1,6 +1,4 @@
-if O.lang.dart.flutter_tools.active then
-  require("flutter-tools").setup{}
-else
+if not O.lang.dart.flutter_tools.active then
   require("lspconfig").dartls.setup {
     cmd = { "dart", O.lang.dart.sdk_path, "--lsp" },
     on_attach = require("lsp").common_on_attach,
