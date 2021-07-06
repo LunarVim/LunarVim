@@ -46,10 +46,10 @@ O.treesitter.ignore_install = {"haskell"}
 O.lang.python.analysis.type_checking = "off"
 O.lang.python.analysis.auto_search_paths = true
 O.lang.python.analysis.use_library_code_types = true
-O.lang.python.isort = true
 O.lang.python.diagnostics.signs = true
 O.lang.python.diagnostics.underline = true
 O.lang.python.diagnostics.virtual_text = true
+O.lang.python.isort = true
 -- add things like O.python.linter.flake8.exec_path
 -- O.python.linter = 'flake8'
 
