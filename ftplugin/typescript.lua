@@ -7,6 +7,13 @@
 -- require'completion'.on_attach(client)
 -- require'illuminate'.on_attach(client)
 -- end
+
+local on_attach = function(client, bufnr)
+    local lsp = require "lsp"
+    lsp.common_on_attach(client, bufnr)
+    lsp.tsserver_on_attach(client, bufnr)
+end
+
 require("lspconfig").tsserver.setup {
   cmd = {
     DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
@@ -20,7 +27,7 @@ require("lspconfig").tsserver.setup {
     "typescriptreact",
     "typescript.tsx",
   },
-  on_attach = require("lsp").tsserver_on_attach,
+  on_attach = on_attach, 
   -- This makes sure tsserver is not used for formatting (I prefer prettier)
   -- on_attach = require'lsp'.common_on_attach,
   root_dir = require("lspconfig/util").root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),

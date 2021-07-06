@@ -83,6 +83,7 @@ O = {
     lazygit = { active = false },
     lush = { active = false },
     diffview = { active = false },
+    lsp_signature = {active = false },
 
     ----------------------------------------------------------------------
     -- Non builtins

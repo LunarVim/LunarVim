@@ -60,6 +60,11 @@ return require("packer").startup(function(use)
     end,
   }
 
+  use {
+    "ray-x/lsp_signature.nvim",
+    disable = not O.plugin.lsp_signature.active
+    }
+
   use { "hrsh7th/vim-vsnip", event = "InsertEnter" }
   use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
