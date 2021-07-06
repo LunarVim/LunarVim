@@ -33,8 +33,8 @@ O = {
     ignore_install = { "haskell" },
     -- The below are for treesitter-textobjects plugin
     textobj_prefixes = {
-      goto_previous = "[", -- Go to previous
       goto_next = "]", -- Go to next
+      goto_previous = "[", -- Go to previous
       inner = "i", -- Select inside
       outer = "a", -- Selct around
       swap = "<leader>a", -- Swap with next
@@ -70,6 +70,8 @@ O = {
     floatterm = { active = false },
     indent_line = { active = false },
     lush = { active = false },
+    sanegx = { active = false },
+    symbol_outline = { active = false },
     telescope_fzy = { active = false },
     telescope_project = { active = false },
     trouble = { active = false },
@@ -80,8 +82,6 @@ O = {
     ts_rainbow = { active = false },
     ts_textobjects = { active = false },
     ts_textsubjects = { active = false },
-    sanegx = { active = false },
-    symbol_outline = { active = false },
     zen = { active = false },
   },
 

@@ -46,8 +46,8 @@ Example:
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
 O.auto_complete = true
-O.colorscheme = 'spacegray'
-O.leader_key = ' '
+O.colorscheme = "spacegray"
+O.leader_key = " "
 O.relative_number = false
 O.timeoutlen = 100
 
@@ -63,11 +63,11 @@ O.treesitter.ignore_install = {"haskell"}
 
 -- lua
 O.lang.lua.autoformat = false
-O.lang.lua.formatter = 'lua-format'
+O.lang.lua.formatter = "lua-format"
 
 -- javascript
 O.lang.tsserver.autoformat = true
-O.lang.tsserver.formatter = 'prettier'
+O.lang.tsserver.formatter = "prettier"
 O.lang.tsserver.linter = nil
 
 -- json

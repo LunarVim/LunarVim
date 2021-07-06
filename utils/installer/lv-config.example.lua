@@ -7,8 +7,8 @@ a global executable or a path to
 an executable
 ]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
-O.auto_complete = true
 O.auto_close_tree = 0
+O.auto_complete = true
 O.colorscheme = "spacegray"
 O.document_highlight = true
 O.format_on_save = true
@@ -32,9 +32,9 @@ O.plugin.zen.active = false
 -- O.dashboard.custom_header = {""}
 -- O.dashboard.footer = {""}
 
-O.lang.clang.diagnostics.virtual_text = true
 O.lang.clang.diagnostics.signs = true
 O.lang.clang.diagnostics.underline = true
+O.lang.clang.diagnostics.virtual_text = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
@@ -43,8 +43,8 @@ O.treesitter.ignore_install = {"haskell"}
 
 
 -- python
-O.lang.python.analysis.type_checking = "off"
 O.lang.python.analysis.auto_search_paths = true
+O.lang.python.analysis.type_checking = "off"
 O.lang.python.analysis.use_library_code_types = true
 O.lang.python.diagnostics.signs = true
 O.lang.python.diagnostics.underline = true
