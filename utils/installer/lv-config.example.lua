@@ -59,7 +59,7 @@ O.lang.rust.formatter = {
 -- Reference: https://github.com/latex-lsp/texlab/blob/master/docs/options.md
 O.lang.latex.aux_directory = "."
 O.lang.latex.bibtex_formatter = "texlab"
---TODO build args are hardcoded; args are not passed through to ftplugin/tex.lua
+O.lang.latex.build.args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' }
 O.lang.latex.build.executable = "latexmk" 
 O.lang.latex.build.forward_search_after = false
 O.lang.latex.build.on_save = false
