@@ -1,7 +1,7 @@
 -- if not package.loaded['nvim-treesitter'] then return end
 --
 -- Custom parsers
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+-- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 -- parser_config.make = {
 --     install_info = {
 --         url = "https://github.com/alemuller/tree-sitter-make", -- local path or git repo
@@ -17,7 +17,6 @@ local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 --     -- filetype = "just", -- if filetype does not agrees with parser name
 --     -- used_by = {"bar", "baz"} -- additional filetypes that use this parser
 -- }
-
 -- Custom text objects
 local textobj_prefixes = O.treesitter.textobj_prefixes
 local textobj_suffixes = O.treesitter.textobj_suffixes
@@ -89,7 +88,7 @@ require("nvim-treesitter.configs").setup {
     -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
   },
   highlight = {
-    enable = O.treesitter.enabled, -- false will disable the whole extension
+    enable = O.treesitter.highlight.enabled, -- false will disable the whole extension
     additional_vim_regex_highlighting = true,
     disable = { "latex" },
   },
