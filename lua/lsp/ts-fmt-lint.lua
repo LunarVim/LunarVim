@@ -10,7 +10,7 @@ M.setup = function()
         formatStdin = true
     }
 
-    if vim.fn.glob("node_modules/.bin/prettier") then
+    if vim.fn.glob("node_modules/.bin/prettier") ~= "" then
         prettier = {
             formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
             formatStdin = true
@@ -21,7 +21,7 @@ M.setup = function()
         -- init_options = {initializationOptions},
         cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
         init_options = {documentFormatting = true, codeAction = false},
-        filetypes = {"html", "css", "yaml", "vue"},
+        filetypes = {"html", "css", "yaml", "vue", "javascript", "javascriptreact", "typescript", "typescriptreact"},
         settings = {
             rootMarkers = {".git/", "package.json"},
             languages = {
@@ -29,7 +29,6 @@ M.setup = function()
                 css = {prettier},
                 json = {prettier},
                 yaml = {prettier}
-                -- markdown = {markdownPandocFormat, markdownlint},
             }
         }
     }
