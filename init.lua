@@ -11,6 +11,9 @@ require "lsp"
 if O.lang.emmet.active then
   require "lsp.emmet-ls"
 end
+if O.lang.tailwindcss.active then
+  require "lsp.tailwindcss-ls"
+end
 
 -- autoformat
 if O.format_on_save then

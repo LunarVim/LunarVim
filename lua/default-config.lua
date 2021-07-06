@@ -146,6 +146,7 @@ O = {
       },
     },
     tailwindcss = {
+      active = false,
       filetypes = {
         "html",
         "css",
