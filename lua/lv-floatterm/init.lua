@@ -33,6 +33,17 @@ M.config = function()
     }
     lazy:toggle() 
   end
+  
+  -- Map esc to exit inside lazygit
+  vim.api.nvim_exec([[
+  function LazyGitNativation()
+    echom &filetype
+    if &filetype ==# 'FTerm'
+      tnoremap <Esc> q
+      tnoremap <C-v><Esc> <Esc>
+    endif
+  endfunction
+  ]], false)
 
 end
 
