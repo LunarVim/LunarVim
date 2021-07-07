@@ -23,7 +23,7 @@ vim.g.colors_name = O.colorscheme
 
 opt.backup = false -- creates a backup file
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
+opt.cmdheight = O.cmdheight -- more space in the neovim command line for displaying messages
 opt.colorcolumn = "99999" -- fix indentline for now
 opt.completeopt = { "menuone", "noselect" }
 opt.conceallevel = 0 -- so that `` is visible in markdown files
@@ -56,5 +56,6 @@ opt.tabstop = 4 -- insert 4 spaces for a tab
 opt.cursorline = O.cursorline -- highlight the current line
 opt.number = O.number -- set numbered lines
 opt.relativenumber = O.relative_number -- set relative numbered lines
+opt.numberwidth = O.number_width
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.wrap = O.wrap_lines -- display lines as one long line
