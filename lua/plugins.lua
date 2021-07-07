@@ -61,7 +61,9 @@ return require("packer").startup(function(use)
 
   use {
     "kyazdani42/nvim-tree.lua",
+    -- event = "BufEnter",
     -- cmd = "NvimTreeToggle",
+    commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
       require("lv-nvimtree").config()
     end,
@@ -128,9 +130,9 @@ return require("packer").startup(function(use)
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
     -- cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
-    config = function()
-      require("lv-dashboard").config()
-    end,
+    -- config = function()
+    --   require("lv-dashboard").config()
+    -- end,
     disable = not O.plugin.dashboard.active,
     -- opt = true,
   }

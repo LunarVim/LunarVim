@@ -1,13 +1,13 @@
---if not package.loaded['nvim-tree.view'] then
---  return
---end
-
+-- --if not package.loaded['nvim-tree.view'] then
+-- --  return
+-- --end
+--
 local M = {}
 local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
 if not status_ok then
   return
 end
-
+--
 M.config = function()
   local g = vim.g
 
@@ -69,9 +69,6 @@ local view_status_ok, view = pcall(require, "nvim-tree.view")
 if not view_status_ok then
   return
 end
-
---local view = require "nvim-tree.view"
-
 M.toggle_tree = function()
   if view.win_open() then
     require("nvim-tree").close()
@@ -86,5 +83,5 @@ M.toggle_tree = function()
     require("nvim-tree").find_file(true)
   end
 end
-
+--
 return M
