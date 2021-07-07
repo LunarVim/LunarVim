@@ -84,13 +84,23 @@ vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { noremap = true
 -- close buffer
 vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
 
+-- open lv-config
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>.",
+  ":e " .. CONFIG_PATH .. "/lv-config.lua<CR>",
+  { noremap = true, silent = true }
+)
+
 local mappings = {
 
+  ["."] = "LunarConfig",
   ["/"] = "Comment",
   ["c"] = "Close Buffer",
   ["e"] = "Explorer",
   ["f"] = "Find File",
   ["h"] = "No Highlight",
+  [";"] = "Dashboard",
   b = {
     name = "Buffers",
     j = { "<cmd>BufferPick<cr>", "jump to buffer" },
