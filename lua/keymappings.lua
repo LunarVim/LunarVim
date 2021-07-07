@@ -41,8 +41,8 @@ local mappings = {
     { "<", "<gv" },
     { ">", ">gv" },
 
-    -- { "p", '"0p', { silent = true } },
-    -- { "P", '"0P', { silent = true } },
+    { "p", '"0p', { silent = true } },
+    { "P", '"0P', { silent = true } },
   },
   i = {
     -- I hate escape
@@ -53,6 +53,19 @@ local mappings = {
     -- Move current line / block with Alt-j/k ala vscode.
     { "<A-j>", "<Esc>:m .+1<CR>==gi" },
     { "<A-k>", "<Esc>:m .-2<CR>==gi" },
+
+    -- Terminal window navigation
+    { "<C-h>", "<C-\\><C-N><C-w>h" },
+    { "<C-j>", "<C-\\><C-N><C-w>j" },
+    { "<C-k>", "<C-\\><C-N><C-w>k" },
+    { "<C-l>", "<C-\\><C-N><C-w>l" },
+  },
+  t = {
+    -- Terminal window navigation
+    { "<C-h>", "<C-\\><C-N><C-w>h" },
+    { "<C-j>", "<C-\\><C-N><C-w>j" },
+    { "<C-k>", "<C-\\><C-N><C-w>k" },
+    { "<C-l>", "<C-\\><C-N><C-w>l" },
   },
   x = {
     -- Move selected line / block of text in visual mode
@@ -79,17 +92,6 @@ end
 
 register_mappings(mappings, { silent = true, noremap = true })
 
--- Terminal window navigation
-vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("i", "<C-h>", "<C-\\><C-N><C-w>h", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("i", "<C-j>", "<C-\\><C-N><C-w>j", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("i", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("i", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true, noremap = true })
-
--- Better nav for omnicomplete
 vim.cmd 'inoremap <expr> <c-j> ("\\<C-n>")'
 vim.cmd 'inoremap <expr> <c-k> ("\\<C-p>")'
 
