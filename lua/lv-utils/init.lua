@@ -76,6 +76,10 @@ lv_utils.define_augroups {
     -- will cause split windows to be resized evenly if main window is resized
     { "VimResized ", "*", "wincmd =" },
   },
+  _fterm_lazygit = {
+    -- will cause esc key to exit lazy git
+    {"TermEnter", "*", "call LazyGitNativation()"}
+  },
   -- _mode_switching = {
   --   -- will switch between absolute and relative line numbers depending on mode
   --   {'InsertEnter', '*', 'if &relativenumber | let g:ms_relativenumberoff = 1 | setlocal number norelativenumber | endif'},
