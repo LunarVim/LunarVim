@@ -7,7 +7,7 @@
     <a href="https://github.com/ChristianChiarulli/LunarVim/pulse">
       <img alt="Last commit" src="https://img.shields.io/github/last-commit/ChristianChiarulli/LunarVim"/>
     </a>
-    <a href="https://github.com/ChristianChiarulli/LunarVim/blob/main/LICENSE">
+    <a href="https://github.com/ChristianChiarulli/LunarVim/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/siduck76/NvChad?style=flat-square&logo=GNU&label=License" alt="License"
     />
     <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon">
