@@ -96,6 +96,56 @@ O = {
     { "FileType", "qf", "set nobuflisted" },
   },
 
+
+  -- nvim-tree
+  nvim_tree = {
+    side = "left",
+    width = 30,
+    ignore = { ".git", "node_modules", ".cache" },
+    auto_open = 1,
+    auto_close = 0,
+    quit_on_open = 0,
+    follow = 1,
+    indent_markers = 1,
+    hide_dotfiles = 1,
+    git_hl = 1,
+    root_folder_modifier = ":t",
+    tab_open = 0,
+    allow_resize = 1,
+    lsp_diagnostics = 1,
+    auto_ignore_ft = { "startify", "dashboard" },
+
+    show_icons = {
+      git = 1,
+      folders = 1,
+      files = 1,
+      folder_arrows = 1,
+    },
+
+    tree_icons = {
+      default = "",
+      symlink = "",
+      git = {
+        unstaged = "",
+        staged = "S",
+        unmerged = "",
+        renamed = "➜",
+        deleted = "",
+        untracked = "U",
+        ignored = "◌",
+      },
+    },
+
+    folder = {
+      default = "",
+      open = "",
+      empty = "",
+      empty_open = "",
+      symlink = "",
+    },
+  },
+
+
   lang = {
     python = {
       linter = "",

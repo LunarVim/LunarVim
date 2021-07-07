@@ -13,47 +13,47 @@ M.config = function()
 
   vim.o.termguicolors = true
 
-  g.nvim_tree_side = "left"
-  g.nvim_tree_width = 30
-  g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
-  g.nvim_tree_auto_open = 1
-  g.nvim_tree_auto_close = 0
-  g.nvim_tree_quit_on_open = 0
-  g.nvim_tree_follow = 1
-  g.nvim_tree_indent_markers = 1
-  g.nvim_tree_hide_dotfiles = 1
-  g.nvim_tree_git_hl = 1
-  g.nvim_tree_root_folder_modifier = ":t"
-  g.nvim_tree_tab_open = 0
-  g.nvim_tree_allow_resize = 1
-  g.nvim_tree_lsp_diagnostics = 1
-  g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
+  g.nvim_tree_side = O.nvim_tree.side
+  g.nvim_tree_width = O.nvim_tree.width
+  g.nvim_tree_ignore = O.nvim_tree.ignore
+  g.nvim_tree_auto_open = O.nvim_tree.auto_open
+  g.nvim_tree_auto_close = O.nvim_tree.auto_close
+  g.nvim_tree_quit_on_open = O.nvim_tree.quit_on_open
+  g.nvim_tree_follow = O.nvim_tree.follow
+  g.nvim_tree_indent_markers = O.nvim_tree.indent_markers
+  g.nvim_tree_hide_dotfiles = O.nvim_tree.hide_dotfiles
+  g.nvim_tree_git_hl = O.nvim_tree.git_hl
+  g.nvim_tree_root_folder_modifier = O.nvim_tree.root_folder_modifier
+  g.nvim_tree_tab_open = O.nvim_tree.tab_open
+  g.nvim_tree_allow_resize = O.nvim_tree.allow_resize
+  g.nvim_tree_lsp_diagnostics = O.nvim_tree.lsp_diagnostics
+  g.nvim_tree_auto_ignore_ft = O.nvim_tree.auto_ignore_ft
 
   g.nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
+    git = O.nvim_tree.show_icons.git,
+    folders = O.nvim_tree.show_icons.folders,
+    files = O.nvim_tree.show_icons.files,
+    folder_arrows = O.nvim_tree.show_icons.folder_arrows,
   }
 
   vim.g.nvim_tree_icons = {
-    default = "",
-    symlink = "",
+    default = O.nvim_tree.tree_icons.default,
+    symlink = O.nvim_tree.tree_icons.symlink,
     git = {
-      unstaged = "",
-      staged = "S",
-      unmerged = "",
-      renamed = "➜",
-      deleted = "",
-      untracked = "U",
-      ignored = "◌",
+      unstaged = O.nvim_tree.tree_icons.git.unstaged,
+      staged = O.nvim_tree.tree_icons.git.staged,
+      unmerged = O.nvim_tree.tree_icons.unmerged,
+      renamed = O.nvim_tree.tree_icons.renamed,
+      deleted = O.nvim_tree.tree_icons.deleted,
+      untracked = O.nvim_tree.tree_icons.untracked,
+      ignored = O.nvim_tree.tree_icons.ignored,
     },
     folder = {
-      default = "",
-      open = "",
-      empty = "",
-      empty_open = "",
-      symlink = "",
+      default = O.nvim_tree.folder.default,
+      open = O.nvim_tree.folder.open,
+      empty = O.nvim_tree.folder.empty,
+      empty_open = O.nvim_tree.folder.empty_open,
+      symlink = O.nvim_tree.folder.symlink,
     },
   }
   local tree_cb = nvim_tree_config.nvim_tree_callback
