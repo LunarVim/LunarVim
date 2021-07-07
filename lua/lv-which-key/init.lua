@@ -140,22 +140,6 @@ local mappings = {
   -- " Debug Adapter protocol:
   -- "   https://microsoft.github.io/debug-adapter-protocol/
   -- " Debugging
-  d = {
-    name = "Debug",
-    t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-    b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-    C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
-    d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-    g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-    o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-    u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
-    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-    s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-    q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
-  },
   g = {
     name = "Git",
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -251,24 +235,6 @@ if O.plugin.zen.active then
   vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
   mappings["z"] = "Zen"
 end
-if O.plugin.floatterm.active then
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap(
-    "t",
-    "<A-i>",
-    "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap(
-    "t",
-    "<A-l>",
-    "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>",
-    { noremap = true, silent = true }
-  )
-  mappings["gg"] = "LazyGit"
-end
 if O.plugin.telescope_project.active then
   -- open projects
   vim.api.nvim_set_keymap(
@@ -304,13 +270,13 @@ if O.lushmode then
   }
 end
 
--- for _, v in pairs(O.user_which_key) do
--- end
+if O.plugin.floatterm then
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  mappings["gg"] = "LazyGit"
+end
+
 for k, v in pairs(O.user_which_key) do
   mappings[k] = v
-  -- table.insert(mappings, O.user_which_key[1])
-  -- print(k)
-  --   print(v)
 end
 
 local wk = require "which-key"

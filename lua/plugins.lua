@@ -79,7 +79,13 @@ return require("packer").startup(function(use)
   }
 
   -- whichkey
-  use { "folke/which-key.nvim" }
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require "lv-which-key"
+    end,
+    event = "BufWinEnter",
+  }
 
   -- Autopairs
   use {
@@ -209,18 +215,7 @@ return require("packer").startup(function(use)
   use {
     "mfussenegger/nvim-dap",
     config = function()
-      local status_ok, dap = pcall(require, "dap")
-      if not status_ok then
-        return
-      end
-      -- require "dap"
-      vim.fn.sign_define("DapBreakpoint", {
-        text = "",
-        texthl = "LspDiagnosticsSignError",
-        linehl = "",
-        numhl = "",
-      })
-      dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
+      require "lv-dap"
     end,
     disable = not O.plugin.debug.active,
   }
@@ -228,7 +223,7 @@ return require("packer").startup(function(use)
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
-    event = "BufWinEnter",
+    event = "BufRead",
     config = function()
       require("lv-floatterm").config()
     end,
