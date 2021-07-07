@@ -96,7 +96,6 @@ O = {
     { "FileType", "qf", "set nobuflisted" },
   },
 
-
   -- nvim-tree
   nvim_tree = {
     side = "left",
@@ -144,7 +143,6 @@ O = {
       symlink = "",
     },
   },
-
 
   lang = {
     python = {
