@@ -8,6 +8,9 @@ require "lv-galaxyline"
 require "lv-treesitter"
 require "lv-which-key"
 require "lv-neoformat"
+if O.plugin.dashboard.active then
+  require("lv-dashboard").config()
+end
 require "lsp"
 if O.lang.emmet.active then
   require "lsp.emmet-ls"

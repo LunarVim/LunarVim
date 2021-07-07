@@ -130,9 +130,9 @@ return require("packer").startup(function(use)
     "ChristianChiarulli/dashboard-nvim",
     -- event = "BufWinEnter",
     -- cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
-    config = function()
-      require("lv-dashboard").config()
-    end,
+    -- config = function()
+    --   require("lv-dashboard").config()
+    -- end,
     disable = not O.plugin.dashboard.active,
     -- opt = true,
   }
