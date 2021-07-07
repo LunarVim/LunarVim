@@ -38,7 +38,7 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     config = [[require('lv-telescope')]],
-    event = "BufEnter",
+    --event = "BufEnter",
   }
 
   -- Autocomplete
