@@ -4,6 +4,12 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
+local EFM_CONF_PATH = os.getenv("HOME") .. "/.config/efm-langserver/config.yaml"
+
+if vim.fn.empty(vim.fn.glob(EFM_CONF_PATH)) > 0 then
+  EFM_CONF_PATH = CONFIG_PATH .. "/utils/efm-config.yaml"
+end
+
 O = {
   leader_key = "space",
   colorscheme = "spacegray",
@@ -64,6 +70,10 @@ O = {
     popup_border = "single",
   },
 
+  efm = {
+    config_path = EFM_CONF_PATH,
+  },
+
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
 
   plugin = {
@@ -120,7 +130,6 @@ O = {
       },
     },
     docker = {},
-    efm = {},
     elm = {},
     emmet = { active = true },
     elixir = {},
@@ -130,6 +139,7 @@ O = {
         exe = "gofmt",
         args = {},
       },
+      efm = { active = true},
     },
     html = {},
     java = {
@@ -147,12 +157,10 @@ O = {
         exe = "python",
         args = { "-m", "json.tool" },
       },
+      efm = { active = true},
     },
     kotlin = {},
-    latex = {
-      auto_save = false,
-      ignore_errors = { },
-    },
+    latex = {},
     lua = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -161,7 +169,7 @@ O = {
       },
       formatter = {
         exe = "stylua",
-        args = {},
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
         stdin = false,
       },
     },
@@ -204,6 +212,7 @@ O = {
         exe = "yapf",
         args = {},
       },
+      efm = { active = true},
     },
     ruby = {
       diagnostics = {
@@ -226,7 +235,7 @@ O = {
       -- @usage can be clippy
       formatter = {
         exe = "rustfmt",
-        args = { "--emit=stdout", "--edition=2018" },
+        args = { "--emit=stdout" },
       },
       linter = "",
       diagnostics = {
@@ -249,6 +258,7 @@ O = {
         args = { "-w" },
         stdin = false,
       },
+      efm = { active = true},
     },
     svelte = {},
     tailwindcss = {
@@ -264,13 +274,12 @@ O = {
       },
       formatter = {
         exe = "prettier",
-        args = { "--write", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = false,
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
       },
     },
     terraform = {},
     tsserver = {
-      -- @usage can be 'eslint' or 'eslint_d'
+      -- @usage can be 'eslint'
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -279,9 +288,9 @@ O = {
       },
       formatter = {
         exe = "prettier",
-        args = { "--write", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = false,
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
       },
+      efm = { active = true},
     },
     vim = {},
     yaml = {

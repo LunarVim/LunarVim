@@ -22,3 +22,7 @@ require("lspconfig").clangd.setup {
     }),
   },
 }
+
+if O.lang.clang.efm.active == true then
+  require("lsp.efm-ls").generic_setup({"c", "cpp"})
+end

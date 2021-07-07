@@ -1,0 +1,236 @@
+---
+version: 2
+log-file: /tmp/efm-output.log
+log-level: 1
+tools:
+  yaml-yamllint: &yaml-yamllint
+    lint-command: 'yamllint -f parsable -'
+    lint-stdin: true
+
+  python-flake8: &python-flake8
+    lint-command: 'flake8 --stdin-display-name ${INPUT} -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+  python-yapf: &python-yapf
+    format-command: 'yapf --quiet'
+    format-stdin: true
+  python-mypy: &python-mypy
+    lint-command: 'mypy --show-column-numbers'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+  python-pylint: &python-pylint
+    lint-command: 'pylint --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f:%l:%c:%t:%m'
+    lint-offset-columns: 1
+    lint-category-map:
+      I: H
+      R: I
+      C: I
+      W: W
+      E: E
+      F: E
+
+  dockerfile-hadolint: &dockerfile-hadolint
+    lint-command: 'hadolint'
+    lint-formats:
+      - '%f:%l %m'
+
+  sh-shellcheck: &sh-shellcheck
+    lint-command: 'shellcheck -f gcc -x'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+
+  sh-shfmt: &sh-shfmt
+    format-command: 'shfmt -i 2 -ci'
+    format-stdin: true
+
+  eslint: &eslint
+    lint-command: 'eslint -f visualstudio --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %rror %m"
+  eslint_d: &eslint_d
+    lint-command: './node_modules/.bin/eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %rror %m"
+    root-markers:
+      - .eslintrc.js
+      - .eslintrc.yaml
+      - .eslintrc.yml
+      - .eslintrc.json
+      - .eslintrc.cjs
+  local-eslint: &local-eslint
+    lint-command: './node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %rror %m"
+    root-markers:
+      - .eslintrc.cjs
+      - package.json
+      - .eslintrc.js
+      - .eslintrc.yaml
+      - .eslintrc.yml
+      - .eslintrc.json
+
+  prettier: &prettier
+    format-command: 'prettier --stdin-filepath ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - '.prettierrc'
+      - '.prettierrc.json'
+  prettier-d: &prettier_d
+    format-command: 'prettierd --stdin-filename ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - '.prettierrc'
+      - '.prettierrc.json'
+  prettier-d-slim: &prettier-d-slim
+    format-command: 'prettier_d_slim --stdin --stdin-filepath ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - '.prettierrc'
+      - '.prettierrc.json'
+  local-prettier: &local-prettier
+    format-command: './node_modules/.bin/prettier --stdin-filepath ${INPUT}'
+    format-stdin: true
+  local-prettier-d-slim: &local-prettier-d-slim
+    format-command: './node_modules/.bin/prettier_d_slim --stdin --stdin-filepath ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - '.prettierrc'
+      - '.prettierrc.json'
+
+  html-prettier: &html-prettier
+    format-command: './node_modules/.bin/prettier --parser html --stdin-filename ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.json
+
+  css-prettier: &css-prettier
+    format-command: './node_modules/.bin/prettier --parser css --stdin-filename ${INPUT}'
+    format-stdin: true
+    root-markers: 
+      - .prettierrc
+      - .prettierrc.json
+
+  json-prettier: &json-prettier
+    format-command: './node_modules/.bin/prettier --parser json --stdin-filename ${INPUT}'
+    format-stdin: true
+    root-markers: 
+      - .prettierrc
+      - .prettierrc.json
+
+  json-jq: &json-jq
+    lint-command: 'jq .'
+
+  json-fixjson: &json-fixjson
+    format-command: 'fixjson'
+
+  csv-csvlint: &csv-csvlint
+    lint-command: 'csvlint'
+
+  stylelint-lint: &stylelint-lint
+    lint-command: './node_modules/.bin/stylelint --formatter unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: false
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%t%*[a-z]]'
+    root-markers:
+      - .stylelintrc.json
+      - .stylelintrc
+
+  lua-stylua-format: &lua-stylua-format
+    format-command: 'stylua -'
+    format-stdin: true
+    root-markers:
+      - 'stylua.toml'
+
+  luaformat: &luaformat
+    format-command: "lua-format --chop-down-table --indent-width=2 --no-use-tab --in-place --no-keep-simple-function-one-line --column-limit=80"
+    format-stdin: true
+
+  luacheck: &luacheck
+    lint-command: 'luacheck --std lua51 --globals vim --filename ${INPUT} --formatter visual_studio -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+
+  any-excitetranslate: &any-excitetranslate
+    hover-command: 'excitetranslate'
+    hover-stdin: true
+
+languages:
+  # yaml:
+  #   - <<: *yaml-yamllint
+
+  python:
+    - <<: *python-yapf
+    - <<: *python-mypy
+    - <<: *python-pylint
+
+  dockerfile:
+    - <<: *dockerfile-hadolint
+
+  sh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
+
+  javascript:
+    - <<: *prettier
+    - <<: *eslint
+    # - <<: *eslint_d
+    # - <<: *local-prettier-d-slim
+    # - <<: *stylelint-lint
+
+  # javascriptreact:
+    # - <<: *prettier
+    # - <<: *eslint
+    # - <<: *eslint_d
+    # - <<: *local-prettier-d-slim
+    # - <<: *stylelint-lint
+
+  typescript:
+    - <<: *prettier
+    - <<: *eslint
+    # - <<: *local-prettier-d-slim
+    # - <<: *stylelint-lint
+
+  # typescriptreact:
+    # - <<: *eslint_d
+    # - <<: *local-prettier-d-slim
+    # - <<: *stylelint-lint
+
+  html:
+    - <<: *local-prettier-d-slim
+
+  css:
+    - <<: *css-prettier
+    - <<: *stylelint-lint
+
+  json:
+    - <<: *json-jq
+    # - <<: *json-fixjson
+    - <<: *json-prettier
+
+  lua:
+    - <<: *lua-stylua-format
+    # - <<: *luaformat
+    - <<: *luacheck
+
+  _:
+    - <<: *any-excitetranslate

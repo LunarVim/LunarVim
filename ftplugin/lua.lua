@@ -45,3 +45,7 @@ if O.lang.lua.autoformat then
 end
 
 vim.cmd "setl ts=2 sw=2"
+
+if O.lang.lua.efm.active == true then
+  require("lsp.efm-ls").generic_setup({"lua"})
+end
