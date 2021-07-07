@@ -105,9 +105,7 @@ installpynvim() {
         echo "Installing using Portage"
 if ! command -v sudo &> /dev/null
 then
-
     doas emerge -avn dev-python/pynvim
-    installongentoodoas
 else
     sudo emerge -avn dev-python/pynvim
 fi
@@ -193,7 +191,7 @@ installongentoodoas() {
 checksudo() {
 if ! command -v sudo &> /dev/null
 then
-	echo "hello"
+
     installongentoodoas
 else
     installongentoo
