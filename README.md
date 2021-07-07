@@ -75,6 +75,21 @@ O.lang.tsserver.autoformat = true
 
 -- json
 O.lang.json.autoformat = true
+
+-- Additional Plugins
+-- O.user_plugins = {{"windwp/nvim-ts-autotag"}}
+
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
+
+-- Additional Leader bindings for WhichKey
+-- O.user_which_key = {
+--   A = {
+--     name = "+Custom Leader Keys",
+--     a = { "<cmd>echo 'first custom command'<cr>", "Description for a" },
+--     b = { "<cmd>echo 'second custom command'<cr>", "Description for b" },
+--   },
+-- }
 ```
 
 **NOTE** After changing a setting it is important to exit LunarVim and run the following:
