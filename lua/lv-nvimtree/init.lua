@@ -65,7 +65,12 @@ M.config = function()
   }
 end
 
-local view = require "nvim-tree.view"
+local view_status_ok, view = pcall(require, "nvim-tree.view")
+if not view_status_ok then
+  return
+end
+
+--local view = require "nvim-tree.view"
 
 M.toggle_tree = function()
   if view.win_open() then
