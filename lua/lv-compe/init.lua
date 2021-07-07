@@ -7,7 +7,7 @@ local M = {}
 vim.g.vsnip_snippet_dir = O.vnsip_dir
 
 M.config = function()
-  opt = {
+  local opt = {
     enabled = O.auto_complete,
     autocomplete = true,
     debug = false,
@@ -39,8 +39,12 @@ M.config = function()
       -- for emoji press : (idk if that in compe tho)
     },
   }
+  local status_ok, compe = pcall(require, "compe")
+  if not status_ok then
+    return
+  end
 
-  require("compe").setup(opt)
+  compe.setup(opt)
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -86,7 +90,7 @@ M.config = function()
   vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
 
   vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
-  -- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
+  vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })

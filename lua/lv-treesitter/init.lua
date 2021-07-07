@@ -80,8 +80,12 @@ if status then
   wk.register(textobj_move_keymaps["goto_previous_start"], normal)
   wk.register(textobj_move_keymaps["goto_previous_end"], normal)
 end
+local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+if not status_ok then
+  return
+end
 
-require("nvim-treesitter.configs").setup {
+treesitter_configs.setup {
   ensure_installed = O.treesitter.ensure_installed, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = O.treesitter.ignore_install,
   matchup = {

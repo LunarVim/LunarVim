@@ -94,7 +94,11 @@ return require("packer").startup(function(use)
     "terrortylor/nvim-comment",
     cmd = "CommentToggle",
     config = function()
-      require("nvim_comment").setup()
+      local status_ok, nvim_comment = pcall(require, "nvim_comment")
+      if not status_ok then
+        return
+      end
+      nvim_comment.setup()
     end,
   }
 
@@ -145,8 +149,8 @@ return require("packer").startup(function(use)
     "norcalli/nvim-colorizer.lua",
     event = "BufRead",
     config = function()
-      require("colorizer").setup()
-      vim.cmd "ColorizerReloadAllBuffers"
+      require "lv-colorizer"
+      -- vim.cmd "ColorizerReloadAllBuffers"
     end,
     disable = not O.plugin.colorizer.active,
   }
@@ -202,14 +206,18 @@ return require("packer").startup(function(use)
   use {
     "mfussenegger/nvim-dap",
     config = function()
-      require "dap"
+      local status_ok, dap = pcall(require, "dap")
+      if not status_ok then
+        return
+      end
+      -- require "dap"
       vim.fn.sign_define("DapBreakpoint", {
         text = "",
         texthl = "LspDiagnosticsSignError",
         linehl = "",
         numhl = "",
       })
-      require("dap").defaults.fallback.terminal_win_cmd = "50vsplit new"
+      dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
     end,
     disable = not O.plugin.debug.active,
   }
@@ -217,12 +225,9 @@ return require("packer").startup(function(use)
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
-    event = "BufRead",
+    event = "BufWinEnter",
     config = function()
-      require("FTerm").setup {
-        dimensions = { height = 0.8, width = 0.8, x = 0.5, y = 0.5 },
-        border = "single", -- or 'double'
-      }
+      require("lv-floatterm").config()
     end,
     disable = not O.plugin.floatterm.active,
   }
@@ -238,7 +243,9 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope-project.nvim",
     event = "BufRead",
-    setup = function () vim.cmd[[packadd telescope.nvim]] end,
+    setup = function()
+      vim.cmd [[packadd telescope.nvim]]
+    end,
     disable = not O.plugin.telescope_project.active,
   }
 
@@ -247,13 +254,6 @@ return require("packer").startup(function(use)
     "felipec/vim-sanegx",
     event = "BufRead",
     disable = not O.plugin.sanegx.active,
-  }
-
-  -- Lazygit
-  use {
-    "kdheepak/lazygit.nvim",
-    cmd = "LazyGit",
-    disable = not O.plugin.lazygit.active,
   }
 
   -- Diffview
@@ -355,7 +355,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.ts_hintobjects.active,
   }
 
-  for _, plugin in pairs(O.custom_plugins) do
+  for _, plugin in pairs(O.user_plugins) do
     packer.use(plugin)
   end
 end)

@@ -1,8 +1,12 @@
 -- if not package.loaded['which-key'] then
 --  return
 -- end
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+  return
+end
 
-require("which-key").setup {
+which_key.setup {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -61,16 +65,12 @@ vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, si
 
 -- explorer
 
--- TODO this introduces some bugs unfortunately
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>e",
   ":lua require'lv-nvimtree'.toggle_tree()<CR>",
   { noremap = true, silent = true }
 )
--- vim.api.nvim_set_keymap('n', '<Leader>e',
---                         ":NvimTreeToggle<CR>",
---                         {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
 
@@ -83,8 +83,6 @@ vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { noremap = true
 
 -- close buffer
 vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
-
--- TODO create entire treesitter section
 
 local mappings = {
 
@@ -120,30 +118,10 @@ local mappings = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
     i = { "<cmd>PackerInstall<cr>", "Install" },
-    r = { ":luafile %<cr>", "Reload" },
+    r = { "<cmd>lua require('lv-utils').reload_lv_config()<cr>", "Reload" },
     s = { "<cmd>PackerSync<cr>", "Sync" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
-  -- diagnostics vanilla nvim
-  -- -- diagnostic
-  -- function lv_utils.get_all()
-  --     vim.lsp.diagnostic.get_all()
-  -- end
-  -- function lv_utils.get_next()
-  --     vim.lsp.diagnostic.get_next()
-  -- end
-  -- function lv_utils.get_prev()
-  --     vim.lsp.diagnostic.get_prev()
-  -- end
-  -- function lv_utils.goto_next()
-  --     vim.lsp.diagnostic.goto_next()
-  -- end
-  -- function lv_utils.goto_prev()
-  --     vim.lsp.diagnostic.goto_prev()
-  -- end
-  -- function lv_utils.show_line_diagnostics()
-  --     vim.lsp.diagnostic.show_line_diagnostics()
-  -- end
 
   -- " Available Debug Adapters:
   -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
@@ -200,7 +178,7 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>Neoformat<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     j = { "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>", "Next Diagnostic" },
     k = { "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>", "Prev Diagnostic" },
@@ -263,8 +241,22 @@ if O.plugin.zen.active then
   vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
   mappings["z"] = "Zen"
 end
-if O.plugin.lazygit.active then
-  vim.api.nvim_set_keymap("n", "<leader>gg", ":LazyGit<CR>", { noremap = true, silent = true })
+if O.plugin.floatterm.active then
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(
+    "t",
+    "<A-i>",
+    "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
+    { noremap = true, silent = true }
+  )
+  vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(
+    "t",
+    "<A-l>",
+    "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>",
+    { noremap = true, silent = true }
+  )
   mappings["gg"] = "LazyGit"
 end
 if O.plugin.telescope_project.active then
@@ -300,6 +292,15 @@ if O.lushmode then
     t = { ":LushRunTutorial<cr>", "Lush Tutorial" },
     q = { ":LushRunQuickstart<cr>", "Lush Quickstart" },
   }
+end
+
+-- for _, v in pairs(O.user_which_key) do
+-- end
+for k, v in pairs(O.user_which_key) do
+  mappings[k] = v
+  -- table.insert(mappings, O.user_which_key[1])
+  -- print(k)
+  --   print(v)
 end
 
 local wk = require "which-key"
