@@ -4,19 +4,20 @@
     <a href="https://github.com/ChristianChiarulli/LunarVim/releases/latest">
       <img alt="Latest release" src="https://img.shields.io/github/v/release/ChristianChiarulli/LunarVim" />
     </a>
-    <a href="https://github.com/ChristianChiarulli/sniprun/releases">
-      <img alt="Total downloads" src="https://img.shields.io/github/downloads/ChristianChiarulli/LunarVim/total" />
-    </a>
     <a href="https://github.com/ChristianChiarulli/LunarVim/pulse">
       <img alt="Last commit" src="https://img.shields.io/github/last-commit/ChristianChiarulli/LunarVim"/>
     </a>
+    <a href="https://github.com/ChristianChiarulli/LunarVim/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/siduck76/NvChad?style=flat-square&logo=GNU&label=License" alt="License"
+    />
     <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon">
       <img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" />
     </a>
     <a href="https://twitter.com/intent/follow?screen_name=chrisatmachine">
       <img src="https://img.shields.io/twitter/follow/chrisatmachine?style=social&logo=twitter" alt="follow on Twitter">
     </a>
-</p>
+</p>	
+
 </div>
 
 ## Install In One Command!
@@ -74,6 +75,21 @@ O.lang.tsserver.autoformat = true
 
 -- json
 O.lang.json.autoformat = true
+
+-- Additional Plugins
+-- O.user_plugins = {{"windwp/nvim-ts-autotag"}}
+
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
+
+-- Additional Leader bindings for WhichKey
+-- O.user_which_key = {
+--   A = {
+--     name = "+Custom Leader Keys",
+--     a = { "<cmd>echo 'first custom command'<cr>", "Description for a" },
+--     b = { "<cmd>echo 'second custom command'<cr>", "Description for b" },
+--   },
+-- }
 ```
 
 **NOTE** After changing a setting it is important to exit LunarVim and run the following:
@@ -110,4 +126,18 @@ cd ~/.config/nvim && git pull
 
 - [Twitter](https://twitter.com/chrisatmachine)
 
+## Testimonials
 
+> "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
+> - @juanCortelezzi, LunarVim user.
+
+<<<<<<< HEAD
+
+=======
+<div align="center">
+	
+[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)]()
+	
+	
+</div>
+>>>>>>> 68bfac0468ea4d5d7faf5bede0a4ab8cb5572f0c

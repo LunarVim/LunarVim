@@ -7,7 +7,7 @@ local M = {}
 vim.g.vsnip_snippet_dir = O.vnsip_dir
 
 M.config = function()
-  opt = {
+  local opt = {
     enabled = O.auto_complete,
     autocomplete = true,
     debug = false,
@@ -31,7 +31,7 @@ M.config = function()
       nvim_lua = false,
       spell = { kind = "   (Spell)" },
       tags = false,
-      vim_dadbod_completion = true,
+      -- vim_dadbod_completion = true,
       -- snippets_nvim = {kind = "  "},
       -- ultisnips = {kind = "  "},
       -- treesitter = {kind = "  "},
@@ -39,12 +39,12 @@ M.config = function()
       -- for emoji press : (idk if that in compe tho)
     },
   }
-
-  if O.plugin.tabnine.active then
-    opt.source.tabnine = { kind = " ", priority = 200, max_reslts = 6 }
+  local status_ok, compe = pcall(require, "compe")
+  if not status_ok then
+    return
   end
 
-  require("compe").setup(opt)
+  compe.setup(opt)
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)

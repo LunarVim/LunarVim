@@ -1,7 +1,11 @@
 local M = {}
+local status_ok, zen_mode = pcall(require, "zen-mode")
+if not status_ok then
+  return
+end
 
 M.config = function()
-  require("zen-mode").setup {
+  zen_mode.setup {
     window = {
       backdrop = 1,
       height = 0.85, -- height of the Zen window

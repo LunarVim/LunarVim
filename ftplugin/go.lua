@@ -6,17 +6,7 @@ require("lspconfig").gopls.setup {
   on_attach = require("lsp").common_on_attach,
 }
 
-if O.lang.go.autoformat then
-  require("lv-utils").define_augroups {
-    _go_format = {
-      { "BufWritePre", "*.go", "lua vim.lsp.buf.formatting_sync(nil,1000)" },
-    },
-    _go = {
-      -- Go generally requires Tabs instead of spaces.
-      { "FileType", "go", "setlocal tabstop=4" },
-      { "FileType", "go", "setlocal shiftwidth=4" },
-      { "FileType", "go", "setlocal softtabstop=4" },
-      { "FileType", "go", "setlocal noexpandtab" },
-    },
-  }
-end
+vim.opt_local.tabstop = 4
+vim.opt_local.shiftwidth = 4
+vim.opt_local.softtabstop = 4
+vim.opt_local.expandtab = false
