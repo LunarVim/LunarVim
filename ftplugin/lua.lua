@@ -40,3 +40,5 @@ if O.lang.lua.autoformat then
     },
   }
 end
+
+vim.cmd "setl ts=2 sw=2"
