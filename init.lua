@@ -1,4 +1,3 @@
-
 require "default-config"
 require('compile')
 require "keymappings"
@@ -10,9 +9,7 @@ require "lv-galaxyline"
 require "lv-treesitter"
 require "lv-which-key"
 require "lv-neoformat"
-if O.plugin.dashboard.active then
-  require("lv-dashboard").config()
-end
+if O.plugin.dashboard.active then require("lv-dashboard").config() end
 -- TODO these gues need to be in language files
 -- require "lsp"
 -- if O.lang.emmet.active then
