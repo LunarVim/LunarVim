@@ -127,7 +127,7 @@ return require("packer").startup(function(use)
   use {
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
-    cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
+    -- cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
     config = function()
       require("lv-dashboard").config()
     end,

@@ -28,10 +28,10 @@ M.config = function()
       description = { "  Settings           " },
       command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
     },
-    f = {
-      description = { "  Neovim Config Files" },
-      command = "Telescope find_files cwd=" .. CONFIG_PATH,
-    },
+    -- f = {
+    --   description = { "  Neovim Config Files" },
+    --   command = "Telescope find_files cwd=" .. CONFIG_PATH,
+    -- },
     -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
   }
   vim.cmd "let g:dashboard_session_directory = $HOME..'/.config/nvim/.sessions'"
