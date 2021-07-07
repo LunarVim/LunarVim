@@ -20,6 +20,7 @@ O = {
   smart_case = true,
   lushmode = false,
   hl_search = false,
+  document_highlight = false,
   transparent_window = false,
   leader_key = "space",
   vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
