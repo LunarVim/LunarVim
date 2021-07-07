@@ -61,8 +61,9 @@ return require("packer").startup(function(use)
 
   use {
     "kyazdani42/nvim-tree.lua",
-    event = "BufEnter",
+    -- event = "BufEnter",
     -- cmd = "NvimTreeToggle",
+    commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
       require("lv-nvimtree").config()
     end,
