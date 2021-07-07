@@ -57,7 +57,9 @@ installnode() {
     [ -f "/etc/arch-release" ] && installnodearch
     [ -f "/etc/artix-release" ] && installnodearch
     [ -f "/etc/fedora-release" ] && installnodefedora
-    [ -f "/etc/gentoo-release" ] && installnodegentoo
+    [ -f "/etc/gentoo-release" ] && if ! command -v sudo &> /dev/null then; installnodegentoodoas; else; installnodegentoo; fi
+
+
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
     sudo npm i -g neovim
 }
@@ -84,7 +86,7 @@ installpipongentoo() {
     sudo emerge -avn dev-python/pip
 }
 
-nstallpipongentoodoas() {
+installpipongentoodoas() {
     doas emerge -avn dev-python/pip
 }
 
@@ -95,7 +97,7 @@ installpip() {
     [ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
     [ -f "/etc/arch-release" ] && installpiponarch
     [ -f "/etc/fedora-release" ] && installpiponfedora
-    [ -f "/etc/gentoo-release" ] && installpipongentoo
+    [ -f "/etc/gentoo-release" ] && if ! command -v sudo &> /dev/null then; installpipongentoodoas; else; installpipongentoo; fi
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
