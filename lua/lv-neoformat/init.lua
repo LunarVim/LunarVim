@@ -10,7 +10,3 @@ if O.format_on_save then
     },
   }
 end
-
-if not O.format_on_save then
-  vim.cmd ":autocmd! autoformat"
-end
