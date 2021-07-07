@@ -16,41 +16,24 @@ M.config = function()
     border = "single", -- or 'double'
   }
 
-  -- Create LazyGit Terminal
-  local term = require "FTerm.terminal"
-  local lazy = term:new():setup {
-    cmd = "lazygit",
-    dimensions = {
-      height = 0.9,
-      width = 0.9,
-      x = 0.5,
-      y = 0.3,
-    },
-  }
-
-  local function is_installed(exe)
-    return vim.fn.executable(exe) == 1
-  end
-
-  -- Use this to toggle gitui in a floating terminal
-  function _G.__fterm_lazygit()
-    if is_installed "lazygit" ~= true then
-      print "Please install lazygit. Check documentation for more information"
+  function _G.__fterm_command(command)
+    if vim.fn.executable(command) ~= 1 then
+      print(string.format("Please install %s. Check documentation for more information", command))
       return
     end
-    lazy:toggle()
+    local term = require "FTerm.terminal"
+    local lazy = term:new():setup {
+      cmd = command,
+      dimensions = {
+        height = 0.9,
+        width = 0.9,
+        x = 0.5,
+        y = 0.3,
+      },
+    }
+    lazy:toggle() 
   end
 
-  -- Map esc to exit inside lazygit
-  vim.api.nvim_exec([[
-  function LazyGitNativation()
-    echom &filetype
-    if &filetype ==# 'FTerm'
-      tnoremap <Esc> q
-      tnoremap <C-v><Esc> <Esc>
-    endif
-  endfunction
-  ]], false)
 end
 
 return M
