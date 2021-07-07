@@ -3,6 +3,10 @@
 --end
 
 local M = {}
+local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+if not status_ok then
+  return
+end
 
 M.config = function()
   local g = vim.g
@@ -52,7 +56,7 @@ M.config = function()
       symlink = "",
     },
   }
-  local tree_cb = require("nvim-tree.config").nvim_tree_callback
+  local tree_cb = nvim_tree_config.nvim_tree_callback
 
   vim.g.nvim_tree_bindings = {
     { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },

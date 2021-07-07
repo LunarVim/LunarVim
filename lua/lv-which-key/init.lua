@@ -1,8 +1,12 @@
 -- if not package.loaded['which-key'] then
 --  return
 -- end
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+  return
+end
 
-require("which-key").setup {
+which_key.setup {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode

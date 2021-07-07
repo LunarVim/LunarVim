@@ -1,8 +1,10 @@
 -- if not package.loaded['galaxyline'] then
 --   return
 -- end
-
-local gl = require "galaxyline"
+local status_ok, gl = pcall(require, "galaxyline")
+if not status_ok then
+  return
+end
 -- get my theme in galaxyline repo
 -- local colors = require('galaxyline.theme').default
 local colors = {
