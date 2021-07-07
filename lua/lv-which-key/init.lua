@@ -23,8 +23,8 @@ which_key.setup {
     },
   },
   icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "➜", -- symbol used between a key and it's label
+    breadcrumb = "¬ª", -- symbol used in the command line area that shows your active key combo
+    separator = "‚ûú", -- symbol used between a key and it's label
     group = "+", -- symbol prepended to a group
   },
   window = {
@@ -251,8 +251,9 @@ if O.plugin.zen.active then
   vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
   mappings["z"] = "Zen"
 end
+
 if O.plugin.floatterm.active then
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_command('lazygit')<CR>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap(
     "t",
@@ -260,15 +261,16 @@ if O.plugin.floatterm.active then
     "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
     { noremap = true, silent = true }
   )
-  vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_command('lazygit')<CR>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap(
     "t",
     "<A-l>",
-    "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>",
+    "<C-\\><C-n><CMD>lua _G.__fterm_command('lazygit')<CR>",
     { noremap = true, silent = true }
   )
   mappings["gg"] = "LazyGit"
 end
+
 if O.plugin.telescope_project.active then
   -- open projects
   vim.api.nvim_set_keymap(
