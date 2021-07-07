@@ -57,7 +57,12 @@ installnode() {
     [ -f "/etc/arch-release" ] && installnodearch
     [ -f "/etc/artix-release" ] && installnodearch
     [ -f "/etc/fedora-release" ] && installnodefedora
-    [ -f "/etc/gentoo-release" ] && if ! command -v sudo &> /dev/null then; installnodegentoodoas; else; installnodegentoo; fi
+    [ -f "/etc/gentoo-release" ] && if ! command -v sudo &> /dev/null 
+then
+    installnodegentoodoas
+else
+    installnodegentoo 
+    fi
 
 
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
@@ -97,7 +102,11 @@ installpip() {
     [ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
     [ -f "/etc/arch-release" ] && installpiponarch
     [ -f "/etc/fedora-release" ] && installpiponfedora
-    [ -f "/etc/gentoo-release" ] && if ! command -v sudo &> /dev/null then; installpipongentoodoas; else; installpipongentoo; fi
+    [ -f "/etc/gentoo-release" ] && if ! command -v sudo &> /dev/null 
+then
+    installpipongentoodoas 
+else installpipongentoo 
+    fi
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
@@ -245,4 +254,7 @@ echo "I recommend you also install and activate a font from here: https://github
 # echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
 
 # echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'
+
+
+
 
