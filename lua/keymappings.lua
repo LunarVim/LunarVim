@@ -9,14 +9,30 @@ local function register_mappings(mappings, default_options)
 end
 
 local mappings = {
-  n = {
-    -- better window movement
+  i = { -- Insert mode
+    -- I hate escape
+    { "jk", "<ESC>" },
+    { "kj", "<ESC>" },
+    { "jj", "<ESC>" },
+
+    -- Move current line / block with Alt-j/k ala vscode.
+    { "<A-j>", "<Esc>:m .+1<CR>==gi" },
+    { "<A-k>", "<Esc>:m .-2<CR>==gi" },
+
+    -- Terminal window navigation
+    { "<C-h>", "<C-\\><C-N><C-w>h" },
+    { "<C-j>", "<C-\\><C-N><C-w>j" },
+    { "<C-k>", "<C-\\><C-N><C-w>k" },
+    { "<C-l>", "<C-\\><C-N><C-w>l" },
+  },
+  n = { -- Normal mode
+    -- Better window movement
     { "<C-h>", "<C-w>h", { silent = true } },
     { "<C-j>", "<C-w>j", { silent = true } },
     { "<C-k>", "<C-w>k", { silent = true } },
     { "<C-l>", "<C-w>l", { silent = true } },
 
-    -- resize with arrows
+    -- Resize with arrows
     { "<C-Up>", ":resize -2<CR>", { silent = true } },
     { "<C-Down>", ":resize +2<CR>", { silent = true } },
     { "<C-Left>", ":vertical resize -2<CR>", { silent = true } },
@@ -36,38 +52,22 @@ local mappings = {
 
     -- {'<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true}},
   },
-  v = {
-    -- better indenting
+  t = { -- Terminal mode
+    -- Terminal window navigation
+    { "<C-h>", "<C-\\><C-N><C-w>h" },
+    { "<C-j>", "<C-\\><C-N><C-w>j" },
+    { "<C-k>", "<C-\\><C-N><C-w>k" },
+    { "<C-l>", "<C-\\><C-N><C-w>l" },
+  },
+  v = { -- Visual/Select mode
+    -- Better indenting
     { "<", "<gv" },
     { ">", ">gv" },
 
     { "p", '"0p', { silent = true } },
     { "P", '"0P', { silent = true } },
   },
-  i = {
-    -- I hate escape
-    { "jk", "<ESC>" },
-    { "kj", "<ESC>" },
-    { "jj", "<ESC>" },
-
-    -- Move current line / block with Alt-j/k ala vscode.
-    { "<A-j>", "<Esc>:m .+1<CR>==gi" },
-    { "<A-k>", "<Esc>:m .-2<CR>==gi" },
-
-    -- Terminal window navigation
-    { "<C-h>", "<C-\\><C-N><C-w>h" },
-    { "<C-j>", "<C-\\><C-N><C-w>j" },
-    { "<C-k>", "<C-\\><C-N><C-w>k" },
-    { "<C-l>", "<C-\\><C-N><C-w>l" },
-  },
-  t = {
-    -- Terminal window navigation
-    { "<C-h>", "<C-\\><C-N><C-w>h" },
-    { "<C-j>", "<C-\\><C-N><C-w>j" },
-    { "<C-k>", "<C-\\><C-N><C-w>k" },
-    { "<C-l>", "<C-\\><C-N><C-w>l" },
-  },
-  x = {
+  x = { -- Visual mode
     -- Move selected line / block of text in visual mode
     { "K", ":move '<-2<CR>gv-gv" },
     { "J", ":move '>+1<CR>gv-gv" },
