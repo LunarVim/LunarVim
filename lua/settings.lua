@@ -12,6 +12,7 @@ cmd "set iskeyword+=-"
 cmd "set whichwrap+=<,>,[,],h,l"
 if O.transparent_window then
   cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
+  cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
 end
 
 --- COLORSCHEME ---

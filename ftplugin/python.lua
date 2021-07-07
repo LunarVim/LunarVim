@@ -20,12 +20,6 @@ if O.lang.python.isort then
   table.insert(python_arguments, isort)
 end
 
-if O.lang.python.formatter == "yapf" then
-  table.insert(python_arguments, yapf)
-elseif O.lang.python.formatter == "black" then
-  table.insert(python_arguments, black)
-end
-
 require("lspconfig").efm.setup {
   -- init_options = {initializationOptions},
   cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
@@ -64,17 +58,8 @@ require("lspconfig").pyright.setup {
     },
   },
 }
-if O.lang.python.autoformat then
-  require("lv-utils").define_augroups {
-    _python_autoformat = {
-      {
-        "BufWritePre",
-        "*.py",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-      },
-    },
-  }
-end
 
-local dap_install = require("dap-install")
-dap_install.config("python_dbg", {})
+if O.plugin.debug.active and O.plugin.dap_install.active then
+  local dap_install = require("dap-install")
+  dap_install.config("python_dbg", {})
+end
