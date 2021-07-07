@@ -355,7 +355,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.ts_hintobjects.active,
   }
 
-  for _, plugin in pairs(O.custom_plugins) do
+  for _, plugin in pairs(O.user_plugins) do
     packer.use(plugin)
   end
 end)

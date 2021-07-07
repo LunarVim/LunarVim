@@ -65,16 +65,12 @@ vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, si
 
 -- explorer
 
--- TODO this introduces some bugs unfortunately
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>e",
   ":lua require'lv-nvimtree'.toggle_tree()<CR>",
   { noremap = true, silent = true }
 )
--- vim.api.nvim_set_keymap('n', '<Leader>e',
---                         ":NvimTreeToggle<CR>",
---                         {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
 
@@ -87,8 +83,6 @@ vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { noremap = true
 
 -- close buffer
 vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
-
--- TODO create entire treesitter section
 
 local mappings = {
 
@@ -128,26 +122,6 @@ local mappings = {
     s = { "<cmd>PackerSync<cr>", "Sync" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
-  -- diagnostics vanilla nvim
-  -- -- diagnostic
-  -- function lv_utils.get_all()
-  --     vim.lsp.diagnostic.get_all()
-  -- end
-  -- function lv_utils.get_next()
-  --     vim.lsp.diagnostic.get_next()
-  -- end
-  -- function lv_utils.get_prev()
-  --     vim.lsp.diagnostic.get_prev()
-  -- end
-  -- function lv_utils.goto_next()
-  --     vim.lsp.diagnostic.goto_next()
-  -- end
-  -- function lv_utils.goto_prev()
-  --     vim.lsp.diagnostic.goto_prev()
-  -- end
-  -- function lv_utils.show_line_diagnostics()
-  --     vim.lsp.diagnostic.show_line_diagnostics()
-  -- end
 
   -- " Available Debug Adapters:
   -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
@@ -318,6 +292,15 @@ if O.lushmode then
     t = { ":LushRunTutorial<cr>", "Lush Tutorial" },
     q = { ":LushRunQuickstart<cr>", "Lush Quickstart" },
   }
+end
+
+-- for _, v in pairs(O.user_which_key) do
+-- end
+for k, v in pairs(O.user_which_key) do
+  mappings[k] = v
+  -- table.insert(mappings, O.user_which_key[1])
+  -- print(k)
+  --   print(v)
 end
 
 local wk = require "which-key"
