@@ -45,7 +45,7 @@ O.lang.python.analysis.use_library_code_types = true
 O.lang.tsserver.linter = nil
 
 -- Additional Plugins
--- O.custom_plugins = {{"windwp/nvim-ts-autotag"}}
+-- O.user_plugins = {{"windwp/nvim-ts-autotag"}}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
