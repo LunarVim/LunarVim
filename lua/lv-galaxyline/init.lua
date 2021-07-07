@@ -184,7 +184,7 @@ local get_lsp_client = function(msg)
   local lsps = ""
   for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
-    if filetypes and vim.fn.index(filetypes, buf_ft) ~= 1 then
+    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
       -- print(client.name)
       if lsps == "" then
         -- print("first", lsps)
