@@ -13,7 +13,7 @@ M.config = function()
 
   vim.o.termguicolors = true
 
-  g.nvim_tree_side = "left"
+  g.nvim_tree_side = O.nvim_tree_side
   g.nvim_tree_width = 30
   g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
   g.nvim_tree_auto_open = 1
@@ -72,11 +72,11 @@ end
 M.toggle_tree = function()
   if view.win_open() then
     require("nvim-tree").close()
-    if package.loaded["bufferline.state"] then
+    if O.nvim_tree_side == "left" and package.loaded["bufferline.state"] then
       require("bufferline.state").set_offset(0)
     end
   else
-    if package.loaded["bufferline.state"] then
+    if O.nvim_tree_side == "left" and package.loaded["bufferline.state"] then
       -- require'bufferline.state'.set_offset(31, 'File Explorer')
       require("bufferline.state").set_offset(31, "")
     end
