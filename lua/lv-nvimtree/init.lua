@@ -72,13 +72,13 @@ end
 M.toggle_tree = function()
   if view.win_open() then
     require("nvim-tree").close()
-    if package.loaded["bufferline.state"] then
+    if O.nvim_tree.side == "left" and package.loaded["bufferline.state"] then
       require("bufferline.state").set_offset(0)
     end
   else
-    if package.loaded["bufferline.state"] then
+    if O.nvim_tree.side == "left" and package.loaded["bufferline.state"] then
       -- require'bufferline.state'.set_offset(31, 'File Explorer')
-      require("bufferline.state").set_offset(31, "")
+      require("bufferline.state").set_offset(O.nvim_tree.width + 1, "")
     end
     require("nvim-tree").find_file(true)
   end
