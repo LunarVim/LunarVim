@@ -101,29 +101,6 @@ local mappings = {
   ["f"] = "Find File",
   ["h"] = "No Highlight",
   [";"] = "Dashboard",
-  b = {
-    name = "Buffers",
-    j = { "<cmd>BufferPick<cr>", "jump to buffer" },
-    f = { "<cmd>Telescope buffers<cr>", "Find buffer" },
-    w = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
-    e = {
-      "<cmd>BufferCloseAllButCurrent<cr>",
-      "close all but current buffer",
-    },
-    h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
-    l = {
-      "<cmd>BufferCloseBuffersRight<cr>",
-      "close all BufferLines to the right",
-    },
-    D = {
-      "<cmd>BufferOrderByDirectory<cr>",
-      "sort BufferLines automatically by directory",
-    },
-    L = {
-      "<cmd>BufferOrderByLanguage<cr>",
-      "sort BufferLines automatically by language",
-    },
-  },
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -140,22 +117,6 @@ local mappings = {
   -- " Debug Adapter protocol:
   -- "   https://microsoft.github.io/debug-adapter-protocol/
   -- " Debugging
-  d = {
-    name = "Debug",
-    t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-    b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-    C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
-    d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-    g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-    o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-    u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
-    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-    s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-    q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
-  },
   g = {
     name = "Git",
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -177,6 +138,7 @@ local mappings = {
       "Checkout commit(for current file)",
     },
   },
+
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -203,6 +165,7 @@ local mappings = {
       "Workspace Symbols",
     },
   },
+
   s = {
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -213,11 +176,6 @@ local mappings = {
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     t = { "<cmd>Telescope live_grep<cr>", "Text" },
-  },
-  S = {
-    name = "Session",
-    s = { "<cmd>SessionSave<cr>", "Save Session" },
-    l = { "<cmd>SessionLoad<cr>", "Load Session" },
   },
   T = {
     name = "Treesitter",
@@ -251,24 +209,6 @@ if O.plugin.zen.active then
   vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
   mappings["z"] = "Zen"
 end
-if O.plugin.floatterm.active then
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap(
-    "t",
-    "<A-i>",
-    "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap(
-    "t",
-    "<A-l>",
-    "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>",
-    { noremap = true, silent = true }
-  )
-  mappings["gg"] = "LazyGit"
-end
 if O.plugin.telescope_project.active then
   -- open projects
   vim.api.nvim_set_keymap(
@@ -278,20 +218,6 @@ if O.plugin.telescope_project.active then
     { noremap = true, silent = true }
   )
   mappings["P"] = "Projects"
-end
-
--- [";"] = "Dashboard",
-
-if O.lang.latex.active then
-  mappings["L"] = {
-    name = "+Latex",
-    c = { "<cmd>VimtexCompile<cr>", "Toggle Compilation Mode" },
-    f = { "<cmd>call vimtex#fzf#run()<cr>", "Fzf Find" },
-    i = { "<cmd>VimtexInfo<cr>", "Project Information" },
-    s = { "<cmd>VimtexStop<cr>", "Stop Project Compilation" },
-    t = { "<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content" },
-    v = { "<cmd>VimtexView<cr>", "View PDF" },
-  }
 end
 
 if O.lushmode then
@@ -304,13 +230,13 @@ if O.lushmode then
   }
 end
 
--- for _, v in pairs(O.user_which_key) do
--- end
+if O.plugin.floatterm then
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+  mappings["gg"] = "LazyGit"
+end
+
 for k, v in pairs(O.user_which_key) do
   mappings[k] = v
-  -- table.insert(mappings, O.user_which_key[1])
-  -- print(k)
-  --   print(v)
 end
 
 local wk = require "which-key"
