@@ -186,6 +186,8 @@ O = {
     rust = {
       rust_tools = {
         active = false,
+        parameter_hints_prefix = "<-",
+        other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
       },
       linter = "",
       diagnostics = {
