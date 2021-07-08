@@ -1,3 +1,7 @@
+if require("lv-utils").check_lsp_client_active "jdtls" then
+  return
+end
+
 local util = require "lspconfig/util"
 -- In Vimscript
 -- augroup lsp
