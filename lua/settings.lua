@@ -11,13 +11,9 @@ cmd "set inccommand=split"
 cmd "set iskeyword+=-"
 cmd "set whichwrap+=<,>,[,],h,l"
 if O.transparent_window then
-  cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-  cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
+    cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
+    cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
 end
-
---- COLORSCHEME ---
-
-vim.g.colors_name = O.colorscheme
 
 ---  SETTINGS  ---
 
@@ -25,7 +21,7 @@ opt.backup = false -- creates a backup file
 opt.clipboard = O.clipboard -- allows neovim to access the system clipboard
 opt.cmdheight = O.cmdheight -- more space in the neovim command line for displaying messages
 opt.colorcolumn = "99999" -- fix indentline for now
-opt.completeopt = { "menuone", "noselect" }
+opt.completeopt = {"menuone", "noselect"}
 opt.conceallevel = 0 -- so that `` is visible in markdown files
 opt.fileencoding = "utf-8" -- the encoding written to a file
 opt.guifont = "monospace:h17" -- the font used in graphical neovim applications

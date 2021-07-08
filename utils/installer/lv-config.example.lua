@@ -31,7 +31,7 @@ O.plugin.zen.active = false
 -- O.dashboard.footer = {""}
 
 -- if you don't want all the parsers change this to a table of the ones you want
-O.treesitter.ensure_installed = "all"
+O.treesitter.ensure_installed = "maintained"
 O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
@@ -45,7 +45,13 @@ O.lang.python.analysis.use_library_code_types = true
 O.lang.tsserver.linter = nil
 
 -- Additional Plugins
--- O.user_plugins = {{"windwp/nvim-ts-autotag"}}
+-- O.user_plugins = {
+--     {"folke/tokyonight.nvim"}, {
+--         "ray-x/lsp_signature.nvim",
+--         config = function() require"lsp_signature".on_attach() end,
+--         event = "InsertEnter"
+--     }
+-- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
