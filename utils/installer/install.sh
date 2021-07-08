@@ -104,10 +104,10 @@ cloneconfig() {
     cp $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
     nvim -cq --headless \
         +'autocmd User PackerComplete sleep 100m | qall' \
-        +PackerInstall >/dev/null 2>&1
+        +PackerInstall
     nvim -cq --headless \
         +'autocmd User PackerComplete sleep 10m | qall' \
-        +PackerSync >/dev/null 2>&1
+        +PackerSync
     echo -e "\nCompile Complete"
     # nvim --headless -cq ':silent TSUpdate' -cq ':qall' >/dev/null 2>&1
 }
