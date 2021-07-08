@@ -8,6 +8,7 @@ O = {
   auto_close_tree = 0,
   auto_complete = true,
   colorscheme = "lunar",
+  clipboard = "unnamedplus",
   hidden_files = true,
   wrap_lines = false,
   number = true,
@@ -16,6 +17,7 @@ O = {
   cmdheight = 2,
   cursorline = true,
   shell = "bash",
+  scrolloff = 0,
   timeoutlen = 100,
   nvim_tree_disable_netrw = 0,
   ignore_case = true,
@@ -99,68 +101,7 @@ O = {
   },
 
   lang = {
-    python = {
-      linter = "",
-      isort = false,
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      analysis = {
-        type_checking = "basic",
-        auto_search_paths = true,
-        use_library_code_types = true,
-      },
-    },
-    dart = {
-      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-    },
-    lua = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    sh = {
-      -- @usage can be 'shellcheck'
-      linter = "",
-      -- @usage can be 'shfmt'
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    tsserver = {
-      -- @usage can be 'eslint'
-      linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    json = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    tailwindcss = {
-      active = false,
-      filetypes = {
-        "html",
-        "css",
-        "scss",
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-      },
-    },
+    cmake = {},
     clang = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -170,32 +111,37 @@ O = {
       cross_file_rename = true,
       header_insertion = "never",
     },
-    ruby = {
-      diagnostics = {
-        virtualtext = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "rb", "erb", "rakefile", "ruby" },
+    css = {
+      virtual_text = true,
     },
-    go = {},
+    dart = {
+      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+    },
+    docker = {},
+    efm = {},
+    elm = {},
+    emmet = { active = true },
     elixir = {},
-    vim = {},
-    yaml = {},
-    terraform = {},
-    rust = {
-      rust_tools = {
-        active = false,
-      },
-      linter = "",
+    graphql = {},
+    go = {},
+    html = {},
+    java = {},
+    json = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
       },
     },
-    svelte = {},
-
+    kotlin = {},
+    latex = {},
+    lua = {
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+    },
     php = {
       format = {
         format = {
@@ -212,19 +158,76 @@ O = {
       },
       filetypes = { "php", "phtml" },
     },
-    latex = {},
-    kotlin = {},
-    html = {},
-    elm = {},
-    emmet = { active = true },
-    graphql = {},
-    efm = {},
-    docker = {},
-    cmake = {},
-    java = {},
-    css = {
-      virtual_text = true,
+    python = {
+      linter = "",
+      isort = false,
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      analysis = {
+        type_checking = "basic",
+        auto_search_paths = true,
+        use_library_code_types = true,
+      },
     },
+    ruby = {
+      diagnostics = {
+        virtualtext = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      filetypes = { "rb", "erb", "rakefile", "ruby" },
+    },
+    rust = {
+      rust_tools = {
+        active = false,
+        parameter_hints_prefix = "<-",
+        other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
+      },
+      linter = "",
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+    },
+    sh = {
+      -- @usage can be 'shellcheck'
+      linter = "",
+      -- @usage can be 'shfmt'
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+    },
+    svelte = {},
+    tailwindcss = {
+      active = false,
+      filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+      },
+    },
+    terraform = {},
+    tsserver = {
+      -- @usage can be 'eslint'
+      linter = "",
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+    },
+    vim = {},
+    yaml = {},
   },
 
   dashboard = {

@@ -11,21 +11,17 @@ cmd "set inccommand=split"
 cmd "set iskeyword+=-"
 cmd "set whichwrap+=<,>,[,],h,l"
 if O.transparent_window then
-  cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-  cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
+    cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
+    cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
 end
-
---- COLORSCHEME ---
-
-vim.g.colors_name = O.colorscheme
 
 ---  SETTINGS  ---
 
 opt.backup = false -- creates a backup file
-opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
+opt.clipboard = O.clipboard -- allows neovim to access the system clipboard
 opt.cmdheight = O.cmdheight -- more space in the neovim command line for displaying messages
 opt.colorcolumn = "99999" -- fix indentline for now
-opt.completeopt = { "menuone", "noselect" }
+opt.completeopt = {"menuone", "noselect"}
 opt.conceallevel = 0 -- so that `` is visible in markdown files
 opt.fileencoding = "utf-8" -- the encoding written to a file
 opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
@@ -34,6 +30,7 @@ opt.hlsearch = O.hl_search -- highlight all matches on previous search pattern
 opt.ignorecase = O.ignore_case -- ignore case in search patterns
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.pumheight = 10 -- pop up menu height
+opt.scrolloff = O.scrolloff -- minimal number of screen lines to keep above and below the cursor
 opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 opt.showtabline = 2 -- always show tabs
 opt.smartcase = O.smart_case -- smart case
