@@ -159,6 +159,7 @@ O = {
       filetypes = { "php", "phtml" },
     },
     python = {
+      -- @usage can be flake8 or yapf
       linter = "",
       isort = false,
       diagnostics = {
@@ -186,6 +187,7 @@ O = {
         parameter_hints_prefix = "<-",
         other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
       },
+      -- @usage can be clippy
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
