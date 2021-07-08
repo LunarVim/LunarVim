@@ -104,11 +104,11 @@ cloneconfig() {
     mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
     nvim --headless \
         +'autocmd User PackerComplete sleep 100m | qall' \
-        +PackerInstall
+        +PackerInstall >/dev/null
     nvim --headless \
         +'autocmd User PackerComplete sleep 10m | qall' \
         +PackerSync >/dev/null
-    echo "\nCompile Complete"
+    echo -e "\nCompile Complete"
 }
 
 asktoinstallnode() {
