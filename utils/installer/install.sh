@@ -109,7 +109,7 @@ cloneconfig() {
         +'autocmd User PackerComplete sleep 10m | qall' \
         +PackerSync
     echo -e "\nCompile Complete"
-    nvim --headless -c ':silent TSUpdate' -c ':qall'
+    nvim --headless -c ':silent TSUpdate' -c ':qall' 2>/dev/null
 }
 
 asktoinstallnode() {
