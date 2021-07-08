@@ -190,6 +190,27 @@ local mappings = {
   },
 }
 
+-- Flutter-Tools
+-- Todo: Ask for help
+-- How to enable only in flutter projects?
+if O.lang.dart.flutter_tools.active then
+  mappings["F"] = {
+    name = "Flutter",
+    c = { ":FlutterCopyProfilerUrl<cr>", "Copy Profile Url" },
+    d = { ":FlutterDevices<cr>", "Devices" },
+    D = { ":FlutterDevTools<cr>", "Dev Tools" },
+    e = { ":FlutterEmulators<cr>", "Emulators" },
+    h = { ":FlutterReload<cr>", "Reload" },
+    H = { ":FlutterRestart<cr>", "Restart" },
+    l = { ":FlutterLogClear<cr>", "Log Clear" },
+    o = { ":FlutterOutline<cr>", "Outline" },
+    p = { ":FlutterPubGet<cr>", "Pub Get" },
+    q = { ":FlutterQuit<cr>", "Quit" },
+    r = { ":FlutterRun<cr>", "Run" },
+    v = { ":FlutterVisualDebug<cr>", "Visual Debug" },
+}
+end
+
 -- if O.plugin.trouble.active then
 --   mappings["d"] = {
 --     name = "Diagnostics",

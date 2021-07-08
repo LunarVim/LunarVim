@@ -115,6 +115,9 @@ O = {
       virtual_text = true,
     },
     dart = {
+      flutter_tools = {
+        active = false,
+      },
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
     },
     docker = {},

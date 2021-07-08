@@ -283,6 +283,17 @@ return require("packer").startup(function(use)
   }
 
   -- LANGUAGE SPECIFIC GOES HERE
+
+  -- Dart/Flutter
+  use {
+    "akinsho/flutter-tools.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+        require("flutter-tools").setup{}
+    end,
+    disable = not O.lang.dart.flutter_tools.active,
+  }
+
   use {
     "lervag/vimtex",
     ft = "tex",
