@@ -1,9 +1,9 @@
 local lv_utils = {}
 
 function lv_utils.reload_lv_config()
-  vim.cmd "source ~/.config/nvim/lv-config.lua"
-  vim.cmd "source ~/.config/nvim/lua/plugins.lua"
-  vim.cmd "source ~/.config/nvim/lua/lv-neoformat/init.lua"
+  vim.cmd("source " .. CONFIG_PATH .. "/lv-config.lua")
+  vim.cmd("source " .. CONFIG_PATH .. "/lua/plugins.lua")
+  vim.cmd("source " .. CONFIG_PATH .. "/lua/lv-neoformat/init.lua")
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
 end
