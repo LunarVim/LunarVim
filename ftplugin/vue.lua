@@ -1,3 +1,7 @@
+if require("lv-utils").check_lsp_client_active "vuels" then
+  return
+end
+
 -- Vue language server configuration (vetur)
 require("lspconfig").vuels.setup {
   cmd = { DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls", "--stdio" },

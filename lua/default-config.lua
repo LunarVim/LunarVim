@@ -8,6 +8,7 @@ O = {
   auto_close_tree = 0,
   auto_complete = true,
   colorscheme = "lunar",
+  clipboard = "unnamedplus",
   hidden_files = true,
   wrap_lines = false,
   number = true,
@@ -16,6 +17,7 @@ O = {
   cmdheight = 2,
   cursorline = true,
   shell = "bash",
+  scrolloff = 0,
   timeoutlen = 100,
   nvim_tree_disable_netrw = 0,
   ignore_case = true,
@@ -99,6 +101,96 @@ O = {
   },
 
   lang = {
+    cmake = {
+      formatter = {
+        exe = "clang-format",
+        args = {},
+      },
+    },
+    clang = {
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      cross_file_rename = true,
+      header_insertion = "never",
+      filetypes = { "c", "cpp", "objc" },
+      formatter = {
+        exe = "clang-format",
+        args = {},
+      },
+    },
+    css = {
+      virtual_text = true,
+    },
+    dart = {
+      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+      formatter = {
+        exe = "dart",
+        args = { "format" },
+      },
+    },
+    docker = {},
+    efm = {},
+    elm = {},
+    emmet = { active = true },
+    elixir = {},
+    graphql = {},
+    go = {
+      formatter = {
+        exe = "gofmt",
+        args = {},
+      },
+    },
+    html = {},
+    java = {},
+    json = {
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      formatter = {
+        exe = "python",
+        args = { "-m", "json.tool" },
+      },
+    },
+    kotlin = {},
+    latex = {},
+    lua = {
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      formatter = {
+        exe = "stylua",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+        stdin = false,
+      },
+    },
+    php = {
+      format = {
+        format = {
+          default = "psr12",
+        },
+      },
+      environment = {
+        php_version = "7.4",
+      },
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      filetypes = { "php", "phtml" },
+      formatter = {
+        exe = "phpcbf",
+        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+        stdin = false,
+      },
+    },
     python = {
       linter = "",
       isort = false,
@@ -117,23 +209,33 @@ O = {
         args = {},
       },
     },
-    dart = {
-      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+    ruby = {
+      diagnostics = {
+        virtualtext = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      filetypes = { "rb", "erb", "rakefile", "ruby" },
       formatter = {
-        exe = "dart",
-        args = { "format" },
+        exe = "rufo",
+        args = { "-x" },
       },
     },
-    lua = {
+    rust = {
+      rust_tools = {
+        active = false,
+        parameter_hints_prefix = "<-",
+        other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
+      },
+      formatter = {
+        exe = "rustfmt",
+        args = { "--emit=stdout" },
+      },
+      linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
-      },
-      formatter = {
-        exe = "stylua",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
-        stdin = false,
       },
     },
     sh = {
@@ -151,30 +253,7 @@ O = {
         stdin = false,
       },
     },
-    tsserver = {
-      -- @usage can be 'eslint'
-      linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      },
-    },
-    json = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "python",
-        args = { "-m", "json.tool" },
-      },
-    },
+    svelte = {},
     tailwindcss = {
       active = false,
       filetypes = {
@@ -191,96 +270,26 @@ O = {
         args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
       },
     },
-    clang = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      cross_file_rename = true,
-      header_insertion = "never",
-      filetypes = { "c", "cpp", "cmake", "objc" },
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-    },
-    ruby = {
-      diagnostics = {
-        virtualtext = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "rb", "erb", "rakefile", "ruby" },
-      formatter = {
-        exe = "rufo",
-        args = { "-x" },
-      },
-    },
-    go = {
-      formatter = {
-        exe = "gofmt",
-        args = {},
-      },
-    },
-    elixir = {},
-    vim = {},
-    yaml = {
-      formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      },
-    },
     terraform = {},
-    rust = {
-      rust_tools = {
-        active = false,
-      },
-      formatter = {
-        exe = "rustfmt",
-        args = { "--emit=stdout" },
-      },
+    tsserver = {
+      -- @usage can be 'eslint'
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
       },
-    },
-    svelte = {},
-    php = {
-      format = {
-        format = {
-          default = "psr12",
-        },
-      },
       formatter = {
-        exe = "phpcbf",
-        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-        stdin = false,
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
       },
-      environment = {
-        php_version = "7.4",
-      },
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "php", "phtml" },
     },
-    latex = {},
-    kotlin = {},
-    html = {},
-    elm = {},
-    emmet = { active = true },
-    graphql = {},
-    efm = {},
-    docker = {},
-    cmake = {},
-    java = {},
-    css = {
-      virtual_text = true,
+    vim = {},
+    yaml = {
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
     },
   },
 
