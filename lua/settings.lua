@@ -34,6 +34,7 @@ opt.hlsearch = O.hl_search -- highlight all matches on previous search pattern
 opt.ignorecase = O.ignore_case -- ignore case in search patterns
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.pumheight = 10 -- pop up menu height
+opt.scrolloff = O.scrolloff -- minimal number of screen lines to keep above and below the cursor
 opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 opt.showtabline = 2 -- always show tabs
 opt.smartcase = O.smart_case -- smart case
