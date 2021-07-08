@@ -184,6 +184,7 @@ O = {
     yaml = {},
     terraform = {},
     rust = {
+      active = false,
       rust_tools = {
         active = false,
       },
