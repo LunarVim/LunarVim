@@ -10,29 +10,44 @@ if O.format_on_save then
     },
   }
 end
+-- returns default formatter for given language
+function formatter_return(lang_formatter)
+  return {
+    exe = lang_formatter.exe,
+    args = lang_formatter.args,
+    stdin = not (lang_formatter.stdin ~= nil),
+  }
+end
+
 formatter_filetypes = {}
 for k, v in pairs(O.lang) do
   if v.formatter ~= nil then
-    if v.formatter.exe ~=nil and v.formatter.args ~= nil then
-      formatter_filetypes[k]={
-        function ()
-          return {
-              exe = v.formatter.exe,
-              args = v.formatter.args,
-              stdin = true,
+    if v.formatter.exe ~= nil and v.formatter.args ~= nil then
+      if v.filetypes ~= nil then
+        for _, l in pairs(v.filetypes) do
+          formatter_filetypes[l] = {
+            function()
+              return formatter_return(v.formatter)
+            end,
           }
         end
-      }
+      else
+        formatter_filetypes[k] = {
+          function()
+            return formatter_return(v.formatter)
+          end,
+        }
+      end
     end
   end
 end
-require('formatter').setup({
+require("formatter").setup {
   logging = false,
   filetype = formatter_filetypes,
-})
+}
 
 if not O.format_on_save then
-  if vim.fn.exists('#autoformat#BufWritePre') then
-    vim.cmd [[ :autocmd! autoformat ]]
-  end
+  vim.cmd [[if exists('#autoformat#BufWritePre')
+	:autocmd! autoformat
+	endif]]
 end

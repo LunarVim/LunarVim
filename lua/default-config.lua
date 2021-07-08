@@ -112,15 +112,28 @@ O = {
         auto_search_paths = true,
         use_library_code_types = true,
       },
+      formatter = {
+        exe = "yapf",
+        args = {},
+      },
     },
     dart = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+      formatter = {
+        exe = "dart",
+        args = { "format" },
+      },
     },
     lua = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+      },
+      formatter = {
+        exe = "stylua",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+        stdin = false,
       },
     },
     sh = {
@@ -132,6 +145,11 @@ O = {
         signs = true,
         underline = true,
       },
+      formatter = {
+        exe = "shfmt",
+        args = { "-w" },
+        stdin = false,
+      },
     },
     tsserver = {
       -- @usage can be 'eslint'
@@ -141,12 +159,20 @@ O = {
         signs = true,
         underline = true,
       },
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
     },
     json = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+      },
+      formatter = {
+        exe = "python",
+        args = { "-m", "json.tool" },
       },
     },
     tailwindcss = {
@@ -160,6 +186,10 @@ O = {
         "typescript",
         "typescriptreact",
       },
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
     },
     clang = {
       diagnostics = {
@@ -169,6 +199,11 @@ O = {
       },
       cross_file_rename = true,
       header_insertion = "never",
+      filetypes = { "c", "cpp", "cmake", "objc" },
+      formatter = {
+        exe = "clang-format",
+        args = {},
+      },
     },
     ruby = {
       diagnostics = {
@@ -177,11 +212,25 @@ O = {
         underline = true,
       },
       filetypes = { "rb", "erb", "rakefile", "ruby" },
+      formatter = {
+        exe = "rufo",
+        args = { "-x" },
+      },
     },
-    go = {},
+    go = {
+      formatter = {
+        exe = "gofmt",
+        args = {},
+      },
+    },
     elixir = {},
     vim = {},
-    yaml = {},
+    yaml = {
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
+    },
     terraform = {},
     rust = {
       rust_tools = {
@@ -189,7 +238,7 @@ O = {
       },
       formatter = {
         exe = "rustfmt",
-        args = {"--emit=stdout"},
+        args = { "--emit=stdout" },
       },
       linter = "",
       diagnostics = {
@@ -199,12 +248,16 @@ O = {
       },
     },
     svelte = {},
-
     php = {
       format = {
         format = {
           default = "psr12",
         },
+      },
+      formatter = {
+        exe = "phpcbf",
+        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+        stdin = false,
       },
       environment = {
         php_version = "7.4",
