@@ -103,11 +103,11 @@ cloneconfig() {
     git clone --branch rolling https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
     mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
     nvim --headless \
-       +'autocmd User PackerComplete sleep 100m | qall' \
-       +PackerInstall
+        +'autocmd User PackerComplete sleep 100m | qall' \
+        +PackerInstall
     nvim --headless \
-       +'autocmd User PackerComplete sleep 10m | qall' \
-       +PackerSync
+        +'autocmd User PackerComplete sleep 10m | qall' \
+        +PackerSync
     echo "\nCompile Complete"
 }
 
