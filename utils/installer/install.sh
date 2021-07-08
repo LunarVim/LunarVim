@@ -106,7 +106,12 @@ cloneconfig() {
     # nvim -u $HOME/.config/nvim/init.lua +PackerCompile +PackerInstall
     nvim --headless \
        +'autocmd User PackerComplete sleep 100m | qall' \
-       +PackerInstall \
+       +PackerInstall
+
+    nvim --headless \
+       +'autocmd User PackerComplete sleep 100m | qall' \
+       +PackerCompile \
+       echo "Compile Complete"
     # cat ~/.config/nvim/packer.install.result | rg -v 'Press'
     # nvim --headless \
     #    +'autocmd User PackerComplete sleep 100m | write ~/.config/nvim/packer.compile.result | qall' \
