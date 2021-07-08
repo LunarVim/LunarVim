@@ -16,15 +16,15 @@ M.config = function()
       description = { "  Recently Used Files" },
       command = "Telescope oldfiles",
     },
+    -- c = {
+    --   description = { "  Load Last Session  " },
+    --   command = "SessionLoad",
+    -- },
     c = {
-      description = { "  Load Last Session  " },
-      command = "SessionLoad",
-    },
-    d = {
       description = { "  Find Word          " },
       command = "Telescope live_grep",
     },
-    e = {
+    d = {
       description = { "  Settings           " },
       command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
     },
