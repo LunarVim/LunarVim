@@ -1,3 +1,10 @@
+local clients = vim.lsp.get_active_clients()
+for _, client in pairs(clients) do
+  if client.name == 'rust_analyzer' then
+    return
+  end
+end
+
 if O.lang.rust.rust_tools.active then
   local opts = {
     tools = { -- rust-tools options
@@ -77,7 +84,7 @@ else
     cmd = { DATA_PATH .. "/lspinstall/rust/rust-analyzer" },
     on_attach = require("lsp").common_on_attach,
     filetypes = { "rust" },
-    root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json"),
+    root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "Cargo.lock", "rust-project.json"),
   }
 end
 
