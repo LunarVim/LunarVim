@@ -104,8 +104,7 @@ return require("packer").startup(function(use)
   -- Comments
   use {
     "terrortylor/nvim-comment",
-    event = "BufRead",
-    -- cmd = "CommentToggle",
+    event = "BufWinEnter",
     config = function()
       local status_ok, nvim_comment = pcall(require, "nvim_comment")
       if not status_ok then
