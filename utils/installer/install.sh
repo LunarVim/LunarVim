@@ -104,10 +104,11 @@ cloneconfig() {
     mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
     # mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
     # nvim -u $HOME/.config/nvim/init.lua +PackerCompile +PackerInstall
-    nvim \
-        +'autocmd User PackerComplete sleep 100m | write ~/.config/nvim/packer.install.result | qall' \
-        +PackerInstall \
-    cat ~/.config/nvim/packer.result | rg -v 'Press'
+    # nvim \
+    #    +'autocmd User PackerComplete sleep 100m | write ~/.config/nvim/packer.install.result | qall' \
+    #    +PackerInstall \
+    # cat ~/.config/nvim/packer.result | rg -v 'Press'
+    nvim --headless +PackerInstall
     nvim --headless +PackerCompile
     # nvim +PackerCompile +PackerInstall
     # rm $HOME/.config/nvim/init.lua
