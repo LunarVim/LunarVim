@@ -108,7 +108,7 @@ cloneconfig() {
        +'autocmd User PackerComplete sleep 100m | write ~/.config/nvim/packer.install.result | qall' \
        +PackerInstall \
     cat ~/.config/nvim/packer.install.result | rg -v 'Press'
-    nvim--headless \
+    nvim --headless \
        +'autocmd User PackerComplete sleep 100m | write ~/.config/nvim/packer.compile.result | qall' \
        +PackerCompile \
     cat ~/.config/nvim/packer.compile.result | rg -v 'Press'
