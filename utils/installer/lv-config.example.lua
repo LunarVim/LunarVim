@@ -36,7 +36,7 @@ O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
 -- python
--- O.python.linter = 'flake8'
+-- O.lang.python.linter = 'flake8'
 O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
