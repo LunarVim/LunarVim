@@ -44,6 +44,12 @@ O.lang.python.analysis.use_library_code_types = true
 -- javascript
 O.lang.tsserver.linter = nil
 
+-- rust
+O.lang.rust.formatter = {
+  exe = "rustfmt",
+  args = {"--emit=stdout"},
+}
+
 -- Additional Plugins
 -- O.user_plugins = {{"windwp/nvim-ts-autotag"}}
 

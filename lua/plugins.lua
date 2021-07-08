@@ -54,11 +54,11 @@ return require("packer").startup(function(use)
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
-  -- Neoformat
+  -- Formatter.nvim
   use {
-    "sbdchd/neoformat",
+    "mhartington/formatter.nvim",
     config = function()
-      require "lv-neoformat"
+      require "lv-formatter"
     end,
     event = "BufRead",
   }

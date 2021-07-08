@@ -187,6 +187,10 @@ O = {
       rust_tools = {
         active = false,
       },
+      formatter = {
+        exe = "rustfmt",
+        args = {"--emit=stdout"},
+      },
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
