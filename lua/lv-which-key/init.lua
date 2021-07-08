@@ -101,29 +101,6 @@ local mappings = {
   ["f"] = "Find File",
   ["h"] = "No Highlight",
   [";"] = "Dashboard",
-  b = {
-    name = "Buffers",
-    j = { "<cmd>BufferPick<cr>", "jump to buffer" },
-    f = { "<cmd>Telescope buffers<cr>", "Find buffer" },
-    w = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
-    e = {
-      "<cmd>BufferCloseAllButCurrent<cr>",
-      "close all but current buffer",
-    },
-    h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
-    l = {
-      "<cmd>BufferCloseBuffersRight<cr>",
-      "close all BufferLines to the right",
-    },
-    D = {
-      "<cmd>BufferOrderByDirectory<cr>",
-      "sort BufferLines automatically by directory",
-    },
-    L = {
-      "<cmd>BufferOrderByLanguage<cr>",
-      "sort BufferLines automatically by language",
-    },
-  },
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -161,6 +138,7 @@ local mappings = {
       "Checkout commit(for current file)",
     },
   },
+
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -187,6 +165,7 @@ local mappings = {
       "Workspace Symbols",
     },
   },
+
   s = {
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -197,11 +176,6 @@ local mappings = {
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     t = { "<cmd>Telescope live_grep<cr>", "Text" },
-  },
-  S = {
-    name = "Session",
-    s = { "<cmd>SessionSave<cr>", "Save Session" },
-    l = { "<cmd>SessionLoad<cr>", "Load Session" },
   },
   T = {
     name = "Treesitter",
@@ -244,20 +218,6 @@ if O.plugin.telescope_project.active then
     { noremap = true, silent = true }
   )
   mappings["P"] = "Projects"
-end
-
--- [";"] = "Dashboard",
-
-if O.lang.latex.active then
-  mappings["L"] = {
-    name = "+Latex",
-    c = { "<cmd>VimtexCompile<cr>", "Toggle Compilation Mode" },
-    f = { "<cmd>call vimtex#fzf#run()<cr>", "Fzf Find" },
-    i = { "<cmd>VimtexInfo<cr>", "Project Information" },
-    s = { "<cmd>VimtexStop<cr>", "Stop Project Compilation" },
-    t = { "<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content" },
-    v = { "<cmd>VimtexView<cr>", "View PDF" },
-  }
 end
 
 if O.lushmode then

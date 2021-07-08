@@ -74,7 +74,11 @@ lv_utils.define_augroups {
   },
   _auto_resize = {
     -- will cause split windows to be resized evenly if main window is resized
-    { "VimResized ", "*", "wincmd =" },
+    { "VimResized", "*", "wincmd =" },
+  },
+  _packer_compile = {
+    -- will cause split windows to be resized evenly if main window is resized
+    { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
   -- _fterm_lazygit = {
   --   -- will cause esc key to exit lazy git
