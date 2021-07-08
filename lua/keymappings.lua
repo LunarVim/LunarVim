@@ -20,10 +20,17 @@ vim.cmd [[
 
 -- TODO fix this
 -- resize with arrows
-vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
+if vim.fn.has("mac") == 1 then
+  vim.api.nvim_set_keymap("n", "<A-Up>", ":resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-Down>", ":resize +2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-Left>", ":vertical resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<A-Right>", ":vertical resize +2<CR>", { silent = true })
+else
+  vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
+end
 
 -- better indenting
 vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
