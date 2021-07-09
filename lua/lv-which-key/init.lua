@@ -21,7 +21,7 @@ which_key.setup {
       z = true, -- bindings for folds, spelling and others prefixed with z
       g = true, -- bindings for prefixed with g
     },
-    spelling = {enabled = true, suggestions = 20}, -- use which-key for spelling hints
+    spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -88,7 +88,7 @@ vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, 
 -- Save
 vim.api.nvim_set_keymap("n", "<leader>w", ":w!<CR>", { noremap = true, silent = true })
 
--- Quit 
+-- Quit
 vim.api.nvim_set_keymap("n", "<leader>q", ":q!<CR>", { noremap = true, silent = true })
 
 -- open lv-config
