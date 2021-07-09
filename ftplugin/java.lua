@@ -3,7 +3,6 @@ if require("lv-utils").check_lsp_client_active "jdtls" then
 end
 
 if O.lang.java.java_tools.active then
-  print "hi"
   -- find_root looks for parent directories relative to the current buffer containing one of the given arguments.
   if vim.fn.has "mac" == 1 then
     JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/java-mac-ls"
@@ -18,8 +17,15 @@ if O.lang.java.java_tools.active then
   print(WORKSPACE_PATH)
 
   require("jdtls").start_or_attach {
+    on_attach = require("lsp").common_on_attach,
     cmd = { JAVA_LS_EXECUTABLE, WORKSPACE_PATH .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t") },
   }
+
+  vim.cmd "command! -buffer JdtCompile lua require('jdtls').compile()"
+  vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
+  vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
+  vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
+  vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
 else
   local util = require "lspconfig/util"
 
