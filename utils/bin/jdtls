@@ -9,10 +9,10 @@
 
 case Darwin in
   Linux)
-    CONFIG="/Users/chris/.local/share/nvim/lspinstall/java/config_linux"
+    CONFIG="$HOME/.local/share/nvim/lspinstall/java/config_linux"
     ;;
   Darwin)
-    CONFIG="/Users/chris/.local/share/nvim/lspinstall/java/config_mac"
+    CONFIG="$HOME/.local/share/nvim/lspinstall/java/config_mac"
     ;;
 esac
 
@@ -40,7 +40,7 @@ location of your Java installation."
 fi
 
 # JAR="$HOME/.config/nvim/.language-servers/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"
-JAR="/Users/chris/.local/share/nvim/lspinstall/java/plugins/org.eclipse.equinox.launcher_*.jar"
+JAR="$HOME/.local/share/nvim/lspinstall/java/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME=$HOME/gradle "$JAVACMD" \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
