@@ -45,16 +45,28 @@ O.plugin.which_key = {
     noremap = true, -- use `noremap` when creating keymaps
     nowait = true, -- use `nowait` when creating keymaps
   },
+  vopts = {
+    mode = "v", -- VISUAL mode
+    prefix = "<leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
+  },
+  -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
+  -- see https://neovim.io/doc/user/map.html#:map-cmd
+  vmappings ={
+    ["/"] = { ":CommentToggle<CR>", "Comment" },
+  },
   mappings = {
-    ["w"] = "Save",
-    ["q"] = "Quit",
-    ["."] = "LunarConfig",
-    ["/"] = "Comment",
-    ["c"] = "Close Buffer",
-    ["e"] = "Explorer",
-    ["f"] = "Find File",
-    ["h"] = "No Highlight",
-    [";"] = "Dashboard",
+    ["w"] = { "<cmd>w!<CR>", "Save" },
+    ["q"] = { "<cmd>q!<CR>", "Quit" },
+    ["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
+    ["c"] = { "<cmd>BufferClose<CR>", "Close Buffer" },
+    ["e"] = { "<cmd>lua require'lv-nvimtree'.toggle_tree()<CR>", "Explorer" },
+    ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
+    ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
+    [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },
     p = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
