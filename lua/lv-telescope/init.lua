@@ -36,7 +36,7 @@ telescope.setup {
     file_sorter = require("telescope.sorters").get_fzy_sorter,
     file_ignore_patterns = {},
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-    path_display = {"shorten"},
+    path_display = { "shorten" },
     winblend = 0,
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },

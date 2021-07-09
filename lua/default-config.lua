@@ -2,18 +2,24 @@ CONFIG_PATH = vim.fn.stdpath "config"
 DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
+USER = vim.fn.expand "$USER"
 
 O = {
   format_on_save = true,
   auto_close_tree = 0,
   auto_complete = true,
-  colorscheme = "lunar",
+  colorcolumn = "99999", -- fixes indentline for now
+  colorscheme = "spacegray",
   clipboard = "unnamedplus",
   hidden_files = true,
   wrap_lines = false,
+  spell = false,
+  spelllang = "en",
   number = true,
-  relative_number = true,
+  relative_number = false,
   number_width = 4,
+  shift_width = 2,
+  tab_stop = 2,
   cmdheight = 2,
   cursorline = true,
   shell = "bash",
@@ -24,7 +30,7 @@ O = {
   smart_case = true,
   lushmode = false,
   hl_search = false,
-  document_highlight = false,
+  document_highlight = true,
   transparent_window = false,
   leader_key = "space",
   vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
@@ -69,7 +75,7 @@ O = {
     -- Builtins
     dashboard = { active = false },
     colorizer = { active = false },
-    zen = { active = false },
+    -- zen = { active = false },
     ts_playground = { active = false },
     ts_context_commentstring = { active = false },
     ts_hintobjects = { active = false },
@@ -128,7 +134,11 @@ O = {
     graphql = {},
     go = {},
     html = {},
-    java = {},
+    java = {
+      java_tools = {
+        active = false,
+      },
+    },
     json = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -258,3 +268,5 @@ O = {
     footer = { "chrisatmachine.com" },
   },
 }
+
+require "lv-zen.config"

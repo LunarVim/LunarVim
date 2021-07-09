@@ -52,7 +52,7 @@ return require("packer").startup(function(use)
   use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
   -- Treesitter
-  use { "nvim-treesitter/nvim-treesitter", run = ":silent TSUpdate" }
+  use { "nvim-treesitter/nvim-treesitter" }
 
   -- Neoformat
   use {
@@ -230,7 +230,7 @@ return require("packer").startup(function(use)
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
-    event = "BufRead",
+    event = "BufWinEnter",
     config = function()
       require("lv-floatterm").config()
     end,
@@ -324,6 +324,12 @@ return require("packer").startup(function(use)
       "typescript.tsx",
     },
   }
+
+  use {
+    "mfussenegger/nvim-jdtls",
+    disable = not O.lang.java.java_tools.active,
+  }
+
   -- use {
   --   "jose-elias-alvarez/null-ls.nvim",
   --   ft = {

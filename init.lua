@@ -7,7 +7,7 @@ vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins a
 require "lv-utils"
 require "lv-treesitter"
 if O.plugin.dashboard.active then
-    require("lv-dashboard").config()
+  require("lv-dashboard").config()
 end
 -- TODO these gues need to be in language files
 -- require "lsp"
