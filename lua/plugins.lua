@@ -28,7 +28,7 @@ return require("packer").startup(function(use)
 
   -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
-  use { "kabouzeid/nvim-lspinstall", event = "BufRead" }
+  use { "kabouzeid/nvim-lspinstall", event = "VimEnter" }
   -- Telescope
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
@@ -52,7 +52,7 @@ return require("packer").startup(function(use)
   use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
   -- Treesitter
-  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use { "nvim-treesitter/nvim-treesitter" }
 
   -- Neoformat
   use {
@@ -313,6 +313,12 @@ return require("packer").startup(function(use)
       "typescript.tsx",
     },
   }
+
+  use {
+    "mfussenegger/nvim-jdtls",
+    disable = not O.lang.java.java_tools.active,
+  }
+
   -- use {
   --   "jose-elias-alvarez/null-ls.nvim",
   --   ft = {

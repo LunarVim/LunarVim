@@ -100,13 +100,20 @@ installpacker() {
 
 cloneconfig() {
     echo "Cloning LunarVim configuration"
-    git clone --branch stable https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
-    mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
-    # mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
-    # nvim -u $HOME/.config/nvim/init.lua +PackerCompile +PackerInstall
-    nvim +PackerCompile +PackerInstall
-    # rm $HOME/.config/nvim/init.lua
-    # mv $HOME/.config/nvim/init.lua.tmp $HOME/.config/nvim/init.lua
+    git clone --branch master https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
+    cp $HOME/.config/nvim/utils/installer/lv-config.example-no-ts.lua $HOME/.config/nvim/lv-config.lua
+    nvim --headless \
+        +'autocmd User PackerComplete sleep 100m | qall' \
+        +PackerInstall
+
+    nvim --headless \
+        +'autocmd User PackerComplete sleep 100m | qall' \
+        +PackerSync
+
+    echo -e "\nCompile Complete"
+    rm $HOME/.config/nvim/lv-config.lua
+    cp $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
+    # nvim --headless -cq ':silent TSUpdate' -cq ':qall' >/dev/null 2>&1
 }
 
 asktoinstallnode() {

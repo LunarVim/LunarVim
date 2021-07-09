@@ -31,12 +31,12 @@ O.plugin.zen.active = false
 -- O.dashboard.footer = {""}
 
 -- if you don't want all the parsers change this to a table of the ones you want
-O.treesitter.ensure_installed = "maintained"
+O.treesitter.ensure_installed = {}
 O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
 -- python
--- O.lang.python.linter = 'flake8'
+-- O.python.linter = 'flake8'
 O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
