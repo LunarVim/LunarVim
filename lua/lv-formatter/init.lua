@@ -47,7 +47,7 @@ require("formatter").setup {
 }
 
 if not O.format_on_save then
-  vim.cmd [[if exists('#autoformat#BufWritePre')
+  vim.cmd [[if exists('#autoformat#BufWritePost')
 	:autocmd! autoformat
 	endif]]
 end
