@@ -47,9 +47,9 @@ opt.undofile = true -- enable persisten undo
 opt.updatetime = 300 -- faster completion
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 opt.expandtab = true -- convert tabs to spaces
-opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
+opt.shiftwidth = O.shift_width -- the number of spaces inserted for each indentation
 opt.shortmess:append "c"
-opt.tabstop = 2 -- insert 4 spaces for a tab
+opt.tabstop = O.tab_stop -- insert 4 spaces for a tab
 opt.cursorline = O.cursorline -- highlight the current line
 opt.number = O.number -- set numbered lines
 opt.relativenumber = O.relative_number -- set relative numbered lines
