@@ -10,6 +10,18 @@ if O.format_on_save then
     },
   }
 end
+
+-- check if formatter has been defined for the language or not
+function formatter_exists(lang_formatter)
+  if lang_formatter == nil then
+    return false
+  end
+  if lang_formatter.exe == nil or lang_formatter.args == nil then
+    return false
+  end
+  return true
+end
+
 -- returns default formatter for given language
 function formatter_return(lang_formatter)
   return {
@@ -19,28 +31,24 @@ function formatter_return(lang_formatter)
   }
 end
 
-formatter_filetypes = {}
+-- fill a table like this -> {rust: {exe:"sth",args:{"a","b"},stdin=true},go: {}...}
+local formatter_filetypes = {}
 for k, v in pairs(O.lang) do
-  if v.formatter ~= nil then
-    if v.formatter.exe ~= nil and v.formatter.args ~= nil then
-      if v.filetypes ~= nil then
-        for _, l in pairs(v.filetypes) do
-          formatter_filetypes[l] = {
-            function()
-              return formatter_return(v.formatter)
-            end,
-          }
-        end
-      else
-        formatter_filetypes[k] = {
-          function()
-            return formatter_return(v.formatter)
-          end,
-        }
-      end
+  if formatter_exists(v.formatter) then
+    local keys = v.filetypes
+    if keys == nil then
+      keys = {k}
+    end
+    for _, l in pairs(keys) do
+      formatter_filetypes[l] = {
+        function ()
+          return formatter_return(v.formatter)
+        end,
+      }
     end
   end
 end
+
 require("formatter").setup {
   logging = false,
   filetype = formatter_filetypes,
