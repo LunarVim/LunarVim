@@ -65,7 +65,12 @@ lv_utils.define_augroups {
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
     { "BufWritePost", "lv-config.lua", "lua require('lv-utils').reload_lv_config()" },
-    { "VimLeavePre", "*", "set title set titleold=" },
+    -- { "VimLeavePre", "*", "set title set titleold=" },
+  },
+  _solidity = {
+    { "BufWinEnter", ".tf", "setlocal filetype=hcl" },
+    { "BufRead", "*.tf", "setlocal filetype=hcl" },
+    { "BufNewFile", "*.tf", "setlocal filetype=hcl" },
   },
   -- _solidity = {
   --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},

@@ -25,14 +25,14 @@
 Make sure you have the newest version of Neovim (0.5).
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/stable/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
 ## Installing LSP for your language
 
 Just enter `:LspInstall` followed by `<TAB>` to see your options
 
-**NOTE** I recommend installing `lua` language support to make work
+**NOTE** I recommend installing `lua` for autocomplete in `lv-config.lua`
 
 ## Configuration file
 
@@ -101,14 +101,6 @@ O.lang.python.analysis.use_library_code_types = true
 -- }
 ```
 
-**NOTE** After changing a setting it is important to exit LunarVim and run the following:
-
-```
-:PackerInstall
-
-:PackerCompile
-```
-
 ## Updating LunarVim
 
 In order to update you should be aware of three things `Plugins`, `LunarVim` and `Neovim`
@@ -124,6 +116,8 @@ To update LunarVim:
 ```bash
 cd ~/.config/nvim && git pull
 ```
+
+To update Neovim use your package manager
 
 ## Resources
 

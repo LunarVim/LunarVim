@@ -31,7 +31,7 @@ O.plugin.zen.active = false
 -- O.dashboard.footer = {""}
 
 -- if you don't want all the parsers change this to a table of the ones you want
-O.treesitter.ensure_installed = "maintained"
+O.treesitter.ensure_installed = {}
 O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
@@ -43,12 +43,6 @@ O.lang.python.analysis.use_library_code_types = true
 
 -- javascript
 O.lang.tsserver.linter = nil
-
--- rust
-O.lang.rust.formatter = {
-  exe = "rustfmt",
-  args = {"--emit=stdout"},
-}
 
 -- Additional Plugins
 -- O.user_plugins = {

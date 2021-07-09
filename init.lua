@@ -3,6 +3,7 @@ require "keymappings"
 vim.cmd("luafile " .. CONFIG_PATH .. "/lv-config.lua")
 require "settings"
 require "plugins"
+vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 require "lv-utils"
 require "lv-treesitter"
 if O.plugin.dashboard.active then
