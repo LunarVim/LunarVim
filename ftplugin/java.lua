@@ -5,16 +5,13 @@ end
 if O.lang.java.java_tools.active then
   -- find_root looks for parent directories relative to the current buffer containing one of the given arguments.
   if vim.fn.has "mac" == 1 then
-    JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/java-mac-ls"
     WORKSPACE_PATH = "/Users/" .. USER .. "/workspace/"
   elseif vim.fn.has "unix" == 1 then
-    JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/java-linux-ls"
     WORKSPACE_PATH = "/home/" .. USER .. "/workspace/"
   else
     print "Unsupported system"
   end
-  print(JAVA_LS_EXECUTABLE)
-  print(WORKSPACE_PATH)
+  JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/jdtls"
 
   require("jdtls").start_or_attach {
     on_attach = require("lsp").common_on_attach,
