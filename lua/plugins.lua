@@ -313,6 +313,12 @@ return require("packer").startup(function(use)
       "typescript.tsx",
     },
   }
+
+  use {
+    "mfussenegger/nvim-jdtls",
+    disable = not O.lang.java.java_tools.active,
+  }
+
   -- use {
   --   "jose-elias-alvarez/null-ls.nvim",
   --   ft = {

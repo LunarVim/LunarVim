@@ -2,6 +2,7 @@ CONFIG_PATH = vim.fn.stdpath "config"
 DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
+USER = vim.fn.expand "$USER"
 
 O = {
   format_on_save = true,
@@ -125,7 +126,11 @@ O = {
     graphql = {},
     go = {},
     html = {},
-    java = {},
+    java = {
+      java_tools = {
+        active = false,
+      },
+    },
     json = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
