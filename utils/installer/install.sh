@@ -1,7 +1,15 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
+set -o pipefail # exit when a pipe fails
+
+installfreebsd() {
+    sudo pkg install lua53
+    sudo pkg install node
+    sudo pkg install yarn
+    sudo pkg install npm
+}
 
 installnodemac() {
     brew install lua
@@ -46,10 +54,15 @@ installnode() {
     [ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installnodeubuntu
     [ -f "/etc/arch-release" ] && installnodearch
     [ -f "/etc/artix-release" ] && installnodearch
+    [ "$(uname -s)" == "FreeBSD" ] && installfreebsd
     [ -f "/etc/fedora-release" ] && installnodefedora
     [ -f "/etc/gentoo-release" ] && installnodegentoo
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
     sudo npm i -g neovim
+}
+
+installpiponfreebsd() {
+    sudo pkg install py38-pip
 }
 
 installpiponmac() {
@@ -79,6 +92,7 @@ installpip() {
     [ "$(uname)" == "Darwin" ] && installpiponmac
     [ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
     [ -f "/etc/arch-release" ] && installpiponarch
+    [ "$(uname -s)" == "FreeBSD" ] && installfreebsd
     [ -f "/etc/fedora-release" ] && installpiponfedora
     [ -f "/etc/gentoo-release" ] && installpipongentoo
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
@@ -89,6 +103,8 @@ installpynvim() {
     if [ -f "/etc/gentoo-release" ]; then
         echo "Installing using Portage"
         sudo emerge -avn dev-python/pynvim
+    elif [ "$(uname -s)" == "FreeBSD" ]; then
+        sudo pkg install py38-pynvim
     else
         pip3 install pynvim --user
     fi
@@ -149,6 +165,11 @@ installonubuntu() {
     npm install -g tree-sitter-cli
 }
 
+installonfreebsd() {
+    sudo pkg install ripgrep fzf py38-ranger tree-sitter
+    pip-3.8 install neovim-remote
+}
+
 installonarch() {
     sudo pacman -S ripgrep fzf ranger
     which yay >/dev/null && yay -S python-ueberzug-git || pipinstallueberzug
@@ -172,6 +193,7 @@ installextrapackages() {
     [ "$(uname)" == "Darwin" ] && installonmac
     [ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installonubuntu
     [ -f "/etc/arch-release" ] && installonarch
+    [ "$(uname -s)" == "FreeBSD" ] && installonfreebsd
     [ -f "/etc/artix-release" ] && installonarch
     [ -f "/etc/fedora-release" ] && installonfedora
     [ -f "/etc/gentoo-release" ] && installongentoo
@@ -185,13 +207,13 @@ echo 'Installing LunarVim'
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
 # install pip
-which pip3 >/dev/null && echo "pip installed, moving on..." || asktoinstallpip
+which pip3 >/dev/null || which pip-3.8 >/dev/null && echo "pip installed, moving on..." || asktoinstallpip
 
 # install node and neovim support
 which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
 
 # install pynvim
-pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
+pip3 list | grep pynvim >/dev/null || pip-3.8 | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
 
 if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
     echo 'packer already installed'

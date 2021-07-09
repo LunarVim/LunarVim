@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 nvim -u ~/.config/nvim/init.lua
