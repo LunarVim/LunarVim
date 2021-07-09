@@ -56,3 +56,5 @@ opt.relativenumber = O.relative_number -- set relative numbered lines
 opt.numberwidth = O.number_width -- set number column width to 2 {default 4}
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.wrap = O.wrap_lines -- display lines as one long line
+opt.spell = O.spell
+opt.spelllang = O.spelllang
