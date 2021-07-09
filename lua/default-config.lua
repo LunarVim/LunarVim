@@ -91,7 +91,29 @@ O = {
     dap_install = { active = false },
     lush = { active = false },
     diffview = { active = false },
-    floatterm = { active = false },
+    floatterm = {
+      active = false,
+      config = {
+        fterm = {
+          border = "single", -- or 'double'
+          dimensions = {
+            height = 0.8,
+            width = 0.8,
+            x = 0.5,
+            y = 0.5,
+          },
+        },
+        lazygit = {
+          cmd = "lazygit",
+          dimensions = {
+            height = 0.9,
+            width = 0.9,
+            x = 0.5,
+            y = 0.3,
+          },
+        },
+      },
+    },
     trouble = { active = false },
     sanegx = { active = false },
   },
