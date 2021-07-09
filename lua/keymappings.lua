@@ -5,19 +5,19 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { silent = true })
 
 -- Terminal window navigation
-vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("i", "<C-h>", "<C-\\><C-N><C-w>h", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("i", "<C-j>", "<C-\\><C-N><C-w>j", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("i", "<C-k>", "<C-\\><C-N><C-w>k", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("i", "<C-l>", "<C-\\><C-N><C-w>l", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<C-h>", "<C-\\><C-N><C-w>h", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<C-j>", "<C-\\><C-N><C-w>j", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, noremap = true })
 
 -- TODO fix this
 -- resize with arrows
-if vim.fn.has("mac") == 1 then
+if vim.fn.has "mac" == 1 then
   vim.api.nvim_set_keymap("n", "<A-Up>", ":resize -2<CR>", { silent = true })
   vim.api.nvim_set_keymap("n", "<A-Down>", ":resize +2<CR>", { silent = true })
   vim.api.nvim_set_keymap("n", "<A-Left>", ":vertical resize -2<CR>", { silent = true })
