@@ -7,7 +7,6 @@ USER = vim.fn.expand "$USER"
 O = {
   format_on_save = true,
   auto_close_tree = 0,
-  auto_complete = true,
   colorcolumn = "99999", -- fixes indentline for now
   colorscheme = "spacegray",
   clipboard = "unnamedplus",
@@ -267,3 +266,4 @@ O = {
 }
 
 require "lv-zen.config"
+require "lv-compe.config"
