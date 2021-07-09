@@ -8,6 +8,7 @@ O = {
   format_on_save = true,
   auto_close_tree = 0,
   auto_complete = true,
+  colorcolumn = "99999", -- fixes indentline for now
   colorscheme = "spacegray",
   clipboard = "unnamedplus",
   hidden_files = true,
