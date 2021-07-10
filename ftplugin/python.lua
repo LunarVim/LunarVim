@@ -1,6 +1,6 @@
 local python_arguments = {}
 
--- TODO replace with path argument
+-- TODO: replace with path argument
 local flake8 = {
   LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
   lintStdin = true,
@@ -63,7 +63,7 @@ if not require("lv-utils").check_lsp_client_active "pyright" then
   }
 end
 
-if O.plugin.debug.active and O.plugin.dap_install.active then
+if O.plugin.dap.active then
   local dap_install = require "dap-install"
   dap_install.config("python_dbg", {})
 end

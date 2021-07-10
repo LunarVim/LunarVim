@@ -45,19 +45,17 @@ Example:
 
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
-O.auto_complete = true
-O.relative_number = false
+O.completion.autocomplete = true
+O.default_options.relativenumber = true
 O.colorscheme = 'spacegray'
-O.timeoutlen = 100
+O.default_options.timeoutlen = 100
 O.leader_key = ' '
 
 -- After changing plugin config it is recommended to run :PackerCompile
-O.plugin.colorizer.active = true
 O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true
-O.plugin.symbol_outline = true
-O.plugin.trouble.active = true
 O.plugin.zen.active = true
+O.plugin.telescope_project.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
@@ -133,6 +131,9 @@ To update Neovim use your package manager
 
 > "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
 > - @juanCortelezzi, LunarVim user.
+
+> "My minimal config with a good amount less code than LunarVim loads 40ms slower. Time to switch."
+> - @mvllow, Potential LunarVim user.
 
 <div align="center">
 	
