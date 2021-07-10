@@ -134,6 +134,9 @@ To update Neovim use your package manager
 > "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
 > - @juanCortelezzi, LunarVim user.
 
+> "My minimal config with a good amount less code than LunarVim loads 40ms slower. Time to switch."
+> - @mvllow, Potential LunarVim user.
+
 <div align="center">
 	
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)]()
