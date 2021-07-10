@@ -150,7 +150,7 @@ return require("packer").startup(function(use)
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     config = function()
       require "lv-dap"
     end,
@@ -160,7 +160,7 @@ return require("packer").startup(function(use)
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     -- event = "BufRead",
     disable = not O.plugin.dap.active,
   }
@@ -252,7 +252,7 @@ return require("packer").startup(function(use)
 
   use {
     "mfussenegger/nvim-jdtls",
-    ft = { "java" },
+    -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
 
