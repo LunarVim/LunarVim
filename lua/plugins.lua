@@ -124,7 +124,8 @@ return require("packer").startup(function(use)
     config = function()
       require "lv-galaxyline"
     end,
-    -- event = "VimEnter",
+    event = "BufWinEnter",
+    disable = not O.plugin.galaxyline.active,
   }
 
   use {
