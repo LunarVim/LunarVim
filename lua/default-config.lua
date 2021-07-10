@@ -64,6 +64,13 @@ O = {
     hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
   },
 
+	nvimtree = {
+    side = "right",
+    auto_close = 0,
+    quit_on_open = 0,
+    hide_dotfiles = 1
+  },
+
   lsp = {
     popup_border = "single",
   },
