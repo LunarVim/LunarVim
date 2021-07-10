@@ -1,18 +1,9 @@
 vim.g.vimtex_compiler_method = "latexmk"
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_fold_enabled = 0
-
-O.user_which_key["L"] = {
-  name = "+Latex",
-  c = { "<cmd>VimtexCompile<cr>", "Toggle Compilation Mode" },
-  f = { "<cmd>call vimtex#fzf#run()<cr>", "Fzf Find" },
-  i = { "<cmd>VimtexInfo<cr>", "Project Information" },
-  s = { "<cmd>VimtexStop<cr>", "Stop Project Compilation" },
-  t = { "<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content" },
-  v = { "<cmd>VimtexView<cr>", "View PDF" },
-}
-
+vim.g.vimtex_quickfix_ignore_filters = O.vimtex_ignore_errors
 -- Compile on initialization, cleanup on quit
+-- O.autosavevimtex = false
 vim.api.nvim_exec(
   [[
         augroup vimtex_event_1
@@ -23,3 +14,7 @@ vim.api.nvim_exec(
     ]],
   false
 )
+if (O.vimtex_autosave)
+then
+  vim.api.nvim_exec([[au FocusLost * :wa]],false)
+end
