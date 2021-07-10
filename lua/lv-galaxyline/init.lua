@@ -133,7 +133,7 @@ local PythonEnv = function()
   if vim.bo.filetype == "python" then
     local venv = os.getenv "CONDA_DEFAULT_ENV"
     if venv ~= nil then
-      return "🅒 (" .. env_cleanup(venv) .. ")"
+      return "  (" .. env_cleanup(venv) .. ")"
     end
     venv = os.getenv "VIRTUAL_ENV"
     if venv ~= nil then
@@ -237,7 +237,7 @@ table.insert(gls.right, {
       end
       return true
     end,
-    icon = "  ",
+    icon = " ",
     highlight = "StatusLineNC",
   },
 })
