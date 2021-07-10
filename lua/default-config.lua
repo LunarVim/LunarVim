@@ -5,35 +5,17 @@ TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
 O = {
-  format_on_save = true,
-  auto_close_tree = 0,
-  colorcolumn = "99999", -- fixes indentline for now
-  colorscheme = "spacegray",
-  clipboard = "unnamedplus",
-  hidden_files = true,
-  wrap_lines = false,
-  spell = false,
-  spelllang = "en",
-  number = true,
-  relative_number = false,
-  number_width = 4,
-  shift_width = 2,
-  tab_stop = 2,
-  cmdheight = 2,
-  cursorline = true,
-  shell = "bash",
-  scrolloff = 0,
-  timeoutlen = 100,
-  nvim_tree_disable_netrw = 0,
-  ignore_case = true,
-  smart_case = true,
-  lushmode = false,
-  hl_search = false,
-  document_highlight = true,
-  transparent_window = false,
   leader_key = "space",
+  colorscheme = "spacegray",
+  transparent_window = false,
+  format_on_save = true,
   vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
 
+  -- TODO refactor for tree
+  auto_close_tree = 0,
+  nvim_tree_disable_netrw = 0,
+
+  -- TODO refactor treesitter
   -- @usage pass a table with your desired languages
   treesitter = {
     ensure_installed = "all",
@@ -65,15 +47,15 @@ O = {
   },
 
   lsp = {
+    document_highlight = true,
     popup_border = "single",
   },
 
-  database = { save_location = "~/.config/nvcode_db", auto_execute = 1 },
+  database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
 
   plugin = {
     -- Builtins
     diffview = { active = false },
-
     ts_context_commentstring = { active = false },
     ts_hintobjects = { active = false },
     ts_autotag = { active = false },
@@ -86,6 +68,7 @@ O = {
     lush = { active = false },
   },
 
+  -- TODO just using mappings (leader mappings)
   user_which_key = {},
 
   user_plugins = {
