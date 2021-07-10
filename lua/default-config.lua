@@ -89,10 +89,10 @@ O = {
 
   lang = {
     cmake = {
-      formatter = {
+      formatter = { {
         exe = "clang-format",
         args = {},
-      },
+      } },
     },
     clang = {
       diagnostics = {
@@ -104,8 +104,10 @@ O = {
       header_insertion = "never",
       filetypes = { "c", "cpp", "objc" },
       formatter = {
-        exe = "clang-format",
-        args = {},
+        {
+          exe = "clang-format",
+          args = {},
+        },
       },
     },
     css = {
@@ -113,10 +115,10 @@ O = {
     },
     dart = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-      formatter = {
+      formatter = { {
         exe = "dart",
         args = { "format" },
-      },
+      } },
     },
     docker = {},
     efm = {},
@@ -126,8 +128,10 @@ O = {
     graphql = {},
     go = {
       formatter = {
-        exe = "gofmt",
-        args = {},
+        {
+          exe = "gofmt",
+          args = {},
+        },
       },
     },
     html = {},
@@ -142,10 +146,10 @@ O = {
         signs = true,
         underline = true,
       },
-      formatter = {
+      formatter = { {
         exe = "python",
         args = { "-m", "json.tool" },
-      },
+      } },
     },
     kotlin = {},
     latex = {},
@@ -156,9 +160,11 @@ O = {
         underline = true,
       },
       formatter = {
-        exe = "stylua",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
-        stdin = false,
+        {
+          exe = "stylua",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+          stdin = false,
+        },
       },
     },
     php = {
@@ -177,9 +183,11 @@ O = {
       },
       filetypes = { "php", "phtml" },
       formatter = {
-        exe = "phpcbf",
-        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-        stdin = false,
+        {
+          exe = "phpcbf",
+          args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+          stdin = false,
+        },
       },
     },
     python = {
@@ -196,8 +204,14 @@ O = {
         use_library_code_types = true,
       },
       formatter = {
-        exe = "yapf",
-        args = {},
+        {
+          exe = "yapf",
+          args = {},
+        },
+        {
+          exe = "black",
+          args = { "-" },
+        },
       },
     },
     ruby = {
@@ -208,8 +222,10 @@ O = {
       },
       filetypes = { "rb", "erb", "rakefile", "ruby" },
       formatter = {
-        exe = "rufo",
-        args = { "-x" },
+        {
+          exe = "rufo",
+          args = { "-x" },
+        },
       },
     },
     rust = {
@@ -219,8 +235,10 @@ O = {
         other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
       },
       formatter = {
-        exe = "rustfmt",
-        args = { "--emit=stdout" },
+        {
+          exe = "rustfmt",
+          args = { "--emit=stdout" },
+        },
       },
       linter = "",
       diagnostics = {
@@ -238,11 +256,11 @@ O = {
         signs = true,
         underline = true,
       },
-      formatter = {
+      formatter = { {
         exe = "shfmt",
         args = { "-w" },
         stdin = false,
-      },
+      } },
     },
     svelte = {},
     tailwindcss = {
@@ -257,8 +275,10 @@ O = {
         "typescriptreact",
       },
       formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        },
       },
     },
     terraform = {},
@@ -271,15 +291,19 @@ O = {
         underline = true,
       },
       formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        },
       },
     },
     vim = {},
     yaml = {
       formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        },
       },
     },
   },

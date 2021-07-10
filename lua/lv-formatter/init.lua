@@ -31,20 +31,27 @@ local function formatter_return(lang_formatter)
   }
 end
 
--- fill a table like this -> {rust: {exe:"sth",args:{"a","b"},stdin=true},go: {}...}
+-- fill a table like this -> {rust: {{exe:"sth",args:{"a","b"},stdin=true}},go: {{}}...}
 local formatter_filetypes = {}
-for k, v in pairs(O.lang) do
-  if formatter_exists(v.formatter) then
-    local keys = v.filetypes
-    if keys == nil then
-      keys = { k }
-    end
-    for _, l in pairs(keys) do
-      formatter_filetypes[l] = {
-        function()
-          return formatter_return(v.formatter)
-        end,
-      }
+for k, z in pairs(O.lang) do
+  if z.formatter ~= nil then
+    for _, v in pairs(z.formatter) do
+      if formatter_exists(v) then
+        if vim.fn.executable(v.exe) == 1 then
+          local keys = z.filetypes
+          if keys == nil then
+            keys = { k }
+          end
+          for _, l in pairs(keys) do
+            formatter_filetypes[l] = {
+              function()
+                return formatter_return(v)
+              end,
+            }
+          end
+          break
+        end
+      end
     end
   end
 end
