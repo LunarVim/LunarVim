@@ -27,7 +27,7 @@ return require("packer").startup(function(use)
   -- Packer can manage itself as an optional plugin
   use "wbthomason/packer.nvim"
 
-  -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
+  -- TODO: refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
   use {
     "kabouzeid/nvim-lspinstall",
@@ -177,7 +177,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.dashboard.active,
   }
 
-  -- TODO remove in favor of akinsho/nvim-toggleterm.lua
+  -- TODO: remove in favor of akinsho/nvim-toggleterm.lua
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",

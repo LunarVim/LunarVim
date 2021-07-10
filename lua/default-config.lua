@@ -54,7 +54,7 @@ O = {
     scrolloff = 8, -- is one of my fav
   },
 
-  -- TODO refactor for tree
+  -- TODO: refactor for tree
   auto_close_tree = 0,
   nvim_tree_disable_netrw = 0,
 
@@ -76,7 +76,7 @@ O = {
     lush = { active = false },
   },
 
-  -- TODO just using mappings (leader mappings)
+  -- TODO: just using mappings (leader mappings)
   user_which_key = {},
 
   user_plugins = {
