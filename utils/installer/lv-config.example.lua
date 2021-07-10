@@ -14,11 +14,9 @@ O.format_on_save = true
 O.completion.autocomplete = true
 O.colorscheme = "spacegray"
 O.auto_close_tree = 0
-O.wrap_lines = true
-O.timeoutlen = 100
+O.default_options.wrap = true
+O.default_options.timeoutlen = 100
 O.leader_key = " "
-O.ignore_case = true
-O.smart_case = true
 
 -- TODO User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
