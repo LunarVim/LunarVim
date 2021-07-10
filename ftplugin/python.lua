@@ -63,7 +63,7 @@ if not require("lv-utils").check_lsp_client_active "pyright" then
   }
 end
 
-if O.plugin.debug.active and O.plugin.dap_install.active then
+if O.plugin.dap.active then
   local dap_install = require "dap-install"
   dap_install.config("python_dbg", {})
 end

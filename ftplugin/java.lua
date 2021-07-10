@@ -5,27 +5,37 @@ end
 if O.lang.java.java_tools.active then
   -- find_root looks for parent directories relative to the current buffer containing one of the given arguments.
   if vim.fn.has "mac" == 1 then
-    JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/java-mac-ls"
     WORKSPACE_PATH = "/Users/" .. USER .. "/workspace/"
   elseif vim.fn.has "unix" == 1 then
-    JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/java-linux-ls"
     WORKSPACE_PATH = "/home/" .. USER .. "/workspace/"
   else
     print "Unsupported system"
   end
-  print(JAVA_LS_EXECUTABLE)
-  print(WORKSPACE_PATH)
+  JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/jdtls"
 
   require("jdtls").start_or_attach {
     on_attach = require("lsp").common_on_attach,
     cmd = { JAVA_LS_EXECUTABLE, WORKSPACE_PATH .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t") },
   }
 
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>la",
+    ":lua require('jdtls').code_action()<CR>",
+    { noremap = true, silent = true }
+  )
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>lR",
+    ":lua require('jdtls').code_action(false, 'refactor')<CR>",
+    { noremap = true, silent = true }
+  )
+
   vim.cmd "command! -buffer JdtCompile lua require('jdtls').compile()"
   vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
-  vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
+  -- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
   vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
-  vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
+  -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
 else
   local util = require "lspconfig/util"
 

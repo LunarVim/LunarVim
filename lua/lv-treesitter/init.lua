@@ -104,7 +104,7 @@ treesitter_configs.setup {
   -- indent = {enable = true, disable = {"python", "html", "javascript"}},
   -- TODO seems to be broken
   indent = { enable = { "javascriptreact" } },
-  autotag = { enable = O.plugin.ts_autotag.active },
+  autotag = { enable = false },
   textobjects = {
     swap = {
       enable = O.plugin.ts_textobjects,
@@ -121,7 +121,7 @@ treesitter_configs.setup {
     keymaps = { ["."] = "textsubjects-smart", [";"] = "textsubjects-big" },
   },
   playground = {
-    enable = O.plugin.ts_playground.active,
+    enable = false,
     disable = {},
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false, -- Whether the query persists across vim sessions
@@ -139,7 +139,7 @@ treesitter_configs.setup {
     },
   },
   rainbow = {
-    enable = O.plugin.ts_rainbow.active,
+    enable = false,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
   },
