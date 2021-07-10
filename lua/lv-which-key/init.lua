@@ -78,11 +78,6 @@ if O.plugin.lush.active then
   }
 end
 
-if O.plugin.floatterm then
-  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-  mappings["gg"] = "LazyGit"
-end
-
 for k, v in pairs(O.user_which_key) do
   mappings[k] = v
 end
