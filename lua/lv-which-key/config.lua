@@ -116,7 +116,26 @@ O.plugin.which_key = {
         "Workspace Symbols",
       },
     },
-
+    Q = {
+      name = "+QuickFix",
+      o = { "<cmd>copen<cr>", "Open" },
+      c = { "<cmd>cclose<cr>", "Close" },
+      n = { "<cmd>cnext<cr>", "Next item" },
+      p = { "<cmd>cprev<cr>", "Previous item" },
+      f = { "<cmd>cfirst<cr>", "First item" },
+      l = { "<cmd>clast<cr>", "Last item" },
+      i = { function() local itemNr = vim.fn.input("QuickFix item #") vim.cmd("cc" .. itemNr) end, "Item ..." },
+    },
+    L = {
+      name = "+Location list",
+      o = { "<cmd>lopen<cr>", "Open" },
+      c = { "<cmd>lclose<cr>", "Close" },
+      n = { "<cmd>lnext<cr>", "Next item" },
+      p = { "<cmd>lprev<cr>", "Previous item" },
+      f = { "<cmd>lfirst<cr>", "First item" },
+      l = { "<cmd>llast<cr>", "Last item" },
+      i = { function() local itemNr = vim.fn.input("Location list item #") vim.cmd("ll" .. itemNr) end, "Item ..." },
+    },
     s = {
       name = "Search",
       b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
