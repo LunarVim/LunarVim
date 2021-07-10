@@ -275,6 +275,7 @@ return require("packer").startup(function(use)
 
   use {
     "mfussenegger/nvim-jdtls",
+    ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
 
