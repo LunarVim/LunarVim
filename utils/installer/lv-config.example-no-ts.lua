@@ -7,12 +7,14 @@ a global executable or a path to
 an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+
 -- general
+
 O.format_on_save = true
-O.auto_complete = true
+O.completion.autocomplete = true
 O.colorscheme = "spacegray"
 O.auto_close_tree = 0
-O.wrap_lines = false
+O.wrap_lines = true
 O.timeoutlen = 100
 O.leader_key = " "
 O.ignore_case = true
@@ -21,14 +23,10 @@ O.smart_case = true
 -- TODO User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
-O.plugin.colorizer.active = false
-O.plugin.ts_playground.active = false
+O.plugin.floatterm.active = true
 O.plugin.indent_line.active = false
 O.plugin.zen.active = false
-
--- dashboard
--- O.dashboard.custom_header = {""}
--- O.dashboard.footer = {""}
+O.plugin.zen.window.height = 0.90
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = {}
