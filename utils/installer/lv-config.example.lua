@@ -32,19 +32,13 @@ O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
 -- python
--- O.python.linter = 'flake8'
 O.lang.python.isort = true
+O.lang.python.formatter = { Formatter.black , Formatter.yapf }
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
 
 -- javascript
 O.lang.tsserver.linter = nil
-
--- rust
-O.lang.rust.formatter = {
-  exe = "rustfmt",
-  args = {"--emit=stdout"},
-}
 
 -- Additional Plugins
 -- O.user_plugins = {
