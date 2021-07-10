@@ -29,10 +29,10 @@ O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
 
 -- nvimtree
-O.nvimtree.side = "left"
-O.nvimtree.auto_close = 0
-O.nvimtree.quit_on_open = 0
-O.nvimtree.hide_dotfiles = 1
+-- O.nvimtree.side = "right"
+-- O.nvimtree.auto_close = 1
+-- O.nvimtree.quit_on_open = 1
+-- O.nvimtree.hide_dotfiles = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "maintained"
