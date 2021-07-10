@@ -65,7 +65,7 @@ O = {
   },
 
   nvimtree = {
-    side = "right",
+    side = "left",
     auto_close = 0,
     quit_on_open = 0,
     hide_dotfiles = 1
