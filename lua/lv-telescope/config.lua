@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 O.plugin.telescope = {
+  active = false,
   defaults = {
     find_command = {
       "rg",

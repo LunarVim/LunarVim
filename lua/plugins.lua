@@ -36,7 +36,7 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     config = [[require('lv-telescope')]],
-    --event = "BufEnter",
+    event = "BufWinEnter",
   }
 
   -- Autocomplete
@@ -158,13 +158,6 @@ return require("packer").startup(function(use)
     disable = not O.plugin.zen.active,
   }
 
-  -- Treesitter playground
-  use {
-    "nvim-treesitter/playground",
-    event = "BufRead",
-    disable = not O.plugin.ts_playground.active,
-  }
-
   use {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufRead",
@@ -198,7 +191,7 @@ return require("packer").startup(function(use)
     config = function()
       require "lv-dap"
     end,
-    disable = not O.plugin.debug.active,
+    disable = not O.plugin.dap.active,
   }
 
   -- Floating terminal
@@ -246,7 +239,7 @@ return require("packer").startup(function(use)
   use {
     "Pocco81/DAPInstall.nvim",
     -- event = "BufRead",
-    disable = not O.plugin.dap_install.active,
+    disable = not O.plugin.dap.active,
   }
 
   -- LANGUAGE SPECIFIC GOES HERE

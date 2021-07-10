@@ -188,10 +188,10 @@ local mappings = {
   },
 }
 
-if O.plugin.ts_playground.active then
-  vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
-  mappings[""] = "Highlight Capture"
-end
+-- if O.plugin.ts_playground.active then
+--   vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
+--   mappings[""] = "Highlight Capture"
+-- end
 
 if O.plugin.zen.active then
   vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })

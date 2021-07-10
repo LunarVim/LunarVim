@@ -3,12 +3,7 @@ if not status_ok then
   return
 end
 -- require "dap"
-vim.fn.sign_define("DapBreakpoint", {
-  text = "",
-  texthl = "LspDiagnosticsSignError",
-  linehl = "",
-  numhl = "",
-})
+vim.fn.sign_define("DapBreakpoint", O.plugin.dap.breakpoint)
 dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
 O.user_which_key["d"] = {

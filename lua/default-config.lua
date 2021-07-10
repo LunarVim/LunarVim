@@ -72,7 +72,8 @@ O = {
 
   plugin = {
     -- Builtins
-    ts_playground = { active = false },
+    diffview = { active = false },
+
     ts_context_commentstring = { active = false },
     ts_hintobjects = { active = false },
     ts_autotag = { active = false },
@@ -82,10 +83,7 @@ O = {
     telescope_fzy = { active = false },
     telescope_project = { active = false },
     indent_line = { active = false },
-    debug = { active = false },
-    dap_install = { active = false },
     lush = { active = false },
-    diffview = { active = false },
   },
 
   user_which_key = {},
@@ -240,3 +238,4 @@ require "lv-floatterm.config"
 require "lv-galaxyline.config"
 require "lv-gitsigns.config"
 require "lv-telescope.config"
+require "lv-dap.config"
