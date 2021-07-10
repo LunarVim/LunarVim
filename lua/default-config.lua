@@ -31,6 +31,7 @@ O = {
   lushmode = false,
   hl_search = false,
   document_highlight = true,
+  line_wrap_cursor_movement = false,
   transparent_window = false,
   leader_key = "space",
   vnsip_dir = vim.fn.stdpath "config" .. "/snippets",

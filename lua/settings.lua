@@ -9,7 +9,11 @@ cmd "filetype plugin on"
 cmd('let &titleold="' .. TERMINAL .. '"')
 cmd "set inccommand=split"
 cmd "set iskeyword+=-"
-cmd "set whichwrap+=<,>,[,],h,l"
+
+if O.line_wrap_cursor_movement then
+  cmd "set whichwrap+=<,>,[,],h,l"
+end
+
 if O.transparent_window then
   cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
   cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
