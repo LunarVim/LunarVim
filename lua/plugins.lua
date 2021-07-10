@@ -248,9 +248,6 @@ return require("packer").startup(function(use)
   use {
     "lervag/vimtex",
     ft = "tex",
-    config = function()
-      require "lv-vimtex"
-    end,
   }
 
   -- Rust tools
