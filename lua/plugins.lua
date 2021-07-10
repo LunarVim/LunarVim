@@ -51,7 +51,7 @@ return require("packer").startup(function(use)
   -- Autocomplete
   use {
     "hrsh7th/nvim-compe",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     config = function()
       require("lv-compe").config()
     end,
@@ -60,7 +60,7 @@ return require("packer").startup(function(use)
   -- Autopairs
   use {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     after = { "telescope.nvim" },
     config = function()
       require "lv-autopairs"
