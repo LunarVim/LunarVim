@@ -28,6 +28,12 @@ Make sure you have the newest version of Neovim (0.5).
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
+If you help to develop Lunarvim, you can install a specific branch branch directly
+``` bash
+LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+```
+
+
 ## Installing LSP for your language
 
 Just enter `:LspInstall` followed by `<TAB>` to see your options
