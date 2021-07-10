@@ -50,6 +50,18 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- Autopairs
+  use {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    after = { "telescope.nvim" },
+    config = function()
+      require "lv-autopairs"
+    end,
+  }
+
+  -- Snippets
+
   use { "hrsh7th/vim-vsnip", event = "InsertEnter" }
   use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
@@ -94,20 +106,10 @@ return require("packer").startup(function(use)
     event = "BufWinEnter",
   }
 
-  -- Autopairs
-  use {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    after = { "telescope.nvim" },
-    config = function()
-      require "lv-autopairs"
-    end,
-  }
-
   -- Comments
   use {
     "terrortylor/nvim-comment",
-    event = "BufWinEnter",
+    event = "BufRead",
     config = function()
       local status_ok, nvim_comment = pcall(require, "nvim_comment")
       if not status_ok then
@@ -210,38 +212,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.indent_line.active,
   }
 
-  -- Diffview
-  use {
-    "sindrets/diffview.nvim",
-    event = "BufRead",
-    disable = not O.plugin.diffview.active,
-  }
-
   ---------------------------------------------------------------------------------
-
-  -- comments in context
-  use {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "BufRead",
-    disable = not O.plugin.ts_context_commentstring.active,
-  }
-
-  -- Use project for telescope
-  use {
-    "nvim-telescope/telescope-project.nvim",
-    event = "BufWinEnter",
-    setup = function()
-      vim.cmd [[packadd telescope.nvim]]
-    end,
-    disable = not O.plugin.telescope_project.active,
-  }
-
-  -- Lush Create Color Schemes
-  use {
-    "rktjmp/lush.nvim",
-    -- cmd = {"LushRunQuickstart", "LushRunTutorial", "Lushify"},
-    disable = not O.plugin.lush.active,
-  }
 
   -- LANGUAGE SPECIFIC GOES HERE
   use {
@@ -277,21 +248,6 @@ return require("packer").startup(function(use)
     ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
-
-  -- use {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   ft = {
-  --     "javascript",
-  --     "javascriptreact",
-  --     "javascript.jsx",
-  --     "typescript",
-  --     "typescriptreact",
-  --     "typescript.tsx",
-  --   },
-  --   config = function()
-  --     require("null-ls").setup()
-  --   end,
-  -- }
 
   -- Custom semantic text objects
   use {
