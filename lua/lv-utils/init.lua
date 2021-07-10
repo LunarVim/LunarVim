@@ -121,4 +121,4 @@ endfunction
 
 return lv_utils
 
--- TODO find a new home for these autocommands
+-- TODO: find a new home for these autocommands

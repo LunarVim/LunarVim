@@ -10,7 +10,7 @@ require "settings"
 require "lv-utils"
 require "lv-treesitter"
 
--- TODO these guys need to be in language files
+-- TODO: these guys need to be in language files
 -- require "lsp"
 -- if O.lang.emmet.active then
 --   require "lsp.emmet-ls"

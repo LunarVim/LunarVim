@@ -18,7 +18,7 @@ O.default_options.wrap = true
 O.default_options.timeoutlen = 100
 O.leader_key = " "
 
--- TODO User Config for predefined plugins
+-- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true

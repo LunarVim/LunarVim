@@ -1,4 +1,4 @@
--- TODO refacor this whole file and treesitter in general
+-- TODO: refacor this whole file and treesitter in general
 -- if not package.loaded['nvim-treesitter'] then return end
 --
 -- Custom parsers
@@ -102,7 +102,7 @@ treesitter_configs.setup {
     config = { css = "// %s" },
   },
   -- indent = {enable = true, disable = {"python", "html", "javascript"}},
-  -- TODO seems to be broken
+  -- TODO: seems to be broken
   indent = { enable = { "javascriptreact" } },
   autotag = { enable = false },
   textobjects = {

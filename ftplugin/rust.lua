@@ -85,7 +85,7 @@ else
   }
 end
 
--- TODO fix these mappings
+-- TODO: fix these mappings
 vim.api.nvim_exec(
   [[
     autocmd Filetype rust nnoremap <leader>lm <Cmd>RustExpandMacro<CR>
