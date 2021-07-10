@@ -64,6 +64,7 @@ vim.cmd 'inoremap <expr> <c-k> ("\\<C-p>")'
 
 vim.cmd 'vnoremap p "0p'
 vim.cmd 'vnoremap P "0P'
+
 -- vim.api.nvim_set_keymap('v', 'p', '"0p', {silent = true})
 -- vim.api.nvim_set_keymap('v', 'P', '"0P', {silent = true})
 
@@ -78,8 +79,6 @@ vim.cmd 'vnoremap P "0P'
 -- map <leader>n <Plug>(miniyank-cycle)
 -- map <leader>N <Plug>(miniyank-cycleback)
 -- ]])
--- no hl
-vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, silent = true })
 
 -- Toggle the QuickFix window
 vim.api.nvim_set_keymap("", "<C-q>", ":call QuickFixToggle()<CR>", { noremap = true, silent = true })

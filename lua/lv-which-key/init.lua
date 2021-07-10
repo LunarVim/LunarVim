@@ -17,44 +17,31 @@ else
   vim.g.mapleader = O.leader_key
 end
 
-local opts = {
-  mode = "n", -- NORMAL mode
-  prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = false, -- use `nowait` when creating keymaps
-}
-
--- explorer
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>e",
-  ":lua require'lv-nvimtree'.toggle_tree()<CR>",
-  { noremap = true, silent = true }
-)
-
-vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
-
--- dashboard
-vim.api.nvim_set_keymap("n", "<Leader>;", ":Dashboard<CR>", { noremap = true, silent = true })
+local opts = O.plugin.which_key.opts
 
 -- Comments
 vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { noremap = true, silent = true })
-
+-- dashboard
+vim.api.nvim_set_keymap("n", "<Leader>;", ":Dashboard<CR>", { noremap = true, silent = true })
 -- Save
 vim.api.nvim_set_keymap("n", "<leader>w", ":w!<CR>", { noremap = true, silent = true })
-
+-- no hl
+vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, silent = true })
 -- Quit
 vim.api.nvim_set_keymap("n", "<leader>q", ":q!<CR>", { noremap = true, silent = true })
-
 -- open lv-config
 vim.api.nvim_set_keymap(
   "n",
   "<leader>.",
   ":e " .. CONFIG_PATH .. "/lv-config.lua<CR>",
+  { noremap = true, silent = true }
+)
+-- explorer
+vim.api.nvim_set_keymap(
+  "n",
+  "<Leader>e",
+  ":lua require'lv-nvimtree'.toggle_tree()<CR>",
   { noremap = true, silent = true }
 )
 

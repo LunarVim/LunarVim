@@ -36,6 +36,15 @@ O.plugin.which_key = {
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
   },
+
+  opts = {
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
+  },
   mappings = {
     ["w"] = "Save",
     ["q"] = "Quit",
