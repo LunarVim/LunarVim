@@ -5,14 +5,14 @@ if O.format_on_save then
       {
         "BufWritePost",
         "*",
-        "FormatWrite",
+        ":silent FormatWrite",
       },
     },
   }
 end
 
 -- check if formatter has been defined for the language or not
-function formatter_exists(lang_formatter)
+local function formatter_exists(lang_formatter)
   if lang_formatter == nil then
     return false
   end
@@ -23,7 +23,7 @@ function formatter_exists(lang_formatter)
 end
 
 -- returns default formatter for given language
-function formatter_return(lang_formatter)
+local function formatter_return(lang_formatter)
   return {
     exe = lang_formatter.exe,
     args = lang_formatter.args,
@@ -37,11 +37,11 @@ for k, v in pairs(O.lang) do
   if formatter_exists(v.formatter) then
     local keys = v.filetypes
     if keys == nil then
-      keys = {k}
+      keys = { k }
     end
     for _, l in pairs(keys) do
       formatter_filetypes[l] = {
-        function ()
+        function()
           return formatter_return(v.formatter)
         end,
       }
