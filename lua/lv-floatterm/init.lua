@@ -6,26 +6,13 @@ M.config = function()
     return
   end
 
-  fterm.setup {
-    dimensions = {
-      height = 0.8,
-      width = 0.8,
-      x = 0.5,
-      y = 0.5,
-    },
-    border = "single", -- or 'double'
-  }
+  fterm.setup(O.plugin.floatterm)
 
   -- Create LazyGit Terminal
   local term = require "FTerm.terminal"
   local lazy = term:new():setup {
     cmd = "lazygit",
-    dimensions = {
-      height = 0.9,
-      width = 0.9,
-      x = 0.5,
-      y = 0.3,
-    },
+    dimensions = O.plugin.floatterm.dimensions,
   }
 
   local function is_installed(exe)

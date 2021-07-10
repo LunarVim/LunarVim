@@ -164,10 +164,7 @@ local mappings = {
     k = { "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>", "Prev Diagnostic" },
     q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    s = {
-      O.plugin.symbol_outline.active and "<cmd>SymbolsOutline<cr>" or "<cmd> Telescope lsp_document_symbols<cr>",
-      "Document Symbols",
-    },
+    s = { "<cmd> Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
@@ -191,11 +188,6 @@ local mappings = {
   },
 }
 
-if O.plugin.symbol_outline.active then
-  vim.api.nvim_set_keymap("n", "<leader>o", ":SymbolsOutline<CR>", { noremap = true, silent = true })
-  mappings["o"] = "Symbols outline"
-end
-
 if O.plugin.ts_playground.active then
   vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
   mappings[""] = "Highlight Capture"
@@ -205,6 +197,7 @@ if O.plugin.zen.active then
   vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
   mappings["z"] = "Zen"
 end
+
 if O.plugin.telescope_project.active then
   -- open projects
   vim.api.nvim_set_keymap(
