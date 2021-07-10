@@ -1,5 +1,6 @@
 #!/bin/sh
-
+#Set Variable to master is not set differently
+LVBRANCH="${LVBRANCH:-master}"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
@@ -100,7 +101,7 @@ installpacker() {
 
 cloneconfig() {
     echo "Cloning LunarVim configuration"
-    git clone --branch master https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
+    git clone --branch $LVBRANCH https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
     cp $HOME/.config/nvim/utils/installer/lv-config.example-no-ts.lua $HOME/.config/nvim/lv-config.lua
     nvim --headless \
         +'autocmd User PackerComplete sleep 100m | qall' \
