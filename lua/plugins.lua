@@ -196,6 +196,13 @@ return require("packer").startup(function(use)
     disable = not O.plugin.dap.active,
   }
 
+  -- Debugger management
+  use {
+    "Pocco81/DAPInstall.nvim",
+    -- event = "BufRead",
+    disable = not O.plugin.dap.active,
+  }
+
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
@@ -235,13 +242,6 @@ return require("packer").startup(function(use)
     "rktjmp/lush.nvim",
     -- cmd = {"LushRunQuickstart", "LushRunTutorial", "Lushify"},
     disable = not O.plugin.lush.active,
-  }
-
-  -- Debugger management
-  use {
-    "Pocco81/DAPInstall.nvim",
-    -- event = "BufRead",
-    disable = not O.plugin.dap.active,
   }
 
   -- LANGUAGE SPECIFIC GOES HERE
@@ -293,12 +293,6 @@ return require("packer").startup(function(use)
   --     require("null-ls").setup()
   --   end,
   -- }
-
-  -- Pretty parentheses
-  use {
-    "p00f/nvim-ts-rainbow",
-    disable = not O.plugin.ts_rainbow.active,
-  }
 
   -- Autotags <div>|</div>
   use {
