@@ -358,6 +358,13 @@ return require("packer").startup(function(use)
     disable = not O.plugin.ts_hintobjects.active,
   }
 
+ use {
+      "rmagatti/goto-preview",
+      config = function()
+          require('lv-goto-preview').config()
+      end
+  }
+
   for _, plugin in pairs(O.user_plugins) do
     packer.use(plugin)
   end
