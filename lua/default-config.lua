@@ -3,7 +3,59 @@ DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
-
+Formatter = {
+  yapf = {
+    exe = "yapf",
+    args = {},
+  },
+  black = {
+    exe = "black",
+    args = { "-" },
+  },
+  phpcbf = {
+    exe = "phpcbf",
+    args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+    stdin = false,
+  },
+  clang_format = {
+    exe = "clang-format",
+    args = {},
+  },
+  dart = {
+    exe = "dart",
+    args = { "format" },
+  },
+  gofmt = {
+    exe = "gofmt",
+    args = {},
+  },
+  python_json = {
+    exe = "python",
+    args = { "-m", "json.tool" },
+  },
+  stylua = {
+    exe = "stylua",
+    args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+    stdin = false,
+  },
+  rufo = {
+    exe = "rufo",
+    args = { "-x" },
+  },
+  rustfmt = {
+    exe = "rustfmt",
+    args = { "--emit=stdout" },
+  },
+  shfmt = {
+    exe = "shfmt",
+    args = { "-w" },
+    stdin = false,
+  },
+  prettier = {
+    exe = "prettier",
+    args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+  },
+}
 O = {
   leader_key = "space",
   colorscheme = "spacegray",
@@ -86,13 +138,9 @@ O = {
   user_autocommands = {
     { "FileType", "qf", "set nobuflisted" },
   },
-
   lang = {
     cmake = {
-      formatter = { {
-        exe = "clang-format",
-        args = {},
-      } },
+      formatter = { Formatter.clang_format },
     },
     clang = {
       diagnostics = {
@@ -103,22 +151,14 @@ O = {
       cross_file_rename = true,
       header_insertion = "never",
       filetypes = { "c", "cpp", "objc" },
-      formatter = {
-        {
-          exe = "clang-format",
-          args = {},
-        },
-      },
+      formatter = { Formatter.clang_format },
     },
     css = {
       virtual_text = true,
     },
     dart = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-      formatter = { {
-        exe = "dart",
-        args = { "format" },
-      } },
+      formatter = { Formatter.dart },
     },
     docker = {},
     efm = {},
@@ -127,12 +167,7 @@ O = {
     elixir = {},
     graphql = {},
     go = {
-      formatter = {
-        {
-          exe = "gofmt",
-          args = {},
-        },
-      },
+      formatter = { Formatter.gofmt },
     },
     html = {},
     java = {
@@ -146,10 +181,7 @@ O = {
         signs = true,
         underline = true,
       },
-      formatter = { {
-        exe = "python",
-        args = { "-m", "json.tool" },
-      } },
+      formatter = { Formatter.python_json },
     },
     kotlin = {},
     latex = {},
@@ -159,13 +191,7 @@ O = {
         signs = true,
         underline = true,
       },
-      formatter = {
-        {
-          exe = "stylua",
-          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
-          stdin = false,
-        },
-      },
+      formatter = { Formatter.stylua },
     },
     php = {
       format = {
@@ -182,13 +208,7 @@ O = {
         underline = true,
       },
       filetypes = { "php", "phtml" },
-      formatter = {
-        {
-          exe = "phpcbf",
-          args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-          stdin = false,
-        },
-      },
+      formatter = { Formatter.phpcbf },
     },
     python = {
       linter = "",
@@ -203,16 +223,7 @@ O = {
         auto_search_paths = true,
         use_library_code_types = true,
       },
-      formatter = {
-        {
-          exe = "yapf",
-          args = {},
-        },
-        {
-          exe = "black",
-          args = { "-" },
-        },
-      },
+      formatter = { Formatter.yapf, Formatter.black },
     },
     ruby = {
       diagnostics = {
@@ -221,12 +232,7 @@ O = {
         underline = true,
       },
       filetypes = { "rb", "erb", "rakefile", "ruby" },
-      formatter = {
-        {
-          exe = "rufo",
-          args = { "-x" },
-        },
-      },
+      formatter = { Formatter.rufo },
     },
     rust = {
       rust_tools = {
@@ -234,12 +240,7 @@ O = {
         parameter_hints_prefix = "<-",
         other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
       },
-      formatter = {
-        {
-          exe = "rustfmt",
-          args = { "--emit=stdout" },
-        },
-      },
+      formatter = { Formatter.rustfmt },
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -256,11 +257,7 @@ O = {
         signs = true,
         underline = true,
       },
-      formatter = { {
-        exe = "shfmt",
-        args = { "-w" },
-        stdin = false,
-      } },
+      formatter = { Formatter.shfmt },
     },
     svelte = {},
     tailwindcss = {
@@ -274,12 +271,7 @@ O = {
         "typescript",
         "typescriptreact",
       },
-      formatter = {
-        {
-          exe = "prettier",
-          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        },
-      },
+      formatter = { Formatter.prettier },
     },
     terraform = {},
     tsserver = {
@@ -290,21 +282,11 @@ O = {
         signs = true,
         underline = true,
       },
-      formatter = {
-        {
-          exe = "prettier",
-          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        },
-      },
+      formatter = { Formatter.prettier },
     },
     vim = {},
     yaml = {
-      formatter = {
-        {
-          exe = "prettier",
-          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        },
-      },
+      formatter = { Formatter.prettier },
     },
   },
 }
