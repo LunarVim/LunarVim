@@ -3,6 +3,7 @@ local lv_utils = {}
 function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/nvim/lv-config.lua"
   vim.cmd "source ~/.config/nvim/lua/plugins.lua"
+  vim.cmd "source ~/.config/nvim/lua/settings.lua"
   vim.cmd "source ~/.config/nvim/lua/lv-formatter/init.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"

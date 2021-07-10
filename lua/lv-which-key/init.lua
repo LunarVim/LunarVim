@@ -68,7 +68,7 @@ if O.plugin.telescope_project.active then
   mappings["P"] = "Projects"
 end
 
-if O.lushmode then
+if O.plugin.lush.active then
   mappings["L"] = {
     name = "+Lush",
     l = { ":Lushify<cr>", "Lushify" },
