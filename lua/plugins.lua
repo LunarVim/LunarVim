@@ -30,10 +30,11 @@ return require("packer").startup(function(use)
   -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
   use { "kabouzeid/nvim-lspinstall", event = "VimEnter" }
-  -- Telescope
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "tjdevries/astronauta.nvim" }
+
+  -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
     config = [[require('lv-telescope')]],
@@ -64,9 +65,10 @@ return require("packer").startup(function(use)
     event = "BufRead",
   }
 
+  -- NvimTree
   use {
     "kyazdani42/nvim-tree.lua",
-    -- event = "BufEnter",
+    -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
@@ -136,6 +138,24 @@ return require("packer").startup(function(use)
     event = "BufWinEnter",
   }
 
+  -- Debugging
+  use {
+    "mfussenegger/nvim-dap",
+    event = "BufWinEnter",
+    config = function()
+      require "lv-dap"
+    end,
+    disable = not O.plugin.dap.active,
+  }
+
+  -- Debugger management
+  use {
+    "Pocco81/DAPInstall.nvim",
+    event = "BufWinEnter",
+    -- event = "BufRead",
+    disable = not O.plugin.dap.active,
+  }
+
   -- Builtins, these do not load by default
 
   -- Dashboard
@@ -146,6 +166,17 @@ return require("packer").startup(function(use)
       require("lv-dashboard").config()
     end,
     disable = not O.plugin.dashboard.active,
+  }
+
+  -- TODO remove in favor of akinsho/nvim-toggleterm.lua
+  -- Floating terminal
+  use {
+    "numToStr/FTerm.nvim",
+    event = "BufWinEnter",
+    config = function()
+      require("lv-floatterm").config()
+    end,
+    disable = not O.plugin.floatterm.active,
   }
 
   -- Zen Mode
@@ -179,47 +210,20 @@ return require("packer").startup(function(use)
     disable = not O.plugin.indent_line.active,
   }
 
+  -- Diffview
+  use {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+    disable = not O.plugin.diffview.active,
+  }
+
+  ---------------------------------------------------------------------------------
+
   -- comments in context
   use {
     "JoosepAlviste/nvim-ts-context-commentstring",
     event = "BufRead",
     disable = not O.plugin.ts_context_commentstring.active,
-  }
-
-  -- Debugging
-  use {
-    "mfussenegger/nvim-dap",
-    event = "BufWinEnter",
-    config = function()
-      require "lv-dap"
-    end,
-    disable = not O.plugin.dap.active,
-  }
-
-  -- Debugger management
-  use {
-    "Pocco81/DAPInstall.nvim",
-    event = "BufWinEnter",
-    -- event = "BufRead",
-    disable = not O.plugin.dap.active,
-  }
-
-  -- TODO remove in favor of akinsho/nvim-toggleterm.lua
-  -- Floating terminal
-  use {
-    "numToStr/FTerm.nvim",
-    event = "BufWinEnter",
-    config = function()
-      require("lv-floatterm").config()
-    end,
-    disable = not O.plugin.floatterm.active,
-  }
-
-  -- Use fzy for telescope
-  use {
-    "nvim-telescope/telescope-fzy-native.nvim",
-    event = "BufRead",
-    disable = not O.plugin.telescope_fzy.active,
   }
 
   -- Use project for telescope
@@ -230,13 +234,6 @@ return require("packer").startup(function(use)
       vim.cmd [[packadd telescope.nvim]]
     end,
     disable = not O.plugin.telescope_project.active,
-  }
-
-  -- Diffview
-  use {
-    "sindrets/diffview.nvim",
-    event = "BufRead",
-    disable = not O.plugin.diffview.active,
   }
 
   -- Lush Create Color Schemes
@@ -295,13 +292,6 @@ return require("packer").startup(function(use)
   --     require("null-ls").setup()
   --   end,
   -- }
-
-  -- Autotags <div>|</div>
-  use {
-    "windwp/nvim-ts-autotag",
-    event = "InsertEnter",
-    disable = not O.plugin.ts_autotag.active,
-  }
 
   -- Custom semantic text objects
   use {
