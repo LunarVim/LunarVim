@@ -146,14 +146,13 @@ return require("packer").startup(function(use)
       require("lv-dashboard").config()
     end,
     disable = not O.plugin.dashboard.active,
-    -- opt = true,
   }
 
   -- Zen Mode
   use {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
-    -- event = "BufRead",
+    event = "BufRead",
     config = function()
       require("lv-zen").config()
     end,
@@ -190,6 +189,7 @@ return require("packer").startup(function(use)
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
+    event = "BufWinEnter",
     config = function()
       require "lv-dap"
     end,
@@ -199,10 +199,12 @@ return require("packer").startup(function(use)
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
+    event = "BufWinEnter",
     -- event = "BufRead",
     disable = not O.plugin.dap.active,
   }
 
+  -- TODO remove in favor of akinsho/nvim-toggleterm.lua
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
