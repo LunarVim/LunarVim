@@ -1,5 +1,6 @@
 require "default-config"
 require "keymappings"
+require "lv-distrib"
 local status_ok, _ = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
 if not status_ok then
   print "something is wrong with your lv-config"

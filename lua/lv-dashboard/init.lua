@@ -17,12 +17,14 @@ M.config = function()
   vim.cmd "let g:dashboard_session_directory = $HOME..'/.config/nvim/.sessions'"
   vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
 
-  vim.api.nvim_exec(
-    [[
-    let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' plugins']
-]],
-    false
-  )
+  if O.distrib.name == nil then
+    vim.api.nvim_exec(
+      [[
+      let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' plugins']
+  ]],
+      false
+    )
+  end
 
   -- file_browser = {description = {' File Browser'}, command = 'Telescope find_files'},
 
