@@ -184,6 +184,7 @@ O = {
       },
     },
     python = {
+      -- @usage can be flake8 or yapf
       linter = "",
       isort = false,
       diagnostics = {
@@ -219,6 +220,7 @@ O = {
         parameter_hints_prefix = "<-",
         other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
       },
+      -- @usage can be clippy
       formatter = {
         exe = "rustfmt",
         args = { "--emit=stdout" },
