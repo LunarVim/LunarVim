@@ -11,8 +11,8 @@ if O.format_on_save then
   }
 end
 
--- check if formatter has been defined for the language or not
-local function formatter_exists(lang_formatter)
+-- check if formatter configuration is available inside `Formatter` in default-config.lua or not
+local function fmt_conf_present(lang_formatter)
   if lang_formatter == nil then
     return false
   end
@@ -22,10 +22,11 @@ local function formatter_exists(lang_formatter)
   return true
 end
 
--- returns default formatter for given language
-local function formatter_return(formatter_list)
+-- returns default formatter for given language. reads from `O.lang.*.formatter` in default-config.lua
+local function default_formatter(formatter_list)
   for _, selected_formatter in pairs(formatter_list) do
-    if formatter_exists(selected_formatter) then
+    if fmt_conf_present(selected_formatter) then
+      -- check if formatter executable is available in the system
       if vim.fn.executable(selected_formatter.exe) == 1 then
         return {
           exe = selected_formatter.exe,
@@ -35,21 +36,24 @@ local function formatter_return(formatter_list)
       end
     end
   end
+  -- if none of the formatters are available, don't format anything
   return {}
 end
 
 -- fill a table like this -> {rust: {{exe:"sth",args:{"a","b"},stdin=true}},go: {{}}...}
 local formatter_filetypes = {}
-for k, v in pairs(O.lang) do
-  if v.formatter ~= nil then
-    local keys = v.filetypes
-    if keys == nil then
-      keys = { k }
+for lang_name, lang_conf in pairs(O.lang) do
+  if lang_conf.formatter ~= nil then
+    -- if a lang has multiple filetypes, gather them all
+    local lang_file_types = lang_conf.filetypes
+    if lang_file_types == nil then
+      lang_file_types = { lang_name }
     end
-    for _, l in pairs(keys) do
-      formatter_filetypes[l] = {
+    -- set formatter for all supported file types in the language
+    for _, file_type in pairs(lang_file_types) do
+      formatter_filetypes[file_type] = {
         function()
-          return formatter_return(v.formatter)
+          return default_formatter(lang_conf.formatter)
         end,
       }
     end
