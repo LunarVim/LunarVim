@@ -55,8 +55,12 @@ O = {
   },
 
   -- TODO: refactor for tree
-  auto_close_tree = 0,
-  nvim_tree_disable_netrw = 0,
+  nvimtree = {
+    side = "left",
+    auto_close = 0,
+    quit_on_open = 0,
+    hide_dotfiles = 1
+  },
 
   lsp = {
     document_highlight = true,
