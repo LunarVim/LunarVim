@@ -4,7 +4,7 @@ function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/nvim/lv-config.lua"
   vim.cmd "source ~/.config/nvim/lua/plugins.lua"
   vim.cmd "source ~/.config/nvim/lua/settings.lua"
-  vim.cmd "source ~/.config/nvim/lua/lv-formatter/init.lua"
+  vim.cmd "source ~/.config/nvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
 end
@@ -17,6 +17,15 @@ function lv_utils.check_lsp_client_active(name)
     end
   end
   return false
+end
+
+function lv_utils.fetch_overrides(overrides, opts)
+  overrides = overrides or {}
+  for opt, _ in pairs(opts) do
+    if overrides[opt] ~= nil then
+        opts[opt] = overrides[opt]
+    end
+  end
 end
 
 function lv_utils.define_augroups(definitions) -- {{{1
@@ -121,4 +130,4 @@ endfunction
 
 return lv_utils
 
--- TODO: find a new home for these autocommands
+-- TODO find a new home for these autocommands

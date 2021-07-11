@@ -63,7 +63,7 @@ O.plugin.which_key = {
     ["q"] = { "<cmd>q!<CR>", "Quit" },
     ["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
     ["c"] = { "<cmd>BufferClose<CR>", "Close Buffer" },
-    ["e"] = { "<cmd>lua require'lv-nvimtree'.toggle_tree()<CR>", "Explorer" },
+    ["e"] = { "<cmd>lua require'core.nvimtree'.toggle_tree()<CR>", "Explorer" },
     ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
     ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
     [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },

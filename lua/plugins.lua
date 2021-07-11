@@ -32,9 +32,7 @@ return require("packer").startup(function(use)
   use {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
-    config = function()
-      require("lspinstall").setup()
-    end,
+    config = [[ require("lspinstall").setup() ]],
   }
 
   use { "nvim-lua/popup.nvim" }
@@ -44,16 +42,14 @@ return require("packer").startup(function(use)
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
-    config = [[require('lv-telescope')]],
+    config = [[ require('lv-telescope') ]],
   }
 
   -- Autocomplete
   use {
     "hrsh7th/nvim-compe",
     -- event = "InsertEnter",
-    config = function()
-      require("lv-compe").config()
-    end,
+    config = [[ require("core.completion").config() ]],
   }
 
   -- Autopairs
@@ -61,9 +57,7 @@ return require("packer").startup(function(use)
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
     after = { "telescope.nvim" },
-    config = function()
-      require "lv-autopairs"
-    end,
+    config = [[ require('core.autopairs') ]],
   }
 
   -- Snippets
@@ -77,9 +71,7 @@ return require("packer").startup(function(use)
   -- Formatter.nvim
   use {
     "mhartington/formatter.nvim",
-    config = function()
-      require "lv-formatter"
-    end,
+    config = [[ require('core.formatter') ]],
     event = "BufRead",
   }
 
@@ -89,18 +81,14 @@ return require("packer").startup(function(use)
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-    config = function()
-      require("lv-nvimtree").config()
-    end,
+    config = [[ require('core.nvimtree').config() ]],
   }
 
   use {
     "lewis6991/gitsigns.nvim",
-
-    config = function()
-      require("lv-gitsigns").config()
-    end,
+    config = [[ require('core.gitsigns').config() ]],
     event = "BufRead",
+    disable = not O.plugin.gitsigns.active,
   }
 
   -- whichkey
@@ -123,6 +111,7 @@ return require("packer").startup(function(use)
       end
       nvim_comment.setup()
     end,
+    disable = not O.plugin.nvim_comment.active,
   }
 
   -- whichkey
@@ -139,28 +128,23 @@ return require("packer").startup(function(use)
   -- Status Line and Bufferline
   use {
     "glepnir/galaxyline.nvim",
-    config = function()
-      require "lv-galaxyline"
-    end,
+    config = [[ require('core.statusline') ]],
     event = "BufWinEnter",
     disable = not O.plugin.galaxyline.active,
   }
 
   use {
     "romgrk/barbar.nvim",
-    config = function()
-      require "lv-barbar"
-    end,
+    config = [[ require('core.barbar') ]],
     event = "BufWinEnter",
+    disable = not O.plugin.barbar.active,
   }
 
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
-    config = function()
-      require "lv-dap"
-    end,
+    config = [[ require('core.dap') ]],
     disable = not O.plugin.dap.active,
   }
 
@@ -177,10 +161,9 @@ return require("packer").startup(function(use)
   -- Dashboard
   use {
     "ChristianChiarulli/dashboard-nvim",
-    event = "BufWinEnter",
-    config = function()
-      require("lv-dashboard").config()
-    end,
+    -- event = "BufWinEnter",
+    -- cmd = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks" },
+  	config = [[ require('core.dashboard').config() ]],
     disable = not O.plugin.dashboard.active,
   }
 
@@ -189,9 +172,7 @@ return require("packer").startup(function(use)
   use {
     "numToStr/FTerm.nvim",
     event = "BufWinEnter",
-    config = function()
-      require("lv-floatterm").config()
-    end,
+    config = [[ require('core.floatterm').config() ]],
     disable = not O.plugin.floatterm.active,
   }
 
@@ -200,29 +181,14 @@ return require("packer").startup(function(use)
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
     event = "BufRead",
-    config = function()
-      require("lv-zen").config()
-    end,
+    config = [[ require("core.zen").config() ]],
     disable = not O.plugin.zen.active,
   }
 
   use {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufRead",
-    setup = function()
-      vim.g.indentLine_enabled = 1
-      vim.g.indent_blankline_char = "▏"
-
-      vim.g.indent_blankline_filetype_exclude = {
-        "help",
-        "terminal",
-        "dashboard",
-      }
-      vim.g.indent_blankline_buftype_exclude = { "terminal" }
-
-      vim.g.indent_blankline_show_trailing_blankline_indent = false
-      vim.g.indent_blankline_show_first_indent_level = true
-    end,
+    config = [[ require('core.indent') ]],
     disable = not O.plugin.indent_line.active,
   }
 

@@ -1,4 +1,6 @@
-O.plugin["zen"] = {
+local M = {}
+
+M.opts = {
 	window = {
 		backdrop = 1,
 		height = 0.85, -- height of the Zen window
@@ -19,3 +21,14 @@ O.plugin["zen"] = {
 		-- refer to the configuration section below
 	},
 }
+
+local status_ok, zen_mode = pcall(require, "zen-mode")
+if not status_ok then
+  return
+end
+
+M.config = function()
+  require('lv-utils').fetch_overrides(O.plugin.zen, M.opts)
+  zen_mode.setup(O.plugin.zen)
+end
+return M

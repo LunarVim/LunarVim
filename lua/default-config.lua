@@ -68,13 +68,22 @@ O = {
 
   plugin = {
     -- Builtins
+    barbar = { active = true },
+    dap = { active = false },
+    dashboard = { active = true },
     diffview = { active = false },
+    floatterm = { active = false },
+    galaxyline = { active = true },
+    gitsigns = { active = false },
+    ts_context_commentstring = { active = false },
     ts_hintobjects = { active = false },
     ts_textobjects = { active = false },
     ts_textsubjects = { active = false },
     telescope_project = { active = false },
     indent_line = { active = false },
     lush = { active = false },
+    nvim_comment = {active = false},
+    zen = { active = false },
   },
 
   -- TODO: just using mappings (leader mappings)
@@ -293,14 +302,6 @@ O = {
   },
 }
 
-require "lv-zen.config"
-require "lv-compe.config"
-require "lv-dashboard.config"
-require "lv-floatterm.config"
-require "lv-galaxyline.config"
-require "lv-gitsigns.config"
 require "lv-telescope.config"
-require "lv-floatterm.config"
-require "lv-dap.config"
 require "lv-which-key.config"
 require "lv-treesitter.config"

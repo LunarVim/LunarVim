@@ -1,8 +1,20 @@
+local M = {}
+M.opts = {
+  active = false,
+  breakpoint = {
+    text = "",
+    texthl = "LspDiagnosticsSignError",
+    linehl = "",
+    numhl = "",
+  },
+}
+
 local status_ok, dap = pcall(require, "dap")
 if not status_ok then
   return
 end
 -- require "dap"
+require('lv-utils').fetch_overrides(O.plugin.dap, M.opts)
 vim.fn.sign_define("DapBreakpoint", O.plugin.dap.breakpoint)
 dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 

@@ -1,10 +1,38 @@
---if not package.loaded['compe'] then
---   return
--- end
-
 local M = {}
 
-vim.g.vsnip_snippet_dir = O.vnsip_dir
+M.completion_opts = {
+  enabled = true,
+  autocomplete = true,
+  debug = false,
+  min_length = 1,
+  preselect = "enable",
+  throttle_time = 80,
+  source_timeout = 200,
+  incomplete_delay = 400,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
+  documentation = true,
+
+  source = {
+    path = { kind = "   (Path)" },
+    buffer = { kind = "   (Buffer)" },
+    calc = { kind = "   (Calc)" },
+    vsnip = { kind = "   (Snippet)" },
+    nvim_lsp = { kind = "   (LSP)" },
+    nvim_lua = false,
+    spell = { kind = "   (Spell)" },
+    tags = false,
+    vim_dadbod_completion = false,
+    snippets_nvim = false,
+    ultisnips = false,
+    treesitter = false,
+    emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } },
+    -- for emoji press : (idk if that in compe tho)
+  },
+}
+
+
 
 M.config = function()
   local status_ok, compe = pcall(require, "compe")
@@ -12,7 +40,11 @@ M.config = function()
     return
   end
 
-  compe.setup(O.completion)
+  require('lv-utils').fetch_overrides(O.completion, M.completion_opts)
+
+  vim.g.vsnip_snippet_dir = O.vnsip_dir
+
+  compe.setup(M.completion_opts)
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)

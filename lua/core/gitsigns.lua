@@ -1,4 +1,6 @@
-O.plugin.gitsigns = {
+local M = {}
+
+M.opts = {
   signs = {
     -- TODO: add hl to colorscheme
     add = {
@@ -45,3 +47,15 @@ O.plugin.gitsigns = {
   status_formatter = nil, -- Use default
   use_decoration_api = false,
 }
+
+
+M.config = function()
+  local status_ok, gitsigns = pcall(require, "gitsigns")
+  if not status_ok then
+    return
+  end
+  require('lv-utils').fetch_overrides(O.plugin.gitsigns, M.opts)
+  gitsigns.setup(O.plugin.gitsigns)
+end
+
+return M

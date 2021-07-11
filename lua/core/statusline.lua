@@ -1,6 +1,30 @@
--- if not package.loaded['galaxyline'] then
---   return
--- end
+local M = {}
+
+M.opts = {
+  active = true,
+  colors = {
+    bg = "#2E2E2E",
+    yellow = "#DCDCAA",
+    dark_yellow = "#D7BA7D",
+    cyan = "#4EC9B0",
+    green = "#608B4E",
+    light_green = "#B5CEA8",
+    string_orange = "#CE9178",
+    orange = "#FF8800",
+    purple = "#C586C0",
+    magenta = "#D16D9E",
+    grey = "#858585",
+    blue = "#569CD6",
+    vivid_blue = "#4FC1FF",
+    light_blue = "#9CDCFE",
+    red = "#D16969",
+    error_red = "#F44747",
+    info_yellow = "#FFCC66",
+  },
+}
+if not package.loaded['galaxyline'] then
+  return
+end
 local status_ok, gl = pcall(require, "galaxyline")
 if not status_ok then
   return
@@ -9,8 +33,9 @@ end
 -- NOTE: if someone defines colors but doesn't have them then this will break
 local palette_status_ok, colors = pcall(require, O.colorscheme .. ".palette")
 if not palette_status_ok then
-  colors = O.plugin.galaxyline.colors
+  colors = M.opts.colors
 end
+require('lv-utils').fetch_overrides(O.plugin.galaxyline, M.opts)
 
 local condition = require "galaxyline.condition"
 local gls = gl.section

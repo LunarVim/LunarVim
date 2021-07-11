@@ -1,18 +1,32 @@
 local M = {}
 
+M.opts = {
+  active = false,
+  dimensions = {
+    height = 0.9,
+    width = 0.9,
+    x = 0.5,
+    y = 0.3,
+  },
+  border = "single", -- or 'double'
+}
+
+
 M.config = function()
   local status_ok, fterm = pcall(require, "FTerm")
   if not status_ok then
     return
   end
 
-  fterm.setup(O.plugin.floatterm)
+  require('lv-utils').fetch_overrides(O.plugin.floatterm, M.opts)
+
+  fterm.setup(M.opts)
 
   -- Create LazyGit Terminal
   local term = require "FTerm.terminal"
   local lazy = term:new():setup {
     cmd = "lazygit",
-    dimensions = O.plugin.floatterm.dimensions,
+    dimensions = M.opts.dimensions,
   }
 
   local function is_installed(exe)
