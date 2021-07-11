@@ -1,10 +1,9 @@
 vim.api.nvim_set_keymap("n", "<S-x>", ":BufferClose<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-h>", ":BufferPrevious<CR>", { noremap = true, silent = true })
--- close buffer
 vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
 
-O.user_which_key["b"] = {
+O.plugin.which_key.mappings["b"] = {
   name = "Buffers",
   j = { "<cmd>BufferPick<cr>", "jump to buffer" },
   f = { "<cmd>Telescope buffers<cr>", "Find buffer" },

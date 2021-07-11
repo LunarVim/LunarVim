@@ -15,7 +15,7 @@ vim.api.nvim_set_keymap("i", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true, nore
 vim.api.nvim_set_keymap("i", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, noremap = true })
 
--- TODO fix this
+-- TODO: fix this
 -- resize with arrows
 if vim.fn.has "mac" == 1 then
   vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { silent = true })

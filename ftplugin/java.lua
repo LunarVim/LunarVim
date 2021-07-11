@@ -61,7 +61,7 @@ end
 --     init_options = {bundles = bundles}
 -- })
 
--- TODO setup autoformat stuff later
+-- TODO: setup autoformat stuff later
 -- _java = {
 --     -- {'FileType', 'java', 'luafile '..CONFIG_PATH..'/lua/lsp/java-ls.lua'},
 --     {

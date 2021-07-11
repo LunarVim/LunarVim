@@ -7,6 +7,7 @@ USER = vim.fn.expand "$USER"
 O = {
   leader_key = "space",
   colorscheme = "spacegray",
+  line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
   vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
@@ -54,40 +55,9 @@ O = {
     scrolloff = 8, -- is one of my fav
   },
 
-  -- TODO refactor for tree
+  -- TODO: refactor for tree
   auto_close_tree = 0,
   nvim_tree_disable_netrw = 0,
-
-  -- TODO refactor treesitter
-  -- @usage pass a table with your desired languages
-  treesitter = {
-    ensure_installed = "all",
-    ignore_install = { "haskell" },
-    highlight = { enabled = true },
-    -- The below are for treesitter-textobjects plugin
-    textobj_prefixes = {
-      goto_next = "]", -- Go to next
-      goto_previous = "[", -- Go to previous
-      inner = "i", -- Select inside
-      outer = "a", -- Selct around
-      swap = "<leader>a", -- Swap with next
-    },
-    textobj_suffixes = {
-      -- Start and End respectively for the goto keys
-      -- for other keys it only uses the first
-      ["function"] = { "f", "F" },
-      ["class"] = { "m", "M" },
-      ["parameter"] = { "a", "A" },
-      ["block"] = { "k", "K" },
-      ["conditional"] = { "i", "I" },
-      ["call"] = { "c", "C" },
-      ["loop"] = { "l", "L" },
-      ["statement"] = { "s", "S" },
-      ["comment"] = { "/", "?" },
-    },
-    -- The below is for treesitter hint textobjects plugin
-    hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
-  },
 
   lsp = {
     document_highlight = true,
@@ -99,7 +69,6 @@ O = {
   plugin = {
     -- Builtins
     diffview = { active = false },
-    ts_context_commentstring = { active = false },
     ts_hintobjects = { active = false },
     ts_textobjects = { active = false },
     ts_textsubjects = { active = false },
@@ -108,7 +77,7 @@ O = {
     lush = { active = false },
   },
 
-  -- TODO just using mappings (leader mappings)
+  -- TODO: just using mappings (leader mappings)
   user_which_key = {},
 
   user_plugins = {
@@ -120,7 +89,12 @@ O = {
   },
 
   lang = {
-    cmake = {},
+    cmake = {
+      formatter = {
+        exe = "clang-format",
+        args = {},
+      },
+    },
     clang = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -129,12 +103,21 @@ O = {
       },
       cross_file_rename = true,
       header_insertion = "never",
+      filetypes = { "c", "cpp", "objc" },
+      formatter = {
+        exe = "clang-format",
+        args = {},
+      },
     },
     css = {
       virtual_text = true,
     },
     dart = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+      formatter = {
+        exe = "dart",
+        args = { "format" },
+      },
     },
     docker = {},
     efm = {},
@@ -142,7 +125,12 @@ O = {
     emmet = { active = true },
     elixir = {},
     graphql = {},
-    go = {},
+    go = {
+      formatter = {
+        exe = "gofmt",
+        args = {},
+      },
+    },
     html = {},
     java = {
       java_tools = {
@@ -155,6 +143,10 @@ O = {
         signs = true,
         underline = true,
       },
+      formatter = {
+        exe = "python",
+        args = { "-m", "json.tool" },
+      },
     },
     kotlin = {},
     latex = {},
@@ -163,6 +155,11 @@ O = {
         virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
+      },
+      formatter = {
+        exe = "stylua",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+        stdin = false,
       },
     },
     php = {
@@ -180,6 +177,11 @@ O = {
         underline = true,
       },
       filetypes = { "php", "phtml" },
+      formatter = {
+        exe = "phpcbf",
+        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+        stdin = false,
+      },
     },
     python = {
       -- @usage can be flake8 or yapf
@@ -195,6 +197,10 @@ O = {
         auto_search_paths = true,
         use_library_code_types = true,
       },
+      formatter = {
+        exe = "yapf",
+        args = {},
+      },
     },
     ruby = {
       diagnostics = {
@@ -203,6 +209,10 @@ O = {
         underline = true,
       },
       filetypes = { "rb", "erb", "rakefile", "ruby" },
+      formatter = {
+        exe = "rufo",
+        args = { "-x" },
+      },
     },
     rust = {
       rust_tools = {
@@ -211,6 +221,10 @@ O = {
         other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
       },
       -- @usage can be clippy
+      formatter = {
+        exe = "rustfmt",
+        args = { "--emit=stdout" },
+      },
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -227,6 +241,11 @@ O = {
         signs = true,
         underline = true,
       },
+      formatter = {
+        exe = "shfmt",
+        args = { "-w" },
+        stdin = false,
+      },
     },
     svelte = {},
     tailwindcss = {
@@ -240,6 +259,10 @@ O = {
         "typescript",
         "typescriptreact",
       },
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
     },
     terraform = {},
     tsserver = {
@@ -250,9 +273,18 @@ O = {
         signs = true,
         underline = true,
       },
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
     },
     vim = {},
-    yaml = {},
+    yaml = {
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
+    },
   },
 }
 
@@ -263,5 +295,7 @@ require "lv-floatterm.config"
 require "lv-galaxyline.config"
 require "lv-gitsigns.config"
 require "lv-telescope.config"
+require "lv-floatterm.config"
 require "lv-dap.config"
 require "lv-which-key.config"
+require "lv-treesitter.config"

@@ -28,6 +28,12 @@ Make sure you have the newest version of Neovim (0.5).
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
+If you help to develop Lunarvim, you can install a specific branch branch directly
+``` bash
+LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+```
+
+
 ## Installing LSP for your language
 
 Just enter `:LspInstall` followed by `<TAB>` to see your options
@@ -45,19 +51,17 @@ Example:
 
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
-O.auto_complete = true
-O.relative_number = false
+O.completion.autocomplete = true
+O.default_options.relativenumber = true
 O.colorscheme = 'spacegray'
-O.timeoutlen = 100
+O.default_options.timeoutlen = 100
 O.leader_key = ' '
 
 -- After changing plugin config it is recommended to run :PackerCompile
-O.plugin.colorizer.active = true
 O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true
-O.plugin.symbol_outline = true
-O.plugin.trouble.active = true
 O.plugin.zen.active = true
+O.plugin.telescope_project.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"

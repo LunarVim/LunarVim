@@ -1,6 +1,6 @@
 local python_arguments = {}
 
--- TODO replace with path argument
+-- TODO: replace with path argument
 local flake8 = {
   LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
   lintStdin = true,

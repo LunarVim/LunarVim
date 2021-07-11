@@ -1,4 +1,4 @@
--- TODO figure out why this don't work
+-- TODO: figure out why this don't work
 vim.fn.sign_define(
   "LspDiagnosticsSignError",
   { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
@@ -131,7 +131,7 @@ function lsp_config.tsserver_on_attach(client, bufnr)
 
     -- formatting
     enable_formatting = O.lang.tsserver.autoformat,
-    formatter = O.lang.tsserver.formatter,
+    formatter = O.lang.tsserver.formatter.exe,
     formatter_config_fallback = nil,
 
     -- parentheses completion

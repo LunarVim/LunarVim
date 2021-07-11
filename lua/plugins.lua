@@ -27,9 +27,16 @@ return require("packer").startup(function(use)
   -- Packer can manage itself as an optional plugin
   use "wbthomason/packer.nvim"
 
-  -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
+  -- TODO: refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
-  use { "kabouzeid/nvim-lspinstall", event = "VimEnter" }
+  use {
+    "kabouzeid/nvim-lspinstall",
+    event = "VimEnter",
+    config = function()
+      require("lspinstall").setup()
+    end,
+  }
+
   use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "tjdevries/astronauta.nvim" }
@@ -38,17 +45,28 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     config = [[require('lv-telescope')]],
-    event = "BufWinEnter",
   }
 
   -- Autocomplete
   use {
     "hrsh7th/nvim-compe",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     config = function()
       require("lv-compe").config()
     end,
   }
+
+  -- Autopairs
+  use {
+    "windwp/nvim-autopairs",
+    -- event = "InsertEnter",
+    after = { "telescope.nvim" },
+    config = function()
+      require "lv-autopairs"
+    end,
+  }
+
+  -- Snippets
 
   use { "hrsh7th/vim-vsnip", event = "InsertEnter" }
   use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
@@ -56,11 +74,11 @@ return require("packer").startup(function(use)
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter" }
 
-  -- Neoformat
+  -- Formatter.nvim
   use {
-    "sbdchd/neoformat",
+    "mhartington/formatter.nvim",
     config = function()
-      require "lv-neoformat"
+      require "lv-formatter"
     end,
     event = "BufRead",
   }
@@ -94,20 +112,10 @@ return require("packer").startup(function(use)
     event = "BufWinEnter",
   }
 
-  -- Autopairs
-  use {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    after = { "telescope.nvim" },
-    config = function()
-      require "lv-autopairs"
-    end,
-  }
-
   -- Comments
   use {
     "terrortylor/nvim-comment",
-    event = "BufWinEnter",
+    event = "BufRead",
     config = function()
       local status_ok, nvim_comment = pcall(require, "nvim_comment")
       if not status_ok then
@@ -141,7 +149,7 @@ return require("packer").startup(function(use)
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     config = function()
       require "lv-dap"
     end,
@@ -151,7 +159,7 @@ return require("packer").startup(function(use)
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     -- event = "BufRead",
     disable = not O.plugin.dap.active,
   }
@@ -168,7 +176,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.dashboard.active,
   }
 
-  -- TODO remove in favor of akinsho/nvim-toggleterm.lua
+  -- TODO: remove in favor of akinsho/nvim-toggleterm.lua
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
@@ -210,38 +218,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.indent_line.active,
   }
 
-  -- Diffview
-  use {
-    "sindrets/diffview.nvim",
-    event = "BufRead",
-    disable = not O.plugin.diffview.active,
-  }
-
   ---------------------------------------------------------------------------------
-
-  -- comments in context
-  use {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "BufRead",
-    disable = not O.plugin.ts_context_commentstring.active,
-  }
-
-  -- Use project for telescope
-  use {
-    "nvim-telescope/telescope-project.nvim",
-    event = "BufWinEnter",
-    setup = function()
-      vim.cmd [[packadd telescope.nvim]]
-    end,
-    disable = not O.plugin.telescope_project.active,
-  }
-
-  -- Lush Create Color Schemes
-  use {
-    "rktjmp/lush.nvim",
-    -- cmd = {"LushRunQuickstart", "LushRunTutorial", "Lushify"},
-    disable = not O.plugin.lush.active,
-  }
 
   -- LANGUAGE SPECIFIC GOES HERE
   use {
@@ -274,24 +251,9 @@ return require("packer").startup(function(use)
 
   use {
     "mfussenegger/nvim-jdtls",
-    ft = { "java" },
+    -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
-
-  -- use {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   ft = {
-  --     "javascript",
-  --     "javascriptreact",
-  --     "javascript.jsx",
-  --     "typescript",
-  --     "typescriptreact",
-  --     "typescript.tsx",
-  --   },
-  --   config = function()
-  --     require("null-ls").setup()
-  --   end,
-  -- }
 
   -- Custom semantic text objects
   use {

@@ -41,7 +41,11 @@ M.config = function()
   --   ]],
   --     false
   --   )
+
+  O.plugin.which_key.mappings["gg"] = "LazyGit"
   vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+
   vim.api.nvim_set_keymap(
     "t",
     "<A-i>",
