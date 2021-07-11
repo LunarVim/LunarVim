@@ -45,8 +45,8 @@ O.lang.python.analysis.use_library_code_types = true
 O.lang.tsserver.linter = nil
 
 -- latex 
-O.vimtex_autosave = false -- saves and compiles on focus change
-O.vimtex_ignore_errors = { } -- which errors not to display, i.e adding "hbox" will prevent hbox errors from showing.
+-- O.lang.latex.auto_save = false -- saves and compiles on focus change
+-- O.lang.latex.ignore_errors = { } -- which errors not to display, i.e adding "hbox" will prevent hbox errors from showing.
 
 -- Additional Plugins
 -- O.user_plugins = {

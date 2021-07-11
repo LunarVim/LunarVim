@@ -1,7 +1,7 @@
 vim.g.vimtex_compiler_method = "latexmk"
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_fold_enabled = 0
-vim.g.vimtex_quickfix_ignore_filters = O.vimtex_ignore_errors
+vim.g.vimtex_quickfix_ignore_filters = O.lang.latex.ignore_errors
 O.user_which_key["L"] = {
   name = "+Latex",
   c = { "<cmd>VimtexCompile<cr>", "Toggle Compilation Mode" },
@@ -22,7 +22,7 @@ vim.api.nvim_exec(
     ]],
   false
 )
-if (O.vimtex_autosave)
+if (O.lang.latex.auto_save)
 then
   vim.api.nvim_exec([[au FocusLost * :wa]],false)
 end
