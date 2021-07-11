@@ -223,7 +223,7 @@ O = {
       -- @usage can be clippy
       formatter = {
         exe = "rustfmt",
-        args = { "--emit=stdout" },
+        args = { "--emit=stdout --edition=2018" },
       },
       linter = "",
       diagnostics = {
