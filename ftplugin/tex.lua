@@ -76,6 +76,8 @@ O.plugin.which_key.mappings["L"] = {
   s = { "<cmd>VimtexStop<cr>", "Stop Project Compilation" },
   t = { "<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content" },
   v = { "<cmd>VimtexView<cr>", "View PDF" },
+  b = { "<cmd>TexlabBuild<cr>", "Build with Texlab" },
+  p = { "<cmd>TexlabForward<cr>", "Preview with Texlab" },
 }
 
 -- Compile on initialization, cleanup on quit
