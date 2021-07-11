@@ -266,7 +266,7 @@ O = {
     },
     terraform = {},
     tsserver = {
-      -- @usage can be 'eslint'
+      -- @usage can be 'eslint' or 'eslint_d'
       linter = "",
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
