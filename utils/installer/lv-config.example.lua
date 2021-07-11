@@ -46,6 +46,10 @@ O.lang.rust.formatter = {
   args = {"--emit=stdout"},
 }
 
+-- latex
+-- O.lang.latex.auto_save = false
+-- O.lang.latex.ignore_errors = { }
+
 -- Additional Plugins
 -- O.user_plugins = {
 --     {"folke/tokyonight.nvim"}, {
