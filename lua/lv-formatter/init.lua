@@ -25,15 +25,13 @@ end
 -- returns default formatter for given language. reads from `O.lang.*.formatter` in default-config.lua
 local function default_formatter(formatter_list)
   for _, selected_formatter in pairs(formatter_list) do
-    if fmt_conf_present(selected_formatter) then
       -- check if formatter executable is available in the system
-      if vim.fn.executable(selected_formatter.exe) == 1 then
+    if (fmt_conf_present(selected_formatter) and vim.fn.executable(selected_formatter.exe)) then
         return {
           exe = selected_formatter.exe,
           args = selected_formatter.args,
           stdin = not (selected_formatter.stdin ~= nil),
         }
-      end
     end
   end
   -- if none of the formatters are available, don't format anything
