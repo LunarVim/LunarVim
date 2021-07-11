@@ -68,7 +68,7 @@ vim.g.vimtex_compiler_method = "latexmk"
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_fold_enabled = 0
 
-O.plugin.which_key.mappings["L"] = {
+O.plugin.which_key.mappings["t"] = {
   name = "+Latex",
   c = { "<cmd>VimtexCompile<cr>", "Toggle Compilation Mode" },
   f = { "<cmd>call vimtex#fzf#run()<cr>", "Fzf Find" },
