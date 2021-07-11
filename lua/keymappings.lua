@@ -15,13 +15,13 @@ vim.api.nvim_set_keymap("i", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true, nore
 vim.api.nvim_set_keymap("i", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, noremap = true })
 
--- TODO fix this
+-- TODO: fix this
 -- resize with arrows
 if vim.fn.has "mac" == 1 then
-  vim.api.nvim_set_keymap("n", "<A-Up>", ":resize -2<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<A-Down>", ":resize +2<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<A-Left>", ":vertical resize -2<CR>", { silent = true })
-  vim.api.nvim_set_keymap("n", "<A-Right>", ":vertical resize +2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 else
   vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { silent = true })
   vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<CR>", { silent = true })
@@ -39,8 +39,8 @@ vim.api.nvim_set_keymap("i", "kj", "<ESC>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", { noremap = true, silent = true })
 
 -- Tab switch buffer
-vim.api.nvim_set_keymap("n", "<TAB>", ":bnext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-TAB>", ":bprevious<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<TAB>", ":bnext<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<S-TAB>", ":bprevious<CR>", { noremap = true, silent = true })
 
 -- Move selected line / block of text in visual mode
 vim.api.nvim_set_keymap("x", "K", ":move '<-2<CR>gv-gv", { noremap = true, silent = true })
@@ -64,6 +64,7 @@ vim.cmd 'inoremap <expr> <c-k> ("\\<C-p>")'
 
 vim.cmd 'vnoremap p "0p'
 vim.cmd 'vnoremap P "0P'
+
 -- vim.api.nvim_set_keymap('v', 'p', '"0p', {silent = true})
 -- vim.api.nvim_set_keymap('v', 'P', '"0P', {silent = true})
 

@@ -1,4 +1,4 @@
--- TODO figure out why this don't work
+-- TODO: figure out why this don't work
 vim.fn.sign_define(
   "LspDiagnosticsSignError",
   { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
@@ -151,7 +151,7 @@ function lsp_config.PeekDefinition()
   end
 end
 
-if O.document_highlight then
+if O.lsp.document_highlight then
   function lsp_config.common_on_attach(client, bufnr)
     documentHighlight(client, bufnr)
   end
@@ -179,7 +179,7 @@ function lsp_config.tsserver_on_attach(client, bufnr)
 
     -- formatting
     enable_formatting = O.lang.tsserver.autoformat,
-    formatter = O.lang.tsserver.formatter,
+    formatter = O.lang.tsserver.formatter.exe,
     formatter_config_fallback = nil,
 
     -- parentheses completion
