@@ -158,7 +158,7 @@ O = {
       },
       formatter = {
         exe = "stylua",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+        args = {},
         stdin = false,
       },
     },
