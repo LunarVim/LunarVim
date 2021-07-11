@@ -1,4 +1,4 @@
--- TODO refacor this whole file and treesitter in general
+-- TODO: refacor this whole file and treesitter in general
 -- if not package.loaded['nvim-treesitter'] then return end
 --
 -- Custom parsers
@@ -85,5 +85,6 @@ local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
   return
 end
+
 
 treesitter_configs.setup(O.treesitter)

@@ -9,7 +9,11 @@ cmd "filetype plugin on"
 cmd('let &titleold="' .. TERMINAL .. '"')
 cmd "set inccommand=split"
 cmd "set iskeyword+=-"
-cmd "set whichwrap+=<,>,[,],h,l"
+
+if O.line_wrap_cursor_movement then
+  cmd "set whichwrap+=<,>,[,],h,l"
+end
+
 if O.transparent_window then
   cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
   cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
@@ -39,6 +43,13 @@ local disabled_built_ins = {
   "spellfile_plugin",
   -- 'matchit', 'matchparen', 'shada_plugin',
 }
+
+if O.leader_key == " " or O.leader_key == "space" then
+  vim.g.mapleader = ' '
+else
+  vim.g.mapleader = O.leader_key
+end
+
 for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end

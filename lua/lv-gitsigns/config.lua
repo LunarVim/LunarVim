@@ -1,6 +1,6 @@
 O.plugin.gitsigns = {
   signs = {
-    -- TODO add hl to colorscheme
+    -- TODO: add hl to colorscheme
     add = {
       hl = "GitSignsAdd",
       text = "▎",

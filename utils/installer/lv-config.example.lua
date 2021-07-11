@@ -18,7 +18,7 @@ O.default_options.wrap = true
 O.default_options.timeoutlen = 100
 O.leader_key = " "
 
--- TODO User Config for predefined plugins
+-- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true
@@ -32,6 +32,7 @@ O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
 -- python
+-- O.lang.python.linter = 'flake8'
 O.lang.python.isort = true
 O.lang.python.formatter = { Formatter.black , Formatter.yapf }
 O.lang.python.diagnostics.virtual_text = true

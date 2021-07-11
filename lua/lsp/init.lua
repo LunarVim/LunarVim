@@ -1,4 +1,4 @@
--- TODO figure out why this don't work
+-- TODO: figure out why this don't work
 vim.fn.sign_define(
   "LspDiagnosticsSignError",
   { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }

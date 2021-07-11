@@ -27,7 +27,7 @@ return require("packer").startup(function(use)
   -- Packer can manage itself as an optional plugin
   use "wbthomason/packer.nvim"
 
-  -- TODO refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
+  -- TODO: refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   use { "neovim/nvim-lspconfig" }
   use {
     "kabouzeid/nvim-lspinstall",
@@ -45,13 +45,12 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     config = [[require('lv-telescope')]],
-    event = "BufWinEnter",
   }
 
   -- Autocomplete
   use {
     "hrsh7th/nvim-compe",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     config = function()
       require("lv-compe").config()
     end,
@@ -60,7 +59,7 @@ return require("packer").startup(function(use)
   -- Autopairs
   use {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     after = { "telescope.nvim" },
     config = function()
       require "lv-autopairs"
@@ -150,7 +149,7 @@ return require("packer").startup(function(use)
   -- Debugging
   use {
     "mfussenegger/nvim-dap",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     config = function()
       require "lv-dap"
     end,
@@ -160,7 +159,7 @@ return require("packer").startup(function(use)
   -- Debugger management
   use {
     "Pocco81/DAPInstall.nvim",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     -- event = "BufRead",
     disable = not O.plugin.dap.active,
   }
@@ -177,7 +176,7 @@ return require("packer").startup(function(use)
     disable = not O.plugin.dashboard.active,
   }
 
-  -- TODO remove in favor of akinsho/nvim-toggleterm.lua
+  -- TODO: remove in favor of akinsho/nvim-toggleterm.lua
   -- Floating terminal
   use {
     "numToStr/FTerm.nvim",
@@ -252,7 +251,7 @@ return require("packer").startup(function(use)
 
   use {
     "mfussenegger/nvim-jdtls",
-    ft = { "java" },
+    -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
 
