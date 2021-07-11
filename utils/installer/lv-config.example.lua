@@ -62,6 +62,8 @@ O.lang.latex.formatter_line_length = 80
 O.lang.latex.forward_search.executable = "zathura"
 O.lang.latex.latex_formatter = "latexindent"
 O.lang.latex.latexindent.modify_line_breaks = false
+-- O.lang.latex.auto_save = false
+-- O.lang.latex.ignore_errors = { }
 
 -- Additional Plugins
 -- O.user_plugins = {

@@ -67,6 +67,7 @@ require("lspconfig").texlab.setup {
 vim.g.vimtex_compiler_method = "latexmk"
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_fold_enabled = 0
+vim.g.vimtex_quickfix_ignore_filters = O.lang.latex.ignore_errors
 
 O.plugin.which_key.mappings["t"] = {
   name = "+Latex",
@@ -91,3 +92,7 @@ vim.api.nvim_exec(
     ]],
   false
 )
+if (O.lang.latex.auto_save)
+then
+  vim.api.nvim_exec([[au FocusLost * :wa]],false)
+end

@@ -179,6 +179,8 @@ O = {
         signs = true,
         underline = true,
       },
+      auto_save = false,
+      ignore_errors = { },
     },
     lua = {
       diagnostics = {
@@ -253,7 +255,7 @@ O = {
       -- @usage can be clippy
       formatter = {
         exe = "rustfmt",
-        args = { "--emit=stdout" },
+        args = { "--emit=stdout", "--edition=2018" },
       },
       linter = "",
       diagnostics = {
