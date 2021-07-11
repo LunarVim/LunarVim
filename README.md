@@ -105,6 +105,10 @@ O.lang.python.analysis.use_library_code_types = true
 -- }
 ```
 
+❗ You can also make a local configuration file(`.lv-config.lua`) for your current project. This configuration will only be loaded when you open neovim from the directory where this file is situated
+For example: If you are working in `/home/foo/Projects/bar` then you should create a file in `/home/foo/Projects/bar` called `.lv-config.lua` ie. (`/home/foo/Projects/bar/.lv-config.lua`). This file will only be loaded when you open neovim while you are in `/home/foo/Projects/bar`.
+Note that it is not necessary to have this file. It is optional!
+
 ## Updating LunarVim
 
 In order to update you should be aware of three things `Plugins`, `LunarVim` and `Neovim`

@@ -1,7 +1,24 @@
 local lv_utils = {}
 
+function lv_utils.load_user_config()
+  -- Load the user config
+  local global_status_ok, _ = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
+  if not global_status_ok then
+    print "something is wrong with your lv-config"
+  end
+
+  -- Check if a local config exists and source it
+  local local_config_path = vim.fn.getcwd() .. "/.lv-config.lua"
+  if vim.fn.filereadable(local_config_path) == 1 then
+    local local_status_ok, _ = pcall(vim.cmd, "luafile " .. local_config_path)
+    if not local_status_ok then
+      print "something is wrong with your local lv-config (./.lv-config.lua)"
+    end
+  end
+end
+
 function lv_utils.reload_lv_config()
-  vim.cmd "source ~/.config/nvim/lv-config.lua"
+  lv_utils.load_user_config()
   vim.cmd "source ~/.config/nvim/lua/plugins.lua"
   vim.cmd "source ~/.config/nvim/lua/settings.lua"
   vim.cmd "source ~/.config/nvim/lua/lv-formatter/init.lua"
@@ -65,7 +82,7 @@ lv_utils.define_augroups {
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
-    { "BufWritePost", "lv-config.lua", "lua require('lv-utils').reload_lv_config()" },
+    { "BufWritePost", "lv-config.lua,.lv-config.lua", "lua require('lv-utils').reload_lv_config()" },
     -- { "VimLeavePre", "*", "set title set titleold=" },
   },
   _solidity = {
