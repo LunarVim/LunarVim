@@ -151,6 +151,24 @@ function lsp_config.PeekDefinition()
   end
 end
 
+function lsp_config.PeekTypeDefinition()
+  if vim.tbl_contains(vim.api.nvim_list_wins(), lsp_config.floating_win) then
+    vim.api.nvim_set_current_win(lsp_config.floating_win)
+  else
+    local params = vim.lsp.util.make_position_params()
+    return vim.lsp.buf_request(0, "textDocument/typeDefinition", params, lsp_config.preview_location_callback)
+  end
+end
+
+function lsp_config.PeekImplementation()
+  if vim.tbl_contains(vim.api.nvim_list_wins(), lsp_config.floating_win) then
+    vim.api.nvim_set_current_win(lsp_config.floating_win)
+  else
+    local params = vim.lsp.util.make_position_params()
+    return vim.lsp.buf_request(0, "textDocument/implementation", params, lsp_config.preview_location_callback)
+  end
+end
+
 if O.lsp.document_highlight then
   function lsp_config.common_on_attach(client, bufnr)
     documentHighlight(client, bufnr)
