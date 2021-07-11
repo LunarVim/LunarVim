@@ -185,7 +185,10 @@ O = {
       formatter = { Formatter.python_json },
     },
     kotlin = {},
-    latex = {},
+    latex = {
+      auto_save = false,
+      ignore_errors = { },
+    },
     lua = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },

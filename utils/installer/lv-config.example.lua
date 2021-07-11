@@ -41,6 +41,10 @@ O.lang.python.analysis.use_library_code_types = true
 -- javascript
 O.lang.tsserver.linter = nil
 
+-- latex
+-- O.lang.latex.auto_save = false
+-- O.lang.latex.ignore_errors = { }
+
 -- Additional Plugins
 -- O.user_plugins = {
 --     {"folke/tokyonight.nvim"}, {

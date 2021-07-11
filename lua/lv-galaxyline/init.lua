@@ -5,8 +5,12 @@ local status_ok, gl = pcall(require, "galaxyline")
 if not status_ok then
   return
 end
--- get my theme in galaxyline repo
-local colors = O.plugin.galaxyline.colors
+
+-- NOTE: if someone defines colors but doesn't have them then this will break
+local palette_status_ok, colors = pcall(require, O.colorscheme .. ".palette")
+if not palette_status_ok then
+  colors = O.plugin.galaxyline.colors
+end
 
 local condition = require "galaxyline.condition"
 local gls = gl.section
