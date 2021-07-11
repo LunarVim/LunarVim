@@ -212,7 +212,9 @@ local get_lsp_client = function(msg)
         -- print("first", lsps)
         lsps = client.name
       else
-        lsps = lsps .. ", " .. client.name
+        if not string.find(lsps, client.name) then
+          lsps = lsps .. ", " .. client.name
+        end
         -- print("more", lsps)
       end
     end
