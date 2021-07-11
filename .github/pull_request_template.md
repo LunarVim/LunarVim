@@ -1,18 +1,24 @@
+<!-- This won't be rendered!
+[CHECKLIST]
+I prefixed the title with one of the following tags:
+ - [Feature]: For feature addition / improvements
+ - [Bugfix]: When fixing a functionality
+ - [Refactor]: When moving code without adding any functionality
+ - [Doc]: On documentation updates
+
+- I read the contributing guide (CONTRIBUTING.md)
+- My code follows the style guidelines of this project
+- I have performed a self-review of my code
+- I have commented on my code, particularly in hard-to-understand areas
+- I have made corresponding changes to the documentation
+- My changes generate no new warnings
+-->
 # Description
 
 Please include a summary of the change and which issue is fixed. \
 List any dependencies that are required for this change.
 
 Fixes #(issue)
-
-## Type Of Change
-
-Please check the relevant options.
-
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
 
 ## How Has This Been Tested?
 
@@ -24,11 +30,3 @@ Please also list any relevant details for your test configuration.
 - Check logs
 - ...
 
-## Checklist:
-
-- [ ] I read the [contributing](https://github.com/ChristianChiarulli/LunarVim/blob/rolling/CONTRIBUTING.md) guide
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my code
-- [ ] I have commented on my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings
