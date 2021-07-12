@@ -48,10 +48,10 @@ O.lang.python.analysis.use_library_code_types = true
 O.lang.tsserver.linter = nil
 
 -- rust
-O.lang.rust.formatter = {
-  exe = "rustfmt",
-  args = {"--emit=stdout", "--edition=2018"},
-}
+-- O.lang.rust.formatter = {
+--   exe = "rustfmt",
+--   args = {"--emit=stdout", "--edition=2018"},
+-- }
 
 -- latex
 -- O.lang.latex.auto_save = false
