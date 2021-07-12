@@ -125,6 +125,14 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- whichkey
+  use {
+    "airblade/vim-rooter",
+    config = function()
+      vim.g.rooter_silent_chdir = 1
+    end,
+  }
+
   -- Icons
   use { "kyazdani42/nvim-web-devicons" }
 
