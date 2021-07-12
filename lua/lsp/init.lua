@@ -126,7 +126,7 @@ function lsp_config.preview_location(location, context, before_context)
     false
   )
   local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  return vim.lsp.util.open_floating_preview(contents, filetype)
+  return vim.lsp.util.open_floating_preview(contents, filetype, { border = O.lsp.popup_border })
 end
 
 function lsp_config.preview_location_callback(_, method, result)
