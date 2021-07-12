@@ -98,7 +98,7 @@ return require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
 
     config = function()
-      require("lv-gitsigns").config()
+      require("core.gitsigns").setup()
     end,
     event = "BufRead",
   }

@@ -151,7 +151,7 @@ O = {
     kotlin = {},
     latex = {
       auto_save = false,
-      ignore_errors = { },
+      ignore_errors = {},
     },
     lua = {
       diagnostics = {
@@ -298,7 +298,8 @@ require "lv-compe.config"
 require "lv-dashboard.config"
 require "lv-floatterm.config"
 require "lv-galaxyline.config"
-require "lv-gitsigns.config"
+require("core.gitsigns").config()
+-- print(vim.inspect(O["gitsigns"]))
 require "lv-telescope.config"
 require "lv-floatterm.config"
 require "lv-dap.config"
