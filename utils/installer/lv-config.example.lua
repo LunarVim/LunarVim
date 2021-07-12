@@ -50,7 +50,7 @@ O.lang.tsserver.linter = nil
 -- rust
 O.lang.rust.formatter = {
   exe = "rustfmt",
-  args = {"--emit=stdout"},
+  args = {"--emit=stdout", "--edition=2018"},
 }
 
 -- latex
