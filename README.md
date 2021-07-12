@@ -30,7 +30,7 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/mas
 
 If you help to develop Lunarvim, you can install a specific branch branch directly
 ``` bash
-LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 
@@ -78,7 +78,7 @@ O.lang.tsserver.linter = nil
 O.lang.tsserver.autoformat = true
 
 -- python
--- O.python.linter = 'flake8'
+-- O.lang.python.linter = 'flake8'
 O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true

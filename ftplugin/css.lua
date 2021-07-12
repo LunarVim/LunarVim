@@ -1,4 +1,6 @@
 if not require("lv-utils").check_lsp_client_active "cssls" then
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
   -- npm install -g vscode-css-languageserver-bin
   require("lspconfig").cssls.setup {
     cmd = {
@@ -7,6 +9,7 @@ if not require("lv-utils").check_lsp_client_active "cssls" then
       "--stdio",
     },
     on_attach = require("lsp").common_on_attach,
+    capabilities = capabilities,
   }
 end
 
