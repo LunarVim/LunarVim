@@ -78,10 +78,16 @@ O.lang.tsserver.linter = nil
 O.lang.tsserver.autoformat = true
 
 -- python
--- O.lang.python.linter = 'flake8'
 O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
+-- to change default formatter from yapf to black
+-- O.lang.python.formatter.exe = "black"
+-- O.lang.python.formatter.args = {"-"}
+
+-- go
+-- to change default formatter from gofmt to goimport
+-- O.lang.formatter.go.exe = "goimport"
 
 -- Additional Plugins
 -- O.user_plugins = {
