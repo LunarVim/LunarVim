@@ -42,6 +42,29 @@ function lv_utils.define_augroups(definitions) -- {{{1
   end
 end
 
+function lv_utils.save_without_formatting()
+    -- Temporarily disable format on save
+    vim.cmd([[if exists('#autoformat#BufWritePost')
+    :autocmd! autoformat
+    endif]])
+
+    -- Save file
+    vim.cmd(':w')
+
+    -- Re-enable format on save if previously enabled
+    if O.format_on_save then
+        require('lv-utils').define_augroups({
+            autoformat = {
+                {
+                    'BufWritePost',
+                    '*',
+                    ':silent FormatWrite',
+                },
+            },
+        })
+    end
+end
+
 lv_utils.define_augroups {
 
   _general_settings = {
