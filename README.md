@@ -129,6 +129,29 @@ cd ~/.config/nvim && git pull
 
 To update Neovim use your package manager
 
+## Project Goals
+
+1. Provide basic functionalities required from an IDE
+  - LSP
+  - Formatting/Linting
+  - Debugging
+  - Treesitter
+  - Colorschemes
+2. Be as fast and lean as possible 
+  - Lazy loading
+  - Not a single extra plugin
+  - User configurable lang/feature enable/disable
+3. Provide a [simple and easy](https://github.com/LunarVim/LunarVimCommunity) way for users to share their own configuration or use others. 
+4. Hot reload of configurations
+  - Hot install of lsp/treesitter/formatter required upon openning a filetype for the first time
+5. Provide a stable & maintainable error free configuration layer over neovim 
+  - With the help of the community behind it
+  - Github workflow testing
+  - Freezing plugin versions
+6. Provide detailed documentation
+  - Video series on how to configure LunarVim as an IDE for each lang
+7. Valhalla
+
 ## Resources
 
 - [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
