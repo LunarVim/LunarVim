@@ -86,8 +86,8 @@ O.lang.python.analysis.use_library_code_types = true
 -- O.lang.python.formatter.args = {"-"}
 
 -- go
--- to change default formatter from gofmt to goimport
--- O.lang.formatter.go.exe = "goimport"
+-- to change default formatter from gofmt to goimports
+-- O.lang.formatter.go.exe = "goimports"
 
 -- Additional Plugins
 -- O.user_plugins = {
