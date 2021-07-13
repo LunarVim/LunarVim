@@ -178,8 +178,8 @@ To update Neovim use your package manager
 > "My minimal config with a good amount less code than LunarVim loads 40ms slower. Time to switch."
 > - @mvllow, Potential LunarVim user.
 
-<div align="center">
+<div align="center" id="madewithlua">
 	
-[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)]()
+[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)](#madewithlua)
 	
 </div>
