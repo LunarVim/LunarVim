@@ -1,14 +1,14 @@
 -- autoformat
 if O.format_on_save then
-	require("lv-utils").define_augroups({
-		autoformat = {
-			{
-				"BufWritePost",
-				"*",
-				":silent FormatWrite",
-			},
-		},
-	})
+  require("lv-utils").define_augroups {
+    autoformat = {
+      {
+        "BufWritePost",
+        "*",
+        ":silent FormatWrite",
+      },
+    },
+  }
 end
 
 -- -- check if formatter has been defined for the language or not
@@ -50,13 +50,13 @@ end
 -- end
 local status_ok, formatter = pcall(require, "formatter")
 if not status_ok then
-	return
+  return
 end
 
-formatter.setup({ formatter.config })
+formatter.setup { formatter.config }
 
 if not O.format_on_save then
-	vim.cmd([[if exists('#autoformat#BufWritePost')
+  vim.cmd [[if exists('#autoformat#BufWritePost')
 	:autocmd! autoformat
-	endif]])
+	endif]]
 end

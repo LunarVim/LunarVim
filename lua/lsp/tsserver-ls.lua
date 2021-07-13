@@ -11,8 +11,9 @@ O.formatters.filetype["javascriptreact"] = {
   function()
     return {
       exe = prettier_instance,
-      args = O.lang.tsserver.formatter.args,
-      stdin = not (O.lang.tsserver.formatter.stdin ~= nil),
+      -- TODO: allow user to override this
+      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      stdin = true
     }
   end,
 }
