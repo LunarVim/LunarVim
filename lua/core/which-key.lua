@@ -1,5 +1,9 @@
-local M = {}
-M.config = function()
+local m = {
+  "folke/which-key.nvim",
+  event = "BufWinEnter",
+}
+
+m.config = function()
   O.plugin.which_key = {
     active = false,
     setup = {
@@ -158,7 +162,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   -- if not package.loaded['which-key'] then
   --  return
   -- end
@@ -194,4 +198,4 @@ M.setup = function()
   wk.register(vmappings, vopts)
 end
 
-return M
+return m

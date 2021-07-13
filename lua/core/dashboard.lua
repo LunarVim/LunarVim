@@ -1,5 +1,10 @@
-local M = {}
-M.config = function()
+local m = {
+  "ChristianChiarulli/dashboard-nvim",
+  event = "BufWinEnter",
+  disable = not O.plugin.dashboard.active,
+}
+
+m.config = function()
   O.plugin.dashboard = {
     active = false,
     search_handler = "telescope",
@@ -51,7 +56,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   vim.g.dashboard_disable_at_vimenter = 0
 
   vim.g.dashboard_custom_header = O.plugin.dashboard.custom_header
@@ -97,4 +102,4 @@ M.setup = function()
   }
 end
 
-return M
+return m

@@ -1,5 +1,10 @@
-local M = {}
-M.config = function()
+local m = {
+  "glepnir/galaxyline.nvim",
+  event = "BufWinEnter",
+  disable = not O.plugin.galaxyline.active,
+}
+
+m.config = function()
   O.plugin.gitsigns = {
     signs = {
       add = {
@@ -48,7 +53,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   local status_ok, gitsigns = pcall(require, "gitsigns")
   if not status_ok then
     return
@@ -56,4 +61,4 @@ M.setup = function()
   gitsigns.setup(O.plugin.gitsigns)
 end
 
-return M
+return m

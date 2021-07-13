@@ -1,5 +1,9 @@
-local M = {}
-M.config = function()
+local m = {
+  "hrsh7th/nvim-compe",
+  -- event = "InsertEnter",
+}
+
+m.config = function()
   O.completion = {
     enabled = true,
     autocomplete = true,
@@ -33,7 +37,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   vim.g.vsnip_snippet_dir = O.vnsip_dir
 
   local status_ok, compe = pcall(require, "compe")
@@ -93,4 +97,4 @@ M.setup = function()
   vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })
 end
 
-return M
+return m

@@ -1,14 +1,21 @@
+local m = {
+  "kyazdani42/nvim-tree.lua",
+  -- event = "BufWinOpen",
+  -- cmd = "NvimTreeToggle",
+  commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
+}
+
 -- --if not package.loaded['nvim-tree.view'] then
 -- --  return
 -- --end
 --
-local M = {}
-local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not status_ok then
-  return
-end
 --
-M.setup = function()
+m.setup = function()
+  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  if not status_ok then
+    return
+  end
+
   local g = vim.g
 
   vim.o.termguicolors = true
@@ -69,7 +76,7 @@ local view_status_ok, view = pcall(require, "nvim-tree.view")
 if not view_status_ok then
   return
 end
-M.toggle_tree = function()
+m.toggle_tree = function()
   if view.win_open() then
     require("nvim-tree").close()
     if package.loaded["bufferline.state"] then
@@ -84,4 +91,4 @@ M.toggle_tree = function()
   end
 end
 --
-return M
+return m

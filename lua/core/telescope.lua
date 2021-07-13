@@ -1,5 +1,8 @@
-local M = {}
-M.config = function()
+local m = {
+  "nvim-telescope/telescope.nvim",
+}
+
+m.config = function()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
     return
@@ -82,7 +85,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then
     return
@@ -91,4 +94,4 @@ M.setup = function()
   vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
 end
 
-return M
+return m

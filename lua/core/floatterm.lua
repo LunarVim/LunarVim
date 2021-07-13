@@ -1,5 +1,10 @@
-local M = {}
-M.config = function()
+local m = {
+  "numToStr/FTerm.nvim",
+  event = "BufWinEnter",
+  disable = not O.plugin.floatterm.active,
+}
+
+m.config = function()
   O.plugin.floatterm = {
     active = false,
     dimensions = {
@@ -12,7 +17,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   local status_ok, fterm = pcall(require, "FTerm")
   if not status_ok then
     return
@@ -73,4 +78,4 @@ M.setup = function()
   )
 end
 
-return M
+return m

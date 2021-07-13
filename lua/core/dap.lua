@@ -1,5 +1,10 @@
-local M = {}
-M.config = function()
+local m = {
+  "mfussenegger/nvim-dap",
+  -- event = "BufWinEnter",
+  disable = not O.plugin.dap.active,
+}
+
+m.config = function()
   O.plugin.dap = {
     active = false,
     breakpoint = {
@@ -11,7 +16,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+m.setup = function()
   local status_ok, dap = pcall(require, "dap")
   if not status_ok then
     return
@@ -38,4 +43,4 @@ M.setup = function()
   }
 end
 
-return M
+return m

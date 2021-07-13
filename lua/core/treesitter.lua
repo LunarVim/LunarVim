@@ -1,5 +1,8 @@
-local M = {}
-M.config = function()
+local m = {
+  "nvim-treesitter/nvim-treesitter",
+}
+
+m.config = function()
   O.treesitter = {
     ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {},
@@ -92,7 +95,7 @@ M.config = function()
   -- },
 end
 
-M.setup = function()
+m.setup = function()
   -- TODO: refacor this whole file and treesitter in general
   -- if not package.loaded['nvim-treesitter'] then return end
   --
@@ -184,4 +187,4 @@ M.setup = function()
   treesitter_configs.setup(O.treesitter)
 end
 
-return M
+return m
