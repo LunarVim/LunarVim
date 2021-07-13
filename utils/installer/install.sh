@@ -16,7 +16,7 @@ installnodeubuntu() {
 }
 
 moveoldnvim() {
-    echo "Not installing LunarVim"
+    echo "Now installing LunarVim"
     echo "Please move your ~/.config/nvim folder before installing"
     exit
 }
