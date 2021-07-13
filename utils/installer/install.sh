@@ -182,6 +182,13 @@ installextrapackages() {
 # Welcome
 echo 'Installing LunarVim'
 
+if [[ $* == *--overwrite* ]]; then
+  echo '!!Warning!! -> Removing all nvim related config because of the --overwrite flag'
+  rm -rf "$HOME/.config/nvim"
+  rm -rf "$HOME/.cache/nvim"
+  rm -rf "$HOME/.local/share/nvim/site/pack/packer"
+fi
+
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
