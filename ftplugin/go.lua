@@ -1,3 +1,18 @@
+O.formatters.filetype["go"] = {
+  function()
+    return {
+      exe = O.lang.go.formatter.exe,
+      args = O.lang.go.formatter.args,
+      stdin = not (O.lang.go.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
+
 if not require("lv-utils").check_lsp_client_active "gopls" then
   require("lspconfig").gopls.setup {
     cmd = { DATA_PATH .. "/lspinstall/go/gopls" },

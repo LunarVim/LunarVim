@@ -1,3 +1,17 @@
+O.formatters.filetype["rust"] = {
+  function()
+    return {
+      exe = O.lang.rust.formatter.exe,
+      args = O.lang.rust.formatter.args,
+      stdin = not (O.lang.rust.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 if require("lv-utils").check_lsp_client_active "rust_analyzer" then
   return
 end
@@ -81,7 +95,7 @@ else
     cmd = { DATA_PATH .. "/lspinstall/rust/rust-analyzer" },
     on_attach = require("lsp").common_on_attach,
     filetypes = { "rust" },
-    root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json"),
+    root_dir = require("lspconfig.util").root_pattern("Carrust.toml", "rust-project.json"),
   }
 end
 

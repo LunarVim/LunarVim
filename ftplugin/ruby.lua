@@ -1,3 +1,17 @@
+O.formatters.filetype["ruby"] = {
+  function()
+    return {
+      exe = O.lang.ruby.formatter.exe,
+      args = O.lang.ruby.formatter.args,
+      stdin = not (O.lang.ruby.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 if require("lv-utils").check_lsp_client_active "solargraph" then
   return
 end

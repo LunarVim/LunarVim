@@ -1,18 +1,23 @@
 vim.cmd "let proj = FindRootDirectory()"
-print(vim.api.nvim_get_var "proj")
 local root_dir = vim.api.nvim_get_var "proj"
+
+-- use the global prettier if you didn't find the local one
+local prettier_instance = root_dir .. "/node_modules/.bin/prettier"
+if vim.fn.executable(prettier_instance) ~= 1 then
+  prettier_instance = O.lang.tsserver.formatter.exe
+end
+
 O.formatters.filetype["javascriptreact"] = {
-  -- vim.cmd "let root_dir "
-  -- prettier
   function()
     return {
-      exe = root_dir .. "/node_modules/.bin/prettier",
-      --  TODO: append to this for args don't overwrite
+      exe = prettier_instance,
+      -- TODO: allow user to override this
       args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      stdin = true,
+      stdin = true
     }
   end,
 }
+O.formatters.filetype["javascript"] = O.formatters.filetype["javascriptreact"]
 
 require("formatter.config").set_defaults {
   logging = false,

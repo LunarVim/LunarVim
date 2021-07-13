@@ -258,11 +258,6 @@ O = {
         "typescript",
         "typescriptreact",
       },
-      formatter = {
-        exe = "prettier",
-        args = { "--write", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = false,
-      },
     },
     terraform = {},
     tsserver = {
@@ -275,8 +270,7 @@ O = {
       },
       formatter = {
         exe = "prettier",
-        args = { "--write", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = false,
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
       },
     },
     vim = {},

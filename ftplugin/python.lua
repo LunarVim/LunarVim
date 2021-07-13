@@ -1,3 +1,18 @@
+O.formatters.filetype["python"] = {
+  function()
+    return {
+      exe = O.lang.python.formatter.exe,
+      args = O.lang.python.formatter.args,
+      stdin = not (O.lang.python.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
+
 local python_arguments = {}
 
 -- TODO: replace with path argument
