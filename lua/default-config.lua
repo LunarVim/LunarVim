@@ -10,7 +10,7 @@ O = {
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
-  vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
+  vsnip_dir = vim.fn.stdpath "config" .. "/snippets",
 
   default_options = {
     backup = false, -- creates a backup file
