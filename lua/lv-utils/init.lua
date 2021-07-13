@@ -43,7 +43,6 @@ end
 
 lv_utils.define_augroups {
 
-  _user_autocommands = O.user_autocommands,
   _general_settings = {
     {
       "TextYankPost",
@@ -107,6 +106,7 @@ lv_utils.define_augroups {
   --   {'InsertEnter', '*', 'if &cursorline | let g:ms_cursorlineoff = 1 | setlocal nocursorline | endif'},
   --   {'InsertLeave', '*', 'if exists("g:ms_cursorlineoff") | setlocal cursorline | endif'},
   -- },
+  _user_autocommands = O.user_autocommands,
 }
 
 vim.cmd [[
