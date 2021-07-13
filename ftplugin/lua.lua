@@ -1,5 +1,4 @@
 O.formatters.filetype["lua"] = {
-  -- prettier
   function()
     return {
       exe = "stylua",

@@ -1,3 +1,13 @@
+O.formatters.filetype["ruby"] = {
+  function()
+    return {
+      exe = "rufo",
+      --  TODO: append to this for args don't overwrite
+      args = { "-x" },
+    }
+  end,
+}
+
 if require("lv-utils").check_lsp_client_active "solargraph" then
   return
 end

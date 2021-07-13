@@ -1,3 +1,13 @@
+O.formatters.filetype["dart"] = {
+  function()
+    return {
+      exe = "dart",
+      --  TODO: append to this for args don't overwrite
+      args = { "format" },
+    }
+  end,
+}
+
 if require("lv-utils").check_lsp_client_active "dartls" then
   return
 end

@@ -1,3 +1,14 @@
+O.formatters.filetype["sh"] = {
+  function()
+    return {
+      exe = "shfmt",
+      --  TODO: append to this for args don't overwrite
+      args = { "-w" },
+      stdin = false,
+    }
+  end,
+}
+
 if not require("lv-utils").check_lsp_client_active "bashls" then
   -- npm i -g bash-language-server
   require("lspconfig").bashls.setup {
@@ -26,7 +37,7 @@ if not require("lv-utils").check_lsp_client_active "efm" then
     -- init_options = {initializationOptions},
     cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
     init_options = { documentFormatting = true, codeAction = false },
-    root_dir = require("lspconfig").util.root_pattern(".git/"),
+    root_dir = require("lspconfig").util.root_pattern ".git/",
     filetypes = { "sh" },
     settings = {
       rootMarkers = { ".git/" },

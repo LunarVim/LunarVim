@@ -1,3 +1,18 @@
+local clang_formatter = {
+  function()
+    return {
+      exe = "clang-format",
+      --  TODO: append to this for args don't overwrite
+      args = {},
+    }
+  end,
+}
+
+O.formatters.filetype["c"] = clang_formatter
+O.formatters.filetype["cpp"] = clang_formatter
+O.formatters.filetype["cmake"] = clang_formatter
+O.formatters.filetype["obj"] = clang_formatter
+
 if require("lv-utils").check_lsp_client_active "clangd" then
   return
 end

@@ -1,3 +1,13 @@
+O.formatters.filetype["json"] = {
+  function()
+    return {
+      exe = "python",
+      --  TODO: append to this for args don't overwrite
+      args = { "-m", "json.tool" },
+    }
+  end,
+}
+
 if require("lv-utils").check_lsp_client_active "jsonls" then
   return
 end

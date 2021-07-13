@@ -53,7 +53,7 @@ if not status_ok then
   return
 end
 
-formatter.setup {}
+formatter.setup { formatter.config }
 
 if not O.format_on_save then
   vim.cmd [[if exists('#autoformat#BufWritePost')

@@ -1,3 +1,13 @@
+O.formatters.filetype["rust"] = {
+  function()
+    return {
+      exe = "rustfmt",
+      --  TODO: append to this for args don't overwrite
+      args = { "--emit=stdout", "--edition=2018" },
+    }
+  end,
+}
+
 if require("lv-utils").check_lsp_client_active "rust_analyzer" then
   return
 end

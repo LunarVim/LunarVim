@@ -1,3 +1,13 @@
+O.formatters.filetype["go"] = {
+  function()
+    return {
+      exe = "gofmt",
+      --  TODO: append to this for args don't overwrite
+      args = {},
+    }
+  end,
+}
+
 if not require("lv-utils").check_lsp_client_active "gopls" then
   require("lspconfig").gopls.setup {
     cmd = { DATA_PATH .. "/lspinstall/go/gopls" },

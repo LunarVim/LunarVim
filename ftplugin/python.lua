@@ -1,3 +1,13 @@
+O.formatters.filetype["python"] = {
+  function()
+    return {
+      exe = "yapf",
+      --  TODO: append to this for args don't overwrite
+      args = {},
+    }
+  end,
+}
+
 local python_arguments = {}
 
 -- TODO: replace with path argument
