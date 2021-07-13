@@ -34,7 +34,7 @@ M.config = function()
 end
 
 M.setup = function()
-  vim.g.vsnip_snippet_dir = O.vnsip_dir
+  vim.g.vsnip_snippet_dir = O.vsnip_dir
 
   local status_ok, compe = pcall(require, "compe")
   if not status_ok then
