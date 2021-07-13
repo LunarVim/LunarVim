@@ -125,7 +125,7 @@ return require("packer").startup(function(use)
     end,
   }
 
-  -- whichkey
+  -- vim-rooter
   use {
     "airblade/vim-rooter",
     config = function()
