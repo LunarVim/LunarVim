@@ -1,18 +1,17 @@
 O.formatters.filetype["php"] = {
   function()
     return {
-      exe = "phpcbf",
-      --  TODO: append to this for args don't overwrite
-      args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-      stdin = false,
+      exe = O.lang.php.formatter.exe,
+      args = O.lang.php.formatter.args,
+      stdin = not (O.lang.php.formatter.stdin ~= nil),
     }
   end,
 }
+
 require("formatter.config").set_defaults {
   logging = false,
   filetype = O.formatters.filetype,
 }
-
 if require("lv-utils").check_lsp_client_active "intelephense" then
   return
 end

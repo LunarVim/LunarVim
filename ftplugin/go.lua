@@ -1,13 +1,13 @@
 O.formatters.filetype["go"] = {
   function()
     return {
-      exe = "gofmt",
-      --  TODO: append to this for args don't overwrite
-      args = {},
-      stdin = true,
+      exe = O.lang.go.formatter.exe,
+      args = O.lang.go.formatter.args,
+      stdin = not (O.lang.go.formatter.stdin ~= nil),
     }
   end,
 }
+
 require("formatter.config").set_defaults {
   logging = false,
   filetype = O.formatters.filetype,

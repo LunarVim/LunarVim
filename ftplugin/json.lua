@@ -1,18 +1,17 @@
 O.formatters.filetype["json"] = {
   function()
     return {
-      exe = "python",
-      --  TODO: append to this for args don't overwrite
-      args = { "-m", "json.tool" },
-      stdin = true,
+      exe = O.lang.json.formatter.exe,
+      args = O.lang.json.formatter.args,
+      stdin = not (O.lang.json.formatter.stdin ~= nil),
     }
   end,
 }
+
 require("formatter.config").set_defaults {
   logging = false,
   filetype = O.formatters.filetype,
 }
-
 if require("lv-utils").check_lsp_client_active "jsonls" then
   return
 end

@@ -1,10 +1,9 @@
 O.formatters.filetype["dart"] = {
   function()
     return {
-      exe = "dart",
-      --  TODO: append to this for args don't overwrite
-      args = { "format" },
-      stdin = true,
+      exe = O.lang.dart.formatter.exe,
+      args = O.lang.dart.formatter.args,
+      stdin = not (O.lang.dart.formatter.stdin ~= nil),
     }
   end,
 }

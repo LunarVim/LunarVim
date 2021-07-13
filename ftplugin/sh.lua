@@ -1,18 +1,17 @@
 O.formatters.filetype["sh"] = {
   function()
     return {
-      exe = "shfmt",
-      --  TODO: append to this for args don't overwrite
-      args = { "-w" },
-      stdin = false,
+      exe = O.lang.sh.formatter.exe,
+      args = O.lang.sh.formatter.args,
+      stdin = not (O.lang.sh.formatter.stdin ~= nil),
     }
   end,
 }
+
 require("formatter.config").set_defaults {
   logging = false,
   filetype = O.formatters.filetype,
 }
-
 if not require("lv-utils").check_lsp_client_active "bashls" then
   -- npm i -g bash-language-server
   require("lspconfig").bashls.setup {

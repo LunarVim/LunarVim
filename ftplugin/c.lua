@@ -1,17 +1,14 @@
-local clang_formatter = {
+O.formatters.filetype["c"] = {
   function()
     return {
-      exe = "clang-format",
-      --  TODO: append to this for args don't overwrite
-      args = {},
-      stdin = true,
+      exe = O.lang.c.formatter.exe,
+      args = O.lang.c.formatter.args,
+      stdin = not (O.lang.c.formatter.stdin ~= nil),
     }
   end,
 }
+O.formatters.filetype["cpp"] = O.formatters.filetype["c"]
 
-O.formatters.filetype["c"] = clang_formatter
-O.formatters.filetype["cpp"] = clang_formatter
-O.formatters.filetype["obj"] = clang_formatter
 require("formatter.config").set_defaults {
   logging = false,
   filetype = O.formatters.filetype,

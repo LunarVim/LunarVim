@@ -1,13 +1,13 @@
 O.formatters.filetype["python"] = {
   function()
     return {
-      exe = "yapf",
-      --  TODO: append to this for args don't overwrite
-      args = {},
-      stdin = true,
+      exe = O.lang.python.formatter.exe,
+      args = O.lang.python.formatter.args,
+      stdin = not (O.lang.python.formatter.stdin ~= nil),
     }
   end,
 }
+
 require("formatter.config").set_defaults {
   logging = false,
   filetype = O.formatters.filetype,
