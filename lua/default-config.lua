@@ -284,13 +284,13 @@ O = {
   },
 }
 
+require "core.status_colors"
 require("core.gitsigns").config()
 require("core.compe").config()
 require("core.dashboard").config()
 require("core.dap").config()
 require("core.floatterm").config()
 require("core.zen").config()
-require("core.galaxyline").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()

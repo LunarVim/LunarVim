@@ -7,6 +7,7 @@ function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/nvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
+  -- vim.cmd ":PackerClean"
 end
 
 function lv_utils.check_lsp_client_active(name)
@@ -55,6 +56,11 @@ lv_utils.define_augroups {
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
     {
+      "BufWinEnter",
+      "dashboard",
+      "setlocal cursorline signcolumn=yes cursorcolumn number",
+    },
+    {
       "BufRead",
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
@@ -95,6 +101,7 @@ lv_utils.define_augroups {
     -- will cause split windows to be resized evenly if main window is resized
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
+
   -- _fterm_lazygit = {
   --   -- will cause esc key to exit lazy git
   --   {"TermEnter", "*", "call LazyGitNativation()"}
