@@ -119,6 +119,7 @@ M.config = function()
           "Workspace Diagnostics",
         },
         f = { "<cmd>silent FormatWrite<cr>", "Format" },
+        F = { "<cmd>lua require('lv-utils').save_without_formatting()<cr>", "Save Without Formatting" },
         i = { "<cmd>LspInfo<cr>", "Info" },
         j = {
           "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>",
