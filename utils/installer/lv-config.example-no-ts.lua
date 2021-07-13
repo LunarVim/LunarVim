@@ -22,7 +22,6 @@ O.leader_key = " "
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true
-O.plugin.indent_line.active = false
 O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
 
