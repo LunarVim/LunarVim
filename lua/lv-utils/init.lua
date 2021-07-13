@@ -42,6 +42,11 @@ function lv_utils.define_augroups(definitions) -- {{{1
   end
 end
 
+function lv_utils.unrequire(m)
+  package.loaded[m] = nil
+  _G[m] = nil
+end
+
 lv_utils.define_augroups {
 
   _general_settings = {

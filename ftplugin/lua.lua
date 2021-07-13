@@ -1,3 +1,19 @@
+O.formatters.filetype["lua"] = {
+  -- prettier
+  function()
+    return {
+      exe = "stylua",
+      --  TODO: append to this for args don't overwrite
+      args = {},
+      stdin = false,
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 if not require("lv-utils").check_lsp_client_active "sumneko_lua" then
   -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
   local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
