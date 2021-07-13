@@ -79,6 +79,11 @@ O = {
     { "FileType", "qf", "set nobuflisted" },
   },
 
+  formatters = {
+    filetype = {},
+  },
+
+  -- TODO move all of this into lang specific files, only require when using
   lang = {
     cmake = {
       formatter = {
@@ -113,7 +118,7 @@ O = {
     docker = {},
     efm = {},
     elm = {},
-    emmet = { active = true },
+    emmet = { active = false },
     elixir = {},
     graphql = {},
     go = {

@@ -85,7 +85,6 @@ return require("packer").startup(function(use)
     config = function()
       require "core.formatter"
     end,
-    event = "BufRead",
   }
 
   -- NvimTree
