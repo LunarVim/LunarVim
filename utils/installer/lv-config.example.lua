@@ -6,24 +6,30 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
--- general
-
-O.format_on_save = true
+-- These are example configurations. More examples on the [wiki](https://github.com/ChristianChiarulli/LunarVim/wiki)
+-- Use the autocompletion to explore the options
+O.leader_key = ' '
+O.colorscheme = 'spacegray'
+O.transparent_window = false
 O.completion.autocomplete = true
-O.colorscheme = "spacegray"
-O.auto_close_tree = 0
-O.default_options.wrap = true
 O.default_options.timeoutlen = 100
-O.leader_key = " "
+O.default_options.relativenumber = true
+O.default_options.wrap = true
+O.format_on_save = true
+O.auto_close_tree = 0
+O.ignore_case = true
+O.smart_case = true
+O.plugin.indent_line.active = false
+O.cursorline = false
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true
 O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
+
+-- TODO: User config for predefined plugins from wiki.  
+-- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "maintained"

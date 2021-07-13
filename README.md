@@ -58,14 +58,15 @@ Example:
 ```lua
 -- O is the global options object
 
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
--- general
--- O.default_options.wrap = true -- wrap long lines
-O.completion.autocomplete = true
-O.default_options.relativenumber = true
-O.colorscheme = 'spacegray'
-O.default_options.timeoutlen = 100
+-- These are example configurations. More examples on the [wiki](https://github.com/ChristianChiarulli/LunarVim/wiki)
+-- Use the autocompletion to explore the options
 O.leader_key = ' '
+O.colorscheme = 'spacegray'
+O.transparent_window = false
+O.completion.autocomplete = true
+O.default_options.timeoutlen = 100
+O.default_options.relativenumber = true
+O.default_options.wrap = false
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.dashboard.active = true
@@ -173,11 +174,17 @@ To update Neovim use your package manager
 
 - [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
 
-- [Wiki](https://github.com/ChristianChiarulli/LunarVim/wiki)
-
+- [Odysee](https://odysee.com/@chrisatmachine:f)
+ 
 - [Discord](https://discord.gg/Xb9B4Ny)
+ 
+- Matrix @Machine LunarVim
 
 - [Twitter](https://twitter.com/chrisatmachine)
+
+- [Community](https://github.com/LunarVim/LunarVimCommunity)
+ 
+- [Wiki](https://github.com/ChristianChiarulli/LunarVim/wiki)
 
 ## Testimonials
 

@@ -24,9 +24,9 @@ M.config = function()
       sorting_strategy = "descending",
       layout_strategy = "horizontal",
       layout_config = {
-        width = 0.75,
+        width = 0.90,
         prompt_position = "bottom",
-        preview_cutoff = 120,
+        preview_cutoff = 60,
         horizontal = { mirror = false },
         vertical = { mirror = false },
       },
