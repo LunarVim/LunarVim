@@ -247,4 +247,9 @@ return require("packer").startup(function(use)
     -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
+
+  -- Install user plugins
+  for _, plugin in pairs(O.user_plugins) do
+    packer.use(plugin)
+  end
 end)
