@@ -4,8 +4,13 @@ O.formatters.filetype["json"] = {
       exe = "python",
       --  TODO: append to this for args don't overwrite
       args = { "-m", "json.tool" },
+      stdin = true,
     }
   end,
+}
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
 }
 
 if require("lv-utils").check_lsp_client_active "jsonls" then

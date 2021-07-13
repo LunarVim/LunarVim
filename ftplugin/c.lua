@@ -4,14 +4,18 @@ local clang_formatter = {
       exe = "clang-format",
       --  TODO: append to this for args don't overwrite
       args = {},
+      stdin = true,
     }
   end,
 }
 
 O.formatters.filetype["c"] = clang_formatter
 O.formatters.filetype["cpp"] = clang_formatter
-O.formatters.filetype["cmake"] = clang_formatter
 O.formatters.filetype["obj"] = clang_formatter
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 
 if require("lv-utils").check_lsp_client_active "clangd" then
   return

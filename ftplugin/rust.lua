@@ -4,8 +4,13 @@ O.formatters.filetype["rust"] = {
       exe = "rustfmt",
       --  TODO: append to this for args don't overwrite
       args = { "--emit=stdout", "--edition=2018" },
+      stdin = true,
     }
   end,
+}
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
 }
 
 if require("lv-utils").check_lsp_client_active "rust_analyzer" then

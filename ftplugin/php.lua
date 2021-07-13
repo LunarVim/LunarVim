@@ -8,6 +8,10 @@ O.formatters.filetype["php"] = {
     }
   end,
 }
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 
 if require("lv-utils").check_lsp_client_active "intelephense" then
   return

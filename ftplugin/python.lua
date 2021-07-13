@@ -4,8 +4,13 @@ O.formatters.filetype["python"] = {
       exe = "yapf",
       --  TODO: append to this for args don't overwrite
       args = {},
+      stdin = true,
     }
   end,
+}
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
 }
 
 local python_arguments = {}
