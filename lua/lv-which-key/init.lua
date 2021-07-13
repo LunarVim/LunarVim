@@ -45,6 +45,10 @@ if O.plugin.lush.active then
   }
 end
 
+if O.lang.deno.active then
+  mappings["l"]["c"] = { "<cmd>DenolsCache<cr>", "Deno Cache" }
+end
+
 for k, v in pairs(O.user_which_key) do
   mappings[k] = v
 end

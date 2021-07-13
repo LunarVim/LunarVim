@@ -119,6 +119,7 @@ O = {
         args = { "format" },
       },
     },
+    deno = {},
     docker = {},
     efm = {},
     elm = {},
