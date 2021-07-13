@@ -73,7 +73,7 @@ O.plugin.dashboard.active = true
 O.plugin.floatterm.active = true
 O.plugin.zen.active = true
 
--- if you don't want all the parsers change this to a table of the ones you want
+-- If you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
 O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
