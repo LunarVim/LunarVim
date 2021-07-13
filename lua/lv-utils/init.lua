@@ -10,6 +10,13 @@ function lv_utils.reload_lv_config()
   -- vim.cmd ":PackerClean"
 end
 
+function lv_utils.adapt_plugin(plugin, packer_config)
+  for k, v in pairs(plugin) do
+    packer_config[k] = v
+  end
+  return packer_config
+end
+
 function lv_utils.check_lsp_client_active(name)
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do

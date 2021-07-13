@@ -1,14 +1,17 @@
-local m = {
-  "glepnir/galaxyline.nvim",
-  event = "BufWinEnter",
-  disable = not O.plugin.galaxyline.active,
-}
+local m = {}
 
-m.config = function()
-  vim.api.nvim_set_keymap("n", "<S-x>", ":BufferClose<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("n", "<S-h>", ":BufferPrevious<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "romgrk/barbar.nvim",
+    event = "BufWinEnter",
+  })
+end
+
+m.load_defaults = function()
+  -- vim.api.nvim_set_keymap("n", "<S-x>", ":BufferClose<CR>", { noremap = true, silent = true })
+  -- vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silent = true })
+  -- vim.api.nvim_set_keymap("n", "<S-h>", ":BufferPrevious<CR>", { noremap = true, silent = true })
+  -- vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
 
   O.plugin.which_key.mappings["b"] = {
     name = "Buffers",

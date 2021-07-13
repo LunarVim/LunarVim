@@ -1,7 +1,11 @@
-local m = {
-  "hrsh7th/nvim-compe",
-  -- event = "InsertEnter",
-}
+local m = {}
+
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "windwp/nvim-autopairs",
+    after = { "telescope.nvim" },
+  })
+end
 
 m.config = function()
   -- if not package.loaded['nvim-autopairs'] then

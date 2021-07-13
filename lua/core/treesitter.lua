@@ -1,8 +1,12 @@
-local m = {
-  "nvim-treesitter/nvim-treesitter",
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "nvim-treesitter/nvim-treesitter",
+  })
+end
+
+m.load_defaults = function()
   O.treesitter = {
     ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {},
@@ -95,7 +99,7 @@ m.config = function()
   -- },
 end
 
-m.setup = function()
+m.config = function()
   -- TODO: refacor this whole file and treesitter in general
   -- if not package.loaded['nvim-treesitter'] then return end
   --

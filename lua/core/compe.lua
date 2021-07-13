@@ -1,9 +1,13 @@
-local m = {
-  "hrsh7th/nvim-compe",
-  -- event = "InsertEnter",
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "hrsh7th/nvim-compe",
+    -- event = "InsertEnter",
+  })
+end
+
+m.load_defaults = function()
   O.completion = {
     enabled = true,
     autocomplete = true,
@@ -37,7 +41,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   vim.g.vsnip_snippet_dir = O.vnsip_dir
 
   local status_ok, compe = pcall(require, "compe")

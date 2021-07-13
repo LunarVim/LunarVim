@@ -1,10 +1,14 @@
-local m = {
-  "glepnir/galaxyline.nvim",
-  event = "BufWinEnter",
-  disable = not O.plugin.galaxyline.active,
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    disable = not O.plugin.galaxyline.active,
+  })
+end
+
+m.load_defaults = function()
   O.plugin.gitsigns = {
     signs = {
       add = {
@@ -53,7 +57,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   local status_ok, gitsigns = pcall(require, "gitsigns")
   if not status_ok then
     return

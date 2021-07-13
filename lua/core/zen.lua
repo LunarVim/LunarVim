@@ -1,14 +1,15 @@
-local m = {
-  "folke/zen-mode.nvim",
-  cmd = "ZenMode",
-  event = "BufRead",
-  config = function()
-    require("core.zen").setup()
-  end,
-  disable = not O.plugin.zen.active,
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    event = "BufRead",
+    disable = not O.plugin.zen.active,
+  })
+end
+
+m.load_defaults = function()
   O.plugin["zen"] = {
     window = {
       backdrop = 1,
@@ -32,7 +33,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   local status_ok, zen_mode = pcall(require, "zen-mode")
   if not status_ok then
     return

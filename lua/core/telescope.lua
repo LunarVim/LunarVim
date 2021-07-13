@@ -1,8 +1,12 @@
-local m = {
-  "nvim-telescope/telescope.nvim",
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "nvim-telescope/telescope.nvim",
+  })
+end
+
+m.load_defaults = function()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
     return
@@ -85,7 +89,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then
     return

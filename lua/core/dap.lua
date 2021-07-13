@@ -1,10 +1,14 @@
-local m = {
-  "mfussenegger/nvim-dap",
-  -- event = "BufWinEnter",
-  disable = not O.plugin.dap.active,
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "mfussenegger/nvim-dap",
+    -- event = "BufWinEnter",
+    disable = not O.plugin.dap.active,
+  })
+end
+
+m.load_defaults = function()
   O.plugin.dap = {
     active = false,
     breakpoint = {
@@ -16,7 +20,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   local status_ok, dap = pcall(require, "dap")
   if not status_ok then
     return

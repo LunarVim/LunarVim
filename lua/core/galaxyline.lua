@@ -1,11 +1,12 @@
-local m = {
-  "glepnir/galaxyline.nvim",
-  config = function()
-    require "core.galaxyline"
-  end,
-  event = "BufWinEnter",
-  disable = not O.plugin.galaxyline.active,
-}
+local m = {}
+
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "glepnir/galaxyline.nvim",
+    event = "BufWinEnter",
+    disable = not O.plugin.galaxyline.active,
+  })
+end
 
 m.config = function()
   -- if not package.loaded['galaxyline'] then

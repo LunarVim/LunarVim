@@ -290,12 +290,13 @@ O = {
 }
 
 require "core.status_colors"
-require("core.gitsigns").config()
-require("core.compe").config()
-require("core.dashboard").config()
-require("core.dap").config()
-require("core.floatterm").config()
-require("core.zen").config()
-require("core.telescope").config()
-require("core.treesitter").config()
-require("core.which-key").config()
+require("core.which-key").load_defaults()
+require("core.bufferline").load_defaults()
+require("core.gitsigns").load_defaults()
+require("core.compe").load_defaults()
+require("core.dashboard").load_defaults()
+require("core.dap").load_defaults()
+require("core.floatterm").load_defaults()
+require("core.zen").load_defaults()
+require("core.telescope").load_defaults()
+require("core.treesitter").load_defaults()

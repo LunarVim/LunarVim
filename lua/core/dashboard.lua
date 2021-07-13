@@ -1,10 +1,14 @@
-local m = {
-  "ChristianChiarulli/dashboard-nvim",
-  event = "BufWinEnter",
-  disable = not O.plugin.dashboard.active,
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "ChristianChiarulli/dashboard-nvim",
+    event = "BufWinEnter",
+    disable = not O.plugin.dashboard.active,
+  })
+end
+
+m.load_defaults = function()
   O.plugin.dashboard = {
     active = false,
     search_handler = "telescope",
@@ -56,7 +60,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   vim.g.dashboard_disable_at_vimenter = 0
 
   vim.g.dashboard_custom_header = O.plugin.dashboard.custom_header

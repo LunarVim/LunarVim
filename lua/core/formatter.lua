@@ -1,11 +1,10 @@
-local m = {
-  "numToStr/FTerm.nvim",
-  event = "BufWinEnter",
-  config = function()
-    require("core.floatterm").setup()
-  end,
-  disable = not O.plugin.floatterm.active,
-}
+local m = {}
+
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "mhartington/formatter.nvim",
+  })
+end
 
 m.config = function()
   -- autoformat

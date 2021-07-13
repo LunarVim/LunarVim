@@ -1,9 +1,12 @@
-local m = {
-  "folke/which-key.nvim",
-  event = "BufWinEnter",
-}
+local m = {}
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "folke/which-key.nvim",
+    event = "BufWinEnter",
+  })
+end
 
-m.config = function()
+m.load_defaults = function()
   O.plugin.which_key = {
     active = false,
     setup = {
@@ -162,7 +165,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   -- if not package.loaded['which-key'] then
   --  return
   -- end
@@ -193,9 +196,8 @@ m.setup = function()
     mappings[k] = v
   end
 
-  local wk = require "which-key"
-  wk.register(mappings, opts)
-  wk.register(vmappings, vopts)
+  which_key.register(mappings, opts)
+  which_key.register(vmappings, vopts)
 end
 
 return m

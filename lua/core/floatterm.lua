@@ -1,10 +1,14 @@
-local m = {
-  "numToStr/FTerm.nvim",
-  event = "BufWinEnter",
-  disable = not O.plugin.floatterm.active,
-}
+local m = {}
 
-m.config = function()
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "numToStr/FTerm.nvim",
+    event = "BufWinEnter",
+    disable = not O.plugin.floatterm.active,
+  })
+end
+
+m.load_defaults = function()
   O.plugin.floatterm = {
     active = false,
     dimensions = {
@@ -17,7 +21,7 @@ m.config = function()
   }
 end
 
-m.setup = function()
+m.config = function()
   local status_ok, fterm = pcall(require, "FTerm")
   if not status_ok then
     return

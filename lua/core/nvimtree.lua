@@ -1,9 +1,13 @@
-local m = {
-  "kyazdani42/nvim-tree.lua",
-  -- event = "BufWinOpen",
-  -- cmd = "NvimTreeToggle",
-  commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-}
+local m = {}
+
+m.packer_config = function()
+  return require("lv-utils").adapt_plugin(m, {
+    "kyazdani42/nvim-tree.lua",
+    -- event = "BufWinOpen",
+    -- cmd = "NvimTreeToggle",
+    commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
+  })
+end
 
 -- --if not package.loaded['nvim-tree.view'] then
 -- --  return
