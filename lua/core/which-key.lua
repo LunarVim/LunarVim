@@ -185,13 +185,11 @@ M.setup = function()
     mappings["z"] = "Zen"
   end
 
-  for k, v in pairs(O.user_which_key) do
-    mappings[k] = v
-  end
-
   local wk = require "which-key"
+
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
+  wk.register(O.user_which_key, opts)
 end
 
 return M
