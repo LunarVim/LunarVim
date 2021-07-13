@@ -44,7 +44,7 @@ return require("packer").startup(function(use)
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
-    config = [[require('lv-telescope')]],
+    config = [[require('core.telescope').setup()]],
   }
 
   -- Autocomplete
@@ -52,7 +52,7 @@ return require("packer").startup(function(use)
     "hrsh7th/nvim-compe",
     -- event = "InsertEnter",
     config = function()
-      require("lv-compe").config()
+      require("core.compe").setup()
     end,
   }
 
@@ -62,7 +62,7 @@ return require("packer").startup(function(use)
     -- event = "InsertEnter",
     after = { "telescope.nvim" },
     config = function()
-      require "lv-autopairs"
+      require "core.autopairs"
     end,
   }
 
@@ -72,13 +72,18 @@ return require("packer").startup(function(use)
   use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
   -- Treesitter
-  use { "nvim-treesitter/nvim-treesitter" }
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("core.treesitter").setup()
+    end,
+  }
 
   -- Formatter.nvim
   use {
     "mhartington/formatter.nvim",
     config = function()
-      require "lv-formatter"
+      require "core.formatter"
     end,
     event = "BufRead",
   }
@@ -90,7 +95,7 @@ return require("packer").startup(function(use)
     -- cmd = "NvimTreeToggle",
     commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
-      require("lv-nvimtree").config()
+      require("core.nvimtree").setup()
     end,
   }
 
@@ -107,7 +112,7 @@ return require("packer").startup(function(use)
   use {
     "folke/which-key.nvim",
     config = function()
-      require "lv-which-key"
+      require("core.which-key").setup()
     end,
     event = "BufWinEnter",
   }
@@ -140,7 +145,7 @@ return require("packer").startup(function(use)
   use {
     "glepnir/galaxyline.nvim",
     config = function()
-      require "lv-galaxyline"
+      require("core.galaxyline").setup()
     end,
     event = "BufWinEnter",
     disable = not O.plugin.galaxyline.active,
@@ -149,7 +154,7 @@ return require("packer").startup(function(use)
   use {
     "romgrk/barbar.nvim",
     config = function()
-      require "lv-barbar"
+      require "core.bufferline"
     end,
     event = "BufWinEnter",
   }
@@ -159,7 +164,7 @@ return require("packer").startup(function(use)
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
     config = function()
-      require "lv-dap"
+      require("core.dap").setup()
     end,
     disable = not O.plugin.dap.active,
   }
@@ -179,7 +184,7 @@ return require("packer").startup(function(use)
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
     config = function()
-      require("lv-dashboard").config()
+      require("core.dashboard").setup()
     end,
     disable = not O.plugin.dashboard.active,
   }
@@ -190,7 +195,7 @@ return require("packer").startup(function(use)
     "numToStr/FTerm.nvim",
     event = "BufWinEnter",
     config = function()
-      require("lv-floatterm").config()
+      require("core.floatterm").setup()
     end,
     disable = not O.plugin.floatterm.active,
   }
@@ -201,29 +206,9 @@ return require("packer").startup(function(use)
     cmd = "ZenMode",
     event = "BufRead",
     config = function()
-      require("lv-zen").config()
+      require("core.zen").setup()
     end,
     disable = not O.plugin.zen.active,
-  }
-
-  use {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufRead",
-    setup = function()
-      vim.g.indentLine_enabled = 1
-      vim.g.indent_blankline_char = "▏"
-
-      vim.g.indent_blankline_filetype_exclude = {
-        "help",
-        "terminal",
-        "dashboard",
-      }
-      vim.g.indent_blankline_buftype_exclude = { "terminal" }
-
-      vim.g.indent_blankline_show_trailing_blankline_indent = false
-      vim.g.indent_blankline_show_first_indent_level = true
-    end,
-    disable = not O.plugin.indent_line.active,
   }
 
   ---------------------------------------------------------------------------------
@@ -262,27 +247,4 @@ return require("packer").startup(function(use)
     -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
   }
-
-  -- Custom semantic text objects
-  use {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    disable = not O.plugin.ts_textobjects.active,
-  }
-
-  -- Smart text objects
-  use {
-    "RRethy/nvim-treesitter-textsubjects",
-    disable = not O.plugin.ts_textsubjects.active,
-  }
-
-  -- Text objects using hint labels
-  use {
-    "mfussenegger/nvim-ts-hint-textobject",
-    event = "BufRead",
-    disable = not O.plugin.ts_hintobjects.active,
-  }
-
-  for _, plugin in pairs(O.user_plugins) do
-    packer.use(plugin)
-  end
 end)

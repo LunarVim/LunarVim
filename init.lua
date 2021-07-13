@@ -8,7 +8,6 @@ require "plugins"
 vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 require "settings"
 require "lv-utils"
-require "lv-treesitter"
 
 -- TODO: these guys need to be in language files
 -- require "lsp"

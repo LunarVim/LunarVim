@@ -64,8 +64,8 @@ local mappings = {
     { "<", "<gv" },
     { ">", ">gv" },
 
-    { "p", '"0p', { silent = true } },
-    { "P", '"0P', { silent = true } },
+    -- { "p", '"0p', { silent = true } },
+    -- { "P", '"0P', { silent = true } },
   },
   x = { -- Visual mode
     -- Move selected line / block of text in visual mode

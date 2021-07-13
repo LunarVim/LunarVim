@@ -8,7 +8,7 @@ if not status_ok then
   return
 end
 --
-M.config = function()
+M.setup = function()
   local g = vim.g
 
   vim.o.termguicolors = true

@@ -1,6 +1,18 @@
 local M = {}
-
 M.config = function()
+  O.plugin.floatterm = {
+    active = false,
+    dimensions = {
+      height = 0.9,
+      width = 0.9,
+      x = 0.5,
+      y = 0.3,
+    },
+    border = "single", -- or 'double'
+  }
+end
+
+M.setup = function()
   local status_ok, fterm = pcall(require, "FTerm")
   if not status_ok then
     return
