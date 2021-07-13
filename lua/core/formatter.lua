@@ -48,8 +48,12 @@ end
 --     end
 --   end
 -- end
+local status_ok, formatter = pcall(require, "formatter")
+if not status_ok then
+  return
+end
 
-require("formatter").setup {}
+formatter.setup {}
 
 if not O.format_on_save then
   vim.cmd [[if exists('#autoformat#BufWritePost')

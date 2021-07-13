@@ -82,9 +82,9 @@ return require("packer").startup(function(use)
   -- Formatter.nvim
   use {
     "mhartington/formatter.nvim",
-    -- config = function()
-    --   require "core.formatter"
-    -- end,
+    config = function()
+      require "core.formatter"
+    end,
   }
 
   -- NvimTree
