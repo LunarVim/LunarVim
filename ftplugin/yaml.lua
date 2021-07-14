@@ -1,3 +1,17 @@
+O.formatters.filetype["yaml"] = {
+  function()
+    return {
+      exe = O.lang.yaml.formatter.exe,
+      args = O.lang.yaml.formatter.args,
+      stdin = not (O.lang.yaml.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 if require("lv-utils").check_lsp_client_active "yamlls" then
   return
 end

@@ -1,6 +1,21 @@
+O.formatters.filetype["python"] = {
+  function()
+    return {
+      exe = O.lang.python.formatter.exe,
+      args = O.lang.python.formatter.args,
+      stdin = not (O.lang.python.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
+
 local python_arguments = {}
 
--- TODO replace with path argument
+-- TODO: replace with path argument
 local flake8 = {
   LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
   lintStdin = true,
@@ -25,6 +40,7 @@ if not require("lv-utils").check_lsp_client_active "efm" then
     -- init_options = {initializationOptions},
     cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
     init_options = { documentFormatting = true, codeAction = false },
+    root_dir = require("lspconfig").util.root_pattern(".git/", "requirements.txt"),
     filetypes = { "python" },
     settings = {
       rootMarkers = { ".git/", "requirements.txt" },
@@ -63,7 +79,7 @@ if not require("lv-utils").check_lsp_client_active "pyright" then
   }
 end
 
-if O.plugin.debug.active and O.plugin.dap_install.active then
+if O.plugin.dap.active then
   local dap_install = require "dap-install"
   dap_install.config("python_dbg", {})
 end

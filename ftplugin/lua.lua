@@ -1,3 +1,17 @@
+O.formatters.filetype["lua"] = {
+  function()
+    return {
+      exe = O.lang.lua.formatter.exe,
+      args = O.lang.lua.formatter.args,
+      stdin = not (O.lang.lua.formatter.stdin ~= nil),
+    }
+  end,
+}
+
+require("formatter.config").set_defaults {
+  logging = false,
+  filetype = O.formatters.filetype,
+}
 if not require("lv-utils").check_lsp_client_active "sumneko_lua" then
   -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
   local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
@@ -31,17 +45,3 @@ if not require("lv-utils").check_lsp_client_active "sumneko_lua" then
     },
   }
 end
-
-if O.lang.lua.autoformat then
-  require("lv-utils").define_augroups {
-    _lua_autoformat = {
-      {
-        "BufWritePre",
-        "*.lua",
-        "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-      },
-    },
-  }
-end
-
-vim.cmd "setl ts=2 sw=2"
