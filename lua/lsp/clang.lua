@@ -14,7 +14,7 @@ M.config = function()
       exe = "clang-format",
       args = {},
     },
-    dap = {
+    debug = {
       adapter = {
         command = "/usr/bin/lldb-vscode",
       },
@@ -81,7 +81,7 @@ M.dap = function()
     dap_install.config("ccppr_vsc_dbg", {})
     dap.adapters.lldb = {
       type = "executable",
-      command = O.lang.clang.dap.adapter.command,
+      command = O.lang.clang.debug.adapter.command,
       name = "lldb",
     }
     local shared_dap_config = {
@@ -93,7 +93,7 @@ M.dap = function()
           return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
-        stopOnEntry = O.lang.clang.dap.stop_on_entry,
+        stopOnEntry = O.lang.clang.debug.stop_on_entry,
         args = {},
         env = function()
           local variables = {}
@@ -108,7 +108,7 @@ M.dap = function()
         -- If you get an "Operation not permitted" error using this, try disabling YAMA:
         --  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
         name = "Attach to process",
-        type = "cpp", -- Adjust this to match your adapter name (`dap.adapters.<name>`)
+        type = "lldb", -- Adjust this to match your adapter name (`dap.adapters.<name>`)
         request = "attach",
         pid = function()
           local output = vim.fn.system { "ps", "a" }
