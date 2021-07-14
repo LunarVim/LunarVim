@@ -67,6 +67,44 @@ function lv_utils.reload_lv_config()
   -- vim.cmd ":PackerClean"
 end
 
+local function scan_directory(directory)
+  local uv = vim.loop
+  local fd = uv.fs_scandir(directory)
+  if fd == nil then
+    return nil
+  end
+
+  local files = {}
+  while true do
+    local name, fstype = uv.fs_scandir_next(fd)
+    if name == nil then
+      break
+    end
+    table.insert(files, name)
+  end
+
+  return files
+end
+
+function lv_utils.uncache_modules(modules)
+  for _, module in ipairs(modules) do
+    if string.sub(module, -1) == "/" then
+      local files = scan_directory(module)
+      local root_idx = module:find "/"
+      local root = module:sub(root_idx + 1)
+      root = root:gsub("/", ".")
+
+      local ext = ".lua"
+      for _, file in ipairs(files) do
+        local module_path = root .. file:sub(1, -(ext:len() + 1))
+        package.loaded[module_path] = nil
+      end
+    else
+      package.loaded[module] = nil
+    end
+  end
+end
+
 function lv_utils.check_lsp_client_active(name)
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
