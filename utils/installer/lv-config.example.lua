@@ -52,7 +52,22 @@ O.lang.tsserver.linter = nil
 --   args = {"--emit=stdout", "--edition=2018"},
 -- }
 
--- latex
+--LaTeX
+-- Options: https://github.com/latex-lsp/texlab/blob/master/docs/options.md
+O.lang.latex.active = true
+O.lang.latex.aux_directory = "."
+O.lang.latex.bibtex_formatter = "texlab"
+O.lang.latex.build.args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' }
+O.lang.latex.build.executable = "latexmk"
+O.lang.latex.build.forward_search_after = false
+O.lang.latex.build.on_save = false
+O.lang.latex.chktex.on_edit = false
+O.lang.latex.chktex.on_open_and_save = false
+O.lang.latex.diagnostics_delay = 300
+O.lang.latex.formatter_line_length = 80
+O.lang.latex.forward_search.executable = "zathura"
+O.lang.latex.latex_formatter = "latexindent"
+O.lang.latex.latexindent.modify_line_breaks = false
 -- O.lang.latex.auto_save = false
 -- O.lang.latex.ignore_errors = { }
 
