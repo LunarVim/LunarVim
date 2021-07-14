@@ -23,7 +23,6 @@ M.lint = function()
   end
   local python_arguments = {}
 
-  -- TODO: replace with path argument
   local flake8 = {
     LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
     lintStdin = true,
@@ -42,7 +41,6 @@ M.lint = function()
 
   if not require("lv-utils").check_lsp_client_active "efm" then
     require("lspconfig").efm.setup {
-      -- init_options = {initializationOptions},
       cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
       init_options = { documentFormatting = true, codeAction = false },
       root_dir = require("lspconfig").util.root_pattern(".git/", "requirements.txt"),

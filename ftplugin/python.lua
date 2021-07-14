@@ -1,4 +1,4 @@
-require("lsp.python-ls").format()
-require("lsp.python-ls").lint()
-require("lsp.python-ls").lsp()
-require("lsp.python-ls").dap()
+require("lsp.python").format()
+require("lsp.python").lint()
+require("lsp.python").lsp()
+require("lsp.python").dap()
