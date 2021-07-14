@@ -138,7 +138,7 @@ return require("packer").startup(function(use)
   }
 
   -- Icons
-  use { "kyazdani42/nvim-web-devicons" }
+  use { "kyazdani42/nvim-web-devicons", disable = O.experimental.disable_fancy_icons }
 
   -- Status Line and Bufferline
   use {
