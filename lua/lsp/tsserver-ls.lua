@@ -18,6 +18,8 @@ O.formatters.filetype["javascriptreact"] = {
   end,
 }
 O.formatters.filetype["javascript"] = O.formatters.filetype["javascriptreact"]
+O.formatters.filetype["typescript"] = O.formatters.filetype["javascriptreact"]
+O.formatters.filetype["typescriptreact"] = O.formatters.filetype["javascriptreact"]
 
 require("formatter.config").set_defaults {
   logging = false,
