@@ -107,6 +107,10 @@ O = {
     },
     css = {
       virtual_text = true,
+      formatter = {
+        exe = "prettier",
+        args = {},
+      },
     },
     dart = {
       sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
