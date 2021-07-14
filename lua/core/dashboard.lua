@@ -60,7 +60,7 @@ M.setup = function()
 
   vim.g.dashboard_custom_section = O.plugin.dashboard.custom_section
 
-  O.user_which_key[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+  O.plugin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
 
   -- f = {
   --   description = { "  Neovim Config Files" },
