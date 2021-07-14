@@ -7,23 +7,22 @@ if vim.fn.executable(prettier_instance) ~= 1 then
   prettier_instance = O.lang.tsserver.formatter.exe
 end
 
-O.formatters.filetype["javascriptreact"] = {
+local shared_config = {
   function()
     local args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
-    local extend_args = O.lang.tsserver.formatter.args
-    for i = 1, #extend_args do
-      table.insert(args, extend_args[i])
-    end
+    local extended_args = require('lv-utils').extend_table(args, O.lang.tsserver.formatter.args)
     return {
       exe = prettier_instance,
-      args = args,
+      args = extended_args,
       stdin = true,
     }
   end,
 }
-O.formatters.filetype["javascript"] = O.formatters.filetype["javascriptreact"]
-O.formatters.filetype["typescript"] = O.formatters.filetype["javascriptreact"]
-O.formatters.filetype["typescriptreact"] = O.formatters.filetype["javascriptreact"]
+
+O.formatters.filetype["javascript"] = shared_config
+O.formatters.filetype["javascriptreact"] = shared_config
+O.formatters.filetype["typescript"] = shared_config
+O.formatters.filetype["typescriptreact"] = shared_config
 
 require("formatter.config").set_defaults {
   logging = false,

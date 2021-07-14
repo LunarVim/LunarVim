@@ -8,23 +8,21 @@ if vim.fn.executable(prettier_instance) ~= 1 then
 end
 
 local ft = vim.bo.filetype
-O.formatters.filetype[ft]= {
+
+local shared_config = {
   function()
     local args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
-    -- TODO: O.lang.[ft].formatter.args
-    local extend_args = O.lang.css.formatter.args
-
-    for i = 1, #extend_args do
-      table.insert(args, extend_args[i])
-    end
-
+    -- TODO: Use O.lang.[ft].formatter.args to allow user config for scss etc.
+    local extended_args = require('lv-utils').extend_table(args, O.lang.css.formatter.args)
     return {
       exe = prettier_instance,
-      args = args,
-      stdin = true
+      args = extended_args,
+      stdin = true,
     }
   end,
 }
+
+O.formatters.filetype[ft] = shared_config
 
 require("formatter.config").set_defaults {
   logging = false,
