@@ -182,7 +182,7 @@ installextrapackages() {
 # Welcome
 echo 'Installing LunarVim'
 
-if [[ $* == *--overwrite* ]]; then
+if [ -n "$(echo "$@" | grep "\-\-overwrite")" ]; then
   echo '!!Warning!! -> Removing all nvim related config because of the --overwrite flag'
   rm -rf "$HOME/.config/nvim"
   rm -rf "$HOME/.cache/nvim"
