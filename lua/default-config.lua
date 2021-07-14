@@ -330,6 +330,9 @@ O = {
       },
     },
   },
+  experimental = {
+    disable_fancy_icons = false
+  }
 }
 
 require "core.status_colors"
