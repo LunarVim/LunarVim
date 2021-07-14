@@ -11,7 +11,7 @@ local uv = vim.loop
 function m:watch(filename, callback)
   local fullpath = vim.api.nvim_call_function("fnamemodify", { filename, ":p" })
   local watcher = uv.new_fs_event()
-  self.files[filename] = true
+  self.files[filename] = { timestamp = nil }
 
   local function on_change(err, _, events)
     if not err == nil then
@@ -23,10 +23,18 @@ function m:watch(filename, callback)
     if self.files[filename] == nil then
       return
     end
-    callback(filename, events)
-    if self.files[filename] == nil then
-      return
+
+    local timestamp = os.time()
+    -- NOTE: This allows to discard duplicated events
+    if not self.files[filename].timestamp or self.files[filename].timestamp < timestamp then
+      self.files[filename].timestamp = timestamp
+      callback(filename, events)
+      if self.files[filename] == nil then
+        return
+      end
     end
+    self.files[filename].timestamp = timestamp
+
     watcher:start(fullpath, {}, vim.schedule_wrap(on_change))
   end
 
