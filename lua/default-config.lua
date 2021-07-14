@@ -55,6 +55,27 @@ O = {
     scrolloff = 8, -- is one of my fav
   },
 
+  disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin", -- 'man',
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    -- 'matchit', 'matchparen', 'shada_plugin',
+  },
+
   plugin = {},
 
   -- TODO: refactor for tree
@@ -160,7 +181,7 @@ O = {
     },
     kotlin = {},
     latex = {
-      filetypes = { "tex", "bib"},
+      filetypes = { "tex", "bib" },
       aux_directory = nil,
       bibtex_formatter = "texlab",
       diagnostics_delay = 300,
@@ -168,7 +189,7 @@ O = {
       latex_formatter = "latexindent",
       build = {
         executable = "latexmk",
-        args = {'-pdf', '-interaction=nonstopmode', '-synctex=1', '%f'},
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
         on_save = false,
         forward_search_after = false,
       },
@@ -178,14 +199,14 @@ O = {
       },
       forward_search = {
         executable = nil,
-        args = {}
+        args = {},
       },
       latexindent = {
         ["local"] = nil,
-        modify_line_breaks = false
+        modify_line_breaks = false,
       },
       diagnostics = {
-        virtual_text = {spacing = 0, prefix = ""},
+        virtual_text = { spacing = 0, prefix = "" },
         signs = true,
         underline = true,
       },
