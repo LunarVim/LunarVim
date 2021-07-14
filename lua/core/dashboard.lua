@@ -60,6 +60,8 @@ M.setup = function()
 
   vim.g.dashboard_custom_section = O.plugin.dashboard.custom_section
 
+  O.plugin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+
   -- f = {
   --   description = { "  Neovim Config Files" },
   --   command = "Telescope find_files cwd=" .. CONFIG_PATH,
