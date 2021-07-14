@@ -1,9 +1,9 @@
 O.formatters.filetype["c"] = {
   function()
     return {
-      exe = O.lang.c.formatter.exe,
-      args = O.lang.c.formatter.args,
-      stdin = not (O.lang.c.formatter.stdin ~= nil),
+      exe = O.lang.clang.formatter.exe,
+      args = O.lang.clang.formatter.args,
+      stdin = not (O.lang.clang.formatter.stdin ~= nil),
     }
   end,
 }
