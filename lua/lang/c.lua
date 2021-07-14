@@ -6,7 +6,7 @@ M.config = function()
 end
 
 M.format = function()
-  -- TODO: implement linters (if applicable)
+  -- TODO: implement formatter (if applicable)
   return "No formatters configured!"
 end
 
