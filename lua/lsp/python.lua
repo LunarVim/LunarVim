@@ -74,6 +74,7 @@ M.lsp = function()
         update_in_insert = true,
       }),
     },
+    root_dir = require("lspconfig").util.root_pattern(".git/", "requirements.txt"),
     settings = {
       python = {
         analysis = {
