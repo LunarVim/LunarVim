@@ -13,7 +13,7 @@ O.formatters.filetype["javascriptreact"] = {
       exe = prettier_instance,
       -- TODO: allow user to override this
       args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      stdin = true
+      stdin = true,
     }
   end,
 }

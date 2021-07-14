@@ -132,6 +132,10 @@ O = {
       java_tools = {
         active = false,
       },
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      },
     },
     json = {
       diagnostics = {
