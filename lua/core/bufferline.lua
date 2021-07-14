@@ -26,3 +26,19 @@ O.plugin.which_key.mappings["b"] = {
     "sort BufferLines automatically by language",
   },
 }
+
+if O.experimental.disable_fancy_icons then
+  -- TODO: How to do this initialise `g` lua?
+  vim.cmd [[let bufferline = get(g:, 'bufferline', {})]]
+
+  -- TODO: Setting these in lua doesn't seem to work
+  -- vim.g.bufferline = {
+  --   icon_close_tab = '×',
+  --   icon_close_tab_modified = '●',
+  --   icons = false
+  -- }
+  vim.cmd [[let bufferline.icon_close_tab = '×']]
+  vim.cmd [[let bufferline.icon_close_tab_modified = '●']]
+  vim.cmd [[let bufferline.icons = v:false]]
+end
+
