@@ -259,7 +259,13 @@ O = {
         "typescriptreact",
       },
     },
-    terraform = {},
+    terraform = {
+      formatter = {
+        exe = "terraform",
+        args = { "fmt" },
+        stdin = false,
+      },
+    },
     tsserver = {
       -- @usage can be 'eslint' or 'eslint_d'
       linter = "",
