@@ -131,6 +131,17 @@ vim.cmd [[
 endfunction
 ]]
 
+
+function lv_utils.extend_table(args, extend_args)
+  local result = args
+
+  for i = 1, #extend_args do
+    table.insert(result, extend_args[i])
+  end
+
+  return result
+end
+
 return lv_utils
 
 -- TODO: find a new home for these autocommands
