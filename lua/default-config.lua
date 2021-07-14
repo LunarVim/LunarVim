@@ -123,7 +123,13 @@ O = {
     efm = {},
     elm = {},
     emmet = { active = false },
-    elixir = {},
+    elixir = {
+      formatter = {
+        exe = "mix",
+        args = { "format" },
+        stdin = true,
+      },
+    },
     graphql = {},
     go = {
       formatter = {
