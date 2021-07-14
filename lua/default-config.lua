@@ -328,4 +328,5 @@ require("core.zen").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
-require("lsp.clang").config()
+
+require("lang.clang").config()
