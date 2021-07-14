@@ -60,7 +60,6 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
-    after = { "telescope.nvim" },
     config = function()
       require "core.autopairs"
     end,
