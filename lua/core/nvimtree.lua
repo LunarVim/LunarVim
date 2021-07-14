@@ -56,6 +56,42 @@ M.setup = function()
       symlink = "",
     },
   }
+
+  if O.experimental.disable_fancy_icons then
+    g.nvim_tree_show_icons = {
+      git = 1,
+      folders = 1,
+      files = 0,
+      folder_arrows = 0,
+    }
+    vim.g.nvim_tree_icons = {
+      default = '',
+      symlink = '',
+      git = {
+        unstaged = '×',
+        staged = '✓',
+        unmerged = '◇',
+        renamed = '➜',
+        deleted = ' ',
+        untracked = '★',
+        ignored = '◌',
+      },
+      folder = {
+        default = '>',
+        open = '▼',
+        empty = '≥',
+        empty_open = '≤',
+        symlink = '↔',
+      },
+      lsp = {
+        hint = '?',
+        info = 'i',
+        warning = '△',
+        error = '×',
+      },
+    }
+  end
+
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
   vim.g.nvim_tree_bindings = {
