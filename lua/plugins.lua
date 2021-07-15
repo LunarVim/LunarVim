@@ -60,11 +60,7 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-autopairs",
     config = function()
-      if O.plugin.autopairs.config then
-        O.plugin.autopairs.config()
-      else
-        require("core.autopairs").setup()
-      end
+      require("core.autopairs").setup()
     end,
   }
 
