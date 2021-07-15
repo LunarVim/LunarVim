@@ -70,11 +70,11 @@ end
 local function scan_directory(directory)
   local uv = vim.loop
   local fd = uv.fs_scandir(directory)
+  local files = {}
   if fd == nil then
-    return nil
+    return files
   end
 
-  local files = {}
   while true do
     local name, fstype = uv.fs_scandir_next(fd)
     if name == nil then
