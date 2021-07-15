@@ -20,7 +20,7 @@ M.lsp = function()
   end
 
   require("lspconfig").elmls.setup {
-    cmd = { DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server" },
+    cmd = { require("lsp.installer").get_langserver_path "elm" },
     init_options = {
       elmAnalyseTrigger = "change",
       elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",

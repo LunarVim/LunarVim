@@ -128,7 +128,7 @@ require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
 
-require("lang.clang").config()
+require("lang.cpp").config()
 require("lang.cmake").config()
 require("lang.css").config()
 require("lang.dart").config()

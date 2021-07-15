@@ -40,7 +40,7 @@ end
 M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "sumneko_lua" then
     -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-    local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
+    local sumneko_root_path = require("lsp.installer").get_langserver_path "lua"
     local sumneko_binary = sumneko_root_path .. "/sumneko-lua-language-server"
 
     require("lspconfig").sumneko_lua.setup {

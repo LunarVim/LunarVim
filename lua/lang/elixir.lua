@@ -38,7 +38,7 @@ M.lsp = function()
   end
 
   require("lspconfig").elixirls.setup {
-    cmd = { DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh" },
+    cmd = { require("lsp.installer").get_langserver_path "elixir" },
   }
 end
 

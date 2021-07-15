@@ -1,5 +1,5 @@
 -- TODO: what is a svelte filetype
 require("lspconfig").svelte.setup {
-  cmd = { DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver", "--stdio" },
+  cmd = { require("lsp.installer").get_langserver_path "svelte", "--stdio" },
   on_attach = require("lsp").common_on_attach,
 }

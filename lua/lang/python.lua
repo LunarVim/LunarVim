@@ -63,7 +63,7 @@ M.lint = function()
 
   if not require("lv-utils").check_lsp_client_active "efm" then
     require("lspconfig").efm.setup {
-      cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
+      cmd = { require("lsp.installer").get_langserver_path "efm" },
       init_options = { documentFormatting = true, codeAction = false },
       root_dir = require("lspconfig").util.root_pattern(".git/", "requirements.txt"),
       filetypes = { "python" },
@@ -83,10 +83,7 @@ M.lsp = function()
   end
   -- npm i -g pyright
   require("lspconfig").pyright.setup {
-    cmd = {
-      DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
-      "--stdio",
-    },
+    cmd = { require("lsp.installer").get_langserver_path "python", "--stdio" },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

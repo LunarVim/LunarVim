@@ -45,7 +45,7 @@ end
 -- end
 require("lspconfig").tsserver.setup {
   cmd = {
-    DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+    require("lsp.installer").get_langserver_path "typescript",
     "--stdio",
   },
   filetypes = {

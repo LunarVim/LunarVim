@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = function()
-  O.lang.clang = {
+  O.lang.cpp = {
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
       signs = true,
@@ -27,9 +27,9 @@ M.format = function()
   local shared_config = {
     function()
       return {
-        exe = O.lang.clang.formatter.exe,
-        args = O.lang.clang.formatter.args,
-        stdin = not (O.lang.clang.formatter.stdin ~= nil),
+        exe = O.lang.cpp.formatter.exe,
+        args = O.lang.cpp.formatter.args,
+        stdin = not (O.lang.cpp.formatter.stdin ~= nil),
         cwd = vim.fn.expand "%:h:p",
       }
     end,
@@ -55,20 +55,20 @@ M.lsp = function()
   end
   local clangd_flags = { "--background-index" }
 
-  if O.lang.clang.cross_file_rename then
+  if O.lang.cpp.cross_file_rename then
     table.insert(clangd_flags, "--cross-file-rename")
   end
 
-  table.insert(clangd_flags, "--header-insertion=" .. O.lang.clang.header_insertion)
+  table.insert(clangd_flags, "--header-insertion=" .. O.lang.cpp.header_insertion)
 
   require("lspconfig").clangd.setup {
-    cmd = { DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd", unpack(clangd_flags) },
+    cmd = { require("lsp.installer").get_langserver_path "cpp", unpack(clangd_flags) },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = O.lang.clang.diagnostics.virtual_text,
-        signs = O.lang.clang.diagnostics.signs,
-        underline = O.lang.clang.diagnostics.underline,
+        virtual_text = O.lang.cpp.diagnostics.virtual_text,
+        signs = O.lang.cpp.diagnostics.signs,
+        underline = O.lang.cpp.diagnostics.underline,
         update_in_insert = true,
       }),
     },
@@ -82,7 +82,7 @@ M.dap = function()
     dap_install.config("ccppr_vsc_dbg", {})
     dap.adapters.lldb = {
       type = "executable",
-      command = O.lang.clang.debug.adapter.command,
+      command = O.lang.cpp.debug.adapter.command,
       name = "lldb",
     }
     local shared_dap_config = {
@@ -94,7 +94,7 @@ M.dap = function()
           return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
-        stopOnEntry = O.lang.clang.debug.stop_on_entry,
+        stopOnEntry = O.lang.cpp.debug.stop_on_entry,
         args = {},
         env = function()
           local variables = {}

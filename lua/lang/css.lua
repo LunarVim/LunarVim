@@ -57,7 +57,7 @@ M.lsp = function()
     require("lspconfig").cssls.setup {
       cmd = {
         "node",
-        DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+        require("lsp.installer").get_langserver_path "css",
         "--stdio",
       },
       on_attach = require("lsp").common_on_attach,

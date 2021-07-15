@@ -25,7 +25,7 @@ M.lsp = function()
   end
 
   require("lspconfig").cmake.setup {
-    cmd = { DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server" },
+    cmd = { require("lsp.installer").get_langserver_path "cmake" },
     on_attach = require("lsp").common_on_attach,
     filetypes = { "cmake" },
   }

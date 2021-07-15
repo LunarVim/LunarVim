@@ -75,7 +75,7 @@ M.lsp = function()
   end
 
   require("lspconfig").texlab.setup {
-    cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
+    cmd = { require("lsp.installer").get_langserver_path "latex" },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

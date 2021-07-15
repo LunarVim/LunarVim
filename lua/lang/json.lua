@@ -45,7 +45,7 @@ M.lsp = function()
   require("lspconfig").jsonls.setup {
     cmd = {
       "node",
-      DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
+      require("lsp.installer").get_langserver_path "json",
       "--stdio",
     },
     on_attach = require("lsp").common_on_attach,

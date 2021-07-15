@@ -53,7 +53,7 @@ M.lint = function()
   if not require("lv-utils").check_lsp_client_active "efm" then
     require("lspconfig").efm.setup {
       -- init_options = {initializationOptions},
-      cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
+      cmd = { require("lsp.installer").get_langserver_path "efm" },
       init_options = { documentFormatting = true, codeAction = false },
       root_dir = require("lspconfig").util.root_pattern ".git/",
       filetypes = { "sh" },
@@ -71,7 +71,7 @@ M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "bashls" then
     -- npm i -g bash-language-server
     require("lspconfig").bashls.setup {
-      cmd = { DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server", "start" },
+      cmd = { require("lsp.installer").get_langserver_path "bash", "start" },
       on_attach = require("lsp").common_on_attach,
       filetypes = { "sh", "zsh" },
     }

@@ -31,7 +31,7 @@ return require("packer").startup(function(use)
   use { "neovim/nvim-lspconfig" }
   use {
     "kabouzeid/nvim-lspinstall",
-    event = "VimEnter",
+    -- event = "VimEnter",
     config = function()
       require("lspinstall").setup()
     end,

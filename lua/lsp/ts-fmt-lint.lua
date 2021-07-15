@@ -19,7 +19,7 @@ M.setup = function()
 
   require("lspconfig").efm.setup {
     -- init_options = {initializationOptions},
-    cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
+    cmd = { require("lsp.installer").get_langserver_path "efm" },
     init_options = { documentFormatting = true, codeAction = false },
     root_dir = require("lspconfig").util.root_pattern(".git/", "package.json"),
     filetypes = {

@@ -34,7 +34,7 @@ end
 M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "gopls" then
     require("lspconfig").gopls.setup {
-      cmd = { DATA_PATH .. "/lspinstall/go/gopls" },
+      cmd = { require("lsp.installer").get_langserver_path "go" },
       settings = { gopls = { analyses = { unusedparams = true }, staticcheck = true } },
       root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
       init_options = { usePlaceholders = true, completeUnimported = true },
