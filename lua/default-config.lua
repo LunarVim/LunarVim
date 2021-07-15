@@ -85,14 +85,7 @@ O = {
 
   -- TODO move all of this into lang specific files, only require when using
   lang = {
-    cmake = {
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-    },
     efm = {},
-    elm = {},
     emmet = { active = false },
     svelte = {},
     tailwindcss = {
