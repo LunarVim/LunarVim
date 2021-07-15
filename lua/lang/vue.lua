@@ -15,7 +15,18 @@ M.lint = function()
   return "No linters configured!"
 end
 
-M.lsp = function() end
+M.lsp = function()
+  if require("lv-utils").check_lsp_client_active "vuels" then
+    return
+  end
+
+  -- Vue language server configuration (vetur)
+  require("lspconfig").vuels.setup {
+    cmd = { DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls", "--stdio" },
+    on_attach = require("lsp").common_on_attach,
+    root_dir = require("lspconfig").util.root_pattern(".git", "vue.config.js", "package.json", "yarn.lock"),
+  }
+end
 
 M.dap = function()
   -- TODO: implement dap
