@@ -16,10 +16,9 @@ M.lint = function()
 end
 
 M.lsp = function()
-
-if require("lv-utils").check_lsp_client_active "zls" then
+  if require("lv-utils").check_lsp_client_active "zls" then
     return
-end
+  end
   -- Because lspinstall don't support zig yet,
   -- So we need zls preset in global lib
   -- Further custom install zls in
