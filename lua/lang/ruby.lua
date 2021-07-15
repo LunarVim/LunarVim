@@ -59,6 +59,7 @@ M.lsp = function()
 end
 
 M.dap = function()
+  -- gem install readapt ruby-debug-ide
   if O.plugin.dap.active then
     local dap_install = require "dap-install"
     dap_install.config("ruby_vsc_dbg", {})
