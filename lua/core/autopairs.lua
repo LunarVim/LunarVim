@@ -10,13 +10,9 @@ M.config = function()
 end
 
 M.setup = function()
-  if O.plugin.autopairs.config then
-    return O.plugin.autopairs.config
-  end
-
   local status_ok, autopairs = pcall(require, "nvim-autopairs")
   if not status_ok then
-    return
+    return false
   end
   local npairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
