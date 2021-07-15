@@ -39,8 +39,8 @@ M.lsp = function()
   if require("lv-utils").check_lsp_client_active "dartls" then
     return
   end
-  
-  if flutter_tools.active then
+
+  if O.lang.dart.flutter_tools.active then
     return
   end
 
