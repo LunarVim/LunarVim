@@ -17,6 +17,7 @@ M.format = function()
         exe = O.lang.terraform.formatter.exe,
         args = O.lang.terraform.formatter.args,
         stdin = not (O.lang.terraform.formatter.stdin ~= nil),
+        tempfile_prefix = ".formatter",
       }
     end,
   }
