@@ -46,7 +46,7 @@ local disabled_built_ins = {
 }
 
 if O.leader_key == " " or O.leader_key == "space" then
-  vim.g.mapleader = ' '
+  vim.g.mapleader = " "
 else
   vim.g.mapleader = O.leader_key
 end

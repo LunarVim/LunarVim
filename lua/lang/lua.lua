@@ -1,18 +1,18 @@
 local M = {}
 
 M.config = function()
-    O.lang.lua = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "stylua",
-        args = {},
-        stdin = false,
-      },
-    }
+  O.lang.lua = {
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    formatter = {
+      exe = "stylua",
+      args = {},
+      stdin = false,
+    },
+  }
 end
 
 M.format = function()

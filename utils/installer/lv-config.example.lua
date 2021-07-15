@@ -57,7 +57,7 @@ O.lang.tsserver.linter = nil
 O.lang.latex.active = true
 O.lang.latex.aux_directory = "."
 O.lang.latex.bibtex_formatter = "texlab"
-O.lang.latex.build.args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' }
+O.lang.latex.build.args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" }
 O.lang.latex.build.executable = "latexmk"
 O.lang.latex.build.forward_search_after = false
 O.lang.latex.build.on_save = false
