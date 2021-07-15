@@ -6,8 +6,8 @@ M.config = function()
 end
 
 M.format = function()
-  -- TODO: implement formatter (if applicable)
-  return "No formatters configured!"
+  -- TODO: implement formatter for language
+  return "No formatter available!"
 end
 
 M.lint = function()
@@ -15,10 +15,7 @@ M.lint = function()
   return "No linters configured!"
 end
 
-M.lsp = function()
-  -- TODO: implement lsp
-  return "No LSP configured!"
-end
+M.lsp = function() end
 
 M.dap = function()
   -- TODO: implement dap
