@@ -59,10 +59,7 @@ return require("packer").startup(function(use)
   -- Autopairs
   use {
     "windwp/nvim-autopairs",
-    -- event = "InsertEnter",
-    config = function()
-      require "core.autopairs"
-    end,
+    config = require("core.autopairs").setup(),
   }
 
   -- Snippets
