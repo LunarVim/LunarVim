@@ -1,5 +1,5 @@
-require("lamg.vue").format()
-require("lamg.vue").lint()
-require("lamg.vue").lsp()
-require("lamg.vue").dap()
+require("lang.vue").format()
+require("lang.vue").lint()
+require("lang.vue").lsp()
+require("lang.vue").dap()
 
