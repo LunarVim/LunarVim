@@ -48,6 +48,7 @@ jobs:
 
   freebsd:
     runs-on: macos-latest
+    if: github.event.pull_request.draft == false
     continue-on-error: true # we don't support freebsd yet
     name: "FreeBSD macos-latest"
     steps:
