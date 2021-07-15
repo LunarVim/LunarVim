@@ -21,7 +21,7 @@ O.leader_key = " "
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
-O.plugin.floatterm.active = true
+O.plugin.terminal.active = true
 O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
 
@@ -57,7 +57,7 @@ O.lang.tsserver.linter = nil
 O.lang.latex.active = true
 O.lang.latex.aux_directory = "."
 O.lang.latex.bibtex_formatter = "texlab"
-O.lang.latex.build.args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' }
+O.lang.latex.build.args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" }
 O.lang.latex.build.executable = "latexmk"
 O.lang.latex.build.forward_search_after = false
 O.lang.latex.build.on_save = false

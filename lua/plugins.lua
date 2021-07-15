@@ -189,13 +189,22 @@ return require("packer").startup(function(use)
 
   -- TODO: remove in favor of akinsho/nvim-toggleterm.lua
   -- Floating terminal
+  -- use {
+  --   "numToStr/FTerm.nvim",
+  --   event = "BufWinEnter",
+  --   config = function()
+  --     require("core.floatterm").setup()
+  --   end,
+  --   disable = not O.plugin.floatterm.active,
+  -- }
+
   use {
-    "numToStr/FTerm.nvim",
+    "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
     config = function()
-      require("core.floatterm").setup()
+      require("core.terminal").setup()
     end,
-    disable = not O.plugin.floatterm.active,
+    disable = not O.plugin.terminal.active,
   }
 
   -- Zen Mode

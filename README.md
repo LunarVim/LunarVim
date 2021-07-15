@@ -69,7 +69,7 @@ O.leader_key = ' '
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.dashboard.active = true
-O.plugin.floatterm.active = true
+O.plugin.terminal.active = true
 O.plugin.zen.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want

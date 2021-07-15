@@ -21,7 +21,7 @@ O.leader_key = " "
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
-O.plugin.floatterm.active = true
+O.plugin.terminal.active = true
 O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
 
@@ -49,7 +49,6 @@ O.lang.tsserver.linter = nil
 -- latex
 -- O.lang.latex.auto_save = false
 -- O.lang.latex.ignore_errors = { }
-
 
 -- Additional Plugins
 -- O.user_plugins = {
