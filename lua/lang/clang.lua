@@ -30,6 +30,7 @@ M.format = function()
         exe = O.lang.clang.formatter.exe,
         args = O.lang.clang.formatter.args,
         stdin = not (O.lang.clang.formatter.stdin ~= nil),
+        cwd = vim.fn.expand "%:h:p",
       }
     end,
   }
