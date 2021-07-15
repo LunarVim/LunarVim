@@ -225,7 +225,7 @@ return require("packer").startup(function(use)
     "lervag/vimtex",
     ft = "tex",
   }
-  
+
   -- Dart/Flutter
   use {
     "akinsho/flutter-tools.nvim",
@@ -235,7 +235,7 @@ return require("packer").startup(function(use)
     end,
     disable = not O.lang.dart.flutter_tools.active,
   }
-    
+
   -- Rust tools
   -- TODO: use lazy loading maybe?
   use {
