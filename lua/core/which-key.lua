@@ -193,7 +193,7 @@ M.setup = function()
       v = { ":FlutterVisualDebug<CR>", "Visual Debug" },
     }
   end
-  
+
   -- if O.plugin.ts_playground.active then
   --   vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
   --   mappings[""] = "Highlight Capture"
