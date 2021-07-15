@@ -174,6 +174,26 @@ M.setup = function()
   local mappings = O.plugin.which_key.mappings
   local vmappings = O.plugin.which_key.vmappings
 
+  -- Flutter-Tools
+  -- Todo: Only for flutter projects
+  if O.lang.dart.flutter_tools.active then
+    mappings["F"] = {
+      name = "Flutter",
+      c = { ":FlutterCopyProfilerUrl<CR>", "Copy Profile Url" },
+      d = { ":FlutterDevices<CR>", "Devices" },
+      D = { ":FlutterDevTools<CR>", "Dev Tools" },
+      e = { ":FlutterEmulators<CR>", "Emulators" },
+      h = { ":FlutterReload<CR>", "Reload" },
+      H = { ":FlutterRestart<CR>", "Restart" },
+      l = { ":FlutterLogClear<CR>", "Log Clear" },
+      o = { ":FlutterOutline<CR>", "Outline" },
+      p = { ":FlutterPubGet<CR>", "Pub Get" },
+      q = { ":FlutterQuit<CR>", "Quit" },
+      r = { ":FlutterRun<CR>", "Run" },
+      v = { ":FlutterVisualDebug<CR>", "Visual Debug" },
+    }
+  end
+  
   -- if O.plugin.ts_playground.active then
   --   vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
   --   mappings[""] = "Highlight Capture"
