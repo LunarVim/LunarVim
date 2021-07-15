@@ -1,8 +1,7 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.docker = {}
 end
 
 M.format = function()

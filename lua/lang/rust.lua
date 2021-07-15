@@ -1,8 +1,24 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.rust = {
+    rust_tools = {
+      active = false,
+      parameter_hints_prefix = "<-",
+      other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
+    },
+    -- @usage can be clippy
+    formatter = {
+      exe = "rustfmt",
+      args = { "--emit=stdout", "--edition=2018" },
+    },
+    linter = "",
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+  }
 end
 
 M.format = function()

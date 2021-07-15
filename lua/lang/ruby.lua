@@ -1,8 +1,18 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.ruby = {
+    diagnostics = {
+      virtualtext = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    filetypes = { "rb", "erb", "rakefile", "ruby" },
+    formatter = {
+      exe = "rufo",
+      args = { "-x" },
+    },
+  }
 end
 
 M.format = function()

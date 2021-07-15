@@ -1,6 +1,15 @@
 local M = {}
 
 M.config = function()
+  O.lang.go = {
+    formatter = {
+      exe = "gofmt",
+      args = {},
+    },
+  }
+end
+
+M.format = function()
   O.formatters.filetype["go"] = {
     function()
       return {
@@ -15,11 +24,6 @@ M.config = function()
     logging = false,
     filetype = O.formatters.filetype,
   }
-end
-
-M.format = function()
-  -- TODO: implement formatter for language
-  return "No formatter available!"
 end
 
 M.lint = function()

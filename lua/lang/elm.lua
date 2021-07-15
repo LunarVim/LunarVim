@@ -1,8 +1,7 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.elm = {}
 end
 
 M.format = function()

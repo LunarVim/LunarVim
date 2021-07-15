@@ -1,8 +1,12 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.cmake = {
+    formatter = {
+      exe = "clang-format",
+      args = {},
+    },
+  }
 end
 
 M.format = function()

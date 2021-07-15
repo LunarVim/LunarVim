@@ -1,8 +1,13 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.terraform = {
+    formatter = {
+      exe = "terraform",
+      args = { "fmt" },
+      stdin = false,
+    },
+  }
 end
 
 M.format = function()

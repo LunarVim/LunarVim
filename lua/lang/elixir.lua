@@ -1,8 +1,13 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.elixir = {
+    formatter = {
+      exe = "mix",
+      args = { "format" },
+      stdin = true,
+    },
+  }
 end
 
 M.format = function()

@@ -1,8 +1,12 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.yaml = {
+    formatter = {
+      exe = "prettier",
+      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+    },
+  }
 end
 
 M.format = function()

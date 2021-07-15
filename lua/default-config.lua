@@ -85,12 +85,6 @@ O = {
 
   -- TODO move all of this into lang specific files, only require when using
   lang = {
-    cmake = {
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-    },
     clang = {
       diagnostics = {
         virtual_text = { spacing = 0, prefix = "" },
@@ -105,190 +99,9 @@ O = {
         args = {},
       },
     },
-    css = {
-      virtual_text = true,
-      formatter = {
-        exe = "prettier",
-        args = {},
-      },
-    },
-    dart = {
-      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-      formatter = {
-        exe = "dart",
-        args = { "format" },
-      },
-    },
-    docker = {},
     efm = {},
     elm = {},
     emmet = { active = false },
-    elixir = {
-      formatter = {
-        exe = "mix",
-        args = { "format" },
-        stdin = true,
-      },
-    },
-    graphql = {},
-    go = {
-      formatter = {
-        exe = "gofmt",
-        args = {},
-      },
-    },
-    html = {},
-    java = {
-      java_tools = {
-        active = false,
-      },
-      formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      },
-    },
-    json = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "python",
-        args = { "-m", "json.tool" },
-      },
-    },
-    kotlin = {},
-    latex = {
-      filetypes = { "tex", "bib"},
-      aux_directory = nil,
-      bibtex_formatter = "texlab",
-      diagnostics_delay = 300,
-      formatter_line_length = 80,
-      latex_formatter = "latexindent",
-      build = {
-        executable = "latexmk",
-        args = {'-pdf', '-interaction=nonstopmode', '-synctex=1', '%f'},
-        on_save = false,
-        forward_search_after = false,
-      },
-      chktex = {
-        on_open_and_save = false,
-        on_edit = false,
-      },
-      forward_search = {
-        executable = nil,
-        args = {}
-      },
-      latexindent = {
-        ["local"] = nil,
-        modify_line_breaks = false
-      },
-      diagnostics = {
-        virtual_text = {spacing = 0, prefix = ""},
-        signs = true,
-        underline = true,
-      },
-      auto_save = false,
-      ignore_errors = {},
-    },
-    lua = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "stylua",
-        args = {},
-        stdin = false,
-      },
-    },
-    php = {
-      format = {
-        format = {
-          default = "psr12",
-        },
-      },
-      environment = {
-        php_version = "7.4",
-      },
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "php", "phtml" },
-      formatter = {
-        exe = "phpcbf",
-        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-        stdin = false,
-      },
-    },
-    python = {
-      -- @usage can be flake8 or yapf
-      linter = "",
-      isort = false,
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      analysis = {
-        type_checking = "basic",
-        auto_search_paths = true,
-        use_library_code_types = true,
-      },
-      formatter = {
-        exe = "yapf",
-        args = {},
-      },
-    },
-    ruby = {
-      diagnostics = {
-        virtualtext = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "rb", "erb", "rakefile", "ruby" },
-      formatter = {
-        exe = "rufo",
-        args = { "-x" },
-      },
-    },
-    rust = {
-      rust_tools = {
-        active = false,
-        parameter_hints_prefix = "<-",
-        other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
-      },
-      -- @usage can be clippy
-      formatter = {
-        exe = "rustfmt",
-        args = { "--emit=stdout", "--edition=2018" },
-      },
-      linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    sh = {
-      -- @usage can be 'shellcheck'
-      linter = "",
-      -- @usage can be 'shfmt'
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "shfmt",
-        args = { "-w" },
-        stdin = false,
-      },
-    },
     svelte = {},
     tailwindcss = {
       active = false,
@@ -300,13 +113,6 @@ O = {
         "javascriptreact",
         "typescript",
         "typescriptreact",
-      },
-    },
-    terraform = {
-      formatter = {
-        exe = "terraform",
-        args = { "fmt" },
-        stdin = false,
       },
     },
     tsserver = {
@@ -322,13 +128,6 @@ O = {
         args = {},
       },
     },
-    vim = {},
-    yaml = {
-      formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      },
-    },
   },
 }
 
@@ -342,3 +141,26 @@ require("core.zen").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
+
+require("lang.cmake").config()
+require("lang.css").config()
+require("lang.dart").config()
+require("lang.dockerfile").config()
+require("lang.elixir").config()
+require("lang.elm").config()
+require("lang.go").config()
+require("lang.graphql").config()
+require("lang.html").config()
+require("lang.java").config()
+require("lang.json").config()
+require("lang.kotlin").config()
+require("lang.lua").config()
+require("lang.php").config()
+require("lang.python").config()
+require("lang.ruby").config()
+require("lang.rust").config()
+require("lang.sh").config()
+require("lang.terraform").config()
+require("lang.tex").config()
+require("lang.vim").config()
+require("lang.yaml").config()
