@@ -91,20 +91,6 @@ O = {
         args = {},
       },
     },
-    clang = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      cross_file_rename = true,
-      header_insertion = "never",
-      filetypes = { "c", "cpp", "objc" },
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-    },
     css = {
       virtual_text = true,
       formatter = {
@@ -342,3 +328,5 @@ require("core.zen").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
+
+require("lang.clang").config()
