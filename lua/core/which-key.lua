@@ -66,6 +66,7 @@ M.config = function()
       ["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
       ["c"] = { "<cmd>BufferClose<CR>", "Close Buffer" },
       ["e"] = { "<cmd>lua require'core.nvimtree'.toggle_tree()<CR>", "Explorer" },
+      ["t"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
       ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
       ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
       p = {
