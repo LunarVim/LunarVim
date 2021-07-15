@@ -125,12 +125,12 @@ asktoinstallnode() {
 }
 
 asktoinstallpip() {
-    # echo "pip not found"
-    # echo -n "Would you like to install pip now (y/n)? "
-    # read answer
-    # [ "$answer" != "${answer#[Yy]}" ] && installpip
-    echo "Please install pip3 before continuing with install"
-    exit
+    echo "pip not found"
+    echo -n "Would you like to install pip now (y/n)? "
+    read answer
+    [ "$answer" != "${answer#[Yy]}" ] && installpip
+    # echo "Please install pip3 before continuing with install"
+    # exit
 }
 
 installonmac() {
