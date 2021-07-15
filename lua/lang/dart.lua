@@ -2,6 +2,9 @@ local M = {}
 
 M.config = function()
   O.lang.dart = {
+    flutter_tools = {
+      active = false,
+    },
     sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
     formatter = {
       exe = "dart",
@@ -34,6 +37,10 @@ end
 
 M.lsp = function()
   if require("lv-utils").check_lsp_client_active "dartls" then
+    return
+  end
+  
+  if flutter_tools.active then
     return
   end
 
