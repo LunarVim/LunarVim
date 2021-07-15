@@ -196,9 +196,7 @@ function lsp_config.tsserver_on_attach(client, bufnr)
     eslint_enable_diagnostics = true,
 
     -- formatting
-    enable_formatting = O.lang.tsserver.autoformat,
-    formatter = O.lang.tsserver.formatter.exe,
-    formatter_config_fallback = nil,
+    enable_formatting = false, -- handled by formatter.nvim
 
     -- parentheses completion
     complete_parens = false,
@@ -213,11 +211,11 @@ function lsp_config.tsserver_on_attach(client, bufnr)
   -- required to fix code action ranges
   ts_utils.setup_client(client)
 
-  -- TODO: keymap these?
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {silent = true})
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "qq", ":TSLspFixCurrent<CR>", {silent = true})
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", {silent = true})
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", {silent = true})
+  -- TODO: ts-utils gives us these commands. Should we use them somwhere?
+  -- :TSLspOrganize
+  -- :TSLspFixCurrent
+  -- :TSLspRenameFile
+  -- :TSLspImportAll
 end
 
 require("lv-utils").define_augroups {
