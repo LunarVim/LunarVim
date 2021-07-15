@@ -127,6 +127,7 @@ require("core.zen").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
+require("core.nvimtree").config()
 
 require("lang.clang").config()
 require("lang.cmake").config()
