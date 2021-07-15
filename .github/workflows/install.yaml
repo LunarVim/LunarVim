@@ -33,7 +33,6 @@ jobs:
         if: matrix.os == 'osx'
         run: |
           brew update >/dev/null
-          brew upgrade
           brew install neovim
 
       - name: Install LunarVim
