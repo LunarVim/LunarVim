@@ -1,6 +1,8 @@
 local M = {}
 
 M.config = function()
+  -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
+  -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
   O.lang.r = {
     formatter = {
       exe = "R",
@@ -41,7 +43,7 @@ M.lsp = function()
   if require("lv-utils").check_lsp_client_active "r_language_server" then
     return
   end
-
+  -- R -e 'install.packages("languageserver",repos = "http://cran.us.r-project.org")'
   require("lspconfig").r_language_server.setup {}
 end
 
