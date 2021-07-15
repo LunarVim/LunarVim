@@ -1,5 +1,5 @@
-require("lamg.yaml").format()
-require("lamg.yaml").lint()
-require("lamg.yaml").lsp()
-require("lamg.yaml").dap()
+require("lang.yaml").format()
+require("lang.yaml").lint()
+require("lang.yaml").lsp()
+require("lang.yaml").dap()
 
