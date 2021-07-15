@@ -85,15 +85,7 @@ O = {
 
   -- TODO move all of this into lang specific files, only require when using
   lang = {
-    clang = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      cross_file_rename = true,
-      header_insertion = "never",
-      filetypes = { "c", "cpp", "objc" },
+    cmake = {
       formatter = {
         exe = "clang-format",
         args = {},
@@ -142,6 +134,7 @@ require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
 
+require("lang.clang").config()
 require("lang.cmake").config()
 require("lang.css").config()
 require("lang.dart").config()

@@ -1,4 +1,4 @@
-require("lang.c").format()
-require("lang.c").lint()
-require("lang.c").lsp()
-require("lang.c").dap()
+require("lang.clang").format()
+require("lang.clang").lint()
+require("lang.clang").lsp()
+require("lang.clang").dap()
