@@ -1,6 +1,15 @@
 local M = {}
 
 M.config = function()
+  O.lang.yaml = {
+    formatter = {
+      exe = "prettier",
+      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+    },
+  }
+end
+
+M.format = function()
   O.formatters.filetype["yaml"] = {
     function()
       return {
@@ -14,11 +23,6 @@ M.config = function()
     logging = false,
     filetype = O.formatters.filetype,
   }
-end
-
-M.format = function()
-  -- TODO: implement formatter for language
-  return "No formatter available!"
 end
 
 M.lint = function()

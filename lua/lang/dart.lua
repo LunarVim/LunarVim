@@ -1,8 +1,13 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.dart = {
+    sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+    formatter = {
+      exe = "dart",
+      args = { "format" },
+    },
+  }
 end
 
 M.format = function()

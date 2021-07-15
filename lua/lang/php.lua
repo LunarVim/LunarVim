@@ -1,8 +1,27 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.php = {
+    format = {
+      format = {
+        default = "psr12",
+      },
+    },
+    environment = {
+      php_version = "7.4",
+    },
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    filetypes = { "php", "phtml" },
+    formatter = {
+      exe = "phpcbf",
+      args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+      stdin = false,
+    },
+  }
 end
 
 M.format = function()

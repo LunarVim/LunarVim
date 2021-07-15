@@ -1,8 +1,18 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+    O.lang.lua = {
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      formatter = {
+        exe = "stylua",
+        args = {},
+        stdin = false,
+      },
+    }
 end
 
 M.format = function()

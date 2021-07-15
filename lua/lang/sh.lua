@@ -1,8 +1,21 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.sh = {
+    -- @usage can be 'shellcheck'
+    linter = "",
+    -- @usage can be 'shfmt'
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    formatter = {
+      exe = "shfmt",
+      args = { "-w" },
+      stdin = false,
+    },
+  }
 end
 
 M.format = function()

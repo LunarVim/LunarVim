@@ -1,5 +1,27 @@
 local M = {}
 
+M.config = function()
+  O.lang.python = {
+    -- @usage can be flake8 or yapf
+    linter = "",
+    isort = false,
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    analysis = {
+      type_checking = "basic",
+      auto_search_paths = true,
+      use_library_code_types = true,
+    },
+    formatter = {
+      exe = "yapf",
+      args = {},
+    },
+  }
+end
+
 M.format = function()
   O.formatters.filetype["python"] = {
     function()

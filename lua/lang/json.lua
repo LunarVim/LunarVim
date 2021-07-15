@@ -1,8 +1,17 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.json = {
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    formatter = {
+      exe = "python",
+      args = { "-m", "json.tool" },
+    },
+  }
 end
 
 M.format = function()
