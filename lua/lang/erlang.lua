@@ -19,7 +19,9 @@ M.lsp = function()
     return
   end
 
-  require("lspconfig").erlangls.setup {}
+  require("lspconfig").erlangls.setup {
+    on_attach = require("lsp").common_on_attach,
+  }
 end
 
 M.dap = function()

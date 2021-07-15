@@ -55,6 +55,7 @@ M.lint = function()
     require("lspconfig").efm.setup {
       -- init_options = {initializationOptions},
       cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
+      on_attach = require("lsp").common_on_attach,
       init_options = { documentFormatting = true, codeAction = false },
       root_dir = require("lspconfig").util.root_pattern ".git/",
       filetypes = { "sh" },
