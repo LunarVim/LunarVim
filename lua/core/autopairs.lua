@@ -10,7 +10,6 @@ M.config = function()
 end
 
 M.setup = function()
-  -- if not O.plugin.autopairs.config then
   if O.plugin.autopairs.config then
     return O.plugin.autopairs.config
   end
