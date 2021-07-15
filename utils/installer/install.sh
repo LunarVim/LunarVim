@@ -60,7 +60,7 @@ installpiponmac() {
 }
 
 installpiponubuntu() {
-    sudo apt install python3-pip >/dev/null
+    sudo apt install python3-pip
 }
 
 installpiponarch() {
@@ -68,7 +68,7 @@ installpiponarch() {
 }
 
 installpiponfedora() {
-    sudo dnf install -y pip >/dev/nul
+    sudo dnf install -y pip
 }
 
 installpipongentoo() {
