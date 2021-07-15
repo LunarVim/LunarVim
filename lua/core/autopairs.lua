@@ -11,7 +11,7 @@ end
 
 M.setup = function()
   if O.plugin.autopairs.config then
-    return O.plugin.autopairs.config()
+    return O.plugin.autopairs.config
   end
 
   local status_ok, autopairs = pcall(require, "nvim-autopairs")
