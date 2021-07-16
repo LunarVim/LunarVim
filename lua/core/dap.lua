@@ -2,6 +2,7 @@ local M = {}
 M.config = function()
   O.plugin.dap = {
     active = false,
+    config = nil,
     breakpoint = {
       text = "",
       texthl = "LspDiagnosticsSignError",
@@ -12,6 +13,10 @@ M.config = function()
 end
 
 M.setup = function()
+  if O.plugin.dap.config then
+    return O.plugin.dap.config()
+  end
+
   local status_ok, dap = pcall(require, "dap")
   if not status_ok then
     return

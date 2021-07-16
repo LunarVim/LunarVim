@@ -142,7 +142,7 @@ return require("packer").startup(function(use)
   use {
     "glepnir/galaxyline.nvim",
     config = function()
-      require "core.galaxyline"
+      require("core.galaxyline").setup()
     end,
     event = "BufWinEnter",
     disable = not O.plugin.galaxyline.active,

@@ -2,6 +2,7 @@ local M = {}
 M.config = function()
   O.plugin.dashboard = {
     active = false,
+    config = nil,
     search_handler = "telescope",
     custom_header = {
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -52,6 +53,10 @@ M.config = function()
 end
 
 M.setup = function()
+  if O.plugin.dashboard.config then
+    return O.plugin.dashboard.config()
+  end
+
   vim.g.dashboard_disable_at_vimenter = 0
 
   vim.g.dashboard_custom_header = O.plugin.dashboard.custom_header

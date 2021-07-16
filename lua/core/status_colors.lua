@@ -1,5 +1,6 @@
 O.plugin.galaxyline = {
   active = true,
+  config = nil,
   colors = {
     alt_bg = "#2E2E2E",
     grey = "#858585",
