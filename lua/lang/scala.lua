@@ -67,6 +67,7 @@ M.lsp = function()
       excludedPackages = O.lang.scala.metals.excluded_packages,
     }
     metals_config.init_options.statusBarProvider = O.lang.scala.metals.status_bar_provider
+    require "lsp"
     require("metals").initialize_or_attach(metals_config)
   end
 end
