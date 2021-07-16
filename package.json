@@ -1,0 +1,21 @@
+{
+    "name": "repos",
+    "version": "1.0.0",
+    "description": "Website for ",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "docs:dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs"
+    },
+    "keywords": [
+        "lunarvim"
+    ],
+    "author": "chris",
+    "license": "ISC",
+    "devDependencies": {
+        "vuepress": "^2.0.0-beta.22"
+    }
+}
