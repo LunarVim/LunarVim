@@ -10,6 +10,7 @@ M.config = function()
     formatter = {
       exe = "python",
       args = { "-m", "json.tool" },
+      stdin = true,
     },
   }
 end
@@ -20,7 +21,7 @@ M.format = function()
       return {
         exe = O.lang.json.formatter.exe,
         args = O.lang.json.formatter.args,
-        stdin = not (O.lang.json.formatter.stdin ~= nil),
+        stdin = O.lang.json.formatter.stdin,
       }
     end,
   }

@@ -11,6 +11,7 @@ M.config = function()
     formatter = {
       exe = "rustfmt",
       args = { "--emit=stdout", "--edition=2018" },
+      stdin = true,
     },
     linter = "",
     diagnostics = {
@@ -27,7 +28,7 @@ M.format = function()
       return {
         exe = O.lang.rust.formatter.exe,
         args = O.lang.rust.formatter.args,
-        stdin = not (O.lang.rust.formatter.stdin ~= nil),
+        stdin = O.lang.rust.formatter.stdin,
       }
     end,
   }

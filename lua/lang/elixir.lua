@@ -16,7 +16,7 @@ M.format = function()
       return {
         exe = O.lang.elixir.formatter.exe,
         args = O.lang.elixir.formatter.args,
-        stdin = not (O.lang.elixir.formatter.stdin ~= nil),
+        stdin = O.lang.elixir.formatter.stdin,
       }
     end,
   }

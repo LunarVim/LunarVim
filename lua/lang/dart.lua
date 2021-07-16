@@ -6,6 +6,7 @@ M.config = function()
     formatter = {
       exe = "dart",
       args = { "format" },
+      stdin = true,
     },
   }
 end
@@ -16,7 +17,7 @@ M.format = function()
       return {
         exe = O.lang.dart.formatter.exe,
         args = O.lang.dart.formatter.args,
-        stdin = not (O.lang.dart.formatter.stdin ~= nil),
+        stdin = O.lang.dart.formatter.stdin,
       }
     end,
   }

@@ -18,6 +18,7 @@ M.config = function()
     formatter = {
       exe = "yapf",
       args = {},
+      stdin = true,
     },
   }
 end
@@ -28,7 +29,7 @@ M.format = function()
       return {
         exe = O.lang.python.formatter.exe,
         args = O.lang.python.formatter.args,
-        stdin = not (O.lang.python.formatter.stdin ~= nil),
+        stdin = O.lang.python.formatter.stdin,
       }
     end,
   }
