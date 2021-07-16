@@ -1,13 +1,30 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.zig = {
+    formatter = {
+      exe = "zig",
+      args = { "fmt" },
+      stdin = false,
+    },
+  }
 end
 
 M.format = function()
-  -- TODO: implement formatter for language
-  return "No formatter available!"
+  O.formatters.filetype["zig"] = {
+    function()
+      return {
+        exe = O.lang.zig.formatter.exe,
+        args = O.lang.zig.formatter.args,
+        stdin = O.lang.zig.formatter.stdin,
+      }
+    end,
+  }
+
+  require("formatter.config").set_defaults {
+    logging = false,
+    filetype = O.formatters.filetype,
+  }
 end
 
 M.lint = function()
