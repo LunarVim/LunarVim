@@ -50,7 +50,8 @@ M.lsp = function()
     -- enable metal server integration
     if O.lang.scala.metals.active then
       vim.g["metals_server_version"] = O.lang.scala.metals.server_version
-
+      -- https://github.com/scalameta/nvim-metals#prerequisites
+      vim.opt_global.shortmess:remove("F"):append "c"
       local metals_config = require("metals").bare_config
       metals_config.settings = {
         showImplicitArguments = O.lang.scala.metals.show_implicit_arguments,
