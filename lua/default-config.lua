@@ -66,6 +66,8 @@ O = {
       },
       signs = true,
       underline = true,
+      document_highlight = true,
+      popup_border = "single",
     },
   },
 
