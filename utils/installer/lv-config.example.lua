@@ -47,10 +47,15 @@ O.lang.python.analysis.use_library_code_types = true
 O.lang.tsserver.linter = nil
 
 -- rust
+-- O.lang.rust.rust_tools = true
 -- O.lang.rust.formatter = {
 --   exe = "rustfmt",
 --   args = {"--emit=stdout", "--edition=2018"},
 -- }
+
+-- scala
+-- O.lang.scala.metals.active = true
+-- O.lang.scala.metals.server_version = "0.10.2+33-c6441eb4-SNAPSHOT",
 
 --LaTeX
 -- Options: https://github.com/latex-lsp/texlab/blob/master/docs/options.md

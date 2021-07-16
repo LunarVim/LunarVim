@@ -249,10 +249,17 @@ return require("packer").startup(function(use)
     },
   }
 
+  -- Java
   use {
     "mfussenegger/nvim-jdtls",
     -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
+  }
+
+  -- Scala
+  use {
+    "scalameta/nvim-metals",
+    disable = not O.lang.scala.metals.active,
   }
 
   -- Install user plugins
