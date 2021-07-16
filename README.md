@@ -65,7 +65,27 @@ O.completion.autocomplete = true
 O.default_options.relativenumber = true
 O.colorscheme = 'spacegray'
 O.default_options.timeoutlen = 100
-O.leader_key = ' '
+
+-- keymappings 
+O.keys.leader_key = "space"
+-- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
+O.keys.normal_mode = {
+    -- Page down/up
+  {'[d', '<PageUp>'},
+  {']d', '<PageDown>'},
+
+  -- Navigate buffers
+  {'<Tab>', ':bnext<CR>'},
+  {'<S-Tab>', ':bprevious<CR>'},
+}
+-- if you just want to augment the existing ones then use the utility function
+require("lv-utils").add_keymap_insert_mode({ silent = true }, {
+  { "<C-s>", ":w<cr>" },
+  { "<C-c>", "<ESC>" }
+})
+
+-- you can also use the native vim way directly
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.dashboard.active = true
