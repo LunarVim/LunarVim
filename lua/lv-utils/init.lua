@@ -3,9 +3,11 @@ local lv_utils = {}
 function lv_utils.reload_lv_config()
   vim.cmd("source " .. CONFIG_PATH .. "/lv-config.lua")
   vim.cmd("source " .. CONFIG_PATH .. "/lua/plugins.lua")
-  vim.cmd("source " .. CONFIG_PATH .. "/lua/lv-neoformat/init.lua")
+  vim.cmd("source " .. CONFIG_PATH .. "/lua/settings.lua")
+  vim.cmd("source " .. CONFIG_PATH .. "/lua/core/formatter.lua")
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
+  -- vim.cmd ":PackerClean"
 end
 
 function lv_utils.check_lsp_client_active(name)
@@ -40,9 +42,13 @@ function lv_utils.define_augroups(definitions) -- {{{1
   end
 end
 
+function lv_utils.unrequire(m)
+  package.loaded[m] = nil
+  _G[m] = nil
+end
+
 lv_utils.define_augroups {
 
-  _user_autocommands = O.user_autocommands,
   _general_settings = {
     {
       "TextYankPost",
@@ -55,6 +61,11 @@ lv_utils.define_augroups {
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
     {
+      "BufWinEnter",
+      "dashboard",
+      "setlocal cursorline signcolumn=yes cursorcolumn number",
+    },
+    {
       "BufRead",
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
@@ -65,7 +76,12 @@ lv_utils.define_augroups {
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
     { "BufWritePost", "lv-config.lua", "lua require('lv-utils').reload_lv_config()" },
-    { "VimLeavePre", "*", "set title set titleold=" },
+    -- { "VimLeavePre", "*", "set title set titleold=" },
+  },
+  _solidity = {
+    { "BufWinEnter", ".tf", "setlocal filetype=hcl" },
+    { "BufRead", "*.tf", "setlocal filetype=hcl" },
+    { "BufNewFile", "*.tf", "setlocal filetype=hcl" },
   },
   -- _solidity = {
   --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
@@ -90,6 +106,7 @@ lv_utils.define_augroups {
     -- will cause split windows to be resized evenly if main window is resized
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
+
   -- _fterm_lazygit = {
   --   -- will cause esc key to exit lazy git
   --   {"TermEnter", "*", "call LazyGitNativation()"}
@@ -101,6 +118,7 @@ lv_utils.define_augroups {
   --   {'InsertEnter', '*', 'if &cursorline | let g:ms_cursorlineoff = 1 | setlocal nocursorline | endif'},
   --   {'InsertLeave', '*', 'if exists("g:ms_cursorlineoff") | setlocal cursorline | endif'},
   -- },
+  _user_autocommands = O.user_autocommands,
 }
 
 vim.cmd [[
@@ -115,4 +133,4 @@ endfunction
 
 return lv_utils
 
--- TODO find a new home for these autocommands
+-- TODO: find a new home for these autocommands

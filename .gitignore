@@ -20,4 +20,5 @@ spell/
 nv-settings.lua
 lv-settings.lua
 .stylua.toml
+lua/lv-user/
 lua/lv-user-config/

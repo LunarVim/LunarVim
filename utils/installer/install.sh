@@ -1,5 +1,6 @@
 #!/bin/sh
-
+#Set Variable to master is not set differently
+LVBRANCH="${LVBRANCH:-master}"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
@@ -100,13 +101,20 @@ installpacker() {
 
 cloneconfig() {
     echo "Cloning LunarVim configuration"
-    git clone --branch stable https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
-    mv $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
-    # mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
-    # nvim -u $HOME/.config/nvim/init.lua +PackerCompile +PackerInstall
-    nvim +PackerCompile +PackerInstall
-    # rm $HOME/.config/nvim/init.lua
-    # mv $HOME/.config/nvim/init.lua.tmp $HOME/.config/nvim/init.lua
+    git clone --branch $LVBRANCH https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
+    cp $HOME/.config/nvim/utils/installer/lv-config.example-no-ts.lua $HOME/.config/nvim/lv-config.lua
+    nvim --headless \
+        +'autocmd User PackerComplete sleep 100m | qall' \
+        +PackerInstall
+
+    nvim --headless \
+        +'autocmd User PackerComplete sleep 100m | qall' \
+        +PackerSync
+
+    echo -e "\nCompile Complete"
+    rm $HOME/.config/nvim/lv-config.lua
+    cp $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
+    # nvim --headless -cq ':silent TSUpdate' -cq ':qall' >/dev/null 2>&1
 }
 
 asktoinstallnode() {
@@ -173,6 +181,13 @@ installextrapackages() {
 
 # Welcome
 echo 'Installing LunarVim'
+
+if [[ $* == *--overwrite* ]]; then
+  echo '!!Warning!! -> Removing all nvim related config because of the --overwrite flag'
+  rm -rf "$HOME/.config/nvim"
+  rm -rf "$HOME/.cache/nvim"
+  rm -rf "$HOME/.local/share/nvim/site/pack/packer"
+fi
 
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim

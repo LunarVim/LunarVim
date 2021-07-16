@@ -1,0 +1,25 @@
+name: format
+on:
+  push:
+    branches: '**'
+  pull_request:
+    branches:
+      - 'master'
+      - 'rolling'
+
+jobs:
+  stylua-check:
+    name: "Formatting check with Stylua"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Prepare dependencies
+        run: |
+          sudo apt install -y curl unzip --no-install-recommends
+          bash ./utils/installer/install_stylua.sh
+
+      - name: Check formatting
+        run: |
+          ./utils/stylua --config-path ./utils/.stylua.toml -c .
+
