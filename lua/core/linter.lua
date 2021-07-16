@@ -9,6 +9,11 @@ M.setup = function()
           "<buffer>",
           ":lua require('lint').try_lint()",
         },
+        {
+          "BufEnter",
+          "<buffer>",
+          ":lua require('lint').try_lint()",
+        },
       },
     }
   end
