@@ -11,6 +11,7 @@ an executable
 -- general
 
 O.format_on_save = true
+O.lint_on_save = true
 O.completion.autocomplete = true
 O.colorscheme = "spacegray"
 O.auto_close_tree = 0

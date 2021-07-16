@@ -10,6 +10,7 @@ O = {
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
+  lint_on_save = true,
   vsnip_dir = vim.fn.stdpath "config" .. "/snippets",
 
   default_options = {
