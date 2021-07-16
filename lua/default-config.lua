@@ -58,6 +58,17 @@ O = {
     sidescrolloff = 8,
   },
 
+  lsp = {
+    diagnostics = {
+      virtual_text = {
+        prefix = "",
+        spacing = 0,
+      },
+      signs = true,
+      underline = true,
+    },
+  },
+
   plugin = {},
 
   -- TODO: refactor for tree
