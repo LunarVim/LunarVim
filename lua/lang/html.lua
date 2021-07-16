@@ -10,8 +10,10 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    -- https://docs.errata.ai/vale/scoping#html
+    html = { "tidy", "vale" },
+  }
 end
 
 M.lsp = function()

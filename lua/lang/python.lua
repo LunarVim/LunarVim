@@ -40,41 +40,9 @@ M.format = function()
 end
 
 M.lint = function()
-  if require("lv-utils").check_lsp_client_active "efm" then
-    return
-  end
-  local python_arguments = {}
-
-  local flake8 = {
-    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
-    lintStdin = true,
-    lintFormats = { "%f:%l:%c: %m" },
+  require("lint").linters_by_ft = {
+    python = { "flake8", "pylint", "mypy" },
   }
-
-  local isort = { formatCommand = "isort --quiet -", formatStdin = true }
-
-  if O.lang.python.linter == "flake8" then
-    table.insert(python_arguments, flake8)
-  end
-
-  if O.lang.python.isort then
-    table.insert(python_arguments, isort)
-  end
-
-  if not require("lv-utils").check_lsp_client_active "efm" then
-    require("lspconfig").efm.setup {
-      cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
-      init_options = { documentFormatting = true, codeAction = false },
-      root_dir = require("lspconfig").util.root_pattern(".git/", "requirements.txt"),
-      filetypes = { "python" },
-      settings = {
-        rootMarkers = { ".git/", "requirements.txt" },
-        languages = {
-          python = python_arguments,
-        },
-      },
-    }
-  end
 end
 
 M.lsp = function()

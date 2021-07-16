@@ -42,8 +42,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    tex = { "chktex" },
+  }
 end
 
 M.lsp = function()
