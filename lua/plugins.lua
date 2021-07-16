@@ -86,6 +86,12 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- Linter
+  use {
+    "mfussenegger/nvim-lint",
+    config = require("core.linter").setup,
+  }
+
   -- NvimTree
   use {
     "kyazdani42/nvim-tree.lua",

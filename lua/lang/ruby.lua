@@ -12,6 +12,7 @@ M.config = function()
       exe = "rufo",
       args = { "-x" },
     },
+    linters = { "ruby" },
   }
 end
 
@@ -33,8 +34,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    ruby = O.lang.ruby.linters,
+  }
 end
 
 M.lsp = function()

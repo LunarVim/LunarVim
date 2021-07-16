@@ -31,6 +31,7 @@ M.config = function()
       signs = true,
       underline = true,
     },
+    linters = { "chktex" },
     auto_save = false,
     ignore_errors = {},
   }
@@ -42,8 +43,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    tex = O.lang.latex.linters,
+  }
 end
 
 M.lsp = function()

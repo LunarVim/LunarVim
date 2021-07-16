@@ -1,7 +1,9 @@
 local M = {}
 
 M.config = function()
-  O.lang.vim = {}
+  O.lang.vim = {
+    linters = { "vint" },
+  }
 end
 
 M.format = function()
@@ -10,8 +12,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    vim = O.lang.vim.linters,
+  }
 end
 
 M.lsp = function()
