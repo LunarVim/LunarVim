@@ -21,6 +21,7 @@ M.lsp = function()
 
   require("lspconfig").elmls.setup {
     cmd = { DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server" },
+    on_attach = require("lsp").common_on_attach,
     init_options = {
       elmAnalyseTrigger = "change",
       elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",

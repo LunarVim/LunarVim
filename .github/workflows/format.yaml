@@ -16,13 +16,10 @@ jobs:
 
       - name: Prepare dependencies
         run: |
-          sudo apt update
-          sudo apt install -y curl
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-          cargo install stylua
-      
+          sudo apt install -y curl unzip --no-install-recommends
+          bash ./utils/installer/install_stylua.sh
+
       - name: Check formatting
         run: |
-          cp ./utils/.stylua.toml .
-          stylua -c .
+          ./utils/stylua --config-path ./utils/.stylua.toml -c .
 
