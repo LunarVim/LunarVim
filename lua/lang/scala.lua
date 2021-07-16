@@ -4,13 +4,9 @@ M.config = function()
   O.lang.scala = {
     metals = {
       active = false,
-      server_version = "0.10.2+33-c6441eb4-SNAPSHOT",
-      excluded_packages = {
-        "akka.actor.typed.javadsl",
-        "com.github.swagger.akka.javadsl",
-        "akka.stream.javadsl",
-      },
-      show_implicit_arguments = true,
+      server_version = "0.10.5",
+      excluded_packages = {},
+      show_implicit_arguments = false,
       show_inferred_type = true,
       status_bar_provider = false,
     },
