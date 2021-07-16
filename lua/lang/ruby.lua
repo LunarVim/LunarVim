@@ -12,6 +12,7 @@ M.config = function()
       exe = "rufo",
       args = { "-x" },
     },
+    linters = { "ruby" },
   }
 end
 
@@ -34,7 +35,7 @@ end
 
 M.lint = function()
   require("lint").linters_by_ft = {
-    tex = { "ruby" },
+    ruby = O.lang.ruby.linters,
   }
 end
 

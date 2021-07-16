@@ -14,6 +14,9 @@ M.config = function()
       exe = "clang-format",
       args = {},
     },
+    linters = {
+      "cppcheck",
+    },
     debug = {
       adapter = {
         command = "/usr/bin/lldb-vscode",
@@ -46,8 +49,8 @@ end
 
 M.lint = function()
   require("lint").linters_by_ft = {
-    c = { "cppcheck" },
-    cpp = { "cppcheck" },
+    c = O.lang.clang.linters,
+    cpp = O.lang.clang.linters,
   }
 end
 

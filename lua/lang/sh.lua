@@ -15,6 +15,7 @@ M.config = function()
       args = { "-w" },
       stdin = false,
     },
+    linters = { "shellcheck" },
   }
 end
 
@@ -38,7 +39,7 @@ end
 
 M.lint = function()
   require("lint").linters_by_ft = {
-    sh = { "shellcheck" },
+    sh = O.lang.sh.linters,
   }
 end
 

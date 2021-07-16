@@ -6,6 +6,10 @@ M.config = function()
       exe = "gofmt",
       args = {},
     },
+    linters = {
+      "golangcilint",
+      "revive",
+    },
   }
 end
 
@@ -28,7 +32,7 @@ end
 
 M.lint = function()
   require("lint").linters_by_ft = {
-    go = { "golangcilint", "revive" },
+    go = O.lang.go.linters,
   }
 end
 

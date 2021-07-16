@@ -19,6 +19,11 @@ M.config = function()
       exe = "yapf",
       args = {},
     },
+    linters = {
+      "flake8",
+      "pylint",
+      "mypy",
+    },
   }
 end
 
@@ -41,7 +46,7 @@ end
 
 M.lint = function()
   require("lint").linters_by_ft = {
-    python = { "flake8", "pylint", "mypy" },
+    python = O.lang.python.linters,
   }
 end
 

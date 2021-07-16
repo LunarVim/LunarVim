@@ -12,6 +12,7 @@ M.config = function()
       args = {},
       stdin = false,
     },
+    linters = { "luacheck" },
   }
 end
 
@@ -35,7 +36,7 @@ end
 
 M.lint = function()
   require("lint").linters_by_ft = {
-    lua = { "luacheck" },
+    lua = O.lang.lua.linters,
   }
 end
 
