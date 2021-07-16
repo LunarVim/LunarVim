@@ -51,8 +51,6 @@ end
 
 M.lsp = function()
   local function scala_on_attach(client, bufnr)
-    require("lsp").common_on_attach(client, bufnr)
-
     -- enable metal server integration
     if O.lang.scala.metals.active then
       vim.g["metals_server_version"] = O.lang.scala.metals.server_version
