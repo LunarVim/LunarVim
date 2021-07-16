@@ -44,7 +44,9 @@ return require("packer").startup(function(use)
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
-    config = require("core.telescope").setup(),
+    config = function()
+      require("core.telescope").setup()
+    end,
   }
 
   -- Autocomplete
