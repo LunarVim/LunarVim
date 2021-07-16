@@ -32,6 +32,7 @@ M.config = function()
         background = "Normal",
       },
     },
+    config = nil,
   }
 end
 
@@ -41,6 +42,11 @@ M.setup = function()
     print(terminal)
     return
   end
+
+  if O.plugin.terminal.config then
+    return O.plugin.terminal.config()
+  end
+
   vim.api.nvim_set_keymap(
     "n",
     "<leader>gg",

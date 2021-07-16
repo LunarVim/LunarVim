@@ -81,6 +81,7 @@ M.config = function()
         override_file_sorter = true,
       },
     },
+    config = nil,
   }
 end
 
@@ -89,6 +90,11 @@ M.setup = function()
   if not status_ok then
     return
   end
+
+  if O.plugin.telescope.config then
+    return O.plugin.telescope.config()
+  end
+
   telescope.setup(O.plugin.telescope)
   vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
 end
