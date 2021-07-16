@@ -12,6 +12,7 @@ M.config = function()
         "--no-save",
         '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
       },
+      stdin = true,
     },
   }
 end
@@ -22,7 +23,7 @@ M.format = function()
       return {
         exe = O.lang.r.formatter.exe,
         args = O.lang.r.formatter.args,
-        stdin = not (O.lang.r.formatter.stdin ~= nil),
+        stdin = O.lang.r.formatter.stdin,
       }
     end,
   }
