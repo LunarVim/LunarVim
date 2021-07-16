@@ -13,6 +13,7 @@ M.config = function()
     max_kind_width = 100,
     max_menu_width = 100,
     documentation = true,
+    config = nil,
 
     source = {
       path = { kind = "   (Path)" },
@@ -34,6 +35,9 @@ M.config = function()
 end
 
 M.setup = function()
+  if O.completion.config then
+    return O.completion.config()
+  end
   vim.g.vsnip_snippet_dir = O.vsnip_dir
 
   local status_ok, compe = pcall(require, "compe")

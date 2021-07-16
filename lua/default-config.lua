@@ -138,6 +138,7 @@ require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
 require("core.autopairs").config()
+require("core.bufferline").config()
 
 require("lang.clang").config()
 require("lang.cmake").config()

@@ -151,7 +151,7 @@ return require("packer").startup(function(use)
   use {
     "romgrk/barbar.nvim",
     config = function()
-      require "core.bufferline"
+      require("core.bufferline").setup()
     end,
     event = "BufWinEnter",
   }
