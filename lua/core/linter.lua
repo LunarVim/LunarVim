@@ -7,12 +7,12 @@ M.setup = function()
         {
           "BufWritePost",
           "<buffer>",
-          ":lua require('lint').try_lint()",
+          ":silent lua require('lint').try_lint()",
         },
         {
           "BufEnter",
           "<buffer>",
-          ":lua require('lint').try_lint()",
+          ":silent lua require('lint').try_lint()",
         },
       },
     }

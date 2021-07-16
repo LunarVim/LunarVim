@@ -127,7 +127,7 @@ M.config = function()
           "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
-        l = { "<cmd>lua require('lint').try_lint()<cr>", "Lint" },
+        l = { "<cmd>silent lua require('lint').try_lint()<cr>", "Lint" },
         q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
