@@ -1,14 +1,21 @@
--- --if not package.loaded['nvim-tree.view'] then
--- --  return
--- --end
---
 local M = {}
 local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
 if not status_ok then
   return
 end
 --
+
+M.config = function()
+  O.plugin.nvimtree = {
+    config = nil,
+  }
+end
+
 M.setup = function()
+  if O.plugin.nvimtree.config then
+    return O.plugin.nvimtree.config()
+  end
+
   local g = vim.g
 
   vim.o.termguicolors = true

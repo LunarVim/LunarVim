@@ -139,6 +139,7 @@ require("core.treesitter").config()
 require("core.which-key").config()
 require("core.autopairs").config()
 require("core.bufferline").config()
+require("core.nvimtree").config()
 
 require("lang.clang").config()
 require("lang.cmake").config()
