@@ -16,6 +16,7 @@ M.config = function()
     },
     linters = {
       "cppcheck",
+      "clangtidy",
     },
     debug = {
       adapter = {
