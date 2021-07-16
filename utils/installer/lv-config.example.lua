@@ -91,3 +91,66 @@ O.lang.latex.latexindent.modify_line_breaks = false
 --     b = { "<cmd>echo 'second custom command'<cr>", "Description for b" },
 --   },
 -- }
+
+-- If you want to override settings to the core plugins
+-- AND those settings are not available from the global object 'O'
+-- You can provide your own configuration by placing it in the following format:
+
+-- O.plugin.autopairs.config = function()
+--   print "loading user config for autopairs"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.bufferline.config = function()
+--   print "Loaded user config for bufferline"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.completion.config = function()
+--   print "Loaded user config for compe"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.dap.active = true
+-- O.plugin.dap.config = function()
+--   print "Loaded user config for dap"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.dashboard.active = true
+-- O.plugin.dashboard.config = function()
+--   print "Loaded user config for dashboard"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.galaxyline.config = function()
+--   print "Loaded user config for galaxyline"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.nvimtree.config = function()
+--   print "Loaded user config for nvimtree"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.telescope.config = function()
+--   print "Loaded user config for telescope"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.terminal.active = true
+-- O.plugin.terminal.config = function()
+--   print "Loaded user config for terminal"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.treesitter.config = function()
+--   print "Loaded user config for treesitter"
+--   -- VALID_CONFIG_HERE
+-- end
+--
+-- O.plugin.zen.active = true
+-- O.plugin.zen.config = function()
+--   print "Loaded user config for zen"
+--   -- VALID_CONFIG_HERE
+-- end
