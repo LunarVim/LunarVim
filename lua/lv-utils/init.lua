@@ -1,46 +1,45 @@
 local lv_utils = {}
 
--- recursive Print (structure, limit, indent)
-local function rPrint(s, l, i)
-  l = l or 100 -- default item limit
-  i = i or "." -- indent string
-  if l < 1 then
+-- recursive Print (structure, limit, separator)
+local function r_inspect_settings(structure, limit, separator)
+  limit = limit or 100 -- default item limit
+  separator = separator or "." -- indent string
+  if limit < 1 then
     print "ERROR: Item limit reached."
-    return l - 1
+    return limit - 1
   end
-  local ts = type(s)
-  if ts ~= "table" then
-    if ts == nil then
-      io.write("-- O", i:sub(2), " = nil\n")
-      return l - 1
-    elseif ts == "string" then
-      -- escape sequences
-      s = string.format("%q", s)
+  if structure == nil then
+    io.write("-- O", separator:sub(2), " = nil\n")
+    return limit - 1
+  end
+  local ts = type(structure)
+
+  if ts == "table" then
+    for k, v in pairs(structure) do
+      -- replace non alpha keys wih ["key"]
+      if tostring(k):match "[^%a_]" then
+        k = '["' .. tostring(k) .. '"]'
+      end
+      limit = r_inspect_settings(v, limit, separator .. "." .. tostring(k))
+      if limit < 0 then
+        break
+      end
     end
-    i = i:gsub("%.%[", "%[")
-    if type(s) == "function" then
-      -- don't print functions
-      io.write("-- O", i:sub(2), " = function ()\n")
-    else
-      io.write("O", i:sub(2), " = ", tostring(s), "\n")
-    end
-    return l - 1
+    return limit
   end
 
-  if ts == nil then
-    ts = ""
+  if ts == "string" then
+    -- escape sequences
+    structure = string.format("%q", structure)
   end
-  for k, v in pairs(s) do
-    -- replace non alpha keys wih ["key"]
-    if tostring(k):match "[^%a_]" then
-      k = '["' .. tostring(k) .. '"]'
-    end
-    l = rPrint(v, l, i .. "." .. tostring(k))
-    if l < 0 then
-      break
-    end
+  separator = separator:gsub("%.%[", "%[")
+  if type(structure) == "function" then
+    -- don't print functions
+    io.write("-- O", separator:sub(2), " = function ()\n")
+  else
+    io.write("O", separator:sub(2), " = ", tostring(structure), "\n")
   end
-  return l
+  return limit - 1
 end
 
 function lv_utils.generate_settings()
@@ -50,7 +49,8 @@ function lv_utils.generate_settings()
   -- sets the default output file as test.lua
   io.output(file)
 
-  rPrint(O, 10000, ".")
+  -- write all `O` related settings to `lv-settings.lua` file
+  r_inspect_settings(O, 10000, ".")
 
   -- closes the open file
   io.close(file)
