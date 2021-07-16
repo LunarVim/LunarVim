@@ -46,27 +46,29 @@ M.lint = function()
 end
 
 M.lsp = function()
-  local function scala_on_attach(client, bufnr)
-    -- enable metal server integration
-    if O.lang.scala.metals.active then
-      vim.g["metals_server_version"] = O.lang.scala.metals.server_version
-      -- https://github.com/scalameta/nvim-metals#prerequisites
-      vim.opt_global.shortmess:remove("F"):append "c"
-      local metals_config = require("metals").bare_config
-      metals_config.settings = {
-        showImplicitArguments = O.lang.scala.metals.show_implicit_arguments,
-        showInferredType = O.lang.scala.metals.show_inferred_type,
-        excludedPackages = O.lang.scala.metals.excluded_packages,
-      }
-      metals_config.init_options.statusBarProvider = O.lang.scala.metals.status_bar_provider
-      require("metals").initialize_or_attach(metals_config)
+  -- enable metal server integration
+  if O.lang.scala.metals.active then
+    vim.g["metals_server_version"] = O.lang.scala.metals.server_version
+    -- https://github.com/scalameta/nvim-metals#prerequisites
+    vim.opt_global.shortmess:remove("F"):append "c"
+    local metals_config = require("metals").bare_config
+    metals_config.on_attach = function()
+      require("completion").on_attach()
     end
+    metals_config.handlers["textDocument/publishDiagnostics"] =
+      vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = {
+          prefix = "",
+        },
+      })
+    metals_config.settings = {
+      showImplicitArguments = O.lang.scala.metals.show_implicit_arguments,
+      showInferredType = O.lang.scala.metals.show_inferred_type,
+      excludedPackages = O.lang.scala.metals.excluded_packages,
+    }
+    metals_config.init_options.statusBarProvider = O.lang.scala.metals.status_bar_provider
+    require("metals").initialize_or_attach(metals_config)
   end
-
-  require("lspconfig").metals.setup {
-    on_attach = scala_on_attach,
-    filetypes = { "scala", "sbt" },
-  }
 end
 
 M.dap = function()
