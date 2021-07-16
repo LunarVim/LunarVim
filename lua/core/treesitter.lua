@@ -58,6 +58,7 @@ M.config = function()
       extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
       max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
     },
+    config = nil,
   }
 
   -- -- TODO refactor treesitter
@@ -179,6 +180,10 @@ M.setup = function()
   local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
     return
+  end
+
+  if O.treesitter.config then
+    return O.treesitter.config()
   end
 
   treesitter_configs.setup(O.treesitter)
