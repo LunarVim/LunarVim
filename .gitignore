@@ -22,3 +22,9 @@ lv-settings.lua
 .stylua.toml
 lua/lv-user/
 lua/lv-user-config/
+
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
