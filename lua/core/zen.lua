@@ -20,6 +20,7 @@ M.config = function()
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
+    config = nil,
   }
 end
 
@@ -28,6 +29,11 @@ M.setup = function()
   if not status_ok then
     return
   end
+
+  if O.plugin.zen.config then
+    return O.plugin.zen.config()
+  end
+
   zen_mode.setup(O.plugin.zen)
 end
 
