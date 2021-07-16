@@ -1,5 +1,61 @@
 local lv_utils = {}
 
+-- recursive Print (structure, limit, indent)
+local function rPrint(s, l, i)
+  l = l or 100 -- default item limit
+  i = i or "." -- indent string
+  if l < 1 then
+    print "ERROR: Item limit reached."
+    return l - 1
+  end
+  local ts = type(s)
+  if ts ~= "table" then
+    if ts == nil then
+      io.write("-- O", i:sub(2), " = nil\n")
+      return l - 1
+    elseif ts == "string" then
+      -- escape sequences
+      s = string.format("%q", s)
+    end
+    i = i:gsub("%.%[", "%[")
+    if type(s) == "function" then
+      -- don't print functions
+      io.write("-- O", i:sub(2), " = function ()\n")
+    else
+      io.write("O", i:sub(2), " = ", tostring(s), "\n")
+    end
+    return l - 1
+  end
+
+  if ts == nil then
+    ts = ""
+  end
+  for k, v in pairs(s) do
+    -- replace non alpha keys wih ["key"]
+    if tostring(k):match "[^%a_]" then
+      k = '["' .. tostring(k) .. '"]'
+    end
+    l = rPrint(v, l, i .. "." .. tostring(k))
+    if l < 0 then
+      break
+    end
+  end
+  return l
+end
+
+function lv_utils.generate_settings()
+  -- Opens a file in append mode
+  local file = io.open("lv-settings.lua", "w")
+
+  -- sets the default output file as test.lua
+  io.output(file)
+
+  rPrint(O, 10000, ".")
+
+  -- closes the open file
+  io.close(file)
+end
+
 function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/nvim/lv-config.lua"
   vim.cmd "source ~/.config/nvim/lua/plugins.lua"
