@@ -3,6 +3,8 @@ const path = require("path");
 
 module.exports = {
   // base: "/LunarVim.com/",
+  lang: "en-US",
+  title: "LunarVim Docs",
   themeConfig: {
     home: "/",
     logo: "/assets/lunarvim_logo.png",
