@@ -68,7 +68,6 @@ M.config = function()
       ["e"] = { "<cmd>lua require'core.nvimtree'.toggle_tree()<CR>", "Explorer" },
       ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
       ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
-      [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },
       p = {
         name = "Packer",
         c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -128,9 +127,10 @@ M.config = function()
           "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
+        l = { "<cmd>silent lua require('lint').try_lint()<cr>", "Lint" },
         q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = { "<cmd> Telescope lsp_document_symbols<cr>", "Document Symbols" },
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = {
           "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
           "Workspace Symbols",
@@ -149,6 +149,10 @@ M.config = function()
         t = { "<cmd>Telescope live_grep<cr>", "Text" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
+        p = {
+          "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+          "Colorscheme with Preview",
+        },
       },
       T = {
         name = "Treesitter",
@@ -185,13 +189,11 @@ M.setup = function()
     mappings["z"] = "Zen"
   end
 
-  for k, v in pairs(O.user_which_key) do
-    mappings[k] = v
-  end
-
   local wk = require "which-key"
+
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
+  wk.register(O.user_which_key, opts)
 end
 
 return M

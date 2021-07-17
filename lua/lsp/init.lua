@@ -16,15 +16,43 @@ vim.fn.sign_define(
   { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" }
 )
 
+-- local opts = { border = "single" }
+-- TODO revisit this
+-- local border = {
+--   { "🭽", "FloatBorder" },
+--   { "▔", "FloatBorder" },
+--   { "🭾", "FloatBorder" },
+--   { "▕", "FloatBorder" },
+--   { "🭿", "FloatBorder" },
+--   { "▁", "FloatBorder" },
+--   { "🭼", "FloatBorder" },
+--   { "▏", "FloatBorder" },
+-- }
+
+-- My font didn't like this :/
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "gl",
+--   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = { { "🭽", "FloatBorder" }, { "▔", "FloatBorder" }, { "🭾", "FloatBorder" }, { "▕", "FloatBorder" }, { "🭿", "FloatBorder" }, { "▁", "FloatBorder" }, { "🭼", "FloatBorder" }, { "▏", "FloatBorder" }, } })<CR>',
+--   { noremap = true, silent = true }
+-- )
+
 vim.cmd "nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>"
 vim.cmd "nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>"
 vim.cmd "nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>"
 vim.cmd "nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>"
+vim.api.nvim_set_keymap(
+  "n",
+  "gl",
+  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = "single" })<CR>',
+  { noremap = true, silent = true }
+)
+
 vim.cmd "nnoremap <silent> gp <cmd>lua require'lsp'.PeekDefinition()<CR>"
 vim.cmd "nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>"
--- vim.cmd('nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>')
 vim.cmd "nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<CR>"
 vim.cmd "nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<CR>"
+vim.cmd "nnoremap <silent> <tab> <cmd>lua vim.lsp.buf.signature_help()<CR>"
 -- scroll down hover doc or scroll in definition preview
 -- scroll up hover doc
 vim.cmd 'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()'
@@ -32,12 +60,9 @@ vim.cmd 'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = {
-    prefix = "",
-    spacing = 0,
-  },
-  signs = true,
-  underline = true,
+  virtual_text = O.lsp.diagnostics.virtual_text,
+  signs = O.lsp.diagnostics.signs,
+  underline = O.lsp.document_highlight,
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -191,7 +216,7 @@ function lsp_config.tsserver_on_attach(client, bufnr)
     -- eslint
     eslint_enable_code_actions = true,
     eslint_enable_disable_comments = true,
-    eslint_bin = O.lang.tsserver.linter,
+    -- eslint_bin = O.lang.tsserver.linter,
     eslint_config_fallback = nil,
     eslint_enable_diagnostics = true,
 

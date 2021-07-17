@@ -281,7 +281,7 @@ table.insert(gls.right, {
     condition = condition.hide_in_width,
     separator = " ",
     separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { colors.grey, colors.alt_bg },
+    highlight = { colors.alt_bg, colors.alt_bg },
   },
 })
 
@@ -311,7 +311,7 @@ table.insert(gls.short_line_left, {
     provider = "FileTypeName",
     separator = " ",
     separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { colors.grey, colors.alt_bg },
+    highlight = { colors.alt_bg, colors.alt_bg },
   },
 })
 
@@ -319,7 +319,7 @@ table.insert(gls.short_line_left, {
   SFileName = {
     provider = "SFileName",
     condition = condition.buffer_not_empty,
-    highlight = { colors.grey, colors.alt_bg },
+    highlight = { colors.alt_bg, colors.alt_bg },
   },
 })
 
