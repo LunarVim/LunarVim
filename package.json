@@ -1,7 +1,7 @@
 {
-    "name": "repos",
+    "name": "LunarVim.com",
     "version": "1.0.0",
-    "description": "Website for ",
+    "description": "LunarVim an IDE layer for Neovim",
     "main": "index.js",
     "directories": {
         "test": "test"
@@ -11,11 +11,17 @@
         "docs:build": "vuepress build docs"
     },
     "keywords": [
-        "lunarvim"
+        "lunarvim",
+        "neovim",
+        "vim",
+        "ide",
+        "chrisatmachine",
+        "christian chiarulli"
     ],
-    "author": "chris",
+    "author": "Christian Chiarulli",
     "license": "ISC",
     "devDependencies": {
         "vuepress": "^2.0.0-beta.22"
-    }
+    },
+    "dependencies": {}
 }

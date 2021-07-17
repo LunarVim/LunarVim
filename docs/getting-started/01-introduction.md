@@ -1,9 +1,10 @@
 <!-- # Hello LunarVim 🍝 -->
+# Landing Page
 <!-- --- -->
 <!-- lang: en-US -->
 <!-- title: Title of this page -->
 <!-- description: Description of this page -->
-<!-- --- -->
+---
 
 <!-- ![LunarVim Logo](/assets/lunarvim_logo.png) -->
 
@@ -36,3 +37,25 @@ export const config: UserConfig = {
   <source src="https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_1mb.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
+
+asdf
+
+
+## this title
+
+
+asdf
+
+|asdfasdf
+
+
+::: tip [info]
+[content]
+:::
+
+<!-- tip -->
+<!-- warning -->
+<!-- danger -->
+<!-- details -->
+<!-- codeGroup -->
+<!-- codeGroupItem -->
