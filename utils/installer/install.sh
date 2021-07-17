@@ -31,6 +31,10 @@ installnodefedora() {
     sudo dnf install -y npm
 }
 
+installnodeopensuse() {
+	sudo zypper in nodejs-common
+}
+
 installnodegentoo() {
     echo "Printing current node status..."
     emerge -pqv net-libs/nodejs
@@ -48,6 +52,7 @@ installnode() {
     [ -f "/etc/arch-release" ] && installnodearch
     [ -f "/etc/artix-release" ] && installnodearch
     [ -f "/etc/fedora-release" ] && installnodefedora
+    [ -n "$(cat /etc/os-release | grep openSUSE)" ] && installnodeopensuse
     [ -f "/etc/gentoo-release" ] && installnodegentoo
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
     sudo npm i -g neovim
@@ -71,6 +76,10 @@ installpiponfedora() {
     sudo dnf install -y pip >/dev/nul
 }
 
+installpiponopensuse() {
+	sudo zypper in python-pip
+}
+
 installpipongentoo() {
     sudo emerge -avn dev-python/pip
 }
@@ -81,6 +90,7 @@ installpip() {
     [ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
     [ -f "/etc/arch-release" ] && installpiponarch
     [ -f "/etc/fedora-release" ] && installpiponfedora
+    [ -n "$(cat /etc/os-release | grep openSUSE)" ] && installpiponopensuse
     [ -f "/etc/gentoo-release" ] && installpipongentoo
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
@@ -163,6 +173,14 @@ installonfedora() {
     pip3 install wheel ueberzug
 }
 
+installonopensuse() {
+	sudo zypper in ripgrep fzf ranger
+	sudo zypper in python-devel python3-devel
+    pip3 install ueberzug
+    pip3 install neovim-remote
+    npm install -g tree-sitter-cli
+}
+
 installongentoo() {
     sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/ranger dev-python/neovim-remote virtual/jpeg sys-libs/zlib
     pipinstallueberzug
@@ -175,6 +193,7 @@ installextrapackages() {
     [ -f "/etc/arch-release" ] && installonarch
     [ -f "/etc/artix-release" ] && installonarch
     [ -f "/etc/fedora-release" ] && installonfedora
+    [ -n "$(cat /etc/os-release | grep openSUSE)" ] && installonopensuse
     [ -f "/etc/gentoo-release" ] && installongentoo
     [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
 }
