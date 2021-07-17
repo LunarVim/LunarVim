@@ -118,6 +118,7 @@ M.config = function()
           "Workspace Diagnostics",
         },
         f = { "<cmd>silent FormatWrite<cr>", "Format" },
+        F = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format (native-lsp)" },
         i = { "<cmd>LspInfo<cr>", "Info" },
         j = {
           "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>",

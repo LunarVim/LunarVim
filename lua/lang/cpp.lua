@@ -1,24 +1,22 @@
 local M = {}
 
 M.config = function()
-  O.lang.clang = {
+  O.lang.cpp = {
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
       signs = true,
       underline = true,
     },
-    cross_file_rename = true,
-    header_insertion = "never",
     filetypes = { "c", "cpp", "objc" },
-    formatter = {
-      exe = "clang-format",
-      args = {},
-      stdin = true,
+    clangd_flags = {
+      "--background-index",
+      "--header-insertion=never",
+      "--cross-file-rename",
+      "--clang-tidy",
+      "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
     },
-    linters = {
-      "cppcheck",
-      "clangtidy",
-    },
+    formatter = {},
+    linters = {},
     debug = {
       adapter = {
         command = "/usr/bin/lldb-vscode",
@@ -29,12 +27,15 @@ M.config = function()
 end
 
 M.format = function()
+  if O.lang.cpp.format == nil then
+    return
+  end
   local shared_config = {
     function()
       return {
-        exe = O.lang.clang.formatter.exe,
-        args = O.lang.clang.formatter.args,
-        stdin = O.lang.clang.formatter.stdin,
+        exe = O.lang.cpp.formatter.exe,
+        args = O.lang.cpp.formatter.args,
+        stdin = O.lang.cpp.formatter.stdin,
         cwd = vim.fn.expand "%:h:p",
       }
     end,
@@ -42,7 +43,6 @@ M.format = function()
   O.formatters.filetype["c"] = shared_config
   O.formatters.filetype["cpp"] = shared_config
   O.formatters.filetype["objc"] = shared_config
-
   require("formatter.config").set_defaults {
     logging = false,
     filetype = O.formatters.filetype,
@@ -50,9 +50,12 @@ M.format = function()
 end
 
 M.lint = function()
+  if O.lang.cpp.inters == nil then
+    return
+  end
   require("lint").linters_by_ft = {
-    c = O.lang.clang.linters,
-    cpp = O.lang.clang.linters,
+    c = O.lang.cpp.linters,
+    cpp = O.lang.cpp.linters,
   }
 end
 
@@ -60,22 +63,15 @@ M.lsp = function()
   if require("lv-utils").check_lsp_client_active "clangd" then
     return
   end
-  local clangd_flags = { "--background-index" }
-
-  if O.lang.clang.cross_file_rename then
-    table.insert(clangd_flags, "--cross-file-rename")
-  end
-
-  table.insert(clangd_flags, "--header-insertion=" .. O.lang.clang.header_insertion)
 
   require("lspconfig").clangd.setup {
-    cmd = { DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd", unpack(clangd_flags) },
+    cmd = { DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd", unpack(O.lang.cpp.clangd_flags) },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = O.lang.clang.diagnostics.virtual_text,
-        signs = O.lang.clang.diagnostics.signs,
-        underline = O.lang.clang.diagnostics.underline,
+        virtual_text = O.lang.cpp.diagnostics.virtual_text,
+        signs = O.lang.cpp.diagnostics.signs,
+        underline = O.lang.cpp.diagnostics.underline,
         update_in_insert = true,
       }),
     },
@@ -89,7 +85,7 @@ M.dap = function()
     dap_install.config("ccppr_vsc_dbg", {})
     dap.adapters.lldb = {
       type = "executable",
-      command = O.lang.clang.debug.adapter.command,
+      command = O.lang.cpp.debug.adapter.command,
       name = "lldb",
     }
     local shared_dap_config = {
@@ -101,7 +97,7 @@ M.dap = function()
           return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
-        stopOnEntry = O.lang.clang.debug.stop_on_entry,
+        stopOnEntry = O.lang.cpp.debug.stop_on_entry,
         args = {},
         env = function()
           local variables = {}
