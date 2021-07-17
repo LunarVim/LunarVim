@@ -5,6 +5,9 @@ module.exports = {
   // base: "/LunarVim.com/",
   lang: "en-US",
   title: "LunarVim Docs",
+  description: "Documentation for LunarVim",
+  head: [["link", { rel: "icon", href: "/assets/lunarvim_logo.png" }]],
+
   themeConfig: {
     home: "/",
     logo: "/assets/lunarvim_logo.png",
