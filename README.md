@@ -1,25 +1,23 @@
-# LunarVim.com
+# LunarVim.org
+
 Website for LunarVim
 
-module.exports = {
-  lang: "en-US",
-  title: "LunarVim to the Moon!",
-  description: "This is my first VuePress site",
+## Run this site locally
 
-  themeConfig: {
-    logo: "https://vuejs.org/images/logo.png",
-    docsBranch: "master",
-    docsDir: "docs",
-    sidebar: {
-      "/docs/": [
-        "", // this is your docs/README.md
-        // all sub-items here (I explain later)
-      ],
-      "/": [
-        // Your fallback (this is your landing page)
-        "", // this is your README.md (main)
-      ],
-    },
-    sidebarDepth: 2,
-  },
-};
+- Clone the repo:
+
+```
+git clone https://github.com/LunarVim/LunarVim.com.git
+```
+
+- Install:
+
+```
+cd LunarVim.com && npm install
+```
+
+- Start the server:
+
+```
+npm run docs:dev
+```
