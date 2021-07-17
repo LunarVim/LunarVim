@@ -21,6 +21,13 @@ function lv_utils.check_lsp_client_active(name)
   return false
 end
 
+function lv_utils.configure_plugin(plugin_name)
+  status_ok, plugin = pcall("require", plugin_name)
+  if status_ok then
+    plugin.config()
+  end
+end
+
 function lv_utils.define_augroups(definitions) -- {{{1
   -- Create autocommand groups based on the passed definitions
   --
