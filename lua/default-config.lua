@@ -149,6 +149,13 @@ O = {
   },
 }
 
+local function configure_plugin(plugin_name)
+  status_ok, plugin = pcall("require", plugin_name)
+  if status_ok then
+    plugin.config()
+  end
+end
+
 require "core.status_colors"
 require("core.gitsigns").config()
 require("core.compe").config()
@@ -159,7 +166,7 @@ require("core.zen").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.which-key").config()
-require("core.nvimtree").config()
+configure_plugin("core.nvimtree")
 
 require("lang.clang").config()
 require("lang.cmake").config()

@@ -52,6 +52,10 @@ end
 M.setup = function()
   local g = vim.g
 
+  if not O.plugin.nvimtree  then
+    return
+  end
+
   for opt, val in pairs(O.plugin.nvimtree) do
     g["nvim_tree_" .. opt] = val
   end
