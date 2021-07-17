@@ -33,7 +33,7 @@ M.config = function()
       file_sorter = require("telescope.sorters").get_fzy_sorter,
       file_ignore_patterns = {},
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-      path_display = { "shorten" },
+      path_display = { shorten = 5 },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
