@@ -62,8 +62,11 @@ M.lsp = function()
 end
 
 M.dap = function()
-  -- TODO: implement dap
-  return "No DAP configured!"
+  -- gem install readapt ruby-debug-ide
+  if O.plugin.dap.active then
+    local dap_install = require "dap-install"
+    dap_install.config("ruby_vsc_dbg", {})
+  end
 end
 
 return M
