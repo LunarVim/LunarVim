@@ -17,6 +17,10 @@ end
 if O.transparent_window then
   cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
   cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
+  cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
+  cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
+  cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
+  cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
   cmd "let &fcs='eob: '"
 end
 
@@ -24,34 +28,13 @@ end
 
 opt.shortmess:append "c"
 
-local disabled_built_ins = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin", -- 'man',
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
-  "2html_plugin",
-  "logipat",
-  "rrhelper",
-  "spellfile_plugin",
-  -- 'matchit', 'matchparen', 'shada_plugin',
-}
-
 if O.leader_key == " " or O.leader_key == "space" then
   vim.g.mapleader = " "
 else
   vim.g.mapleader = O.leader_key
 end
 
-for _, plugin in pairs(disabled_built_ins) do
+for _, plugin in pairs(O.disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
 

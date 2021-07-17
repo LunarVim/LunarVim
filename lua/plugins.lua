@@ -60,7 +60,6 @@ return require("packer").startup(function(use)
   use {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
-    after = { "telescope.nvim" },
     config = function()
       require "core.autopairs"
     end,
@@ -84,6 +83,14 @@ return require("packer").startup(function(use)
     "mhartington/formatter.nvim",
     config = function()
       require "core.formatter"
+    end,
+  }
+
+  -- Linter
+  use {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("core.linter").setup()
     end,
   }
 
@@ -190,13 +197,22 @@ return require("packer").startup(function(use)
 
   -- TODO: remove in favor of akinsho/nvim-toggleterm.lua
   -- Floating terminal
+  -- use {
+  --   "numToStr/FTerm.nvim",
+  --   event = "BufWinEnter",
+  --   config = function()
+  --     require("core.floatterm").setup()
+  --   end,
+  --   disable = not O.plugin.floatterm.active,
+  -- }
+
   use {
-    "numToStr/FTerm.nvim",
+    "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
     config = function()
-      require("core.floatterm").setup()
+      require("core.terminal").setup()
     end,
-    disable = not O.plugin.floatterm.active,
+    disable = not O.plugin.terminal.active,
   }
 
   -- Zen Mode
@@ -241,10 +257,17 @@ return require("packer").startup(function(use)
     },
   }
 
+  -- Java
   use {
     "mfussenegger/nvim-jdtls",
     -- ft = { "java" },
     disable = not O.lang.java.java_tools.active,
+  }
+
+  -- Scala
+  use {
+    "scalameta/nvim-metals",
+    disable = not O.lang.scala.metals.active,
   }
 
   -- Install user plugins

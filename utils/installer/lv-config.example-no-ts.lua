@@ -11,9 +11,9 @@ an executable
 -- general
 
 O.format_on_save = true
+O.lint_on_save = true
 O.completion.autocomplete = true
 O.colorscheme = "spacegray"
-O.auto_close_tree = 0
 O.default_options.wrap = true
 O.default_options.timeoutlen = 100
 O.leader_key = " "
@@ -21,9 +21,11 @@ O.leader_key = " "
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
-O.plugin.floatterm.active = true
+O.plugin.terminal.active = true
 O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
+O.plugin.nvimtree.side = "left"
+O.plugin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = {}
@@ -31,16 +33,17 @@ O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
 -- python
--- O.python.linter = 'flake8'
-O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
--- to change default formatter from yapf to black
+-- To change default formatter from yapf to black
 -- O.lang.python.formatter.exe = "black"
 -- O.lang.python.formatter.args = {"-"}
+-- To change enabled linters
+-- https://github.com/mfussenegger/nvim-lint#available-linters
+-- O.lang.python.linters = { "flake8", "pylint", "mypy", ... }
 
 -- go
--- to change default formatter from gofmt to goimports
+-- To change default formatter from gofmt to goimports
 -- O.lang.formatter.go.exe = "goimports"
 
 -- javascript

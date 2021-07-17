@@ -60,6 +60,8 @@ M.setup = function()
 
   vim.g.dashboard_custom_section = O.plugin.dashboard.custom_section
 
+  O.plugin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+
   -- f = {
   --   description = { "  Neovim Config Files" },
   --   command = "Telescope find_files cwd=" .. CONFIG_PATH,
@@ -90,7 +92,7 @@ M.setup = function()
       {
         "FileType",
         "dashboard",
-        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2",
+        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. O.default_options.showtabline,
       },
       { "FileType", "dashboard", "nnoremap <silent> <buffer> q :q<CR>" },
     },
