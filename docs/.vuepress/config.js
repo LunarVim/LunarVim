@@ -3,7 +3,6 @@ const path = require("path");
 
 module.exports = {
   // base: "/LunarVim.com/",
-  base: "/LunarVim.com/",
   themeConfig: {
     home: "/",
     logo: "/assets/lunarvim_logo.png",
@@ -38,7 +37,7 @@ module.exports = {
     docsRepo: "https://github.com/LunarVim/LunarVim.com",
     docsBranch: "master",
     docsDir: "docs",
-    editLinkPattern: ":repo/-/edit/:branch/:path",
+    // editLinkPattern: ":repo/-/edit/:branch/:path",
     sidebar: {
       "/": getSideBar("/", "Getting Started", true),
       "/languages/": getSideBar("languages", "Supported Languages", true),
