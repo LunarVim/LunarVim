@@ -52,7 +52,7 @@ end
 M.setup = function()
   local g = vim.g
 
-  if not O.plugin.nvimtree  then
+  if not O.plugin.nvimtree then
     return
   end
 
