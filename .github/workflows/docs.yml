@@ -1,19 +1,15 @@
 name: docs
 
 on:
-
-# trigger deployment on every push to master branch
-
-push:
-branches: [master]
-
-# trigger deployment manually
-
-workflow_dispatch:
+  # trigger deployment on every push to master branch
+  push:
+    branches: [master]
+  # trigger deployment manually
+  workflow_dispatch:
 
 jobs:
-docs:
-runs-on: ubuntu-latest
+  docs:
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
