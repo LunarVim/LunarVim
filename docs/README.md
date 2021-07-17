@@ -1,15 +1,15 @@
 <!-- # Hello LunarVim 🍝 -->
-# Landing Page
 <!-- --- -->
 <!-- lang: en-US -->
 <!-- title: Title of this page -->
 <!-- description: Description of this page -->
----
+<!-- --- -->
 
 <!-- ![LunarVim Logo](/assets/lunarvim_logo.png) -->
 
 <img :src="$withBase('/assets/lunarvim_logo.png')" alt="VuePress Logo">
 
+# Landing Page
 
 [[toc]]
 <!-- relative path -->
