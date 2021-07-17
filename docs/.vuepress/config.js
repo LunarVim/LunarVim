@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = {
   themeConfig: {
-    home: "/getting-started/",
+    home: "/getting-started/01-introduction.html",
     logo: "/assets/lunarvim_logo.png",
     navbar: [
       {
