@@ -149,7 +149,7 @@ O = {
   },
 }
 
-lvutils = require("lv-utils")
+lvutils = require "lv-utils"
 
 require "core.status_colors"
 require("core.gitsigns").config()
