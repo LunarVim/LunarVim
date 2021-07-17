@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = {
-  base: "LunarVim.com",
+  base: "/LunarVim.com/",
   themeConfig: {
     home: "/getting-started/01-introduction.html",
     logo: "/assets/lunarvim_logo.png",
