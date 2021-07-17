@@ -26,7 +26,7 @@ if not require("lv-utils").check_lsp_client_active "efm" then
     -- init_options = {initializationOptions},
     cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
     init_options = { documentFormatting = true, codeAction = false },
-    root_dir = require("lspconfig").util.root_pattern(".git/"),
+    root_dir = require("lspconfig").util.root_pattern ".git/",
     filetypes = { "sh" },
     settings = {
       rootMarkers = { ".git/" },

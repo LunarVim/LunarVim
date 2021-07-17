@@ -33,7 +33,6 @@ vim.api.nvim_exec(
     ]],
   false
 )
-if (O.lang.latex.auto_save)
-then
-  vim.api.nvim_exec([[au FocusLost * :wa]],false)
+if O.lang.latex.auto_save then
+  vim.api.nvim_exec([[au FocusLost * :wa]], false)
 end
