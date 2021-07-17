@@ -4,32 +4,32 @@ const path = require("path");
 module.exports = {
   base: "/LunarVim.com/",
   themeConfig: {
-    home: "/getting-started/01-introduction.html",
+    home: "/",
     logo: "/assets/lunarvim_logo.png",
     navbar: [
       {
         text: "Getting Started",
-        link: "/getting-started/01-introduction.html",
+        link: "/",
       },
       {
         text: "Languages",
-        link: "/languages/01-languages.html",
+        link: "/languages/",
       },
       {
         text: "Modules",
-        link: "/modules/01-modules.html",
+        link: "/modules/",
       },
       {
         text: "For Devs",
-        link: "/dev/01-lua-resources.html",
+        link: "/dev/",
       },
       {
         text: "Community",
-        link: "/community/01-links.html",
+        link: "/community/",
       },
       {
         text: "Sponsors",
-        link: "/sponsors/01-thank-you.html",
+        link: "/sponsors/",
       },
     ],
     repo: "https://github.com/ChristianChiarulli/LunarVim",
@@ -39,16 +39,12 @@ module.exports = {
     docsDir: "docs",
     editLinkPattern: ":repo/-/edit/:branch/:path",
     sidebar: {
-      "/getting-started": getSideBar(
-        "/getting-started",
-        "Getting Started",
-        false
-      ),
-      "/languages/": getSideBar("languages", "Supported Languages", false),
-      "/modules/": getSideBar("modules", "Lunar Modules", false),
-      "/dev/": getSideBar("dev", "For Developers", false),
-      "/community/": getSideBar("community", "Community", false),
-      "/sponsors/": getSideBar("sponsors", "Sponsors", false),
+      "/": getSideBar("/", "Getting Started", true),
+      "/languages/": getSideBar("languages", "Supported Languages", true),
+      "/modules/": getSideBar("modules", "Lunar Modules", true),
+      "/dev/": getSideBar("dev", "For Developers", true),
+      "/community/": getSideBar("community", "Community", true),
+      "/sponsors/": getSideBar("sponsors", "Sponsors", true),
     },
   },
 };
