@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: lunarvim.org
+Token: edc1fab7846523c6b451d4da39ca37b5015121d9bcce546bd13f5d381dd24674
