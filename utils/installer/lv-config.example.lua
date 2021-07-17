@@ -14,7 +14,6 @@ O.format_on_save = true
 O.lint_on_save = true
 O.completion.autocomplete = true
 O.colorscheme = "spacegray"
-O.auto_close_tree = 0
 O.default_options.wrap = true
 O.default_options.timeoutlen = 100
 O.leader_key = " "
@@ -25,6 +24,8 @@ O.plugin.dashboard.active = true
 O.plugin.terminal.active = true
 O.plugin.zen.active = false
 O.plugin.zen.window.height = 0.90
+O.plugin.nvimtree.side = "left"
+O.plugin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "maintained"

@@ -18,6 +18,7 @@ One of the best ways to begin contributing in a meaningful way is by helping fin
 ## Setting up development tools
 
 1. Install [stylua](https://github.com/johnnymorganz/stylua#installation)
+
 2. Copy `utils/.stylua.toml` into the LunarVim root directory
 
 ## Some Guidelines
