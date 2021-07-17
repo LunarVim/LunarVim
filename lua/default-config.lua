@@ -72,6 +72,27 @@ O = {
     popup_border = "single",
   },
 
+  disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin", -- 'man',
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    -- 'matchit', 'matchparen', 'shada_plugin',
+  },
+
   plugin = {},
 
   -- TODO: refactor for tree
