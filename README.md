@@ -60,7 +60,8 @@ Example:
 
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
--- O.default_options.wrap = true -- wrap long lines
+-- O.format_on_save = false -- to disbale formatting on save
+-- O.lint_on_save = false -- to disable formatting on save
 O.completion.autocomplete = true
 O.default_options.relativenumber = true
 O.colorscheme = 'spacegray'
@@ -87,12 +88,14 @@ O.lang.tsserver.linter = nil
 O.lang.tsserver.autoformat = true
 
 -- python
-O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
 -- to change default formatter from yapf to black
 -- O.lang.python.formatter.exe = "black"
 -- O.lang.python.formatter.args = {"-"}
+-- To change enabled linters
+-- https://github.com/mfussenegger/nvim-lint#available-linters
+-- O.lang.python.linters = { "flake8", "pylint", "mypy", ... }
 
 -- go
 -- to change default formatter from gofmt to goimports
