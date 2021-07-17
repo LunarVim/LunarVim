@@ -5,6 +5,7 @@ M.config = function()
     formatter = {
       exe = "gofmt",
       args = {},
+      stdin = true,
     },
     linters = {
       "golangcilint",
@@ -19,7 +20,7 @@ M.format = function()
       return {
         exe = O.lang.go.formatter.exe,
         args = O.lang.go.formatter.args,
-        stdin = not (O.lang.go.formatter.stdin ~= nil),
+        stdin = O.lang.go.formatter.stdin,
       }
     end,
   }

@@ -13,6 +13,7 @@ M.config = function()
     formatter = {
       exe = "clang-format",
       args = {},
+      stdin = true,
     },
     linters = {
       "cppcheck",
@@ -33,7 +34,7 @@ M.format = function()
       return {
         exe = O.lang.clang.formatter.exe,
         args = O.lang.clang.formatter.args,
-        stdin = not (O.lang.clang.formatter.stdin ~= nil),
+        stdin = O.lang.clang.formatter.stdin,
         cwd = vim.fn.expand "%:h:p",
       }
     end,

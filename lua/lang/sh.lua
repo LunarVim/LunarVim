@@ -25,7 +25,7 @@ M.format = function()
       return {
         exe = O.lang.sh.formatter.exe,
         args = O.lang.sh.formatter.args,
-        stdin = not (O.lang.sh.formatter.stdin ~= nil),
+        stdin = O.lang.sh.formatter.stdin,
         tempfile_prefix = ".formatter",
       }
     end,

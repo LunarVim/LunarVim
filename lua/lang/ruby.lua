@@ -11,6 +11,7 @@ M.config = function()
     formatter = {
       exe = "rufo",
       args = { "-x" },
+      stdin = true,
     },
     linters = { "ruby" },
   }
@@ -22,7 +23,7 @@ M.format = function()
       return {
         exe = O.lang.ruby.formatter.exe,
         args = O.lang.ruby.formatter.args,
-        stdin = not (O.lang.ruby.formatter.stdin ~= nil),
+        stdin = O.lang.ruby.formatter.stdin,
       }
     end,
   }

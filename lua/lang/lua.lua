@@ -22,7 +22,7 @@ M.format = function()
       return {
         exe = O.lang.lua.formatter.exe,
         args = O.lang.lua.formatter.args,
-        stdin = not (O.lang.lua.formatter.stdin ~= nil),
+        stdin = O.lang.lua.formatter.stdin,
         tempfile_prefix = ".formatter",
       }
     end,
