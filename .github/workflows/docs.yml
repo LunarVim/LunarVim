@@ -52,6 +52,7 @@ jobs:
           target_branch: gh-pages
           # deploy the default output dir of VuePress
           build_dir: docs/.vuepress/dist
+          fqdn: www.lunarvim.org
         env:
           # @see https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
