@@ -1,15 +1,19 @@
 name: docs
 
 on:
-  # trigger deployment on every push to master branch
-  push:
-    branches: [master]
-  # trigger deployment manually
-  workflow_dispatch:
+
+# trigger deployment on every push to master branch
+
+push:
+branches: [master]
+
+# trigger deployment manually
+
+workflow_dispatch:
 
 jobs:
-  docs:
-    runs-on: ubuntu-latest
+docs:
+runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -52,7 +56,7 @@ jobs:
           target_branch: gh-pages
           # deploy the default output dir of VuePress
           build_dir: docs/.vuepress/dist
-          fqdn: lunarvim.org
+          fqdn: www.lunarvim.org
         env:
           # @see https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
