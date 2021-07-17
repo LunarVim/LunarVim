@@ -33,8 +33,6 @@ O.treesitter.ignore_install = { "haskell" }
 O.treesitter.highlight.enabled = true
 
 -- python
--- O.lang.python.linter = 'flake8'
-O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
 -- To change default formatter from yapf to black
@@ -60,7 +58,7 @@ O.lang.tsserver.linter = nil
 
 -- scala
 -- O.lang.scala.metals.active = true
--- O.lang.scala.metals.server_version = "0.10.2+33-c6441eb4-SNAPSHOT",
+-- O.lang.scala.metals.server_version = "0.10.5",
 
 --LaTeX
 -- Options: https://github.com/latex-lsp/texlab/blob/master/docs/options.md
