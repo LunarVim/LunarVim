@@ -30,7 +30,8 @@ M.format = function()
       return {
         exe = O.lang.php.formatter.exe,
         args = O.lang.php.formatter.args,
-        stdin = not (O.lang.php.formatter.stdin ~= nil),
+        stdin = O.lang.php.formatter.stdin,
+        tempfile_prefix = ".formatter",
       }
     end,
   }

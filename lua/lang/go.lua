@@ -5,6 +5,11 @@ M.config = function()
     formatter = {
       exe = "gofmt",
       args = {},
+      stdin = true,
+    },
+    linters = {
+      "golangcilint",
+      "revive",
     },
   }
 end
@@ -15,7 +20,7 @@ M.format = function()
       return {
         exe = O.lang.go.formatter.exe,
         args = O.lang.go.formatter.args,
-        stdin = not (O.lang.go.formatter.stdin ~= nil),
+        stdin = O.lang.go.formatter.stdin,
       }
     end,
   }
@@ -27,8 +32,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    go = O.lang.go.linters,
+  }
 end
 
 M.lsp = function()

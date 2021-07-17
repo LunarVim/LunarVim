@@ -11,6 +11,7 @@ an executable
 -- general
 
 O.format_on_save = true
+O.lint_on_save = true
 O.completion.autocomplete = true
 O.colorscheme = "spacegray"
 O.default_options.wrap = true
@@ -36,22 +37,30 @@ O.treesitter.highlight.enabled = true
 O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
--- to change default formatter from yapf to black
+-- To change default formatter from yapf to black
 -- O.lang.python.formatter.exe = "black"
 -- O.lang.python.formatter.args = {"-"}
+-- To change enabled linters
+-- https://github.com/mfussenegger/nvim-lint#available-linters
+-- O.lang.python.linters = { "flake8", "pylint", "mypy", ... }
 
 -- go
--- to change default formatter from gofmt to goimports
+-- To change default formatter from gofmt to goimports
 -- O.lang.formatter.go.exe = "goimports"
 
 -- javascript
 O.lang.tsserver.linter = nil
 
 -- rust
+-- O.lang.rust.rust_tools = true
 -- O.lang.rust.formatter = {
 --   exe = "rustfmt",
 --   args = {"--emit=stdout", "--edition=2018"},
 -- }
+
+-- scala
+-- O.lang.scala.metals.active = true
+-- O.lang.scala.metals.server_version = "0.10.2+33-c6441eb4-SNAPSHOT",
 
 --LaTeX
 -- Options: https://github.com/latex-lsp/texlab/blob/master/docs/options.md

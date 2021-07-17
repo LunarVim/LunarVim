@@ -5,6 +5,7 @@ M.config = function()
     formatter = {
       exe = "prettier",
       args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      stdin = true,
     },
   }
 end
@@ -15,7 +16,7 @@ M.format = function()
       return {
         exe = O.lang.yaml.formatter.exe,
         args = O.lang.yaml.formatter.args,
-        stdin = not (O.lang.yaml.formatter.stdin ~= nil),
+        stdin = O.lang.yaml.formatter.stdin,
       }
     end,
   }

@@ -127,9 +127,10 @@ M.config = function()
           "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
+        l = { "<cmd>silent lua require('lint').try_lint()<cr>", "Lint" },
         q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = { "<cmd> Telescope lsp_document_symbols<cr>", "Document Symbols" },
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = {
           "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
           "Workspace Symbols",
@@ -148,6 +149,10 @@ M.config = function()
         t = { "<cmd>Telescope live_grep<cr>", "Text" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
+        p = {
+          "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+          "Colorscheme with Preview",
+        },
       },
       T = {
         name = "Treesitter",

@@ -39,7 +39,7 @@ you can run the script with `--overwrite` but be warned this will remove the fol
 - `~/.cache/nvim`
 - `~/.local/share/nvim/site/pack/packer`
 ```bash
-curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh| LVBRANCH=rolling bash -s -- --overwrite
+curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 ```
 
 

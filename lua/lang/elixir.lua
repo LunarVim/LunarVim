@@ -16,7 +16,7 @@ M.format = function()
       return {
         exe = O.lang.elixir.formatter.exe,
         args = O.lang.elixir.formatter.args,
-        stdin = not (O.lang.elixir.formatter.stdin ~= nil),
+        stdin = O.lang.elixir.formatter.stdin,
       }
     end,
   }
@@ -39,6 +39,7 @@ M.lsp = function()
 
   require("lspconfig").elixirls.setup {
     cmd = { DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh" },
+    on_attach = require("lsp").common_on_attach,
   }
 end
 
