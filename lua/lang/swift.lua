@@ -8,13 +8,6 @@ M.config = function()
       stdin = true,
     },
   }
-  O.lang.objc = {
-    formatter = {
-      exe = "uncrustify",
-      args = { "-q", "-l OC+" },
-      stdin = true,
-    },
-  }
 end
 
 M.format = function()
@@ -29,15 +22,6 @@ M.lint = function()
         exe = O.lang.swift.formatter.exe,
         args = O.lang.swift.formatter.args,
         stdin = O.lang.swift.formatter.stdin,
-      }
-    end,
-  }
-  O.formatters.filetype["objc"] = {
-    function()
-      return {
-        exe = O.lang.objc.formatter.exe,
-        args = O.lang.objc.formatter.args,
-        stdin = O.lang.objc.formatter.stdin,
       }
     end,
   }
@@ -56,7 +40,7 @@ M.lsp = function()
   require("lspconfig").sourcekit.setup {
     cmd = { "xcrun", "sourcekit-lsp" },
     on_attach = require("lsp").common_on_attach,
-    filetypes = { "swift", "objective-c", "objective-cpp" },
+    filetypes = { "swift" },
   }
 end
 

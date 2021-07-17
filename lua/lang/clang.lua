@@ -9,7 +9,7 @@ M.config = function()
     },
     cross_file_rename = true,
     header_insertion = "never",
-    filetypes = { "c", "cpp" },
+    filetypes = { "c", "cpp", "objc" },
     formatter = {
       exe = "clang-format",
       args = {},
@@ -41,6 +41,7 @@ M.format = function()
   }
   O.formatters.filetype["c"] = shared_config
   O.formatters.filetype["cpp"] = shared_config
+  O.formatters.filetype["objc"] = shared_config
 
   require("formatter.config").set_defaults {
     logging = false,
