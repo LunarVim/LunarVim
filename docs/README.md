@@ -1,61 +1,15 @@
-<!-- # Hello LunarVim 🍝 -->
-<!-- --- -->
-<!-- lang: en-US -->
-<!-- title: Title of this page -->
-<!-- description: Description of this page -->
-<!-- --- -->
-
-<!-- ![LunarVim Logo](/assets/lunarvim_logo.png) -->
-
 <img :src="$withBase('/assets/lunarvim_logo.png')" alt="VuePress Logo">
 
-# Landing Page
+---
 
-[[toc]]
-<!-- relative path -->
-[Home](../README.md)  
-[Config Reference](../reference/config.md)  
-[Getting Started](./getting-started.md)  
-<!-- absolute path -->
-[Guide](/guide/README.md)  
-[Config Reference > markdown.links](/reference/config.md#links)  
-<!-- URL -->
-[GitHub](https://github.com)  
+# Introduction
 
-```ts{1,6-8}
-import type { UserConfig } from '@vuepress/cli'
+LunarVim is an IDE layer for Neovim. Taking advantage of new advancements such as Treesitter and the Language Server Protocol. LunarVim is opinionated, extensible and fast.
 
-export const config: UserConfig = {
-  title: 'Hello, VuePress',
+## Opinionated
 
-  themeConfig: {
-    logo: 'https://vuejs.org/images/logo.png',
-  },
-}
-```
-<video width="560" height="240" controls>
-  <source src="https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_1mb.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video> 
+LunarVim ships with a sane default config to build on top of. Features such as autocompletion, integrated terminal, file explorer, fuzzy finder, LSP, linting, formatting and debugging.
 
-asdf
+## Extensible
 
-
-## this title
-
-
-asdf
-
-|asdfasdf
-
-
-::: tip [info]
-[content]
-:::
-
-<!-- tip -->
-<!-- warning -->
-<!-- danger -->
-<!-- details -->
-<!-- codeGroup -->
-<!-- codeGroupItem -->
+Just because LunarVim has an opinion doesn't mean you need to share it. Every builtin plugin enabled by default can be disable in the `lv-config.lua` file. Here you can enable/disable builtin plugins, add your own plugins, keymaps, autocommands leader bindings, and all other custom configuration.
