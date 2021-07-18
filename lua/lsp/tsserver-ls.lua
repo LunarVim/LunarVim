@@ -11,9 +11,13 @@ O.formatters.filetype["javascriptreact"] = {
   function()
     local args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
     local extend_args = O.lang.tsserver.formatter.args
-    for i = 1, #extend_args do
-      table.insert(args, extend_args[i])
+
+    if extend_args then
+      for i = 1, #extend_args do
+        table.insert(args, extend_args[i])
+      end
     end
+
     return {
       exe = prettier_instance,
       args = args,
