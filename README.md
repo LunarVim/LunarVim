@@ -152,6 +152,14 @@ O.lang.python.analysis.use_library_code_types = true
 -- vim.cmd('source ' .. CONFIG_PATH .. '/lua/lv-user/init.vim')
 ```
 
+In case you want to see all the settings inside LunarVim, run the following:
+
+```bash
+cd ~/.config/nvim
+nvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+```
+and then inspect `~/.config/nvim/lv-settings.lua` file
+
 ## Updating LunarVim
 
 In order to update you should be aware of three things `Plugins`, `LunarVim` and `Neovim`

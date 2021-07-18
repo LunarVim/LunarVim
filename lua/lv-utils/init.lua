@@ -1,5 +1,61 @@
 local lv_utils = {}
 
+-- recursive Print (structure, limit, separator)
+local function r_inspect_settings(structure, limit, separator)
+  limit = limit or 100 -- default item limit
+  separator = separator or "." -- indent string
+  if limit < 1 then
+    print "ERROR: Item limit reached."
+    return limit - 1
+  end
+  if structure == nil then
+    io.write("-- O", separator:sub(2), " = nil\n")
+    return limit - 1
+  end
+  local ts = type(structure)
+
+  if ts == "table" then
+    for k, v in pairs(structure) do
+      -- replace non alpha keys wih ["key"]
+      if tostring(k):match "[^%a_]" then
+        k = '["' .. tostring(k) .. '"]'
+      end
+      limit = r_inspect_settings(v, limit, separator .. "." .. tostring(k))
+      if limit < 0 then
+        break
+      end
+    end
+    return limit
+  end
+
+  if ts == "string" then
+    -- escape sequences
+    structure = string.format("%q", structure)
+  end
+  separator = separator:gsub("%.%[", "%[")
+  if type(structure) == "function" then
+    -- don't print functions
+    io.write("-- O", separator:sub(2), " = function ()\n")
+  else
+    io.write("O", separator:sub(2), " = ", tostring(structure), "\n")
+  end
+  return limit - 1
+end
+
+function lv_utils.generate_settings()
+  -- Opens a file in append mode
+  local file = io.open("lv-settings.lua", "w")
+
+  -- sets the default output file as test.lua
+  io.output(file)
+
+  -- write all `O` related settings to `lv-settings.lua` file
+  r_inspect_settings(O, 10000, ".")
+
+  -- closes the open file
+  io.close(file)
+end
+
 function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/nvim/lua/keymappings.lua"
   vim.cmd "source ~/.config/nvim/lv-config.lua"
