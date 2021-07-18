@@ -34,13 +34,14 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiar
 ```
 
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
-you can run the script with `--overwrite` but be warned this will remove the following folder:
+you can run the script with `--overwrite` but be warned this will remove the following folders:
 - `~/.config/nvim`
 - `~/.cache/nvim`
 - `~/.local/share/nvim/site/pack/packer`
 ```bash
 curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 ```
+then run nvim and wait for treesitter to finish the installation
 
 
 ## Installing LSP for your language
@@ -66,7 +67,27 @@ O.completion.autocomplete = true
 O.default_options.relativenumber = true
 O.colorscheme = 'spacegray'
 O.default_options.timeoutlen = 100
-O.leader_key = ' '
+
+-- keymappings 
+O.keys.leader_key = "space"
+-- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
+O.keys.normal_mode = {
+    -- Page down/up
+  {'[d', '<PageUp>'},
+  {']d', '<PageDown>'},
+
+  -- Navigate buffers
+  {'<Tab>', ':bnext<CR>'},
+  {'<S-Tab>', ':bprevious<CR>'},
+}
+-- if you just want to augment the existing ones then use the utility function
+require("lv-utils").add_keymap_insert_mode({ silent = true }, {
+  { "<C-s>", ":w<cr>" },
+  { "<C-c>", "<ESC>" }
+})
+
+-- you can also use the native vim way directly
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.dashboard.active = true
@@ -130,6 +151,14 @@ O.lang.python.analysis.use_library_code_types = true
 -- To link your init.vim (until you find Lua replacements)
 -- vim.cmd('source ' .. CONFIG_PATH .. '/lua/lv-user/init.vim')
 ```
+
+In case you want to see all the settings inside LunarVim, run the following:
+
+```bash
+cd ~/.config/nvim
+nvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+```
+and then inspect `~/.config/nvim/lv-settings.lua` file
 
 ## Updating LunarVim
 

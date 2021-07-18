@@ -5,7 +5,9 @@ TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
 O = {
-  leader_key = "space",
+  keys = {
+    leader_key = "space",
+  },
   colorscheme = "spacegray",
   line_wrap_cursor_movement = true,
   transparent_window = false,
@@ -177,10 +179,13 @@ require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
 require("lang.python").config()
+require("lang.r").config()
 require("lang.ruby").config()
 require("lang.rust").config()
-require("lang.scala").config()
 require("lang.sh").config()
+require("lang.scala").config()
+require("lang.svelte").config()
+require("lang.swift").config()
 require("lang.terraform").config()
 require("lang.tex").config()
 require("lang.vim").config()

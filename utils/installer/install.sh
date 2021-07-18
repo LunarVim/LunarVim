@@ -134,38 +134,30 @@ asktoinstallpip() {
 }
 
 installonmac() {
-    brew install ripgrep fzf ranger
+    brew install ripgrep fzf 
     npm install -g tree-sitter-cli
 }
 
-pipinstallueberzug() {
-    which pip3 >/dev/null && pip3 install ueberzug || echo "Not installing ueberzug pip not found"
-}
-
 installonubuntu() {
-    sudo apt install ripgrep fzf ranger
+    sudo apt install ripgrep fzf 
     sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
-    pip3 install ueberzug
     pip3 install neovim-remote
     npm install -g tree-sitter-cli
 }
 
 installonarch() {
-    sudo pacman -S ripgrep fzf ranger
-    which yay >/dev/null && yay -S python-ueberzug-git || pipinstallueberzug
+    sudo pacman -S ripgrep fzf 
     pip3 install neovim-remote
     npm install -g tree-sitter-cli
 }
 
 installonfedora() {
     sudo dnf groupinstall "X Software Development"
-    sudo dnf install -y fzf ripgrep ranger
-    pip3 install wheel ueberzug
+    sudo dnf install -y fzf ripgrep 
 }
 
 installongentoo() {
-    sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/ranger dev-python/neovim-remote virtual/jpeg sys-libs/zlib
-    pipinstallueberzug
+    sudo emerge -avn sys-apps/ripgrep app-shells/fzf dev-python/neovim-remote virtual/jpeg sys-libs/zlib
     npm install -g tree-sitter-cli
 }
 
@@ -217,7 +209,4 @@ else
 fi
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
-
-# echo "I also recommend you add 'set preview_images_method ueberzug' to ~/.config/ranger/rc.conf"
-
 # echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'
