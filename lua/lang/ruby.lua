@@ -11,7 +11,9 @@ M.config = function()
     formatter = {
       exe = "rufo",
       args = { "-x" },
+      stdin = true,
     },
+    linters = { "ruby" },
   }
 end
 
@@ -21,7 +23,7 @@ M.format = function()
       return {
         exe = O.lang.ruby.formatter.exe,
         args = O.lang.ruby.formatter.args,
-        stdin = not (O.lang.ruby.formatter.stdin ~= nil),
+        stdin = O.lang.ruby.formatter.stdin,
       }
     end,
   }
@@ -33,8 +35,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    ruby = O.lang.ruby.linters,
+  }
 end
 
 M.lsp = function()
@@ -59,8 +62,11 @@ M.lsp = function()
 end
 
 M.dap = function()
-  -- TODO: implement dap
-  return "No DAP configured!"
+  -- gem install readapt ruby-debug-ide
+  if O.plugin.dap.active then
+    local dap_install = require "dap-install"
+    dap_install.config("ruby_vsc_dbg", {})
+  end
 end
 
 return M

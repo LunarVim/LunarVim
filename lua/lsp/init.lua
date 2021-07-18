@@ -216,7 +216,7 @@ function lsp_config.tsserver_on_attach(client, bufnr)
     -- eslint
     eslint_enable_code_actions = true,
     eslint_enable_disable_comments = true,
-    eslint_bin = O.lang.tsserver.linter,
+    -- eslint_bin = O.lang.tsserver.linter,
     eslint_config_fallback = nil,
     eslint_enable_diagnostics = true,
 

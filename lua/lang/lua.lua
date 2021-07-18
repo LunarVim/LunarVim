@@ -12,6 +12,7 @@ M.config = function()
       args = {},
       stdin = false,
     },
+    linters = { "luacheck" },
   }
 end
 
@@ -21,7 +22,7 @@ M.format = function()
       return {
         exe = O.lang.lua.formatter.exe,
         args = O.lang.lua.formatter.args,
-        stdin = not (O.lang.lua.formatter.stdin ~= nil),
+        stdin = O.lang.lua.formatter.stdin,
         tempfile_prefix = ".formatter",
       }
     end,
@@ -34,8 +35,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    lua = O.lang.lua.linters,
+  }
 end
 
 M.lsp = function()

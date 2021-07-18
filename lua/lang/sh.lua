@@ -15,6 +15,7 @@ M.config = function()
       args = { "-w" },
       stdin = false,
     },
+    linters = { "shellcheck" },
   }
 end
 
@@ -24,7 +25,7 @@ M.format = function()
       return {
         exe = O.lang.sh.formatter.exe,
         args = O.lang.sh.formatter.args,
-        stdin = not (O.lang.sh.formatter.stdin ~= nil),
+        stdin = O.lang.sh.formatter.stdin,
         tempfile_prefix = ".formatter",
       }
     end,
@@ -37,36 +38,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- sh
-  local sh_arguments = {}
-
-  local shfmt = { formatCommand = "shfmt -ci -s -bn", formatStdin = true }
-
-  local shellcheck = {
-    LintCommand = "shellcheck -f gcc -x",
-    lintFormats = { "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m", "%f:%l:%c: %tote: %m" },
+  require("lint").linters_by_ft = {
+    sh = O.lang.sh.linters,
   }
-
-  if O.lang.sh.linter == "shellcheck" then
-    table.insert(sh_arguments, shellcheck)
-  end
-
-  if not require("lv-utils").check_lsp_client_active "efm" then
-    require("lspconfig").efm.setup {
-      -- init_options = {initializationOptions},
-      cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
-      on_attach = require("lsp").common_on_attach,
-      init_options = { documentFormatting = true, codeAction = false },
-      root_dir = require("lspconfig").util.root_pattern ".git/",
-      filetypes = { "sh" },
-      settings = {
-        rootMarkers = { ".git/" },
-        languages = {
-          sh = sh_arguments,
-        },
-      },
-    }
-  end
 end
 
 M.lsp = function()

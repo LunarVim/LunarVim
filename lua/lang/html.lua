@@ -1,7 +1,13 @@
 local M = {}
 
 M.config = function()
-  O.lang.html = {}
+  O.lang.html = {
+    linters = {
+      "tidy",
+      -- https://docs.errata.ai/vale/scoping#html
+      "vale",
+    },
+  }
 end
 
 M.format = function()
@@ -10,8 +16,9 @@ M.format = function()
 end
 
 M.lint = function()
-  -- TODO: implement linters (if applicable)
-  return "No linters configured!"
+  require("lint").linters_by_ft = {
+    html = O.lang.html.linters,
+  }
 end
 
 M.lsp = function()

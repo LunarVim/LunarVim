@@ -1,6 +1,7 @@
 local lv_utils = {}
 
 function lv_utils.reload_lv_config()
+  vim.cmd "source ~/.config/nvim/lua/keymappings.lua"
   vim.cmd "source ~/.config/nvim/lv-config.lua"
   vim.cmd "source ~/.config/nvim/lua/plugins.lua"
   vim.cmd "source ~/.config/nvim/lua/settings.lua"
