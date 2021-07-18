@@ -83,10 +83,10 @@ local default_keys = {
 
 if vim.fn.has "mac" == 1 then
   -- TODO: fix this
-  default_keys.insert_mode["n"][5][1] = "<A-Up>"
-  default_keys.insert_mode["n"][6][1] = "<A-Down>"
-  default_keys.insert_mode["n"][7][1] = "<A-Left>"
-  default_keys.insert_mode["n"][8][1] = "<A-Right>"
+  default_keys.normal_mode[5][1] = "<A-Up>"
+  default_keys.normal_mode[6][1] = "<A-Down>"
+  default_keys.normal_mode[7][1] = "<A-Left>"
+  default_keys.normal_mode[8][1] = "<A-Right>"
 end
 
 if O.keys.leader_key == " " or O.keys.leader_key == "space" then
