@@ -122,6 +122,17 @@ lv_utils.define_augroups {
   _user_autocommands = O.user_autocommands,
 }
 
+function lv_utils.gsub_args(args)
+  if args == nil or type(args) ~= "table" then
+    return args
+  end
+  local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+  for i = 1, #args do
+    args[i], _ = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
+  end
+  return args
+end
+
 vim.cmd [[
   function! QuickFixToggle()
     if empty(filter(getwininfo(), 'v:val.quickfix'))

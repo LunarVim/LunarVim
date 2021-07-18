@@ -27,16 +27,10 @@ M.format = function()
   local ft = vim.bo.filetype
   O.formatters.filetype[ft] = {
     function()
-      local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-
-      local formatter_args = O.lang.vue.formatter.args
-      for i = 1, #formatter_args do
-        formatter_args[i], _ = string.gsub(formatter_args[i], "${FILEPATH}", buffer_filepath)
-      end
-
+      local lv_utils = require "lv-utils"
       return {
         exe = formatter_instance,
-        args = formatter_args,
+        args = lv_utils.gsub_args(O.lang.vue.formatter.args),
         stdin = O.lang.vue.formatter.stdin,
       }
     end,
