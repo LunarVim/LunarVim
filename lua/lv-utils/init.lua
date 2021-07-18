@@ -21,6 +21,32 @@ function lv_utils.check_lsp_client_active(name)
   return false
 end
 
+function lv_utils.add_keymap(mode, opts, keymaps)
+  for _, keymap in ipairs(keymaps) do
+    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+  end
+end
+
+function lv_utils.add_keymap_normal_mode(opts, keymaps)
+  lv_utils.add_keymap("n", opts, keymaps)
+end
+
+function lv_utils.add_keymap_visual_mode(opts, keymaps)
+  lv_utils.add_keymap("v", opts, keymaps)
+end
+
+function lv_utils.add_keymap_visual_block_mode(opts, keymaps)
+  lv_utils.add_keymap("x", opts, keymaps)
+end
+
+function lv_utils.add_keymap_insert_mode(opts, keymaps)
+  lv_utils.add_keymap("i", opts, keymaps)
+end
+
+function lv_utils.add_keymap_term_mode(opts, keymaps)
+  lv_utils.add_keymap("t", opts, keymaps)
+end
+
 function lv_utils.define_augroups(definitions) -- {{{1
   -- Create autocommand groups based on the passed definitions
   --

@@ -28,12 +28,6 @@ end
 
 opt.shortmess:append "c"
 
-if O.leader_key == " " or O.leader_key == "space" then
-  vim.g.mapleader = " "
-else
-  vim.g.mapleader = O.leader_key
-end
-
 for _, plugin in pairs(O.disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
