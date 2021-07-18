@@ -7,9 +7,13 @@ M.setup = function()
 
   if O.lang.tsserver.linter == "eslint" or O.lang.tsserver.linter == "eslint_d" then
     local eslint = {
-      lintCommand = O.lang.tsserver.linter .. " -f unix --stdin --stdin-filename   {INPUT}",
+      lintCommand = O.lang.tsserver.linter .. " -f visualstudio --stdin --stdin-filename ${INPUT}",
       lintStdin = true,
-      lintFormats = { "%f:%l:%c: %m" },
+      lintFormats = {
+        "%f(%l,%c): %tarning %m",
+        "%f(%l,%c): %rror %m",
+      },
+      lintSource = O.lang.tsserver.linter,
       lintIgnoreExitCode = true,
       formatCommand = O.lang.tsserver.linter .. " --fix-to-stdout --stdin  --stdin-filename=${INPUT}",
       formatStdin = true,
