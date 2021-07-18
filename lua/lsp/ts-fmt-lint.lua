@@ -1,30 +1,49 @@
 -- Example configuations here: https://github.com/mattn/efm-langserver
--- You can look for project scope Prettier and Eslint with e.g. vim.fn.glob("node_modules/.bin/prettier") etc. If it is not found revert to global Prettier where needed.
 local M = {}
 
 M.setup = function()
+  vim.cmd "let proj = FindRootDirectory()"
+  local root_dir = vim.api.nvim_get_var "proj"
+
+  local get_linter_instance = function()
+    -- prioritize local instance over global
+    local local_instance = root_dir .. "/node_modules/.bin/" .. O.lang.tsserver.linter
+    if vim.fn.executable(local_instance) == 1 then
+      return local_instance
+    end
+    return O.lang.tsserver.linter
+  end
+
   local tsserver_args = {}
+  local formattingSupported = false
 
   if O.lang.tsserver.linter == "eslint" or O.lang.tsserver.linter == "eslint_d" then
     local eslint = {
-      lintCommand = O.lang.tsserver.linter .. " -f visualstudio --stdin --stdin-filename ${INPUT}",
+      lintCommand = get_linter_instance() .. " -f visualstudio --stdin --stdin-filename ${INPUT}",
       lintStdin = true,
       lintFormats = {
         "%f(%l,%c): %tarning %m",
-        "%f(%l,%c): %rror %m",
+        "%f(%l,%c): %trror %m",
       },
       lintSource = O.lang.tsserver.linter,
       lintIgnoreExitCode = true,
-      formatCommand = O.lang.tsserver.linter .. " --fix-to-stdout --stdin  --stdin-filename=${INPUT}",
-      formatStdin = true,
     }
     table.insert(tsserver_args, eslint)
+    -- Only eslint_d supports --fix-to-stdout
+    if string.find(get_linter_instance(), "eslint_d") then
+      formattingSupported = true
+      local eslint_fix = {
+        formatCommand = get_linter_instance() .. " --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+        formatStdin = true,
+      }
+      table.insert(tsserver_args, eslint_fix)
+    end
   end
 
   require("lspconfig").efm.setup {
     -- init_options = {initializationOptions},
     cmd = { DATA_PATH .. "/lspinstall/efm/efm-langserver" },
-    init_options = { documentFormatting = true, codeAction = false },
+    init_options = { documentFormatting = formattingSupported, codeAction = false },
     root_dir = require("lspconfig").util.root_pattern(".git/", "package.json"),
     filetypes = {
       "vue",
