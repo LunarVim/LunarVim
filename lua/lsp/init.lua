@@ -196,8 +196,8 @@ function lsp_config.PeekImplementation()
   end
 end
 
-if O.lsp.document_highlight then
-  function lsp_config.common_on_attach(client, bufnr)
+function lsp_config.common_on_attach(client, bufnr)
+  if O.lsp.document_highlight then
     documentHighlight(client, bufnr)
   end
 end
