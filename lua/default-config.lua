@@ -72,6 +72,7 @@ O = {
     },
     document_highlight = true,
     popup_border = "single",
+    default_keybinds = true,
   },
 
   disabled_built_ins = {
