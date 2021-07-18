@@ -40,8 +40,8 @@ you can run the script with `--overwrite` but be warned this will remove the fol
 - `~/.local/share/nvim/site/pack/packer`
 ```bash
 curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
-# then run nvim and wait for treesitter to finish the installation
 ```
+then run nvim and wait for treesitter to finish the installation
 
 
 ## Installing LSP for your language
