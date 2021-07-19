@@ -73,6 +73,7 @@ O = {
     document_highlight = true,
     popup_border = "single",
     default_keybinds = true,
+    on_attach_callback = nil,
   },
 
   disabled_built_ins = {
