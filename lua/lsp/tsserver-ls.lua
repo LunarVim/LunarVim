@@ -3,17 +3,9 @@ local root_dir = vim.api.nvim_get_var "proj"
 
 local formatter_exe = O.lang.tsserver.formatter.exe
 
-local get_prettier_module_name = function()
-  -- get local module name
-  if formatter_exe == "prettierd" then
-    return "@fsouza/prettierd"
-  end
-  return formatter_exe
-end
-
 local get_prettier_instance = function()
   -- prioritize local instance over global
-  local local_instance = root_dir .. "/node_modules/.bin/" .. get_prettier_module_name()
+  local local_instance = root_dir .. "/node_modules/.bin/" .. formatter_exe
   if vim.fn.executable(local_instance) == 1 then
     return local_instance
   end
