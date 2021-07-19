@@ -145,6 +145,7 @@ O = {
         underline = true,
       },
       formatter = {
+        -- @usage can be 'prettier' or 'prettierd'
         exe = "prettier",
         args = {},
       },
