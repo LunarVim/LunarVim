@@ -111,7 +111,7 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- Java
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
 
-local function documentHighlight(client, bufnr)
+local function documentHighlight(client, _)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(
@@ -202,7 +202,7 @@ if O.lsp.document_highlight then
   end
 end
 
-function lsp_config.tsserver_on_attach(client, bufnr)
+function lsp_config.tsserver_on_attach(client, _)
   -- lsp_config.common_on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
 
