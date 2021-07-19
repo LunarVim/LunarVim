@@ -1,15 +1,28 @@
 vim.cmd "let proj = FindRootDirectory()"
 local root_dir = vim.api.nvim_get_var "proj"
 
--- use the global prettier if you didn't find the local one
-local prettier_instance = root_dir .. "/node_modules/.bin/prettier"
-if vim.fn.executable(prettier_instance) ~= 1 then
-  prettier_instance = O.lang.tsserver.formatter.exe
+local formatter_exe = O.lang.tsserver.formatter.exe
+
+local get_prettier_module_name = function()
+  -- get local module name
+	if formatter_exe == "prettierd" then
+		return "@fsouza/prettierd"
+	end
+	return formatter_exe
+end
+
+local get_prettier_instance = function()
+	-- prioritize local instance over global
+  local local_instance = root_dir .. "/node_modules/.bin/" .. get_prettier_module_name()
+	if vim.fn.executable(local_instance) == 1 then
+		return local_instance
+	end
+	return formatter_exe
 end
 
 O.formatters.filetype["javascriptreact"] = {
   function()
-    local args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
+    local args = { vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
     local extend_args = O.lang.tsserver.formatter.args
 
     if extend_args then
@@ -19,7 +32,7 @@ O.formatters.filetype["javascriptreact"] = {
     end
 
     return {
-      exe = prettier_instance,
+      exe = get_prettier_instance(),
       args = args,
       stdin = true,
     }
