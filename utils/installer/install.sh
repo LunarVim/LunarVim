@@ -49,7 +49,7 @@ installnode() {
 	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
 	[ -f "/etc/gentoo-release" ] && installnodegentoo
-  [ "${"$(uname -s)":0}" = "MINGW64_NT" ] && echo "Windows not currently supported"
+	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
 }
 
@@ -82,7 +82,7 @@ installpip() {
 	[ -f "/etc/arch-release" ] && installpiponarch
 	[ -f "/etc/fedora-release" ] && installpiponfedora
 	[ -f "/etc/gentoo-release" ] && installpipongentoo
-	[ "${"$(uname -s)":0}" = "MINGW64_NT" ] && echo "Windows not currently supported"
+	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
 installpynvim() {
@@ -168,7 +168,7 @@ installextrapackages() {
 	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
 	[ -f "/etc/gentoo-release" ] && installongentoo
-	[ "${"$(uname -s)":0}" = "MINGW64_NT" ] && echo "Windows not currently supported"
+	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
 # Welcome
