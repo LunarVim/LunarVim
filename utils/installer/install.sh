@@ -187,10 +187,10 @@ esac
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
 # install pip
-(which pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip
+(command -v pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip
 
 # install node and neovim support
-(which node >/dev/null && echo "node installed, moving on...") || asktoinstallnode
+(command -v node >/dev/null && echo "node installed, moving on...") || asktoinstallnode
 
 # install pynvim
 (pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
