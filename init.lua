@@ -1,5 +1,5 @@
 vim.cmd [[
-  set packpath+=~/.local/share/lvim/site
+  set packpath+=~/.local/share/lunarvim/site
   set packpath+=~/.config/lvim
   set runtimepath+=~/.config/lvim
 
@@ -9,7 +9,7 @@ vim.cmd [[
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
--- local status_ok, error = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
+local status_ok, error = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
 local status_ok, error = pcall(vim.cmd, "luafile ~/.config/lvim/lv-config.lua")
 if not status_ok then
   print "something is wrong with your lv-config"
