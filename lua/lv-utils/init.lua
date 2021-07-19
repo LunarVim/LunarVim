@@ -1,5 +1,4 @@
 local lv_utils = {}
-
 LocalConfigTrusted = false
 
 function lv_utils.ask_user(prompt, cb)
@@ -19,7 +18,7 @@ function lv_utils.ask_user(prompt, cb)
 end
 
 function lv_utils.check_if_config_trusted(config_file)
-  local trusted_local_configs_file = DATA_PATH .. "/lunar_vim/trusted_local_configs"
+  local trusted_local_configs_file = "~/.local/share/lvim/data/trusted_local_configs"
   if vim.fn.filereadable(trusted_local_configs_file) ~= 1 then
     local file = io.open(trusted_local_configs_file, "w")
     file:close()
@@ -42,7 +41,7 @@ function lv_utils.check_if_config_trusted(config_file)
 end
 
 function lv_utils.make_config_trusted(config_file)
-  local file = io.open(DATA_PATH .. "/lunar_vim/trusted_local_configs", "a")
+  local file = io.open("~/.local/share/lvim/data/trusted_local_configs", "a")
 
   LocalConfigTrusted = true
   file:write(config_file, "\n")
@@ -52,7 +51,7 @@ end
 
 function lv_utils.load_user_config()
   -- Load the user config
-  local global_status_ok, _ = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
+  local global_status_ok, _ = pcall(vim.cmd, "luafile ~/.config/lvim/lv-config.lua")
   if not global_status_ok then
     print "something is wrong with your lv-config"
   end
@@ -86,12 +85,70 @@ Do you trust this file? Note such files could be insecure! (y/N)]],
 end
 
 function lv_utils.reload_lv_config()
-  lv_utils.load_user_config()
+  vim.cmd "source ~/.config/nvim/lua/keymappings.lua"
+  lv_utils.load_user_config()  
   vim.cmd "source ~/.config/nvim/lua/plugins.lua"
   vim.cmd "source ~/.config/nvim/lua/settings.lua"
-  vim.cmd "source ~/.config/nvim/lua/lv-formatter/init.lua"
+  vim.cmd "source ~/.config/nvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
+  -- vim.cmd ":PackerClean"
+end
+  
+-- recursive Print (structure, limit, separator)
+local function r_inspect_settings(structure, limit, separator)
+  limit = limit or 100 -- default item limit
+  separator = separator or "." -- indent string
+  if limit < 1 then
+    print "ERROR: Item limit reached."
+    return limit - 1
+  end
+  if structure == nil then
+    io.write("-- O", separator:sub(2), " = nil\n")
+    return limit - 1
+  end
+  local ts = type(structure)
+
+  if ts == "table" then
+    for k, v in pairs(structure) do
+      -- replace non alpha keys wih ["key"]
+      if tostring(k):match "[^%a_]" then
+        k = '["' .. tostring(k) .. '"]'
+      end
+      limit = r_inspect_settings(v, limit, separator .. "." .. tostring(k))
+      if limit < 0 then
+        break
+      end
+    end
+    return limit
+  end
+
+  if ts == "string" then
+    -- escape sequences
+    structure = string.format("%q", structure)
+  end
+  separator = separator:gsub("%.%[", "%[")
+  if type(structure) == "function" then
+    -- don't print functions
+    io.write("-- O", separator:sub(2), " = function ()\n")
+  else
+    io.write("O", separator:sub(2), " = ", tostring(structure), "\n")
+  end
+  return limit - 1
+end
+
+function lv_utils.generate_settings()
+  -- Opens a file in append mode
+  local file = io.open("lv-settings.lua", "w")
+
+  -- sets the default output file as test.lua
+  io.output(file)
+
+  -- write all `O` related settings to `lv-settings.lua` file
+  r_inspect_settings(O, 10000, ".")
+
+  -- closes the open file
+  io.close(file)
 end
 
 function lv_utils.check_lsp_client_active(name)
@@ -102,6 +159,32 @@ function lv_utils.check_lsp_client_active(name)
     end
   end
   return false
+end
+
+function lv_utils.add_keymap(mode, opts, keymaps)
+  for _, keymap in ipairs(keymaps) do
+    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+  end
+end
+
+function lv_utils.add_keymap_normal_mode(opts, keymaps)
+  lv_utils.add_keymap("n", opts, keymaps)
+end
+
+function lv_utils.add_keymap_visual_mode(opts, keymaps)
+  lv_utils.add_keymap("v", opts, keymaps)
+end
+
+function lv_utils.add_keymap_visual_block_mode(opts, keymaps)
+  lv_utils.add_keymap("x", opts, keymaps)
+end
+
+function lv_utils.add_keymap_insert_mode(opts, keymaps)
+  lv_utils.add_keymap("i", opts, keymaps)
+end
+
+function lv_utils.add_keymap_term_mode(opts, keymaps)
+  lv_utils.add_keymap("t", opts, keymaps)
 end
 
 function lv_utils.define_augroups(definitions) -- {{{1
@@ -126,9 +209,13 @@ function lv_utils.define_augroups(definitions) -- {{{1
   end
 end
 
+function lv_utils.unrequire(m)
+  package.loaded[m] = nil
+  _G[m] = nil
+end
+
 lv_utils.define_augroups {
 
-  _user_autocommands = O.user_autocommands,
   _general_settings = {
     {
       "TextYankPost",
@@ -139,6 +226,11 @@ lv_utils.define_augroups {
       "BufWinEnter",
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+    },
+    {
+      "BufWinEnter",
+      "dashboard",
+      "setlocal cursorline signcolumn=yes cursorcolumn number",
     },
     {
       "BufRead",
@@ -181,6 +273,7 @@ lv_utils.define_augroups {
     -- will cause split windows to be resized evenly if main window is resized
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
+
   -- _fterm_lazygit = {
   --   -- will cause esc key to exit lazy git
   --   {"TermEnter", "*", "call LazyGitNativation()"}
@@ -192,7 +285,19 @@ lv_utils.define_augroups {
   --   {'InsertEnter', '*', 'if &cursorline | let g:ms_cursorlineoff = 1 | setlocal nocursorline | endif'},
   --   {'InsertLeave', '*', 'if exists("g:ms_cursorlineoff") | setlocal cursorline | endif'},
   -- },
+  _user_autocommands = O.user_autocommands,
 }
+
+function lv_utils.gsub_args(args)
+  if args == nil or type(args) ~= "table" then
+    return args
+  end
+  local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+  for i = 1, #args do
+    args[i], _ = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
+  end
+  return args
+end
 
 vim.cmd [[
   function! QuickFixToggle()

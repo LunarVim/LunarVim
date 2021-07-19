@@ -5,12 +5,15 @@ TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
 O = {
-  leader_key = "space",
+  keys = {
+    leader_key = "space",
+  },
   colorscheme = "spacegray",
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
-  vnsip_dir = vim.fn.stdpath "config" .. "/snippets",
+  lint_on_save = true,
+  vsnip_dir = vim.fn.stdpath "config" .. "/snippets",
   always_trust_local_config = false,
   never_trust_local_config = false,
 
@@ -22,9 +25,11 @@ O = {
     completeopt = { "menuone", "noselect" },
     conceallevel = 0, -- so that `` is visible in markdown files
     fileencoding = "utf-8", -- the encoding written to a file
+    foldmethod = "manual", -- folding, set to "expr" for treesitter based foloding
+    foldexpr = "", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
     guifont = "monospace:h17", -- the font used in graphical neovim applications
     hidden = true, -- required to keep multiple buffers and open multiple buffers
-    hlsearch = false, -- highlight all matches on previous search pattern
+    hlsearch = true, -- highlight all matches on previous search pattern
     ignorecase = true, -- ignore case in search patterns
     mouse = "a", -- allow the mouse to be used in neovim
     pumheight = 10, -- pop up menu height
@@ -55,29 +60,51 @@ O = {
     spell = false,
     spelllang = "en",
     scrolloff = 8, -- is one of my fav
+    sidescrolloff = 8,
   },
+
+  lsp = {
+    diagnostics = {
+      virtual_text = {
+        prefix = "",
+        spacing = 0,
+      },
+      signs = true,
+      underline = true,
+    },
+    document_highlight = true,
+    popup_border = "single",
+    default_keybinds = true,
+  },
+
+  disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin", -- 'man',
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    -- 'matchit', 'matchparen', 'shada_plugin',
+  },
+
+  plugin = {},
 
   -- TODO: refactor for tree
   auto_close_tree = 0,
   nvim_tree_disable_netrw = 0,
 
-  lsp = {
-    document_highlight = true,
-    popup_border = "single",
-  },
-
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
-
-  plugin = {
-    -- Builtins
-    diffview = { active = false },
-    ts_hintobjects = { active = false },
-    ts_textobjects = { active = false },
-    ts_textsubjects = { active = false },
-    telescope_project = { active = false },
-    indent_line = { active = false },
-    lush = { active = false },
-  },
 
   -- TODO: just using mappings (leader mappings)
   user_which_key = {},
@@ -90,168 +117,14 @@ O = {
     { "FileType", "qf", "set nobuflisted" },
   },
 
+  formatters = {
+    filetype = {},
+  },
+
+  -- TODO move all of this into lang specific files, only require when using
   lang = {
-    cmake = {
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-    },
-    clang = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      cross_file_rename = true,
-      header_insertion = "never",
-      filetypes = { "c", "cpp", "objc" },
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-    },
-    css = {
-      virtual_text = true,
-    },
-    dart = {
-      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-      formatter = {
-        exe = "dart",
-        args = { "format" },
-      },
-    },
-    docker = {},
     efm = {},
-    elm = {},
-    emmet = { active = true },
-    elixir = {},
-    graphql = {},
-    go = {
-      formatter = {
-        exe = "gofmt",
-        args = {},
-      },
-    },
-    html = {},
-    java = {
-      java_tools = {
-        active = false,
-      },
-    },
-    json = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "python",
-        args = { "-m", "json.tool" },
-      },
-    },
-    kotlin = {},
-    latex = {
-      auto_save = false,
-      ignore_errors = {},
-    },
-    lua = {
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "stylua",
-        args = {},
-        stdin = false,
-      },
-    },
-    php = {
-      format = {
-        format = {
-          default = "psr12",
-        },
-      },
-      environment = {
-        php_version = "7.4",
-      },
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "php", "phtml" },
-      formatter = {
-        exe = "phpcbf",
-        args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-        stdin = false,
-      },
-    },
-    python = {
-      -- @usage can be flake8 or yapf
-      linter = "",
-      isort = false,
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      analysis = {
-        type_checking = "basic",
-        auto_search_paths = true,
-        use_library_code_types = true,
-      },
-      formatter = {
-        exe = "yapf",
-        args = {},
-      },
-    },
-    ruby = {
-      diagnostics = {
-        virtualtext = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      filetypes = { "rb", "erb", "rakefile", "ruby" },
-      formatter = {
-        exe = "rufo",
-        args = { "-x" },
-      },
-    },
-    rust = {
-      rust_tools = {
-        active = false,
-        parameter_hints_prefix = "<-",
-        other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
-      },
-      -- @usage can be clippy
-      formatter = {
-        exe = "rustfmt",
-        args = { "--emit=stdout", "--edition=2018" },
-      },
-      linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-    },
-    sh = {
-      -- @usage can be 'shellcheck'
-      linter = "",
-      -- @usage can be 'shfmt'
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "shfmt",
-        args = { "-w" },
-        stdin = false,
-      },
-    },
+    emmet = { active = false },
     svelte = {},
     tailwindcss = {
       active = false,
@@ -264,13 +137,7 @@ O = {
         "typescript",
         "typescriptreact",
       },
-      formatter = {
-        exe = "prettier",
-        args = { "--write", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = false,
-      },
     },
-    terraform = {},
     tsserver = {
       -- @usage can be 'eslint' or 'eslint_d'
       linter = "",
@@ -281,28 +148,50 @@ O = {
       },
       formatter = {
         exe = "prettier",
-        args = { "--write", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = false,
-      },
-    },
-    vim = {},
-    yaml = {
-      formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        args = {},
       },
     },
   },
 }
 
-require "lv-zen.config"
-require "lv-compe.config"
-require "lv-dashboard.config"
-require "lv-floatterm.config"
-require "lv-galaxyline.config"
-require "lv-gitsigns.config"
-require "lv-telescope.config"
-require "lv-floatterm.config"
-require "lv-dap.config"
-require "lv-which-key.config"
-require "lv-treesitter.config"
+require "core.status_colors"
+require("core.gitsigns").config()
+require("core.compe").config()
+require("core.dashboard").config()
+require("core.dap").config()
+require("core.terminal").config()
+require("core.zen").config()
+require("core.telescope").config()
+require("core.treesitter").config()
+require("core.which-key").config()
+require("core.nvimtree").config()
+
+require("lang.clang").config()
+require("lang.cmake").config()
+require("lang.css").config()
+require("lang.dart").config()
+require("lang.dockerfile").config()
+require("lang.elixir").config()
+require("lang.elm").config()
+require("lang.go").config()
+require("lang.graphql").config()
+require("lang.html").config()
+require("lang.java").config()
+require("lang.json").config()
+require("lang.kotlin").config()
+require("lang.lua").config()
+require("lang.php").config()
+require("lang.python").config()
+require("lang.r").config()
+require("lang.ruby").config()
+require("lang.rust").config()
+require("lang.sh").config()
+require("lang.scala").config()
+require("lang.svelte").config()
+require("lang.swift").config()
+require("lang.terraform").config()
+require("lang.tex").config()
+require("lang.vim").config()
+require("lang.vue").config()
+require("lang.yaml").config()
+require("lang.zig").config()
