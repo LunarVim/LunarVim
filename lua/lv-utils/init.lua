@@ -209,7 +209,7 @@ function lv_utils.gsub_args(args)
   end
   local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
   for i = 1, #args do
-    args[i], _ = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
+    args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
   end
   return args
 end

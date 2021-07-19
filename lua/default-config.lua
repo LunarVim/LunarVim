@@ -72,6 +72,7 @@ O = {
     },
     document_highlight = true,
     popup_border = "single",
+    default_keybinds = true,
   },
 
   disabled_built_ins = {
@@ -175,6 +176,7 @@ require("lang.graphql").config()
 require("lang.html").config()
 require("lang.java").config()
 require("lang.json").config()
+require("lang.julia").config()
 require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
