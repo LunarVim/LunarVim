@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
   if O.lint_on_save then
-    require("utils").define_augroups {
+    require("utils.augroups").define_augroups {
       autolint = {
         {
           "BufWritePost",

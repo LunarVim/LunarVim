@@ -25,7 +25,9 @@ plugin_loader:load { plugins, O.user_plugins }
 vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 
 require "settings"
-require "utils"
+
+local augroups = require "augroups"
+require("utils.augroups").define_augroups(augroups)
 
 -- TODO: these guys need to be in language files
 -- require "lsp"

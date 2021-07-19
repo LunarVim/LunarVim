@@ -1,6 +1,6 @@
 -- autoformat
 if O.format_on_save then
-  require("utils").define_augroups {
+  require("utils.augroups").define_augroups {
     autoformat = {
       {
         "BufWritePost",
