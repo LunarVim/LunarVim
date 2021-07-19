@@ -28,6 +28,8 @@ require "settings"
 
 local augroups = require "augroups"
 require("utils.augroups").define_augroups(augroups)
+local commands = require "commands"
+commands.load(commands.defaults)
 
 -- TODO: these guys need to be in language files
 -- require "lsp"
