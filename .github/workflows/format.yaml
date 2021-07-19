@@ -22,4 +22,22 @@ jobs:
       - name: Check formatting
         run: |
           ./utils/stylua --config-path ./utils/.stylua.toml -c .
+  shfmt-check:
+    name: "Formatting check with shfmt"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
 
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16'
+      
+      - name: Use shfmt
+        run: |
+          GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+
+      - name: Check formatting
+        run: |
+          shfmt -l -d .
+    
