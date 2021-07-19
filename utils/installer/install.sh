@@ -36,20 +36,20 @@ installnodegentoo() {
 	emerge -pqv net-libs/nodejs
 	echo "Make sure the npm USE flag is enabled for net-libs/nodejs"
 	echo "If it isn't enabled, would you like to enable it with flaggie? (Y/N)"
-	read answer
+	read -r answer
 	[ "$answer" != "${answer#[Yy]}" ] && sudo flaggie net-libs/nodejs +npm
 	sudo emerge -avnN net-libs/nodejs
 }
 
 installnode() {
 	echo "Installing node..."
-	[ "$(uname)" == "Darwin" ] && installnodemac
-	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installnodeubuntu
+	[ "$(uname)" = "Darwin" ] && installnodemac
+	grep -q Ubuntu /etc/os-release && installnodeubuntu
 	[ -f "/etc/arch-release" ] && installnodearch
 	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
 	[ -f "/etc/gentoo-release" ] && installnodegentoo
-	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
+  [ "${"$(uname -s)":0}" = "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
 }
 
@@ -68,7 +68,7 @@ installpiponarch() {
 }
 
 installpiponfedora() {
-	sudo dnf install -y pip >/dev/nul
+	sudo dnf install -y pip >/dev/null
 }
 
 installpipongentoo() {
@@ -77,12 +77,12 @@ installpipongentoo() {
 
 installpip() {
 	echo "Installing pip..."
-	[ "$(uname)" == "Darwin" ] && installpiponmac
-	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installpiponubuntu
+	[ "$(uname)" = "Darwin" ] && installpiponmac
+	grep -q Ubuntu /etc/os-release && installpiponubuntu
 	[ -f "/etc/arch-release" ] && installpiponarch
 	[ -f "/etc/fedora-release" ] && installpiponfedora
 	[ -f "/etc/gentoo-release" ] && installpipongentoo
-	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
+	[ "${"$(uname -s)":0}" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
 installpynvim() {
@@ -101,8 +101,8 @@ installpacker() {
 
 cloneconfig() {
 	echo "Cloning LunarVim configuration"
-	git clone --branch $LVBRANCH https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
-	cp $HOME/.config/nvim/utils/installer/lv-config.example-no-ts.lua $HOME/.config/nvim/lv-config.lua
+	git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
+	cp "$HOME/.config/nvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/nvim/lv-config.lua"
 	nvim --headless \
 		+'autocmd User PackerComplete sleep 100m | qall' \
 		+PackerInstall
@@ -111,16 +111,16 @@ cloneconfig() {
 		+'autocmd User PackerComplete sleep 100m | qall' \
 		+PackerSync
 
-	echo -e "\nCompile Complete"
-	rm $HOME/.config/nvim/lv-config.lua
-	cp $HOME/.config/nvim/utils/installer/lv-config.example.lua $HOME/.config/nvim/lv-config.lua
+	printf "\nCompile Complete\n"
+	rm "$HOME/.config/nvim/lv-config.lua"
+	cp "$HOME/.config/nvim/utils/installer/lv-config.example.lua" "$HOME/.config/nvim/lv-config.lua"
 	# nvim --headless -cq ':silent TSUpdate' -cq ':qall' >/dev/null 2>&1
 }
 
 asktoinstallnode() {
 	echo "node not found"
-	echo -n "Would you like to install node now (y/n)? "
-	read answer
+	printf "Would you like to install node now (y/n)? "
+	read -r answer
 	[ "$answer" != "${answer#[Yy]}" ] && installnode
 }
 
@@ -162,36 +162,38 @@ installongentoo() {
 }
 
 installextrapackages() {
-	[ "$(uname)" == "Darwin" ] && installonmac
-	[ -n "$(cat /etc/os-release | grep Ubuntu)" ] && installonubuntu
+	[ "$(uname)" = "Darwin" ] && installonmac
+	grep -q Ubuntu /etc/os-release && installonubuntu
 	[ -f "/etc/arch-release" ] && installonarch
 	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
 	[ -f "/etc/gentoo-release" ] && installongentoo
-	[ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ] && echo "Windows not currently supported"
+	[ "${"$(uname -s)":0}" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
 # Welcome
 echo 'Installing LunarVim'
 
-if [[ $* == *--overwrite* ]]; then
+case "$@" in
+*--overwrite*)
 	echo '!!Warning!! -> Removing all nvim related config because of the --overwrite flag'
 	rm -rf "$HOME/.config/nvim"
 	rm -rf "$HOME/.cache/nvim"
 	rm -rf "$HOME/.local/share/nvim/site/pack/packer"
-fi
+	;;
+esac
 
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
 # install pip
-which pip3 >/dev/null && echo "pip installed, moving on..." || asktoinstallpip
+(which pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip
 
 # install node and neovim support
-which node >/dev/null && echo "node installed, moving on..." || asktoinstallnode
+(which node >/dev/null && echo "node installed, moving on...") || asktoinstallnode
 
 # install pynvim
-pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on..." || installpynvim
+(pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
 
 if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
 	echo 'packer already installed'
