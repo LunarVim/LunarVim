@@ -57,11 +57,10 @@ function lv_utils.generate_settings()
 end
 
 function lv_utils.reload_lv_config()
-  vim.cmd "source ~/.config/nvim/lua/keymappings.lua"
-  vim.cmd "source ~/.config/nvim/lv-config.lua"
-  vim.cmd "source ~/.config/nvim/lua/plugins.lua"
-  vim.cmd "source ~/.config/nvim/lua/settings.lua"
-  vim.cmd "source ~/.config/nvim/lua/core/formatter.lua"
+  vim.cmd "source ~/.config/lvim/lv-config.lua"
+  vim.cmd "source ~/.local/share/lvim/lua/plugins.lua"
+  vim.cmd "source ~/.local/share/lvim/lua/settings.lua"
+  vim.cmd "source ~/.local/share/lvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"

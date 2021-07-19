@@ -1,5 +1,10 @@
+vim.cmd[[
+  set packpath-=~/.local/share/nvim/site
+  set packpath+=~/.local/share/lvim/site
+]]
 require "default-config"
-local status_ok, error = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
+-- local status_ok, error = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
+local status_ok, error = pcall(vim.cmd, "luafile ~/.config/lvim/lv-config.lua")
 if not status_ok then
   print "something is wrong with your lv-config"
   print(error)
@@ -22,3 +27,8 @@ require "lv-utils"
 -- end
 -- if O.lang.tailwindcss.active then
 --   require "lsp.tailwind
+
+vim.cmd[[
+  set runtimepath+=~/.config/lvim
+  set runtimepath-=~/.config/nvim
+]]
