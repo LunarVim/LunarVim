@@ -1,7 +1,13 @@
-vim.cmd[[
-  set packpath-=~/.local/share/nvim/site
+vim.cmd [[
   set packpath+=~/.local/share/lvim/site
+  set packpath+=~/.config/lvim
+  set runtimepath+=~/.config/lvim
+
+  set runtimepath-=~/.config/nvim
+  set runtimepath-=~/.config/nvim
+  set packpath-=~/.local/share/nvim/site
 ]]
+-- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
 -- local status_ok, error = pcall(vim.cmd, "luafile " .. CONFIG_PATH .. "/lv-config.lua")
 local status_ok, error = pcall(vim.cmd, "luafile ~/.config/lvim/lv-config.lua")
@@ -27,8 +33,3 @@ require "lv-utils"
 -- end
 -- if O.lang.tailwindcss.active then
 --   require "lsp.tailwind
-
-vim.cmd[[
-  set runtimepath+=~/.config/lvim
-  set runtimepath-=~/.config/nvim
-]]
