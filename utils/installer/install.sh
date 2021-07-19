@@ -102,6 +102,7 @@ installpacker() {
 cloneconfig() {
 	echo "Cloning LunarVim configuration"
 	git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.local/share/lunarvim/lvim
+	mkdir -p "$HOME/.config/lvim"
 	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/lvim/lv-config.lua"
 
 	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
