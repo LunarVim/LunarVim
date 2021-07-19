@@ -1,0 +1,26 @@
+name: lint
+on:
+  push:
+    branches: '**'
+  pull_request:
+    branches:
+      - 'master'
+      - 'rolling'
+
+jobs:
+  lua-linter:
+    name: "Linting with luacheck"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: leafo/gh-actions-lua@v8
+      - uses: leafo/gh-actions-luarocks@v4
+
+      - name: Use luacheck
+        run: luarocks install luacheck
+      
+      - name: Run luacheck
+        run: |
+          luacheck *.lua lua/
+    
