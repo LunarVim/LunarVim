@@ -41,7 +41,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if not require("lv-utils").check_lsp_client_active "gopls" then
+  if not require("utils").check_lsp_client_active "gopls" then
     require("lspconfig").gopls.setup {
       cmd = { O.lang.go.lsp.path },
       settings = { gopls = { analyses = { unusedparams = true }, staticcheck = true } },

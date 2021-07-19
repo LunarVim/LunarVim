@@ -1,4 +1,4 @@
-local lv_utils = require "lv-utils"
+local utils = require "utils"
 
 local opts = {
   nnoremap = { noremap = true, silent = true },
@@ -103,11 +103,11 @@ local function get_user_keys(mode)
   end
 end
 
-lv_utils.add_keymap_normal_mode(opts.nnoremap, get_user_keys "normal_mode")
-lv_utils.add_keymap_insert_mode(opts.inoremap, get_user_keys "insert_mode")
-lv_utils.add_keymap_visual_mode(opts.vnoremap, get_user_keys "visual_mode")
-lv_utils.add_keymap_visual_block_mode(opts.xnoremap, get_user_keys "visual_block_mode")
-lv_utils.add_keymap_term_mode(opts.generic, get_user_keys "term_mode")
+utils.add_keymap_normal_mode(opts.nnoremap, get_user_keys "normal_mode")
+utils.add_keymap_insert_mode(opts.inoremap, get_user_keys "insert_mode")
+utils.add_keymap_visual_mode(opts.vnoremap, get_user_keys "visual_mode")
+utils.add_keymap_visual_block_mode(opts.xnoremap, get_user_keys "visual_block_mode")
+utils.add_keymap_term_mode(opts.generic, get_user_keys "term_mode")
 
 -- navigate tab completion with <c-j> and <c-k>
 -- runs conditionally

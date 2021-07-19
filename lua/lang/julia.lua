@@ -19,7 +19,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if require("lv-utils").check_lsp_client_active "julials" then
+  if require("utils").check_lsp_client_active "julials" then
     return
   end
   -- Add the following lines to a new julia file, e.g. install.jl

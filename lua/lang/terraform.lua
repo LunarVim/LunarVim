@@ -38,7 +38,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if require("lv-utils").check_lsp_client_active "terraformls" then
+  if require("utils").check_lsp_client_active "terraformls" then
     return
   end
 

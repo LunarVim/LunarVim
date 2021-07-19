@@ -72,7 +72,7 @@ M.config = function()
         name = "Packer",
         c = { "<cmd>PackerCompile<cr>", "Compile" },
         i = { "<cmd>PackerInstall<cr>", "Install" },
-        r = { "<cmd>lua require('lv-utils').reload_lv_config()<cr>", "Reload" },
+        r = { "<cmd>lua require('utils').reload_lv_config()<cr>", "Reload" },
         s = { "<cmd>PackerSync<cr>", "Sync" },
         u = { "<cmd>PackerUpdate<cr>", "Update" },
       },

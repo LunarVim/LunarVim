@@ -30,10 +30,10 @@ M.format = function()
   local ft = vim.bo.filetype
   O.formatters.filetype[ft] = {
     function()
-      local lv_utils = require "lv-utils"
+      local utils = require "utils"
       return {
         exe = formatter_instance,
-        args = lv_utils.gsub_args(O.lang.vue.formatter.args),
+        args = utils.gsub_args(O.lang.vue.formatter.args),
         stdin = O.lang.vue.formatter.stdin,
       }
     end,
@@ -50,7 +50,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if require("lv-utils").check_lsp_client_active "vuels" then
+  if require("utils").check_lsp_client_active "vuels" then
     return
   end
 

@@ -82,7 +82,7 @@ M.setup = function()
 
   -- vim.g.dashboard_session_directory = CACHE_PATH..'/session'
   -- vim.g.dashboard_custom_footer = O.dashboard.footer
-  require("lv-utils").define_augroups {
+  require("utils").define_augroups {
     _dashboard = {
       -- seems to be nobuflisted that makes my stuff disapear will do more testing
       {

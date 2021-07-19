@@ -1,6 +1,6 @@
 -- autoformat
 if O.format_on_save then
-  require("lv-utils").define_augroups {
+  require("utils").define_augroups {
     autoformat = {
       {
         "BufWritePost",

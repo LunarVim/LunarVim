@@ -19,7 +19,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if require("lv-utils").check_lsp_client_active "clojure_lsp" then
+  if require("utils").check_lsp_client_active "clojure_lsp" then
     return
   end
 

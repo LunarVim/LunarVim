@@ -44,7 +44,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if not require("lv-utils").check_lsp_client_active "sumneko_lua" then
+  if not require("utils").check_lsp_client_active "sumneko_lua" then
     -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
     local sumneko_main = string.gsub(O.lang.lua.lsp.path, "sumneko-lua-language-server", "main.lua")
 

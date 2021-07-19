@@ -41,7 +41,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if require("lv-utils").check_lsp_client_active "r_language_server" then
+  if require("utils").check_lsp_client_active "r_language_server" then
     return
   end
   -- R -e 'install.packages("languageserver",repos = "http://cran.us.r-project.org")'

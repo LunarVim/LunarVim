@@ -44,11 +44,11 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if not require("lv-utils").check_lsp_client_active "sorbet" then
+  if not require("utils").check_lsp_client_active "sorbet" then
     require("lspconfig").sorbet.setup {}
   end
 
-  if not require("lv-utils").check_lsp_client_active "solargraph" then
+  if not require("utils").check_lsp_client_active "solargraph" then
     -- If you are using rvm, make sure to change below configuration
     require("lspconfig").solargraph.setup {
       cmd = { O.lang.ruby.lsp.path, "stdio" },

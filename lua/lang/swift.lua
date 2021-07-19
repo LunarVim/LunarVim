@@ -36,7 +36,7 @@ M.lint = function()
 end
 
 M.lsp = function()
-  if require("lv-utils").check_lsp_client_active "sourcekit" then
+  if require("utils").check_lsp_client_active "sourcekit" then
     return
   end
 

@@ -90,7 +90,7 @@ O.keys.normal_mode = {
   {']d', '<PageDown>'},
 }
 -- if you just want to augment the existing ones then use the utility function
-require("lv-utils").add_keymap_insert_mode({ silent = true }, {
+require("utils").add_keymap_insert_mode({ silent = true }, {
   { "<C-s>", ":w<cr>" },
   { "<C-c>", "<ESC>" }
 })
@@ -175,7 +175,7 @@ In case you want to see all the settings inside LunarVim, run the following:
 
 ```bash
 cd /tmp
-lvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+lvim --headless +'lua require("utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
 and then inspect `/tmp/lv-settings.lua` file
 

@@ -34,7 +34,7 @@ require("formatter.config").set_defaults {
   filetype = O.formatters.filetype,
 }
 
-if require("lv-utils").check_lsp_client_active "tsserver" then
+if require("utils").check_lsp_client_active "tsserver" then
   return
 end
 

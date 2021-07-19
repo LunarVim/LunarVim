@@ -25,7 +25,7 @@ plugin_loader:load { plugins, O.user_plugins }
 vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 
 require "settings"
-require "lv-utils"
+require "utils"
 
 -- TODO: these guys need to be in language files
 -- require "lsp"

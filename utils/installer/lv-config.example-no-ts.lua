@@ -29,7 +29,7 @@ O.keys.leader_key = "space"
 --   {'<S-Tab>', ':bprevious<CR>'},
 -- }
 -- if you just want to augment the existing ones then use the utility function
--- require("lv-utils").add_keymap_insert_mode({ silent = true }, {
+-- require("utils").add_keymap_insert_mode({ silent = true }, {
 -- { "<C-s>", ":w<cr>" },
 -- { "<C-c>", "<ESC>" },
 -- })
