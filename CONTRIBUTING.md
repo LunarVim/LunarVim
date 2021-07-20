@@ -21,6 +21,8 @@ One of the best ways to begin contributing in a meaningful way is by helping fin
 
 2. Copy `utils/.stylua.toml` into the LunarVim root directory
 
+3. Install [shfmt](https://github.com/mvdan/sh#shfmt)
+
 ## Some Guidelines
 
 ### Git Commit Messages
@@ -40,6 +42,16 @@ ex: (feature|bugfix|hotfix)/what-my-pr-does
 All lua code is formatted with [Stylua](https://github.com/JohnnyMorganz/StyLua).
 * Use snake_case
 * Avoid platform-dependent code
+```bash
+stylua --config-path ./utils/.stylua.toml -c .
+```
+
+All shell code is formatted according to [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+* use two spaces instead of tabs
+```bash
+shfmt -i 2 -ci -l -d .
+```
+
 
 ## Communication
 
