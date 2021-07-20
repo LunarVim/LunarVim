@@ -7,6 +7,9 @@ M.config = function()
       -- https://docs.errata.ai/vale/scoping#html
       "vale",
     },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
+    },
   }
 end
 
@@ -30,7 +33,7 @@ M.lsp = function()
     require("lspconfig").html.setup {
       cmd = {
         "node",
-        DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
+        O.lang.html.lsp.path,
         "--stdio",
       },
       on_attach = require("lsp").common_on_attach,

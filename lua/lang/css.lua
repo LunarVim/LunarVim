@@ -7,6 +7,9 @@ M.config = function()
       exe = "prettier",
       args = {},
     },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+    },
   }
 end
 
@@ -57,7 +60,7 @@ M.lsp = function()
     require("lspconfig").cssls.setup {
       cmd = {
         "node",
-        DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+        O.lang.css.lsp.path,
         "--stdio",
       },
       on_attach = require("lsp").common_on_attach,

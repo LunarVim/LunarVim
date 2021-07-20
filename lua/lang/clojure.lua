@@ -1,7 +1,11 @@
 local M = {}
 
 M.config = function()
-  O.lang.erlang = {}
+  O.lang.erlang = {
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
+    },
+  }
 end
 
 M.format = function()
@@ -20,7 +24,7 @@ M.lsp = function()
   end
 
   require("lspconfig").clojure_lsp.setup {
-    cmd = { DATA_PATH .. "/lspinstall/clojure/clojure-lsp" },
+    cmd = { O.lang.erlang.lsp.path },
     on_attach = require("lsp").common_on_attach,
   }
 end

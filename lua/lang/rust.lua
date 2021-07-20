@@ -19,6 +19,9 @@ M.config = function()
       signs = true,
       underline = true,
     },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+    },
   }
 end
 
@@ -118,14 +121,14 @@ M.lsp = function()
       -- these override the defaults set by rust-tools.nvim
       -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
       server = {
-        cmd = { DATA_PATH .. "/lspinstall/rust/rust-analyzer" },
+        cmd = { O.lang.rust.lsp.path },
         on_attach = require("lsp").common_on_attach,
       }, -- rust-analyser options
     }
     require("rust-tools").setup(opts)
   else
     require("lspconfig").rust_analyzer.setup {
-      cmd = { DATA_PATH .. "/lspinstall/rust/rust-analyzer" },
+      cmd = { O.lang.rust.lsp.path },
       on_attach = require("lsp").common_on_attach,
       filetypes = { "rust" },
       root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json"),

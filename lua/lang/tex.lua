@@ -8,6 +8,9 @@ M.config = function()
     diagnostics_delay = 300,
     formatter_line_length = 80,
     latex_formatter = "latexindent",
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/latex/texlab",
+    },
     build = {
       executable = "latexmk",
       args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
@@ -77,7 +80,7 @@ M.lsp = function()
   end
 
   require("lspconfig").texlab.setup {
-    cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
+    cmd = { O.lang.latex.lsp.path },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
