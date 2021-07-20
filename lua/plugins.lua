@@ -8,7 +8,11 @@ return {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
     config = function()
-      require("lspinstall").setup()
+      local lspinstall = require "lspinstall"
+      lspinstall.setup()
+      if O.plugin.lspinstall.on_config_done then
+        O.plugin.lspinstall.on_config_done(lspinstall)
+      end
     end,
   },
 
@@ -19,7 +23,12 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    config = [[require('core.telescope').setup()]],
+    config = function()
+      require("core.telescope").setup()
+      if O.plugin.telescope.on_config_done then
+        O.plugin.telescope.on_config_done(require "telescope")
+      end
+    end,
   },
 
   -- Autocomplete
@@ -28,6 +37,9 @@ return {
     -- event = "InsertEnter",
     config = function()
       require("core.compe").setup()
+      if O.plugin.compe.on_config_done then
+        O.plugin.compe.on_config_done(require "compe")
+      end
     end,
   },
 
@@ -37,6 +49,9 @@ return {
     -- event = "InsertEnter",
     config = function()
       require "core.autopairs"
+      if O.plugin.autopairs.on_config_done then
+        O.plugin.autopairs.on_config_done(require "nvim-autopairs")
+      end
     end,
   },
 
@@ -50,6 +65,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("core.treesitter").setup()
+      if O.plugin.treesitter.on_config_done then
+        O.plugin.treesitter.on_config_done(require "nvim-treesitter.configs")
+      end
     end,
   },
 
@@ -58,6 +76,9 @@ return {
     "mhartington/formatter.nvim",
     config = function()
       require "core.formatter"
+      if O.plugin.formatter.on_config_done then
+        O.plugin.formatter.on_config_done(require "formatter")
+      end
     end,
   },
 
@@ -66,6 +87,9 @@ return {
     "mfussenegger/nvim-lint",
     config = function()
       require("core.linter").setup()
+      if O.plugin.lint.on_config_done then
+        O.plugin.lint.on_config_done(require "lint")
+      end
     end,
   },
 
@@ -77,6 +101,9 @@ return {
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
       require("core.nvimtree").setup()
+      if O.plugin.nvimtree.on_config_done then
+        O.plugin.nvimtree.on_config_done(require "nvim-tree.config")
+      end
     end,
   },
 
@@ -85,6 +112,9 @@ return {
 
     config = function()
       require("core.gitsigns").setup()
+      if O.plugin.gitsigns.on_config_done then
+        O.plugin.gitsigns.on_config_done(require "gitsigns")
+      end
     end,
     event = "BufRead",
   },
@@ -94,6 +124,9 @@ return {
     "folke/which-key.nvim",
     config = function()
       require("core.which-key").setup()
+      if O.plugin.which_key.on_config_done then
+        O.plugin.which_key.on_config_done(require "which-key")
+      end
     end,
     event = "BufWinEnter",
   },
@@ -108,6 +141,9 @@ return {
         return
       end
       nvim_comment.setup()
+      if O.plugin.comment.on_config_done then
+        O.plugin.comment.on_config_done(nvim_comment)
+      end
     end,
   },
 
@@ -116,6 +152,9 @@ return {
     "airblade/vim-rooter",
     config = function()
       vim.g.rooter_silent_chdir = 1
+      if O.plugin.rooter.on_config_done then
+        O.plugin.rooter.on_config_done()
+      end
     end,
   },
 
@@ -127,6 +166,9 @@ return {
     "glepnir/galaxyline.nvim",
     config = function()
       require "core.galaxyline"
+      if O.plugin.galaxyline.on_config_done then
+        O.plugin.galaxyline.on_config_done(require "galaxyline")
+      end
     end,
     event = "BufWinEnter",
     disable = not O.plugin.galaxyline.active,
@@ -136,6 +178,9 @@ return {
     "romgrk/barbar.nvim",
     config = function()
       require "core.bufferline"
+      if O.plugin.bufferline.on_config_done then
+        O.plugin.bufferline.on_config_done()
+      end
     end,
     event = "BufWinEnter",
   },
@@ -146,6 +191,9 @@ return {
     -- event = "BufWinEnter",
     config = function()
       require("core.dap").setup()
+      if O.plugin.dap.on_config_done then
+        O.plugin.dap.on_config_done(require "dap")
+      end
     end,
     disable = not O.plugin.dap.active,
   },
@@ -166,6 +214,9 @@ return {
     event = "BufWinEnter",
     config = function()
       require("core.dashboard").setup()
+      if O.plugin.dashboard.on_config_done then
+        O.plugin.dashboard.on_config_done(require "dashboard")
+      end
     end,
     disable = not O.plugin.dashboard.active,
   },
@@ -186,6 +237,9 @@ return {
     event = "BufWinEnter",
     config = function()
       require("core.terminal").setup()
+      if O.plugin.terminal.on_config_done then
+        O.plugin.terminal.on_config_done(require "toggleterm")
+      end
     end,
     disable = not O.plugin.terminal.active,
   },
@@ -197,6 +251,9 @@ return {
     event = "BufRead",
     config = function()
       require("core.zen").setup()
+      if O.plugin.zen.on_config_done then
+        O.plugin.zen.on_config_done(require "zen-mode")
+      end
     end,
     disable = not O.plugin.zen.active,
   },

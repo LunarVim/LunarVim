@@ -96,7 +96,26 @@ O = {
     -- 'matchit', 'matchparen', 'shada_plugin',
   },
 
-  plugin = {},
+  plugin = {
+    lspinstall = {},
+    telescope = {},
+    compe = {},
+    autopairs = {},
+    treesitter = {},
+    formatter = {},
+    lint = {},
+    nvimtree = {},
+    gitsigns = {},
+    which_key = {},
+    comment = {},
+    rooter = {},
+    galaxyline = {},
+    bufferline = {},
+    dap = {},
+    dashboard = {},
+    terminal = {},
+    zen = {},
+  },
 
   -- TODO: refactor for tree
   auto_close_tree = 0,
