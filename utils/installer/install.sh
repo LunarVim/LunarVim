@@ -101,7 +101,16 @@ installpacker() {
 
 cloneconfig() {
 	echo "Cloning LunarVim configuration"
-	git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.local/share/lunarvim/lvim
+	mkdir -p ~/.local/share/lunarvim
+	case "$@" in
+
+	*--testing*)
+		cp -r "$(pwd)" ~/.local/share/lunarvim/lvim
+		;;
+	*)
+		git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.local/share/lunarvim/lvim
+		;;
+	esac
 	mkdir -p "$HOME/.config/lvim"
 	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "/usr/local/bin"
 	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/lvim/lv-config.lua"
@@ -181,6 +190,7 @@ case "$@" in
 	echo '!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag'
 	rm -rf "$HOME/.local/share/lunarvim"
 	rm -rf "$HOME/.cache/nvim"
+	rm -rf "$HOME/.config/lvim"
 	;;
 esac
 
@@ -206,7 +216,7 @@ if [ -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
 	echo 'LunarVim already installed'
 else
 	# clone config down
-	cloneconfig
+	cloneconfig "$@"
 	# echo 'export PATH=$HOME/.config/nvim/utils/bin:$PATH' >>~/.zshrc
 	# echo 'export PATH=$HOME/.config/lunarvim/utils/bin:$PATH' >>~/.bashrc
 fi
