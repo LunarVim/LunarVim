@@ -2,7 +2,9 @@ local M = {}
 
 M.config = function()
   O.lang.docker = {
-    lsp_path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
+    },
   }
 end
 
@@ -23,7 +25,7 @@ M.lsp = function()
 
   -- npm install -g dockerfile-language-server-nodejs
   require("lspconfig").dockerls.setup {
-    cmd = { O.lang.docker.lsp_path, "--stdio" },
+    cmd = { O.lang.docker.lsp.path, "--stdio" },
     on_attach = require("lsp").common_on_attach,
     root_dir = vim.loop.cwd,
   }

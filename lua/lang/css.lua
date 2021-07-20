@@ -2,11 +2,13 @@ local M = {}
 
 M.config = function()
   O.lang.css = {
-    lsp_path = DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
     virtual_text = true,
     formatter = {
       exe = "prettier",
       args = {},
+    },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
     },
   }
 end
@@ -58,7 +60,7 @@ M.lsp = function()
     require("lspconfig").cssls.setup {
       cmd = {
         "node",
-        O.lang.css.lsp_path,
+        O.lang.css.lsp.path,
         "--stdio",
       },
       on_attach = require("lsp").common_on_attach,

@@ -2,7 +2,9 @@ local M = {}
 
 M.config = function()
   O.lang.kotlin = {
-    lsp_path = DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
+    },
   }
 end
 
@@ -31,7 +33,7 @@ M.lsp = function()
 
   local util = require "lspconfig/util"
 
-  local bin_name = O.lang.kotlin.lsp_path
+  local bin_name = O.lang.kotlin.lsp.path
   if vim.fn.has "win32" == 1 then
     bin_name = bin_name .. ".bat"
   end

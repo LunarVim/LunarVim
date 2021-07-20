@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   O.lang.lua = {
-    lsp_path = DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
       signs = true,
@@ -14,6 +13,9 @@ M.config = function()
       stdin = false,
     },
     linters = { "luacheck" },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
+    },
   }
 end
 
@@ -44,10 +46,10 @@ end
 M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "sumneko_lua" then
     -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-    local sumneko_main = string.gsub(O.lang.lua.lsp_path, "sumneko-lua-language-server", "main.lua")
+    local sumneko_main = string.gsub(O.lang.lua.lsp.path, "sumneko-lua-language-server", "main.lua")
 
     require("lspconfig").sumneko_lua.setup {
-      cmd = { O.lang.lua.lsp_path, "-E", sumneko_main },
+      cmd = { O.lang.lua.lsp.path, "-E", sumneko_main },
       on_attach = require("lsp").common_on_attach,
       settings = {
         Lua = {

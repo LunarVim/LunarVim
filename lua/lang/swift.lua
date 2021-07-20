@@ -2,11 +2,13 @@ local M = {}
 
 M.config = function()
   O.lang.swift = {
-    lsp_path = "sourcekit-lsp",
     formatter = {
       exe = "swiftformat",
       args = {},
       stdin = true,
+    },
+    lsp = {
+      path = "sourcekit-lsp",
     },
   }
 end
@@ -39,7 +41,7 @@ M.lsp = function()
   end
 
   require("lspconfig").sourcekit.setup {
-    cmd = { "xcrun", O.lang.swift.lsp_path },
+    cmd = { "xcrun", O.lang.swift.lsp.path },
     on_attach = require("lsp").common_on_attach,
     filetypes = { "swift" },
   }

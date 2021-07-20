@@ -2,11 +2,13 @@ local M = {}
 
 M.config = function()
   O.lang.zig = {
-    lsp_path = "zls",
     formatter = {
       exe = "zig",
       args = { "fmt" },
       stdin = false,
+    },
+    lsp = {
+      path = "zls",
     },
   }
 end
@@ -42,7 +44,7 @@ M.lsp = function()
   -- Further custom install zls in
   -- https://github.com/zigtools/zls/wiki/Downloading-and-Building-ZLS
   require("lspconfig").zls.setup {
-    cmd = { O.lang.zig.lsp_path },
+    cmd = { O.lang.zig.lsp.path },
     root_dir = require("lspconfig").util.root_pattern(".git", "build.zig", "zls.json"),
     on_attach = require("lsp").common_on_attach,
   }

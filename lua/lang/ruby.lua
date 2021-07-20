@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   O.lang.ruby = {
-    lsp_path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
     diagnostics = {
       virtualtext = { spacing = 0, prefix = "" },
       signs = true,
@@ -15,6 +14,9 @@ M.config = function()
       stdin = true,
     },
     linters = { "ruby" },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
+    },
   }
 end
 
@@ -49,7 +51,7 @@ M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "solargraph" then
     -- If you are using rvm, make sure to change below configuration
     require("lspconfig").solargraph.setup {
-      cmd = { O.lang.ruby.lsp_path, "stdio" },
+      cmd = { O.lang.ruby.lsp.path, "stdio" },
       on_attach = require("lsp").common_on_attach,
       handlers = {
         ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

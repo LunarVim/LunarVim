@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   O.lang.vue = {
-    lsp_path = DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
     formatter = {
       exe = "prettier",
       args = {
@@ -12,6 +11,9 @@ M.config = function()
       stdin = true,
     },
     auto_import = true,
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+    },
   }
 end
 
@@ -54,7 +56,7 @@ M.lsp = function()
 
   -- Vue language server configuration (vetur)
   require("lspconfig").vuels.setup {
-    cmd = { O.lang.vue.lsp_path, "--stdio" },
+    cmd = { O.lang.vue.lsp.path, "--stdio" },
     on_attach = require("lsp").common_on_attach,
   }
 

@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   O.lang.json = {
-    lsp_path = DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
       signs = true,
@@ -12,6 +11,9 @@ M.config = function()
       exe = "python",
       args = { "-m", "json.tool" },
       stdin = true,
+    },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
     },
   }
 end
@@ -47,7 +49,7 @@ M.lsp = function()
   require("lspconfig").jsonls.setup {
     cmd = {
       "node",
-      O.lang.json.lsp_path,
+      O.lang.json.lsp.path,
       "--stdio",
     },
     on_attach = require("lsp").common_on_attach,

@@ -2,7 +2,9 @@ local M = {}
 
 M.config = function()
   O.lang.julia = {
-    lsp_path = CONFIG_PATH .. "/lua/lsp/julia/run.jl",
+    lsp = {
+      path = CONFIG_PATH .. "/lua/lsp/julia/run.jl",
+    },
   }
 end
 
@@ -32,7 +34,7 @@ M.lsp = function()
     "--startup-file=no",
     "--history-file=no",
     -- vim.fn.expand "~/.config/nvim/lua/lsp/julia/run.jl",
-    O.lang.julia.lsp_path,
+    O.lang.julia.lsp.path,
   }
   require("lspconfig").julials.setup {
     cmd = cmd,

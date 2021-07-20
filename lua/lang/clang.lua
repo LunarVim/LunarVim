@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   O.lang.clang = {
-    lsp_path = DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
       signs = true,
@@ -25,6 +24,9 @@ M.config = function()
         command = "/usr/bin/lldb-vscode",
       },
       stop_on_entry = false,
+    },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
     },
   }
 end
@@ -70,7 +72,7 @@ M.lsp = function()
   table.insert(clangd_flags, "--header-insertion=" .. O.lang.clang.header_insertion)
 
   require("lspconfig").clangd.setup {
-    cmd = { O.lang.clang.lsp_path, unpack(clangd_flags) },
+    cmd = { O.lang.clang.lsp.path, unpack(clangd_flags) },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

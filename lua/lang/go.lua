@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   O.lang.go = {
-    lsp_path = DATA_PATH .. "/lspinstall/go/gopls",
     formatter = {
       exe = "gofmt",
       args = {},
@@ -11,6 +10,9 @@ M.config = function()
     linters = {
       "golangcilint",
       "revive",
+    },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/go/gopls",
     },
   }
 end
@@ -41,7 +43,7 @@ end
 M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "gopls" then
     require("lspconfig").gopls.setup {
-      cmd = { O.lang.go.lsp_path },
+      cmd = { O.lang.go.lsp.path },
       settings = { gopls = { analyses = { unusedparams = true }, staticcheck = true } },
       root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
       init_options = { usePlaceholders = true, completeUnimported = true },

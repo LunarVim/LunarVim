@@ -2,7 +2,9 @@ local M = {}
 
 M.config = function()
   O.lang.svelte = {
-    lsp_path = DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
+    },
   }
 end
 
@@ -22,7 +24,7 @@ M.lsp = function()
   end
 
   require("lspconfig").svelte.setup {
-    cmd = { O.lang.svelte.lsp_path, "--stdio" },
+    cmd = { O.lang.svelte.lsp.path, "--stdio" },
     filetypes = { "svelte" },
     root_dir = require("lspconfig.util").root_pattern("package.json", ".git"),
     on_attach = require("lsp").common_on_attach,

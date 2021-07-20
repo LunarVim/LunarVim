@@ -4,10 +4,12 @@ M.config = function()
   local elm_bin = DATA_PATH .. "/lspinstall/elm/node_modules/.bin"
 
   O.lang.elm = {
-    lsp_path = elm_bin .. "/elm-language-server",
-    format_path = elm_bin .. "/elm-format",
-    elm_path = elm_bin,
-    test_path = elm_bin .. "/elm-test",
+    lsp = {
+      path = elm_bin .. "/elm-language-server",
+      format = elm_bin .. "/elm-format",
+      root = elm_bin,
+      test = elm_bin .. "/elm-test",
+    },
   }
 end
 
@@ -27,13 +29,13 @@ M.lsp = function()
   end
 
   require("lspconfig").elmls.setup {
-    cmd = { O.lang.elm.lsp_path },
+    cmd = { O.lang.elm.lsp.path },
     on_attach = require("lsp").common_on_attach,
     init_options = {
       elmAnalyseTrigger = "change",
-      elmFormatPath = O.lang.elm.format_path,
-      elmPath = O.lang.elm.elm_path,
-      elmTestPath = O.lang.elm.test_path,
+      elmFormatPath = O.lang.elm.lsp.format,
+      elmPath = O.lang.elm.lsp.root,
+      elmTestPath = O.lang.elm.lsp.test,
     },
   }
 end
