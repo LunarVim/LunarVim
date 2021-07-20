@@ -62,7 +62,6 @@ M.lsp = function()
       filetypes = O.lang.ruby.filetypes,
     }
   end
-
 end
 
 M.dap = function()
