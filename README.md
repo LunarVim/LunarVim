@@ -47,6 +47,7 @@ you can run the script with `--overwrite` but be warned this will remove the fol
 - `~/.config/nvim`                        #Removed only on Master Branch
 - `~/.local/share/nvim/site/pack/packer`  #Removed only on Master Branch
 - `~/.local/share/lunarvim`               #Removed only on Rolling Branch
+- `~/.config/lvim`                        #Removed only on Rolling Branch
 ```bash
 curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 ```
