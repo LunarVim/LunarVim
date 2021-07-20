@@ -112,7 +112,10 @@ return {
   },
 
   -- lsp-rooter
-  { "ahmedkhalf/lsp-rooter.nvim" },
+  { 
+    "ahmedkhalf/lsp-rooter.nvim",
+    event = "BufRead",
+  },
 
   -- Icons
   { "kyazdani42/nvim-web-devicons" },
