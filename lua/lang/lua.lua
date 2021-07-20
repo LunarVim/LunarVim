@@ -59,11 +59,12 @@ M.lsp = function()
           },
           diagnostics = {
             -- Get the language server to recognize the `vim` global
-            globals = { "vim" },
+            globals = { "vim", "O" },
           },
           workspace = {
             -- Make the server aware of Neovim runtime files
             library = {
+              [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
               [vim.fn.expand "$VIMRUNTIME/lua"] = true,
               [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
             },

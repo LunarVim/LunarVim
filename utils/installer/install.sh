@@ -15,9 +15,9 @@ installnodeubuntu() {
 	sudo apt install npm
 }
 
-moveoldnvim() {
+moveoldlvim() {
 	echo "Not installing LunarVim"
-	echo "Please move your ~/.config/nvim folder before installing"
+	echo "Please move your ~/.local/share/lunarvim folder before installing"
 	exit
 }
 
@@ -96,25 +96,27 @@ installpynvim() {
 }
 
 installpacker() {
-	git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	git clone https://github.com/wbthomason/packer.nvim ~/.local/share/lunarvim/site/pack/packer/start/packer.nvim
 }
 
 cloneconfig() {
 	echo "Cloning LunarVim configuration"
-	git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.config/nvim
-	cp "$HOME/.config/nvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/nvim/lv-config.lua"
-	nvim --headless \
+	git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.local/share/lunarvim/lvim
+	mkdir -p "$HOME/.config/lvim"
+	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "/usr/local/bin"
+	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/lvim/lv-config.lua"
+
+	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
 		+'autocmd User PackerComplete sleep 100m | qall' \
 		+PackerInstall
 
-	nvim --headless \
+	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
 		+'autocmd User PackerComplete sleep 100m | qall' \
 		+PackerSync
 
 	printf "\nCompile Complete\n"
-	rm "$HOME/.config/nvim/lv-config.lua"
-	cp "$HOME/.config/nvim/utils/installer/lv-config.example.lua" "$HOME/.config/nvim/lv-config.lua"
-	# nvim --headless -cq ':silent TSUpdate' -cq ':qall' >/dev/null 2>&1
+	rm "$HOME/.config/lvim/lv-config.lua"
+	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua" "$HOME/.config/lvim/lv-config.lua"
 }
 
 asktoinstallnode() {
@@ -176,15 +178,14 @@ echo 'Installing LunarVim'
 
 case "$@" in
 *--overwrite*)
-	echo '!!Warning!! -> Removing all nvim related config because of the --overwrite flag'
-	rm -rf "$HOME/.config/nvim"
+	echo '!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag'
+	rm -rf "$HOME/.local/share/lunarvim"
 	rm -rf "$HOME/.cache/nvim"
-	rm -rf "$HOME/.local/share/nvim/site/pack/packer"
 	;;
 esac
 
-# move old nvim directory if it exists
-[ -d "$HOME/.config/nvim" ] && moveoldnvim
+# move old lvim directory if it exists
+[ -d "$HOME/.local/share/lunarvim" ] && moveoldlvim
 
 # install pip
 (command -v pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip
@@ -195,13 +196,13 @@ esac
 # install pynvim
 (pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
 
-if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+if [ -e "$HOME/.local/share/lunarvim/site/pack/packer/start/packer.nvim" ]; then
 	echo 'packer already installed'
 else
 	installpacker
 fi
 
-if [ -e "$HOME/.config/nvim/init.lua" ]; then
+if [ -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
 	echo 'LunarVim already installed'
 else
 	# clone config down

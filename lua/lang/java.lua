@@ -58,7 +58,8 @@ M.lsp = function()
     else
       print "Unsupported system"
     end
-    JAVA_LS_EXECUTABLE = CONFIG_PATH .. "/utils/bin/jdtls"
+
+    JAVA_LS_EXECUTABLE = os.getenv "HOME" .. "/.local/share/lunarvim/lvim/utils/bin/jdtls"
 
     require("jdtls").start_or_attach {
       on_attach = require("lsp").common_on_attach,

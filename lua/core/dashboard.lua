@@ -43,7 +43,8 @@ M.config = function()
       },
       d = {
         description = { "  Settings           " },
-        command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
+        -- command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
+        command = ":e ~/.config/lvim/lv-config.lua",
       },
     },
 
@@ -67,8 +68,8 @@ M.setup = function()
   --   command = "Telescope find_files cwd=" .. CONFIG_PATH,
   -- },
   -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
-  vim.cmd "let g:dashboard_session_directory = $HOME..'/.config/nvim/.sessions'"
-  vim.cmd "let packages = len(globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))"
+  vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
+  vim.cmd "let packages = len(globpath('~/.local/share/lunarvim/site/pack/packer/start', '*', 0, 1))"
 
   vim.api.nvim_exec(
     [[

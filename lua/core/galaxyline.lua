@@ -281,7 +281,7 @@ table.insert(gls.right, {
     condition = condition.hide_in_width,
     separator = " ",
     separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { colors.alt_bg, colors.alt_bg },
+    highlight = { colors.grey, colors.alt_bg },
   },
 })
 
