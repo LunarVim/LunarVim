@@ -3,7 +3,7 @@ local M = {}
 M.setup = function()
   if O.lint_on_save then
     require("lv-utils").define_augroups {
-      autolint_on_save = {
+      autolint = {
         {
           "BufWritePost",
           "<buffer>",
