@@ -112,7 +112,7 @@ return {
   },
 
   -- lsp-rooter
-  { 
+  {
     "ahmedkhalf/lsp-rooter.nvim",
     event = "BufRead",
   },
