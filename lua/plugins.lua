@@ -111,13 +111,8 @@ return {
     end,
   },
 
-  -- vim-rooter
-  {
-    "airblade/vim-rooter",
-    config = function()
-      vim.g.rooter_silent_chdir = 1
-    end,
-  },
+  -- lsp-rooter
+  { "ahmedkhalf/lsp-rooter.nvim" },
 
   -- Icons
   { "kyazdani42/nvim-web-devicons" },
