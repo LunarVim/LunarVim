@@ -28,16 +28,26 @@ Make sure you have the newest version of Neovim (0.5).
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
-If you help to develop Lunarvim, you can install a specific branch branch directly
+### Installing
+The following command installs LunarVim.  Change `LVBRANCH` to the branch you'd like to install.  `master` for the stable branch and `rolling` for the latest changes.
 ``` bash
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
 ```
 
+### BREAKING CHANGE on the rolling branch
+* The latest changes to LunarVim require you to [remove it completely](https://github.com/ChristianChiarulli/LunarVim/wiki/Uninstalling-LunarVim) before upgrading
+* Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
+* To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
+* Your personal configuration file (`lv-config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
+
+### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
 you can run the script with `--overwrite` but be warned this will remove the following folders:
-- `~/.config/nvim`
 - `~/.cache/nvim`
-- `~/.local/share/nvim/site/pack/packer`
+- `~/.config/nvim`                        #Removed only on Master Branch
+- `~/.local/share/nvim/site/pack/packer`  #Removed only on Master Branch
+- `~/.local/share/lunarvim`               #Removed only on Rolling Branch
+- `~/.config/lvim`                        #Removed only on Rolling Branch
 ```bash
 curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 ```
@@ -50,9 +60,11 @@ Just enter `:LspInstall` followed by `<TAB>` to see your options
 
 **NOTE** I recommend installing `lua` for autocomplete in `lv-config.lua`
 
+For the julia language server look [here](https://github.com/ChristianChiarulli/LunarVim/wiki/Enabling-a-language-server#julia-support)
+
 ## Configuration file
 
-To activate other plugins and language features use the `lv-config.lua` file provided in the `nvim` folder (`~/.config/nvim/lv-config.lua`)
+To activate other plugins and language features use the `lv-config.lua` file provided in the `nvim` folder (`~/.config/nvim/lv-config.lua`) in the master branch or (`~/.config/lvim/lv-config.lua`) on rolling
 
 Example:
 
@@ -173,10 +185,16 @@ To update plugins:
 To update LunarVim:
 
 ```bash
+# Master Branch
 cd ~/.config/nvim && git pull
+:PackerSync  
+
+# Rolling Branch
+cd ~/.local/share/lunarvim && git pull
+:PackerSync
 ```
 
-To update Neovim use your package manager
+To update Neovim use your package manager or [compile from source](https://github.com/ChristianChiarulli/LunarVim/wiki/Installation#get-the-latest-version-of-neovim)
 
 ## Project Goals
 
