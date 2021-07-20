@@ -163,10 +163,10 @@ O.lang.python.analysis.use_library_code_types = true
 In case you want to see all the settings inside LunarVim, run the following:
 
 ```bash
-cd ~/.config/nvim
+cd /tmp
 lvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
-and then inspect `~/.config/nvim/lv-settings.lua` file
+and then inspect `/tmp/lv-settings.lua` file
 
 ## Updating LunarVim
 
