@@ -7,12 +7,13 @@ M.config = function()
       parameter_hints_prefix = "<-",
       other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
     },
-    -- @usage can be clippy
+    -- @usage can be rustfmt
     formatter = {
       exe = "rustfmt",
       args = { "--emit=stdout", "--edition=2018" },
       stdin = true,
     },
+    -- @usage can be clippy
     linter = "",
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
