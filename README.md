@@ -43,8 +43,9 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiar
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
 you can run the script with `--overwrite` but be warned this will remove the following folders:
 - `~/.cache/nvim`
-- `~/.local/share/nvim/site/pack/packer`  #Master Branch
-- `~/.local/share/lunarvim`               #Rolling Branch
+- `~/.config/nvim`                        #Removed only on Master Branch
+- `~/.local/share/nvim/site/pack/packer`  #Removed only on Master Branch
+- `~/.local/share/lunarvim`               #Removed only on Rolling Branch
 ```bash
 curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 ```
