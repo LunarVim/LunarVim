@@ -64,7 +64,7 @@ M.lsp = function()
           workspace = {
             -- Make the server aware of Neovim runtime files
             library = {
-              [vim.fn.expand "~/.local/share/lvim/lua"] = true,
+              [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
               [vim.fn.expand "$VIMRUNTIME/lua"] = true,
               [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
             },
