@@ -1,10 +1,13 @@
 vim.cmd [[
+  set packpath-=~/.config/nvim
+  set packpath-=~/.config/nvim/after
+  set packpath-=~/.local/share/nvim/site
   set packpath^=~/.local/share/lunarvim/site
   set packpath^=~/.config/lvim
-  set runtimepath^=~/.config/lvim
 
   set runtimepath-=~/.config/nvim
-  set packpath-=~/.local/share/nvim/site
+  set runtimepath-=~/.config/nvim/after
+  set runtimepath^=~/.config/lvim
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
