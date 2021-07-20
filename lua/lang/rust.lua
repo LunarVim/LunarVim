@@ -42,7 +42,7 @@ end
 
 M.lint = function()
   -- TODO: implement linters (if applicable)
-  require("lint).linters_by_fit =  {
+  require("lint").linters_by_fit =  {
     rust = O.lang.rust.linters,
   }
   -- return "No linters configured!"
