@@ -40,16 +40,16 @@ fi
 
 # JAR="$HOME/.config/nvim/.language-servers/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"
 JAR="$HOME/.local/share/nvim/lspinstall/java/plugins/org.eclipse.equinox.launcher_*.jar"
-GRADLE_HOME="$HOME/gradle" "$JAVACMD" \
+GRADLE_HOME=$HOME/gradle "$JAVACMD" \
 	-Declipse.application=org.eclipse.jdt.ls.core.id1 \
 	-Dosgi.bundles.defaultStartLevel=4 \
 	-Declipse.product=org.eclipse.jdt.ls.core.product \
 	-Dlog.protocol=true \
 	-Dlog.level=ALL \
-	-javaagent:"$HOME/.local/share/nvim/lspinstall/java/lombok.jar" \
+	-javaagent:$HOME/.local/share/nvim/lspinstall/java/lombok.jar \
 	-Xms1g \
 	-Xmx2G \
-	-jar "$JAR" \
+	-jar $(echo "$JAR") \
 	-configuration "$CONFIG" \
 	-data "${1:-$HOME/workspace}" \
 	--add-modules=ALL-SYSTEM \
