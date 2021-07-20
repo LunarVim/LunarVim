@@ -17,22 +17,6 @@ M.setup = function()
       },
     }
   end
-  if O.lint_on_text_changed then
-    require("lv-utils").define_augroups {
-      autolint_text_changed = {
-        {
-          "TextChanged",
-          "<buffer>",
-          ":silent lua require('lint').try_lint()",
-        },
-        {
-          "BufEnter",
-          "<buffer>",
-          ":silent lua require('lint').try_lint()",
-        },
-      },
-    }
-  end
 end
 
 local status_ok, _ = pcall(require, "lint")
