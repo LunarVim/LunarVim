@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
   O.lang.sh = {
+    lsp_path = DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
     -- @usage can be 'shellcheck'
     linter = "",
     -- @usage can be 'shfmt'
@@ -47,7 +48,7 @@ M.lsp = function()
   if not require("lv-utils").check_lsp_client_active "bashls" then
     -- npm i -g bash-language-server
     require("lspconfig").bashls.setup {
-      cmd = { DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server", "start" },
+      cmd = { O.lang.sh.lsp_path, "start" },
       on_attach = require("lsp").common_on_attach,
       filetypes = { "sh", "zsh" },
     }

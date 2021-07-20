@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
   O.lang.html = {
+    lsp_path = DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
     linters = {
       "tidy",
       -- https://docs.errata.ai/vale/scoping#html
@@ -30,7 +31,7 @@ M.lsp = function()
     require("lspconfig").html.setup {
       cmd = {
         "node",
-        DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
+        O.lang.html.lsp_path,
         "--stdio",
       },
       on_attach = require("lsp").common_on_attach,

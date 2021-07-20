@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
   O.lang.terraform = {
+    lsp_path = DATA_PATH .. "/lspinstall/terraform/terraform-ls",
     formatter = {
       exe = "terraform",
       args = { "fmt" },
@@ -40,7 +41,7 @@ M.lsp = function()
   end
 
   require("lspconfig").terraformls.setup {
-    cmd = { DATA_PATH .. "/lspinstall/terraform/terraform-ls", "serve" },
+    cmd = { O.lang.terraform.lsp_path, "serve" },
     on_attach = require("lsp").common_on_attach,
     filetypes = { "tf", "terraform", "hcl" },
   }

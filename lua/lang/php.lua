@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
   O.lang.php = {
+    lsp_path = DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
     format = {
       format = {
         default = "psr12",
@@ -53,7 +54,7 @@ M.lsp = function()
   end
 
   require("lspconfig").intelephense.setup {
-    cmd = { DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense", "--stdio" },
+    cmd = { O.lang.lsp_path, "--stdio" },
     on_attach = require("lsp").common_on_attach,
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

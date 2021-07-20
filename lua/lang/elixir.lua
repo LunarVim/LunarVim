@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
   O.lang.elixir = {
+    lsp_path = DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
     formatter = {
       exe = "mix",
       args = { "format" },
@@ -38,7 +39,7 @@ M.lsp = function()
   end
 
   require("lspconfig").elixirls.setup {
-    cmd = { DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh" },
+    cmd = { O.lang.elixir.lsp_path },
     on_attach = require("lsp").common_on_attach,
   }
 end

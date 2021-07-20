@@ -4,6 +4,7 @@ M.config = function()
   O.lang.python = {
     -- @usage can be flake8 or yapf
     linter = "",
+    lsp_path = DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
     isort = false,
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
@@ -58,7 +59,7 @@ M.lsp = function()
   -- npm i -g pyright
   require("lspconfig").pyright.setup {
     cmd = {
-      DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
+      O.lang.python.lsp_path,
       "--stdio",
     },
     on_attach = require("lsp").common_on_attach,
