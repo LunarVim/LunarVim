@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   O.lang.ruby = {
-    lsp_path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
+    lsp_path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph.gemspec",
     diagnostics = {
       virtualtext = { spacing = 0, prefix = "" },
       signs = true,
