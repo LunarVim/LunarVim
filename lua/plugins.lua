@@ -8,9 +8,10 @@ return {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
     config = function()
-      require("lspinstall").setup()
+      local lspinstall = require "lspinstall"
+      lspinstall.setup()
       if O.plugin.lspinstall.on_config_done then
-        O.plugin.lspinstall.on_config_done(require "lspinstall")
+        O.plugin.lspinstall.on_config_done(lspinstall)
       end
     end,
   },
@@ -141,7 +142,7 @@ return {
       end
       nvim_comment.setup()
       if O.plugin.comment.on_config_done then
-        O.plugin.comment.on_config_done(require "nvim_comment")
+        O.plugin.comment.on_config_done(nvim_comment)
       end
     end,
   },
