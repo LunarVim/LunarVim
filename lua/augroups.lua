@@ -45,20 +45,17 @@ return {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },
   },
-  _buffer_bindings = {
-    { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
-  },
   _auto_resize = {
-    -- will cause split windows to be resized evenly if main window is resized
+    -- Makes split windows resize evenly if main window is resized
     { "VimResized", "*", "wincmd =" },
   },
   _packer_compile = {
-    -- will cause split windows to be resized evenly if main window is resized
+    -- Runs PackerCompile when plugins.lua is updated
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
 
   -- _fterm_lazygit = {
-  --   -- will cause esc key to exit lazy git
+  --   -- Makes esc key exit lazy git
   --   {"TermEnter", "*", "call LazyGitNativation()"}
   -- },
   -- _mode_switching = {
