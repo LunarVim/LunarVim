@@ -3,9 +3,25 @@ local M = {}
 M.setup = function()
   if O.lint_on_save then
     require("lv-utils").define_augroups {
-      autolint = {
+      autolint_on_save = {
         {
           "BufWritePost",
+          "<buffer>",
+          ":silent lua require('lint').try_lint()",
+        },
+        {
+          "BufEnter",
+          "<buffer>",
+          ":silent lua require('lint').try_lint()",
+        },
+      },
+    }
+  end
+  if O.lint_on_text_changed then
+    require("lv-utils").define_augroups {
+      autolint_text_changed = {
+        {
+          "TextChanged",
           "<buffer>",
           ":silent lua require('lint').try_lint()",
         },

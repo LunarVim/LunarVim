@@ -13,6 +13,7 @@ O = {
   transparent_window = false,
   format_on_save = true,
   lint_on_save = true,
+  lint_on_text_changed = true,
   vsnip_dir = vim.fn.stdpath "config" .. "/snippets",
 
   default_options = {
