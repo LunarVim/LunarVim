@@ -58,8 +58,9 @@ end
 
 function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/lvim/lv-config.lua"
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugin-loader.lua"
+  local plugins = require "plugins"
+  local plugin_loader = require("plugin-loader").init()
+  plugin_loader:load { plugins, O.user_plugins }
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
