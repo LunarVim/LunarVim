@@ -1,3 +1,15 @@
+function call_config_done_callback(plugin_variable_name, module_name)
+  local plugin_variable = O.plugin[plugin_variable_name]
+  if plugin_variable and plugin_variable.on_config_done then
+    if module_name then
+      plugin_variable.on_config_done(require(module_name))
+    else
+      plugin_variable.on_config_done()
+    end
+  else
+  end
+end
+
 return {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
@@ -9,6 +21,7 @@ return {
     event = "VimEnter",
     config = function()
       require("lspinstall").setup()
+      call_config_done_callback("lspinstall", "lspinstall")
     end,
   },
 
@@ -19,7 +32,10 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    config = [[require('core.telescope').setup()]],
+    config = function()
+      require("core.telescope").setup()
+      call_config_done_callback("telescope", "telescope")
+    end,
   },
 
   -- Autocomplete
@@ -28,6 +44,7 @@ return {
     -- event = "InsertEnter",
     config = function()
       require("core.compe").setup()
+      call_config_done_callback("compe", "compe")
     end,
   },
 
@@ -37,6 +54,7 @@ return {
     -- event = "InsertEnter",
     config = function()
       require "core.autopairs"
+      call_config_done_callback("autopairs", "nvim-autopairs")
     end,
   },
 
@@ -50,6 +68,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("core.treesitter").setup()
+      call_config_done_callback("treesitter", "nvim-treesitter.configs")
     end,
   },
 
@@ -58,6 +77,7 @@ return {
     "mhartington/formatter.nvim",
     config = function()
       require "core.formatter"
+      call_config_done_callback("formatter", "formatter")
     end,
   },
 
@@ -66,6 +86,7 @@ return {
     "mfussenegger/nvim-lint",
     config = function()
       require("core.linter").setup()
+      call_config_done_callback("lint", "lint")
     end,
   },
 
@@ -77,6 +98,7 @@ return {
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = function()
       require("core.nvimtree").setup()
+      call_config_done_callback("nvimtree", "nvim-tree.config")
     end,
   },
 
@@ -85,6 +107,7 @@ return {
 
     config = function()
       require("core.gitsigns").setup()
+      call_config_done_callback("gitsigns", "gitsigns")
     end,
     event = "BufRead",
   },
@@ -94,6 +117,7 @@ return {
     "folke/which-key.nvim",
     config = function()
       require("core.which-key").setup()
+      call_config_done_callback("whick_key", "which-key")
     end,
     event = "BufWinEnter",
   },
@@ -108,6 +132,7 @@ return {
         return
       end
       nvim_comment.setup()
+      call_config_done_callback("comment", "nvim_comment")
     end,
   },
 
@@ -116,6 +141,7 @@ return {
     "airblade/vim-rooter",
     config = function()
       vim.g.rooter_silent_chdir = 1
+      call_config_done_callback "rooter"
     end,
   },
 
@@ -127,6 +153,7 @@ return {
     "glepnir/galaxyline.nvim",
     config = function()
       require "core.galaxyline"
+      call_config_done_callback("galaxyline", "galaxyline")
     end,
     event = "BufWinEnter",
     disable = not O.plugin.galaxyline.active,
@@ -136,6 +163,7 @@ return {
     "romgrk/barbar.nvim",
     config = function()
       require "core.bufferline"
+      call_config_done_callback "bufferline"
     end,
     event = "BufWinEnter",
   },
@@ -146,6 +174,7 @@ return {
     -- event = "BufWinEnter",
     config = function()
       require("core.dap").setup()
+      call_config_done_callback("dap", "dap")
     end,
     disable = not O.plugin.dap.active,
   },
@@ -166,6 +195,7 @@ return {
     event = "BufWinEnter",
     config = function()
       require("core.dashboard").setup()
+      call_config_done_callback("dashboard", "dashboard")
     end,
     disable = not O.plugin.dashboard.active,
   },
@@ -186,6 +216,7 @@ return {
     event = "BufWinEnter",
     config = function()
       require("core.terminal").setup()
+      call_config_done_callback("terminal", "toggleterm")
     end,
     disable = not O.plugin.terminal.active,
   },
@@ -197,6 +228,7 @@ return {
     event = "BufRead",
     config = function()
       require("core.zen").setup()
+      call_config_done_callback("zen", "zen-mode")
     end,
     disable = not O.plugin.zen.active,
   },
