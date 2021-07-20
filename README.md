@@ -29,15 +29,15 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/mas
 ```
 
 ### Installing
-The following command installs LunarVim.  Change LVBRANCH to the branch you'd like to install.  'master' for the stable branch and 'rolling' for the latest changes.
+The following command installs LunarVim.  Change `LVBRANCH` to the branch you'd like to install.  `master` for the stable branch and `rolling` for the latest changes.
 ``` bash
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 ### BREAKING CHANGE on the rolling branch
-* Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to ~/.local/share/lunarvim.  
-* To launch Lunarvim use the new 'lvim' command.  'nvim' will only launch standard neovim.  
-* Your personal configuration file (lv-config.lua) can now be found in ~/.config/lvim.  You can initialize this folder as a git repository to track changes to your configuration files.
+* Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
+* To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
+* Your personal configuration file (`lv-config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
 
 ### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
