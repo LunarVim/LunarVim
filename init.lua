@@ -1,4 +1,3 @@
-print "hi"
 vim.cmd [[
   set packpath-=~/.config/nvim
   set packpath-=~/.config/nvim/after
