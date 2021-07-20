@@ -87,10 +87,6 @@ O.keys.normal_mode = {
     -- Page down/up
   {'[d', '<PageUp>'},
   {']d', '<PageDown>'},
-
-  -- Navigate buffers
-  {'<Tab>', ':bnext<CR>'},
-  {'<S-Tab>', ':bprevious<CR>'},
 }
 -- if you just want to augment the existing ones then use the utility function
 require("lv-utils").add_keymap_insert_mode({ silent = true }, {
@@ -168,7 +164,7 @@ In case you want to see all the settings inside LunarVim, run the following:
 
 ```bash
 cd ~/.config/nvim
-nvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+lvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
 and then inspect `~/.config/nvim/lv-settings.lua` file
 
