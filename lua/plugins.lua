@@ -117,7 +117,7 @@ return {
     "folke/which-key.nvim",
     config = function()
       require("core.which-key").setup()
-      call_config_done_callback("whick_key", "which-key")
+      call_config_done_callback("which_key", "which-key")
     end,
     event = "BufWinEnter",
   },
