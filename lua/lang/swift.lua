@@ -7,6 +7,9 @@ M.config = function()
       args = {},
       stdin = true,
     },
+    lsp = {
+      path = "sourcekit-lsp",
+    },
   }
 end
 
@@ -38,7 +41,7 @@ M.lsp = function()
   end
 
   require("lspconfig").sourcekit.setup {
-    cmd = { "xcrun", "sourcekit-lsp" },
+    cmd = { "xcrun", O.lang.swift.lsp.path },
     on_attach = require("lsp").common_on_attach,
     filetypes = { "swift" },
   }

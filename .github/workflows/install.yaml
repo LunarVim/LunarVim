@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-#           - runner: ubuntu-20.04
-#             os: linux
+          - runner: ubuntu-20.04
+            os: linux
           - runner: macos-10.15
             os: osx
     runs-on: ${{ matrix.runner }}
@@ -27,7 +27,9 @@ jobs:
         if: matrix.os == 'linux'
         run: |
           sudo apt-get install -y gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip build-essential
-          sudo bash ./utils/bin/install-latest-neovim
+          sudo add-apt-repository ppa:neovim-ppa/unstable -y
+          sudo apt-get update
+          sudo apt-get install neovim -y
 
       - name: Installl dependencies for OSX
         if: matrix.os == 'osx'
@@ -37,13 +39,13 @@ jobs:
 
       - name: Install LunarVim
         run: |
-          bash ./utils/installer/install.sh
+          bash ./utils/installer/install.sh --testing
 
       - name: Test LunarVim PackerCompile
-        run: if nvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+        run: if lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
       - name: Test LunarVim Health
-        run: if nvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+        run: if lvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
 #   freebsd:
 #     runs-on: macos-latest
