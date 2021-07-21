@@ -193,7 +193,6 @@ M.setup = function()
 
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
-  wk.register(O.user_which_key, opts)
 end
 
 return M

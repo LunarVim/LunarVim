@@ -93,7 +93,7 @@ M.setup = function()
       {
         "FileType",
         "dashboard",
-        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. O.default_options.showtabline,
+        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. vim.opt.showtabline._value,
       },
       { "FileType", "dashboard", "nnoremap <silent> <buffer> q :q<CR>" },
     },

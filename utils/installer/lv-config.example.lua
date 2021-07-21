@@ -14,8 +14,6 @@ O.format_on_save = true
 O.lint_on_save = true
 O.completion.autocomplete = true
 O.colorscheme = "spacegray"
-O.default_options.wrap = true
-O.default_options.timeoutlen = 100
 -- keymappings
 O.keys.leader_key = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
@@ -118,7 +116,7 @@ O.lang.latex.latexindent.modify_line_breaks = false
 -- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
+-- O.autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
 
 -- Additional Leader bindings for WhichKey
 -- O.user_which_key = {

@@ -61,7 +61,7 @@ function lv_utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
-  plugin_loader:load { plugins, O.user_plugins }
+  plugin_loader:load { plugins, O.plugins }
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
@@ -203,7 +203,7 @@ lv_utils.define_augroups {
   --   {'InsertEnter', '*', 'if &cursorline | let g:ms_cursorlineoff = 1 | setlocal nocursorline | endif'},
   --   {'InsertLeave', '*', 'if exists("g:ms_cursorlineoff") | setlocal cursorline | endif'},
   -- },
-  _user_autocommands = O.user_autocommands,
+  _user_autocommands = O.autocommands,
 }
 
 function lv_utils.gsub_args(args)

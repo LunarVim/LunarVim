@@ -20,7 +20,7 @@ M.setup = function()
   vim.fn.sign_define("DapBreakpoint", O.plugin.dap.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
-  O.user_which_key["d"] = {
+  O.plugin.which_key.mappings["d"] = {
     name = "Debug",
     t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
     b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
