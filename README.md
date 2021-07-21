@@ -120,7 +120,7 @@ O.treesitter.highlight.enabled = true
 
 -- lua
 O.lang.lua.autoformat = false
-O.lang.lua.formatter = 'lua-format'
+O.lang.lua.formatters = { 'stylua' }
 
 -- javascript
 O.lang.tsserver.formatter = 'prettier'
@@ -130,16 +130,21 @@ O.lang.tsserver.autoformat = true
 -- python
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
--- to change default formatter from yapf to black
--- O.lang.python.formatter.exe = "black"
--- O.lang.python.formatter.args = {"-"}
+-- To configure multiple formatters with an existing profile
+-- O.lang.python.formatters = { "black", "yapf", "isort" }
+-- To configure a new formatter
+-- O.lang.python.formatters.my_new_formatter = {
+--   exe = "my_formatter",
+--   args = {},
+--   stdin = true,
+-- }
 -- To change enabled linters
 -- https://github.com/mfussenegger/nvim-lint#available-linters
 -- O.lang.python.linters = { "flake8", "pylint", "mypy", ... }
 
 -- go
 -- to change default formatter from gofmt to goimports
--- O.lang.formatter.go.exe = "goimports"
+-- O.lang.go.formatters = { "goimports" }
 
 -- Additional Plugins
 -- O.user_plugins = {

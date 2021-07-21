@@ -6,6 +6,11 @@ local formatter_profiles = {
     args = {},
     stdin = true,
   },
+  goimports = {
+    exe = "goimports",
+    args = {},
+    stdin = true,
+  },
 }
 
 M.config = function()
