@@ -197,7 +197,7 @@ cd ~/.config/nvim && git pull
 :PackerSync  
 
 # Rolling Branch
-cd ~/.local/share/lunarvim && git pull
+cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
 
