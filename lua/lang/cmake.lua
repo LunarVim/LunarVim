@@ -1,10 +1,18 @@
 local M = {}
 
+local formatter_profiles = {
+  ["cmake-format"] = {
+    exe = "cmake-format",
+    args = { "-i" },
+    stdin = false,
+    tempfile_prefix = ".formatter",
+  },
+}
+
 M.config = function()
   O.lang.cmake = {
-    formatter = {
-      exe = "clang-format",
-      args = {},
+    formatters = {
+      "cmake-format",
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
@@ -13,8 +21,11 @@ M.config = function()
 end
 
 M.format = function()
-  -- TODO: implement formatters (if applicable)
-  return "No formatters configured!"
+  O.formatters.filetype["cmake"] = require("lv-utils").wrap_formatters(O.lang.cmake.formatters, formatter_profiles)
+  require("formatter.config").set_defaults {
+    logging = false,
+    filetype = O.formatters.filetype,
+  }
 end
 
 M.lint = function()
