@@ -4,7 +4,6 @@ M.config = function()
   O.lang.python = {
     -- @usage can be flake8 or yapf
     linter = "",
-    isort = false,
     diagnostics = {
       virtual_text = { spacing = 0, prefix = "" },
       signs = true,
@@ -15,10 +14,17 @@ M.config = function()
       auto_search_paths = true,
       use_library_code_types = true,
     },
-    formatter = {
-      exe = "yapf",
-      args = {},
-      stdin = true,
+    formatters = {
+      {
+        exe = "black",
+        args = { "-" },
+        stdin = true,
+      },
+      {
+        exe = "isort",
+        args = { "-" },
+        stdin = true,
+      },
     },
     linters = {
       "flake8",
@@ -32,16 +38,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["python"] = {
-    function()
-      return {
-        exe = O.lang.python.formatter.exe,
-        args = O.lang.python.formatter.args,
-        stdin = O.lang.python.formatter.stdin,
-      }
-    end,
-  }
-
+  O.formatters.filetype["python"] = require("lv-utils").wrap_formatters(O.lang.python.formatters)
   require("formatter.config").set_defaults {
     logging = false,
     filetype = O.formatters.filetype,

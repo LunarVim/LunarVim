@@ -79,6 +79,18 @@ function lv_utils.check_lsp_client_active(name)
   return false
 end
 
+function lv_utils.wrap_formatters(formatters)
+  local wrapped = {}
+
+  for _, formatter in ipairs(formatters) do
+    table.insert(wrapped, function()
+      return formatter
+    end)
+  end
+
+  return wrapped
+end
+
 function lv_utils.add_keymap(mode, opts, keymaps)
   for _, keymap in ipairs(keymaps) do
     vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
