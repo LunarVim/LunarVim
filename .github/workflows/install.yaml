@@ -27,12 +27,13 @@ jobs:
       - name: Installl dependencies for OSX
         if: matrix.os == 'osx'
         run: |
+          echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
           brew install coreutils
 
       - name: Install neovim binary
         run: |
           bash ./utils/installer/install-neovim-from-release
-          sudo cp "$HOME/.local/bin/nvim" /usr/local/bin/nvim
 
       - name: Install LunarVim
         timeout-minutes: 4

@@ -2,7 +2,7 @@
 
 set -eu pipefall
 
-declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
+declare -r LV_INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 declare -r RELEASE_VER="${RELEASE_VER:-latest}" # can be set to nightly
 
 declare ARCHIVE_NAME
@@ -33,8 +33,8 @@ RELEASE_SHA="$(curl -Ls "$CHECKSUM_URL" | awk '{print $1}')"
 readonly RELEASE_SHA
 
 function main() {
-  if [ ! -d "$INSTALL_PREFIX" ]; then
-    mkdir -p "INSTALL_PREFIX" || __invalid__prefix__handler
+  if [ ! -d "$LV_INSTALL_PREFIX" ]; then
+    mkdir -p "$LV_INSTALL_PREFIX" || __invalid__prefix__handler
   fi
   download_neovim
   verify_neovim
@@ -69,13 +69,13 @@ function install_neovim() {
   tar -xzf "$DOWNLOAD_DIR/$ARCHIVE_NAME.tar.gz"
   popd
   # https://dev.to/ackshaey/macos-vs-linux-the-cp-command-will-trip-you-up-2p00
-  cp -r "$DOWNLOAD_DIR/$RELEASE_NAME/." "$INSTALL_PREFIX"
-  echo "Installtion complete!"
-  echo "Now you can run $INSTALL_PREFIX/bin/nvim"
+  cp -r "$DOWNLOAD_DIR/$RELEASE_NAME/." "$LV_INSTALL_PREFIX"
+  echo "Installation complete!"
+  echo "Now you can run $LV_INSTALL_PREFIX/bin/nvim"
 }
 
 function __invalid__prefix__handler() {
-  echo "Error! Invalid value for INSTALL_PREFIX: [$INSTALL_PREFIX]"
+  echo "Error! Invalid value for LV_INSTALL_PREFIX: [$INSTALL_PREFIX]"
   echo "Please verify that the folder exists and re-run the installer!"
   exit 1
 }
