@@ -48,7 +48,6 @@ O = {
     dap = {},
     dashboard = {},
     terminal = {},
-    zen = {},
   },
 
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
@@ -105,7 +104,6 @@ require("core.compe").config()
 require("core.dashboard").config()
 require("core.dap").config()
 require("core.terminal").config()
-require("core.zen").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()

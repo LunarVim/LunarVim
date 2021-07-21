@@ -179,16 +179,6 @@ M.setup = function()
   local mappings = O.plugin.which_key.mappings
   local vmappings = O.plugin.which_key.vmappings
 
-  -- if O.plugin.ts_playground.active then
-  --   vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
-  --   mappings[""] = "Highlight Capture"
-  -- end
-
-  if O.plugin.zen.active then
-    vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
-    mappings["z"] = "Zen"
-  end
-
   local wk = require "which-key"
 
   wk.register(mappings, opts)

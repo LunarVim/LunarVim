@@ -245,18 +245,18 @@ return {
   },
 
   -- Zen Mode
-  {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    event = "BufRead",
-    config = function()
-      require("core.zen").setup()
-      if O.plugin.zen.on_config_done then
-        O.plugin.zen.on_config_done(require "zen-mode")
-      end
-    end,
-    disable = not O.plugin.zen.active,
-  },
+  -- {
+  --   "folke/zen-mode.nvim",
+  --   cmd = "ZenMode",
+  --   event = "BufRead",
+  --   config = function()
+  --     require("core.zen").setup()
+  --     if O.plugin.zen.on_config_done then
+  --       O.plugin.zen.on_config_done(require "zen-mode")
+  --     end
+  --   end,
+  --   disable = not O.plugin.zen.active,
+  -- },
 
   ---------------------------------------------------------------------------------
 

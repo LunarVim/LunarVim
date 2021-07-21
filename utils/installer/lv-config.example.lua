@@ -38,8 +38,6 @@ O.keys.leader_key = "space"
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 O.plugin.dashboard.active = true
 O.plugin.terminal.active = true
-O.plugin.zen.active = false
-O.plugin.zen.window.height = 0.90
 O.plugin.nvimtree.side = "left"
 O.plugin.nvimtree.show_icons.git = 0
 
