@@ -1,19 +1,6 @@
 local M = {}
 
-M.config = function()
-  O.lang.css = {
-    virtual_text = true,
-    formatter = {
-      exe = "prettier",
-      args = {},
-    },
-    lsp = {
-      path = DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
-    },
-  }
-end
-
-M.format = function()
+local function find_local_prettier()
   vim.cmd "let proj = FindRootDirectory()"
   local root_dir = vim.api.nvim_get_var "proj"
 
@@ -22,25 +9,30 @@ M.format = function()
   if vim.fn.executable(prettier_instance) ~= 1 then
     prettier_instance = O.lang.tsserver.formatter.exe
   end
+  return prettier_instance
+end
 
-  local ft = vim.bo.filetype
-  O.formatters.filetype[ft] = {
-    function()
-      local args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
-      -- TODO: O.lang.[ft].formatter.args
-      local extend_args = O.lang.css.formatter.args
-
-      for i = 1, #extend_args do
-        table.insert(args, extend_args[i])
-      end
-
-      return {
-        exe = prettier_instance,
-        args = args,
-        stdin = true,
-      }
-    end,
+M.config = function()
+  O.lang.css = {
+    virtual_text = true,
+    formatters = {
+      {
+        exe = find_local_prettier,
+        args = function()
+          return { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
+        end,
+      },
+    },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+    },
   }
+end
+
+M.format = function()
+  local ft = vim.bo.filetype
+  O.formatters.filetype[ft] = require("lv-utils").wrap_formatters(O.lang.css.formatters)
+
   require("formatter.config").set_defaults {
     logging = false,
     filetype = O.formatters.filetype,

@@ -1,18 +1,6 @@
 local M = {}
 
-M.config = function()
-  O.lang.java = {
-    java_tools = {
-      active = false,
-    },
-    formatter = {
-      exe = "prettier",
-      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-    },
-  }
-end
-
-M.format = function()
+local function find_local_prettier()
   vim.cmd "let proj = FindRootDirectory()"
   local root_dir = vim.api.nvim_get_var "proj"
 
@@ -21,17 +9,26 @@ M.format = function()
   if vim.fn.executable(prettier_instance) ~= 1 then
     prettier_instance = O.lang.tsserver.formatter.exe
   end
+  return prettier_instance
+end
 
-  O.formatters.filetype["java"] = {
-    function()
-      return {
-        exe = prettier_instance,
-        -- TODO: allow user to override this
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+M.config = function()
+  O.lang.java = {
+    java_tools = {
+      active = false,
+    },
+    formatters = {
+      {
+        exe = find_local_prettier,
+        args = function() { "--stdin-filepath", vim.api.nvim_buf_get_name(0) } end,
         stdin = true,
-      }
-    end,
+      },
+    },
   }
+end
+
+M.format = function()
+  O.formatters.filetype["java"] = require("lv-utils").wrap_formatters(O.lang.java.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

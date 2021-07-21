@@ -16,10 +16,15 @@ M.config = function()
       underline = true,
     },
     filetypes = { "php", "phtml" },
-    formatter = {
-      exe = "phpcbf",
-      args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-      stdin = false,
+    formatters = {
+      {
+        exe = "phpcbf",
+        args = function()
+          return { "--standard=PSR12", vim.api.nvim_buf_get_name(0) }
+        end,
+        stdin = false,
+        tempfile_prefix = ".formatter",
+      },
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
@@ -28,16 +33,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["php"] = {
-    function()
-      return {
-        exe = O.lang.php.formatter.exe,
-        args = O.lang.php.formatter.args,
-        stdin = O.lang.php.formatter.stdin,
-        tempfile_prefix = ".formatter",
-      }
-    end,
-  }
+  O.formatters.filetype["php"] = require("lv-utils").wrap_formatters(O.lang.php.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

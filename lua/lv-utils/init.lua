@@ -84,7 +84,15 @@ function lv_utils.wrap_formatters(formatters)
 
   for _, formatter in ipairs(formatters) do
     table.insert(wrapped, function()
-      return formatter
+      -- Make a copy to not overwrite formatter function parameters
+      local instance = formatter
+      for k, v in pairs(instance) do
+        if type(v) == "function" then
+          instance[k] = v()
+        end
+      end
+
+      return instance
     end)
   end
 

@@ -1,14 +1,30 @@
 local M = {}
 
+local function find_local_prettier()
+  vim.cmd "let proj = FindRootDirectory()"
+  local root_dir = vim.api.nvim_get_var "proj"
+
+  -- use the global formatter if you didn't find the local one
+  local formatter_instance = root_dir .. "/node_modules/.bin/" .. O.lang.vue.formatter.exe
+  if vim.fn.executable(formatter_instance) ~= 1 then
+    formatter_instance = O.lang.vue.formatter.exe
+  end
+  return formatter_instance
+end
+
 M.config = function()
   O.lang.vue = {
-    formatter = {
-      exe = "prettier",
-      args = {
-        "--stdin-filepath",
-        "${FILEPATH}",
+    formatters = {
+      {
+        exe = "prettier",
+        args = function()
+          return require("lv-utils").gsub_args {
+            "--stdin-filepath",
+            "${FILEPATH}",
+          }
+        end,
+        stdin = true,
       },
-      stdin = true,
     },
     auto_import = true,
     lsp = {
@@ -18,26 +34,9 @@ M.config = function()
 end
 
 M.format = function()
-  vim.cmd "let proj = FindRootDirectory()"
-  local root_dir = vim.api.nvim_get_var "proj"
-
-  -- use the global formatter if you didn't find the local one
-  local formatter_instance = root_dir .. "/node_modules/.bin/" .. O.lang.vue.formatter.exe
-  if vim.fn.executable(formatter_instance) ~= 1 then
-    formatter_instance = O.lang.vue.formatter.exe
-  end
-
   local ft = vim.bo.filetype
-  O.formatters.filetype[ft] = {
-    function()
-      local lv_utils = require "lv-utils"
-      return {
-        exe = formatter_instance,
-        args = lv_utils.gsub_args(O.lang.vue.formatter.args),
-        stdin = O.lang.vue.formatter.stdin,
-      }
-    end,
-  }
+  O.formatters.filetype[ft] = require("lv-utils").wrap_formatters(O.lang.vue.formatters)
+
   require("formatter.config").set_defaults {
     logging = false,
     filetype = O.formatters.filetype,
