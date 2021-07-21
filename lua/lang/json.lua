@@ -1,5 +1,13 @@
 local M = {}
 
+local formatter_profiles = {
+  python = {
+    exe = "python",
+    args = { "-m", "json.tool" },
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.json = {
     diagnostics = {
@@ -8,11 +16,7 @@ M.config = function()
       underline = true,
     },
     formatters = {
-      {
-        exe = "python",
-        args = { "-m", "json.tool" },
-        stdin = true,
-      },
+      "python",
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
@@ -21,7 +25,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["json"] = require("lv-utils").wrap_formatters(O.lang.json.formatters)
+  O.formatters.filetype["json"] = require("lv-utils").wrap_formatters(O.lang.json.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

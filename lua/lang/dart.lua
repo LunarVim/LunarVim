@@ -1,20 +1,24 @@
 local M = {}
 
+local formatter_profiles = {
+  dart = {
+    exe = "dart",
+    args = { "format" },
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.dart = {
     sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
     formatters = {
-      {
-        exe = "dart",
-        args = { "format" },
-        stdin = true,
-      },
+      "dart",
     },
   }
 end
 
 M.format = function()
-  O.formatters.filetype["dart"] = require("lv-utils").wrap_formatters(O.lang.dart.formatters)
+  O.formatters.filetype["dart"] = require("lv-utils").wrap_formatters(O.lang.dart.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

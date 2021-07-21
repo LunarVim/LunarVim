@@ -1,5 +1,14 @@
 local M = {}
 
+local formatter_profiles = {
+  shfmt = {
+    exe = "shfmt",
+    args = { "-w" },
+    stdin = false,
+    tempfile_prefix = ".formatter",
+  },
+}
+
 M.config = function()
   O.lang.sh = {
     -- @usage can be 'shellcheck'
@@ -11,12 +20,7 @@ M.config = function()
       underline = true,
     },
     formatters = {
-      {
-        exe = "shfmt",
-        args = { "-w" },
-        stdin = false,
-        tempfile_prefix = ".formatter",
-      },
+      "shfmt",
     },
     linters = { "shellcheck" },
     lsp = {
@@ -26,7 +30,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["sh"] = require("lv-utils").wrap_formatters(O.lang.sh.formatters)
+  O.formatters.filetype["sh"] = require("lv-utils").wrap_formatters(O.lang.sh.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

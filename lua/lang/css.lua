@@ -12,16 +12,20 @@ local function find_local_prettier()
   return prettier_instance
 end
 
+local formatter_profiles = {
+  prettier = {
+    exe = find_local_prettier,
+    args = function()
+      return { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
+    end,
+  },
+}
+
 M.config = function()
   O.lang.css = {
     virtual_text = true,
     formatters = {
-      {
-        exe = find_local_prettier,
-        args = function()
-          return { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) }
-        end,
-      },
+      "prettier",
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
@@ -31,7 +35,7 @@ end
 
 M.format = function()
   local ft = vim.bo.filetype
-  O.formatters.filetype[ft] = require("lv-utils").wrap_formatters(O.lang.css.formatters)
+  O.formatters.filetype[ft] = require("lv-utils").wrap_formatters(O.lang.css.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

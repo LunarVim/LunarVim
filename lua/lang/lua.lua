@@ -1,5 +1,14 @@
 local M = {}
 
+local formatter_profiles = {
+  stylua = {
+    exe = "stylua",
+    args = {},
+    stdin = false,
+    tempfile_prefix = ".formatter",
+  },
+}
+
 M.config = function()
   O.lang.lua = {
     diagnostics = {
@@ -8,12 +17,7 @@ M.config = function()
       underline = true,
     },
     formatters = {
-      {
-        exe = "stylua",
-        args = {},
-        stdin = false,
-        tempfile_prefix = ".formatter",
-      },
+      "stylua",
     },
     linters = { "luacheck" },
     lsp = {
@@ -23,7 +27,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["lua"] = require("lv-utils").wrap_formatters(O.lang.lua.formatters)
+  O.formatters.filetype["lua"] = require("lv-utils").wrap_formatters(O.lang.lua.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

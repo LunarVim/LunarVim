@@ -1,5 +1,13 @@
 local M = {}
 
+local formatter_profiles = {
+  rustfmt = {
+    exe = "rustfmt",
+    args = { "--emit=stdout", "--edition=2018" },
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.rust = {
     rust_tools = {
@@ -9,11 +17,7 @@ M.config = function()
     },
     -- @usage can be clippy
     formatters = {
-      {
-        exe = "rustfmt",
-        args = { "--emit=stdout", "--edition=2018" },
-        stdin = true,
-      },
+      "rustfmt",
     },
     linter = "",
     diagnostics = {
@@ -28,7 +32,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["rust"] = require("lv-utils").wrap_formatters(O.lang.rust.formatters)
+  O.formatters.filetype["rust"] = require("lv-utils").wrap_formatters(O.lang.rust.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

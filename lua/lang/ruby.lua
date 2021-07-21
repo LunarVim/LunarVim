@@ -1,5 +1,13 @@
 local M = {}
 
+local formatter_profiles = {
+  rufo = {
+    exe = "rufo",
+    args = { "-x" },
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.ruby = {
     diagnostics = {
@@ -9,11 +17,7 @@ M.config = function()
     },
     filetypes = { "rb", "erb", "rakefile", "ruby" },
     formatters = {
-      {
-        exe = "rufo",
-        args = { "-x" },
-        stdin = true,
-      },
+      "rufo",
     },
     linters = { "ruby" },
     lsp = {
@@ -23,7 +27,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["ruby"] = require("lv-utils").wrap_formatters(O.lang.ruby.formatters)
+  O.formatters.filetype["ruby"] = require("lv-utils").wrap_formatters(O.lang.ruby.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

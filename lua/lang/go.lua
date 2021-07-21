@@ -1,13 +1,17 @@
 local M = {}
 
+local formatter_profiles = {
+  gofmt = {
+    exe = "gofmt",
+    args = {},
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.go = {
     formatters = {
-      {
-        exe = "gofmt",
-        args = {},
-        stdin = true,
-      },
+      "gofmt",
     },
     linters = {
       "golangcilint",
@@ -20,7 +24,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["go"] = require("lv-utils").wrap_formatters(O.lang.go.formatters)
+  O.formatters.filetype["go"] = require("lv-utils").wrap_formatters(O.lang.go.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

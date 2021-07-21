@@ -1,5 +1,16 @@
 local M = {}
 
+local formatter_profiles = {
+  ["clang-format"] = {
+    exe = "clang-format",
+    args = {},
+    stdin = true,
+    cwd = function()
+      return vim.fn.expand "%:h:p"
+    end,
+  },
+}
+
 M.config = function()
   O.lang.clang = {
     diagnostics = {
@@ -11,14 +22,7 @@ M.config = function()
     header_insertion = "never",
     filetypes = { "c", "cpp", "objc" },
     formatters = {
-      {
-        exe = "clang-format",
-        args = {},
-        stdin = true,
-        cwd = function()
-          return vim.fn.expand "%:h:p"
-        end,
-      },
+      "clang-format",
     },
     linters = {
       "cppcheck",
@@ -37,7 +41,7 @@ M.config = function()
 end
 
 M.format = function()
-  local formatters = require("lv-utils").wrap_formatters(O.lang.clang.formatters)
+  local formatters = require("lv-utils").wrap_formatters(O.lang.clang.formatters, formatter_profiles)
   O.formatters.filetype["c"] = formatters
   O.formatters.filetype["cpp"] = formatters
   O.formatters.filetype["objc"] = formatters

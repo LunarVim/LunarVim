@@ -12,19 +12,23 @@ local function find_local_prettier()
   return formatter_instance
 end
 
+local formatter_profiles = {
+  prettier = {
+    exe = find_local_prettier,
+    args = function()
+      return require("lv-utils").gsub_args {
+        "--stdin-filepath",
+        "${FILEPATH}",
+      }
+    end,
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.vue = {
     formatters = {
-      {
-        exe = "prettier",
-        args = function()
-          return require("lv-utils").gsub_args {
-            "--stdin-filepath",
-            "${FILEPATH}",
-          }
-        end,
-        stdin = true,
-      },
+      "prettier",
     },
     auto_import = true,
     lsp = {
@@ -35,7 +39,7 @@ end
 
 M.format = function()
   local ft = vim.bo.filetype
-  O.formatters.filetype[ft] = require("lv-utils").wrap_formatters(O.lang.vue.formatters)
+  O.formatters.filetype[ft] = require("lv-utils").wrap_formatters(O.lang.vue.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

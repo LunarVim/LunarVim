@@ -12,23 +12,29 @@ local function find_local_prettier()
   return prettier_instance
 end
 
+local formatter_profiles = {
+  prettier = {
+    exe = find_local_prettier,
+    args = function()
+      return { "--stdin-filepath", vim.api.nvim_buf_get_name(0) }
+    end,
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.java = {
     java_tools = {
       active = false,
     },
     formatters = {
-      {
-        exe = find_local_prettier,
-        args = function() { "--stdin-filepath", vim.api.nvim_buf_get_name(0) } end,
-        stdin = true,
-      },
+      "prettier",
     },
   }
 end
 
 M.format = function()
-  O.formatters.filetype["java"] = require("lv-utils").wrap_formatters(O.lang.java.formatters)
+  O.formatters.filetype["java"] = require("lv-utils").wrap_formatters(O.lang.java.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

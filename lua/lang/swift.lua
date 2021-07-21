@@ -1,13 +1,17 @@
 local M = {}
 
+local formatter_profiles = {
+  siftformat = {
+    exe = "swiftformat",
+    args = {},
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.swift = {
     formatters = {
-      {
-        exe = "swiftformat",
-        args = {},
-        stdin = true,
-      },
+      "swiftformat",
     },
     lsp = {
       path = "sourcekit-lsp",
@@ -16,7 +20,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["swift"] = require("lv-utils").wrap_formatters(O.lang.swift.formatters)
+  O.formatters.filetype["swift"] = require("lv-utils").wrap_formatters(O.lang.swift.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

@@ -1,13 +1,16 @@
 local M = {}
 
+local formatter_profiles = {
+  zig = {
+    exe = "zig",
+    args = { "fmt" },
+    stdin = false,
+  },
+}
 M.config = function()
   O.lang.zig = {
     formatters = {
-      {
-        exe = "zig",
-        args = { "fmt" },
-        stdin = false,
-      },
+      "zig",
     },
     lsp = {
       path = "zls",
@@ -16,7 +19,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["zig"] = require("lv-utils").wrap_formatters(O.lang.zig.formatters)
+  O.formatters.filetype["zig"] = require("lv-utils").wrap_formatters(O.lang.zig.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

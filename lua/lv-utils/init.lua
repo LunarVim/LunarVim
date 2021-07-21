@@ -79,21 +79,32 @@ function lv_utils.check_lsp_client_active(name)
   return false
 end
 
-function lv_utils.wrap_formatters(formatters)
+function lv_utils.wrap_formatters(formatters, formatter_profiles)
   local wrapped = {}
 
   for _, formatter in ipairs(formatters) do
-    table.insert(wrapped, function()
-      -- Make a copy to not overwrite formatter function parameters
-      local instance = formatter
-      for k, v in pairs(instance) do
-        if type(v) == "function" then
-          instance[k] = v()
-        end
+    if type(formatter) == "string" then
+      if formatter_profiles[formatter] == nil then
+        print("Formatter '" .. formatter .. "' doesn't have a preconfigured profile")
+        formatter = nil
+      else
+        formatter = formatter_profiles[formatter]
       end
+    end
 
-      return instance
-    end)
+    if formatter then
+      table.insert(wrapped, function()
+        -- Make a copy to not overwrite formatter function parameters
+        local instance = formatter
+        for k, v in pairs(instance) do
+          if type(v) == "function" then
+            instance[k] = v()
+          end
+        end
+
+        return instance
+      end)
+    end
   end
 
   return wrapped

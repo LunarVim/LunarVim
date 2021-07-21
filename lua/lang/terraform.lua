@@ -1,14 +1,18 @@
 local M = {}
 
+local formatter_profiles = {
+  terraform = {
+    exe = "terraform",
+    args = { "fmt" },
+    stdin = false,
+    tempfile_prefix = ".formatter",
+  },
+}
+
 M.config = function()
   O.lang.terraform = {
     formatters = {
-      {
-        exe = "terraform",
-        args = { "fmt" },
-        stdin = false,
-        tempfile_prefix = ".formatter",
-      },
+      "terraform",
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/terraform/terraform-ls",
@@ -17,7 +21,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["hcl"] = require("lv-utils").wrap_formatters(O.lang.terraform.formatters)
+  O.formatters.filetype["hcl"] = require("lv-utils").wrap_formatters(O.lang.terraform.formatters, formatter_profiles)
   O.formatters.filetype["tf"] = O.formatters.filetype["hcl"]
 
   require("formatter.config").set_defaults {

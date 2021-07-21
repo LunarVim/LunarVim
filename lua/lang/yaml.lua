@@ -1,15 +1,19 @@
 local M = {}
 
+local formatter_profiles = {
+  prettier = {
+    exe = "prettier",
+    args = function()
+      return { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" }
+    end,
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.yaml = {
     formatters = {
-      {
-        exe = "prettier",
-        args = function()
-          return { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" }
-        end,
-        stdin = true,
-      },
+      "prettier",
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
@@ -18,7 +22,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["yaml"] = require("lv-utils").wrap_formatters(O.lang.yaml.formatters)
+  O.formatters.filetype["yaml"] = require("lv-utils").wrap_formatters(O.lang.yaml.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

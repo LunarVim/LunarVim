@@ -1,13 +1,17 @@
 local M = {}
 
+local formatter_profiles = {
+  mix = {
+    exe = "mix",
+    args = { "format" },
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.elixir = {
     formatters = {
-      {
-        exe = "mix",
-        args = { "format" },
-        stdin = true,
-      },
+      "mix",
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
@@ -16,7 +20,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["elixir"] = require("lv-utils").wrap_formatters(O.lang.elixir.formatters)
+  O.formatters.filetype["elixir"] = require("lv-utils").wrap_formatters(O.lang.elixir.formatters, formatter_profiles)
 
   require("formatter.config").set_defaults {
     logging = false,

@@ -1,5 +1,13 @@
 local M = {}
 
+local formatter_profiles = {
+  scalafmt = {
+    exe = "scalafmt",
+    args = { "--stdin" },
+    stdin = true,
+  },
+}
+
 M.config = function()
   O.lang.scala = {
     metals = {
@@ -11,17 +19,13 @@ M.config = function()
       status_bar_provider = false,
     },
     formatters = {
-      {
-        exe = "scalafmt",
-        args = { "--stdin" },
-        stdin = true,
-      },
+      "scalafmt",
     },
   }
 end
 
 M.format = function()
-  O.formatters.filetype["scala"] = require("lv-utils").wrap_formatters(O.lang.scala.formatters)
+  O.formatters.filetype["scala"] = require("lv-utils").wrap_formatters(O.lang.scala.formatters, formatter_profiles)
   O.formatters.filetype["sbt"] = O.formatters.filetype["scala"]
   --  To understand sbt files on stdin, scalafmt needs to assume any old filename
   --  that ends in .sbt.  Using a dummy filename instead of the actual one is

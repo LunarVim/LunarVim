@@ -1,26 +1,30 @@
 local M = {}
 
+local formatter_profiles = {
+  R = {
+    exe = "R",
+    args = {
+      "--slave",
+      "--no-restore",
+      "--no-save",
+      '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
+    },
+    stdin = true,
+  },
+}
+
 M.config = function()
   -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
   -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
   O.lang.r = {
     formatters = {
-      {
-        exe = "R",
-        args = {
-          "--slave",
-          "--no-restore",
-          "--no-save",
-          '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
-        },
-        stdin = true,
-      },
+      "R",
     },
   }
 end
 
 M.format = function()
-  O.formatters.filetype["r"] = require("lv-utils").wrap_formatters(O.lang.r.formatters)
+  O.formatters.filetype["r"] = require("lv-utils").wrap_formatters(O.lang.r.formatters, formatter_profiles)
   O.formatters.filetype["rmd"] = O.formatters.filetype["r"]
 
   require("formatter.config").set_defaults {
