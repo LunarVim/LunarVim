@@ -1,3 +1,5 @@
+local M = {}
+
 -- autoformat
 if O.format_on_save then
   require("lv-utils").define_augroups {
@@ -31,6 +33,19 @@ end
 --   }
 -- end
 
+M.setup = function(filetype, config)
+  O.formatters.filetype[filetype] = {
+    function()
+      return config
+    end,
+  }
+
+  require("formatter.config").set_defaults {
+    logging = false,
+    filetype = O.formatters.filetype,
+  }
+end
+
 -- fill a table like this -> {rust: {exe:"sth",args:{"a","b"},stdin=true},go: {}...}
 -- local formatter_filetypes = {}
 -- for k, v in pairs(O.lang) do
@@ -58,3 +73,5 @@ if not O.format_on_save then
 	:autocmd! autoformat
 	endif]]
 end
+
+return M

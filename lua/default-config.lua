@@ -66,6 +66,23 @@ O = {
 
   -- TODO move all of this into lang specific files, only require when using
   lang = {
+
+    python = {
+      -- @usage can be flake8 or yapf
+      formatter = {
+        exe = "yapf",
+        args = {},
+        stdin = true,
+      },
+      linters = {
+        "flake8",
+        "pylint",
+        "mypy",
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
+      },
+    },
     efm = {},
     emmet = { active = false },
     svelte = {},

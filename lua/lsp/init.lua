@@ -257,6 +257,27 @@ require("lv-utils").define_augroups {
   },
 }
 
+-- settings = {
+--   python = {
+--     analysis = {
+--       typeCheckingMode = O.lang.python.analysis.type_checking,
+--       autoSearchPaths = O.lang.python.analysis.auto_search_paths,
+--       useLibraryCodeForTypes = O.lang.python.analysis.use_library_code_types,
+--     },
+--   },
+-- },
+
+function lsp_config.setup(lang_server, cmd)
+  if require("lv-utils").check_lsp_client_active(lang_server) then
+    return
+  end
+
+  require("lspconfig")[lang_server].setup {
+    cmd = cmd,
+    on_attach = require("lsp").common_on_attach,
+  }
+end
+
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 -- local servers = {"pyright", "tsserver"}
