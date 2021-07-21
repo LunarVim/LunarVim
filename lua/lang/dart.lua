@@ -11,8 +11,8 @@ M.config = function()
       args = { "format" },
     },
   }
-  if O.lang.dart.flutter_tools.active then
-    O.plugin.which_key.mappings["F"] = {
+  O.user_which_key = {
+    F = {
       name = "Flutter",
       c = { ":FlutterCopyProfilerUrl<CR>", "Copy Profile Url" },
       d = { ":FlutterDevices<CR>", "Devices" },
@@ -26,8 +26,8 @@ M.config = function()
       q = { ":FlutterQuit<CR>", "Quit" },
       r = { ":FlutterRun<CR>", "Run" },
       v = { ":FlutterVisualDebug<CR>", "Visual Debug" },
-    }
-  end
+    },
+  }
 end
 
 M.format = function()
