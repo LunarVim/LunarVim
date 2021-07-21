@@ -8,10 +8,12 @@ M.config = function()
       other_hints_prefix = "=>", -- prefix for all the other hints (type, chaining)
     },
     -- @usage can be clippy
-    formatter = {
-      exe = "rustfmt",
-      args = { "--emit=stdout", "--edition=2018" },
-      stdin = true,
+    formatters = {
+      {
+        exe = "rustfmt",
+        args = { "--emit=stdout", "--edition=2018" },
+        stdin = true,
+      },
     },
     linter = "",
     diagnostics = {
@@ -26,15 +28,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["rust"] = {
-    function()
-      return {
-        exe = O.lang.rust.formatter.exe,
-        args = O.lang.rust.formatter.args,
-        stdin = O.lang.rust.formatter.stdin,
-      }
-    end,
-  }
+  O.formatters.filetype["rust"] = require("lv-utils").wrap_formatters(O.lang.rust.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

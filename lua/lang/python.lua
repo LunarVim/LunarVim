@@ -38,7 +38,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["python"] = require("lv-utils").wrap_formatters(O.lang.python.formatters)
+  -- O.formatters.filetype["python"] = require("lv-utils").wrap_formatters(O.lang.python.formatters)
   require("formatter.config").set_defaults {
     logging = false,
     filetype = O.formatters.filetype,

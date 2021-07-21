@@ -10,10 +10,13 @@ M.config = function()
       signs = true,
       underline = true,
     },
-    formatter = {
-      exe = "shfmt",
-      args = { "-w" },
-      stdin = false,
+    formatters = {
+      {
+        exe = "shfmt",
+        args = { "-w" },
+        stdin = false,
+        tempfile_prefix = ".formatter",
+      },
     },
     linters = { "shellcheck" },
     lsp = {
@@ -23,16 +26,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["sh"] = {
-    function()
-      return {
-        exe = O.lang.sh.formatter.exe,
-        args = O.lang.sh.formatter.args,
-        stdin = O.lang.sh.formatter.stdin,
-        tempfile_prefix = ".formatter",
-      }
-    end,
-  }
+  O.formatters.filetype["sh"] = require("lv-utils").wrap_formatters(O.lang.sh.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

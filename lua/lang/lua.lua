@@ -7,10 +7,13 @@ M.config = function()
       signs = true,
       underline = true,
     },
-    formatter = {
-      exe = "stylua",
-      args = {},
-      stdin = false,
+    formatters = {
+      {
+        exe = "stylua",
+        args = {},
+        stdin = false,
+        tempfile_prefix = ".formatter",
+      },
     },
     linters = { "luacheck" },
     lsp = {
@@ -20,16 +23,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["lua"] = {
-    function()
-      return {
-        exe = O.lang.lua.formatter.exe,
-        args = O.lang.lua.formatter.args,
-        stdin = O.lang.lua.formatter.stdin,
-        tempfile_prefix = ".formatter",
-      }
-    end,
-  }
+  O.formatters.filetype["lua"] = require("lv-utils").wrap_formatters(O.lang.lua.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

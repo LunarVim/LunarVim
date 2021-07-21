@@ -7,10 +7,12 @@ M.config = function()
       signs = true,
       underline = true,
     },
-    formatter = {
-      exe = "python",
-      args = { "-m", "json.tool" },
-      stdin = true,
+    formatters = {
+      {
+        exe = "python",
+        args = { "-m", "json.tool" },
+        stdin = true,
+      },
     },
     lsp = {
       path = DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
@@ -19,15 +21,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["json"] = {
-    function()
-      return {
-        exe = O.lang.json.formatter.exe,
-        args = O.lang.json.formatter.args,
-        stdin = O.lang.json.formatter.stdin,
-      }
-    end,
-  }
+  O.formatters.filetype["json"] = require("lv-utils").wrap_formatters(O.lang.json.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

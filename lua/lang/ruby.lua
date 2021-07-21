@@ -8,10 +8,12 @@ M.config = function()
       underline = true,
     },
     filetypes = { "rb", "erb", "rakefile", "ruby" },
-    formatter = {
-      exe = "rufo",
-      args = { "-x" },
-      stdin = true,
+    formatters = {
+      {
+        exe = "rufo",
+        args = { "-x" },
+        stdin = true,
+      },
     },
     linters = { "ruby" },
     lsp = {
@@ -21,15 +23,7 @@ M.config = function()
 end
 
 M.format = function()
-  O.formatters.filetype["ruby"] = {
-    function()
-      return {
-        exe = O.lang.ruby.formatter.exe,
-        args = O.lang.ruby.formatter.args,
-        stdin = O.lang.ruby.formatter.stdin,
-      }
-    end,
-  }
+  O.formatters.filetype["ruby"] = require("lv-utils").wrap_formatters(O.lang.ruby.formatters)
 
   require("formatter.config").set_defaults {
     logging = false,

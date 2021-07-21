@@ -10,24 +10,18 @@ M.config = function()
       show_inferred_type = true,
       status_bar_provider = false,
     },
-    formatter = {
-      exe = "scalafmt",
-      args = { "--stdin" },
-      stdin = true,
+    formatters = {
+      {
+        exe = "scalafmt",
+        args = { "--stdin" },
+        stdin = true,
+      },
     },
   }
 end
 
 M.format = function()
-  O.formatters.filetype["scala"] = {
-    function()
-      return {
-        exe = O.lang.scala.formatter.exe,
-        args = O.lang.scala.formatter.args,
-        stdin = O.lang.scala.formatter.stdin,
-      }
-    end,
-  }
+  O.formatters.filetype["scala"] = require("lv-utils").wrap_formatters(O.lang.scala.formatters)
   O.formatters.filetype["sbt"] = O.formatters.filetype["scala"]
   --  To understand sbt files on stdin, scalafmt needs to assume any old filename
   --  that ends in .sbt.  Using a dummy filename instead of the actual one is
