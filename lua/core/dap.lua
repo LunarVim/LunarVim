@@ -40,11 +40,19 @@ end
 
 -- TODO put this up there ^^^ call in ftplugin
 
-M.dap = function()
-  if O.plugin.dap.active then
-    local dap_install = require "dap-install"
-    dap_install.config("python_dbg", {})
-  end
-end
+-- M.dap = function()
+--   if O.plugin.dap.active then
+--     local dap_install = require "dap-install"
+--     dap_install.config("python_dbg", {})
+--   end
+-- end
+--
+-- M.dap = function()
+--   -- gem install readapt ruby-debug-ide
+--   if O.plugin.dap.active then
+--     local dap_install = require "dap-install"
+--     dap_install.config("ruby_vsc_dbg", {})
+--   end
+-- end
 
 return M

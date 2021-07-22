@@ -122,6 +122,17 @@ O = {
         "typescriptreact",
       },
     },
+    ruby = {
+      formatter = {
+        exe = "rufo",
+        args = { "-x" },
+        stdin = true,
+      },
+      linters = { "ruby" },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
+      },
+    },
     tsserver = {
       -- @usage can be 'eslint' or 'eslint_d'
       linter = "",
@@ -150,12 +161,8 @@ require("core.treesitter").config()
 require("core.nvimtree").config()
 
 require("lang.clang").config()
-require("lang.clojure").config()
-require("lang.cmake").config()
-require("lang.cs").config()
 require("lang.css").config()
 require("lang.dart").config()
-require("lang.dockerfile").config()
 require("lang.elixir").config()
 require("lang.elm").config()
 require("lang.go").config()
@@ -168,7 +175,6 @@ require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
 require("lang.r").config()
-require("lang.ruby").config()
 require("lang.rust").config()
 require("lang.sh").config()
 require("lang.scala").config()
