@@ -125,6 +125,11 @@ O = {
     },
     efm = {},
     emmet = { active = false },
+    graphql = {
+      lsp = {
+        path = "graphql-lsp",
+      },
+    },
     go = {
       formatter = {
         exe = "gofmt",

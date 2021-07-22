@@ -1,4 +1,6 @@
-require("lang.graphql").format()
-require("lang.graphql").lint()
-require("lang.graphql").lsp()
-require("lang.graphql").dap()
+require("lsp").setup("graphql", {
+  O.lang.graphql.lsp.path,
+  "server",
+  "-m",
+  "stream",
+})
