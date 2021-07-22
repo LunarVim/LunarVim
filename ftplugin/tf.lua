@@ -1,4 +1,5 @@
-require("lang.terraform").format()
-require("lang.terraform").lint()
-require("lang.terraform").lsp()
-require("lang.terraform").dap()
+require("core.formatter").setup "terraform"
+O.formatters.filetype["tf"] = O.formatters.filetype["terraform"]
+O.formatters.filetype["hcl"] = O.formatters.filetype["terraform"]
+
+require("lsp").setup("terraformls", { O.lang.terraform.lsp.path, "serve" })

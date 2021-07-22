@@ -173,6 +173,16 @@ O = {
         "typescriptreact",
       },
     },
+    terraform = {
+      formatter = {
+        exe = "terraform",
+        args = { "fmt" },
+        stdin = false,
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/terraform/terraform-ls",
+      },
+    },
     -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
     -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
     r = {
@@ -259,7 +269,6 @@ require("lang.lua").config()
 require("lang.php").config()
 require("lang.rust").config()
 require("lang.scala").config()
-require("lang.terraform").config()
 require("lang.tex").config()
 require("lang.vue").config()
 require("lang.yaml").config()
