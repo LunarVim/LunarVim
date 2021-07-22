@@ -268,6 +268,15 @@ require("lv-utils").define_augroups {
 -- },
 
 function lsp_config.setup(lang_server, cmd)
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
   if require("lv-utils").check_lsp_client_active(lang_server) then
     return
   end
@@ -275,6 +284,7 @@ function lsp_config.setup(lang_server, cmd)
   require("lspconfig")[lang_server].setup {
     cmd = cmd,
     on_attach = require("lsp").common_on_attach,
+    capabilities = capabilities,
   }
 end
 
