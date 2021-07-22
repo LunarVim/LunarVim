@@ -377,6 +377,12 @@ O.lang = {
               },
               maxPreload = 100000,
               preloadFileSize = 1000,
+            },
+          },
+        },
+      },
+    },
+  },
   php = {
     formatter = {
       exe = "phpcbf",
