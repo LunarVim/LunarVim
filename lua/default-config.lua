@@ -313,6 +313,33 @@ O.lang = {
       },
     },
   },
+  php = {
+    formatter = {
+      exe = "phpcbf",
+      args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+      stdin = false,
+      tempfile_prefix = ".formatter",
+    },
+    linters = {},
+    lsp = {
+      provider = "intelephense",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        filetypes = { "php", "phtml" },
+        settings = {
+          intelephense = {
+            environment = {
+              phpVersion = "7.4",
+            },
+          },
+        },
+      },
+    },
+  },
   python = {
     -- @usage can be flake8 or yapf
     formatter = {
@@ -568,7 +595,6 @@ require("lang.css").config()
 require("lang.java").config()
 require("lang.julia").config()
 require("lang.lua").config()
-require("lang.php").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()
