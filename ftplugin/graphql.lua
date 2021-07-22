@@ -1,6 +1,1 @@
-require("lsp").setup("graphql", {
-  O.lang.graphql.lsp.path,
-  "server",
-  "-m",
-  "stream",
-})
+require("lsp").setup(O.lang.graphql.lsp.provider, O.lang.graphql.lsp.setup)

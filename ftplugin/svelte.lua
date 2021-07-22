@@ -1,4 +1,1 @@
-require("lsp").setup("svelte", {
-  O.lang.svelte.lsp.path,
-  "--stdio",
-})
+require("lsp").setup(O.lang.svelte.lsp.provider, O.lang.svelte.lsp.setup)

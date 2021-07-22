@@ -1,8 +1,6 @@
 require("core.formatter").setup "elixir"
 
-require("lsp").setup("elixirls", {
-  O.lang.elixir.lsp.path,
-})
+require("lsp").setup(O.lang.elixir.lsp.provider, O.lang.elixir.lsp.setup)
 
 -- TODO: do we need this?
 -- needed for the LSP to recognize elixir files (alternativly just use elixir-editors/vim-elixir)

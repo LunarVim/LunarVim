@@ -1,4 +1,1 @@
-require("lsp").setup("cmake", {
-  O.lang.cmake.lsp.path,
-  "--stdio",
-})
+require("lsp").setup(O.lang.cmake.provider, O.lang.cmake.setup)

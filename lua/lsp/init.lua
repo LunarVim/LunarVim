@@ -206,6 +206,19 @@ function lsp_config.common_on_attach(client, bufnr)
   lsp_highlight_document(client)
 end
 
+function lsp_config.common_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
+  return capabilities
+end
+
 function lsp_config.tsserver_on_attach(client, _)
   -- lsp_config.common_on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
@@ -267,25 +280,12 @@ require("lv-utils").define_augroups {
 --   },
 -- },
 
-function lsp_config.setup(lang_server, cmd)
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  }
+function lsp_config.setup(lang_server, lang_setup)
   if require("lv-utils").check_lsp_client_active(lang_server) then
     return
   end
 
-  require("lspconfig")[lang_server].setup {
-    cmd = cmd,
-    on_attach = require("lsp").common_on_attach,
-    capabilities = capabilities,
-  }
+  require("lspconfig")[lang_server].setup(lang_setup)
 end
 
 -- Use a loop to conveniently both setup defined servers

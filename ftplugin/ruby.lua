@@ -5,7 +5,4 @@ require("lint").linters_by_ft = {
 }
 
 -- also support sorbet
-require("lsp").setup("solargraph", {
-  O.lang.ruby.lsp.path,
-  "stdio",
-})
+require("lsp").setup(O.lang.ruby.lsp.provider, O.lang.ruby.lsp.setup)
