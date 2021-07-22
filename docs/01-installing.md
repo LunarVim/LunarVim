@@ -6,7 +6,7 @@ There are a few ways to install LunarVim
 
 No alarms and no surprises:
 
-```
+```bash
 
 ```
 
@@ -14,7 +14,7 @@ No alarms and no surprises:
 
 All the new features with all the new bugs:
 
-```
+```bash
 
 ```
 
@@ -22,7 +22,7 @@ All the new features with all the new bugs:
 
 There is also an option to install by cloning the repo directly:
 
-```
+```bash
 
 ```
 
@@ -30,7 +30,7 @@ There is also an option to install by cloning the repo directly:
 
 Here are a few ways to repair your install if something goes wrong:
 
-```
+```bash
 
 ```
 
@@ -38,6 +38,6 @@ Here are a few ways to repair your install if something goes wrong:
 
 If you already have a `nvim` directory under `~/.config` don't worry LunarVim will not overwrite it. However LunarVim still currently uses the `nvim` directory to store it's config. You will need to move you're current config e.g.
 
-```
+```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 ```
