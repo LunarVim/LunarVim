@@ -67,6 +67,11 @@ O = {
   -- TODO move all of this into lang specific files, only require when using
   lang = {
 
+    clojure = {
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
+      },
+    },
     python = {
       -- @usage can be flake8 or yapf
       formatter = {

@@ -1,4 +1,4 @@
-require("lang.clojure").format()
-require("lang.clojure").lint()
-require("lang.clojure").lsp()
-require("lang.clojure").dap()
+require("lsp").setup("clojure_lsp", {
+  O.lang.clojure.lsp.path,
+  "--stdio",
+})
