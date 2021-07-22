@@ -20,6 +20,7 @@ M.setup = function(filetype)
         exe = O.lang[filetype].formatter.exe,
         args = O.lang[filetype].formatter.args,
         stdin = O.lang[filetype].formatter.stdin,
+        tempfile_prefix = ".formatter",
       }
     end,
   }
