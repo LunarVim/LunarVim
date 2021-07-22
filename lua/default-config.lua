@@ -140,6 +140,24 @@ O.lang = {
       },
     },
   },
+  css = {
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
+    lsp = {
+      provider = "cssls",
+      setup = {
+        cmd = {
+          "node",
+          DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   dart = {
     lsp = {
       provider = "dartls",
@@ -651,9 +669,15 @@ O.lang = {
       },
       stdin = true,
     },
-    auto_import = true,
     lsp = {
-      path = DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+      provider = "vetur",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
     },
   },
   yaml = {
@@ -703,5 +727,3 @@ require("core.terminal").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
-
-require("lang.css").config()
