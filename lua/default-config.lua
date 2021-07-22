@@ -326,6 +326,22 @@ O.lang = {
       },
     },
   },
+  julia = {
+    lsp = {
+      provider = "julials",
+      setup = {
+        {
+          "julia",
+          "--startup-file=no",
+          "--history-file=no",
+          -- vim.fn.expand "~/.config/nvim/lua/lsp/julia/run.jl",
+          CONFIG_PATH .. "/utils/julia/run.jl",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   kotlin = {
     lsp = {
       provider = "kotlin_language_server",
@@ -689,5 +705,3 @@ require("core.treesitter").config()
 require("core.nvimtree").config()
 
 require("lang.css").config()
-require("lang.julia").config()
-require("lang.scala").config()
