@@ -1,4 +1,9 @@
-require("lang.yaml").format()
-require("lang.yaml").lint()
-require("lang.yaml").lsp()
-require("lang.yaml").dap()
+require("core.formatter").setup "yaml"
+
+require("lsp").setup("yamlls", {
+  O.lang.yaml.lsp.path,
+  "--stdio",
+})
+
+-- TODO get from dap
+-- require("lang.python").dap()

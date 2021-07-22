@@ -236,6 +236,16 @@ O = {
         args = {},
       },
     },
+    yaml = {
+      formatter = {
+        exe = "prettier",
+        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+        stdin = true,
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
+      },
+    },
     vim = {
       linters = { "vint" },
       lsp = {
@@ -271,5 +281,4 @@ require("lang.rust").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()
-require("lang.yaml").config()
 require("lang.zig").config()
