@@ -120,7 +120,7 @@ return {
     event = "BufRead",
   },
 
-  -- whichkey
+  -- Whichkey
   {
     "folke/which-key.nvim",
     config = function()
@@ -207,8 +207,6 @@ return {
     disable = not O.plugin.dap.active,
   },
 
-  -- Builtins, these do not load by default
-
   -- Dashboard
   {
     "ChristianChiarulli/dashboard-nvim",
@@ -222,6 +220,7 @@ return {
     disable = not O.plugin.dashboard.active,
   },
 
+  -- Terminal
   {
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
@@ -233,48 +232,4 @@ return {
     end,
     disable = not O.plugin.terminal.active,
   },
-
-  ---------------------------------------------------------------------------------
-
-  -- LANGUAGE SPECIFIC GOES HERE
-  -- {
-  --   "lervag/vimtex",
-  --   ft = "tex",
-  -- },
-
-  --   -- Rust tools
-  --   -- TODO: use lazy loading maybe?
-  --   {
-  --     "simrat39/rust-tools.nvim",
-  --     disable = not O.lang.rust.rust_tools.active,
-  --   },
-  --
-  --   -- Elixir
-  --   { "elixir-editors/vim-elixir", ft = { "elixir", "eelixir", "euphoria3" } },
-  --
-  --   -- Javascript / Typescript
-  --   {
-  --     "jose-elias-alvarez/nvim-lsp-ts-utils",
-  --     ft = {
-  --       "javascript",
-  --       "javascriptreact",
-  --       "javascript.jsx",
-  --       "typescript",
-  --       "typescriptreact",
-  --       "typescript.tsx",
-  --     },
-  --   },
-  --
-  --   -- Java
-  --   {
-  --     "mfussenegger/nvim-jdtls",
-  --     -- ft = { "java" },
-  --     disable = not O.lang.java.java_tools.active,
-  --   },
-  --
-  --   -- Scala
-  --   {
-  --     "scalameta/nvim-metals",
-  --     disable = not O.lang.scala.metals.active,
-  --   },
 }
