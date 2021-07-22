@@ -13,7 +13,10 @@ an executable
 O.format_on_save = true
 O.lint_on_save = true
 O.completion.autocomplete = true
-O.colorscheme = "spacegray"
+O.colors.colorscheme = "spacegray"
+O.colors.highlights = {
+	-- Visual = { bg = "#222222" },
+}
 O.default_options.wrap = true
 O.default_options.timeoutlen = 100
 -- keymappings
