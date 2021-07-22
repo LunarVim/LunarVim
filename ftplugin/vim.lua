@@ -1,4 +1,8 @@
-require("lang.vim").format()
-require("lang.vim").lint()
-require("lang.vim").lsp()
-require("lang.vim").dap()
+require("lsp").setup("vimls", {
+  O.lang.vim.lsp.path,
+  "--stdio",
+})
+
+require("lint").linters_by_ft = {
+  vim = O.lang.vim.linters,
+}

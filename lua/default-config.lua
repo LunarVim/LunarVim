@@ -4,7 +4,9 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
+-- TODO O -> lv
 O = {
+  -- TODO Loose options under opt
   keys = {
     leader_key = "space",
   },
@@ -14,22 +16,9 @@ O = {
   format_on_save = true,
   lint_on_save = true,
   vsnip_dir = os.getenv "HOME" .. "/.config/snippets",
+  database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
 
-  lsp = {
-    diagnostics = {
-      virtual_text = {
-        prefix = "",
-        spacing = 0,
-      },
-      signs = true,
-      underline = true,
-    },
-    document_highlight = true,
-    popup_border = "single",
-    default_keybinds = true,
-    on_attach_callback = nil,
-  },
-
+  -- TODO why do we need this?
   plugin = {
     lspinstall = {},
     telescope = {},
@@ -50,7 +39,20 @@ O = {
     terminal = {},
   },
 
-  database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
+  lsp = {
+    diagnostics = {
+      virtual_text = {
+        prefix = "",
+        spacing = 0,
+      },
+      signs = true,
+      underline = true,
+    },
+    document_highlight = true,
+    popup_border = "single",
+    default_keybinds = true,
+    on_attach_callback = nil,
+  },
 
   plugins = {
     -- use lv-config.lua for this not put here
@@ -60,6 +62,7 @@ O = {
     { "FileType", "qf", "set nobuflisted" },
   },
 
+  -- TODO hide this
   formatters = {
     filetype = {},
   },
@@ -158,7 +161,6 @@ O = {
         path = DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
       },
     },
-    svelte = {},
     tailwindcss = {
       active = false,
       filetypes = {
@@ -224,6 +226,12 @@ O = {
         args = {},
       },
     },
+    vim = {
+      linters = { "vint" },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
+      },
+    },
   },
 }
 
@@ -253,7 +261,6 @@ require("lang.rust").config()
 require("lang.scala").config()
 require("lang.terraform").config()
 require("lang.tex").config()
-require("lang.vim").config()
 require("lang.vue").config()
 require("lang.yaml").config()
 require("lang.zig").config()
