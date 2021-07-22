@@ -339,6 +339,44 @@ O.lang = {
       },
     },
   },
+  lua = {
+    formatter = {
+      exe = "stylua",
+      args = {},
+      stdin = false,
+      tempfile_prefix = ".formatter",
+    },
+    linters = { "luacheck" },
+    lsp = {
+      provider = "sumneko_lua",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
+          "-E",
+          DATA_PATH .. "/lspinstall/lua/main.lua",
+        },
+        on_attach = require("lsp").common_on_attach,
+        settings = {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              version = "LuaJIT",
+              -- Setup your lua path
+              path = vim.split(package.path, ";"),
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { "vim", "O" },
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = {
+                [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
+                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+              },
+              maxPreload = 100000,
+              preloadFileSize = 1000,
   php = {
     formatter = {
       exe = "phpcbf",
@@ -619,7 +657,6 @@ require("core.nvimtree").config()
 require("lang.css").config()
 require("lang.java").config()
 require("lang.julia").config()
-require("lang.lua").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()
