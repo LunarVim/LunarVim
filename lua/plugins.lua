@@ -222,17 +222,6 @@ return {
     disable = not O.plugin.dashboard.active,
   },
 
-  -- TODO: remove in favor of akinsho/nvim-toggleterm.lua
-  -- Floating terminal
-  -- {
-  --   "numToStr/FTerm.nvim",
-  --   event = "BufWinEnter",
-  --   config = function()
-  --     require("core.floatterm").setup()
-  --   end,
-  --   disable = not O.plugin.floatterm.active,
-  -- },
-
   {
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
@@ -245,61 +234,47 @@ return {
     disable = not O.plugin.terminal.active,
   },
 
-  -- Zen Mode
-  -- {
-  --   "folke/zen-mode.nvim",
-  --   cmd = "ZenMode",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("core.zen").setup()
-  --     if O.plugin.zen.on_config_done then
-  --       O.plugin.zen.on_config_done(require "zen-mode")
-  --     end
-  --   end,
-  --   disable = not O.plugin.zen.active,
-  -- },
-
   ---------------------------------------------------------------------------------
 
   -- LANGUAGE SPECIFIC GOES HERE
-  {
-    "lervag/vimtex",
-    ft = "tex",
-  },
+  -- {
+  --   "lervag/vimtex",
+  --   ft = "tex",
+  -- },
 
-  -- Rust tools
-  -- TODO: use lazy loading maybe?
-  {
-    "simrat39/rust-tools.nvim",
-    disable = not O.lang.rust.rust_tools.active,
-  },
-
-  -- Elixir
-  { "elixir-editors/vim-elixir", ft = { "elixir", "eelixir", "euphoria3" } },
-
-  -- Javascript / Typescript
-  {
-    "jose-elias-alvarez/nvim-lsp-ts-utils",
-    ft = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-    },
-  },
-
-  -- Java
-  {
-    "mfussenegger/nvim-jdtls",
-    -- ft = { "java" },
-    disable = not O.lang.java.java_tools.active,
-  },
-
-  -- Scala
-  {
-    "scalameta/nvim-metals",
-    disable = not O.lang.scala.metals.active,
-  },
+  --   -- Rust tools
+  --   -- TODO: use lazy loading maybe?
+  --   {
+  --     "simrat39/rust-tools.nvim",
+  --     disable = not O.lang.rust.rust_tools.active,
+  --   },
+  --
+  --   -- Elixir
+  --   { "elixir-editors/vim-elixir", ft = { "elixir", "eelixir", "euphoria3" } },
+  --
+  --   -- Javascript / Typescript
+  --   {
+  --     "jose-elias-alvarez/nvim-lsp-ts-utils",
+  --     ft = {
+  --       "javascript",
+  --       "javascriptreact",
+  --       "javascript.jsx",
+  --       "typescript",
+  --       "typescriptreact",
+  --       "typescript.tsx",
+  --     },
+  --   },
+  --
+  --   -- Java
+  --   {
+  --     "mfussenegger/nvim-jdtls",
+  --     -- ft = { "java" },
+  --     disable = not O.lang.java.java_tools.active,
+  --   },
+  --
+  --   -- Scala
+  --   {
+  --     "scalameta/nvim-metals",
+  --     disable = not O.lang.scala.metals.active,
+  --   },
 }
