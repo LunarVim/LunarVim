@@ -1,4 +1,4 @@
-require("lsp").setup(O.lang.erlang.lsp.provider, O.lang.erlang.lsp.setup)
+require("lsp").setup(O.lang.erlang.lsp)
 
 -- TODO: do we need this?
 -- needed for the LSP to recognize elixir files (alternativly just use elixir-editors/vim-elixir)

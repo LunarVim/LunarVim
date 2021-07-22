@@ -4,4 +4,4 @@ require("lint").linters_by_ft = {
   sh = O.lang.sh.linters,
 }
 
-require("lsp").setup(O.lang.sh.lsp.provider, O.lang.sh.lsp.setup)
+require("lsp").setup(O.lang.sh.lsp)
