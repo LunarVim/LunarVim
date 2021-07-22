@@ -1,4 +1,1 @@
-require("lang.kotlin").format()
-require("lang.kotlin").lint()
-require("lang.kotlin").lsp()
-require("lang.kotlin").dap()
+require("lsp").setup(O.lang.kotlin.lsp.provider, O.lang.kotlin.lsp.setup)

@@ -248,6 +248,33 @@ O = {
         },
       },
     },
+    kotlin = {
+      lsp = {
+        provider = "kotlin_language_server",
+        setup = {
+          cmd = {
+            DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
+          },
+          on_attach = require("lsp").common_on_attach,
+          root_dir = function(fname)
+            local util = require "lspconfig/util"
+
+            local root_files = {
+              "settings.gradle", -- Gradle (multi-project)
+              "settings.gradle.kts", -- Gradle (multi-project)
+              "build.xml", -- Ant
+              "pom.xml", -- Maven
+            }
+
+            local fallback_root_files = {
+              "build.gradle", -- Gradle
+              "build.gradle.kts", -- Gradle
+            }
+            return util.root_pattern(unpack(root_files))(fname) or util.root_pattern(unpack(fallback_root_files))(fname)
+          end,
+        },
+      },
+    },
     python = {
       -- @usage can be flake8 or yapf
       formatter = {
@@ -504,7 +531,6 @@ require("lang.css").config()
 require("lang.java").config()
 require("lang.json").config()
 require("lang.julia").config()
-require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
 require("lang.scala").config()
