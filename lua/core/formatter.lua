@@ -31,6 +31,34 @@ M.setup = function(filetype)
   }
 end
 
+M.setup_local = function(filetype)
+  vim.cmd "let proj = FindRootDirectory()"
+  local root_dir = vim.api.nvim_get_var "proj"
+
+  -- use the global formatter if you didn't find the local one
+  local formatter_instance = root_dir .. "/node_modules/.bin/" .. O.lang[filetype].formatter.exe
+  if vim.fn.executable(formatter_instance) ~= 1 then
+    formatter_instance = O.lang[filetype].formatter.exe
+  end
+
+  local ft = vim.bo.filetype
+  O.formatters.filetype[ft] = {
+    function()
+      local lv_utils = require "lv-utils"
+      return {
+        exe = formatter_instance,
+        args = lv_utils.gsub_args(O.lang.vue.formatter.args),
+        stdin = O.lang.vue.formatter.stdin,
+        tempfile_prefix = ".formatter",
+      }
+    end,
+  }
+  require("formatter.config").set_defaults {
+    logging = false,
+    filetype = O.formatters.filetype,
+  }
+end
+
 M.initialize = function()
   local status_ok, _ = pcall(require, "formatter")
   if not status_ok then

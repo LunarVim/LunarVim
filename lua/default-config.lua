@@ -275,6 +275,20 @@ O.lang = {
       },
     },
   },
+  java = {
+    formatter = {
+      exe = "prettier",
+      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+    },
+    lsp = {
+      provider = "jdtls",
+      setup = {
+        cmd = { DATA_PATH .. "/lspinstall/java/jdtls.sh" },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   json = {
     formatter = {
       exe = "python",
