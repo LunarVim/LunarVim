@@ -109,6 +109,20 @@ O = {
     },
     efm = {},
     emmet = { active = false },
+    go = {
+      formatter = {
+        exe = "gofmt",
+        args = {},
+        stdin = true,
+      },
+      linters = {
+        "golangcilint",
+        "revive",
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/go/gopls",
+      },
+    },
     svelte = {},
     tailwindcss = {
       active = false,
@@ -165,7 +179,6 @@ require("lang.css").config()
 require("lang.dart").config()
 require("lang.elixir").config()
 require("lang.elm").config()
-require("lang.go").config()
 require("lang.graphql").config()
 require("lang.html").config()
 require("lang.java").config()
