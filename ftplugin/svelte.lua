@@ -1,4 +1,4 @@
-require("lang.svelte").format()
-require("lang.svelte").lint()
-require("lang.svelte").lsp()
-require("lang.svelte").dap()
+require("lsp").setup("svelte", {
+  O.lang.svelte.lsp.path,
+  "--stdio",
+})

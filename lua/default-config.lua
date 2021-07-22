@@ -196,6 +196,11 @@ O = {
         path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
       },
     },
+    svelte = {
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
+      },
+    },
     tsserver = {
       -- @usage can be 'eslint' or 'eslint_d'
       linter = "",
@@ -236,7 +241,6 @@ require("lang.lua").config()
 require("lang.php").config()
 require("lang.rust").config()
 require("lang.scala").config()
-require("lang.svelte").config()
 require("lang.swift").config()
 require("lang.terraform").config()
 require("lang.tex").config()
