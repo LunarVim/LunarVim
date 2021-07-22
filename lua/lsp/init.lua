@@ -282,12 +282,11 @@ require("lv-utils").define_augroups {
 
 function lsp_config.setup(lang_server)
   local provider = lang_server.provider
-  local lang_setup = lang_server.setup
   if require("lv-utils").check_lsp_client_active(provider) then
     return
   end
 
-  require("lspconfig")[provider].setup(lang_setup)
+  require("lspconfig")[provider].setup(lang_server.setup)
 end
 
 -- Use a loop to conveniently both setup defined servers
