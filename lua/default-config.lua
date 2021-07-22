@@ -89,6 +89,14 @@ O = {
         path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
       },
     },
+    dart = {
+      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+      formatter = {
+        exe = "dart",
+        args = { "format" },
+        stdin = true,
+      },
+    },
     docker = {
       lsp = {
         path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
@@ -105,9 +113,18 @@ O = {
       },
     },
     erlang = {
-
       lsp = {
         path = "erlang_ls",
+      },
+    },
+    html = {
+      linters = {
+        "tidy",
+        -- https://docs.errata.ai/vale/scoping#html
+        "vale",
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
       },
     },
     python = {
@@ -208,6 +225,21 @@ O = {
         path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
       },
     },
+    rust = {
+      formatter = {
+        exe = "rustfmt",
+        args = { "--emit=stdout", "--edition=2018" },
+        stdin = true,
+      },
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+      },
+    },
     svelte = {
       lsp = {
         path = DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
@@ -278,16 +310,13 @@ require("core.nvimtree").config()
 
 require("lang.clang").config()
 require("lang.css").config()
-require("lang.dart").config()
 require("lang.elm").config()
-require("lang.html").config()
 require("lang.java").config()
 require("lang.json").config()
 require("lang.julia").config()
 require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
-require("lang.rust").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()

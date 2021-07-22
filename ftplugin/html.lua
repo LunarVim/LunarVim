@@ -1,4 +1,11 @@
-require("lang.html").format()
-require("lang.html").lint()
-require("lang.html").lsp()
-require("lang.html").dap()
+require("core.formatter").setup "html"
+
+require("lsp").setup("html", {
+  "node",
+  O.lang.html.lsp.path,
+  "--stdio",
+})
+
+require("lint").linters_by_ft = {
+  html = O.lang.html.linters,
+}
