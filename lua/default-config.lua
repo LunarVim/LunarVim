@@ -626,6 +626,20 @@ O.lang = {
       },
     },
   },
+  vue = {
+    formatter = {
+      exe = "prettier",
+      args = {
+        "--stdin-filepath",
+        "${FILEPATH}",
+      },
+      stdin = true,
+    },
+    auto_import = true,
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+    },
+  },
   yaml = {
     formatter = {
       exe = "prettier",
@@ -678,4 +692,3 @@ require("lang.css").config()
 require("lang.julia").config()
 require("lang.scala").config()
 require("lang.tex").config()
-require("lang.vue").config()
