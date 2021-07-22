@@ -1,4 +1,1 @@
-require("lsp").setup("clojure_lsp", {
-  O.lang.clojure.lsp.path,
-  "--stdio",
-})
+require("lsp").setup(O.lang.clojure.lsp)

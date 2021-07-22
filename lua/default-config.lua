@@ -66,232 +66,487 @@ O = {
   formatters = {
     filetype = {},
   },
+  lang = {},
+}
 
-  -- TODO move all of this into lang specific files, only require when using
-  lang = {
-
-    csharp = {
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
-      },
-    },
-    cmake = {
-      formatter = {
-        exe = "clang-format",
-        args = {},
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
-      },
-    },
-    clojure = {
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
-      },
-    },
-    dart = {
-      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-      formatter = {
-        exe = "dart",
-        args = { "format" },
-        stdin = true,
-      },
-    },
-    docker = {
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
-      },
-    },
-    elixir = {
-      formatter = {
-        exe = "mix",
-        args = { "format" },
-        stdin = true,
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
-      },
-    },
-    erlang = {
-      lsp = {
-        path = "erlang_ls",
-      },
-    },
-    html = {
-      linters = {
-        "tidy",
-        -- https://docs.errata.ai/vale/scoping#html
-        "vale",
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
-      },
-    },
-    python = {
-      -- @usage can be flake8 or yapf
-      formatter = {
-        exe = "yapf",
-        args = {},
-        stdin = true,
-      },
-      linters = {
-        "flake8",
-        "pylint",
-        "mypy",
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
-      },
-    },
-    efm = {},
-    emmet = { active = false },
-    graphql = {
-      lsp = {
-        path = "graphql-lsp",
-      },
-    },
-    go = {
-      formatter = {
-        exe = "gofmt",
-        args = {},
-        stdin = true,
-      },
-      linters = {
-        "golangcilint",
-        "revive",
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/go/gopls",
-      },
-    },
-    sh = {
-      -- @usage can be 'shellcheck'
-      linter = "",
-      -- @usage can be 'shfmt'
-      formatter = {
-        exe = "shfmt",
-        args = { "-w" },
-        stdin = false,
-      },
-      linters = { "shellcheck" },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
-      },
-    },
-    tailwindcss = {
-      active = false,
-      filetypes = {
-        "html",
-        "css",
-        "scss",
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-      },
-    },
-    terraform = {
-      formatter = {
-        exe = "terraform",
-        args = { "fmt" },
-        stdin = false,
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/terraform/terraform-ls",
-      },
-    },
-    -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
-    -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
-    r = {
-      formatter = {
-        exe = "R",
-        args = {
-          "--slave",
-          "--no-restore",
-          "--no-save",
-          '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
+-- TODO move all of this into lang specific files, only require when using
+O.lang = {
+  csharp = {
+    lsp = {
+      provider = "omnisharp",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
+          "--stdio",
         },
-        stdin = true,
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    ruby = {
-      formatter = {
-        exe = "rufo",
-        args = { "-x" },
-        stdin = true,
-      },
-      linters = { "ruby" },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
+  },
+  cmake = {
+    formatter = {
+      exe = "clang-format",
+      args = {},
+    },
+    lsp = {
+      provider = "cmake",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    rust = {
-      formatter = {
-        exe = "rustfmt",
-        args = { "--emit=stdout", "--edition=2018" },
-        stdin = true,
-      },
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+  },
+  clojure = {
+    lsp = {
+      provider = "clojure_lsp",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    svelte = {
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
+  },
+  dart = {
+    lsp = {
+      provider = "dartls",
+      setup = {
+        cmd = {
+          "dart",
+          "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+          "--lsp",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    swift = {
-      formatter = {
-        exe = "swiftformat",
-        args = {},
-        stdin = true,
-      },
-      lsp = {
-        path = "sourcekit-lsp",
+    formatter = {
+      exe = "dart",
+      args = { "format" },
+      stdin = true,
+    },
+  },
+  docker = {
+    lsp = {
+      provider = "dockerls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    tsserver = {
-      -- @usage can be 'eslint' or 'eslint_d'
-      linter = "",
-      diagnostics = {
-        virtual_text = { spacing = 0, prefix = "" },
-        signs = true,
-        underline = true,
-      },
-      formatter = {
-        exe = "prettier",
-        args = {},
+  },
+  elixir = {
+    formatter = {
+      exe = "mix",
+      args = { "format" },
+      stdin = true,
+    },
+    lsp = {
+      provider = "elixirls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    yaml = {
-      formatter = {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-        stdin = true,
-      },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
+  },
+  elm = {
+    lsp = {
+      provider = "elmls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server",
+        },
+        on_attach = require("lsp").common_on_attach,
+        init_options = {
+          elmAnalyseTrigger = "change",
+          elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",
+          elmPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/",
+          elmTestPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-test",
+        },
       },
     },
-    vim = {
-      linters = { "vint" },
-      lsp = {
-        path = DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
+  },
+  erlang = {
+    lsp = {
+      provider = "erlangls",
+      setup = {
+        cmd = {
+          "erlang_ls",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
-    zig = {
-      formatter = {
-        exe = "zig",
-        args = { "fmt" },
-        stdin = false,
+  },
+  efm = {},
+  emmet = { active = false },
+  go = {
+    formatter = {
+      exe = "gofmt",
+      args = {},
+      stdin = true,
+    },
+    linters = {
+      "golangcilint",
+      "revive",
+    },
+    lsp = {
+      provider = "gopls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/go/gopls",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
-      lsp = {
-        path = "zls",
+    },
+  },
+  graphql = {
+    lsp = {
+      provider = "graphql",
+      setup = {
+        cmd = {
+          "graphql-lsp",
+          "server",
+          "-m",
+          "stream",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  html = {
+    linters = {
+      "tidy",
+      -- https://docs.errata.ai/vale/scoping#html
+      "vale",
+    },
+    lsp = {
+      provider = "html",
+      setup = {
+        cmd = {
+          "node",
+          DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  json = {
+    formatter = {
+      exe = "python",
+      args = { "-m", "json.tool" },
+      stdin = true,
+    },
+    lsp = {
+      provider = "jsonls",
+      setup = {
+        cmd = {
+          "node",
+          DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+        settings = {
+          json = {
+            schemas = require("nlspsettings.jsonls").get_default_schemas(),
+            --   = {
+            --   {
+            --     fileMatch = { "package.json" },
+            --     url = "https://json.schemastore.org/package.json",
+            --   },
+            -- },
+          },
+        },
+        commands = {
+          Format = {
+            function()
+              vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
+            end,
+          },
+        },
+      },
+    },
+  },
+  kotlin = {
+    lsp = {
+      provider = "kotlin_language_server",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
+        },
+        on_attach = require("lsp").common_on_attach,
+        root_dir = function(fname)
+          local util = require "lspconfig/util"
+
+          local root_files = {
+            "settings.gradle", -- Gradle (multi-project)
+            "settings.gradle.kts", -- Gradle (multi-project)
+            "build.xml", -- Ant
+            "pom.xml", -- Maven
+          }
+
+          local fallback_root_files = {
+            "build.gradle", -- Gradle
+            "build.gradle.kts", -- Gradle
+          }
+          return util.root_pattern(unpack(root_files))(fname) or util.root_pattern(unpack(fallback_root_files))(fname)
+        end,
+      },
+    },
+  },
+  python = {
+    -- @usage can be flake8 or yapf
+    formatter = {
+      exe = "yapf",
+      args = {},
+      stdin = true,
+    },
+    linters = {
+      "flake8",
+      "pylint",
+      "mypy",
+    },
+    lsp = {
+      provider = "pyright",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
+  -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
+  r = {
+    formatter = {
+      exe = "R",
+      args = {
+        "--slave",
+        "--no-restore",
+        "--no-save",
+        '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
+      },
+      stdin = true,
+    },
+    lsp = {
+      provider = "r_language_server",
+      setup = {
+        cmd = {
+          "R",
+          "--slave",
+          "-e",
+          "languageserver::run()",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  ruby = {
+    formatter = {
+      exe = "rufo",
+      args = { "-x" },
+      stdin = true,
+    },
+    linters = { "ruby" },
+    lsp = {
+      provider = "solargraph",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
+          "stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  rust = {
+    formatter = {
+      exe = "rustfmt",
+      args = { "--emit=stdout", "--edition=2018" },
+      stdin = true,
+    },
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    lsp = {
+      provider = "rust_analyzer",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  sh = {
+    -- @usage can be 'shellcheck'
+    linter = "",
+    -- @usage can be 'shfmt'
+    formatter = {
+      exe = "shfmt",
+      args = { "-w" },
+      stdin = false,
+    },
+    linters = { "shellcheck" },
+    lsp = {
+      provider = "bashls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
+          "start",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  svelte = {
+    lsp = {
+      provider = "svelte",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  swift = {
+    formatter = {
+      exe = "swiftformat",
+      args = {},
+      stdin = true,
+    },
+    lsp = {
+      provider = "sourcekit",
+      setup = {
+        cmd = {
+          "xcrun",
+          "sourcekit-lsp",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  tailwindcss = {
+    active = false,
+    filetypes = {
+      "html",
+      "css",
+      "scss",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    },
+  },
+  terraform = {
+    formatter = {
+      exe = "terraform",
+      args = { "fmt" },
+      stdin = false,
+    },
+    lsp = {
+      provider = "terraformls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/terraform/terraform-ls",
+          "serve",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  tsserver = {
+    -- @usage can be 'eslint' or 'eslint_d'
+    linter = "",
+    diagnostics = {
+      virtual_text = { spacing = 0, prefix = "" },
+      signs = true,
+      underline = true,
+    },
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
+  },
+  vim = {
+    linters = { "vint" },
+    lsp = {
+      provider = "vimls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  yaml = {
+    formatter = {
+      exe = "prettier",
+      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+      stdin = true,
+    },
+    lsp = {
+      provider = "yamlls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  zig = {
+    formatter = {
+      exe = "zig",
+      args = { "fmt" },
+      stdin = false,
+    },
+    lsp = {
+      provider = "zls",
+      setup = {
+        cmd = {
+          "zls",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
   },
@@ -310,11 +565,8 @@ require("core.nvimtree").config()
 
 require("lang.clang").config()
 require("lang.css").config()
-require("lang.elm").config()
 require("lang.java").config()
-require("lang.json").config()
 require("lang.julia").config()
-require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
 require("lang.scala").config()

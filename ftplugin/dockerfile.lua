@@ -1,4 +1,1 @@
-require("lsp").setup("dockerls", {
-  O.lang.docker.lsp.path,
-  "--stdio",
-})
+require("lsp").setup(O.lang.docker.lsp)
