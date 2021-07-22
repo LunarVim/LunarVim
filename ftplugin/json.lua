@@ -1,4 +1,1 @@
-require("lang.json").format()
-require("lang.json").lint()
-require("lang.json").lsp()
-require("lang.json").dap()
+require("lsp").setup(O.lang.json.lsp.provider, O.lang.json.lsp.setup)

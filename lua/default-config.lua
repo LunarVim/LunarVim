@@ -248,6 +248,43 @@ O = {
         },
       },
     },
+    json = {
+      formatter = {
+        exe = "python",
+        args = { "-m", "json.tool" },
+        stdin = true,
+      },
+      lsp = {
+        provider = "jsonls",
+        setup = {
+          cmd = {
+            "node",
+            DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
+            "--stdio",
+          },
+          on_attach = require("lsp").common_on_attach,
+          capabilities = require("lsp").common_capabilities,
+          settings = {
+            json = {
+              schemas = require("nlspsettings.jsonls").get_default_schemas(),
+              --   = {
+              --   {
+              --     fileMatch = { "package.json" },
+              --     url = "https://json.schemastore.org/package.json",
+              --   },
+              -- },
+            },
+          },
+          commands = {
+            Format = {
+              function()
+                vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
+              end,
+            },
+          },
+        },
+      },
+    },
     kotlin = {
       lsp = {
         provider = "kotlin_language_server",
@@ -529,7 +566,6 @@ require("core.nvimtree").config()
 require("lang.clang").config()
 require("lang.css").config()
 require("lang.java").config()
-require("lang.json").config()
 require("lang.julia").config()
 require("lang.lua").config()
 require("lang.php").config()
