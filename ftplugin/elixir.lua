@@ -1,5 +1,4 @@
 require("core.formatter").setup "elixir"
-require("lang.elixir").lsp()
 
 require("lsp").setup("elixirls", {
   O.lang.elixir.lsp.path,
