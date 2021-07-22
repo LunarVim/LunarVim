@@ -101,6 +101,12 @@ O = {
         path = DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
       },
     },
+    erlang = {
+
+      lsp = {
+        path = "erlang_ls",
+      },
+    },
     python = {
       -- @usage can be flake8 or yapf
       formatter = {
