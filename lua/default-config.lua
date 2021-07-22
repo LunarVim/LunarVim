@@ -208,6 +208,21 @@ O = {
         path = DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
       },
     },
+    rust = {
+      formatter = {
+        exe = "rustfmt",
+        args = { "--emit=stdout", "--edition=2018" },
+        stdin = true,
+      },
+      diagnostics = {
+        virtual_text = { spacing = 0, prefix = "" },
+        signs = true,
+        underline = true,
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+      },
+    },
     svelte = {
       lsp = {
         path = DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
@@ -287,7 +302,6 @@ require("lang.julia").config()
 require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
-require("lang.rust").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()

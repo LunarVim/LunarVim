@@ -1,4 +1,8 @@
-require("lang.rust").format()
-require("lang.rust").lint()
-require("lang.rust").lsp()
-require("lang.rust").dap()
+require("core.formatter").setup "rust"
+
+require("lsp").setup("rust_analyzer", {
+  O.lang.rust.lsp.path,
+})
+
+-- TODO get from dap
+-- require("lang.rust").dap()
