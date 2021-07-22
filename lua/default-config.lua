@@ -71,6 +71,32 @@ O = {
 
 -- TODO move all of this into lang specific files, only require when using
 O.lang = {
+  c = {
+    formatter = {
+      exe = "clang-format",
+      args = {},
+      stdin = true,
+    },
+    linters = {
+      "cppcheck",
+      "clangtidy",
+    },
+    lsp = {
+      provider = "clangd",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
+          "--background-index",
+          "--header-insertion=never",
+          "--cross-file-rename",
+          "--clang-tidy",
+          "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   csharp = {
     lsp = {
       provider = "omnisharp",
@@ -351,6 +377,27 @@ O.lang = {
               },
               maxPreload = 100000,
               preloadFileSize = 1000,
+  php = {
+    formatter = {
+      exe = "phpcbf",
+      args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+      stdin = false,
+      tempfile_prefix = ".formatter",
+    },
+    linters = {},
+    lsp = {
+      provider = "intelephense",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        filetypes = { "php", "phtml" },
+        settings = {
+          intelephense = {
+            environment = {
+              phpVersion = "7.4",
             },
           },
         },
@@ -607,11 +654,9 @@ require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
 
-require("lang.clang").config()
 require("lang.css").config()
 require("lang.java").config()
 require("lang.julia").config()
-require("lang.php").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()
