@@ -67,6 +67,15 @@ O = {
   -- TODO move all of this into lang specific files, only require when using
   lang = {
 
+    cmake = {
+      formatter = {
+        exe = "clang-format",
+        args = {},
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
+      },
+    },
     clojure = {
       lsp = {
         path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
