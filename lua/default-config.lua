@@ -123,6 +123,20 @@ O = {
         path = DATA_PATH .. "/lspinstall/go/gopls",
       },
     },
+    sh = {
+      -- @usage can be 'shellcheck'
+      linter = "",
+      -- @usage can be 'shfmt'
+      formatter = {
+        exe = "shfmt",
+        args = { "-w" },
+        stdin = false,
+      },
+      linters = { "shellcheck" },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
+      },
+    },
     svelte = {},
     tailwindcss = {
       active = false,
@@ -189,7 +203,6 @@ require("lang.lua").config()
 require("lang.php").config()
 require("lang.r").config()
 require("lang.rust").config()
-require("lang.sh").config()
 require("lang.scala").config()
 require("lang.svelte").config()
 require("lang.swift").config()
@@ -199,4 +212,3 @@ require("lang.vim").config()
 require("lang.vue").config()
 require("lang.yaml").config()
 require("lang.zig").config()
-require("lang.zsh").config()

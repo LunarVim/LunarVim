@@ -1,4 +1,10 @@
-require("lang.sh").format()
-require("lang.sh").lint()
-require("lang.sh").lsp()
-require("lang.sh").dap()
+require("core.formatter").setup "sh"
+
+require("lint").linters_by_ft = {
+  sh = O.lang.sh.linters,
+}
+
+require("lsp").setup("bashls", {
+  O.lang.sh.lsp.path,
+  "start",
+})
