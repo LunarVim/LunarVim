@@ -1,4 +1,3 @@
-require("lang.php").format()
-require("lang.php").lint()
-require("lang.php").lsp()
-require("lang.php").dap()
+require("core.formatter").setup "php"
+
+require("lsp").setup(O.lang.php.lsp)
