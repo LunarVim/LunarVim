@@ -91,6 +91,16 @@ O = {
         path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
       },
     },
+    elixir = {
+      formatter = {
+        exe = "mix",
+        args = { "format" },
+        stdin = true,
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
+      },
+    },
     python = {
       -- @usage can be flake8 or yapf
       formatter = {
@@ -191,7 +201,6 @@ require("core.nvimtree").config()
 require("lang.clang").config()
 require("lang.css").config()
 require("lang.dart").config()
-require("lang.elixir").config()
 require("lang.elm").config()
 require("lang.graphql").config()
 require("lang.html").config()
