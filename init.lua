@@ -34,3 +34,7 @@ require "lv-utils"
 -- end
 -- if O.lang.tailwindcss.active then
 --   require "lsp.tailwind
+
+require("nlspsettings").setup {
+  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+}
