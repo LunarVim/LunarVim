@@ -71,6 +71,32 @@ O = {
 
 -- TODO move all of this into lang specific files, only require when using
 O.lang = {
+  c = {
+    formatter = {
+      exe = "clang-format",
+      args = {},
+      stdin = true,
+    },
+    linters = {
+      "cppcheck",
+      "clangtidy",
+    },
+    lsp = {
+      provider = "clangd",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
+          "--background-index",
+          "--header-insertion=never",
+          "--cross-file-rename",
+          "--clang-tidy",
+          "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   csharp = {
     lsp = {
       provider = "omnisharp",
@@ -563,7 +589,6 @@ require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
 
-require("lang.clang").config()
 require("lang.css").config()
 require("lang.java").config()
 require("lang.julia").config()
