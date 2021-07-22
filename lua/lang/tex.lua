@@ -29,11 +29,6 @@ M.config = function()
       ["local"] = nil,
       modify_line_breaks = false,
     },
-    diagnostics = {
-      virtual_text = { spacing = 0, prefix = "" },
-      signs = true,
-      underline = true,
-    },
     linters = { "chktex" },
     auto_save = false,
     ignore_errors = {},
@@ -82,14 +77,6 @@ M.lsp = function()
   require("lspconfig").texlab.setup {
     cmd = { O.lang.latex.lsp.path },
     on_attach = require("lsp").common_on_attach,
-    handlers = {
-      ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = O.lang.latex.diagnostics.virtual_text,
-        signs = O.lang.latex.diagnostics.signs,
-        underline = O.lang.latex.diagnostics.underline,
-        update_in_insert = true,
-      }),
-    },
     filetypes = { "tex", "bib" },
     settings = {
       texlab = {
