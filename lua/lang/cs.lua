@@ -1,8 +1,11 @@
 local M = {}
 
 M.config = function()
-  -- TODO: implement config for language
-  return "No config available!"
+  O.lang.csharp = {
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
+    },
+  }
 end
 
 M.format = function()
@@ -23,7 +26,7 @@ M.lsp = function()
   -- C# language server (csharp/OmniSharp) setup
   require("lspconfig").omnisharp.setup {
     on_attach = require("lsp").common_on_attach,
-    cmd = { DATA_PATH .. "/lspinstall/csharp/omnisharp/run", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    cmd = { O.lang.csharp.lsp.path, "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
   }
 end
 

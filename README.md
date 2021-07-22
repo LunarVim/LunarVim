@@ -29,15 +29,17 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/mas
 ```
 
 ### Installing
-The following command installs LunarVim.  Change LVBRANCH to the branch you'd like to install.  'master' for the stable branch and 'rolling' for the latest changes.
+The following command installs LunarVim.  Change `LVBRANCH` to the branch you'd like to install.  `master` for the stable branch and `rolling` for the latest changes.
 ``` bash
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 ### BREAKING CHANGE on the rolling branch
-* Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to ~/.local/share/lunarvim.  
-* To launch Lunarvim use the new 'lvim' command.  'nvim' will only launch standard neovim.  
-* Your personal configuration file (lv-config.lua) can now be found in ~/.config/lvim.  You can initialize this folder as a git repository to track changes to your configuration files.
+* The latest changes to LunarVim require you to [remove it completely](https://github.com/ChristianChiarulli/LunarVim/wiki/Uninstalling-LunarVim) before upgrading
+* Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
+* To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
+* Your personal configuration file (`lv-config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
+* If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
 
 ### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
@@ -46,6 +48,7 @@ you can run the script with `--overwrite` but be warned this will remove the fol
 - `~/.config/nvim`                        #Removed only on Master Branch
 - `~/.local/share/nvim/site/pack/packer`  #Removed only on Master Branch
 - `~/.local/share/lunarvim`               #Removed only on Rolling Branch
+- `~/.config/lvim`                        #Removed only on Rolling Branch
 ```bash
 curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 ```
@@ -85,10 +88,6 @@ O.keys.normal_mode = {
     -- Page down/up
   {'[d', '<PageUp>'},
   {']d', '<PageDown>'},
-
-  -- Navigate buffers
-  {'<Tab>', ':bnext<CR>'},
-  {'<S-Tab>', ':bprevious<CR>'},
 }
 -- if you just want to augment the existing ones then use the utility function
 require("lv-utils").add_keymap_insert_mode({ silent = true }, {
@@ -108,6 +107,16 @@ O.plugin.zen.active = true
 O.treesitter.ensure_installed = "all"
 O.treesitter.ignore_install = {"haskell"}
 O.treesitter.highlight.enabled = true
+
+-- you can set a custom on_attach function that will be used for all the language servers
+-- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
+-- O.lsp.on_attach_callback = function(client, bufnr)
+--   local function buf_set_option(...)
+--     vim.api.nvim_buf_set_option(bufnr, ...)
+--   end
+--   --Enable completion triggered by <c-x><c-o>
+--   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
 
 -- lua
 O.lang.lua.autoformat = false
@@ -165,10 +174,10 @@ O.lang.python.analysis.use_library_code_types = true
 In case you want to see all the settings inside LunarVim, run the following:
 
 ```bash
-cd ~/.config/nvim
-nvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+cd /tmp
+lvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
-and then inspect `~/.config/nvim/lv-settings.lua` file
+and then inspect `/tmp/lv-settings.lua` file
 
 ## Updating LunarVim
 
@@ -188,7 +197,7 @@ cd ~/.config/nvim && git pull
 :PackerSync  
 
 # Rolling Branch
-cd ~/.local/share/lunarvim && git pull
+cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
 

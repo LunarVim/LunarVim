@@ -7,6 +7,9 @@ M.config = function()
       args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
       stdin = true,
     },
+    lsp = {
+      path = DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
+    },
   }
 end
 
@@ -38,7 +41,7 @@ M.lsp = function()
 
   -- npm install -g yaml-language-server
   require("lspconfig").yamlls.setup {
-    cmd = { DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server", "--stdio" },
+    cmd = { O.lang.yaml.lsp.path, "--stdio" },
     on_attach = require("lsp").common_on_attach,
   }
 end

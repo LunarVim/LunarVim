@@ -1,7 +1,11 @@
 local M = {}
 
 M.config = function()
-  O.lang.graphql = {}
+  O.lang.graphql = {
+    lsp = {
+      path = "graphql-lsp",
+    },
+  }
 end
 
 M.format = function()
@@ -20,7 +24,10 @@ M.lsp = function()
   end
 
   -- npm install -g graphql-language-service-cli
-  require("lspconfig").graphql.setup { on_attach = require("lsp").common_on_attach }
+  require("lspconfig").graphql.setup {
+    cmd = { O.lang.graphql.lsp.path, "server", "-m", "stream" },
+    on_attach = require("lsp").common_on_attach,
+  }
 end
 
 M.dap = function()
