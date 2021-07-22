@@ -162,6 +162,23 @@ O = {
         },
       },
     },
+    elm = {
+      lsp = {
+        provider = "elmls",
+        setup = {
+          cmd = {
+            DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server",
+          },
+          on_attach = require("lsp").common_on_attach,
+          init_options = {
+            elmAnalyseTrigger = "change",
+            elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",
+            elmPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/",
+            elmTestPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-test",
+          },
+        },
+      },
+    },
     erlang = {
       lsp = {
         provider = "erlangls",
@@ -484,7 +501,6 @@ require("core.nvimtree").config()
 
 require("lang.clang").config()
 require("lang.css").config()
-require("lang.elm").config()
 require("lang.java").config()
 require("lang.json").config()
 require("lang.julia").config()
