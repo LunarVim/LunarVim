@@ -8,7 +8,12 @@ O = {
   keys = {
     leader_key = "space",
   },
-  colorscheme = "spacegray",
+  colors = {
+    colorscheme = "spacegray",
+    highlights = { -- will override default highlight from colorscheme
+      -- Visual = { bg = "#222222" },
+    },
+  },
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,

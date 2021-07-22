@@ -78,7 +78,10 @@ Example:
 -- O.lint_on_save = false -- to disable formatting on save
 O.completion.autocomplete = true
 O.default_options.relativenumber = true
-O.colorscheme = 'spacegray'
+O.colors.colorscheme = 'spacegray'
+O.colors.highlights = {
+  Visual = { bg = "#222222" },
+}
 O.default_options.timeoutlen = 100
 
 -- keymappings 
