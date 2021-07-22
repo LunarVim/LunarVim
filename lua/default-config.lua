@@ -86,6 +86,11 @@ O = {
         path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
       },
     },
+    docker = {
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
+      },
+    },
     python = {
       -- @usage can be flake8 or yapf
       formatter = {
