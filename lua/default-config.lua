@@ -113,9 +113,18 @@ O = {
       },
     },
     erlang = {
-
       lsp = {
         path = "erlang_ls",
+      },
+    },
+    html = {
+      linters = {
+        "tidy",
+        -- https://docs.errata.ai/vale/scoping#html
+        "vale",
+      },
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
       },
     },
     python = {
@@ -302,7 +311,6 @@ require("core.nvimtree").config()
 require("lang.clang").config()
 require("lang.css").config()
 require("lang.elm").config()
-require("lang.html").config()
 require("lang.java").config()
 require("lang.json").config()
 require("lang.julia").config()
