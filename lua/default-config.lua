@@ -675,7 +675,6 @@ require("core.treesitter").config()
 require("core.nvimtree").config()
 
 require("lang.css").config()
-require("lang.java").config()
 require("lang.julia").config()
 require("lang.scala").config()
 require("lang.tex").config()
