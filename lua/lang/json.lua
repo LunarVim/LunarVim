@@ -58,11 +58,11 @@ M.lsp = function()
   --require("nlspsettings.jsonls").get_default_schemas(),
   -- npm install -g vscode-json-languageserver
   require("lspconfig").jsonls.setup {
-    -- cmd = {
-    --   "node",
-    --   O.lang.json.lsp.path,
-    --   "--stdio",
-    -- },
+    cmd = {
+      "node",
+      O.lang.json.lsp.path,
+      "--stdio",
+    },
     capabilities = capabilities,
     on_attach = require("lsp").common_on_attach,
     settings = {
