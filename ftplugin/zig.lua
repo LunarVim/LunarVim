@@ -1,4 +1,5 @@
-require("lang.zig").format()
-require("lang.zig").lint()
-require("lang.zig").lsp()
-require("lang.zig").dap()
+require("core.formatter").setup "zig"
+
+require("lsp").setup("zls", {
+  O.lang.zig.lsp.path,
+})

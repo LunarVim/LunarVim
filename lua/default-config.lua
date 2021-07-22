@@ -252,6 +252,16 @@ O = {
         path = DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
       },
     },
+    zig = {
+      formatter = {
+        exe = "zig",
+        args = { "fmt" },
+        stdin = false,
+      },
+      lsp = {
+        path = "zls",
+      },
+    },
   },
 }
 
@@ -281,4 +291,3 @@ require("lang.rust").config()
 require("lang.scala").config()
 require("lang.tex").config()
 require("lang.vue").config()
-require("lang.zig").config()
