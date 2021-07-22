@@ -1,4 +1,7 @@
-require("lang.dart").format()
-require("lang.dart").lint()
-require("lang.dart").lsp()
-require("lang.dart").dap()
+require("core.formatter").setup "dart"
+
+require("lsp").setup("dartls", {
+  "dart",
+  O.lang.dart.sdk_path,
+  "--lsp",
+})

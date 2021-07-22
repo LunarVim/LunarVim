@@ -89,6 +89,14 @@ O = {
         path = DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
       },
     },
+    dart = {
+      sdk_path = "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+      formatter = {
+        exe = "dart",
+        args = { "format" },
+        stdin = true,
+      },
+    },
     docker = {
       lsp = {
         path = DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
@@ -293,7 +301,6 @@ require("core.nvimtree").config()
 
 require("lang.clang").config()
 require("lang.css").config()
-require("lang.dart").config()
 require("lang.elm").config()
 require("lang.html").config()
 require("lang.java").config()
