@@ -166,6 +166,20 @@ O = {
         "typescriptreact",
       },
     },
+    -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
+    -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
+    r = {
+      formatter = {
+        exe = "R",
+        args = {
+          "--slave",
+          "--no-restore",
+          "--no-save",
+          '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
+        },
+        stdin = true,
+      },
+    },
     ruby = {
       formatter = {
         exe = "rufo",
@@ -216,7 +230,6 @@ require("lang.julia").config()
 require("lang.kotlin").config()
 require("lang.lua").config()
 require("lang.php").config()
-require("lang.r").config()
 require("lang.rust").config()
 require("lang.scala").config()
 require("lang.svelte").config()

@@ -1,4 +1,6 @@
-require("lang.r").format()
-require("lang.r").lint()
-require("lang.r").lsp()
-require("lang.r").dap()
+O.formatters.filetype["rmd"] = O.formatters.filetype["r"]
+require("core.formatter").setup "r"
+-- R -e 'install.packages("languageserver",repos = "http://cran.us.r-project.org")'
+require("lsp").setup("r_language_server", {
+  { "R", "--slave", "-e", "languageserver::run()" },
+})
