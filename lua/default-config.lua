@@ -67,6 +67,11 @@ O = {
   -- TODO move all of this into lang specific files, only require when using
   lang = {
 
+    csharp = {
+      lsp = {
+        path = DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
+      },
+    },
     cmake = {
       formatter = {
         exe = "clang-format",

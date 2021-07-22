@@ -1,4 +1,4 @@
-require("lang.cs").format()
-require("lang.cs").lint()
-require("lang.cs").lsp()
-require("lang.cs").dap()
+require("lsp").setup("omnisharp", {
+  O.lang.csharp.lsp.path,
+  "--stdio",
+})
