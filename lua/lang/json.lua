@@ -40,20 +40,43 @@ M.lint = function()
   return "No linters configured!"
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
+
 M.lsp = function()
   if require("lv-utils").check_lsp_client_active "jsonls" then
     return
   end
 
+  --require("nlspsettings.jsonls").get_default_schemas(),
   -- npm install -g vscode-json-languageserver
   require("lspconfig").jsonls.setup {
-    cmd = {
-      "node",
-      O.lang.json.lsp.path,
-      "--stdio",
-    },
+    -- cmd = {
+    --   "node",
+    --   O.lang.json.lsp.path,
+    --   "--stdio",
+    -- },
+    capabilities = capabilities,
     on_attach = require("lsp").common_on_attach,
+    settings = {
+      json = {
+        schemas = require("nlspsettings.jsonls").get_default_schemas(),
 
+        --   = {
+        --   {
+        --     fileMatch = { "package.json" },
+        --     url = "https://json.schemastore.org/package.json",
+        --   },
+        -- },
+      },
+    },
     commands = {
       Format = {
         function()
