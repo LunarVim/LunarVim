@@ -5,6 +5,7 @@ return {
   -- TODO: refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
+  { "jose-elias-alvarez/null-ls.nvim" },
   {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
