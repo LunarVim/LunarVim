@@ -458,6 +458,28 @@ O.lang = {
       },
     },
   },
+  javascript = {
+    -- @usage can be prettier or eslint
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
+    linters = {
+      "eslint",
+    },
+    lsp = {
+      provider = "tsserver",
+      setup = {
+        cmd = {
+          -- TODO:
+          DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   python = {
     -- @usage can be flake8 or yapf
     formatter = {

@@ -8,6 +8,7 @@ vim.cmd [[
   set runtimepath-=~/.config/nvim
   set runtimepath-=~/.config/nvim/after
   set runtimepath^=~/.config/lvim
+  set runtimepath^=~/.local/share/lunarvim/lvim/after
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
@@ -38,3 +39,15 @@ require "lv-utils"
 require("nlspsettings").setup {
   config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
 }
+
+-- require "lsp.null-ls"
+
+-- config = function()
+-- require("lsp-rooter").setup {
+--   -- your configuration comes here
+--   -- or leave it empty to use the default settings
+--   -- refer to the configuration section below
+-- }
+-- vim.cmd "let proj = call FindRootDirectory()"
+
+require("lspconfig")["null-ls"].setup {}
