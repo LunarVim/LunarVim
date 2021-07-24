@@ -89,10 +89,10 @@ if vim.fn.has "mac" == 1 then
   default_keys.normal_mode[8][1] = "<A-Right>"
 end
 
-if lvim.keys.leader_key == " " or lvim.keys.leader_key == "space" then
+if lvim.leader == " " or lvim.leader == "space" then
   vim.g.mapleader = " "
 else
-  vim.g.mapleader = lvim.keys.leader_key
+  vim.g.mapleader = lvim.leader
 end
 
 local function get_user_keys(mode)

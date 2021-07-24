@@ -5,9 +5,7 @@ TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
 lvim = {
-  keys = {
-    leader_key = "space",
-  },
+  leader = "space",
   colorscheme = "spacegray",
   line_wrap_cursor_movement = true,
   transparent_window = false,

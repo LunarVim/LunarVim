@@ -80,7 +80,7 @@ O.completion.autocomplete = true
 O.colorscheme = 'spacegray'
 
 -- keymappings 
-O.keys.leader_key = "space"
+O.leader = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
 O.keys.normal_mode = {
     -- Page down/up

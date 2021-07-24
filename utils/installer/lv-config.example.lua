@@ -15,7 +15,7 @@ lvim.lint_on_save = true
 lvim.completion.autocomplete = true
 lvim.colorscheme = "spacegray"
 -- keymappings
-lvim.keys.leader_key = "space"
+lvim.leader = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
 -- lvim.keys.normal_mode = {
 --   Page down/up
@@ -58,7 +58,6 @@ lvim.treesitter.highlight.enabled = true
 -- end
 
 -- python
-
 
 -- Additional Plugins
 -- lvim.plugins = {
