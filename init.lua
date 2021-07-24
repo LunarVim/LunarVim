@@ -7,7 +7,7 @@ vim.cmd [[
 
   set runtimepath-=~/.config/nvim
   set runtimepath-=~/.config/nvim/after
-  set runtimepath^=~/.config/lvim
+  set runtimepath+=~/.config/lvim
   set runtimepath^=~/.local/share/lunarvim/lvim/after
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
@@ -28,27 +28,19 @@ vim.g.colors_name = O.colorscheme -- Colorscheme must get called after plugins a
 vim.cmd("colorscheme " .. O.colorscheme)
 
 require "lv-utils"
+require("lsp").setup_handlers()
+
+require("nlspsettings").setup {
+  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+}
+local null_ls = require "null-ls"
+
+null_ls.config {}
+require("lspconfig")["null-ls"].setup {}
 
 -- TODO: these guys need to be in language files
--- require "lsp"
 -- if O.lang.emmet.active then
 --   require "lsp.emmet-ls"
 -- end
 -- if O.lang.tailwindcss.active then
 --   require "lsp.tailwind
-
-require("nlspsettings").setup {
-  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
-}
-
--- require "lsp.null-ls"
-
--- config = function()
--- require("lsp-rooter").setup {
---   -- your configuration comes here
---   -- or leave it empty to use the default settings
---   -- refer to the configuration section below
--- }
--- vim.cmd "let proj = call FindRootDirectory()"
-
-require("lspconfig")["null-ls"].setup {}

@@ -1,4 +1,5 @@
--- TODO: figure out why this don't work
+local lsp_config = {}
+
 vim.fn.sign_define(
   "LspDiagnosticsSignError",
   { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
@@ -61,19 +62,21 @@ end
 
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = O.lsp.diagnostics.virtual_text,
-  signs = O.lsp.diagnostics.signs,
-  underline = O.lsp.document_highlight,
-})
+function lsp_config.setup_handlers()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = O.lsp.diagnostics.virtual_text,
+    signs = O.lsp.diagnostics.signs,
+    underline = O.lsp.document_highlight,
+  })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = O.lsp.popup_border,
-})
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = O.lsp.popup_border,
+  })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = O.lsp.popup_border,
-})
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = O.lsp.popup_border,
+  })
+end
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
@@ -132,7 +135,6 @@ local function lsp_highlight_document(client)
     )
   end
 end
-local lsp_config = {}
 
 -- Taken from https://www.reddit.com/r/neovim/comments/gyb077/nvimlsp_peek_defination_javascript_ttserver/
 function lsp_config.preview_location(location, context, before_context)

@@ -483,9 +483,8 @@ O.lang = {
   python = {
     -- @usage can be flake8 or yapf
     formatter = {
-      exe = "yapf",
+      exe = "black",
       args = {},
-      stdin = true,
     },
     linters = {
       "flake8",
@@ -555,11 +554,6 @@ O.lang = {
       exe = "rustfmt",
       args = { "--emit=stdout", "--edition=2018" },
       stdin = true,
-    },
-    diagnostics = {
-      virtual_text = { spacing = 0, prefix = "" },
-      signs = true,
-      underline = true,
     },
     lsp = {
       provider = "rust_analyzer",
@@ -658,11 +652,6 @@ O.lang = {
   tsserver = {
     -- @usage can be 'eslint' or 'eslint_d'
     linter = "",
-    diagnostics = {
-      virtual_text = { spacing = 0, prefix = "" },
-      signs = true,
-      underline = true,
-    },
     formatter = {
       exe = "prettier",
       args = {},
