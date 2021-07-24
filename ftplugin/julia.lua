@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.julia.lsp)
+require("lsp").setup "julia"

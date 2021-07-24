@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.dart.lsp)
+require("lsp").setup "dart"

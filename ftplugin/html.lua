@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.html.lsp)
+require("lsp").setup "html"

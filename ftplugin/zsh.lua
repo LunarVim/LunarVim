@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.sh.lsp)
+require("lsp").setup "sh"

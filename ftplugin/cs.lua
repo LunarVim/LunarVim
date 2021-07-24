@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.csharp.lsp)
+require("lsp").setup "csharp"

@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.java.lsp)
+require("lsp").setup "java"

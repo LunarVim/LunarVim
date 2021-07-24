@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.erlang.lsp)
+require("lsp").setup "erlang"

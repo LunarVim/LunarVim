@@ -58,12 +58,6 @@ O = {
   autocommands = {
     { "FileType", "qf", "set nobuflisted" },
   },
-
-  -- TODO hide this
-  formatters = {
-    filetype = {},
-  },
-  lang = {},
 }
 
 -- TODO move all of this into lang specific files, only require when using

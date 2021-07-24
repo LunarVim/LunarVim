@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.swift.lsp)
+require("lsp").setup "swift"

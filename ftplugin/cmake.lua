@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.cmake.lsp)
+require("lsp").setup "cmake"

@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.php.lsp)
+require("lsp").setup "php"

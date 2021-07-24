@@ -1,1 +1,1 @@
-require("lsp").setup(O.lang.css.lsp)
+require("lsp").setup "css"
