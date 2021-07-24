@@ -3,8 +3,7 @@
 local cmd = vim.cmd
 local opt = vim.opt
 
-default_options =
-  {
+local default_options = {
   backup = false, -- creates a backup file
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
   cmdheight = 2, -- more space in the neovim command line for displaying messages
@@ -48,10 +47,7 @@ default_options =
   spelllang = "en",
   scrolloff = 8, -- is one of my fav
   sidescrolloff = 8,
-}, ---  VIM ONLY COMMANDS  ---cmd "filetype plugin on"
-  cmd('let &titleold="' .. TERMINAL .. '"')
-cmd "set inccommand=split"
-cmd "set iskeyword+=-"
+} ---  VIM ONLY COMMANDS  ---cmd "filetype plugin on"cmd('let &titleold="' .. TERMINAL .. '"')cmd "set inccommand=split"cmd "set iskeyword+=-"
 
 if lvim.line_wrap_cursor_movement then
   cmd "set whichwrap+=<,>,[,],h,l"
