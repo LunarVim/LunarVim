@@ -79,7 +79,7 @@ O.lang.python.analysis.use_library_code_types = true
 O.lang.tsserver.linter = nil
 
 -- rust
--- O.lang.rust.rust_tools = true
+-- O.lang.rust.rust_tools.active = true
 -- O.lang.rust.formatter = {
 --   exe = "rustfmt",
 --   args = {"--emit=stdout", "--edition=2018"},
