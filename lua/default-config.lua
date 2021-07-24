@@ -4,7 +4,6 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
-
 lvim = {
   keys = {
     leader_key = "space",
@@ -71,7 +70,32 @@ end
 lvim.lang = {
   c = {
     formatter = {
-      exe = "clang-format",
+      exe = "clang_format",
+      args = {},
+      stdin = true,
+    },
+    linters = {
+      "clangtidy",
+    },
+    lsp = {
+      provider = "clangd",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
+          "--background-index",
+          "--header-insertion=never",
+          "--cross-file-rename",
+          "--clang-tidy",
+          "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+        },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
+  cpp = {
+    formatter = {
+      exe = "clang_format",
       args = {},
       stdin = true,
     },
