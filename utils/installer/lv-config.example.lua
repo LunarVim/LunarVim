@@ -36,10 +36,10 @@ lvim.keys.leader_key = "space"
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.plugin.dashboard.active = true
-lvim.plugin.terminal.active = true
-lvim.plugin.nvimtree.side = "left"
-lvim.plugin.nvimtree.show_icons.git = 0
+lvim.builtin.dashboard.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.treesitter.ensure_installed = "maintained"
@@ -58,54 +58,10 @@ lvim.treesitter.highlight.enabled = true
 -- end
 
 -- python
-lvim.lang.python.diagnostics.virtual_text = true
-lvim.lang.python.analysis.use_library_code_types = true
--- To change default formatter from yapf to black
--- lvim.lang.python.formatter.exe = "black"
--- lvim.lang.python.formatter.args = {"-"}
--- To change enabled linters
--- https://github.com/mfussenegger/nvim-lint#available-linters
--- lvim.lang.python.linters = { "flake8", "pylint", "mypy", ... }
 
--- go
--- To change default formatter from gofmt to goimports
--- lvim.lang.formatter.go.exe = "goimports"
-
--- javascript
-lvim.lang.tsserver.linter = nil
-
--- rust
--- lvim.lang.rust.rust_tools = true
--- lvim.lang.rust.formatter = {
---   exe = "rustfmt",
---   args = {"--emit=stdout", "--edition=2018"},
--- }
-
--- scala
--- lvim.lang.scala.metals.active = true
--- lvim.lang.scala.metals.server_version = "0.10.5",
-
---LaTeX
--- Options: https://github.com/latex-lsp/texlab/blob/master/docs/options.md
-lvim.lang.latex.active = true
-lvim.lang.latex.aux_directory = "."
-lvim.lang.latex.bibtex_formatter = "texlab"
-lvim.lang.latex.build.args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" }
-lvim.lang.latex.build.executable = "latexmk"
-lvim.lang.latex.build.forward_search_after = false
-lvim.lang.latex.build.on_save = false
-lvim.lang.latex.chktex.on_edit = false
-lvim.lang.latex.chktex.on_open_and_save = false
-lvim.lang.latex.diagnostics_delay = 300
-lvim.lang.latex.formatter_line_length = 80
-lvim.lang.latex.forward_search.executable = "zathura"
-lvim.lang.latex.latex_formatter = "latexindent"
-lvim.lang.latex.latexindent.modify_line_breaks = false
--- lvim.lang.latex.auto_save = false
--- lvim.lang.latex.ignore_errors = { }
 
 -- Additional Plugins
--- lvim.user_plugins = {
+-- lvim.plugins = {
 --     {"folke/tokyonight.nvim"}, {
 --         "ray-x/lsp_signature.nvim",
 --         config = function() require"lsp_signature".on_attach() end,

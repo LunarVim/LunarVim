@@ -36,10 +36,10 @@ lvim.keys.leader_key = "space"
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.plugin.dashboard.active = true
-lvim.plugin.terminal.active = true
-lvim.plugin.nvimtree.side = "left"
-lvim.plugin.nvimtree.show_icons.git = 0
+lvim.builtin.dashboard.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.treesitter.ensure_installed = {}
@@ -57,29 +57,8 @@ lvim.treesitter.highlight.enabled = true
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
--- python
-lvim.lang.python.diagnostics.virtual_text = true
-lvim.lang.python.analysis.use_library_code_types = true
--- To change default formatter from yapf to black
--- lvim.lang.python.formatter.exe = "black"
--- lvim.lang.python.formatter.args = {"-"}
--- To change enabled linters
--- https://github.com/mfussenegger/nvim-lint#available-linters
--- lvim.lang.python.linters = { "flake8", "pylint", "mypy", ... }
-
--- go
--- To change default formatter from gofmt to goimports
--- lvim.lang.formatter.go.exe = "goimports"
-
--- javascript
-lvim.lang.tsserver.linter = nil
-
--- latex
--- lvim.lang.latex.auto_save = false
--- lvim.lang.latex.ignore_errors = { }
-
 -- Additional Plugins
--- lvim.user_plugins = {
+-- lvim.plugins = {
 --     {"folke/tokyonight.nvim"}, {
 --         "ray-x/lsp_signature.nvim",
 --         config = function() require"lsp_signature".on_attach() end,
