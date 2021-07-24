@@ -478,11 +478,13 @@ O.lang = {
       exe = "black",
       args = {},
     },
-    linters = {
-      "flake8",
-      "pylint",
-      "mypy",
-    },
+    linters = "flake8",
+    --       {
+    --
+    --       "flake8",
+    --       "pylint",
+    --       "mypy",
+    --     },
     lsp = {
       provider = "pyright",
       setup = {
@@ -562,7 +564,7 @@ O.lang = {
     -- @usage can be 'shfmt'
     formatter = {
       exe = "shfmt",
-      args = { },
+      args = {},
     },
     -- @usage can be 'shellcheck'
     linters = { "shellcheck" },

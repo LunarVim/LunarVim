@@ -272,13 +272,15 @@ require("lv-utils").define_augroups {
   },
 }
 
-function lsp_config.setup(lang_server)
+function lsp_config.setup(lang)
+  lang_server = O.lang[lang].lsp
+  require("lsp.null-ls").setup "python"
   local provider = lang_server.provider
   if require("lv-utils").check_lsp_client_active(provider) then
     return
   end
-
   require("lspconfig")[provider].setup(lang_server.setup)
+  require("lsp.null-ls").setup(lang)
 end
 
 return lsp_config
