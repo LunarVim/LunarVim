@@ -73,28 +73,6 @@ return {
     end,
   },
 
-  -- Formatter.nvim
-  {
-    "mhartington/formatter.nvim",
-    config = function()
-      require "core.formatter"
-      if O.plugin.formatter.on_config_done then
-        O.plugin.formatter.on_config_done(require "formatter")
-      end
-    end,
-  },
-
-  -- Linter
-  {
-    "mfussenegger/nvim-lint",
-    config = function()
-      require("core.linter").setup()
-      if O.plugin.lint.on_config_done then
-        O.plugin.lint.on_config_done(require "lint")
-      end
-    end,
-  },
-
   -- NvimTree
   {
     "kyazdani42/nvim-tree.lua",

@@ -56,14 +56,40 @@ function lv_utils.generate_settings()
   io.close(file)
 end
 
+-- autoformat
+local toggle_autoformat = function()
+  if O.format_on_save then
+    require("lv-utils").define_augroups {
+      autoformat = {
+        {
+          "BufWritePost",
+          "*",
+          ":silent lua vim.lsp.buf.formatting()",
+        },
+      },
+    }
+  end
+
+  if not O.format_on_save then
+    vim.cmd [[if exists('#autoformat#BufWritePost')
+  :autocmd! autoformat
+  endif]]
+  end
+end
+
+function lv_utils.toggle_autoformat()
+  toggle_autoformat()
+end
+
 function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/lvim/lv-config.lua"
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
+  toggle_autoformat()
   plugin_loader:load { plugins, O.plugins }
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/core/formatter.lua"
+  -- vim.cmd "source ~/.local/share/lunarvim/lvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
