@@ -80,4 +80,3 @@ require("lspconfig").tsserver.setup {
   },
 }
 
-require("lsp.ts-fmt-lint").setup()
