@@ -4,9 +4,7 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
--- TODO O -> lv
 lvim = {
-  -- TODO Loose options under opt
   keys = {
     leader_key = "space",
   },
@@ -18,7 +16,7 @@ lvim = {
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
 
   -- TODO why do we need this?
-  plugin = {
+  builtin = {
     lspinstall = {},
     telescope = {},
     compe = {},
@@ -475,13 +473,11 @@ lvim.lang = {
       exe = "black",
       args = {},
     },
-    linters = "flake8",
-    --       {
-    --
-    --       "flake8",
-    --       "pylint",
-    --       "mypy",
-    --     },
+    linters = {
+      "flake8",
+      "pylint",
+      "mypy",
+    },
     lsp = {
       provider = "pyright",
       setup = {

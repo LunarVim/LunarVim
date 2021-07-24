@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  lvim.plugin.dap = {
+  lvim.builtin.dap = {
     active = false,
     breakpoint = {
       text = "",
@@ -17,10 +17,10 @@ M.setup = function()
     return
   end
 
-  vim.fn.sign_define("DapBreakpoint", lvim.plugin.dap.breakpoint)
+  vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
-  lvim.plugin.which_key.mappings["d"] = {
+  lvim.builtin.which_key.mappings["d"] = {
     name = "Debug",
     t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
     b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },

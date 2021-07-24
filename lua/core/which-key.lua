@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  lvim.plugin.which_key = {
+  lvim.builtin.which_key = {
     active = false,
     setup = {
       plugins = {
@@ -172,13 +172,13 @@ M.setup = function()
     return
   end
 
-  which_key.setup(lvim.plugin.which_key.setup)
+  which_key.setup(lvim.builtin.which_key.setup)
 
-  local opts = lvim.plugin.which_key.opts
-  local vopts = lvim.plugin.which_key.vopts
+  local opts = lvim.builtin.which_key.opts
+  local vopts = lvim.builtin.which_key.vopts
 
-  local mappings = lvim.plugin.which_key.mappings
-  local vmappings = lvim.plugin.which_key.vmappings
+  local mappings = lvim.builtin.which_key.mappings
+  local vmappings = lvim.builtin.which_key.vmappings
 
   local wk = require "which-key"
 

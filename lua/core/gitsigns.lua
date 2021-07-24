@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  lvim.plugin.gitsigns = {
+  lvim.builtin.gitsigns = {
     signs = {
       add = {
         hl = "GitSignsAdd",
@@ -53,7 +53,7 @@ M.setup = function()
   if not status_ok then
     return
   end
-  gitsigns.setup(lvim.plugin.gitsigns)
+  gitsigns.setup(lvim.builtin.gitsigns)
 end
 
 return M

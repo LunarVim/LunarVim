@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  lvim.plugin.dashboard = {
+  lvim.builtin.dashboard = {
     active = false,
     search_handler = "telescope",
     custom_header = {
@@ -55,13 +55,13 @@ end
 M.setup = function()
   vim.g.dashboard_disable_at_vimenter = 0
 
-  vim.g.dashboard_custom_header = lvim.plugin.dashboard.custom_header
+  vim.g.dashboard_custom_header = lvim.builtin.dashboard.custom_header
 
-  vim.g.dashboard_default_executive = lvim.plugin.dashboard.search_handler
+  vim.g.dashboard_default_executive = lvim.builtin.dashboard.search_handler
 
-  vim.g.dashboard_custom_section = lvim.plugin.dashboard.custom_section
+  vim.g.dashboard_custom_section = lvim.builtin.dashboard.custom_section
 
-  lvim.plugin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+  lvim.builtin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
 
   -- f = {
   --   description = { "  Neovim Config Files" },

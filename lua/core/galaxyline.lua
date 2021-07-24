@@ -9,7 +9,7 @@ end
 -- NOTE: if someone defines colors but doesn't have them then this will break
 local palette_status_ok, colors = pcall(require, lvim.colorscheme .. ".palette")
 if not palette_status_ok then
-  colors = lvim.plugin.galaxyline.colors
+  colors = lvim.builtin.galaxyline.colors
 end
 
 local condition = require "galaxyline.condition"

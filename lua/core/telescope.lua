@@ -5,7 +5,7 @@ M.config = function()
     return
   end
 
-  lvim.plugin.telescope = {
+  lvim.builtin.telescope = {
     active = false,
     defaults = {
       find_command = {
@@ -89,7 +89,7 @@ M.setup = function()
   if not status_ok then
     return
   end
-  telescope.setup(lvim.plugin.telescope)
+  telescope.setup(lvim.builtin.telescope)
   vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
 end
 
