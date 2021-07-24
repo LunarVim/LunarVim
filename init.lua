@@ -10,6 +10,9 @@ vim.cmd [[
   set runtimepath+=~/.config/lvim
   set runtimepath^=~/.local/share/lunarvim/lvim/after
 ]]
+require("nlspsettings").setup {
+  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+}
 -- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
 require "settings"
@@ -31,9 +34,6 @@ local utils = require "lv-utils"
 utils.toggle_autoformat()
 require("lsp").setup_handlers()
 
-require("nlspsettings").setup {
-  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
-}
 local null_ls = require "null-ls"
 
 null_ls.config {}
