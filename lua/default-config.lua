@@ -4,14 +4,6 @@ CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
 
-local schemas = nil
-
-local common_on_attach = require("lsp").common_on_attach
-local common_capabilities = require("lsp").common_capabilities()
-local status_ok, jsonls_settings = pcall(require, "nlspsettings.jsonls")
-if status_ok then
-  schemas = jsonls_settings.get_default_schemas()
-end
 
 lvim = {
   keys = {
@@ -67,6 +59,13 @@ lvim = {
   },
 }
 
+local schemas = nil
+local common_on_attach = require("lsp").common_on_attach
+local common_capabilities = require("lsp").common_capabilities()
+local status_ok, jsonls_settings = pcall(require, "nlspsettings.jsonls")
+if status_ok then
+  schemas = jsonls_settings.get_default_schemas()
+end
 
 -- TODO move all of this into lang specific files, only require when using
 lvim.lang = {
