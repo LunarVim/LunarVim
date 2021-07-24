@@ -1,1 +1,1 @@
-require("lsp").setup "kotlin"
+require("lsp").setup("kotlin")

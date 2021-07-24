@@ -1,1 +1,1 @@
-require("lsp").setup "swift"
+require("lsp").setup("swift")

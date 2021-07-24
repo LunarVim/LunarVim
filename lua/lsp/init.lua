@@ -52,8 +52,12 @@ if lvim.lsp.default_keybinds then
 
 	vim.cmd("nnoremap <silent> gp <cmd>lua require'lsp'.PeekDefinition()<CR>")
 	vim.cmd("nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>")
-	vim.cmd("nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<CR>")
-	vim.cmd("nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<CR>")
+	vim.cmd(
+		"nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<CR>"
+	)
+	vim.cmd(
+		"nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<CR>"
+	)
 	vim.cmd("nnoremap <silent> <tab> <cmd>lua vim.lsp.buf.signature_help()<CR>")
 	-- scroll down hover doc or scroll in definition preview
 	-- scroll up hover doc
