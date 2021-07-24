@@ -272,16 +272,6 @@ require("lv-utils").define_augroups {
   },
 }
 
--- settings = {
---   python = {
---     analysis = {
---       typeCheckingMode = O.lang.python.analysis.type_checking,
---       autoSearchPaths = O.lang.python.analysis.auto_search_paths,
---       useLibraryCodeForTypes = O.lang.python.analysis.use_library_code_types,
---     },
---   },
--- },
-
 function lsp_config.setup(lang_server)
   local provider = lang_server.provider
   if require("lv-utils").check_lsp_client_active(provider) then
@@ -291,8 +281,4 @@ function lsp_config.setup(lang_server)
   require("lspconfig")[provider].setup(lang_server.setup)
 end
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
--- local servers = {"pyright", "tsserver"}
--- for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
 return lsp_config

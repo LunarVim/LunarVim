@@ -14,7 +14,6 @@ O = {
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
-  lint_on_save = true,
   vsnip_dir = os.getenv "HOME" .. "/.config/snippets",
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
 
@@ -25,8 +24,6 @@ O = {
     compe = {},
     autopairs = {},
     treesitter = {},
-    formatter = {},
-    lint = {},
     nvimtree = {},
     gitsigns = {},
     which_key = {},
@@ -236,7 +233,6 @@ O.lang = {
       },
     },
   },
-  efm = {},
   emmet = { active = false },
   go = {
     formatter = {
@@ -391,8 +387,6 @@ O.lang = {
     formatter = {
       exe = "stylua",
       args = {},
-      stdin = false,
-      tempfile_prefix = ".formatter",
     },
     linters = { "luacheck" },
     lsp = {
@@ -435,8 +429,6 @@ O.lang = {
     formatter = {
       exe = "phpcbf",
       args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
-      stdin = false,
-      tempfile_prefix = ".formatter",
     },
     linters = {},
     lsp = {
@@ -567,14 +559,12 @@ O.lang = {
     },
   },
   sh = {
-    -- @usage can be 'shellcheck'
-    linter = "",
     -- @usage can be 'shfmt'
     formatter = {
       exe = "shfmt",
-      args = { "-w" },
-      stdin = false,
+      args = { },
     },
+    -- @usage can be 'shellcheck'
     linters = { "shellcheck" },
     lsp = {
       provider = "bashls",
@@ -647,14 +637,6 @@ O.lang = {
         on_attach = require("lsp").common_on_attach,
         capabilities = require("lsp").common_capabilities(),
       },
-    },
-  },
-  tsserver = {
-    -- @usage can be 'eslint' or 'eslint_d'
-    linter = "",
-    formatter = {
-      exe = "prettier",
-      args = {},
     },
   },
   vim = {
