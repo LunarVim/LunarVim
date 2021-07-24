@@ -89,7 +89,6 @@ function lv_utils.reload_lv_config()
   toggle_autoformat()
   plugin_loader:load { plugins, O.plugins }
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  -- vim.cmd "source ~/.local/share/lunarvim/lvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"

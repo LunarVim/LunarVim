@@ -1,5 +1,3 @@
-require("core.formatter").setup "elixir"
-
 require("lsp").setup(O.lang.elixir.lsp)
 
 -- TODO: do we need this?
