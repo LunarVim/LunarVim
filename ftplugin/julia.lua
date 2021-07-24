@@ -1,1 +1,1 @@
-require("lsp").setup("julia")
+require("lsp").setup "julia"

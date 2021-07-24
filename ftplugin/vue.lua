@@ -1,1 +1,1 @@
-require("lsp").setup("vue")
+require("lsp").setup "vue"

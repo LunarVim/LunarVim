@@ -1,4 +1,4 @@
-require("lsp").setup("elixir")
+require("lsp").setup "elixir"
 
 -- TODO: do we need this?
 -- needed for the LSP to recognize elixir files (alternativly just use elixir-editors/vim-elixir)

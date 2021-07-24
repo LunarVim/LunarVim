@@ -1,1 +1,1 @@
-require("lsp").setup("yaml")
+require("lsp").setup "yaml"

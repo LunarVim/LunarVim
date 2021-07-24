@@ -1,1 +1,1 @@
-require("lsp").setup("erlang")
+require("lsp").setup "erlang"
