@@ -27,12 +27,12 @@ end
 function M.setup(filetype)
   exe = O.lang[filetype].formatter.exe
   if has_value(local_executables, exe) then
-    local smart_prettier = null_ls.builtins.formatting[exe]
+    local smart_executable = null_ls.builtins.formatting[exe]
     local formatter_instance = find_local_exe(exe)
     if vim.fn.executable(formatter_instance) then
-      smart_prettier._opts.command = formatter_instance
+      smart_executable._opts.command = formatter_instance
     end
-    table.insert(sources, smart_prettier)
+    table.insert(sources, smart_executable)
   else
     table.insert(sources, null_ls.builtins.formatting[exe])
   end
