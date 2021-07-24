@@ -10,9 +10,6 @@ vim.cmd [[
   set runtimepath+=~/.config/lvim
   set runtimepath^=~/.local/share/lunarvim/lvim/after
 ]]
-require("nlspsettings").setup {
-  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
-}
 -- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
 require "settings"
@@ -34,10 +31,19 @@ local utils = require "lv-utils"
 utils.toggle_autoformat()
 require("lsp").setup_handlers()
 
-local null_ls = require "null-ls"
+local null_status_ok, null_ls = pcall(require, "null-ls")
+if null_status_ok then
+  null_ls.config {}
+  require("lspconfig")["null-ls"].setup {}
+end
 
-null_ls.config {}
-require("lspconfig")["null-ls"].setup {}
+local lsp_settings_status_ok, null_ls = pcall(require, "nlspsettings")
+if lsp_settings_status_ok then
+require("nlspsettings").setup {
+  config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+}
+end
+
 
 -- TODO: these guys need to be in language files
 -- if lvim.lang.emmet.active then
