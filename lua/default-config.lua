@@ -54,7 +54,7 @@ lvim = {
   },
 
   autocommands = {
-    { "FileType", "qf", "set nobuflisted" },
+    
   },
 }
 
