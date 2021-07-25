@@ -233,6 +233,12 @@ lvim.lang = {
     },
   },
   elm = {
+    formatter = {
+      exe = "",
+      args = {},
+      stdin = true,
+    },
+    linters = {},
     lsp = {
       provider = "elmls",
       setup = {
