@@ -35,9 +35,9 @@ local function r_inspect_settings(structure, limit, separator)
   separator = separator:gsub("%.%[", "%[")
   if type(structure) == "function" then
     -- don't print functions
-    io.write("-- O", separator:sub(2), " = function ()\n")
+    io.write("-- lvim", separator:sub(2), " = function ()\n")
   else
-    io.write("O", separator:sub(2), " = ", tostring(structure), "\n")
+    io.write("lvim", separator:sub(2), " = ", tostring(structure), "\n")
   end
   return limit - 1
 end
