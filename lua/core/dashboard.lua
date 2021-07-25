@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  O.plugin.dashboard = {
+  lvim.builtin.dashboard = {
     active = false,
     search_handler = "telescope",
     custom_header = {
@@ -55,13 +55,13 @@ end
 M.setup = function()
   vim.g.dashboard_disable_at_vimenter = 0
 
-  vim.g.dashboard_custom_header = O.plugin.dashboard.custom_header
+  vim.g.dashboard_custom_header = lvim.builtin.dashboard.custom_header
 
-  vim.g.dashboard_default_executive = O.plugin.dashboard.search_handler
+  vim.g.dashboard_default_executive = lvim.builtin.dashboard.search_handler
 
-  vim.g.dashboard_custom_section = O.plugin.dashboard.custom_section
+  vim.g.dashboard_custom_section = lvim.builtin.dashboard.custom_section
 
-  O.plugin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+  lvim.builtin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
 
   -- f = {
   --   description = { "  Neovim Config Files" },
@@ -81,7 +81,7 @@ M.setup = function()
   -- file_browser = {description = {' File Browser'}, command = 'Telescope find_files'},
 
   -- vim.g.dashboard_session_directory = CACHE_PATH..'/session'
-  -- vim.g.dashboard_custom_footer = O.dashboard.footer
+  -- vim.g.dashboard_custom_footer = lvim.dashboard.footer
   require("lv-utils").define_augroups {
     _dashboard = {
       -- seems to be nobuflisted that makes my stuff disapear will do more testing
@@ -93,7 +93,7 @@ M.setup = function()
       {
         "FileType",
         "dashboard",
-        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. O.default_options.showtabline,
+        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. vim.opt.showtabline._value,
       },
       { "FileType", "dashboard", "nnoremap <silent> <buffer> q :q<CR>" },
     },

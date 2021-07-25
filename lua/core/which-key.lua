@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  O.plugin.which_key = {
+  lvim.builtin.which_key = {
     active = false,
     setup = {
       plugins = {
@@ -117,14 +117,15 @@ M.config = function()
           "<cmd>Telescope lsp_workspace_diagnostics<cr>",
           "Workspace Diagnostics",
         },
-        f = { "<cmd>silent FormatWrite<cr>", "Format" },
+        -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
+        f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
         j = {
-          "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>",
+          "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Next Diagnostic",
         },
         k = {
-          "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>",
+          "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
         l = { "<cmd>silent lua require('lint').try_lint()<cr>", "Lint" },
@@ -171,29 +172,18 @@ M.setup = function()
     return
   end
 
-  which_key.setup(O.plugin.which_key.setup)
+  which_key.setup(lvim.builtin.which_key.setup)
 
-  local opts = O.plugin.which_key.opts
-  local vopts = O.plugin.which_key.vopts
+  local opts = lvim.builtin.which_key.opts
+  local vopts = lvim.builtin.which_key.vopts
 
-  local mappings = O.plugin.which_key.mappings
-  local vmappings = O.plugin.which_key.vmappings
-
-  -- if O.plugin.ts_playground.active then
-  --   vim.api.nvim_set_keymap("n", "<leader>Th", ":TSHighlightCapturesUnderCursor<CR>", { noremap = true, silent = true })
-  --   mappings[""] = "Highlight Capture"
-  -- end
-
-  if O.plugin.zen.active then
-    vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
-    mappings["z"] = "Zen"
-  end
+  local mappings = lvim.builtin.which_key.mappings
+  local vmappings = lvim.builtin.which_key.vmappings
 
   local wk = require "which-key"
 
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
-  wk.register(O.user_which_key, opts)
 end
 
 return M

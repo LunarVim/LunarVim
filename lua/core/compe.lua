@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  O.completion = {
+  lvim.completion = {
     enabled = true,
     autocomplete = true,
     debug = false,
@@ -34,14 +34,14 @@ M.config = function()
 end
 
 M.setup = function()
-  vim.g.vsnip_snippet_dir = O.vsnip_dir
+  vim.g.vsnip_snippet_dir = lvim.vsnip_dir
 
   local status_ok, compe = pcall(require, "compe")
   if not status_ok then
     return
   end
 
-  compe.setup(O.completion)
+  compe.setup(lvim.completion)
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)

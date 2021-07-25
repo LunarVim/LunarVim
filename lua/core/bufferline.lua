@@ -3,7 +3,7 @@ vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silen
 vim.api.nvim_set_keymap("n", "<S-h>", ":BufferPrevious<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>", { noremap = true, silent = true })
 
-O.plugin.which_key.mappings["b"] = {
+lvim.builtin.which_key.mappings["b"] = {
   name = "Buffers",
   j = { "<cmd>BufferPick<cr>", "jump to buffer" },
   f = { "<cmd>Telescope buffers<cr>", "Find buffer" },

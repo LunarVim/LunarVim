@@ -56,14 +56,39 @@ function lv_utils.generate_settings()
   io.close(file)
 end
 
+-- autoformat
+local toggle_autoformat = function()
+  if lvim.format_on_save then
+    require("lv-utils").define_augroups {
+      autoformat = {
+        {
+          "BufWritePost",
+          "*",
+          ":silent lua vim.lsp.buf.formatting()",
+        },
+      },
+    }
+  end
+
+  if not lvim.format_on_save then
+    vim.cmd [[if exists('#autoformat#BufWritePost')
+  :autocmd! autoformat
+  endif]]
+  end
+end
+
+function lv_utils.toggle_autoformat()
+  toggle_autoformat()
+end
+
 function lv_utils.reload_lv_config()
   vim.cmd "source ~/.config/lvim/lv-config.lua"
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
-  plugin_loader:load { plugins, O.user_plugins }
+  toggle_autoformat()
+  plugin_loader:load { plugins, lvim.plugins }
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/core/formatter.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
@@ -163,10 +188,13 @@ lv_utils.define_augroups {
     { "BufWritePost", "lv-config.lua", "lua require('lv-utils').reload_lv_config()" },
     -- { "VimLeavePre", "*", "set title set titleold=" },
   },
-  _solidity = {
+  _filetypechanges = {
     { "BufWinEnter", ".tf", "setlocal filetype=hcl" },
     { "BufRead", "*.tf", "setlocal filetype=hcl" },
     { "BufNewFile", "*.tf", "setlocal filetype=hcl" },
+    { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
+    { "BufRead", "*.zsh", "setlocal filetype=sh" },
+    { "BufNewFile", "*.zsh", "setlocal filetype=sh" },
   },
   -- _solidity = {
   --     {'BufWinEnter', '.sol', 'setlocal filetype=solidity'}, {'BufRead', '*.sol', 'setlocal filetype=solidity'},
@@ -203,7 +231,7 @@ lv_utils.define_augroups {
   --   {'InsertEnter', '*', 'if &cursorline | let g:ms_cursorlineoff = 1 | setlocal nocursorline | endif'},
   --   {'InsertLeave', '*', 'if exists("g:ms_cursorlineoff") | setlocal cursorline | endif'},
   -- },
-  _user_autocommands = O.user_autocommands,
+  _user_autocommands = lvim.autocommands,
 }
 
 function lv_utils.gsub_args(args)

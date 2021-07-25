@@ -77,12 +77,10 @@ Example:
 -- O.format_on_save = false -- to disbale formatting on save
 -- O.lint_on_save = false -- to disable formatting on save
 O.completion.autocomplete = true
-O.default_options.relativenumber = true
 O.colorscheme = 'spacegray'
-O.default_options.timeoutlen = 100
 
 -- keymappings 
-O.keys.leader_key = "space"
+O.leader = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
 O.keys.normal_mode = {
     -- Page down/up
@@ -101,7 +99,6 @@ vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, 
 -- After changing plugin config it is recommended to run :PackerCompile
 O.plugin.dashboard.active = true
 O.plugin.terminal.active = true
-O.plugin.zen.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 O.treesitter.ensure_installed = "all"
@@ -142,7 +139,7 @@ O.lang.python.analysis.use_library_code_types = true
 -- O.lang.formatter.go.exe = "goimports"
 
 -- Additional Plugins
--- O.user_plugins = {
+-- O.plugins = {
 --   {"folke/tokyonight.nvim"},
 --   {
 --     "ray-x/lsp_signature.nvim",
@@ -156,16 +153,9 @@ O.lang.python.analysis.use_library_code_types = true
 -- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
+-- O.autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
 
--- Additional Leader bindings for WhichKey
--- O.user_which_key = {
---   A = {
---     name = "+Custom Leader Keys",
---     a = { "<cmd>echo 'first custom command'<cr>", "Description for a" },
---     b = { "<cmd>echo 'second custom command'<cr>", "Description for b" },
---   },
--- }
+-- TODO Additional Leader bindings for WhichKey
 
 -- To link your init.vim (until you find Lua replacements)
 -- vim.cmd('source ' .. CONFIG_PATH .. '/lua/lv-user/init.vim')

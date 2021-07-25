@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  O.plugin.dap = {
+  lvim.builtin.dap = {
     active = false,
     breakpoint = {
       text = "",
@@ -17,10 +17,10 @@ M.setup = function()
     return
   end
 
-  vim.fn.sign_define("DapBreakpoint", O.plugin.dap.breakpoint)
+  vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
-  O.user_which_key["d"] = {
+  lvim.builtin.which_key.mappings["d"] = {
     name = "Debug",
     t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
     b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
@@ -37,5 +37,22 @@ M.setup = function()
     q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
   }
 end
+
+-- TODO put this up there ^^^ call in ftplugin
+
+-- M.dap = function()
+--   if lvim.plugin.dap.active then
+--     local dap_install = require "dap-install"
+--     dap_install.config("python_dbg", {})
+--   end
+-- end
+--
+-- M.dap = function()
+--   -- gem install readapt ruby-debug-ide
+--   if lvim.plugin.dap.active then
+--     local dap_install = require "dap-install"
+--     dap_install.config("ruby_vsc_dbg", {})
+--   end
+-- end
 
 return M
