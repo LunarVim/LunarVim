@@ -1,4 +1,4 @@
-O.plugin.galaxyline = {
+lvim.builtin.galaxyline = {
   active = true,
   colors = {
     alt_bg = "#2E2E2E",

@@ -1,1 +1,1 @@
-require "lsp.tsserver-ls"
+require("lsp").setup "javascript"

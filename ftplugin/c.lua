@@ -1,4 +1,4 @@
-require("lang.clang").format()
-require("lang.clang").lint()
-require("lang.clang").lsp()
-require("lang.clang").dap()
+require("lsp").setup "c"
+
+-- TODO get from dap
+-- require("lang.c").dap()

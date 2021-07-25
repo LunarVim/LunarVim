@@ -1,4 +1,5 @@
--- TODO: figure out why this don't work
+local lsp_config = {}
+
 vim.fn.sign_define(
   "LspDiagnosticsSignError",
   { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
@@ -37,7 +38,7 @@ vim.fn.sign_define(
 --   { noremap = true, silent = true }
 -- )
 
-if O.lsp.default_keybinds then
+if lvim.lsp.default_keybinds then
   vim.cmd "nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>"
   vim.cmd "nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>"
   vim.cmd "nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>"
@@ -51,8 +52,8 @@ if O.lsp.default_keybinds then
 
   vim.cmd "nnoremap <silent> gp <cmd>lua require'lsp'.PeekDefinition()<CR>"
   vim.cmd "nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>"
-  vim.cmd "nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<CR>"
-  vim.cmd "nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<CR>"
+  vim.cmd "nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<CR>"
+  vim.cmd "nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<CR>"
   vim.cmd "nnoremap <silent> <tab> <cmd>lua vim.lsp.buf.signature_help()<CR>"
   -- scroll down hover doc or scroll in definition preview
   -- scroll up hover doc
@@ -61,19 +62,21 @@ end
 
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = O.lsp.diagnostics.virtual_text,
-  signs = O.lsp.diagnostics.signs,
-  underline = O.lsp.document_highlight,
-})
+function lsp_config.setup_handlers()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = lvim.lsp.diagnostics.virtual_text,
+    signs = lvim.lsp.diagnostics.signs,
+    underline = lvim.lsp.document_highlight,
+  })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = O.lsp.popup_border,
-})
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = lvim.lsp.popup_border,
+  })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = O.lsp.popup_border,
-})
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = lvim.lsp.popup_border,
+  })
+end
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
@@ -112,7 +115,7 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
 
 local function lsp_highlight_document(client)
-  if O.lsp.document_highlight == false then
+  if lvim.lsp.document_highlight == false then
     return -- we don't need further
   end
   -- Set autocommands conditional on server_capabilities
@@ -132,7 +135,6 @@ local function lsp_highlight_document(client)
     )
   end
 end
-local lsp_config = {}
 
 -- Taken from https://www.reddit.com/r/neovim/comments/gyb077/nvimlsp_peek_defination_javascript_ttserver/
 function lsp_config.preview_location(location, context, before_context)
@@ -156,7 +158,7 @@ function lsp_config.preview_location(location, context, before_context)
     false
   )
   local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  return vim.lsp.util.open_floating_preview(contents, filetype, { border = O.lsp.popup_border })
+  return vim.lsp.util.open_floating_preview(contents, filetype, { border = lvim.lsp.popup_border })
 end
 
 function lsp_config.preview_location_callback(_, method, result)
@@ -200,10 +202,23 @@ function lsp_config.PeekImplementation()
 end
 
 function lsp_config.common_on_attach(client, bufnr)
-  if O.lsp.on_attach_callback then
-    O.lsp.on_attach_callback(client, bufnr)
+  if lvim.lsp.on_attach_callback then
+    lvim.lsp.on_attach_callback(client, bufnr)
   end
   lsp_highlight_document(client)
+end
+
+function lsp_config.common_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
+  return capabilities
 end
 
 function lsp_config.tsserver_on_attach(client, _)
@@ -222,13 +237,13 @@ function lsp_config.tsserver_on_attach(client, _)
     -- eslint
     eslint_enable_code_actions = true,
     eslint_enable_disable_comments = true,
-    -- eslint_bin = O.lang.tsserver.linter,
+    -- eslint_bin = lvim.lang.tsserver.linter,
     eslint_config_fallback = nil,
     eslint_enable_diagnostics = true,
 
     -- formatting
-    enable_formatting = O.lang.tsserver.autoformat,
-    formatter = O.lang.tsserver.formatter.exe,
+    enable_formatting = lvim.lang.tsserver.autoformat,
+    formatter = lvim.lang.tsserver.formatter.exe,
     formatter_config_fallback = nil,
 
     -- parentheses completion
@@ -257,8 +272,47 @@ require("lv-utils").define_augroups {
   },
 }
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
--- local servers = {"pyright", "tsserver"}
--- for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
+local function is_table(t)
+  return type(t) == "table"
+end
+
+local function is_string(t)
+  return type(t) == "string"
+end
+
+local function has_value(tab, val)
+  for index, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
+function lsp_config.setup(lang)
+  local lang_server = lvim.lang[lang].lsp
+  local provider = lang_server.provider
+  if require("lv-utils").check_lsp_client_active(provider) then
+    return
+  end
+
+  local overrides = lvim.lsp.override
+
+  if is_table(overrides) then
+    if has_value(overrides, lang) then
+      return
+    end
+  end
+
+  if is_string(overrides) then
+    if overrides == lang then
+      return
+    end
+  end
+
+  require("lspconfig")[provider].setup(lang_server.setup)
+  require("lsp.null-ls").setup(lang)
+end
+
 return lsp_config

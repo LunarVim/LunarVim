@@ -1,1 +1,1 @@
-c.lua
+require("lsp").setup "cpp"

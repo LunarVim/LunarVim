@@ -124,8 +124,13 @@ cloneconfig() {
 		+PackerSync
 
 	printf "\nCompile Complete\n"
-	rm "$HOME/.config/lvim/lv-config.lua"
-	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua" "$HOME/.config/lvim/lv-config.lua"
+
+	if [ -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
+		echo 'lv-config already present'
+	else
+		cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua" "$HOME/.config/lvim/lv-config.lua"
+	fi
+
 }
 
 asktoinstallnode() {
