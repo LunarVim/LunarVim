@@ -292,7 +292,6 @@ end
 
 function lsp_config.setup(lang)
   local lang_server = lvim.lang[lang].lsp
-  require("lsp.null-ls").setup "python"
   local provider = lang_server.provider
   if require("lv-utils").check_lsp_client_active(provider) then
     return
