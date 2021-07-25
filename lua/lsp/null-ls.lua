@@ -50,6 +50,7 @@ local function setup_ls(exe, type)
   null_ls.register { sources = sources }
 end
 
+-- TODO: for linters and formatters with spaces and '-' replace with '_'
 local function setup(filetype, type)
   local executables = nil
   if type == "diagnostics" then
@@ -69,6 +70,7 @@ local function setup(filetype, type)
   end
 end
 
+-- TODO: return the formatter if one was registered, then turn off the builtin formatter
 function M.setup(filetype)
   setup(filetype, "formatting")
   setup(filetype, "diagnostics")
