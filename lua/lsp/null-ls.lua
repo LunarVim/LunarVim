@@ -62,10 +62,12 @@ local function setup(filetype, type)
 
   if is_table(executables) then
     for _, exe in pairs(executables) do
-      setup_ls(exe, type)
+      if exe ~= "" then
+        setup_ls(exe, type)
+      end
     end
   end
-  if is_string(executables) then
+  if is_string(executables) and executables ~= "" then
     setup_ls(executables, type)
   end
 end

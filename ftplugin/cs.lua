@@ -1,1 +1,1 @@
-require("lsp").setup "csharp"
+require("lsp").setup "cs"

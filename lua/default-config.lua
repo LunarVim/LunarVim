@@ -117,11 +117,12 @@ lvim.lang = {
       },
     },
   },
-  csharp = {
+  cs = {
     formatter = {
       exe = "",
       args = {},
     },
+    linters = {},
     lsp = {
       provider = "omnisharp",
       setup = {
