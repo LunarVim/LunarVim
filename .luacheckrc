@@ -2,7 +2,7 @@
 
 stds.nvim = {
 	globals = {
-		"O",
+		"lvim",
 		vim = { fields = { "g" } },
 		"CONFIG_PATH",
 		"CACHE_PATH",
