@@ -73,7 +73,7 @@ Example:
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.colorscheme = "darkplus"
+lvim.colorscheme = "spacegray"
 
 lvim.builtin.compe.autocomplete = true
 
