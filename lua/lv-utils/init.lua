@@ -49,8 +49,8 @@ function lv_utils.generate_settings()
   -- sets the default output file as test.lua
   io.output(file)
 
-  -- write all `O` related settings to `lv-settings.lua` file
-  r_inspect_settings(O, 10000, ".")
+  -- write all `lvim` related settings to `lv-settings.lua` file
+  r_inspect_settings(lvim, 10000, ".")
 
   -- closes the open file
   io.close(file)
