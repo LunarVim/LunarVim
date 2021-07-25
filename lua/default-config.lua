@@ -137,9 +137,10 @@ lvim.lang = {
   },
   cmake = {
     formatter = {
-      exe = "clang-format",
+      exe = "clang_format",
       args = {},
     },
+    linters = {},
     lsp = {
       provider = "cmake",
       setup = {
@@ -153,6 +154,11 @@ lvim.lang = {
     },
   },
   clojure = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "clojure_lsp",
       setup = {
@@ -170,6 +176,7 @@ lvim.lang = {
       exe = "prettier",
       args = {},
     },
+    linters = {},
     lsp = {
       provider = "cssls",
       setup = {
@@ -184,6 +191,12 @@ lvim.lang = {
     },
   },
   dart = {
+    formatter = {
+      exe = "dart",
+      args = { "format" },
+      stdin = true,
+    },
+    linters = {},
     lsp = {
       provider = "dartls",
       setup = {
@@ -196,13 +209,13 @@ lvim.lang = {
         capabilities = common_capabilities,
       },
     },
-    formatter = {
-      exe = "dart",
-      args = { "format" },
-      stdin = true,
-    },
   },
   docker = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "dockerls",
       setup = {
@@ -221,6 +234,7 @@ lvim.lang = {
       args = { "format" },
       stdin = true,
     },
+    linters = {},
     lsp = {
       provider = "elixirls",
       setup = {
@@ -256,6 +270,11 @@ lvim.lang = {
     },
   },
   erlang = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "erlangls",
       setup = {
@@ -290,6 +309,11 @@ lvim.lang = {
     },
   },
   graphql = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "graphql",
       setup = {
@@ -305,6 +329,10 @@ lvim.lang = {
     },
   },
   html = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
     linters = {
       "tidy",
       -- https://docs.errata.ai/vale/scoping#html
@@ -328,6 +356,7 @@ lvim.lang = {
       exe = "prettier",
       args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
     },
+    linters = {},
     lsp = {
       provider = "jdtls",
       setup = {
@@ -343,6 +372,7 @@ lvim.lang = {
       args = { "-m", "json.tool" },
       stdin = true,
     },
+    linters = {},
     lsp = {
       provider = "jsonls",
       setup = {
@@ -375,6 +405,11 @@ lvim.lang = {
     },
   },
   julia = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "julials",
       setup = {
