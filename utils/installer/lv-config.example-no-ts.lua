@@ -1,19 +1,10 @@
---[[
-O is the global options object
-
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
-
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.completion.autocomplete = true
 lvim.colorscheme = "spacegray"
+
 -- keymappings
 lvim.leader = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
@@ -42,9 +33,9 @@ lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.treesitter.ensure_installed = {}
-lvim.treesitter.ignore_install = { "haskell" }
-lvim.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.ensure_installed = {}
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers

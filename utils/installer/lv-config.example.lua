@@ -12,7 +12,6 @@ an executable
 
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.completion.autocomplete = true
 lvim.colorscheme = "spacegray"
 -- keymappings
 lvim.leader = "space"
@@ -42,9 +41,9 @@ lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.treesitter.ensure_installed = "maintained"
-lvim.treesitter.ignore_install = { "haskell" }
-lvim.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
