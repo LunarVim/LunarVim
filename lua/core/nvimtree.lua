@@ -89,9 +89,9 @@ M.focus_or_close = function()
     end
   else
     view.open()
-    if package.loaded["bufferline.state"] then
-      -- require'bufferline.state'.set_offset(O.plugin.nvimtree.width + 1, 'File Explorer')
-      require("bufferline.state").set_offset(O.plugin.nvimtree.width + 1, "")
+    if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
+      -- require'bufferline.state'.set_offset(lvim.builtin.nvimtree.width + 1, 'File Explorer')
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
     end
   end
 end
@@ -108,8 +108,8 @@ M.toggle_tree = function()
     end
   else
     if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
-      -- require'bufferline.state'.set_offset(O.plugin.nvimtree.width + 1, 'File Explorer')
-      require("bufferline.state").set_offset(O.plugin.nvimtree.width + 1, "")
+      -- require'bufferline.state'.set_offset(lvim.builtin.nvimtree.width + 1, 'File Explorer')
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
     end
     require("nvim-tree").toggle()
   end
