@@ -76,6 +76,8 @@ end
 function M.setup(filetype)
   setup(filetype, "formatting")
   setup(filetype, "diagnostics")
+  lvim.sources = sources
+  return sources
 end
 
 return M

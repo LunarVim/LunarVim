@@ -208,6 +208,14 @@ function lsp_config.common_on_attach(client, bufnr)
   lsp_highlight_document(client)
 end
 
+local function no_formatter_on_attach(client, bufnr)
+  if lvim.lsp.on_attach_callback then
+    lvim.lsp.on_attach_callback(client, bufnr)
+  end
+  lsp_highlight_document(client)
+  client.resolved_capabilities.document_formatting = false
+end
+
 function lsp_config.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -310,9 +318,26 @@ function lsp_config.setup(lang)
       return
     end
   end
+  local sources = require("lsp.null-ls").setup(lang)
+
+  for _, source in pairs(sources) do
+    local method = source.method
+    local format_method = "NULL_LS_FORMATTING"
+
+    if is_table(method) then
+      if has_value(method, format_method) then
+        lang_server.setup.on_attach = no_formatter_on_attach
+      end
+    end
+
+    if is_string(method) then
+      if method == format_method then
+        lang_server.setup.on_attach = no_formatter_on_attach
+      end
+    end
+  end
 
   require("lspconfig")[provider].setup(lang_server.setup)
-  require("lsp.null-ls").setup(lang)
 end
 
 return lsp_config
