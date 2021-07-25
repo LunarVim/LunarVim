@@ -497,6 +497,28 @@ lvim.lang = {
       },
     },
   },
+  javascriptreact = {
+    -- @usage can be prettier or eslint
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
+    linters = {
+      "eslint",
+    },
+    lsp = {
+      provider = "tsserver",
+      setup = {
+        cmd = {
+          -- TODO:
+          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   python = {
     -- @usage can be flake8 or yapf
     formatter = {
@@ -661,6 +683,50 @@ lvim.lang = {
         },
         on_attach = common_on_attach,
         capabilities = common_capabilities,
+      },
+    },
+  },
+  typescript = {
+    -- @usage can be prettier or eslint
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
+    linters = {
+      "eslint",
+    },
+    lsp = {
+      provider = "tsserver",
+      setup = {
+        cmd = {
+          -- TODO:
+          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
+  typescriptreact = {
+    -- @usage can be prettier or eslint
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
+    linters = {
+      "eslint",
+    },
+    lsp = {
+      provider = "tsserver",
+      setup = {
+        cmd = {
+          -- TODO:
+          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
       },
     },
   },

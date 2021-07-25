@@ -35,9 +35,9 @@ local function r_inspect_settings(structure, limit, separator)
   separator = separator:gsub("%.%[", "%[")
   if type(structure) == "function" then
     -- don't print functions
-    io.write("-- O", separator:sub(2), " = function ()\n")
+    io.write("-- lvim", separator:sub(2), " = function ()\n")
   else
-    io.write("O", separator:sub(2), " = ", tostring(structure), "\n")
+    io.write("lvim", separator:sub(2), " = ", tostring(structure), "\n")
   end
   return limit - 1
 end
@@ -49,8 +49,8 @@ function lv_utils.generate_settings()
   -- sets the default output file as test.lua
   io.output(file)
 
-  -- write all `O` related settings to `lv-settings.lua` file
-  r_inspect_settings(O, 10000, ".")
+  -- write all `lvim` related settings to `lv-settings.lua` file
+  r_inspect_settings(lvim, 10000, ".")
 
   -- closes the open file
   io.close(file)
