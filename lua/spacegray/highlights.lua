@@ -26,7 +26,7 @@ local highlights = {
   NormalFloat = { bg = C.alt_bg },
   Visual = { bg = C.alt_bg },
   VisualNOS = { bg = C.alt_bg },
-  WarningMsg = { fg = C.error_red, bg = C.bg },
+  WarningMsg = { fg = C.warning_orange, bg = C.bg },
   DiffAdd = { fg = C.alt_bg, bg = C.sign_add },
   DiffChange = { fg = C.alt_bg, bg = C.sign_change, style = "underline" },
   DiffDelete = { fg = C.alt_bg, bg = C.sign_delete },
