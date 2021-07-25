@@ -665,7 +665,11 @@ lvim.lang = {
     },
   },
   vim = {
-    linters = { "vint" },
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = { "" },
     lsp = {
       provider = "vimls",
       setup = {
