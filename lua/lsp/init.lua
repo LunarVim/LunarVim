@@ -266,7 +266,7 @@ function lsp_config.tsserver_on_attach(client, _)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", {silent = true})
 end
 
-require("lv-utils").define_augroups {
+require("core.autocmds").define_augroups {
   _general_lsp = {
     { "FileType", "lspinfo", "nnoremap <silent> <buffer> q :q<CR>" },
   },
