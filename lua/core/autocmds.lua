@@ -1,6 +1,5 @@
 local autocommands = {}
 
-
 lvim.autocommands = {
   _general_settings = {
     {
@@ -28,14 +27,11 @@ lvim.autocommands = {
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
-    { "BufWritePost",
-      "lv-config.lua",
-      "lua require('lv-utils').reload_lv_config()"
-    },
+    { "BufWritePost", "lv-config.lua", "lua require('lv-utils').reload_lv_config()" },
     {
       "FileType",
       "qf",
-      "set nobuflisted"
+      "set nobuflisted",
     },
     -- { "VimLeavePre", "*", "set title set titleold=" },
   },
@@ -70,7 +66,7 @@ lvim.autocommands = {
     -- will cause split windows to be resized evenly if main window is resized
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
-  
+
   -- _fterm_lazygit = {
   --   -- will cause esc key to exit lazy git
   --   {"TermEnter", "*", "call LazyGitNativation()"}
@@ -106,7 +102,5 @@ function autocommands.define_augroups(definitions) -- {{{1
     vim.cmd "augroup END"
   end
 end
-
-
 
 return autocommands

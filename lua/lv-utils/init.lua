@@ -130,7 +130,6 @@ function lv_utils.add_keymap_term_mode(opts, keymaps)
   lv_utils.add_keymap("t", opts, keymaps)
 end
 
-
 function lv_utils.unrequire(m)
   package.loaded[m] = nil
   _G[m] = nil

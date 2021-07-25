@@ -53,9 +53,7 @@ lvim = {
     -- use lv-config.lua for this not put here
   },
 
-  autocommands = {
-    
-  },
+  autocommands = {},
 }
 
 local schemas = nil

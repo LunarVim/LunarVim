@@ -18,7 +18,7 @@ if not status_ok then
   print "something is wrong with your lv-config"
   print(error)
 end
-require('core.autocmds').define_augroups(lvim.autocommands)
+require("core.autocmds").define_augroups(lvim.autocommands)
 
 require "keymappings"
 
