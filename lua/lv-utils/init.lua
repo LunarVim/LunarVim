@@ -82,13 +82,13 @@ function lv_utils.toggle_autoformat()
 end
 
 function lv_utils.reload_lv_config()
+  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
+  vim.cmd "source ~/.config/lvim/lv-config.lua"
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
   toggle_autoformat()
   plugin_loader:load { plugins, lvim.plugins }
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd "source ~/.config/lvim/lv-config.lua"
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
