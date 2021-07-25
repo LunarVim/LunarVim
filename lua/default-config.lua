@@ -42,6 +42,7 @@ lvim = {
       signs = true,
       underline = true,
     },
+    override = {},
     document_highlight = true,
     popup_border = "single",
     default_keybinds = true,

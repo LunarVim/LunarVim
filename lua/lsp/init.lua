@@ -272,13 +272,46 @@ require("lv-utils").define_augroups {
   },
 }
 
+local function is_table(t)
+  return type(t) == "table"
+end
+
+local function is_string(t)
+  return type(t) == "string"
+end
+
+local function has_value(tab, val)
+  for index, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 function lsp_config.setup(lang)
-  lang_server = lvim.lang[lang].lsp
+  local lang_server = lvim.lang[lang].lsp
   require("lsp.null-ls").setup "python"
   local provider = lang_server.provider
   if require("lv-utils").check_lsp_client_active(provider) then
     return
   end
+
+  local overrides = lvim.lsp.override
+
+  if is_table(overrides) then
+    if has_value(overrides, lang) then
+      return
+    end
+  end
+
+  if is_string(overrides) then
+    if overrides == lang then
+      return
+    end
+  end
+
   require("lspconfig")[provider].setup(lang_server.setup)
   require("lsp.null-ls").setup(lang)
 end

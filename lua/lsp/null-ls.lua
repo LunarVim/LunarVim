@@ -45,6 +45,7 @@ local function setup_ls(exe, type)
 end
 
 local function setup(filetype, type)
+  local executables = nil
   if type == "diagnostics" then
     executables = lvim.lang[filetype].linters
   end
