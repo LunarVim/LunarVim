@@ -34,12 +34,18 @@ local function setup_ls(exe, type)
   if has_value(local_executables, exe) then
     local smart_executable = null_ls.builtins[type][exe]
     local local_executable = find_local_exe(exe)
-    if vim.fn.executable(local_executable) then
+    if vim.fn.executable(local_executable) == 1 then
       smart_executable._opts.command = local_executable
+      table.insert(sources, smart_executable)
+    else
+      if vim.fn.executable(exe) == 1 then
+        table.insert(sources, smart_executable)
+      end
     end
-    table.insert(sources, smart_executable)
   else
-    table.insert(sources, null_ls.builtins[type][exe])
+    if vim.fn.executable(exe) == 1 then
+      table.insert(sources, null_ls.builtins[type][exe])
+    end
   end
   null_ls.register { sources = sources }
 end
