@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  lvim.completion = {
+  lvim.builtin.compe = {
     enabled = true,
     autocomplete = true,
     debug = false,
@@ -41,7 +41,7 @@ M.setup = function()
     return
   end
 
-  compe.setup(lvim.completion)
+  compe.setup(lvim.builtin.compe)
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
