@@ -266,7 +266,11 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   Tabstop = {
     provider = function()
-      return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
+      local label = "Spaces: "
+      if not vim.api.nvim_buf_get_option(0, "expandtab") then
+        label = "Tab size: "
+      end
+      return label .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
     end,
     condition = condition.hide_in_width,
     separator = " ",
