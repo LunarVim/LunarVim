@@ -41,13 +41,6 @@ M.setup = function()
     print(terminal)
     return
   end
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>gg",
-    "<cmd>lua require('core.terminal')._lazygit_toggle()<CR>",
-    { noremap = true, silent = true }
-  )
-  lvim.builtin.which_key.mappings["gg"] = "LazyGit"
   terminal.setup(lvim.builtin.terminal)
 end
 
