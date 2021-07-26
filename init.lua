@@ -12,12 +12,13 @@ vim.cmd [[
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
 require "default-config"
-require "settings"
+require("settings").load_options()
 local status_ok, error = pcall(vim.cmd, "luafile ~/.config/lvim/lv-config.lua")
 if not status_ok then
   print "something is wrong with your lv-config"
   print(error)
 end
+require("settings").load_commands()
 require("core.autocmds").define_augroups(lvim.autocommands)
 
 require "keymappings"
