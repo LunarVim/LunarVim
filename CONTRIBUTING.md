@@ -19,9 +19,7 @@ One of the best ways to begin contributing in a meaningful way is by helping fin
 
 1. Install [stylua](https://github.com/johnnymorganz/stylua#installation)
 
-2. Copy `utils/.stylua.toml` into the LunarVim root directory
-
-3. Install [shfmt](https://github.com/mvdan/sh#shfmt)
+2. Install [shfmt](https://github.com/mvdan/sh#shfmt)
 
 ## Some Guidelines
 
