@@ -1,4 +1,4 @@
-local lv_utils = {}
+local utils = {}
 
 -- recursive Print (structure, limit, separator)
 local function r_inspect_settings(structure, limit, separator)
@@ -42,7 +42,7 @@ local function r_inspect_settings(structure, limit, separator)
   return limit - 1
 end
 
-function lv_utils.generate_settings()
+function utils.generate_settings()
   -- Opens a file in append mode
   local file = io.open("lv-settings.lua", "w")
 
@@ -57,7 +57,7 @@ function lv_utils.generate_settings()
 end
 
 -- autoformat
-local toggle_autoformat = function()
+function utils.toggle_autoformat()
   if lvim.format_on_save then
     require("core.autocmds").define_augroups {
       autoformat = {
@@ -71,30 +71,28 @@ local toggle_autoformat = function()
   end
 
   if not lvim.format_on_save then
-    vim.cmd [[if exists('#autoformat#BufWritePre')
-  :autocmd! autoformat
-  endif]]
+    vim.cmd [[
+      if exists('#autoformat#BufWritePre')
+        :autocmd! autoformat
+      endif
+    ]]
   end
 end
 
-function lv_utils.toggle_autoformat()
-  toggle_autoformat()
-end
-
-function lv_utils.reload_lv_config()
+function utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
   vim.cmd "source ~/.config/lvim/lv-config.lua"
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
-  toggle_autoformat()
+  utils.toggle_autoformat()
   plugin_loader:load { plugins, lvim.plugins }
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
 end
 
-function lv_utils.check_lsp_client_active(name)
+function utils.check_lsp_client_active(name)
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
     if client.name == name then
@@ -104,38 +102,38 @@ function lv_utils.check_lsp_client_active(name)
   return false
 end
 
-function lv_utils.add_keymap(mode, opts, keymaps)
+function utils.add_keymap(mode, opts, keymaps)
   for _, keymap in ipairs(keymaps) do
     vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
   end
 end
 
-function lv_utils.add_keymap_normal_mode(opts, keymaps)
-  lv_utils.add_keymap("n", opts, keymaps)
+function utils.add_keymap_normal_mode(opts, keymaps)
+  utils.add_keymap("n", opts, keymaps)
 end
 
-function lv_utils.add_keymap_visual_mode(opts, keymaps)
-  lv_utils.add_keymap("v", opts, keymaps)
+function utils.add_keymap_visual_mode(opts, keymaps)
+  utils.add_keymap("v", opts, keymaps)
 end
 
-function lv_utils.add_keymap_visual_block_mode(opts, keymaps)
-  lv_utils.add_keymap("x", opts, keymaps)
+function utils.add_keymap_visual_block_mode(opts, keymaps)
+  utils.add_keymap("x", opts, keymaps)
 end
 
-function lv_utils.add_keymap_insert_mode(opts, keymaps)
-  lv_utils.add_keymap("i", opts, keymaps)
+function utils.add_keymap_insert_mode(opts, keymaps)
+  utils.add_keymap("i", opts, keymaps)
 end
 
-function lv_utils.add_keymap_term_mode(opts, keymaps)
-  lv_utils.add_keymap("t", opts, keymaps)
+function utils.add_keymap_term_mode(opts, keymaps)
+  utils.add_keymap("t", opts, keymaps)
 end
 
-function lv_utils.unrequire(m)
+function utils.unrequire(m)
   package.loaded[m] = nil
   _G[m] = nil
 end
 
-function lv_utils.gsub_args(args)
+function utils.gsub_args(args)
   if args == nil or type(args) ~= "table" then
     return args
   end
@@ -146,16 +144,6 @@ function lv_utils.gsub_args(args)
   return args
 end
 
-vim.cmd [[
-  function! QuickFixToggle()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-      copen
-    else
-      cclose
-    endif
-endfunction
-]]
-
-return lv_utils
+return utils
 
 -- TODO: find a new home for these autocommands

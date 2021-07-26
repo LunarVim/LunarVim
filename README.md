@@ -116,7 +116,7 @@ In case you want to see all the settings inside LunarVim, run the following:
 
 ```bash
 cd /tmp
-lvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+lvim --headless +'lua require("utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
 and then inspect `/tmp/lv-settings.lua` file
 
