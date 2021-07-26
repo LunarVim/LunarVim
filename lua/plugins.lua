@@ -83,6 +83,8 @@ return {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "0.5-compat",
+    -- run = ":TSUpdate",
     config = function()
       require("core.treesitter").setup()
       if lvim.builtin.treesitter.on_config_done then
