@@ -1,6 +1,6 @@
 local M = {}
 
-M.options = function()
+M.load_options = function()
   local opt = vim.opt
 
   local default_options = {
@@ -58,7 +58,7 @@ M.options = function()
   end
 end
 
-M.commands = function()
+M.load_commands = function()
   local cmd = vim.cmd
   if lvim.line_wrap_cursor_movement then
     cmd "set whichwrap+=<,>,[,],h,l"
