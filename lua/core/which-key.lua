@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.which_key = {
     active = false,
@@ -187,14 +188,7 @@ M.config = function()
 end
 
 M.setup = function()
-  -- if not package.loaded['which-key'] then
-  --  return
-  -- end
-  local status_ok, which_key = pcall(require, "which-key")
-  if not status_ok then
-    return
-  end
-
+  local which_key = require "which-key"
   which_key.setup(lvim.builtin.which_key.setup)
 
   local opts = lvim.builtin.which_key.opts
@@ -203,10 +197,10 @@ M.setup = function()
   local mappings = lvim.builtin.which_key.mappings
   local vmappings = lvim.builtin.which_key.vmappings
 
-  local wk = require "which-key"
+  which_key.register(mappings, opts)
+  which_key.register(vmappings, vopts)
 
-  wk.register(mappings, opts)
-  wk.register(vmappings, vopts)
+  return which_key
 end
 
 return M

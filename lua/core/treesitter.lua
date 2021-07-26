@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.treesitter = {
     ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -62,12 +63,9 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-  if not status_ok then
-    return
-  end
-
+  local treesitter_configs = require "nvim-treesitter.configs"
   treesitter_configs.setup(lvim.builtin.treesitter)
+  return treesitter_configs
 end
 
 return M

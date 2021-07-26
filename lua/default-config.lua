@@ -14,25 +14,6 @@ lvim = {
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
   keys = {},
 
-  -- TODO why do we need this?
-  builtin = {
-    lspinstall = {},
-    telescope = {},
-    compe = {},
-    autopairs = {},
-    treesitter = {},
-    nvimtree = {},
-    gitsigns = {},
-    which_key = {},
-    comment = {},
-    rooter = {},
-    galaxyline = {},
-    bufferline = {},
-    dap = {},
-    dashboard = {},
-    terminal = {},
-  },
-
   lsp = {
     diagnostics = {
       virtual_text = {
@@ -48,6 +29,8 @@ lvim = {
     default_keybinds = true,
     on_attach_callback = nil,
   },
+
+  builtin = {},
 
   plugins = {
     -- use lv-config.lua for this not put here

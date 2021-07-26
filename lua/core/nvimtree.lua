@@ -46,12 +46,9 @@ M.config = function()
 end
 --
 M.setup = function()
-  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-  if not status_ok then
-    return
-  end
-  local g = vim.g
+  nvim_tree_config = require "nvim-tree.config"
 
+  local g = vim.g
   for opt, val in pairs(lvim.builtin.nvimtree) do
     g["nvim_tree_" .. opt] = val
   end
@@ -63,6 +60,8 @@ M.setup = function()
     { key = "h", cb = tree_cb "close_node" },
     { key = "v", cb = tree_cb "vsplit" },
   }
+
+  return nvim_tree_config
 end
 --
 --

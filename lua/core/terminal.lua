@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin["terminal"] = {
     -- size can be a number or function which is passed the current terminal
@@ -36,11 +37,8 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, terminal = pcall(require, "toggleterm")
-  if not status_ok then
-    print(terminal)
-    return
-  end
+  local terminal = require "toggleterm"
+
   vim.api.nvim_set_keymap(
     "n",
     "<leader>gg",
@@ -49,6 +47,7 @@ M.setup = function()
   )
   lvim.builtin.which_key.mappings["gg"] = "LazyGit"
   terminal.setup(lvim.builtin.terminal)
+  return terminal
 end
 
 local function is_installed(exe)
@@ -56,7 +55,7 @@ local function is_installed(exe)
 end
 
 M._lazygit_toggle = function()
-  if is_installed "lazygit" ~= true then
+  if is_installed "lazygit" == false then
     print "Please install lazygit. Check documentation for more information"
     return
   end

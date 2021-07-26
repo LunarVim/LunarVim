@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.gitsigns = {
     signs = {
@@ -49,11 +50,9 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, gitsigns = pcall(require, "gitsigns")
-  if not status_ok then
-    return
-  end
+  local gitsigns = require "gitsigns"
   gitsigns.setup(lvim.builtin.gitsigns)
+  return gitsigns
 end
 
 return M

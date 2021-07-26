@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.compe = {
     enabled = true,
@@ -36,11 +37,7 @@ end
 M.setup = function()
   vim.g.vsnip_snippet_dir = lvim.vsnip_dir
 
-  local status_ok, compe = pcall(require, "compe")
-  if not status_ok then
-    return
-  end
-
+  local compe = require("compe")
   compe.setup(lvim.builtin.compe)
 
   local t = function(str)
@@ -91,6 +88,8 @@ M.setup = function()
   vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })
+
+  return compe
 end
 
 return M

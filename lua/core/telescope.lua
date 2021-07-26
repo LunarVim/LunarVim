@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
@@ -77,11 +78,9 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, telescope = pcall(require, "telescope")
-  if not status_ok then
-    return
-  end
+  local telescope = require "telescope"
   telescope.setup(lvim.builtin.telescope)
+  return telescope
 end
 
 return M

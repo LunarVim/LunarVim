@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.dap = {
     active = false,
@@ -12,10 +13,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, dap = pcall(require, "dap")
-  if not status_ok then
-    return
-  end
+  local dap = require "dap"
 
   vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
@@ -36,6 +34,8 @@ M.setup = function()
     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
     q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
   }
+
+  return dap
 end
 
 -- TODO put this up there ^^^ call in ftplugin
