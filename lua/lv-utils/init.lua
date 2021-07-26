@@ -71,7 +71,7 @@ local toggle_autoformat = function()
   end
 
   if not lvim.format_on_save then
-    vim.cmd [[if exists('#autoformat#BufWritePost')
+    vim.cmd [[if exists('#autoformat#BufWritePre')
   :autocmd! autoformat
   endif]]
   end
