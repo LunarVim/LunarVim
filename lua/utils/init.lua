@@ -57,7 +57,7 @@ function utils.generate_settings()
 end
 
 -- autoformat
-local toggle_autoformat = function()
+function utils.toggle_autoformat()
   if lvim.format_on_save then
     require("core.autocmds").define_augroups {
       autoformat = {
@@ -71,14 +71,12 @@ local toggle_autoformat = function()
   end
 
   if not lvim.format_on_save then
-    vim.cmd [[if exists('#autoformat#BufWritePre')
-  :autocmd! autoformat
-  endif]]
+    vim.cmd [[
+      if exists('#autoformat#BufWritePre')
+        :autocmd! autoformat
+      endif
+    ]]
   end
-end
-
-function utils.toggle_autoformat()
-  toggle_autoformat()
 end
 
 function utils.reload_lv_config()
@@ -87,7 +85,7 @@ function utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
-  toggle_autoformat()
+  utils.toggle_autoformat()
   plugin_loader:load { plugins, lvim.plugins }
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
@@ -145,16 +143,6 @@ function utils.gsub_args(args)
   end
   return args
 end
-
-vim.cmd [[
-  function! QuickFixToggle()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-      copen
-    else
-      cclose
-    endif
-endfunction
-]]
 
 return utils
 

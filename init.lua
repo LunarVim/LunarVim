@@ -30,6 +30,9 @@ vim.cmd("colorscheme " .. lvim.colorscheme)
 
 local utils = require "utils"
 utils.toggle_autoformat()
+local commands = require "core.commands"
+commands.load(commands.defaults)
+
 require("lsp").setup_handlers()
 
 local null_status_ok, null_ls = pcall(require, "null-ls")
