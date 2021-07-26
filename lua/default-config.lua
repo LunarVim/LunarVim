@@ -707,6 +707,7 @@ lvim.lang = {
       args = {},
       stdin = true,
     },
+    linters = {},
     lsp = {
       provider = "sourcekit",
       setup = {
@@ -737,6 +738,7 @@ lvim.lang = {
       args = { "fmt" },
       stdin = false,
     },
+    linters = {},
     lsp = {
       provider = "terraformls",
       setup = {
