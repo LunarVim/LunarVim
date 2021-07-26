@@ -749,6 +749,22 @@ lvim.lang = {
       },
     },
   },
+  tex = {
+    formatter = {
+      exe = "latexindent",
+      args = {},
+      stdin = false,
+    },
+    linters = { "chketx" },
+    lsp = {
+      provider = "texlab",
+      setup = {
+        cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   typescript = {
     -- @usage can be prettier or eslint
     formatter = {
