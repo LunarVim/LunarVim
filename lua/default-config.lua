@@ -684,6 +684,11 @@ lvim.lang = {
     },
   },
   svelte = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "svelte",
       setup = {
