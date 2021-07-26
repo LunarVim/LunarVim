@@ -226,5 +226,12 @@ else
 	# echo 'export PATH=$HOME/.config/lunarvim/utils/bin:$PATH' >>~/.bashrc
 fi
 
+if [ -e "$HOME/.local/share/applications/lvim.desktop" ]; then
+	echo 'Desktop file already available'
+else
+	# clone config down
+	cp "$HOME/.local/share/lunarvim/lvim/utils/desktop/lvim.desktop" "$HOME/.local/share/applications/lvim.desktop"
+fi
+
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 # echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'
