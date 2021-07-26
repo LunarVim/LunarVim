@@ -769,7 +769,7 @@ lvim.lang = {
       args = {},
       stdin = false,
     },
-    linters = { "chketx" },
+    linters = { "chktex" },
     lsp = {
       provider = "texlab",
       setup = {
