@@ -229,7 +229,6 @@ fi
 if [ -e "$HOME/.local/share/applications/lvim.desktop" ]; then
 	echo 'Desktop file already available'
 else
-	# clone config down
 	cp "$HOME/.local/share/lunarvim/lvim/utils/desktop/lvim.desktop" "$HOME/.local/share/applications/lvim.desktop"
 fi
 
