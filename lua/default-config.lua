@@ -734,8 +734,8 @@ lvim.lang = {
   },
   terraform = {
     formatter = {
-      exe = "terraform",
-      args = { "fmt" },
+      exe = "",
+      args = {},
       stdin = false,
     },
     linters = {},
@@ -816,12 +816,9 @@ lvim.lang = {
   vue = {
     formatter = {
       exe = "prettier",
-      args = {
-        "--stdin-filepath",
-        "${FILEPATH}",
-      },
-      stdin = true,
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "vetur",
       setup = {
@@ -836,9 +833,9 @@ lvim.lang = {
   yaml = {
     formatter = {
       exe = "prettier",
-      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      stdin = true,
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "yamlls",
       setup = {
@@ -853,10 +850,11 @@ lvim.lang = {
   },
   zig = {
     formatter = {
-      exe = "zig",
-      args = { "fmt" },
+      exe = "",
+      args = {},
       stdin = false,
     },
+    linters = {},
     lsp = {
       provider = "zls",
       setup = {
