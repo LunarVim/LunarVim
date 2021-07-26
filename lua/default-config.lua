@@ -482,7 +482,7 @@ lvim.lang = {
             },
             diagnostics = {
               -- Get the language server to recognize the `vim` global
-              globals = { "vim", "O" },
+              globals = { "vim", "lvim" },
             },
             workspace = {
               -- Make the server aware of Neovim runtime files
