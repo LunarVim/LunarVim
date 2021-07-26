@@ -64,7 +64,7 @@ local toggle_autoformat = function()
         {
           "BufWritePost",
           "*",
-          ":silent lua vim.lsp.buf.formatting()",
+          ":silent lua vim.lsp.buf.formatting_sync()",
         },
       },
     }
