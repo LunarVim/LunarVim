@@ -8,14 +8,6 @@ M.config = function()
   lvim.builtin.telescope = {
     active = false,
     defaults = {
-      find_command = {
-        "rg",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-      },
       prompt_prefix = " ",
       selection_caret = " ",
       entry_prefix = "  ",
