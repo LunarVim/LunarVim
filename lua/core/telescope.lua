@@ -8,14 +8,6 @@ M.config = function()
   lvim.builtin.telescope = {
     active = false,
     defaults = {
-      find_command = {
-        "rg",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-      },
       prompt_prefix = " ",
       selection_caret = " ",
       entry_prefix = "  ",
@@ -90,7 +82,6 @@ M.setup = function()
     return
   end
   telescope.setup(lvim.builtin.telescope)
-  vim.api.nvim_set_keymap("n", "<Leader>f", ":Telescope find_files<CR>", { noremap = true, silent = true })
 end
 
 return M

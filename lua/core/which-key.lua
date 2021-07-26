@@ -68,6 +68,29 @@ M.config = function()
       ["e"] = { "<cmd>lua require'core.nvimtree'.toggle_tree()<CR>", "Explorer" },
       ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
       ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
+      b = {
+        name = "Buffers",
+        j = { "<cmd>BufferPick<cr>", "jump to buffer" },
+        f = { "<cmd>Telescope buffers<cr>", "Find buffer" },
+        w = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
+        e = {
+          "<cmd>BufferCloseAllButCurrent<cr>",
+          "close all but current buffer",
+        },
+        h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
+        l = {
+          "<cmd>BufferCloseBuffersRight<cr>",
+          "close all BufferLines to the right",
+        },
+        D = {
+          "<cmd>BufferOrderByDirectory<cr>",
+          "sort BufferLines automatically by directory",
+        },
+        L = {
+          "<cmd>BufferOrderByLanguage<cr>",
+          "sort BufferLines automatically by language",
+        },
+      },
       p = {
         name = "Packer",
         c = { "<cmd>PackerCompile<cr>", "Compile" },

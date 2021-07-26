@@ -53,9 +53,7 @@ lvim = {
     -- use lv-config.lua for this not put here
   },
 
-  autocommands = {
-    { "FileType", "qf", "set nobuflisted" },
-  },
+  autocommands = {},
 }
 
 local schemas = nil
@@ -119,7 +117,12 @@ lvim.lang = {
       },
     },
   },
-  csharp = {
+  cs = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "omnisharp",
       setup = {
@@ -134,9 +137,10 @@ lvim.lang = {
   },
   cmake = {
     formatter = {
-      exe = "clang-format",
+      exe = "clang_format",
       args = {},
     },
+    linters = {},
     lsp = {
       provider = "cmake",
       setup = {
@@ -150,6 +154,11 @@ lvim.lang = {
     },
   },
   clojure = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "clojure_lsp",
       setup = {
@@ -167,6 +176,7 @@ lvim.lang = {
       exe = "prettier",
       args = {},
     },
+    linters = {},
     lsp = {
       provider = "cssls",
       setup = {
@@ -181,6 +191,12 @@ lvim.lang = {
     },
   },
   dart = {
+    formatter = {
+      exe = "dart",
+      args = { "format" },
+      stdin = true,
+    },
+    linters = {},
     lsp = {
       provider = "dartls",
       setup = {
@@ -193,13 +209,13 @@ lvim.lang = {
         capabilities = common_capabilities,
       },
     },
-    formatter = {
-      exe = "dart",
-      args = { "format" },
-      stdin = true,
-    },
   },
   docker = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "dockerls",
       setup = {
@@ -218,6 +234,7 @@ lvim.lang = {
       args = { "format" },
       stdin = true,
     },
+    linters = {},
     lsp = {
       provider = "elixirls",
       setup = {
@@ -230,6 +247,12 @@ lvim.lang = {
     },
   },
   elm = {
+    formatter = {
+      exe = "",
+      args = {},
+      stdin = true,
+    },
+    linters = {},
     lsp = {
       provider = "elmls",
       setup = {
@@ -247,6 +270,11 @@ lvim.lang = {
     },
   },
   erlang = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "erlangls",
       setup = {
@@ -281,6 +309,11 @@ lvim.lang = {
     },
   },
   graphql = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "graphql",
       setup = {
@@ -296,6 +329,10 @@ lvim.lang = {
     },
   },
   html = {
+    formatter = {
+      exe = "prettier",
+      args = {},
+    },
     linters = {
       "tidy",
       -- https://docs.errata.ai/vale/scoping#html
@@ -319,6 +356,7 @@ lvim.lang = {
       exe = "prettier",
       args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
     },
+    linters = {},
     lsp = {
       provider = "jdtls",
       setup = {
@@ -334,6 +372,7 @@ lvim.lang = {
       args = { "-m", "json.tool" },
       stdin = true,
     },
+    linters = {},
     lsp = {
       provider = "jsonls",
       setup = {
@@ -366,6 +405,11 @@ lvim.lang = {
     },
   },
   julia = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "julials",
       setup = {
@@ -382,6 +426,11 @@ lvim.lang = {
     },
   },
   kotlin = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "kotlin_language_server",
       setup = {
@@ -546,15 +595,10 @@ lvim.lang = {
   -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
   r = {
     formatter = {
-      exe = "R",
-      args = {
-        "--slave",
-        "--no-restore",
-        "--no-save",
-        '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
-      },
-      stdin = true,
+      exe = "",
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "r_language_server",
       setup = {
@@ -572,8 +616,7 @@ lvim.lang = {
   ruby = {
     formatter = {
       exe = "rufo",
-      args = { "-x" },
-      stdin = true,
+      args = {},
     },
     linters = { "ruby" },
     lsp = {
@@ -590,16 +633,30 @@ lvim.lang = {
   },
   rust = {
     formatter = {
-      exe = "rustfmt",
-      args = { "--emit=stdout", "--edition=2018" },
-      stdin = true,
+      exe = "",
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "rust_analyzer",
       setup = {
         cmd = {
           DATA_PATH .. "/lspinstall/rust/rust-analyzer",
         },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
+  scala = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = { "" },
+    lsp = {
+      provider = "metals",
+      setup = {
         on_attach = common_on_attach,
         capabilities = common_capabilities,
       },
@@ -626,6 +683,11 @@ lvim.lang = {
     },
   },
   svelte = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "svelte",
       setup = {
@@ -642,8 +704,8 @@ lvim.lang = {
     formatter = {
       exe = "swiftformat",
       args = {},
-      stdin = true,
     },
+    linters = {},
     lsp = {
       provider = "sourcekit",
       setup = {
@@ -670,10 +732,11 @@ lvim.lang = {
   },
   terraform = {
     formatter = {
-      exe = "terraform",
-      args = { "fmt" },
+      exe = "",
+      args = {},
       stdin = false,
     },
+    linters = {},
     lsp = {
       provider = "terraformls",
       setup = {
@@ -751,12 +814,9 @@ lvim.lang = {
   vue = {
     formatter = {
       exe = "prettier",
-      args = {
-        "--stdin-filepath",
-        "${FILEPATH}",
-      },
-      stdin = true,
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "vetur",
       setup = {
@@ -771,9 +831,9 @@ lvim.lang = {
   yaml = {
     formatter = {
       exe = "prettier",
-      args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-      stdin = true,
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "yamlls",
       setup = {
@@ -788,10 +848,11 @@ lvim.lang = {
   },
   zig = {
     formatter = {
-      exe = "zig",
-      args = { "fmt" },
+      exe = "",
+      args = {},
       stdin = false,
     },
+    linters = {},
     lsp = {
       provider = "zls",
       setup = {

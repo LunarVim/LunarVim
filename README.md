@@ -40,6 +40,7 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiar
 * To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
 * Your personal configuration file (`lv-config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
 * If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
+* Many options formerly available in `lv-config.lua` have been renamed.  For details [look here](https://github.com/ChristianChiarulli/LunarVim/wiki/Breaking-changes-in-rolling)
 
 ### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
@@ -105,7 +106,9 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
+-- lvim.autocommands.custom_groups = {
+--   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+-- }
 
 ```
 

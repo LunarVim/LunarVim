@@ -21,7 +21,7 @@ jobs:
 
       - name: Check formatting
         run: |
-          ./utils/stylua --config-path ./utils/.stylua.toml -c .
+          ./utils/stylua --config-path .stylua.toml -c .
   shfmt-check:
     name: "Formatting check with shfmt"
     runs-on: ubuntu-20.04

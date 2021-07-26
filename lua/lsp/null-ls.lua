@@ -14,7 +14,7 @@ local function is_string(t)
 end
 
 local function has_value(tab, val)
-  for index, value in ipairs(tab) do
+  for _, value in ipairs(tab) do
     if value == val then
       return true
     end
@@ -62,10 +62,12 @@ local function setup(filetype, type)
 
   if is_table(executables) then
     for _, exe in pairs(executables) do
-      setup_ls(exe, type)
+      if exe ~= "" then
+        setup_ls(exe, type)
+      end
     end
   end
-  if is_string(executables) then
+  if is_string(executables) and executables ~= "" then
     setup_ls(executables, type)
   end
 end
@@ -74,6 +76,8 @@ end
 function M.setup(filetype)
   setup(filetype, "formatting")
   setup(filetype, "diagnostics")
+  lvim.sources = sources
+  return sources
 end
 
 return M

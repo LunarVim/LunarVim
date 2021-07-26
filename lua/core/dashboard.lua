@@ -73,7 +73,7 @@ M.setup = function()
 
   vim.api.nvim_exec(
     [[
-    let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' plugins']
+    let g:dashboard_custom_footer = ['LunarVim loaded '..packages..' plugins ']
 ]],
     false
   )
@@ -82,7 +82,8 @@ M.setup = function()
 
   -- vim.g.dashboard_session_directory = CACHE_PATH..'/session'
   -- vim.g.dashboard_custom_footer = lvim.dashboard.footer
-  require("lv-utils").define_augroups {
+
+  require("core.autocmds").define_augroups {
     _dashboard = {
       -- seems to be nobuflisted that makes my stuff disapear will do more testing
       {
