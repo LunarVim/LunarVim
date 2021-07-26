@@ -195,10 +195,6 @@ M.setup = function()
     return
   end
 
-  if lvim.builtin.terminal.active then
-    lvim.builtin.which_key.mappings["gg"] = { "<cmd>lua require('core.terminal')._lazygit_toggle()<CR>", "LazyGit" }
-  end
-
   which_key.setup(lvim.builtin.which_key.setup)
 
   local opts = lvim.builtin.which_key.opts

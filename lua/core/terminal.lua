@@ -33,6 +33,7 @@ M.config = function()
       },
     },
   }
+  lvim.builtin.which_key.mappings["gg"] = { "<cmd>lua require('core.terminal')._lazygit_toggle()<CR>", "LazyGit" }
 end
 
 M.setup = function()
