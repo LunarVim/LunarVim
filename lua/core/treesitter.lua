@@ -18,7 +18,7 @@ M.config = function()
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     -- TODO seems to be broken
-    indent = { enable = { "javascriptreact" } },
+    indent = { enable = true },
     autotag = { enable = false },
     textobjects = {
       swap = {

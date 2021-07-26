@@ -32,21 +32,46 @@ return {
   },
 
   -- Autocomplete
+  -- {
+  --   "hrsh7th/nvim-compe",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("core.compe").setup()
+  --     if lvim.builtin.compe.on_config_done then
+  --       lvim.builtin.compe.on_config_done(require "compe")
+  --     end
+  --   end,
+  -- },
+
+  -- Completion & Snippets
   {
     "hrsh7th/nvim-compe",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     config = function()
       require("core.compe").setup()
       if lvim.builtin.compe.on_config_done then
         lvim.builtin.compe.on_config_done(require "compe")
       end
     end,
+    wants = "vim-vsnip",
+    requires = {
+      {
+        "hrsh7th/vim-vsnip",
+        wants = "friendly-snippets",
+        event = "InsertCharPre",
+      },
+      {
+        "rafamadriz/friendly-snippets",
+        event = "InsertCharPre",
+      },
+    },
   },
 
   -- Autopairs
   {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
+    after = "nvim-compe",
     config = function()
       require "core.autopairs"
       if lvim.builtin.autopairs.on_config_done then
@@ -54,11 +79,6 @@ return {
       end
     end,
   },
-
-  -- Snippets
-
-  { "hrsh7th/vim-vsnip", event = "InsertEnter" },
-  { "rafamadriz/friendly-snippets", event = "InsertEnter" },
 
   -- Treesitter
   {

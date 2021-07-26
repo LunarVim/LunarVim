@@ -330,7 +330,7 @@ lvim.lang = {
   },
   html = {
     formatter = {
-      exe = "",
+      exe = "prettier",
       args = {},
     },
     linters = {
