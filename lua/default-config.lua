@@ -649,6 +649,20 @@ lvim.lang = {
       },
     },
   },
+  scala = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = { "" },
+    lsp = {
+      provider = "metals",
+      setup = {
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   sh = {
     -- @usage can be 'shfmt'
     formatter = {
