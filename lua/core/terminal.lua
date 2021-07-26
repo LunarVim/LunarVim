@@ -32,6 +32,11 @@ M.config = function()
         background = "Normal",
       },
     },
+    -- Add executables on the lv-config file
+    -- { exec, keymap, name}
+    -- lvim.builtin.terminal.execs = {{}} to overwrite
+    -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
+    execs = { { "lazygit", "gg", "LazyGit" } },
   }
 end
 
@@ -41,13 +46,9 @@ M.setup = function()
     print(terminal)
     return
   end
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>gg",
-    "<cmd>lua require('core.terminal')._lazygit_toggle()<CR>",
-    { noremap = true, silent = true }
-  )
-  lvim.builtin.which_key.mappings["gg"] = "LazyGit"
+  for _, exec in pairs(lvim.builtin.terminal.execs) do
+    require("core.terminal").add_exec(exec[1], exec[2], exec[3])
+  end
   terminal.setup(lvim.builtin.terminal)
 end
 
@@ -55,14 +56,36 @@ local function is_installed(exe)
   return vim.fn.executable(exe) == 1
 end
 
-M._lazygit_toggle = function()
-  if is_installed "lazygit" ~= true then
-    print "Please install lazygit. Check documentation for more information"
+M.add_exec = function(exec, keymap, name)
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>" .. keymap,
+    "<cmd>lua require('core.terminal')._exec_toggle('" .. exec .. "')<CR>",
+    { noremap = true, silent = true }
+  )
+  lvim.builtin.which_key.mappings[keymap] = name
+end
+
+M._split = function(inputstr, sep)
+  if sep == nil then
+    sep = "%s"
+  end
+  local t = {}
+  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+    table.insert(t, str)
+  end
+  return t
+end
+
+M._exec_toggle = function(exec)
+  local binary = M._split(exec)[1]
+  if is_installed(binary) ~= true then
+    print("Please install executable " .. binary .. ". Check documentation for more information")
     return
   end
   local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
-  lazygit:toggle()
+  local exec_term = Terminal:new { cmd = exec, hidden = true }
+  exec_term:toggle()
 end
 
 return M
