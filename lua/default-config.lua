@@ -426,6 +426,11 @@ lvim.lang = {
     },
   },
   kotlin = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
     lsp = {
       provider = "kotlin_language_server",
       setup = {
@@ -590,15 +595,10 @@ lvim.lang = {
   -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
   r = {
     formatter = {
-      exe = "R",
-      args = {
-        "--slave",
-        "--no-restore",
-        "--no-save",
-        '-e "formatR::tidy_source(text=readr::read_file(file(\\"stdin\\")), arrow=FALSE)"',
-      },
-      stdin = true,
+      exe = "",
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "r_language_server",
       setup = {
@@ -616,8 +616,7 @@ lvim.lang = {
   ruby = {
     formatter = {
       exe = "rufo",
-      args = { "-x" },
-      stdin = true,
+      args = {},
     },
     linters = { "ruby" },
     lsp = {
@@ -634,10 +633,10 @@ lvim.lang = {
   },
   rust = {
     formatter = {
-      exe = "rustfmt",
-      args = { "--emit=stdout", "--edition=2018" },
-      stdin = true,
+      exe = "",
+      args = {},
     },
+    linters = {},
     lsp = {
       provider = "rust_analyzer",
       setup = {
@@ -705,7 +704,6 @@ lvim.lang = {
     formatter = {
       exe = "swiftformat",
       args = {},
-      stdin = true,
     },
     linters = {},
     lsp = {
