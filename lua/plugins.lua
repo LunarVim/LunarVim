@@ -31,18 +31,6 @@ return {
     end,
   },
 
-  -- Autocomplete
-  -- {
-  --   "hrsh7th/nvim-compe",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("core.compe").setup()
-  --     if lvim.builtin.compe.on_config_done then
-  --       lvim.builtin.compe.on_config_done(require "compe")
-  --     end
-  --   end,
-  -- },
-
   -- Completion & Snippets
   {
     "hrsh7th/nvim-compe",
