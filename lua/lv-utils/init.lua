@@ -62,7 +62,7 @@ local toggle_autoformat = function()
     require("core.autocmds").define_augroups {
       autoformat = {
         {
-          "BufWritePost",
+          "BufWritePre",
           "*",
           ":silent lua vim.lsp.buf.formatting_sync()",
         },
