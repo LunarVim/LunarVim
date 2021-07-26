@@ -1,8 +1,8 @@
 {
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
-  "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
-  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/vimscript/nv-vscode/init.vim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "$HOME/.config/nvim/utils/lv-vscode/init.vim",
+  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/utils/lv-vscode/init.vim",
   "whichkey.sortOrder": "alphabetically",
   "whichkey.delay": 0,
   "whichkey.bindings": [
