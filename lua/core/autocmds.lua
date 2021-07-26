@@ -54,6 +54,10 @@ lvim.autocommands = {
   _markdown = {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },
+    { "FileType", "markdown", "map <Tab> <Tab>" },
+    { "FileType", "markdown", "map <S-Tab> <S-Tab>" },
+    { "FileType", "markdown", "imap <Tab> <Tab>" },
+    { "FileType", "markdown", "imap <S-Tab> <S-Tab>" },
   },
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
