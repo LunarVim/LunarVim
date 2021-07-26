@@ -11,7 +11,7 @@ M.load_options = function()
     completeopt = { "menuone", "noselect" },
     conceallevel = 0, -- so that `` is visible in markdown files
     fileencoding = "utf-8", -- the encoding written to a file
-    foldmethod = "manual", -- folding, set to "expr" for treesitter based foloding
+    foldmethod = "manual", -- folding, set to "expr" for treesitter based folding
     foldexpr = "", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
     guifont = "monospace:h17", -- the font used in graphical neovim applications
     hidden = true, -- required to keep multiple buffers and open multiple buffers
@@ -31,7 +31,7 @@ M.load_options = function()
     title = true, -- set the title of window to the value of the titlestring
     -- opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
     undodir = CACHE_PATH .. "/undo", -- set an undo directory
-    undofile = true, -- enable persisten undo
+    undofile = true, -- enable persistent undo
     updatetime = 300, -- faster completion
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     expandtab = true, -- convert tabs to spaces
