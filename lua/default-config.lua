@@ -287,6 +287,20 @@ lvim.lang = {
     },
   },
   emmet = { active = false },
+  fish = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "",
+      setup = {
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   go = {
     formatter = {
       exe = "gofmt",

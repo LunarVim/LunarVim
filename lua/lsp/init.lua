@@ -337,6 +337,10 @@ function lsp_config.setup(lang)
     end
   end
 
+  if provider == "" or provider == nil then
+    return
+  end
+
   require("lspconfig")[provider].setup(lang_server.setup)
 end
 
