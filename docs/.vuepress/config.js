@@ -17,6 +17,10 @@ module.exports = {
         link: "/",
       },
       {
+        text: "Configuration",
+        link: "/configuration/",
+      },
+      {
         text: "Languages",
         link: "/languages/",
       },
@@ -45,6 +49,7 @@ module.exports = {
     // editLinkPattern: ":repo/-/edit/:branch/:path",
     sidebar: {
       "/": getSideBar("/", "Getting Started", true),
+      "/configuration/": getSideBar("configuration", "Configuration"),
       "/languages/": getSideBar("languages", "Supported Languages", true),
       "/plugins/": getSideBar("plugins", "Plugins", true),
       "/dev/": getSideBar("dev", "For Developers", true),
