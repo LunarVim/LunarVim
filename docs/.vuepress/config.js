@@ -21,8 +21,8 @@ module.exports = {
         link: "/languages/",
       },
       {
-        text: "Modules",
-        link: "/modules/",
+        text: "Plugins",
+        link: "/plugins/",
       },
       {
         text: "For Devs",
@@ -46,7 +46,7 @@ module.exports = {
     sidebar: {
       "/": getSideBar("/", "Getting Started", true),
       "/languages/": getSideBar("languages", "Supported Languages", true),
-      "/modules/": getSideBar("modules", "Lunar Modules", true),
+      "/plugins/": getSideBar("plugins", "Plugins", true),
       "/dev/": getSideBar("dev", "For Developers", true),
       "/community/": getSideBar("community", "Community", true),
       "/sponsors/": getSideBar("sponsors", "Sponsors", true),
