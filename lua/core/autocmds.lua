@@ -54,12 +54,9 @@ lvim.autocommands = {
   _markdown = {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },
-    { "FileType", "markdown", "imap <Tab> <Tab>" },
-    { "FileType", "markdown", "imap <S-Tab> <S-Tab>" },
-    { "FileType", "md", "setlocal wrap" },
-    { "FileType", "md", "setlocal spell" },
-    { "FileType", "md", "imap <Tab> <Tab>" },
-    { "FileType", "md", "imap <S-Tab> <S-Tab>" },
+  },
+  _tab_bindings = {
+    { "FileType", "*", "lua require'core.compe'.set_tab_keybindings()" },
   },
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
