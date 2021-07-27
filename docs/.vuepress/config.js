@@ -9,7 +9,7 @@ module.exports = {
   head: [["link", { rel: "icon", href: "/assets/lunarvim_logo.png" }]],
 
   themeConfig: {
-    home: "/",
+    home: "/languages",
     logo: "/assets/lunarvim_logo.png",
     navbar: [
       {
