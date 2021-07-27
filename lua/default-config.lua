@@ -538,6 +538,20 @@ lvim.lang = {
       },
     },
   },
+  puppet = {
+    formatter = {
+      exe = "",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "puppet",
+      setup = {
+        on_attach = require("lsp").common_on_attach,
+        capabilities = require("lsp").common_capabilities(),
+      },
+    },
+  },
   javascript = {
     -- @usage can be prettier or eslint
     formatter = {
