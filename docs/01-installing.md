@@ -1,4 +1,4 @@
-# Installing
+# Install
 
 There are a few ways to install LunarVim
 
@@ -18,7 +18,7 @@ All the new features with all the new bugs:
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
 ```
 
-## If the install goes wrong
+## Uninstall
 
 You can remove LunarVim entirely by running the following commands: 
 

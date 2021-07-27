@@ -4,7 +4,7 @@ After installing you should be able to start LunarVim with the `lvim` command
 
 **NOTE:** `<TAB>` indicates that you should press the `<TAB>` key and cycle through your options 
 
-To install syntax highlighting and tressitter support for your language:
+To install syntax highlighting and treesitter support for your language:
 
 ```vim
 :TSInstall <TAB>
