@@ -77,7 +77,7 @@ M.toggle_tree = function()
       require("bufferline.state").set_offset(0)
     end
   else
-    if package.loaded["bufferline.state"] then
+    if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
       -- require'bufferline.state'.set_offset(31, 'File Explorer')
       require("bufferline.state").set_offset(31, "")
     end
