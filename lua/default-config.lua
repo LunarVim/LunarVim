@@ -128,7 +128,9 @@ lvim.lang = {
       setup = {
         cmd = {
           DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
-          "--stdio",
+          "--languageserver",
+          "--hostPID",
+          tostring(vim.fn.getpid()),
         },
         on_attach = common_on_attach,
         capabilities = common_capabilities,
