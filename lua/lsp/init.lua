@@ -2,32 +2,47 @@ local M = {}
 local service = require "lsp.service"
 
 M.config = function()
-  local constant = require "lsp.constant"
-  local utils = require "utils"
-
-  for _, sign in ipairs(constant.signs) do
+  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
 
-  -- symbols for autocomplete
-  vim.lsp.protocol.CompletionItemKind = constant.completion_item_kind
+  -- local opts = { border = "single" }
+  -- TODO revisit this
+  -- local border = {
+  --   { "🭽", "FloatBorder" },
+  --   { "▔", "FloatBorder" },
+  --   { "🭾", "FloatBorder" },
+  --   { "▕", "FloatBorder" },
+  --   { "🭿", "FloatBorder" },
+  --   { "▁", "FloatBorder" },
+  --   { "🭼", "FloatBorder" },
+  --   { "▏", "FloatBorder" },
+  -- }
 
-  if lvim.lsp.default_keybinds then
-    utils.add_keymap_normal_mode({ noremap = true, silent = true }, constant.mappings.normal_mode)
-    -- scroll down hover doc or scroll in definition preview
-    -- scroll up hover doc
-    vim.cmd 'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()'
-  end
+  -- My font didn't like this :/
+  -- vim.api.nvim_set_keymap(
+  --   "n",
+  --   "gl",
+  --   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = { { "🭽", "FloatBorder" }, { "▔", "FloatBorder" }, { "🭾", "FloatBorder" }, { "▕", "FloatBorder" }, { "🭿", "FloatBorder" }, { "▁", "FloatBorder" }, { "🭼", "FloatBorder" }, { "▏", "FloatBorder" }, } })<CR>',
+  --   { noremap = true, silent = true }
+  -- )
+
+  -- symbols for autocomplete
+  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
   -- Java
   -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
-  require("core.autocmds").define_augroups(constant.augroups)
+  require("core.autocmds").define_augroups {
+    _general_lsp = {
+      { "FileType", "lspinfo", "nnoremap <silent> <buffer> q :q<CR>" },
+    },
+  }
 
   -- Set Default Prefix.
   -- Note: You can set a prefix per lsp server in the lv-globals.lua file
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = lvim.lsp.diagnostics.virtual_text,
-    signs = lvim.lsp.diagnostics.signs,
+    signs = lvim.lsp.diagnostics.signs.active,
     underline = lvim.lsp.document_highlight,
   })
 
