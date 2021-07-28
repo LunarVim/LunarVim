@@ -62,7 +62,7 @@ M.preview_location_callback = function(_, method, result)
   end
 end
 
-M.PeekDefinition = function()
+M.peek_definition = function()
   if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
     vim.api.nvim_set_current_win(M.floating_win)
   else
@@ -71,7 +71,7 @@ M.PeekDefinition = function()
   end
 end
 
-M.PeekTypeDefinition = function()
+M.peek_type_definition = function()
   if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
     vim.api.nvim_set_current_win(M.floating_win)
   else
@@ -80,7 +80,7 @@ M.PeekTypeDefinition = function()
   end
 end
 
-M.PeekImplementation = function()
+M.peek_implementation = function()
   if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
     vim.api.nvim_set_current_win(M.floating_win)
   else
