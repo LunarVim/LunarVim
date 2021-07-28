@@ -6,6 +6,11 @@ function lsp_config.config()
   require("lsp.handlers").setup()
   require("lsp.signs").setup()
   require("lsp.keybinds").setup()
+  require("core.autocmds").define_augroups {
+    _general_lsp = {
+      { "FileType", "lspinfo", "nnoremap <silent> <buffer> q :q<CR>" },
+    },
+  }
 end
 
 local function no_formatter_on_attach(client, bufnr)
@@ -15,25 +20,6 @@ local function no_formatter_on_attach(client, bufnr)
   require("lsp.utils").lsp_highlight_document(client)
   client.resolved_capabilities.document_formatting = false
 end
-
-function lsp_config.common_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  }
-  return capabilities
-end
-
-require("core.autocmds").define_augroups {
-  _general_lsp = {
-    { "FileType", "lspinfo", "nnoremap <silent> <buffer> q :q<CR>" },
-  },
-}
 
 function lsp_config.setup(lang)
   local lang_server = lvim.lang[lang].lsp

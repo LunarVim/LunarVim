@@ -57,8 +57,8 @@ lvim = {
 }
 
 local schemas = nil
-local common_on_attach = require("lsp").common_on_attach
-local common_capabilities = require("lsp").common_capabilities()
+local common_on_attach = require("lsp.utils").common_on_attach
+local common_capabilities = require("lsp.utils").common_capabilities()
 local status_ok, jsonls_settings = pcall(require, "nlspsettings.jsonls")
 if status_ok then
   schemas = jsonls_settings.get_default_schemas()
@@ -640,8 +640,8 @@ lvim.lang = {
     lsp = {
       provider = "puppet",
       setup = {
-        on_attach = require("lsp").common_on_attach,
-        capabilities = require("lsp").common_capabilities(),
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
       },
     },
   },
@@ -662,8 +662,8 @@ lvim.lang = {
           DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
           "--stdio",
         },
-        on_attach = require("lsp").common_on_attach,
-        capabilities = require("lsp").common_capabilities(),
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
       },
     },
   },
@@ -684,8 +684,8 @@ lvim.lang = {
           DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
           "--stdio",
         },
-        on_attach = require("lsp").common_on_attach,
-        capabilities = require("lsp").common_capabilities(),
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
       },
     },
   },
@@ -903,8 +903,8 @@ lvim.lang = {
           DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
           "--stdio",
         },
-        on_attach = require("lsp").common_on_attach,
-        capabilities = require("lsp").common_capabilities(),
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
       },
     },
   },
@@ -925,8 +925,8 @@ lvim.lang = {
           DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
           "--stdio",
         },
-        on_attach = require("lsp").common_on_attach,
-        capabilities = require("lsp").common_capabilities(),
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
       },
     },
   },
