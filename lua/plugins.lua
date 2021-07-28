@@ -150,7 +150,7 @@ return {
     config = function()
       vim.g.rooter_silent_chdir = 1
       vim.g.rooter_patterns = {
-        ".git",
+        ".git/",
         "_darcs",
         ".hg",
         ".bzr",
