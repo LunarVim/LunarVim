@@ -1,3 +1,4 @@
+local utils = require "utils"
 local lsp_config = {}
 
 function lsp_config.config()
@@ -34,24 +35,6 @@ require("core.autocmds").define_augroups {
   },
 }
 
-local function is_table(t)
-  return type(t) == "table"
-end
-
-local function is_string(t)
-  return type(t) == "string"
-end
-
-local function has_value(tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
-    end
-  end
-
-  return false
-end
-
 function lsp_config.setup(lang)
   local lang_server = lvim.lang[lang].lsp
   local provider = lang_server.provider
@@ -61,13 +44,13 @@ function lsp_config.setup(lang)
 
   local overrides = lvim.lsp.override
 
-  if is_table(overrides) then
-    if has_value(overrides, lang) then
+  if utils.is_table(overrides) then
+    if utils.has_value(overrides, lang) then
       return
     end
   end
 
-  if is_string(overrides) then
+  if utils.is_string(overrides) then
     if overrides == lang then
       return
     end
@@ -78,13 +61,13 @@ function lsp_config.setup(lang)
     local method = source.method
     local format_method = "NULL_LS_FORMATTING"
 
-    if is_table(method) then
-      if has_value(method, format_method) then
+    if utils.is_table(method) then
+      if utils.has_value(method, format_method) then
         lang_server.setup.on_attach = no_formatter_on_attach
       end
     end
 
-    if is_string(method) then
+    if utils.is_string(method) then
       if method == format_method then
         lang_server.setup.on_attach = no_formatter_on_attach
       end

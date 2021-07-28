@@ -102,6 +102,24 @@ function utils.check_lsp_client_active(name)
   return false
 end
 
+function utils.is_table(t)
+  return type(t) == "table"
+end
+
+function utils.is_string(t)
+  return type(t) == "string"
+end
+
+function utils.has_value(tab, val)
+  for _, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 function utils.add_keymap(mode, opts, keymaps)
   for _, keymap in ipairs(keymaps) do
     vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
