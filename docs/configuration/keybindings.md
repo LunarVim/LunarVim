@@ -40,7 +40,7 @@ Define a table of mappings
    {'[d', '<PageUp>'},
    {']d', '<PageDown>'},
 
-   Navigate buffers
+-- Navigate buffers
    {'<Tab>', ':bnext<CR>'},
    {'<S-Tab>', ':bprevious<CR>'},
  }
