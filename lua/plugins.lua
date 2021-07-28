@@ -149,16 +149,6 @@ return {
     "airblade/vim-rooter",
     config = function()
       vim.g.rooter_silent_chdir = 1
-      vim.g.rooter_patterns = {
-        ".git/",
-        "_darcs",
-        ".hg",
-        ".bzr",
-        ".svn",
-        "Makefile",
-        "package.json",
-        "package-lock.json",
-      }
       if lvim.builtin.rooter.on_config_done then
         lvim.builtin.rooter.on_config_done()
       end
