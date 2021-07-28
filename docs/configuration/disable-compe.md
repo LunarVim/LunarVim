@@ -5,3 +5,5 @@ When writing code pressing `TAB` triggers autocomplete.  But in simple text file
 lvim.builtin.compe.exclude_filetypes = { "md", "markdown", "mdown", "mkd", "mkdn", "mdwn", "text", "txt" },
 ```
 
+`Control`+`space` will still trigger completion. This is useful for autocompleting emoji in text files. (type `:` and hit `control`+`space` or `TAB` to cycle through emoji)
+
