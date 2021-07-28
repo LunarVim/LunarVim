@@ -119,7 +119,7 @@ lvim.lang = {
   },
   cs = {
     formatter = {
-      exe = "",
+      exe = "clang_format",
       args = {},
     },
     linters = {},
@@ -139,7 +139,7 @@ lvim.lang = {
   },
   cmake = {
     formatter = {
-      exe = "clang_format",
+      exe = "cmake_format",
       args = {},
     },
     linters = {},
@@ -194,8 +194,8 @@ lvim.lang = {
   },
   dart = {
     formatter = {
-      exe = "dart",
-      args = { "format" },
+      exe = "dart_format",
+      args = {},
       stdin = true,
     },
     linters = {},
@@ -233,7 +233,7 @@ lvim.lang = {
   elixir = {
     formatter = {
       exe = "mix",
-      args = { "format" },
+      args = {},
       stdin = true,
     },
     linters = {},
@@ -250,7 +250,7 @@ lvim.lang = {
   },
   elm = {
     formatter = {
-      exe = "",
+      exe = "elm_format",
       args = {},
       stdin = true,
     },
@@ -273,7 +273,7 @@ lvim.lang = {
   },
   erlang = {
     formatter = {
-      exe = "",
+      exe = "erlfmt",
       args = {},
     },
     linters = {},
@@ -291,7 +291,7 @@ lvim.lang = {
   emmet = { active = false },
   fish = {
     formatter = {
-      exe = "",
+      exe = "fish_indent",
       args = {},
     },
     linters = {},
@@ -384,8 +384,8 @@ lvim.lang = {
   },
   json = {
     formatter = {
-      exe = "python",
-      args = { "-m", "json.tool" },
+      exe = "json_tool",
+      args = {},
       stdin = true,
     },
     linters = {},
@@ -518,7 +518,7 @@ lvim.lang = {
   php = {
     formatter = {
       exe = "phpcbf",
-      args = { "--standard=PSR12", vim.api.nvim_buf_get_name(0) },
+      args = {},
     },
     linters = {},
     lsp = {
@@ -625,7 +625,7 @@ lvim.lang = {
   -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
   r = {
     formatter = {
-      exe = "",
+      exe = "format_r",
       args = {},
     },
     linters = {},
@@ -663,7 +663,7 @@ lvim.lang = {
   },
   rust = {
     formatter = {
-      exe = "",
+      exe = "rustfmt",
       args = {},
     },
     linters = {},
@@ -680,7 +680,7 @@ lvim.lang = {
   },
   scala = {
     formatter = {
-      exe = "",
+      exe = "scalafmt",
       args = {},
     },
     linters = { "" },
@@ -762,9 +762,8 @@ lvim.lang = {
   },
   terraform = {
     formatter = {
-      exe = "",
+      exe = "terraform_fmt",
       args = {},
-      stdin = false,
     },
     linters = {},
     lsp = {

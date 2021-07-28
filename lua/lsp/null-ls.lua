@@ -43,7 +43,7 @@ local function setup_ls(exe, type)
       end
     end
   else
-    if vim.fn.executable(exe) == 1 then
+    if null_ls.builtins[type][exe] ~= nil and vim.fn.executable(null_ls.builtins[type][exe]._opts.command) then
       table.insert(sources, null_ls.builtins[type][exe])
     end
   end
