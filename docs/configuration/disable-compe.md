@@ -7,3 +7,10 @@ lvim.builtin.compe.exclude_filetypes = { "md", "markdown", "mdown", "mkd", "mkdn
 
 `Control`+`space` will still trigger completion. This is useful for autocompleting emoji in text files. (type `:` and hit `control`+`space` or `TAB` to cycle through emoji)
 
+
+Compe-enabled autocomplete was not removed from markdown and text files, just the `TAB` keymap.  To trigger autocomplete press `Control`+`Space`.  
+
+Add this to your lv-config.lua to opt out entirely.  
+```
+lvim.builtin.compe.exclude_filetypes = {  }
+```
