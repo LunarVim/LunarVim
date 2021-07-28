@@ -1,4 +1,5 @@
 local utils = require "utils"
+local service = require "lsp.service"
 local lsp_config = {}
 
 function lsp_config.config()
@@ -13,18 +14,10 @@ function lsp_config.config()
   }
 end
 
-local function no_formatter_on_attach(client, bufnr)
-  if lvim.lsp.on_attach_callback then
-    lvim.lsp.on_attach_callback(client, bufnr)
-  end
-  require("lsp.utils").lsp_highlight_document(client)
-  client.resolved_capabilities.document_formatting = false
-end
-
 function lsp_config.setup(lang)
   local lang_server = lvim.lang[lang].lsp
   local provider = lang_server.provider
-  if require("utils").check_lsp_client_active(provider) then
+  if utils.check_lsp_client_active(provider) then
     return
   end
 
@@ -49,13 +42,13 @@ function lsp_config.setup(lang)
 
     if utils.is_table(method) then
       if utils.has_value(method, format_method) then
-        lang_server.setup.on_attach = no_formatter_on_attach
+        lang_server.setup.on_attach = service.no_formatter_on_attach
       end
     end
 
     if utils.is_string(method) then
       if method == format_method then
-        lang_server.setup.on_attach = no_formatter_on_attach
+        lang_server.setup.on_attach = service.no_formatter_on_attach
       end
     end
   end

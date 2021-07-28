@@ -98,6 +98,14 @@ function M.common_on_attach(client, bufnr)
   lsp_highlight_document(client)
 end
 
+function M.no_formatter_on_attach(client, bufnr)
+  if lvim.lsp.on_attach_callback then
+    lvim.lsp.on_attach_callback(client, bufnr)
+  end
+  lsp_highlight_document(client)
+  client.resolved_capabilities.document_formatting = false
+end
+
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
