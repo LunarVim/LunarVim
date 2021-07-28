@@ -1,8 +1,10 @@
 local utils = require "utils"
 local service = require "lsp.service"
-local lsp_config = {}
+local lspconfig = require "lspconfig"
+local null_ls = require "lsp.null-ls"
+local M = {}
 
-function lsp_config.config()
+function M.config()
   require("lsp.kind").setup()
   require("lsp.handlers").setup()
   require("lsp.signs").setup()
@@ -14,7 +16,7 @@ function lsp_config.config()
   }
 end
 
-function lsp_config.setup(lang)
+function M.setup(lang)
   local lang_server = lvim.lang[lang].lsp
   local provider = lang_server.provider
   if utils.check_lsp_client_active(provider) then
@@ -34,7 +36,7 @@ function lsp_config.setup(lang)
       return
     end
   end
-  local sources = require("lsp.null-ls").setup(lang)
+  local sources = null_ls.setup(lang)
 
   for _, source in pairs(sources) do
     local method = source.method
@@ -57,7 +59,7 @@ function lsp_config.setup(lang)
     return
   end
 
-  require("lspconfig")[provider].setup(lang_server.setup)
+  lspconfig[provider].setup(lang_server.setup)
 end
 
-return lsp_config
+return M
