@@ -3,6 +3,7 @@ To set up autocommands use `lvim.autocommands.custom_groups.  Autocommands are d
 
 To view help on autocommands: `h: autocmd`
 
+Here is a [list of events](https://tech.saigonist.com/b/code/list-all-vim-script-events.html)
 ```lua
 lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
