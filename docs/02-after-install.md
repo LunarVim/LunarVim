@@ -25,5 +25,5 @@ To create a configuration file for your language server:
 **NOTE:** This will create a directory in `~/.config/lvim/lsp-settings` where you will be able to configure your language server, make sure to install `jsonls` for autocompletion.
 
 ## Nerd Fonts
-Installing a [nerd font](https://www.nerdfonts.com/) is recommended. Otherwise some symbols won't be rendered properly. For more information go to the [ configuration section ](./configuration/01-lv-config.md#nerd-fonts).   
+Installing a [nerd font](https://www.nerdfonts.com/) is recommended. Otherwise some symbols won't be rendered properly. For more information go to the [ configuration section ](./configuration/nerd-fonts.md#nerd-fonts).   
 
