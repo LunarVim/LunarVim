@@ -41,18 +41,27 @@ return {
         lvim.builtin.compe.on_config_done(require "compe")
       end
     end,
-    wants = "vim-vsnip",
-    requires = {
-      {
-        "hrsh7th/vim-vsnip",
-        wants = "friendly-snippets",
-        event = "InsertCharPre",
-      },
-      {
-        "rafamadriz/friendly-snippets",
-        event = "InsertCharPre",
-      },
-    },
+    -- wants = "vim-vsnip",
+    -- requires = {
+    -- {
+    --   "hrsh7th/vim-vsnip",
+    --   wants = "friendly-snippets",
+    --   event = "InsertCharPre",
+    -- },
+    -- {
+    --   "rafamadriz/friendly-snippets",
+    --   event = "InsertCharPre",
+    -- },
+    -- },
+  },
+  {
+    "hrsh7th/vim-vsnip",
+    -- wants = "friendly-snippets",
+    event = "InsertCharPre",
+  },
+  {
+    "rafamadriz/friendly-snippets",
+    event = "InsertCharPre",
   },
 
   -- Autopairs
