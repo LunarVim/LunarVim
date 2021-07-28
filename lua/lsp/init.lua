@@ -40,68 +40,38 @@ M.config = function()
   })
 end
 
-local function is_table(t)
-  return type(t) == "table"
-end
-
-local function is_string(t)
-  return type(t) == "string"
-end
-
-local function has_value(tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
-    end
-  end
-
-  return false
-end
-
 M.setup = function(lang)
-  local lang_server = lvim.lang[lang].lsp
-  local provider = lang_server.provider
-  if require("utils").check_lsp_client_active(provider) then
+  local lsp = lvim.lang[lang].lsp
+  if require("utils").check_lsp_client_active(lsp.provider) then
     return
   end
 
   local overrides = lvim.lsp.override
-
-  if is_table(overrides) then
-    if has_value(overrides, lang) then
-      return
-    end
-  end
-
-  if is_string(overrides) then
-    if overrides == lang then
-      return
-    end
-  end
-  local sources = require("lsp.null-ls").setup(lang)
-
-  for _, source in pairs(sources) do
-    local method = source.method
-    local format_method = "NULL_LS_FORMATTING"
-
-    if is_table(method) then
-      if has_value(method, format_method) then
-        lang_server.setup.on_attach = service.no_formatter_on_attach
-      end
-    end
-
-    if is_string(method) then
-      if method == format_method then
-        lang_server.setup.on_attach = service.no_formatter_on_attach
-      end
-    end
-  end
-
-  if provider == "" or provider == nil then
+  if
+    (type(overrides) == "table" and vim.tbl_contains(overrides, lang))
+    or (type(overrides) == "string" and overrides == lang)
+  then
     return
   end
 
-  require("lspconfig")[provider].setup(lang_server.setup)
+  local null_ls = require "null-ls"
+  local sources = require("lsp.null-ls").setup(lang)
+  for _, source in pairs(sources) do
+    local method = source.method
+    if
+      (type(method) == "table" and vim.tbl_contains(method, null_ls.methods.FORMATTING))
+      or (type(method) == "string" and method == null_ls.methods.FORMATTING)
+    then
+      lsp.setup.on_attach = service.no_formatter_on_attach
+    end
+  end
+
+  local lspconfig = require "lspconfig"
+  if not lspconfig[lsp.provider] then
+    return
+  end
+
+  lspconfig[lsp.provider].setup(lsp.setup)
 end
 
 return M
