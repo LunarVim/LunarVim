@@ -35,7 +35,7 @@ utils.toggle_autoformat()
 local commands = require "core.commands"
 commands.load(commands.defaults)
 
-require("lsp").setup_handlers()
+require("lsp").config()
 
 local null_status_ok, null_ls = pcall(require, "null-ls")
 if null_status_ok then
