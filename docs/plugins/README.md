@@ -10,15 +10,15 @@ After adding the following to your `lv-config.lua` just `:w` and the plugins wil
 
 ```lua
 lvim.plugins = {
-    {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"}, 
-    {
-        "ray-x/lsp_signature.nvim",
-        config = function() 
-          require"lsp_signature".on_attach() 
-        end,
-        event = "InsertEnter"
-    },
+  {"lunarvim/colorschemes"},
+  {"folke/tokyonight.nvim"}, 
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function() 
+      require"lsp_signature".on_attach() 
+      end,
+    event = "InsertEnter"
+  },
 }
 ```
 
@@ -37,4 +37,4 @@ To learn how to extend the configuration of these core plugins [go here](./exten
 
 # Removing Plugins
 
-Removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system.  Any plugins left in the `start` directory will still autostart.  To remove them completely, run `:PackerClean`
+  Removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system.  Any plugins left in the `start` directory will still autostart.  To remove them completely, run `:PackerClean`
