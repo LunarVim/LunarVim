@@ -851,7 +851,7 @@ lvim.lang = {
       "typescriptreact",
     },
   },
-  terraform = {
+  hcl = {
     formatter = {
       exe = "terraform_fmt",
       args = {},
@@ -860,6 +860,7 @@ lvim.lang = {
     lsp = {
       provider = "terraformls",
       setup = {
+        filetypes = { "terraform", "hcl", "tf" },
         cmd = {
           DATA_PATH .. "/lspinstall/terraform/terraform-ls",
           "serve",
