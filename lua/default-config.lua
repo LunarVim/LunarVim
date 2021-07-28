@@ -66,6 +66,32 @@ end
 
 -- TODO move all of this into lang specific files, only require when using
 lvim.lang = {
+  asm = {
+    formatter = {
+      exe = "asmfmt",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "",
+      setup = {},
+    },
+  },
+  beancount = {
+    formatter = {
+      exe = "bean_format",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "beancount",
+      setup = {
+        cmd = { "beancount-langserver" },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   c = {
     formatter = {
       exe = "clang_format",
@@ -112,6 +138,21 @@ lvim.lang = {
           "--clang-tidy",
           "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
         },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
+  crystal = {
+    formatter = {
+      exe = "crystal_format",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "crystalline",
+      setup = {
+        cmd = { "crystalline" },
         on_attach = common_on_attach,
         capabilities = common_capabilities,
       },
@@ -187,6 +228,21 @@ lvim.lang = {
           DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
           "--stdio",
         },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
+  d = {
+    formatter = {
+      exe = "dfmt",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "serve_d",
+      setup = {
+        cmd = { "serve-d" },
         on_attach = common_on_attach,
         capabilities = common_capabilities,
       },
@@ -512,6 +568,41 @@ lvim.lang = {
             },
           },
         },
+      },
+    },
+  },
+  nginx = {
+    formatter = {
+      exe = "nginx_beautifier",
+      args = {
+        provider = "",
+        setup = {},
+      },
+    },
+    linters = {},
+    lsp = {},
+  },
+  perl = {
+    formatter = {
+      exe = "perltidy",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "",
+      setup = {},
+    },
+  },
+  sql = {
+    formatter = {
+      exe = "sqlformat",
+      args = {},
+    },
+    linters = {},
+    lsp = {
+      provider = "sqls",
+      setup = {
+        cmd = { "sqls" },
       },
     },
   },
