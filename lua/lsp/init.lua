@@ -4,16 +4,8 @@ function lsp_config.config()
   require("lsp.kind").setup()
   require("lsp.handlers").setup()
   require("lsp.signs").setup()
-  require("ls.keybindings").setup()
+  require("lsp.keybinds").setup()
 end
-
--- My font didn't like this :/
--- vim.api.nvim_set_keymap(
---   "n",
---   "gl",
---   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = { { "🭽", "FloatBorder" }, { "▔", "FloatBorder" }, { "🭾", "FloatBorder" }, { "▕", "FloatBorder" }, { "🭿", "FloatBorder" }, { "▁", "FloatBorder" }, { "🭼", "FloatBorder" }, { "▏", "FloatBorder" }, } })<CR>',
---   { noremap = true, silent = true }
--- )
 
 local function no_formatter_on_attach(client, bufnr)
   if lvim.lsp.on_attach_callback then

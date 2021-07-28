@@ -22,7 +22,7 @@ require("settings").load_commands()
 require("core.autocmds").define_augroups(lvim.autocommands)
 
 require "keymappings"
-require("lsp").setup_default_bindings()
+-- require("lsp").setup_default_bindings()
 
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
