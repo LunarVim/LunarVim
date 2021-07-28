@@ -9,11 +9,6 @@ function M.config()
   require("lsp.handlers").setup()
   require("lsp.signs").setup()
   require("lsp.keybinds").setup()
-  require("core.autocmds").define_augroups {
-    _general_lsp = {
-      { "FileType", "lspinfo", "nnoremap <silent> <buffer> q :q<CR>" },
-    },
-  }
 end
 
 function M.setup(lang)
