@@ -34,7 +34,7 @@ The following command installs LunarVim.  Change `LVBRANCH` to the branch you'd 
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
 ```
 
-### BREAKING CHANGE on the rolling branch
+### BREAKING CHANGE on rolling and master branches
 * The latest changes to LunarVim require you to [remove it completely](https://github.com/ChristianChiarulli/LunarVim/wiki/Uninstalling-LunarVim) before upgrading
 * Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
 * To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
