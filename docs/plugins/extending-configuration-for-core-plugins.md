@@ -1,6 +1,6 @@
 # Extending Configurations for Core Plugins
 
-The core plugins come pre-configured.  Sometimes you may want to extend the configuration of these plugins to enable additional functionality.  For example, if you want have autopairs automatically close your function definitions, you need to specify endwise rules.  
+Core plugins come pre-configured.  Sometimes you may want to extend the configuration of these plugins to enable additional functionality.  For example, if you want have autopairs automatically close your function definitions, you need to specify endwise rules.  
 
 LunarVim provides a way to extend the default configurations by adding the following to your configuration file. This specifies code to run after the configuration for autopairs has completed. 
 
@@ -74,7 +74,7 @@ You can specify terminal applications to run with a keybind. LazyGit is the only
 
 To set up an executable to run add the following to your `lv-config.lua`
 
-```
+``` lua
 lvim.builtin.terminal.execs = {{"lazygit", "gg", "LazyGit"}, {"gdb", "tg", "GNU Debugger"}}
 ```
 
@@ -82,6 +82,6 @@ The table structure is `{{exec_path, keymap, name}}`
 
 You can also do the following to append an executable
 
-```
+``` lua
 lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
 ```
