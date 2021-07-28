@@ -8,6 +8,9 @@ From the repo:
 ### Video Explanation
 [Installing fonts with included icon sets](https://www.youtube.com/watch?v=fR4ThXzhQYI&t=364s)
 
+### Easy Installer
+Visit [this repo](https://github.com/ronniedroid/getnf) for an easy way to install nerd fonts.
+
 ### Manual Install
 1. To to the [pached fonts directory](https://www.nerdfonts.com/font-downloads)
 1. Copy the downloaded files to `~/.local/share/fonts`
@@ -23,4 +26,5 @@ OTF is a newer standard based on TTF, when given the option you should generally
 
 [ Here ](https://www.makeuseof.com/tag/otf-vs-ttf-fonts-one-better/) is good article explaining the difference.  
 
-
+## Terminal settings
+After installing your font, you will also have to change your terminal settings to use the font you just installed.  Please refer to your terminal's documentation for changing the terminal font.  
