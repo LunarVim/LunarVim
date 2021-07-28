@@ -1,27 +1,10 @@
 local M = {}
 
 local null_ls = require "null-ls"
+local utils = require "utils"
 local sources = {}
 
 local local_executables = { "prettier", "prettierd", "prettier_d_slim", "eslint_d", "eslint" }
-
-local function is_table(t)
-  return type(t) == "table"
-end
-
-local function is_string(t)
-  return type(t) == "string"
-end
-
-local function has_value(tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
-    end
-  end
-
-  return false
-end
 
 local find_local_exe = function(exe)
   vim.cmd "let root_dir = FindRootDirectory()"
@@ -31,7 +14,7 @@ local find_local_exe = function(exe)
 end
 
 local function setup_ls(exe, type)
-  if has_value(local_executables, exe) then
+  if utils.has_value(local_executables, exe) then
     local smart_executable = null_ls.builtins[type][exe]
     local local_executable = find_local_exe(exe)
     if vim.fn.executable(local_executable) == 1 then
@@ -60,14 +43,14 @@ local function setup(filetype, type)
     executables = lvim.lang[filetype].formatter.exe
   end
 
-  if is_table(executables) then
+  if utils.is_table(executables) then
     for _, exe in pairs(executables) do
       if exe ~= "" then
         setup_ls(exe, type)
       end
     end
   end
-  if is_string(executables) and executables ~= "" then
+  if utils.is_string(executables) and executables ~= "" then
     setup_ls(executables, type)
   end
 end
