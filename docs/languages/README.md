@@ -13,3 +13,30 @@ If your language is not supported please do the following:
 If there is support for your language please file an issue with the LunarVim repo
 
 If there is not file a ticket with one of the above repos
+
+## Formatting 
+
+Formatting is handled by by your language server or Null-ls.
+
+The language server will provide basic formatting.  If you need to use a specific formatting tool, set it with. 
+``` lua
+lvim.lang.cpp.formatter.exe = "asmfmt"
+```
+To enable format on save, add the following to your `lv-config.lua`
+
+``` lua
+lvim.format_on_save = true
+```
+
+## Linting
+Linting is handled by Null-ls.  To set a linter for your language:
+
+``` lua
+lvim.lang.cpp.linters = {"cppcheck","clangtidy"}
+```
+
+To enable linting on save:
+
+``` lua
+lvim.lint_on_save = true
+```

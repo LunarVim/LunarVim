@@ -4,20 +4,20 @@ You can configure LunarVim by using the configuration file located in `~/.config
 
 To get started quickly, copy the sample configuration file
 
-```
+``` bash
 cp ~/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua ~/.config/lvim/lv-config.lua
 ```
 
 Many LunarVim internal settings are exposed through the `lvim` global object.
-So see a list of all available settings, run this command to generate a lv-settings.lua file.
+So see a list of all available settings, run this command from `~/.local/share/lunarvim/lvim` to generate an lv-settings.lua file.
 
-```
-lvim --headless +'lua require("lv-utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+``` bash
+lvim --headless +'lua require("utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
 
 Here is a sample of the output.
 
-```
+``` lua
 lvim.builtin.telescope.defaults.initial_mode = "insert"
 lvim.builtin.telescope.defaults.layout_config.horizontal.mirror = false
 lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 120
@@ -28,3 +28,4 @@ lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 
 ```
 
+If you want to keep launching LunarVim with the nvim command, add an alias entry to your shell's config file: alias `nvim=lvim`. To temporarily revert to the default nvim prefix it with a backslash `\nvim`.
