@@ -955,7 +955,7 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "vetur",
+      provider = "vuels",
       setup = {
         cmd = {
           DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
