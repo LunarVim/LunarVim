@@ -1,6 +1,5 @@
 local utils = require "utils"
 local service = require "lsp.service"
-local lspconfig = require "lspconfig"
 local null_ls = require "lsp.null-ls"
 local M = {}
 
@@ -54,7 +53,7 @@ function M.setup(lang)
     return
   end
 
-  lspconfig[provider].setup(lang_server.setup)
+  require("lspconfig")[provider].setup(lang_server.setup)
 end
 
 return M
