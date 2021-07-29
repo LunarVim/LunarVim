@@ -145,11 +145,6 @@ To update plugins:
 To update LunarVim:
 
 ```bash
-# Master Branch
-cd ~/.config/nvim && git pull
-:PackerSync  
-
-# Rolling Branch
 cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
