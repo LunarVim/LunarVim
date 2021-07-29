@@ -183,7 +183,7 @@ To update Neovim use your package manager or [compile from source](https://githu
 
 - [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
 
-- [Wiki](https://github.com/ChristianChiarulli/LunarVim/wiki)
+- [Documentation](https://www.lunarvim.org)
 
 - [Discord](https://discord.gg/Xb9B4Ny)
 
