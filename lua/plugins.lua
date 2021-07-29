@@ -1,3 +1,8 @@
+if lvim.builtin.dashboard.active and not lvim.builtin.telescope.active then
+  lvim.builtin.dashboard.active = false
+  print "Telescope plugin must be active in order to use Dashboard"
+end
+
 return {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
