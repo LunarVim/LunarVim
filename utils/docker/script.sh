@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Updating the package list
 apt-get update
 
@@ -9,7 +11,7 @@ npm install tree-sitter-cli neovim
 
 # Installing Neovim
 mkdir -p /tmp/neovim
-cd /tmp/neovim
+cd /tmp/neovim || exit
 curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
