@@ -1000,6 +1000,22 @@ lvim.lang = {
       },
     },
   },
+  gdscript = {
+    formatter = {},
+    linters = {},
+    lsp = {
+      provider = "gdscript",
+      setup = {
+        cmd = {
+          "nc",
+          "localhost",
+          "6008",
+        },
+        on_attach = common_on_attach,
+        capabilities = common_capabilities,
+      },
+    },
+  },
 }
 
 require("core.which-key").config()
