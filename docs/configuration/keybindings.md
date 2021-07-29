@@ -50,20 +50,6 @@ lvim.keys.normal_mode = {
 }
 ```
 
-Or use the utility functions 
-* add_keymap_insert_mode
-* add_keymap_normal_mode
-* add_keymap_term_mode
-* add_keymap_visual_block_mode
-* add_keymap_visual_mode
-
-``` lua
-require("utils").add_keymap_insert_mode({ silent = true }, {
-    { "<C-s>", ":w<cr>" },
-    { "<C-c>", "<ESC>" },
-    })
-```
-
 ### Listing what is mapped
 To see if a key has already been bound:
 ``` lua
