@@ -16,7 +16,7 @@ If there is not file a ticket with one of the above repos
 
 ## Formatting 
 
-Formatting is handled by by your language server or Null-ls.
+Formatting is handled by by your language server or Null-ls. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
 
 The language server will provide basic formatting.  If you need to use a specific formatting tool, set it with. 
 ``` lua
