@@ -61,7 +61,8 @@ M.config = function()
       ["/"] = { ":CommentToggle<CR>", "Comment" },
     },
     mappings = {
-      ["w"] = { "<cmd>w!<CR>", "Save" },
+      ["w"] = { "<cmd>SaveFile!<CR>", "Save" },
+      ["W"] = { "<cmd>SaveWithoutFormatting!<CR>", "Save without formatting" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
       ["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },

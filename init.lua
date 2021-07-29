@@ -30,8 +30,6 @@ plugin_loader:load { plugins, lvim.plugins }
 vim.g.colors_name = lvim.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 vim.cmd("colorscheme " .. lvim.colorscheme)
 
-local utils = require "utils"
-utils.toggle_autoformat()
 local commands = require "core.commands"
 commands.load(commands.defaults)
 
