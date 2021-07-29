@@ -7,7 +7,7 @@ return {
   {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
-    config = require("core.lspinstall").setup,
+    _builtin = require "core.lspinstall",
   },
 
   { "nvim-lua/popup.nvim" },
@@ -17,14 +17,13 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    config = require("core.telescope").setup,
+    _builtin = require "core.telescope",
   },
 
   -- Completion & Snippets
   {
     "hrsh7th/nvim-compe",
     event = "InsertEnter",
-    config = require("core.compe").setup,
     wants = "vim-vsnip",
     requires = {
       {
@@ -37,6 +36,7 @@ return {
         event = "InsertCharPre",
       },
     },
+    _builtin = require "core.compe",
   },
 
   -- Autopairs
@@ -44,7 +44,7 @@ return {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
     after = "nvim-compe",
-    config = require("core.autopairs").setup,
+    _builtin = require "core.autopairs",
   },
 
   -- Treesitter
@@ -52,7 +52,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "0.5-compat",
     -- run = ":TSUpdate",
-    config = require("core.treesitter").setup,
+    _builtin = require "core.treesitter",
   },
 
   -- NvimTree
@@ -61,33 +61,33 @@ return {
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-    config = require("core.nvimtree").setup,
+    _builtin = require "core.nvimtree",
   },
 
   {
     "lewis6991/gitsigns.nvim",
-    config = require("core.gitsigns").setup,
     event = "BufRead",
+    _builtin = require "core.gitsigns",
   },
 
   -- Whichkey
   {
     "folke/which-key.nvim",
-    config = require("core.which-key").setup,
     event = "BufWinEnter",
+    _builtin = require "core.which-key",
   },
 
   -- Comments
   {
     "terrortylor/nvim-comment",
     event = "BufRead",
-    config = require("core.comment").setup,
+    _builtin = require "core.comment",
   },
 
   -- vim-rooter
   {
     "airblade/vim-rooter",
-    config = require("core.rooter").setup,
+    _builtin = require "core.rooter",
   },
 
   -- Icons
@@ -96,23 +96,21 @@ return {
   -- Status Line and Bufferline
   {
     "glepnir/galaxyline.nvim",
-    config = require("core.galaxyline").setup,
     event = "BufWinEnter",
-    disable = not lvim.builtin.galaxyline.active,
+    _builtin = require "core.galaxyline",
   },
 
   {
     "romgrk/barbar.nvim",
-    config = require("core.bufferline").setup,
     event = "BufWinEnter",
+    _builtin = require "core.bufferline",
   },
 
   -- Debugging
   {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
-    config = require("core.dap").setup,
-    disable = not lvim.builtin.dap.active,
+    _builtin = require "core.dap",
   },
 
   -- Debugger management
@@ -120,22 +118,19 @@ return {
     "Pocco81/DAPInstall.nvim",
     -- event = "BufWinEnter",
     -- event = "BufRead",
-    disable = not lvim.builtin.dap.active,
   },
 
   -- Dashboard
   {
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
-    config = require("core.dashboard").setup,
-    disable = not lvim.builtin.dashboard.active,
+    _builtin = require "core.dashboard",
   },
 
   -- Terminal
   {
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
-    config = require("core.terminal").setup,
-    disable = not lvim.builtin.terminal.active,
+    _builtin = require "core.terminal",
   },
 }

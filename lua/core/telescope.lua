@@ -1,4 +1,4 @@
-local M = {}
+local M = { name = "telescope" }
 
 M.config = function()
   local status_ok, actions = pcall(require, "telescope.actions")
@@ -6,8 +6,8 @@ M.config = function()
     return
   end
 
-  lvim.builtin.telescope = {
-    active = false,
+  lvim.builtin[M.name] = {
+    active = true,
     defaults = {
       prompt_prefix = " ",
       selection_caret = " ",

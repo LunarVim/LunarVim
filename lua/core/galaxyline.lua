@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  name = "galaxyline",
+}
 
 M.setup = function()
   local gl = require "galaxyline"

@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "nvimtree",
+}
 --
 M.config = function()
-  lvim.builtin.nvimtree = {
+  lvim.builtin[M.name] = {
     side = "left",
     show_icons = {
       git = 1,
@@ -46,7 +48,7 @@ M.config = function()
 end
 --
 M.setup = function()
-  nvim_tree_config = require "nvim-tree.config"
+  local nvim_tree_config = require "nvim-tree.config"
 
   local g = vim.g
   for opt, val in pairs(lvim.builtin.nvimtree) do

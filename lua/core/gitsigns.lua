@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "gitsigns",
+}
 
 M.config = function()
-  lvim.builtin.gitsigns = {
+  lvim.builtin[M.name] = {
     signs = {
       add = {
         hl = "GitSignsAdd",

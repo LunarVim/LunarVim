@@ -32,10 +32,43 @@ function plugin_loader:init()
   return self
 end
 
+local builtin_mapper = {
+  config = function(builtin)
+    local config = lvim.builtin[builtin.name]
+
+    if config == nil or config.on_config_done == nil then
+      return builtin.setup
+    end
+    -- NOTE: closure variables can't be captured yet
+    -- https://github.com/wbthomason/packer.nvim/discussions/513
+    return function()
+      local module = builtin.setup()
+      config.on_config_done(module)
+    end
+  end,
+  disable = function(builtin)
+    local config = lvim.builtin[builtin.name]
+    if config == nil or config.active == nil then
+      return false
+    end
+    return not config.active
+  end,
+}
+
 function plugin_loader:load(configurations)
   return self.packer.startup(function(use)
     for _, plugins in ipairs(configurations) do
       for _, plugin in ipairs(plugins) do
+        print(plugin[1])
+        local builtin = plugin["_builtin"]
+        if builtin then
+          plugin["_builtin"] = nil
+          for attr, mapper in pairs(builtin_mapper) do
+            local mapped = mapper(builtin)
+            plugin[attr] = mapped
+          end
+        end
+
         use(plugin)
       end
     end

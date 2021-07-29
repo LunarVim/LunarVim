@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "dap",
+}
 
 M.config = function()
-  lvim.builtin.dap = {
+  lvim.builtin[M.name] = {
     active = false,
     breakpoint = {
       text = "",

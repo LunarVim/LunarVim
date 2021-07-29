@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  name = "bufferline",
+}
 
 M.setup = function()
   vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silent = true })

@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "terminal",
+}
 
 M.config = function()
-  lvim.builtin["terminal"] = {
+  lvim.builtin[M.name] = {
     -- size can be a number or function which is passed the current terminal
     size = 5,
     -- open_mapping = [[<c-\>]],

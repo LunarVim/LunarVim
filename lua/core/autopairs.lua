@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  name = "autopairs",
+}
 
 M.setup = function()
   local npairs = require "nvim-autopairs"

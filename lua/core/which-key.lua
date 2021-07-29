@@ -1,8 +1,10 @@
-local M = {}
+local M = {
+  name = "which_key",
+}
 
 M.config = function()
-  lvim.builtin.which_key = {
-    active = false,
+  lvim.builtin[M.name] = {
+    active = true,
     setup = {
       plugins = {
         marks = true, -- shows a list of your marks on ' and `

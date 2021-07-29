@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "treesitter",
+}
 
 M.config = function()
-  lvim.builtin.treesitter = {
+  lvim.builtin[M.name] = {
     ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {},
     matchup = {

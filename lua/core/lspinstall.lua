@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  name = "lspinstall",
+}
 
 M.setup = function()
   local lspinstall = require "lspinstall"

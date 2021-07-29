@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "dashboard",
+}
 
 M.config = function()
-  lvim.builtin.dashboard = {
+  lvim.builtin[M.name] = {
     active = false,
     search_handler = "telescope",
     custom_header = {

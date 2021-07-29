@@ -1,7 +1,9 @@
-local M = {}
+local M = {
+  name = "compe",
+}
 
 M.config = function()
-  lvim.builtin.compe = {
+  lvim[M.name] = {
     enabled = true,
     autocomplete = true,
     debug = false,
@@ -37,7 +39,7 @@ end
 M.setup = function()
   vim.g.vsnip_snippet_dir = lvim.vsnip_dir
 
-  local compe = require("compe")
+  local compe = require "compe"
   compe.setup(lvim.builtin.compe)
 
   local t = function(str)
