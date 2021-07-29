@@ -102,14 +102,6 @@ function utils.check_lsp_client_active(name)
   return false
 end
 
-function utils.is_table(t)
-  return type(t) == "table"
-end
-
-function utils.is_string(t)
-  return type(t) == "string"
-end
-
 --- Extends a list-like table with the unique values of another list-like table.
 ---
 --- NOTE: This mutates dst!
