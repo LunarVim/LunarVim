@@ -13,15 +13,25 @@ local find_local_exe = function(exe)
   return local_exe
 end
 
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
+local get_normalized_exe = function(exe, type)
+  if type == "diagnostics" and exe == "eslint_d" then
+    return "eslint"
+  end
+  return exe
+end
+
 local function setup_ls(exe, type)
   if utils.has_value(local_executables, exe) then
-    local smart_executable = null_ls.builtins[type][exe]
+    local normalized_exe = get_normalized_exe(exe, type)
+    local smart_executable = null_ls.builtins[type][normalized_exe]
     local local_executable = find_local_exe(exe)
     if vim.fn.executable(local_executable) == 1 then
       smart_executable._opts.command = local_executable
       table.insert(sources, smart_executable)
     else
       if vim.fn.executable(exe) == 1 then
+        smart_executable._opts.command = exe
         table.insert(sources, smart_executable)
       end
     end
