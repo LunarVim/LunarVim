@@ -1,6 +1,6 @@
 local M = {}
 
-local null_ls = require "null-ls"
+local _, null_ls = pcall(require, "null-ls")
 local utils = require "utils"
 local sources = {}
 
