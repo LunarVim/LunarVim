@@ -37,6 +37,7 @@ jobs:
           brew install neovim
 
       - name: Install LunarVim
+        timeout-minutes: 5
         run: |
           bash ./utils/installer/install.sh --testing
 
