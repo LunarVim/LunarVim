@@ -2,9 +2,19 @@ local M = {}
 local u = require "utils"
 local null_ls = require "null-ls"
 
+<<<<<<< HEAD
 local nodejs_local_providers = { "prettier", "prettierd", "prettier_d_slim", "eslint_d", "eslint" }
 
 M.requested_providers = {}
+=======
+local _, null_ls = pcall(require, "null-ls")
+local sources = {}
+
+local local_executables = { "prettier", "prettierd", "prettier_d_slim", "eslint_d", "eslint" }
+local executable_name_map = {
+  eslint_d = "eslint",
+}
+>>>>>>> b8f4b5a (Unbloat code)
 
 function M.get_registered_providers_by_filetype(ft)
   local matches = {}
@@ -26,6 +36,7 @@ local function is_nodejs_provider(provider)
   return false
 end
 
+<<<<<<< HEAD
 local function is_provider_found(provider)
   -- special case: fallback to "eslint"
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
@@ -52,6 +63,29 @@ local function validate_provider(provider)
   if not provider_path then
     u.lvim_log(string.format("Unable to find the path for: [%s]", provider))
     return false
+=======
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
+local get_normalized_exe = function(exe, null_ls_builtins)
+  if not null_ls_builtins[exe] and executable_name_map[exe] then
+    return null_ls_builtins[executable_name_map[exe]]
+  end
+  return null_ls_builtins[exe]
+end
+
+local function setup_ls(exe, null_ls_builtins)
+  if vim.tbl_contains(local_executables, exe) then
+    local smart_executable = get_normalized_exe(exe, null_ls_builtins)
+    local local_executable = find_local_exe(exe)
+    if vim.fn.executable(local_executable) == 1 then
+      smart_executable._opts.command = local_executable
+      table.insert(sources, smart_executable)
+    elseif vim.fn.executable(exe) == 1 then
+      smart_executable._opts.command = exe
+      table.insert(sources, smart_executable)
+    end
+  elseif null_ls_builtins[exe] and vim.fn.executable(null_ls_builtins[exe]._opts.command) then
+    table.insert(sources, null_ls_builtins[exe])
+>>>>>>> b8f4b5a (Unbloat code)
   end
   if is_local then
     provider._opts.command = provider_path
@@ -60,6 +94,7 @@ local function validate_provider(provider)
 end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
+<<<<<<< HEAD
 function M.setup(filetype)
   for _, formatter in pairs(lvim.lang[filetype].formatters) do
     local builtin_formatter = null_ls.builtins.formatting[formatter.exe]
@@ -85,6 +120,25 @@ function M.setup(filetype)
     end
   end
   null_ls.register { sources = M.requested_providers }
+=======
+local function setup(null_ls_builtins, executables)
+  if type(executables) == "table" then
+    for _, exe in pairs(executables) do
+      if exe ~= "" then
+        setup_ls(exe, null_ls_builtins)
+      end
+    end
+  elseif type(executables) == "string" and executables ~= "" then
+    setup_ls(executables, null_ls_builtins)
+  end
+end
+
+-- TODO: return the formatter if one was registered, then turn off the builtin formatter
+function M.setup(filetype)
+  setup(null_ls.builtins.formatting, lvim.lang[filetype].formatter.exe)
+  setup(null_ls.builtins.diagnostics, lvim.lang[filetype].linters)
+  return sources
+>>>>>>> b8f4b5a (Unbloat code)
 end
 
 return M

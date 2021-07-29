@@ -1,5 +1,8 @@
+local service = require "lsp.service"
+
 local M = {}
 local u = require "utils"
+
 function M.config()
   vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
@@ -79,7 +82,7 @@ function M.setup(lang)
     return
   end
 
-  require("lspconfig")[provider].setup(lang_server.setup)
+  lspconfig[lsp.provider].setup(lsp.setup)
 end
 
 return M
