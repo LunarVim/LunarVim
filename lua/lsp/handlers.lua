@@ -5,7 +5,7 @@ local M = {}
 function M.setup()
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = lvim.lsp.diagnostics.virtual_text,
-    signs = lvim.lsp.diagnostics.signs,
+    signs = lvim.lsp.diagnostics.signs.active,
     underline = lvim.lsp.document_highlight,
   })
 

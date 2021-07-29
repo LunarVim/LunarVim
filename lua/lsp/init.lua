@@ -1,9 +1,13 @@
 local M = {}
 local u = require "utils"
 function M.config()
-  require("lsp.kind").setup()
+  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
+
+  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+  end
+
   require("lsp.handlers").setup()
-  require("lsp.signs").setup()
 end
 
 local function lsp_highlight_document(client)
