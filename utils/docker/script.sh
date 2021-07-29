@@ -17,6 +17,7 @@ chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 mv squashfs-root /usr/local/neovim
 ln -s /usr/local/neovim/usr/bin/nvim /usr/bin/nvim
+rm ./nvim.appimage
 
 # Installing LunarVim
 LVBRANCH=master bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
