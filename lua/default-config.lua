@@ -712,11 +712,10 @@ lvim.lang = {
       },
     },
   },
-  -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
-  -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
+  -- R -e 'install::packages("languageserver")'
   r = {
     formatter = {
-      exe = "format_r",
+      exe = "",
       args = {},
     },
     linters = {},
