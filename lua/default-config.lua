@@ -14,24 +14,7 @@ lvim = {
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
   keys = {},
 
-  -- Give autocompletion for builtins that lack a config function
-  builtin = {
-    lspinstall = {
-      on_config_done = nil,
-    },
-    comment = {
-      on_config_done = nil,
-    },
-    rooter = {
-      on_config_done = nil,
-    },
-    galaxyline = {
-      on_config_done = nil,
-    },
-    bufferline = {
-      on_config_done = nil,
-    },
-  },
+  builtin = {},
 
   lsp = {
     diagnostics = {
@@ -1002,9 +985,8 @@ lvim.lang = {
   },
 }
 
-require("core.autopairs").config()
+-- NOTE: which-key should be first because it defines lvim.builtin.which_key.mappings
 require("core.which-key").config()
-require "core.status_colors"
 require("core.gitsigns").config()
 require("core.compe").config()
 require("core.dashboard").config()
@@ -1013,3 +995,9 @@ require("core.terminal").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
+require("core.autopairs").config()
+require("core.lspinstall").config()
+require("core.comment").config()
+require("core.rooter").config()
+require("core.bufferline").config()
+require("core.galaxyline").config()

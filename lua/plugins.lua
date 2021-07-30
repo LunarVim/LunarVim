@@ -7,13 +7,8 @@ return {
   {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
-    config = function()
-      local lspinstall = require "lspinstall"
-      lspinstall.setup()
-      if lvim.builtin.lspinstall.on_config_done then
-        lvim.builtin.lspinstall.on_config_done(lspinstall)
-      end
-    end,
+    config = require("core.lspinstall").setup,
+    disable = not lvim.builtin.lspinstall.active,
   },
 
   { "nvim-lua/popup.nvim" },
@@ -23,18 +18,14 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    config = function()
-      require("core.telescope").setup()
-    end,
+    config = require("core.telescope").setup,
   },
 
   -- Completion & Snippets
   {
     "hrsh7th/nvim-compe",
     event = "InsertEnter",
-    config = function()
-      require("core.compe").setup()
-    end,
+    config = require("core.compe").setup,
     -- wants = "vim-vsnip",
     -- requires = {
     -- {
@@ -63,9 +54,7 @@ return {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
     after = "nvim-compe",
-    config = function()
-      require("core.autopairs").setup()
-    end,
+    config = require("core.autopairs").setup,
     disable = not lvim.builtin.autopairs.active,
   },
 
@@ -74,9 +63,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "0.5-compat",
     -- run = ":TSUpdate",
-    config = function()
-      require("core.treesitter").setup()
-    end,
+    config = require("core.treesitter").setup,
   },
 
   -- NvimTree
@@ -85,26 +72,19 @@ return {
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-    config = function()
-      require("core.nvimtree").setup()
-    end,
+    config = require("core.nvimtree").setup,
   },
 
   {
     "lewis6991/gitsigns.nvim",
-
-    config = function()
-      require("core.gitsigns").setup()
-    end,
+    config = require("core.gitsigns").setup,
     event = "BufRead",
   },
 
   -- Whichkey
   {
     "folke/which-key.nvim",
-    config = function()
-      require("core.which-key").setup()
-    end,
+    config = require("core.which-key").setup,
     event = "BufWinEnter",
   },
 
@@ -112,27 +92,14 @@ return {
   {
     "terrortylor/nvim-comment",
     event = "BufRead",
-    config = function()
-      local status_ok, nvim_comment = pcall(require, "nvim_comment")
-      if not status_ok then
-        return
-      end
-      nvim_comment.setup()
-      if lvim.builtin.comment.on_config_done then
-        lvim.builtin.comment.on_config_done(nvim_comment)
-      end
-    end,
+    config = require("core.comment").setup,
+    disable = not lvim.builtin.comment.active,
   },
 
   -- vim-rooter
   {
     "airblade/vim-rooter",
-    config = function()
-      vim.g.rooter_silent_chdir = 1
-      if lvim.builtin.rooter.on_config_done then
-        lvim.builtin.rooter.on_config_done()
-      end
-    end,
+    config = require("core.rooter").setup,
     disable = not lvim.builtin.rooter.active,
   },
 
@@ -142,28 +109,23 @@ return {
   -- Status Line and Bufferline
   {
     "glepnir/galaxyline.nvim",
-    config = function()
-      require("core.galaxyline").setup()
-    end,
+    config = require("core.galaxyline").setup,
     event = "BufWinEnter",
     disable = not lvim.builtin.galaxyline.active,
   },
 
   {
     "romgrk/barbar.nvim",
-    config = function()
-      require("core.bufferline").setup()
-    end,
+    config = require("core.bufferline").setup,
     event = "BufWinEnter",
+    disable = not lvim.builtin.bufferline.active,
   },
 
   -- Debugging
   {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
-    config = function()
-      require("core.dap").setup()
-    end,
+    config = require("core.dap").setup,
     disable = not lvim.builtin.dap.active,
   },
 
