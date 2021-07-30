@@ -7,10 +7,6 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, _ = pcall(require, "nvim-autopairs")
-  if not status_ok then
-    return
-  end
   local npairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
 
@@ -55,6 +51,8 @@ M.setup = function()
     Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node { "string", "comment" }),
     Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
   }
+
+  return npairs
 end
 
 return M
