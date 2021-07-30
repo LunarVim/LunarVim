@@ -12,7 +12,12 @@ lvim = {
   format_on_save = true,
   vsnip_dir = os.getenv "HOME" .. "/.config/snippets",
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
-  keys = {},
+  keys = {
+    normal_mode = {},
+    insert_mode = {},
+    visual_mode = {},
+    visual_block_mode = {},
+  },
 
   -- TODO why do we need this?
   builtin = {
