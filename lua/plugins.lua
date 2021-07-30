@@ -70,11 +70,12 @@ return {
     -- event = "InsertEnter",
     after = "nvim-compe",
     config = function()
-      require "core.autopairs"
+      require("core.autopairs").setup()
       if lvim.builtin.autopairs.on_config_done then
         lvim.builtin.autopairs.on_config_done(require "nvim-autopairs")
       end
     end,
+    disble = not lvim.builtin.autopairs.active,
   },
 
   -- Treesitter

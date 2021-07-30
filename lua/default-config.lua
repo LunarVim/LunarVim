@@ -1002,6 +1002,7 @@ lvim.lang = {
   },
 }
 
+require("core.autopairs").config()
 require("core.which-key").config()
 require "core.status_colors"
 require("core.gitsigns").config()
