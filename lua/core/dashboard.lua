@@ -2,6 +2,7 @@ local M = {}
 M.config = function()
   lvim.builtin.dashboard = {
     active = false,
+    on_config_done = nil,
     search_handler = "telescope",
     custom_header = {
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -99,6 +100,10 @@ M.setup = function()
       { "FileType", "dashboard", "nnoremap <silent> <buffer> q :q<CR>" },
     },
   }
+
+  if lvim.builtin.dashboard.on_config_done then
+    lvim.builtin.dashboard.on_config_done()
+  end
 end
 
 return M

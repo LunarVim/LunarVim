@@ -2,6 +2,7 @@ local M = {}
 M.config = function()
   lvim.builtin.which_key = {
     active = false,
+    on_config_done = nil,
     setup = {
       plugins = {
         marks = true, -- shows a list of your marks on ' and `
@@ -207,6 +208,12 @@ M.setup = function()
 
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
+
+  if lvim.builtin.which_key.on_config_done then
+    lvim.builtin.which_key.on_config_done(wk)
+  end
+
+  return which_key
 end
 
 return M

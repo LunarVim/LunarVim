@@ -2,6 +2,7 @@ local M = {}
 M.config = function()
   lvim.builtin.compe = {
     enabled = true,
+    on_config_done = nil,
     autocomplete = true,
     debug = false,
     min_length = 1,
@@ -88,6 +89,12 @@ M.setup = function()
   vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", { noremap = true, silent = true, expr = true })
   vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })
+
+  if lvim.builtin.compe.on_config_done then
+    lvim.builtin.compe.on_config_done(compe)
+  end
+
+  return compe
 end
 
 local is_excluded = function(file_type)

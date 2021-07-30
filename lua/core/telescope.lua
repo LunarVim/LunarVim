@@ -7,6 +7,7 @@ M.config = function()
 
   lvim.builtin.telescope = {
     active = false,
+    on_config_done = nil,
     defaults = {
       prompt_prefix = " ",
       selection_caret = " ",
@@ -82,6 +83,12 @@ M.setup = function()
     return
   end
   telescope.setup(lvim.builtin.telescope)
+
+  if lvim.builtin.telescope.on_config_done then
+    lvim.builtin.telescope.on_config_done(telescope)
+  end
+
+  return telescope
 end
 
 return M

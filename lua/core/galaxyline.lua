@@ -318,6 +318,11 @@ M.setup = function()
   })
 
   --table.insert(gls.short_line_right[1] = {BufferIcon = {provider = 'BufferIcon', highlight = {colors.grey, colors.alt_bg}}})
+
+  if lvim.builtin.galaxyline.on_config_done then
+    lvim.builtin.galaxyline.on_config_done(gl)
+  end
+
   return gl
 end
 

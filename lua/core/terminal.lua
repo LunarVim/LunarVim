@@ -1,6 +1,7 @@
 local M = {}
 M.config = function()
   lvim.builtin["terminal"] = {
+    on_config_done = nil,
     -- size can be a number or function which is passed the current terminal
     size = 5,
     -- open_mapping = [[<c-\>]],
@@ -50,6 +51,12 @@ M.setup = function()
     require("core.terminal").add_exec(exec[1], exec[2], exec[3])
   end
   terminal.setup(lvim.builtin.terminal)
+
+  if lvim.builtin.terminal.on_config_done then
+    lvim.builtin.terminal.on_config_done(terminal)
+  end
+
+  return terminal
 end
 
 local function is_installed(exe)

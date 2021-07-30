@@ -2,6 +2,7 @@ local M = {}
 --
 M.config = function()
   lvim.builtin.nvimtree = {
+    on_config_done = nil,
     side = "left",
     show_icons = {
       git = 1,
@@ -63,6 +64,12 @@ M.setup = function()
     { key = "h", cb = tree_cb "close_node" },
     { key = "v", cb = tree_cb "vsplit" },
   }
+
+  if lvim.builtin.nvimtree.on_config_done then
+    lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
+  end
+
+  return nvim_tree_config
 end
 --
 --
