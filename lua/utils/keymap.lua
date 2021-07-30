@@ -1,18 +1,19 @@
-local M = {
-  MODE = {
-    INSERT = "i",
-    NORMAL = "n",
-    TERM = "t",
-    VISUAL = "v",
-    VISUAL_BLOCK = "x",
-  },
+local M = {}
+
+local mode_adapters = {
+  insert_mode = "i",
+  normal_mode = "n",
+  term_mode = "t",
+  visual_mode = "v",
+  visual_block_mode = "x",
 }
 
 -- Load key mappings for a given mode
--- @param mode One of the MODE enumeration values
+-- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param keymaps The list of key mappings
 -- @param opts The mapping options
 M.load_mode = function(mode, keymaps, opts)
+  mode = mode_adapters[mode] and mode_adapters[mode] or mode
   for _, keymap in ipairs(keymaps) do
     vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
   end

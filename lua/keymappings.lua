@@ -1,16 +1,13 @@
-local keymap = require "utils.keymap"
-local MODE = keymap.MODE
-
 local opts = {
-  [MODE.INSERT] = { noremap = true, silent = true },
-  [MODE.NORMAL] = { noremap = true, silent = true },
-  [MODE.VISUAL] = { noremap = true, silent = true },
-  [MODE.VISUAL_BLOCK] = { noremap = true, silent = true },
-  [MODE.TERM] = { silent = true },
+  insert_mode = { noremap = true, silent = true },
+  normal_mode = { noremap = true, silent = true },
+  visual_mode = { noremap = true, silent = true },
+  visual_block_mode = { noremap = true, silent = true },
+  term_mode = { silent = true },
 }
 
 local default_keys = {
-  [MODE.INSERT] = {
+  insert_mode = {
     -- I hate escape
     { "jk", "<ESC>" },
     { "kj", "<ESC>" },
@@ -25,7 +22,7 @@ local default_keys = {
     { "<A-Right>", "<C-\\><C-N><C-w>l" },
   },
 
-  [MODE.NORMAL] = {
+  normal_mode = {
     -- Better window movement
     { "<C-h>", "<C-w>h" },
     { "<C-j>", "<C-w>j" },
@@ -54,7 +51,7 @@ local default_keys = {
     -- {'<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true}},
   },
 
-  [MODE.TERM] = {
+  term_mode = {
     -- Terminal window navigation
     { "<C-h>", "<C-\\><C-N><C-w>h" },
     { "<C-j>", "<C-\\><C-N><C-w>j" },
@@ -62,7 +59,7 @@ local default_keys = {
     { "<C-l>", "<C-\\><C-N><C-w>l" },
   },
 
-  [MODE.VISUAL] = {
+  visual_mode = {
     -- Better indenting
     { "<", "<gv" },
     { ">", ">gv" },
@@ -71,7 +68,7 @@ local default_keys = {
     -- { "P", '"0P', { silent = true } },
   },
 
-  [MODE.VISUAL_BLOCK] = {
+  visual_block_mode = {
     -- Move selected line / block of text in visual mode
     { "K", ":move '<-2<CR>gv-gv" },
     { "J", ":move '>+1<CR>gv-gv" },
@@ -84,14 +81,15 @@ local default_keys = {
 
 if vim.fn.has "mac" == 1 then
   -- TODO: fix this
-  default_keys[MODE.NORMAL][5][1] = "<A-Up>"
-  default_keys[MODE.NORMAL][6][1] = "<A-Down>"
-  default_keys[MODE.NORMAL][7][1] = "<A-Left>"
-  default_keys[MODE.NORMAL][8][1] = "<A-Right>"
+  default_keys.normal_mode[5][1] = "<A-Up>"
+  default_keys.normal_mode[6][1] = "<A-Down>"
+  default_keys.normal_mode[7][1] = "<A-Left>"
+  default_keys.normal_mode[8][1] = "<A-Right>"
 end
 
 vim.g.mapleader = lvim.leader == "space" and " " or lvim.leader
 
+local keymap = require "utils.keymap"
 local keymaps = vim.tbl_deep_extend("force", default_keys, lvim.keys)
 keymap.load(keymaps, opts)
 
