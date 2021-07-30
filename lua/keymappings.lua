@@ -6,7 +6,7 @@ local opts = {
   term_mode = { silent = true },
 }
 
-local default_keys = {
+local keymaps = {
   insert_mode = {
     -- I hate escape
     { "jk", "<ESC>" },
@@ -81,19 +81,17 @@ local default_keys = {
 
 if vim.fn.has "mac" == 1 then
   -- TODO: fix this
-  default_keys.normal_mode[5][1] = "<A-Up>"
-  default_keys.normal_mode[6][1] = "<A-Down>"
-  default_keys.normal_mode[7][1] = "<A-Left>"
-  default_keys.normal_mode[8][1] = "<A-Right>"
+  keymaps.normal_mode[5][1] = "<A-Up>"
+  keymaps.normal_mode[6][1] = "<A-Down>"
+  keymaps.normal_mode[7][1] = "<A-Left>"
+  keymaps.normal_mode[8][1] = "<A-Right>"
 end
 
 vim.g.mapleader = lvim.leader == "space" and " " or lvim.leader
-
-local keymap = require "utils.keymap"
-local keymaps = vim.tbl_deep_extend("force", default_keys, lvim.keys)
-keymap.load(keymaps, opts)
 
 -- navigate tab completion with <c-j> and <c-k>
 -- runs conditionally
 vim.cmd 'inoremap <expr> <C-j> pumvisible() ? "\\<C-n>" : "\\<C-j>"'
 vim.cmd 'inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<C-k>"'
+
+return { keymaps = keymaps, opts = opts }
