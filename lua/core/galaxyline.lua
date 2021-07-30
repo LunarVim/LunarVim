@@ -200,6 +200,7 @@ table.insert(gls.right, {
   },
 })
 
+-- TODO: this function doesn't need to be this complicated
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
   local buf_ft = vim.bo.filetype
