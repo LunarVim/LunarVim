@@ -14,23 +14,23 @@ lvim = {
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
   keys = {},
 
-  -- TODO why do we need this?
+  -- Give autocompletion for builtins that lack a config function
   builtin = {
-    lspinstall = {},
-    telescope = {},
-    compe = {},
-    autopairs = {},
-    treesitter = {},
-    nvimtree = {},
-    gitsigns = {},
-    which_key = {},
-    comment = {},
-    rooter = {},
-    galaxyline = {},
-    bufferline = {},
-    dap = {},
-    dashboard = {},
-    terminal = {},
+    lspinstall = {
+      on_config_done = nil,
+    },
+    comment = {
+      on_config_done = nil,
+    },
+    rooter = {
+      on_config_done = nil,
+    },
+    galaxyline = {
+      on_config_done = nil,
+    },
+    bufferline = {
+      on_config_done = nil,
+    },
   },
 
   lsp = {
