@@ -202,17 +202,35 @@ table.insert(gls.right, {
 
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
-
   local buf_ft = vim.bo.filetype
   local buf_clients = vim.lsp.buf_get_clients()
   if next(buf_clients) == nil then
     return msg
   end
+
+  local utils = require "utils"
+  local config = require("null-ls.config").get()
+  local builtins = require "null-ls.builtins"
+  -- concat all the builtin formatters and linters from null-ls
+  local all_things = builtins.formatting
+  for k, v in pairs(builtins.diagnostics) do
+    all_things[k] = v
+  end
+
+  -- if we open multiple filetypes in the same session
+  -- null-ls will register multiple formatter/linters
+  -- but only use the ones that support vim.bo.filetype
+  -- so we need to filter them
   local buf_client_names = {}
   for _, client in pairs(buf_clients) do
     if client.name == "null-ls" then
-      table.insert(buf_client_names, lvim.lang[buf_ft].linters[1])
-      table.insert(buf_client_names, lvim.lang[buf_ft].formatter.exe)
+      -- for every registered formatter/linter in the current buffer
+      for _, v in pairs(config._names) do
+        -- show only the ones that are being used for the current filetype
+        if utils.has_value(all_things[v].filetypes, buf_ft) then
+          table.insert(buf_client_names, v)
+        end
+      end
     else
       table.insert(buf_client_names, client.name)
     end
