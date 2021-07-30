@@ -1,7 +1,7 @@
 local M = {}
 
 -- https://www.lua.org/pil/13.4.3.html
-function setDefault(t, d)
+local function setDefault(t, d)
   local mt = {
     __index = function()
       return d
