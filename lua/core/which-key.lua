@@ -204,13 +204,11 @@ M.setup = function()
   local mappings = lvim.builtin.which_key.mappings
   local vmappings = lvim.builtin.which_key.vmappings
 
-  local wk = require "which-key"
-
-  wk.register(mappings, opts)
-  wk.register(vmappings, vopts)
+  which_key.register(mappings, opts)
+  which_key.register(vmappings, vopts)
 
   if lvim.builtin.which_key.on_config_done then
-    lvim.builtin.which_key.on_config_done(wk)
+    lvim.builtin.which_key.on_config_done(which_key)
   end
 
   return which_key
