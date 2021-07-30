@@ -19,7 +19,6 @@ keymap.set_group("t", default_keys.term_mode)
 
 -- Set core plugins specific keys
 keymap.set_group("i", core_keys.compe.insert_mode)
-keymap.set_group("s", core_keys.compe.s_mode)
 keymap.set_group("n", core_keys.telescope.normal_mode)
 keymap.set_group("n", core_keys.bufferline.normal_mode)
 
