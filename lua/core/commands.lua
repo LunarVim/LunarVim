@@ -11,18 +11,19 @@ M.defaults = {
   endfunction
   ]],
 
+  -- NOTE: Make sure that `<q-args>` is quoted with single quotes only or there will be errors!
   -- Save files
   -- Save file without formatting the file
-  [[command! -bang -bar SaveWithoutFormatting lua require 'utils'.save_file(false, "<bang>" == "!")]],
+  [[command! -nargs=* -bang -bar SaveWithoutFormatting lua require 'utils'.save_file(false, "<bang>" == "!", nil, <q-args>)]],
   -- Save file and also format the file
-  [[command! -bang -bar SaveWithFormatting  lua require 'utils'.save_file(true, "<bang>" == "!")]],
+  [[command! -nargs=* -bang -bar SaveWithFormatting  lua require 'utils'.save_file(true, "<bang>" == "!", nil, <q-args>)]],
   -- Save file but respect auto format settings
-  [[command! -bang -bar SaveFile lua require 'utils'.save_file(nil, "<bang>" == "!")]],
+  [[command! -nargs=* -bang -bar SaveFile lua require 'utils'.save_file(nil, "<bang>" == "!", nil, <q-args>)]],
 
   -- Like above command but also quit immediately
-  [[command! -bang -bar SaveWithoutFormattingAndQuit lua require 'utils'.save_file(false, "<bang>" == "!", true)]],
-  [[command! -bang -bar SaveWithFormattingAndQuit  lua require 'utils'.save_file(true, "<bang>" == "!", true)]],
-  [[command! -bang -bar SaveFileAndQuit lua require 'utils'.save_file(nil, "<bang>" == "!", true)]],
+  [[command! -nargs=* -bang -bar SaveWithoutFormattingAndQuit lua require 'utils'.save_file(false, "<bang>" == "!", true, <q-args>)]],
+  [[command! -nargs=* -bang -bar SaveWithFormattingAndQuit  lua require 'utils'.save_file(true, "<bang>" == "!", true, <q-args>)]],
+  [[command! -nargs=* -bang -bar SaveFileAndQuit lua require 'utils'.save_file(nil, "<bang>" == "!", true, <q-args>)]],
 
   -- Map vim commands to our new commands
   [[cnoreabbrev w SaveFile]],

@@ -1,18 +1,12 @@
 local utils = {}
 
-function utils.save_file(format, force, quit)
-  print(format, force)
-  if lvim.format_on_save and format ~= false then
-    vim.lsp.buf.formatting()
-  elseif format then
+function utils.save_file(format, force, quit, files)
+  if (lvim.format_on_save and format ~= false) or format then
     vim.lsp.buf.formatting()
   end
 
-  if force then
-    vim.cmd "write!"
-  else
-    vim.cmd "write"
-  end
+  local bang = force and "!" or ""
+  vim.cmd("write" .. bang .. " " .. (files or ""))
 
   if quit then
     vim.cmd "quit"
