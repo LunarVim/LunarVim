@@ -94,7 +94,7 @@ lvim.lang = {
   },
   c = {
     formatter = {
-      exe = "clang_format",
+      exe = "clang-format",
       args = {},
       stdin = true,
     },
@@ -119,7 +119,7 @@ lvim.lang = {
   },
   cpp = {
     formatter = {
-      exe = "clang_format",
+      exe = "clang-format",
       args = {},
       stdin = true,
     },
@@ -160,7 +160,7 @@ lvim.lang = {
   },
   cs = {
     formatter = {
-      exe = "clang_format",
+      exe = "clang-format",
       args = {},
     },
     linters = {},
