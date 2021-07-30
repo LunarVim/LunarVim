@@ -60,7 +60,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ```
 
 ### snap
-```
+``` lua
 {
   "camspiers/snap",
     rocks = "fzy",
@@ -134,7 +134,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ```
 
 ### diffview.nvim
-```
+``` lua
 {
   "sindrets/diffview.nvim",
     event = "BufRead",
@@ -199,7 +199,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ## Telescope Extensions
 
 ### telescope-fzy-native.nvim
-  ```
+  ``` lua
 {
   "nvim-telescope/telescope-fzy-native.nvim",
   run = "make",
@@ -210,14 +210,14 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ## Colorschemes
 
 ### lsp-colors
-```
+``` lua
 {
   "folke/lsp-colors.nvim",
   event = "BufRead",
 }
 ```
 ### lush.nvim
-```
+``` lua
 {
   "rktjmp/lush.nvim",
 }
@@ -246,7 +246,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
   ```
 
 ### vim-bundler
-  ```
+  ``` lua
 {
   "tpope/vim-bundler",
     cmd = {"Bundler", "Bopen", "Bsplit", "Btabedit"}
@@ -293,7 +293,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 
   Also define keybindings in your `lv-config.lua`
 
-  ```
+  ``` lua
   lvim.builtin.which_key.mappings["Q"]= {
     name = "+Quit",
     s = { "<cmd>lua require('persistence').load()<cr>", "Restore for current dir" },
@@ -382,7 +382,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 ### numb.nvim
-```
+``` lua
 {
   "nacro90/numb.nvim",
     event = "BufRead",
@@ -437,7 +437,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
   ```
 
 ### markdown-preview.nvim
-  ```
+  ``` lua
 {
   "iamcco/markdown-preview.nvim",
   run = "cd app && npm install",
@@ -449,7 +449,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 ### bracey
-```
+``` lua
 {
   "turbio/bracey.vim",
   cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
@@ -469,10 +469,18 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 },
   ```
 
-### neoscroll.nvim
 
 ### lsp-rooter
 
+``` lua
+{
+  "ahmedkhalf/lsp-rooter.nvim",
+    event = "BufRead",
+    config = function()
+      require("lsp-rooter").setup()
+      end,
+}
+```
 ### todo-comments.nvim
   ```
 {

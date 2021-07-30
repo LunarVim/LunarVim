@@ -50,12 +50,13 @@ lvim.keys.normal_mode = {
 }
 ```
 
-Or use the utility functions 
-* add_keymap_insert_mode
-* add_keymap_normal_mode
-* add_keymap_term_mode
-* add_keymap_visual_block_mode
-* add_keymap_visual_mode
+Or use the utility functions
+
+*    add_keymap_insert_mode
+*    add_keymap_normal_mode
+*    add_keymap_term_mode
+*    add_keymap_visual_block_mode
+*    add_keymap_visual_mode
 
 ``` lua
 require("utils").add_keymap_insert_mode({ silent = true }, {
@@ -126,3 +127,26 @@ lvim.builtin.which_key.mappings = {
   },
 }
 ```
+
+## Leader Key
+The default leader key is `Space`.  This can be changed with the following
+
+```
+lvim.keys.leader_key = "space"
+
+```
+
+## Cursor Movement
+
+By default, when pressing left/right cursor keys, Vim will not move to the previous/next line after reaching first/last character in the line. This can be quite annoying for new users. Fortunately this behaviour can be easily changed by putting this in your vimrc file:
+
+To enable:
+``` lua
+lvim.line_wrap_cursor_movement = true
+
+```
+Enabling maps the following command
+``` vim
+set whichwrap+=<,>,h,l,[,]
+```
+

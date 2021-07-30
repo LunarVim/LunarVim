@@ -35,6 +35,17 @@ lvim.builtin.terminal.active = true
 
 To learn how to extend the configuration of these core plugins [go here](./extending-configuration-for-core-plugins.md)
 
+# Configuring Plugins
+
+Settings for core plugins are accessible through `lvim.builtin`.   You can press `TAB` to get autocomplete suggestions to explore these settings.
+
+Example settings
+``` lua
+lvim.builtin.compe.allow_prefix_unmatch = false
+lvim.builtin.compe.autocomplete = true
+lvim.builtin.compe.debug = false
+```
+
 # Removing Plugins
 
   Removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system.  Any plugins left in the `start` directory will still autostart.  To remove them completely, run `:PackerClean`

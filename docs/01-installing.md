@@ -24,7 +24,7 @@ Make sure you have the newest version of Neovim (0.5).
 bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
 ```
 
-After installation run `nvim` and then `:PackerInstall`
+After installation run `lvim` and then `:PackerInstall`
 
 ## I already have a Neovim config
 
