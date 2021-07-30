@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = function()
-  lvim.builtin.dap = {
+  lvim.builtin.autopairs = {
     active = true,
   }
 end
