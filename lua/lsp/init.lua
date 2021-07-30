@@ -1,5 +1,5 @@
 local M = {}
-
+local u = require "utils"
 function M.config()
   require("lsp.kind").setup()
   require("lsp.handlers").setup()
@@ -30,16 +30,13 @@ end
 
 local function formatter_handler(client)
   local buffer_filetype = vim.bo.filetype
+  local ext_provider = lvim.lang[buffer_filetype].formatter.exe
 
-  if not client.resolved_capabilities.document_formatting then
-    lvim.lang[buffer_filetype].formatter.override_lsp = true
-    -- error "Unable to format with LSP. Using null-ls instead"
-    return
-  end
-
-  if lvim.lang[buffer_filetype].formatter.override_lsp then
+  if ext_provider then
     client.resolved_capabilities.document_formatting = false
-    -- error "Override flag detected. Using null-ls for formatting"
+    u.lvim_log(
+      string.format("Overriding [%s] formatting if exists, Using provider [%s] instead", client.name, ext_provider)
+    )
   end
 end
 
