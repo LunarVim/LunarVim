@@ -141,9 +141,7 @@ return {
   {
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
-    config = function()
-      require("core.dashboard").setup()
-    end,
+    config = require("core.dashboard").setup,
     disable = not lvim.builtin.dashboard.active,
   },
 
@@ -151,9 +149,7 @@ return {
   {
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
-    config = function()
-      require("core.terminal").setup()
-    end,
+    config = require("core.terminal").setup,
     disable = not lvim.builtin.terminal.active,
   },
 }
