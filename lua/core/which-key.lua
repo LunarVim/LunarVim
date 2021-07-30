@@ -97,6 +97,7 @@ M.config = function()
         i = { "<cmd>PackerInstall<cr>", "Install" },
         r = { "<cmd>lua require('utils').reload_lv_config()<cr>", "Reload" },
         s = { "<cmd>PackerSync<cr>", "Sync" },
+        S = { "<cmd>PackerStatus<cr>", "Status" },
         u = { "<cmd>PackerUpdate<cr>", "Update" },
       },
 
@@ -151,7 +152,6 @@ M.config = function()
           "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
-        l = { "<cmd>silent lua require('lint').try_lint()<cr>", "Lint" },
         q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },

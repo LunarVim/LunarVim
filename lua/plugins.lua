@@ -163,9 +163,9 @@ return {
   {
     "glepnir/galaxyline.nvim",
     config = function()
-      require "core.galaxyline"
+      local galaxyline = require("core.galaxyline").setup()
       if lvim.builtin.galaxyline.on_config_done then
-        lvim.builtin.galaxyline.on_config_done(require "galaxyline")
+        lvim.builtin.galaxyline.on_config_done(galaxyline)
       end
     end,
     event = "BufWinEnter",
