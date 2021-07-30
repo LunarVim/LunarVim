@@ -58,11 +58,13 @@ M.setup = function()
 
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
-  g.nvim_tree_bindings = {
-    { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-    { key = "h", cb = tree_cb "close_node" },
-    { key = "v", cb = tree_cb "vsplit" },
-  }
+  if not g.nvim_tree_bindings then
+    g.nvim_tree_bindings = {
+      { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+      { key = "h", cb = tree_cb "close_node" },
+      { key = "v", cb = tree_cb "vsplit" },
+    }
+  end
 end
 --
 --
