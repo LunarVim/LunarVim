@@ -80,6 +80,10 @@ lvim.builtin.compe.autocomplete = true
 
 -- keymappings
 lvim.leader = "space"
+lvim.keys.normal_mode["[d"] = "<PageUp>"
+lvim.keys.normal_mode["]d"] = "<PageDown>"
+lvim.keys.insert_mode["<C-s>"] = { ":w<cr>", { silent = true } }
+lvim.keys.insert_mode["<C-c>"] = { "<ESC>", { silent = true } }
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
