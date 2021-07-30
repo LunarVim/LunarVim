@@ -73,6 +73,20 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   }
 -- }
 
+-- custom LSP root_dir
+-- you can set your own root_dir pattern for a specific language server
+-- Example:
+-- local nvim_lsp = require("lspconfig")
+-- lvim.lang.python.lsp.setup.root_dir = nvim_lsp.util.root_pattern('.git')
+--
+-- Important: root_dir must be a function and can be generic
+-- Example:
+-- root_dir = function(fname)
+--    return nvim_lsp.util.root_pattern '.git'(fname) or nvim_lsp.util.path.dirname(fname)
+-- end
+
+-- python
+
 -- Additional Plugins
 -- lvim.plugins = {
 --     {"folke/tokyonight.nvim"}, {
