@@ -88,7 +88,7 @@ lvim = {
   },
 
   plugins = {
-    -- use lv-config.lua for this not put here
+    -- use config.lua for this not put here
   },
 
   autocommands = {},

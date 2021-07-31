@@ -32,7 +32,7 @@ M.config = function()
         background = "Normal",
       },
     },
-    -- Add executables on the lv-config file
+    -- Add executables on the config.lua
     -- { exec, keymap, name}
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}

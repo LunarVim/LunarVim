@@ -38,9 +38,9 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiar
 * The latest changes to LunarVim require you to [remove it completely](https://github.com/ChristianChiarulli/LunarVim/wiki/Uninstalling-LunarVim) before upgrading
 * Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
 * To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
-* Your personal configuration file (`lv-config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
+* Your personal configuration file (`config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
 * If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
-* Many options formerly available in `lv-config.lua` have been renamed.  For details [look here](https://github.com/ChristianChiarulli/LunarVim/wiki/Breaking-changes-in-rolling)
+* Many options formerly available in `config.lua` have been renamed.  For details [look here](https://github.com/ChristianChiarulli/LunarVim/wiki/Breaking-changes-in-rolling)
 
 ### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
@@ -60,13 +60,13 @@ then run nvim and wait for treesitter to finish the installation
 
 Just enter `:LspInstall` followed by `<TAB>` to see your options
 
-**NOTE** I recommend installing `lua` for autocomplete in `lv-config.lua`
+**NOTE** I recommend installing `lua` for autocomplete in `config.lua`
 
 For the julia language server look [here](https://github.com/ChristianChiarulli/LunarVim/wiki/Enabling-a-language-server#julia-support)
 
 ## Configuration file
 
-To activate other plugins and language features use the `lv-config.lua` file provided in the `nvim` folder (`~/.config/nvim/lv-config.lua`) in the master branch or (`~/.config/lvim/lv-config.lua`) on rolling
+To activate other plugins and language features use the `lv-config.lua` file provided in the `nvim` folder (`~/.config/nvim/lv-config.lua`) in the master branch or (`~/.config/lvim/config.lua`) on rolling
 
 Example:
 
