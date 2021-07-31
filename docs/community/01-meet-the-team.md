@@ -6,4 +6,6 @@ Christian Chiarulli
 
 [Nelson Jovel](https://github.com/rebuilt)
 
+[Sngmin Chae](https://github.com/chaeing)
+
 (other devs pls make pr and add your name and a link to whatever you want)
