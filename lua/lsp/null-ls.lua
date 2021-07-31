@@ -10,7 +10,7 @@ function M.get_registered_providers_by_filetype(ft)
   local matches = {}
   for _, provider in pairs(M.requested_providers) do
     if vim.tbl_contains(provider.filetypes, ft) then
-      table.insert(matches, provider.name)
+      table.insert(matches, provider._opts.command)
     end
   end
 
