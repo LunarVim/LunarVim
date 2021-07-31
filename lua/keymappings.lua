@@ -99,7 +99,7 @@ if vim.fn.has "mac" == 1 then
   keymaps.normal_mode[8][1] = "<A-Right>"
 end
 
-vim.g.mapleader = lvim.leader == "space" and " " or lvim.leader
+vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
 
 -- navigate tab completion with <c-j> and <c-k>
 -- runs conditionally
