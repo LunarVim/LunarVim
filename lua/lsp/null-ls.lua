@@ -10,7 +10,13 @@ function M.get_registered_providers_by_filetype(ft)
   local matches = {}
   for _, provider in pairs(M.requested_providers) do
     if vim.tbl_contains(provider.filetypes, ft) then
-      table.insert(matches, provider._opts.command)
+      local provider_name = provider.name
+      -- special case: show "eslint_d" instead of eslint
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
+      if string.find(provider._opts.command, "eslint_d") then
+        provider_name = "eslint_d"
+      end
+      table.insert(matches, provider_name)
     end
   end
 
@@ -19,7 +25,7 @@ end
 
 local function is_nodejs_provider(provider)
   for _, local_provider in ipairs(nodejs_local_providers) do
-    if local_provider == provider.exe then
+    if local_provider == provider._opts.command then
       return true
     end
   end
@@ -46,7 +52,7 @@ end
 local function validate_provider(provider)
   local is_local, provider_path = is_provider_found(provider)
   if not provider_path then
-    u.lvim_log(string.format("Unable to find the path for: [%s]", provider))
+    u.lvim_log(string.format("Unable to find the path for: [%s]", vim.inspect(provider)))
     return false
   end
   if is_local then
