@@ -32,8 +32,6 @@ M.setup = function()
     return
   end
 
-  local utils = require "utils"
-
   -- NOTE: if someone defines colors but doesn't have them then this will break
   local palette_status_ok, colors = pcall(require, lvim.colorscheme .. ".palette")
   if not palette_status_ok then

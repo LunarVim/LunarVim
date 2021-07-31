@@ -32,7 +32,8 @@ local function formatter_handler(client)
   local formatter_exe = lvim.lang[vim.bo.filetype].formatters[1].exe
   if formatter_exe and formatter_exe ~= "" then
     client.resolved_capabilities.document_formatting = false
-    __FORMATTER_OVERRIDE = true
+    -- NOTE: do we still need __FORMATTER_OVERRIDE?
+    -- __FORMATTER_OVERRIDE = true
     u.lvim_log(
       string.format("Overriding [%s] formatting if exists, Using provider [%s] instead", client.name, formatter_exe)
     )
