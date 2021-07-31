@@ -1,14 +1,12 @@
-local utils = require "utils"
-
 local opts = {
-  nnoremap = { noremap = true, silent = true },
-  inoremap = { noremap = true, silent = true },
-  vnoremap = { noremap = true, silent = true },
-  xnoremap = { noremap = true, silent = true },
-  generic = { silent = true },
+  insert_mode = { noremap = true, silent = true },
+  normal_mode = { noremap = true, silent = true },
+  visual_mode = { noremap = true, silent = true },
+  visual_block_mode = { noremap = true, silent = true },
+  term_mode = { silent = true },
 }
 
-local default_keys = {
+local keymaps = {
   insert_mode = {
     -- I hate escape
     { "jk", "<ESC>" },
@@ -83,33 +81,17 @@ local default_keys = {
 
 if vim.fn.has "mac" == 1 then
   -- TODO: fix this
-  default_keys.normal_mode[5][1] = "<A-Up>"
-  default_keys.normal_mode[6][1] = "<A-Down>"
-  default_keys.normal_mode[7][1] = "<A-Left>"
-  default_keys.normal_mode[8][1] = "<A-Right>"
+  keymaps.normal_mode[5][1] = "<A-Up>"
+  keymaps.normal_mode[6][1] = "<A-Down>"
+  keymaps.normal_mode[7][1] = "<A-Left>"
+  keymaps.normal_mode[8][1] = "<A-Right>"
 end
 
-if lvim.leader == " " or lvim.leader == "space" then
-  vim.g.mapleader = " "
-else
-  vim.g.mapleader = lvim.leader
-end
-
-local function get_user_keys(mode)
-  if lvim.keys[mode] == nil then
-    return default_keys[mode]
-  else
-    return lvim.keys[mode]
-  end
-end
-
-utils.add_keymap_normal_mode(opts.nnoremap, get_user_keys "normal_mode")
-utils.add_keymap_insert_mode(opts.inoremap, get_user_keys "insert_mode")
-utils.add_keymap_visual_mode(opts.vnoremap, get_user_keys "visual_mode")
-utils.add_keymap_visual_block_mode(opts.xnoremap, get_user_keys "visual_block_mode")
-utils.add_keymap_term_mode(opts.generic, get_user_keys "term_mode")
+vim.g.mapleader = lvim.leader == "space" and " " or lvim.leader
 
 -- navigate tab completion with <c-j> and <c-k>
 -- runs conditionally
 vim.cmd 'inoremap <expr> <C-j> pumvisible() ? "\\<C-n>" : "\\<C-j>"'
 vim.cmd 'inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<C-k>"'
+
+return { keymaps = keymaps, opts = opts }
