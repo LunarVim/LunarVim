@@ -29,13 +29,12 @@ local function lsp_highlight_document(client)
 end
 
 local function formatter_handler(client)
-  local buffer_filetype = vim.bo.filetype
-  local ext_provider = lvim.lang[buffer_filetype].formatter.exe
-
-  if ext_provider then
+  local formatter_exe = lvim.lang[vim.bo.filetype].formatters[1].exe
+  if formatter_exe and formatter_exe ~= "" then
     client.resolved_capabilities.document_formatting = false
+    __FORMATTER_OVERRIDE = true
     u.lvim_log(
-      string.format("Overriding [%s] formatting if exists, Using provider [%s] instead", client.name, ext_provider)
+      string.format("Overriding [%s] formatting if exists, Using provider [%s] instead", client.name, formatter_exe)
     )
   end
 end
