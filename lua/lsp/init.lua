@@ -1,9 +1,14 @@
 local M = {}
 local u = require "utils"
+
 function M.config()
-  require("lsp.kind").setup()
+  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
+
+  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+  end
+
   require("lsp.handlers").setup()
-  require("lsp.signs").setup()
 end
 
 local function lsp_highlight_document(client)
@@ -28,16 +33,6 @@ local function lsp_highlight_document(client)
   end
 end
 
-local function formatter_handler(client)
-  local formatters = lvim.lang[vim.bo.filetype].formatters
-  if not vim.tbl_isempty(formatters) then
-    client.resolved_capabilities.document_formatting = false
-    u.lvim_log(
-      string.format("Overriding [%s] formatting if exists, Using provider [%s] instead", client.name, formatters[1].exe)
-    )
-  end
-end
-
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -56,7 +51,12 @@ function M.common_on_init(client, bufnr)
     lvim.lsp.on_init_callback(client, bufnr)
     return
   end
-  formatter_handler(client)
+
+  local formatters = lvim.lang[vim.bo.filetype].formatters
+  if not vim.tbl_isempty(formatters) then
+    client.resolved_capabilities.document_formatting = false
+    u.lvim_log(string.format("Overriding [%s] formatter with [%s]", client.name, formatters[1].exe))
+  end
 end
 
 function M.common_on_attach(client, bufnr)
@@ -64,18 +64,17 @@ function M.common_on_attach(client, bufnr)
     lvim.lsp.on_attach_callback(client, bufnr)
   end
   lsp_highlight_document(client)
-  require("lsp.keybinds").setup()
   require("lsp.null-ls").setup(vim.bo.filetype)
 end
 
 function M.setup(lang)
-  local lang_server = lvim.lang[lang].lsp
-  local provider = lang_server.provider
-  if require("utils").check_lsp_client_active(provider) then
+  local lsp = lvim.lang[lang].lsp
+  if require("utils").check_lsp_client_active(lsp.provider) then
     return
   end
 
-  require("lspconfig")[provider].setup(lang_server.setup)
+  local lspconfig = require "lspconfig"
+  lspconfig[lsp.provider].setup(lsp.setup)
 end
 
 return M

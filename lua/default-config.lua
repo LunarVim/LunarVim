@@ -34,19 +34,55 @@ lvim = {
   },
 
   lsp = {
+    completion = {
+      item_kind = {
+        "   (Text) ",
+        "   (Method)",
+        "   (Function)",
+        "   (Constructor)",
+        " ﴲ  (Field)",
+        "[] (Variable)",
+        "   (Class)",
+        " ﰮ  (Interface)",
+        "   (Module)",
+        " 襁 (Property)",
+        "   (Unit)",
+        "   (Value)",
+        " 練 (Enum)",
+        "   (Keyword)",
+        "   (Snippet)",
+        "   (Color)",
+        "   (File)",
+        "   (Reference)",
+        "   (Folder)",
+        "   (EnumMember)",
+        " ﲀ  (Constant)",
+        " ﳤ  (Struct)",
+        "   (Event)",
+        "   (Operator)",
+        "   (TypeParameter)",
+      },
+    },
     diagnostics = {
+      signs = {
+        active = true,
+        values = {
+          { name = "LspDiagnosticsSignError", text = "" },
+          { name = "LspDiagnosticsSignWarning", text = "" },
+          { name = "LspDiagnosticsSignHint", text = "" },
+          { name = "LspDiagnosticsSignInformation", text = "" },
+        },
+      },
       virtual_text = {
         prefix = "",
         spacing = 0,
       },
-      signs = true,
       underline = true,
       severity_sort = true,
     },
     override = {},
     document_highlight = true,
     popup_border = "single",
-    default_keybinds = true,
     on_attach_callback = nil,
     on_init_callback = nil,
   },
@@ -60,9 +96,10 @@ lvim = {
 }
 
 local schemas = nil
-local common_on_attach = require("lsp").common_on_attach
-local common_capabilities = require("lsp").common_capabilities()
-local common_on_init = require("lsp").common_on_init
+local lsp = require "lsp"
+local common_on_attach = lsp.common_on_attach
+local common_capabilities = lsp.common_capabilities()
+local common_on_init = lsp.common_on_init
 local status_ok, jsonls_settings = pcall(require, "nlspsettings.jsonls")
 if status_ok then
   schemas = jsonls_settings.get_default_schemas()
