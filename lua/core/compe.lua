@@ -58,6 +58,12 @@ M.setup = function()
     end
   end
 
+  local remap = vim.api.nvim_set_keymap
+
+  remap("i", "<Tab>", 'pumvisible() ? "<C-n>" : "<Tab>"', { silent = true, noremap = true, expr = true })
+
+  remap("i", "<S-Tab>", 'pumvisible() ? "<C-p>" : "<S-Tab>"', { silent = true, noremap = true, expr = true })
+
   -- Use (s-)tab to:
   --- move to prev/next item in completion menuone
   --- jump to prev/next snippet's placeholder
@@ -101,11 +107,11 @@ end
 
 M.set_tab_keybindings = function()
   local file_type = vim.fn.expand "%:e"
-  if is_excluded(file_type) == false then
-    vim.api.nvim_buf_set_keymap(0, "i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-    vim.api.nvim_buf_set_keymap(0, "s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-    vim.api.nvim_buf_set_keymap(0, "i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-    vim.api.nvim_buf_set_keymap(0, "s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-  end
+  -- if is_excluded(file_type) == false then
+  --   vim.api.nvim_buf_set_keymap(0, "i", "<Tab>", "v:lua.tab_complete()", { expr = true })
+  --   vim.api.nvim_buf_set_keymap(0, "s", "<Tab>", "v:lua.tab_complete()", { expr = true })
+  --   vim.api.nvim_buf_set_keymap(0, "i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+  --   vim.api.nvim_buf_set_keymap(0, "s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+  -- end
 end
 return M
