@@ -56,7 +56,7 @@ local keymaps = {
     { "gr", "<cmd>lua vim.lsp.buf.references()<CR>" },
     { "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
     { "gl", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>" },
-    { "gp", "<cmd>lua require('lsp.service').peek_definition()<CR>" },
+    { "gp", "<cmd>lua require'lsp.peek'.Peek('definition')<CR>" },
     { "K", "<cmd>lua vim.lsp.buf.hover()<CR>" },
     { "<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<CR>" },
     { "<C-n>", "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<CR>" },
