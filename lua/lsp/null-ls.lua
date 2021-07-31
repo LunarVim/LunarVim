@@ -77,7 +77,10 @@ function M.setup(filetype)
     -- FIXME: why doesn't this work?
     -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
     -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
-    table.insert(M.requested_providers, builtin_diagnoser)
+    -- NOTE: validate before inserting to table
+    if validate_provider(builtin_diagnoser) then
+      table.insert(M.requested_providers, builtin_diagnoser)
+    end
     -- special case: fallback to "eslint"
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
     if linter.exe == "eslint_d" then
@@ -86,6 +89,7 @@ function M.setup(filetype)
     u.lvim_log(string.format("Using linter provider: [%s]", linter.exe))
   end
 
+  -- FIXME: why would we need to remove if we never add?
   for idx, provider in pairs(M.requested_providers) do
     if not validate_provider(provider) then
       table.remove(M.requested_providers, idx)
