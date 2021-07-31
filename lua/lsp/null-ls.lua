@@ -6,6 +6,17 @@ local nodejs_local_providers = { "prettier", "prettierd", "prettier_d_slim", "es
 
 M.requested_providers = {}
 
+function M.get_registered_providers_by_filetype(ft)
+  local matches = {}
+  for _, provider in pairs(M.requested_providers) do
+    if vim.tbl_contains(provider.filetypes, ft) then
+      table.insert(matches, provider.name)
+    end
+  end
+
+  return matches
+end
+
 local function is_nodejs_provider(provider)
   for _, local_provider in ipairs(nodejs_local_providers) do
     if local_provider == provider.exe then
