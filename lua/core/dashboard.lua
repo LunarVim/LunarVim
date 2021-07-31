@@ -43,8 +43,7 @@ M.config = function()
       },
       d = {
         description = { "  Settings           " },
-        -- command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
-        command = ":e ~/.config/lvim/lv-config.lua",
+        command = ":e " .. USER_CONFIG_PATH,
       },
     },
 

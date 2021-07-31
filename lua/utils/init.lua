@@ -81,7 +81,7 @@ end
 
 function utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd "source ~/.config/lvim/lv-config.lua"
+  vim.cmd("source " .. USER_CONFIG_PATH)
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
