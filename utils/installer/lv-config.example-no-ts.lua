@@ -48,6 +48,21 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
+-- set a formatter if you want to override the default lsp one (if it exists)
+-- lvim.lang.python.formatters = {
+--   {
+--     exe = "black",
+--     args = {}
+--   }
+-- }
+-- set an additional linter
+-- lvim.lang.python.linters = {
+--   {
+--     exe = "flake8",
+--     args = {}
+--   }
+-- }
+
 -- Additional Plugins
 -- lvim.plugins = {
 --     {"folke/tokyonight.nvim"}, {

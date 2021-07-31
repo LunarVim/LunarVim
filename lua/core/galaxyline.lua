@@ -1,10 +1,14 @@
 local M = {}
 
-M.setup = function()
-  local status_ok, gl = pcall(require, "galaxyline")
-  if not status_ok then
-    return
-  end
+
+local utils = require "utils"
+
+-- NOTE: if someone defines colors but doesn't have them then this will break
+local palette_status_ok, colors = pcall(require, lvim.colorscheme .. ".palette")
+if not palette_status_ok then
+  colors = lvim.builtin.galaxyline.colors
+end
+
 
   -- NOTE: if someone defines colors but doesn't have them then this will break
   local palette_status_ok, colors = pcall(require, lvim.colorscheme .. ".palette")
@@ -200,36 +204,23 @@ M.setup = function()
     },
   })
 
-  -- TODO: this function doesn't need to be this complicated
-  local function get_attached_provider_name(msg)
-    msg = msg or "LSP Inactive"
-    local buf_ft = vim.bo.filetype
-    local buf_clients = vim.lsp.buf_get_clients()
-    if next(buf_clients) == nil then
-      return msg
-    end
 
-    local utils = require "utils"
-    local config = require("null-ls.config").get()
-    local builtins = require "null-ls.builtins"
-    -- concat all the builtin formatters and linters from null-ls
-    local all_things = builtins.formatting
-    for k, v in pairs(builtins.diagnostics) do
-      all_things[k] = v
-    end
+local function get_attached_provider_name(msg)
+  msg = msg or "LSP Inactive"
+  local buf_clients = vim.lsp.buf_get_clients()
+  if next(buf_clients) == nil then
+    return msg
+  end
+  local buf_ft = vim.bo.filetype
+  local buf_client_names = {}
+  local null_ls_providers = require("lsp.null-ls").requested_providers
+  for _, client in pairs(buf_clients) do
+    if client.name == "null-ls" then
+      for _, provider in pairs(null_ls_providers) do
+        if vim.tbl_contains(provider.filetypes, buf_ft) then
+          if not vim.tbl_contains(buf_client_names, provider.name) then
+            table.insert(buf_client_names, provider.name)
 
-    -- if we open multiple filetypes in the same session
-    -- null-ls will register multiple formatter/linters
-    -- but only use the ones that support vim.bo.filetype
-    -- so we need to filter them
-    local buf_client_names = {}
-    for _, client in pairs(buf_clients) do
-      if client.name == "null-ls" then
-        -- for every registered formatter/linter in the current buffer
-        for _, v in pairs(config._names) do
-          -- show only the ones that are being used for the current filetype
-          if utils.has_value(all_things[v].filetypes, buf_ft) then
-            table.insert(buf_client_names, v)
           end
         end
       else

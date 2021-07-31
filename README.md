@@ -90,10 +90,23 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
-lvim.lang.python.formatter.exe = "black"
-lvim.lang.python.linters = ""
-
 lvim.lsp.diagnostics.virtual_text = false
+
+-- set a formatter if you want to override the default lsp one (if it exists)
+lvim.lang.python.formatters = {
+  {
+    exe = "black",
+    args = {}
+  }
+}
+-- set an additional linter
+lvim.lang.python.linters = {
+  {
+    exe = "flake8",
+    args = {}
+  }
+}
+
 
 -- Additional Plugins
 lvim.plugins = {
@@ -145,11 +158,6 @@ To update plugins:
 To update LunarVim:
 
 ```bash
-# Master Branch
-cd ~/.config/nvim && git pull
-:PackerSync  
-
-# Rolling Branch
 cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
