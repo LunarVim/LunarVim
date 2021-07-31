@@ -1153,6 +1153,7 @@ lvim.lang = {
           "6008",
         },
         on_attach = common_on_attach,
+        on_init = common_on_init,
         capabilities = common_capabilities,
       },
     },
