@@ -12,7 +12,11 @@ M.config = function()
     max_abbr_width = 100,
     max_kind_width = 100,
     max_menu_width = 100,
-    documentation = true,
+    documentation = {
+      border = "single",
+      winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    },
+    -- documentation = true,
 
     source = {
       path = { kind = "   (Path)" },
