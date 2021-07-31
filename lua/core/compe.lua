@@ -105,7 +105,7 @@ M.setup = function()
     end
   end
 
-  local keymap = require "utils.keymap"
+  local keymap = require("core.service").keymap
   keymap.load(lvim.builtin.compe.keymap.values, lvim.builtin.compe.keymap.opts)
 end
 

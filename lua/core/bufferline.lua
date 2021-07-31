@@ -12,5 +12,5 @@ lvim.builtin.bufferline = {
   },
 }
 
-local keymap = require "utils.keymap"
+local keymap = require("core.service").keymap
 keymap.load(lvim.builtin.bufferline.keymap.values, lvim.builtin.bufferline.keymap.opts)

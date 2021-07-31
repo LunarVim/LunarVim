@@ -42,10 +42,10 @@ end
 require("settings").load_commands()
 autocmds.define_augroups(lvim.autocommands)
 
-local keymap = require "utils.keymap"
+local service = require "core.service"
 local default_keymaps = require "keymappings"
-keymap.load(default_keymaps.keymaps, default_keymaps.opts)
-keymap.load(lvim.keys, default_keymaps.opts)
+service.keymap.load(default_keymaps.keymaps, default_keymaps.opts)
+service.keymap.load(lvim.keys, default_keymaps.opts)
 
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
