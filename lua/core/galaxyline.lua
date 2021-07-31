@@ -202,17 +202,22 @@ table.insert(gls.right, {
 
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
-
-  local buf_ft = vim.bo.filetype
   local buf_clients = vim.lsp.buf_get_clients()
   if next(buf_clients) == nil then
     return msg
   end
+  local buf_ft = vim.bo.filetype
   local buf_client_names = {}
+  local null_ls_providers = require("lsp.null-ls").requested_providers
   for _, client in pairs(buf_clients) do
     if client.name == "null-ls" then
-      table.insert(buf_client_names, lvim.lang[buf_ft].linters[1])
-      table.insert(buf_client_names, lvim.lang[buf_ft].formatter.exe)
+      for _, provider in pairs(null_ls_providers) do
+        if vim.tbl_contains(provider.filetypes, buf_ft) then
+          if not vim.tbl_contains(buf_client_names, provider.name) then
+            table.insert(buf_client_names, provider.name)
+          end
+        end
+      end
     else
       table.insert(buf_client_names, client.name)
     end

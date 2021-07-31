@@ -1,55 +1,78 @@
-local utils = require "utils"
-local service = require "lsp.service"
-local null_ls = require "lsp.null-ls"
 local M = {}
-
+local u = require "utils"
 function M.config()
   require("lsp.kind").setup()
   require("lsp.handlers").setup()
   require("lsp.signs").setup()
+end
+
+local function lsp_highlight_document(client)
+  if lvim.lsp.document_highlight == false then
+    return -- we don't need further
+  end
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec(
+      [[
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
+      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]],
+      false
+    )
+  end
+end
+
+local function formatter_handler(client)
+  local formatter_exe = lvim.lang[vim.bo.filetype].formatters[1].exe
+  if formatter_exe and formatter_exe ~= "" then
+    client.resolved_capabilities.document_formatting = false
+    __FORMATTER_OVERRIDE = true
+    u.lvim_log(
+      string.format("Overriding [%s] formatting if exists, Using provider [%s] instead", client.name, formatter_exe)
+    )
+  end
+end
+
+function M.common_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
+  return capabilities
+end
+
+function M.common_on_init(client, bufnr)
+  if lvim.lsp.on_init_callback then
+    lvim.lsp.on_init_callback(client, bufnr)
+    return
+  end
+  formatter_handler(client)
+end
+
+function M.common_on_attach(client, bufnr)
+  if lvim.lsp.on_attach_callback then
+    lvim.lsp.on_attach_callback(client, bufnr)
+  end
+  lsp_highlight_document(client)
   require("lsp.keybinds").setup()
+  require("lsp.null-ls").setup(vim.bo.filetype)
 end
 
 function M.setup(lang)
   local lang_server = lvim.lang[lang].lsp
   local provider = lang_server.provider
-  if utils.check_lsp_client_active(provider) then
-    return
-  end
-
-  local overrides = lvim.lsp.override
-
-  if utils.is_table(overrides) then
-    if utils.has_value(overrides, lang) then
-      return
-    end
-  end
-
-  if utils.is_string(overrides) then
-    if overrides == lang then
-      return
-    end
-  end
-  local sources = null_ls.setup(lang)
-
-  for _, source in pairs(sources) do
-    local method = source.method
-    local format_method = "NULL_LS_FORMATTING"
-
-    if utils.is_table(method) then
-      if utils.has_value(method, format_method) then
-        lang_server.setup.on_attach = service.no_formatter_on_attach
-      end
-    end
-
-    if utils.is_string(method) then
-      if method == format_method then
-        lang_server.setup.on_attach = service.no_formatter_on_attach
-      end
-    end
-  end
-
-  if provider == "" or provider == nil then
+  if require("utils").check_lsp_client_active(provider) then
     return
   end
 
