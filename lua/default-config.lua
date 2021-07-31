@@ -41,6 +41,7 @@ lvim = {
       },
       signs = true,
       underline = true,
+      severity_sort = true,
     },
     override = {},
     document_highlight = true,
