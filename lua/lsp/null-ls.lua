@@ -27,10 +27,6 @@ local function is_nodejs_provider(provider)
 end
 
 local function is_provider_found(provider)
-  -- special case: fallback to "eslint"
-  -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
-  provider._opts.command = provider._opts.command == "eslint_d" and "eslint" or provider._opts.command
-
   local retval = { is_local = false, path = nil }
   if vim.fn.executable(provider._opts.command) == 1 then
     return false, provider._opts.command
@@ -76,6 +72,11 @@ function M.setup(filetype)
     -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
     -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
     table.insert(M.requested_providers, builtin_diagnoser)
+    -- special case: fallback to "eslint"
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
+    if linter.exe == "eslint_d" then
+      table.insert(M.requested_providers, null_ls.builtins.diagnostics.eslint.with { command = "eslint_d" })
+    end
     u.lvim_log(string.format("Using linter provider: [%s]", linter.exe))
   end
 
