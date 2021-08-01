@@ -157,12 +157,6 @@ function utils.gsub_args(args)
   return args
 end
 
-function utils.lvim_log(msg)
-  if lvim.debug then
-    vim.notify(msg, vim.log.levels.DEBUG)
-  end
-end
-
 return utils
 
 -- TODO: find a new home for these autocommands

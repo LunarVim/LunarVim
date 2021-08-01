@@ -36,7 +36,10 @@ M.config = function()
     -- { exec, keymap, name}
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
-    execs = { { "lazygit", "gg", "LazyGit" } },
+    execs = {
+      { "lazygit", "gg", "LazyGit" },
+      { "lnav ~/.cache/nvim/lunarvim.log", "Li", "Interactive log viewer [lnav]" },
+    },
   }
 end
 

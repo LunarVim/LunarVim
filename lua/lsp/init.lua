@@ -1,5 +1,5 @@
 local M = {}
-local u = require "utils"
+local log = require("utils.log").get_default()
 
 function M.config()
   vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
@@ -111,7 +111,7 @@ function M.common_on_init(client, bufnr)
   local formatters = lvim.lang[vim.bo.filetype].formatters
   if not vim.tbl_isempty(formatters) and formatters[1]["exe"] ~= nil and formatters[1].exe ~= "" then
     client.resolved_capabilities.document_formatting = false
-    u.lvim_log(string.format("Overriding [%s] formatter with [%s]", client.name, formatters[1].exe))
+    log.debug("Overriding language server [", client.name, "] with format provider [", formatters[1].exe, "]")
   end
 end
 

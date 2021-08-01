@@ -173,6 +173,7 @@ M.config = function()
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
         },
+        l = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
       },
 
       s = {
