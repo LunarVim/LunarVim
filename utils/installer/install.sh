@@ -15,6 +15,11 @@ installnodeubuntu() {
 	sudo apt install npm
 }
 
+installnodetermux() {
+	apt install nodejs
+	apt install npm
+}
+
 moveoldlvim() {
 	echo "Not installing LunarVim"
 	echo "Please move your ~/.local/share/lunarvim folder before installing"
@@ -49,6 +54,7 @@ installnode() {
 	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
 	[ -f "/etc/gentoo-release" ] && installnodegentoo
+	[ -d "/data/data/com.termux" ] && installnodetermux
 	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
 }
@@ -61,6 +67,10 @@ installpiponmac() {
 
 installpiponubuntu() {
 	sudo apt install python3-pip >/dev/null
+}
+
+installpipontermux() {
+	apt install python
 }
 
 installpiponarch() {
@@ -82,6 +92,7 @@ installpip() {
 	[ -f "/etc/arch-release" ] && installpiponarch
 	[ -f "/etc/fedora-release" ] && installpiponfedora
 	[ -f "/etc/gentoo-release" ] && installpipongentoo
+	[ -d "/data/data/com.termux" ] && installpipontermux
 	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
@@ -100,6 +111,14 @@ installpacker() {
 }
 
 cloneconfig() {
+	if [ -d "/data/data/com.termux" ]; then
+		sudo() {
+			eval "$@"
+		}
+		bin_path="$HOME/../usr/bin"
+	else
+		bin_path='/usr/local/bin'
+	fi
 	echo "Cloning LunarVim configuration"
 	mkdir -p ~/.local/share/lunarvim
 	case "$@" in
@@ -112,8 +131,8 @@ cloneconfig() {
 		;;
 	esac
 	mkdir -p "$HOME/.config/lvim"
-	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "/usr/local/bin"
-	sudo chmod a+rx /usr/local/bin/lvim
+	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" $bin_path
+	sudo chmod a+rx $bin_path/lvim
 	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example-no-ts.lua" "$HOME/.config/lvim/config.lua"
 
 	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
@@ -162,6 +181,12 @@ installonubuntu() {
 	npm install -g tree-sitter-cli
 }
 
+installtermux() {
+	apt install ripgrep fzf
+	pip install neovim-remote
+	npm install -g tree-sitter-cli
+}
+
 installonarch() {
 	sudo pacman -S ripgrep fzf
 	pip3 install neovim-remote
@@ -185,6 +210,7 @@ installextrapackages() {
 	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
 	[ -f "/etc/gentoo-release" ] && installongentoo
+	[ -d "/data/data/com.termux" ] && installtermux
 	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
