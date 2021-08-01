@@ -657,7 +657,7 @@ lvim.lang = {
     formatters = {
       {
         -- @usage can be stylua or lua_format
-        exe = "stylua",
+        exe = "",
         args = {},
       },
     },
