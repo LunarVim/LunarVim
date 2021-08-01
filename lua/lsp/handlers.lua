@@ -27,7 +27,10 @@ function M.setup()
     local diagnostics = params.diagnostics
 
     for i, v in ipairs(diagnostics) do
-      local source = string.sub(v.source,string.find(v.source,'([%w-_]+)$'))
+      local source = v.source
+      if string.find(v.source, "/") then
+        source = string.sub(v.source, string.find(v.source, "([%w-_]+)$"))
+      end
       diagnostics[i].message = string.format("%s: %s", source, v.message)
 
       if vim.tbl_contains(vim.tbl_keys(v), "code") then

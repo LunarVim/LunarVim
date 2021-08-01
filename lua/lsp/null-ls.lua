@@ -39,8 +39,7 @@ local function is_provider_found(provider)
     local root_dir = vim.api.nvim_get_var "root_dir"
     local local_provider_command = root_dir .. "/node_modules/.bin/" .. provider._opts.command
     if vim.fn.executable(local_provider_command) == 1 then
-      retval.is_local = true
-      retval.path = local_provider_command
+      return true, local_provider_command
     end
   end
   if vim.fn.executable(provider._opts.command) == 1 then
