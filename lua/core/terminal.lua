@@ -63,8 +63,7 @@ M.setup = function()
       .. "')<CR>"
     local command = table.concat(vim.tbl_flatten { "autocmd", { "FileType", ft_cmd[1], cmd } }, " ")
     vim.cmd(command)
-    print(command)
-    -- lvim.builtin.which_key.mappings[ft_cmd[2]] = ft_cmd[4]
+    lvim.builtin.which_key.mappings[ft_cmd[2]] = ft_cmd[4]
   end
   vim.cmd "augroup END"
 
