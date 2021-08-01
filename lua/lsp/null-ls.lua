@@ -34,17 +34,16 @@ end
 
 local function is_provider_found(provider)
   local retval = { is_local = false, path = nil }
-  if vim.fn.executable(provider._opts.command) == 1 then
-    return false, provider._opts.command
-  end
   if is_nodejs_provider(provider) then
     vim.cmd "let root_dir = FindRootDirectory()"
     local root_dir = vim.api.nvim_get_var "root_dir"
     local local_provider_command = root_dir .. "/node_modules/.bin/" .. provider._opts.command
     if vim.fn.executable(local_provider_command) == 1 then
-      retval.is_local = true
-      retval.path = local_provider_command
+      return true, local_provider_command
     end
+  end
+  if vim.fn.executable(provider._opts.command) == 1 then
+    return false, provider._opts.command
   end
   return retval.is_local, retval.path
 end
@@ -78,23 +77,17 @@ function M.setup(filetype)
     -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
     -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
     -- NOTE: validate before inserting to table
-    if validate_provider(builtin_diagnoser) then
-      table.insert(M.requested_providers, builtin_diagnoser)
-    end
     -- special case: fallback to "eslint"
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
     if linter.exe == "eslint_d" then
-      table.insert(M.requested_providers, null_ls.builtins.diagnostics.eslint.with { command = "eslint_d" })
+      builtin_diagnoser = null_ls.builtins.diagnostics.eslint.with { command = "eslint_d" }
+    end
+    if validate_provider(builtin_diagnoser) then
+      table.insert(M.requested_providers, builtin_diagnoser)
     end
     u.lvim_log(string.format("Using linter provider: [%s]", linter.exe))
   end
 
-  -- FIXME: why would we need to remove if we never add?
-  for idx, provider in pairs(M.requested_providers) do
-    if not validate_provider(provider) then
-      table.remove(M.requested_providers, idx)
-    end
-  end
   null_ls.register { sources = M.requested_providers }
 end
 
