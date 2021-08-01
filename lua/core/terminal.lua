@@ -37,6 +37,9 @@ M.config = function()
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     execs = { { "lazygit", "gg", "LazyGit" } },
+    -- Add commands based on filetype to be launched using the terminal
+    -- { filetype, keymap, cmd, name}
+    ft_cmds = {},
   }
 end
 
@@ -49,6 +52,22 @@ M.setup = function()
   for _, exec in pairs(lvim.builtin.terminal.execs) do
     require("core.terminal").add_exec(exec[1], exec[2], exec[3])
   end
+
+  vim.cmd "augroup Terminal_Filetype_autocommands"
+  vim.cmd "autocmd!"
+  for _, ft_cmd in pairs(lvim.builtin.terminal.ft_cmds) do
+    local cmd = "nnoremap <leader>"
+      .. ft_cmd[2]
+      .. " <cmd>lua require('core.terminal')._exec_toggle('"
+      .. ft_cmd[3]
+      .. "')<CR>"
+    local command = table.concat(vim.tbl_flatten { "autocmd", { "FileType", ft_cmd[1], cmd } }, " ")
+    vim.cmd(command)
+    print(command)
+    -- lvim.builtin.which_key.mappings[ft_cmd[2]] = ft_cmd[4]
+  end
+  vim.cmd "augroup END"
+
   terminal.setup(lvim.builtin.terminal)
 end
 

@@ -219,7 +219,7 @@ return {
   -- Terminal
   {
     "akinsho/nvim-toggleterm.lua",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     config = function()
       require("core.terminal").setup()
       if lvim.builtin.terminal.on_config_done then
