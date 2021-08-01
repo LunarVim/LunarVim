@@ -34,6 +34,22 @@ M.config = function()
       emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } },
       -- for emoji press : (idk if that in compe tho)
     },
+
+    keymap = {
+      values = {
+        insert_mode = {
+          { "<Tab>", 'pumvisible() ? "<C-n>" : "<Tab>"' },
+          { "<S-Tab>", 'pumvisible() ? "<C-p>" : "<S-Tab>"' },
+          { "<C-Space>", "compe#complete()" },
+          { "<C-e>", "compe#close('<C-e>')" },
+          { "<C-f>", "compe#scroll({ 'delta': +4 })" },
+          { "<C-d>", "compe#scroll({ 'delta': -4 })" },
+        },
+      },
+      opts = {
+        insert_mode = { noremap = true, silent = true, expr = true },
+      },
+    },
   }
 end
 
@@ -60,12 +76,6 @@ M.setup = function()
     end
   end
 
-  local remap = vim.api.nvim_set_keymap
-
-  remap("i", "<Tab>", 'pumvisible() ? "<C-n>" : "<Tab>"', { silent = true, noremap = true, expr = true })
-
-  remap("i", "<S-Tab>", 'pumvisible() ? "<C-p>" : "<S-Tab>"', { silent = true, noremap = true, expr = true })
-
   -- Use (s-)tab to:
   --- move to prev/next item in completion menuone
   --- jump to prev/next snippet's placeholder
@@ -91,11 +101,8 @@ M.setup = function()
     end
   end
 
-  vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
-  -- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
-  vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", { noremap = true, silent = true, expr = true })
-  vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", { noremap = true, silent = true, expr = true })
-  vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })
+  local keymap = require "utils.keymap"
+  keymap.load(lvim.builtin.compe.keymap.values, lvim.builtin.compe.keymap.opts)
 end
 
 return M
