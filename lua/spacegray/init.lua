@@ -13,10 +13,7 @@ C = require "spacegray.palette"
 local async
 async = vim.loop.new_async(vim.schedule_wrap(function()
   local skeletons = {}
-<<<<<<< HEAD
-=======
 
->>>>>>> add_terminal_filetype_cmd
   for _, skeleton in ipairs(skeletons) do
     util.initialise(skeleton)
   end
