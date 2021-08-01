@@ -73,6 +73,15 @@ function M.setup(lang)
     return
   end
 
+  local overrides = lvim.lsp.override
+
+  if type(overrides) == "table" then
+    if u.has_value(overrides, lang) then
+      return
+    end
+  end
+
+
   local lspconfig = require "lspconfig"
   lspconfig[lsp.provider].setup(lsp.setup)
 end
