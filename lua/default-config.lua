@@ -406,12 +406,12 @@ lvim.lang = {
         },
         on_attach = common_on_attach,
         on_init = common_on_init,
-        init_options = {
-          elmAnalyseTrigger = "change",
-          elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",
-          elmPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/",
-          elmTestPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-test",
-        },
+        -- init_options = {
+          -- elmAnalyseTrigger = "change",
+          -- elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",
+          -- elmPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/",
+          -- elmTestPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-test",
+        -- },
       },
     },
   },
