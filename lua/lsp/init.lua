@@ -68,6 +68,14 @@ function M.common_on_attach(client, bufnr)
 end
 
 function M.setup(lang)
+  local overrides = lvim.lsp.override
+
+  if type(overrides) == "table" then
+    if u.has_value(overrides, lang) then
+      return
+    end
+  end
+
   local lsp = lvim.lang[lang].lsp
 
   -- normalize the lsp config to be a table of providers
