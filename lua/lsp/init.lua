@@ -81,7 +81,6 @@ function M.setup(lang)
     end
   end
 
-
   local lspconfig = require "lspconfig"
   lspconfig[lsp.provider].setup(lsp.setup)
 end
