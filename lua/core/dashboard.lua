@@ -1,5 +1,7 @@
 local M = {}
 M.config = function()
+  local lvim_config = require "config"
+
   lvim.builtin.dashboard = {
     active = false,
     search_handler = "telescope",
@@ -43,7 +45,7 @@ M.config = function()
       },
       d = {
         description = { "  Settings           " },
-        command = ":e " .. USER_CONFIG_PATH,
+        command = ":e " .. lvim_config.USER_CONF_PATH,
       },
     },
 

@@ -89,8 +89,10 @@ function utils.toggle_autoformat()
 end
 
 function utils.reload_lv_config()
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd("source " .. USER_CONFIG_PATH)
+  local service = require "core.service"
+  local config = require "config"
+  config:load(service.keymap, config.USER_CONF_PATH)
+
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()

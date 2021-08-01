@@ -12,40 +12,9 @@ vim.cmd [[
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
 
-local function file_exists(name)
-  local f = io.open(name, "r")
-  if f ~= nil then
-    io.close(f)
-    return true
-  else
-    return false
-  end
-end
-
-local lvim_path = os.getenv "HOME" .. "/.config/lvim/"
-USER_CONFIG_PATH = lvim_path .. "config.lua"
-local config_exist = file_exists(USER_CONFIG_PATH)
-if not config_exist then
-  USER_CONFIG_PATH = lvim_path .. "lv-config.lua"
-  print "Rename ~/.config/lvim/lv-config.lua to config.lua"
-end
-
-require "default-config"
-local autocmds = require "core.autocmds"
-require("settings").load_options()
-
-local status_ok, error = pcall(vim.cmd, "luafile " .. USER_CONFIG_PATH)
-if not status_ok then
-  print("something is wrong with your " .. USER_CONFIG_PATH)
-  print(error)
-end
-require("settings").load_commands()
-autocmds.define_augroups(lvim.autocommands)
-
 local service = require "core.service"
-local default_keymaps = require "keymappings"
-service.keymap.load(default_keymaps.keymaps, default_keymaps.opts)
-service.keymap.load(lvim.keys, default_keymaps.opts)
+local config = require "config"
+config:load(service.keymap, config.USER_CONF_PATH)
 
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()

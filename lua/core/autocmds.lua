@@ -1,4 +1,5 @@
 local autocommands = {}
+local lvim_config = require "config"
 
 lvim.autocommands = {
   _general_settings = {
@@ -27,7 +28,7 @@ lvim.autocommands = {
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
-    { "BufWritePost", USER_CONFIG_PATH, "lua require('utils').reload_lv_config()" },
+    { "BufWritePost", lvim_config.USER_CONF_PATH, "lua require('utils').reload_lv_config()" },
     {
       "FileType",
       "qf",
