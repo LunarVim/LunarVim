@@ -69,12 +69,18 @@ end
 
 function M.setup(lang)
   local lsp = lvim.lang[lang].lsp
-  if require("utils").check_lsp_client_active(lsp.provider) then
-    return
+
+  -- normalize the lsp config to be a table of providers
+  if lsp['provider'] ~= nil then
+    lsp = {[lsp.provider] = lsp}
   end
 
-  local lspconfig = require "lspconfig"
-  lspconfig[lsp.provider].setup(lsp.setup)
+  -- initialize language server for each provider
+  for provider, single_lang_server in pairs(lsp) do
+    if not require("utils").check_lsp_client_active(provider) then
+        require("lspconfig")[provider].setup(single_lang_server.setup)
+    end
+  end
 end
 
 return M
