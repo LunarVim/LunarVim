@@ -498,6 +498,22 @@ lvim.lang = {
       },
     },
   },
+  haskell = {
+    formatters = { {
+      exe = "",
+      args = {},
+    } },
+    linters = {},
+    lsp = {
+      provider = "hls",
+      setup = {
+        cmd = {DATA_PATH .. "/lspinstall/haskell/haskell-language-server-wrapper", "--lsp" },
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   html = {
     formatters = {
       {
