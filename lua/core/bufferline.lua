@@ -2,8 +2,8 @@ lvim.builtin.bufferline = {
   keymap = {
     values = {
       normal_mode = {
-        { "<S-l>", ":BufferNext<CR>" },
-        { "<S-h>", ":BufferPrevious<CR>" },
+        ["<S-l>"] = { ":BufferNext<CR>" },
+        ["<S-h>"] = { ":BufferPrevious<CR>" },
       },
     },
     opts = {
