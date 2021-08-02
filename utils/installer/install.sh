@@ -3,7 +3,7 @@
 LVBRANCH="${LVBRANCH:-master}"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
-declare USER_BIN_DIR="/usr/local/bin"
+USER_BIN_DIR="/usr/local/bin"
 
 installnodemac() {
 	brew install lua
