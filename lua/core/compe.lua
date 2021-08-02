@@ -42,12 +42,12 @@ M.config = function()
     keymap = {
       values = {
         insert_mode = {
-          ["<Tab>"] = { 'pumvisible() ? "<C-n>" : "<Tab>"' },
-          ["<S-Tab>"] = { 'pumvisible() ? "<C-p>" : "<S-Tab>"' },
-          ["<C-Space>"] = { "compe#complete()" },
-          ["<C-e>"] = { "compe#close('<C-e>')" },
-          ["<C-f>"] = { "compe#scroll({ 'delta': +4 })" },
-          ["<C-d>"] = { "compe#scroll({ 'delta': -4 })" },
+          ["<Tab>"] = 'pumvisible() ? "<C-n>" : "<Tab>"',
+          ["<S-Tab>"] = 'pumvisible() ? "<C-p>" : "<S-Tab>"',
+          ["<C-Space>"] = "compe#complete()",
+          ["<C-e>"] = "compe#close('<C-e>')",
+          ["<C-f>"] = "compe#scroll({ 'delta': +4 })",
+          ["<C-d>"] = "compe#scroll({ 'delta': -4 })",
         },
       },
       opts = {
@@ -105,7 +105,7 @@ M.setup = function()
     end
   end
 
-  local keymap = require "utils.keymap"
+  local keymap = require "keymappings"
   keymap.load(lvim.builtin.compe.keymap.values, lvim.builtin.compe.keymap.opts)
 end
 

@@ -1237,6 +1237,7 @@ lvim.lang = {
   },
 }
 
+require("keymappings").config()
 require("core.which-key").config()
 require "core.status_colors"
 require("core.gitsigns").config()
