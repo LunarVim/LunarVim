@@ -63,7 +63,7 @@ lvim.autocommands = {
     { "VimResized", "*", "wincmd =" },
   },
   _packer_compile = {
-    -- will cause split windows to be resized evenly if main window is resized
+    -- will run PackerCompile after writing plugins.lua
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
   _general_lsp = {
