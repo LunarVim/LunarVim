@@ -1,0 +1,77 @@
+[selene]
+base = "lua52"
+name = "vim"
+
+[vim]
+any = true
+
+[lvim]
+any = true
+
+[C]
+any = true
+
+[MUtils]
+any = true
+
+[Config]
+any = true
+
+[USER_DATA_PATH]
+property = true
+
+[USER_CONFIG_PATH]
+property = true
+writable = "overridden"
+
+[CACHE_PATH]
+property = true
+writable = "overridden"
+
+[CONFIG_PATH]
+property = true
+writable = "overridden"
+
+[DATA_PATH]
+property = true
+writable = "overridden"
+
+[[describe.args]]
+type = "string"
+[[describe.args]]
+type = "function"
+
+[[it.args]]
+type = "string"
+[[it.args]]
+type = "function"
+
+[[before_each.args]]
+type = "function"
+[[after_each.args]]
+type = "function"
+
+[assert.is_not]
+any = true
+
+[[assert.equals.args]]
+type = "any"
+[[assert.equals.args]]
+type = "any"
+[[assert.equals.args]]
+type = "any"
+required = false
+
+[[assert.same.args]]
+type = "any"
+[[assert.same.args]]
+type = "any"
+
+[[assert.truthy.args]]
+type = "any"
+
+[[assert.spy.args]]
+type = "any"
+
+[[assert.stub.args]]
+type = "any"
