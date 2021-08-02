@@ -16,9 +16,9 @@ If there is not file a ticket with one of the above repos
 
 ## Formatting 
 
-Formatting is handled by by your language server or Null-ls. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
+Formatting is handled by Null-ls it is off by default. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
 
-The language server will provide basic formatting.  If you need to use a specific formatting tool, set it with. 
+If you want to enable formatting, add the following to your config.lua
 ```lua
 lvim.lang.typescriptreact.formatters = {
   {
@@ -39,7 +39,7 @@ lvim.lang.typescriptreact.formatters = {{}}
 
 If the name of your formatter or linter includes a hyphen `-`, replace it with an underscore `_`. Dashes are not valid identifiers in lua.  LunarVim chooses to match the name of the formatter with the variable it's stored in.     
 
-To enable format on save, add the following to your `lv-config.lua`
+To enable format on save, add the following to your `config.lua`
 
 ``` lua
 lvim.format_on_save = true
