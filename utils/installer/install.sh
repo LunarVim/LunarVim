@@ -3,6 +3,7 @@
 LVBRANCH="${LVBRANCH:-master}"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
+declare USER_BIN_DIR="/usr/local/bin"
 
 installnodemac() {
 	brew install lua
@@ -110,7 +111,6 @@ installpacker() {
 }
 
 cloneconfig() {
-	declare USER_BIN_DIR="/usr/local/bin"
 	if [ -d "/data/data/com.termux" ]; then
 		sudo() {
 			eval "$@"
