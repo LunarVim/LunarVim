@@ -39,15 +39,15 @@ vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { nor
 ### LunarVim style
 Define a table of mappings
 ``` lua
-lvim.keys.normal_mode = {
-  -- Page down/up
-  {'[d', '<PageUp>'},
-  {']d', '<PageDown>'},
+ lvim.keys.normal_mode = {
+   -- Page down/up
+   ["[d"] = { "<PageUp>" },
+   ["]d"] = { "<PageDown>" },
 
-  -- Navigate buffers
-  {'<Tab>', ':bnext<CR>'},
-  {'<S-Tab>', ':bprevious<CR>'},
-}
+   -- Navigate buffers
+   ["<Tab>"] = { ":bnext<CR>" },
+   ["<S-Tab>"] = { ":bprevious<CR>" },
+ }
 ```
 
 Or use the utility functions
