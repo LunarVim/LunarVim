@@ -71,7 +71,7 @@ end
 
 You can specify terminal applications to run with a keybind. LazyGit is the only command set up by default.   
 
-To set up an executable to run add the following to your `lv-config.lua`
+To set up an executable to run add the following to your `config.lua`
 
 ``` lua
 lvim.builtin.terminal.execs = {{"lazygit", "gg", "LazyGit"}, {"gdb", "tg", "GNU Debugger"}}

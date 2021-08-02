@@ -236,7 +236,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
       end
 },
   ```
-  Attach it in your `lv-config.lua`
+  Attach it in your `config.lua`
 
   ``` lua
 lvim.lsp.on_attach_callback = function(client, bufnr)
@@ -291,7 +291,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 },
   ```
 
-  Also define keybindings in your `lv-config.lua`
+  Also define keybindings in your `config.lua`
 
   ``` lua
   lvim.builtin.which_key.mappings["Q"]= {
@@ -505,7 +505,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 }
 ```
 
-Also define keybindings in `lv-config.lua`
+Also define keybindings in `config.lua`
 ```
 lvim.builtin.which_key.mappings["t"] = {
   name = "Diagnostics",

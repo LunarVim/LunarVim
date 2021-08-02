@@ -2,9 +2,9 @@
 
 You can easily install plugins using the options provided by packer.
 
-Just add your plugin to the `lvim.plugins` table in your `lv-config.lua` file and save the file (don't quit or the operation will not run). You can also run `:PackerSync` to pull down updates for your plugins.
+Just add your plugin to the `lvim.plugins` table in your `config.lua` file and save the file (don't quit or the operation will not run). You can also run `:PackerSync` to pull down updates for your plugins.
 
-After adding the following to your `lv-config.lua` just `:w` and the plugins will automatically install.
+After adding the following to your `config.lua` just `:w` and the plugins will automatically install.
 
 ## Example
 

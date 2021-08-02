@@ -10,7 +10,7 @@ To switch color schemes on the fly, type the following command:
 
 You can also press `Space` `s` `p` to cycle through colorschemes with a preview. 
 
-To change the color scheme permanently, modify `lv-config.lua`
+To change the color scheme permanently, modify `config.lua`
 
 ``` lua
 lvim.colorscheme = 'desert'

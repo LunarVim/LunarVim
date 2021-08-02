@@ -4,10 +4,10 @@ If you were previously using LunarVim from before July 20th, 2021, you'll notice
 * If you were on a version of LunarVim prior to commit d022651, you will need to [remove it completely](https://github.com/ChristianChiarulli/LunarVim/wiki/Uninstalling-LunarVim) before upgrading
 * Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
 * To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
-* Your personal configuration file (`lv-config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
+* Your personal configuration file (`config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
 * If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
 
-## Options in `lv-config.lua` have been renamed
+## Options in `config.lua` have been renamed
 | Old Option | New Option |
 | -------- | :----------: |
 | O | lvim |
