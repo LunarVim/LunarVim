@@ -14,8 +14,8 @@ local mode_adapters = {
 -- @param opts The mapping options
 M.load_mode = function(mode, keymaps, opts)
   mode = mode_adapters[mode] and mode_adapters[mode] or mode
-  for _, keymap in ipairs(keymaps) do
-    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+  for key, mapping in pairs(keymaps) do
+    vim.api.nvim_set_keymap(mode, key, mapping[1], opts)
   end
 end
 
