@@ -17,7 +17,6 @@ installnodeubuntu() {
 
 installnodetermux() {
 	apt install nodejs
-	apt install npm
 }
 
 moveoldlvim() {
