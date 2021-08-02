@@ -5,44 +5,49 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ## Navigation
 
 ### Lightspeed
-``` lua
+
+```lua
 {
   "ggandor/lightspeed.nvim",
-    event = "BufRead",
+  event = "BufRead",
 }
 ```
+
 ### Hop
+
 ```lua
 {
   "phaazon/hop.nvim",
-    event = "BufRead",
-    config = function()
-      require("hop").setup()
-      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
-      end,
+  event = "BufRead",
+  config = function()
+    require("hop").setup()
+    vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
+  end,
 }
 ```
+
 ### Nvim-lastplace
-``` lua
+
+```lua
 {
   "ethanholz/nvim-lastplace",
-    event = "BufRead"
-      config = function()
-      require'nvim-lastplace'.setup {
-        lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
-        lastplace_ignore_filetype = {
-          "gitcommit", "gitrebase", "svn", "hgcommit"
-        },
-        lastplace_open_folds = true
-      }
+  event = "BufRead"
+  config = function()
+  require'nvim-lastplace'.setup {
+    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+    lastplace_ignore_filetype = {
+      "gitcommit", "gitrebase", "svn", "hgcommit"
+    },
+    lastplace_open_folds = true
+  }
   end,
 }
 ```
 
 ### rnvimr
 
-``` lua
+```lua
 {
   "kevinhwang91/rnvimr",
     cmd = "Rnvimr",
@@ -56,36 +61,37 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
       require("lv-rnvimr").config()
       end,
 }
-
 ```
 
 ### snap
-``` lua
+
+```lua
 {
   "camspiers/snap",
-    rocks = "fzy",
-    config = function()
-      local snap = require "snap"
-      local layout = snap.get("layout").bottom
-      local file = snap.config.file:with { consumer = "fzy", layout = layout }
-  local vimgrep = snap.config.vimgrep:with { layout = layout }
-  snap.register.command("find_files", file { producer = "ripgrep.file" })
+  rocks = "fzy",
+  config = function()
+    local snap = require "snap"
+    local layout = snap.get("layout").bottom
+    local file = snap.config.file:with { consumer = "fzy", layout = layout }
+    local vimgrep = snap.config.vimgrep:with { layout = layout }
+    snap.register.command("find_files", file { producer = "ripgrep.file" })
     snap.register.command("buffers", file { producer = "vim.buffer" })
     snap.register.command("oldfiles", file { producer = "vim.oldfile" })
     snap.register.command("live_grep", vimgrep {})
-    end,
+  end,
 }
 ```
 
 ## Git
 
 ### gitlinker.nvim
-``` lua
+
+```lua
 {
   "ruifm/gitlinker.nvim",
-    event = "BufRead",
-    config = function()
-      require("gitlinker").setup {
+  event = "BufRead",
+  config = function()
+  require("gitlinker").setup {
         opts = {
           -- remote = 'github', -- force the use of a specific remote
             -- adds current line nr in the url for normal mode
@@ -99,49 +105,54 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
         },
       }
   end,
-    requires = "nvim-lua/plenary.nvim",
+  requires = "nvim-lua/plenary.nvim",
 }
 ```
 
 ### octo.nvim
-``` lua
+
+```lua
 {
   "pwntester/octo.nvim",
-    event = "BufRead",
+  event = "BufRead",
 }
 ```
 
 ### vim-gist
-``` lua
+
+```lua
 {
   "mattn/vim-gist",
-    event = "BufRead",
-
-    requires = "mattn/webapi-vim",
+  event = "BufRead",
+  requires = "mattn/webapi-vim",
 }
 ```
 
 ### git-blame.nvim
+
 ``` lua
 {
   "f-person/git-blame.nvim",
-    event = "BufRead",
-    config = function()
-      vim.cmd "highlight default link gitblame SpecialComment"
-      vim.g.gitblame_enabled = 0
-      end,
+  event = "BufRead",
+  config = function()
+    vim.cmd "highlight default link gitblame SpecialComment"
+    vim.g.gitblame_enabled = 0
+  end,
 }
 ```
 
 ### diffview.nvim
-``` lua
+
+```lua
 {
   "sindrets/diffview.nvim",
-    event = "BufRead",
-},
-  ```
+  event = "BufRead",
+}
+```
+
 ### vim-fugitive
-  ``` lua
+
+```lua
 {
   "tpope/vim-fugitive",
   cmd = {
@@ -160,13 +171,14 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
     "Gedit"
   },
   ft = {"fugitive"}
-},
-  ```
+}
+```
 
 ## Treesitter
 
 ### playground
-  ``` lua
+
+```lua
 {
   "nvim-treesitter/playground",
   event = "BufRead",
@@ -174,32 +186,36 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ```
 
 ### nvim-ts-autotag
-``` lua
+
+```lua
 {
   "windwp/nvim-ts-autotag",
   event = "InsertEnter",
-},
-  ```
+}
+```
 
 ### nvim-ts-rainbow
-  ``` lua
+
+```lua
 {
   "p00f/nvim-ts-rainbow",
 }
 ```
 
 ### nvim-ts-context-commentstring
-``` lua
+
+```lua
 {
   "JoosepAlviste/nvim-ts-context-commentstring",
   event = "BufRead",
-},
-  ```
+}
+```
 
 ## Telescope Extensions
 
 ### telescope-fzy-native.nvim
-  ``` lua
+
+```lua
 {
   "nvim-telescope/telescope-fzy-native.nvim",
   run = "make",
@@ -210,6 +226,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ## Colorschemes
 
 ### lsp-colors
+
 ``` lua
 {
   "folke/lsp-colors.nvim",
@@ -217,6 +234,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 }
 ```
 ### lush.nvim
+
 ``` lua
 {
   "rktjmp/lush.nvim",
@@ -230,36 +248,37 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ``` lua
 {
   "ray-x/lsp_signature.nvim",
-    event = {"InsertEnter"},
-    config = function()
-      require "lsp_signature".setup()
-      end
-},
-  ```
-  Attach it in your `config.lua`
+  event = {"InsertEnter"},
+  config = function()
+    require "lsp_signature".setup()
+  end
+}
+```
+Attach it in your `config.lua`
 
-  ``` lua
+```lua
 lvim.lsp.on_attach_callback = function(client, bufnr)
   require("lsp_signature").on_attach()
-  end
+end
 
-  ```
+```
 
 ### vim-bundler
-  ``` lua
+
+```lua
 {
   "tpope/vim-bundler",
-    cmd = {"Bundler", "Bopen", "Bsplit", "Btabedit"}
-},
-  ```
+  cmd = {"Bundler", "Bopen", "Bsplit", "Btabedit"}
+}
+```
 
 ### Goto-preview
-  ``` lua
+```lua
 {
   "rmagatti/goto-preview",
   config = function()
-    require('goto-preview').setup {
-      width = 120; -- Width of the floating window
+  require('goto-preview').setup {
+        width = 120; -- Width of the floating window
         height = 25; -- Height of the floating window
         default_mappings = false; -- Bind default mappings
         debug = false; -- Print debug information
@@ -274,10 +293,12 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
   end
 }
 ```
+
 ## General
 
 ### Persistence
-``` lua
+
+```lua
 {
   "folke/persistence.nvim",
     event = "VimEnter",
@@ -288,12 +309,12 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
         options = { "buffers", "curdir", "tabpages", "winsize" },
       }
   end,
-},
-  ```
+}
+```
 
-  Also define keybindings in your `config.lua`
+Also define keybindings in your `config.lua`
 
-  ``` lua
+```lua
   lvim.builtin.which_key.mappings["Q"]= {
     name = "+Quit",
     s = { "<cmd>lua require('persistence').load()<cr>", "Restore for current dir" },
@@ -303,24 +324,25 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 ### indent-blankline.nvim
-``` lua
+
+```lua
 {
   "lukas-reineke/indent-blankline.nvim",
   event = "BufRead",
   setup = function()
     vim.g.indentLine_enabled = 1
     vim.g.indent_blankline_char = "▏"
-
     vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
-  vim.g.indent_blankline_buftype_exclude = {"terminal"}
-  vim.g.indent_blankline_show_trailing_blankline_indent = false
+    vim.g.indent_blankline_buftype_exclude = {"terminal"}
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
     vim.g.indent_blankline_show_first_indent_level = false
-    end
+  end
 }
 ```
 
 ### nvim-colorizer
-``` lua
+
+```lua
 {
   "norcalli/nvim-colorizer.lua",
     config = function()
@@ -334,11 +356,12 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
           css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
           })
   end,
-},
-  ```
+}
+```
 
 ### dial.nvim
-  ``` lua
+
+```lua
 {
   "monaqa/dial.nvim",
   event = "BufRead",
@@ -357,15 +380,15 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
       name = "boolean",
       strlist = { "true", "false" },
     }
-  table.insert(dial.config.searchlist.normal, "custom#boolean")
+    table.insert(dial.config.searchlist.normal, "custom#boolean")
 
     -- For Languages which prefer True/False, e.g. python.
     dial.augends["custom#Boolean"] = dial.common.enum_cyclic {
       name = "Boolean",
       strlist = { "True", "False" },
     }
-  table.insert(dial.config.searchlist.normal, "custom#Boolean")
-    end,
+    table.insert(dial.config.searchlist.normal, "custom#Boolean")
+  end,
 }
 
 ```
@@ -374,45 +397,48 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ``` lua
 {
   "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  event = "CursorMoved",
+  config = function()
+    vim.g.matchup_matchparen_offscreen = { method = "popup" }
   end,
 }
 ```
 
 ### numb.nvim
-``` lua
+
+```lua
 {
   "nacro90/numb.nvim",
-    event = "BufRead",
-    config = function()
-      require("numb").setup {
-        show_numbers = true, -- Enable 'number' for the window while peeking
-          show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-      }
+  event = "BufRead",
+  config = function()
+  require("numb").setup {
+    show_numbers = true, -- Enable 'number' for the window while peeking
+    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+  }
   end,
 }
 ```
 
 ### nvim-spectre
-``` lua
+
+```lua
 {
   "windwp/nvim-spectre",
-    event = "BufRead",
-    config = function()
-      require("spectre").setup()
-      end,
+  event = "BufRead",
+  config = function()
+    require("spectre").setup()
+  end,
 }
 ```
 
 ### nvim-bqf
-``` lua
+
+```lua
 {
   "kevinhwang91/nvim-bqf",
-    event = { "BufRead", "BufNew" },
-    config = function()
-      require("bqf").setup({
+  event = { "BufRead", "BufNew" },
+  config = function()
+  require("bqf").setup({
           auto_enable = true,
           preview = {
           win_height = 12,
@@ -434,22 +460,24 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
           })
   end,
 },
-  ```
+```
 
 ### markdown-preview.nvim
-  ``` lua
+
+```lua
 {
   "iamcco/markdown-preview.nvim",
   run = "cd app && npm install",
   ft = "markdown",
   config = function()
     vim.g.mkdp_auto_start = 1
-    end,
+  end,
 }
 ```
 
 ### bracey
-``` lua
+
+```lua
 {
   "turbio/bracey.vim",
   cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
@@ -458,31 +486,34 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 ### glow.nvim
-``` lua
+
+```lua
 -- You must install the glow 
 -- https://github.com/charmbracelet/glow
 -- yay -S glow
 {
   "npxbr/glow.nvim",
-    ft = {"markdown"}
+  ft = {"markdown"}
   -- run = "yay -S glow"
 },
-  ```
+```
 
 
 ### lsp-rooter
 
-``` lua
+```lua
 {
   "ahmedkhalf/lsp-rooter.nvim",
-    event = "BufRead",
-    config = function()
-      require("lsp-rooter").setup()
-      end,
+  event = "BufRead",
+  config = function()
+    require("lsp-rooter").setup()
+  end,
 }
 ```
+
 ### todo-comments.nvim
-  ```
+
+```lua
 {
   "folke/todo-comments.nvim",
   event = "BufRead",
@@ -490,7 +521,8 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 ### symbols-outline.nvim
-``` lua
+
+```lua
 {
   "simrat39/symbols-outline.nvim",
   cmd = "SymbolsOutline",
@@ -498,7 +530,8 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 ### trouble.nvim
-``` lua
+
+```lua
 {
   "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -506,7 +539,7 @@ lvim.lsp.on_attach_callback = function(client, bufnr)
 ```
 
 Also define keybindings in `config.lua`
-```
+```lua
 lvim.builtin.which_key.mappings["t"] = {
   name = "Diagnostics",
   t = { "<cmd>TroubleToggle<cr>", "trouble" },
@@ -519,7 +552,8 @@ lvim.builtin.which_key.mappings["t"] = {
 ```
 
 ### vim-sanegx
-``` lua
+
+```lua
 {
   "felipec/vim-sanegx",
   event = "BufRead",
@@ -527,7 +561,8 @@ lvim.builtin.which_key.mappings["t"] = {
 ```
 
 ### vim-cursorword
-``` lua
+
+```lua
 {
   "itchyny/vim-cursorword",
     event = {"BufEnter", "BufNewFile"},
@@ -540,27 +575,30 @@ lvim.builtin.which_key.mappings["t"] = {
       vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
       vim.api.nvim_command("augroup END")
       end
-},
-  ```
+}
+```
 
 ### vim-surround
-  ```
+
+```lua
 {
   "tpope/vim-surround",
   keys = {"c", "d", "y"}
-},
-  ```
+}
+```
 
 ### vim-repeat
-  ```
+
+```lua
 {
   "tpope/vim-repeat",
   keys = {"."}
-},
-  ```
+}
+```
 
 ### codi.vim
-  ``` lua
+
+```lua
 {
   "metakirby5/codi.vim",
   cmd = "Codi",
@@ -568,17 +606,20 @@ lvim.builtin.which_key.mappings["t"] = {
 ```
 
 ### telescope-project
-``` lua
+
+```lua
 {
   "nvim-telescope/telescope-project.nvim",
   event = "BufWinEnter",
   setup = function()
     vim.cmd [[packadd telescope.nvim]]
-    end,
-},
-  ```
+  end,
+}
+```
+
 ### compe-tabnine
-  ``` lua
+
+```lua
 {
   "tzachar/compe-tabnine",
   run = "./install.sh",
@@ -588,7 +629,8 @@ lvim.builtin.which_key.mappings["t"] = {
 ```
 
 ### vim-rails
-```
+
+```lua
 {
   "tpope/vim-rails",
   cmd = {
@@ -609,25 +651,28 @@ lvim.builtin.which_key.mappings["t"] = {
     "Runner",
     "Extract"
   }
-},
-  ```
+}
+```
+
 ### autosave
-  ``` lua
+
+```lua
 {
   "Pocco81/AutoSave.nvim",
   config = function()
     require("plugins.zenmode").autoSave()
-    end,
+  end,
 }
 ```
 
 ### neoscroll
-``` lua
+
+```lua
 {
   "karb94/neoscroll.nvim",
   event = "WinScrolled",
   config = function()
-    require('neoscroll').setup({
+  require('neoscroll').setup({
         -- All these keys will be mapped to their corresponding default scrolling animation
         mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
         '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
@@ -646,15 +691,15 @@ lvim.builtin.which_key.mappings["t"] = {
 
 ### minimap
 
-``` lua
+```lua
 {
   'wfxr/minimap.vim',
-    run = "cargo install --locked code-minimap",
-    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-    config = function ()
-      vim.cmd ("let g:minimap_width = 10")
-      vim.cmd ("let g:minimap_auto_start = 1")
-      vim.cmd ("let g:minimap_auto_start_win_enter = 1")
-      end
+  run = "cargo install --locked code-minimap",
+  -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+  config = function ()
+    vim.cmd ("let g:minimap_width = 10")
+    vim.cmd ("let g:minimap_auto_start = 1")
+    vim.cmd ("let g:minimap_auto_start_win_enter = 1")
+  end,
 }
 ```
