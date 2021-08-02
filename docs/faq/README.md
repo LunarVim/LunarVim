@@ -17,10 +17,16 @@ lvim.leader = "space"
 - overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
 
 ```lua
-lvim.keys.normal_mode = {
-  {'<Tab>', ':bnext<CR>'},
-  {'<S-Tab>', ':bprevious<CR>'},
-}
+ lvim.keys.normal_mode = {
+   -- Page down/up
+   ["[d"] = { "<PageUp>" },
+   ["]d"] = { "<PageDown>" },
+
+   -- Navigate buffers
+   ["<Tab>"] = { ":bnext<CR>" },
+   ["<S-Tab>"] = { ":bprevious<CR>" },
+ }
+
 ```
 
 - if you just want to augment the existing ones then use the utility function
