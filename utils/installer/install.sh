@@ -1,9 +1,9 @@
 #!/bin/sh
 #Set Variable to master is not set differently
 LVBRANCH="${LVBRANCH:-master}"
+USER_BIN_DIR="/usr/local/bin"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
-USER_BIN_DIR="/usr/local/bin"
 
 installnodemac() {
 	brew install lua
@@ -129,8 +129,8 @@ cloneconfig() {
 		;;
 	esac
 	mkdir -p "$HOME/.config/lvim"
-	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" $USER_BIN_DIR
-	sudo chmod a+rx $USER_BIN_DIR/lvim
+	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "$USER_BIN_DIR"
+	sudo chmod a+rx "$USER_BIN_DIR"/lvim
 	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example-no-ts.lua" "$HOME/.config/lvim/config.lua"
 
 	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
