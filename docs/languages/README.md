@@ -16,13 +16,30 @@ If there is not file a ticket with one of the above repos
 
 ## Formatting 
 
-Formatting is handled by by your language server or Null-ls. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
+Formatting is handled by Null-ls it is off by default. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
 
-The language server will provide basic formatting.  If you need to use a specific formatting tool, set it with. 
-``` lua
-lvim.lang.cpp.formatter.exe = "asmfmt"
+If you want to enable formatting, add the following to your config.lua
+```lua
+lvim.lang.typescriptreact.formatters = {
+  {
+    exe = "prettier",
+    args = {},
+  }
+}
 ```
-To enable format on save, add the following to your `lv-config.lua`
+
+Define the formatter for your filetype. 
+```lua
+lvim.lang.typescript.formatters = {{}}
+lvim.lang.typescriptreact.formatters = {{}}
+lvim.lang.javascript.formatters = {{}}
+lvim.lang.typescriptreact.formatters = {{}}
+
+```
+
+If the name of your formatter or linter includes a hyphen `-`, replace it with an underscore `_`. Dashes are not valid identifiers in lua.  LunarVim chooses to match the name of the formatter with the variable it's stored in.     
+
+To enable format on save, add the following to your `config.lua`
 
 ``` lua
 lvim.format_on_save = true
@@ -32,7 +49,11 @@ lvim.format_on_save = true
 Linting is handled by Null-ls.  To set a linter for your language:
 
 ``` lua
-lvim.lang.cpp.linters = {"cppcheck","clangtidy"}
+lvim.lang.typescriptreact.linters = {
+  {
+    exe = "eslint_d",
+    args = {}, },
+}
 ```
 
 To enable linting on save:
