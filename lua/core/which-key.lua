@@ -166,6 +166,10 @@ M.config = function()
           "Workspace Symbols",
         },
       },
+      L = {
+        name = "+LunarVim",
+        k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
+      },
 
       s = {
         name = "Search",

@@ -98,6 +98,7 @@ function utils.reload_lv_config()
   plugin_loader:load { plugins, lvim.plugins }
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
+  require("keymappings").setup()
   -- vim.cmd ":PackerClean"
 end
 
