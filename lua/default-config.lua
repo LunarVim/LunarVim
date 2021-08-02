@@ -301,6 +301,29 @@ lvim.lang = {
       },
     },
   },
+  less = {
+    formatters = {
+      {
+        -- @usage can be prettier or prettierd
+        exe = "",
+        args = {},
+      },
+    },
+    linters = {},
+    lsp = {
+      provider = "cssls",
+      setup = {
+        cmd = {
+          "node",
+          DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+          "--stdio",
+        },
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   d = {
     formatters = {
       {
