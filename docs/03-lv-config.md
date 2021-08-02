@@ -1,6 +1,6 @@
-# lv-config
+# Configuration File
 
-You can find your `lv-config.lua` file in `~/.config/lvim`
+You can find your configuration file `config.lua` in `~/.config/lvim`
 
 With this file file you can:
 
