@@ -110,13 +110,12 @@ installpacker() {
 }
 
 cloneconfig() {
+	declare USER_BIN_DIR="/usr/local/bin"
 	if [ -d "/data/data/com.termux" ]; then
 		sudo() {
 			eval "$@"
 		}
-		bin_path="$HOME/../usr/bin"
-	else
-		bin_path='/usr/local/bin'
+		USER_BIN_DIR="$HOME/../usr/bin"
 	fi
 	echo "Cloning LunarVim configuration"
 	mkdir -p ~/.local/share/lunarvim
@@ -130,8 +129,8 @@ cloneconfig() {
 		;;
 	esac
 	mkdir -p "$HOME/.config/lvim"
-	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" $bin_path
-	sudo chmod a+rx $bin_path/lvim
+	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" $USER_BIN_DIR
+	sudo chmod a+rx $USER_BIN_DIR/lvim
 	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example-no-ts.lua" "$HOME/.config/lvim/config.lua"
 
 	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \

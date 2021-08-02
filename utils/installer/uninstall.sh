@@ -1,12 +1,11 @@
 #!/bin/sh
+declare USER_BIN_DIR="/usr/local/bin"
 if [ -d "/data/data/com.termux" ]; then
 	sudo() {
 		eval "$@"
 	}
-	bin_path="$HOME/../usr/bin"
-else
-	bin_path='/usr/local/bin'
+	USER_BIN_DIR="$HOME/../usr/bin"
 fi
 rm -rf ~/.local/share/lunarvim
-sudo rm $bin_path/lvim
+sudo rm $USER_BIN_DIR/lvim
 rm -rf ~/.local/share/applications/lvim.desktop
