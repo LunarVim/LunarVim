@@ -8,4 +8,7 @@ Christian Chiarulli
 
 [Sngmin Chae](https://github.com/chaeing)
 
+[Luc Sinet](https://github.com/Tastyep)
+
+
 (other devs pls make pr and add your name and a link to whatever you want)
