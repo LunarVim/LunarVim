@@ -5,7 +5,6 @@ Core plugins come pre-configured.  Sometimes you may want to extend the configur
 LunarVim provides a way to extend the default configurations by adding the following to your configuration file. This specifies code to run after the configuration for autopairs has completed. 
 
 ``` lua
-
 lvim.builtin.autopairs.on_config_done = function(module)
    --  YOUR_VALID_CONFIG_HERE
 end

@@ -131,9 +131,8 @@ lvim.builtin.which_key.mappings = {
 ## Leader Key
 The default leader key is `Space`.  This can be changed with the following
 
-```
+```lua
 lvim.keys.leader_key = "space"
-
 ```
 
 ## Cursor Movement
@@ -143,7 +142,6 @@ By default, when pressing left/right cursor keys, Vim will not move to the previ
 To enable:
 ``` lua
 lvim.line_wrap_cursor_movement = true
-
 ```
 Enabling maps the following command
 ``` vim

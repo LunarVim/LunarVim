@@ -4,7 +4,7 @@ Neovim comes bundled with a language client but not a language server.
 To install a supported language server:
 
 ``` md
-  :LspInstall `<your_language_server>`
+:LspInstall `<your_language_server>`
 ```
 
 Autocomplete works here.  Type `:LspInstall`, then hit `TAB` to see supported language servers

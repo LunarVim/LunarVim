@@ -23,7 +23,7 @@ lvim.plugins = {
 ```
 
 
-# Core plugins
+## Core plugins
 LunarVim comes bundled with a small set of default plugins.  A few plugins are disabled by default.  To enable a plugin, add an entry for it in your personal configuration file.  To see which plugins are installed run `:PackerStatus`
 
 ```lua
