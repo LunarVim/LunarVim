@@ -3,7 +3,7 @@
 Add plugins by pasting any of the example snippets into a table in your `config.lua` like so: 
 ```
 lvim.plugins = {
-	{ "tpope/vim-unimpaired" },
+	{ "oberblastmeister/neuron.nvim" },
 	{ "gennaro-tedesco/nvim-peekup" },
 },
 ```
