@@ -1,6 +1,15 @@
 # Plugin Quickstart
+ 
+Add plugins by pasting any of the example snippets into a table in your `config.lua` like so: 
+```
+lvim.plugins = {
+	{ "tpope/vim-unimpaired" },
+	{ "gennaro-tedesco/nvim-peekup" },
+},
+```
 
-Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will autoinstall.
+Save (`:w`), and Packer will autoinstall the new plugins.
+
 
 ## Navigation
 
@@ -10,7 +19,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "ggandor/lightspeed.nvim",
   event = "BufRead",
-}
+},
 ```
 
 ### Hop
@@ -24,25 +33,25 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
     vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
     vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
   end,
-}
+},
 ```
 
 ### Nvim-lastplace
 
 ```lua
-{
-  "ethanholz/nvim-lastplace",
-  event = "BufRead"
-  config = function()
-  require'nvim-lastplace'.setup {
-    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
-    lastplace_ignore_filetype = {
-      "gitcommit", "gitrebase", "svn", "hgcommit"
-    },
-    lastplace_open_folds = true
-  }
-  end,
-}
+	{
+		"ethanholz/nvim-lastplace",
+		event = "BufRead",
+		config = function()
+			require("nvim-lastplace").setup({
+				lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+				lastplace_ignore_filetype = {
+					"gitcommit", "gitrebase", "svn", "hgcommit",
+				},
+				lastplace_open_folds = true,
+			})
+		end,
+	},
 ```
 
 ### rnvimr
@@ -60,7 +69,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
       vim.api.nvim_set_keymap("n", "-", ":RnvimrToggle<CR>", { noremap = true, silent = true })
       require("lv-rnvimr").config()
       end,
-}
+},
 ```
 
 ### snap
@@ -79,7 +88,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
     snap.register.command("oldfiles", file { producer = "vim.oldfile" })
     snap.register.command("live_grep", vimgrep {})
   end,
-}
+},
 ```
 
 ## Git
@@ -106,7 +115,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
       }
   end,
   requires = "nvim-lua/plenary.nvim",
-}
+},
 ```
 
 ### octo.nvim
@@ -115,7 +124,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "pwntester/octo.nvim",
   event = "BufRead",
-}
+},
 ```
 
 ### vim-gist
@@ -125,7 +134,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
   "mattn/vim-gist",
   event = "BufRead",
   requires = "mattn/webapi-vim",
-}
+},
 ```
 
 ### git-blame.nvim
@@ -138,7 +147,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
     vim.cmd "highlight default link gitblame SpecialComment"
     vim.g.gitblame_enabled = 0
   end,
-}
+},
 ```
 
 ### diffview.nvim
@@ -147,7 +156,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "sindrets/diffview.nvim",
   event = "BufRead",
-}
+},
 ```
 
 ### vim-fugitive
@@ -171,7 +180,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
     "Gedit"
   },
   ft = {"fugitive"}
-}
+},
 ```
 
 ## Treesitter
@@ -182,7 +191,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "nvim-treesitter/playground",
   event = "BufRead",
-}
+},
 ```
 
 ### nvim-ts-autotag
@@ -191,7 +200,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "windwp/nvim-ts-autotag",
   event = "InsertEnter",
-}
+},
 ```
 
 ### nvim-ts-rainbow
@@ -199,7 +208,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 ```lua
 {
   "p00f/nvim-ts-rainbow",
-}
+},
 ```
 
 ### nvim-ts-context-commentstring
@@ -208,7 +217,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "JoosepAlviste/nvim-ts-context-commentstring",
   event = "BufRead",
-}
+},
 ```
 
 ## Telescope Extensions
@@ -220,7 +229,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
   "nvim-telescope/telescope-fzy-native.nvim",
   run = "make",
   event = "BufRead",
-}
+},
 ```
 
 ## Colorschemes
@@ -231,14 +240,14 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
 {
   "folke/lsp-colors.nvim",
   event = "BufRead",
-}
+},
 ```
 ### lush.nvim
 
 ``` lua
 {
   "rktjmp/lush.nvim",
-}
+},
 ```
 
 ## LSP enhancement
@@ -252,7 +261,7 @@ Just paste any of these snippets into `lvim.plugins`, save (`:w`), and it will a
   config = function()
     require "lsp_signature".setup()
   end
-}
+},
 ```
 Attach it in your `config.lua`
 
@@ -269,7 +278,7 @@ end
 {
   "tpope/vim-bundler",
   cmd = {"Bundler", "Bopen", "Bsplit", "Btabedit"}
-}
+},
 ```
 
 ### Goto-preview
@@ -291,7 +300,7 @@ end
         -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
     }
   end
-}
+},
 ```
 
 ## General
@@ -309,7 +318,7 @@ end
         options = { "buffers", "curdir", "tabpages", "winsize" },
       }
   end,
-}
+},
 ```
 
 Also define keybindings in your `config.lua`
@@ -337,7 +346,7 @@ Also define keybindings in your `config.lua`
     vim.g.indent_blankline_show_trailing_blankline_indent = false
     vim.g.indent_blankline_show_first_indent_level = false
   end
-}
+},
 ```
 
 ### nvim-colorizer
@@ -356,7 +365,7 @@ Also define keybindings in your `config.lua`
           css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
           })
   end,
-}
+},
 ```
 
 ### dial.nvim
@@ -389,7 +398,7 @@ Also define keybindings in your `config.lua`
     }
     table.insert(dial.config.searchlist.normal, "custom#Boolean")
   end,
-}
+},
 
 ```
 
@@ -401,7 +410,7 @@ Also define keybindings in your `config.lua`
   config = function()
     vim.g.matchup_matchparen_offscreen = { method = "popup" }
   end,
-}
+},
 ```
 
 ### numb.nvim
@@ -416,7 +425,7 @@ Also define keybindings in your `config.lua`
     show_cursorline = true, -- Enable 'cursorline' for the window while peeking
   }
   end,
-}
+},
 ```
 
 ### nvim-spectre
@@ -428,7 +437,7 @@ Also define keybindings in your `config.lua`
   config = function()
     require("spectre").setup()
   end,
-}
+},
 ```
 
 ### nvim-bqf
@@ -472,7 +481,7 @@ Also define keybindings in your `config.lua`
   config = function()
     vim.g.mkdp_auto_start = 1
   end,
-}
+},
 ```
 
 ### bracey
@@ -482,7 +491,7 @@ Also define keybindings in your `config.lua`
   "turbio/bracey.vim",
   cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
   run = "npm install --prefix server",
-}
+},
 ```
 
 ### glow.nvim
@@ -508,7 +517,7 @@ Also define keybindings in your `config.lua`
   config = function()
     require("lsp-rooter").setup()
   end,
-}
+},
 ```
 
 ### todo-comments.nvim
@@ -517,7 +526,7 @@ Also define keybindings in your `config.lua`
 {
   "folke/todo-comments.nvim",
   event = "BufRead",
-}
+},
 ```
 
 ### symbols-outline.nvim
@@ -526,7 +535,7 @@ Also define keybindings in your `config.lua`
 {
   "simrat39/symbols-outline.nvim",
   cmd = "SymbolsOutline",
-}
+},
 ```
 
 ### trouble.nvim
@@ -535,7 +544,7 @@ Also define keybindings in your `config.lua`
 {
   "folke/trouble.nvim",
     cmd = "TroubleToggle",
-}
+},
 ```
 
 Also define keybindings in `config.lua`
@@ -548,7 +557,7 @@ lvim.builtin.which_key.mappings["t"] = {
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
-}
+},
 ```
 
 ### vim-sanegx
@@ -557,7 +566,7 @@ lvim.builtin.which_key.mappings["t"] = {
 {
   "felipec/vim-sanegx",
   event = "BufRead",
-}
+},
 ```
 
 ### vim-cursorword
@@ -575,7 +584,7 @@ lvim.builtin.which_key.mappings["t"] = {
       vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
       vim.api.nvim_command("augroup END")
       end
-}
+},
 ```
 
 ### vim-surround
@@ -584,7 +593,7 @@ lvim.builtin.which_key.mappings["t"] = {
 {
   "tpope/vim-surround",
   keys = {"c", "d", "y"}
-}
+},
 ```
 
 ### vim-repeat
@@ -593,7 +602,7 @@ lvim.builtin.which_key.mappings["t"] = {
 {
   "tpope/vim-repeat",
   keys = {"."}
-}
+},
 ```
 
 ### codi.vim
@@ -602,7 +611,7 @@ lvim.builtin.which_key.mappings["t"] = {
 {
   "metakirby5/codi.vim",
   cmd = "Codi",
-}
+},
 ```
 
 ### telescope-project
@@ -614,7 +623,7 @@ lvim.builtin.which_key.mappings["t"] = {
   setup = function()
     vim.cmd [[packadd telescope.nvim]]
   end,
-}
+},
 ```
 
 ### compe-tabnine
@@ -625,7 +634,7 @@ lvim.builtin.which_key.mappings["t"] = {
   run = "./install.sh",
   requires = "hrsh7th/nvim-compe",
   event = "InsertEnter",
-}
+},
 ```
 
 ### vim-rails
@@ -651,7 +660,7 @@ lvim.builtin.which_key.mappings["t"] = {
     "Runner",
     "Extract"
   }
-}
+},
 ```
 
 ### autosave
@@ -662,7 +671,7 @@ lvim.builtin.which_key.mappings["t"] = {
   config = function()
     require("plugins.zenmode").autoSave()
   end,
-}
+},
 ```
 
 ### neoscroll
@@ -686,7 +695,7 @@ lvim.builtin.which_key.mappings["t"] = {
         post_hook = nil,              -- Function to run after the scrolling animation ends
         })
   end
-}
+},
 ```
 
 ### minimap
@@ -701,5 +710,5 @@ lvim.builtin.which_key.mappings["t"] = {
     vim.cmd ("let g:minimap_auto_start = 1")
     vim.cmd ("let g:minimap_auto_start_win_enter = 1")
   end,
-}
+},
 ```
