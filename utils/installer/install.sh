@@ -1,5 +1,5 @@
 #!/bin/sh
-#Set Variable to master is not set differently
+#Set Variable to master if not set differently
 LVBRANCH="${LVBRANCH:-master}"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
@@ -113,6 +113,7 @@ cloneconfig() {
 	esac
 	mkdir -p "$HOME/.config/lvim"
 	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "/usr/local/bin"
+  sudo chmod a+rx /usr/local/bin/lvim
 	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/lvim/lv-config.lua"
 
 	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
@@ -133,43 +134,46 @@ cloneconfig() {
 
 }
 
-asktoinstallnode() {
-	echo "node not found"
-	printf "Would you like to install node now (y/n)? "
-	read -r answer
-	[ "$answer" != "${answer#[Yy]}" ] && installnode
-}
+#asktoinstallnode() {
+	#echo "node not found"
+	#printf "Would you like to install node now (y/n)? "
+	#read -r answer
+	#[ "$answer" != "${answer#[Yy]}" ] && installnode
+#}
 
-asktoinstallpip() {
+#asktoinstallpip() {
 	# echo "pip not found"
 	# echo -n "Would you like to install pip now (y/n)? "
 	# read answer
 	# [ "$answer" != "${answer#[Yy]}" ] && installpip
-	echo "Please install pip3 before continuing with install"
-	exit
-}
+	#echo "Please install pip3 before continuing with install"
+	#exit
+#}
 
 installonmac() {
 	brew install ripgrep fzf
 	npm install -g tree-sitter-cli
+	pip3 install neovim-remote
 }
 
 installonubuntu() {
-	sudo apt install ripgrep fzf
+	sudo apt install ripgrep fzf xclip
 	sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
 	pip3 install neovim-remote
 	npm install -g tree-sitter-cli
 }
 
 installonarch() {
-	sudo pacman -S ripgrep fzf
+	sudo pacman -S ripgrep fzf xclip python
 	pip3 install neovim-remote
 	npm install -g tree-sitter-cli
 }
 
 installonfedora() {
 	sudo dnf groupinstall "X Software Development"
-	sudo dnf install -y fzf ripgrep
+	sudo dnf install -y fzf ripgrep xclip python3-devel
+	pip3 install neovim-remote
+	npm install -g tree-sitter-cli
 }
 
 installongentoo() {
@@ -203,13 +207,17 @@ esac
 [ -d "$HOME/.local/share/lunarvim" ] && moveoldlvim
 
 # install pip
-(command -v pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip
+(command -v pip3 >/dev/null && echo "pip installed, moving on...") || installpip
 
 # install node and neovim support
-(command -v node >/dev/null && echo "node installed, moving on...") || asktoinstallnode
+(command -v node >/dev/null && echo "node installed, moving on...") || installnode
 
 # install pynvim
 (pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
+
+# install extra packages
+echo "installing extra packages"
+installextrapackages
 
 if [ -e "$HOME/.local/share/lunarvim/site/pack/packer/start/packer.nvim" ]; then
 	echo 'packer already installed'
