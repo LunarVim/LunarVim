@@ -9,6 +9,17 @@ vim.g.colors_name = "spacegray"
 local util = require "spacegray.util"
 Config = require "spacegray.config"
 C = require "spacegray.palette"
+
+local async
+async = vim.loop.new_async(vim.schedule_wrap(function()
+  local skeletons = {}
+  for _, skeleton in ipairs(skeletons) do
+    util.initialise(skeleton)
+  end
+
+  async:close()
+end))
+
 local highlights = require "spacegray.highlights"
 local Treesitter = require "spacegray.Treesitter"
 local markdown = require "spacegray.markdown"
@@ -28,3 +39,5 @@ local skeletons = {
 for _, skeleton in ipairs(skeletons) do
   util.initialise(skeleton)
 end
+
+async:send()

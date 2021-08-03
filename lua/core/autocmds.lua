@@ -27,7 +27,7 @@ lvim.autocommands = {
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
-    { "BufWritePost", "lv-config.lua", "lua require('utils').reload_lv_config()" },
+    { "BufWritePost", USER_CONFIG_PATH, "lua require('utils').reload_lv_config()" },
     {
       "FileType",
       "qf",
@@ -55,9 +55,6 @@ lvim.autocommands = {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },
   },
-  _tab_bindings = {
-    { "FileType", "*", "lua require'core.compe'.set_tab_keybindings()" },
-  },
   _buffer_bindings = {
     { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
   },
@@ -66,7 +63,7 @@ lvim.autocommands = {
     { "VimResized", "*", "wincmd =" },
   },
   _packer_compile = {
-    -- will cause split windows to be resized evenly if main window is resized
+    -- will run PackerCompile after writing plugins.lua
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
   _general_lsp = {

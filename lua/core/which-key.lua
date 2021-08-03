@@ -152,6 +152,12 @@ M.config = function()
           "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
+        p = {
+          name = "Peek",
+          d = { "<cmd>lua require('lsp.peek').Peek('definition')<cr>", "Definition" },
+          t = { "<cmd>lua require('lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
+          i = { "<cmd>lua require('lsp.peek').Peek('implementation')<cr>", "Implementation" },
+        },
         q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
@@ -159,6 +165,10 @@ M.config = function()
           "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
           "Workspace Symbols",
         },
+      },
+      L = {
+        name = "+LunarVim",
+        k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
       },
 
       s = {

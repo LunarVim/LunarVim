@@ -42,6 +42,15 @@ local function r_inspect_settings(structure, limit, separator)
   return limit - 1
 end
 
+function utils.has_value(tab, val)
+  for _, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+  return false
+end
+
 function utils.generate_settings()
   -- Opens a file in append mode
   local file = io.open("lv-settings.lua", "w")
@@ -81,7 +90,7 @@ end
 
 function utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd "source ~/.config/lvim/lv-config.lua"
+  vim.cmd("source " .. USER_CONFIG_PATH)
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
@@ -89,6 +98,7 @@ function utils.reload_lv_config()
   plugin_loader:load { plugins, lvim.plugins }
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
+  require("keymappings").setup()
   -- vim.cmd ":PackerClean"
 end
 
@@ -102,48 +112,30 @@ function utils.check_lsp_client_active(name)
   return false
 end
 
-function utils.is_table(t)
-  return type(t) == "table"
-end
-
-function utils.is_string(t)
-  return type(t) == "string"
-end
-
-function utils.has_value(tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
+--- Extends a list-like table with the unique values of another list-like table.
+---
+--- NOTE: This mutates dst!
+---
+--@see |vim.tbl_extend()|
+---
+--@param dst list which will be modified and appended to.
+--@param src list from which values will be inserted.
+--@param start Start index on src. defaults to 1
+--@param finish Final index on src. defaults to #src
+--@returns dst
+function utils.list_extend_unique(dst, src, start, finish)
+  vim.validate {
+    dst = { dst, "t" },
+    src = { src, "t" },
+    start = { start, "n", true },
+    finish = { finish, "n", true },
+  }
+  for i = start or 1, finish or #src do
+    if not vim.tbl_contains(dst, src[i]) then
+      table.insert(dst, src[i])
     end
   end
-
-  return false
-end
-
-function utils.add_keymap(mode, opts, keymaps)
-  for _, keymap in ipairs(keymaps) do
-    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
-  end
-end
-
-function utils.add_keymap_normal_mode(opts, keymaps)
-  utils.add_keymap("n", opts, keymaps)
-end
-
-function utils.add_keymap_visual_mode(opts, keymaps)
-  utils.add_keymap("v", opts, keymaps)
-end
-
-function utils.add_keymap_visual_block_mode(opts, keymaps)
-  utils.add_keymap("x", opts, keymaps)
-end
-
-function utils.add_keymap_insert_mode(opts, keymaps)
-  utils.add_keymap("i", opts, keymaps)
-end
-
-function utils.add_keymap_term_mode(opts, keymaps)
-  utils.add_keymap("t", opts, keymaps)
+  return dst
 end
 
 function utils.unrequire(m)
@@ -160,6 +152,12 @@ function utils.gsub_args(args)
     args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
   end
   return args
+end
+
+function utils.lvim_log(msg)
+  if lvim.debug then
+    vim.notify(msg, vim.log.levels.DEBUG)
+  end
 end
 
 return utils

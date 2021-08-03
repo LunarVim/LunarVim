@@ -1,2 +1,11 @@
-vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-h>", ":BufferPrevious<CR>", { noremap = true, silent = true })
+lvim.builtin.bufferline = {
+  keymap = {
+    normal_mode = {
+      ["<S-l>"] = ":BufferNext<CR>",
+      ["<S-h>"] = ":BufferPrevious<CR>",
+    },
+  },
+}
+
+local keymap = require "keymappings"
+keymap.append_to_defaults(lvim.builtin.bufferline.keymap)
