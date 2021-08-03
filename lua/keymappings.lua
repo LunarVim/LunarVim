@@ -2,6 +2,14 @@ local M = {}
 
 local generic_opts_any = { noremap = true, silent = true }
 
+local generic_opts = {
+  insert_mode = generic_opts_any,
+  normal_mode = generic_opts_any,
+  visual_mode = generic_opts_any,
+  visual_block_mode = generic_opts_any,
+  term_mode = { silent = true },
+}
+
 local mode_adapters = {
   insert_mode = "i",
   normal_mode = "n",
@@ -20,23 +28,34 @@ function M.append_to_defaults(keymaps)
   end
 end
 
+-- Set key mappings individually
+-- @param mode The keymap mode, can be one of the keys of mode_adapters
+-- @param key The key of keymap
+-- @param val Can be form as a mapping or tuple of mapping and user defined opt
+function M.set_keymaps(mode, key, val)
+  local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+  if type(val) == "table" then
+    opt = val[2]
+    val = val[1]
+  end
+  vim.api.nvim_set_keymap(mode, key, val, opt)
+end
+
 -- Load key mappings for a given mode
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param keymaps The list of key mappings
--- @param opts The mapping options
-function M.load_mode(mode, keymaps, opts)
+function M.load_mode(mode, keymaps)
   mode = mode_adapters[mode] and mode_adapters[mode] or mode
   for k, v in pairs(keymaps) do
-    vim.api.nvim_set_keymap(mode, k, v, opts)
+    M.set_keymaps(mode, k, v)
   end
 end
 
 -- Load key mappings for all provided modes
 -- @param keymaps A list of key mappings for each mode
--- @param opts The mapping options for each mode
-function M.load(keymaps, opts)
+function M.load(keymaps)
   for mode, mapping in pairs(keymaps) do
-    M.load_mode(mode, mapping, opts[mode])
+    M.load_mode(mode, mapping)
   end
 end
 
@@ -59,6 +78,10 @@ function M.config()
       ["<A-Down>"] = "<C-\\><C-N><C-w>j",
       ["<A-Left>"] = "<C-\\><C-N><C-w>h",
       ["<A-Right>"] = "<C-\\><C-N><C-w>l",
+      -- navigate tab completion with <c-j> and <c-k>
+      -- runs conditionally
+      ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
+      ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
     },
 
     ---@usage change or add keymappings for normal mode
@@ -138,20 +161,8 @@ function M.print(mode)
 end
 
 function M.setup()
-  -- navigate tab completion with <c-j> and <c-k>
-  -- runs conditionally
-  vim.cmd 'inoremap <expr> <C-j> pumvisible() ? "\\<C-n>" : "\\<C-j>"'
-  vim.cmd 'inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<C-k>"'
-  local generic_opts = {
-    insert_mode = generic_opts_any,
-    normal_mode = generic_opts_any,
-    visual_mode = generic_opts_any,
-    visual_block_mode = generic_opts_any,
-    term_mode = { silent = true },
-  }
-
   vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
-  M.load(lvim.keys, generic_opts)
+  M.load(lvim.keys)
 end
 
 return M
