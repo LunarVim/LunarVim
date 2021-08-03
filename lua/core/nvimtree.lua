@@ -3,6 +3,7 @@ local M = {}
 M.config = function()
   lvim.builtin.nvimtree = {
     side = "left",
+    width = 30,
     show_icons = {
       git = 1,
       folders = 1,
@@ -65,6 +66,35 @@ M.setup = function()
   }
 end
 --
+M.focus_or_close = function()
+  local view_status_ok, view = pcall(require, "nvim-tree.view")
+  if not view_status_ok then
+    return
+  end
+  local a = vim.api
+
+  local curwin = a.nvim_get_current_win()
+  local curbuf = a.nvim_win_get_buf(curwin)
+  local bufnr = view.View.bufnr
+  local winnr = view.get_winnr()
+
+  if view.win_open() then
+    if curwin == winnr and curbuf == bufnr then
+      view.close()
+      if package.loaded["bufferline.state"] then
+        require("bufferline.state").set_offset(0)
+      end
+    else
+      view.focus()
+    end
+  else
+    view.open()
+    if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
+      -- require'bufferline.state'.set_offset(lvim.builtin.nvimtree.width + 1, 'File Explorer')
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
+    end
+  end
+end
 --
 M.toggle_tree = function()
   local view_status_ok, view = pcall(require, "nvim-tree.view")
@@ -78,8 +108,8 @@ M.toggle_tree = function()
     end
   else
     if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
-      -- require'bufferline.state'.set_offset(31, 'File Explorer')
-      require("bufferline.state").set_offset(31, "")
+      -- require'bufferline.state'.set_offset(lvim.builtin.nvimtree.width + 1, 'File Explorer')
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
     end
     require("nvim-tree").toggle()
   end
