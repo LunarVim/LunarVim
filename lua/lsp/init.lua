@@ -83,6 +83,10 @@ function M.common_on_attach(client, bufnr)
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)
+  if lvim.lsp.smart_cwd then
+    vim.api.nvim_set_current_dir(client.config.root_dir)
+    require("core.nvimtree").change_tree_dir(client.config.root_dir)
+  end
   require("lsp.null-ls").setup(vim.bo.filetype)
 end
 
