@@ -85,6 +85,8 @@ lvim = {
     popup_border = "single",
     on_attach_callback = nil,
     on_init_callback = nil,
+    ---@usage query the project directory from the language server and use it to set the CWD
+    smart_cwd = true,
   },
 
   plugins = {
@@ -1248,3 +1250,4 @@ require("core.terminal").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
+require("core.rooter").config()

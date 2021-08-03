@@ -112,6 +112,16 @@ function utils.check_lsp_client_active(name)
   return false
 end
 
+function utils.get_active_client_by_ft(filetype)
+  local clients = vim.lsp.get_active_clients()
+  for _, client in pairs(clients) do
+    if client.name == lvim.lang[filetype].lsp.provider then
+      return client
+    end
+  end
+  return nil
+end
+
 --- Extends a list-like table with the unique values of another list-like table.
 ---
 --- NOTE: This mutates dst!

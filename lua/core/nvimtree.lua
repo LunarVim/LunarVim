@@ -117,4 +117,10 @@ M.toggle_tree = function()
   end
 end
 --
+function M.change_tree_dir(dir)
+  if vim.g.loaded_tree then
+    require("nvim-tree.lib").change_dir(dir)
+  end
+end
+--
 return M
