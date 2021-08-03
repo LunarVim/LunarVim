@@ -38,7 +38,10 @@ M.config = function()
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     execs = {
       { "lazygit", "gg", "LazyGit" },
-      { "lnav ~/.cache/nvim/lunarvim.log", "Li", "Interactive log viewer [lnav]" },
+      { "lnav ~/.cache/nvim/lunarvim.log", "Lid", "Interactive default log [lnav]" },
+      { "lnav ~/.cache/nvim/lsp.log", "Lil", "Interactive lsp log [lnav]" },
+      { "lnav ~/.cache/nvim/log", "Lin", "Interactive neovim log [lnav]" },
+      { "lnav ~/.cache/nvim/packer.nvim.log", "Lip", "Interactive packer log [lnav]" },
     },
   }
 end

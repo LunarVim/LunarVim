@@ -42,6 +42,10 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunar
 * If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
 * Many options formerly available in `config.lua` have been renamed.  For details [look here](https://github.com/lunarvim/LunarVim/wiki/Breaking-changes-in-rolling)
 
+### Debugging LunarVim's configuration
+* To turn on debugging add these settings `lvim.debug = true` and use `<leader>Ll` to open the logfile
+* You can also use install [lnav](https://github.com/tstack/lnav) and use it in a floating terminal. To do that set `lvim.builtin.terminal.active = true` and then press `<leader>Li`.
+
 ### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
 you can run the script with `--overwrite` but be warned this will remove the following folders:

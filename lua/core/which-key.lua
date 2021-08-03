@@ -173,9 +173,19 @@ M.config = function()
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
         },
-        l = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
+        l = {
+          name = "+logs",
+          d = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
+          l = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
+          n = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
+          p = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
+        },
+        i = {
+          --- used to define a name for the group in which-key
+          --- these are defined in core.terminal for now
+          name = "+logs (interactive)",
+        },
       },
-
       s = {
         name = "Search",
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
