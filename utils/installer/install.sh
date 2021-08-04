@@ -143,11 +143,11 @@ cloneconfig() {
 
 	printf "\nCompile Complete\n"
 
-	if [ -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
-		echo 'config.lua already present'
-	else
-		cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example.lua" "$HOME/.config/lvim/config.lua"
-	fi
+#	if [ -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
+#		echo 'config.lua already present'
+#	else
+#		cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example.lua" "$HOME/.config/lvim/config.lua"
+#	fi
 
 }
 
@@ -239,9 +239,6 @@ esac
 # install pynvim
 (pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
 
-# install extra packages
-echo "installing extra packages"
-installextrapackages
 
 if [ -e "$HOME/.local/share/lunarvim/site/pack/packer/start/packer.nvim" ]; then
 	echo 'packer already installed'
@@ -268,4 +265,7 @@ if [ "$(uname)" != "Darwin" ]; then
 fi
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
+# install extra packages
+echo "installing extra packages"
+installextrapackages
 # echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'
