@@ -147,7 +147,7 @@ return {
   -- vim-rooter
   {
     "airblade/vim-rooter",
-    event = "BufReadPre",
+    -- event = "BufReadPre",
     config = function()
       require("core.rooter").setup()
       if lvim.builtin.rooter.on_config_done then
