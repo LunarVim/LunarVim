@@ -26,6 +26,12 @@ moveoldlvim() {
 	exit
 }
 
+installannvm() {
+	echo "Nodejs not found"
+	echo "Please install a node version manager"
+	exit
+}
+
 installnodearch() {
 	sudo pacman -S nodejs
 	sudo pacman -S npm
@@ -118,7 +124,7 @@ cloneconfig() {
 		USER_BIN_DIR="$HOME/../usr/bin"
 	fi
 	echo "Cloning LunarVim configuration"
-	mkdir -p ~/.local/share/lunarvim
+#	mkdir -p ~/.local/share/lunarvim   directory already exists at this point
 	case "$@" in
 
 	*--testing*)
@@ -234,7 +240,7 @@ esac
 (command -v pip3 >/dev/null && echo "pip installed, moving on...") || installpip
 
 # install node and neovim support
-(command -v node >/dev/null && echo "node installed, moving on...") || installnode
+(command -v node >/dev/null && echo "node installed, moving on...") || installannvm 
 
 # install pynvim
 (pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
@@ -265,7 +271,9 @@ if [ "$(uname)" != "Darwin" ]; then
 fi
 
 echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
+
 # install extra packages
 echo "installing extra packages"
 installextrapackages
+
 # echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'
