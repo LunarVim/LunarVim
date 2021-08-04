@@ -2,8 +2,6 @@
 
 [Website](https://www.lunarvim.org/) for [LunarVim](https://github.com/ChristianChiarulli/LunarVim)
 
-j
-
 ## Run this site locally
 
 - Clone the repo:
