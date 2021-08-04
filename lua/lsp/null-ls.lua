@@ -24,12 +24,22 @@ function M.get_registered_providers_by_filetype(ft)
 end
 
 local function validate_nodejs_provider(requests, provider)
-  local ts_client = require("utils").get_active_client_by_ft "typescript"
-  if ts_client == nil then
-    u.lvim_log "Unable to determine root directory since tsserver didn't start correctly"
-    return
+  local root_dir = ""
+  if lvim.builtin.rooter.active then
+    --- old logic to set root_dir
+    vim.cmd "let root_dir = FindRootDirectory()"
+    root_dir = vim.api.nvim_get_var "root_dir"
+  else
+    --- new logic to set root_dir
+    local ts_client = require("utils").get_active_client_by_ft "typescript"
+    if ts_client then
+      local root_dir = ts_client.config.root_dir
+    end
+    if ts_client == nil then
+      u.lvim_log "Unable to determine root directory since tsserver didn't start correctly"
+      return
+    end
   end
-  local root_dir = ts_client.config.root_dir
   local local_nodejs_command = root_dir .. "/node_modules/.bin/" .. provider._opts.command
   u.lvim_log(string.format("checking [%s] for local node module: [%s]", local_nodejs_command, vim.inspect(provider)))
   if vim.fn.executable(local_nodejs_command) == 1 then
