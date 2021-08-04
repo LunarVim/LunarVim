@@ -1,80 +1,18 @@
 # Install
 
-There are a few ways to install LunarVim
+To install LunarVim:
 
-## Stable
+Remove the following folders, if any exist. If you already have a `nvim` directory under `~/.config`, move it with `mv nvim/ nvim-old/`.
 
-No alarms and no surprises:
+`~/.cache/nvim`
+`~/.config/nvim`                        
+`~/.config/lvim` 
+`~/.local/share/nvim/site/pack/packer` 
+`~/.local/share/lunarvim`             
 
-```bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
-```
+Install Neovim (>= v0.5.0). If you want to compile from source and install, see [here](#compiling-neovim-from-source).
 
-## Rolling
-
-All the new features with all the new bugs:
-
-```bash
-LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
-```
-
-Make sure you have the newest version of Neovim (0.5).
-
-``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
-```
-
-After installation run `nvim` and then `:PackerInstall`
-
-## I already have a Neovim config
-
-If you already have a `nvim` directory under `~/.config` don't worry LunarVim will not overwrite it. Your LunarVim config will be located in `~/.config/lvim`
-
-
-## Compiling Neovim from source
-
-Some operating systems package versions of Neovim 0.5. You can install
-those or you can follow the steps below to compile the latest version from source.
-Compiling from source is the recommended method.  Sometimes features are added to neovim that plugin authors take advantage of.  Older versions of neovim won't have those features and some plugins won't run correctly.  
-
-First, get the dependencies. For distributions other than Ubuntu or Arch
-go
-[here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites)
-
-``` bash
-#Ubuntu
-sudo apt-get install gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip build-essential
-#Arch
-sudo pacman -S base-devel cmake unzip ninja tree-sitter
-```
-
-Download and compile Neovim
-
-``` bash
-cd $(mktemp -d)
-git clone https://github.com/neovim/neovim
-cd neovim
-sudo make CMAKE_BUILD_TYPE=Release install
-cd ..
-sudo rm -r neovim
-```
-
-or if you are on Arch you can get it from the AUR
-
-``` bash
-yay -S neovim-git
-```
-
-
-If you are on Gentoo you have to emerge the 9999 neovim version with luajit as the lua single target
-
-## Manual install 
-
-First make sure you have version [0.5 of
-neovim](#compiling-neovim-from-source).
-
-
-Install xclip, python3, ripgrep, fzf, npm, nodejs, pip, and with the package manager for your distribution.
+Run the following appropriate command for your respective OS:
 
 ```bash
 # Ubuntu
@@ -102,6 +40,59 @@ python3 get-pip.py
 rm get-pip.py
 ```
 
+Run one of the following commands:
+
+## Stable (master branch)
+
+``` bash
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+```
+
+## Unstable (rolling branch)
+
+All the new features with all the new bugs:
+
+```bash
+LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
+```
+
+
+
+
+
+## Compiling Neovim from source
+
+First, get the dependencies. For distributions other than Ubuntu or Arch, go [here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites).
+
+``` bash
+#Ubuntu
+sudo apt-get install gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip build-essential
+#Arch
+sudo pacman -S base-devel cmake unzip ninja tree-sitter
+```
+
+Download and compile Neovim:
+
+``` bash
+cd $(mktemp -d)
+git clone https://github.com/neovim/neovim
+cd neovim
+sudo make CMAKE_BUILD_TYPE=Release install
+cd ..
+sudo rm -r neovim
+```
+
+or if you are on Arch you can get the development version from the AUR:
+
+``` bash
+yay -S neovim-git
+```
+
+If you are on Gentoo you have to emerge the 9999 neovim version with luajit as the lua single target.
+
+## Manual install 
+
+Install xclip, python3, ripgrep, fzf, npm, nodejs, pip, and with the package manager for your distribution.
 Install tree-sitter.  To globally install packages without the need for sudo
 follow [this guide](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 
@@ -140,14 +131,6 @@ mkdir -p ~/.config/lvim
 cp ~/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua ~/.config/lvim/lv-config.lua
 ```
 
-Install plugins
-```
-#launch LunarVim
-lvim
-
-# Type this command
-:PackerSync
-```
 
 ## Troubleshooting installation problems
 If you encounter problems with the installation check the following: 
