@@ -71,7 +71,7 @@ function M.common_on_init(client, bufnr)
   end
 
   local formatters = lvim.lang[vim.bo.filetype].formatters
-  if not vim.tbl_isempty(formatters) then
+  if not vim.tbl_isempty(formatters) and formatters[1].exe ~= "" then
     client.resolved_capabilities.document_formatting = false
     u.lvim_log(string.format("Overriding [%s] formatter with [%s]", client.name, formatters[1].exe))
   end
