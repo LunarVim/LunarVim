@@ -1,19 +1,21 @@
-# Plugin Quickstart
- 
-Add plugins by pasting any of the example snippets into a table in your `config.lua` like so: 
-```
+# Installing Plugins
+
+Plugins are installed by adding snippets into the `lvim.plugins` table in your `config.lua` file.  Save (`:w` or `<leader>w`), and Packer will autoinstall the new plugins.
+
+## Example
+
+```lua
 lvim.plugins = {
-	{ "oberblastmeister/neuron.nvim" },
-	{ "gennaro-tedesco/nvim-peekup" },
-},
+  {"lunarvim/colorschemes"},
+  {"folke/tokyonight.nvim"}, 
+}
 ```
 
-Save (`:w`), and Packer will autoinstall the new plugins.
-
+Run `:PackerSync` to pull down updates for your existing plugins.
 
 ## Navigation
 
-### Lightspeed
+### lightspeed
 
 ```lua
 {
@@ -22,7 +24,7 @@ Save (`:w`), and Packer will autoinstall the new plugins.
 },
 ```
 
-### Hop
+### hop
 
 ```lua
 {
@@ -36,7 +38,7 @@ Save (`:w`), and Packer will autoinstall the new plugins.
 },
 ```
 
-### Nvim-lastplace
+### nvim-lastplace
 
 ```lua
 	{
@@ -281,7 +283,7 @@ end
 },
 ```
 
-### Goto-preview
+### goto-preview
 ```lua
 {
   "rmagatti/goto-preview",
@@ -305,7 +307,7 @@ end
 
 ## General
 
-### Persistence
+### persistence
 
 ```lua
 {
@@ -711,4 +713,10 @@ lvim.builtin.which_key.mappings["t"] = {
     vim.cmd ("let g:minimap_auto_start_win_enter = 1")
   end,
 },
+```
+
+### Notetaking
+
+```lua
+	{"oberblastmeister/neuron.nvim"},
 ```

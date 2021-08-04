@@ -1,4 +1,30 @@
-# Extending Configurations for Core Plugins
+# Core plugins
+
+LunarVim comes bundled with a small set of default plugins to keep it lean and fast. A few of the builtins are disabled by default. To toggle a builtin, add an entry for it in your personal configuration file. 
+
+```lua
+lvim.builtin.galaxyline.active = true
+lvim.builtin.dap.active = true
+lvim.builtin.dashboard.active = true
+lvim.builtin.terminal.active = true
+```
+
+To see which plugins are installed run `:PackerStatus`
+
+## Configuring Plugins
+
+Settings for core plugins are accessible through `lvim.builtin`. You can press `TAB` to get autocomplete suggestions to explore these settings.
+
+Example settings
+``` lua
+lvim.builtin.compe.allow_prefix_unmatch = false
+lvim.builtin.compe.autocomplete = true
+lvim.builtin.compe.debug = false
+lvim.builtin.telescope.defaults.layout_config.width = 0.95
+lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
+```
+
+## Extending Configurations for Core Plugins
 
 Core plugins come pre-configured.  Sometimes you may want to extend the configuration of these plugins to enable additional functionality.  For example, if you want have autopairs automatically close your function definitions, you need to specify endwise rules.  
 
@@ -84,3 +110,4 @@ You can also do the following to append an executable
 ``` lua
 lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
 ```
+
