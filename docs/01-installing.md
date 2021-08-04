@@ -128,10 +128,10 @@ git clone https://github.com/jose-elias-alvarez/null-ls.nvim.git
 Clone LunarVim
 ```bash
 #Rolling Branch
-git clone -branch rolling https://github.com/ChristianChiarulli/lunarvim.git 
+git clone --branch rolling https://github.com/ChristianChiarulli/lunarvim.git 
 
 #Stable Branch
-git clone -branch master https://github.com/ChristianChiarulli/lunarvim.git 
+git clone --branch master https://github.com/ChristianChiarulli/lunarvim.git 
 ```
 
 Create your configuration file
