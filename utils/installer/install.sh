@@ -160,7 +160,7 @@ asktoinstallnode() {
 
 asktoinstallgit() {
 	echo "git not found, please install git"
-  exit
+        exit
 }
 
 asktoinstallpip() {
