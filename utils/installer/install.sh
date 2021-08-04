@@ -158,6 +158,11 @@ asktoinstallnode() {
 	[ "$answer" != "${answer#[Yy]}" ] && installnode
 }
 
+asktoinstallgit() {
+	echo "git not found, please install git"
+  exit
+}
+
 asktoinstallpip() {
 	# echo "pip not found"
 	# echo -n "Would you like to install pip now (y/n)? "
@@ -226,6 +231,9 @@ esac
 
 # move old lvim directory if it exists
 [ -d "$HOME/.local/share/lunarvim" ] && moveoldlvim
+
+# install node and neovim support
+(command -v git >/dev/null && echo "git installed, moving on...") || asktoinstallgit
 
 # install pip
 (command -v pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip
