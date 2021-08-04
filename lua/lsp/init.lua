@@ -33,24 +33,6 @@ local function lsp_highlight_document(client)
   end
 end
 
-local function add_lsp_buffer_keybindings(bufnr)
-  local wk = require "which-key"
-  local keys = {
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
-    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
-    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
-    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
-    ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
-    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
-    ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
-    ["gl"] = {
-      "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>",
-      "Show line diagnostics",
-    },
-  }
-  wk.register(keys, { mode = "n", buffer = bufnr })
-end
-
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -82,7 +64,7 @@ function M.common_on_attach(client, bufnr)
     lvim.lsp.on_attach_callback(client, bufnr)
   end
   lsp_highlight_document(client)
-  add_lsp_buffer_keybindings(bufnr)
+  require("keymappings").add_lsp_keybindings(bufnr)
   if lvim.lsp.smart_cwd then
     vim.api.nvim_set_current_dir(client.config.root_dir)
     require("core.nvimtree").change_tree_dir(client.config.root_dir)

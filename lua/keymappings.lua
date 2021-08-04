@@ -151,6 +151,33 @@ function M.config()
   end
 end
 
+--- Add keybindings for LSP helper function (goto definition, etc)
+---@param bufnr will be used if specified, otherwise they will be global
+function M.add_lsp_keybindings(bufnr)
+  local keys = {
+    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
+    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
+    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
+    ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
+    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
+    ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
+    ["gl"] = {
+      "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>",
+      "Show line diagnostics",
+    },
+  }
+  local opts = { mode = "n" }
+  if bufnr then
+    opts.buffer = bufnr
+  end
+  local status_ok, wk = pcall(require, "which-key")
+  if not status_ok then
+    error "Unable to load which-key to register keymappings."
+  end
+  wk.register(keys, opts)
+end
+
 function M.print(mode)
   print "List of LunarVim's default keymappings (not including which-key)"
   if mode then
