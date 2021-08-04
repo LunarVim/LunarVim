@@ -8,9 +8,6 @@ module.exports = {
   description: "Documentation for LunarVim",
   head: [["link", { rel: "icon", href: "/assets/lunarvim_logo.png" }]],
   home: "/languages",
-  plugins: [
-    'vuepress-plugin-mermaidjs'
-  ],
 
   themeConfig: {
     logo: "/assets/lunarvim_logo.png",

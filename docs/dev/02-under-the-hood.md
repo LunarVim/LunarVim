@@ -10,6 +10,8 @@ Firefox: GitHub + Mermaid - [Firefox Add-ons](https://addons.mozilla.org/en-GB/f
 
 ![LunarVim initialization flowchart](./lunarvim_initialization.png "LunarVim initialization flowchart")
 
+
+The above chart was made with the following markdown using mermaid markdown
 Last updated Wed Aug  4 10:04:27 PM CEST 2021
 
 ```mermaid
