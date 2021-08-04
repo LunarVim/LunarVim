@@ -1,6 +1,8 @@
 # LunarVim.org
 
-Website for LunarVim
+Website for [LunarVim](https://www.lunarvim.org/)
+
+j
 
 ## Run this site locally
 
@@ -20,4 +22,10 @@ cd lunarvim.org && npm install
 
 ```
 npm run docs:dev
+```
+
+- Run the site in your browser:
+ 
+```
+http://localhost:8080/
 ```
