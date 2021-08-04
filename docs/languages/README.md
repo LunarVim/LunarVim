@@ -34,7 +34,6 @@ lvim.lang.typescript.formatters = {{}}
 lvim.lang.typescriptreact.formatters = {{}}
 lvim.lang.javascript.formatters = {{}}
 lvim.lang.typescriptreact.formatters = {{}}
-
 ```
 
 If the name of your formatter or linter includes a hyphen `-`, replace it with an underscore `_`. Dashes are not valid identifiers in lua.  LunarVim chooses to match the name of the formatter with the variable it's stored in.     
