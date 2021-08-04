@@ -8,6 +8,8 @@ Firefox: GitHub + Mermaid - [Firefox Add-ons](https://addons.mozilla.org/en-GB/f
 
 # Logic from start to window load 
 
+![LunarVim initialization flowchart](./lunarvim_initialization.png "LunarVim initialization flowchart")
+
 Last updated Wed Aug  4 10:04:27 PM CEST 2021
 
 ```mermaid
