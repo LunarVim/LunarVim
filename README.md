@@ -1,6 +1,6 @@
 # LunarVim.org
 
-Website for [LunarVim](https://www.lunarvim.org/)
+[Website](https://www.lunarvim.org/) for [LunarVim](https://github.com/ChristianChiarulli/LunarVim)
 
 j
 
