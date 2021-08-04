@@ -47,7 +47,7 @@ M.config = function()
       },
     },
 
-    footer = { "chrisatmachine.com" },
+    footer = { "lunarvim.org" },
   }
 end
 

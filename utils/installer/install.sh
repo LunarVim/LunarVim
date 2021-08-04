@@ -125,7 +125,7 @@ cloneconfig() {
 		cp -r "$(pwd)" ~/.local/share/lunarvim/lvim
 		;;
 	*)
-		git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.local/share/lunarvim/lvim
+		git clone --branch "$LVBRANCH" https://github.com/lunarvim/lunarvim.git ~/.local/share/lunarvim/lvim
 		;;
 	esac
 	mkdir -p "$HOME/.config/lvim"
