@@ -62,13 +62,17 @@ graph TD
   setup_null_ls --> validate_provider_request["Does a valid provider exist?"]
   query_lsp_for_cwd --> setup_null_ls
   call_lsp_on_attach_callback --> smart_cwd_check
-  validate_provider_request -- nil or empty provider --> first_window_load["First window load"]
+  validate_provider_request -- nil or empty provider --> lsp_setup["Setup LSP"]
   validate_provider_request -- Executable exists --> is_provider_eslint["Is provider eslint?"]
   is_provider_eslint -- Yes --> replace_with_eslintd["Replace it with eslint_d"]
   replace_with_eslintd -->  add_provider_to_table["Add it to the provider to a table"]
   is_provider_eslint -- No --> add_provider_to_table
   validate_provider_request -- Executable does not exist --> print_provider_error["Print error about not being able to find formatting executable"]
-  add_provider_to_table --> first_window_load
-  print_provider_error --> first_window_load
+  add_provider_to_table --> lsp_setup
+  print_provider_error --> lsp_setup
+  lsp_setup --> lsp_override_check["Is there an lvim.lsp.override set?"]
+  lsp_override_check -- Yes --> lsp_override["Use the override table"]
+  lsp_override_check -- No --> first_window_load["First window loads"]
+  lsp_override --> first_window_load
 ```
 
