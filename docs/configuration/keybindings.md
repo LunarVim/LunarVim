@@ -45,8 +45,8 @@ Overwrite/augment the key-mappings provided by LunarVim for any mode, or leave e
    ["]d"] = "<PageDown>",
 
    -- Navigate buffers
-   ["<Tab>"] = { ":bnext<CR>" },
-   ["<S-Tab>"] = { ":bprevious<CR>" },
+   ["<Tab>"] = ":bnext<CR>",
+   ["<S-Tab>"] = ":bprevious<CR>",
  }
 ```
 
