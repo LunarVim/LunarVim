@@ -33,7 +33,7 @@ local function validate_nodejs_provider(requests, provider)
     --- new logic to set root_dir
     local ts_client = require("utils").get_active_client_by_ft "typescript"
     if ts_client then
-      local root_dir = ts_client.config.root_dir
+      root_dir = ts_client.config.root_dir
     end
     if ts_client == nil then
       u.lvim_log "Unable to determine root directory since tsserver didn't start correctly"
