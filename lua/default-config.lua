@@ -932,7 +932,10 @@ lvim.lang = {
         init_options = {
           formatting = true,
         },
-        root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git"),
+        root_dir = function()
+          local util = require("lspconfig").util
+          return util.root_pattern("Gemfile", ".git")
+        end,
         settings = {
           solargraph = {
             diagnostics = true,
