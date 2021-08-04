@@ -864,12 +864,22 @@ lvim.lang = {
   python = {
     formatters = {
       {
-        -- @usage can be black or yapf or isort
-        exe = "",
+        -- @usage can be black and/or yapf and/or isort (multiple formatters allowed)
+        exe = "isort",
+        args = {"--profile", "black"}
+      },
+      {
+        exe = "black",
+        args = {}
+      }
+    },
+    linters = {
+      {
+        -- @usage can be flake8 or ... (multiple linters allowed)
+        exe = "flake8",
         args = {},
       },
     },
-    linters = {},
     lsp = {
       provider = "pyright",
       setup = {
