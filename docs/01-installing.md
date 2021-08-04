@@ -128,7 +128,7 @@ git clone -branch master https://github.com/ChristianChiarulli/lunarvim.git
 Create your configuration file
 ```
 mkdir -p ~/.config/lvim
-cp ~/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua ~/.config/lvim/lv-config.lua
+cp ~/.local/share/lunarvim/lvim/utils/installer/config.example.lua ~/.config/lvim/config.lua
 ```
 
 

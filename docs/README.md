@@ -12,7 +12,7 @@ LunarVim ships with a sane default config to build on top of. Features include a
 
 ## Extensible
 
-Just because LunarVim has an opinion doesn't mean you need to share it. Every builtin plugin enabled by default can be disabled in the `lv-config.lua` file. Here you can also add your own plugins, keymaps, autocommands, leader bindings and any other custom configuration.
+Just because LunarVim has an opinion doesn't mean you have to share it. Every builtin plugin enabled by default can be disabled in the `config.lua` file. Here you can also add your own plugins, keymaps, autocommands, leader bindings and any other custom configuration.
 
 ## Fast
 

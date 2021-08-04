@@ -37,31 +37,17 @@ vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { nor
 ```
 
 ### LunarVim style
-Define a table of mappings
+Overwrite/augment the key-mappings provided by LunarVim for any mode, or leave empty to keep the defaults.
 ``` lua
-lvim.keys.normal_mode = {
-  -- Page down/up
-  {'[d', '<PageUp>'},
-  {']d', '<PageDown>'},
+ lvim.keys.normal_mode = {
+   -- Page down/up
+   ["[d"] = { "<PageUp>" },
+   ["]d"] = { "<PageDown>" },
 
-  -- Navigate buffers
-  {'<Tab>', ':bnext<CR>'},
-  {'<S-Tab>', ':bprevious<CR>'},
-}
-```
-
-Or use the utility functions 
-* add_keymap_insert_mode
-* add_keymap_normal_mode
-* add_keymap_term_mode
-* add_keymap_visual_block_mode
-* add_keymap_visual_mode
-
-``` lua
-require("utils").add_keymap_insert_mode({ silent = true }, {
-    { "<C-s>", ":w<cr>" },
-    { "<C-c>", "<ESC>" },
-    })
+   -- Navigate buffers
+   ["<Tab>"] = { ":bnext<CR>" },
+   ["<S-Tab>"] = { ":bprevious<CR>" },
+ }
 ```
 
 ### Listing what is mapped
@@ -126,3 +112,24 @@ lvim.builtin.which_key.mappings = {
   },
 }
 ```
+
+## Leader Key
+The default leader key is `Space`.  This can be changed with the following
+
+```lua
+lvim.leader_key = "space"
+```
+
+## Cursor Movement
+
+By default, when pressing left/right cursor keys, Vim will not move to the previous/next line after reaching first/last character in the line. This can be quite annoying for new users. Fortunately this behaviour can be easily changed by putting this in your vimrc file:
+
+To enable:
+``` lua
+lvim.line_wrap_cursor_movement = true
+```
+Enabling maps the following command
+``` vim
+set whichwrap+=<,>,h,l,[,]
+```
+

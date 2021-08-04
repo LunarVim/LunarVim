@@ -2,9 +2,9 @@
 
 You can easily install plugins using the options provided by packer.
 
-Just add your plugin to the `lvim.plugins` table in your `lv-config.lua` file and save the file (don't quit or the operation will not run). You can also run `:PackerSync` to pull down updates for your plugins.
+Just add your plugin to the `lvim.plugins` table in your `config.lua` file and save the file (don't quit or the operation will not run). You can also run `:PackerSync` to pull down updates for your plugins.
 
-After adding the following to your `lv-config.lua` just `:w` and the plugins will automatically install.
+After adding the following to your `config.lua` just `:w` and the plugins will automatically install.
 
 ## Example
 
@@ -23,7 +23,7 @@ lvim.plugins = {
 ```
 
 
-# Core plugins
+## Core plugins
 LunarVim comes bundled with a small set of default plugins.  A few plugins are disabled by default.  To enable a plugin, add an entry for it in your personal configuration file.  To see which plugins are installed run `:PackerStatus`
 
 ```lua
@@ -34,6 +34,17 @@ lvim.builtin.terminal.active = true
 ```
 
 To learn how to extend the configuration of these core plugins [go here](./extending-configuration-for-core-plugins.md)
+
+# Configuring Plugins
+
+Settings for core plugins are accessible through `lvim.builtin`.   You can press `TAB` to get autocomplete suggestions to explore these settings.
+
+Example settings
+``` lua
+lvim.builtin.compe.allow_prefix_unmatch = false
+lvim.builtin.compe.autocomplete = true
+lvim.builtin.compe.debug = false
+```
 
 # Removing Plugins
 

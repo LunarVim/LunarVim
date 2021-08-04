@@ -7,13 +7,13 @@ Website for LunarVim
 - Clone the repo:
 
 ```
-git clone https://github.com/LunarVim/LunarVim.com.git
+git clone https://github.com/LunarVim/lunarvim.org.git
 ```
 
 - Install:
 
 ```
-cd LunarVim.com && npm install
+cd lunarvim.org && npm install
 ```
 
 - Start the server:

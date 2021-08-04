@@ -5,7 +5,6 @@ Core plugins come pre-configured.  Sometimes you may want to extend the configur
 LunarVim provides a way to extend the default configurations by adding the following to your configuration file. This specifies code to run after the configuration for autopairs has completed. 
 
 ``` lua
-
 lvim.builtin.autopairs.on_config_done = function(module)
    --  YOUR_VALID_CONFIG_HERE
 end
@@ -72,7 +71,7 @@ end
 
 You can specify terminal applications to run with a keybind. LazyGit is the only command set up by default.   
 
-To set up an executable to run add the following to your `lv-config.lua`
+To set up an executable to run add the following to your `config.lua`
 
 ``` lua
 lvim.builtin.terminal.execs = {{"lazygit", "gg", "LazyGit"}, {"gdb", "tg", "GNU Debugger"}}
