@@ -26,8 +26,8 @@ Sometimes the language server for your language will not have an obvious name.  
 To create a configuration file for your language server:
 
 ```vim
-:NlspSettings <TAB>
-:NlspSettings <NAME_OF_LANGUAGE_SERVER> 
+:NlspConfig <TAB>
+:NlspConfig <NAME_OF_LANGUAGE_SERVER> 
 ```
 
 **NOTE:** This will create a directory in `~/.config/lvim/lsp-settings` where you will be able to configure your language server.
