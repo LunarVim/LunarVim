@@ -1,3 +1,0 @@
-# Removing Plugins
-
-  Removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system.  Any plugins left in the `start` directory will still autostart.  To remove them completely, run `:PackerClean`
