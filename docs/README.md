@@ -4,7 +4,7 @@
 
 # Introduction
 
-LunarVim is an IDE layer for Neovim. Taking advantage of new advancements such as Treesitter and the Language Server Protocol. LunarVim is opinionated, extensible and fast.
+LunarVim is an IDE layer for Neovim 0.5 taking advantage of new advancements in Lua scripting such as [Treesitter](https://tree-sitter.github.io/tree-sitter/) and the [Language Server Protocol](https://en.wikipedia.org/wiki/Language_Server_Protocol). LunarVim is opinionated, extensible and fast.
 
 ## Opinionated
 
@@ -12,7 +12,7 @@ LunarVim ships with a sane default config to build on top of. Features such as a
 
 ## Extensible
 
-Just because LunarVim has an opinion doesn't mean you need to share it. Every builtin plugin enabled by default can be disable in the `config.lua` file. Here you can enable/disable builtin plugins, add your own plugins, keymaps, autocommands leader bindings, and all other custom configuration.
+Just because LunarVim has an opinion doesn't mean you need to share it. Every builtin plugin can be toggled on or off in the `config.lua` file. This is the place to add your own plugins, keymaps, autocommands, leader bindings and all other custom settings.
 
 ## Fast
 
