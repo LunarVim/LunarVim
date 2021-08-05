@@ -32,7 +32,7 @@ lvim.lang.javascript.formatters = {
   {
     exe = "prettier",
     args = {},
-  }
+  },
 }
 ```
 
@@ -51,6 +51,7 @@ Linting is also handled by Null-ls. To set a linter for your language:
 lvim.lang.javascript.linters = {
   {
     exe = "eslint_d",
-    args = {}, },
+    args = {}, 
+  },
 }
 ```
