@@ -99,7 +99,7 @@ function M.setup(lang)
   local overrides = lvim.lsp.override
 
   if type(overrides) == "table" then
-    if u.has_value(overrides, lang) then
+    if vim.tbl_contains(overrides, lang) then
       return
     end
   end
