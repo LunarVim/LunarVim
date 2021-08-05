@@ -626,7 +626,7 @@ lvim.builtin.which_key.mappings["t"] = {
   "tzachar/compe-tabnine",
   run = "./install.sh",
   requires = "hrsh7th/nvim-compe",
-  event = "InsertEnter",
+  after = "nvim-compe",
 },
 ```
 
