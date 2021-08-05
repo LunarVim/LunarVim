@@ -599,10 +599,7 @@ lvim.builtin.which_key.mappings["t"] = {
 ### vim-repeat
 
 ```lua
-{
-  "tpope/vim-repeat",
-  keys = {"."}
-},
+{ "tpope/vim-repeat" },
 ```
 
 ### codi.vim
