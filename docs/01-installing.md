@@ -7,6 +7,19 @@ To install LunarVim:
 
 Install the `neovim` (>= v0.5.0) and `git` packages. If you want to compile `neovim` from source and install, see [here](#compiling-neovim-from-source).
 
+Install `pip`:
+
+|   OS  | Commands                                             |
+|-------|------------------------------------------------------|
+|Mac    |sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py||       |python3 get-pip.py|
+|       |rm get-pip.py|
+|Ubuntu |sudo apt install python3-pip >/dev/null|
+|Arch   |sudo pacman -S python-pip|
+|Fedora |sudo dnf install -y pip >/dev/null|
+|Gentoo |sudo emerge -avn dev-python/pip|
+|Termux |apt install python|
+
+
 LunarVim requires a globally-installed `npm` package called `tree-sitter-cli`. Installing global `npm` packages on Linux is not always straightforward, so we recommend using a node version manager (hereafter, nvm) to handle your `nodejs` and `npm` versions. You can use an nvm in conjunction with your distribution's official `nodejs` and `npm` packages, but you may find it simpler to just use an nvm by itself and not install `nodejs` and `npm` through your package manager at all. We recommend an [nvm called fnm](https://www.youtube.com/watch?v=ClrXIi8qTtI). Users who do not use an nvm to install global `npm` packages may get an error when the LunarVim install script runs.
 
 Install [`fnm`](https://github.com/Schniz/fnm) or another [node version manager](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally). 
@@ -111,13 +124,13 @@ rm get-pip.py
 Install `tree-sitter-cli`:
 
 ```bash
-npm i -g tree-sitter-cli
+npm install -g neovim tree-sitter-cli
 ```
 
-Install `neovim-remote` and `pynvim` with pip3:
+Install `neovim`, `neovim-remote` and `pynvim` with pip3:
 
 ```bash
-pip3 install neovim-remote pynvim --user
+pip3 install neovim neovim-remote pynvim --user
 ```
 
 Clone plugins: 
