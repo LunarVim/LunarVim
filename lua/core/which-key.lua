@@ -158,7 +158,7 @@ M.config = function()
           t = { "<cmd>lua require('lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
           i = { "<cmd>lua require('lsp.peek').Peek('implementation')<cr>", "Implementation" },
         },
-        q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
+        q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = {
