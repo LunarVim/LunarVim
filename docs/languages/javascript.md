@@ -26,7 +26,7 @@ lvim.lang.javascript.formatters = {
 ## Linters
 
 ``` lua
-lvim.lang.python.linters = {
+lvim.lang.javascript.linters = {
   {
     exe = "eslint", -- can be eslint_d as well
     args = {}, 
