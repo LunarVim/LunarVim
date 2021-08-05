@@ -1234,7 +1234,7 @@ lvim.lang = {
     },
   },
   gdscript = {
-    formatter = {},
+    formatters = {},
     linters = {},
     lsp = {
       provider = "gdscript",
@@ -1251,7 +1251,7 @@ lvim.lang = {
     },
   },
   ps1 = {
-    formatter = {},
+    formatters = {},
     linters = {},
     lsp = {
       provider = "powershell_es",
