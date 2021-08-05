@@ -7,7 +7,7 @@ There are a few ways to install LunarVim
 No alarms and no surprises:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
 ## Rolling
@@ -15,13 +15,13 @@ bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/mas
 All the new features with all the new bugs:
 
 ```bash
-LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/rolling/utils/installer/install.sh)
+LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 Make sure you have the newest version of Neovim (0.5).
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/LunarVim/rolling/utils/bin/install-latest-neovim)
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/LunarVim/rolling/utils/bin/install-latest-neovim)
 ```
 
 After installation run `lvim` and then `:PackerInstall`

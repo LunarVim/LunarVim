@@ -1,7 +1,7 @@
 
 # [LunarVim.org](https://www.lunarvim.org/)
 
-Website for [LunarVim](https://github.com/ChristianChiarulli/LunarVim)
+Website for [LunarVim](https://github.com/lunarvim/LunarVim)
 
 ## Run this site locally
 

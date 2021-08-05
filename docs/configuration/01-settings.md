@@ -1,11 +1,9 @@
-# Neovim Configuration
+# General Settings
 
-To set neovim editor options use
+To set options use
 ```lua
 vim.opt.{option}
 ```
-
-Autocomplete should work here.  
 
 ## Example options
 ```lua

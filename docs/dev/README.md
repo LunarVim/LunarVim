@@ -24,7 +24,7 @@ It is based on many pre-existing guides, provides rationals for all their decisi
 
 ## Code Quality
 
-To ensure code quality and a consistent style, our [CI](https://github.com/ChristianChiarulli/LunarVim/actions) uses the following tools:
+To ensure code quality and a consistent style, our [CI](https://github.com/Lunarvim/LunarVim/actions) uses the following tools:
 
 - Lua:
   - [Stylua](https://github.com/JohnnyMorganz/StyLua). An opinionated Lua code formatter.
