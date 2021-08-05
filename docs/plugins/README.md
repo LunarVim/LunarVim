@@ -24,7 +24,7 @@ lvim.builtin.telescope.defaults.layout_config.width = 0.95
 lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
 ```
 
-## Extending Configurations for Core Plugins
+## Extended Configurations
 
 Core plugins come pre-configured.  Sometimes you may want to extend the configuration of these plugins to enable additional functionality.  For example, if you want have autopairs automatically close your function definitions, you need to specify endwise rules.  
 

@@ -12,11 +12,48 @@ lvim.plugins = {
 ```
 
 Run `:PackerSync` to pull down updates for your existing plugins.
-The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's (and docs/ folder if it exists) typically contain good documentation, so it may be worthwhile to create an alias for this directory. 
+The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's (and docs/ folder if it exists) typically contain excellent documentation, so it may be worthwhile to create an alias for this directory. 
+
+## Removing Plugins
 
-## Navigation
+  Removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system.  Any plugins left in the `start` directory will still autostart.  To remove them completely, run `:PackerClean`
 
-### lightspeed
+## Plugin Snippets (a.k.a. Lunar Modules)
+
+## Navigation plugins
+
+### [nvim-spectre](https://github.com/windwp/nvim-spectre): search and replace
+
+```lua
+{
+  "windwp/nvim-spectre",
+  event = "BufRead",
+  config = function()
+    require("spectre").setup()
+  end,
+},
+```
+
+### [snap](https://github.com/camspiers/snap): fast finder system
+
+```lua
+{
+  "camspiers/snap",
+  rocks = "fzy",
+  config = function()
+    local snap = require "snap"
+    local layout = snap.get("layout").bottom
+    local file = snap.config.file:with { consumer = "fzy", layout = layout }
+    local vimgrep = snap.config.vimgrep:with { layout = layout }
+    snap.register.command("find_files", file { producer = "ripgrep.file" })
+    snap.register.command("buffers", file { producer = "vim.buffer" })
+    snap.register.command("oldfiles", file { producer = "vim.oldfile" })
+    snap.register.command("live_grep", vimgrep {})
+  end,
+},
+```
+
+### [lightspeed](https://github.com/ggandor/lightspeed.nvim): jetpack codebase navigation
 
 ```lua
 {
@@ -25,7 +62,7 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### hop
+### [hop](https://github.com/phaazon/hop.nvim): neovim motions on speed!
 
 ```lua
 {
@@ -39,25 +76,50 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### nvim-lastplace
+### [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf): better quickfix window
 
 ```lua
-	{
-		"ethanholz/nvim-lastplace",
-		event = "BufRead",
-		config = function()
-			require("nvim-lastplace").setup({
-				lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-				lastplace_ignore_filetype = {
-					"gitcommit", "gitrebase", "svn", "hgcommit",
-				},
-				lastplace_open_folds = true,
-			})
-		end,
-	},
+{
+  "kevinhwang91/nvim-bqf",
+  event = { "BufRead", "BufNew" },
+  config = function()
+  require("bqf").setup({
+          auto_enable = true,
+          preview = {
+          win_height = 12,
+          win_vheight = 12,
+          delay_syntax = 80,
+          border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+          },
+          func_map = {
+          vsplit = "",
+          ptogglemode = "z,",
+          stoggleup = "",
+          },
+          filter = {
+          fzf = {
+          action_for = { ["ctrl-s"] = "split" },
+          extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+          },
+          },
+          })
+  end,
+},
 ```
 
-### rnvimr
+### [vim-matchup](https://github.com/andymass/vim-matchup): navigate and highlight matching words
+
+``` lua
+{
+  "andymass/vim-matchup",
+  event = "CursorMoved",
+  config = function()
+    vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  end,
+},
+```
+
+### [rnvimr](kevinhwang91/rnvimr): ranger file explorer window
 
 ```lua
 {
@@ -75,21 +137,32 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### snap
+### numb.nvim: jump to the line
 
 ```lua
 {
-  "camspiers/snap",
-  rocks = "fzy",
+  "nacro90/numb.nvim",
+  event = "BufRead",
   config = function()
-    local snap = require "snap"
-    local layout = snap.get("layout").bottom
-    local file = snap.config.file:with { consumer = "fzy", layout = layout }
-    local vimgrep = snap.config.vimgrep:with { layout = layout }
-    snap.register.command("find_files", file { producer = "ripgrep.file" })
-    snap.register.command("buffers", file { producer = "vim.buffer" })
-    snap.register.command("oldfiles", file { producer = "vim.oldfile" })
-    snap.register.command("live_grep", vimgrep {})
+  require("numb").setup {
+    show_numbers = true, -- Enable 'number' for the window while peeking
+    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+  }
+  end,
+},
+```
+
+### [minimap](https://github.com/wfxr/minimap.vim): blazing fast minimap/scrollbar written in Rust. 
+
+```lua
+{
+  'wfxr/minimap.vim',
+  run = "cargo install --locked code-minimap",
+  -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+  config = function ()
+    vim.cmd ("let g:minimap_width = 10")
+    vim.cmd ("let g:minimap_auto_start = 1")
+    vim.cmd ("let g:minimap_auto_start_win_enter = 1")
   end,
 },
 ```
@@ -235,6 +308,29 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
+### telescope-project
+
+```lua
+{
+  "nvim-telescope/telescope-project.nvim",
+  event = "BufWinEnter",
+  setup = function()
+    vim.cmd [[packadd telescope.nvim]]
+  end,
+},
+```
+
+### [compe-tabnine](https://github.com/tzachar/compe-tabnine):  TabNine completion engine for hrsh7th/nvim-compe 
+
+```lua
+{
+  "tzachar/compe-tabnine",
+  run = "./install.sh",
+  requires = "hrsh7th/nvim-compe",
+  event = "InsertEnter",
+},
+```
+
 ## Colorschemes
 
 ### lsp-colors
@@ -253,9 +349,28 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-## LSP enhancement
+### nvim-colorizer
 
-### lsp_signature.nvim
+```lua
+{
+  "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "*" }, {
+          RGB = true, -- #RGB hex codes
+          RRGGBB = true, -- #RRGGBB hex codes
+          RRGGBBAA = true, -- #RRGGBBAA hex codes
+          rgb_fn = true, -- CSS rgb() and rgba() functions
+          hsl_fn = true, -- CSS hsl() and hsla() functions
+          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          })
+  end,
+},
+```
+
+## LSP Enhancement
+
+### [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim): hint when you type
 
 ``` lua
 {
@@ -275,16 +390,52 @@ end
 
 ```
 
-### vim-bundler
+### [lsp-rooter](https://github.com/ahmedkhalf/lsp-rooter.nvim): cwd to the project's root directory
 
 ```lua
 {
-  "tpope/vim-bundler",
-  cmd = {"Bundler", "Bopen", "Bsplit", "Btabedit"}
+  "ahmedkhalf/lsp-rooter.nvim",
+  event = "BufRead",
+  config = function()
+    require("lsp-rooter").setup()
+  end,
 },
 ```
 
-### goto-preview
+### [symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim): a tree like view for symbols
+
+```lua
+{
+  "simrat39/symbols-outline.nvim",
+  cmd = "SymbolsOutline",
+},
+```
+
+### [trouble.nvim](https://github.com/folke/trouble.nvim): diagnostics, references, telescope results, quickfix and location lists
+
+```lua
+{
+  "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+},
+```
+
+Also define keybindings in `config.lua`
+
+```lua
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+},
+```
+
+### [goto-preview](https://github.com/rmagatti/goto-preview): previewing goto definition calls 
+
 ```lua
 {
   "rmagatti/goto-preview",
@@ -308,7 +459,25 @@ end
 
 ## General
 
-### persistence
+### nvim-lastplace: opens file at last place
+
+```lua
+	{
+		"ethanholz/nvim-lastplace",
+		event = "BufRead",
+		config = function()
+			require("nvim-lastplace").setup({
+				lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+				lastplace_ignore_filetype = {
+					"gitcommit", "gitrebase", "svn", "hgcommit",
+				},
+				lastplace_open_folds = true,
+			})
+		end,
+	},
+```
+
+### [persistence](https://github.com/folke/persistence.nvim): simple session management
 
 ```lua
 {
@@ -335,7 +504,66 @@ Also define keybindings in your `config.lua`
   }
 ```
 
-### indent-blankline.nvim
+### [vim-sanegx](https://github.com/felipec/vim-sanegx): open url with `gx`
+
+```lua
+{
+  "felipec/vim-sanegx",
+  event = "BufRead",
+},
+```
+
+### markdown-preview.nvim: preview markdown in the browser
+
+```lua
+{
+  "iamcco/markdown-preview.nvim",
+  run = "cd app && npm install",
+  ft = "markdown",
+  config = function()
+    vim.g.mkdp_auto_start = 1
+  end,
+},
+```
+
+### [glow.nvim](https://github.com/npxbr/glow.nvim): preview markdown in neovim
+
+```lua
+-- You must install glow globally
+-- https://github.com/charmbracelet/glow
+-- yay -S glow
+{
+  "npxbr/glow.nvim",
+  ft = {"markdown"}
+  -- run = "yay -S glow"
+},
+```
+
+### todo-comments.nvim
+
+```lua
+{
+  "folke/todo-comments.nvim",
+  event = "BufRead",
+},
+```
+### [codi.vim](https://github.com/metakirby5/codi.vim): interactive scratchpad for hackers
+
+```lua
+{
+  "metakirby5/codi.vim",
+  cmd = "Codi",
+},
+```
+
+
+### [neuron](https://github.com/oberblastmeister/neuron.nvim): next generation note-taking
+
+```lua
+	{"oberblastmeister/neuron.nvim"},
+```
+
+### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim): indentation guides for every line
 
 ```lua
 {
@@ -352,26 +580,49 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### nvim-colorizer
+### [vim-cursorword](https://github.com/itchyny/vim-cursorword): underlines the word under the cursor
 
 ```lua
 {
-  "norcalli/nvim-colorizer.lua",
+  "itchyny/vim-cursorword",
+    event = {"BufEnter", "BufNewFile"},
     config = function()
-      require("colorizer").setup({ "*" }, {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          RRGGBBAA = true, -- #RRGGBBAA hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          })
-  end,
+      vim.api.nvim_command("augroup user_plugin_cursorword")
+      vim.api.nvim_command("autocmd!")
+      vim.api.nvim_command("autocmd FileType NvimTree,lspsagafinder,dashboard,vista let b:cursorword = 0")
+      vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
+      vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
+      vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
+      vim.api.nvim_command("augroup END")
+      end
 },
 ```
 
-### dial.nvim
+### neoscroll
+
+```lua
+{
+  "karb94/neoscroll.nvim",
+  event = "WinScrolled",
+  config = function()
+  require('neoscroll').setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+        hide_cursor = true,          -- Hide cursor while scrolling
+        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil,        -- Default easing function
+        pre_hook = nil,              -- Function to run before the scrolling animation starts
+        post_hook = nil,              -- Function to run after the scrolling animation ends
+        })
+  end
+},
+```
+
+### [dial.nvim](https://github.com/monaqa/dial.nvim): extended incrementing/decrementing
 
 ```lua
 {
@@ -405,191 +656,6 @@ Also define keybindings in your `config.lua`
 
 ```
 
-### vim-matchup
-``` lua
-{
-  "andymass/vim-matchup",
-  event = "CursorMoved",
-  config = function()
-    vim.g.matchup_matchparen_offscreen = { method = "popup" }
-  end,
-},
-```
-
-### numb.nvim
-
-```lua
-{
-  "nacro90/numb.nvim",
-  event = "BufRead",
-  config = function()
-  require("numb").setup {
-    show_numbers = true, -- Enable 'number' for the window while peeking
-    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-  }
-  end,
-},
-```
-
-### nvim-spectre
-
-```lua
-{
-  "windwp/nvim-spectre",
-  event = "BufRead",
-  config = function()
-    require("spectre").setup()
-  end,
-},
-```
-
-### nvim-bqf
-
-```lua
-{
-  "kevinhwang91/nvim-bqf",
-  event = { "BufRead", "BufNew" },
-  config = function()
-  require("bqf").setup({
-          auto_enable = true,
-          preview = {
-          win_height = 12,
-          win_vheight = 12,
-          delay_syntax = 80,
-          border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-          },
-          func_map = {
-          vsplit = "",
-          ptogglemode = "z,",
-          stoggleup = "",
-          },
-          filter = {
-          fzf = {
-          action_for = { ["ctrl-s"] = "split" },
-          extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
-          },
-          },
-          })
-  end,
-},
-```
-
-### markdown-preview.nvim
-
-```lua
-{
-  "iamcco/markdown-preview.nvim",
-  run = "cd app && npm install",
-  ft = "markdown",
-  config = function()
-    vim.g.mkdp_auto_start = 1
-  end,
-},
-```
-
-### bracey
-
-```lua
-{
-  "turbio/bracey.vim",
-  cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
-  run = "npm install --prefix server",
-},
-```
-
-### glow.nvim
-
-```lua
--- You must install the glow 
--- https://github.com/charmbracelet/glow
--- yay -S glow
-{
-  "npxbr/glow.nvim",
-  ft = {"markdown"}
-  -- run = "yay -S glow"
-},
-```
-
-
-### lsp-rooter
-
-```lua
-{
-  "ahmedkhalf/lsp-rooter.nvim",
-  event = "BufRead",
-  config = function()
-    require("lsp-rooter").setup()
-  end,
-},
-```
-
-### todo-comments.nvim
-
-```lua
-{
-  "folke/todo-comments.nvim",
-  event = "BufRead",
-},
-```
-
-### symbols-outline.nvim
-
-```lua
-{
-  "simrat39/symbols-outline.nvim",
-  cmd = "SymbolsOutline",
-},
-```
-
-### trouble.nvim
-
-```lua
-{
-  "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-},
-```
-
-Also define keybindings in `config.lua`
-```lua
-lvim.builtin.which_key.mappings["t"] = {
-  name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<cr>", "trouble" },
-  w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace" },
-  d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document" },
-  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
-},
-```
-
-### vim-sanegx
-
-```lua
-{
-  "felipec/vim-sanegx",
-  event = "BufRead",
-},
-```
-
-### vim-cursorword
-
-```lua
-{
-  "itchyny/vim-cursorword",
-    event = {"BufEnter", "BufNewFile"},
-    config = function()
-      vim.api.nvim_command("augroup user_plugin_cursorword")
-      vim.api.nvim_command("autocmd!")
-      vim.api.nvim_command("autocmd FileType NvimTree,lspsagafinder,dashboard,vista let b:cursorword = 0")
-      vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
-      vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
-      vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
-      vim.api.nvim_command("augroup END")
-      end
-},
-```
-
 ### vim-surround
 
 ```lua
@@ -608,35 +674,25 @@ lvim.builtin.which_key.mappings["t"] = {
 },
 ```
 
-### codi.vim
+## Language specific
+
+
+### [bracey](https://github.com/turbio/bracey.vim): live edit html, css, and javascript
 
 ```lua
 {
-  "metakirby5/codi.vim",
-  cmd = "Codi",
+  "turbio/bracey.vim",
+  cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
+  run = "npm install --prefix server",
 },
 ```
 
-### telescope-project
+### vim-bundler: lightweight support for ruby's bundler 
 
 ```lua
 {
-  "nvim-telescope/telescope-project.nvim",
-  event = "BufWinEnter",
-  setup = function()
-    vim.cmd [[packadd telescope.nvim]]
-  end,
-},
-```
-
-### compe-tabnine
-
-```lua
-{
-  "tzachar/compe-tabnine",
-  run = "./install.sh",
-  requires = "hrsh7th/nvim-compe",
-  event = "InsertEnter",
+  "tpope/vim-bundler",
+  cmd = {"Bundler", "Bopen", "Bsplit", "Btabedit"}
 },
 ```
 
@@ -677,47 +733,3 @@ lvim.builtin.which_key.mappings["t"] = {
 },
 ```
 
-### neoscroll
-
-```lua
-{
-  "karb94/neoscroll.nvim",
-  event = "WinScrolled",
-  config = function()
-  require('neoscroll').setup({
-        -- All these keys will be mapped to their corresponding default scrolling animation
-        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-        hide_cursor = true,          -- Hide cursor while scrolling
-        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil,        -- Default easing function
-        pre_hook = nil,              -- Function to run before the scrolling animation starts
-        post_hook = nil,              -- Function to run after the scrolling animation ends
-        })
-  end
-},
-```
-
-### minimap
-
-```lua
-{
-  'wfxr/minimap.vim',
-  run = "cargo install --locked code-minimap",
-  -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-  config = function ()
-    vim.cmd ("let g:minimap_width = 10")
-    vim.cmd ("let g:minimap_auto_start = 1")
-    vim.cmd ("let g:minimap_auto_start_win_enter = 1")
-  end,
-},
-```
-
-### Notetaking
-
-```lua
-	{"oberblastmeister/neuron.nvim"},
-```
