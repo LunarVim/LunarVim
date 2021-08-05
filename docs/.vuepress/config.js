@@ -37,10 +37,6 @@ module.exports = {
         link: "/faq/",
       },
       {
-        text: "Tips",
-        link: "/tips/",
-      },
-      {
         text: "Community",
         link: "/community/",
       },
@@ -49,7 +45,7 @@ module.exports = {
         link: "/sponsors/",
       },
     ],
-    repo: "https://github.com/ChristianChiarulli/LunarVim",
+    repo: "https://github.com/LunarVim/LunarVim",
 
     docsRepo: "https://github.com/LunarVim/LunarVim.com",
     docsBranch: "master",
@@ -62,7 +58,6 @@ module.exports = {
       "/plugins/": getSideBar("plugins", "Plugins", true),
       "/dev/": getSideBar("dev", "For Developers", true),
       "/faq/": getSideBar("faq", "FAQ", true),
-      "/tips/": getSideBar("tips", "Tips", true),
       "/community/": getSideBar("community", "Community", true),
       "/sponsors/": getSideBar("sponsors", "Sponsors", true),
     },
