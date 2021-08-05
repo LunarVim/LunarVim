@@ -1235,7 +1235,7 @@ lvim.lang = {
     },
   },
   gdscript = {
-    formatter = {},
+    formatters = {},
     linters = {},
     lsp = {
       provider = "gdscript",
@@ -1245,6 +1245,19 @@ lvim.lang = {
           "localhost",
           "6008",
         },
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
+    },
+  },
+  ps1 = {
+    formatters = {},
+    linters = {},
+    lsp = {
+      provider = "powershell_es",
+      setup = {
+        bundle_path = "",
         on_attach = common_on_attach,
         on_init = common_on_init,
         capabilities = common_capabilities,
