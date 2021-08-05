@@ -147,12 +147,14 @@ return {
   -- vim-rooter
   {
     "airblade/vim-rooter",
+    -- event = "BufReadPre",
     config = function()
-      vim.g.rooter_silent_chdir = 1
+      require("core.rooter").setup()
       if lvim.builtin.rooter.on_config_done then
         lvim.builtin.rooter.on_config_done()
       end
     end,
+    disable = not lvim.builtin.rooter.active,
   },
 
   -- Icons

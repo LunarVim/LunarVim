@@ -71,7 +71,7 @@ function M.common_on_init(client, bufnr)
   end
 
   local formatters = lvim.lang[vim.bo.filetype].formatters
-  if not vim.tbl_isempty(formatters) then
+  if not vim.tbl_isempty(formatters) and formatters[1]["exe"] ~= nil and formatters[1].exe ~= "" then
     client.resolved_capabilities.document_formatting = false
     u.lvim_log(string.format("Overriding [%s] formatter with [%s]", client.name, formatters[1].exe))
   end
@@ -83,6 +83,10 @@ function M.common_on_attach(client, bufnr)
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)
+  if lvim.lsp.smart_cwd then
+    vim.api.nvim_set_current_dir(client.config.root_dir)
+    require("core.nvimtree").change_tree_dir(client.config.root_dir)
+  end
   require("lsp.null-ls").setup(vim.bo.filetype)
 end
 
