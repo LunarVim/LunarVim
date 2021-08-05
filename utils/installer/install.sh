@@ -6,32 +6,6 @@ set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
 
-installpiponmac() {
-	sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-	python3 get-pip.py
-	rm get-pip.py
-}
-
-installpiponubuntu() {
-	sudo apt install python3-pip >/dev/null
-}
-
-installpiponarch() {
-	sudo pacman -S python-pip
-}
-
-installpiponfedora() {
-	sudo dnf install -y pip >/dev/null
-}
-
-installpipongentoo() {
-	sudo emerge -avn dev-python/pip
-}
-
-installpipontermux() {
-	apt install python
-}
-
 moveoldlvim() {
 	echo "Not installing LunarVim"
 	echo "Please move your ~/.local/share/lunarvim folder before installing"
@@ -43,20 +17,9 @@ installgit() {
 	exit
 }
 
-installneovim() {
-	echo "neovim not found, please install neovim >= 0.5.0"
-	exit
-}
-
 installpip() {
-	echo "Installing pip..."
-	[ "$(uname)" = "Darwin" ] && installpiponmac
-	grep -q Ubuntu /etc/os-release && installpiponubuntu
-	[ -f "/etc/arch-release" ] && installpiponarch
-	[ -f "/etc/fedora-release" ] && installpiponfedora
-	[ -f "/etc/gentoo-release" ] && installpipongentoo
-	[ -d "/data/data/com.termux" ] && installpipontermux
-	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
+	echo "pip not found, please install pip"
+	exit
 }
 
 installannvm() {
@@ -187,9 +150,6 @@ esac
 # check for git
 (command -v git >/dev/null && echo "git installed, moving on...") || installgit
 
-# check for neovim
-(command -v neovim >/dev/null && echo "neovim installed, moving on...") || installneovim
-
 # install pip
 (command -v pip3 >/dev/null && echo "pip installed, moving on...") || installpip
 
@@ -233,7 +193,7 @@ fi
 
 # install extra packages
 echo "installing extra packages"
+echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 installextrapackages
 
-echo "I recommend you also install and activate a font from here: https://github.com/ryanoasis/nerd-fonts"
 # echo 'export PATH=/home/$USER/.config/lunarvim/utils/bin:$PATH appending to zshrc/bashrc'
