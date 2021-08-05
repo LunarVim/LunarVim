@@ -42,15 +42,6 @@ local function r_inspect_settings(structure, limit, separator)
   return limit - 1
 end
 
-function utils.has_value(tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
-    end
-  end
-  return false
-end
-
 function utils.generate_settings()
   -- Opens a file in append mode
   local file = io.open("lv-settings.lua", "w")
