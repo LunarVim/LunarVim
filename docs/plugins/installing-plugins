@@ -320,17 +320,6 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [compe-tabnine](https://github.com/tzachar/compe-tabnine):  TabNine completion engine for hrsh7th/nvim-compe 
-
-```lua
-{
-  "tzachar/compe-tabnine",
-  run = "./install.sh",
-  requires = "hrsh7th/nvim-compe",
-  event = "InsertEnter",
-},
-```
-
 ## Colorschemes
 
 ### lsp-colors
@@ -454,6 +443,17 @@ lvim.builtin.which_key.mappings["t"] = {
         -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
     }
   end
+},
+```
+
+### [compe-tabnine](https://github.com/tzachar/compe-tabnine):  TabNine completion engine for hrsh7th/nvim-compe 
+
+```lua
+{
+  "tzachar/compe-tabnine",
+  run = "./install.sh",
+  requires = "hrsh7th/nvim-compe",
+  event = "InsertEnter",
 },
 ```
 
