@@ -1250,6 +1250,19 @@ lvim.lang = {
       },
     },
   },
+  ps1 = {
+    formatter = {},
+    linters = {},
+    lsp = {
+      provider = "powershell_es",
+      setup = {
+        bundle_path = "",
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
+    },
+  },
 }
 
 require("keymappings").config()
