@@ -1,4 +1,4 @@
-# Python
+# Java
 
 ## Install Syntax Highlighting
 
@@ -12,3 +12,18 @@
 :LspInstall java
 ```
 
+## Formatters
+
+(TODO)
+
+## Linters
+
+(TODO)
+
+## LSP Settings
+
+(TODO)
+
+## Debugger
+
+(TODO)
