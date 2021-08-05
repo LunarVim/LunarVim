@@ -46,32 +46,8 @@ lvim.lang.python.linters = {
 :DIInstall python_dbg
 ```
 
-After that you can enable debugging
-
 ```lua
-lvim.builtin.dap.on_config_done = function(dap)
-  dap.adapters.python = {
-    type = "executable",
-    command = "python",
-    args = { "-m", "debugpy.adapter" },
-  }
-  dap.configurations.python = {
-    {
-      type = "python",
-      request = "launch",
-      name = "Launch file",
-      program = "${file}", -- This configuration will launch the current file if used.
-      pythonPath = function()
-        local cwd = vim.fn.getenv "VIRTUAL_ENV"
-        if vim.fn.executable(cwd .. "/bin/python") == 1 then
-          return cwd .. "/bin/python"
-        elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-          return cwd .. "/.venv/bin/python"
-        else
-          return "/usr/bin/python"
-        end
-      end,
-    },
-  }
-end
+-- ~/.config/lvim/ftplugin/python.lua
+local dap_install = require "dap-install"
+dap_install.config("python_dbg", {})
 ```
