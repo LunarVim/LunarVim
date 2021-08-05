@@ -25,7 +25,7 @@ lvim.lang.python.formatters = {
 
 ## Linters
 
-``` lua
+```lua
 lvim.lang.python.linters = {
   {
     exe = "flake8",
@@ -36,8 +36,18 @@ lvim.lang.python.linters = {
 
 ## LSP Settings
 
-```
+```vim
 :NlspConfig pyright
 ```
 
 ## Debugger
+
+```vim
+:DIInstall python_dbg
+```
+
+```lua
+-- ~/.config/lvim/ftplugin/python.lua
+local dap_install = require "dap-install"
+dap_install.config("python_dbg", {})
+```
