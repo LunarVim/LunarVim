@@ -1,13 +1,8 @@
 local M = {}
 local lspui = require "lspconfig/_lspui"
-local job = require "plenary.job"
 local u = require "utils"
+local null_ls_handler = require "lsp.null-ls"
 local indent = "  "
-local sep = {
-  "",
-  "-------------------------------------------------------------------",
-  "",
-}
 
 M.banner = {
   "",
@@ -31,7 +26,7 @@ local function get_formatter_suggestion_msg(ft)
   return {
     "-------------------------------------------------------------------",
     "",
-    "HINT!",
+    "  HINT ",
     "",
     indent .. "* List of supported formatters: " .. str_list(supported_formatters),
     "",
@@ -53,7 +48,7 @@ local function get_linter_suggestion_msg(ft)
   return {
     "-------------------------------------------------------------------",
     "",
-    "HINT!",
+    "  HINT ",
     "",
     indent .. "* List of supported linters: " .. str_list(supported_linters),
     "",
@@ -75,11 +70,14 @@ function M.toggle_display(ft)
   local win_info = lspui.percentage_range_window(0.7, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
 
-  local null_ls_providers = require("lsp.null-ls").get_registered_providers_by_filetype(ft)
   local client = u.get_active_client_by_ft(ft)
   local is_client_active = not client.is_stopped()
   local client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
   local num_caps = vim.tbl_count(client_enabled_caps)
+  local null_ls_providers = null_ls_handler.get_registered_providers_by_filetype(ft)
+
+  local missing_linters = lvim.lang[ft].linters._failed_requests or {}
+  local missing_formatters = lvim.lang[ft].formatters._failed_requests or {}
 
   local buf_lines = {}
   vim.list_extend(buf_lines, M.banner)
@@ -104,11 +102,22 @@ function M.toggle_display(ft)
   vim.list_extend(buf_lines, lsp_info)
 
   local null_ls_info = {
-    "Other active providers: " .. table.concat(null_ls_providers, ", "),
+    "Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
     "",
-    "-------------------------------------------------------------------",
   }
   vim.list_extend(buf_lines, null_ls_info)
+
+  local missing_formatters_status
+  if vim.tbl_count(missing_formatters) > 0 then
+    missing_formatters_status = { "Missing formatters: " .. table.concat(missing_formatters, "  , ") .. "  ", "" }
+    vim.list_extend(buf_lines, missing_formatters_status)
+  end
+
+  local missing_linters_status
+  if vim.tbl_count(missing_linters) > 0 then
+    missing_linters_status = { "Missing linters: " .. table.concat(missing_linters, "  , ") .. "  ", "" }
+    vim.list_extend(buf_lines, missing_linters_status)
+  end
 
   vim.list_extend(buf_lines, get_formatter_suggestion_msg(ft))
 
@@ -121,7 +130,10 @@ function M.toggle_display(ft)
   vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
   vim.cmd("syntax match Identifier /filetype is: .*\\zs\\<" .. ft .. "\\>/")
   vim.cmd("syntax match Identifier /server: .*\\zs\\<" .. client.name .. "\\>/")
+  -- TODO: highlighting is either inconsistent or not working :\
   vim.cmd("syntax match Identifier /providers: .*\\zs\\<" .. table.concat(null_ls_providers, ", ") .. "\\>/")
+  vim.cmd("syntax match Identifier /formatters: .*\\zs\\<" .. table.concat(missing_formatters, ", ") .. "\\>/")
+  vim.cmd("syntax match Identifier /linters: .*\\zs\\<" .. table.concat(missing_linters, ", ") .. "\\>/")
 end
 
 return M

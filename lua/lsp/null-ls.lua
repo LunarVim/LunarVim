@@ -23,6 +23,26 @@ function M.get_registered_providers_by_filetype(ft)
   return matches
 end
 
+function M.get_missing_providers_by_filetype(ft)
+  local matches = {}
+  for _, provider in pairs(M.requested_providers) do
+    if vim.tbl_contains(provider.filetypes, ft) then
+      local provider_name = provider.name
+
+      table.insert(matches, provider_name)
+    end
+  end
+
+  return matches
+end
+
+local function register_failed_request(ft, provider, operation)
+  if not lvim.lang[ft][operation]._failed_requests then
+    lvim.lang[ft][operation]._failed_requests = {}
+  end
+  table.insert(lvim.lang[ft][operation]._failed_requests, provider)
+end
+
 local function validate_nodejs_provider(provider)
   local command_path
   local root_dir
@@ -80,6 +100,9 @@ function M.setup(filetype)
         builtin_formatter._opts.command = resolved_path
         table.insert(M.requested_providers, builtin_formatter)
         u.lvim_log(string.format("Using format provider: [%s]", builtin_formatter.name))
+      else
+        -- mark it here to avoid re-doing the lookup again
+        register_failed_request(filetype, formatter.exe, "formatters")
       end
     end
   end
@@ -101,6 +124,9 @@ function M.setup(filetype)
         builtin_diagnoser._opts.command = resolved_path
         table.insert(M.requested_providers, builtin_diagnoser)
         u.lvim_log(string.format("Using linter provider: [%s]", builtin_diagnoser.name))
+      else
+        -- mark it here to avoid re-doing the lookup again
+        register_failed_request(filetype, linter.exe, "linters")
       end
     end
   end
