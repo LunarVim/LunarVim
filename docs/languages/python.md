@@ -42,10 +42,8 @@ lvim.lang.python.linters = {
 
 ## Debugger
 
-Install [debugpy](https://github.com/microsoft/debugpy)
-
-```shell
-pip install debugpy
+```vim
+:DIInstall python_dbg
 ```
 
 After that you can enable debugging
