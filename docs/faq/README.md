@@ -52,3 +52,12 @@ vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
 For C/C++ we have the `clangd` by `llvm` which can also use its siblings' abilities `clang-tidy` and `clang-format` to support additional linting and formatting. But something like `pyright` doesn't support formatting, so we use `null-ls` to register `black` and `flake8` for example, as a "fake" language server. 
 
 Since it's not using a separate binary it's called `null-ls` or _null language server_.
+
+## Where can I find some example configs?
+
+If you want ideas for configuring LunarVim you can look at these repositories.
+
+* Chris - [https://github.com/ChristianChiarulli/lvim](https://github.com/ChristianChiarulli/lvim)
+* Abouzar -[  https://github.com/abzcoding/lvim ](  https://github.com/abzcoding/lvim )
+* Nelson -[  https://github.com/rebuilt/lvim ](  https://github.com/rebuilt/lvim )
+
