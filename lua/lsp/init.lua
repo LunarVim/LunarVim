@@ -64,6 +64,36 @@ function M.common_capabilities()
   return capabilities
 end
 
+function M.get_ls_capabilities(client_id)
+  local client
+  if not client_id then
+    local buf_clients = vim.lsp.buf_get_clients()
+    for _, client in ipairs(buf_clients) do
+      if client.name ~= "null-ls" then
+        client_id = client.id
+        break
+      end
+    end
+  end
+  if not client_id then
+    error "Unable to determine client_id"
+  end
+
+  client = vim.lsp.get_client_by_id(tonumber(client_id))
+
+  local enabled_caps = {}
+
+  for k, v in pairs(client.resolved_capabilities) do
+    if v == true then
+      -- print("got cap: ", vim.inspect(caps))
+      table.insert(enabled_caps, k)
+      -- vim.list_extend(enabled_caps, cap)
+    end
+  end
+
+  return enabled_caps
+end
+
 function M.common_on_init(client, bufnr)
   if lvim.lsp.on_init_callback then
     lvim.lsp.on_init_callback(client, bufnr)
