@@ -601,7 +601,6 @@ lvim.builtin.which_key.mappings["t"] = {
 ```lua
 {
   "tpope/vim-repeat",
-  keys = {"."}
 },
 ```
 
