@@ -23,7 +23,8 @@ function M.get_registered_providers_by_filetype(ft)
   return matches
 end
 
-local function validate_nodejs_provider(requests, provider)
+local function validate_nodejs_provider(provider)
+  local command_path
   local root_dir
   if lvim.builtin.rooter.active then
     --- use vim-rooter to set root_dir
@@ -41,43 +42,45 @@ local function validate_nodejs_provider(requests, provider)
   local local_nodejs_command = root_dir .. "/node_modules/.bin/" .. provider._opts.command
   u.lvim_log(string.format("checking [%s] for local node module: [%s]", local_nodejs_command, vim.inspect(provider)))
   if vim.fn.executable(local_nodejs_command) == 1 then
-    provider._opts.command = local_nodejs_command
-    table.insert(requests, provider)
+    command_path = local_nodejs_command
   elseif vim.fn.executable(provider._opts.command) == 1 then
     u.lvim_log(string.format("checking in global path instead for node module: [%s]", provider._opts.command))
-    table.insert(requests, provider)
+    command_path = provider._opts.command
   else
     u.lvim_log(string.format("Unable to find node module: [%s]", provider._opts.command))
-    return false
   end
-  return true
+  return command_path
 end
 
-local function validate_provider_request(requests, provider)
+local function validate_provider_request(provider)
   if provider == "" or provider == nil then
-    return false
+    return
   end
   -- NOTE: we can't use provider.name because eslint_d uses eslint name
   if vim.tbl_contains(nodejs_local_providers, provider._opts.command) then
-    return validate_nodejs_provider(requests, provider)
+    return validate_nodejs_provider(provider)
   end
   if vim.fn.executable(provider._opts.command) ~= 1 then
     u.lvim_log(string.format("Unable to find the path for: [%s]", vim.inspect(provider)))
-    return false
+    return
   end
-  table.insert(requests, provider)
-  return true
+  return provider._opts.command
 end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
 function M.setup(filetype)
   for _, formatter in pairs(lvim.lang[filetype].formatters) do
     local builtin_formatter = null_ls.builtins.formatting[formatter.exe]
-    -- FIXME: why doesn't this work?
-    -- builtin_formatter._opts.args = formatter.args or builtin_formatter._opts.args
-    -- builtin_formatter._opts.to_stdin = formatter.stdin or builtin_formatter._opts.to_stdin
-    if validate_provider_request(M.requested_providers, builtin_formatter) then
-      u.lvim_log(string.format("Using format provider: [%s]", formatter.exe))
+    if not vim.tbl_contains(M.requested_providers, builtin_formatter) then
+      -- FIXME: why doesn't this work?
+      -- builtin_formatter._opts.args = formatter.args or builtin_formatter._opts.args
+      -- builtin_formatter._opts.to_stdin = formatter.stdin or builtin_formatter._opts.to_stdin
+      local resolved_path = validate_provider_request(builtin_formatter)
+      if resolved_path then
+        builtin_formatter._opts.command = resolved_path
+        table.insert(M.requested_providers, builtin_formatter)
+        u.lvim_log(string.format("Using format provider: [%s]", builtin_formatter.name))
+      end
     end
   end
 
@@ -89,11 +92,16 @@ function M.setup(filetype)
     if linter.exe == "eslint_d" then
       builtin_diagnoser = null_ls.builtins.diagnostics.eslint.with { command = "eslint_d" }
     end
-    -- FIXME: why doesn't this work?
-    -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
-    -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
-    if validate_provider_request(M.requested_providers, builtin_diagnoser) then
-      u.lvim_log(string.format("Using linter provider: [%s]", linter.exe))
+    if not vim.tbl_contains(M.requested_providers, builtin_diagnoser) then
+      -- FIXME: why doesn't this work?
+      -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
+      -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
+      local resolved_path = validate_provider_request(builtin_diagnoser)
+      if resolved_path then
+        builtin_diagnoser._opts.command = resolved_path
+        table.insert(M.requested_providers, builtin_diagnoser)
+        u.lvim_log(string.format("Using linter provider: [%s]", builtin_diagnoser.name))
+      end
     end
   end
 
