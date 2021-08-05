@@ -3,7 +3,7 @@ DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
 USER = vim.fn.expand "$USER"
-vim.cmd[[ set spellfile=~/.config/lvim/spell/en.utf-8.add ]]
+vim.cmd [[ set spellfile=~/.config/lvim/spell/en.utf-8.add ]]
 
 lvim = {
   leader = "space",
