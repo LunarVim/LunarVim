@@ -1,28 +1,12 @@
-# Installing Plugins
+# Available Plugins
 
-Plugins are installed by adding snippets into the `lvim.plugins` table in your `config.lua` file.  Save (`:w` or `<leader>w`), and Packer will autoinstall the new plugins.
-
-## Example
-
-```lua
-lvim.plugins = {
-  {"lunarvim/colorschemes"},
-  {"folke/tokyonight.nvim"}, 
-}
-```
-
-Run `:PackerSync` to pull down updates for your existing plugins.
-The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's (and docs/ folder if it exists) typically contain excellent documentation, so it may be worthwhile to create an alias for this directory.
-
-## Removing Plugins
-
-  Removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system.  Any plugins left in the `start` directory will still autostart.  To remove them completely, run `:PackerClean`
-
-## Plugin Snippets (a.k.a. Lunar Modules)
+Every plugin that works with Neovim works with LunarVim, here are some examples to get you started.
 
 ## Navigation plugins
 
-### [nvim-spectre](https://github.com/windwp/nvim-spectre): search and replace
+### [nvim-spectre](https://github.com/windwp/nvim-spectre)
+
+**search and replace**
 
 ```lua
 {
@@ -34,7 +18,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [snap](https://github.com/camspiers/snap): fast finder system
+### [snap](https://github.com/camspiers/snap)
+
+**fast finder system**
 
 ```lua
 {
@@ -53,7 +39,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [lightspeed](https://github.com/ggandor/lightspeed.nvim): jetpack codebase navigation
+### [lightspeed](https://github.com/ggandor/lightspeed.nvim)
+
+**jetpack codebase navigation**
 
 ```lua
 {
@@ -62,7 +50,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [hop](https://github.com/phaazon/hop.nvim): neovim motions on speed!
+### [hop](https://github.com/phaazon/hop.nvim)
+
+**neovim motions on speed!**
 
 ```lua
 {
@@ -76,7 +66,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf): better quickfix window
+### [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)
+
+**better quickfix window**
 
 ```lua
 {
@@ -107,7 +99,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [vim-matchup](https://github.com/andymass/vim-matchup): navigate and highlight matching words
+### [vim-matchup](https://github.com/andymass/vim-matchup)
+
+**navigate and highlight matching words**
 
 ``` lua
 {
@@ -119,7 +113,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [rnvimr](kevinhwang91/rnvimr): ranger file explorer window
+### [rnvimr](kevinhwang91/rnvimr)
+
+**ranger file explorer window**
 
 ```lua
 {
@@ -133,7 +129,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### numb.nvim: jump to the line
+### numb.nvim
+
+**jump to the line**
 
 ```lua
 {
@@ -148,7 +146,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 },
 ```
 
-### [minimap](https://github.com/wfxr/minimap.vim): blazing fast minimap/scrollbar written in Rust. 
+### [minimap](https://github.com/wfxr/minimap.vim)
+
+**blazing fast minimap/scrollbar written in Rust**
 
 ```lua
 {
@@ -355,7 +355,9 @@ The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's
 
 ## LSP Enhancement
 
-### [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim): hint when you type
+### [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
+
+**hint when you type**
 
 ``` lua
 {
@@ -375,7 +377,9 @@ end
 
 ```
 
-### [lsp-rooter](https://github.com/ahmedkhalf/lsp-rooter.nvim): cwd to the project's root directory
+### [lsp-rooter](https://github.com/ahmedkhalf/lsp-rooter.nvim)
+
+**cwd to the project's root directory**
 
 ```lua
 {
@@ -387,7 +391,9 @@ end
 },
 ```
 
-### [symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim): a tree like view for symbols
+### [symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)
+
+**a tree like view for symbols**
 
 ```lua
 {
@@ -396,7 +402,9 @@ end
 },
 ```
 
-### [trouble.nvim](https://github.com/folke/trouble.nvim): diagnostics, references, telescope results, quickfix and location lists
+### [trouble.nvim](https://github.com/folke/trouble.nvim)
+
+**diagnostics, references, telescope results, quickfix and location lists**
 
 ```lua
 {
@@ -419,7 +427,9 @@ lvim.builtin.which_key.mappings["t"] = {
 },
 ```
 
-### [goto-preview](https://github.com/rmagatti/goto-preview): previewing goto definition calls 
+### [goto-preview](https://github.com/rmagatti/goto-preview)
+
+**previewing goto definition calls**
 
 ```lua
 {
@@ -442,7 +452,9 @@ lvim.builtin.which_key.mappings["t"] = {
 },
 ```
 
-### [compe-tabnine](https://github.com/tzachar/compe-tabnine):  TabNine completion engine for hrsh7th/nvim-compe 
+### [compe-tabnine](https://github.com/tzachar/compe-tabnine)
+
+**TabNine completion engine for hrsh7th/nvim-compe**
 
 ```lua
 {
@@ -455,7 +467,9 @@ lvim.builtin.which_key.mappings["t"] = {
 
 ## General
 
-### nvim-lastplace: opens file at last place
+### nvim-lastplace
+
+**pick up where you left off**
 
 ```lua
 	{
@@ -473,7 +487,9 @@ lvim.builtin.which_key.mappings["t"] = {
 	},
 ```
 
-### [persistence](https://github.com/folke/persistence.nvim): simple session management
+### [persistence](https://github.com/folke/persistence.nvim)
+
+**simple session management**
 
 ```lua
 {
@@ -500,7 +516,9 @@ Also define keybindings in your `config.lua`
   }
 ```
 
-### [vim-sanegx](https://github.com/felipec/vim-sanegx): open url with `gx`
+### [vim-sanegx](https://github.com/felipec/vim-sanegx)
+
+**open url with `gx`**
 
 ```lua
 {
@@ -509,7 +527,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### markdown-preview.nvim: preview markdown in the browser
+### markdown-preview.nvim
+
+**preview markdown in the browser**
 
 ```lua
 {
@@ -522,7 +542,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### [glow.nvim](https://github.com/npxbr/glow.nvim): preview markdown in neovim
+### [glow.nvim](https://github.com/npxbr/glow.nvim)
+
+**preview markdown in neovim**
 
 ```lua
 -- You must install glow globally
@@ -543,7 +565,9 @@ Also define keybindings in your `config.lua`
   event = "BufRead",
 },
 ```
-### [codi.vim](https://github.com/metakirby5/codi.vim): interactive scratchpad for hackers
+### [codi.vim](https://github.com/metakirby5/codi.vim)
+
+**interactive scratchpad for hackers**
 
 ```lua
 {
@@ -553,13 +577,17 @@ Also define keybindings in your `config.lua`
 ```
 
 
-### [neuron](https://github.com/oberblastmeister/neuron.nvim): next generation note-taking
+### [neuron](https://github.com/oberblastmeister/neuron.nvim)
+
+**next generation note-taking**
 
 ```lua
 	{"oberblastmeister/neuron.nvim"},
 ```
 
-### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim): indentation guides for every line
+### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+**indentation guides for every line**
 
 ```lua
 {
@@ -576,7 +604,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### [vim-cursorword](https://github.com/itchyny/vim-cursorword): underlines the word under the cursor
+### [vim-cursorword](https://github.com/itchyny/vim-cursorword)
+
+**underlines the word under the cursor**
 
 ```lua
 {
@@ -618,7 +648,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### [dial.nvim](https://github.com/monaqa/dial.nvim): extended incrementing/decrementing
+### [dial.nvim](https://github.com/monaqa/dial.nvim)
+
+**extended incrementing/decrementing**
 
 ```lua
 {
@@ -670,7 +702,9 @@ Also define keybindings in your `config.lua`
 ## Language specific
 
 
-### [bracey](https://github.com/turbio/bracey.vim): live edit html, css, and javascript
+### [bracey](https://github.com/turbio/bracey.vim)
+
+**live edit html, css, and javascript**
 
 ```lua
 {
@@ -680,7 +714,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### vim-bundler: lightweight support for ruby's bundler 
+### vim-bundler
+
+**lightweight support for ruby's bundler**
 
 ```lua
 {
