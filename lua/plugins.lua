@@ -182,6 +182,7 @@ return {
       end
     end,
     event = "BufWinEnter",
+    disable = not lvim.builtin.bufferline.active,
   },
 
   -- Debugging
