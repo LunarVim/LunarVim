@@ -1,7 +1,7 @@
 # Plugin Quickstart
  
 Add plugins by pasting any of the example snippets into a table in your `config.lua` like so: 
-```
+```lua
 lvim.plugins = {
 	{ "oberblastmeister/neuron.nvim" },
 	{ "gennaro-tedesco/nvim-peekup" },

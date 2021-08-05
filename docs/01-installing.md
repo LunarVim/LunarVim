@@ -32,7 +32,7 @@ Run one of the following commands:
 No alarms and no surprises:
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/LunarVim/rolling/utils/bin/install-latest-neovim)
 ```
 
 ## Unstable (rolling branch)
@@ -132,15 +132,15 @@ Clone LunarVim:
 
 ```bash
 #Rolling Branch
-git clone -branch rolling https://github.com/ChristianChiarulli/lunarvim.git 
+git clone --branch rolling https://github.com/ChristianChiarulli/lunarvim.git 
 
 #Stable Branch
-git clone -branch master https://github.com/ChristianChiarulli/lunarvim.git 
+git clone --branch master https://github.com/ChristianChiarulli/lunarvim.git 
 ```
 
 Create your configuration file:
 
-```
+```bash
 mkdir -p ~/.config/lvim
 cp ~/.local/share/lunarvim/lvim/utils/installer/config.example.lua ~/.config/lvim/config.lua
 ```

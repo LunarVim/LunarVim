@@ -41,12 +41,12 @@ Overwrite/augment the key-mappings provided by LunarVim for any mode, or leave e
 ``` lua
  lvim.keys.normal_mode = {
    -- Page down/up
-   ["[d"] = { "<PageUp>" },
-   ["]d"] = { "<PageDown>" },
+   ["[d"] = "<PageUp>",
+   ["]d"] = "<PageDown>",
 
    -- Navigate buffers
-   ["<Tab>"] = { ":bnext<CR>" },
-   ["<S-Tab>"] = { ":bprevious<CR>" },
+   ["<Tab>"] = ":bnext<CR>",
+   ["<S-Tab>"] = ":bprevious<CR>",
  }
 ```
 
