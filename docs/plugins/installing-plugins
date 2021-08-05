@@ -12,6 +12,7 @@ lvim.plugins = {
 ```
 
 Run `:PackerSync` to pull down updates for your existing plugins.
+The plugins are stored at ~/.local/share/lunarvim/site/pack/packer. The README's typically contain good documentation, so it may be worthwhile to create an alias to easily get to this directory. 
 
 ## Navigation
 
