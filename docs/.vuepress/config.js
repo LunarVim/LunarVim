@@ -41,7 +41,7 @@ module.exports = {
         link: "/sponsors/",
       },
     ],
-    repo: "https://github.com/ChristianChiarulli/LunarVim",
+    repo: "https://github.com/LunarVim/LunarVim",
 
     docsRepo: "https://github.com/LunarVim/LunarVim.com",
     docsBranch: "master",
