@@ -16,7 +16,7 @@ local function r_inspect_settings(structure, limit, separator)
 
   if ts == "table" then
     for k, v in pairs(structure) do
-      -- replace non alpha keys wih ["key"]
+      -- replace non alpha keys with ["key"]
       if tostring(k):match "[^%a_]" then
         k = '["' .. tostring(k) .. '"]'
       end
