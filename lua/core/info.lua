@@ -1,5 +1,4 @@
 local M = {}
-local lspui = require "lspconfig/_lspui"
 local u = require "utils"
 local null_ls_handler = require "lsp.null-ls"
 local indent = "  "
@@ -65,11 +64,54 @@ local function get_linter_suggestion_msg(ft)
   }
 end
 
-function M.toggle_display(ft)
-  --- set floating window option
-  local win_info = lspui.percentage_range_window(0.7, 0.7)
-  local bufnr, win_id = win_info.bufnr, win_info.win_id
+---creates an average size popup
+---@param buf_lines a list of lines to print
+---@param callback could be used to set syntax highlighting rules for example
+---@return bufnr buffer number of the created buffer
+---@return win_id window ID of the created popup
+function M.create_simple_popup(buf_lines, callback)
+  -- runtime/lua/vim/lsp/util.lua
+  local bufnr = vim.api.nvim_create_buf(false, true)
+  local height_percentage = 0.7
+  local width_percentage = 0.6
+  local row_start_percentage = (1 - height_percentage) / 2
+  local col_start_percentage = (1 - width_percentage) / 2
+  local opts = {}
+  opts.relative = "editor"
+  opts.height = math.ceil(vim.o.lines * height_percentage)
+  opts.row = math.ceil(vim.o.lines * row_start_percentage)
+  opts.col = math.floor(vim.o.columns * col_start_percentage)
+  opts.width = math.floor(vim.o.columns * width_percentage)
+  opts.border = {
+    "┌",
+    "-",
+    "┐",
+    "|",
+    "┘",
+    "-",
+    "└",
+    "|",
+  }
 
+  local win_id = vim.api.nvim_open_win(bufnr, true, opts)
+
+  vim.api.nvim_win_set_buf(win_id, bufnr)
+  -- this needs to be window option!
+  vim.api.nvim_win_set_option(win_id, "number", false)
+  vim.cmd "setlocal nocursorcolumn"
+  -- set buffer options
+  vim.api.nvim_buf_set_option(bufnr, "filetype", "lspinfo")
+  vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
+  buf_lines = vim.lsp.util._trim(buf_lines, {})
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, buf_lines)
+  vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
+  if type(callback) == "function" then
+    callback()
+  end
+  return bufnr, win_id
+end
+
+function M.toggle_popup(ft)
   local client = u.get_active_client_by_ft(ft)
   local is_client_active = not client.is_stopped()
   local client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
@@ -123,17 +165,15 @@ function M.toggle_display(ft)
 
   vim.list_extend(buf_lines, get_linter_suggestion_msg(ft))
 
-  buf_lines = vim.lsp.util._trim(buf_lines, {})
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, buf_lines)
-  vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
-  vim.api.nvim_buf_set_option(bufnr, "filetype", "lspinfo")
-  vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
-  vim.cmd("syntax match Identifier /filetype is: .*\\zs\\<" .. ft .. "\\>/")
-  vim.cmd("syntax match Identifier /server: .*\\zs\\<" .. client.name .. "\\>/")
-  -- TODO: highlighting is either inconsistent or not working :\
-  vim.cmd("syntax match Identifier /providers: .*\\zs\\<" .. table.concat(null_ls_providers, ", ") .. "\\>/")
-  vim.cmd("syntax match Identifier /formatters: .*\\zs\\<" .. table.concat(missing_formatters, ", ") .. "\\>/")
-  vim.cmd("syntax match Identifier /linters: .*\\zs\\<" .. table.concat(missing_linters, ", ") .. "\\>/")
-end
+  local function set_syntax_hl()
+    --TODO: highlighting is either inconsistent or not working :\
+    vim.cmd("syntax match Identifier /filetype is: .*\\zs\\<" .. ft .. "\\>/")
+    vim.cmd("syntax match Identifier /server: .*\\zs\\<" .. client.name .. "\\>/")
+    vim.cmd("syntax match Identifier /providers: .*\\zs\\<" .. table.concat(null_ls_providers, ", ") .. "\\>/")
+    vim.cmd("syntax match Identifier /formatters: .*\\zs\\<" .. table.concat(missing_formatters, ", ") .. "\\>/")
+    vim.cmd("syntax match Identifier /linters: .*\\zs\\<" .. table.concat(missing_linters, ", ") .. "\\>/")
+  end
 
+  return M.create_simple_popup(buf_lines, set_syntax_hl)
+end
 return M

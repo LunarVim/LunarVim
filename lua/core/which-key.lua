@@ -169,6 +169,10 @@ M.config = function()
       L = {
         name = "+LunarVim",
         k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
+        i = {
+          "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
+          "Toggle LunarVim Info",
+        },
       },
 
       s = {
