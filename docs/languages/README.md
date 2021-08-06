@@ -24,7 +24,7 @@ To install a supported language server:
 
 ## Formatting 
 
-Formatting is handled by Null-ls it is off by default. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
+Formatting is handled by Null-ls. It is off by default. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
 
 If you want to enable formatting for javascript for example, add the following to your config.lua
 ```lua
