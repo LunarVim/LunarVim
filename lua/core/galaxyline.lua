@@ -203,7 +203,6 @@ table.insert(gls.right, {
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
   local buf_clients = vim.lsp.buf_get_clients()
-  local utils = require "utils"
   if next(buf_clients) == nil then
     return msg
   end
@@ -215,7 +214,7 @@ local function get_attached_provider_name(msg)
       table.insert(buf_client_names, client.name)
     end
   end
-  utils.list_extend_unique(buf_client_names, null_ls_providers)
+  vim.list_extend(buf_client_names, null_ls_providers)
   return table.concat(buf_client_names, ", ")
 end
 
