@@ -176,7 +176,7 @@ return {
   {
     "romgrk/barbar.nvim",
     config = function()
-      require "core.bufferline"
+      require("core.bufferline").setup()
       if lvim.builtin.bufferline.on_config_done then
         lvim.builtin.bufferline.on_config_done()
       end
