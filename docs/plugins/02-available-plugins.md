@@ -362,7 +362,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 ``` lua
 {
   "ray-x/lsp_signature.nvim",
-  event = {"InsertEnter"},
+  event = "InsertEnter",
   config = function()
     require "lsp_signature".setup()
   end
