@@ -16,7 +16,7 @@ It provides many functions that you wish were implemented in Lua's stdlib, for i
 
 It also comes with a [LSP framework](https://neovim.io/doc/user/lsp.html) and [much more](https://neovim.io/doc/user/).
 
-## Compiling Neovim from source
+## Compiling Neovim from Source
 
 First, get the dependencies. For distributions other than Ubuntu or Arch, go [here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites).
 
@@ -63,44 +63,44 @@ To ensure code quality and a consistent style, our [CI](https://github.com/Lunar
   - [Shfmt](https://github.com/mvdan/sh). A shell parser, formatter, and interpreter with bash support.
   - [Shellcheck](https://github.com/koalaman/shellcheck). A static analysis tool for shell scripts.
 
-## Manual install 
+## Manual Install 
 
-Complete the preparatory steps under Install above up to the running of the install script.
+Complete the preparatory steps under [Getting Started - Install](../01-installing.html) up to the running of the install script.
 
-Install `xclip`, `python3`, `ripgrep`, `fzf`, `pip` and `git` with the package manager for your distribution:
+Install `xclip`, `python3`, `ripgrep` and `fzf` with the package manager for your distribution:
 
 ```bash
 # Ubuntu
-sudo apt install git xclip python3-pip ripgrep fzf libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev python3-pip
+sudo apt install xclip ripgrep fzf libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
 
 # Arch
-sudo pacman -S git xclip python python-pip ripgrep fzf 
+sudo pacman -S xclip python ripgrep fzf 
 
 # Fedora
 sudo dnf groupinstall "X Software Development"
-sudo dnf install -y git xclip python3-devel pip ripgrep fzf pip3 install wheel 
+sudo dnf install -y xclip python3-devel ripgrep fzf
+pip3 install wheel 
 
 # Gentoo
 sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/dev-python/neovim-remote virtual/jpeg sys-libs/zlib
-sudo emerge -avn dev-python/pip
 # Optional.   Enable npm USE flag with flaggie
 sudo flaggie net-libs/nodejs +npm
 sudo emerge -avnN net-libs/nodejs
 
 # Mac
-brew install git lua node yarn ripgrep fzf 
-sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python3 get-pip.py
-rm get-pip.py
+brew install lua ripgrep fzf 
+
+# Termux
+sudo apt install ripgrep fzf xclip python
 ```
 
-Install `tree-sitter-cli`:
+Install the `neovim` and `tree-sitter-cli` packages globally with `npm`:
 
 ```bash
 npm install -g neovim tree-sitter-cli
 ```
 
-Install `neovim`, `neovim-remote` and `pynvim` with pip3:
+Install the `neovim`, `neovim-remote` and `pynvim` packages with `pip3`:
 
 ```bash
 pip3 install neovim neovim-remote pynvim --user
@@ -118,10 +118,10 @@ Clone LunarVim:
 
 ```bash
 #Rolling Branch
-git clone --branch rolling https://github.com/ChristianChiarulli/lunarvim.git 
+git clone --branch rolling https://github.com/LunarVim/lunarvim.git ~/.local/share/lunarvim/lvim
 
 #Stable Branch
-git clone --branch master https://github.com/ChristianChiarulli/lunarvim.git 
+git clone --branch master https://github.com/LunarVim/lunarvim.git ~/.local/share/lunarvim/lvim
 ```
 
 Create your configuration file:
@@ -130,7 +130,5 @@ Create your configuration file:
 mkdir -p ~/.config/lvim
 cp ~/.local/share/lunarvim/lvim/utils/installer/config.example.lua ~/.config/lvim/config.lua
 ```
-
-
-
+Then follow the procedures in [Getting Started - Quick Start](../02-after-install.md).
 

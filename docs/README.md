@@ -8,7 +8,7 @@ LunarVim is an IDE layer for Neovim >= 0.5.0. Taking advantage of new advancemen
 
 ## Opinionated
 
-LunarVim ships with a sane default config to build on top of. Features include autocompletion, integrated terminal, file explorer, fuzzy finder, LSP, linting, formatting and debugging.
+LunarVim ships with a sane default config for you to build on top of. Features include autocompletion, integrated terminal, file explorer, fuzzy finder, LSP, linting, formatting and debugging.
 
 ## Extensible
 

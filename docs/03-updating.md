@@ -21,4 +21,4 @@ Then, in `lvim`:
 
 ### Neovim
 
-Use your package manager or [compile from source](https://github.com/lunarvim/LunarVim/wiki/Installation#get-the-latest-version-of-neovim).
+Use your package manager or [compile from source](./dev/#compiling-neovim-from-source).

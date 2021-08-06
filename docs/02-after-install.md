@@ -48,5 +48,5 @@ Make sure to install `jsonls` for autocompletion.  Not all language servers are 
 
 ## Nerd Fonts
 
-Installing a [nerd font](https://www.nerdfonts.com/) is recommended to ensure that symbols are rendered properly. For more information, see our configuration page [here](./configuration/nerd-fonts.md#nerd-fonts). 
+Installing a [nerd font](https://www.nerdfonts.com/) is recommended to ensure that symbols are rendered properly. For more information, see our configuration page [here](./configuration/04-nerd-fonts.html). 
 

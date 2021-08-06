@@ -1,6 +1,6 @@
 # Install
 
-If you already have an `nvim` directory under `~/.config` don't worry, LunarVim will not overwrite it. Your LunarVim config will be located in `~/.config/lvim`.
+If you already have an `nvim` directory under `~/.config`, don't worry, LunarVim will not overwrite it. Your LunarVim config will be located in `~/.config/lvim`.
 
 If you want to update an existing LunarVim install, follow the procedures [here](./03-updating.md). If you run the following install script with an existing `~/.local/share/lunarvim` directory, the script will exit and ask you to move it (e.g. `mv /old /new`).
 
