@@ -73,7 +73,7 @@ function M.create_simple_popup(buf_lines, callback)
   -- runtime/lua/vim/lsp/util.lua
   local bufnr = vim.api.nvim_create_buf(false, true)
   local height_percentage = 0.7
-  local width_percentage = 0.6
+  local width_percentage = 0.8
   local row_start_percentage = (1 - height_percentage) / 2
   local col_start_percentage = (1 - width_percentage) / 2
   local opts = {}
@@ -99,6 +99,7 @@ function M.create_simple_popup(buf_lines, callback)
   -- this needs to be window option!
   vim.api.nvim_win_set_option(win_id, "number", false)
   vim.cmd "setlocal nocursorcolumn"
+  vim.cmd "setlocal wrap"
   -- set buffer options
   vim.api.nvim_buf_set_option(bufnr, "filetype", "lspinfo")
   vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
