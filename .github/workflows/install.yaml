@@ -30,7 +30,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install neovim -y
 
-      - name: Installl dependencies for OSX
+      - name: Install dependencies for OSX
         if: matrix.os == 'osx'
         run: |
           brew update >/dev/null
