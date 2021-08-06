@@ -4,11 +4,11 @@ LunarVim strives to have basic LSP, linting, formatting and syntax support for a
 
 If your language is not supported please do the following: 
 
-- Check if LSP support is available in the lspconfig [repo]()
+- Check if LSP support is available in the lspconfig [repo](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
 
-- Check if your linter or formatter is available in the null-ls [repo]()
+- Check if your linter or formatter is available in the null-ls [repo](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md)
 
-- Check if your syntax is supported in the treesitter [repo]()
+- Check if your syntax is supported in the treesitter [repo](https://github.com/nvim-treesitter/nvim-treesitter)
 
 If there is support for your language please file an issue with the LunarVim repo
 

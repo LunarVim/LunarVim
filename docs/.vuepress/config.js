@@ -33,6 +33,10 @@ module.exports = {
         link: "/dev/",
       },
       {
+        text: "FAQ",
+        link: "/faq/",
+      },
+      {
         text: "Community",
         link: "/community/",
       },
@@ -41,7 +45,7 @@ module.exports = {
         link: "/sponsors/",
       },
     ],
-    repo: "https://github.com/LunarVim/LunarVim",
+    repo: "https://github.com/ChristianChiarulli/LunarVim",
 
     docsRepo: "https://github.com/LunarVim/LunarVim.com",
     docsBranch: "master",
@@ -50,9 +54,10 @@ module.exports = {
     sidebar: {
       "/": getSideBar("/", "Getting Started", true),
       "/configuration/": getSideBar("configuration", "Configuration"),
-      "/languages/": getSideBar("languages", "Languages", true),
+      "/languages/": getSideBar("languages", "Supported Languages", true),
       "/plugins/": getSideBar("plugins", "Plugins", true),
       "/dev/": getSideBar("dev", "For Developers", true),
+      "/faq/": getSideBar("faq", "FAQ", true),
       "/community/": getSideBar("community", "Community", true),
       "/sponsors/": getSideBar("sponsors", "Sponsors", true),
     },
