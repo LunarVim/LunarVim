@@ -95,3 +95,81 @@ sudo rm /usr/local/bin/lvim
 rm -rf ~/.local/share/applications/lvim.desktop
 ```
 
+
+## Manual Install 
+
+
+Install `xclip`, `python3`, `ripgrep` and `fzf` with the package manager for your distribution:
+
+```bash
+# Ubuntu
+sudo apt install xclip ripgrep fzf libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
+
+# Arch
+sudo pacman -S xclip python ripgrep fzf 
+
+# Fedora
+sudo dnf groupinstall "X Software Development"
+sudo dnf install -y xclip python3-devel ripgrep fzf
+pip3 install wheel 
+
+# Gentoo
+sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/dev-python/neovim-remote virtual/jpeg sys-libs/zlib
+# Optional.   Enable npm USE flag with flaggie
+sudo flaggie net-libs/nodejs +npm
+sudo emerge -avnN net-libs/nodejs
+
+# Mac
+brew install lua ripgrep fzf 
+
+# Termux
+sudo apt install ripgrep fzf xclip python
+```
+
+Install the `neovim` and `tree-sitter-cli` packages globally with `npm`:
+
+```bash
+npm install -g neovim tree-sitter-cli
+```
+
+Install the `neovim`, `neovim-remote` and `pynvim` packages with `pip3`:
+
+```bash
+pip3 install neovim neovim-remote pynvim --user
+```
+
+Clone plugins: 
+
+```bash
+mkdir -p ~/.local/share/lunarvim/site/pack/packer/start/
+cd ~/.local/share/lunarvim/site/pack/packer/start/
+git clone https://github.com/wbthomason/packer.nvim.git
+```
+
+Clone LunarVim:
+
+```bash
+#Rolling Branch
+git clone --branch rolling https://github.com/LunarVim/lunarvim.git ~/.local/share/lunarvim/lvim
+
+#Stable Branch
+git clone --branch master https://github.com/LunarVim/lunarvim.git ~/.local/share/lunarvim/lvim
+```
+
+Create your configuration file:
+
+```bash
+mkdir -p ~/.config/lvim
+cp ~/.local/share/lunarvim/lvim/utils/installer/config.example.lua ~/.config/lvim/config.lua
+```
+
+Install plugins
+```bash
+#launch LunarVim
+lvim
+
+# Type this command
+:PackerSync
+```
+
+
