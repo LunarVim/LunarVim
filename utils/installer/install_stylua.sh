@@ -30,7 +30,7 @@ function download_stylua() {
 		exit 1
 	fi
 
-	echo "Installtion in progress.."
+	echo "Installation in progress.."
 	unzip -q "$DOWNLOAD_DIR/$FILENAME.zip" -d "$DOWNLOAD_DIR"
 
 	if [ -f "$DOWNLOAD_DIR/stylua" ]; then
@@ -43,7 +43,7 @@ function download_stylua() {
 }
 
 function verify_install() {
-	echo "Verifying installtion.."
+	echo "Verifying installation.."
 	local DOWNLOADED_VER
 	DOWNLOADED_VER="$("$INSTALL_DIR/stylua" -V | awk '{ print $2 }')"
 	if [ "$DOWNLOADED_VER" != "$RELEASE" ]; then
