@@ -367,15 +367,6 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
     require "lsp_signature".setup()
   end
 },
-```
-Attach it in your `config.lua`
-
-```lua
-lvim.lsp.on_attach_callback = function(client, bufnr)
-  require("lsp_signature").on_attach()
-end
-
-```
 
 ### [lsp-rooter](https://github.com/ahmedkhalf/lsp-rooter.nvim)
 
