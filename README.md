@@ -187,7 +187,7 @@ To update Neovim use your package manager or [compile from source](https://githu
     - User configurable lang/feature enable/disable
 3. Provide a [simple and easy](https://github.com/LunarVim/LunarVimCommunity) way for users to share their own configuration or use others. 
 4. Hot reload of configurations
-    - Hot install of lsp/treesitter/formatter required upon openning a filetype for the first time
+    - Hot install of lsp/treesitter/formatter required upon opening a filetype for the first time
 5. Provide a stable & maintainable error free configuration layer over neovim 
     - With the help of the community behind it
     - Github workflow testing
