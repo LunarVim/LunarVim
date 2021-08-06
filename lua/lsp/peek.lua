@@ -100,7 +100,7 @@ function M.set_cursor_to_prev_pos(winnr)
   local range = location.targetRange or location.range
   local cursor_pos = { range.start.line + 1, range.start.character }
 
-  -- Set the winnr to the floting window if none was passed in
+  -- Set the winnr to the floating window if none was passed in
   winnr = winnr or M.floating_win
   -- Set the cursor at the correct position in the floating window
   vim.api.nvim_win_set_cursor(winnr, cursor_pos)

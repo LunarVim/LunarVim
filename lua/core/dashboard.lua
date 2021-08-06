@@ -84,7 +84,7 @@ M.setup = function()
 
   require("core.autocmds").define_augroups {
     _dashboard = {
-      -- seems to be nobuflisted that makes my stuff disapear will do more testing
+      -- seems to be nobuflisted that makes my stuff disappear will do more testing
       {
         "FileType",
         "dashboard",
