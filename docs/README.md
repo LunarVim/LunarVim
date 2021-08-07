@@ -1,14 +1,14 @@
-<img :src="$withBase('/assets/lunarvim_logo.png')" alt="VuePress Logo">
+<img :src="$withBase('/assets/lunarvim_logo.png')" alt="LunarVim Logo">
 
 ---
 
 # Introduction
 
-LunarVim is an IDE layer for Neovim 0.5 taking advantage of new advancements in Lua scripting such as [Treesitter](https://tree-sitter.github.io/tree-sitter/) and the [Language Server Protocol](https://en.wikipedia.org/wiki/Language_Server_Protocol). LunarVim is opinionated, extensible and fast.
+LunarVim is an opinionated, extensible, and fast IDE layer for Neovim >= 0.5.0. LunarVim takes advantage of the latest Neovim features such as [Treesitter](https://tree-sitter.github.io/tree-sitter/) and [Language Server Protocol](https://en.wikipedia.org/wiki/Language_Server_Protocol) support.
 
 ## Opinionated
 
-LunarVim ships with a sane default config to build on top of. Features such as autocompletion, integrated terminal, file explorer, fuzzy finder, LSP, linting, formatting and debugging.
+LunarVim ships with a sane default config for you to build on top of. Features include autocompletion, integrated terminal, file explorer, fuzzy finder, LSP, linting, formatting and debugging.
 
 ## Extensible
 

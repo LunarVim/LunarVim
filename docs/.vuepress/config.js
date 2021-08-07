@@ -32,6 +32,10 @@ module.exports = {
         text: "For Devs",
         link: "/dev/",
       },
+      //{
+      //  text: "FAQ",
+      //  link: "/faq/",
+      //},
       {
         text: "Community",
         link: "/community/",
@@ -53,6 +57,7 @@ module.exports = {
       "/languages/": getSideBar("languages", "Languages", true),
       "/plugins/": getSideBar("plugins", "Plugins", true),
       "/dev/": getSideBar("dev", "For Developers", true),
+     // "/faq/": getSideBar("faq", "FAQ", true),
       "/community/": getSideBar("community", "Community", true),
       "/sponsors/": getSideBar("sponsors", "Sponsors", true),
     },
