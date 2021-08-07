@@ -102,6 +102,7 @@ end
 function M.common_on_init(client, bufnr)
   if lvim.lsp.on_init_callback then
     lvim.lsp.on_init_callback(client, bufnr)
+    Log:get_default().info "Called lsp.on_init_callback"
     return
   end
 
@@ -117,6 +118,7 @@ end
 function M.common_on_attach(client, bufnr)
   if lvim.lsp.on_attach_callback then
     lvim.lsp.on_attach_callback(client, bufnr)
+    Log:get_default().info "Called lsp.on_init_callback"
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)
