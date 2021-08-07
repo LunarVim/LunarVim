@@ -1,4 +1,4 @@
-# Javascript
+# JavaScript
 
 ## Install Syntax Highlighting
 
@@ -8,9 +8,7 @@
 
 ## Install Language Server
 
-```vim
-:LspInstall typescript
-```
+JavaScript uses [TypeScript](/languages/typescript.html#install-language-server) language server.
 
 ## Formatters
 
@@ -21,12 +19,26 @@ lvim.lang.javascript.formatters = {
     args = {},
   },
 }
+lvim.lang.javascriptreact.formatters = {
+  {
+    exe = "prettier", -- can be prettierd eslint, or eslint_d as well
+    args = {},
+  },
+}
 ```
+
+The selected formatter(s) must be installed separately.
 
 ## Linters
 
-``` lua
+```lua
 lvim.lang.javascript.linters = {
+  {
+    exe = "eslint", -- can be eslint_d as well
+    args = {}, 
+  },
+}
+lvim.lang.javascriptreact.linters = {
   {
     exe = "eslint", -- can be eslint_d as well
     args = {}, 
@@ -34,11 +46,12 @@ lvim.lang.javascript.linters = {
 }
 ```
 
+The selected linter(s) must be installed separately.
+
 ## LSP Settings
 
-(TODO)
+More information in [TypeScript](/languages/typescript.html#lsp-settings).
 
 ## Debugger
 
 (TODO)
-
