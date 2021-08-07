@@ -43,8 +43,8 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunar
 * Many options formerly available in `config.lua` have been renamed.  For details [look here](https://github.com/lunarvim/LunarVim/wiki/Breaking-changes-in-rolling)
 
 ### Debugging LunarVim's configuration
-* To turn on debugging add these settings `lvim.debug = true` and use `<leader>Ll` to open the logfile
-* You can also use install [lnav](https://github.com/tstack/lnav) and use it in a floating terminal. To do that set `lvim.builtin.terminal.active = true` and then press `<leader>Li`.
+* To turn on debugging add these settings `lvim.log.level = debug` and use `<leader>Ll` to see the options of viewing the logfiles
+* You can also use install [lnav](https://github.com/tstack/lnav) and use it in a floating terminal. Make sure to set `lvim.builtin.terminal.active = true`.
 
 ### Fixing installation problems
 If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \

@@ -2,7 +2,7 @@ local M = {}
 M.config = function()
   lvim.builtin["terminal"] = {
     -- size can be a number or function which is passed the current terminal
-    size = 5,
+    size = 20,
     -- open_mapping = [[<c-\>]],
     open_mapping = [[<c-t>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
@@ -11,7 +11,7 @@ M.config = function()
     shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
     start_in_insert = true,
     insert_mappings = true, -- whether or not the open mapping applies in insert mode
-    persist_size = true,
+    persist_size = false,
     -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
     direction = "float",
     close_on_exit = true, -- close the terminal window when the process exits
@@ -38,10 +38,6 @@ M.config = function()
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     execs = {
       { "lazygit", "gg", "LazyGit" },
-      { "lnav ~/.cache/nvim/lunarvim.log", "Lid", "Interactive default log [lnav]" },
-      { "lnav ~/.cache/nvim/lsp.log", "Lil", "Interactive lsp log [lnav]" },
-      { "lnav ~/.cache/nvim/log", "Lin", "Interactive neovim log [lnav]" },
-      { "lnav ~/.cache/nvim/packer.nvim.log", "Lip", "Interactive packer log [lnav]" },
     },
   }
 end
@@ -92,6 +88,37 @@ M._exec_toggle = function(exec)
   local Terminal = require("toggleterm.terminal").Terminal
   local exec_term = Terminal:new { cmd = exec, hidden = true }
   exec_term:toggle()
+end
+
+---Use toggle term to view the live log
+---@param name of the logfile, e,g: {lunarvim, lsp, neovim, packer}
+M.toggle_log_view = function(name)
+  --- NOTE: this is hardcoded in Plenary unfortunately
+  local logfile = CACHE_PATH .. "/" .. name .. ".log"
+  -- handle custom paths not managed by Plenary.log
+  if name == "nvim" then
+    logfile = CACHE_PATH .. "log"
+  elseif name == "packer" then
+    logfile = CACHE_PATH .. "/packer.nvim.log"
+  end
+
+  local view_cmd = lvim.log.viewer .. " " .. logfile
+
+  local term_opts = vim.tbl_extend("keep", {
+    cmd = view_cmd,
+    open_mapping = [[<M-t>]],
+    direction = "horizontal",
+    -- FIXME: this isn't working
+    size = 40,
+    float_opts = { winblend = 3 },
+    hidden = true,
+    start_in_insert = true,
+  }, lvim.builtin.terminal)
+
+  local Terminal = require("toggleterm.terminal").Terminal
+  local log_view = Terminal:new(term_opts)
+  -- require("core.log"):get_default().debug("term", vim.inspect(term_opts))
+  log_view:toggle()
 end
 
 return M

@@ -175,15 +175,20 @@ M.config = function()
         },
         l = {
           name = "+logs",
-          d = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
-          l = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
-          n = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
-          p = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
-        },
-        i = {
-          --- used to define a name for the group in which-key
-          --- these are defined in core.terminal for now
-          name = "+logs (interactive)",
+          d = {
+            "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
+            "view default log",
+          },
+          D = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
+          n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
+          N = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
+          l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+          L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
+          p = {
+            "<cmd>lua require('core.terminal').toggle_log_view('packer')<cr>",
+            "view packer log",
+          },
+          P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
         },
       },
       s = {

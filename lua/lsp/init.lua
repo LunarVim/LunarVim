@@ -1,7 +1,5 @@
 local M = {}
-local u = require "utils"
-local log = require("utils.log").get_default()
-
+local Log = require "core.log"
 function M.config()
   vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
@@ -94,9 +92,7 @@ function M.get_ls_capabilities(client_id)
 
   for k, v in pairs(client.resolved_capabilities) do
     if v == true then
-      -- print("got cap: ", vim.inspect(caps))
       table.insert(enabled_caps, k)
-      -- vim.list_extend(enabled_caps, cap)
     end
   end
 
@@ -112,7 +108,9 @@ function M.common_on_init(client, bufnr)
   local formatters = lvim.lang[vim.bo.filetype].formatters
   if not vim.tbl_isempty(formatters) and formatters[1]["exe"] ~= nil and formatters[1].exe ~= "" then
     client.resolved_capabilities.document_formatting = false
-    log.debug("Overriding language server [", client.name, "] with format provider [", formatters[1].exe, "]")
+    Log:get_default().info(
+      string.format("Overriding language server [%s] with format provider [%s]", client.name, formatters[1].exe)
+    )
   end
 end
 

@@ -34,6 +34,12 @@ lvim = {
     terminal = {},
   },
 
+  log = {
+    viewer = "lnav",
+    ---@usage can be { "trace", "debug", "info", "warn", "error", "fatal" },
+    level = "warn",
+  },
+
   lsp = {
     completion = {
       item_kind = {
@@ -95,7 +101,6 @@ lvim = {
   },
 
   autocommands = {},
-  debug = false,
 }
 
 local schemas = nil
