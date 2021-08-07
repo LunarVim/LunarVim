@@ -24,9 +24,9 @@ To install a supported language server:
 
 ## Formatting 
 
-Formatting is handled by Null-ls. It is off by default. Not all formatters are supported.  For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources)
+Formatting is handled by Null-ls. It is off by default. Not all formatters are supported. For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources). Formatters and linters are not installed with LunarVim and therefore they must be installed separately.
 
-If you want to enable formatting for javascript for example, add the following to your config.lua
+If you want to enable formatting for javascript for example, install the formatter and then add the following to your config.lua
 ```lua
 lvim.lang.javascript.formatters = {
   {
@@ -45,7 +45,7 @@ lvim.format_on_save = true
 ```
 
 ## Linting
-Linting is also handled by Null-ls. To set a linter for your language:
+Linting is also handled by Null-ls. To set a linter for your language, install the linter and then enable the linter with configuration:
 
 ``` lua
 lvim.lang.javascript.linters = {
