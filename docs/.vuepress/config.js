@@ -54,7 +54,7 @@ module.exports = {
     sidebar: {
       "/": getSideBar("/", "Getting Started", true),
       "/configuration/": getSideBar("configuration", "Configuration"),
-      "/languages/": getSideBar("languages", "Supported Languages", true),
+      "/languages/": getSideBar("languages", "Languages", true),
       "/plugins/": getSideBar("plugins", "Plugins", true),
       "/dev/": getSideBar("dev", "For Developers", true),
      // "/faq/": getSideBar("faq", "FAQ", true),
