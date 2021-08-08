@@ -71,7 +71,7 @@ function cloneconfig($arg) {
 		Copy-Item -Recurse "${pwd}" "$HOME/.local/share/lunarvim/lvim"
 	} else {
 		Write-Output "lvbranch=$LVBRANCH"
-		git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git "$HOME/.local/share/lunarvim/lvim"
+		git clone --branch "$LVBRANCH" https://github.com/LunarVim/LunarVim.git "$HOME/.local/share/lunarvim/lvim"
 	}
 
 	mkdirondemand("$HOME/.config/lvim")
