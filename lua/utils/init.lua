@@ -64,7 +64,7 @@ function utils.toggle_autoformat()
         {
           "BufWritePre",
           "*",
-          ":silent lua vim.lsp.buf.formatting_sync()",
+          ":silent lua vim.lsp.buf.formatting()",
         },
       },
     }
