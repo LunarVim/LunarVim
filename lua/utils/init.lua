@@ -1,5 +1,6 @@
 local utils = {}
 local Log = require "core.log"
+local uv = vim.loop
 
 -- recursive Print (structure, limit, separator)
 local function r_inspect_settings(structure, limit, separator)
@@ -163,6 +164,14 @@ function utils.gsub_args(args)
     args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
   end
   return args
+end
+
+--- Checks whether a given path exists and is a file.
+--@param filename (string) path to check
+--@returns (bool)
+function utils.is_file(filename)
+  local stat = uv.fs_stat(filename)
+  return stat and stat.type == "file" or false
 end
 
 return utils

@@ -1,5 +1,7 @@
 local M = {}
 local Log = require "core.log"
+local utils = require "utils"
+
 M.config = function()
   lvim.builtin["terminal"] = {
     -- size can be a number or function which is passed the current terminal
@@ -92,30 +94,35 @@ M._exec_toggle = function(exec)
   exec_term:toggle()
 end
 
----Use toggle term to view the live log
----@param name of the logfile, e,g: {lunarvim, lsp, neovim, packer}
-M.toggle_log_view = function(name)
-  --- NOTE: this is hardcoded in Plenary unfortunately
-  local logfile = CACHE_PATH .. "/" .. name .. ".log"
-  -- handle custom paths not managed by Plenary.log
+local function get_log_path(name)
+  --handle custom paths not managed by Plenary.log
+  local logger = require "core.log"
+  local file
   if name == "nvim" then
-    logfile = CACHE_PATH .. "log"
-  elseif name == "packer" then
-    logfile = CACHE_PATH .. "/packer.nvim.log"
+    file = CACHE_PATH .. "/log"
+  else
+    file = logger:new({ plugin = name }):get_path()
   end
+  if utils.is_file(file) then
+    return file
+  end
+end
 
-  local view_cmd = lvim.log.viewer .. " " .. logfile
-
-  local term_opts = vim.tbl_extend("keep", {
-    cmd = view_cmd,
-    open_mapping = [[<M-t>]],
-    direction = "horizontal",
-    -- FIXME: this isn't working
-    size = 40,
-    float_opts = { winblend = 3 },
-    hidden = true,
-    start_in_insert = true,
-  }, lvim.builtin.terminal)
+---Toggles a log viewer according to log.viewer.layout_config
+---@param name can be the name of any of the managed logs, e,g. "lunarvim" or the default ones {"nvim", "lsp", "packer.nvim"}
+M.toggle_log_view = function(name)
+  local logfile = get_log_path(name)
+  if not logfile then
+    return
+  end
+  local term_opts = vim.tbl_deep_extend("force", lvim.builtin.terminal, {
+    cmd = lvim.log.viewer.cmd .. " " .. logfile,
+    open_mapping = lvim.log.viewer.layout_config.open_mapping,
+    direction = lvim.log.viewer.layout_config.direction,
+    -- TODO: this might not be working as expected
+    size = lvim.log.viewer.layout_config.size,
+    float_opts = lvim.log.viewer.layout_config.float_opts,
+  })
 
   local Terminal = require("toggleterm.terminal").Terminal
   local log_view = Terminal:new(term_opts)

@@ -9,18 +9,14 @@ function Log:new(opts)
     return nil
   end
 
-  if vim.fn.executable(lvim.log.viewer) ~= 1 then
-    lvim.log.viewer = "less +F"
+  local obj = require("plenary.log").new(opts)
+  local path = string.format("%s/%s.log", vim.api.nvim_call_function("stdpath", { "cache" }), opts.plugin)
+
+  obj.get_path = function()
+    return path
   end
 
-  opts = opts or {}
-
-  setmetatable({
-    plugin = opts.plugin,
-    level = opts.level,
-  }, Log)
-
-  return require("plenary.log").new(opts)
+  return obj
 end
 
 --- Creates or retrieves a log handle for the default logfile

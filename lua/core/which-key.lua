@@ -186,7 +186,7 @@ M.config = function()
           l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
           L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
           p = {
-            "<cmd>lua require('core.terminal').toggle_log_view('packer')<cr>",
+            "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",
             "view packer log",
           },
           P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
