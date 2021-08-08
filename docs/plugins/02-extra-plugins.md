@@ -113,7 +113,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [rnvimr](kevinhwang91/rnvimr)
+### [rnvimr](https://github.com/kevinhwang91/rnvimr)
 
 **ranger file explorer window**
 
@@ -129,7 +129,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### numb.nvim
+### [numb](https://github.com/nacro90/numb.nvim)
 
 **jump to the line**
 
@@ -165,7 +165,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## Git
 
-### gitlinker.nvim
+### [gitlinker](https://github.com/ruifm/gitlinker.nvim)
+
+**generate shareable file permalinks for several git web frontend hosts**
 
 ```lua
 {
@@ -190,7 +192,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### octo.nvim
+### [octo](https://github.com/pwntester/octo.nvim)
+
+**edit and review GitHub issues and pull requests**
 
 ```lua
 {
@@ -199,7 +203,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### vim-gist
+### [vim-gist](https://github.com/mattn/vim-gist)
+
+**create/edit Github gists**
 
 ```lua
 {
@@ -209,7 +215,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### git-blame.nvim
+### [git-blame](https://github.com/f-person/git-blame.nvim)
+
+**show git blame**
 
 ``` lua
 {
@@ -222,7 +230,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### diffview.nvim
+### [diffview](https://github.com/sindrets/diffview.nvim)
+
+**git diff in a single tabpage**
 
 ```lua
 {
@@ -231,7 +241,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### vim-fugitive
+### [vim-fugitive](https://github.com/tpope/vim-fugitive)
+
+**git wrapper**
 
 ```lua
 {
@@ -257,7 +269,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## Treesitter
 
-### playground
+### [playground](https://github.com/nvim-treesitter/playground)
+
+**view treesitter information**
 
 ```lua
 {
@@ -266,7 +280,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### nvim-ts-autotag
+### [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)
+
+**autoclose and autorename html tag**
 
 ```lua
 {
@@ -275,7 +291,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### nvim-ts-rainbow
+### [nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)
+
+**rainbow parentheses**
 
 ```lua
 {
@@ -283,7 +301,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### nvim-ts-context-commentstring
+### [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)
+
+**commentstring option based on the cursor location**
 
 ```lua
 {
@@ -294,7 +314,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## Telescope Extensions
 
-### telescope-fzy-native.nvim
+### [telescope-fzy-native.nvim](https://github.com/nvim-telescope/telescope-fzy-native.nvim)
+
+**fzy style sorter that is compiled**
 
 ```lua
 {
@@ -304,7 +326,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### telescope-project
+### [telescope-project](https://github.com/nvim-telescope/telescope-project.nvim)
+
+**switch between projects**
 
 ```lua
 {
@@ -318,7 +342,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## Colorschemes
 
-### lsp-colors
+### [lsp-colors](https://github.com/folke/lsp-colors.nvim)
+
+**lsp diagnostics highlight groups for non lsp colorschemes**
 
 ``` lua
 {
@@ -326,7 +352,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
   event = "BufRead",
 },
 ```
-### lush.nvim
+### [lush.nvim](https://github.com/rktjmp/lush.nvim)
+
+**colorscheme creation aid**
 
 ``` lua
 {
@@ -334,7 +362,9 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### nvim-colorizer
+### [nvim-colorizer](https://github.com/norcalli/nvim-colorizer.lua)
+
+**color highlighter**
 
 ```lua
 {
@@ -459,7 +489,7 @@ lvim.builtin.which_key.mappings["t"] = {
 
 ## General
 
-### nvim-lastplace
+### [nvim-lastplace](https://github.com/ethanholz/nvim-lastplace)
 
 **pick up where you left off**
 
@@ -519,7 +549,7 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### markdown-preview.nvim
+### [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 
 **preview markdown in the browser**
 
@@ -549,7 +579,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### todo-comments.nvim
+### [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
+
+**highlight and search for todo comments**
 
 ```lua
 {
@@ -616,7 +648,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### neoscroll
+### [neoscroll](https://github.com/karb94/neoscroll.nvim)
+
+**smooth scrolling**
 
 ```lua
 {
@@ -676,7 +710,9 @@ Also define keybindings in your `config.lua`
 
 ```
 
-### vim-surround
+### [vim-surround](https://github.com/tpope/vim-surround)
+
+**mappings to delete, change and add surroundings**
 
 ```lua
 {
@@ -685,7 +721,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### vim-repeat
+### [vim-repeat](https://github.com/tpope/vim-repeat)
+
+**enable repeating supported plugin maps with "."**
 
 ```lua
 { "tpope/vim-repeat" },
@@ -706,7 +744,7 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### vim-bundler
+### [vim-bundler](https://github.com/tpope/vim-bundler)
 
 **lightweight support for ruby's bundler**
 
@@ -717,7 +755,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### vim-rails
+### [vim-rails](https://github.com/tpope/vim-rails)
+
+**edit ruby on rails applications**
 
 ```lua
 {
@@ -743,7 +783,9 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### autosave
+### [autosave](https://github.com/Pocco81/AutoSave.nvim)
+
+**automatically saving your work whenever you make changes to it**
 
 ```lua
 {
