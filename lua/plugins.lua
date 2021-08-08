@@ -57,7 +57,7 @@ return {
   {
     "hrsh7th/vim-vsnip",
     -- wants = "friendly-snippets",
-    event = "InsertCharPre",
+    event = "InsertEnter",
   },
   {
     "rafamadriz/friendly-snippets",
