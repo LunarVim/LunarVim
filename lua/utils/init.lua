@@ -1,4 +1,5 @@
 local utils = {}
+local Log = require "core.log"
 
 -- recursive Print (structure, limit, separator)
 local function r_inspect_settings(structure, limit, separator)
@@ -68,6 +69,7 @@ function utils.toggle_autoformat()
         },
       },
     }
+    Log:get_default().info "Format on save active"
   end
 
   if not lvim.format_on_save then
@@ -76,6 +78,7 @@ function utils.toggle_autoformat()
         :autocmd! autoformat
       endif
     ]]
+    Log:get_default().info "Format on save off"
   end
 end
 
@@ -91,6 +94,7 @@ function utils.reload_lv_config()
   vim.cmd ":PackerInstall"
   require("keymappings").setup()
   -- vim.cmd ":PackerClean"
+  Log:get_default().info "Reloaded configuration"
 end
 
 function utils.check_lsp_client_active(name)
