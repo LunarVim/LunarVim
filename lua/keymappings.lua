@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 
 local generic_opts_any = { noremap = true, silent = true }
 
@@ -148,6 +149,7 @@ function M.config()
     lvim.keys.normal_mode["<A-Down>"] = lvim.keys.normal_mode["<C-Down>"]
     lvim.keys.normal_mode["<A-Left>"] = lvim.keys.normal_mode["<C-Left>"]
     lvim.keys.normal_mode["<A-Right>"] = lvim.keys.normal_mode["<C-Right>"]
+    Log:get_default().info "Activated mac keymappings"
   end
 end
 
