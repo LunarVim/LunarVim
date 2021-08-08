@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.compe = {
     enabled = true,
@@ -62,6 +63,7 @@ M.setup = function()
 
   local status_ok, compe = pcall(require, "compe")
   if not status_ok then
+    Log:get_default().error "Failed to load compe"
     return
   end
 

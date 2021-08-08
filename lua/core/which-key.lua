@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.which_key = {
     active = false,
@@ -222,6 +223,7 @@ M.setup = function()
   -- end
   local status_ok, which_key = pcall(require, "which-key")
   if not status_ok then
+    Log:get_default "Failed to load whichkey"
     return
   end
 

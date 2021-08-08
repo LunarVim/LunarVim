@@ -69,7 +69,9 @@ function utils.toggle_autoformat()
         },
       },
     }
-    Log:get_default().info "Format on save active"
+    if Log:get_default() then
+      Log:get_default().info "Format on save active"
+    end
   end
 
   if not lvim.format_on_save then
@@ -78,7 +80,9 @@ function utils.toggle_autoformat()
         :autocmd! autoformat
       endif
     ]]
-    Log:get_default().info "Format on save off"
+    if Log:get_default() then
+      Log:get_default().info "Format on save off"
+    end
   end
 end
 

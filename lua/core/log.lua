@@ -4,6 +4,11 @@ local Log = {}
 ---@param opts these are passed verbatim to Plenary.log
 ---@return log handle
 function Log:new(opts)
+  local status_ok, _ = pcall(require, "plenary.log")
+  if not status_ok then
+    return nil
+  end
+
   if vim.fn.executable(lvim.log.viewer) ~= 1 then
     lvim.log.viewer = "less +F"
   end
@@ -14,6 +19,7 @@ function Log:new(opts)
     plugin = opts.plugin,
     level = opts.level,
   }, Log)
+
   return require("plenary.log").new(opts)
 end
 

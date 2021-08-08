@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin["terminal"] = {
     -- size can be a number or function which is passed the current terminal
@@ -45,6 +46,7 @@ end
 M.setup = function()
   local status_ok, terminal = pcall(require, "toggleterm")
   if not status_ok then
+    Log:get_default().error "Failed to load toggleterm"
     print(terminal)
     return
   end

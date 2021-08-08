@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.dap = {
     active = false,
@@ -14,6 +15,7 @@ end
 M.setup = function()
   local status_ok, dap = pcall(require, "dap")
   if not status_ok then
+    Log:get_default().error "Failed to load dap"
     return
   end
 

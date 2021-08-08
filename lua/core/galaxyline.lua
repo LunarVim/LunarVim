@@ -1,8 +1,10 @@
 -- if not package.loaded['galaxyline'] then
 --   return
 -- end
+local Log = require "core.log"
 local status_ok, gl = pcall(require, "galaxyline")
 if not status_ok then
+  Log:get_default().error "Failed to load galaxyline"
   return
 end
 

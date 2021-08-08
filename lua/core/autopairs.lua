@@ -1,8 +1,10 @@
 -- if not package.loaded['nvim-autopairs'] then
 --   return
 -- end
+local Log = require "core.log"
 local status_ok, _ = pcall(require, "nvim-autopairs")
 if not status_ok then
+  Log:get_default().error "Failed to load autopairs"
   return
 end
 local npairs = require "nvim-autopairs"
