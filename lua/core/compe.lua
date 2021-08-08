@@ -42,8 +42,8 @@ M.config = function()
     keymap = {
       values = {
         insert_mode = {
-          ["<Tab>"] = { 'pumvisible() ? "<C-n>" : "<Tab>"', { silent = true, noremap = true, expr = true } },
-          ["<S-Tab>"] = { 'pumvisible() ? "<C-p>" : "<S-Tab>"', { silent = true, noremap = true, expr = true } },
+          -- ["<Tab>"] = { 'pumvisible() ? "<C-n>" : "<Tab>"', { silent = true, noremap = true, expr = true } },
+          -- ["<S-Tab>"] = { 'pumvisible() ? "<C-p>" : "<S-Tab>"', { silent = true, noremap = true, expr = true } },
           ["<C-Space>"] = { "compe#complete()", { silent = true, noremap = true, expr = true } },
           ["<C-e>"] = { "compe#close('<C-e>')", { silent = true, noremap = true, expr = true } },
           ["<C-f>"] = { "compe#scroll({ 'delta': +4 })", { silent = true, noremap = true, expr = true } },
@@ -86,12 +86,13 @@ M.setup = function()
   _G.tab_complete = function()
     if vim.fn.pumvisible() == 1 then
       return t "<C-n>"
-    elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-      return t "<Plug>(vsnip-expand-or-jump)"
+    elseif vim.fn.call("vsnip#jumpable", { 1 }) == 1 then
+      return t "<Plug>(vsnip-jump-next)"
     elseif check_back_space() then
       return t "<Tab>"
     else
-      return vim.fn["compe#complete"]()
+      -- return vim.fn["compe#complete"]() -- < use this if you want <tab> to always offer completion
+      return t "<Tab>"
     end
   end
 
@@ -107,6 +108,18 @@ M.setup = function()
 
   local keymap = require "keymappings"
   keymap.load(lvim.builtin.compe.keymap.values, lvim.builtin.compe.keymap.opts)
+
+  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
+  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
+  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+  vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+
+--   vim.cmd[[
+-- imap <expr> <c-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<c-n>'
+-- smap <expr> <c-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<c-j>'
+-- imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+-- smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+--   ]]
 end
 
 return M
