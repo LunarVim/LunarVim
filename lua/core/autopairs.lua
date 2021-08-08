@@ -24,10 +24,11 @@ MUtils.completion_confirm = function()
   end
 end
 
-if package.loaded["compe"] and vim.bo.filetype ~= "tex" then
+if package.loaded["compe"] then
+  local map_complete_optional = vim.bo.filetype ~= "tex"
   require("nvim-autopairs.completion.compe").setup {
     map_cr = true, --  map <CR> on insert mode
-    map_complete = true, -- it will auto insert `(` after select function or method item
+    map_complete = map_complete_optional, -- it will auto insert `(` after select function or method item
   }
 end
 
