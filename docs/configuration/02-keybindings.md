@@ -81,7 +81,6 @@ lvim.builtin.which_key.mappings["P"] = {
 ```
 Adding a key to a submenu. 
 ``` lua
-
 lvim.builtin.which_key.mappings["TP"] = { 
   "<cmd>lua require'telescope'.extensions.project.project{}<CR>", "Projects" 
 }
