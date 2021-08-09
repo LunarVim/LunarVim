@@ -10,6 +10,8 @@ M.defaults = {
     endif
   endfunction
   ]],
+  -- :LvimInfo
+  [[command! LvimInfo lua require('core.info').toggle_popup(vim.bo.filetype)]],
 }
 
 M.load = function(commands)

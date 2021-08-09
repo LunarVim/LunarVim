@@ -73,7 +73,6 @@ M.load_commands = function()
     cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
     cmd "let &fcs='eob: '"
   end
-  vim.cmd [[command! LvimInfo lua require('core.info').toggle_popup(vim.bo.filetype)]]
 end
 
 return M
