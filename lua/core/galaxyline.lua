@@ -8,11 +8,11 @@ if not status_ok then
   return
 end
 
--- NOTE: if someone defines colors but doesn't have them then this will break
 local palette_status_ok, colors = pcall(require, lvim.colorscheme .. ".palette")
 if not palette_status_ok then
-  colors = lvim.builtin.galaxyline.colors
+  colors = {}
 end
+colors = vim.tbl_deep_extend("force", colors, lvim.builtin.galaxyline.colors)
 
 local condition = require "galaxyline.condition"
 local gls = gl.section
@@ -44,7 +44,9 @@ table.insert(gls.left, {
         ["!"] = colors.blue,
         t = colors.blue,
       }
-      vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
+      -- if color not defnied use bright red to get attention
+      local hi_color = mode_color[vim.fn.mode()] or "#ff5500"
+      vim.api.nvim_command("hi GalaxyViMode guifg=" .. hi_color)
       return "▊"
     end,
     separator_highlight = { "NONE", colors.alt_bg },
