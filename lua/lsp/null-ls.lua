@@ -1,5 +1,6 @@
 local M = {}
-local u = require "utils"
+local Log = require "core.log"
+
 local null_ls = require "null-ls"
 
 local nodejs_local_providers = { "prettier", "prettierd", "prettier_d_slim", "eslint_d", "eslint" }
@@ -54,20 +55,21 @@ local function validate_nodejs_provider(provider)
     --- use LSP to set root_dir
     local ts_client = require("utils").get_active_client_by_ft "typescript"
     if ts_client == nil then
-      u.lvim_log "Unable to determine root directory since tsserver didn't start correctly"
+      Log:get_default().error "Unable to determine root directory since tsserver didn't start correctly"
       return
     end
     root_dir = ts_client.config.root_dir
   end
   local local_nodejs_command = root_dir .. "/node_modules/.bin/" .. provider._opts.command
-  u.lvim_log(string.format("checking [%s] for local node module: [%s]", local_nodejs_command, vim.inspect(provider)))
+  Log:get_default().debug("checking for local node module: ", vim.inspect(provider))
+
   if vim.fn.executable(local_nodejs_command) == 1 then
     command_path = local_nodejs_command
   elseif vim.fn.executable(provider._opts.command) == 1 then
-    u.lvim_log(string.format("checking in global path instead for node module: [%s]", provider._opts.command))
+    Log:get_default().debug("checking in global path instead for node module", provider._opts.command)
     command_path = provider._opts.command
   else
-    u.lvim_log(string.format("Unable to find node module: [%s]", provider._opts.command))
+    Log:get_default().debug("Unable to find node module", provider._opts.command)
   end
   return command_path
 end
@@ -81,7 +83,7 @@ local function validate_provider_request(provider)
     return validate_nodejs_provider(provider)
   end
   if vim.fn.executable(provider._opts.command) ~= 1 then
-    u.lvim_log(string.format("Unable to find the path for: [%s]", vim.inspect(provider)))
+    Log:get_default().warn("Unable to find the path for", vim.inspect(provider))
     return
   end
   return provider._opts.command
@@ -90,6 +92,7 @@ end
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
 function M.setup(filetype)
   for _, formatter in pairs(lvim.lang[filetype].formatters) do
+    Log:get_default().debug("validating format provider: ", formatter.exe)
     local builtin_formatter = null_ls.builtins.formatting[formatter.exe]
     if not vim.tbl_contains(M.requested_providers, builtin_formatter) then
       -- FIXME: why doesn't this work?
@@ -99,7 +102,7 @@ function M.setup(filetype)
       if resolved_path then
         builtin_formatter._opts.command = resolved_path
         table.insert(M.requested_providers, builtin_formatter)
-        u.lvim_log(string.format("Using format provider: [%s]", builtin_formatter.name))
+        Log:get_default().info("Using format provider", builtin_formatter.name)
       else
         -- mark it here to avoid re-doing the lookup again
         register_failed_request(filetype, formatter.exe, "formatters")
@@ -109,6 +112,7 @@ function M.setup(filetype)
 
   for _, linter in pairs(lvim.lang[filetype].linters) do
     local builtin_diagnoser = null_ls.builtins.diagnostics[linter.exe]
+    Log:get_default().debug("validating lint provider: ", linter.exe)
     -- special case: fallback to "eslint"
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
     -- if provider.exe
@@ -123,7 +127,7 @@ function M.setup(filetype)
       if resolved_path then
         builtin_diagnoser._opts.command = resolved_path
         table.insert(M.requested_providers, builtin_diagnoser)
-        u.lvim_log(string.format("Using linter provider: [%s]", builtin_diagnoser.name))
+        Log:get_default().info("Using linter provider", builtin_diagnoser.name)
       else
         -- mark it here to avoid re-doing the lookup again
         register_failed_request(filetype, linter.exe, "linters")

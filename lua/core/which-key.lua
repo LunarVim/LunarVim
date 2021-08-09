@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.which_key = {
     active = false,
@@ -173,8 +174,24 @@ M.config = function()
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
         },
+        l = {
+          name = "+logs",
+          d = {
+            "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
+            "view default log",
+          },
+          D = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
+          n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
+          N = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
+          l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+          L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
+          p = {
+            "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",
+            "view packer log",
+          },
+          P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
+        },
       },
-
       s = {
         name = "Search",
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -206,6 +223,7 @@ M.setup = function()
   -- end
   local status_ok, which_key = pcall(require, "which-key")
   if not status_ok then
+    Log:get_default "Failed to load whichkey"
     return
   end
 

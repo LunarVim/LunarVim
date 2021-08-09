@@ -1,6 +1,5 @@
 local M = {}
-local u = require "utils"
-
+local Log = require "core.log"
 function M.config()
   vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
@@ -93,9 +92,7 @@ function M.get_ls_capabilities(client_id)
 
   for k, v in pairs(client.resolved_capabilities) do
     if v == true then
-      -- print("got cap: ", vim.inspect(caps))
       table.insert(enabled_caps, k)
-      -- vim.list_extend(enabled_caps, cap)
     end
   end
 
@@ -105,19 +102,23 @@ end
 function M.common_on_init(client, bufnr)
   if lvim.lsp.on_init_callback then
     lvim.lsp.on_init_callback(client, bufnr)
+    Log:get_default().info "Called lsp.on_init_callback"
     return
   end
 
   local formatters = lvim.lang[vim.bo.filetype].formatters
   if not vim.tbl_isempty(formatters) and formatters[1]["exe"] ~= nil and formatters[1].exe ~= "" then
     client.resolved_capabilities.document_formatting = false
-    u.lvim_log(string.format("Overriding [%s] formatter with [%s]", client.name, formatters[1].exe))
+    Log:get_default().info(
+      string.format("Overriding language server [%s] with format provider [%s]", client.name, formatters[1].exe)
+    )
   end
 end
 
 function M.common_on_attach(client, bufnr)
   if lvim.lsp.on_attach_callback then
     lvim.lsp.on_attach_callback(client, bufnr)
+    Log:get_default().info "Called lsp.on_init_callback"
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)

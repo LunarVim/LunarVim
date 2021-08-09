@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.gitsigns = {
     signs = {
@@ -50,6 +51,7 @@ end
 M.setup = function()
   local status_ok, gitsigns = pcall(require, "gitsigns")
   if not status_ok then
+    Log:get_default().error "Failed to load gitsigns"
     return
   end
   gitsigns.setup(lvim.builtin.gitsigns)

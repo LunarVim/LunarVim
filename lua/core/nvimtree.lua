@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 --
 M.config = function()
   lvim.builtin.nvimtree = {
@@ -49,6 +50,7 @@ end
 M.setup = function()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
+    Log:get_default().error "Failed to load nvim-tree.config"
     return
   end
   local g = vim.g
