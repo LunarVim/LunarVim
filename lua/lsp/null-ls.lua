@@ -35,6 +35,7 @@ local function find_root_dir()
     return vim.api.nvim_get_var "root_dir"
   end
 
+  -- TODO: Rework this to not make it javascript specific
   --- use LSP to set root_dir
   local ts_client = require("utils").get_active_client_by_ft "typescript"
   if ts_client == nil then
@@ -50,7 +51,6 @@ local function find_command(command)
     local root_dir = find_root_dir()
     local local_command = local_installations[command](root_dir, command)
     if vim.fn.executable(local_command) == 1 then
-      logger.debug("Using local installation:", local_command)
       return local_command
     end
   end
@@ -58,8 +58,6 @@ local function find_command(command)
   if vim.fn.executable(command) == 1 then
     return command
   end
-
-  logger.warn(command, "not found")
   return nil
 end
 
@@ -80,7 +78,6 @@ function M.registered_providers_name(ft)
       table.insert(names, provider.name)
     end
   end
-
   return names
 end
 
@@ -106,6 +103,7 @@ function M.setup(filetype)
     elseif not vim.tbl_contains(M.langs[filetype].registered.formatters, builtin_formatter) then
       local formatter_cmd = find_command(builtin_formatter._opts.command)
       if not formatter_cmd then
+        logger.warn("Not found:", builtin_formatter._opts.command)
         table.insert(M.langs[filetype].errors.formatters, formatter.exe)
       else
         logger.info("Using formatter:", formatter_cmd)
@@ -121,6 +119,7 @@ function M.setup(filetype)
     elseif not vim.tbl_contains(M.langs[filetype].registered.linters, builtin_linter) then
       local linter_cmd = find_command(builtin_linter._opts.command)
       if not linter_cmd then
+        logger.warn("Not found:", builtin_linter._opts.command)
         table.insert(M.langs[filetype].errors.linters, linter.exe)
       else
         logger.info("Using linter:", linter_cmd)
