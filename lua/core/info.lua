@@ -1,6 +1,5 @@
 local M = {}
 local u = require "utils"
-local null_ls_handler = require "lsp.null-ls"
 local indent = "  "
 
 M.banner = {
@@ -151,14 +150,16 @@ function M.toggle_popup(ft)
   }
   vim.list_extend(buf_lines, lsp_info)
 
-  local null_ls_providers = null_ls_handler.registered_providers_name(ft)
+  local null_ls_services = require "lsp.null-ls.services"
+  local null_ls_providers = null_ls_services.list_provider_names(ft)
   local null_ls_info = {
     indent .. "Formatters and linters",
     indent .. "* Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
   }
   vim.list_extend(buf_lines, null_ls_info)
 
-  local missing_formatters = null_ls_handler.langs[ft].errors.formatters
+  local null_ls_formatters = require "lsp.null-ls.formatters"
+  local missing_formatters = null_ls_formatters.list_configured().unsupported
   if vim.tbl_count(missing_formatters) > 0 then
     local missing_formatters_status = {
       indent .. "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
@@ -166,7 +167,8 @@ function M.toggle_popup(ft)
     vim.list_extend(buf_lines, missing_formatters_status)
   end
 
-  local missing_linters = null_ls_handler.langs[ft].errors.linters
+  local null_ls_linters = require "lsp.null-ls.linters"
+  local missing_linters = null_ls_linters.list_configured().unsupported
   if vim.tbl_count(missing_linters) > 0 then
     local missing_linters_status = {
       indent .. "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",

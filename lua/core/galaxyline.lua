@@ -217,7 +217,7 @@ local function get_attached_provider_name(msg)
     end
   end
 
-  local null_ls_providers = require("lsp.null-ls").registered_providers_name(vim.bo.filetype)
+  local null_ls_providers = require("lsp.null-ls.services").list_provider_names(vim.bo.filetype)
   vim.list_extend(buf_client_names, null_ls_providers)
 
   return table.concat(buf_client_names, ", ")

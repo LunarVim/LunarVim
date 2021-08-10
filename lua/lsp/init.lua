@@ -1,5 +1,6 @@
 local M = {}
 local Log = require "core.log"
+
 function M.config()
   vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
@@ -133,7 +134,6 @@ function M.setup(lang)
   end
 
   local overrides = lvim.lsp.override
-
   if type(overrides) == "table" then
     if vim.tbl_contains(overrides, lang) then
       return
