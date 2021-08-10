@@ -189,7 +189,6 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, get_linter_suggestion_msg(ft))
 
   local function set_syntax_hl()
-    --TODO: highlighting is either inconsistent or not working :\
     vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
     vim.cmd [[highlight link LvimInfoHeader Type]]
     vim.cmd [[let m=matchadd("DashboardHeader", "Language Server Protocol (LSP) info")]]
