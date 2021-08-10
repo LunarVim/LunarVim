@@ -23,7 +23,7 @@ end
 local function get_formatter_suggestion_msg(ft)
   local supported_formatters = u.get_supported_formatters_by_filetype(ft)
   return {
-    "-------------------------------------------------------------------",
+    "───────────────────────────────────────────────────────────────────",
     "",
     "  HINT ",
     "",
@@ -35,17 +35,17 @@ local function get_formatter_suggestion_msg(ft)
       .. "lvim.lang."
       .. tostring(ft)
       .. [[.formatting = { { exe = ']]
-      .. table.concat(supported_formatters, "|")
+      .. table.concat(supported_formatters, "│")
       .. [[' } }]],
     "",
-    "-------------------------------------------------------------------",
+    "───────────────────────────────────────────────────────────────────",
   }
 end
 
 local function get_linter_suggestion_msg(ft)
   local supported_linters = u.get_supported_linters_by_filetype(ft)
   return {
-    "-------------------------------------------------------------------",
+    "───────────────────────────────────────────────────────────────────",
     "",
     "  HINT ",
     "",
@@ -57,10 +57,10 @@ local function get_linter_suggestion_msg(ft)
       .. "lvim.lang."
       .. tostring(ft)
       .. [[.linters = { { exe = ']]
-      .. table.concat(supported_linters, "|")
+      .. table.concat(supported_linters, "│")
       .. [[' } }]],
     "",
-    "-------------------------------------------------------------------",
+    "───────────────────────────────────────────────────────────────────",
   }
 end
 
@@ -83,14 +83,14 @@ function M.create_simple_popup(buf_lines, callback)
   opts.col = math.floor(vim.o.columns * col_start_percentage)
   opts.width = math.floor(vim.o.columns * width_percentage)
   opts.border = {
-    "┌",
-    "-",
-    "┐",
-    "|",
-    "┘",
-    "-",
-    "└",
-    "|",
+    "╭",
+    "─",
+    "╮",
+    "│",
+    "╯",
+    "─",
+    "╰",
+    "│",
   }
 
   local win_id = vim.api.nvim_open_win(bufnr, true, opts)
