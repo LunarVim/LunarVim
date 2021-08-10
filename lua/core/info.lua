@@ -129,18 +129,7 @@ local function tbl_set_highlight(terms, highlight_group)
 end
 
 function M.toggle_popup(ft)
-  local client = u.get_active_client_by_ft(ft)
-  local is_client_active = not client.is_stopped()
-  local client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
-  local num_caps = vim.tbl_count(client_enabled_caps)
-  local null_ls_providers = null_ls_handler.get_registered_providers_by_filetype(ft)
-
-  local missing_linters = lvim.lang[ft].linters._failed_requests or {}
-  local missing_formatters = lvim.lang[ft].formatters._failed_requests or {}
-
-  local buf_lines = {}
-  vim.list_extend(buf_lines, M.banner)
-
+  local buf_lines = M.banner
   local header = {
     indent .. "Detected filetype:     " .. tostring(ft),
     indent .. "Treesitter active:     " .. tostring(next(vim.treesitter.highlighter.active) ~= nil),
@@ -148,10 +137,13 @@ function M.toggle_popup(ft)
   }
   vim.list_extend(buf_lines, header)
 
+  local client = u.get_active_client_by_ft(ft)
+  local client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
+  local num_caps = vim.tbl_count(client_enabled_caps)
   local lsp_info = {
     indent .. "Language Server Protocol (LSP) info",
     indent .. "* Associated server:   " .. client.name,
-    indent .. "* Active:              " .. tostring(is_client_active) .. " (id: " .. tostring(client.id) .. ")",
+    indent .. "* Active:              " .. tostring(not client.is_stopped) .. " (id: " .. tostring(client.id) .. ")",
     indent .. "* Supports formatting: " .. tostring(client.resolved_capabilities.document_formatting),
     indent .. "* Capabilities list:   " .. table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", "),
     indent .. indent .. indent .. table.concat(vim.list_slice(client_enabled_caps, ((num_caps / 2) + 1)), ", "),
@@ -159,23 +151,24 @@ function M.toggle_popup(ft)
   }
   vim.list_extend(buf_lines, lsp_info)
 
+  local null_ls_providers = null_ls_handler.registered_providers_name(ft)
   local null_ls_info = {
     indent .. "Formatters and linters",
     indent .. "* Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
   }
   vim.list_extend(buf_lines, null_ls_info)
 
-  local missing_formatters_status
+  local missing_formatters = null_ls_handler.langs[ft].errors.formatters
   if vim.tbl_count(missing_formatters) > 0 then
-    missing_formatters_status = {
+    local missing_formatters_status = {
       indent .. "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
     }
     vim.list_extend(buf_lines, missing_formatters_status)
   end
 
-  local missing_linters_status
+  local missing_linters = null_ls_handler.langs[ft].errors.linters
   if vim.tbl_count(missing_linters) > 0 then
-    missing_linters_status = {
+    local missing_linters_status = {
       indent .. "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",
     }
     vim.list_extend(buf_lines, missing_linters_status)
@@ -184,7 +177,6 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, { "" })
 
   vim.list_extend(buf_lines, get_formatter_suggestion_msg(ft))
-
   vim.list_extend(buf_lines, get_linter_suggestion_msg(ft))
 
   local function set_syntax_hl()
