@@ -4,15 +4,20 @@ local null_ls_handler = require "lsp.null-ls"
 local indent = "  "
 
 M.banner = {
+  indent .. "Press q to close",
   "",
-  "",
-  "⠀⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀     ⠀⠀⠀   ⠀⠀ ⣺⡿⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀",
-  "⠀⣿⠇⠀⠀⠀⠀⠀⣤⡄⠀⠀⢠⣤⡄⠀.⣠⣤⣤⣤⡀⠀⠀⢀⣤⣤⣤⣤⡄⠀⠀⠀⣤⣄⣤⣤⣤⠀⠀ ⣿⣯  ⣿⡟⠀   ⣤⣤⠀⠀⠀⠀⣠⣤⣤⣤⣄⣤⣤",
-  "⢠⣿⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⣸⣿⠁⠀⣿⣿⠉⠀⠈⣿⡇⠀⠀⠛⠋⠀⠀⢹⣿⠀⠀⠀⣿⠏⠀⠸⠿⠃⠀⣿⣿⠀⣰⡟⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⣿⡟⢸⣿⡇⢀⣿",
-  "⣸⡇⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⣿⡟⠀⢠⣿⡇⠀⠀⢰⣿⡇⠀⣰⣾⠟⠛⠛⣻⡇⠀⠀⢸⡿⠀⠀⠀⠀⠀⠀⢻⣿⢰⣿⠀⠀⠀⠀⠀⠀⣾⡇⠀⠀⠀⢸⣿⠇⢸⣿⠀⢸⡏",
-  "⣿⣧⣤⣤⣤⡄⠀⠘⣿⣤⣤⡤⣿⠇⠀⢸⣿⠁⠀⠀⣼⣿⠀⠀⢿⣿⣤⣤⠔⣿⠃⠀⠀⣾⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⠋⠀⠀⠀⢠⣤⣤⣿⣥⣤⡄⠀⣼⣿⠀⣸⡏⠀⣿⠃",
-  "⠉⠉⠉⠉⠉⠁⠀⠀⠈⠉⠉⠀⠉⠀⠀⠈⠉⠀⠀⠀⠉⠉⠀⠀⠀⠉⠉⠁⠈⠉⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠁⠀⠉⠁⠀⠉⠁⠀⠉⠀",
-  "",
+  indent
+    .. "⠀⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀     ⠀⠀⠀   ⠀⠀ ⣺⡿⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀",
+  indent
+    .. "⠀⣿⠇⠀⠀⠀⠀⠀⣤⡄⠀⠀⢠⣤⡄⠀.⣠⣤⣤⣤⡀⠀⠀⢀⣤⣤⣤⣤⡄⠀⠀⠀⣤⣄⣤⣤⣤⠀⠀ ⣿⣯  ⣿⡟⠀   ⣤⣤⠀⠀⠀⠀⣠⣤⣤⣤⣄⣤⣤",
+  indent
+    .. "⢠⣿⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⣸⣿⠁⠀⣿⣿⠉⠀⠈⣿⡇⠀⠀⠛⠋⠀⠀⢹⣿⠀⠀⠀⣿⠏⠀⠸⠿⠃⠀⣿⣿⠀⣰⡟⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⣿⡟⢸⣿⡇⢀⣿",
+  indent
+    .. "⣸⡇⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⣿⡟⠀⢠⣿⡇⠀⠀⢰⣿⡇⠀⣰⣾⠟⠛⠛⣻⡇⠀⠀⢸⡿⠀⠀⠀⠀⠀⠀⢻⣿⢰⣿⠀⠀⠀⠀⠀⠀⣾⡇⠀⠀⠀⢸⣿⠇⢸⣿⠀⢸⡏",
+  indent
+    .. "⣿⣧⣤⣤⣤⡄⠀⠘⣿⣤⣤⡤⣿⠇⠀⢸⣿⠁⠀⠀⣼⣿⠀⠀⢿⣿⣤⣤⠔⣿⠃⠀⠀⣾⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⠋⠀⠀⠀⢠⣤⣤⣿⣥⣤⡄⠀⣼⣿⠀⣸⡏⠀⣿⠃",
+  indent
+    .. "⠉⠉⠉⠉⠉⠁⠀⠀⠈⠉⠉⠀⠉⠀⠀⠈⠉⠀⠀⠀⠉⠉⠀⠀⠀⠉⠉⠁⠈⠉⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠁⠀⠉⠁⠀⠉⠁⠀⠉⠀",
   "",
 }
 
@@ -23,44 +28,42 @@ end
 local function get_formatter_suggestion_msg(ft)
   local supported_formatters = u.get_supported_formatters_by_filetype(ft)
   return {
-    "───────────────────────────────────────────────────────────────────",
+    indent
+      .. "───────────────────────────────────────────────────────────────────",
     "",
-    "  HINT ",
+    indent .. " HINT ",
     "",
     indent .. "* List of supported formatters: " .. str_list(supported_formatters),
+    indent .. "* Selected formatter needs to be installed and executable.",
+    indent .. "* Enable installed formatter(s) with following config in ~/.config/lvim/config.lua",
     "",
-    indent .. "You can enable a supported formatter by adding this to your config.lua",
+    indent .. "  lvim.lang." .. tostring(ft) .. [[.formatting = { { exe = ']] .. table.concat(
+      supported_formatters,
+      "│"
+    ) .. [[' } }]],
     "",
-    indent
-      .. "lvim.lang."
-      .. tostring(ft)
-      .. [[.formatting = { { exe = ']]
-      .. table.concat(supported_formatters, "│")
-      .. [[' } }]],
-    "",
-    "───────────────────────────────────────────────────────────────────",
   }
 end
 
 local function get_linter_suggestion_msg(ft)
   local supported_linters = u.get_supported_linters_by_filetype(ft)
   return {
-    "───────────────────────────────────────────────────────────────────",
+    indent
+      .. "───────────────────────────────────────────────────────────────────",
     "",
-    "  HINT ",
+    indent .. " HINT ",
     "",
     indent .. "* List of supported linters: " .. str_list(supported_linters),
-    "",
-    indent .. "You can enable a supported linter by adding this to your config.lua",
+    indent .. "* Selected linter needs to be installed and executable.",
+    indent .. "* Enable installed linter(s) with following config in ~/.config/lvim/config.lua",
     "",
     indent
-      .. "lvim.lang."
+      .. "  lvim.lang."
       .. tostring(ft)
       .. [[.linters = { { exe = ']]
       .. table.concat(supported_linters, "│")
       .. [[' } }]],
     "",
-    "───────────────────────────────────────────────────────────────────",
   }
 end
 
@@ -78,20 +81,24 @@ function M.create_simple_popup(buf_lines, callback)
   local col_start_percentage = (1 - width_percentage) / 2
   local opts = {}
   opts.relative = "editor"
-  opts.height = math.ceil(vim.o.lines * height_percentage)
+  opts.height = math.min(math.ceil(vim.o.lines * height_percentage), #buf_lines)
   opts.row = math.ceil(vim.o.lines * row_start_percentage)
   opts.col = math.floor(vim.o.columns * col_start_percentage)
   opts.width = math.floor(vim.o.columns * width_percentage)
+  opts.style = "minimal"
+  opts.border = "rounded"
+  --[[
   opts.border = {
-    "╭",
-    "─",
-    "╮",
-    "│",
-    "╯",
-    "─",
-    "╰",
-    "│",
+    lvim.builtin.telescope.defaults.borderchars[5], -- "┌",
+    lvim.builtin.telescope.defaults.borderchars[3], -- "-",
+    lvim.builtin.telescope.defaults.borderchars[6], -- "┐",
+    lvim.builtin.telescope.defaults.borderchars[2], -- "|",
+    lvim.builtin.telescope.defaults.borderchars[7], -- "┘",
+    lvim.builtin.telescope.defaults.borderchars[3], -- "-",
+    lvim.builtin.telescope.defaults.borderchars[8], -- "└",
+    lvim.builtin.telescope.defaults.borderchars[4], -- "|",
   }
+  --]]
 
   local win_id = vim.api.nvim_open_win(bufnr, true, opts)
 
@@ -126,41 +133,46 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, M.banner)
 
   local header = {
-    "Detected filetype is: " .. tostring(ft),
-    "",
-    "Treesitter active: " .. tostring(next(vim.treesitter.highlighter.active) ~= nil),
-    "",
+    indent .. "Detected filetype:     " .. tostring(ft),
+    indent .. "Treesitter active:     " .. tostring(next(vim.treesitter.highlighter.active) ~= nil),
     "",
   }
   vim.list_extend(buf_lines, header)
 
   local lsp_info = {
-    "Associated language-server: " .. client.name,
-    indent .. "* Active: " .. tostring(is_client_active) .. ", id: " .. tostring(client.id),
-    indent .. "* Formatting support: " .. tostring(client.resolved_capabilities.document_formatting),
-    indent .. "* Capabilities list: " .. table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", "),
+    indent .. "Language Server",
+    indent .. "* Associated server:   " .. client.name,
+    indent .. "* Active:              " .. tostring(is_client_active) .. " (id: " .. tostring(client.id) .. ")",
+    indent .. "* Supports formatting: " .. tostring(client.resolved_capabilities.document_formatting),
+    indent .. "* Capabilities list:   " .. table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", "),
     indent .. indent .. indent .. table.concat(vim.list_slice(client_enabled_caps, ((num_caps / 2) + 1)), ", "),
     "",
   }
   vim.list_extend(buf_lines, lsp_info)
 
   local null_ls_info = {
-    "Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
-    "",
+    indent .. "Formatters and linters",
+    indent .. "* Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
   }
   vim.list_extend(buf_lines, null_ls_info)
 
   local missing_formatters_status
   if vim.tbl_count(missing_formatters) > 0 then
-    missing_formatters_status = { "Missing formatters: " .. table.concat(missing_formatters, "  , ") .. "  ", "" }
+    missing_formatters_status = {
+      indent .. "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
+    }
     vim.list_extend(buf_lines, missing_formatters_status)
   end
 
   local missing_linters_status
   if vim.tbl_count(missing_linters) > 0 then
-    missing_linters_status = { "Missing linters: " .. table.concat(missing_linters, "  , ") .. "  ", "" }
+    missing_linters_status = {
+      indent .. "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",
+    }
     vim.list_extend(buf_lines, missing_linters_status)
   end
+
+  vim.list_extend(buf_lines, { "" })
 
   vim.list_extend(buf_lines, get_formatter_suggestion_msg(ft))
 
