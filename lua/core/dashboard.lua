@@ -32,7 +32,7 @@ M.config = function(config)
     custom_section = {
       a = {
         description = { "  Find File          " },
-        command = "Telescope find_files",
+        command = "Telescope find_files hidden=true",
       },
       b = {
         description = { "  Recent Projects    " },
