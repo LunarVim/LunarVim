@@ -90,6 +90,7 @@ end
 function utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
   vim.cmd("source " .. USER_CONFIG_PATH)
+  require("keymappings").setup() -- this should be done before loading the plugins
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
@@ -97,7 +98,6 @@ function utils.reload_lv_config()
   plugin_loader:load { plugins, lvim.plugins }
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
-  require("keymappings").setup()
   -- vim.cmd ":PackerClean"
   Log:get_default().info "Reloaded configuration"
 end
