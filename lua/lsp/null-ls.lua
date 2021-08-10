@@ -83,7 +83,8 @@ local function validate_provider_request(provider)
     return validate_nodejs_provider(provider)
   end
   if vim.fn.executable(provider._opts.command) ~= 1 then
-    Log:get_default().warn("Unable to find the path for", vim.inspect(provider))
+    Log:get_default().debug("Unable to find the path for", vim.inspect(provider))
+    Log:get_default().warn("Unable to find the path for ", provider._opts.command)
     return
   end
   return provider._opts.command
