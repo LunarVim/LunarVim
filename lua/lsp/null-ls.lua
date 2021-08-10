@@ -50,7 +50,7 @@ local function find_command(command)
     local root_dir = find_root_dir()
     local local_command = local_installations[command](root_dir, command)
     if vim.fn.executable(local_command) == 1 then
-      logger.debug("Using local installation: ", local_command)
+      logger.debug("Using local installation:", local_command)
       return local_command
     end
   end
@@ -59,7 +59,7 @@ local function find_command(command)
     return command
   end
 
-  logger.warn(command, " not found")
+  logger.warn(command, "not found")
   return nil
 end
 
@@ -101,12 +101,14 @@ function M.setup(filetype)
 
   for _, formatter in ipairs(lvim.lang[filetype].formatters) do
     local builtin_formatter = null_ls.builtins.formatting[formatter.exe]
-    if builtin_formatter and not vim.tbl_contains(M.langs[filetype].registered.formatters, builtin_formatter) then
+    if not builtin_formatter then
+      logger.error("Not a valid formatter:", formatter.exe)
+    elseif not vim.tbl_contains(M.langs[filetype].registered.formatters, builtin_formatter) then
       local formatter_cmd = find_command(builtin_formatter._opts.command)
       if not formatter_cmd then
         table.insert(M.langs[filetype].errors.formatters, formatter.exe)
       else
-        logger.info("Using formatter: ", formatter_cmd)
+        logger.info("Using formatter:", formatter_cmd)
         table.insert(M.langs[filetype].registered.formatters, builtin_formatter.with { command = formatter_cmd })
       end
     end
@@ -114,12 +116,14 @@ function M.setup(filetype)
 
   for _, linter in pairs(lvim.lang[filetype].linters) do
     local builtin_linter = adapt_linter(linter)
-    if builtin_linter and not vim.tbl_contains(M.langs[filetype].registered.linters, builtin_linter) then
+    if not builtin_linter then
+      logger.error("Not a valid linter:", linter.exe)
+    elseif not vim.tbl_contains(M.langs[filetype].registered.linters, builtin_linter) then
       local linter_cmd = find_command(builtin_linter._opts.command)
       if not linter_cmd then
         table.insert(M.langs[filetype].errors.linters, linter.exe)
       else
-        logger.info("Using linter: ", linter_cmd)
+        logger.info("Using linter:", linter_cmd)
         table.insert(M.langs[filetype].registered.linters, builtin_linter.with { command = linter_cmd })
       end
     end
