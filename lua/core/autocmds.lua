@@ -3,6 +3,11 @@ local autocommands = {}
 lvim.autocommands = {
   _general_settings = {
     {
+      "Filetype",
+      "*",
+      "lua require('utils.ft').do_filetype(vim.fn.expand(\"<amatch>\"))",
+    },
+    {
       "TextYankPost",
       "*",
       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
