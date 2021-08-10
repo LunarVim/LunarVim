@@ -4,8 +4,7 @@ local null_ls_handler = require "lsp.null-ls"
 local indent = "  "
 
 M.banner = {
-  indent .. "Press q to close",
-  "",
+  " ",
   indent
     .. "⠀⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀     ⠀⠀⠀   ⠀⠀ ⣺⡿⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀",
   indent
@@ -34,7 +33,7 @@ local function get_formatter_suggestion_msg(ft)
     indent .. " HINT ",
     "",
     indent .. "* List of supported formatters: " .. str_list(supported_formatters),
-    indent .. "* Selected formatter needs to be installed and executable.",
+    indent .. "* Configured formatter needs to be installed and executable.",
     indent .. "* Enable installed formatter(s) with following config in ~/.config/lvim/config.lua",
     "",
     indent .. "  lvim.lang." .. tostring(ft) .. [[.formatting = { { exe = ']] .. table.concat(
@@ -54,7 +53,7 @@ local function get_linter_suggestion_msg(ft)
     indent .. " HINT ",
     "",
     indent .. "* List of supported linters: " .. str_list(supported_linters),
-    indent .. "* Selected linter needs to be installed and executable.",
+    indent .. "* Configured linter needs to be installed and executable.",
     indent .. "* Enable installed linter(s) with following config in ~/.config/lvim/config.lua",
     "",
     indent
@@ -75,7 +74,7 @@ end
 function M.create_simple_popup(buf_lines, callback)
   -- runtime/lua/vim/lsp/util.lua
   local bufnr = vim.api.nvim_create_buf(false, true)
-  local height_percentage = 0.7
+  local height_percentage = 0.9
   local width_percentage = 0.8
   local row_start_percentage = (1 - height_percentage) / 2
   local col_start_percentage = (1 - width_percentage) / 2
@@ -119,6 +118,17 @@ function M.create_simple_popup(buf_lines, callback)
   return bufnr, win_id
 end
 
+local function tbl_set_highlight(terms, highlight_group)
+  if type(terms) ~= "table" then
+    return
+  end
+
+  for _, v in pairs(terms) do
+    print("Add highlight for word: " .. v)
+    vim.cmd('let m=matchadd("' .. highlight_group .. '", "' .. v .. '")')
+  end
+end
+
 function M.toggle_popup(ft)
   local client = u.get_active_client_by_ft(ft)
   local is_client_active = not client.is_stopped()
@@ -140,7 +150,7 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, header)
 
   local lsp_info = {
-    indent .. "Language Server",
+    indent .. "Language Server Protocol (LSP) info",
     indent .. "* Associated server:   " .. client.name,
     indent .. "* Active:              " .. tostring(is_client_active) .. " (id: " .. tostring(client.id) .. ")",
     indent .. "* Supports formatting: " .. tostring(client.resolved_capabilities.document_formatting),
@@ -180,11 +190,19 @@ function M.toggle_popup(ft)
 
   local function set_syntax_hl()
     --TODO: highlighting is either inconsistent or not working :\
-    vim.cmd("syntax match Identifier /filetype is: .*\\zs\\<" .. ft .. "\\>/")
-    vim.cmd("syntax match Identifier /server: .*\\zs\\<" .. client.name .. "\\>/")
-    vim.cmd("syntax match Identifier /providers: .*\\zs\\<" .. table.concat(null_ls_providers, ", ") .. "\\>/")
-    vim.cmd("syntax match Identifier /formatters: .*\\zs\\<" .. table.concat(missing_formatters, ", ") .. "\\>/")
-    vim.cmd("syntax match Identifier /linters: .*\\zs\\<" .. table.concat(missing_linters, ", ") .. "\\>/")
+    vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
+    vim.cmd [[highlight link LvimInfoHeader Type]]
+    vim.cmd [[let m=matchadd("DashboardHeader", "Language Server Protocol (LSP) info")]]
+    vim.cmd [[let m=matchadd("DashboardHeader", "Formatters and linters")]]
+    vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
+    vim.cmd 'let m=matchadd("luaString", "true")'
+    vim.cmd 'let m=matchadd("luaError", "false")'
+    tbl_set_highlight(null_ls_providers, "LvimInfoIdentifier")
+    tbl_set_highlight(missing_formatters, "LvimInfoIdentifier")
+    tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
+    -- tbl_set_highlight(u.get_supported_formatters_by_filetype(ft), "LvimInfoIdentifier")
+    -- tbl_set_highlight(u.get_supported_linters_by_filetype(ft), "LvimInfoIdentifier")
+    vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client.name .. '")')
   end
 
   return M.create_simple_popup(buf_lines, set_syntax_hl)
