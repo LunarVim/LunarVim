@@ -18,8 +18,6 @@ return {
 
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
-  { "tjdevries/astronauta.nvim", commit = "e69d7bdc4183047c4700427922c4a3cc1e3258c6" },
-
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",

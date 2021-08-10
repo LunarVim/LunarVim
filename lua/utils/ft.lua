@@ -1,3 +1,5 @@
+-- Here be dragons
+-- Opening files with telescope will not start LSP without this
 local ft = {}
 
 ft.find_lua_ftplugins = function(filetype)
