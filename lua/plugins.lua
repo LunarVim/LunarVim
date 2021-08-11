@@ -73,6 +73,7 @@ return {
         lvim.builtin.autopairs.on_config_done(require "nvim-autopairs")
       end
     end,
+    disable = not lvim.builtin.autopairs.active,
   },
 
   -- Treesitter
