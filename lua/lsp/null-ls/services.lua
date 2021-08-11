@@ -11,7 +11,8 @@ local function find_root_dir()
 
   -- TODO: Rework this to not make it javascript specific
   --- use LSP to set root_dir
-  local ts_client = require("utils").get_active_client_by_ft "typescript"
+  local lsp_utils = require "lsp.utils"
+  local ts_client = lsp_utils.get_active_client_by_ft "typescript"
   if ts_client == nil then
     logger.error "Unable to determine root directory since tsserver didn't start correctly"
     return nil

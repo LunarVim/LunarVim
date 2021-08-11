@@ -136,7 +136,9 @@ function M.toggle_popup(ft)
   }
   vim.list_extend(buf_lines, header)
 
-  local client = u.get_active_client_by_ft(ft)
+  local lsp_utils = require "lsp.utils"
+  -- TODO: CHECK RETURN VALUES !
+  local client = lsp_utils.get_active_client_by_ft(ft)
   local client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
   local num_caps = vim.tbl_count(client_enabled_caps)
   local lsp_info = {

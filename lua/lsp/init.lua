@@ -128,8 +128,9 @@ function M.common_on_attach(client, bufnr)
 end
 
 function M.setup(lang)
+  local lsp_utils = require "lsp.utils"
   local lsp = lvim.lang[lang].lsp
-  if require("utils").check_lsp_client_active(lsp.provider) then
+  if lsp_utils.is_client_active(lsp.provider) then
     return
   end
 
