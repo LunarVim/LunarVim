@@ -193,8 +193,8 @@ function M.toggle_popup(ft)
     vim.cmd [[let m=matchadd("DashboardHeader", "Language Server Protocol (LSP) info")]]
     vim.cmd [[let m=matchadd("DashboardHeader", "Formatters and linters")]]
     vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
-    vim.cmd 'let m=matchadd("luaString", "true")'
-    vim.cmd 'let m=matchadd("luaError", "false")'
+    vim.cmd 'let m=matchadd("string", "true")'
+    vim.cmd 'let m=matchadd("error", "false")'
     tbl_set_highlight(null_ls_providers, "LvimInfoIdentifier")
     tbl_set_highlight(missing_formatters, "LvimInfoIdentifier")
     tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
