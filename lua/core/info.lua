@@ -150,16 +150,15 @@ function M.toggle_popup(ft)
   }
   vim.list_extend(buf_lines, lsp_info)
 
-  local null_ls_services = require "lsp.null-ls.services"
-  local null_ls_providers = null_ls_services.list_provider_names(ft)
+  local null_ls = require "lsp.null-ls"
+  local registered_providers = null_ls.list_provider_names(ft, true)
   local null_ls_info = {
     indent .. "Formatters and linters",
-    indent .. "* Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
+    indent .. "* Configured providers: " .. table.concat(registered_providers, "  , ") .. "  ",
   }
   vim.list_extend(buf_lines, null_ls_info)
 
-  local null_ls_formatters = require "lsp.null-ls.formatters"
-  local missing_formatters = null_ls_formatters.list_configured().unsupported
+  local missing_formatters = null_ls.list_formatter_names(ft, false)
   if vim.tbl_count(missing_formatters) > 0 then
     local missing_formatters_status = {
       indent .. "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
@@ -167,8 +166,7 @@ function M.toggle_popup(ft)
     vim.list_extend(buf_lines, missing_formatters_status)
   end
 
-  local null_ls_linters = require "lsp.null-ls.linters"
-  local missing_linters = null_ls_linters.list_configured().unsupported
+  local missing_linters = null_ls.list_linter_names(ft, false)
   if vim.tbl_count(missing_linters) > 0 then
     local missing_linters_status = {
       indent .. "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",
@@ -189,7 +187,7 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
     vim.cmd 'let m=matchadd("string", "true")'
     vim.cmd 'let m=matchadd("error", "false")'
-    tbl_set_highlight(null_ls_providers, "LvimInfoIdentifier")
+    tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
     tbl_set_highlight(missing_formatters, "LvimInfoIdentifier")
     tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
     -- tbl_set_highlight(u.get_supported_formatters_by_filetype(ft), "LvimInfoIdentifier")

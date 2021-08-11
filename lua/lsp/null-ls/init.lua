@@ -1,5 +1,35 @@
 local M = {}
 
+local providers_by_ft = {}
+
+local function list_provider_names(providers, registered)
+  local names = {}
+
+  local flag = registered == true and "supported" or "unsupported"
+  for name, _ in pairs(providers[flag]) do
+    table.insert(names, name)
+  end
+
+  return names
+end
+
+function M.list_provider_names(filetype, registered)
+  local names = {}
+
+  for _, providers in pairs(providers_by_ft[filetype]) do
+    vim.list_extend(names, list_provider_names(providers, registered))
+  end
+
+  return names
+end
+
+function M.list_formatter_names(filetype, registered)
+  return list_provider_names(providers_by_ft[filetype].formatters, registered)
+end
+
+function M.list_linter_names(filetype, registered)
+  return list_provider_names(providers_by_ft[filetype].linters, registered)
+end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
 function M.setup(filetype)
@@ -12,7 +42,6 @@ function M.setup(filetype)
 
   local function register_providers(providers, provider_type)
     for _, flag in ipairs { "supported", "unsupported" } do
-      require("core.log"):get_default().info("flag", flag, "providers", vim.inspect(providers[flag]))
       for _, provider in ipairs(providers[flag]) do
         providers_by_ft[filetype][provider_type][flag][provider.name] = provider
       end

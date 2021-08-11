@@ -47,19 +47,4 @@ function M.find_command(command)
   return nil
 end
 
-function M.list_provider_names(filetype)
-  local names = {}
-  local null_formatters = require "lsp.null-ls.formatters"
-  local null_linters = require "lsp.null-ls.linters"
-  local formatters = null_formatters.list_configured(lvim.lang[filetype].formatters)
-  local linters = null_linters.list_configured(lvim.lang[filetype].linters)
-  for _, providers in ipairs { formatters, linters } do
-    for _, provider in ipairs(providers.supported) do
-      table.insert(names, provider.name)
-    end
-  end
-
-  return names
-end
-
 return M
