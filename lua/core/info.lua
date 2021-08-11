@@ -124,7 +124,6 @@ local function tbl_set_highlight(terms, highlight_group)
   end
 
   for _, v in pairs(terms) do
-    print("Add highlight for word: " .. v)
     vim.cmd('let m=matchadd("' .. highlight_group .. '", "' .. v .. '")')
   end
 end
