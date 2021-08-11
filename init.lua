@@ -11,18 +11,36 @@ vim.cmd [[
   set runtimepath^=~/.local/share/lunarvim/lvim/after
 ]]
 -- vim.opt.rtp:append() instead of vim.cmd ?
+
+local function file_exists(name)
+  local f = io.open(name, "r")
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
+end
+
+local lvim_path = os.getenv "HOME" .. "/.config/lvim/"
+USER_CONFIG_PATH = lvim_path .. "config.lua"
+local config_exist = file_exists(USER_CONFIG_PATH)
+if not config_exist then
+  USER_CONFIG_PATH = lvim_path .. "lv-config.lua"
+  print "Rename ~/.config/lvim/lv-config.lua to config.lua"
+end
+
 require "default-config"
+local autocmds = require "core.autocmds"
 require("settings").load_options()
-local status_ok, error = pcall(vim.cmd, "luafile ~/.config/lvim/lv-config.lua")
+
+local status_ok, error = pcall(vim.cmd, "luafile " .. USER_CONFIG_PATH)
 if not status_ok then
-  print "something is wrong with your lv-config"
+  print("something is wrong with your " .. USER_CONFIG_PATH)
   print(error)
 end
 require("settings").load_commands()
-require("core.autocmds").define_augroups(lvim.autocommands)
-
-require "keymappings"
--- require("lsp").setup_default_bindings()
+autocmds.define_augroups(lvim.autocommands)
 
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
@@ -49,6 +67,8 @@ if lsp_settings_status_ok then
     config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
   }
 end
+
+require("keymappings").setup()
 
 -- TODO: these guys need to be in language files
 -- if lvim.lang.emmet.active then

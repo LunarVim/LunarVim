@@ -1,66 +1,142 @@
 local M = {}
+local Log = require "core.log"
 
-local _, null_ls = pcall(require, "null-ls")
-local utils = require "utils"
-local sources = {}
+local null_ls = require "null-ls"
 
-local local_executables = { "prettier", "prettierd", "prettier_d_slim", "eslint_d", "eslint" }
+local nodejs_local_providers = { "prettier", "prettierd", "prettier_d_slim", "eslint_d", "eslint" }
 
-local find_local_exe = function(exe)
-  vim.cmd "let root_dir = FindRootDirectory()"
-  local root_dir = vim.api.nvim_get_var "root_dir"
-  local local_exe = root_dir .. "/node_modules/.bin/" .. exe
-  return local_exe
-end
+M.requested_providers = {}
 
-local function setup_ls(exe, type)
-  if utils.has_value(local_executables, exe) then
-    local smart_executable = null_ls.builtins[type][exe]
-    local local_executable = find_local_exe(exe)
-    if vim.fn.executable(local_executable) == 1 then
-      smart_executable._opts.command = local_executable
-      table.insert(sources, smart_executable)
-    else
-      if vim.fn.executable(exe) == 1 then
-        table.insert(sources, smart_executable)
+function M.get_registered_providers_by_filetype(ft)
+  local matches = {}
+  for _, provider in pairs(M.requested_providers) do
+    if vim.tbl_contains(provider.filetypes, ft) then
+      local provider_name = provider.name
+      -- special case: show "eslint_d" instead of eslint
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
+      if string.find(provider._opts.command, "eslint_d") then
+        provider_name = "eslint_d"
       end
-    end
-  else
-    if null_ls.builtins[type][exe] and vim.fn.executable(null_ls.builtins[type][exe]._opts.command) then
-      table.insert(sources, null_ls.builtins[type][exe])
+      table.insert(matches, provider_name)
     end
   end
-  null_ls.register { sources = sources }
+
+  return matches
+end
+
+function M.get_missing_providers_by_filetype(ft)
+  local matches = {}
+  for _, provider in pairs(M.requested_providers) do
+    if vim.tbl_contains(provider.filetypes, ft) then
+      local provider_name = provider.name
+
+      table.insert(matches, provider_name)
+    end
+  end
+
+  return matches
+end
+
+local function register_failed_request(ft, provider, operation)
+  if not lvim.lang[ft][operation]._failed_requests then
+    lvim.lang[ft][operation]._failed_requests = {}
+  end
+  table.insert(lvim.lang[ft][operation]._failed_requests, provider)
+end
+
+local function validate_nodejs_provider(provider)
+  local command_path
+  local root_dir
+  if lvim.builtin.rooter.active then
+    --- use vim-rooter to set root_dir
+    vim.cmd "let root_dir = FindRootDirectory()"
+    root_dir = vim.api.nvim_get_var "root_dir"
+  else
+    --- use LSP to set root_dir
+    local ts_client = require("utils").get_active_client_by_ft "typescript"
+    if ts_client == nil then
+      Log:get_default().error "Unable to determine root directory since tsserver didn't start correctly"
+      return
+    end
+    root_dir = ts_client.config.root_dir
+  end
+  local local_nodejs_command = root_dir .. "/node_modules/.bin/" .. provider._opts.command
+  Log:get_default().debug("checking for local node module: ", vim.inspect(provider))
+
+  if vim.fn.executable(local_nodejs_command) == 1 then
+    command_path = local_nodejs_command
+  elseif vim.fn.executable(provider._opts.command) == 1 then
+    Log:get_default().debug("checking in global path instead for node module", provider._opts.command)
+    command_path = provider._opts.command
+  else
+    Log:get_default().debug("Unable to find node module", provider._opts.command)
+  end
+  return command_path
+end
+
+local function validate_provider_request(provider)
+  if provider == "" or provider == nil then
+    return
+  end
+  -- NOTE: we can't use provider.name because eslint_d uses eslint name
+  if vim.tbl_contains(nodejs_local_providers, provider._opts.command) then
+    return validate_nodejs_provider(provider)
+  end
+  if vim.fn.executable(provider._opts.command) ~= 1 then
+    Log:get_default().debug("Unable to find the path for", vim.inspect(provider))
+    Log:get_default().warn("Unable to find the path for ", provider._opts.command)
+    return
+  end
+  return provider._opts.command
 end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
-local function setup(filetype, type)
-  local executables = nil
-  if type == "diagnostics" then
-    executables = lvim.lang[filetype].linters
-  end
-  if type == "formatting" then
-    executables = lvim.lang[filetype].formatter.exe
-  end
-
-  if utils.is_table(executables) then
-    for _, exe in pairs(executables) do
-      if exe ~= "" then
-        setup_ls(exe, type)
+function M.setup(filetype)
+  for _, formatter in pairs(lvim.lang[filetype].formatters) do
+    Log:get_default().debug("validating format provider: ", formatter.exe)
+    local builtin_formatter = null_ls.builtins.formatting[formatter.exe]
+    if not vim.tbl_contains(M.requested_providers, builtin_formatter) then
+      -- FIXME: why doesn't this work?
+      -- builtin_formatter._opts.args = formatter.args or builtin_formatter._opts.args
+      -- builtin_formatter._opts.to_stdin = formatter.stdin or builtin_formatter._opts.to_stdin
+      local resolved_path = validate_provider_request(builtin_formatter)
+      if resolved_path then
+        builtin_formatter._opts.command = resolved_path
+        table.insert(M.requested_providers, builtin_formatter)
+        Log:get_default().info("Using format provider", builtin_formatter.name)
+      else
+        -- mark it here to avoid re-doing the lookup again
+        register_failed_request(filetype, formatter.exe, "formatters")
       end
     end
   end
-  if utils.is_string(executables) and executables ~= "" then
-    setup_ls(executables, type)
-  end
-end
 
--- TODO: return the formatter if one was registered, then turn off the builtin formatter
-function M.setup(filetype)
-  setup(filetype, "formatting")
-  setup(filetype, "diagnostics")
-  lvim.sources = sources
-  return sources
+  for _, linter in pairs(lvim.lang[filetype].linters) do
+    local builtin_diagnoser = null_ls.builtins.diagnostics[linter.exe]
+    Log:get_default().debug("validating lint provider: ", linter.exe)
+    -- special case: fallback to "eslint"
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/9b8458bd1648e84169a7e8638091ba15c2f20fc0/doc/BUILTINS.md#eslint
+    -- if provider.exe
+    if linter.exe == "eslint_d" then
+      builtin_diagnoser = null_ls.builtins.diagnostics.eslint.with { command = "eslint_d" }
+    end
+    if not vim.tbl_contains(M.requested_providers, builtin_diagnoser) then
+      -- FIXME: why doesn't this work?
+      -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
+      -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
+      local resolved_path = validate_provider_request(builtin_diagnoser)
+      if resolved_path then
+        builtin_diagnoser._opts.command = resolved_path
+        table.insert(M.requested_providers, builtin_diagnoser)
+        Log:get_default().info("Using linter provider", builtin_diagnoser.name)
+      else
+        -- mark it here to avoid re-doing the lookup again
+        register_failed_request(filetype, linter.exe, "linters")
+      end
+    end
+  end
+
+  null_ls.register { sources = M.requested_providers }
 end
 
 return M

@@ -18,8 +18,6 @@ return {
 
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
-  { "tjdevries/astronauta.nvim", commit = "e69d7bdc4183047c4700427922c4a3cc1e3258c6" },
-
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -57,7 +55,7 @@ return {
   {
     "hrsh7th/vim-vsnip",
     -- wants = "friendly-snippets",
-    event = "InsertCharPre",
+    event = "InsertEnter",
   },
   {
     "rafamadriz/friendly-snippets",
@@ -135,6 +133,8 @@ return {
     config = function()
       local status_ok, nvim_comment = pcall(require, "nvim_comment")
       if not status_ok then
+        local Log = require "core.log"
+        Log:get_default().error "Failed to load nvim-comment"
         return
       end
       nvim_comment.setup()
@@ -147,12 +147,14 @@ return {
   -- vim-rooter
   {
     "airblade/vim-rooter",
+    -- event = "BufReadPre",
     config = function()
-      vim.g.rooter_silent_chdir = 1
+      require("core.rooter").setup()
       if lvim.builtin.rooter.on_config_done then
         lvim.builtin.rooter.on_config_done()
       end
     end,
+    disable = not lvim.builtin.rooter.active,
   },
 
   -- Icons
@@ -174,12 +176,13 @@ return {
   {
     "romgrk/barbar.nvim",
     config = function()
-      require "core.bufferline"
+      require("core.bufferline").setup()
       if lvim.builtin.bufferline.on_config_done then
         lvim.builtin.bufferline.on_config_done()
       end
     end,
     event = "BufWinEnter",
+    disable = not lvim.builtin.bufferline.active,
   },
 
   -- Debugging

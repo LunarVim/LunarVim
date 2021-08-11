@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.dap = {
     active = false,
@@ -14,6 +15,7 @@ end
 M.setup = function()
   local status_ok, dap = pcall(require, "dap")
   if not status_ok then
+    Log:get_default().error "Failed to load dap"
     return
   end
 
@@ -34,7 +36,7 @@ M.setup = function()
     p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-    q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
+    q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   }
 end
 

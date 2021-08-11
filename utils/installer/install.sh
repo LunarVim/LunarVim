@@ -1,6 +1,7 @@
 #!/bin/sh
 #Set Variable to master is not set differently
 LVBRANCH="${LVBRANCH:-master}"
+USER_BIN_DIR="/usr/local/bin"
 set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
@@ -13,6 +14,10 @@ installnodemac() {
 installnodeubuntu() {
 	sudo apt install nodejs
 	sudo apt install npm
+}
+
+installnodetermux() {
+	apt install nodejs
 }
 
 moveoldlvim() {
@@ -49,6 +54,7 @@ installnode() {
 	[ -f "/etc/artix-release" ] && installnodearch
 	[ -f "/etc/fedora-release" ] && installnodefedora
 	[ -f "/etc/gentoo-release" ] && installnodegentoo
+	[ -d "/data/data/com.termux" ] && installnodetermux
 	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 	sudo npm i -g neovim
 }
@@ -61,6 +67,10 @@ installpiponmac() {
 
 installpiponubuntu() {
 	sudo apt install python3-pip >/dev/null
+}
+
+installpipontermux() {
+	apt install python
 }
 
 installpiponarch() {
@@ -82,6 +92,7 @@ installpip() {
 	[ -f "/etc/arch-release" ] && installpiponarch
 	[ -f "/etc/fedora-release" ] && installpiponfedora
 	[ -f "/etc/gentoo-release" ] && installpipongentoo
+	[ -d "/data/data/com.termux" ] && installpipontermux
 	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
@@ -100,6 +111,12 @@ installpacker() {
 }
 
 cloneconfig() {
+	if [ -d "/data/data/com.termux" ]; then
+		sudo() {
+			eval "$@"
+		}
+		USER_BIN_DIR="$HOME/../usr/bin"
+	fi
 	echo "Cloning LunarVim configuration"
 	mkdir -p ~/.local/share/lunarvim
 	case "$@" in
@@ -108,12 +125,13 @@ cloneconfig() {
 		cp -r "$(pwd)" ~/.local/share/lunarvim/lvim
 		;;
 	*)
-		git clone --branch "$LVBRANCH" https://github.com/ChristianChiarulli/lunarvim.git ~/.local/share/lunarvim/lvim
+		git clone --branch "$LVBRANCH" https://github.com/lunarvim/lunarvim.git ~/.local/share/lunarvim/lvim
 		;;
 	esac
 	mkdir -p "$HOME/.config/lvim"
-	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "/usr/local/bin"
-	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example-no-ts.lua" "$HOME/.config/lvim/lv-config.lua"
+	sudo cp "$HOME/.local/share/lunarvim/lvim/utils/bin/lvim" "$USER_BIN_DIR"
+	sudo chmod a+rx "$USER_BIN_DIR"/lvim
+	cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example-no-ts.lua" "$HOME/.config/lvim/config.lua"
 
 	nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" --headless \
 		+'autocmd User PackerComplete sleep 100m | qall' \
@@ -126,9 +144,9 @@ cloneconfig() {
 	printf "\nCompile Complete\n"
 
 	if [ -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
-		echo 'lv-config already present'
+		echo 'config.lua already present'
 	else
-		cp "$HOME/.local/share/lunarvim/lvim/utils/installer/lv-config.example.lua" "$HOME/.config/lvim/lv-config.lua"
+		cp "$HOME/.local/share/lunarvim/lvim/utils/installer/config.example.lua" "$HOME/.config/lvim/config.lua"
 	fi
 
 }
@@ -138,6 +156,11 @@ asktoinstallnode() {
 	printf "Would you like to install node now (y/n)? "
 	read -r answer
 	[ "$answer" != "${answer#[Yy]}" ] && installnode
+}
+
+asktoinstallgit() {
+	echo "git not found, please install git"
+	exit
 }
 
 asktoinstallpip() {
@@ -158,6 +181,12 @@ installonubuntu() {
 	sudo apt install ripgrep fzf
 	sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
 	pip3 install neovim-remote
+	npm install -g tree-sitter-cli
+}
+
+installtermux() {
+	apt install ripgrep fzf
+	pip install neovim-remote
 	npm install -g tree-sitter-cli
 }
 
@@ -184,6 +213,7 @@ installextrapackages() {
 	[ -f "/etc/artix-release" ] && installonarch
 	[ -f "/etc/fedora-release" ] && installonfedora
 	[ -f "/etc/gentoo-release" ] && installongentoo
+	[ -d "/data/data/com.termux" ] && installtermux
 	[ "$(uname -s | cut -c 1-10)" = "MINGW64_NT" ] && echo "Windows not currently supported"
 }
 
@@ -201,6 +231,9 @@ esac
 
 # move old lvim directory if it exists
 [ -d "$HOME/.local/share/lunarvim" ] && moveoldlvim
+
+# install node and neovim support
+(command -v git >/dev/null && echo "git installed, moving on...") || asktoinstallgit
 
 # install pip
 (command -v pip3 >/dev/null && echo "pip installed, moving on...") || asktoinstallpip

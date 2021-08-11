@@ -1,115 +1,172 @@
-local utils = require "utils"
+local M = {}
+local Log = require "core.log"
 
-local opts = {
-  nnoremap = { noremap = true, silent = true },
-  inoremap = { noremap = true, silent = true },
-  vnoremap = { noremap = true, silent = true },
-  xnoremap = { noremap = true, silent = true },
-  generic = { silent = true },
+local generic_opts_any = { noremap = true, silent = true }
+
+local generic_opts = {
+  insert_mode = generic_opts_any,
+  normal_mode = generic_opts_any,
+  visual_mode = generic_opts_any,
+  visual_block_mode = generic_opts_any,
+  term_mode = { silent = true },
 }
 
-local default_keys = {
-  insert_mode = {
-    -- I hate escape
-    { "jk", "<ESC>" },
-    { "kj", "<ESC>" },
-    { "jj", "<ESC>" },
-    -- Move current line / block with Alt-j/k ala vscode.
-    { "<A-j>", "<Esc>:m .+1<CR>==gi" },
-    { "<A-k>", "<Esc>:m .-2<CR>==gi" },
-    -- navigation
-    { "<A-Up>", "<C-\\><C-N><C-w>k" },
-    { "<A-Down>", "<C-\\><C-N><C-w>j" },
-    { "<A-Left>", "<C-\\><C-N><C-w>h" },
-    { "<A-Right>", "<C-\\><C-N><C-w>l" },
-  },
-
-  normal_mode = {
-    -- Better window movement
-    { "<C-h>", "<C-w>h" },
-    { "<C-j>", "<C-w>j" },
-    { "<C-k>", "<C-w>k" },
-    { "<C-l>", "<C-w>l" },
-
-    -- Resize with arrows
-    { "<C-Up>", ":resize -2<CR>" },
-    { "<C-Down>", ":resize +2<CR>" },
-    { "<C-Left>", ":vertical resize -2<CR>" },
-    { "<C-Right>", ":vertical resize +2<CR>" },
-
-    -- Tab switch buffer
-    -- { "<TAB>", ":bnext<CR>" },
-    -- { "<S-TAB>", ":bprevious<CR>" },
-
-    -- Move current line / block with Alt-j/k a la vscode.
-    { "<A-j>", ":m .+1<CR>==" },
-    { "<A-k>", ":m .-2<CR>==" },
-
-    -- QuickFix
-    { "]q", ":cnext<CR>" },
-    { "[q", ":cprev<CR>" },
-    { "<C-q>", ":call QuickFixToggle()<CR>" },
-
-    -- {'<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true}},
-  },
-
-  term_mode = {
-    -- Terminal window navigation
-    { "<C-h>", "<C-\\><C-N><C-w>h" },
-    { "<C-j>", "<C-\\><C-N><C-w>j" },
-    { "<C-k>", "<C-\\><C-N><C-w>k" },
-    { "<C-l>", "<C-\\><C-N><C-w>l" },
-  },
-
-  visual_mode = {
-    -- Better indenting
-    { "<", "<gv" },
-    { ">", ">gv" },
-
-    -- { "p", '"0p', { silent = true } },
-    -- { "P", '"0P', { silent = true } },
-  },
-
-  visual_block_mode = {
-    -- Move selected line / block of text in visual mode
-    { "K", ":move '<-2<CR>gv-gv" },
-    { "J", ":move '>+1<CR>gv-gv" },
-
-    -- Move current line / block with Alt-j/k ala vscode.
-    { "<A-j>", ":m '>+1<CR>gv-gv" },
-    { "<A-k>", ":m '<-2<CR>gv-gv" },
-  },
+local mode_adapters = {
+  insert_mode = "i",
+  normal_mode = "n",
+  term_mode = "t",
+  visual_mode = "v",
+  visual_block_mode = "x",
 }
 
-if vim.fn.has "mac" == 1 then
-  -- TODO: fix this
-  default_keys.normal_mode[5][1] = "<A-Up>"
-  default_keys.normal_mode[6][1] = "<A-Down>"
-  default_keys.normal_mode[7][1] = "<A-Left>"
-  default_keys.normal_mode[8][1] = "<A-Right>"
-end
-
-if lvim.leader == " " or lvim.leader == "space" then
-  vim.g.mapleader = " "
-else
-  vim.g.mapleader = lvim.leader
-end
-
-local function get_user_keys(mode)
-  if lvim.keys[mode] == nil then
-    return default_keys[mode]
-  else
-    return lvim.keys[mode]
+-- Append key mappings to lunarvim's defaults for a given mode
+-- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
+function M.append_to_defaults(keymaps)
+  for mode, mappings in pairs(keymaps) do
+    for k, v in ipairs(mappings) do
+      lvim.keys[mode][k] = v
+    end
   end
 end
 
-utils.add_keymap_normal_mode(opts.nnoremap, get_user_keys "normal_mode")
-utils.add_keymap_insert_mode(opts.inoremap, get_user_keys "insert_mode")
-utils.add_keymap_visual_mode(opts.vnoremap, get_user_keys "visual_mode")
-utils.add_keymap_visual_block_mode(opts.xnoremap, get_user_keys "visual_block_mode")
-utils.add_keymap_term_mode(opts.generic, get_user_keys "term_mode")
+-- Set key mappings individually
+-- @param mode The keymap mode, can be one of the keys of mode_adapters
+-- @param key The key of keymap
+-- @param val Can be form as a mapping or tuple of mapping and user defined opt
+function M.set_keymaps(mode, key, val)
+  local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+  if type(val) == "table" then
+    opt = val[2]
+    val = val[1]
+  end
+  vim.api.nvim_set_keymap(mode, key, val, opt)
+end
 
--- navigate tab completion with <c-j> and <c-k>
--- runs conditionally
-vim.cmd 'inoremap <expr> <C-j> pumvisible() ? "\\<C-n>" : "\\<C-j>"'
-vim.cmd 'inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<C-k>"'
+-- Load key mappings for a given mode
+-- @param mode The keymap mode, can be one of the keys of mode_adapters
+-- @param keymaps The list of key mappings
+function M.load_mode(mode, keymaps)
+  mode = mode_adapters[mode] and mode_adapters[mode] or mode
+  for k, v in pairs(keymaps) do
+    M.set_keymaps(mode, k, v)
+  end
+end
+
+-- Load key mappings for all provided modes
+-- @param keymaps A list of key mappings for each mode
+function M.load(keymaps)
+  for mode, mapping in pairs(keymaps) do
+    M.load_mode(mode, mapping)
+  end
+end
+
+function M.config()
+  lvim.keys = {
+    ---@usage change or add keymappings for insert mode
+    insert_mode = {
+      -- 'jk' for quitting insert mode
+      ["jk"] = "<ESC>",
+      -- 'kj' for quitting insert mode
+      ["kj"] = "<ESC>",
+      -- 'jj' for quitting insert mode
+      ["jj"] = "<ESC>",
+      -- Move current line / block with Alt-j/k ala vscode.
+      ["<A-j>"] = "<Esc>:m .+1<CR>==gi",
+      -- Move current line / block with Alt-j/k ala vscode.
+      ["<A-k>"] = "<Esc>:m .-2<CR>==gi",
+      -- navigation
+      ["<A-Up>"] = "<C-\\><C-N><C-w>k",
+      ["<A-Down>"] = "<C-\\><C-N><C-w>j",
+      ["<A-Left>"] = "<C-\\><C-N><C-w>h",
+      ["<A-Right>"] = "<C-\\><C-N><C-w>l",
+      -- navigate tab completion with <c-j> and <c-k>
+      -- runs conditionally
+      ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
+      ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
+    },
+
+    ---@usage change or add keymappings for normal mode
+    normal_mode = {
+      -- Better window movement
+      ["<C-h>"] = "<C-w>h",
+      ["<C-j>"] = "<C-w>j",
+      ["<C-k>"] = "<C-w>k",
+      ["<C-l>"] = "<C-w>l",
+
+      -- Resize with arrows
+      ["<C-Up>"] = ":resize -2<CR>",
+      ["<C-Down>"] = ":resize +2<CR>",
+      ["<C-Left>"] = ":vertical resize -2<CR>",
+      ["<C-Right>"] = ":vertical resize +2<CR>",
+
+      -- Tab switch buffer
+      ["<S-l>"] = ":BufferNext<CR>",
+      ["<S-h>"] = ":BufferPrevious<CR>",
+
+      -- Move current line / block with Alt-j/k a la vscode.
+      ["<A-j>"] = ":m .+1<CR>==",
+      ["<A-k>"] = ":m .-2<CR>==",
+
+      -- QuickFix
+      ["]q"] = ":cnext<CR>",
+      ["[q"] = ":cprev<CR>",
+      ["<C-q>"] = ":call QuickFixToggle()<CR>",
+    },
+
+    ---@usage change or add keymappings for terminal mode
+    term_mode = {
+      -- Terminal window navigation
+      ["<C-h>"] = "<C-\\><C-N><C-w>h",
+      ["<C-j>"] = "<C-\\><C-N><C-w>j",
+      ["<C-k>"] = "<C-\\><C-N><C-w>k",
+      ["<C-l>"] = "<C-\\><C-N><C-w>l",
+    },
+
+    ---@usage change or add keymappings for visual mode
+    visual_mode = {
+      -- Better indenting
+      ["<"] = "<gv",
+      [">"] = ">gv",
+
+      -- ["p"] = '"0p',
+      -- ["P"] = '"0P',
+    },
+
+    ---@usage change or add keymappings for visual block mode
+    visual_block_mode = {
+      -- Move selected line / block of text in visual mode
+      ["K"] = ":move '<-2<CR>gv-gv",
+      ["J"] = ":move '>+1<CR>gv-gv",
+
+      -- Move current line / block with Alt-j/k ala vscode.
+      ["<A-j>"] = ":m '>+1<CR>gv-gv",
+      ["<A-k>"] = ":m '<-2<CR>gv-gv",
+    },
+  }
+
+  if vim.fn.has "mac" == 1 then
+    lvim.keys.normal_mode["<A-Up>"] = lvim.keys.normal_mode["<C-Up>"]
+    lvim.keys.normal_mode["<A-Down>"] = lvim.keys.normal_mode["<C-Down>"]
+    lvim.keys.normal_mode["<A-Left>"] = lvim.keys.normal_mode["<C-Left>"]
+    lvim.keys.normal_mode["<A-Right>"] = lvim.keys.normal_mode["<C-Right>"]
+    if Log:get_default() then
+      Log:get_default().info "Activated mac keymappings"
+    end
+  end
+end
+
+function M.print(mode)
+  print "List of LunarVim's default keymappings (not including which-key)"
+  if mode then
+    print(vim.inspect(lvim.keys[mode]))
+  else
+    print(vim.inspect(lvim.keys))
+  end
+end
+
+function M.setup()
+  vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
+  M.load(lvim.keys)
+end
+
+return M

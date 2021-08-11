@@ -1,8 +1,10 @@
 -- if not package.loaded['galaxyline'] then
 --   return
 -- end
+local Log = require "core.log"
 local status_ok, gl = pcall(require, "galaxyline")
 if not status_ok then
+  Log:get_default().error "Failed to load galaxyline"
   return
 end
 
@@ -202,21 +204,19 @@ table.insert(gls.right, {
 
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
-
-  local buf_ft = vim.bo.filetype
   local buf_clients = vim.lsp.buf_get_clients()
   if next(buf_clients) == nil then
     return msg
   end
+  local buf_ft = vim.bo.filetype
   local buf_client_names = {}
+  local null_ls_providers = require("lsp.null-ls").get_registered_providers_by_filetype(buf_ft)
   for _, client in pairs(buf_clients) do
-    if client.name == "null-ls" then
-      table.insert(buf_client_names, lvim.lang[buf_ft].linters[1])
-      table.insert(buf_client_names, lvim.lang[buf_ft].formatter.exe)
-    else
+    if client.name ~= "null-ls" then
       table.insert(buf_client_names, client.name)
     end
   end
+  vim.list_extend(buf_client_names, null_ls_providers)
   return table.concat(buf_client_names, ", ")
 end
 

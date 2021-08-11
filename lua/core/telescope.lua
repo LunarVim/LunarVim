@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
@@ -40,11 +41,11 @@ M.config = function()
       -- buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
       mappings = {
         i = {
-          ["<C-n>"] = actions.cycle_history_next,
-          ["<C-p>"] = actions.cycle_history_prev,
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
           ["<C-c>"] = actions.close,
-          ["<C-j>"] = actions.move_selection_next,
-          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-j>"] = actions.cycle_history_next,
+          ["<C-k>"] = actions.cycle_history_prev,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           ["<CR>"] = actions.select_default + actions.center,
           -- To disable a keymap, put [map] = false
@@ -79,6 +80,7 @@ end
 M.setup = function()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then
+    Log:get_default().error "Failed to load telescope"
     return
   end
   telescope.setup(lvim.builtin.telescope)

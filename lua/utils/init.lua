@@ -1,4 +1,6 @@
 local utils = {}
+local Log = require "core.log"
+local uv = vim.loop
 
 -- recursive Print (structure, limit, separator)
 local function r_inspect_settings(structure, limit, separator)
@@ -16,7 +18,7 @@ local function r_inspect_settings(structure, limit, separator)
 
   if ts == "table" then
     for k, v in pairs(structure) do
-      -- replace non alpha keys wih ["key"]
+      -- replace non alpha keys with ["key"]
       if tostring(k):match "[^%a_]" then
         k = '["' .. tostring(k) .. '"]'
       end
@@ -68,6 +70,9 @@ function utils.toggle_autoformat()
         },
       },
     }
+    if Log:get_default() then
+      Log:get_default().info "Format on save active"
+    end
   end
 
   if not lvim.format_on_save then
@@ -76,12 +81,16 @@ function utils.toggle_autoformat()
         :autocmd! autoformat
       endif
     ]]
+    if Log:get_default() then
+      Log:get_default().info "Format on save off"
+    end
   end
 end
 
 function utils.reload_lv_config()
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
-  vim.cmd "source ~/.config/lvim/lv-config.lua"
+  vim.cmd("source " .. USER_CONFIG_PATH)
+  require("keymappings").setup() -- this should be done before loading the plugins
   vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
@@ -90,6 +99,7 @@ function utils.reload_lv_config()
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
+  Log:get_default().info "Reloaded configuration"
 end
 
 function utils.check_lsp_client_active(name)
@@ -102,48 +112,42 @@ function utils.check_lsp_client_active(name)
   return false
 end
 
-function utils.is_table(t)
-  return type(t) == "table"
+function utils.get_active_client_by_ft(filetype)
+  local clients = vim.lsp.get_active_clients()
+  for _, client in pairs(clients) do
+    if client.name == lvim.lang[filetype].lsp.provider then
+      return client
+    end
+  end
+  return nil
 end
 
-function utils.is_string(t)
-  return type(t) == "string"
-end
+-- TODO: consider porting this logic to null-ls instead
+function utils.get_supported_linters_by_filetype(filetype)
+  local null_ls = require "null-ls"
+  local matches = {}
+  for _, provider in pairs(null_ls.builtins.diagnostics) do
+    if vim.tbl_contains(provider.filetypes, filetype) then
+      local provider_name = provider.name
 
-function utils.has_value(tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
+      table.insert(matches, provider_name)
     end
   end
 
-  return false
+  return matches
 end
 
-function utils.add_keymap(mode, opts, keymaps)
-  for _, keymap in ipairs(keymaps) do
-    vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
+function utils.get_supported_formatters_by_filetype(filetype)
+  local null_ls = require "null-ls"
+  local matches = {}
+  for _, provider in pairs(null_ls.builtins.formatting) do
+    if provider.filetypes and vim.tbl_contains(provider.filetypes, filetype) then
+      -- table.insert(matches, { provider.name, ft })
+      table.insert(matches, provider.name)
+    end
   end
-end
 
-function utils.add_keymap_normal_mode(opts, keymaps)
-  utils.add_keymap("n", opts, keymaps)
-end
-
-function utils.add_keymap_visual_mode(opts, keymaps)
-  utils.add_keymap("v", opts, keymaps)
-end
-
-function utils.add_keymap_visual_block_mode(opts, keymaps)
-  utils.add_keymap("x", opts, keymaps)
-end
-
-function utils.add_keymap_insert_mode(opts, keymaps)
-  utils.add_keymap("i", opts, keymaps)
-end
-
-function utils.add_keymap_term_mode(opts, keymaps)
-  utils.add_keymap("t", opts, keymaps)
+  return matches
 end
 
 function utils.unrequire(m)
@@ -160,6 +164,14 @@ function utils.gsub_args(args)
     args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
   end
   return args
+end
+
+--- Checks whether a given path exists and is a file.
+--@param filename (string) path to check
+--@returns (bool)
+function utils.is_file(filename)
+  local stat = uv.fs_stat(filename)
+  return stat and stat.type == "file" or false
 end
 
 return utils

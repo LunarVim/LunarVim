@@ -30,13 +30,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install neovim -y
 
-      - name: Installl dependencies for OSX
+      - name: Install dependencies for OSX
         if: matrix.os == 'osx'
         run: |
           brew update >/dev/null
           brew install neovim
 
       - name: Install LunarVim
+        timeout-minutes: 4
         run: |
           bash ./utils/installer/install.sh --testing
 
