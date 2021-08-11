@@ -151,14 +151,14 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, lsp_info)
 
   local null_ls = require "lsp.null-ls"
-  local registered_providers = null_ls.list_provider_names(ft, true)
+  local registered_providers = null_ls.list_provider_names(ft)
   local null_ls_info = {
     indent .. "Formatters and linters",
     indent .. "* Configured providers: " .. table.concat(registered_providers, "  , ") .. "  ",
   }
   vim.list_extend(buf_lines, null_ls_info)
 
-  local missing_formatters = null_ls.list_formatter_names(ft, false)
+  local missing_formatters = null_ls.list_unsupported_formatter_names(ft)
   if vim.tbl_count(missing_formatters) > 0 then
     local missing_formatters_status = {
       indent .. "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
@@ -166,7 +166,7 @@ function M.toggle_popup(ft)
     vim.list_extend(buf_lines, missing_formatters_status)
   end
 
-  local missing_linters = null_ls.list_linter_names(ft, false)
+  local missing_linters = null_ls.list_unsupported_linter_names(ft)
   if vim.tbl_count(missing_linters) > 0 then
     local missing_linters_status = {
       indent .. "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",
