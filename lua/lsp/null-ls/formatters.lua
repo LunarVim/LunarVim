@@ -4,6 +4,18 @@ local null_ls = require "null-ls"
 local services = require "lsp.null-ls.services"
 local logger = require("core.log"):get_default()
 
+function M.list_available(filetype)
+  local formatters = {}
+  for _, provider in pairs(null_ls.builtins.formatting) do
+    -- TODO: Add support for wildcard filetypes
+    if vim.tbl_contains(provider.filetypes or {}, filetype) then
+      table.insert(formatters, provider.name)
+    end
+  end
+
+  return formatters
+end
+
 function M.list_configured(formatter_configs)
   local formatters, errors = {}, {}
 

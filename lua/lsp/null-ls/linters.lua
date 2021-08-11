@@ -13,6 +13,18 @@ local function adapt_linter(linter)
   return null_ls.builtins.diagnostics[linter.exe]
 end
 
+function M.list_available(filetype)
+  local linters = {}
+  for _, provider in pairs(null_ls.builtins.diagnostics) do
+    -- TODO: Add support for wildcard filetypes
+    if vim.tbl_contains(provider.filetypes or {}, filetype) then
+      table.insert(linters, provider.name)
+    end
+  end
+
+  return linters
+end
+
 function M.list_configured(linter_configs)
   local linters, errors = {}, {}
 

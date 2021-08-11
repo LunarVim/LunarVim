@@ -24,7 +24,8 @@ local function str_list(list)
 end
 
 local function get_formatter_suggestion_msg(ft)
-  local supported_formatters = u.get_supported_formatters_by_filetype(ft)
+  local null_formatters = require "lsp.null-ls.formatters"
+  local supported_formatters = null_formatters.list_available(ft)
   return {
     indent
       .. "───────────────────────────────────────────────────────────────────",
@@ -44,7 +45,8 @@ local function get_formatter_suggestion_msg(ft)
 end
 
 local function get_linter_suggestion_msg(ft)
-  local supported_linters = u.get_supported_linters_by_filetype(ft)
+  local null_linters = require "lsp.null-ls.linters"
+  local supported_linters = null_linters.list_available(ft)
   return {
     indent
       .. "───────────────────────────────────────────────────────────────────",
@@ -192,8 +194,8 @@ function M.toggle_popup(ft)
     tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
     tbl_set_highlight(missing_formatters, "LvimInfoIdentifier")
     tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
-    -- tbl_set_highlight(u.get_supported_formatters_by_filetype(ft), "LvimInfoIdentifier")
-    -- tbl_set_highlight(u.get_supported_linters_by_filetype(ft), "LvimInfoIdentifier")
+    -- tbl_set_highlight(require("lsp.null-ls.formatters").list_available(ft), "LvimInfoIdentifier")
+    -- tbl_set_highlight(require("lsp.null-ls.linters").list_available(ft), "LvimInfoIdentifier")
     vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client.name .. '")')
   end
 
