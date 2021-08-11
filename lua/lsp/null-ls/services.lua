@@ -29,17 +29,17 @@ local function from_node_modules(command)
   return root_dir .. "/node_modules/.bin/" .. command
 end
 
-local local_installations = {
-  prettier = from_node_modules,
-  prettierd = from_node_modules,
-  prettier_d_slim = from_node_modules,
-  eslint_d = from_node_modules,
-  eslint = from_node_modules,
+local local_providers = {
+  prettier = { find = from_node_modules },
+  prettierd = { find = from_node_modules },
+  prettier_d_slim = { find = from_node_modules },
+  eslint_d = { find = from_node_modules },
+  eslint = { find = from_node_modules },
 }
 
 function M.find_command(command)
-  if local_installations[command] then
-    local local_command = local_installations[command](command)
+  if local_providers[command] then
+    local local_command = local_providers[command].find(command)
     if local_command and vim.fn.executable(local_command) == 1 then
       return local_command
     end
