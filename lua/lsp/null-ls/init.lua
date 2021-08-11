@@ -17,6 +17,10 @@ end
 function M.list_provider_names(filetype, options)
   local names = {}
 
+  if not providers_by_ft[filetype] then
+    return names
+  end
+
   for _, providers in pairs(providers_by_ft[filetype]) do
     vim.list_extend(names, list_provider_names(providers, options))
   end
@@ -25,18 +29,30 @@ function M.list_provider_names(filetype, options)
 end
 
 function M.list_supported_formatter_names(filetype)
+  if not providers_by_ft[filetype] then
+    return {}
+  end
   return list_provider_names(providers_by_ft[filetype].formatters, { filter = "supported" })
 end
 
 function M.list_supported_linter_names(filetype)
+  if not providers_by_ft[filetype] then
+    return {}
+  end
   return list_provider_names(providers_by_ft[filetype].linters, { filter = "supported" })
 end
 
 function M.list_unsupported_formatter_names(filetype)
+  if not providers_by_ft[filetype] then
+    return {}
+  end
   return list_provider_names(providers_by_ft[filetype].formatters, { filter = "unsupported" })
 end
 
 function M.list_unsupported_linter_names(filetype)
+  if not providers_by_ft[filetype] then
+    return {}
+  end
   return list_provider_names(providers_by_ft[filetype].linters, { filter = "unsupported" })
 end
 
