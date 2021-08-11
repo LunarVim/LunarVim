@@ -140,8 +140,10 @@ function M.setup(lang)
     end
   end
 
-  local lspconfig = require "lspconfig"
-  lspconfig[lsp.provider].setup(lsp.setup)
+  if lsp.provider ~= nil and lsp.provider ~= "" then
+    local lspconfig = require "lspconfig"
+    lspconfig[lsp.provider].setup(lsp.setup)
+  end
 end
 
 return M
