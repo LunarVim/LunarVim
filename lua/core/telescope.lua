@@ -1,5 +1,4 @@
 local M = {}
-local Log = require "core.log"
 function M.config()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
@@ -114,6 +113,7 @@ end
 function M.setup()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then
+    local Log = require "core.log"
     Log:get_default().error "Failed to load telescope"
     return
   end
