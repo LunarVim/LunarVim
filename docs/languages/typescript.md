@@ -18,6 +18,8 @@ Project root is recognized by having one of the folloing files/folders in the ro
 
 The configured formatter(s) must be installed separately.
 
+Configuration in `~/.config/lvim/config.lua`:
+
 ```lua
 -- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
 lvim.lang.typescript.formatters = { { exe = "prettier" } }
@@ -37,6 +39,8 @@ With `eslint` and `eslint_d`, the `--fix` functionality is used for formatting.
 ## Linters
 
 The configured linter must be installed separately.
+
+Configuration in `~/.config/lvim/config.lua`:
 
 ```lua
 -- exe value can be "eslint" or "eslint_d"

@@ -14,6 +14,8 @@ JavaScript uses [TypeScript](/languages/typescript.html#install-language-server)
 
 The configured formatter(s) must be installed separately.
 
+Configuration in `~/.config/lvim/config.lua`:
+
 ```lua
 -- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
 lvim.lang.javascript.formatters = { { exe = "prettier" } }
@@ -33,6 +35,8 @@ With `eslint` and `eslint_d`, the `--fix` functionality is used for formatting.
 ## Linters
 
 The configured linter must be installed separately.
+
+Configuration in `~/.config/lvim/config.lua`:
 
 ```lua
 -- exe value can be "eslint" or "eslint_d"
