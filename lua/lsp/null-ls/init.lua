@@ -41,7 +41,24 @@ function M.list_unsupported_linter_names(filetype)
 end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
-function M.setup(filetype)
+function M.setup(filetype, options)
+  options = options or {}
+  if providers_by_ft[filetype] and not options.force_reload then
+    return
+  end
+
+  -- Reset the structure to allow reloading from updated configuration
+  providers_by_ft[filetype] = {
+    formatters = {
+      supported = {},
+      unsupported = {},
+    },
+    linters = {
+      supported = {},
+      unsupported = {},
+    },
+  }
+
   local null_ls = require "null-ls"
   local null_formatters = require "lsp.null-ls.formatters"
   local null_linters = require "lsp.null-ls.linters"
@@ -57,17 +74,6 @@ function M.setup(filetype)
     end
     null_ls.register { sources = providers.supported }
   end
-
-  providers_by_ft[filetype] = {
-    formatters = {
-      supported = {},
-      unsupported = {},
-    },
-    linters = {
-      supported = {},
-      unsupported = {},
-    },
-  }
 
   register_providers(formatters, "formatters")
   register_providers(linters, "linters")

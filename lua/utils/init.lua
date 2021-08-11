@@ -99,6 +99,9 @@ function utils.reload_lv_config()
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
+  local null_ls = require "lsp.null-ls"
+  null_ls.setup(vim.bo.filetype, { force_reload = true })
+
   Log:get_default().info "Reloaded configuration"
 end
 
