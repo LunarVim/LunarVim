@@ -2,18 +2,6 @@ local M = {}
 
 local logger = require("core.log"):get_default()
 
-local function find_local_node_package(root_dir, command)
-  return root_dir .. "/node_modules/.bin/" .. command
-end
-
-local local_installations = {
-  prettier = find_local_node_package,
-  prettierd = find_local_node_package,
-  prettier_d_slim = find_local_node_package,
-  eslint_d = find_local_node_package,
-  eslint = find_local_node_package,
-}
-
 local function find_root_dir()
   if lvim.builtin.rooter.active then
     --- use vim-rooter to set root_dir
@@ -32,11 +20,27 @@ local function find_root_dir()
   return ts_client.config.root_dir
 end
 
+local function from_node_modules(command)
+  local root_dir = find_root_dir()
+  if not root_dir then
+    return nil
+  end
+
+  return root_dir .. "/node_modules/.bin/" .. command
+end
+
+local local_installations = {
+  prettier = from_node_modules,
+  prettierd = from_node_modules,
+  prettier_d_slim = from_node_modules,
+  eslint_d = from_node_modules,
+  eslint = from_node_modules,
+}
+
 function M.find_command(command)
   if local_installations[command] then
-    local root_dir = find_root_dir()
-    local local_command = local_installations[command](root_dir, command)
-    if vim.fn.executable(local_command) == 1 then
+    local local_command = local_installations[command](command)
+    if local_command and vim.fn.executable(local_command) == 1 then
       return local_command
     end
   end
