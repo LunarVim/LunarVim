@@ -56,6 +56,10 @@ lvim.autocommands = {
   --     {'BufWinEnter', '.gmi', 'setlocal filetype=markdown'}, {'BufRead', '*.gmi', 'setlocal filetype=markdown'},
   --     {'BufNewFile', '*.gmi', 'setlocal filetype=markdown'}
   -- },
+  _git = {
+    { "FileType", "gitcommit", "setlocal wrap" },
+    { "FileType", "gitcommit", "setlocal spell" },
+  },
   _markdown = {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },
