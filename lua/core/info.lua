@@ -130,13 +130,26 @@ end
 
 function M.toggle_popup(ft)
   local client = u.get_active_client_by_ft(ft)
-  local is_client_active = not client.is_stopped()
-  local client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
+  local is_client_active = false
+  local client_enabled_caps = {}
+  local client_name = ""
+  local client_id = 0
+  local document_formatting = false
+  local missing_linters = {}
+  local missing_formatters = {}
   local num_caps = vim.tbl_count(client_enabled_caps)
   local null_ls_providers = null_ls_handler.get_registered_providers_by_filetype(ft)
-
-  local missing_linters = lvim.lang[ft].linters._failed_requests or {}
-  local missing_formatters = lvim.lang[ft].formatters._failed_requests or {}
+  if client ~= nil then
+    is_client_active = not client.is_stopped()
+    client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
+    client_name = client.name
+    client_id = client.id
+    document_formatting = client.resolved_capabilities.document_formatting
+  end
+  if lvim.lang[ft] ~= nil then
+    missing_linters = lvim.lang[ft].linters._failed_requests or {}
+    missing_formatters = lvim.lang[ft].formatters._failed_requests or {}
+  end
 
   local buf_lines = {}
   vim.list_extend(buf_lines, M.banner)
@@ -150,9 +163,9 @@ function M.toggle_popup(ft)
 
   local lsp_info = {
     indent .. "Language Server Protocol (LSP) info",
-    indent .. "* Associated server:   " .. client.name,
-    indent .. "* Active:              " .. tostring(is_client_active) .. " (id: " .. tostring(client.id) .. ")",
-    indent .. "* Supports formatting: " .. tostring(client.resolved_capabilities.document_formatting),
+    indent .. "* Associated server:   " .. client_name,
+    indent .. "* Active:              " .. tostring(is_client_active) .. " (id: " .. tostring(client_id) .. ")",
+    indent .. "* Supports formatting: " .. tostring(document_formatting),
     indent .. "* Capabilities list:   " .. table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", "),
     indent .. indent .. indent .. table.concat(vim.list_slice(client_enabled_caps, ((num_caps / 2) + 1)), ", "),
     "",
@@ -200,7 +213,7 @@ function M.toggle_popup(ft)
     tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
     -- tbl_set_highlight(u.get_supported_formatters_by_filetype(ft), "LvimInfoIdentifier")
     -- tbl_set_highlight(u.get_supported_linters_by_filetype(ft), "LvimInfoIdentifier")
-    vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client.name .. '")')
+    vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client_name .. '")')
   end
 
   return M.create_simple_popup(buf_lines, set_syntax_hl)
