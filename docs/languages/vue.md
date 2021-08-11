@@ -14,29 +14,30 @@
 
 ## Formatters
 
+The configured formatter(s) must be installed separately.
+
 ```lua
-lvim.lang.vue.formatters = {
-  {
-    exe = "prettier", -- can be prettierd, eslint or eslint_d as well
-    args = {},
-  },
-}
+-- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
+lvim.lang.vue.formatters = { { exe = "prettier" } }
 ```
 
-The selected formatter must be installed separately.
+Also combination of some prettier and eslint can be specified:
+
+```lua
+-- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
+lvim.lang.vue.formatters = { { exe = "eslint"}, { exe = "prettier" } }
+```
+
+With `eslint` and `eslint_d`, the `--fix` functionality is used for formatting. 
 
 ## Linters
 
-```lua
-lvim.lang.vue.linters = {
-  {
-    exe = "eslint", -- can be eslint_d as well
-    args = {}, 
-  },
-}
-```
+The configured linter must be installed separately.
 
-The selected linter must be installed separately.
+```lua
+-- exe value can be "eslint" or "eslint_d"
+lvim.lang.vue.linters = { { exe = "eslint" } }
+```
 
 ## LSP Settings
 
