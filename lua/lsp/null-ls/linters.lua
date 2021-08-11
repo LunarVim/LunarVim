@@ -20,15 +20,15 @@ function M.list_configured(linter_configs)
     local linter = adapt_linter(lnt_config)
     if not linter then
       logger.error("Not a valid linter:", lnt_config.exe)
-      table.insert(errors, { name = lnt_config.exe })
+      errors[lnt_config.exe] = {} -- Add data here when necessary
     else
       local linter_cmd = services.find_command(linter._opts.command)
       if not linter_cmd then
         logger.warn("Not found:", linter._opts.command)
-        table.insert(errors, { name = lnt_config.exe })
+        errors[lnt_config.exe] = {} -- Add data here when necessary
       else
         logger.info("Using linter:", linter_cmd)
-        table.insert(linters, linter.with { command = linter_cmd })
+        linters[lnt_config.exe] = linter.with { command = linter_cmd }
       end
     end
   end
