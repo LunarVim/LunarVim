@@ -3,7 +3,7 @@ return {
   { "wbthomason/packer.nvim" },
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
-  { "jose-elias-alvarez/null-ls.nvim", commit = "341b726b910e0dce0d7da98a2b4c47f1629e8339" },
+  { "jose-elias-alvarez/null-ls.nvim" },
   {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
