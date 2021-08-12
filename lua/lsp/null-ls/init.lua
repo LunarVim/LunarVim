@@ -63,7 +63,12 @@ function M.setup(filetype, options)
     return
   end
 
-  local null_ls = require "null-ls"
+  local ok, null_ls = pcall(require, "null-ls")
+  if not ok then
+    require("core.log"):get_default().error("Missing null-ls dependency")
+    return
+  end
+
   local null_formatters = require "lsp.null-ls.formatters"
   local null_linters = require "lsp.null-ls.linters"
 
