@@ -58,7 +58,7 @@ function M.list_configured(formatter_configs)
         errors[fmt_config.exe] = {} -- Add data here when necessary
       else
         logger.info("Using formatter:", formatter_cmd)
-        formatters[fmt_config.exe] = formatter.with { command = formatter_cmd }
+        formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, args = fmt_config.args }
       end
     end
   end

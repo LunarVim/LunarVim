@@ -67,7 +67,7 @@ function M.list_configured(linter_configs)
         errors[lnt_config.exe] = {} -- Add data here when necessary
       else
         logger.info("Using linter:", linter_cmd)
-        linters[lnt_config.exe] = linter.with { command = linter_cmd }
+        linters[lnt_config.exe] = linter.with { command = linter_cmd, args = lnt_config.args }
       end
     end
   end
