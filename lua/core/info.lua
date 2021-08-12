@@ -201,8 +201,8 @@ function M.toggle_popup(ft)
   local function set_syntax_hl()
     vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
     vim.cmd [[highlight link LvimInfoHeader Type]]
-    vim.cmd [[let m=matchadd("DashboardHeader", "Language Server Protocol (LSP) info")]]
-    vim.cmd [[let m=matchadd("DashboardHeader", "Formatters and linters")]]
+    vim.cmd [[let m=matchadd("LvimInfoHeader", "Language Server Protocol (LSP) info")]]
+    vim.cmd [[let m=matchadd("LvimInfoHeader", "Formatters and linters")]]
     vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
     vim.cmd 'let m=matchadd("string", "true")'
     vim.cmd 'let m=matchadd("error", "false")'
