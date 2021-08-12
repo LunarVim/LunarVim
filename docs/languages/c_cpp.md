@@ -22,21 +22,14 @@ List of other [available language servers](https://github.com/neovim/nvim-lspcon
 
 ## Formatters
 
-`clangd` supports formatting. Optionally `uncrustify` and `clangd_format` can be used as a formatter. Optional formatter will disable language server formatter.
+`clangd` language server supports formatting. Optionally `uncrustify` and `clang_format` can be used as a formatter. Optional formatter will disable language server formatter.
+
+Configuration in `~/.config/lvim/config.lua`
 
 ```lua
-lvim.lang.c.formatters = {
-  {
-    exe = "clangd_format", -- can also be uncrustify
-    args = {},
-  },
-}
-lvim.lang.cpp.formatters = {
-  {
-    exe = "clangd_format", -- can also be uncrustify
-    args = {},
-  },
-}
+-- exe value can be "clang_format" or "uncrustify"
+lvim.lang.c.formatters = { { exe = "clang_format" } }
+lvim.lang.cpp.formatters = lvim.lang.c.formatters
 ```
 
 The selected formatter must be installed separately.
