@@ -35,7 +35,7 @@ local function get_formatter_suggestion_msg(ft)
     indent .. "* Configured formatter needs to be installed and executable.",
     indent .. "* Enable installed formatter(s) with following config in ~/.config/lvim/config.lua",
     "",
-    indent .. "  lvim.lang." .. tostring(ft) .. [[.formatting = { { exe = ']] .. table.concat(
+    indent .. "  lvim.lang." .. tostring(ft) .. [[.formatters = { { exe = ']] .. table.concat(
       supported_formatters,
       "│"
     ) .. [[' } }]],
