@@ -97,7 +97,7 @@ function M.setup(filetype)
     local builtin_formatter = null_ls.builtins.formatting[formatter.exe]
     if not vim.tbl_contains(M.requested_providers, builtin_formatter) then
       -- FIXME: why doesn't this work?
-      -- builtin_formatter._opts.args = formatter.args or builtin_formatter._opts.args
+      builtin_formatter._opts.args = formatter.args or builtin_formatter._opts.args
       -- builtin_formatter._opts.to_stdin = formatter.stdin or builtin_formatter._opts.to_stdin
       local resolved_path = validate_provider_request(builtin_formatter)
       if resolved_path then
