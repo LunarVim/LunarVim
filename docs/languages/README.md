@@ -14,6 +14,14 @@ If there is support for your language please file an issue with the LunarVim rep
 
 If there is not file a ticket with one of the above repos
 
+## LunarVim Info
+
+Check LSP info, linter and formatter status for the currently opened file buffer
+
+```lua
+:LvimInfo
+```
+
 ## LSP
 
 To install a supported language server:
@@ -28,17 +36,12 @@ Formatting is handled by Null-ls. It is off by default. Not all formatters are s
 
 If you want to enable formatting for javascript for example, install the formatter and then add the following to your config.lua
 ```lua
-lvim.lang.javascript.formatters = {
-  {
-    exe = "prettier",
-    args = {},
-  },
-}
+lvim.lang.javascript.formatters = { { exe = "prettier" } }
 ```
 
 If the name of your formatter or linter includes a hyphen `-`, replace it with an underscore `_`. Dashes are not valid identifiers in lua.
 
-To enable format on save, add the following to your `config.lua`
+To enable format on save, add the following to your `~/.config/lvim/config.lua`
 
 ``` lua
 lvim.format_on_save = true
@@ -48,10 +51,6 @@ lvim.format_on_save = true
 Linting is also handled by Null-ls. To set a linter for your language, install the linter and then enable the linter with configuration:
 
 ``` lua
-lvim.lang.javascript.linters = {
-  {
-    exe = "eslint_d",
-    args = {}, 
-  },
-}
+lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 ```
+
