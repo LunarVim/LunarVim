@@ -1,0 +1,29 @@
+repos:
+  - repo: local
+    hooks:
+      - id: shfmt
+        name: shfmt
+        minimum_pre_commit_version: 2.4.0
+        language: golang
+        additional_dependencies: [mvdan.cc/sh/v3/cmd/shfmt@v3.2.2]
+        entry: shfmt
+        args: [-i=2, -ci, -w]
+        types: [shell]
+      - id: shellcheck
+        name: shellcheck
+        language: system
+        types: [shell]
+        entry: bash
+        args: [-c, "shfmt -f $(git rev-parse --show-toplevel) | xargs shellcheck"]
+      - id: stylua
+        name: StyLua
+        language: rust
+        entry: stylua
+        types: [lua]
+        args : [.]
+      - id: luacheck
+        name: luacheck
+        language: system
+        entry: luacheck
+        types: [lua]
+        args : [.]
