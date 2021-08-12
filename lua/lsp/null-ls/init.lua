@@ -1,83 +1,44 @@
 local M = {}
 
-local providers_by_ft = {}
-
-local function list_provider_names(providers, options)
-  options = options or {}
+function M.list_supported_provider_names(filetype)
   local names = {}
 
-  local filter = options.filter or "supported"
-  for name, _ in pairs(providers[filter]) do
-    table.insert(names, name)
-  end
+  local formatters = require "lsp.null-ls.formatters"
+  local linters = require "lsp.null-ls.linters"
+
+  vim.list_extend(names, formatters.list_supported_names(filetype))
+  vim.list_extend(names, linters.list_supported_names(filetype))
 
   return names
 end
 
-function M.list_provider_names(filetype, options)
+function M.list_unsupported_provider_names(filetype)
   local names = {}
 
-  if not providers_by_ft[filetype] then
-    return names
-  end
+  local formatters = require "lsp.null-ls.formatters"
+  local linters = require "lsp.null-ls.linters"
 
-  for _, providers in pairs(providers_by_ft[filetype]) do
-    vim.list_extend(names, list_provider_names(providers, options))
-  end
+  vim.list_extend(names, formatters.list_unsupported_names(filetype))
+  vim.list_extend(names, linters.list_unsupported_names(filetype))
 
   return names
-end
-
-function M.list_supported_formatter_names(filetype)
-  if not providers_by_ft[filetype] then
-    return {}
-  end
-  return list_provider_names(providers_by_ft[filetype].formatters, { filter = "supported" })
-end
-
-function M.list_supported_linter_names(filetype)
-  if not providers_by_ft[filetype] then
-    return {}
-  end
-  return list_provider_names(providers_by_ft[filetype].linters, { filter = "supported" })
-end
-
-function M.list_unsupported_formatter_names(filetype)
-  if not providers_by_ft[filetype] then
-    return {}
-  end
-  return list_provider_names(providers_by_ft[filetype].formatters, { filter = "unsupported" })
-end
-
-function M.list_unsupported_linter_names(filetype)
-  if not providers_by_ft[filetype] then
-    return {}
-  end
-  return list_provider_names(providers_by_ft[filetype].linters, { filter = "unsupported" })
 end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
 function M.setup(filetype, options)
   options = options or {}
-  if providers_by_ft[filetype] and not options.force_reload then
-    return
-  end
 
-  local ok, null_ls = pcall(require, "null-ls")
+  local ok, _ = pcall(require, "null-ls")
   if not ok then
-    require("core.log"):get_default().error("Missing null-ls dependency")
+    require("core.log"):get_default().error "Missing null-ls dependency"
     return
   end
 
-  local null_formatters = require "lsp.null-ls.formatters"
-  local null_linters = require "lsp.null-ls.linters"
+  local formatters = require "lsp.null-ls.formatters"
+  local linters = require "lsp.null-ls.linters"
 
-  -- Reset the structure to allow reloading from updated configuration
-  providers_by_ft[filetype] = {}
-  providers_by_ft[filetype].formatters = null_formatters.list_configured(lvim.lang[filetype].formatters)
-  providers_by_ft[filetype].linters = null_linters.list_configured(lvim.lang[filetype].linters)
-  null_ls.register { sources = providers_by_ft[filetype].formatters.supported }
-  null_ls.register { sources = providers_by_ft[filetype].linters.supported }
+  formatters.setup(filetype, options)
+  linters.setup(filetype, options)
 end
 
 return M
