@@ -18,6 +18,20 @@ local condition = require "galaxyline.condition"
 local gls = gl.section
 gl.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
 
+local function get_mode_name()
+  local names = {
+    n = "NORMAL",
+    i = "INSERT",
+    c = "COMMAND",
+    v = "VISUAL",
+    V = "VISUAL LINE",
+    t = "TERMINAL",
+    R = "REPLACE",
+    [""] = "VISUAL BLOCK",
+  }
+  return names[vim.fn.mode()]
+end
+
 table.insert(gls.left, {
   ViMode = {
     provider = function()
@@ -44,6 +58,16 @@ table.insert(gls.left, {
         ["!"] = colors.blue,
         t = colors.blue,
       }
+      if lvim.builtin.galaxyline.show_mode then
+        local name = get_mode_name()
+        -- Fall back to the default behavior is a name is not defined
+        if name ~= nil then
+          vim.api.nvim_command("hi GalaxyViMode guibg=" .. mode_color[vim.fn.mode()])
+          vim.api.nvim_command("hi GalaxyViMode guifg=" .. colors.alt_bg)
+          return "  " .. name .. " "
+        end
+      end
+      vim.api.nvim_command("hi GalaxyViMode guibg=" .. colors.alt_bg)
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
       return "▊"
     end,
