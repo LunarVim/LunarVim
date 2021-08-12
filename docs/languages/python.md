@@ -14,24 +14,23 @@
 
 ## Formatters
 
+The configured formatter(s) must be installed separately.
+
+Configuration in `~/.config/lvim/config.lua`:
+
 ```lua
-lvim.lang.python.formatters = {
-  {
-    exe = "black", -- can be yapf, or isort as well
-    args = {},
-  },
-}
+-- exe value can be "black", "yapf", or "isort"
+lvim.lang.python.formatters = { { exe = "black" } }
 ```
 
 ## Linters
 
+The configured linter must be installed separately.
+
+Configuration in `~/.config/lvim/config.lua`:
+
 ```lua
-lvim.lang.python.linters = {
-  {
-    exe = "flake8",
-    args = {}, 
-  },
-}
+lvim.lang.python.linters = { { exe = "flake8" } }
 ```
 
 ## LSP Settings
