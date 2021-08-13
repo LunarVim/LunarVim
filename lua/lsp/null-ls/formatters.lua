@@ -48,6 +48,7 @@ function M.list_configured(formatter_configs)
 
   for _, fmt_config in ipairs(formatter_configs) do
     local formatter = null_ls.builtins.formatting[fmt_config.exe]
+
     if not formatter then
       logger.error("Not a valid formatter:", fmt_config.exe)
       errors[fmt_config.exe] = {} -- Add data here when necessary
