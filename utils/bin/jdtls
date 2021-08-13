@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2116
 
 # NOTE:
 # This doesn't work as is on Windows. You'll need to create an equivalent `.bat` file instead
@@ -7,7 +8,8 @@
 # If you're not using Linux you'll need to adjust the `-configuration` option
 # to point to the `config_mac' or `config_win` folders depending on your system.
 
-case Darwin in
+OS="$(uname -s)"
+case "$OS" in
   Linux)
     CONFIG="$HOME/.local/share/nvim/lspinstall/java/config_linux"
     ;;
@@ -32,7 +34,7 @@ location of your Java installation."
   fi
 else
   JAVACMD="java"
-  which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+  command -v java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
 
 Please set the JAVA_HOME variable in your environment to match the
 location of your Java installation."
@@ -46,10 +48,10 @@ GRADLE_HOME=$HOME/gradle "$JAVACMD" \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
   -Dlog.protocol=true \
   -Dlog.level=ALL \
-  -javaagent:$HOME/.local/share/nvim/lspinstall/java/lombok.jar \
+  -javaagent:"$HOME/.local/share/nvim/lspinstall/java/lombok.jar" \
   -Xms1g \
   -Xmx2G \
-  -jar $(echo "$JAR") \
+  -jar "$(echo "$JAR")" \
   -configuration "$CONFIG" \
   -data "${1:-$HOME/workspace}" \
   --add-modules=ALL-SYSTEM \

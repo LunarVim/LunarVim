@@ -17,9 +17,19 @@ One of the best ways to begin contributing in a meaningful way is by helping fin
 
 ## Setting up development tools
 
-1. Install [stylua](https://github.com/johnnymorganz/stylua#installation)
+### For editing Lua files
 
-2. Install [shfmt](https://github.com/mvdan/sh#shfmt)
+1. Formatter: [stylua](https://github.com/johnnymorganz/stylua#installation).
+2. Linter:  [luacheck](https://github.com/luarocks/luacheck).
+
+### For editing shell scripts
+
+1. Formatter: [shfmt](https://github.com/mvdan/sh#shfmt).
+2. Linter: [shellcheck](https://github.com/koalaman/shellcheck).
+
+### (Optional)
+
+Install [pre-commit](https://github.com/pre-commit/pre-commit) which will run all linters and formatters for you as a pre-commit-hook.
 
 ## Some Guidelines
 
