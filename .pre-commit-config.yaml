@@ -14,16 +14,17 @@ repos:
         language: system
         types: [shell]
         entry: bash
-        args: [-c, "shfmt -f $(git rev-parse --show-toplevel) | xargs shellcheck"]
+        args:
+          [-c, "shfmt -f $(git rev-parse --show-toplevel) | xargs shellcheck"]
       - id: stylua
         name: StyLua
         language: rust
         entry: stylua
         types: [lua]
-        args : [.]
+        args: [.]
       - id: luacheck
         name: luacheck
         language: system
         entry: luacheck
         types: [lua]
-        args : [.]
+        args: [.]
