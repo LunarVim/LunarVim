@@ -66,6 +66,7 @@ M.setup = function()
       { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
       { key = "h", cb = tree_cb "close_node" },
       { key = "v", cb = tree_cb "vsplit" },
+      { key = "q", cb = ":lua require('core.nvimtree').toggle_tree()<cr>" },
     }
   end
 end
