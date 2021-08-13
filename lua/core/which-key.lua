@@ -169,6 +169,18 @@ M.config = function()
       },
       L = {
         name = "+LunarVim",
+        c = {
+          "<cmd>edit ~/.config/lvim/config.lua<cr>",
+          "Edit config.lua",
+        },
+        f = {
+          "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>",
+          "Find LunarVim files",
+        },
+        g = {
+          "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>",
+          "Grep LunarVim files",
+        },
         k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
         i = {
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
