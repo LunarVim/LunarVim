@@ -127,11 +127,10 @@ end
 lvim.lang = {
   asm = {
     formatters = {
-      {
-        -- @usage can be asmfmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "asmfmt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -141,11 +140,10 @@ lvim.lang = {
   },
   beancount = {
     formatters = {
-      {
-        -- @usage can be bean_format
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "bean_format",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -160,12 +158,14 @@ lvim.lang = {
   },
   c = {
     formatters = {
-      {
-        -- @usage can be clang_format or uncrustify
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "clang_format",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "uncrustify",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -187,12 +187,14 @@ lvim.lang = {
   },
   cpp = {
     formatters = {
-      {
-        -- @usage can be clang_format or uncrustify
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "clang_format",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "uncrustify",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -214,11 +216,10 @@ lvim.lang = {
   },
   crystal = {
     formatters = {
-      {
-        -- @usage can be crystal_format
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "crystal_format",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -233,11 +234,14 @@ lvim.lang = {
   },
   cs = {
     formatters = {
-      {
-        -- @usage can be clang_format or uncrustify
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "clang_format ",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "uncrustify",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -257,11 +261,10 @@ lvim.lang = {
   },
   cmake = {
     formatters = {
-      {
-        -- @usage can be cmake_format
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "cmake_format",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -277,10 +280,7 @@ lvim.lang = {
     },
   },
   clojure = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "clojure_lsp",
@@ -297,11 +297,14 @@ lvim.lang = {
   },
   css = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -320,11 +323,14 @@ lvim.lang = {
   },
   less = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -343,11 +349,10 @@ lvim.lang = {
   },
   d = {
     formatters = {
-      {
-        -- @usage can be dfmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "dfmt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -362,12 +367,10 @@ lvim.lang = {
   },
   dart = {
     formatters = {
-      {
-        -- @usage can be dart_format
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "dart_format",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -385,13 +388,7 @@ lvim.lang = {
     },
   },
   docker = {
-    formatters = {
-      {
-        exe = "",
-        args = {},
-      },
-      -- @usage can be {"hadolint"}
-    },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "dockerls",
@@ -408,12 +405,10 @@ lvim.lang = {
   },
   elixir = {
     formatters = {
-      {
-        -- @usage can be mix
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "mix",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -430,12 +425,10 @@ lvim.lang = {
   },
   elm = {
     formatters = {
-      {
-        -- @usage can be elm_format
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "elm_format",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -457,11 +450,10 @@ lvim.lang = {
   },
   erlang = {
     formatters = {
-      {
-        -- @usage can be erlfmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "erlfmt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -479,11 +471,10 @@ lvim.lang = {
   emmet = { active = false },
   fish = {
     formatters = {
-      {
-        -- @usage can be fish_indent
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "fish_indent",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -497,12 +488,18 @@ lvim.lang = {
   },
   go = {
     formatters = {
-      {
-        -- @usage can be gofmt or goimports or gofumpt
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "gofmt",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "goimports",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "gofumpt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -518,10 +515,7 @@ lvim.lang = {
     },
   },
   graphql = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "graphql",
@@ -539,10 +533,7 @@ lvim.lang = {
     },
   },
   haskell = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "hls",
@@ -556,11 +547,14 @@ lvim.lang = {
   },
   html = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -579,11 +573,14 @@ lvim.lang = {
   },
   java = {
     formatters = {
-      {
-        -- @usage can be clang_format or uncrustify
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "clang_format",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "uncrustify",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -598,12 +595,18 @@ lvim.lang = {
   },
   json = {
     formatters = {
-      {
-        -- @usage can be json_tool or prettier or prettierd
-        exe = "",
-        args = {},
-        stdin = true,
-      },
+      -- {
+      --   exe = "json_tool",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -639,10 +642,7 @@ lvim.lang = {
     },
   },
   julia = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "julials",
@@ -661,10 +661,7 @@ lvim.lang = {
     },
   },
   kotlin = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "kotlin_language_server",
@@ -695,11 +692,14 @@ lvim.lang = {
   },
   lua = {
     formatters = {
-      {
-        -- @usage can be stylua or lua_format
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "stylua",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "lua_format",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -742,25 +742,23 @@ lvim.lang = {
   },
   nginx = {
     formatters = {
-      {
-        -- @usage can be nginx_beautifier
-        exe = "",
-        args = {
-          provider = "",
-          setup = {},
-        },
-      },
+      -- {
+      --   exe = "nginx_beautifier",
+      --   args = {
+      --     provider = "",
+      --     setup = {},
+      --   },
+      -- },
     },
     linters = {},
     lsp = {},
   },
   perl = {
     formatters = {
-      {
-        -- @usage can be perltidy
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "perltidy",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -770,11 +768,10 @@ lvim.lang = {
   },
   sql = {
     formatters = {
-      {
-        -- @usage can be sqlformat
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "sqlformat",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -786,11 +783,10 @@ lvim.lang = {
   },
   php = {
     formatters = {
-      {
-        -- @usage can be phpcbf
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "phpcbf",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -814,10 +810,7 @@ lvim.lang = {
     },
   },
   puppet = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "puppet",
@@ -829,12 +822,19 @@ lvim.lang = {
     },
   },
   javascript = {
-    -- @usage can be prettier or prettier_d_slim or prettierd
     formatters = {
-      {
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettier_d_slim",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
     -- @usage can be {"eslint"} or {"eslint_d"}
     linters = {},
@@ -854,13 +854,19 @@ lvim.lang = {
   },
   javascriptreact = {
     formatters = {
-      {
-        -- @usage can be prettier or prettier_d_slim or prettierd
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettier_d_slim",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
-    -- @usage can be {"eslint"} or {"eslint_d"}
     linters = {},
     lsp = {
       provider = "tsserver",
@@ -878,11 +884,14 @@ lvim.lang = {
   },
   python = {
     formatters = {
-      {
-        -- @usage can be black or yapf or isort
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "yapf",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "isort",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -902,11 +911,10 @@ lvim.lang = {
   -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
   r = {
     formatters = {
-      {
-        -- @usage can be format_r
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "format_r",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -926,11 +934,10 @@ lvim.lang = {
   },
   ruby = {
     formatters = {
-      {
-        -- @usage can be rufo
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "rufo",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -961,11 +968,10 @@ lvim.lang = {
   },
   rust = {
     formatters = {
-      {
-        -- @usage can be rustfmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "rustfmt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -982,11 +988,10 @@ lvim.lang = {
   },
   scala = {
     formatters = {
-      {
-        -- @usage can be scalafmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "scalafmt",
+      --   args = {},
+      -- },
     },
     linters = { "" },
     lsp = {
@@ -1000,11 +1005,10 @@ lvim.lang = {
   },
   sh = {
     formatters = {
-      {
-        -- @usage can be shfmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "shfmt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -1021,10 +1025,7 @@ lvim.lang = {
     },
   },
   svelte = {
-    formatters = { {
-      exe = "",
-      args = {},
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "svelte",
@@ -1041,11 +1042,10 @@ lvim.lang = {
   },
   swift = {
     formatters = {
-      {
-        -- @usage can be swiftformat
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "swiftformat",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -1075,11 +1075,10 @@ lvim.lang = {
   },
   terraform = {
     formatters = {
-      {
-        -- @usage can be terraform_fmt
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "terraform_fmt",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -1096,14 +1095,7 @@ lvim.lang = {
     },
   },
   tex = {
-    formatters = {
-      {
-        exe = "",
-        args = {},
-        stdin = false,
-      },
-      -- @usage can be chktex or vale
-    },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "texlab",
@@ -1117,12 +1109,18 @@ lvim.lang = {
   },
   typescript = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd or prettier_d_slim
-        exe = "",
-        args = {},
-      },
-      -- @usage can be {"eslint"} or {"eslint_d"}
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettier_d_slim",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -1141,11 +1139,18 @@ lvim.lang = {
   },
   typescriptreact = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd or prettier_d_slim
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettier_d_slim",
+      --   args = {},
+      -- },
     },
     -- @usage can be {"eslint"} or {"eslint_d"}
     linters = {},
@@ -1164,13 +1169,7 @@ lvim.lang = {
     },
   },
   vim = {
-    formatters = {
-      {
-        exe = "",
-        args = {},
-      },
-    },
-    -- @usage can be {"vint"}
+    formatters = {},
     linters = { "" },
     lsp = {
       provider = "vimls",
@@ -1187,13 +1186,19 @@ lvim.lang = {
   },
   vue = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd or prettier_d_slim
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettier_d_slim",
+      --   args = {},
+      -- },
     },
-    -- @usage can be {"eslint"} or {"eslint_d"}
     linters = {},
     lsp = {
       provider = "vuels",
@@ -1209,11 +1214,14 @@ lvim.lang = {
   },
   yaml = {
     formatters = {
-      {
-        -- @usage can be prettier or prettierd
-        exe = "",
-        args = {},
-      },
+      -- {
+      --   exe = "prettier",
+      --   args = {},
+      -- },
+      -- {
+      --   exe = "prettierd",
+      --   args = {},
+      -- },
     },
     linters = {},
     lsp = {
@@ -1230,11 +1238,7 @@ lvim.lang = {
     },
   },
   zig = {
-    formatters = { {
-      exe = "",
-      args = {},
-      stdin = false,
-    } },
+    formatters = {},
     linters = {},
     lsp = {
       provider = "zls",

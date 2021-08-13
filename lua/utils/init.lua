@@ -99,55 +99,10 @@ function utils.reload_lv_config()
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
+  local null_ls = require "lsp.null-ls"
+  null_ls.setup(vim.bo.filetype, { force_reload = true })
+
   Log:get_default().info "Reloaded configuration"
-end
-
-function utils.check_lsp_client_active(name)
-  local clients = vim.lsp.get_active_clients()
-  for _, client in pairs(clients) do
-    if client.name == name then
-      return true
-    end
-  end
-  return false
-end
-
-function utils.get_active_client_by_ft(filetype)
-  local clients = vim.lsp.get_active_clients()
-  for _, client in pairs(clients) do
-    if client.name == lvim.lang[filetype].lsp.provider then
-      return client
-    end
-  end
-  return nil
-end
-
--- TODO: consider porting this logic to null-ls instead
-function utils.get_supported_linters_by_filetype(filetype)
-  local null_ls = require "null-ls"
-  local matches = {}
-  for _, provider in pairs(null_ls.builtins.diagnostics) do
-    if vim.tbl_contains(provider.filetypes, filetype) then
-      local provider_name = provider.name
-
-      table.insert(matches, provider_name)
-    end
-  end
-
-  return matches
-end
-
-function utils.get_supported_formatters_by_filetype(filetype)
-  local null_ls = require "null-ls"
-  local matches = {}
-  for _, provider in pairs(null_ls.builtins.formatting) do
-    if provider.filetypes and vim.tbl_contains(provider.filetypes, filetype) then
-      -- table.insert(matches, { provider.name, ft })
-      table.insert(matches, provider.name)
-    end
-  end
-
-  return matches
 end
 
 function utils.unrequire(m)

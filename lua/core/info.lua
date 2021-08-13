@@ -1,6 +1,4 @@
 local M = {}
-local u = require "utils"
-local null_ls_handler = require "lsp.null-ls"
 local indent = "  "
 
 M.banner = {
@@ -25,7 +23,8 @@ local function str_list(list)
 end
 
 local function get_formatter_suggestion_msg(ft)
-  local supported_formatters = u.get_supported_formatters_by_filetype(ft)
+  local null_formatters = require "lsp.null-ls.formatters"
+  local supported_formatters = null_formatters.list_available(ft)
   return {
     indent
       .. "───────────────────────────────────────────────────────────────────",
@@ -36,7 +35,7 @@ local function get_formatter_suggestion_msg(ft)
     indent .. "* Configured formatter needs to be installed and executable.",
     indent .. "* Enable installed formatter(s) with following config in ~/.config/lvim/config.lua",
     "",
-    indent .. "  lvim.lang." .. tostring(ft) .. [[.formatting = { { exe = ']] .. table.concat(
+    indent .. "  lvim.lang." .. tostring(ft) .. [[.formatters = { { exe = ']] .. table.concat(
       supported_formatters,
       "│"
     ) .. [[' } }]],
@@ -45,7 +44,8 @@ local function get_formatter_suggestion_msg(ft)
 end
 
 local function get_linter_suggestion_msg(ft)
-  local supported_linters = u.get_supported_linters_by_filetype(ft)
+  local null_linters = require "lsp.null-ls.linters"
+  local supported_linters = null_linters.list_available(ft)
   return {
     indent
       .. "───────────────────────────────────────────────────────────────────",
@@ -129,16 +129,14 @@ local function tbl_set_highlight(terms, highlight_group)
 end
 
 function M.toggle_popup(ft)
-  local client = u.get_active_client_by_ft(ft)
+  local lsp_utils = require "lsp.utils"
+  local client = lsp_utils.get_active_client_by_ft(ft)
   local is_client_active = false
   local client_enabled_caps = {}
   local client_name = ""
   local client_id = 0
   local document_formatting = false
-  local missing_linters = {}
-  local missing_formatters = {}
   local num_caps = 0
-  local null_ls_providers = null_ls_handler.get_registered_providers_by_filetype(ft)
   if client ~= nil then
     is_client_active = not client.is_stopped()
     client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
@@ -146,10 +144,6 @@ function M.toggle_popup(ft)
     client_name = client.name
     client_id = client.id
     document_formatting = client.resolved_capabilities.document_formatting
-  end
-  if lvim.lang[ft] ~= nil then
-    missing_linters = lvim.lang[ft].linters._failed_requests or {}
-    missing_formatters = lvim.lang[ft].formatters._failed_requests or {}
   end
 
   local buf_lines = {}
@@ -173,23 +167,27 @@ function M.toggle_popup(ft)
   }
   vim.list_extend(buf_lines, lsp_info)
 
+  local null_ls = require "lsp.null-ls"
+  local registered_providers = null_ls.list_supported_provider_names(ft)
   local null_ls_info = {
     indent .. "Formatters and linters",
-    indent .. "* Configured providers: " .. table.concat(null_ls_providers, "  , ") .. "  ",
+    indent .. "* Configured providers: " .. table.concat(registered_providers, "  , ") .. "  ",
   }
   vim.list_extend(buf_lines, null_ls_info)
 
-  local missing_formatters_status
+  local null_formatters = require "lsp.null-ls.formatters"
+  local missing_formatters = null_formatters.list_unsupported_names(ft)
   if vim.tbl_count(missing_formatters) > 0 then
-    missing_formatters_status = {
+    local missing_formatters_status = {
       indent .. "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
     }
     vim.list_extend(buf_lines, missing_formatters_status)
   end
 
-  local missing_linters_status
+  local null_linters = require "lsp.null-ls.linters"
+  local missing_linters = null_linters.list_unsupported_names(ft)
   if vim.tbl_count(missing_linters) > 0 then
-    missing_linters_status = {
+    local missing_linters_status = {
       indent .. "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",
     }
     vim.list_extend(buf_lines, missing_linters_status)
@@ -198,7 +196,6 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, { "" })
 
   vim.list_extend(buf_lines, get_formatter_suggestion_msg(ft))
-
   vim.list_extend(buf_lines, get_linter_suggestion_msg(ft))
 
   local function set_syntax_hl()
@@ -209,11 +206,11 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
     vim.cmd 'let m=matchadd("string", "true")'
     vim.cmd 'let m=matchadd("error", "false")'
-    tbl_set_highlight(null_ls_providers, "LvimInfoIdentifier")
+    tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
     tbl_set_highlight(missing_formatters, "LvimInfoIdentifier")
     tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
-    -- tbl_set_highlight(u.get_supported_formatters_by_filetype(ft), "LvimInfoIdentifier")
-    -- tbl_set_highlight(u.get_supported_linters_by_filetype(ft), "LvimInfoIdentifier")
+    -- tbl_set_highlight(require("lsp.null-ls.formatters").list_available(ft), "LvimInfoIdentifier")
+    -- tbl_set_highlight(require("lsp.null-ls.linters").list_available(ft), "LvimInfoIdentifier")
     vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client_name .. '")')
   end
 
