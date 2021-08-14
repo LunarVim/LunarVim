@@ -1,5 +1,10 @@
 local M = {}
 
+--- Create a new floating window
+-- @param config The configuration passed to vim.api.nvim_open_win
+-- @param win_opts The options registered with vim.api.nvim_win_set_option
+-- @param buf_opts The options registered with vim.api.nvim_buf_set_option
+-- @return A new popup
 function M.new(config, win_opts, buf_opts)
   config = config or {}
   win_opts = win_opts or {}
