@@ -11,6 +11,7 @@ function M.align(container, lines, alignment)
 
   local indent_size = math.ceil(math.max(container.width - max_length, 0) * alignment)
   local padding = string.rep(" ", indent_size)
+
   local output = {}
   for _, line in ipairs(lines) do
     table.insert(output, padding .. line)

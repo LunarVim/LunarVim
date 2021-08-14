@@ -58,36 +58,19 @@ end
 ---@param callback could be used to set syntax highlighting rules for example
 ---@return bufnr buffer number of the created buffer
 ---@return win_id window ID of the created popup
-function M.create_simple_popup(buf_lines, callback)
-  -- runtime/lua/vim/lsp/util.lua
+function M.create_simple_popup(content_formatter, callback)
   local bufnr = vim.api.nvim_create_buf(false, true)
-  local height_percentage = 0.9
-  local width_percentage = 0.8
-  local row_start_percentage = (1 - height_percentage) / 2
-  local col_start_percentage = (1 - width_percentage) / 2
-  local opts = {}
-  opts.relative = "editor"
-  opts.height = math.min(math.ceil(vim.o.lines * height_percentage), #buf_lines)
-  opts.row = math.ceil(vim.o.lines * row_start_percentage)
-  opts.col = math.floor(vim.o.columns * col_start_percentage)
-  opts.width = math.floor(vim.o.columns * width_percentage)
-  opts.style = "minimal"
-  opts.border = "rounded"
-  --[[
-  opts.border = {
-    lvim.builtin.telescope.defaults.borderchars[5], -- "┌",
-    lvim.builtin.telescope.defaults.borderchars[3], -- "-",
-    lvim.builtin.telescope.defaults.borderchars[6], -- "┐",
-    lvim.builtin.telescope.defaults.borderchars[2], -- "|",
-    lvim.builtin.telescope.defaults.borderchars[7], -- "┘",
-    lvim.builtin.telescope.defaults.borderchars[3], -- "-",
-    lvim.builtin.telescope.defaults.borderchars[8], -- "└",
-    lvim.builtin.telescope.defaults.borderchars[4], -- "|",
+  local opts = {
+    relative = "editor",
+    height = math.ceil(vim.o.lines * 0.9),
+    width = math.floor(vim.o.columns * 0.8),
+    style = "minimal",
+    border = "rounded",
   }
-  --]]
+  opts.col = (vim.o.columns - opts.width) / 2
+  opts.row = (vim.o.lines - opts.height) / 2
 
   local win_id = vim.api.nvim_open_win(bufnr, true, opts)
-
   vim.api.nvim_win_set_buf(win_id, bufnr)
   -- this needs to be window option!
   vim.api.nvim_win_set_option(win_id, "number", false)
@@ -96,12 +79,14 @@ function M.create_simple_popup(buf_lines, callback)
   -- set buffer options
   vim.api.nvim_buf_set_option(bufnr, "filetype", "lspinfo")
   vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
-  buf_lines = vim.lsp.util._trim(buf_lines, {})
+
+  local buf_lines = content_formatter { width = opts.width }
+  -- buf_lines = vim.lsp.util._trim(buf_lines, {})
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, buf_lines)
   vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
-  if type(callback) == "function" then
-    callback()
-  end
+
+  callback()
+
   return bufnr, win_id
 end
 
@@ -133,15 +118,11 @@ function M.toggle_popup(ft)
     document_formatting = client.resolved_capabilities.document_formatting
   end
 
-  local buf_lines = {}
-  vim.list_extend(buf_lines, M.banner)
-
   local header = {
     fmt("Detected filetype:     %s", ft),
     fmt("Treesitter active:     %s", tostring(next(vim.treesitter.highlighter.active) ~= nil)),
     "",
   }
-  vim.list_extend(buf_lines, header)
 
   local lsp_info = {
     "Language Server Protocol (LSP) info",
@@ -152,7 +133,6 @@ function M.toggle_popup(ft)
     table.concat(vim.list_slice(client_enabled_caps, ((num_caps / 2) + 1)), ", "),
     "",
   }
-  vim.list_extend(buf_lines, lsp_info)
 
   local null_ls = require "lsp.null-ls"
   local registered_providers = null_ls.list_supported_provider_names(ft)
@@ -160,29 +140,46 @@ function M.toggle_popup(ft)
     "Formatters and linters",
     fmt("* Configured providers: %s", table.concat(registered_providers, "  , ") .. "  "),
   }
-  vim.list_extend(buf_lines, null_ls_info)
 
   local null_formatters = require "lsp.null-ls.formatters"
   local missing_formatters = null_formatters.list_unsupported_names(ft)
+  local missing_formatters_status = {}
   if vim.tbl_count(missing_formatters) > 0 then
-    local missing_formatters_status = {
-      fmt("* Missing formatters:   %s", table.concat(missing_formatters, "  , ") .. "  "),
-    }
-    vim.list_extend(buf_lines, missing_formatters_status)
+    table.insert(
+      missing_formatters_status,
+      fmt("* Missing formatters:   %s", table.concat(missing_formatters, "  , ") .. "  ")
+    )
   end
 
   local null_linters = require "lsp.null-ls.linters"
   local missing_linters = null_linters.list_unsupported_names(ft)
+  local missing_linters_status = {}
   if vim.tbl_count(missing_linters) > 0 then
-    local missing_linters_status = {
-      fmt("* Missing linters:      %s", table.concat(missing_linters, "  , ") .. "  "),
-    }
-    vim.list_extend(buf_lines, missing_linters_status)
+    table.insert(
+      missing_linters_status,
+      fmt("* Missing linters:      %s", table.concat(missing_linters, "  , ") .. "  ")
+    )
   end
 
-  vim.list_extend(buf_lines, { "" })
-  vim.list_extend(buf_lines, get_formatter_suggestion_msg(ft))
-  vim.list_extend(buf_lines, get_linter_suggestion_msg(ft))
+  local content_formatter = function(container)
+    local content = {}
+
+    for _, section in ipairs {
+      M.banner,
+      header,
+      lsp_info,
+      null_ls_info,
+      missing_formatters_status,
+      missing_linters_status,
+      { "" },
+      get_formatter_suggestion_msg(ft),
+      get_linter_suggestion_msg(ft),
+    } do
+      vim.list_extend(content, section)
+    end
+
+    return text.align(container, content, 0.5)
+  end
 
   local function set_syntax_hl()
     vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
@@ -200,7 +197,6 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client_name .. '")')
   end
 
-  buf_lines = text.align({ width = vim.o.columns }, buf_lines, 0.15)
-  return M.create_simple_popup(buf_lines, set_syntax_hl)
+  return M.create_simple_popup(content_formatter, set_syntax_hl)
 end
 return M
