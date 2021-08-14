@@ -815,6 +815,10 @@ lvim.lang = {
     lsp = {
       provider = "puppet",
       setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/puppet/puppet-editor-services/puppet-languageserver",
+          "--stdio",
+        },
         on_attach = common_on_attach,
         on_init = common_on_init,
         capabilities = common_capabilities,
