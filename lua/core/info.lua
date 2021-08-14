@@ -28,7 +28,7 @@ local function get_formatter_suggestion_msg(ft)
     "",
     fmt("* List of supported formatters: %s", str_list(supported_formatters)),
     "* Configured formatter needs to be installed and executable.",
-    "* Enable installed formatter(s) with following config in ~/.config/lvim/config.lua",
+    fmt("* Enable installed formatter(s) with following config in %s", USER_CONFIG_PATH),
     "",
     fmt("  lvim.lang.%s.formatters = { { exe = '%s' } }", ft, table.concat(supported_formatters, "│")),
     "",
@@ -46,7 +46,7 @@ local function get_linter_suggestion_msg(ft)
     "",
     fmt("* List of supported linters: %s", str_list(supported_linters)),
     "* Configured linter needs to be installed and executable.",
-    "* Enable installed linter(s) with following config in ~/.config/lvim/config.lua",
+    fmt("* Enable installed linter(s) with following config in %s", USER_CONFIG_PATH),
     "",
     fmt("  lvim.lang.%s.linters = { { exe = '%s' } }", ft, table.concat(supported_linters, "│")),
     "",
@@ -91,10 +91,6 @@ function M.create_simple_popup(content_formatter, callback)
 end
 
 local function tbl_set_highlight(terms, highlight_group)
-  if type(terms) ~= "table" then
-    return
-  end
-
   for _, v in pairs(terms) do
     vim.cmd('let m=matchadd("' .. highlight_group .. '", "' .. v .. "[ ,│']\")")
   end
