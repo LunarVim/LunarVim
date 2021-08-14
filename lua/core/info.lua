@@ -83,9 +83,14 @@ function M.toggle_popup(ft)
 
   local null_ls = require "lsp.null-ls"
   local registered_providers = null_ls.list_supported_provider_names(ft)
+  local registered_count = vim.tbl_count(registered_providers)
   local null_ls_info = {
     "Formatters and linters",
-    fmt("* Configured providers: %s", table.concat(registered_providers, "  , ") .. "  "),
+    fmt(
+      "* Configured providers: %s%s",
+      table.concat(registered_providers, "  , "),
+      registered_count > 0 and "  " or ""
+    ),
   }
 
   local null_formatters = require "lsp.null-ls.formatters"
