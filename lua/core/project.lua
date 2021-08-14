@@ -43,7 +43,7 @@ function M.setup()
   }
 
   if package.loaded["telescope"] then
-    require('telescope').load_extension('projects')
+    require("telescope").load_extension "projects"
   end
 end
 return M
