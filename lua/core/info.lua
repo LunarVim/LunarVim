@@ -53,43 +53,6 @@ local function get_linter_suggestion_msg(ft)
   }
 end
 
----creates an average size popup
----@param buf_lines a list of lines to print
----@param callback could be used to set syntax highlighting rules for example
----@return bufnr buffer number of the created buffer
----@return win_id window ID of the created popup
-function M.create_simple_popup(content_formatter, callback)
-  local bufnr = vim.api.nvim_create_buf(false, true)
-  local opts = {
-    relative = "editor",
-    height = math.ceil(vim.o.lines * 0.9),
-    width = math.floor(vim.o.columns * 0.8),
-    style = "minimal",
-    border = "rounded",
-  }
-  opts.col = (vim.o.columns - opts.width) / 2
-  opts.row = (vim.o.lines - opts.height) / 2
-
-  local win_id = vim.api.nvim_open_win(bufnr, true, opts)
-  vim.api.nvim_win_set_buf(win_id, bufnr)
-  -- this needs to be window option!
-  vim.api.nvim_win_set_option(win_id, "number", false)
-  vim.cmd "setlocal nocursorcolumn"
-  vim.cmd "setlocal wrap"
-  -- set buffer options
-  vim.api.nvim_buf_set_option(bufnr, "filetype", "lspinfo")
-  vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
-
-  local buf_lines = content_formatter { width = opts.width }
-  -- buf_lines = vim.lsp.util._trim(buf_lines, {})
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, buf_lines)
-  vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
-
-  callback()
-
-  return bufnr, win_id
-end
-
 local function tbl_set_highlight(terms, highlight_group)
   for _, v in pairs(terms) do
     vim.cmd('let m=matchadd("' .. highlight_group .. '", "' .. v .. "[ ,│']\")")
@@ -157,7 +120,7 @@ function M.toggle_popup(ft)
     )
   end
 
-  local content_formatter = function(container)
+  local content_provider = function(popup)
     local content = {}
 
     for _, section in ipairs {
@@ -174,7 +137,7 @@ function M.toggle_popup(ft)
       vim.list_extend(content, section)
     end
 
-    return text.align(container, content, 0.5)
+    return text.align(popup, content, 0.5)
   end
 
   local function set_syntax_hl()
@@ -193,6 +156,11 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client_name .. '")')
   end
 
-  return M.create_simple_popup(content_formatter, set_syntax_hl)
+  local popup_factory = require "interface.popup"
+  local popup = popup_factory.new({}, { number = false }, { modifiable = false, filetype = "lspinfo" })
+  popup.display(content_provider)
+  set_syntax_hl()
+
+  return popup
 end
 return M
