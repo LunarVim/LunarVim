@@ -4,12 +4,12 @@ local function find_root_dir()
   local util = require "lspconfig/util"
   local lsp_utils = require "lsp.utils"
 
-  local ts_client = lsp_utils.get_active_client_by_ft "typescript"
-  if not ts_client then
-    local dirname = vim.fn.expand "%:p:h"
-    return util.root_pattern "package.json"(dirname)
+  local status_ok, ts_client = lsp_utils.is_client_active "typescript"
+  if status_ok then
+    return ts_client.config.root_dir
   end
-  return ts_client.config.root_dir
+  local dirname = vim.fn.expand "%:p:h"
+  return util.root_pattern "package.json"(dirname)
 end
 
 local function from_node_modules(command)
