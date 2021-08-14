@@ -7,14 +7,9 @@ local logger = require("core.log"):get_default()
 
 local function list_names(linters, options)
   options = options or {}
-  local names = {}
-
   local filter = options.filter or "supported"
-  for name, _ in pairs(linters[filter]) do
-    table.insert(names, name)
-  end
 
-  return names
+  return vim.tbl_keys(linters[filter])
 end
 
 function M.list_supported_names(filetype)
