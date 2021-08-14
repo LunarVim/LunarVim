@@ -1,6 +1,7 @@
 local M = {}
 
 local text = require "interface.text"
+local fmt = string.format
 
 M.banner = {
   "",
@@ -13,7 +14,7 @@ M.banner = {
 }
 
 local function str_list(list)
-  return "[ " .. table.concat(list, ", ") .. " ]"
+  return fmt("[ %s ]", table.concat(list, ", "))
 end
 
 local function get_formatter_suggestion_msg(ft)
@@ -25,15 +26,11 @@ local function get_formatter_suggestion_msg(ft)
     "",
     " HINT ",
     "",
-    "* List of supported formatters: " .. str_list(supported_formatters),
+    fmt("* List of supported formatters: %s", str_list(supported_formatters)),
     "* Configured formatter needs to be installed and executable.",
     "* Enable installed formatter(s) with following config in ~/.config/lvim/config.lua",
     "",
-    "  lvim.lang."
-      .. tostring(ft)
-      .. [[.formatters = { { exe = ']]
-      .. table.concat(supported_formatters, "│")
-      .. [[' } }]],
+    fmt("  lvim.lang.%s.formatters = { { exe = '%s' } }", ft, table.concat(supported_formatters, "│")),
     "",
   }
 end
@@ -47,11 +44,11 @@ local function get_linter_suggestion_msg(ft)
     "",
     " HINT ",
     "",
-    "* List of supported linters: " .. str_list(supported_linters),
+    fmt("* List of supported linters: %s", str_list(supported_linters)),
     "* Configured linter needs to be installed and executable.",
     "* Enable installed linter(s) with following config in ~/.config/lvim/config.lua",
     "",
-    "  lvim.lang." .. tostring(ft) .. [[.linters = { { exe = ']] .. table.concat(supported_linters, "│") .. [[' } }]],
+    fmt("  lvim.lang.%s.linters = { { exe = '%s' } }", ft, table.concat(supported_linters, "│")),
     "",
   }
 end
@@ -140,18 +137,18 @@ function M.toggle_popup(ft)
   vim.list_extend(buf_lines, M.banner)
 
   local header = {
-    "Detected filetype:     " .. tostring(ft),
-    "Treesitter active:     " .. tostring(next(vim.treesitter.highlighter.active) ~= nil),
+    fmt("Detected filetype:     %s", ft),
+    fmt("Treesitter active:     %s", tostring(next(vim.treesitter.highlighter.active) ~= nil)),
     "",
   }
   vim.list_extend(buf_lines, header)
 
   local lsp_info = {
     "Language Server Protocol (LSP) info",
-    "* Associated server:   " .. client_name,
-    "* Active:              " .. tostring(is_client_active) .. " (id: " .. tostring(client_id) .. ")",
-    "* Supports formatting: " .. tostring(document_formatting),
-    "* Capabilities list:   " .. table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", "),
+    fmt("* Associated server:   %s", client_name),
+    fmt("* Active:              %s (id: %d)", tostring(is_client_active), client_id),
+    fmt("* Supports formatting: %s", tostring(document_formatting)),
+    fmt("* Capabilities list:   %s", table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", ")),
     table.concat(vim.list_slice(client_enabled_caps, ((num_caps / 2) + 1)), ", "),
     "",
   }
@@ -161,7 +158,7 @@ function M.toggle_popup(ft)
   local registered_providers = null_ls.list_supported_provider_names(ft)
   local null_ls_info = {
     "Formatters and linters",
-    "* Configured providers: " .. table.concat(registered_providers, "  , ") .. "  ",
+    fmt("* Configured providers: %s", table.concat(registered_providers, "  , ") .. "  "),
   }
   vim.list_extend(buf_lines, null_ls_info)
 
@@ -169,7 +166,7 @@ function M.toggle_popup(ft)
   local missing_formatters = null_formatters.list_unsupported_names(ft)
   if vim.tbl_count(missing_formatters) > 0 then
     local missing_formatters_status = {
-      "* Missing formatters:   " .. table.concat(missing_formatters, "  , ") .. "  ",
+      fmt("* Missing formatters:   %s", table.concat(missing_formatters, "  , ") .. "  "),
     }
     vim.list_extend(buf_lines, missing_formatters_status)
   end
@@ -178,13 +175,12 @@ function M.toggle_popup(ft)
   local missing_linters = null_linters.list_unsupported_names(ft)
   if vim.tbl_count(missing_linters) > 0 then
     local missing_linters_status = {
-      "* Missing linters:      " .. table.concat(missing_linters, "  , ") .. "  ",
+      fmt("* Missing linters:      %s", table.concat(missing_linters, "  , ") .. "  "),
     }
     vim.list_extend(buf_lines, missing_linters_status)
   end
 
   vim.list_extend(buf_lines, { "" })
-
   vim.list_extend(buf_lines, get_formatter_suggestion_msg(ft))
   vim.list_extend(buf_lines, get_linter_suggestion_msg(ft))
 
