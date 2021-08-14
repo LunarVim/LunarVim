@@ -26,7 +26,7 @@ lvim = {
     gitsigns = {},
     which_key = {},
     comment = {},
-    rooter = {},
+    project = {},
     galaxyline = {},
     bufferline = {},
     dap = {},
@@ -1295,5 +1295,5 @@ require("core.terminal").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
-require("core.rooter").config()
+require("core.project").config()
 require("core.bufferline").config()

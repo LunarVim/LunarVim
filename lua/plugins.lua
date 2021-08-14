@@ -144,17 +144,16 @@ return {
     end,
   },
 
-  -- vim-rooter
+  -- project.nvim
   {
-    "airblade/vim-rooter",
-    -- event = "BufReadPre",
+    "ahmedkhalf/project.nvim",
     config = function()
-      require("core.rooter").setup()
-      if lvim.builtin.rooter.on_config_done then
-        lvim.builtin.rooter.on_config_done()
+      require("core.project").setup()
+      if lvim.builtin.project.on_config_done then
+        lvim.builtin.project.on_config_done()
       end
     end,
-    disable = not lvim.builtin.rooter.active,
+    disable = not lvim.builtin.project.active,
   },
 
   -- Icons

@@ -29,19 +29,16 @@ M.config = function()
         description = { "  Find File          " },
         command = "Telescope find_files",
       },
-      b = {
+      -- b is reserved for the core.project module
+      c = {
         description = { "  Recently Used Files" },
         command = "Telescope oldfiles",
       },
-      -- c = {
-      --   description = { "  Load Last Session  " },
-      --   command = "SessionLoad",
-      -- },
-      c = {
+      d = {
         description = { "  Find Word          " },
         command = "Telescope live_grep",
       },
-      d = {
+      e = {
         description = { "  Settings           " },
         command = ":e " .. USER_CONFIG_PATH,
       },
