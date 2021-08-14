@@ -34,7 +34,7 @@ local function lsp_highlight_document(client)
 end
 
 local function add_lsp_buffer_keybindings(bufnr)
-  local wk = require "which-key"
+  local status_ok, wk = pcall(require, "which-key")
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
@@ -48,7 +48,9 @@ local function add_lsp_buffer_keybindings(bufnr)
       "Show line diagnostics",
     },
   }
-  wk.register(keys, { mode = "n", buffer = bufnr })
+  if status_ok then
+    wk.register(keys, { mode = "n", buffer = bufnr })
+  end
 end
 
 local function set_smart_cwd(client)

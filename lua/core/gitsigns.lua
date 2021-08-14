@@ -1,6 +1,7 @@
 local M = {}
 M.config = function()
   lvim.builtin.gitsigns = {
+    active = true,
     signs = {
       add = {
         hl = "GitSignsAdd",

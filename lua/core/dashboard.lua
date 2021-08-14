@@ -3,6 +3,8 @@ M.config = function()
   lvim.builtin.dashboard = {
     active = false,
     search_handler = "telescope",
+    disable_at_vim_enter = 0,
+    session_directory = os.getenv "HOME" .. "/.cache/lvim/sessions",
     custom_header = {
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣶⣾⠿⠿⠟⠛⠛⠛⠛⠿⠿⣿⣷⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -52,7 +54,7 @@ M.config = function()
 end
 
 M.setup = function()
-  vim.g.dashboard_disable_at_vimenter = 0
+  vim.g.dashboard_disable_at_vimenter = lvim.builtin.dashboard.disable_at_vim_enter
 
   vim.g.dashboard_custom_header = lvim.builtin.dashboard.custom_header
 
@@ -62,12 +64,8 @@ M.setup = function()
 
   lvim.builtin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
 
-  -- f = {
-  --   description = { "  Neovim Config Files" },
-  --   command = "Telescope find_files cwd=" .. CONFIG_PATH,
-  -- },
-  -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
-  vim.cmd 'let g:dashboard_session_directory = "~/.config/lvim/.sessions"'
+  vim.g.dashboard_session_directory = lvim.builtin.dashboard.session_directory
+
   vim.cmd "let packages = len(globpath('~/.local/share/lunarvim/site/pack/packer/start', '*', 0, 1))"
 
   vim.api.nvim_exec(
@@ -76,11 +74,6 @@ M.setup = function()
 ]],
     false
   )
-
-  -- file_browser = {description = {' File Browser'}, command = 'Telescope find_files'},
-
-  -- vim.g.dashboard_session_directory = CACHE_PATH..'/session'
-  -- vim.g.dashboard_custom_footer = lvim.dashboard.footer
 
   require("core.autocmds").define_augroups {
     _dashboard = {

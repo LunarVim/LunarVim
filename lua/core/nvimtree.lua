@@ -3,6 +3,7 @@ local Log = require "core.log"
 --
 M.config = function()
   lvim.builtin.nvimtree = {
+    active = true,
     side = "left",
     width = 30,
     show_icons = {
