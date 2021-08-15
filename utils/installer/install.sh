@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 #Set branch to master unless specified by the user
 declare -r LVBRANCH="${LVBRANCH:-master}"
