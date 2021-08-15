@@ -144,7 +144,7 @@ function M.setup(lang)
 
   -- initialize language server for each provider
   for provider, single_lang_server in pairs(lsp) do
-    if not require("utils").check_lsp_client_active(provider) then
+    if not require("lsp.utils").is_client_active(provider) then
       require("lspconfig")[provider].setup(single_lang_server.setup)
     end
   end
