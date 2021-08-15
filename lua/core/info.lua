@@ -70,7 +70,7 @@ function M.toggle_popup(ft)
     fmt("Treesitter active:      %s", tostring(next(vim.treesitter.highlighter.active) ~= nil)),
   }
 
-  local txt = require "interface.text"
+  local text = require "interface.text"
   local lsp_info = {
     "Language Server Protocol (LSP) info",
     fmt("* Associated server:    %s", client_name),
@@ -79,7 +79,8 @@ function M.toggle_popup(ft)
   }
   local caps_text = "* Capabilities list:    "
   local caps_text_len = caps_text:len()
-  local enabled_caps = txt.shift_left(client_enabled_caps, caps_text_len)
+  local enabled_caps = text.format_table(client_enabled_caps, 3, " | ")
+  enabled_caps = text.shift_left(enabled_caps, caps_text_len)
   enabled_caps[1] = fmt("%s%s", caps_text, enabled_caps[1]:sub(caps_text_len + 1))
   vim.list_extend(lsp_info, enabled_caps)
 
@@ -137,7 +138,6 @@ function M.toggle_popup(ft)
       vim.list_extend(content, section)
     end
 
-    local text = require "interface.text"
     return text.align(popup, content, 0.5)
   end
 
