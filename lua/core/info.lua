@@ -57,11 +57,9 @@ function M.toggle_popup(ft)
   local client_name = ""
   local client_id = 0
   local document_formatting = false
-  local num_caps = 0
   if client ~= nil then
     is_client_active = not client.is_stopped()
     client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
-    num_caps = vim.tbl_count(client_enabled_caps)
     client_name = client.name
     client_id = client.id
     document_formatting = client.resolved_capabilities.document_formatting
@@ -72,14 +70,18 @@ function M.toggle_popup(ft)
     fmt("Treesitter active:      %s", tostring(next(vim.treesitter.highlighter.active) ~= nil)),
   }
 
+  local txt = require "interface.text"
   local lsp_info = {
     "Language Server Protocol (LSP) info",
     fmt("* Associated server:    %s", client_name),
     fmt("* Active:               %s (id: %d)", tostring(is_client_active), client_id),
     fmt("* Supports formatting:  %s", tostring(document_formatting)),
-    fmt("* Capabilities list:    %s", table.concat(vim.list_slice(client_enabled_caps, 1, num_caps / 2), ", ")),
-    table.concat(vim.list_slice(client_enabled_caps, ((num_caps / 2) + 1)), ", "),
   }
+  local caps_text = "* Capabilities list:    "
+  local caps_text_len = caps_text:len()
+  local enabled_caps = txt.shift_left(client_enabled_caps, caps_text_len)
+  enabled_caps[1] = fmt("%s%s", caps_text, enabled_caps[1]:sub(caps_text_len + 1))
+  vim.list_extend(lsp_info, enabled_caps)
 
   local null_ls = require "lsp.null-ls"
   local registered_providers = null_ls.list_supported_provider_names(ft)
