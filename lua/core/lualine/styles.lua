@@ -113,7 +113,7 @@ local lvim = {
         condition = conditions.hide_in_width,
       },
       {
-        function()
+        function(msg)
           msg = msg or "LSP Inactive"
           local buf_clients = vim.lsp.buf_get_clients()
           if next(buf_clients) == nil then
