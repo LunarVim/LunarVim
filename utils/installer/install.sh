@@ -155,7 +155,8 @@ function check_system_deps() {
   for dep in "${!__system_deps[@]}"; do
     if ! command -v "${__system_deps[$dep]}" &>/dev/null; then
       print_missing_dep_msg "$dep"
-      exit 1
+      # do not abort in a Github workflow
+      [ -z "$GITHUB_ACTIONS" ] && exit 1
     fi
   done
 }
@@ -212,6 +213,20 @@ function clone_lvim() {
     --depth 1 https://github.com/$LV_REMOTE $LUNARVIM_RUNTIME_DIR/lvim"
   printf "Running: %s" "$CLONE_CMD"
   eval "$CLONE_CMD"
+}
+
+function setup_shim() {
+  if [ ! -d "$INSTALL_PREFIX/bin" ]; then
+    mkdir -p "$INSTALL_PREFIX/bin"
+  fi
+  cat >"$INSTALL_PREFIX/bin/lvim" <<EOF
+#!/usr/bin/env bash
+
+declare -r LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
+declare -r LUNARVIM_CONFIG_DIR="$LUNARVIM_CONFIG_DIR"
+
+exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "\$@"
+EOF
 }
 
 function setup_shim() {
