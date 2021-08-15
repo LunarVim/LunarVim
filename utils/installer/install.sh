@@ -244,6 +244,9 @@ esac
 # install pynvim
 (pip3 list | grep pynvim >/dev/null && echo "pynvim installed, moving on...") || installpynvim
 
+# install extra pkgs
+installextrapackages
+
 if [ -e "$HOME/.local/share/lunarvim/site/pack/packer/start/packer.nvim" ]; then
   echo 'packer already installed'
 else
