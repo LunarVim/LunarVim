@@ -63,18 +63,18 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules")
+--   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
 -- }
 -- or if you need something more advanced
 -- lvim.lsp.null_ls.setup.root_dir = function(fname)
--- 	if vim.bo.filetype == "javascript" then
--- 		return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
--- 			or require("lspconfig/util").path.dirname(fname)
--- 	elseif vim.bo.filetype == "php" then
--- 		return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
--- 	else
--- 		return require("lspconfig/util").root_pattern("Makefile", ".git")(fname)
--- 	end
+--   if vim.bo.filetype == "javascript" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
+--       or require("lspconfig/util").path.dirname(fname)
+--   elseif vim.bo.filetype == "php" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
+--   else
+--     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname)
+--   end
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)
