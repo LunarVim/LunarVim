@@ -42,11 +42,6 @@ end
 require("settings").load_commands()
 autocmds.define_augroups(lvim.autocommands)
 
-local keymap = require "utils.keymap"
-local default_keymaps = require "keymappings"
-keymap.load(default_keymaps.keymaps, default_keymaps.opts)
-keymap.load(lvim.keys, default_keymaps.opts)
-
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
 plugin_loader:load { plugins, lvim.plugins }
@@ -72,6 +67,8 @@ if lsp_settings_status_ok then
     config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
   }
 end
+
+require("keymappings").setup()
 
 -- TODO: these guys need to be in language files
 -- if lvim.lang.emmet.active then

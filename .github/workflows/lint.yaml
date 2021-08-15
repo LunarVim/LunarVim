@@ -22,17 +22,13 @@ jobs:
       
       - name: Run luacheck
         run: luacheck *.lua lua/
-    
-  shell-linter:
-    name: "Linting with shellcheck"
-    runs-on: ubuntu-20.04
+
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Use shellcheck
-        run: sudo apt-get install shellcheck
-      
-      - name: Run shellcheck
-        run:  |
-          pwd
-          shellcheck $(find . -name "*.sh")
+    - uses: actions/checkout@v2
+    - name: Run ShellCheck
+      uses: ludeeus/action-shellcheck@master
+      with:
+       scandir: './utils'

@@ -47,7 +47,7 @@ M.config = function()
       },
     },
 
-    footer = { "chrisatmachine.com" },
+    footer = { "lunarvim.org" },
   }
 end
 
@@ -72,7 +72,7 @@ M.setup = function()
 
   vim.api.nvim_exec(
     [[
-    let g:dashboard_custom_footer = ['LunarVim loaded '..packages..' plugins ']
+    let g:dashboard_custom_footer = ['LunarVim loaded '..packages..' plugins  ']
 ]],
     false
   )
@@ -84,7 +84,7 @@ M.setup = function()
 
   require("core.autocmds").define_augroups {
     _dashboard = {
-      -- seems to be nobuflisted that makes my stuff disapear will do more testing
+      -- seems to be nobuflisted that makes my stuff disappear will do more testing
       {
         "FileType",
         "dashboard",

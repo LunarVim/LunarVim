@@ -28,10 +28,14 @@ function M.setup()
 
     for i, v in ipairs(diagnostics) do
       local source = v.source
-      if string.find(v.source, "/") then
-        source = string.sub(v.source, string.find(v.source, "([%w-_]+)$"))
+      if source then
+        if string.find(source, "/") then
+          source = string.sub(v.source, string.find(v.source, "([%w-_]+)$"))
+        end
+        diagnostics[i].message = string.format("%s: %s", source, v.message)
+      else
+        diagnostics[i].message = string.format("%s", v.message)
       end
-      diagnostics[i].message = string.format("%s: %s", source, v.message)
 
       if vim.tbl_contains(vim.tbl_keys(v), "code") then
         diagnostics[i].message = diagnostics[i].message .. string.format(" [%s]", v.code)

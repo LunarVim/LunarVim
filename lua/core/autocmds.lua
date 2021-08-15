@@ -3,6 +3,11 @@ local autocommands = {}
 lvim.autocommands = {
   _general_settings = {
     {
+      "Filetype",
+      "*",
+      "lua require('utils.ft').do_filetype(vim.fn.expand(\"<amatch>\"))",
+    },
+    {
       "TextYankPost",
       "*",
       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
@@ -51,6 +56,10 @@ lvim.autocommands = {
   --     {'BufWinEnter', '.gmi', 'setlocal filetype=markdown'}, {'BufRead', '*.gmi', 'setlocal filetype=markdown'},
   --     {'BufNewFile', '*.gmi', 'setlocal filetype=markdown'}
   -- },
+  _git = {
+    { "FileType", "gitcommit", "setlocal wrap" },
+    { "FileType", "gitcommit", "setlocal spell" },
+  },
   _markdown = {
     { "FileType", "markdown", "setlocal wrap" },
     { "FileType", "markdown", "setlocal spell" },
@@ -63,7 +72,7 @@ lvim.autocommands = {
     { "VimResized", "*", "wincmd =" },
   },
   _packer_compile = {
-    -- will cause split windows to be resized evenly if main window is resized
+    -- will run PackerCompile after writing plugins.lua
     { "BufWritePost", "plugins.lua", "PackerCompile" },
   },
   _general_lsp = {

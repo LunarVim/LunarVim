@@ -1,5 +1,6 @@
 lvim.builtin.galaxyline = {
   active = true,
+  show_mode = false,
   colors = {
     alt_bg = "#2E2E2E",
     grey = "#858585",

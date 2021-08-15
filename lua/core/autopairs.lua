@@ -1,8 +1,10 @@
 -- if not package.loaded['nvim-autopairs'] then
 --   return
 -- end
+local Log = require "core.log"
 local status_ok, _ = pcall(require, "nvim-autopairs")
 if not status_ok then
+  Log:get_default().error "Failed to load autopairs"
   return
 end
 local npairs = require "nvim-autopairs"
@@ -25,9 +27,10 @@ MUtils.completion_confirm = function()
 end
 
 if package.loaded["compe"] then
+  local map_complete_optional = vim.bo.filetype ~= "tex"
   require("nvim-autopairs.completion.compe").setup {
     map_cr = true, --  map <CR> on insert mode
-    map_complete = true, -- it will auto insert `(` after select function or method item
+    map_complete = map_complete_optional, -- it will auto insert `(` after select function or method item
   }
 end
 

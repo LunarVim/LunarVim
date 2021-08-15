@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.which_key = {
     active = false,
@@ -67,7 +68,7 @@ M.config = function()
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
       ["e"] = { "<cmd>lua require'core.nvimtree'.toggle_tree()<CR>", "Explorer" },
       ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
-      ["h"] = { '<cmd>let @/=""<CR>', "No Highlight" },
+      ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "jump to buffer" },
@@ -158,7 +159,7 @@ M.config = function()
           t = { "<cmd>lua require('lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
           i = { "<cmd>lua require('lsp.peek').Peek('implementation')<cr>", "Implementation" },
         },
-        q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
+        q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = {
@@ -166,7 +167,43 @@ M.config = function()
           "Workspace Symbols",
         },
       },
-
+      L = {
+        name = "+LunarVim",
+        c = {
+          "<cmd>edit ~/.config/lvim/config.lua<cr>",
+          "Edit config.lua",
+        },
+        f = {
+          "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>",
+          "Find LunarVim files",
+        },
+        g = {
+          "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>",
+          "Grep LunarVim files",
+        },
+        k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
+        i = {
+          "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
+          "Toggle LunarVim Info",
+        },
+        l = {
+          name = "+logs",
+          d = {
+            "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
+            "view default log",
+          },
+          D = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
+          n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
+          N = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
+          l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+          L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
+          p = {
+            "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",
+            "view packer log",
+          },
+          P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
+        },
+      },
       s = {
         name = "Search",
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
@@ -198,6 +235,7 @@ M.setup = function()
   -- end
   local status_ok, which_key = pcall(require, "which-key")
   if not status_ok then
+    Log:get_default "Failed to load whichkey"
     return
   end
 

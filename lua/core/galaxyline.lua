@@ -1,8 +1,10 @@
 -- if not package.loaded['galaxyline'] then
 --   return
 -- end
+local Log = require "core.log"
 local status_ok, gl = pcall(require, "galaxyline")
 if not status_ok then
+  Log:get_default().error "Failed to load galaxyline"
   return
 end
 
@@ -15,6 +17,20 @@ end
 local condition = require "galaxyline.condition"
 local gls = gl.section
 gl.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
+
+local function get_mode_name()
+  local names = {
+    n = "NORMAL",
+    i = "INSERT",
+    c = "COMMAND",
+    v = "VISUAL",
+    V = "VISUAL LINE",
+    t = "TERMINAL",
+    R = "REPLACE",
+    [""] = "VISUAL BLOCK",
+  }
+  return names[vim.fn.mode()]
+end
 
 table.insert(gls.left, {
   ViMode = {
@@ -42,6 +58,16 @@ table.insert(gls.left, {
         ["!"] = colors.blue,
         t = colors.blue,
       }
+      if lvim.builtin.galaxyline.show_mode then
+        local name = get_mode_name()
+        -- Fall back to the default behavior is a name is not defined
+        if name ~= nil then
+          vim.api.nvim_command("hi GalaxyViMode guibg=" .. mode_color[vim.fn.mode()])
+          vim.api.nvim_command("hi GalaxyViMode guifg=" .. colors.alt_bg)
+          return "  " .. name .. " "
+        end
+      end
+      vim.api.nvim_command("hi GalaxyViMode guibg=" .. colors.alt_bg)
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
       return "▊"
     end,
@@ -202,20 +228,23 @@ table.insert(gls.right, {
 
 local function get_attached_provider_name(msg)
   msg = msg or "LSP Inactive"
+
   local buf_clients = vim.lsp.buf_get_clients()
-  local utils = require "utils"
   if next(buf_clients) == nil then
     return msg
   end
-  local buf_ft = vim.bo.filetype
+
   local buf_client_names = {}
-  local null_ls_providers = require("lsp.null-ls").get_registered_providers_by_filetype(buf_ft)
   for _, client in pairs(buf_clients) do
     if client.name ~= "null-ls" then
       table.insert(buf_client_names, client.name)
     end
   end
-  utils.list_extend_unique(buf_client_names, null_ls_providers)
+
+  local null_ls = require "lsp.null-ls"
+  local null_ls_providers = null_ls.list_supported_provider_names(vim.bo.filetype)
+  vim.list_extend(buf_client_names, null_ls_providers)
+
   return table.concat(buf_client_names, ", ")
 end
 
