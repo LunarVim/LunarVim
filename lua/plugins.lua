@@ -164,8 +164,12 @@ return {
 
   -- Status Line and Bufferline
   {
+    -- "hoob3rt/lualine.nvim",
+    "Lunarvim/lualine.nvim",
     config = function()
+      require("core.lualine").setup()
     end,
+    disable = not lvim.builtin.lualine.active,
   },
 
   {

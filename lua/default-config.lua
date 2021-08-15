@@ -27,7 +27,7 @@ lvim = {
     which_key = {},
     comment = {},
     project = {},
-    galaxyline = {},
+    lualine = {},
     bufferline = {},
     dap = {},
     dashboard = {},
@@ -1342,3 +1342,4 @@ require("core.project").config()
 require("core.bufferline").config()
 require("core.autopairs").config()
 require("core.comment").config()
+require("core.lualine").config()
