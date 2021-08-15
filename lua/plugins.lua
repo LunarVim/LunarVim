@@ -164,15 +164,8 @@ return {
 
   -- Status Line and Bufferline
   {
-    "glepnir/galaxyline.nvim",
     config = function()
-      require "core.galaxyline"
-      if lvim.builtin.galaxyline.on_config_done then
-        lvim.builtin.galaxyline.on_config_done(require "galaxyline")
-      end
     end,
-    event = "BufWinEnter",
-    disable = not lvim.builtin.galaxyline.active,
   },
 
   {
