@@ -49,15 +49,15 @@ function main() {
   # Welcome
   __add_separator "80"
 
-  cat <<"EOF"
-88\                                                   88\               
-88 |                                                  \__|              
-88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\  
-88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\ 
-88 |88 |  88 |88 |  88 | 888888$ |88 |  \__|\88\88  / 88 |88 / 88 / 88 |
-88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
-88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
-\__| \______/ \__|  \__| \_______|\__|         \_/    \__|\__| \__| \__|
+  cat <<'EOF'
+      88\                                                   88\               
+      88 |                                                  \__|              
+      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\  
+      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\ 
+      88 |88 |  88 |88 |  88 | 888888$ |88 |  \__|\88\88  / 88 |88 / 88 / 88 |
+      88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
+      88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
+      \__| \______/ \__|  \__| \_______|\__|         \_/    \__|\__| \__| \__|
 EOF
 
   __add_separator "80"
@@ -107,7 +107,7 @@ EOF
     echo "Updating LunarVim"
     update_lvim
   else
-    clone_lvim "$@"
+    clone_lvim
     setup_lvim
   fi
 
@@ -150,7 +150,8 @@ function check_system_deps() {
   for dep in "${!__system_deps[@]}"; do
     if ! command -v "${__system_deps[$dep]}" &>/dev/null; then
       print_missing_dep_msg "$dep"
-      exit 1
+      # do not abort in a Github workflow
+      [ -z "$GITHUB_ACTIONS" ] && exit 1
     fi
   done
 }
@@ -203,17 +204,10 @@ function install_packer() {
 
 function clone_lvim() {
   echo "Cloning LunarVim configuration"
-  case "$@" in
-    *--testing*)
-      cp -r "$(pwd)" "$LUNARVIM_RUNTIME_DIR/lvim"
-      ;;
-    *)
-      local CLONE_CMD="git clone --progress --branch $LVBRANCH \
-        --depth 1 https://github.com/$LV_REMOTE $LUNARVIM_RUNTIME_DIR/lvim"
-      printf "Running: %s" "$CLONE_CMD"
-      eval "$CLONE_CMD"
-      ;;
-  esac
+  local CLONE_CMD="git clone --progress --branch $LVBRANCH \
+    --depth 1 https://github.com/$LV_REMOTE $LUNARVIM_RUNTIME_DIR/lvim"
+  printf "Running: %s" "$CLONE_CMD"
+  eval "$CLONE_CMD"
 }
 
 function lvim() {
@@ -224,14 +218,25 @@ function lvim() {
   fi
 }
 
+function setup_shim() {
+  if [ ! -d "$INSTALL_PREFIX/bin" ]; then
+    mkdir -p "$INSTALL_PREFIX/bin"
+  fi
+  cat >"$INSTALL_PREFIX/bin/lvim" <<EOF
+#!/usr/bin/env bash
+
+declare -r LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
+declare -r LUNARVIM_CONFIG_DIR="$LUNARVIM_CONFIG_DIR"
+
+exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "\$@"
+EOF
+}
+
 function setup_lvim() {
 
   echo "Installing LunarVim shim"
 
-  if [ ! -d "$INSTALL_PREFIX/bin" ]; then
-    mkdir -p "$INSTALL_PREFIX/bin"
-  fi
-  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/bin/lvim" "$INSTALL_PREFIX/bin"
+  setup_shim
   chmod u+x "$INSTALL_PREFIX/bin/lvim"
 
   echo "Preparing Packer setup"
