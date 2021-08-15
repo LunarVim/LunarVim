@@ -157,11 +157,13 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client_name .. '")')
   end
 
-  local popup_factory = require "interface.popup"
-  local popup = popup_factory.new({}, { number = false }, { modifiable = false, filetype = "lspinfo" })
-  popup.display(content_provider)
+  local Popup = require("interface.popup"):new {
+    win_opts = { number = false },
+    buf_opts = { modifiable = false, filetype = "lspinfo" },
+  }
+  Popup:display(content_provider)
   set_syntax_hl()
 
-  return popup
+  return Popup
 end
 return M
