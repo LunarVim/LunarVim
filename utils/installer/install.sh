@@ -64,17 +64,22 @@ EOF
 
   echo "Detecting platform for managing any additional neovim dependencies"
   detect_platform
-  check_system_deps
 
-  __add_separator "80"
+  # skip this in a Github workflow
+  if [ -z "$GITHUB_ACTIONS" ]; then
+    check_system_deps
 
-  echo "Would you like to check noevim's nodejs dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_npm_deps
+    __add_separator "80"
 
-  echo "Would you like to check noevim's python dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_pip_deps
+    echo "Would you like to check noevim's nodejs dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_npm_deps
+
+    echo "Would you like to check noevim's python dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_pip_deps
+
+  fi
 
   __add_separator "80"
 
@@ -150,8 +155,7 @@ function check_system_deps() {
   for dep in "${!__system_deps[@]}"; do
     if ! command -v "${__system_deps[$dep]}" &>/dev/null; then
       print_missing_dep_msg "$dep"
-      # do not abort in a Github workflow
-      [ -z "$GITHUB_ACTIONS" ] && exit 1
+      exit 1
     fi
   done
 }

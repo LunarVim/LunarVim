@@ -38,7 +38,7 @@ jobs:
       - name: Install LunarVim
         timeout-minutes: 4
         run: |
-          bash ./utils/installer/install.sh --testing
+          bash ./utils/installer/install.sh
 
       - name: Test LunarVim PackerCompile
         run: if lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
