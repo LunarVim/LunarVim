@@ -214,14 +214,6 @@ function clone_lvim() {
   eval "$CLONE_CMD"
 }
 
-function lvim() {
-  if command -v lvim &>/dev/null; then
-    eval lvim "$@"
-  else
-    eval nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "$@"
-  fi
-}
-
 function setup_shim() {
   if [ ! -d "$INSTALL_PREFIX/bin" ]; then
     mkdir -p "$INSTALL_PREFIX/bin"
@@ -248,11 +240,11 @@ function setup_lvim() {
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example-no-ts.lua" \
     "$HOME/.config/lvim/config.lua"
 
-  lvim --headless \
+  "$INSTALL_PREFIX"/bin/lvim --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
     +PackerInstall
 
-  lvim --headless \
+  "$INSTALL_PREFIX"/bin/lvim --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
     +PackerSync
 
