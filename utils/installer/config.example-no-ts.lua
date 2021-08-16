@@ -73,7 +73,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   elseif vim.bo.filetype == "php" then
 --     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
 --   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname)
+--     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
 --   end
 -- end
 
