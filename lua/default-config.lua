@@ -317,7 +317,6 @@ lvim.lang = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
-              "--stdio",
             },
             on_attach = common_on_attach,
             on_init = common_on_init,
