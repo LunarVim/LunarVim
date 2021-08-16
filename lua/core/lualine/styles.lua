@@ -185,7 +185,7 @@ function M.update(config, colorscheme)
     style = "lvim"
   end
 
-  local selected_style = require("utils").clone_table(styles[style])
+  local selected_style = vim.deepcopy(styles[style])
 
   return {
     active = true,
