@@ -36,7 +36,6 @@ function M.setup()
   -- Path where project.nvim will store the project history for use in
   -- telescope
   settings["datapath"] = CACHE_PATH,
-
   require("project_nvim").setup(settings)
 
   lvim.builtin.dashboard.custom_section["b"] = {
