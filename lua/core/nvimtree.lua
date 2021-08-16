@@ -59,6 +59,12 @@ M.setup = function()
     g["nvim_tree_" .. opt] = val
   end
 
+  -- Implicitly update nvim-tree when project module is active
+  if lvim.builtin.project.active then
+    vim.g.nvim_tree_update_cwd = 1
+    vim.g.nvim_tree_respect_buf_cwd = 1
+  end
+
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
   if not g.nvim_tree_bindings then
