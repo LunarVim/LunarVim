@@ -18,29 +18,43 @@ end
 local function get_formatter_suggestion_msg(ft)
   local null_formatters = require "lsp.null-ls.formatters"
   local supported_formatters = null_formatters.list_available(ft)
-  return {
+  local section = {
     " HINT ",
     "",
     fmt("* List of supported formatters: %s", str_list(supported_formatters)),
-    "* Configured formatter needs to be installed and executable.",
-    fmt("* Enable installed formatter(s) with following config in %s", USER_CONFIG_PATH),
-    "",
-    fmt("  lvim.lang.%s.formatters = { { exe = '%s' } }", ft, table.concat(supported_formatters, "│")),
   }
+
+  if not vim.tbl_isempty(supported_formatters) then
+    vim.list_extend(section, {
+      "* Configured formatter needs to be installed and executable.",
+      fmt("* Enable installed formatter(s) with following config in %s", USER_CONFIG_PATH),
+      "",
+      fmt("  lvim.lang.%s.formatters = { { exe = '%s' } }", ft, table.concat(supported_formatters, "│")),
+    })
+  end
+
+  return section
 end
 
 local function get_linter_suggestion_msg(ft)
   local null_linters = require "lsp.null-ls.linters"
   local supported_linters = null_linters.list_available(ft)
-  return {
+  local section = {
     " HINT ",
     "",
     fmt("* List of supported linters: %s", str_list(supported_linters)),
-    "* Configured linter needs to be installed and executable.",
-    fmt("* Enable installed linter(s) with following config in %s", USER_CONFIG_PATH),
-    "",
-    fmt("  lvim.lang.%s.linters = { { exe = '%s' } }", ft, table.concat(supported_linters, "│")),
   }
+
+  if not vim.tbl_isempty(supported_linters) then
+    vim.list_extend(section, {
+      "* Configured linter needs to be installed and executable.",
+      fmt("* Enable installed linter(s) with following config in %s", USER_CONFIG_PATH),
+      "",
+      fmt("  lvim.lang.%s.linters = { { exe = '%s' } }", ft, table.concat(supported_linters, "│")),
+    })
+  end
+
+  return section
 end
 
 local function tbl_set_highlight(terms, highlight_group)
@@ -77,13 +91,14 @@ function M.toggle_popup(ft)
     fmt("* Active:               %s (id: %d)", tostring(is_client_active), client_id),
     fmt("* Supports formatting:  %s", tostring(document_formatting)),
   }
-  local caps_text = "* Capabilities list:    "
-  local caps_text_len = caps_text:len()
-  local enabled_caps = text.format_table(client_enabled_caps, 3, " | ")
-  enabled_caps = text.shift_left(enabled_caps, caps_text_len)
-  enabled_caps[1] = fmt("%s%s", caps_text, enabled_caps[1]:sub(caps_text_len + 1))
-  vim.list_extend(lsp_info, enabled_caps)
-
+  if not vim.tbl_isempty(client_enabled_caps) then
+    local caps_text = "* Capabilities list:    "
+    local caps_text_len = caps_text:len()
+    local enabled_caps = text.format_table(client_enabled_caps, 3, " | ")
+    enabled_caps = text.shift_left(enabled_caps, caps_text_len)
+    enabled_caps[1] = fmt("%s%s", caps_text, enabled_caps[1]:sub(caps_text_len + 1))
+    vim.list_extend(lsp_info, enabled_caps)
+  end
   local null_ls = require "lsp.null-ls"
   local registered_providers = null_ls.list_supported_provider_names(ft)
   local registered_count = vim.tbl_count(registered_providers)
@@ -99,7 +114,7 @@ function M.toggle_popup(ft)
   local null_formatters = require "lsp.null-ls.formatters"
   local missing_formatters = null_formatters.list_unsupported_names(ft)
   local missing_formatters_status = {}
-  if vim.tbl_count(missing_formatters) > 0 then
+  if not vim.tbl_isempty(missing_formatters) then
     missing_formatters_status = {
       fmt("* Missing formatters:   %s", table.concat(missing_formatters, "  , ") .. "  "),
     }
@@ -108,7 +123,7 @@ function M.toggle_popup(ft)
   local null_linters = require "lsp.null-ls.linters"
   local missing_linters = null_linters.list_unsupported_names(ft)
   local missing_linters_status = {}
-  if vim.tbl_count(missing_linters) > 0 then
+  if not vim.tbl_isempty(missing_linters) then
     missing_linters_status = {
       fmt("* Missing linters:      %s", table.concat(missing_linters, "  , ") .. "  "),
     }
