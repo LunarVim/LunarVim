@@ -83,9 +83,12 @@ M.setup = function()
   end
 
   local is_emmet_active = function()
-    local utils = require "lsp.utils"
-    if utils.is_client_active "emmet_ls" then
-      return true
+    local clients = vim.lsp.buf_get_clients()
+
+    for _, client in pairs(clients) do
+      if client.name == "emmet_ls" then
+        return true
+      end
     end
     return false
   end
