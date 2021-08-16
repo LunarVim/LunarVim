@@ -1,4 +1,4 @@
-BASE_PATH = os.getenv "HOME" or os.getenv "HOMEDRIVE" .. os.getenv "HOMEPATH"
+local BASE_PATH = os.getenv "HOME" or os.getenv "HOMEDRIVE" .. os.getenv "HOMEPATH"
 CONFIG_PATH = BASE_PATH .. "/.local/share/lunarvim/lvim"
 DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"

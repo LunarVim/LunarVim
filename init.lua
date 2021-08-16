@@ -22,7 +22,7 @@ local function file_exists(name)
   end
 end
 
-BASE_PATH = os.getenv "HOME" or os.getenv "HOMEDRIVE" .. os.getenv "HOMEPATH"
+local BASE_PATH = os.getenv "HOME" or os.getenv "HOMEDRIVE" .. os.getenv "HOMEPATH"
 local lvim_path = BASE_PATH .. "/.config/lvim/"
 USER_CONFIG_PATH = lvim_path .. "config.lua"
 local config_exist = file_exists(USER_CONFIG_PATH)
