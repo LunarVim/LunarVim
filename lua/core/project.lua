@@ -40,8 +40,8 @@ function M.setup()
   require("project_nvim").setup(settings)
 
   -- Sometimes, telescope loads after project
-  if lvim.builtin.telescope.active == false then
-    vim.cmd [[packadd telescope.nvim]]
+  if lvim.builtin.telescope.active == true then
+    pcall(vim.cmd, [[packadd telescope.nvim]])
   end
 
   if package.loaded["telescope"] then
