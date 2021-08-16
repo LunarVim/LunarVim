@@ -1,4 +1,5 @@
 local M = {}
+--
 function M.config()
   lvim.builtin.project = {
     --- This is on by default since it's currently the expected behavior.
@@ -24,18 +25,19 @@ function M.config()
     silent_chdir = true,
   }
 end
+--
 function M.setup()
-  require("project_nvim").setup {
-    manual_mode = lvim.builtin.project.manual_mode,
-    detection_methods = lvim.builtin.project.detection_methods,
-    patterns = lvim.builtin.project.patterns,
-    silent_chdir = lvim.builtin.project.silent_chdir,
+  local settings = lvim.builtin.project
 
-    -- Table of lsp clients to ignore by name
-    -- This should probably not be exposed
-    -- eg: { "efm", ... }
-    ignore_lsp = {},
-  }
+  -- Table of lsp clients to ignore by name
+  -- eg: { "efm", ... }
+  settings["ignore_lsp"] = {}
+
+  -- Path where project.nvim will store the project history for use in
+  -- telescope
+  settings["datapath"] = CACHE_PATH,
+
+  require("project_nvim").setup(settings)
 
   lvim.builtin.dashboard.custom_section["b"] = {
     description = { "  Recent Projects    " },
@@ -46,4 +48,5 @@ function M.setup()
     require("telescope").load_extension "projects"
   end
 end
+--
 return M
