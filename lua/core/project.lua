@@ -40,14 +40,15 @@ function M.setup()
   require("project_nvim").setup(settings)
 
   -- Sometimes, telescope loads after project
-  vim.cmd [[packadd telescope.nvim]]
-
-  lvim.builtin.dashboard.custom_section["b"] = {
-    description = { "  Recent Projects    " },
-    command = "Telescope projects",
-  }
+  if lvim.builtin.telescope.active == false then
+    vim.cmd [[packadd telescope.nvim]]
+  end
 
   if package.loaded["telescope"] then
+    lvim.builtin.dashboard.custom_section["b"] = {
+      description = { "  Recent Projects    " },
+      command = "Telescope projects",
+    }
     require("telescope").load_extension "projects"
   end
 end
