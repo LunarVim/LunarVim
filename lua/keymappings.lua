@@ -109,6 +109,9 @@ function M.config()
       ["<A-j>"] = ":m .+1<CR>==",
       ["<A-k>"] = ":m .-2<CR>==",
 
+      -- Join lines, keeping the cursor position
+      ["<S-j>"] = "mzJ`z",
+
       -- QuickFix
       ["]q"] = ":cnext<CR>",
       ["[q"] = ":cprev<CR>",
