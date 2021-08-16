@@ -22,7 +22,8 @@ local function file_exists(name)
   end
 end
 
-local lvim_path = os.getenv "HOME" .. "/.config/lvim/"
+BASE_PATH = os.getenv "HOME" or os.getenv "HOMEDRIVE" .. os.getenv "HOMEPATH"
+local lvim_path = BASE_PATH .. "/.config/lvim/"
 USER_CONFIG_PATH = lvim_path .. "config.lua"
 local config_exist = file_exists(USER_CONFIG_PATH)
 if not config_exist then
@@ -64,7 +65,7 @@ end
 local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
 if lsp_settings_status_ok then
   lsp_settings.setup {
-    config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+    config_home = BASE_PATH .. "/.config/lvim/lsp-settings",
   }
 end
 
