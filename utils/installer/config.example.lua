@@ -85,7 +85,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 --     args = {}
 --   }
 -- }
--- you can define multiple providers for one language
+-- you can define multiple language servers
 -- make sure you disable duplicate capabilities like textDocument/formatting and textDocument/hover via handlers
 -- lvim.lang.php.lsp = {
 --   providers = {
