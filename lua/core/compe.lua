@@ -1,5 +1,4 @@
 local M = {}
-local Log = require "core.log"
 M.config = function()
   lvim.builtin.compe = {
     enabled = true,
@@ -61,11 +60,7 @@ end
 M.setup = function()
   vim.g.vsnip_snippet_dir = lvim.vsnip_dir
 
-  local status_ok, compe = pcall(require, "compe")
-  if not status_ok then
-    Log:get_default().error "Failed to load compe"
-    return
-  end
+  local compe = require "compe"
 
   compe.setup(lvim.builtin.compe)
 
