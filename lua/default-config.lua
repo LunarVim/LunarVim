@@ -105,6 +105,9 @@ lvim = {
     on_init_callback = nil,
     ---@usage query the project directory from the language server and use it to set the CWD
     smart_cwd = true,
+    null_ls = {
+      setup = {},
+    },
   },
 
   plugins = {

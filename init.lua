@@ -59,7 +59,7 @@ require("lsp").config()
 local null_status_ok, null_ls = pcall(require, "null-ls")
 if null_status_ok then
   null_ls.config {}
-  require("lspconfig")["null-ls"].setup {}
+  require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
 end
 
 local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
