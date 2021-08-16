@@ -82,6 +82,14 @@ M.setup = function()
     end
   end
 
+  local is_emmet_active = function()
+    local utils = require "lsp.utils"
+    if utils.is_client_active "emmet_ls" then
+      return true
+    end
+    return false
+  end
+
   -- Use (s-)tab to:
   --- move to prev/next item in completion menuone
   --- jump to prev/next snippet's placeholder
@@ -90,10 +98,11 @@ M.setup = function()
       return t "<C-n>"
     elseif vim.fn.call("vsnip#jumpable", { 1 }) == 1 then
       return t "<Plug>(vsnip-jump-next)"
+    elseif is_emmet_active() then
+      return vim.fn["compe#complete"]()
     elseif check_back_space() then
       return t "<Tab>"
     else
-      -- return vim.fn["compe#complete"]() -- < use this if you want <tab> to always offer completion
       return t "<Tab>"
     end
   end
