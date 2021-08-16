@@ -131,15 +131,9 @@ return {
     "terrortylor/nvim-comment",
     event = "BufRead",
     config = function()
-      local status_ok, nvim_comment = pcall(require, "nvim_comment")
-      if not status_ok then
-        local Log = require "core.log"
-        Log:get_default().error "Failed to load nvim-comment"
-        return
-      end
-      nvim_comment.setup()
+      require("nvim_comment").setup()
       if lvim.builtin.comment.on_config_done then
-        lvim.builtin.comment.on_config_done(nvim_comment)
+        lvim.builtin.comment.on_config_done(require "nvim_comment")
       end
     end,
   },
