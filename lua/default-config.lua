@@ -134,12 +134,7 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      providers = {
-        {
-          name = "",
-          setup = {},
-        },
-      },
+      providers = {},
     },
   },
   beancount = {
@@ -541,16 +536,7 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      providers = {
-        {
-          name = "",
-          setup = {
-            on_attach = common_on_attach,
-            on_init = common_on_init,
-            capabilities = common_capabilities,
-          },
-        },
-      },
+      providers = {},
     },
   },
   go = {
@@ -866,12 +852,7 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      providers = {
-        {
-          name = "",
-          setup = {},
-        },
-      },
+      providers = {},
     },
   },
   sql = {
