@@ -100,8 +100,6 @@ function utils.reload_lv_config()
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
   -- vim.cmd ":PackerClean"
-  vim.g.colors_name = lvim.colorscheme
-  vim.cmd("colorscheme " .. lvim.colorscheme)
   local null_ls = require "lsp.null-ls"
   null_ls.setup(vim.bo.filetype, { force_reload = true })
   Log:get_default().info "Reloaded configuration"
