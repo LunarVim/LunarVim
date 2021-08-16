@@ -134,8 +134,12 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "",
-      setup = {},
+      providers = {
+        {
+          name = "",
+          setup = {},
+        },
+      },
     },
   },
   beancount = {
@@ -147,12 +151,16 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "beancount",
-      setup = {
-        cmd = { "beancount-langserver" },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "beancount",
+          setup = {
+            cmd = { "beancount-langserver" },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -169,19 +177,23 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "clangd",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
-          "--background-index",
-          "--header-insertion=never",
-          "--cross-file-rename",
-          "--clang-tidy",
-          "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+      providers = {
+        {
+          name = "clangd",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
+              "--background-index",
+              "--header-insertion=never",
+              "--cross-file-rename",
+              "--clang-tidy",
+              "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -198,19 +210,23 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "clangd",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
-          "--background-index",
-          "--header-insertion=never",
-          "--cross-file-rename",
-          "--clang-tidy",
-          "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+      providers = {
+        {
+          name = "clangd",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
+              "--background-index",
+              "--header-insertion=never",
+              "--cross-file-rename",
+              "--clang-tidy",
+              "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -223,12 +239,16 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "crystalline",
-      setup = {
-        cmd = { "crystalline" },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "crystalline",
+          setup = {
+            cmd = { "crystalline" },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -245,17 +265,21 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "omnisharp",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
-          "--languageserver",
-          "--hostPID",
-          tostring(vim.fn.getpid()),
+      providers = {
+        {
+          name = "omnisharp",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
+              "--languageserver",
+              "--hostPID",
+              tostring(vim.fn.getpid()),
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -268,14 +292,18 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "cmake",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
+      providers = {
+        {
+          name = "cmake",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -283,15 +311,19 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "clojure_lsp",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
-          "--stdio",
+      providers = {
+        {
+          name = "clojure_lsp",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -308,16 +340,20 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "cssls",
-      setup = {
-        cmd = {
-          "node",
-          DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
-          "--stdio",
+      providers = {
+        {
+          name = "cssls",
+          setup = {
+            cmd = {
+              "node",
+              DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -334,16 +370,20 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "cssls",
-      setup = {
-        cmd = {
-          "node",
-          DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
-          "--stdio",
+      providers = {
+        {
+          name = "cssls",
+          setup = {
+            cmd = {
+              "node",
+              DATA_PATH .. "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -356,12 +396,16 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "serve_d",
-      setup = {
-        cmd = { "serve-d" },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "serve_d",
+          setup = {
+            cmd = { "serve-d" },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -374,16 +418,20 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "dartls",
-      setup = {
-        cmd = {
-          "dart",
-          "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
-          "--lsp",
+      providers = {
+        {
+          name = "dartls",
+          setup = {
+            cmd = {
+              "dart",
+              "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot",
+              "--lsp",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -391,15 +439,19 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "dockerls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
-          "--stdio",
+      providers = {
+        {
+          name = "dockerls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -412,14 +464,18 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "elixirls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
+      providers = {
+        {
+          name = "elixirls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -432,19 +488,23 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "elmls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server",
+      providers = {
+        {
+          name = "elmls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            -- init_options = {
+            -- elmAnalyseTrigger = "change",
+            -- elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",
+            -- elmPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/",
+            -- elmTestPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-test",
+            -- },
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        -- init_options = {
-        -- elmAnalyseTrigger = "change",
-        -- elmFormatPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-format",
-        -- elmPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/",
-        -- elmTestPath = DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-test",
-        -- },
       },
     },
   },
@@ -457,14 +517,18 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "erlangls",
-      setup = {
-        cmd = {
-          "erlang_ls",
+      providers = {
+        {
+          name = "erlangls",
+          setup = {
+            cmd = {
+              "erlang_ls",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -478,11 +542,15 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "",
-      setup = {
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "",
+          setup = {
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -503,14 +571,18 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "gopls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/go/gopls",
+      providers = {
+        {
+          name = "gopls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/go/gopls",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -518,17 +590,21 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "graphql",
-      setup = {
-        cmd = {
-          "graphql-lsp",
-          "server",
-          "-m",
-          "stream",
+      providers = {
+        {
+          name = "graphql",
+          setup = {
+            cmd = {
+              "graphql-lsp",
+              "server",
+              "-m",
+              "stream",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -536,12 +612,16 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "hls",
-      setup = {
-        cmd = { DATA_PATH .. "/lspinstall/haskell/hls" },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "hls",
+          setup = {
+            cmd = { DATA_PATH .. "/lspinstall/haskell/hls" },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -558,16 +638,20 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "html",
-      setup = {
-        cmd = {
-          "node",
-          DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
-          "--stdio",
+      providers = {
+        {
+          name = "html",
+          setup = {
+            cmd = {
+              "node",
+              DATA_PATH .. "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -584,12 +668,16 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "jdtls",
-      setup = {
-        cmd = { DATA_PATH .. "/lspinstall/java/jdtls.sh" },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "jdtls",
+          setup = {
+            cmd = { DATA_PATH .. "/lspinstall/java/jdtls.sh" },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -610,32 +698,36 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "jsonls",
-      setup = {
-        cmd = {
-          "node",
-          DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
-          "--stdio",
-        },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
-        settings = {
-          json = {
-            schemas = schemas,
-            --   = {
-            --   {
-            --     fileMatch = { "package.json" },
-            --     url = "https://json.schemastore.org/package.json",
-            --   },
-            -- },
-          },
-        },
-        commands = {
-          Format = {
-            function()
-              vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
-            end,
+      providers = {
+        {
+          name = "jsonls",
+          setup = {
+            cmd = {
+              "node",
+              DATA_PATH .. "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+            settings = {
+              json = {
+                schemas = schemas,
+                --   = {
+                --   {
+                --     fileMatch = { "package.json" },
+                --     url = "https://json.schemastore.org/package.json",
+                --   },
+                -- },
+              },
+            },
+            commands = {
+              Format = {
+                function()
+                  vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
+                end,
+              },
+            },
           },
         },
       },
@@ -645,18 +737,22 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "julials",
-      setup = {
+      providers = {
         {
-          "julia",
-          "--startup-file=no",
-          "--history-file=no",
-          -- vim.fn.expand "~/.config/nvim/lua/lsp/julia/run.jl",
-          CONFIG_PATH .. "/utils/julia/run.jl",
+          name = "julials",
+          setup = {
+            {
+              "julia",
+              "--startup-file=no",
+              "--history-file=no",
+              -- vim.fn.expand "~/.config/nvim/lua/lsp/julia/run.jl",
+              CONFIG_PATH .. "/utils/julia/run.jl",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -664,29 +760,34 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "kotlin_language_server",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
+      providers = {
+        {
+          name = "kotlin_language_server",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            root_dir = function(fname)
+              local util = require "lspconfig/util"
+
+              local root_files = {
+                "settings.gradle", -- Gradle (multi-project)
+                "settings.gradle.kts", -- Gradle (multi-project)
+                "build.xml", -- Ant
+                "pom.xml", -- Maven
+              }
+
+              local fallback_root_files = {
+                "build.gradle", -- Gradle
+                "build.gradle.kts", -- Gradle
+              }
+              return util.root_pattern(unpack(root_files))(fname)
+                or util.root_pattern(unpack(fallback_root_files))(fname)
+            end,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        root_dir = function(fname)
-          local util = require "lspconfig/util"
-
-          local root_files = {
-            "settings.gradle", -- Gradle (multi-project)
-            "settings.gradle.kts", -- Gradle (multi-project)
-            "build.xml", -- Ant
-            "pom.xml", -- Maven
-          }
-
-          local fallback_root_files = {
-            "build.gradle", -- Gradle
-            "build.gradle.kts", -- Gradle
-          }
-          return util.root_pattern(unpack(root_files))(fname) or util.root_pattern(unpack(fallback_root_files))(fname)
-        end,
       },
     },
   },
@@ -703,37 +804,41 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "sumneko_lua",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
-          "-E",
-          DATA_PATH .. "/lspinstall/lua/main.lua",
-        },
-        capabilities = common_capabilities,
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        settings = {
-          Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = "LuaJIT",
-              -- Setup your lua path
-              path = vim.split(package.path, ";"),
+      providers = {
+        {
+          name = "sumneko_lua",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
+              "-E",
+              DATA_PATH .. "/lspinstall/lua/main.lua",
             },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { "vim", "lvim" },
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = {
-                [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
-                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            capabilities = common_capabilities,
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            settings = {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                  version = "LuaJIT",
+                  -- Setup your lua path
+                  path = vim.split(package.path, ";"),
+                },
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = { "vim", "lvim" },
+                },
+                workspace = {
+                  -- Make the server aware of Neovim runtime files
+                  library = {
+                    [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
+                    [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                    [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+                  },
+                  maxPreload = 100000,
+                  preloadFileSize = 1000,
+                },
               },
-              maxPreload = 100000,
-              preloadFileSize = 1000,
             },
           },
         },
@@ -762,8 +867,12 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "",
-      setup = {},
+      providers = {
+        {
+          name = "",
+          setup = {},
+        },
+      },
     },
   },
   sql = {
@@ -775,9 +884,13 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "sqls",
-      setup = {
-        cmd = { "sqls" },
+      providers = {
+        {
+          name = "sqls",
+          setup = {
+            cmd = { "sqls" },
+          },
+        },
       },
     },
   },
@@ -790,19 +903,23 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "intelephense",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
-          "--stdio",
-        },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        filetypes = { "php", "phtml" },
-        settings = {
-          intelephense = {
-            environment = {
-              phpVersion = "7.4",
+      providers = {
+        {
+          name = "intelephense",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            filetypes = { "php", "phtml" },
+            settings = {
+              intelephense = {
+                environment = {
+                  phpVersion = "7.4",
+                },
+              },
             },
           },
         },
@@ -813,15 +930,19 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "puppet",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/puppet/puppet-editor-services/puppet-languageserver",
-          "--stdio",
+      providers = {
+        {
+          name = "puppet",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/puppet/puppet-editor-services/puppet-languageserver",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -843,16 +964,20 @@ lvim.lang = {
     -- @usage can be {"eslint"} or {"eslint_d"}
     linters = {},
     lsp = {
-      provider = "tsserver",
-      setup = {
-        cmd = {
-          -- TODO:
-          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
-          "--stdio",
+      providers = {
+        {
+          name = "tsserver",
+          setup = {
+            cmd = {
+              -- TODO:
+              DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -873,16 +998,20 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "tsserver",
-      setup = {
-        cmd = {
-          -- TODO:
-          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
-          "--stdio",
+      providers = {
+        {
+          name = "tsserver",
+          setup = {
+            cmd = {
+              -- TODO:
+              DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -899,15 +1028,19 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "pyright",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
-          "--stdio",
+      providers = {
+        {
+          name = "pyright",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -922,17 +1055,21 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "r_language_server",
-      setup = {
-        cmd = {
-          "R",
-          "--slave",
-          "-e",
-          "languageserver::run()",
+      providers = {
+        {
+          name = "r_language_server",
+          setup = {
+            cmd = {
+              "R",
+              "--slave",
+              "-e",
+              "languageserver::run()",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -945,26 +1082,30 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "solargraph",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
-          "stdio",
-        },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
-        filetypes = { "ruby" },
-        init_options = {
-          formatting = true,
-        },
-        root_dir = function(fname)
-          local util = require("lspconfig").util
-          return util.root_pattern("Gemfile", ".git")(fname)
-        end,
-        settings = {
-          solargraph = {
-            diagnostics = true,
+      providers = {
+        {
+          name = "solargraph",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
+              "stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+            filetypes = { "ruby" },
+            init_options = {
+              formatting = true,
+            },
+            root_dir = function(fname)
+              local util = require("lspconfig").util
+              return util.root_pattern("Gemfile", ".git")(fname)
+            end,
+            settings = {
+              solargraph = {
+                diagnostics = true,
+              },
+            },
           },
         },
       },
@@ -979,14 +1120,18 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "rust_analyzer",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+      providers = {
+        {
+          name = "rust_analyzer",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/rust/rust-analyzer",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -999,11 +1144,15 @@ lvim.lang = {
     },
     linters = { "" },
     lsp = {
-      provider = "metals",
-      setup = {
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "metals",
+          setup = {
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -1016,15 +1165,19 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "bashls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
-          "start",
+      providers = {
+        {
+          name = "bashls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
+              "start",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1032,15 +1185,19 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "svelte",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
-          "--stdio",
+      providers = {
+        {
+          name = "svelte",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1053,15 +1210,19 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "sourcekit",
-      setup = {
-        cmd = {
-          "xcrun",
-          "sourcekit-lsp",
+      providers = {
+        {
+          name = "sourcekit",
+          setup = {
+            cmd = {
+              "xcrun",
+              "sourcekit-lsp",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1086,15 +1247,19 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "terraformls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/terraform/terraform-ls",
-          "serve",
+      providers = {
+        {
+          name = "terraformls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/terraform/terraform-ls",
+              "serve",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1102,12 +1267,16 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "texlab",
-      setup = {
-        cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "texlab",
+          setup = {
+            cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
@@ -1128,16 +1297,20 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "tsserver",
-      setup = {
-        cmd = {
-          -- TODO:
-          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
-          "--stdio",
+      providers = {
+        {
+          name = "tsserver",
+          setup = {
+            cmd = {
+              -- TODO:
+              DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1159,16 +1332,20 @@ lvim.lang = {
     -- @usage can be {"eslint"} or {"eslint_d"}
     linters = {},
     lsp = {
-      provider = "tsserver",
-      setup = {
-        cmd = {
-          -- TODO:
-          DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
-          "--stdio",
+      providers = {
+        {
+          name = "tsserver",
+          setup = {
+            cmd = {
+              -- TODO:
+              DATA_PATH .. "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1176,15 +1353,19 @@ lvim.lang = {
     formatters = {},
     linters = { "" },
     lsp = {
-      provider = "vimls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
-          "--stdio",
+      providers = {
+        {
+          name = "vimls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1205,14 +1386,18 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "vuels",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+      providers = {
+        {
+          name = "vuels",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1229,15 +1414,19 @@ lvim.lang = {
     },
     linters = {},
     lsp = {
-      provider = "yamlls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
-          "--stdio",
+      providers = {
+        {
+          name = "yamlls",
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
+              "--stdio",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1245,14 +1434,18 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "zls",
-      setup = {
-        cmd = {
-          "zls",
+      providers = {
+        {
+          name = "zls",
+          setup = {
+            cmd = {
+              "zls",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1260,16 +1453,20 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "gdscript",
-      setup = {
-        cmd = {
-          "nc",
-          "localhost",
-          "6008",
+      providers = {
+        {
+          name = "gdscript",
+          setup = {
+            cmd = {
+              "nc",
+              "localhost",
+              "6008",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -1277,12 +1474,16 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "powershell_es",
-      setup = {
-        bundle_path = "",
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
+      providers = {
+        {
+          name = "powershell_es",
+          setup = {
+            bundle_path = "",
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
+        },
       },
     },
   },
