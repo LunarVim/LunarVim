@@ -128,6 +128,10 @@ function M.common_on_attach(client, bufnr)
 end
 
 function M.setup(lang)
+  if not lvim.lang[lang] or not lvim.lang[lang].lsp then
+    return
+  end
+
   local overrides = lvim.lsp.override
   if type(overrides) == "table" then
     if vim.tbl_contains(overrides, lang) then
@@ -137,7 +141,7 @@ function M.setup(lang)
 
   -- initialize language server for each provider
   local lsp_utils = require "lsp.utils"
-  local providers = (lvim.lang[lang] and lvim.lang[lang].lsp.providers or {})
+  local providers = lvim.lang[lang].lsp.providers
   for _, provider in pairs(providers) do
     if not lsp_utils.is_client_active(provider.name) then
       require("lspconfig")[provider.name].setup(provider.setup)
