@@ -98,10 +98,10 @@ M.setup = function()
       return t "<C-n>"
     elseif vim.fn.call("vsnip#jumpable", { 1 }) == 1 then
       return t "<Plug>(vsnip-jump-next)"
-    elseif is_emmet_active() then
-      return vim.fn["compe#complete"]()
     elseif check_back_space() then
       return t "<Tab>"
+    elseif is_emmet_active() then
+      return vim.fn["compe#complete"]()
     else
       return t "<Tab>"
     end
