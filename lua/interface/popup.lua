@@ -13,19 +13,23 @@ function Popup:new(opts)
 
   Popup.__index = Popup
 
-  local default_layout = {
+  local editor_layout = {
+    height = vim.o.lines - vim.o.cmdheight - 2, -- Add margin for status and buffer line
+    width = vim.o.columns,
+  }
+  local popup_layout = {
     relative = "editor",
-    height = math.ceil(vim.o.lines * 0.9),
-    width = math.floor(vim.o.columns * 0.8),
+    height = math.floor(editor_layout.height * 0.9),
+    width = math.floor(editor_layout.width * 0.8),
     style = "minimal",
     border = "rounded",
   }
-  default_layout.col = (vim.o.columns - default_layout.width) / 2
-  default_layout.row = (vim.o.lines - default_layout.height) / 2
+  popup_layout.row = math.floor((editor_layout.height - popup_layout.height) / 2)
+  popup_layout.col = math.floor((editor_layout.width - popup_layout.width) / 2)
 
   local obj = {
     buffer = vim.api.nvim_create_buf(false, true),
-    layout = vim.tbl_deep_extend("force", default_layout, opts.layout),
+    layout = vim.tbl_deep_extend("force", popup_layout, opts.layout),
     win_opts = opts.win_opts,
     buf_opts = opts.buf_opts,
   }
