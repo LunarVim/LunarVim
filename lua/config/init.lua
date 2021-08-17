@@ -5,7 +5,7 @@ local M = {
 --- Initialize lvim default configuration
 -- Define lvim global variable
 function M:init()
-  require "default-config"
+  require "config.defaults"
 
   local builtins = require "core.builtins"
   builtins.config(self)
