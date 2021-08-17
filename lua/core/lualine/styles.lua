@@ -136,7 +136,7 @@ styles.lvim = {
               table.insert(buf_client_names, client.name)
             end
           end
-          vim.list_extend(buf_client_names, active_client)
+          vim.list_extend(buf_client_names, active_client or {})
           return table.concat(buf_client_names, ", ")
         end,
         condition = conditions.hide_in_width,
