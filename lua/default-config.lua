@@ -488,6 +488,21 @@ lvim.lang = {
       },
     },
   },
+  fortran = {
+    formatters = {},
+    linters = {},
+    lsp = {
+      provider = "fortls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/fortran/venv/bin/fortls",
+        },
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
+    },
+  },
   go = {
     formatters = {
       -- {
