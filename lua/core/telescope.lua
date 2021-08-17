@@ -119,6 +119,9 @@ function M.setup()
     return
   end
   telescope.setup(lvim.builtin.telescope)
+  if lvim.builtin.project.active then
+    pcall(require("telescope").load_extension, "projects")
+  end
 end
 
 return M
