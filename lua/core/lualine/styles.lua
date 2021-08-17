@@ -2,7 +2,13 @@ local M = {}
 local conditions = require "core.lualine.conditions"
 local colors = require "core.lualine.colors"
 
-local none = {
+local styles = {
+  lvim = nil,
+  default = nil,
+  none = nil,
+}
+
+styles.none = {
   style = "none",
   options = {
     icons_enabled = true,
@@ -30,7 +36,7 @@ local none = {
   extensions = {},
 }
 
-local default = {
+styles.default = {
   style = "default",
   options = {
     icons_enabled = true,
@@ -58,13 +64,13 @@ local default = {
   extensions = {},
 }
 
-local lvim = {
+styles.lvim = {
   style = "lvim",
   options = {
     icons_enabled = true,
     component_separators = "",
     section_separators = "",
-    disabled_filetypes = { "dashboard", " ", "", "WhichKey" },
+    disabled_filetypes = { "dashboard", "" },
   },
   sections = {
     lualine_a = {
@@ -81,7 +87,9 @@ local lvim = {
       {
         "branch",
         icon = " ",
-        condition = conditions.check_git_workspace,
+        condition = function()
+          return conditions.hide_in_width() and conditions.check_git_workspace()
+        end,
       },
     },
     lualine_c = {
@@ -104,7 +112,7 @@ local lvim = {
       },
       {
         function()
-          if next(vim.treesitter.highlighter.active) ~= nil then
+          if next(vim.treesitter.highlighter.active) then
             return "  "
           end
           return ""
@@ -122,13 +130,13 @@ local lvim = {
           local buf_ft = vim.bo.filetype
           local buf_client_names = {}
           -- local null_ls_providers = require("lsp.null-ls").get_registered_providers_by_filetype(buf_ft)
-          local null_ls_providers = require("lsp.utils").get_active_client_by_ft(buf_ft)
+          local active_client = require("lsp.utils").get_active_client_by_ft(buf_ft)
           for _, client in pairs(buf_clients) do
             if client.name ~= "null-ls" then
               table.insert(buf_client_names, client.name)
             end
           end
-          vim.list_extend(buf_client_names, null_ls_providers)
+          vim.list_extend(buf_client_names, active_client)
           return table.concat(buf_client_names, ", ")
         end,
         condition = conditions.hide_in_width,
@@ -170,31 +178,27 @@ local lvim = {
   extensions = { "nvim-tree" },
 }
 
-local styles = {
-  lvim = lvim,
-  default = default,
-  none = none,
-}
-
-function M.update(config, colorscheme)
+function M.update()
+  local config = lvim.builtin.lualine
   local style = config.style
 
-  if style ~= "none" and style ~= "default" and style ~= "lvim" then
-    print 'Valid lualine style options are: "lvim" or "default" or "none"'
+  local style_keys = vim.tbl_keys(styles)
+  if not vim.tbl_contains(style_keys, style) then
+    print('Valid lualine style options are: "' .. table.concat(style_keys, '", "') .. '"')
     print '"lvim" style is applied.'
     style = "lvim"
   end
 
   local selected_style = vim.deepcopy(styles[style])
 
-  return {
+  lvim.builtin.lualine = {
     active = true,
     style = style,
     options = {
       icons_enabled = config.options.icons_enabled or selected_style.options.icons_enabled,
       component_separators = config.options.component_separators or selected_style.options.component_separators,
       section_separators = config.options.section_separators or selected_style.options.section_separators,
-      theme = config.options.theme or colorscheme or "auto",
+      theme = config.options.theme or lvim.colorscheme or "auto",
       disabled_filetypes = config.options.disabled_filetypes or selected_style.options.disabled_filetypes,
     },
     sections = {
@@ -215,6 +219,7 @@ function M.update(config, colorscheme)
     },
     tabline = config.tabline or selected_style.tabline,
     extensions = config.extensions or selected_style.extensions,
+    on_config_done = config.on_config_done,
   }
 end
 

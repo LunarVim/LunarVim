@@ -28,22 +28,18 @@ M.config = function()
     },
     tabline = nil,
     extensions = nil,
+    on_config_done = nil,
   }
 end
 
 M.setup = function()
-  local status_ok, lualine = pcall(require, "lualine")
-  if not status_ok then
-    return
-  end
+  require("core.lualine.styles").update()
 
-  local styles = require "core.lualine.styles"
-  lvim.builtin.lualine = styles.update(lvim.builtin.lualine, lvim.colorscheme)
-
+  local lualine = require "lualine"
   lualine.setup(lvim.builtin.lualine)
 
   if lvim.builtin.lualine.on_config_done then
-    lvim.builtin.lualine.on_config_done(require "lualine")
+    lvim.builtin.lualine.on_config_done(lualine)
   end
 end
 
