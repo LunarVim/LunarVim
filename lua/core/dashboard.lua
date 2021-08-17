@@ -1,6 +1,6 @@
 local M = {}
 
-M.config = function()
+M.config = function(config)
   lvim.builtin.dashboard = {
     active = false,
     on_config_done = nil,
@@ -47,7 +47,7 @@ M.config = function()
       },
       e = {
         description = { "  Configuration      " },
-        command = ":e " .. USER_CONFIG_PATH,
+        command = ":e " .. config.path,
       },
     },
 
