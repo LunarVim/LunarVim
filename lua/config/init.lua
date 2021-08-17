@@ -6,6 +6,15 @@ local M = {
 function M:init()
   require "default-config"
   require("core.builtins").config(self)
+
+  -- Fallback config.lua to lv-config.lua
+  local uv = vim.loop
+  if not uv.fs_stat(self.path) then
+    local lv_config = self.path:gsub("config.lua$", "lv-config.lua")
+    print(self.path, "not found, falling back to", lv_config)
+
+    self.path = lv_config
+  end
 end
 
 --- Override the configuration and load settings
