@@ -3,37 +3,23 @@ set -eo pipefail
 
 #Set branch to master unless specified by the user
 declare -r LVBRANCH="${LVBRANCH:-master}"
-declare -r LV_REMOTE="${LV_REMOTE:-\"ChristianChiarulli/lunarvim.git\"}"
+declare -r LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
 declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
 declare -r XDG_DATA_HOME=${XDG_DATA_HOME:-"$HOME/.local/share"}
 declare -r XDG_CACHE_HOME=${XDG_CACHE_HOME:-"$HOME/.cache"}
 declare -r XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
 
-# declare -r NEOVIM_RUNTIME_DIR="$XDG_DATA_HOME/nvim"
-# declare -r NEOVIM_CONFIG_DIR="$XDG_CONFIG_HOME/nvim"
+# TODO: Use a dedicated cache directory #1256
 declare -r NEOVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
 
 declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$XDG_DATA_HOME/lunarvim}"
 declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-$XDG_CONFIG_HOME/lvim}"
 
-# declare -a __nvim_dirs=(
-#   "$NEOVIM_CACHE_DIR"
-#   "$NEOVIM_CONFIG_DIR"
-#   "$NEOVIM_RUNTIME_DIR"
-# )
-
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
   "$LUNARVIM_RUNTIME_DIR"
   "$NEOVIM_CACHE_DIR" # for now this is shared with neovim
-)
-
-declare -A __system_deps=(
-  ["git"]="git"
-  ["neovim"]="nvim"
-  ["ripgrep"]="rg"
-  ["fd-find"]="fd"
 )
 
 declare -a __npm_deps=(
@@ -46,10 +32,8 @@ declare -a __pip_deps=(
 )
 
 function main() {
-  # Welcome
-  __add_separator "80"
-
   cat <<'EOF'
+
       88\                                                   88\               
       88 |                                                  \__|              
       88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\  
@@ -58,6 +42,7 @@ function main() {
       88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
       88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
       \__| \______/ \__|  \__| \_______|\__|         \_/    \__|\__| \__| \__|
+
 EOF
 
   __add_separator "80"
@@ -71,22 +56,26 @@ EOF
 
     __add_separator "80"
 
-    echo "Would you like to check noevim's nodejs dependencies?"
+    echo "Would you like to check lunarvim's NodeJS dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_npm_deps
+    [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-    echo "Would you like to check noevim's python dependencies?"
+    echo "Would you like to check lunarvim's Python dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_pip_deps
+    [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
+
+    echo "Would you like to check lunarvim's Rust dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+
+    __add_separator "80"
+
+    echo "Backing up old LunarVim configuration"
+    backup_old_config
+
+    __add_separator "80"
 
   fi
-
-  __add_separator "80"
-
-  echo "Backing up old LunarVim configuration"
-  backup_old_config
-
-  __add_separator "80"
 
   case "$@" in
     *--overwrite*)
@@ -152,29 +141,29 @@ function check_dep() {
 }
 
 function check_system_deps() {
-  for dep in "${!__system_deps[@]}"; do
-    if ! command -v "${__system_deps[$dep]}" &>/dev/null; then
-      print_missing_dep_msg "$dep"
-      # do not abort in a Github workflow
-      [ -z "$GITHUB_ACTIONS" ] && exit 1
-    fi
-  done
+  if ! command -v git &>/dev/null; then
+    print_missing_dep_msg "git"
+    exit 1
+  fi
+  if ! command -v nvim &>/dev/null; then
+    print_missing_dep_msg "neovim"
+    exit 1
+  fi
 }
 
-function install_npm_deps() {
+function install_nodejs_deps() {
   check_dep "npm"
-  check_dep "yarn"
-  echo "Installing with npm.."
+  echo "Installing node modules with npm.."
   for dep in "${__npm_deps[@]}"; do
     if ! npm ls -g "$dep" &>/dev/null; then
       printf "installing %s .." "$dep"
       npm install -g "$dep"
     fi
   done
-  echo "all nodejs dependencies are succesfully installed"
+  echo "All NodeJS dependencies are succesfully installed"
 }
 
-function install_pip_deps() {
+function install_python_deps() {
   echo "Verifying that pip is available.."
   if ! python3 -m ensurepip &>/dev/null; then
     print_missing_dep_msg "pip"
@@ -184,7 +173,27 @@ function install_pip_deps() {
   for dep in "${__pip_deps[@]}"; do
     pip3 install --user "$dep"
   done
-  echo "all python dependencies are succesfully installed"
+  echo "All Python dependencies are succesfully installed"
+}
+
+function __attempt_to_install_with_cargo() {
+  if ! command -v cargo &>/dev/null; then
+    echo "Installing missing Rust dependency with cargo"
+    cargo install "$1"
+  else
+    echo "[WARN]: Unable to find fd. Make sure to install it to avoid any problems"
+  fi
+}
+
+# we try to install the missing one with cargo even though it's unlikely to be found
+function install_rust_deps() {
+  if ! command -v fd &>/dev/null; then
+    __attempt_to_install_with_cargo "fd-find"
+  fi
+  if ! command -v rg &>/dev/null; then
+    __attempt_to_install_with_cargo "ripgrpe"
+  fi
+  echo "All Rust dependencies are succesfully installed"
 }
 
 function backup_old_config() {
@@ -209,10 +218,11 @@ function install_packer() {
 
 function clone_lvim() {
   echo "Cloning LunarVim configuration"
-  local CLONE_CMD="git clone --progress --branch $LVBRANCH \
-    --depth 1 https://github.com/$LV_REMOTE $LUNARVIM_RUNTIME_DIR/lvim"
-  printf "Running: %s" "$CLONE_CMD"
-  eval "$CLONE_CMD"
+  if ! git clone --progress --branch "$LVBRANCH" \
+    --depth 1 "https://github.com/${LV_REMOTE}" "$LUNARVIM_RUNTIME_DIR/lvim"; then
+    echo "Failed to clone repository. Installation failed."
+    exit 1
+  fi
 }
 
 function setup_shim() {
@@ -223,10 +233,11 @@ function setup_shim() {
 #!/usr/bin/env bash
 
 declare -r LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
-declare -r LUNARVIM_CONFIG_DIR="$LUNARVIM_CONFIG_DIR"
 
-exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "\$@"
+exec nvim -u "\$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
 EOF
+
+  chmod u+x "$INSTALL_PREFIX/bin/lvim"
 }
 
 function setup_shim() {
@@ -248,26 +259,23 @@ function setup_lvim() {
   echo "Installing LunarVim shim"
 
   setup_shim
-  chmod u+x "$INSTALL_PREFIX/bin/lvim"
 
   echo "Preparing Packer setup"
 
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example-no-ts.lua" \
-    "$HOME/.config/lvim/config.lua"
+    "$LUNARVIM_CONFIG_DIR/config.lua"
 
-  "$INSTALL_PREFIX"/bin/lvim --headless \
+  nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
     +PackerInstall
 
-  "$INSTALL_PREFIX"/bin/lvim --headless \
+  nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
     +PackerSync
 
   echo "Packer setup complete"
 
-  if [ ! -e "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
-    cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$HOME/.config/lvim/config.lua"
-  fi
+  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 }
 
 function update_lvim() {
