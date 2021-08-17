@@ -1160,21 +1160,3 @@ lvim.lang = {
     },
   },
 }
-
--- NOTE: which-key should be first because it defines lvim.builtin.which_key.mappings
-require("keymappings").config()
-require("core.which-key").config()
-require("core.gitsigns").config()
-require("core.compe").config()
-require("core.dashboard").config()
-require("core.dap").config()
-require("core.terminal").config()
-require("core.telescope").config()
-require("core.treesitter").config()
-require("core.nvimtree").config()
-require("core.project").config()
-require("core.bufferline").config()
-require("core.autopairs").config()
-require("core.comment").config()
-require("core.lspinstall").config()
-require("core.lualine").config()
