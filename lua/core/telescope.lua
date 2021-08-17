@@ -6,7 +6,8 @@ function M.config()
   end
 
   lvim.builtin.telescope = {
-    active = false,
+    ---@usage disable telescope completely [not recommeded]
+    active = true,
     defaults = {
       prompt_prefix = " ",
       selection_caret = " ",

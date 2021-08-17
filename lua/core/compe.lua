@@ -1,7 +1,7 @@
 local M = {}
 M.config = function()
   lvim.builtin.compe = {
-    enabled = true,
+    active = true,
     autocomplete = true,
     debug = false,
     min_length = 1,

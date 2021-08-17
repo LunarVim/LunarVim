@@ -34,7 +34,11 @@ local function lsp_highlight_document(client)
 end
 
 local function add_lsp_buffer_keybindings(bufnr)
-  local wk = require "which-key"
+  local status_ok, wk = pcall(require, "which-key")
+  if not status_ok then
+    return
+  end
+
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
