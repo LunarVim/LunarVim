@@ -27,6 +27,7 @@ return {
         lvim.builtin.telescope.on_config_done(require "telescope")
       end
     end,
+    disable = not lvim.builtin.telescope.active,
   },
 
   -- Completion & Snippets
@@ -39,6 +40,7 @@ return {
         lvim.builtin.compe.on_config_done(require "compe")
       end
     end,
+    disable = not lvim.builtin.compe.active,
     -- wants = "vim-vsnip",
     -- requires = {
     -- {
@@ -56,10 +58,12 @@ return {
     "hrsh7th/vim-vsnip",
     -- wants = "friendly-snippets",
     event = "InsertEnter",
+    disable = not lvim.builtin.compe.active,
   },
   {
     "rafamadriz/friendly-snippets",
     event = "InsertCharPre",
+    disable = not lvim.builtin.compe.active,
   },
 
   -- Autopairs
@@ -68,11 +72,12 @@ return {
     -- event = "InsertEnter",
     after = "nvim-compe",
     config = function()
-      require "core.autopairs"
+      require("core.autopairs").setup()
       if lvim.builtin.autopairs.on_config_done then
         lvim.builtin.autopairs.on_config_done(require "nvim-autopairs")
       end
     end,
+    disable = not lvim.builtin.autopairs.active or not lvim.builtin.compe.active,
   },
 
   -- Treesitter
@@ -100,6 +105,7 @@ return {
         lvim.builtin.nvimtree.on_config_done(require "nvim-tree.config")
       end
     end,
+    disable = not lvim.builtin.nvimtree.active,
   },
 
   {
@@ -112,6 +118,7 @@ return {
       end
     end,
     event = "BufRead",
+    disable = not lvim.builtin.gitsigns.active,
   },
 
   -- Whichkey
@@ -124,6 +131,7 @@ return {
       end
     end,
     event = "BufWinEnter",
+    disable = not lvim.builtin.which_key.active,
   },
 
   -- Comments
@@ -131,17 +139,12 @@ return {
     "terrortylor/nvim-comment",
     event = "BufRead",
     config = function()
-      local status_ok, nvim_comment = pcall(require, "nvim_comment")
-      if not status_ok then
-        local Log = require "core.log"
-        Log:get_default().error "Failed to load nvim-comment"
-        return
-      end
-      nvim_comment.setup()
+      require("nvim_comment").setup()
       if lvim.builtin.comment.on_config_done then
-        lvim.builtin.comment.on_config_done(nvim_comment)
+        lvim.builtin.comment.on_config_done(require "nvim_comment")
       end
     end,
+    disable = not lvim.builtin.comment.active,
   },
 
   -- project.nvim

@@ -7,14 +7,9 @@ local logger = require("core.log"):get_default()
 
 local function list_names(linters, options)
   options = options or {}
-  local names = {}
-
   local filter = options.filter or "supported"
-  for name, _ in pairs(linters[filter]) do
-    table.insert(names, name)
-  end
 
-  return names
+  return vim.tbl_keys(linters[filter])
 end
 
 function M.list_supported_names(filetype)
@@ -59,7 +54,7 @@ function M.list_configured(linter_configs)
         errors[lnt_config.exe] = {} -- Add data here when necessary
       else
         logger.info("Using linter:", linter_cmd)
-        linters[lnt_config.exe] = linter.with { command = linter_cmd, args = lnt_config.args }
+        linters[lnt_config.exe] = linter.with { command = linter_cmd, extra_args = lnt_config.args }
       end
     end
   end

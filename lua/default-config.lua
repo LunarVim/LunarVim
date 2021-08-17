@@ -102,6 +102,9 @@ lvim = {
     popup_border = "single",
     on_attach_callback = nil,
     on_init_callback = nil,
+    null_ls = {
+      setup = {},
+    },
   },
 
   plugins = {
@@ -285,7 +288,6 @@ lvim.lang = {
       setup = {
         cmd = {
           DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
-          "--stdio",
         },
         on_attach = common_on_attach,
         on_init = common_on_init,
@@ -813,6 +815,10 @@ lvim.lang = {
     lsp = {
       provider = "puppet",
       setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/puppet/puppet-editor-services/puppet-languageserver",
+          "--stdio",
+        },
         on_attach = common_on_attach,
         on_init = common_on_init,
         capabilities = common_capabilities,
@@ -1295,3 +1301,5 @@ require("core.treesitter").config()
 require("core.nvimtree").config()
 require("core.project").config()
 require("core.bufferline").config()
+require("core.autopairs").config()
+require("core.comment").config()

@@ -7,14 +7,9 @@ local logger = require("core.log"):get_default()
 
 local function list_names(formatters, options)
   options = options or {}
-  local names = {}
-
   local filter = options.filter or "supported"
-  for name, _ in pairs(formatters[filter]) do
-    table.insert(names, name)
-  end
 
-  return names
+  return vim.tbl_keys(formatters[filter])
 end
 
 function M.list_supported_names(filetype)
@@ -59,7 +54,7 @@ function M.list_configured(formatter_configs)
         errors[fmt_config.exe] = {} -- Add data here when necessary
       else
         logger.info("Using formatter:", formatter_cmd)
-        formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, args = fmt_config.args }
+        formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, extra_args = fmt_config.args }
       end
     end
   end
