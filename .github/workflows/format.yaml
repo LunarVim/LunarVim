@@ -40,5 +40,5 @@ jobs:
       # https://google.github.io/styleguide/shellguide.html
       - name: Check formatting
         run: |
-          shfmt -i 2 -ci -l -d .
+          shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -l -d
     

@@ -32,3 +32,4 @@ jobs:
       uses: ludeeus/action-shellcheck@master
       with:
        scandir: './utils'
+       ignore: 'bin'
