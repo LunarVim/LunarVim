@@ -13,11 +13,9 @@ local function find_root_dir()
 end
 
 local function from_node_modules(command)
-  local logger = require("core.log"):get_default()
   local root_dir = find_root_dir()
 
   if not root_dir then
-    logger.error(string.format("Unable to find the [%s] node module.", command))
     return nil
   end
 
