@@ -1067,14 +1067,40 @@ lvim.lang = {
   },
   tailwindcss = {
     active = false,
-    filetypes = {
-      "html",
-      "css",
-      "scss",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
+    lsp = {
+      provider = "tailwindcss",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/tailwindcss/tailwindcss-intellisense.sh",
+          "--stdio",
+        },
+        on_attach = require("lsp").common_on_attach,
+        on_init = require("lsp").common_on_init,
+        capabilities = require("lsp").common_capabilities(),
+        filetypes = {
+          "html",
+          "css",
+          "scss",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "svelte",
+        },
+        root_dir = require("lspconfig").util.root_pattern(
+          "tailwind.config.js",
+          "tailwind.config.ts",
+          "postcss.config.js",
+          "postcss.config.ts",
+          "tailwind.config.cjs",
+          "tailwind.config.cts",
+          "postcss.config.cjs",
+          "postcss.config.cts",
+          "package.json",
+          "node_modules",
+          ".git"
+        ),
+      },
     },
   },
   terraform = {
