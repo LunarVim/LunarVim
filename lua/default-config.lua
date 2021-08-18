@@ -26,7 +26,7 @@ lvim = {
     gitsigns = {},
     which_key = {},
     comment = {},
-    rooter = {},
+    project = {},
     galaxyline = {},
     bufferline = {},
     dap = {},
@@ -102,8 +102,9 @@ lvim = {
     popup_border = "single",
     on_attach_callback = nil,
     on_init_callback = nil,
-    ---@usage query the project directory from the language server and use it to set the CWD
-    smart_cwd = true,
+    null_ls = {
+      setup = {},
+    },
   },
 
   plugins = {
@@ -537,6 +538,21 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {},
+    },
+  },
+  fortran = {
+    formatters = {},
+    linters = {},
+    lsp = {
+      provider = "fortls",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/fortran/venv/bin/fortls",
+        },
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
     },
   },
   go = {
@@ -1480,5 +1496,7 @@ require("core.terminal").config()
 require("core.telescope").config()
 require("core.treesitter").config()
 require("core.nvimtree").config()
-require("core.rooter").config()
+require("core.project").config()
 require("core.bufferline").config()
+require("core.autopairs").config()
+require("core.comment").config()

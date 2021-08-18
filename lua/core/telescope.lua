@@ -6,7 +6,8 @@ function M.config()
   end
 
   lvim.builtin.telescope = {
-    active = false,
+    ---@usage disable telescope completely [not recommeded]
+    active = true,
     defaults = {
       prompt_prefix = " ",
       selection_caret = " ",
@@ -118,6 +119,9 @@ function M.setup()
     return
   end
   telescope.setup(lvim.builtin.telescope)
+  if lvim.builtin.project.active then
+    pcall(require("telescope").load_extension, "projects")
+  end
 end
 
 return M
