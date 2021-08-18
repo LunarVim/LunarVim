@@ -129,7 +129,6 @@ styles.lvim = {
           end
           local buf_ft = vim.bo.filetype
           local buf_client_names = {}
-          -- local null_ls_providers = require("lsp.null-ls").get_registered_providers_by_filetype(buf_ft)
           local active_client = require("lsp.utils").get_active_client_by_ft(buf_ft)
           for _, client in pairs(buf_clients) do
             if client.name ~= "null-ls" then
@@ -178,10 +177,7 @@ styles.lvim = {
   extensions = { "nvim-tree" },
 }
 
-function M.update()
-  local config = lvim.builtin.lualine
-  local style = config.style
-
+local function get_style(style)
   local style_keys = vim.tbl_keys(styles)
   if not vim.tbl_contains(style_keys, style) then
     local Log = require "core.log"
@@ -195,36 +191,43 @@ function M.update()
     logger.info '"lvim" style is applied.'
     style = "lvim"
   end
-  local selected_style = vim.deepcopy(styles[style])
+
+  return vim.deepcopy(styles[style])
+end
+
+function M.update()
+  local config = lvim.builtin.lualine
+
+  local style = get_style(config.style)
 
   lvim.builtin.lualine = {
     active = true,
-    style = style,
+    style = style.style,
     options = {
-      icons_enabled = config.options.icons_enabled or selected_style.options.icons_enabled,
-      component_separators = config.options.component_separators or selected_style.options.component_separators,
-      section_separators = config.options.section_separators or selected_style.options.section_separators,
+      icons_enabled = config.options.icons_enabled or style.options.icons_enabled,
+      component_separators = config.options.component_separators or style.options.component_separators,
+      section_separators = config.options.section_separators or style.options.section_separators,
       theme = config.options.theme or lvim.colorscheme or "auto",
-      disabled_filetypes = config.options.disabled_filetypes or selected_style.options.disabled_filetypes,
+      disabled_filetypes = config.options.disabled_filetypes or style.options.disabled_filetypes,
     },
     sections = {
-      lualine_a = config.sections.lualine_a or selected_style.sections.lualine_a,
-      lualine_b = config.sections.lualine_b or selected_style.sections.lualine_b,
-      lualine_c = config.sections.lualine_c or selected_style.sections.lualine_c,
-      lualine_x = config.sections.lualine_x or selected_style.sections.lualine_x,
-      lualine_y = config.sections.lualine_y or selected_style.sections.lualine_y,
-      lualine_z = config.sections.lualine_z or selected_style.sections.lualine_z,
+      lualine_a = config.sections.lualine_a or style.sections.lualine_a,
+      lualine_b = config.sections.lualine_b or style.sections.lualine_b,
+      lualine_c = config.sections.lualine_c or style.sections.lualine_c,
+      lualine_x = config.sections.lualine_x or style.sections.lualine_x,
+      lualine_y = config.sections.lualine_y or style.sections.lualine_y,
+      lualine_z = config.sections.lualine_z or style.sections.lualine_z,
     },
     inactive_sections = {
-      lualine_a = config.inactive_sections.lualine_a or selected_style.inactive_sections.lualine_a,
-      lualine_b = config.inactive_sections.lualine_b or selected_style.inactive_sections.lualine_b,
-      lualine_c = config.inactive_sections.lualine_c or selected_style.inactive_sections.lualine_c,
-      lualine_x = config.inactive_sections.lualine_x or selected_style.inactive_sections.lualine_x,
-      lualine_y = config.inactive_sections.lualine_y or selected_style.inactive_sections.lualine_y,
-      lualine_z = config.inactive_sections.lualine_z or selected_style.inactive_sections.lualine_z,
+      lualine_a = config.inactive_sections.lualine_a or style.inactive_sections.lualine_a,
+      lualine_b = config.inactive_sections.lualine_b or style.inactive_sections.lualine_b,
+      lualine_c = config.inactive_sections.lualine_c or style.inactive_sections.lualine_c,
+      lualine_x = config.inactive_sections.lualine_x or style.inactive_sections.lualine_x,
+      lualine_y = config.inactive_sections.lualine_y or style.inactive_sections.lualine_y,
+      lualine_z = config.inactive_sections.lualine_z or style.inactive_sections.lualine_z,
     },
-    tabline = config.tabline or selected_style.tabline,
-    extensions = config.extensions or selected_style.extensions,
+    tabline = config.tabline or style.tabline,
+    extensions = config.extensions or style.extensions,
     on_config_done = config.on_config_done,
   }
 end
