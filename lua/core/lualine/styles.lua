@@ -75,6 +75,7 @@ styles.lvim = {
   sections = {
     lualine_a = {
       {
+        -- Vim mode
         function()
           return " "
         end,
@@ -104,6 +105,24 @@ styles.lvim = {
     },
     lualine_x = {
       {
+        -- Python Env
+        function()
+          if vim.bo.filetype == "python" then
+            local venv = os.getenv "CONDA_DEFAULT_ENV"
+            if venv ~= nil then
+              return "  (" .. require("core.lualine.utils").env_cleanup(venv) .. ")"
+            end
+            venv = os.getenv "VIRTUAL_ENV"
+            if venv ~= nil then
+              return "  (" .. require("core.lualine.utils").env_cleanup(venv) .. ")"
+            end
+            return ""
+          end
+          return ""
+        end,
+        condition = conditions.hide_in_width,
+      },
+      {
         "diagnostics",
         sources = { "nvim_lsp" },
         symbols = { error = " ", warn = " ", info = " ", hint = " " },
@@ -111,6 +130,7 @@ styles.lvim = {
         color = { bg = colors.bg },
       },
       {
+        -- Treesitter
         function()
           if next(vim.treesitter.highlighter.active) then
             return "  "
@@ -121,6 +141,7 @@ styles.lvim = {
         condition = conditions.hide_in_width,
       },
       {
+        -- LSP
         function(msg)
           msg = msg or "LSP Inactive"
           local buf_clients = vim.lsp.buf_get_clients()
@@ -145,6 +166,7 @@ styles.lvim = {
       { "location", condition = conditions.hide_in_width },
       { "progress", condition = conditions.hide_in_width },
       {
+        -- Spaces
         function()
           local label = "Spaces: "
           if not vim.api.nvim_buf_get_option(0, "expandtab") then
