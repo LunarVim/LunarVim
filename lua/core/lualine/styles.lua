@@ -150,6 +150,8 @@ styles.lvim = {
           end
           local buf_ft = vim.bo.filetype
           local buf_client_names = {}
+
+          -- add client
           local active_client = require("lsp.utils").get_active_client_by_ft(buf_ft)
           for _, client in pairs(buf_clients) do
             if client.name ~= "null-ls" then
@@ -157,6 +159,15 @@ styles.lvim = {
             end
           end
           vim.list_extend(buf_client_names, active_client or {})
+
+          -- add formatter
+          local active_formatters = require("lsp.null-ls.formatters").list_supported_names(buf_ft)
+          vim.list_extend(buf_client_names, active_formatters or {})
+
+          -- add linter
+          local active_linters = require("lsp.null-ls.linters").list_supported_names(buf_ft)
+          vim.list_extend(buf_client_names, active_linters or {})
+
           return table.concat(buf_client_names, ", ")
         end,
         condition = conditions.hide_in_width,
