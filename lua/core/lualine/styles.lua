@@ -140,7 +140,7 @@ styles.lvim = {
           return table.concat(buf_client_names, ", ")
         end,
         condition = conditions.hide_in_width,
-        icon = "",
+        icon = " ",
         color = { gui = "bold" },
       },
       { "location", condition = conditions.hide_in_width },
