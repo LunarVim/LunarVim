@@ -34,6 +34,7 @@ end
 
 M.setup = function()
   require("core.lualine.styles").update()
+  require("core.lualine.utils").validate_theme()
 
   local lualine = require "lualine"
   lualine.setup(lvim.builtin.lualine)
