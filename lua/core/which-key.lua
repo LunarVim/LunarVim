@@ -1,7 +1,8 @@
 local M = {}
 M.config = function()
   lvim.builtin.which_key = {
-    active = false,
+    ---@usage disable which-key completely [not recommeded]
+    active = true,
     setup = {
       plugins = {
         marks = true, -- shows a list of your marks on ' and `

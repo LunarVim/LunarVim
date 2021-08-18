@@ -34,7 +34,11 @@ local function lsp_highlight_document(client)
 end
 
 local function add_lsp_buffer_keybindings(bufnr)
-  local wk = require "which-key"
+  local status_ok, wk = pcall(require, "which-key")
+  if not status_ok then
+    return
+  end
+
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
@@ -49,14 +53,6 @@ local function add_lsp_buffer_keybindings(bufnr)
     },
   }
   wk.register(keys, { mode = "n", buffer = bufnr })
-end
-
-local function set_smart_cwd(client)
-  local proj_dir = client.config.root_dir
-  if lvim.lsp.smart_cwd and proj_dir ~= "/" then
-    vim.api.nvim_set_current_dir(proj_dir)
-    require("core.nvimtree").change_tree_dir(proj_dir)
-  end
 end
 
 function M.common_capabilities()
@@ -123,7 +119,6 @@ function M.common_on_attach(client, bufnr)
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)
-  set_smart_cwd(client)
   require("lsp.null-ls").setup(vim.bo.filetype)
 end
 

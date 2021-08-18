@@ -1,28 +1,20 @@
 local M = {}
 
-local logger = require("core.log"):get_default()
-
 local function find_root_dir()
-  if lvim.builtin.rooter.active then
-    --- use vim-rooter to set root_dir
-    vim.cmd "let root_dir = FindRootDirectory()"
-    return vim.api.nvim_get_var "root_dir"
-  end
-
-  -- TODO: Rework this to not make it javascript specific
-  --- use LSP to set root_dir
+  local util = require "lspconfig/util"
   local lsp_utils = require "lsp.utils"
-  local ts_client = lsp_utils.get_active_client_by_ft "typescript"
-  if ts_client == nil then
-    logger.error "Unable to determine root directory since tsserver didn't start correctly"
-    return nil
-  end
 
-  return ts_client.config.root_dir
+  local status_ok, ts_client = lsp_utils.is_client_active "typescript"
+  if status_ok then
+    return ts_client.config.root_dir
+  end
+  local dirname = vim.fn.expand "%:p:h"
+  return util.root_pattern "package.json"(dirname)
 end
 
 local function from_node_modules(command)
   local root_dir = find_root_dir()
+
   if not root_dir then
     return nil
   end
