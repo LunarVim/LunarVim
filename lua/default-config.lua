@@ -148,8 +148,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "beancount",
+        beancount = {
           setup = {
             cmd = { "beancount-langserver" },
             on_attach = common_on_attach,
@@ -174,8 +173,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "clangd",
+        clangd = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
@@ -207,8 +205,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "clangd",
+        clangd = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
@@ -236,8 +233,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "crystalline",
+        crystalline = {
           setup = {
             cmd = { "crystalline" },
             on_attach = common_on_attach,
@@ -262,8 +258,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "omnisharp",
+        omnisharp = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
@@ -289,8 +284,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "cmake",
+        cmake = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
@@ -308,8 +302,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "clojure_lsp",
+        clojure_lsp = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
@@ -336,8 +329,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "cssls",
+        cssls = {
           setup = {
             cmd = {
               "node",
@@ -366,8 +358,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "cssls",
+        cssls = {
           setup = {
             cmd = {
               "node",
@@ -392,8 +383,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "serve_d",
+        serve_d = {
           setup = {
             cmd = { "serve-d" },
             on_attach = common_on_attach,
@@ -414,8 +404,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "dartls",
+        dartls = {
           setup = {
             cmd = {
               "dart",
@@ -435,8 +424,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "dockerls",
+        dockerls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
@@ -460,8 +448,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "elixirls",
+        elixirls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
@@ -484,8 +471,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "elmls",
+        elmls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server",
@@ -513,8 +499,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "erlangls",
+        erlangls = {
           setup = {
             cmd = {
               "erlang_ls",
@@ -544,14 +529,17 @@ lvim.lang = {
     formatters = {},
     linters = {},
     lsp = {
-      provider = "fortls",
-      setup = {
-        cmd = {
-          DATA_PATH .. "/lspinstall/fortran/venv/bin/fortls",
+      providers = {
+        fortls = {
+          setup = {
+            cmd = {
+              DATA_PATH .. "/lspinstall/fortran/venv/bin/fortls",
+            },
+            on_attach = common_on_attach,
+            on_init = common_on_init,
+            capabilities = common_capabilities,
+          },
         },
-        on_attach = common_on_attach,
-        on_init = common_on_init,
-        capabilities = common_capabilities,
       },
     },
   },
@@ -573,8 +561,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "gopls",
+        gopls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/go/gopls",
@@ -592,8 +579,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "graphql",
+        graphql = {
           setup = {
             cmd = {
               "graphql-lsp",
@@ -614,8 +600,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "hls",
+        hls = {
           setup = {
             cmd = { DATA_PATH .. "/lspinstall/haskell/hls" },
             on_attach = common_on_attach,
@@ -640,8 +625,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "html",
+        html = {
           setup = {
             cmd = {
               "node",
@@ -670,8 +654,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "jdtls",
+        jdtls = {
           setup = {
             cmd = { DATA_PATH .. "/lspinstall/java/jdtls.sh" },
             on_attach = common_on_attach,
@@ -700,8 +683,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "jsonls",
+        jsonls = {
           setup = {
             cmd = {
               "node",
@@ -739,8 +721,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "julials",
+        julials = {
           setup = {
             {
               "julia",
@@ -762,8 +743,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "kotlin_language_server",
+        kotlin_language_server = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
@@ -806,8 +786,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "sumneko_lua",
+        sumneko_lua = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
@@ -881,8 +860,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "sqls",
+        sqls = {
           setup = {
             cmd = { "sqls" },
           },
@@ -900,8 +878,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "intelephense",
+        intelephense = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
@@ -927,8 +904,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "puppet",
+        puppet = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/puppet/puppet-editor-services/puppet-languageserver",
@@ -961,8 +937,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "tsserver",
+        tsserver = {
           setup = {
             cmd = {
               -- TODO:
@@ -995,8 +970,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "tsserver",
+        tsserver = {
           setup = {
             cmd = {
               -- TODO:
@@ -1025,8 +999,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "pyright",
+        pyright = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
@@ -1052,8 +1025,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "r_language_server",
+        r_language_server = {
           setup = {
             cmd = {
               "R",
@@ -1079,8 +1051,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "solargraph",
+        solargraph = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
@@ -1117,8 +1088,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "rust_analyzer",
+        rust_analyzer = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/rust/rust-analyzer",
@@ -1141,8 +1111,7 @@ lvim.lang = {
     linters = { "" },
     lsp = {
       providers = {
-        {
-          name = "metals",
+        metals = {
           setup = {
             on_attach = common_on_attach,
             on_init = common_on_init,
@@ -1162,8 +1131,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "bashls",
+        bashls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
@@ -1182,8 +1150,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "svelte",
+        svelte = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
@@ -1207,8 +1174,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "sourcekit",
+        sourcekit = {
           setup = {
             cmd = {
               "xcrun",
@@ -1244,8 +1210,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "terraformls",
+        terraformls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/terraform/terraform-ls",
@@ -1264,8 +1229,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "texlab",
+        texlab = {
           setup = {
             cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
             on_attach = common_on_attach,
@@ -1294,8 +1258,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "tsserver",
+        tsserver = {
           setup = {
             cmd = {
               -- TODO:
@@ -1329,8 +1292,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "tsserver",
+        tsserver = {
           setup = {
             cmd = {
               -- TODO:
@@ -1350,8 +1312,7 @@ lvim.lang = {
     linters = { "" },
     lsp = {
       providers = {
-        {
-          name = "vimls",
+        vimls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
@@ -1383,8 +1344,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "vuels",
+        vuels = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
@@ -1411,8 +1371,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "yamlls",
+        yamlls = {
           setup = {
             cmd = {
               DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
@@ -1431,8 +1390,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "zls",
+        zls = {
           setup = {
             cmd = {
               "zls",
@@ -1450,8 +1408,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "gdscript",
+        gdscript = {
           setup = {
             cmd = {
               "nc",
@@ -1471,8 +1428,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       providers = {
-        {
-          name = "powershell_es",
+        powershell_es = {
           setup = {
             bundle_path = "",
             on_attach = common_on_attach,

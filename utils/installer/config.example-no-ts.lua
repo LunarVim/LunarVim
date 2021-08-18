@@ -96,7 +96,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- lvim.lang.php.lsp = {
 --   providers = {
 --     intelephense = {
---       name = "intelephense",
 --       setup = {
 --         cmd = {
 --           DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
@@ -113,7 +112,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 --       },
 --     },
 --     phpactor = {
---       name = "phpactor",
 --       setup = {
 --         handlers = {
 --           ["textDocument/hover"] = function() end,
