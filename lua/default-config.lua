@@ -1301,6 +1301,31 @@ lvim.lang = {
       },
     },
   },
+  nix = {
+    formatters = {
+      -- {
+      --   exe = "nixfmt",
+      --   args = {},
+      -- },
+    },
+    linters = {},
+    lsp = {
+      provider = "rnix",
+      setup = {
+        cmd = { "rnix-lsp" },
+        filetypes = { "nix" },
+        init_options = {},
+        settings = {},
+        root_dir = function(fname)
+          local util = require "lspconfig/util"
+          return util.root_pattern ".git"(fname) or vim.fn.getcwd()
+        end,
+        on_attach = common_on_attach,
+        on_init = common_on_init,
+        capabilities = common_capabilities,
+      },
+    },
+  },
 }
 
 require("keymappings").config()
