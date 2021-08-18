@@ -96,9 +96,9 @@ styles.lvim = {
       {
         "diff",
         symbols = { added = "  ", modified = "柳", removed = " " },
-        color_added = colors.green,
-        color_modified = colors.yellow,
-        color_removed = colors.red,
+        color_added = { fg = colors.green },
+        color_modified = { fg = colors.yellow },
+        color_removed = { fg = colors.red },
         condition = conditions.hide_in_width,
       },
     },
