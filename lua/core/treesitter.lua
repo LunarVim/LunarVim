@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "core.log"
 M.config = function()
   lvim.builtin.treesitter = {
     on_config_done = nil,
@@ -65,6 +66,7 @@ end
 M.setup = function()
   local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
+    Log:get_default().error "Failed to load nvim-treesitter.configs"
     return
   end
 

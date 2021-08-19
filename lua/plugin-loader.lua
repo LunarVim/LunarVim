@@ -23,7 +23,7 @@ function plugin_loader:init()
     git = { clone_timeout = 300 },
     display = {
       open_fn = function()
-        return util.float { border = "single" }
+        return util.float { border = "rounded" }
       end,
     },
   }

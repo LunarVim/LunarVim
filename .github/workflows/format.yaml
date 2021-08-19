@@ -37,7 +37,8 @@ jobs:
         run: |
           GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
+      # https://google.github.io/styleguide/shellguide.html
       - name: Check formatting
         run: |
-          shfmt -l -d .
+          shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -l -d
     

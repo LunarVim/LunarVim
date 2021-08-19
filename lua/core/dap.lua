@@ -13,10 +13,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, dap = pcall(require, "dap")
-  if not status_ok then
-    return
-  end
+  local dap = require "dap"
 
   vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
@@ -35,7 +32,7 @@ M.setup = function()
     p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-    q = { "<cmd>lua require'dap'.stop()<cr>", "Quit" },
+    q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   }
 
   if lvim.builtin.dap.on_config_done then

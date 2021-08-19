@@ -13,12 +13,11 @@ return {
 
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
-  { "tjdevries/astronauta.nvim" },
-
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     config = require("core.telescope").setup,
+    disable = not lvim.builtin.telescope.active,
   },
 
   -- Completion & Snippets
@@ -26,6 +25,7 @@ return {
     "hrsh7th/nvim-compe",
     event = "InsertEnter",
     config = require("core.compe").setup,
+    disable = not lvim.builtin.compe.active,
     -- wants = "vim-vsnip",
     -- requires = {
     -- {
@@ -42,11 +42,13 @@ return {
   {
     "hrsh7th/vim-vsnip",
     -- wants = "friendly-snippets",
-    event = "InsertCharPre",
+    event = "InsertEnter",
+    disable = not lvim.builtin.compe.active,
   },
   {
     "rafamadriz/friendly-snippets",
     event = "InsertCharPre",
+    disable = not lvim.builtin.compe.active,
   },
 
   -- Autopairs
@@ -55,7 +57,7 @@ return {
     -- event = "InsertEnter",
     after = "nvim-compe",
     config = require("core.autopairs").setup,
-    disable = not lvim.builtin.autopairs.active,
+    disable = not lvim.builtin.autopairs.active or not lvim.builtin.compe.active,
   },
 
   -- Treesitter
@@ -73,12 +75,14 @@ return {
     -- cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
     config = require("core.nvimtree").setup,
+    disable = not lvim.builtin.nvimtree.active,
   },
 
   {
     "lewis6991/gitsigns.nvim",
     config = require("core.gitsigns").setup,
     event = "BufRead",
+    disable = not lvim.builtin.gitsigns.active,
   },
 
   -- Whichkey
@@ -86,6 +90,7 @@ return {
     "folke/which-key.nvim",
     config = require("core.which-key").setup,
     event = "BufWinEnter",
+    disable = not lvim.builtin.which_key.active,
   },
 
   -- Comments
@@ -96,11 +101,13 @@ return {
     disable = not lvim.builtin.comment.active,
   },
 
-  -- vim-rooter
+  -- project.nvim
   {
-    "airblade/vim-rooter",
-    config = require("core.rooter").setup,
-    disable = not lvim.builtin.rooter.active,
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("core.project").setup()
+    end,
+    disable = not lvim.builtin.project.active,
   },
 
   -- Icons
@@ -109,7 +116,12 @@ return {
   -- Status Line and Bufferline
   {
     "glepnir/galaxyline.nvim",
-    config = require("core.galaxyline").setup,
+    config = function()
+      require "core.galaxyline"
+      if lvim.builtin.galaxyline.on_config_done then
+        lvim.builtin.galaxyline.on_config_done(require "galaxyline")
+      end
+    end,
     event = "BufWinEnter",
     disable = not lvim.builtin.galaxyline.active,
   },

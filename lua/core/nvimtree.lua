@@ -1,9 +1,12 @@
 local M = {}
+local Log = require "core.log"
 --
 M.config = function()
   lvim.builtin.nvimtree = {
+    active = true,
     on_config_done = nil,
     side = "left",
+    width = 30,
     show_icons = {
       git = 1,
       folders = 1,
@@ -49,6 +52,7 @@ end
 M.setup = function()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
+    Log:get_default().error "Failed to load nvim-tree.config"
     return
   end
   local g = vim.g
@@ -57,21 +61,57 @@ M.setup = function()
     g["nvim_tree_" .. opt] = val
   end
 
+  -- Implicitly update nvim-tree when project module is active
+  if lvim.builtin.project.active then
+    vim.g.nvim_tree_update_cwd = 1
+    vim.g.nvim_tree_respect_buf_cwd = 1
+  end
+
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
-  g.nvim_tree_bindings = {
-    { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-    { key = "h", cb = tree_cb "close_node" },
-    { key = "v", cb = tree_cb "vsplit" },
-  }
+  if not g.nvim_tree_bindings then
+    g.nvim_tree_bindings = {
+      { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+      { key = "h", cb = tree_cb "close_node" },
+      { key = "v", cb = tree_cb "vsplit" },
+      { key = "q", cb = ":lua require('core.nvimtree').toggle_tree()<cr>" },
+    }
+  end
 
   if lvim.builtin.nvimtree.on_config_done then
     lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
-
-  return nvim_tree_config
 end
 --
+M.focus_or_close = function()
+  local view_status_ok, view = pcall(require, "nvim-tree.view")
+  if not view_status_ok then
+    return
+  end
+  local a = vim.api
+
+  local curwin = a.nvim_get_current_win()
+  local curbuf = a.nvim_win_get_buf(curwin)
+  local bufnr = view.View.bufnr
+  local winnr = view.get_winnr()
+
+  if view.win_open() then
+    if curwin == winnr and curbuf == bufnr then
+      view.close()
+      if package.loaded["bufferline.state"] then
+        require("bufferline.state").set_offset(0)
+      end
+    else
+      view.focus()
+    end
+  else
+    view.open()
+    if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
+      -- require'bufferline.state'.set_offset(lvim.builtin.nvimtree.width + 1, 'File Explorer')
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
+    end
+  end
+end
 --
 M.toggle_tree = function()
   local view_status_ok, view = pcall(require, "nvim-tree.view")
@@ -85,10 +125,16 @@ M.toggle_tree = function()
     end
   else
     if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
-      -- require'bufferline.state'.set_offset(31, 'File Explorer')
-      require("bufferline.state").set_offset(31, "")
+      -- require'bufferline.state'.set_offset(lvim.builtin.nvimtree.width + 1, 'File Explorer')
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
     end
     require("nvim-tree").toggle()
+  end
+end
+--
+function M.change_tree_dir(dir)
+  if vim.g.loaded_tree then
+    require("nvim-tree.lib").change_dir(dir)
   end
 end
 --

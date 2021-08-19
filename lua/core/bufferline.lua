@@ -4,12 +4,18 @@ M.config = function()
   lvim.builtin.bufferline = {
     active = true,
     on_config_done = nil,
+    keymap = {
+      normal_mode = {
+        ["<S-l>"] = ":BufferNext<CR>",
+        ["<S-h>"] = ":BufferPrevious<CR>",
+      },
+    },
   }
 end
 
 M.setup = function()
-  vim.api.nvim_set_keymap("n", "<S-l>", ":BufferNext<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("n", "<S-h>", ":BufferPrevious<CR>", { noremap = true, silent = true })
+  local keymap = require "keymappings"
+  keymap.append_to_defaults(lvim.builtin.bufferline.keymap)
 
   if lvim.builtin.bufferline.on_config_done then
     lvim.builtin.bufferline.on_config_done()

@@ -1,12 +1,13 @@
 local M = {}
-M.config = function()
+function M.config()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
     return
   end
 
   lvim.builtin.telescope = {
-    active = false,
+    ---@usage disable telescope completely [not recommeded]
+    active = true,
     on_config_done = nil,
     defaults = {
       prompt_prefix = " ",
@@ -60,8 +61,8 @@ M.config = function()
           -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
         },
         n = {
-          ["<C-j>"] = actions.move_selection_next,
-          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           -- ["<c-t>"] = trouble.open_with_trouble,
           -- ["<C-i>"] = my_cool_custom_action,
@@ -77,18 +78,51 @@ M.config = function()
   }
 end
 
-M.setup = function()
-  local status_ok, telescope = pcall(require, "telescope")
-  if not status_ok then
-    return
-  end
+function M.find_lunarvim_files(opts)
+  opts = opts or {}
+  local themes = require "telescope.themes"
+  local theme_opts = themes.get_ivy {
+    previewer = false,
+    sorting_strategy = "ascending",
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 5,
+      width = 0.5,
+    },
+    prompt = ">> ",
+    prompt_title = "~ LunarVim files ~",
+    cwd = CONFIG_PATH,
+    find_command = { "git", "ls-files" },
+  }
+  opts = vim.tbl_deep_extend("force", theme_opts, opts)
+  require("telescope.builtin").find_files(opts)
+end
+
+function M.grep_lunarvim_files(opts)
+  opts = opts or {}
+  local themes = require "telescope.themes"
+  local theme_opts = themes.get_ivy {
+    sorting_strategy = "ascending",
+    layout_strategy = "bottom_pane",
+    prompt = ">> ",
+    prompt_title = "~ search LunarVim ~",
+    cwd = CONFIG_PATH,
+  }
+  opts = vim.tbl_deep_extend("force", theme_opts, opts)
+  require("telescope.builtin").live_grep(opts)
+end
+
+function M.setup()
+  local telescope = require "telescope"
+
   telescope.setup(lvim.builtin.telescope)
+  if lvim.builtin.project.active then
+    telescope.load_extension "projects"
+  end
 
   if lvim.builtin.telescope.on_config_done then
     lvim.builtin.telescope.on_config_done(telescope)
   end
-
-  return telescope
 end
 
 return M
