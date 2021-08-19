@@ -41,20 +41,6 @@ return {
       end
       return ""
     end,
-    -- function()
-    --   if vim.bo.filetype == "python" then
-    --     local venv = os.getenv "CONDA_DEFAULT_ENV"
-    --     if venv then
-    --       return "  (" .. utils.env_cleanup(venv) .. ")"
-    --     end
-    --     venv = os.getenv "VIRTUAL_ENV"
-    --     if venv then
-    --       return "  (" .. utils.env_cleanup(venv) .. ")"
-    --     end
-    --     return ""
-    --   end
-    --   return ""
-    -- end,
     color = { fg = colors.green },
     condition = conditions.hide_in_width,
   },
