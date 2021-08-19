@@ -76,16 +76,16 @@ M.setup = function()
     }
   end
 
-  vim.cmd("au FileType NvimTree lua require('core.nvimtree').on_type()")
+  vim.cmd "au FileType NvimTree lua require('core.nvimtree').on_type()"
 end
 --
-M.on_type = function ()
-  local buf = vim.fn.expand("<abuf>")
+M.on_type = function()
+  local buf = vim.fn.expand "<abuf>"
   vim.cmd("au BufWinEnter <buffer=" .. buf .. "> lua require('core.nvimtree').on_open()")
   vim.cmd("au WinClosed   <buffer=" .. buf .. "> lua require('core.nvimtree').on_close()")
 end
 --
-M.on_open = function ()
+M.on_open = function()
   if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
     require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
   end
