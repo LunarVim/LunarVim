@@ -119,7 +119,7 @@ return {
       local current_line = vim.fn.line "."
       local total_lines = vim.fn.line "$"
       local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-      local scroll_index = 1
+      local scroll_index
       if current_line == 1 then
         scroll_index = 1
       elseif current_line == total_lines then
