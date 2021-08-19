@@ -96,7 +96,7 @@ M.on_open = function()
 end
 --
 M.on_close = function()
-  local buf = tonumber(vim.fn.expand("<abuf>"))
+  local buf = tonumber(vim.fn.expand "<abuf>")
   if vim.api.nvim_buf_get_option(buf, "filetype") == "NvimTree" then
     if package.loaded["bufferline.state"] then
       require("bufferline.state").set_offset(0)
