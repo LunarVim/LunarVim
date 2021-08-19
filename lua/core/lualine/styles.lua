@@ -102,8 +102,6 @@ styles.lvim = {
         color_removed = { fg = colors.red },
         condition = conditions.hide_in_width,
       },
-    },
-    lualine_x = {
       {
         -- Python Env
         function()
@@ -122,6 +120,8 @@ styles.lvim = {
         end,
         condition = conditions.hide_in_width,
       },
+    },
+    lualine_x = {
       {
         "diagnostics",
         sources = { "nvim_lsp" },
