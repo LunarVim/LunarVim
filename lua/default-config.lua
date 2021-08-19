@@ -431,8 +431,7 @@ lvim.lang = {
     linters = {},
     lsp = {
       provider = "",
-      setup = {
-      },
+      setup = {},
     },
   },
   fortran = {
@@ -912,8 +911,7 @@ lvim.lang = {
     linters = { "" },
     lsp = {
       provider = "metals",
-      setup = {
-      },
+      setup = {},
     },
   },
   sh = {
