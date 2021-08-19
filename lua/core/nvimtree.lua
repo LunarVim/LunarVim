@@ -79,16 +79,16 @@ M.setup = function()
   lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 
   -- Add nvim_tree open callback
-  on_open = require("nvim-tree.view").open
-  on_open_new = function()
+  local on_open = require("nvim-tree.view").open
+  local on_open_new = function()
     M.on_open()
     on_open()
   end
   require("nvim-tree.view").open = on_open_new
 
   -- Add nvim_tree close callback
-  on_leave = require("nvim-tree").on_leave
-  on_leave_new = function()
+  local on_leave = require("nvim-tree").on_leave
+  local on_leave_new = function()
     M.on_close()
     on_leave()
   end
