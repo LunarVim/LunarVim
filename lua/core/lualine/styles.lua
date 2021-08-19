@@ -118,6 +118,7 @@ styles.lvim = {
           end
           return ""
         end,
+        color = { fg = colors.green },
         condition = conditions.hide_in_width,
       },
     },
