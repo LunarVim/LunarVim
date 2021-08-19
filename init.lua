@@ -1,16 +1,24 @@
-vim.cmd [[
-  set packpath-=~/.config/nvim
-  set packpath-=~/.config/nvim/after
-  set packpath-=~/.local/share/nvim/site
-  set packpath^=~/.local/share/lunarvim/site
-  set packpath^=~/.config/lvim
+--    __                          _    ___
+--   / /   __  ______  ____ _____| |  / (_)___ ___
+--  / /   / / / / __ \/ __ `/ ___/ | / / / __ `__ \
+-- / /___/ /_/ / / / / /_/ / /   | |/ / / / / / / /
+--/_____/\__,_/_/ /_/\__,_/_/    |___/_/_/ /_/ /_/
 
-  set runtimepath-=~/.config/nvim
-  set runtimepath-=~/.config/nvim/after
-  set runtimepath+=~/.config/lvim
-  set runtimepath^=~/.local/share/lunarvim/lvim/after
-]]
--- vim.opt.rtp:append() instead of vim.cmd ?
+--- Bootstrap
+vim.opt.rtp:append(os.getenv "HOME" .. "/.local/share/lunarvim/lvim")
+
+vim.opt.rtp:remove(os.getenv "HOME" .. "/.config/nvim")
+vim.opt.rtp:remove(os.getenv "HOME" .. "/.config/nvim/after")
+vim.opt.rtp:append(os.getenv "HOME" .. "/.config/lvim")
+vim.opt.rtp:append(os.getenv "HOME" .. "/.config/lvim/after")
+
+vim.opt.rtp:remove(os.getenv "HOME" .. "/.local/share/nvim/site")
+vim.opt.rtp:remove(os.getenv "HOME" .. "/.local/share/nvim/site/after")
+vim.opt.rtp:append(os.getenv "HOME" .. "/.local/share/lunarvim/site")
+vim.opt.rtp:append(os.getenv "HOME" .. "/.local/share/lunarvim/site/after")
+
+-- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
+vim.cmd [[let &packpath = &runtimepath]]
 
 local function file_exists(name)
   local f = io.open(name, "r")
