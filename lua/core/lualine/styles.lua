@@ -109,11 +109,11 @@ styles.lvim = {
         function()
           if vim.bo.filetype == "python" then
             local venv = os.getenv "CONDA_DEFAULT_ENV"
-            if venv ~= nil then
+            if venv then
               return "  (" .. require("core.lualine.utils").env_cleanup(venv) .. ")"
             end
             venv = os.getenv "VIRTUAL_ENV"
-            if venv ~= nil then
+            if venv then
               return "  (" .. require("core.lualine.utils").env_cleanup(venv) .. ")"
             end
             return ""
