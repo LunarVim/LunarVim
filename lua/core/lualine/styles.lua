@@ -1,6 +1,5 @@
 local M = {}
-local conditions = require "core.lualine.conditions"
-local colors = require "core.lualine.colors"
+local components = require "core.lualine.components"
 
 local styles = {
   lvim = nil,
@@ -74,127 +73,31 @@ styles.lvim = {
   },
   sections = {
     lualine_a = {
-      {
-        -- Vim mode
-        function()
-          return " "
-        end,
-        left_padding = 0,
-        right_padding = 0,
-        condition = conditions.hide_in_width,
-      },
+      components.vi_mode,
     },
     lualine_b = {
-      {
-        "branch",
-        icon = " ",
-        condition = function()
-          return conditions.hide_in_width() and conditions.check_git_workspace()
-        end,
-      },
+      components.branch,
     },
     lualine_c = {
-      {
-        "diff",
-        symbols = { added = "  ", modified = "柳", removed = " " },
-        color_added = { fg = colors.green },
-        color_modified = { fg = colors.yellow },
-        color_removed = { fg = colors.red },
-        condition = conditions.hide_in_width,
-      },
-      {
-        -- Python Env
-        function()
-          if vim.bo.filetype == "python" then
-            local venv = os.getenv "CONDA_DEFAULT_ENV"
-            if venv then
-              return "  (" .. require("core.lualine.utils").env_cleanup(venv) .. ")"
-            end
-            venv = os.getenv "VIRTUAL_ENV"
-            if venv then
-              return "  (" .. require("core.lualine.utils").env_cleanup(venv) .. ")"
-            end
-            return ""
-          end
-          return ""
-        end,
-        color = { fg = colors.green },
-        condition = conditions.hide_in_width,
-      },
+      components.diff,
+      components.python_env,
     },
     lualine_x = {
-      {
-        "diagnostics",
-        sources = { "nvim_lsp" },
-        symbols = { error = " ", warn = " ", info = " ", hint = " " },
-        condition = conditions.hide_in_width,
-      },
-      {
-        -- Treesitter
-        function()
-          if next(vim.treesitter.highlighter.active) then
-            return "  "
-          end
-          return ""
-        end,
-        color = { fg = colors.green },
-        condition = conditions.hide_in_width,
-      },
-      {
-        -- LSP
-        function(msg)
-          msg = msg or "LSP Inactive"
-          local buf_clients = vim.lsp.buf_get_clients()
-          if next(buf_clients) == nil then
-            return msg
-          end
-          local buf_ft = vim.bo.filetype
-          local buf_client_names = {}
-
-          -- add client
-          local active_client = require("lsp.utils").get_active_client_by_ft(buf_ft)
-          for _, client in pairs(buf_clients) do
-            if client.name ~= "null-ls" then
-              table.insert(buf_client_names, client.name)
-            end
-          end
-          vim.list_extend(buf_client_names, active_client or {})
-
-          -- add formatter
-          local active_formatters = require("lsp.null-ls.formatters").list_supported_names(buf_ft)
-          vim.list_extend(buf_client_names, active_formatters or {})
-
-          -- add linter
-          local active_linters = require("lsp.null-ls.linters").list_supported_names(buf_ft)
-          vim.list_extend(buf_client_names, active_linters or {})
-
-          return table.concat(buf_client_names, ", ")
-        end,
-        condition = conditions.hide_in_width,
-        icon = " ",
-        color = { gui = "bold" },
-      },
-      { "location", condition = conditions.hide_in_width },
-      { "progress", condition = conditions.hide_in_width },
-      {
-        -- Spaces
-        function()
-          local label = "Spaces: "
-          if not vim.api.nvim_buf_get_option(0, "expandtab") then
-            label = "Tab size: "
-          end
-          return label .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
-        end,
-        condition = conditions.hide_in_width,
-      },
-      {
-        "o:encoding",
-        upper = true,
-        condition = conditions.hide_in_width,
-      },
+      components.diagnostics,
+      components.treesitter,
+      components.lsp,
+      -- components.location,
+      -- components.progress,
+      -- components.spaces,
+      -- components.encoding,
+      components.filetype,
     },
-    lualine_y = { "filetype" },
-    lualine_z = {},
+    lualine_y = {
+      -- components.filetype,
+    },
+    lualine_z = {
+      components.scrollbar,
+    },
   },
   inactive_sections = {
     lualine_a = {
@@ -210,7 +113,7 @@ styles.lvim = {
   extensions = { "nvim-tree" },
 }
 
-local function get_style(style)
+function M.get_style(style)
   local style_keys = vim.tbl_keys(styles)
   if not vim.tbl_contains(style_keys, style) then
     local Log = require "core.log"
@@ -230,8 +133,7 @@ end
 
 function M.update()
   local config = lvim.builtin.lualine
-
-  local style = get_style(config.style)
+  local style = M.get_style(config.style)
 
   lvim.builtin.lualine = {
     active = true,
