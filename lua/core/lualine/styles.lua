@@ -127,7 +127,6 @@ styles.lvim = {
         sources = { "nvim_lsp" },
         symbols = { error = " ", warn = " ", info = " ", hint = " " },
         condition = conditions.hide_in_width,
-        color = { bg = colors.bg },
       },
       {
         -- Treesitter
