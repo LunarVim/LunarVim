@@ -1189,7 +1189,7 @@ lvim.lang = {
   },
   vim = {
     formatters = {},
-    linters = { "" },
+    linters = {},
     lsp = {
       provider = "vimls",
       setup = {

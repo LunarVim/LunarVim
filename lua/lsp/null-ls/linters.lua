@@ -63,7 +63,7 @@ function M.list_configured(linter_configs)
 end
 
 function M.setup(filetype, options)
-  if linters_by_ft[filetype] and not options.force_reload then
+  if (linters_by_ft[filetype] and not options.force_reload) or not lvim.lang[filetype] then
     return
   end
 
