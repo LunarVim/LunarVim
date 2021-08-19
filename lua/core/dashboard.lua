@@ -41,7 +41,7 @@ M.config = function()
         command = "Telescope live_grep",
       },
       e = {
-        description = { "  Settings           " },
+        description = { "  Configuration      " },
         command = ":e " .. USER_CONFIG_PATH,
       },
     },
