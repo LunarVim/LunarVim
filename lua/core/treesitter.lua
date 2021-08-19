@@ -1,5 +1,6 @@
 local M = {}
 local Log = require "core.log"
+
 M.config = function()
   lvim.builtin.treesitter = {
     on_config_done = nil,
@@ -75,8 +76,6 @@ M.setup = function()
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)
   end
-
-  return treesitter_configs
 end
 
 return M

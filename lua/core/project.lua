@@ -1,5 +1,5 @@
 local M = {}
---
+
 function M.config()
   lvim.builtin.project = {
     --- This is on by default since it's currently the expected behavior.
@@ -27,7 +27,7 @@ function M.config()
     silent_chdir = true,
   }
 end
---
+
 function M.setup()
   local settings = lvim.builtin.project
 
@@ -51,5 +51,5 @@ function M.setup()
     lvim.builtin.project.on_config_done(project)
   end
 end
---
+
 return M

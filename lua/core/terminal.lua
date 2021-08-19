@@ -55,8 +55,6 @@ M.setup = function()
   if lvim.builtin.terminal.on_config_done then
     lvim.builtin.terminal.on_config_done(terminal)
   end
-
-  return terminal
 end
 
 M.add_exec = function(exec, keymap, name)

@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.dap = {
     active = false,
@@ -38,8 +39,6 @@ M.setup = function()
   if lvim.builtin.dap.on_config_done then
     lvim.builtin.dap.on_config_done(dap)
   end
-
-  return dap
 end
 
 -- TODO put this up there ^^^ call in ftplugin

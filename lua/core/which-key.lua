@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommeded]

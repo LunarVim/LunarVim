@@ -1,6 +1,6 @@
 local M = {}
 local Log = require "core.log"
---
+
 M.config = function()
   lvim.builtin.nvimtree = {
     active = true,
@@ -48,7 +48,7 @@ M.config = function()
     },
   }
 end
---
+
 M.setup = function()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
@@ -82,7 +82,7 @@ M.setup = function()
     lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
 end
---
+
 M.focus_or_close = function()
   local view_status_ok, view = pcall(require, "nvim-tree.view")
   if not view_status_ok then
@@ -112,7 +112,7 @@ M.focus_or_close = function()
     end
   end
 end
---
+
 M.toggle_tree = function()
   local view_status_ok, view = pcall(require, "nvim-tree.view")
   if not view_status_ok then
@@ -131,11 +131,11 @@ M.toggle_tree = function()
     require("nvim-tree").toggle()
   end
 end
---
+
 function M.change_tree_dir(dir)
   if vim.g.loaded_tree then
     require("nvim-tree.lib").change_dir(dir)
   end
 end
---
+
 return M

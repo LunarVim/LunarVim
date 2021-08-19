@@ -14,8 +14,6 @@ M.setup = function()
   if lvim.builtin.lspinstall.on_config_done then
     lvim.builtin.lspinstall.on_config_done(lspinstall)
   end
-
-  return lspinstall
 end
 
 return M

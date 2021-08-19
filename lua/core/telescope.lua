@@ -1,4 +1,5 @@
 local M = {}
+
 function M.config()
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then

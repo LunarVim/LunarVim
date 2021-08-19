@@ -1,4 +1,5 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.compe = {
     active = true,
