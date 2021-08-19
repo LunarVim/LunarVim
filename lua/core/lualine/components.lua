@@ -118,21 +118,20 @@ return {
     function()
       local current_line = vim.fn.line "."
       local total_lines = vim.fn.line "$"
-      local default_chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-      local chars = default_chars
-      local index = 1
+      local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+      local scroll_index = 1
       if current_line == 1 then
-        index = 1
+        scroll_index = 1
       elseif current_line == total_lines then
-        index = #chars
+        scroll_index = #chars
       else
         local line_no_fraction = vim.fn.floor(current_line) / vim.fn.floor(total_lines)
-        index = vim.fn.float2nr(line_no_fraction * #chars)
-        if index == 0 then
-          index = 1
+        scroll_index = vim.fn.float2nr(line_no_fraction * #chars)
+        if scroll_index == 0 then
+          scroll_index = 1
         end
       end
-      return chars[index]
+      return chars[scroll_index]
     end,
     color = { fg = colors.yellow, bg = colors.bg },
     left_padding = 0,
