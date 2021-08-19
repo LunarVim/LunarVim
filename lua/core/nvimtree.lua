@@ -86,13 +86,7 @@ M.setup = function()
   end
   require("nvim-tree.view").open = on_open_new
 
-  -- Add nvim_tree close callback
-  local on_leave = require("nvim-tree").on_leave
-  local on_leave_new = function()
-    M.on_close()
-    on_leave()
-  end
-  require("nvim-tree").on_leave = on_leave_new
+  vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
 end
 --
 M.on_open = function()
@@ -102,6 +96,8 @@ M.on_open = function()
 end
 --
 M.on_close = function()
+  buf = tonumber(vim.fn.expand("<abuf>")) 
+  if vim.api.nvim_buf_get_option(buf, "filetype") ~= "NvimTree" then return end
   if package.loaded["bufferline.state"] then
     require("bufferline.state").set_offset(0)
   end
