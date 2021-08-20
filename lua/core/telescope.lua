@@ -1,15 +1,19 @@
 local M = {}
 
 function M.config()
+  -- Define this minimal config so that it's available if telescope is not yet available.
+  lvim.builtin.telescope = {
+    ---@usage disable telescope completely [not recommeded]
+    active = true,
+    on_config_done = nil,
+  }
+
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
     return
   end
 
-  lvim.builtin.telescope = {
-    ---@usage disable telescope completely [not recommeded]
-    active = true,
-    on_config_done = nil,
+  lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
       prompt_prefix = " ",
       selection_caret = " ",
@@ -76,7 +80,7 @@ function M.config()
         override_file_sorter = true,
       },
     },
-  }
+  })
 end
 
 function M.find_lunarvim_files(opts)
