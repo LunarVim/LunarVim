@@ -138,6 +138,17 @@ function M.setup(lang)
 
   if lsp.provider ~= nil and lsp.provider ~= "" then
     local lspconfig = require "lspconfig"
+
+    if not lsp.setup.on_attach then
+      lsp.setup.on_attach = M.common_on_attach
+    end
+    if not lsp.setup.on_init then
+      lsp.setup.on_init = M.common_on_init
+    end
+    if not lsp.setup.capabilities then
+      lsp.setup.capabilities = M.common_capabilities()
+    end
+
     lspconfig[lsp.provider].setup(lsp.setup)
   end
 end
