@@ -115,15 +115,13 @@ return {
 
   -- Status Line and Bufferline
   {
-    "glepnir/galaxyline.nvim",
+    -- "hoob3rt/lualine.nvim",
+    "shadmansaleh/lualine.nvim",
+    -- "Lunarvim/lualine.nvim",
     config = function()
-      require "core.galaxyline"
-      if lvim.builtin.galaxyline.on_config_done then
-        lvim.builtin.galaxyline.on_config_done(require "galaxyline")
-      end
+      require("core.lualine").setup()
     end,
-    event = "BufWinEnter",
-    disable = not lvim.builtin.galaxyline.active,
+    disable = not lvim.builtin.lualine.active,
   },
 
   {
