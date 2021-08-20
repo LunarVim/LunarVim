@@ -119,12 +119,8 @@ return {
       local current_line = vim.fn.line "."
       local total_lines = vim.fn.line "$"
       local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-      local index
-      local line_no_fraction = current_line / total_lines
-      index = vim.fn.float2nr(line_no_fraction * #chars)
-      if index == 0 then
-        index = 1
-      end
+      local line_ratio = current_line / total_lines
+      local index = math.ceil(line_ratio * #chars)
       return chars[index]
     end,
     color = { fg = colors.yellow, bg = colors.bg },
