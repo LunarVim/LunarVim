@@ -1,6 +1,6 @@
 local M = {}
 local Log = require "core.log"
---
+
 M.config = function()
   lvim.builtin.nvimtree = {
     active = true,
@@ -47,7 +47,7 @@ M.config = function()
     },
   }
 end
---
+
 M.setup = function()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
@@ -89,13 +89,13 @@ M.setup = function()
 
   vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
 end
---
+
 M.on_open = function()
   if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
     require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
   end
 end
---
+
 M.on_close = function()
   local buf = tonumber(vim.fn.expand "<abuf>")
   local ft = vim.api.nvim_buf_get_option(buf, "filetype")
@@ -103,12 +103,12 @@ M.on_close = function()
     require("bufferline.state").set_offset(0)
   end
 end
---
+
 function M.change_tree_dir(dir)
   local lib_status_ok, lib = pcall(require, "nvim-tree.lib")
   if lib_status_ok then
     lib.change_dir(dir)
   end
 end
---
+
 return M
