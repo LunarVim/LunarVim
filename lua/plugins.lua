@@ -7,8 +7,10 @@ return {
   {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
-    config = require("core.lspinstall").setup,
-    disable = not lvim.builtin.lspinstall.active,
+    config = function()
+      local lspinstall = require "core.lspinstall"
+      lspinstall.setup()
+    end,
   },
 
   { "nvim-lua/popup.nvim" },
@@ -16,7 +18,9 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    config = require("core.telescope").setup,
+    config = function()
+      require("core.telescope").setup()
+    end,
     disable = not lvim.builtin.telescope.active,
   },
 
@@ -24,7 +28,9 @@ return {
   {
     "hrsh7th/nvim-compe",
     event = "InsertEnter",
-    config = require("core.compe").setup,
+    config = function()
+      require("core.compe").setup()
+    end,
     disable = not lvim.builtin.compe.active,
     -- wants = "vim-vsnip",
     -- requires = {
@@ -56,7 +62,9 @@ return {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
     after = "nvim-compe",
-    config = require("core.autopairs").setup,
+    config = function()
+      require("core.autopairs").setup()
+    end,
     disable = not lvim.builtin.autopairs.active or not lvim.builtin.compe.active,
   },
 
@@ -65,7 +73,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "0.5-compat",
     -- run = ":TSUpdate",
-    config = require("core.treesitter").setup,
+    config = function()
+      require("core.treesitter").setup()
+    end,
   },
 
   -- NvimTree
@@ -74,13 +84,18 @@ return {
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-    config = require("core.nvimtree").setup,
+    config = function()
+      require("core.nvimtree").setup()
+    end,
     disable = not lvim.builtin.nvimtree.active,
   },
 
   {
     "lewis6991/gitsigns.nvim",
-    config = require("core.gitsigns").setup,
+
+    config = function()
+      require("core.gitsigns").setup()
+    end,
     event = "BufRead",
     disable = not lvim.builtin.gitsigns.active,
   },
@@ -88,7 +103,9 @@ return {
   -- Whichkey
   {
     "folke/which-key.nvim",
-    config = require("core.which-key").setup,
+    config = function()
+      require("core.which-key").setup()
+    end,
     event = "BufWinEnter",
     disable = not lvim.builtin.which_key.active,
   },
@@ -97,14 +114,18 @@ return {
   {
     "terrortylor/nvim-comment",
     event = "BufRead",
-    config = require("core.comment").setup,
+    config = function()
+      require("nvim_comment").setup()
+    end,
     disable = not lvim.builtin.comment.active,
   },
 
   -- project.nvim
   {
     "ahmedkhalf/project.nvim",
-    config = require("core.project").setup,
+    config = function()
+      require("core.project").setup()
+    end,
     disable = not lvim.builtin.project.active,
   },
 
@@ -116,13 +137,17 @@ return {
     -- "hoob3rt/lualine.nvim",
     "shadmansaleh/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
-    config = require("core.lualine").setup,
+    config = function()
+      require("core.lualine").setup()
+    end,
     disable = not lvim.builtin.lualine.active,
   },
 
   {
     "romgrk/barbar.nvim",
-    config = require("core.bufferline").setup,
+    config = function()
+      require("core.bufferline").setup()
+    end,
     event = "BufWinEnter",
     disable = not lvim.builtin.bufferline.active,
   },
@@ -131,7 +156,9 @@ return {
   {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
-    config = require("core.dap").setup,
+    config = function()
+      require("core.dap").setup()
+    end,
     disable = not lvim.builtin.dap.active,
   },
 
@@ -147,7 +174,9 @@ return {
   {
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
-    config = require("core.dashboard").setup,
+    config = function()
+      require("core.dashboard").setup()
+    end,
     disable = not lvim.builtin.dashboard.active,
   },
 
@@ -155,7 +184,9 @@ return {
   {
     "akinsho/nvim-toggleterm.lua",
     event = "BufWinEnter",
-    config = require("core.terminal").setup,
+    config = function()
+      require("core.terminal").setup()
+    end,
     disable = not lvim.builtin.terminal.active,
   },
 }
