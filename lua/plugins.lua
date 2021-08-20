@@ -104,9 +104,7 @@ return {
   -- project.nvim
   {
     "ahmedkhalf/project.nvim",
-    config = function()
-      require("core.project").setup()
-    end,
+    config = require("core.project").setup,
     disable = not lvim.builtin.project.active,
   },
 
@@ -118,9 +116,7 @@ return {
     -- "hoob3rt/lualine.nvim",
     "shadmansaleh/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
-    config = function()
-      require("core.lualine").setup()
-    end,
+    config = require("core.lualine").setup,
     disable = not lvim.builtin.lualine.active,
   },
 
