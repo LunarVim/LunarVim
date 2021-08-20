@@ -27,7 +27,7 @@ lvim = {
     which_key = {},
     comment = {},
     project = {},
-    galaxyline = {},
+    lualine = {},
     bufferline = {},
     dap = {},
     dashboard = {},
@@ -1330,7 +1330,6 @@ lvim.lang = {
 
 require("keymappings").config()
 require("core.which-key").config()
-require "core.status_colors"
 require("core.gitsigns").config()
 require("core.compe").config()
 require("core.dashboard").config()
@@ -1343,3 +1342,4 @@ require("core.project").config()
 require("core.bufferline").config()
 require("core.autopairs").config()
 require("core.comment").config()
+require("core.lualine").config()
