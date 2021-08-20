@@ -20,6 +20,9 @@ function M.config()
     -- detection_methods
     patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
 
+    -- Show hidden files in telescope
+    show_hidden = false,
+
     -- When set to false, you will get a message when project.nvim changes your
     -- directory.
     silent_chdir = true,
