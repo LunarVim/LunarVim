@@ -123,7 +123,7 @@ lvim.builtin.which_key.mappings = {
 The default leader key is `Space`.  This can be changed with the following
 
 ```lua
-lvim.leader_key = "space"
+lvim.leader = "space"
 ```
 
 ## Cursor Movement
