@@ -78,13 +78,14 @@ M.setup = function()
 
   lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 
+  local tree_view = require "nvim-tree.view"
+
   -- Add nvim_tree open callback
-  local on_open = require("nvim-tree.view").open
-  local on_open_new = function()
+  local open = tree_view.open
+  tree_view.open = function()
     M.on_open()
-    on_open()
+    open()
   end
-  require("nvim-tree.view").open = on_open_new
 
   vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
 end
@@ -97,10 +98,9 @@ end
 --
 M.on_close = function()
   local buf = tonumber(vim.fn.expand "<abuf>")
-  if vim.api.nvim_buf_get_option(buf, "filetype") == "NvimTree" then
-    if package.loaded["bufferline.state"] then
-      require("bufferline.state").set_offset(0)
-    end
+  local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+  if ft == "NvimTree" and package.loaded["bufferline.state"] then
+    require("bufferline.state").set_offset(0)
   end
 end
 --
