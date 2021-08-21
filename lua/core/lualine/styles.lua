@@ -77,6 +77,7 @@ styles.lvim = {
     },
     lualine_b = {
       components.branch,
+      components.filename,
     },
     lualine_c = {
       components.diff,
