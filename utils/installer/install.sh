@@ -245,12 +245,11 @@ function setup_shim() {
     mkdir -p "$INSTALL_PREFIX/bin"
   fi
   cat >"$INSTALL_PREFIX/bin/lvim" <<EOF
-#!/usr/bin/env bash
+#!/bin/sh
 
-declare -r LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
-declare -r LUNARVIM_CONFIG_DIR="$LUNARVIM_CONFIG_DIR"
+LUNARVIM_CONFIG_DIR="$LUNARVIM_CONFIG_DIR"
 
-exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "\$@"
+exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
 EOF
 }
 
