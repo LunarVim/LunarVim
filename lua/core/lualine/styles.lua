@@ -73,7 +73,7 @@ styles.lvim = {
   },
   sections = {
     lualine_a = {
-      components.vi_mode,
+      components.mode,
     },
     lualine_b = {
       components.branch,

@@ -2,7 +2,7 @@ local conditions = require "core.lualine.conditions"
 local colors = require "core.lualine.colors"
 
 return {
-  vi_mode = {
+  mode = {
     function()
       return " "
     end,
