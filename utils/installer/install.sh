@@ -6,15 +6,15 @@ declare -r LVBRANCH="${LVBRANCH:-rolling}"
 declare -r LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
 declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
-declare -r XDG_DATA_HOME=${XDG_DATA_HOME:-"$HOME/.local/share"}
-declare -r XDG_CACHE_HOME=${XDG_CACHE_HOME:-"$HOME/.cache"}
-declare -r XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
+declare -r XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
+declare -r XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
 # TODO: Use a dedicated cache directory #1256
 declare -r NEOVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
 
-declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$XDG_DATA_HOME/lunarvim}"
-declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-$XDG_CONFIG_HOME/lvim}"
+declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
+declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
