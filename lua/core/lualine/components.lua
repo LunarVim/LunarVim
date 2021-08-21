@@ -16,6 +16,12 @@ return {
     condition = function()
       return conditions.hide_in_width() and conditions.check_git_workspace()
     end,
+  filename = {
+    "filename",
+    condition = function()
+      return true
+    end,
+    color = {},
   },
   diff = {
     "diff",
