@@ -16,6 +16,7 @@ a.describe("initial start", function()
     assert.is_true(vim.tbl_contains(rtp_list, lvim_config_path))
   end)
   a.it("should be able to run treesitter without errors", function()
+    vim.cmd [[TSInstall lua]]
     local status, _ = pcall(vim.treesitter.require_language, "lua")
     assert.is_true(status)
   end)
