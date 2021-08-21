@@ -21,4 +21,24 @@ function M.env_cleanup(venv)
   return venv
 end
 
+function M.get_mode_name()
+  local names = {
+    n = " NORMAL ",
+    i = " INSERT ",
+    c = " COMMAND ",
+    v = " VISUAL ",
+    V = " VISUAL LINE ",
+    t = " TERMINAL ",
+    R = " REPLACE ",
+    [""] = " VISUAL BLOCK ",
+  }
+
+  local currentMode=names[vim.fn.mode()]
+  if currentMode==nil then 
+    return " "
+  else 
+    return currentMode 
+  end
+end
+
 return M

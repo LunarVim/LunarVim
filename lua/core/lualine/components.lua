@@ -1,10 +1,11 @@
 local conditions = require "core.lualine.conditions"
 local colors = require "core.lualine.colors"
+local utils = require "core.lualine.utils"
 
 return {
   vi_mode = {
     function()
-      return " "
+      return utils.get_mode_name()
     end,
     left_padding = 0,
     right_padding = 0,
@@ -27,7 +28,6 @@ return {
   },
   python_env = {
     function()
-      local utils = require "core.lualine.utils"
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV"
         if venv then
