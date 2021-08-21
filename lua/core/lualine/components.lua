@@ -8,7 +8,9 @@ return {
     end,
     left_padding = 0,
     right_padding = 0,
-    condition = conditions.hide_in_width,
+    condition = function()
+      return true
+    end,
     color = {},
   },
   branch = {
