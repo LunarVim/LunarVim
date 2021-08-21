@@ -2,7 +2,7 @@
 set -eo pipefail
 
 #Set branch to master unless specified by the user
-declare -r LVBRANCH="${LVBRANCH:-master}"
+declare -r LVBRANCH="${LVBRANCH:-rolling}"
 declare -r LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
 declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
@@ -191,7 +191,7 @@ function install_rust_deps() {
     __attempt_to_install_with_cargo "fd-find"
   fi
   if ! command -v rg &>/dev/null; then
-    __attempt_to_install_with_cargo "ripgrpe"
+    __attempt_to_install_with_cargo "ripgrep"
   fi
   echo "All Rust dependencies are succesfully installed"
 }
@@ -230,9 +230,9 @@ function setup_shim() {
     mkdir -p "$INSTALL_PREFIX/bin"
   fi
   cat >"$INSTALL_PREFIX/bin/lvim" <<EOF
-#!/usr/bin/env bash
+#!/bin/sh
 
-declare -r LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
+LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
 
 exec nvim -u "\$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
 EOF
@@ -254,7 +254,6 @@ EOF
 }
 
 function setup_lvim() {
-
   echo "Installing LunarVim shim"
 
   setup_shim

@@ -43,10 +43,10 @@ jobs:
           bash ./utils/installer/install.sh
 
       - name: Test LunarVim PackerCompile
-        run: if nvim -u "$HOME/.local/share/lunarvim/lvim/init.lua" --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+        run: if "$HOME"/.local/bin/lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
       - name: Test LunarVim Health
-        run: if nvim -u "$HOME/.local/share/lunarvim/lvim/init.lua" --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+        run: if "$HOME"/.local/bin/lvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 #   freebsd:
 #     runs-on: macos-latest
 #     if: github.event.pull_request.draft == false
