@@ -114,18 +114,26 @@ EOF
 
 function detect_platform() {
   OS="$(uname -s)"
-  if [ "$OS" == "Linux" ]; then
-    grep -q Ubuntu /etc/os-release && RECOMMEND_INSTALL="sudo apt install -y" && return
-    [ -f "/etc/arch-release" ] && RECOMMEND_INSTALL="sudo pacman -S" && return
-    [ -f "/etc/artix-release" ] && RECOMMEND_INSTALL="sudo dnf install -y" && return
-    [ -f "/etc/fedora-release" ] && RECOMMEND_INSTALL="sudo dnf install -y" && return
-    [ -f "/etc/gentoo-release" ] && RECOMMEND_INSTALL="emerge install -y" && return
-  elif [ "$OS" == "Darwin" ]; then
-    RECOMMEND_INSTALL="brew install"
-  else
-    echo "OS $OS is not currently supported."
-    exit 1
-  fi
+  case "$OS" in
+    Linux)
+      if [ -f "/etc/arch-release" ] || [ -f "/etc/artix-release" ]; then
+        RECOMMEND_INSTALL="sudo pacman -S"
+      elif [ -f "/etc/fedora-release" ] || [ -f "/etc/redhat-release" ]; then
+        RECOMMEND_INSTALL="sudo dnf install -y"
+      elif [ -f "/etc/gentoo-release" ]; then
+        RECOMMEND_INSTALL="emerge install -y"
+      else # assume debian based
+        RECOMMEND_INSTALL="sudo apt install -y"
+      fi
+      ;;
+    Darwin)
+      RECOMMEND_INSTALL="brew install"
+      ;;
+    *)
+      echo "OS $OS is not currently supported."
+      exit 1
+      ;;
+  esac
 }
 
 function print_missing_dep_msg() {
