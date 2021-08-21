@@ -5,7 +5,7 @@ function M.validate_theme()
 
   local lualine_loader = require "lualine.utils.loader"
   local ok = pcall(lualine_loader.load_theme, theme)
-  if not ok then
+  if not ok and type(theme) ~= "table" then
     lvim.builtin.lualine.options.theme = "auto"
   end
 end
