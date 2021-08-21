@@ -40,7 +40,7 @@ M.setup = function()
   lualine.setup(lvim.builtin.lualine)
 
   if lvim.builtin.lualine.on_config_done then
-    lvim.builtin.lualine.on_config_done(lualine, lvim.builtin.lualine)
+    lvim.builtin.lualine.on_config_done(lualine)
   end
 end
 
