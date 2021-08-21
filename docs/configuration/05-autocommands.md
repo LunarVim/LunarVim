@@ -9,3 +9,10 @@ lvim.autocommands.custom_groups = {
   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 }
 ```
+Using "*" will make the autocommand run in any file. 
+Autocommands runs console commands, in order to use vim commands, put the mode in front of the command
+``` lua
+lvim.autocommands.custom_groups = {
+  {"InsertEnter", "*", ":normal zz"},
+ }
+```
