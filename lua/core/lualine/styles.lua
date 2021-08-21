@@ -69,7 +69,7 @@ styles.lvim = {
     icons_enabled = true,
     component_separators = "",
     section_separators = "",
-    disabled_filetypes = { "dashboard", "" },
+    disabled_filetypes = { "dashboard" },
   },
   sections = {
     lualine_a = {
