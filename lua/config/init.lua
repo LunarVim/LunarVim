@@ -22,6 +22,8 @@ function M:init(opts)
 
   local settings = require "config.settings"
   settings.load_options()
+
+  require("lsp.manager").load_configs()
 end
 
 --- Override the configuration with a user provided one

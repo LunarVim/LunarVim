@@ -149,29 +149,4 @@ function M.setup(lang)
   end
 end
 
-function M.global_setup()
-  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
-
-  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-  end
-
-  require("lsp.handlers").setup()
-
-  local null_status_ok, null_ls = pcall(require, "null-ls")
-  if null_status_ok then
-    null_ls.config()
-    require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
-  end
-
-  local utils = require "utils"
-
-  local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
-  if lsp_settings_status_ok then
-    lsp_settings.setup {
-      config_home = utils.join_paths(get_config_dir(), "lsp-settings"),
-    }
-  end
-end
-
 return M
