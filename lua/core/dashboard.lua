@@ -33,7 +33,10 @@ M.config = function()
         description = { "  Find File          " },
         command = "Telescope find_files",
       },
-      -- b is reserved for the core.project module
+      b = {
+        description = { "  Recent Projects    " },
+        command = "Telescope projects",
+      },
       c = {
         description = { "  Recently Used Files" },
         command = "Telescope oldfiles",

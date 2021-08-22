@@ -1,16 +1,21 @@
-vim.cmd [[
-  set packpath-=~/.config/nvim
-  set packpath-=~/.config/nvim/after
-  set packpath-=~/.local/share/nvim/site
-  set packpath^=~/.local/share/lunarvim/site
-  set packpath^=~/.config/lvim
+-- {{{ Bootstrap
+local home_dir = vim.loop.os_homedir()
 
-  set runtimepath-=~/.config/nvim
-  set runtimepath-=~/.config/nvim/after
-  set runtimepath+=~/.config/lvim
-  set runtimepath^=~/.local/share/lunarvim/lvim/after
-]]
--- vim.opt.rtp:append() instead of vim.cmd ?
+vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/lvim")
+
+vim.opt.rtp:remove(home_dir .. "/.config/nvim")
+vim.opt.rtp:remove(home_dir .. "/.config/nvim/after")
+vim.opt.rtp:append(home_dir .. "/.config/lvim")
+vim.opt.rtp:append(home_dir .. "/.config/lvim/after")
+
+vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site")
+vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site/after")
+vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/site")
+vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/site/after")
+
+-- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
+vim.cmd [[let &packpath = &runtimepath]]
+-- }}}
 
 local function file_exists(name)
   local f = io.open(name, "r")
