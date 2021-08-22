@@ -88,11 +88,16 @@ function utils.toggle_autoformat()
 end
 
 function utils.reload_lv_config()
+  -- Hot reload of statusline
   require("core.lualine").config()
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/settings.lua"
+
+  -- Remove package cache
+  package.loaded["settings"] = nil
+  package.loaded["plugins"] = nil
+
+  require "settings"
   vim.cmd("source " .. USER_CONFIG_PATH)
   require("keymappings").setup() -- this should be done before loading the plugins
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
   local plugins = require "plugins"
   local plugin_loader = require("plugin-loader").init()
   utils.toggle_autoformat()
