@@ -3,6 +3,7 @@ local M = {}
 function M.config()
   lvim.builtin.comment = {
     active = true,
+    on_config_done = nil,
     -- Linters prefer comment and line to have a space in between markers
     marker_padding = true,
     -- should comment out empty or whitespace only lines
@@ -19,7 +20,12 @@ function M.config()
 end
 
 function M.setup()
-  require("nvim_comment").setup(lvim.builtin.comment)
+  local nvim_comment = require "nvim_comment"
+
+  nvim_comment.setup(lvim.builtin.comment)
+  if lvim.builtin.comment.on_config_done then
+    lvim.builtin.comment.on_config_done(nvim_comment)
+  end
 end
 
 return M

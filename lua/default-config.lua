@@ -15,24 +15,7 @@ lvim = {
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
   keys = {},
 
-  -- TODO why do we need this?
-  builtin = {
-    lspinstall = {},
-    telescope = {},
-    compe = {},
-    autopairs = {},
-    treesitter = {},
-    nvimtree = {},
-    gitsigns = {},
-    which_key = {},
-    comment = {},
-    project = {},
-    lualine = {},
-    bufferline = {},
-    dap = {},
-    dashboard = {},
-    terminal = {},
-  },
+  builtin = {},
 
   log = {
     ---@usage can be { "trace", "debug", "info", "warn", "error", "fatal" },
@@ -1178,6 +1161,7 @@ lvim.lang = {
   },
 }
 
+-- NOTE: which-key should be first because it defines lvim.builtin.which_key.mappings
 require("keymappings").config()
 require("core.which-key").config()
 require("core.gitsigns").config()
@@ -1192,4 +1176,5 @@ require("core.project").config()
 require("core.bufferline").config()
 require("core.autopairs").config()
 require("core.comment").config()
+require("core.lspinstall").config()
 require("core.lualine").config()

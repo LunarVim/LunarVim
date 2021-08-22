@@ -1,7 +1,9 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.compe = {
     active = true,
+    on_config_done = nil,
     autocomplete = true,
     debug = false,
     min_length = 1,
@@ -122,6 +124,10 @@ M.setup = function()
   vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
   vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
   vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+
+  if lvim.builtin.compe.on_config_done then
+    lvim.builtin.compe.on_config_done(compe)
+  end
 end
 
 return M

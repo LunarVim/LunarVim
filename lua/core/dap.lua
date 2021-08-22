@@ -1,7 +1,9 @@
 local M = {}
+
 M.config = function()
   lvim.builtin.dap = {
     active = false,
+    on_config_done = nil,
     breakpoint = {
       text = "",
       texthl = "LspDiagnosticsSignError",
@@ -33,6 +35,10 @@ M.setup = function()
     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
     q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   }
+
+  if lvim.builtin.dap.on_config_done then
+    lvim.builtin.dap.on_config_done(dap)
+  end
 end
 
 -- TODO put this up there ^^^ call in ftplugin

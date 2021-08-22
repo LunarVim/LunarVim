@@ -1,9 +1,10 @@
 local M = {}
 local Log = require "core.log"
 
-M.config = function()
+function M.config()
   lvim.builtin.nvimtree = {
     active = true,
+    on_config_done = nil,
     side = "left",
     width = 30,
     show_icons = {
@@ -48,7 +49,7 @@ M.config = function()
   }
 end
 
-M.setup = function()
+function M.setup()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
     Log:get_default().error "Failed to load nvim-tree.config"
@@ -88,15 +89,19 @@ M.setup = function()
   end
 
   vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
+
+  if lvim.builtin.nvimtree.on_config_done then
+    lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
+  end
 end
 
-M.on_open = function()
+function M.on_open()
   if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
     require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
   end
 end
 
-M.on_close = function()
+function M.on_close()
   local buf = tonumber(vim.fn.expand "<abuf>")
   local ft = vim.api.nvim_buf_get_option(buf, "filetype")
   if ft == "NvimTree" and package.loaded["bufferline.state"] then

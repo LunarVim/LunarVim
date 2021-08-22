@@ -3,6 +3,7 @@ local M = {}
 function M.config()
   lvim.builtin.autopairs = {
     active = true,
+    on_config_done = nil,
     ---@usage  map <CR> on insert mode
     map_cr = true,
     ---@usage auto insert after select function or method item
@@ -21,19 +22,19 @@ end
 M.setup = function()
   -- skip it, if you use another global object
   _G.MUtils = {}
-  local npairs = require "nvim-autopairs"
+  local autopairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
 
   vim.g.completion_confirm_key = ""
   MUtils.completion_confirm = function()
     if vim.fn.pumvisible() ~= 0 then
       if vim.fn.complete_info()["selected"] ~= -1 then
-        return vim.fn["compe#confirm"](npairs.esc "<cr>")
+        return vim.fn["compe#confirm"](autopairs.esc "<cr>")
       else
-        return npairs.esc "<cr>"
+        return autopairs.esc "<cr>"
       end
     else
-      return npairs.autopairs_cr()
+      return autopairs.autopairs_cr()
     end
   end
 
@@ -44,7 +45,7 @@ M.setup = function()
     }
   end
 
-  npairs.setup {
+  autopairs.setup {
     check_ts = lvim.builtin.autopairs.check_ts,
     ts_config = lvim.builtin.autopairs.ts_config,
   }
@@ -55,10 +56,14 @@ M.setup = function()
 
   -- TODO: can these rules be safely added from "config.lua" ?
   -- press % => %% is only inside comment or string
-  npairs.add_rules {
+  autopairs.add_rules {
     Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node { "string", "comment" }),
     Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
   }
+
+  if lvim.builtin.autopairs.on_config_done then
+    lvim.builtin.autopairs.on_config_done(autopairs)
+  end
 end
 
 return M
