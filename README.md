@@ -28,10 +28,20 @@ Make sure you have the newest version of Neovim (0.5).
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
-### Installing
-The following command installs LunarVim.  Change `LVBRANCH` to the branch you'd like to install.  `master` for the stable branch and `rolling` for the latest changes.
+### Customizing the installation
+
+The following options are supported by setting environment variables:
+- `"$LV_REMOTE"`            Select a different LunarVim remote [default: 'lunarvim/lunarvim.git']
+- `"$LV_BRANCH"`            Select LunarVim's branch [default: 'rolling']
+- `"$INSTALL_PREFIX"`       Select LunarVim's install prefix [default: `'$HOME/.local'`]
+- `"$LUNARVIM_RUNTIME_DIR"` Select LunarVim's runtime directory [default: `'$HOME/.local/share/lunarvim'`]
+- `"$LUNARVIM_CONFIG_DIR"`  Select LunarVim's configuration directory [default: `'$HOME/.config/lvim'`]
+
+Putting it all together
+
 ``` bash
-LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh -O install.sh
+INSTALL_PREFIX=/tmp/t1 LUNARVIM_CONFIG_DIR=/tmp/t2 LUNARVIM_RUNTIME_DIR=/tmp/t3 bash ./install.sh
 ```
 
 ### BREAKING CHANGE on rolling and master branches

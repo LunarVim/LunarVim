@@ -2,7 +2,7 @@
 set -eo pipefail
 
 #Set branch to master unless specified by the user
-declare -r LVBRANCH="${LVBRANCH:-rolling}"
+declare -r LV_BRANCH="${LV_BRANCH:-rolling}"
 declare -r LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
 declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
@@ -226,7 +226,7 @@ function install_packer() {
 
 function clone_lvim() {
   echo "Cloning LunarVim configuration"
-  if ! git clone --progress --branch "$LVBRANCH" \
+  if ! git clone --progress --branch "$LV_BRANCH" \
     --depth 1 "https://github.com/${LV_REMOTE}" "$LUNARVIM_RUNTIME_DIR/lvim"; then
     echo "Failed to clone repository. Installation failed."
     exit 1
@@ -237,14 +237,9 @@ function setup_shim() {
   if [ ! -d "$INSTALL_PREFIX/bin" ]; then
     mkdir -p "$INSTALL_PREFIX/bin"
   fi
-  cat >"$INSTALL_PREFIX/bin/lvim" <<EOF
-#!/bin/sh
-
-LUNARVIM_RUNTIME_DIR="$LUNARVIM_RUNTIME_DIR"
-
-exec nvim -u "\$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
-EOF
-
+  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/bin/lvim" "$INSTALL_PREFIX/bin/lvim"
+  sed -i s"@LUNARVIM_RUNTIME_DIR=.\(.*\)@LUNARVIM_RUNTIME_DIR=\"$LUNARVIM_RUNTIME_DIR\"@"g "$INSTALL_PREFIX/bin/lvim"
+  sed -i s"@LUNARVIM_CONFIG_DIR=.\(.*\)@LUNARVIM_CONFIG_DIR=\"$LUNARVIM_CONFIG_DIR\"@"g "$INSTALL_PREFIX/bin/lvim"
   chmod u+x "$INSTALL_PREFIX/bin/lvim"
 }
 
