@@ -22,6 +22,6 @@ require("utils").toggle_autoformat()
 local commands = require "core.commands"
 commands.load(commands.defaults)
 
-require("lsp").global_setup()
+require("lsp.manager").global_setup()
 
 require("keymappings").setup()
