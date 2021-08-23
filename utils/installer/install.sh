@@ -107,9 +107,6 @@ EOF
 
   __add_separator "80"
 
-  echo "Thank you for installing LunarVim!!"
-  echo "I recommend you also install and activate a font \
- from here: https://github.com/ryanoasis/nerd-fonts"
 }
 
 function detect_platform() {
@@ -269,6 +266,11 @@ function setup_lvim() {
   echo "Packer setup complete"
 
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
+
+  printf "Thank you for installing LunarVim!!\n \
+    You can start it by running: %s" "$INSTALL_PREFIX/bin/lvim"
+
+  echo "Do not forget to use a font with ligatures support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
 function update_lvim() {
@@ -276,7 +278,7 @@ function update_lvim() {
     git -C "$LUNARVIM_RUNTIME_DIR/lvim" pull --ff-only --progress ||
       echo "Unable to guarantee data integrity while updating. Please do that manually instead." && exit 1
   fi
-  echo "Your LunarVim installation is up to date!"
+  echo "Your LunarVim installation is now up to date!"
 }
 
 function __add_separator() {
