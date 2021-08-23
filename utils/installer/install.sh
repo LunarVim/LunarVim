@@ -237,23 +237,15 @@ function setup_shim() {
   if [ ! -d "$INSTALL_PREFIX/bin" ]; then
     mkdir -p "$INSTALL_PREFIX/bin"
   fi
-  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/bin/lvim" "$INSTALL_PREFIX/bin/lvim"
-  sed -i s"@LUNARVIM_RUNTIME_DIR=.\(.*\)@LUNARVIM_RUNTIME_DIR=\"$LUNARVIM_RUNTIME_DIR\"@"g "$INSTALL_PREFIX/bin/lvim"
-  sed -i s"@LUNARVIM_CONFIG_DIR=.\(.*\)@LUNARVIM_CONFIG_DIR=\"$LUNARVIM_CONFIG_DIR\"@"g "$INSTALL_PREFIX/bin/lvim"
-  chmod u+x "$INSTALL_PREFIX/bin/lvim"
-}
-
-function setup_shim() {
-  if [ ! -d "$INSTALL_PREFIX/bin" ]; then
-    mkdir -p "$INSTALL_PREFIX/bin"
-  fi
   cat >"$INSTALL_PREFIX/bin/lvim" <<EOF
 #!/bin/sh
 
-LUNARVIM_CONFIG_DIR="$LUNARVIM_CONFIG_DIR"
+export LUNARVIM_CONFIG_DIR="\${LUNARVIM_CONFIG_DIR:-$LUNARVIM_CONFIG_DIR}"
+export LUNARVIM_RUNTIME_DIR="\${LUNARVIM_RUNTIME_DIR:-$LUNARVIM_RUNTIME_DIR}"
 
-exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
+exec nvim -u "\$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
 EOF
+  chmod +x "$INSTALL_PREFIX/bin/lvim"
 }
 
 function setup_lvim() {
