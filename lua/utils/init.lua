@@ -88,7 +88,6 @@ function utils.toggle_autoformat()
 end
 
 function utils.reload_lv_config()
-  -- Hot reload of statusline
   require("core.lualine").config()
 
   -- Remove package cache
