@@ -652,6 +652,7 @@ lvim.lang = {
               maxPreload = 100000,
               preloadFileSize = 1000,
             },
+            telemetry = { enable = false },
           },
         },
       },
