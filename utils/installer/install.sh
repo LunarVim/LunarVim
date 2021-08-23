@@ -267,9 +267,8 @@ function setup_lvim() {
 
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
-  printf "Thank you for installing LunarVim!!\n \
-    You can start it by running: %s" "$INSTALL_PREFIX/bin/lvim"
-
+  echo "Thank you for installing LunarVim!!"
+  echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
   echo "Do not forget to use a font with ligatures support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
