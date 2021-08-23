@@ -4,37 +4,18 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## Navigation plugins
 
-### [nvim-spectre](https://github.com/windwp/nvim-spectre)
+### [hop](https://github.com/phaazon/hop.nvim)
 
-**search and replace**
+**neovim motions on speed!**
 
 ```lua
 {
-  "windwp/nvim-spectre",
+  "phaazon/hop.nvim",
   event = "BufRead",
   config = function()
-    require("spectre").setup()
-  end,
-},
-```
-
-### [snap](https://github.com/camspiers/snap)
-
-**fast finder system**
-
-```lua
-{
-  "camspiers/snap",
-  rocks = "fzy",
-  config = function()
-    local snap = require "snap"
-    local layout = snap.get("layout").bottom
-    local file = snap.config.file:with { consumer = "fzy", layout = layout }
-    local vimgrep = snap.config.vimgrep:with { layout = layout }
-    snap.register.command("find_files", file { producer = "ripgrep.file" })
-    snap.register.command("buffers", file { producer = "vim.buffer" })
-    snap.register.command("oldfiles", file { producer = "vim.oldfile" })
-    snap.register.command("live_grep", vimgrep {})
+    require("hop").setup()
+    vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
   end,
 },
 ```
@@ -50,18 +31,36 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [hop](https://github.com/phaazon/hop.nvim)
+### [minimap](https://github.com/wfxr/minimap.vim)
 
-**neovim motions on speed!**
+**blazing fast minimap/scrollbar written in Rust**
 
 ```lua
 {
-  "phaazon/hop.nvim",
+  'wfxr/minimap.vim',
+  run = "cargo install --locked code-minimap",
+  -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+  config = function ()
+    vim.cmd ("let g:minimap_width = 10")
+    vim.cmd ("let g:minimap_auto_start = 1")
+    vim.cmd ("let g:minimap_auto_start_win_enter = 1")
+  end,
+},
+```
+
+### [numb](https://github.com/nacro90/numb.nvim)
+
+**jump to the line**
+
+```lua
+{
+  "nacro90/numb.nvim",
   event = "BufRead",
   config = function()
-    require("hop").setup()
-    vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-    vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
+  require("numb").setup {
+    show_numbers = true, -- Enable 'number' for the window while peeking
+    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+  }
   end,
 },
 ```
@@ -99,19 +98,20 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [vim-matchup](https://github.com/andymass/vim-matchup)
+### [nvim-spectre](https://github.com/windwp/nvim-spectre)
 
-**navigate and highlight matching words**
+**search and replace**
 
-``` lua
+```lua
 {
-  "andymass/vim-matchup",
-  event = "CursorMoved",
+  "windwp/nvim-spectre",
+  event = "BufRead",
   config = function()
-    vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    require("spectre").setup()
   end,
 },
 ```
+
 
 ### [rnvimr](https://github.com/kevinhwang91/rnvimr)
 
@@ -129,41 +129,68 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [numb](https://github.com/nacro90/numb.nvim)
+### [snap](https://github.com/camspiers/snap)
 
-**jump to the line**
+**fast finder system**
 
 ```lua
 {
-  "nacro90/numb.nvim",
-  event = "BufRead",
+  "camspiers/snap",
+  rocks = "fzy",
   config = function()
-  require("numb").setup {
-    show_numbers = true, -- Enable 'number' for the window while peeking
-    show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-  }
+    local snap = require "snap"
+    local layout = snap.get("layout").bottom
+    local file = snap.config.file:with { consumer = "fzy", layout = layout }
+    local vimgrep = snap.config.vimgrep:with { layout = layout }
+    snap.register.command("find_files", file { producer = "ripgrep.file" })
+    snap.register.command("buffers", file { producer = "vim.buffer" })
+    snap.register.command("oldfiles", file { producer = "vim.oldfile" })
+    snap.register.command("live_grep", vimgrep {})
   end,
 },
 ```
 
-### [minimap](https://github.com/wfxr/minimap.vim)
+### [vim-matchup](https://github.com/andymass/vim-matchup)
 
-**blazing fast minimap/scrollbar written in Rust**
+**navigate and highlight matching words**
 
-```lua
+``` lua
 {
-  'wfxr/minimap.vim',
-  run = "cargo install --locked code-minimap",
-  -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-  config = function ()
-    vim.cmd ("let g:minimap_width = 10")
-    vim.cmd ("let g:minimap_auto_start = 1")
-    vim.cmd ("let g:minimap_auto_start_win_enter = 1")
+  "andymass/vim-matchup",
+  event = "CursorMoved",
+  config = function()
+    vim.g.matchup_matchparen_offscreen = { method = "popup" }
   end,
 },
 ```
 
 ## Git
+
+### [diffview](https://github.com/sindrets/diffview.nvim)
+
+**git diff in a single tabpage**
+
+```lua
+{
+  "sindrets/diffview.nvim",
+  event = "BufRead",
+},
+```
+
+### [git-blame](https://github.com/f-person/git-blame.nvim)
+
+**show git blame**
+
+``` lua
+{
+  "f-person/git-blame.nvim",
+  event = "BufRead",
+  config = function()
+    vim.cmd "highlight default link gitblame SpecialComment"
+    vim.g.gitblame_enabled = 0
+  end,
+},
+```
 
 ### [gitlinker](https://github.com/ruifm/gitlinker.nvim)
 
@@ -203,44 +230,6 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [vim-gist](https://github.com/mattn/vim-gist)
-
-**create/edit Github gists**
-
-```lua
-{
-  "mattn/vim-gist",
-  event = "BufRead",
-  requires = "mattn/webapi-vim",
-},
-```
-
-### [git-blame](https://github.com/f-person/git-blame.nvim)
-
-**show git blame**
-
-``` lua
-{
-  "f-person/git-blame.nvim",
-  event = "BufRead",
-  config = function()
-    vim.cmd "highlight default link gitblame SpecialComment"
-    vim.g.gitblame_enabled = 0
-  end,
-},
-```
-
-### [diffview](https://github.com/sindrets/diffview.nvim)
-
-**git diff in a single tabpage**
-
-```lua
-{
-  "sindrets/diffview.nvim",
-  event = "BufRead",
-},
-```
-
 ### [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
 **git wrapper**
@@ -267,18 +256,19 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-## Treesitter
+### [vim-gist](https://github.com/mattn/vim-gist)
 
-### [playground](https://github.com/nvim-treesitter/playground)
-
-**view treesitter information**
+**create/edit Github gists**
 
 ```lua
 {
-  "nvim-treesitter/playground",
+  "mattn/vim-gist",
   event = "BufRead",
+  requires = "mattn/webapi-vim",
 },
 ```
+
+## Treesitter
 
 ### [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)
 
@@ -294,6 +284,17 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
+### [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)
+
+**commentstring option based on the cursor location**
+
+```lua
+{
+  "JoosepAlviste/nvim-ts-context-commentstring",
+  event = "BufRead",
+},
+```
+
 ### [nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)
 
 **rainbow parentheses**
@@ -304,13 +305,13 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)
+### [playground](https://github.com/nvim-treesitter/playground)
 
-**commentstring option based on the cursor location**
+**view treesitter information**
 
 ```lua
 {
-  "JoosepAlviste/nvim-ts-context-commentstring",
+  "nvim-treesitter/playground",
   event = "BufRead",
 },
 ```
@@ -388,18 +389,42 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## LSP Enhancement
 
-### [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
+### [compe-tabnine](https://github.com/tzachar/compe-tabnine)
 
-**hint when you type**
+**TabNine completion engine for hrsh7th/nvim-compe**
 
-``` lua
+```lua
 {
-  "ray-x/lsp_signature.nvim",
+  "tzachar/compe-tabnine",
+  run = "./install.sh",
+  requires = "hrsh7th/nvim-compe",
   event = "InsertEnter",
+},
+```
+
+### [goto-preview](https://github.com/rmagatti/goto-preview)
+
+**previewing goto definition calls**
+
+```lua
+{
+  "rmagatti/goto-preview",
   config = function()
-    require "lsp_signature".setup()
+  require('goto-preview').setup {
+        width = 120; -- Width of the floating window
+        height = 25; -- Height of the floating window
+        default_mappings = false; -- Bind default mappings
+        debug = false; -- Print debug information
+        opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        -- You can use "default_mappings = true" setup option
+        -- Or explicitly set keybindings
+        -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+        -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+        -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+    }
   end
-}
+},
 ```
 
 ### [lsp-rooter](https://github.com/ahmedkhalf/lsp-rooter.nvim)
@@ -414,6 +439,20 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
     require("lsp-rooter").setup()
   end,
 },
+```
+
+### [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
+
+**hint when you type**
+
+``` lua
+{
+  "ray-x/lsp_signature.nvim",
+  event = "InsertEnter",
+  config = function()
+    require "lsp_signature".setup()
+  end
+}
 ```
 
 ### [symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)
@@ -452,45 +491,137 @@ lvim.builtin.which_key.mappings["t"] = {
 },
 ```
 
-### [goto-preview](https://github.com/rmagatti/goto-preview)
+## General
 
-**previewing goto definition calls**
+### [codi.vim](https://github.com/metakirby5/codi.vim)
+
+**interactive scratchpad for hackers**
 
 ```lua
 {
-  "rmagatti/goto-preview",
+  "metakirby5/codi.vim",
+  cmd = "Codi",
+},
+```
+
+### [dial.nvim](https://github.com/monaqa/dial.nvim)
+
+**extended incrementing/decrementing**
+
+```lua
+{
+  "monaqa/dial.nvim",
+  event = "BufRead",
   config = function()
-  require('goto-preview').setup {
-        width = 120; -- Width of the floating window
-        height = 25; -- Height of the floating window
-        default_mappings = false; -- Bind default mappings
-        debug = false; -- Print debug information
-        opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
-        post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
-        -- You can use "default_mappings = true" setup option
-        -- Or explicitly set keybindings
-        -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-        -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-        -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+    local dial = require "dial"
+    vim.cmd [[
+    nmap <C-a> <Plug>(dial-increment)
+      nmap <C-x> <Plug>(dial-decrement)
+      vmap <C-a> <Plug>(dial-increment)
+      vmap <C-x> <Plug>(dial-decrement)
+      vmap g<C-a> <Plug>(dial-increment-additional)
+      vmap g<C-x> <Plug>(dial-decrement-additional)
+    ]]
+
+    dial.augends["custom#boolean"] = dial.common.enum_cyclic {
+      name = "boolean",
+      strlist = { "true", "false" },
     }
+    table.insert(dial.config.searchlist.normal, "custom#boolean")
+
+    -- For Languages which prefer True/False, e.g. python.
+    dial.augends["custom#Boolean"] = dial.common.enum_cyclic {
+      name = "Boolean",
+      strlist = { "True", "False" },
+    }
+    table.insert(dial.config.searchlist.normal, "custom#Boolean")
+  end,
+},
+
+```
+
+### [glow.nvim](https://github.com/npxbr/glow.nvim)
+
+**preview markdown in neovim**
+
+```lua
+-- You must install glow globally
+-- https://github.com/charmbracelet/glow
+-- yay -S glow
+{
+  "npxbr/glow.nvim",
+  ft = {"markdown"}
+  -- run = "yay -S glow"
+},
+```
+
+### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+**indentation guides for every line**
+
+```lua
+{
+  "lukas-reineke/indent-blankline.nvim",
+  event = "BufRead",
+  setup = function()
+    vim.g.indentLine_enabled = 1
+    vim.g.indent_blankline_char = "▏"
+    vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
+    vim.g.indent_blankline_buftype_exclude = {"terminal"}
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
+    vim.g.indent_blankline_show_first_indent_level = false
   end
 },
 ```
 
-### [compe-tabnine](https://github.com/tzachar/compe-tabnine)
+### [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 
-**TabNine completion engine for hrsh7th/nvim-compe**
+**preview markdown in the browser**
 
 ```lua
 {
-  "tzachar/compe-tabnine",
-  run = "./install.sh",
-  requires = "hrsh7th/nvim-compe",
-  event = "InsertEnter",
+  "iamcco/markdown-preview.nvim",
+  run = "cd app && npm install",
+  ft = "markdown",
+  config = function()
+    vim.g.mkdp_auto_start = 1
+  end,
 },
 ```
 
-## General
+### [neoscroll](https://github.com/karb94/neoscroll.nvim)
+
+**smooth scrolling**
+
+```lua
+{
+  "karb94/neoscroll.nvim",
+  event = "WinScrolled",
+  config = function()
+  require('neoscroll').setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+        hide_cursor = true,          -- Hide cursor while scrolling
+        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil,        -- Default easing function
+        pre_hook = nil,              -- Function to run before the scrolling animation starts
+        post_hook = nil,              -- Function to run after the scrolling animation ends
+        })
+  end
+},
+```
+
+### [neuron](https://github.com/oberblastmeister/neuron.nvim)
+
+**next generation note-taking**
+
+```lua
+	{"oberblastmeister/neuron.nvim"},
+```
 
 ### [nvim-lastplace](https://github.com/ethanholz/nvim-lastplace)
 
@@ -541,47 +672,6 @@ Also define keybindings in your `config.lua`
   }
 ```
 
-### [vim-sanegx](https://github.com/felipec/vim-sanegx)
-
-**open url with `gx`**
-
-```lua
-{
-  "felipec/vim-sanegx",
-  event = "BufRead",
-},
-```
-
-### [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
-
-**preview markdown in the browser**
-
-```lua
-{
-  "iamcco/markdown-preview.nvim",
-  run = "cd app && npm install",
-  ft = "markdown",
-  config = function()
-    vim.g.mkdp_auto_start = 1
-  end,
-},
-```
-
-### [glow.nvim](https://github.com/npxbr/glow.nvim)
-
-**preview markdown in neovim**
-
-```lua
--- You must install glow globally
--- https://github.com/charmbracelet/glow
--- yay -S glow
-{
-  "npxbr/glow.nvim",
-  ft = {"markdown"}
-  -- run = "yay -S glow"
-},
-```
-
 ### [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
 
 **highlight and search for todo comments**
@@ -590,44 +680,6 @@ Also define keybindings in your `config.lua`
 {
   "folke/todo-comments.nvim",
   event = "BufRead",
-},
-```
-### [codi.vim](https://github.com/metakirby5/codi.vim)
-
-**interactive scratchpad for hackers**
-
-```lua
-{
-  "metakirby5/codi.vim",
-  cmd = "Codi",
-},
-```
-
-
-### [neuron](https://github.com/oberblastmeister/neuron.nvim)
-
-**next generation note-taking**
-
-```lua
-	{"oberblastmeister/neuron.nvim"},
-```
-
-### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
-
-**indentation guides for every line**
-
-```lua
-{
-  "lukas-reineke/indent-blankline.nvim",
-  event = "BufRead",
-  setup = function()
-    vim.g.indentLine_enabled = 1
-    vim.g.indent_blankline_char = "▏"
-    vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
-    vim.g.indent_blankline_buftype_exclude = {"terminal"}
-    vim.g.indent_blankline_show_trailing_blankline_indent = false
-    vim.g.indent_blankline_show_first_indent_level = false
-  end
 },
 ```
 
@@ -651,66 +703,23 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### [neoscroll](https://github.com/karb94/neoscroll.nvim)
+### [vim-repeat](https://github.com/tpope/vim-repeat)
 
-**smooth scrolling**
+**enable repeating supported plugin maps with "."**
 
 ```lua
-{
-  "karb94/neoscroll.nvim",
-  event = "WinScrolled",
-  config = function()
-  require('neoscroll').setup({
-        -- All these keys will be mapped to their corresponding default scrolling animation
-        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-        hide_cursor = true,          -- Hide cursor while scrolling
-        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil,        -- Default easing function
-        pre_hook = nil,              -- Function to run before the scrolling animation starts
-        post_hook = nil,              -- Function to run after the scrolling animation ends
-        })
-  end
-},
+{ "tpope/vim-repeat" },
 ```
 
-### [dial.nvim](https://github.com/monaqa/dial.nvim)
+### [vim-sanegx](https://github.com/felipec/vim-sanegx)
 
-**extended incrementing/decrementing**
+**open url with `gx`**
 
 ```lua
 {
-  "monaqa/dial.nvim",
+  "felipec/vim-sanegx",
   event = "BufRead",
-  config = function()
-    local dial = require "dial"
-    vim.cmd [[
-    nmap <C-a> <Plug>(dial-increment)
-      nmap <C-x> <Plug>(dial-decrement)
-      vmap <C-a> <Plug>(dial-increment)
-      vmap <C-x> <Plug>(dial-decrement)
-      vmap g<C-a> <Plug>(dial-increment-additional)
-      vmap g<C-x> <Plug>(dial-decrement-additional)
-    ]]
-
-    dial.augends["custom#boolean"] = dial.common.enum_cyclic {
-      name = "boolean",
-      strlist = { "true", "false" },
-    }
-    table.insert(dial.config.searchlist.normal, "custom#boolean")
-
-    -- For Languages which prefer True/False, e.g. python.
-    dial.augends["custom#Boolean"] = dial.common.enum_cyclic {
-      name = "Boolean",
-      strlist = { "True", "False" },
-    }
-    table.insert(dial.config.searchlist.normal, "custom#Boolean")
-  end,
 },
-
 ```
 
 ### [vim-surround](https://github.com/tpope/vim-surround)
@@ -724,16 +733,20 @@ Also define keybindings in your `config.lua`
 },
 ```
 
-### [vim-repeat](https://github.com/tpope/vim-repeat)
-
-**enable repeating supported plugin maps with "."**
-
-```lua
-{ "tpope/vim-repeat" },
-```
-
 ## Language specific
 
+### [autosave](https://github.com/Pocco81/AutoSave.nvim)
+
+**automatically saving your work whenever you make changes to it**
+
+```lua
+{
+  "Pocco81/AutoSave.nvim",
+  config = function()
+    require("plugins.zenmode").autoSave()
+  end,
+},
+```
 
 ### [bracey](https://github.com/turbio/bracey.vim)
 
@@ -785,17 +798,3 @@ Also define keybindings in your `config.lua`
   }
 },
 ```
-
-### [autosave](https://github.com/Pocco81/AutoSave.nvim)
-
-**automatically saving your work whenever you make changes to it**
-
-```lua
-{
-  "Pocco81/AutoSave.nvim",
-  config = function()
-    require("plugins.zenmode").autoSave()
-  end,
-},
-```
-
