@@ -269,7 +269,7 @@ function setup_lvim() {
 
   echo "Thank you for installing LunarVim!!"
   echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
-  echo "Do not forget to use a font with ligatures support [https://github.com/ryanoasis/nerd-fonts]"
+  echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
 function update_lvim() {
