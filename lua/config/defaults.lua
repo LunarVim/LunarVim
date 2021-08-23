@@ -948,15 +948,14 @@ lvim.lang = {
     },
   },
   tailwindcss = {
-    active = false,
-    filetypes = {
-      "html",
-      "css",
-      "scss",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
+    lsp = {
+      provider = "tailwindcss",
+      setup = {
+        cmd = {
+          DATA_PATH .. "/lspinstall/tailwindcss/tailwindcss-intellisense.sh",
+          "--stdio",
+        },
+      },
     },
   },
   terraform = {
