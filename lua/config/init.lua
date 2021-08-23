@@ -5,6 +5,8 @@ local M = {
 --- Initialize lvim default configuration
 -- Define lvim global variable
 function M:init()
+  local utils = require "utils"
+
   require "config.defaults"
 
   local builtins = require "core.builtins"
@@ -14,8 +16,7 @@ function M:init()
   settings.load_options()
 
   -- Fallback config.lua to lv-config.lua
-  local uv = vim.loop
-  if not uv.fs_stat(self.path) then
+  if not utils.is_file(self.path) then
     local lv_config = self.path:gsub("config.lua$", "lv-config.lua")
     print(self.path, "not found, falling back to", lv_config)
 
