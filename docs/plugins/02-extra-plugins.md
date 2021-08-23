@@ -493,6 +493,19 @@ lvim.builtin.which_key.mappings["t"] = {
 
 ## General
 
+### [autosave](https://github.com/Pocco81/AutoSave.nvim)
+
+**automatically saving your work whenever you make changes to it**
+
+```lua
+{
+  "Pocco81/AutoSave.nvim",
+  config = function()
+    require("plugins.zenmode").autoSave()
+  end,
+},
+```
+
 ### [codi.vim](https://github.com/metakirby5/codi.vim)
 
 **interactive scratchpad for hackers**
@@ -734,33 +747,6 @@ Also define keybindings in your `config.lua`
 ```
 
 ## Language specific
-
-### [autosave](https://github.com/Pocco81/AutoSave.nvim)
-
-**automatically saving your work whenever you make changes to it**
-
-```lua
-{
-  "Pocco81/AutoSave.nvim",
-  config = function()
-    require("plugins.zenmode").autoSave()
-  end,
-},
-```
-```
-
-### [autosave](https://github.com/Pocco81/AutoSave.nvim)
-
-**automatically saving your work whenever you make changes to it**
-
-```lua
-{
-  "Pocco81/AutoSave.nvim",
-  config = function()
-    require("plugins.zenmode").autoSave()
-  end,
-},
-```
 
 ### [bracey](https://github.com/turbio/bracey.vim)
 
