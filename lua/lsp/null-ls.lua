@@ -121,9 +121,9 @@ function M.setup(filetype)
       builtin_diagnoser = null_ls.builtins.diagnostics.eslint.with { command = "eslint_d" }
     end
     if not vim.tbl_contains(M.requested_providers, builtin_diagnoser) then
-      -- FIXME: why doesn't this work?
-      -- builtin_diagnoser._opts.args = linter.args or builtin_diagnoser._opts.args
-      -- builtin_diagnoser._opts.to_stdin = linter.stdin or builtin_diagnoser._opts.to_stdin
+      for k, v in pairs(linter) do
+        builtin_diagnoser._opts[k] = v or builtin_diagnoser._opts[k]
+      end
       local resolved_path = validate_provider_request(builtin_diagnoser)
       if resolved_path then
         builtin_diagnoser._opts.command = resolved_path
