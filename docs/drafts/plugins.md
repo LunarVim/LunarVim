@@ -50,24 +50,6 @@ lvim.builtin.dap.on_config_done = function(dap)
 end
 ```
 
-## Modifying Galaxyline
-
-If you don't want to see all the elements of the galaxyline, you can remove portions like so:
-
-``` lua
-lvim.builtin.galaxyline.on_config_done = function(gl)
--- print(vim.inspect(gl))
-
-local gls = gl.section
-
--- remove the sections you don't want.  The remove function takes an index.  Leaving off the index will remove the last item from the table.
-table.remove(gls.right )
-table.remove(gls.right, 1 )
-table.remove(gls.right, 2 )
-
-end
-```
-
 ## Configuring ToggleTerm
 
 You can specify terminal applications to run with a keybind. LazyGit is the only command set up by default.   

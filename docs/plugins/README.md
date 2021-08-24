@@ -3,7 +3,7 @@
 Toggle builtin plugins:
 
 ```lua
-lvim.builtin.galaxyline.active = true
+lvim.builtin.lualine.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
