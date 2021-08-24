@@ -69,14 +69,15 @@ styles.lvim = {
     icons_enabled = true,
     component_separators = "",
     section_separators = "",
-    disabled_filetypes = { "dashboard", "" },
+    disabled_filetypes = { "dashboard" },
   },
   sections = {
     lualine_a = {
-      components.vi_mode,
+      components.mode,
     },
     lualine_b = {
       components.branch,
+      components.filename,
     },
     lualine_c = {
       components.diff,
@@ -86,15 +87,9 @@ styles.lvim = {
       components.diagnostics,
       components.treesitter,
       components.lsp,
-      -- components.location,
-      -- components.progress,
-      -- components.spaces,
-      -- components.encoding,
       components.filetype,
     },
-    lualine_y = {
-      -- components.filetype,
-    },
+    lualine_y = {},
     lualine_z = {
       components.scrollbar,
     },
@@ -132,39 +127,12 @@ function M.get_style(style)
 end
 
 function M.update()
-  local config = lvim.builtin.lualine
-  local style = M.get_style(config.style)
+  local style = M.get_style(lvim.builtin.lualine.style)
+  if lvim.builtin.lualine.options.theme == nil then
+    lvim.builtin.lualine.options.theme = lvim.colorscheme
+  end
 
-  lvim.builtin.lualine = {
-    active = true,
-    style = style.style,
-    options = {
-      icons_enabled = config.options.icons_enabled or style.options.icons_enabled,
-      component_separators = config.options.component_separators or style.options.component_separators,
-      section_separators = config.options.section_separators or style.options.section_separators,
-      theme = config.options.theme or lvim.colorscheme or "auto",
-      disabled_filetypes = config.options.disabled_filetypes or style.options.disabled_filetypes,
-    },
-    sections = {
-      lualine_a = config.sections.lualine_a or style.sections.lualine_a,
-      lualine_b = config.sections.lualine_b or style.sections.lualine_b,
-      lualine_c = config.sections.lualine_c or style.sections.lualine_c,
-      lualine_x = config.sections.lualine_x or style.sections.lualine_x,
-      lualine_y = config.sections.lualine_y or style.sections.lualine_y,
-      lualine_z = config.sections.lualine_z or style.sections.lualine_z,
-    },
-    inactive_sections = {
-      lualine_a = config.inactive_sections.lualine_a or style.inactive_sections.lualine_a,
-      lualine_b = config.inactive_sections.lualine_b or style.inactive_sections.lualine_b,
-      lualine_c = config.inactive_sections.lualine_c or style.inactive_sections.lualine_c,
-      lualine_x = config.inactive_sections.lualine_x or style.inactive_sections.lualine_x,
-      lualine_y = config.inactive_sections.lualine_y or style.inactive_sections.lualine_y,
-      lualine_z = config.inactive_sections.lualine_z or style.inactive_sections.lualine_z,
-    },
-    tabline = config.tabline or style.tabline,
-    extensions = config.extensions or style.extensions,
-    on_config_done = config.on_config_done,
-  }
+  lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
 end
 
 return M
