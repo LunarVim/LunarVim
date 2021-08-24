@@ -36,8 +36,24 @@ vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { nor
 -- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
 ```
 
-### LunarVim style
-Overwrite/augment the key-mappings provided by LunarVim for any mode, or leave empty to keep the defaults.
+### LunarVim keybindings
+Use `<Leader>Lk` to view the keybindings set by Lunarvim.  
+
+To modify a single Lunarvim keymapping
+```lua
+  -- X closes a buffer
+  lvim.keys.normal_mode["<S-x>"] = ":BufferClose<CR>"
+```
+
+To remove keymappings set by Lunarvim
+```lua
+  -- use the default vim behavior for H and L 
+  lvim.keys.normal_mode["<S-l>"] = nil
+  lvim.keys.normal_mode["<S-h>"] = nil
+  -- vim.opt.scrolloff = 0 -- Required so L moves to the last line
+```
+
+Erase Lunarvim bindings and replace them with your own mappings
 ``` lua
  lvim.keys.normal_mode = {
    -- Page down/up
@@ -51,7 +67,9 @@ Overwrite/augment the key-mappings provided by LunarVim for any mode, or leave e
 ```
 
 ### Listing what is mapped
-To see if a key has already been bound:
+Use `<Leader>Lk` to view the keybindings set by Lunarvim.  
+
+To see if a particular key has already been bound:
 ``` lua
 :verbose map <TAB>
 ```
