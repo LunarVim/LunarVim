@@ -207,8 +207,8 @@ function backup_old_config() {
     # that require an existing directory
     mkdir -p "$dir" "$dir.bak"
     if command -v rsync &>/dev/null; then
-      rsync --archive -hh --partial --info=stats1 --info=progress2 \
-        --modify-window=1 "$dir" "$dir.bak"
+      rsync --archive -hh --partial --progress \
+        --modify-window=1 "$dir"/ "$dir.bak"
     else
       cp -R "$dir/*" "$dir.bak/."
     fi
