@@ -5,45 +5,47 @@ function M.config()
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
-    side = "left",
-    width = 30,
-    show_icons = {
-      git = 1,
-      folders = 1,
-      files = 1,
-      folder_arrows = 1,
-      tree_width = 30,
-    },
-    ignore = { ".git", "node_modules", ".cache" },
-    auto_open = 0,
-    auto_close = 1,
-    quit_on_open = 0,
-    follow = 1,
-    hide_dotfiles = 1,
-    git_hl = 1,
-    root_folder_modifier = ":t",
-    tab_open = 0,
-    allow_resize = 1,
-    lsp_diagnostics = 1,
-    auto_ignore_ft = { "startify", "dashboard" },
-    icons = {
-      default = "",
-      symlink = "",
-      git = {
-        unstaged = "",
-        staged = "S",
-        unmerged = "",
-        renamed = "➜",
-        deleted = "",
-        untracked = "U",
-        ignored = "◌",
+    config = {
+      side = "left",
+      width = 30,
+      show_icons = {
+        git = 1,
+        folders = 1,
+        files = 1,
+        folder_arrows = 1,
+        tree_width = 30,
       },
-      folder = {
-        default = "",
-        open = "",
-        empty = "",
-        empty_open = "",
-        symlink = "",
+      ignore = { ".git", "node_modules", ".cache" },
+      auto_open = 0,
+      auto_close = 1,
+      quit_on_open = 0,
+      follow = 1,
+      hide_dotfiles = 1,
+      git_hl = 1,
+      root_folder_modifier = ":t",
+      tab_open = 0,
+      allow_resize = 1,
+      lsp_diagnostics = 1,
+      auto_ignore_ft = { "startify", "dashboard" },
+      icons = {
+        default = "",
+        symlink = "",
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          deleted = "",
+          untracked = "U",
+          ignored = "◌",
+        },
+        folder = {
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+        },
       },
     },
   }
@@ -57,7 +59,7 @@ function M.setup()
   end
   local g = vim.g
 
-  for opt, val in pairs(lvim.builtin.nvimtree) do
+  for opt, val in pairs(lvim.builtin.nvimtree.config) do
     g["nvim_tree_" .. opt] = val
   end
 
@@ -99,8 +101,8 @@ function M.setup()
 end
 
 function M.on_open()
-  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
-    require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
+  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.config.side == "left" then
+    require("bufferline.state").set_offset(lvim.builtin.nvimtree.config.width + 1, "")
   end
 end
 

@@ -26,13 +26,13 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.telescope.on_config_done = function()
 --   local actions = require "telescope.actions"
 --   -- for input mode
---   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
---   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
+--   lvim.builtin.telescope.config.defaults.mappings.i["<C-j>"] = actions.move_selection_next
+--   lvim.builtin.telescope.config.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
+--   lvim.builtin.telescope.config.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
+--   lvim.builtin.telescope.config.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
 --   -- for normal mode
---   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
+--   lvim.builtin.telescope.config.defaults.mappings.n["<C-j>"] = actions.move_selection_next
+--   lvim.builtin.telescope.config.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 -- end
 
 -- Use which-key to add extra bindings with the leader-key prefix
@@ -51,13 +51,13 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.nvimtree.config.side = "left"
+lvim.builtin.nvimtree.config.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.config.ensure_installed = "maintained"
+lvim.builtin.treesitter.config.ignore_install = { "haskell" }
+lvim.builtin.treesitter.config.highlight.enabled = true
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers

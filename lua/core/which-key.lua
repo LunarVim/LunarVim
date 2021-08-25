@@ -5,7 +5,7 @@ M.config = function()
     ---@usage disable which-key completely [not recommeded]
     active = true,
     on_config_done = nil,
-    setup = {
+    config = {
       plugins = {
         marks = true, -- shows a list of your marks on ' and `
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -238,7 +238,7 @@ end
 M.setup = function()
   local which_key = require "which-key"
 
-  which_key.setup(lvim.builtin.which_key.setup)
+  which_key.setup(lvim.builtin.which_key.config)
 
   local opts = lvim.builtin.which_key.opts
   local vopts = lvim.builtin.which_key.vopts

@@ -4,7 +4,7 @@ M.config = function()
   lvim.builtin.gitsigns = {
     active = true,
     on_config_done = nil,
-    opts = {
+    config = {
       signs = {
         add = {
           hl = "GitSignsAdd",
@@ -55,7 +55,7 @@ end
 M.setup = function()
   local gitsigns = require "gitsigns"
 
-  gitsigns.setup(lvim.builtin.gitsigns.opts)
+  gitsigns.setup(lvim.builtin.gitsigns.config)
   if lvim.builtin.gitsigns.on_config_done then
     lvim.builtin.gitsigns.on_config_done(gitsigns)
   end
