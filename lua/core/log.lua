@@ -4,12 +4,12 @@ local Log = {}
 ---@param opts these are passed verbatim to Plenary.log
 ---@return log handle
 function Log:new(opts)
-  local status_ok, _ = pcall(require, "plenary.log")
+  local status_ok, handle = pcall(require, "plenary.log")
   if not status_ok then
-    return nil
+    vim.notify("Plenary.log is not available. Logging to console only", vim.log.levels.DEBUG)
   end
 
-  self.__handle = require("plenary.log").new(opts)
+  self.__handle = handle
 
   local path = string.format("%s/%s.log", vim.api.nvim_call_function("stdpath", { "cache" }), opts.plugin)
 
