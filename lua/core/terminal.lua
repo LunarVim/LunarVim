@@ -82,7 +82,7 @@ M._exec_toggle = function(exec)
   local binary = M._split(exec)[1]
   if vim.fn.executable(binary) ~= 1 then
     local Log = require "core.log"
-    Log:get_default().error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
+    Log:error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
   local Terminal = require("toggleterm.terminal").Terminal
@@ -122,7 +122,7 @@ M.toggle_log_view = function(name)
 
   local Terminal = require("toggleterm.terminal").Terminal
   local log_view = Terminal:new(term_opts)
-  -- require("core.log"):get_default().debug("term", vim.inspect(term_opts))
+  -- require("core.log"):debug("term", vim.inspect(term_opts))
   log_view:toggle()
 end
 

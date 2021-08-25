@@ -3,7 +3,7 @@ local formatters_by_ft = {}
 
 local null_ls = require "null-ls"
 local services = require "lsp.null-ls.services"
-local logger = require("core.log"):get_default()
+local Log = require "core.log"
 
 local function list_names(formatters, options)
   options = options or {}
@@ -45,15 +45,15 @@ function M.list_configured(formatter_configs)
     local formatter = null_ls.builtins.formatting[fmt_config.exe]
 
     if not formatter then
-      logger.error("Not a valid formatter:", fmt_config.exe)
+      Log:error("Not a valid formatter:", fmt_config.exe)
       errors[fmt_config.exe] = {} -- Add data here when necessary
     else
       local formatter_cmd = services.find_command(formatter._opts.command)
       if not formatter_cmd then
-        logger.warn("Not found:", formatter._opts.command)
+        Log:warn("Not found:", formatter._opts.command)
         errors[fmt_config.exe] = {} -- Add data here when necessary
       else
-        logger.info("Using formatter:", formatter_cmd)
+        Log:info("Using formatter:", formatter_cmd)
         formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, extra_args = fmt_config.args }
       end
     end

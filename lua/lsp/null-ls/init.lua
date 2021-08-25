@@ -30,7 +30,7 @@ function M.setup(filetype, options)
 
   local ok, _ = pcall(require, "null-ls")
   if not ok then
-    require("core.log"):get_default().error "Missing null-ls dependency"
+    require("core.log"):error "Missing null-ls dependency"
     return
   end
 

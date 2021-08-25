@@ -99,16 +99,14 @@ end
 function M.common_on_init(client, bufnr)
   if lvim.lsp.on_init_callback then
     lvim.lsp.on_init_callback(client, bufnr)
-    Log:get_default().info "Called lsp.on_init_callback"
+    Log:info "Called lsp.on_init_callback"
     return
   end
 
   local formatters = lvim.lang[vim.bo.filetype].formatters
   if not vim.tbl_isempty(formatters) and formatters[1]["exe"] ~= nil and formatters[1].exe ~= "" then
     client.resolved_capabilities.document_formatting = false
-    Log:get_default().info(
-      string.format("Overriding language server [%s] with format provider [%s]", client.name, formatters[1].exe)
-    )
+    Log:info(string.format("Overriding language server [%s] with format provider [%s]", client.name, formatters[1].exe))
   end
 end
 
