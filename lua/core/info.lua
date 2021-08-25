@@ -16,6 +16,7 @@ local function str_list(list)
 end
 
 local function get_formatter_suggestion_msg(ft)
+  local config = require "config"
   local null_formatters = require "lsp.null-ls.formatters"
   local supported_formatters = null_formatters.list_available(ft)
   local section = {
@@ -27,7 +28,7 @@ local function get_formatter_suggestion_msg(ft)
   if not vim.tbl_isempty(supported_formatters) then
     vim.list_extend(section, {
       "* Configured formatter needs to be installed and executable.",
-      fmt("* Enable installed formatter(s) with following config in %s", USER_CONFIG_PATH),
+      fmt("* Enable installed formatter(s) with following config in %s", config.path),
       "",
       fmt("  lvim.lang.%s.formatters = { { exe = '%s' } }", ft, table.concat(supported_formatters, "│")),
     })
@@ -37,6 +38,7 @@ local function get_formatter_suggestion_msg(ft)
 end
 
 local function get_linter_suggestion_msg(ft)
+  local config = require "config"
   local null_linters = require "lsp.null-ls.linters"
   local supported_linters = null_linters.list_available(ft)
   local section = {
@@ -48,7 +50,7 @@ local function get_linter_suggestion_msg(ft)
   if not vim.tbl_isempty(supported_linters) then
     vim.list_extend(section, {
       "* Configured linter needs to be installed and executable.",
-      fmt("* Enable installed linter(s) with following config in %s", USER_CONFIG_PATH),
+      fmt("* Enable installed linter(s) with following config in %s", config.path),
       "",
       fmt("  lvim.lang.%s.linters = { { exe = '%s' } }", ft, table.concat(supported_linters, "│")),
     })
