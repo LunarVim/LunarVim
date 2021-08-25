@@ -10,6 +10,7 @@
 --  Key mappings modes:
 --   insert_mode        = "i",
 --   normal_mode        = "n",
+--   select_mode        = "s",
 --   term_mode          = "t",
 --   visual_mode        = "v",
 --   visual_block_mode  = "x",

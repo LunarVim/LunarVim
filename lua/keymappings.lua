@@ -6,6 +6,7 @@ local generic_opts_any = { noremap = true, silent = true }
 local generic_opts = {
   insert_mode = generic_opts_any,
   normal_mode = generic_opts_any,
+  select_mode = generic_opts_any,
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
   command_mode = generic_opts_any,
@@ -15,6 +16,7 @@ local generic_opts = {
 local mode_adapters = {
   insert_mode = "i",
   normal_mode = "n",
+  select_mode = "s",
   term_mode = "t",
   visual_mode = "v",
   visual_block_mode = "x",
@@ -38,7 +40,7 @@ end
 function M.set_keymaps(mode, key, val)
   local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
   if type(val) == "table" then
-    opt = val[2]
+    opt = val[2] or opt
     val = val[1]
   end
   vim.api.nvim_set_keymap(mode, key, val, opt)
