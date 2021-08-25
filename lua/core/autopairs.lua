@@ -5,16 +5,9 @@ function M.config()
     active = true,
     on_config_done = nil,
     config = {
-      ---@usage  map <CR> on insert mode
-      map_cr = true,
-      ---@usage auto insert after select function or method item
-      -- NOTE: This should be wrapped into a function so that it is re-evaluated when opening new files
       map_complete = vim.bo.filetype ~= "tex",
-      ---@usage check treesitter
       check_ts = true,
       ts_config = {
-        lua = { "string" },
-        javascript = { "template_string" },
         java = false,
       },
     },
