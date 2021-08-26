@@ -32,9 +32,6 @@ local function load_config()
   local builtins = require "core.builtins"
   builtins.setup(config)
 
-  local autocommands_config = require "config.autocmds"
-  autocommands_config.setup(config)
-
   -- Fallback config.lua to lv-config.lua
   local utils = require "utils"
   local path = string.format("%s/.config/lvim/config.lua", home_dir)
@@ -45,11 +42,16 @@ local function load_config()
     path = lv_config
   end
 
-  config:load(path)
+  config.path = path
+
+  local autocommands_config = require "config.autocmds"
+  autocommands_config.setup(config)
+
+  config:load()
   settings.load_commands(config)
 
-  -- local autocmds = require "core.autocmds"
-  -- autocmds.define_augroups(config.get "autocommands")
+  local autocmds = require "core.autocmds"
+  autocmds.define_augroups(config:get("autocommands").entries)
 
   return config
 end
