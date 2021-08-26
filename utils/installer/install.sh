@@ -263,7 +263,7 @@ function setup_lvim() {
 
   nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
-    +PackerInstall
+    +PackerSync
 
   echo "Packer setup complete"
 
