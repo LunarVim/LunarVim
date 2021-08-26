@@ -171,8 +171,10 @@ function install_nodejs_deps() {
 function install_python_deps() {
   echo "Verifying that pip is available.."
   if ! python3 -m ensurepip &>/dev/null; then
-    print_missing_dep_msg "pip"
-    exit 1
+    if ! command -v pip3 &>/dev/null; then
+      print_missing_dep_msg "pip"
+      exit 1
+    fi
   fi
   echo "Installing with pip.."
   for dep in "${__pip_deps[@]}"; do
