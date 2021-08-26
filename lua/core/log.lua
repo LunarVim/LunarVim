@@ -23,11 +23,11 @@ end
 
 function Log:add_entry(msg, level)
   local status_ok, _ = pcall(require, "plenary.log")
-  if not status_ok then
-    return vim.notify(msg, vim.log.levels[level])
+  if status_ok then
+    -- plenary uses lower-case log levels
+    return self.__handle[level:lower()](msg)
   end
-  -- plenary uses lower-case log levels
-  return self.__handle[level:lower()](msg)
+  -- don't do anything if plenary is not available
 end
 
 --- Creates or retrieves a log handle for the default logfile
