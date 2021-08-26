@@ -219,13 +219,13 @@ function backup_old_config() {
 }
 
 function install_packer() {
-  git clone --progress --depth 1 https://github.com/wbthomason/packer.nvim \
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     "$LUNARVIM_RUNTIME_DIR/site/pack/packer/start/packer.nvim"
 }
 
 function clone_lvim() {
   echo "Cloning LunarVim configuration"
-  if ! git clone --progress --branch "$LV_BRANCH" \
+  if ! git clone --branch "$LV_BRANCH" \
     --depth 1 "https://github.com/${LV_REMOTE}" "$LUNARVIM_RUNTIME_DIR/lvim"; then
     echo "Failed to clone repository. Installation failed."
     exit 1
@@ -259,11 +259,11 @@ function setup_lvim() {
 
   nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
-    +PackerInstall
+    +PackerCompile
 
   nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
     +'autocmd User PackerComplete sleep 100m | qall' \
-    +PackerSync
+    +PackerInstall
 
   echo "Packer setup complete"
 
