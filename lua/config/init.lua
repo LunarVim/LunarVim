@@ -1,6 +1,5 @@
-local home_dir = vim.loop.os_homedir()
 local M = {
-  path = string.format("%s/.config/lvim/config.lua", home_dir),
+  path = nil,
 }
 
 --- Create a new configuration.
@@ -104,14 +103,7 @@ function M:extend_with(entries, opts)
 
   self.entries = walk_entries(self.entries, entries, "")
 
-<<<<<<< HEAD
-  autocmds.define_augroups(lvim.autocommands)
-
-  local settings = require "config.settings"
-  settings.load_commands()
-=======
   return self
->>>>>>> 654f482 (Make the config object extendable and lookable by key)
 end
 
 return M
