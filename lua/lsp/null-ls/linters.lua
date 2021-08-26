@@ -3,7 +3,7 @@ local linters_by_ft = {}
 
 local null_ls = require "null-ls"
 local services = require "lsp.null-ls.services"
-local logger = require("core.log"):get_default()
+local Log = require "core.log"
 
 local function list_names(linters, options)
   options = options or {}
@@ -45,15 +45,15 @@ function M.list_configured(linter_configs)
     local linter = null_ls.builtins.diagnostics[lnt_config.exe]
 
     if not linter then
-      logger.error("Not a valid linter:", lnt_config.exe)
+      Log:error("Not a valid linter:", lnt_config.exe)
       errors[lnt_config.exe] = {} -- Add data here when necessary
     else
       local linter_cmd = services.find_command(linter._opts.command)
       if not linter_cmd then
-        logger.warn("Not found:", linter._opts.command)
+        Log:warn("Not found:", linter._opts.command)
         errors[lnt_config.exe] = {} -- Add data here when necessary
       else
-        logger.info("Using linter:", linter_cmd)
+        Log:info("Using linter:", linter_cmd)
         linters[lnt_config.exe] = linter.with { command = linter_cmd, extra_args = lnt_config.args }
       end
     end

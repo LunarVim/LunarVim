@@ -52,7 +52,7 @@ end
 function M.setup()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
-    Log:get_default().error "Failed to load nvim-tree.config"
+    Log:error "Failed to load nvim-tree.config"
     return
   end
   local g = vim.g
