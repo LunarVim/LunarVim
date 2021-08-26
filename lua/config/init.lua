@@ -39,6 +39,8 @@ function M:load(config_path)
 
   self.path = config_path
 
+  autocmds.define_augroups(lvim.autocommands)
+
   local settings = require "config.settings"
   settings.load_commands()
 end
