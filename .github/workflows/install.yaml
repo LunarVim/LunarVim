@@ -38,8 +38,9 @@ jobs:
       - name: Install LunarVim
         timeout-minutes: 4
         run: |
-          mkdir -p "$HOME/.local/share/lunarvim"
-          mkdir -p "$HOME/.config/lvim"
+          mkdir -p "$HOME"/.local/share/lunarvim/lvim
+          mkdir -p "$HOME"/.config/lvim
+          ln -s "$PWD"/* "$HOME"/.local/share/lunarvim/lvim/.
           bash ./utils/installer/install.sh
 
       - name: Test LunarVim PackerCompile

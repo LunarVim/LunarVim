@@ -53,7 +53,7 @@ function M.list_configured(formatter_configs)
         Log:warn("Not found:", formatter._opts.command)
         errors[fmt_config.exe] = {} -- Add data here when necessary
       else
-        Log:info("Using formatter:", formatter_cmd)
+        Log:debug("Using formatter:", formatter_cmd)
         formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, extra_args = fmt_config.args }
       end
     end

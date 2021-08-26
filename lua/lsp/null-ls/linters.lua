@@ -53,7 +53,7 @@ function M.list_configured(linter_configs)
         Log:warn("Not found:", linter._opts.command)
         errors[lnt_config.exe] = {} -- Add data here when necessary
       else
-        Log:info("Using linter:", linter_cmd)
+        Log:debug("Using linter:", linter_cmd)
         linters[lnt_config.exe] = linter.with { command = linter_cmd, extra_args = lnt_config.args }
       end
     end
