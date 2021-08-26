@@ -1,19 +1,21 @@
-local M = {}
-
-M.config = function()
-  lvim.builtin.gitsigns = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     config = {},
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
   local gitsigns = require "gitsigns"
 
-  gitsigns.setup(lvim.builtin.gitsigns.config)
-  if lvim.builtin.gitsigns.on_config_done then
-    lvim.builtin.gitsigns.on_config_done(gitsigns)
+  gitsigns.setup(lvim.builtins.gitsigns.config)
+  if lvim.builtins.gitsigns.on_config_done then
+    lvim.builtins.gitsigns.on_config_done(gitsigns)
   end
 end
 

@@ -1,8 +1,6 @@
-local M = {}
 local home_dir = vim.loop.os_homedir()
-
-M.config = function(config)
-  lvim.builtin.dashboard = {
+local M = {
+  defaults = {
     active = false,
     on_config_done = nil,
     config = {
@@ -49,23 +47,28 @@ M.config = function(config)
         },
         e = {
           description = { "  Configuration      " },
-          command = ":e " .. config.path,
+          -- TODO
+          -- command = ":e " .. config.path,
         },
 
         footer = { "lunarvim.org" },
       },
     },
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
-  vim.g.dashboard_disable_at_vimenter = lvim.builtin.dashboard.config.disable_at_vim_enter
-  vim.g.dashboard_custom_header = lvim.builtin.dashboard.config.custom_header
-  vim.g.dashboard_default_executive = lvim.builtin.dashboard.config.search_handler
-  vim.g.dashboard_custom_section = lvim.builtin.dashboard.config.custom_section
-  vim.g.dashboard_session_directory = lvim.builtin.dashboard.config.session_directory
+function M:config()
+  vim.g.dashboard_disable_at_vimenter = lvim.builtins.dashboard.config.disable_at_vim_enter
+  vim.g.dashboard_custom_header = lvim.builtins.dashboard.config.custom_header
+  vim.g.dashboard_default_executive = lvim.builtins.dashboard.config.search_handler
+  vim.g.dashboard_custom_section = lvim.builtins.dashboard.config.custom_section
+  vim.g.dashboard_session_directory = lvim.builtins.dashboard.config.session_directory
 
-  lvim.builtin.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+  lvim.builtins.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
 
   vim.cmd "let packages = len(globpath('~/.local/share/lunarvim/site/pack/packer/start', '*', 0, 1))"
 
@@ -93,8 +96,8 @@ M.setup = function()
     },
   }
 
-  if lvim.builtin.dashboard.on_config_done then
-    lvim.builtin.dashboard.on_config_done()
+  if lvim.builtins.dashboard.on_config_done then
+    lvim.builtins.dashboard.on_config_done()
   end
 end
 

@@ -1,7 +1,5 @@
-local M = {}
-
-function M.config()
-  lvim.builtin.autopairs = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     config = {
@@ -11,17 +9,23 @@ function M.config()
         java = false,
       },
     },
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
+  -- skip it, if you use another global object
+  _G.MUtils = {}
   local autopairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
   local cond = require "nvim-autopairs.conds"
 
   autopairs.setup {
-    check_ts = lvim.builtin.autopairs.config.check_ts,
-    ts_config = lvim.builtin.autopairs.config.ts_config,
+    check_ts = lvim.builtins.autopairs.config.check_ts,
+    ts_config = lvim.builtins.autopairs.config.ts_config,
   }
 
   -- vim.g.completion_confirm_key = ""
@@ -64,8 +68,8 @@ M.setup = function()
     Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
   }
 
-  if lvim.builtin.autopairs.on_config_done then
-    lvim.builtin.autopairs.on_config_done(autopairs)
+  if lvim.builtins.autopairs.on_config_done then
+    lvim.builtins.autopairs.on_config_done(autopairs)
   end
 end
 

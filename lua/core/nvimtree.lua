@@ -1,8 +1,5 @@
-local M = {}
-local Log = require "core.log"
-
-function M.config()
-  lvim.builtin.nvimtree = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     config = {
@@ -48,23 +45,28 @@ function M.config()
         },
       },
     },
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-function M.setup()
+function M:config()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
+    local Log = require "core.log"
     Log:error "Failed to load nvim-tree.config"
     return
   end
   local g = vim.g
 
-  for opt, val in pairs(lvim.builtin.nvimtree.config) do
+  for opt, val in pairs(lvim.builtins.nvimtree.config) do
     g["nvim_tree_" .. opt] = val
   end
 
   -- Implicitly update nvim-tree when project module is active
-  if lvim.builtin.project.active then
+  if lvim.builtins.project.active then
     vim.g.nvim_tree_update_cwd = 1
     vim.g.nvim_tree_respect_buf_cwd = 1
     vim.g.nvim_tree_disable_netrw = 0
@@ -82,7 +84,7 @@ function M.setup()
     }
   end
 
-  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
+  lvim.builtins.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 
   local tree_view = require "nvim-tree.view"
 
@@ -95,14 +97,14 @@ function M.setup()
 
   vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
 
-  if lvim.builtin.nvimtree.on_config_done then
-    lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
+  if lvim.builtins.nvimtree.on_config_done then
+    lvim.builtins.nvimtree.on_config_done(nvim_tree_config)
   end
 end
 
 function M.on_open()
-  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.config.side == "left" then
-    require("bufferline.state").set_offset(lvim.builtin.nvimtree.config.width + 1, "")
+  if package.loaded["bufferline.state"] and lvim.builtins.nvimtree.config.side == "left" then
+    require("bufferline.state").set_offset(lvim.builtins.nvimtree.config.width + 1, "")
   end
 end
 

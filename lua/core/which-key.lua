@@ -1,11 +1,44 @@
-local M = {}
-
-M.config = function()
-  lvim.builtin.which_key = {
+local M = {
+  defaults = {
     ---@usage disable which-key completely [not recommeded]
     active = true,
     on_config_done = nil,
-    config = {},
+    config = {
+      plugins = {
+        marks = true, -- shows a list of your marks on ' and `
+        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+        -- No actual key bindings are created
+        presets = {
+          operators = false, -- adds help for operators like d, y, ...
+          motions = false, -- adds help for motions
+          text_objects = false, -- help for text objects triggered after entering an operator
+          windows = true, -- default bindings on <c-w>
+          nav = true, -- misc bindings to work with windows
+          z = true, -- bindings for folds, spelling and others prefixed with z
+          g = true, -- bindings for prefixed with g
+        },
+        spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
+      },
+      icons = {
+        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+        separator = "➜", -- symbol used between a key and it's label
+        group = "+", -- symbol prepended to a group
+      },
+      window = {
+        border = "single", -- none, single, double, shadow
+        position = "bottom", -- bottom, top
+        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+        padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+      },
+      layout = {
+        height = { min = 4, max = 25 }, -- min and max height of the columns
+        width = { min = 20, max = 50 }, -- min and max width of the columns
+        spacing = 3, -- spacing between columns
+      },
+      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
+      show_help = true, -- show help message on the command line when the popup is visible
+    },
 
     opts = {
       mode = "n", -- NORMAL mode
@@ -197,25 +230,22 @@ M.config = function()
         i = { ":TSConfigInfo<cr>", "Info" },
       },
     },
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M.config()
   local which_key = require "which-key"
+  local config = lvim.builtins.which_key
 
-  which_key.setup(lvim.builtin.which_key.config)
-
-  local opts = lvim.builtin.which_key.opts
-  local vopts = lvim.builtin.which_key.vopts
-
-  local mappings = lvim.builtin.which_key.mappings
-  local vmappings = lvim.builtin.which_key.vmappings
-
-  which_key.register(mappings, opts)
-  which_key.register(vmappings, vopts)
-
-  if lvim.builtin.which_key.on_config_done then
-    lvim.builtin.which_key.on_config_done(which_key)
+  which_key.setup(config.config)
+  which_key.register(config.mappings, config.opts)
+  which_key.register(config.vmappings, config.vopts)
+  if config.on_config_done then
+    config.on_config_done(which_key)
   end
 end
 

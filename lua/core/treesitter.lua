@@ -1,8 +1,5 @@
-local M = {}
-local Log = require "core.log"
-
-M.config = function()
-  lvim.builtin.treesitter = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     config = {
@@ -15,20 +12,26 @@ M.config = function()
         disable = { "yaml" },
       },
     },
-  }
+  },
+}
+
+local Log = require "core.log"
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
   local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
     Log:get_default().error "Failed to load nvim-treesitter.configs"
     return
   end
 
-  treesitter_configs.setup(lvim.builtin.treesitter.config)
+  treesitter_configs.setup(lvim.builtins.treesitter.config)
 
-  if lvim.builtin.treesitter.on_config_done then
-    lvim.builtin.treesitter.on_config_done(treesitter_configs)
+  if lvim.builtins.treesitter.on_config_done then
+    lvim.builtins.treesitter.on_config_done(treesitter_configs)
   end
 end
 

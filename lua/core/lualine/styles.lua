@@ -126,12 +126,12 @@ function M.get_style(style)
 end
 
 function M.update()
-  local style = M.get_style(lvim.builtin.lualine.config.style)
-  if lvim.builtin.lualine.config.options.theme == nil then
-    lvim.builtin.lualine.config.options.theme = lvim.colorscheme
+  local style = M.get_style(lvim.builtins.lualine.config.style)
+  if lvim.builtins.lualine.config.options.theme == nil then
+    lvim.builtins.lualine.config.options.theme = lvim.colorscheme
   end
 
-  lvim.builtin.lualine.config = vim.tbl_deep_extend("keep", lvim.builtin.lualine.config, style)
+  lvim.builtins.lualine.config = vim.tbl_deep_extend("keep", lvim.builtins.lualine.config, style)
 end
 
 return M

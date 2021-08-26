@@ -1,18 +1,20 @@
-local M = {}
-
-M.config = function()
-  lvim.builtin.lspinstall = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
   local lspinstall = require "lspinstall"
-  lspinstall.setup()
 
-  if lvim.builtin.lspinstall.on_config_done then
-    lvim.builtin.lspinstall.on_config_done(lspinstall)
+  lspinstall.setup()
+  if lvim.builtins.lspinstall.on_config_done then
+    lvim.builtins.lspinstall.on_config_done(lspinstall)
   end
 end
 

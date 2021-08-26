@@ -1,7 +1,5 @@
-local M = {}
-
-M.config = function()
-  lvim.builtin.bufferline = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     keymap = {
@@ -10,15 +8,19 @@ M.config = function()
         ["<S-h>"] = ":BufferPrevious<CR>",
       },
     },
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
   local keymap = require "keymappings"
-  keymap.append_to_defaults(lvim.builtin.bufferline.keymap)
+  keymap.append_to_defaults(lvim.builtins.bufferline.keymap)
 
-  if lvim.builtin.bufferline.on_config_done then
-    lvim.builtin.bufferline.on_config_done()
+  if lvim.builtins.bufferline.on_config_done then
+    lvim.builtins.bufferline.on_config_done()
   end
 end
 

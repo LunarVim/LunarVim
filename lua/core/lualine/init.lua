@@ -1,7 +1,5 @@
-local M = {}
-
-M.config = function()
-  lvim.builtin.lualine = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     config = {
@@ -10,18 +8,22 @@ M.config = function()
       sections = {},
       inactive_sections = {},
     },
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
   require("core.lualine.styles").update()
   require("core.lualine.utils").validate_theme()
 
   local lualine = require "lualine"
-  lualine.setup(lvim.builtin.lualine.config)
+  lualine.setup(lvim.builtins.lualine.config)
 
-  if lvim.builtin.lualine.on_config_done then
-    lvim.builtin.lualine.on_config_done(lualine)
+  if lvim.builtins.lualine.on_config_done then
+    lvim.builtins.lualine.on_config_done(lualine)
   end
 end
 

@@ -1,19 +1,19 @@
-local M = {}
-
-function M.config()
-  -- Define this minimal config so that it's available if telescope is not yet available.
-  lvim.builtin.telescope = {
+local M = {
+  defaults = {
     ---@usage disable telescope completely [not recommeded]
     active = true,
     on_config_done = nil,
-  }
+  },
+}
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
     return
   end
-
-  lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
+  config:extend_with {
     config = {
       defaults = {
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -41,7 +41,20 @@ function M.config()
         },
       },
     },
-  })
+  }
+end
+
+function M:config()
+  local telescope = require "telescope"
+
+  telescope.setup(lvim.builtins.telescope.config)
+  if lvim.builtins.project.active then
+    telescope.load_extension "projects"
+  end
+
+  if lvim.builtins.telescope.on_config_done then
+    lvim.builtins.telescope.on_config_done(telescope)
+  end
 end
 
 function M.find_lunarvim_files(opts)
@@ -76,19 +89,6 @@ function M.grep_lunarvim_files(opts)
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   require("telescope.builtin").live_grep(opts)
-end
-
-function M.setup()
-  local telescope = require "telescope"
-
-  telescope.setup(lvim.builtin.telescope.config)
-  if lvim.builtin.project.active then
-    telescope.load_extension "projects"
-  end
-
-  if lvim.builtin.telescope.on_config_done then
-    lvim.builtin.telescope.on_config_done(telescope)
-  end
 end
 
 return M

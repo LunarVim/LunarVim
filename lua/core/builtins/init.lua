@@ -1,7 +1,6 @@
 local M = {}
 
 local builtins = {
-  "keymappings",
   "core.which-key",
   "core.gitsigns",
   "core.cmp",
@@ -19,10 +18,11 @@ local builtins = {
   "core.lualine",
 }
 
-function M.config(config)
+function M.setup(config)
   for _, builtin_path in ipairs(builtins) do
     local builtin = require(builtin_path)
-    builtin.config(config)
+    local config_path = builtin_path:gsub("core", "builtins"):gsub("-", "_")
+    builtin:setup(config:get(config_path, {}))
   end
 end
 

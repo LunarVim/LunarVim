@@ -1,31 +1,34 @@
-local M = {}
-local utils = require "utils"
-
-M.config = function()
-  lvim.builtin.terminal = {
+local M = {
+  defaults = {
     active = true,
     on_config_done = nil,
     config = {},
     -- Add executables on the config.lua
     -- { exec, keymap, name}
-    -- lvim.builtin.terminal.execs = {{}} to overwrite
-    -- table.insert(lvim.builtin.terminal.execs, {"gdb", "tg", "GNU Debugger"})
+    -- lvim.builtins.terminal.execs = {{}} to overwrite
+    -- table.insert(lvim.builtins.terminal.execs, {"gdb", "tg", "GNU Debugger"})
     execs = {
       { "lazygit", "gg", "LazyGit" },
     },
-  }
+  },
+}
+
+local utils = require "utils"
+
+function M:setup(config)
+  config:extend_with(self.defaults)
 end
 
-M.setup = function()
+function M:config()
   local terminal = require "toggleterm"
 
-  for _, exec in pairs(lvim.builtin.terminal.execs) do
+  for _, exec in pairs(lvim.builtins.terminal.execs) do
     M.add_exec(exec[1], exec[2], exec[3])
   end
-  terminal.setup(lvim.builtin.terminal.config)
+  terminal.setup(lvim.builtins.terminal.config)
 
-  if lvim.builtin.terminal.on_config_done then
-    lvim.builtin.terminal.on_config_done(terminal)
+  if lvim.builtins.terminal.on_config_done then
+    lvim.builtins.terminal.on_config_done(terminal)
   end
 end
 
@@ -36,7 +39,7 @@ M.add_exec = function(exec, keymap, name)
     "<cmd>lua require('core.terminal')._exec_toggle('" .. exec .. "')<CR>",
     { noremap = true, silent = true }
   )
-  lvim.builtin.which_key.mappings[keymap] = name
+  lvim.builtins.which_key.mappings[keymap] = name
 end
 
 M._split = function(inputstr, sep)
@@ -83,7 +86,7 @@ M.toggle_log_view = function(name)
   if not logfile then
     return
   end
-  local term_opts = vim.tbl_deep_extend("force", lvim.builtin.terminal.config, {
+  local term_opts = vim.tbl_deep_extend("force", lvim.builtins.terminal.config, {
     cmd = lvim.log.viewer.cmd .. " " .. logfile,
     open_mapping = lvim.log.viewer.layout_config.open_mapping,
     direction = lvim.log.viewer.layout_config.direction,
