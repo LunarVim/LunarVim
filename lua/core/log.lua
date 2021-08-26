@@ -22,9 +22,12 @@ function Log:new(opts)
 end
 
 function Log:add_entry(msg, level)
-  local status_ok, _ = pcall(require, "plenary.log")
+  local status_ok, handle = pcall(require, "plenary.log")
   if not status_ok then
     return vim.notify(msg, vim.log.levels[level])
+  end
+  if not self.__handle then
+    self.__handle = handle
   end
   -- plenary uses lower-case log levels
   return self.__handle[level:lower()](msg)
