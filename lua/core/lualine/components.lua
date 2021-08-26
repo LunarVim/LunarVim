@@ -1,6 +1,17 @@
 local conditions = require "core.lualine.conditions"
 local colors = require "core.lualine.colors"
 
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
+
 return {
   mode = {
     function()
@@ -8,34 +19,29 @@ return {
     end,
     left_padding = 0,
     right_padding = 0,
-    condition = function()
-      return true
-    end,
     color = {},
+    condition = nil,
   },
   branch = {
-    "branch",
+    "b:gitsigns_head",
     icon = " ",
-    condition = function()
-      return conditions.hide_in_width() and conditions.check_git_workspace()
-    end,
     color = { gui = "bold" },
+    condition = conditions.hide_in_width,
   },
   filename = {
     "filename",
-    condition = function()
-      return true
-    end,
     color = {},
+    condition = nil,
   },
   diff = {
     "diff",
+    source = diff_source,
     symbols = { added = "  ", modified = "柳", removed = " " },
     color_added = { fg = colors.green },
     color_modified = { fg = colors.yellow },
     color_removed = { fg = colors.red },
-    condition = conditions.hide_in_width,
     color = {},
+    condition = nil,
   },
   python_env = {
     function()
@@ -53,15 +59,15 @@ return {
       end
       return ""
     end,
-    condition = conditions.hide_in_width,
     color = { fg = colors.green },
+    condition = conditions.hide_in_width,
   },
   diagnostics = {
     "diagnostics",
     sources = { "nvim_lsp" },
     symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    condition = conditions.hide_in_width,
     color = {},
+    condition = conditions.hide_in_width,
   },
   treesitter = {
     function()
@@ -70,8 +76,8 @@ return {
       end
       return ""
     end,
-    condition = conditions.hide_in_width,
     color = { fg = colors.green },
+    condition = conditions.hide_in_width,
   },
   lsp = {
     function(msg)
@@ -106,8 +112,8 @@ return {
       return table.concat(buf_client_names, ", ")
     end,
     icon = " ",
-    condition = conditions.hide_in_width,
     color = { gui = "bold" },
+    condition = conditions.hide_in_width,
   },
   location = { "location", condition = conditions.hide_in_width, color = {} },
   progress = { "progress", condition = conditions.hide_in_width, color = {} },
@@ -125,8 +131,8 @@ return {
   encoding = {
     "o:encoding",
     upper = true,
-    condition = conditions.hide_in_width,
     color = {},
+    condition = conditions.hide_in_width,
   },
   filetype = { "filetype", condition = conditions.hide_in_width, color = {} },
   scrollbar = {
@@ -140,9 +146,7 @@ return {
     end,
     left_padding = 0,
     right_padding = 0,
-    condition = function()
-      return true
-    end,
     color = { fg = colors.yellow, bg = colors.bg },
+    condition = nil,
   },
 }
