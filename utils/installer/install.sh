@@ -50,32 +50,33 @@ EOF
   echo "Detecting platform for managing any additional neovim dependencies"
   detect_platform
 
-  # skip this in a Github workflow
-  if [ -z "$GITHUB_ACTIONS" ]; then
-    check_system_deps
-
-    __add_separator "80"
-
-    echo "Would you like to check lunarvim's NodeJS dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
-
-    echo "Would you like to check lunarvim's Python dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
-
-    echo "Would you like to check lunarvim's Rust dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
-
-    __add_separator "80"
-
-    echo "Backing up old LunarVim configuration"
-    backup_old_config
-
-    __add_separator "80"
-
+  if [ -n "$GITHUB_ACTIONS" ]; then
+    setup_lvim
+    exit 0
   fi
+
+  check_system_deps
+
+  __add_separator "80"
+
+  echo "Would you like to check lunarvim's NodeJS dependencies?"
+  read -p "[y]es or [n]o (default: no) : " -r answer
+  [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
+
+  echo "Would you like to check lunarvim's Python dependencies?"
+  read -p "[y]es or [n]o (default: no) : " -r answer
+  [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
+
+  echo "Would you like to check lunarvim's Rust dependencies?"
+  read -p "[y]es or [n]o (default: no) : " -r answer
+  [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+
+  __add_separator "80"
+
+  echo "Backing up old LunarVim configuration"
+  backup_old_config
+
+  __add_separator "80"
 
   case "$@" in
     *--overwrite*)
