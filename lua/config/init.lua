@@ -3,26 +3,26 @@ local M = {
   path = string.format("%s/.config/lvim/config.lua", home_dir),
 }
 
---- Initialize lvim default configuration
--- Define lvim global variable
-function M:init()
-  local utils = require "utils"
+--- Create a new configuration.
+-- @function Config
+-- @param defaults The default config entries
+setmetatable(M, {
+  __call = function(cls, ...)
+    return cls:new(...)
+  end,
+})
 
-  require "config.defaults"
+function M:new(defaults, opts)
+  opts = opts or {}
+  local config = {}
 
-  local builtins = require "core.builtins"
-  builtins.config(self)
+  config.entries = defaults
+  config.path = opts.path
 
-  local settings = require "config.settings"
-  settings.load_options()
+  M.__index = M
+  setmetatable(config, M)
 
-  -- Fallback config.lua to lv-config.lua
-  if not utils.is_file(self.path) then
-    local lv_config = self.path:gsub("config.lua$", "lv-config.lua")
-    print(self.path, "not found, falling back to", lv_config)
-
-    self.path = lv_config
-  end
+  return config
 end
 
 --- Override the configuration with a user provided one
@@ -38,13 +38,80 @@ function M:load(config_path)
     return
   end
 
-  lvim = vim.tbl_deep_extend("force", lvim, config())
   self.path = config_path
+  self:extend_with(config(), { force = false, log = true })
+end
 
+--- Get a sub configuration
+-- @param path The path to the entry as a list of . separated keys
+-- @param default The default value to use if not found
+function M:get(path, default)
+  local keys = vim.split(path, "%.")
+  local entries = self.entries
+
+  for _, key in ipairs(keys) do
+    if not entries[key] then
+      if type(default) == "table" then
+        entries[key] = default
+        return self:new(entries[key], { path = self.path })
+      end
+      return default
+    end
+    entries = entries[key]
+  end
+
+  if type(entries) ~= "table" then
+    return entries
+  end
+  return self:new(entries, { path = self.path })
+end
+
+--- Merge recursively the given entries with our own.
+-- @param entries The entries to merge
+-- @param opts Optional paramters
+-- @param opts.force Use the given value, default:true
+-- @param opts.log TODO
+function M:extend_with(entries, opts)
+  opts = opts or {}
+  local force = opts.behaviour or true
+  -- local log = opts.log or true
+
+  local function walk_entries(self_entries, p_entries, path)
+    local function walk_entry(self_entry, entry, entry_path)
+      if not self_entry then
+        return entry
+      end
+
+      local entry_type = type(entry)
+      local self_entry_type = type(self_entry)
+      if entry_type ~= self_entry_type then
+        print("Invalid type for", entry_path, "is", entry_type, "expected", self_entry_type)
+        return force and entry or self_entry
+      end
+      if entry_type ~= "table" then
+        return force and entry or self_entry
+      end
+      return walk_entries(self_entry, entry, entry_path)
+    end
+
+    local content = self_entries
+    for key, value in pairs(p_entries) do
+      content[key] = walk_entry(self_entries[key], value, path .. "." .. key)
+    end
+
+    return content
+  end
+
+  self.entries = walk_entries(self.entries, entries, "")
+
+<<<<<<< HEAD
   autocmds.define_augroups(lvim.autocommands)
 
   local settings = require "config.settings"
   settings.load_commands()
+=======
+  return self
+>>>>>>> 654f482 (Make the config object extendable and lookable by key)
 end
 
 return M
