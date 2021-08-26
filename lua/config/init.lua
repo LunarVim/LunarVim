@@ -27,6 +27,8 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
+  local autocmds = require "core.autocmds"
+
   config_path = config_path or self.path
   local ok, err = pcall(vim.cmd, "luafile " .. config_path)
   if not ok then

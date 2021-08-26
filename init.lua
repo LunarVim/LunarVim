@@ -21,9 +21,6 @@ local config = require "config"
 config:init()
 config:load()
 
-local autocmds = require "core.autocmds"
-autocmds.define_augroups(lvim.autocommands)
-
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
 plugin_loader:load { plugins, lvim.plugins }
