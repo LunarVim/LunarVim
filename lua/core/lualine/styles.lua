@@ -118,7 +118,7 @@ function M.get_style(style)
       "options are: ",
       string.format('"%s"', table.concat(style_keys, '", "'))
     )
-    Log:info '"lvim" style is applied.'
+    Log:debug '"lvim" style is applied.'
     style = "lvim"
   end
 

@@ -159,7 +159,7 @@ function M.config()
     lvim.keys.normal_mode["<A-Down>"] = lvim.keys.normal_mode["<C-Down>"]
     lvim.keys.normal_mode["<A-Left>"] = lvim.keys.normal_mode["<C-Left>"]
     lvim.keys.normal_mode["<A-Right>"] = lvim.keys.normal_mode["<C-Right>"]
-    Log:info "Activated mac keymappings"
+    Log:debug "Activated mac keymappings"
   end
 end
 
