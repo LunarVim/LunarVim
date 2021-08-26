@@ -1,4 +1,5 @@
-CONFIG_PATH = os.getenv "HOME" .. "/.local/share/lunarvim/lvim"
+local home_dir = vim.loop.os_homedir()
+CONFIG_PATH = home_dir .. "/.local/share/lunarvim/lvim"
 DATA_PATH = vim.fn.stdpath "data"
 CACHE_PATH = vim.fn.stdpath "cache"
 TERMINAL = vim.fn.expand "$TERMINAL"
@@ -11,7 +12,7 @@ lvim = {
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
-  vsnip_dir = os.getenv "HOME" .. "/.config/snippets",
+  vsnip_dir = home_dir .. "/.config/snippets",
   database = { save_location = "~/.config/lunarvim_db", auto_execute = 1 },
   keys = {},
 

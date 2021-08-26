@@ -47,7 +47,7 @@ end
 local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
 if lsp_settings_status_ok then
   lsp_settings.setup {
-    config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+    config_home = home_dir .. "/.config/lvim/lsp-settings",
   }
 end
 
