@@ -39,11 +39,11 @@
 --
 -- Plugin configuration:
 --  'Built-in' Plugins
---    builtin.plugin_name.config = {...}
+--    builtins.plugin_name.config = {...}
 --    This table will be forwarded to the plugin at configuration time, for more information,
 --    check the related plugin's documentation
 --    Example:
---     builtin.which_key = {
+--     builtins.which_key = {
 --       config = {
 --         mappings = {
 --           ["P"] = { "<cmd>Telescope projects<CR>", "Projects" },
@@ -67,13 +67,13 @@
 --     builtin.telescope.on_config_done = function()
 --       local actions = require "telescope.actions"
 --       -- for input mode
---       builtin.telescope.config.defaults.mappings.i["<C-j>"] = actions.move_selection_next
---       builtin.telescope.config.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
---       builtin.telescope.config.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
---       builtin.telescope.config.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
+--       builtins.telescope.config.defaults.mappings.i["<C-j>"] = actions.move_selection_next
+--       builtins.telescope.config.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
+--       builtins.telescope.config.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
+--       builtins.telescope.config.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
 --       -- for normal mode
---       builtin.telescope.config.defaults.mappings.n["<C-j>"] = actions.move_selection_next
---       builtin.telescope.config.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
+--       builtins.telescope.config.defaults.mappings.n["<C-j>"] = actions.move_selection_next
+--       builtins.telescope.config.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 --     end
 --
 -- Formatter / Linter configuration

@@ -62,15 +62,15 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.insert_mode["po"] = {'<ESC>', { noremap = true }}
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+-- lvim.builtins.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- Configure builtin plugins
-lvim.builtin.dashboard.active = true
-lvim.builtin.terminal.active = true
+lvim.builtins.dashboard.active = true
+lvim.builtins.terminal.active = true
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtins.treesitter.ensure_installed = "maintained"
+lvim.builtins.treesitter.ignore_install = { "haskell" }
 
 -- Disable virtual text
 lvim.lsp.diagnostics.virtual_text = false
