@@ -1,6 +1,6 @@
 local M = {}
 
-M.load_options = function()
+function M.load_options()
   local default_options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -56,13 +56,13 @@ M.load_options = function()
   end
 end
 
-M.load_commands = function()
+function M.load_commands(config)
   local cmd = vim.cmd
-  if lvim.line_wrap_cursor_movement then
+  if config:get "line_wrap_cursor_movement" then
     cmd "set whichwrap+=<,>,[,],h,l"
   end
 
-  if lvim.transparent_window then
+  if config:get "transparent_window" then
     cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
     cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
     cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
