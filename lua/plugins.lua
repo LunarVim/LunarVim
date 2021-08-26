@@ -14,7 +14,13 @@ return {
   },
 
   { "nvim-lua/popup.nvim" },
-  { "nvim-lua/plenary.nvim" },
+  {
+    "nvim-lua/plenary.nvim",
+    config = function()
+      local Log = require("core.log").new_default()
+      Log:info "Starting LunarVim"
+    end,
+  },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
