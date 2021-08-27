@@ -274,7 +274,7 @@ function setup_lvim() {
 
 function update_lvim() {
   git -C "$LUNARVIM_RUNTIME_DIR/lvim" fetch --quiet
-  if ! git -C "$LUNARVIM_RUNTIME_DIR/lvim" diff --quiet @{u}; then
+  if ! git -C "$LUNARVIM_RUNTIME_DIR/lvim" diff --quiet "@{upstream}"; then
     git -C "$LUNARVIM_RUNTIME_DIR/lvim" merge --ff-only --progress ||
       echo "Unable to guarantee data integrity while updating. Please do that manually instead." && exit 1
   fi
