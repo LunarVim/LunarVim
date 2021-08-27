@@ -1,4 +1,5 @@
 local M = {}
+local home_dir = vim.loop.os_homedir()
 
 M.config = function(config)
   lvim.builtin.dashboard = {
@@ -6,7 +7,7 @@ M.config = function(config)
     on_config_done = nil,
     search_handler = "telescope",
     disable_at_vim_enter = 0,
-    session_directory = os.getenv "HOME" .. "/.cache/lvim/sessions",
+    session_directory = home_dir .. "/.cache/lvim/sessions",
     custom_header = {
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
       "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣶⣾⠿⠿⠟⠛⠛⠛⠛⠿⠿⣿⣷⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",

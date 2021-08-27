@@ -1,5 +1,6 @@
+local home_dir = vim.loop.os_homedir()
 local M = {
-  path = string.format("%s/.config/lvim/config.lua", os.getenv "HOME"),
+  path = string.format("%s/.config/lvim/config.lua", home_dir),
 }
 
 --- Initialize lvim default configuration
