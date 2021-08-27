@@ -9,6 +9,11 @@ lvim.autocommands = {
       "lua require('utils.ft').do_filetype(vim.fn.expand(\"<amatch>\"))",
     },
     {
+      "FileType",
+      "qf",
+      "nnoremap <silent> <buffer> q :q<CR>",
+    },
+    {
       "TextYankPost",
       "*",
       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
