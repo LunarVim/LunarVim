@@ -211,7 +211,7 @@ function backup_old_config() {
     # that require an existing directory
     mkdir -p "$dir" "$dir.bak"
     if command -v rsync &>/dev/null; then
-      rsync --archive -hh --partial --progress \
+      rsync --archive -hh --partial --progress --cvs-exclude \
         --modify-window=1 "$dir"/ "$dir.bak"
     else
       cp -R "$dir/*" "$dir.bak/."
@@ -273,8 +273,9 @@ function setup_lvim() {
 }
 
 function update_lvim() {
-  if ! git -C "$LUNARVIM_RUNTIME_DIR/lvim" status -uno &>/dev/null; then
-    git -C "$LUNARVIM_RUNTIME_DIR/lvim" pull --ff-only --progress ||
+  git -C "$LUNARVIM_RUNTIME_DIR/lvim" fetch --quiet
+  if ! git -C "$LUNARVIM_RUNTIME_DIR/lvim" diff --quiet "@{upstream}"; then
+    git -C "$LUNARVIM_RUNTIME_DIR/lvim" merge --ff-only --progress ||
       echo "Unable to guarantee data integrity while updating. Please do that manually instead." && exit 1
   fi
   echo "Your LunarVim installation is now up to date!"
