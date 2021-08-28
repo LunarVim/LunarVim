@@ -175,7 +175,7 @@ function clone_lvim() {
 
 function setup_shim() {
 	if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
-		New-Item "$INSTALL_PREFIX\bin" -ItemType "directory"
+		New-Item "$INSTALL_PREFIX\bin" -ItemType "directory" | Out-Null
 	}
 
 	Set-Content -Path "$INSTALL_PREFIX\bin\lvim.ps1" ("
