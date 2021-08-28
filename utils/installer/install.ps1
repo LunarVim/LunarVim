@@ -204,14 +204,18 @@ function setup_lvim() {
   
 	Write-Output "Packer setup complete"
   
+	__add_separator "80"
+
 	Copy-Item "$LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$LUNARVIM_CONFIG_DIR\config.lua"
   
-	$answer = Read-Host "Would you like to create a shortcut for $INSTALL_PREFIX\bin\lvim.ps1? [y]es or [n]o "
+	$answer = Read-Host $(`
+	"Would you like to create an alias inside your Powershell profile?`n" +`
+	"(This enables you to start lvim with the command 'lvim') [y]es or [n]o (default: no)" )
 	if ("$answer" -eq "y" -and "$answer" -eq "Y") {
-		create_shortcut
+		create_alias
 	} 
 
-	#append_to_path
+	__add_separator "80"
 
 	Write-Output "Thank you for installing LunarVim!!"
 	Write-Output "You can start it by running: $INSTALL_PREFIX\bin\lvim.ps1"
@@ -236,38 +240,16 @@ function __add_separator($div_width) {
 	Write-Output ""
 }
 
-function create_shortcut {
-	if(Test-Path "$INSTALL_PREFIX\bin\lvim") {
-		Remove-Item "$INSTALL_PREFIX\bin\lvim"
-	}
-	$WshShell = New-Object -comObject WScript.Shell
-	$Shortcut = $WshShell.CreateShortcut("$INSTALL_PREFIX\bin\lvim.lnk")
-	$Shortcut.TargetPath = "$INSTALL_PREFIX\bin\lvim.ps1"
-	$Shortcut.Save()
-	Move-Item "$INSTALL_PREFIX\bin\lvim.lnk" "$INSTALL_PREFIX\bin\lvim"
-}
+function create_alias {
+	if($null -eq $(Get-Alias | Select-String "lvim")){
+		Add-Content -Path $PROFILE -Value $(-join @('Set-Alias lvim "', "$INSTALL_PREFIX", '\bin\lvim.ps1"'))
 
-# TODO needs elevation
-function append_to_path {
-	$registryPath = 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment'
-	$path = (Get-ItemProperty -Path $registryPath -Name PATH).path
-	$list = [System.Collections.ArrayList]::new()
-	$list.AddRange(($path -split ";"))
-	$containsPathAlready = $false
-	foreach ($item in $list) {
-		if($item -eq "$INSTALL_PREFIX\bin\lvim"){
-			$containsPathAlready = $true
-			break
-		}
-	}
+		Write-Output ""
+		Write-Host 'To use the new alias in this window reload your profile with ". $PROFILE".' -ForegroundColor Yellow
 
-	if (!$containsPathAlready) {
-		Write-Output "Add $INSTALL_PREFIX\bin\lvim to PATH variable"
-		$list.Add("$INSTALL_PREFIX\bin\lvim")
-		$newPath = ($list -join ";")
-		Set-ItemProperty -Path $registryPath -Name PATH -Value $newPath
+	}else {
+		Write-Output "Alias is already set and will not be reset."
 	}
-	
 }
 
 append_to_path
