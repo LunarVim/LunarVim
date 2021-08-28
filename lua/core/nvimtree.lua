@@ -15,7 +15,7 @@ function M.config()
       tree_width = 30,
     },
     ignore = { ".git", "node_modules", ".cache" },
-    auto_open = 1,
+    auto_open = 0,
     auto_close = 1,
     quit_on_open = 0,
     follow = 1,
@@ -65,6 +65,9 @@ function M.setup()
   if lvim.builtin.project.active then
     vim.g.nvim_tree_update_cwd = 1
     vim.g.nvim_tree_respect_buf_cwd = 1
+    vim.g.nvim_tree_disable_netrw = 0
+    vim.g.nvim_tree_hijack_netrw = 0
+    vim.g.netrw_banner = 0
   end
 
   local tree_cb = nvim_tree_config.nvim_tree_callback
