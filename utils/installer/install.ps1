@@ -178,11 +178,10 @@ function setup_shim() {
 		New-Item "$INSTALL_PREFIX\bin" -ItemType "directory" | Out-Null
 	}
 
-	Set-Content -Path "$INSTALL_PREFIX\bin\lvim.ps1" ("
-		New-Variable -Name LUNARVIM_CONFIG_DIR -Value '$LUNARVIM_CONFIG_DIR'
-		New-Variable -Name LUNARVIM_RUNTIME_DIR -Value '$LUNARVIM_RUNTIME_DIR'
-		
-		nvim -u '$LUNARVIM_RUNTIME_DIR\lvim\init.lua' ", '"', "$args", '"')
+	Set-Content -Path "$INSTALL_PREFIX\bin\lvim.ps1" -Value (`
+	"New-Variable -Name LUNARVIM_CONFIG_DIR -Value `"$LUNARVIM_CONFIG_DIR`"`n" +`
+	"New-Variable -Name LUNARVIM_RUNTIME_DIR -Value `"$LUNARVIM_RUNTIME_DIR`"`n`n" +`
+	"nvim -u `"$LUNARVIM_RUNTIME_DIR\lvim\init.lua`" " + '$args')
 }
 
 function setup_lvim() {
