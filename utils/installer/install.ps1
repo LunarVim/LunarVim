@@ -202,7 +202,7 @@ function setup_lvim() {
 	nvim -u "$LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerSync
   
 	Write-Output "Packer setup complete"
-  
+	
 	__add_separator "80"
 
 	Copy-Item "$LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$LUNARVIM_CONFIG_DIR\config.lua"
@@ -242,7 +242,7 @@ function __add_separator($div_width) {
 function create_alias {
 	if($null -eq $(Get-Alias | Select-String "lvim")){
 		Add-Content -Path $PROFILE -Value $(-join @('Set-Alias lvim "', "$INSTALL_PREFIX", '\bin\lvim.ps1"'))
-
+		
 		Write-Output ""
 		Write-Host 'To use the new alias in this window reload your profile with ". $PROFILE".' -ForegroundColor Yellow
 
@@ -251,6 +251,5 @@ function create_alias {
 	}
 }
 
-append_to_path
-#main "$args"
+main "$args"
 
