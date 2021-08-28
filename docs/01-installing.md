@@ -21,7 +21,7 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunar
 Make sure you have the newest version of Neovim (0.5).
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/LunarVim/rolling/utils/bin/install-latest-neovim)
+bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 ```
 
 After installation run `lvim` and then `:PackerInstall`
