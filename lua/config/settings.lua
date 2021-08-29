@@ -1,8 +1,6 @@
 local M = {}
 
 M.load_options = function()
-  local opt = vim.opt
-
   local default_options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -51,7 +49,7 @@ M.load_options = function()
 
   ---  SETTINGS  ---
 
-  opt.shortmess:append "c"
+  vim.opt.shortmess:append "c"
 
   for k, v in pairs(default_options) do
     vim.opt[k] = v

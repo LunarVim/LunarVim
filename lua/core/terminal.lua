@@ -1,9 +1,9 @@
 local M = {}
-local Log = require "core.log"
 local utils = require "utils"
 
 M.config = function()
   lvim.builtin["terminal"] = {
+    on_config_done = nil,
     -- size can be a number or function which is passed the current terminal
     size = 20,
     -- open_mapping = [[<c-\>]],
@@ -46,20 +46,15 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, terminal = pcall(require, "toggleterm")
-  if not status_ok then
-    Log:get_default().error "Failed to load toggleterm"
-    print(terminal)
-    return
-  end
+  local terminal = require "toggleterm"
   for _, exec in pairs(lvim.builtin.terminal.execs) do
     require("core.terminal").add_exec(exec[1], exec[2], exec[3])
   end
   terminal.setup(lvim.builtin.terminal)
-end
 
-local function is_installed(exe)
-  return vim.fn.executable(exe) == 1
+  if lvim.builtin.terminal.on_config_done then
+    lvim.builtin.terminal.on_config_done(terminal)
+  end
 end
 
 M.add_exec = function(exec, keymap, name)
@@ -85,8 +80,9 @@ end
 
 M._exec_toggle = function(exec)
   local binary = M._split(exec)[1]
-  if is_installed(binary) ~= true then
-    print("Please install executable " .. binary .. ". Check documentation for more information")
+  if vim.fn.executable(binary) ~= 1 then
+    local Log = require "core.log"
+    Log:error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
   local Terminal = require("toggleterm.terminal").Terminal
@@ -126,7 +122,7 @@ M.toggle_log_view = function(name)
 
   local Terminal = require("toggleterm.terminal").Terminal
   local log_view = Terminal:new(term_opts)
-  -- require("core.log"):get_default().debug("term", vim.inspect(term_opts))
+  -- require("core.log"):debug("term", vim.inspect(term_opts))
   log_view:toggle()
 end
 

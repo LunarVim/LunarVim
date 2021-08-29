@@ -8,6 +8,7 @@ local generic_opts = {
   normal_mode = generic_opts_any,
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
+  command_mode = generic_opts_any,
   term_mode = { silent = true },
 }
 
@@ -17,6 +18,7 @@ local mode_adapters = {
   term_mode = "t",
   visual_mode = "v",
   visual_block_mode = "x",
+  command_mode = "c",
 }
 
 -- Append key mappings to lunarvim's defaults for a given mode
@@ -142,6 +144,14 @@ function M.config()
       ["<A-j>"] = ":m '>+1<CR>gv-gv",
       ["<A-k>"] = ":m '<-2<CR>gv-gv",
     },
+
+    ---@usage change or add keymappings for command mode
+    command_mode = {
+      -- navigate tab completion with <c-j> and <c-k>
+      -- runs conditionally
+      ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
+      ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
+    },
   }
 
   if vim.fn.has "mac" == 1 then
@@ -149,9 +159,7 @@ function M.config()
     lvim.keys.normal_mode["<A-Down>"] = lvim.keys.normal_mode["<C-Down>"]
     lvim.keys.normal_mode["<A-Left>"] = lvim.keys.normal_mode["<C-Left>"]
     lvim.keys.normal_mode["<A-Right>"] = lvim.keys.normal_mode["<C-Right>"]
-    if Log:get_default() then
-      Log:get_default().info "Activated mac keymappings"
-    end
+    Log:debug "Activated mac keymappings"
   end
 end
 

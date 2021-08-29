@@ -1,3 +1,6 @@
 #!/bin/sh
 
-exec nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim" "$@"
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
+export LUNARVIM_CONFIG_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.config/lvim}"
+
+exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"

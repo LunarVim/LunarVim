@@ -1,50 +1,33 @@
-vim.cmd [[
-  set packpath-=~/.config/nvim
-  set packpath-=~/.config/nvim/after
-  set packpath-=~/.local/share/nvim/site
-  set packpath^=~/.local/share/lunarvim/site
-  set packpath^=~/.config/lvim
+-- {{{ Bootstrap
+local home_dir = vim.loop.os_homedir()
 
-  set runtimepath-=~/.config/nvim
-  set runtimepath-=~/.config/nvim/after
-  set runtimepath+=~/.config/lvim
-  set runtimepath^=~/.local/share/lunarvim/lvim/after
-]]
--- vim.opt.rtp:append() instead of vim.cmd ?
+vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/lvim")
 
-local function file_exists(name)
-  local f = io.open(name, "r")
-  if f ~= nil then
-    io.close(f)
-    return true
-  else
-    return false
-  end
-end
+vim.opt.rtp:remove(home_dir .. "/.config/nvim")
+vim.opt.rtp:remove(home_dir .. "/.config/nvim/after")
+vim.opt.rtp:append(home_dir .. "/.config/lvim")
+vim.opt.rtp:append(home_dir .. "/.config/lvim/after")
 
-local lvim_path = os.getenv "HOME" .. "/.config/lvim/"
-USER_CONFIG_PATH = lvim_path .. "config.lua"
-local config_exist = file_exists(USER_CONFIG_PATH)
-if not config_exist then
-  USER_CONFIG_PATH = lvim_path .. "lv-config.lua"
-  print "Rename ~/.config/lvim/lv-config.lua to config.lua"
-end
+vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site")
+vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site/after")
+vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/site")
+vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/site/after")
 
-require "default-config"
-local autocmds = require "core.autocmds"
-require("settings").load_options()
+-- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
+vim.cmd [[let &packpath = &runtimepath]]
+-- }}}
 
-local status_ok, error = pcall(vim.cmd, "luafile " .. USER_CONFIG_PATH)
-if not status_ok then
-  print("something is wrong with your " .. USER_CONFIG_PATH)
-  print(error)
-end
-require("settings").load_commands()
-autocmds.define_augroups(lvim.autocommands)
+local config = require "config"
+config:init()
+config:load()
 
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
 plugin_loader:load { plugins, lvim.plugins }
+
+local Log = require "core.log"
+Log:info "Starting LunarVim"
+
 vim.g.colors_name = lvim.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 vim.cmd("colorscheme " .. lvim.colorscheme)
 
@@ -58,13 +41,13 @@ require("lsp").config()
 local null_status_ok, null_ls = pcall(require, "null-ls")
 if null_status_ok then
   null_ls.config {}
-  require("lspconfig")["null-ls"].setup {}
+  require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
 end
 
 local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
 if lsp_settings_status_ok then
   lsp_settings.setup {
-    config_home = os.getenv "HOME" .. "/.config/lvim/lsp-settings",
+    config_home = home_dir .. "/.config/lvim/lsp-settings",
   }
 end
 

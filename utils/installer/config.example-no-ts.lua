@@ -14,8 +14,21 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
+-- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
+-- lvim.builtin.telescope.on_config_done = function()
+--   local actions = require "telescope.actions"
+--   -- for input mode
+--   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
+--   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
+--   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
+--   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
+--   -- for normal mode
+--   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
+--   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
+-- end
+
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", "Projects" }
+-- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -47,6 +60,21 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   end
 --   --Enable completion triggered by <c-x><c-o>
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
+-- you can overwrite the null_ls setup table (useful for setting the root_dir function)
+-- lvim.lsp.null_ls.setup = {
+--   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
+-- }
+-- or if you need something more advanced
+-- lvim.lsp.null_ls.setup.root_dir = function(fname)
+--   if vim.bo.filetype == "javascript" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
+--       or require("lspconfig/util").path.dirname(fname)
+--   elseif vim.bo.filetype == "php" then
+--     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
+--   else
+--     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
+--   end
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)

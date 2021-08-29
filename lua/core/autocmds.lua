@@ -1,4 +1,5 @@
 local autocommands = {}
+local config = require "config"
 
 lvim.autocommands = {
   _general_settings = {
@@ -6,6 +7,11 @@ lvim.autocommands = {
       "Filetype",
       "*",
       "lua require('utils.ft').do_filetype(vim.fn.expand(\"<amatch>\"))",
+    },
+    {
+      "FileType",
+      "qf",
+      "nnoremap <silent> <buffer> q :q<CR>",
     },
     {
       "TextYankPost",
@@ -32,7 +38,7 @@ lvim.autocommands = {
       "*",
       "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     },
-    { "BufWritePost", USER_CONFIG_PATH, "lua require('utils').reload_lv_config()" },
+    { "BufWritePost", config.path, "lua require('utils').reload_lv_config()" },
     {
       "FileType",
       "qf",

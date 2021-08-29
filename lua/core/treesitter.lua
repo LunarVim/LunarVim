@@ -1,7 +1,9 @@
 local M = {}
 local Log = require "core.log"
+
 M.config = function()
   lvim.builtin.treesitter = {
+    on_config_done = nil,
     ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {},
     matchup = {
@@ -70,6 +72,10 @@ M.setup = function()
   end
 
   treesitter_configs.setup(lvim.builtin.treesitter)
+
+  if lvim.builtin.treesitter.on_config_done then
+    lvim.builtin.treesitter.on_config_done(treesitter_configs)
+  end
 end
 
 return M

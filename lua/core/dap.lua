@@ -1,8 +1,9 @@
 local M = {}
-local Log = require "core.log"
+
 M.config = function()
   lvim.builtin.dap = {
     active = false,
+    on_config_done = nil,
     breakpoint = {
       text = "",
       texthl = "LspDiagnosticsSignError",
@@ -13,11 +14,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, dap = pcall(require, "dap")
-  if not status_ok then
-    Log:get_default().error "Failed to load dap"
-    return
-  end
+  local dap = require "dap"
 
   vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
@@ -38,6 +35,10 @@ M.setup = function()
     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
     q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   }
+
+  if lvim.builtin.dap.on_config_done then
+    lvim.builtin.dap.on_config_done(dap)
+  end
 end
 
 -- TODO put this up there ^^^ call in ftplugin
