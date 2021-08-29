@@ -4,6 +4,7 @@ return {
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
   { "jose-elias-alvarez/null-ls.nvim" },
+  { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
