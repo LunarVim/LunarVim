@@ -949,6 +949,7 @@ lvim.lang = {
   },
   tailwindcss = {
     lsp = {
+      active = false,
       provider = "tailwindcss",
       setup = {
         cmd = {

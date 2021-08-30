@@ -125,7 +125,7 @@ end
 function M.setup(lang)
   local lsp_utils = require "lsp.utils"
   local lsp = lvim.lang[lang].lsp
-  if lsp_utils.is_client_active(lsp.provider) then
+  if (lsp.active ~= nil and not lsp.active) or lsp_utils.is_client_active(lsp.provider) then
     return
   end
 
