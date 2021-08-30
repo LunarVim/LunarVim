@@ -27,7 +27,7 @@ local LSP = {
   QuickScopeSecondary = { fg = C.cyan_test, style = "underline" },
   TelescopeSelection = { fg = C.hint_blue },
   TelescopeMatching = { fg = C.info_yellow, style = "bold" },
-  TelescopeBorder = { fg = C.blue, bg = Config.transparent_background and "NONE" or C.bg },
+  TelescopeBorder = { fg = C.cyan, bg = Config.transparent_background and "NONE" or C.bg },
   TelescopePromptPrefix = { fg = C.purple },
   NvimTreeFolderIcon = { fg = C.blue },
   NvimTreeIndentMarker = { fg = C.gray },
