@@ -53,7 +53,7 @@ local highlights = {
   MoreMsg = { fg = C.orange },
   Question = { fg = C.orange },
   EndOfBuffer = { fg = C.bg },
-  NonText = { fg = C.bg },
+  NonText = { fg = C.context },
   Variable = { fg = C.fg },
   String = { fg = C.green },
   Character = { fg = C.green },
