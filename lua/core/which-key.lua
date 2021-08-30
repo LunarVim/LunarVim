@@ -130,6 +130,10 @@ M.config = function()
           "<cmd>Telescope git_bcommits<cr>",
           "Checkout commit(for current file)",
         },
+        d = {
+          "<cmd>Gitsigns diffthis HEAD<cr>",
+          "Git Diff",
+        },
       },
 
       l = {
