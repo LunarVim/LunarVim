@@ -42,6 +42,7 @@ local function create_floating_file(location, opts)
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
 
+  vim.api.nvim_win_set_cursor(winnr, { range.start.line + 1, range.start.character })
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
 
   -- Set some autocmds to close the window
