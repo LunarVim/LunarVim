@@ -11,7 +11,7 @@ local Treesitter = {
   TSKeyword = { fg = C.purple },
   TSKeywordReturn = { fg = C.purple },
   TSKeywordFunction = { fg = C.purple },
-  TSLabel = { fg = C.red },
+  TSLabel = { fg = C.blue },
   TSNone = { fg = C.fg },
   TSNamespace = { fg = C.purple },
   TSRepeat = { fg = C.purple },
@@ -48,8 +48,9 @@ local Treesitter = {
   TSTag = { fg = C.blue },
   TSEmphasis = { style = "italic" },
   TSUnderline = { style = "underline" },
-  TSWarning = { fg = C.warning_orange },
-  TSDanger = { fg = C.error_red },
+  TSNote = { fg = C.info_yellow, style = "bold" },
+  TSWarning = { fg = C.warning_orange, style = "bold" },
+  TSDanger = { fg = C.error_red, style = "bold" },
   TSTitle = { fg = C.blue, style = "bold" },
   TSLiteral = { fg = C.green },
   TSURI = { fg = C.blue, style = "underline" },
@@ -60,7 +61,6 @@ local Treesitter = {
   TSQueryLinterError = { fg = C.warning_orange },
   TSEnvironment = { fg = C.fg },
   TSEnvironmentName = { fg = C.fg },
-  TSNote = { fg = C.blue },
 }
 
 return Treesitter
