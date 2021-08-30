@@ -8,7 +8,7 @@ vim.cmd [[ set spellfile=~/.config/lvim/spell/en.utf-8.add ]]
 
 lvim = {
   leader = "space",
-  colorscheme = "spacegray",
+  colorscheme = "onedarker",
   line_wrap_cursor_movement = true,
   transparent_window = false,
   format_on_save = true,
