@@ -76,7 +76,7 @@ Just enter `:LspInstall` followed by `<TAB>` to see your options
 
 **NOTE** I recommend installing `lua` for autocomplete in `config.lua`
 
-For the julia language server look [here](https://github.com/lunarvim/LunarVim/wiki/Enabling-a-language-server#julia-support)
+For the julia language server look [here](https://www.lunarvim.org/languages/julia.html)
 
 ## Configuration file
 
