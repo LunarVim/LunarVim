@@ -54,7 +54,7 @@ local highlights = {
   Question = { fg = C.orange },
   EndOfBuffer = { fg = C.bg },
   NonText = { fg = C.context },
-  Variable = { fg = C.fg },
+  Variable = { fg = C.cyan },
   String = { fg = C.green },
   Character = { fg = C.green },
   Constant = { fg = C.orange },

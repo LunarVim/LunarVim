@@ -10,7 +10,7 @@ local markdown = {
   markdownH4 = { fg = C.blue },
   markdownH5 = { fg = C.blue },
   markdownH6 = { fg = C.blue },
-  markdownHeadingDelimiter = { fg = C.red },
+  markdownHeadingDelimiter = { fg = C.blue },
   markdownHeadingRule = { fg = C.accent },
   markdownId = { fg = C.purple },
   markdownIdDeclaration = { fg = C.blue },
