@@ -48,7 +48,7 @@ local function load_config()
   config:load()
 
   local autocmds = require "core.autocmds"
-  autocmds.define_augroups(config:get("autocommands", {}))
+  autocmds.define_augroups(config:get "autocommands")
   settings.load_commands(config)
 
   return config
@@ -64,13 +64,13 @@ lvim = config.entries
 
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
-plugin_loader:load { plugins, lvim.plugins }
+plugin_loader:load { plugins, config:get "plugins" }
 
 local Log = require "core.log"
 Log:info "Starting LunarVim"
 
-vim.g.colors_name = lvim.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
-vim.cmd("colorscheme " .. lvim.colorscheme)
+vim.g.colors_name = config:get "colorscheme"
+vim.cmd("colorscheme " .. config:get "colorscheme")
 
 local utils = require "utils"
 utils.toggle_autoformat()
@@ -82,7 +82,7 @@ require("lsp").config()
 local null_status_ok, null_ls = pcall(require, "null-ls")
 if null_status_ok then
   null_ls.config {}
-  require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
+  require("lspconfig")["null-ls"].setup(config:get "lsp.null_ls.setup")
 end
 
 local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
