@@ -103,22 +103,6 @@ function utils.reload_lv_config()
   Log:info "Reloaded configuration"
 end
 
-function utils.unrequire(m)
-  package.loaded[m] = nil
-  _G[m] = nil
-end
-
-function utils.gsub_args(args)
-  if args == nil or type(args) ~= "table" then
-    return args
-  end
-  local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-  for i = 1, #args do
-    args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
-  end
-  return args
-end
-
 --- Checks whether a given path exists and is a file.
 --@param filename (string) path to check
 --@returns (bool)
