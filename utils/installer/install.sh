@@ -256,12 +256,13 @@ function setup_lvim() {
 
   echo "Preparing Packer setup"
   
+    
   if [ ! -d "$LUNARVIM_CONFIG_DIR" ]; then
-    mkdir -p "$LUNARVIM_CONFIG_DIR"
+   echo "$LUNARVIM_CONFIG_DIR not found"
+   mkdir -p $LUNARVIM_CONFIG_DIR
   fi
-
-  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example-no-ts.lua" \
-    "$LUNARVIM_CONFIG_DIR/config.lua"
+  
+  cp -i $LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example-no-ts.lua $LUNARVIM_CONFIG_DIR/config.lua
 
   nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
     -c 'autocmd User PackerComplete quitall' \
