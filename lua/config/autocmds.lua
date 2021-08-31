@@ -1,7 +1,7 @@
 local autocmds = {}
 
 function autocmds.setup(config)
-  config:get("autocommands", {}):extend_with {
+  config:extend {
     _general_settings = {
       {
         "Filetype",

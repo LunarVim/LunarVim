@@ -1,6 +1,4 @@
-local M = {
-  path = nil,
-}
+local M = {}
 
 --- Create a new configuration.
 -- @function Config
@@ -27,8 +25,6 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
-  local autocmds = require "core.autocmds"
-
   config_path = config_path or self.path
   local config, err = loadfile(config_path)
   if err then
@@ -38,10 +34,27 @@ function M:load(config_path)
   end
 
   self.path = config_path
-  self:extend_with(config(), { force = false, log = true })
+  self:extend(config(), { force = false, log = true })
 end
 
 --- Get a sub configuration
+-- @param path The path to the entry as a list of . separated keys
+-- @return A configuration wrapping the entries designated by path
+function M:sub(path)
+  local keys = vim.split(path, "%.")
+  local entries = self.entries
+
+  for _, key in ipairs(keys) do
+    if not entries[key] then
+      entries[key] = {}
+    end
+    entries = entries[key]
+  end
+
+  return self:new(entries, { path = self.path })
+end
+
+--- Get a configuration entry
 -- @param path The path to the entry as a list of . separated keys
 -- @param default The default value to use if not found
 function M:get(path, default)
@@ -50,60 +63,51 @@ function M:get(path, default)
 
   for _, key in ipairs(keys) do
     if not entries[key] then
-      if type(default) == "table" then
-        entries[key] = default
-        return self:new(entries[key], { path = self.path })
-      end
       return default
     end
     entries = entries[key]
   end
 
-  if type(entries) ~= "table" then
-    return entries
-  end
-  return self:new(entries, { path = self.path })
+  return entries
 end
 
 --- Merge recursively the given entries with our own.
--- @param entries The entries to merge
--- @param opts Optional paramters
--- @param opts.force Use the given value, default:true
+-- @param overrides The entries overrides to merge
+-- @param opts Optional parameters
+-- @param opts.force Use the given value, default: True
 -- @param opts.log TODO
-function M:extend_with(entries, opts)
+function M:extend(overrides, opts)
   opts = opts or {}
   local force = opts.behaviour or true
   -- local log = opts.log or true
 
-  local function walk_entries(self_entries, p_entries, path)
-    local function walk_entry(self_entry, entry, entry_path)
-      if not self_entry then
-        return entry
+  local function walk_entries(entries, _overrides, path)
+    local function walk_entry(entry, override, entry_path)
+      if not entry then
+        return override
       end
 
       local entry_type = type(entry)
-      local self_entry_type = type(self_entry)
-      if entry_type ~= self_entry_type then
-        print("Invalid type for", entry_path, "is", entry_type, "expected", self_entry_type)
-        return force and entry or self_entry
+      local override_type = type(override)
+      if entry_type ~= override_type then
+        print("Invalid type for", entry_path, "is", override_type, "expected", entry_type)
+        return force and override or entry
       end
-      if entry_type ~= "table" then
-        return force and entry or self_entry
+      if override_type ~= "table" then
+        return force and override or entry
       end
-      return walk_entries(self_entry, entry, entry_path)
+      return walk_entries(entry, override, entry_path)
     end
 
-    local content = self_entries
-    for key, value in pairs(p_entries) do
-      content[key] = walk_entry(self_entries[key], value, path .. "." .. key)
+    local content = entries
+    for key, value in pairs(_overrides) do
+      content[key] = walk_entry(entries[key], value, path .. "." .. key)
     end
 
     return content
   end
 
-  self.entries = walk_entries(self.entries, entries, "")
-
-  return self
+  self.entries = walk_entries(self.entries, overrides, "")
 end
 
 return M

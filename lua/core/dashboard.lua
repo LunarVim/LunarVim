@@ -58,7 +58,7 @@ local M = {
 }
 
 function M:setup(config)
-  config:extend_with(self.defaults)
+  config:extend(self.defaults)
 end
 
 function M:config()

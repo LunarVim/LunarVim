@@ -27,7 +27,10 @@ local function load_config()
   settings.load_options()
 
   local keymappings = require "config.keymappings"
-  keymappings.setup(config)
+  keymappings.setup(config:sub "keys")
+
+  local autocommands = require "config.autocmds"
+  autocommands.setup(config:sub "autocommands")
 
   local builtins = require "core.builtins"
   builtins.setup(config)
@@ -41,17 +44,12 @@ local function load_config()
 
     path = lv_config
   end
-
   config.path = path
-
-  local autocommands_config = require "config.autocmds"
-  autocommands_config.setup(config)
-
   config:load()
-  settings.load_commands(config)
 
   local autocmds = require "core.autocmds"
-  autocmds.define_augroups(config:get("autocommands").entries)
+  autocmds.define_augroups(config:get("autocommands", {}))
+  settings.load_commands(config)
 
   return config
 end
@@ -95,5 +93,5 @@ if lsp_settings_status_ok then
 end
 
 local keymap = require "keymappings"
-keymap.setup(config:get "leader", config:get("keys").entries)
+keymap.setup(config:get "leader", config:get "keys")
 
