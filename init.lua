@@ -33,7 +33,7 @@ local function load_config()
   autocommands.setup(config:sub "autocommands")
 
   local builtins = require "core.builtins"
-  builtins.setup(config)
+  builtins.setup(config:sub "builtins")
 
   -- Fallback config.lua to lv-config.lua
   local utils = require "utils"
