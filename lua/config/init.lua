@@ -34,7 +34,7 @@ function M:load(config_path)
   end
 
   self.path = config_path
-  self:extend(config(), { force = false, log = true })
+  self:extend(config(), { force = true, log = true })
 end
 
 --- Get a sub configuration
@@ -78,7 +78,7 @@ end
 -- @param opts.log TODO
 function M:extend(overrides, opts)
   opts = opts or {}
-  local force = opts.behaviour or true
+  local keep = not opts.force or false
   -- local log = opts.log or true
 
   local function walk_entries(entries, _overrides, path)
@@ -91,20 +91,24 @@ function M:extend(overrides, opts)
       local override_type = type(override)
       if entry_type ~= override_type then
         print("Invalid type for", entry_path, "is", override_type, "expected", entry_type)
-        return force and override or entry
+        if keep then
+          return entry
+        end
+        return override
       end
       if override_type ~= "table" then
-        return force and override or entry
+        if keep then
+          return entry
+        end
+        return override
       end
       return walk_entries(entry, override, entry_path)
     end
 
-    local content = entries
     for key, value in pairs(_overrides) do
-      content[key] = walk_entry(entries[key], value, path .. "." .. key)
+      entries[key] = walk_entry(entries[key], value, path .. "." .. key)
     end
-
-    return content
+    return entries
   end
 
   self.entries = walk_entries(self.entries, overrides, "")
