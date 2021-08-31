@@ -258,7 +258,6 @@ function setup_lvim() {
   
     
   if [ ! -d "$LUNARVIM_CONFIG_DIR" ]; then
-   echo "$LUNARVIM_CONFIG_DIR not found"
    mkdir -p $LUNARVIM_CONFIG_DIR
   fi
   
