@@ -214,7 +214,7 @@ function backup_old_config() {
       rsync --archive -hh --partial --progress --cvs-exclude \
         --modify-window=1 "$dir"/ "$dir.bak"
     else
-      cp -R "$dir/*" "$dir.bak/."
+      cp -R "$dir/"* "$dir.bak/."
     fi
   done
   echo "Backup operation complete"
