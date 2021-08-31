@@ -69,7 +69,21 @@ M.setup = function()
 
   vim.g.dashboard_session_directory = lvim.builtin.dashboard.session_directory
 
-  vim.g.dashboard_custom_footer = lvim.builtin.dashboard.footer
+  local lv_site = "lunarvim.org"
+  local lv_path = "$HOME/.local/share/lunarvim"
+
+  local lv_ver_full = vim.fn.system("git -C " .. lv_path .. "/lvim describe --tag")
+  local lv_ver = vim.fn.split(lv_ver_full, "-")[1]
+  local num_plugins_loaded = #vim.fn.globpath(lv_path .. "/site/pack/packer/start", "*", 0, 1)
+
+  -- vim.g.dashboard_custom_footer = { "   v" .. lv_ver, "", lv_site .. "     " }
+  vim.g.dashboard_custom_footer = {
+    "LunarVim loaded " .. num_plugins_loaded .. " plugins  ",
+    "",
+    "          v" .. lv_ver,
+    "",
+    "       " .. lv_site,
+  }
 
   require("core.autocmds").define_augroups {
     _dashboard = {
