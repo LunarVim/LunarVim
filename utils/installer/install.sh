@@ -210,11 +210,11 @@ function backup_old_config() {
     # we create an empty folder for subsequent commands \
     # that require an existing directory
     mkdir -p "$dir" "$dir.bak"
+    touch "$dir/ignore"
     if command -v rsync &>/dev/null; then
       rsync --archive -hh --partial --progress --cvs-exclude \
         --modify-window=1 "$dir"/ "$dir.bak"
     else
-
       OS="$(uname -s)"
       case "$OS" in
         Linux)
