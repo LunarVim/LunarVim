@@ -255,6 +255,10 @@ function setup_lvim() {
   setup_shim
 
   echo "Preparing Packer setup"
+  
+  if [ ! -d "$LUNARVIM_CONFIG_DIR" ]; then
+    mkdir -p "$LUNARVIM_CONFIG_DIR"
+  fi
 
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example-no-ts.lua" \
     "$LUNARVIM_CONFIG_DIR/config.lua"
