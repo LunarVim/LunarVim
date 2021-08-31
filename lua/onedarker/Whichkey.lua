@@ -3,7 +3,7 @@ local Whichkey = {
   WhichKeySeperator = { fg = C.green },
   WhichKeyGroup = { fg = C.cyan },
   WhichKeyDesc = { fg = C.blue },
-  WhichKeyFloat = { bg = C.dark },
+  WhichKeyFloat = { bg = C.bg },
 }
 
 return Whichkey
