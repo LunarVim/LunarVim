@@ -9,8 +9,7 @@ return {
     "kabouzeid/nvim-lspinstall",
     event = "VimEnter",
     config = function()
-      local lspinstall = require "core.lspinstall"
-      lspinstall.setup()
+      require("core.lspinstall"):config()
     end,
   },
 
@@ -92,7 +91,7 @@ return {
   {
     "folke/which-key.nvim",
     config = function()
-      require("core.which-key").config()
+      require("core.which-key"):config()
     end,
     -- event = "BufWinEnter",
     -- disable = not lvim.builtins.which_key.active,
@@ -103,7 +102,7 @@ return {
     "terrortylor/nvim-comment",
     event = "BufRead",
     config = function()
-      require("core.comment").config()
+      require("core.comment"):config()
     end,
     disable = not lvim.builtins.comment.active,
   },

@@ -237,7 +237,7 @@ function M:setup(config)
   config:extend(self.defaults)
 end
 
-function M.config()
+function M:config()
   local which_key = require "which-key"
   local config = lvim.builtins.which_key
 
