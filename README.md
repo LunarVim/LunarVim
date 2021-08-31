@@ -40,17 +40,19 @@ The following options are supported by setting environment variables:
 Putting it all together
 
 ``` bash
-curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh -O install.sh
-INSTALL_PREFIX=/tmp/t1 LUNARVIM_CONFIG_DIR=/tmp/t2 LUNARVIM_RUNTIME_DIR=/tmp/t3 bash ./install.sh
+curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh --output install.sh
+bash ./install.sh
+# you can customize it like this
+# INSTALL_PREFIX=/tmp/t1 LUNARVIM_CONFIG_DIR=/tmp/t2 LUNARVIM_RUNTIME_DIR=/tmp/t3 bash ./install.sh
 ```
 
 ### BREAKING CHANGE on rolling and master branches
-* The latest changes to LunarVim require you to [remove it completely](https://github.com/lunarvim/LunarVim/wiki/Uninstalling-LunarVim) before upgrading
+* The latest changes to LunarVim require you to [remove it completely](https://www.lunarvim.org/01-installing.html#uninstall) before upgrading
 * Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
 * To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
 * Your personal configuration file (`config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
 * If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
-* Many options formerly available in `config.lua` have been renamed.  For details [look here](https://github.com/lunarvim/LunarVim/wiki/Breaking-changes-in-rolling)
+* Many options formerly available in `config.lua` have been renamed.
 
 ### Debugging LunarVim's configuration
 * To turn on debugging add these settings `lvim.log.level = debug` and use `<leader>Ll` to see the options of viewing the logfiles
@@ -65,7 +67,8 @@ you can run the script with `--overwrite` but be warned this will remove the fol
 - `~/.local/share/lunarvim`               #Removed only on Rolling Branch
 - `~/.config/lvim`                        #Removed only on Rolling Branch
 ```bash
-curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
+curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh --output install.sh
+LVBRANCH=rolling bash install.sh --overwrite
 ```
 then run nvim and wait for treesitter to finish the installation
 
@@ -76,7 +79,7 @@ Just enter `:LspInstall` followed by `<TAB>` to see your options
 
 **NOTE** I recommend installing `lua` for autocomplete in `config.lua`
 
-For the julia language server look [here](https://github.com/lunarvim/LunarVim/wiki/Enabling-a-language-server#julia-support)
+For the julia language server look [here](https://www.lunarvim.org/languages/julia.html)
 
 ## Configuration file
 
@@ -185,7 +188,7 @@ cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
 
-To update Neovim use your package manager or [compile from source](https://github.com/lunarvim/LunarVim/wiki/Installation#get-the-latest-version-of-neovim)
+To update Neovim use your package manager or [compile from source](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source)
 
 ## Project Goals
 
