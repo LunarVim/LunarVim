@@ -84,23 +84,11 @@ function utils.toggle_autoformat()
 end
 
 function utils.reload_lv_config()
-  require("core.lualine").config()
-
-  local config = require "config"
-  config:load()
-
-  require("keymappings").setup() -- this should be done before loading the plugins
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
-  local plugins = require "plugins"
-  local plugin_loader = require("plugin-loader").init()
-  utils.toggle_autoformat()
-  plugin_loader:load { plugins, lvim.plugins }
+  Log:info "Reloading lvim"
+  require "main"()
   vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
-  -- vim.cmd ":PackerClean"
-  local null_ls = require "lsp.null-ls"
-  null_ls.setup(vim.bo.filetype, { force_reload = true })
-  Log:info "Reloaded configuration"
+  Log:info "Reloaded"
 end
 
 --- Checks whether a given path exists and is a file.
