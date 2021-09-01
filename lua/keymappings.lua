@@ -4,21 +4,23 @@ local Log = require "core.log"
 local generic_opts_any = { noremap = true, silent = true }
 
 local generic_opts = {
+  command_mode = generic_opts_any,
   insert_mode = generic_opts_any,
   normal_mode = generic_opts_any,
+  select_mode = generic_opts_any,
+  term_mode = { silent = true },
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
-  command_mode = generic_opts_any,
-  term_mode = { silent = true },
 }
 
 local mode_adapters = {
+  command_mode = "c",
   insert_mode = "i",
   normal_mode = "n",
+  select_mode = "s",
   term_mode = "t",
   visual_mode = "v",
   visual_block_mode = "x",
-  command_mode = "c",
 }
 
 -- Append key mappings to lunarvim's defaults for a given mode
@@ -38,7 +40,7 @@ end
 function M.set_keymaps(mode, key, val)
   local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
   if type(val) == "table" then
-    opt = val[2]
+    opt = val[2] or opt
     val = val[1]
   end
   vim.api.nvim_set_keymap(mode, key, val, opt)
