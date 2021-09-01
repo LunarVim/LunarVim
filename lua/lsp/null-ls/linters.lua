@@ -15,11 +15,9 @@ function M.list_available(filetype)
   local linters = {}
   local Table = require "utils.table"
   for _, provider in pairs(null_ls.builtins.diagnostics) do
-    if
-      Table.any_of(provider.filetypes or {}, function(entry)
-        return entry == "*" or entry == filetype
-      end)
-    then
+    if Table.any_of(provider.filetypes or {}, function(ft)
+      return ft == "*" or ft == filetype
+    end) then
       table.insert(linters, provider.name)
     end
   end
