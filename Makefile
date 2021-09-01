@@ -1,15 +1,19 @@
 SHELL := /bin/bash
 
 install:
-	@echo Starting LunarVim Installer
+	@echo starting LunarVim installer
 	bash ./utils/installer/install.sh
 
+install-bin:
+	@echo starting LunarVim bin-installer
+	bash ./utils/installer/install_bin.sh
+
 install-neovim-binary:
-	@echo Installing Neovim from github releases
+	@echo installing Neovim from github releases
 	bash ./utils/installer/install-neovim-from-release
 
 uninstall:
-	@echo Starting LunarVim Uninstaller
+	@echo starting LunarVim uninstaller
 	bash ./utils/installer/uninstall.sh
 
 generate_plugins_sha:
@@ -30,7 +34,7 @@ style-lua:
 	stylua --config-path .stylua.toml --check .
 
 style-sh:
-	shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -l -d
+	shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -bn -l -d
 
 test:
 	bash ./utils/bin/test_runner.sh "$(TEST)"
