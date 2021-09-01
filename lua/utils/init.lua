@@ -108,8 +108,8 @@ function utils.restart_nvim()
   if restart_cap == "1" then
     vim.cmd "mksession! ~/.cache/nvim/restart_session.vim"
     vim.cmd "cquit! 206"
-  elseif restart_cap == 0 then
-    print "Restart disabled"
+  elseif restart_cap == "0" then
+    print "Restart capability disabled"
   else
     print "Restart capability not available"
   end
