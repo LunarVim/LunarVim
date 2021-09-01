@@ -74,6 +74,7 @@ M.config = function()
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "jump to buffer" },
         f = { "<cmd>Telescope buffers<cr>", "Find buffer" },
+        b = { ":b#<cr>", "go back to previous buffer" },
         w = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
         e = {
           "<cmd>BufferCloseAllButCurrent<cr>",
