@@ -208,6 +208,7 @@ M.config = function()
           },
           P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
         },
+        r = { "lua require('utils').restart_nvim()", "Restart LunarVim" },
       },
       s = {
         name = "Search",
