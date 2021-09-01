@@ -45,15 +45,15 @@ function M.list_configured(formatter_configs)
     local formatter = null_ls.builtins.formatting[fmt_config.exe]
 
     if not formatter then
-      Log:error("Not a valid formatter:", fmt_config.exe)
+      Log:error("Not a valid formatter: " .. fmt_config.exe)
       errors[fmt_config.exe] = {} -- Add data here when necessary
     else
       local formatter_cmd = services.find_command(formatter._opts.command)
       if not formatter_cmd then
-        Log:warn("Not found:", formatter._opts.command)
+        Log:warn("Not found: " .. formatter._opts.command)
         errors[fmt_config.exe] = {} -- Add data here when necessary
       else
-        Log:debug("Using formatter:", formatter_cmd)
+        Log:debug("Using formatter: " .. formatter_cmd)
         formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, extra_args = fmt_config.args }
       end
     end

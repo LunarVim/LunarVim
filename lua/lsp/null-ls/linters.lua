@@ -45,15 +45,15 @@ function M.list_configured(linter_configs)
     local linter = null_ls.builtins.diagnostics[lnt_config.exe]
 
     if not linter then
-      Log:error("Not a valid linter:", lnt_config.exe)
+      Log:error("Not a valid linter: " .. lnt_config.exe)
       errors[lnt_config.exe] = {} -- Add data here when necessary
     else
       local linter_cmd = services.find_command(linter._opts.command)
       if not linter_cmd then
-        Log:warn("Not found:", linter._opts.command)
+        Log:warn("Not found: " .. linter._opts.command)
         errors[lnt_config.exe] = {} -- Add data here when necessary
       else
-        Log:debug("Using linter:", linter_cmd)
+        Log:debug("Using linter: " .. linter_cmd)
         linters[lnt_config.exe] = linter.with { command = linter_cmd, extra_args = lnt_config.args }
       end
     end
