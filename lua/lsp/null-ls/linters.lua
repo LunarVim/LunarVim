@@ -13,9 +13,13 @@ end
 
 function M.list_available(filetype)
   local linters = {}
+  local Table = require "utils.table"
   for _, provider in pairs(null_ls.builtins.diagnostics) do
-    -- TODO: Add support for wildcard filetypes
-    if vim.tbl_contains(provider.filetypes or {}, filetype) then
+    if
+      Table.any_of(provider.filetypes or {}, function(entry)
+        return entry == "*" or entry == filetype
+      end)
+    then
       table.insert(linters, provider.name)
     end
   end
