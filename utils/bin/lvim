@@ -2,7 +2,14 @@
 
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
 export LUNARVIM_CONFIG_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.config/lvim}"
-export LUNARVIM_RESTART_CAP=1
+
+if [ -z "${LUNARVIM_RESTART_CAP}" ]; then
+	if [ "$TERM_PROGRAM" != tmux ] || [ -z "${TMUX}" ]; then
+		export LUNARVIM_RESTART_CAP=1
+	else
+		export LUNARVIM_RESTART_CAP=0
+	fi
+fi
 
 start_nvim() {
 	nvim "$@"
@@ -14,4 +21,8 @@ start_nvim() {
 	fi
 }
 
-start_nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+if [ "${LUNARVIM_RESTART_CAP}" = 1 ]; then
+	start_nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+else
+	exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+fi

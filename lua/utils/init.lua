@@ -104,11 +104,14 @@ function utils.reload_lv_config()
 end
 
 function utils.restart_nvim()
-  if vim.env.LUNARVIM_RESTART_CAP ~= nil then
+  local restart_cap = vim.env.LUNARVIM_RESTART_CAP
+  if restart_cap == "1" then
     vim.cmd "mksession! ~/.cache/nvim/restart_session.vim"
     vim.cmd "cquit! 206"
+  elseif restart_cap == 0 then
+    print "Restart disabled"
   else
-    print "Cannot restart"
+    print "Restart capability not available"
   end
 end
 
