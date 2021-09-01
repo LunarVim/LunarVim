@@ -1,8 +1,9 @@
 # Quick start
 
-After installing you should be able to start LunarVim with the `lvim` command
+After installing you should be able to start LunarVim with the `lvim` command. 
 
-**NOTE:** `<TAB>` indicates that you should press the `<TAB>` key and cycle through your options 
+## Add `lvim` to `$PATH`
+If your terminal can't find the `lvim` command, [add the installation folder to your path](https://gist.github.com/nex3/c395b2f8fd4b02068be37c961301caa7) or move the lvim command to somewhere in your path. The default install folder is `~/.local/bin`.
 
 ## Tree-sitter
 To install syntax highlighting and treesitter support for your language:
@@ -10,6 +11,7 @@ To install syntax highlighting and treesitter support for your language:
 ```vim
 :TSInstall <TAB>
 ```
+**NOTE:** `<TAB>` indicates that you should press the `<TAB>` key and cycle through your options 
 
 Not all languages are supported.  For a list of supported languages [look here](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
 
