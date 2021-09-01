@@ -103,6 +103,15 @@ function utils.reload_lv_config()
   Log:info "Reloaded configuration"
 end
 
+function utils.restart_nvim()
+  if vim.env.LUNARVIM_RESTART_CAP ~= nil then
+    vim.cmd "mksession! ~/.cache/nvim/restart_session.vim"
+    vim.cmd "cquit! 206"
+  else
+    print "Cannot restart"
+  end
+end
+
 function utils.unrequire(m)
   package.loaded[m] = nil
   _G[m] = nil

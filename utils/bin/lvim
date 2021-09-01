@@ -2,5 +2,16 @@
 
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
 export LUNARVIM_CONFIG_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.config/lvim}"
+export LUNARVIM_RESTART_CAP=1
 
-exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+start_nvim() {
+	nvim "$@"
+	status=$?
+	if [ $status = 206 ]; then
+		start_nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" -S "$HOME/.cache/nvim/restart_session.vim"
+	else
+		exit $status
+	fi
+}
+
+start_nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
