@@ -42,7 +42,7 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 
 ## Configuration file
 
-To activate other plugins and language features use the `lv-config.lua` file provided in the `nvim` folder (`~/.config/nvim/lv-config.lua`) in the master branch or (`~/.config/lvim/config.lua`) on rolling
+To install plugins configure LunarVim use the `config.lua` located here: `~/.config/lvim/config.lua`
 
 Example:
 
@@ -73,15 +73,15 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
 -- }
 
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+-- Configure builtin plugins
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 
--- if you don't want all the parsers change this to a table of the ones you want
+-- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
 
+-- Disable virtual text
 lvim.lsp.diagnostics.virtual_text = false
 
 -- set a formatter if you want to override the default lsp one (if it exists)
