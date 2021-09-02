@@ -3,15 +3,15 @@ local home_dir = vim.loop.os_homedir()
 
 vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/lvim")
 
-vim.opt.rtp:remove(home_dir .. "/.config/nvim")
-vim.opt.rtp:remove(home_dir .. "/.config/nvim/after")
-vim.opt.rtp:append(home_dir .. "/.config/lvim")
-vim.opt.rtp:append(home_dir .. "/.config/lvim/after")
-
 vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site")
 vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site/after")
-vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/site")
+vim.opt.rtp:prepend(home_dir .. "/.local/share/lunarvim/site")
 vim.opt.rtp:append(home_dir .. "/.local/share/lunarvim/site/after")
+
+vim.opt.rtp:remove(home_dir .. "/.config/nvim")
+vim.opt.rtp:remove(home_dir .. "/.config/nvim/after")
+vim.opt.rtp:prepend(home_dir .. "/.config/lvim")
+vim.opt.rtp:append(home_dir .. "/.config/lvim/after")
 
 -- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
 vim.cmd [[let &packpath = &runtimepath]]
