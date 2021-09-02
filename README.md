@@ -20,66 +20,25 @@
 
 </div>
 
+## Documentation
+
+You can find all of the documentation for Lunarvim at [lunarvim.org](https://www.lunarvim.org)
+
 ## Install In One Command!
 
-Make sure you have the newest version of Neovim (0.5).
+Make sure you have the release version of Neovim (0.5).
 
 ``` bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
-### Customizing the installation
+## Install Language support
 
-The following options are supported by setting environment variables:
-- `"$LV_REMOTE"`            Select a different LunarVim remote [default: 'lunarvim/lunarvim.git']
-- `"$LV_BRANCH"`            Select LunarVim's branch [default: 'rolling']
-- `"$INSTALL_PREFIX"`       Select LunarVim's install prefix [default: `'$HOME/.local'`]
-- `"$LUNARVIM_RUNTIME_DIR"` Select LunarVim's runtime directory [default: `'$HOME/.local/share/lunarvim'`]
-- `"$LUNARVIM_CONFIG_DIR"`  Select LunarVim's configuration directory [default: `'$HOME/.config/lvim'`]
+- Enter `:LspInstall` followed by `<TAB>` to see your options for LSP
 
-Putting it all together
-
-``` bash
-curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh --output install.sh
-bash ./install.sh
-# you can customize it like this
-# INSTALL_PREFIX=/tmp/t1 LUNARVIM_CONFIG_DIR=/tmp/t2 LUNARVIM_RUNTIME_DIR=/tmp/t3 bash ./install.sh
-```
-
-### BREAKING CHANGE on rolling and master branches
-* The latest changes to LunarVim require you to [remove it completely](https://www.lunarvim.org/01-installing.html#uninstall) before upgrading
-* Going forward LunarVim will no longer reside in the nvim configuration folder.  LunarVim has been moved to `~/.local/share/lunarvim`.  
-* To launch Lunarvim use the new `lvim` command.  `nvim` will only launch standard neovim.  
-* Your personal configuration file (`config.lua`) can now be found in `~/.config/lvim`.  You can initialize this folder as a git repository to track changes to your configuration files.
-* If you want to keep launching LunarVim with the `nvim` command, add an alias entry to your shell's config file:  `alias nvim=lvim`.  To temporarily revert to the default `nvim` prefix it with a backslash `\nvim`.
-* Many options formerly available in `config.lua` have been renamed.
-
-### Debugging LunarVim's configuration
-* To turn on debugging add these settings `lvim.log.level = debug` and use `<leader>Ll` to see the options of viewing the logfiles
-* You can also use install [lnav](https://github.com/tstack/lnav) and use it in a floating terminal. Make sure to set `lvim.builtin.terminal.active = true`.
-
-### Fixing installation problems
-If your installation is stuck on `Ok to remove? [y/N]`, it means there are some leftovers, \
-you can run the script with `--overwrite` but be warned this will remove the following folders:
-- `~/.cache/nvim`
-- `~/.config/nvim`                        #Removed only on Master Branch
-- `~/.local/share/nvim/site/pack/packer`  #Removed only on Master Branch
-- `~/.local/share/lunarvim`               #Removed only on Rolling Branch
-- `~/.config/lvim`                        #Removed only on Rolling Branch
-```bash
-curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh --output install.sh
-LVBRANCH=rolling bash install.sh --overwrite
-```
-then run nvim and wait for treesitter to finish the installation
-
-
-## Installing LSP for your language
-
-Just enter `:LspInstall` followed by `<TAB>` to see your options
+- Enter `:TSInstall` followed by `<TAB>` to see your options for syntax highlighting
 
 **NOTE** I recommend installing `lua` for autocomplete in `config.lua`
-
-For the julia language server look [here](https://www.lunarvim.org/languages/julia.html)
 
 ## Configuration file
 
@@ -90,12 +49,8 @@ Example:
 ```lua
 -- general
 lvim.format_on_save = true
-lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
 
-lvim.builtin.compe.autocomplete = true
-
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
@@ -159,17 +114,7 @@ lvim.plugins = {
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
-
-
 ```
-
-In case you want to see all the settings inside LunarVim, run the following:
-
-```bash
-cd /tmp
-lvim --headless +'lua require("utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
-```
-and then inspect `/tmp/lv-settings.lua` file
 
 ## Updating LunarVim
 
@@ -188,36 +133,11 @@ cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
 
-To update Neovim use your package manager or [compile from source](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source)
-
-## Project Goals
-
-1. Provide basic functionalities required from an IDE
-    - LSP
-    - Formatting/Linting
-    - Debugging
-    - Treesitter
-    - Colorschemes
-2. Be as fast and lean as possible 
-    - Lazy loading
-    - Not a single extra plugin
-    - User configurable lang/feature enable/disable
-3. Provide a [simple and easy](https://github.com/LunarVim/LunarVimCommunity) way for users to share their own configuration or use others. 
-4. Hot reload of configurations
-    - Hot install of lsp/treesitter/formatter required upon opening a filetype for the first time
-5. Provide a stable & maintainable error free configuration layer over neovim 
-    - With the help of the community behind it
-    - Github workflow testing
-    - Freezing plugin versions
-6. Provide detailed documentation
-    - Video series on how to configure LunarVim as an IDE for each lang
-7. Valhalla
-
 ## Resources
 
-- [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
-
 - [Documentation](https://www.lunarvim.org)
+
+- [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
 
 - [Discord](https://discord.gg/Xb9B4Ny)
 
