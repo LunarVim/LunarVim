@@ -77,13 +77,14 @@ M.setup = function()
   local num_plugins_loaded = #vim.fn.globpath(lv_path .. "/site/pack/packer/start", "*", 0, 1)
 
   -- vim.g.dashboard_custom_footer = { "   v" .. lv_ver, "", lv_site .. "     " }
-  vim.g.dashboard_custom_footer = {
-    "LunarVim loaded " .. num_plugins_loaded .. " plugins  ",
+  local text = require "interface.text"
+  vim.g.dashboard_custom_footer = text.align_center({ width = 0 }, {
+    "LunarVim loaded " .. num_plugins_loaded .. " plugins ",
     "",
-    "          v" .. lv_ver,
+    "v" .. lv_ver,
     "",
-    "       " .. lv_site,
-  }
+    lv_site,
+  }, 0.49) -- Use 0.49 as  counts for 2 characters
 
   require("core.autocmds").define_augroups {
     _dashboard = {
