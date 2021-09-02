@@ -362,7 +362,7 @@
         },
         {
           "key": "P",
-          "name": "Push",
+          "name": "Pull",
           "type": "command",
           "command": "git.pull"
         },
