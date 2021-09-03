@@ -29,7 +29,8 @@ function M.list_configured(linter_configs)
   local linters, errors = {}, {}
 
   for _, lnt_config in pairs(linter_configs) do
-    local linter = null_ls.builtins.diagnostics[lnt_config.exe]
+    local linter_name = lnt_config.exe:gsub("-", "_")
+    local linter = null_ls.builtins.diagnostics[linter_name]
 
     if not linter then
       Log:error("Not a valid linter: " .. lnt_config.exe)
