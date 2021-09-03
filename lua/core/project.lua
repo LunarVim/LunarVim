@@ -20,6 +20,10 @@ function M.config()
     --- can also delete or rearangne the detection methods.
     detection_methods = { "lsp", "pattern" },
 
+    ---@usage Methods of detecting patterns for excluding from the project list
+    --- Ex: { "~/.cargo/*", ... }
+    exclude_dirs = {},
+
     ---@usage patterns used to detect root dir, when **"pattern"** is in detection_methods
     patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
 
