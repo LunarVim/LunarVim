@@ -11,7 +11,6 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -90,24 +89,22 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- lvim.lang.python.formatters = {
 --   {
 --     exe = "black",
---     args = {}
 --   }
 -- }
 -- set an additional linter
 -- lvim.lang.python.linters = {
 --   {
 --     exe = "flake8",
---     args = {}
 --   }
 -- }
 
 -- Additional Plugins
 -- lvim.plugins = {
---     {"folke/tokyonight.nvim"}, {
---         "ray-x/lsp_signature.nvim",
---         config = function() require"lsp_signature".on_attach() end,
---         event = "InsertEnter"
---     }
+--     {"folke/tokyonight.nvim"},
+--     {
+--       "folke/trouble.nvim",
+--       cmd = "TroubleToggle",
+--     },
 -- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
