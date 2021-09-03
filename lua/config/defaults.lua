@@ -134,6 +134,20 @@ lvim.lang = {
       },
     },
   },
+  bicep = {
+    formatters = {},
+    linters = {},
+    lsp = {
+      provider = "bicep",
+      setup = {
+        cmd = {
+          "dotnet",
+          DATA_PATH .. "/lspinstall/bicep/Bicep.LangServer.dll",
+        },
+        filetypes = { "bicep" },
+      },
+    },
+  },
   c = {
     formatters = {
       -- {
@@ -1076,6 +1090,27 @@ lvim.lang = {
       setup = {
         cmd = {
           DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
+        },
+        root_dir = function(fname)
+          local util = require "lspconfig/util"
+          return util.root_pattern "package.json"(fname) or util.root_pattern "vue.config.js"(fname) or vim.fn.getcwd()
+        end,
+        init_options = {
+          config = {
+            vetur = {
+              completion = {
+                autoImport = true,
+                tagCasing = "kebab",
+                useScaffoldSnippets = true,
+              },
+              useWorkspaceDependencies = true,
+              validation = {
+                script = true,
+                style = true,
+                template = true,
+              },
+            },
+          },
         },
       },
     },

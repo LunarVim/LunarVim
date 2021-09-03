@@ -72,25 +72,26 @@ M.config = function()
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       b = {
         name = "Buffers",
-        j = { "<cmd>BufferPick<cr>", "jump to buffer" },
-        f = { "<cmd>Telescope buffers<cr>", "Find buffer" },
-        w = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
+        j = { "<cmd>BufferPick<cr>", "Jump" },
+        f = { "<cmd>Telescope buffers<cr>", "Find" },
+        b = { "<cmd>b#<cr>", "Previous" },
+        w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
         e = {
           "<cmd>BufferCloseAllButCurrent<cr>",
-          "close all but current buffer",
+          "Close all but current",
         },
-        h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
+        h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
         l = {
           "<cmd>BufferCloseBuffersRight<cr>",
-          "close all BufferLines to the right",
+          "Close all to the right",
         },
         D = {
           "<cmd>BufferOrderByDirectory<cr>",
-          "sort BufferLines automatically by directory",
+          "Sort by directory",
         },
         L = {
           "<cmd>BufferOrderByLanguage<cr>",
-          "sort BufferLines automatically by language",
+          "Sort by language",
         },
       },
       p = {
