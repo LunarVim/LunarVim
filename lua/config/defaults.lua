@@ -134,6 +134,20 @@ lvim.lang = {
       },
     },
   },
+  bicep = {
+    formatters = {},
+    linters = {},
+    lsp = {
+      provider = "bicep",
+      setup = {
+        cmd = {
+          "dotnet",
+          DATA_PATH .. "/lspinstall/bicep/Bicep.LangServer.dll",
+        },
+        filetypes = { "bicep" },
+      },
+    },
+  },
   c = {
     formatters = {
       -- {
