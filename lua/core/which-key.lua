@@ -80,10 +80,10 @@ M.config = function()
           "<cmd>BufferCloseAllButCurrent<cr>",
           "Close all but current",
         },
-        l = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all - left" },
-        r = {
+        h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
+        l = {
           "<cmd>BufferCloseBuffersRight<cr>",
-          "Close all - right",
+          "Close all to the right",
         },
         D = {
           "<cmd>BufferOrderByDirectory<cr>",
