@@ -799,3 +799,19 @@ Also define keybindings in your `config.lua`
 },
 
 ```
+
+### [lua-dev](https://github.com/folke/lua-dev.nvim)
+
+**full signature help, docs and completion for the nvim lua API in config.lua and init.lua**
+
+```lua
+{
+  "folke/lua-dev.nvim",
+  config = function()
+    local luadev = require("lua-dev").setup({
+      lspconfig = lvim.lang.lua.lsp.setup
+    })
+    lvim.lang.lua.lsp.setup = luadev
+  end
+}
+```
