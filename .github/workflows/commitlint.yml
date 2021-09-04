@@ -11,4 +11,6 @@ jobs:
           fetch-depth: 0
       - run: |
           npm install --save-dev @commitlint/cli
-          "$(gh pr view ${{ github.event.pull_request.number }} --json commits --jq '.[][0].messageHeadline')" | bash ./utils/ci/run_commitlint.sh
+          if [ -e ./utils/ci/run_commitlint.sh ]; then
+            "$(gh pr view ${{ github.event.pull_request.number }} --json commits --jq '.[][0].messageHeadline')" | bash ./utils/ci/run_commitlint.sh
+          fi
