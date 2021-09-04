@@ -50,29 +50,32 @@ function M.show_line_diagnostics()
   local width = 0
   local opts = {}
   local close_events = { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre" }
-  local bufnr = vim.api.nvim_create_buf(false, true)
   local diagnostic_severities = {
     "Error",
     "Warning",
     "Information",
     "Hint",
   }
+  if height == 0 then
+    return
+  end
+  local bufnr = vim.api.nvim_create_buf(false, true)
 
-  for i, v in ipairs(diagnostics) do
-    local source = v.source
+  for i, diagnostic in ipairs(diagnostics) do
+    local source = diagnostic.source
     if source then
       if string.find(source, "/") then
-        source = string.sub(v.source, string.find(v.source, "([%w-_]+)$"))
+        source = string.sub(diagnostic.source, string.find(diagnostic.source, "([%w-_]+)$"))
       end
-      diags[i].message = string.format("%s: %s", source, v.message)
+      diags[i].message = string.format("%s: %s", source, diagnostic.message)
     else
-      diags[i].message = string.format("%s", v.message)
+      diags[i].message = string.format("%s", diagnostic.message)
     end
 
-    if vim.tbl_contains(vim.tbl_keys(v), "code") then
-      diags[i].message = diags[i].message .. string.format(" [%s]", v.code)
+    if diagnostic.code then
+      diags[i].message = string.format("%s [%s]", diags[i].message, diagnostic.code)
     end
-    if string.len(diags[i].message) > width then
+    if diags[i].message:len() > width then
       width = string.len(diags[i].message)
     end
   end
@@ -85,15 +88,15 @@ function M.show_line_diagnostics()
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
-  for i, v in ipairs(diags) do
-    vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { v.message })
+  for i, diag in ipairs(diags) do
+    vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { diag.message })
     vim.api.nvim_buf_add_highlight(
       bufnr,
       -1,
-      "LspDiagnosticsFloating" .. diagnostic_severities[v.severity],
+      "LspDiagnosticsFloating" .. diagnostic_severities[diag.severity],
       i - 1,
       0,
-      string.len(v.message)
+      diag.message:len()
     )
   end
 
