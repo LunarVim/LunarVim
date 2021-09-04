@@ -1,5 +1,5 @@
-local conditions = require "core.lualine.conditions"
-local colors = require "core.lualine.colors"
+local conditions = require "core.builtins.lualine.conditions"
+local colors = require "core.builtins.lualine.colors"
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -45,7 +45,7 @@ return {
   },
   python_env = {
     function()
-      local utils = require "core.lualine.utils"
+      local utils = require "core.builtins.lualine.utils"
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV"
         if venv then

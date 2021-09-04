@@ -178,11 +178,11 @@ local M = {
           "Edit config.lua",
         },
         f = {
-          "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>",
+          "<cmd>lua require('core.builtins.telescope').find_lunarvim_files()<cr>",
           "Find LunarVim files",
         },
         g = {
-          "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>",
+          "<cmd>lua require('core.builtins.telescope').grep_lunarvim_files()<cr>",
           "Grep LunarVim files",
         },
         k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
@@ -193,13 +193,13 @@ local M = {
         l = {
           name = "+logs",
           d = {
-            "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
+            "<cmd>lua require('core.builtins.terminal').toggle_log_view('lunarvim')<cr>",
             "view default log",
           },
           D = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
-          n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
+          n = { "<cmd>lua require('core.builtins.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
           N = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
-          l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+          l = { "<cmd>lua require('core.builtins.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
           L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
           p = {
             "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",

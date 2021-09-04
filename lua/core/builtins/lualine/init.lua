@@ -16,8 +16,8 @@ function M:setup(config)
 end
 
 function M:config()
-  require("core.lualine.styles").update()
-  require("core.lualine.utils").validate_theme()
+  require("core.builtins.lualine.styles").update()
+  require("core.builtins.lualine.utils").validate_theme()
 
   local lualine = require "lualine"
   lualine.setup(lvim.builtins.lualine.config)

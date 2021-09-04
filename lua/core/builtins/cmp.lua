@@ -20,7 +20,7 @@ local is_emmet_active = function()
   return false
 end
 
-M.config = function()
+function M:setup()
   local status_cmp_ok, cmp = pcall(require, "cmp")
   if not status_cmp_ok then
     return
@@ -114,10 +114,11 @@ M.config = function()
     },
   }
 
-  M.setup = function()
+end
+  
+function M:config()
     require("luasnip/loaders/from_vscode").lazy_load()
     require("cmp").setup(lvim.builtin.cmp)
-  end
 end
 
 return M

@@ -1,5 +1,5 @@
 local M = {}
-local components = require "core.lualine.components"
+local components = require "core.builtins.lualine.components"
 
 local styles = {
   lvim = nil,

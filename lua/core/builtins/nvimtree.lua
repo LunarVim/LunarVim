@@ -95,7 +95,7 @@ function M:config()
     open()
   end
 
-  vim.cmd "au WinClosed * lua require('core.nvimtree').on_close()"
+  vim.cmd "au WinClosed * lua require('core.builtins.nvimtree').on_close()"
 
   if lvim.builtins.nvimtree.on_config_done then
     lvim.builtins.nvimtree.on_config_done(nvim_tree_config)

@@ -36,7 +36,7 @@ M.add_exec = function(exec, keymap, name)
   vim.api.nvim_set_keymap(
     "n",
     "<leader>" .. keymap,
-    "<cmd>lua require('core.terminal')._exec_toggle('" .. exec .. "')<CR>",
+    "<cmd>lua require('core.builtins.terminal')._exec_toggle('" .. exec .. "')<CR>",
     { noremap = true, silent = true }
   )
   lvim.builtins.which_key.mappings[keymap] = name
