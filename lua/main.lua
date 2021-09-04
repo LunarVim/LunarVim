@@ -30,6 +30,9 @@ local function load_config()
   config:load()
   lvim = config.entries
 
+  local Log = require "core.log"
+  Log:config(config:sub "log")
+
   local autocmds = require "core.autocmds"
   autocmds.define_augroups(config:get "autocommands")
   settings.load_commands(config)
