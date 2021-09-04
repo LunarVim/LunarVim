@@ -7,25 +7,32 @@ These are the default plugins that are installed with LunarVim, here is a very b
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 **use-package inspired plugin/package management for Neovim.**  
-Basic commands:
-    :PackerInstall installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua  
+
+```
+:PackerInstall installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua  
                    or init.buit ~not sure.  
-    :PackerStatus Lists the installed plugins  
-    :PackerUpdate fetches and installs updates to packages  
+:PackerStatus Lists the installed plugins  
+:PackerUpdate fetches and installs updates to packages  
+```
 
 ## Language Server Protocol
 
 ### [nvim.lspconfig](https://github.com/neovim/nvim-lspconfig)
 
 **A collection of common configurations for Neovim's built-in language server client.**  
+
 Automatically launching and initializing language servers that are installed on your system.  
-    :LspInfo Language server diagnostics  
+```
+:LspInfo Language server diagnostics  
+```
 
 ### [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)
 
 **Companion plugin for nvim-lspconfig to install language servers**  
-      can use tab completion with LspInstall to check for available language servers  
-      :LspInstall <language>   
+can use tab completion with LspInstall to check for available language servers  
+```
+:LspInstall <language>   
+```
 
 ### [nlsp.settings.nvim](https://github.com/tamago324/nlsp-settings.nvim)
 
@@ -36,18 +43,24 @@ Automatically launching and initializing language servers that are installed on 
 ### [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
 **Simple and easy way to use the interface for tree-sitter in Neovim and provide some basic functionality such as highlighting**  
-    :TSInstall <language_to_install>  tab t show available languages  
-    :TSInfoInstallInfo  check installation status  
+
+```
+:TSInstall <language_to_install>  tab to show available languages  
+:TSInfoInstallInfo  check installation status  
+```
 see the nvim.treesitter documentation to see the supported languages  
 
 ## File explorer, treesitter
 
 ### [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
 
-**A File Explorer For Neovim Written In Lua**  
-    launch with <leader> e   <spacebar> is LunarVim default leader key  
-    to quit :q   
-    help and key bindings: g?  
+**A File Explorer For Neovim Written In Lua** 
+
+```
+:<leader> e   open explorer <spacebar> is LunarVim default leader key  
+:q   quit  
+g?  help and key bindings 
+```
 
 ### [rnvimr](https://github.com/kevinhwang91/rnvimr)
 
