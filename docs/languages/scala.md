@@ -1,3 +1,13 @@
+# Scala
+
+## Install Syntax Highlighting
+
+```vim
+:TSInstall scala
+```
+
+## Install Language Server
+
 To get scala LSP support working in Lunarvim, first you need to do the prerequisites listed here https://github.com/scalameta/nvim-metals#prerequisites.
 
 Then use coursier to install the metals language server so that it is available on your PATH:
