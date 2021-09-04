@@ -55,7 +55,7 @@ see the nvim.treesitter documentation to see the supported languages
 **A File Explorer For Neovim Written In Lua** 
 
 
-```<leader> e```   opens explorer #<spacebar>  is LunarVim default leader key  
+```<leader> e```   opens explorer \<spacebar>  is LunarVim default leader key  
 ```:q```   quit  
 ```g?```  help and key bindings 
 
