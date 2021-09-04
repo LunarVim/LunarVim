@@ -34,7 +34,7 @@ function M:load(config_path)
   end
 
   self.path = config_path
-  self:merge(config(), { force = true, log = true })
+  self:merge(config(), { force = true })
 end
 
 --- Get a sub configuration
@@ -75,11 +75,10 @@ end
 -- @param overrides The entries overrides to merge
 -- @param opts Optional parameters
 -- @param opts.force Use the given value, default: True
--- @param opts.log TODO
 function M:merge(overrides, opts)
   opts = opts or {}
   local keep = not opts.force or false
-  -- local log = opts.log or true
+  local Log = require "core.log"
 
   local function walk_entries(entries, _overrides, path)
     local function walk_entry(entry, override, entry_path)
@@ -90,11 +89,10 @@ function M:merge(overrides, opts)
       local entry_type = type(entry)
       local override_type = type(override)
       if entry_type ~= override_type then
-        print("Invalid type for", entry_path, "is", override_type, "expected", entry_type)
-        if keep then
-          return entry
-        end
-        return override
+        Log:error(
+          string.format("Invalid config entry type '%s', expected '%s', is '%s'", entry_path, entry_type, override_type)
+        )
+        return entry
       end
       if override_type ~= "table" then
         if keep then
