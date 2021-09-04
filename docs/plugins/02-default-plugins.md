@@ -55,7 +55,22 @@ see the nvim.treesitter documentation to see the supported languages
 **A File Explorer For Neovim Written In Lua** 
 
 
-```<leader> e```   opens explorer \<spacebar>  is LunarVim default leader key  
+```<leader> e```   opens explorer,  \<spacebar> is default leader key in LunarVim  
+```:q```   quit  
+```g?```  help and key bindings 
+
+## Project management
+
+### [project.nvim](https://github.com/ahmedkhalf/project.nvim)
+
+**all in one project management.** 
+
+Finds the root of your project and changes the LunarVim working directory to the project root depending on the language maybe where .git, Cargo.toml, etc
+To overide this feature to be like normal neovim:
+set ```lvim.builtin.project.manual_mode = true``` in ~/.config/lv-settings.lua then remove the project.vim dir in ~/.local/share/lunarvim/site/pack/packer/start/ an then reinstall with ```PackerInstall``` if you don't have the plugin LSP will break.
+
+
+```<leader> e```   opens explorer,  \<spacebar> is default leader key in LunarVim  
 ```:q```   quit  
 ```g?```  help and key bindings 
 
