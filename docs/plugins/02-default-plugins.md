@@ -65,31 +65,14 @@ see the nvim.treesitter documentation to see the supported languages
 
 **all in one project management.** 
 
-Finds the root of your project and changes the LunarVim working directory to the project root depending on the language maybe where .git, Cargo.toml, etc
-To overide this feature to be like normal neovim:
-set ```lvim.builtin.project.manual_mode = true``` in ~/.config/lv-settings.lua then remove the project.vim dir in ~/.local/share/lunarvim/site/pack/packer/start/ an then reinstall with ```PackerInstall``` if you don't have the plugin LSP will break.
+Finds the root of your project and changes the LunarVim working directory to the project root depending on the language may use .git, Cargo.toml, etc
+To overide this like a basic neovim:
+set ```lvim.builtin.project.manual_mode = true``` in ~/.config/lv-settings.lua then remove the project.vim dir in ~/.local/share/lunarvim/site/pack/packer/start/ and then reinstall with ```PackerInstall``` if you don't have the plugin LSP will break.
 
+### [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 
-```<leader> e```   opens explorer,  \<spacebar> is default leader key in LunarVim  
-```:q```   quit  
-```g?```  help and key bindings 
-
-
-### [rnvimr](https://github.com/kevinhwang91/rnvimr)
-
-**ranger file explorer window**  
-
-```lua
-{
-  "kevinhwang91/rnvimr",
-    cmd = "RnvimrToggle",
-    config = function()
-      vim.g.rnvimr_draw_border = 1
-      vim.g.rnvimr_pick_enable = 1
-      vim.g.rnvimr_bw_enable = 1
-      end,
-},
-```
+**extendable fuzzy finder over lists, built on the latest features from neovim core**  
+open with ```<leader> f```  ```\<spacebar> f``` if using LunarVim defaults
 
 ### [snap](https://github.com/camspiers/snap)
 
