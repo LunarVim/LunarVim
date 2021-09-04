@@ -6,14 +6,12 @@ These are the default plugins that are installed with LunarVim, here is a very b
 
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
-**use-package inspired plugin/package management for Neovim.**  
+**'use-package' inspired plugin/package management for Neovim.**  
 
-```
-:PackerInstall installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua  
-                   or init.buit ~not sure.  
-:PackerStatus Lists the installed plugins  
-:PackerUpdate fetches and installs updates to packages  
-```
+
+```:PackerInstall``` installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua 
+```:PackerStatus``` Lists the installed plugins  
+```:PackerUpdate``` fetches and installs updates to packages  
 
 ## Language Server Protocol
 
@@ -29,6 +27,7 @@ Automatically launching and initializing language servers that are installed on 
 ### [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)
 
 **Companion plugin for nvim-lspconfig to install language servers**  
+
 can use tab completion with LspInstall to check for available language servers  
 ```
 :LspInstall <language>   
@@ -42,7 +41,7 @@ can use tab completion with LspInstall to check for available language servers
 
 ### [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
-**Simple and easy way to use the interface for tree-sitter in Neovim and provide some basic functionality such as highlighting**  
+**Easy way to use the tree-sitter interface  in Neovim and provide some basic functionality such as highlighting**  
 
 ```
 :TSInstall <language_to_install>  tab to show available languages  
