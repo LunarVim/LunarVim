@@ -80,8 +80,6 @@ function M.setup()
     }
   end
 
-  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
-
   local tree_view = require "nvim-tree.view"
 
   -- Add nvim_tree open callback
