@@ -1,57 +1,57 @@
 # Default Plugins
 
-These are the default plugins that are installed with LunarVim, here is a very brief discription of what they do and some commands and LunarVim default key mappings.
+These are the default plugins that are installed with LunarVim, here is a very brief discription of what they do, some commands and the LunarVim default key bindings.
 
-## Plugin managememt
+## Plugin management
 
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
-**use-package inspired plugin/package management for Neovim.**
+**use-package inspired plugin/package management for Neovim.**  
 Basic commands:
-    :PackerInstall installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua
-                   or init.buit ~not sure.
-    :PackerStatus Lists the installed plugins
-    :PackerUpdate fetches and installs updates to packages
+    :PackerInstall installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua  
+                   or init.buit ~not sure.  
+    :PackerStatus Lists the installed plugins  
+    :PackerUpdate fetches and installs updates to packages  
 
 ## Language Server Protocol
 
 ### [nvim.lspconfig](https://github.com/neovim/nvim-lspconfig)
 
-**A collection of common configurations for Neovim's built-in language server client.**
-Automatically launching and initializing language servers that are installed on your system.
-    :LspInfo Language server diagnostics
+**A collection of common configurations for Neovim's built-in language server client.**  
+Automatically launching and initializing language servers that are installed on your system.  
+    :LspInfo Language server diagnostics  
 
 ### [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)
 
-**Companion plugin for nvim-lspconfig to install language servers**
-      can use tab completion with LspInstall to check for available language servers
-      :LspInstall <language> 
+**Companion plugin for nvim-lspconfig to install language servers**  
+      can use tab completion with LspInstall to check for available language servers  
+      :LspInstall <language>   
 
 ### [nlsp.settings.nvim](https://github.com/tamago324/nlsp-settings.nvim)
 
-**A plugin to configure Neovim LSP using json files like coc-settings.json.**
+**A plugin to configure Neovim LSP using json files like coc-settings.json.**  
 
 ## Highlighting, treesitter
 
 ### [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
-**Simple and easy way to use the interface for tree-sitter in Neovim and provide some basic functionality such as highlighting**
-    :TSInstall <language_to_install>  tab t show available languages
-    :TSInfoInstallInfo  check installation status
-see the nvim.treesitter documentation to see the supported languages
+**Simple and easy way to use the interface for tree-sitter in Neovim and provide some basic functionality such as highlighting**  
+    :TSInstall <language_to_install>  tab t show available languages  
+    :TSInfoInstallInfo  check installation status  
+see the nvim.treesitter documentation to see the supported languages  
 
 ## File explorer, treesitter
 
 ### [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
 
-**A File Explorer For Neovim Written In Lua**
-    launch with <leader> e   <spacebar> is LunarVim default leader key
-    to quit :q 
-    help and key bindings: g?
+**A File Explorer For Neovim Written In Lua**  
+    launch with <leader> e   <spacebar> is LunarVim default leader key  
+    to quit :q   
+    help and key bindings: g?  
 
 ### [rnvimr](https://github.com/kevinhwang91/rnvimr)
 
-**ranger file explorer window**
+**ranger file explorer window**  
 
 ```lua
 {
