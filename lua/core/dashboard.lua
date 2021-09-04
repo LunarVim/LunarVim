@@ -76,7 +76,6 @@ M.setup = function()
   local lv_ver = vim.fn.split(lv_ver_full, "-")[1]
   local num_plugins_loaded = #vim.fn.globpath(lv_path .. "/site/pack/packer/start", "*", 0, 1)
 
-  -- vim.g.dashboard_custom_footer = { "   v" .. lv_ver, "", lv_site .. "     " }
   local text = require "interface.text"
   vim.g.dashboard_custom_footer = text.align_center({ width = 0 }, {
     "LunarVim loaded " .. num_plugins_loaded .. " plugins ",
