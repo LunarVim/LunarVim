@@ -3,9 +3,14 @@ local M = {
     active = true,
     on_config_done = nil,
     keymap = {
-      normal_mode = {
-        ["<S-l>"] = ":BufferNext<CR>",
-        ["<S-h>"] = ":BufferPrevious<CR>",
+      values = {
+        normal_mode = {
+          ["<S-l>"] = "<cmd>BufferNext<CR>",
+          ["<S-h>"] = "<cmd>BufferPrevious<CR>",
+        },
+      },
+      opts = {
+        normal_mode = { noremap = true, silent = true },
       },
     },
   },
@@ -17,7 +22,7 @@ end
 
 function M:config()
   local keymap = require "core.service.keymap"
-  keymap.append_to_defaults(lvim.builtins.bufferline.keymap)
+  keymap.load(lvim.builtins.bufferline.keymap.values, lvim.builtins.bufferline.keymap.opts)
 
   if lvim.builtins.bufferline.on_config_done then
     lvim.builtins.bufferline.on_config_done()
