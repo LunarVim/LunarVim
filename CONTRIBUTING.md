@@ -66,4 +66,4 @@ shfmt -i 2 -ci -l -d .
 Members of the community have multiple ways to collaborate on the project.
 We encourage you to join the community:
 - [Discord server](https://discord.gg/Xb9B4Ny)
-- [Matrix server](https://matrix.to/#/+atmachine:matrix)
+- [Matrix server](https://matrix.to/#/#atmachine-neovim:matrix.org)
