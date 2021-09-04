@@ -16,7 +16,7 @@ local M = {
 local utils = require "utils"
 
 function M:setup(config)
-  config:extend(self.defaults)
+  config:merge(self.defaults)
 end
 
 function M:config()

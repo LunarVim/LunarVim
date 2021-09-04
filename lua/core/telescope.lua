@@ -7,13 +7,13 @@ local M = {
 }
 
 function M:setup(config)
-  config:extend(self.defaults)
+  config:merge(self.defaults)
 
   local status_ok, actions = pcall(require, "telescope.actions")
   if not status_ok then
     return
   end
-  config:extend {
+  config:merge {
     config = {
       defaults = {
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,

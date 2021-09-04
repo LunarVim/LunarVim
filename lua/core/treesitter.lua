@@ -18,7 +18,7 @@ local M = {
 local Log = require "core.log"
 
 function M:setup(config)
-  config:extend(self.defaults)
+  config:merge(self.defaults)
 end
 
 function M:config()

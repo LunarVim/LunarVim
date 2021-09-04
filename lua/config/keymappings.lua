@@ -102,7 +102,7 @@ function keymappings.setup(config)
     Log:debug "Activated mac keymappings"
   end
 
-  config:extend(keys)
+  config:merge(keys)
 end
 
 return keymappings

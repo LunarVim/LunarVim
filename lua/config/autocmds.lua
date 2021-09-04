@@ -1,7 +1,7 @@
 local autocmds = {}
 
 function autocmds.setup(config)
-  config:extend {
+  config:merge {
     _general_settings = {
       {
         "Filetype",

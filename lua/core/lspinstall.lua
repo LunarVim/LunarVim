@@ -6,7 +6,7 @@ local M = {
 }
 
 function M:setup(config)
-  config:extend(self.defaults)
+  config:merge(self.defaults)
 end
 
 function M:config()

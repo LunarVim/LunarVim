@@ -34,7 +34,7 @@ function M:load(config_path)
   end
 
   self.path = config_path
-  self:extend(config(), { force = true, log = true })
+  self:merge(config(), { force = true, log = true })
 end
 
 --- Get a sub configuration
@@ -76,7 +76,7 @@ end
 -- @param opts Optional parameters
 -- @param opts.force Use the given value, default: True
 -- @param opts.log TODO
-function M:extend(overrides, opts)
+function M:merge(overrides, opts)
   opts = opts or {}
   local keep = not opts.force or false
   -- local log = opts.log or true
