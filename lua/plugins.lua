@@ -24,7 +24,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.telescope"):config()
       end,
-      disable = not lvim.builtins.telescope.active,
+      disable = not config:get("telescope.active", true),
     },
     -- Install nvim-cmp, and buffer source as a dependency
     {
@@ -55,7 +55,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.autopairs"):config()
       end,
-      disable = not lvim.builtin.autopairs.active,
+      disable = not config:get("autopairs.active", true),
     },
 
     -- Treesitter
@@ -77,7 +77,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.nvimtree"):config()
       end,
-      disable = not lvim.builtins.nvimtree.active,
+      disable = not config:get("nvimtree.active", true),
     },
 
     {
@@ -87,7 +87,7 @@ function Plugins.defaults(config)
         require("core.builtins.gitsigns"):config()
       end,
       event = "BufRead",
-      disable = not lvim.builtins.gitsigns.active,
+      disable = not config:get("gitsigns.active", true),
     },
 
     -- Whichkey
@@ -97,7 +97,8 @@ function Plugins.defaults(config)
         require("core.builtins.which-key"):config()
       end,
       -- event = "BufWinEnter",
-      -- disable = not lvim.builtins.which_key.active,
+      event = "BufWinEnter",
+      disable = not config:get("which_key.active", true),
     },
 
     -- Comments
@@ -107,7 +108,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.comment"):config()
       end,
-      disable = not lvim.builtins.comment.active,
+      disable = not config:get("comment.active", true),
     },
 
     -- project.nvim
@@ -116,7 +117,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.project"):config()
       end,
-      disable = not lvim.builtins.project.active,
+      disable = not config:get("project.active", true),
     },
 
     -- Icons
@@ -130,7 +131,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.lualine"):config()
       end,
-      disable = not lvim.builtins.lualine.active,
+      disable = not config:get("lualine.active", true),
     },
 
     {
@@ -139,7 +140,7 @@ function Plugins.defaults(config)
         require("core.builtins.bufferline"):config()
       end,
       event = "BufWinEnter",
-      disable = not lvim.builtins.bufferline.active,
+      disable = not config:get("bufferline.active", true),
     },
 
     -- Debugging
@@ -149,7 +150,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.dap"):config()
       end,
-      disable = not lvim.builtins.dap.active,
+      disable = not config:get("dap.active", true),
     },
 
     -- Debugger management
@@ -157,7 +158,7 @@ function Plugins.defaults(config)
       "Pocco81/DAPInstall.nvim",
       -- event = "BufWinEnter",
       -- event = "BufRead",
-      disable = not lvim.builtins.dap.active,
+      disable = not config:get("dap.active", true),
     },
 
     -- Dashboard
@@ -167,7 +168,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.dashboard"):config()
       end,
-      disable = not lvim.builtins.dashboard.active,
+      disable = not config:get("dashboard.active", true),
     },
 
     -- Terminal
@@ -177,7 +178,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.terminal"):config()
       end,
-      disable = not lvim.builtins.terminal.active,
+      disable = not config:get("terminal.active", true),
     },
   }
 end
