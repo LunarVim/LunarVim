@@ -1,4 +1,4 @@
-local M = {}
+local KeyMap = {}
 
 local generic_opts_any = { noremap = true, silent = true }
 
@@ -22,9 +22,10 @@ local mode_adapters = {
   command_mode = "c",
 }
 
+-- TODO REMOVE
 -- Append key mappings to lunarvim's defaults for a given mode
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
-function M.append_to_defaults(keymaps)
+function KeyMap.append_to_defaults(keymaps)
   for mode, mappings in pairs(keymaps) do
     for k, v in ipairs(mappings) do
       lvim.keys[mode][k] = v
@@ -36,7 +37,7 @@ end
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param key The key of keymap
 -- @param val Can be form as a mapping or tuple of mapping and user defined opt
-function M.set_keymaps(mode, key, val)
+function KeyMap.set_keymaps(mode, key, val)
   local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
   if type(val) == "table" then
     opt = val[2] or opt
@@ -48,22 +49,22 @@ end
 -- Load key mappings for a given mode
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param keymaps The list of key mappings
-function M.load_mode(mode, keymaps)
+function KeyMap.load_mode(mode, keymaps)
   mode = mode_adapters[mode] and mode_adapters[mode] or mode
   for k, v in pairs(keymaps) do
-    M.set_keymaps(mode, k, v)
+    KeyMap.set_keymaps(mode, k, v)
   end
 end
 
 -- Load key mappings for all provided modes
 -- @param keymaps A list of key mappings for each mode
-function M.load(keymaps)
+function KeyMap.load(keymaps)
   for mode, mapping in pairs(keymaps) do
-    M.load_mode(mode, mapping)
+    KeyMap.load_mode(mode, mapping)
   end
 end
 
-function M.print(mode)
+function KeyMap.print(mode)
   print "List of LunarVim's default keymappings (not including which-key)"
   if mode then
     print(vim.inspect(lvim.keys[mode]))
@@ -72,9 +73,9 @@ function M.print(mode)
   end
 end
 
-function M.setup(leader_key, keys)
+function KeyMap.setup(leader_key, keys)
   vim.g.mapleader = leader_key == "space" and " " or leader_key
-  M.load(keys)
+  KeyMap.load(keys)
 end
 
-return M
+return KeyMap

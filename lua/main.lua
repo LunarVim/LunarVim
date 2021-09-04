@@ -75,7 +75,7 @@ local function main()
     }
   end
 
-  local keymap = require "keymappings"
+  local keymap = require "core.service.keymap"
   keymap.setup(config:get "leader", config:get "keys")
 end
 

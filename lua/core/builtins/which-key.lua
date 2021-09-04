@@ -185,7 +185,7 @@ local M = {
           "<cmd>lua require('core.builtins.telescope').grep_lunarvim_files()<cr>",
           "Grep LunarVim files",
         },
-        k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
+        k = { "<cmd>lua require('core.service.keymap').print()<cr>", "View LunarVim's default keymappings" },
         i = {
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",

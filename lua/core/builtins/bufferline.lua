@@ -16,7 +16,7 @@ function M:setup(config)
 end
 
 function M:config()
-  local keymap = require "keymappings"
+  local keymap = require "core.service.keymap"
   keymap.append_to_defaults(lvim.builtins.bufferline.keymap)
 
   if lvim.builtins.bufferline.on_config_done then
