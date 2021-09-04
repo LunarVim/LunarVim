@@ -48,7 +48,7 @@ local function add_lsp_buffer_keybindings(bufnr)
     ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
     ["gp"] = { "<cmd>lua require'lsp.peek'.Peek('definition')<CR>", "Peek definition" },
     ["gl"] = {
-      "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>",
+      "<cmd>lua require'lsp.handlers'.show_line_diagnostics()<CR>",
       "Show line diagnostics",
     },
   }
