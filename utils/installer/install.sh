@@ -60,15 +60,15 @@ EOF
 
   __add_separator "80"
 
-  echo "Would you like to check lunarvim's NodeJS dependencies?"
+  echo "Would you like to install lunarvim's NodeJS dependencies?"
   read -p "[y]es or [n]o (default: no) : " -r answer
   [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-  echo "Would you like to check lunarvim's Python dependencies?"
+  echo "Would you like to install lunarvim's Python dependencies?"
   read -p "[y]es or [n]o (default: no) : " -r answer
   [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
 
-  echo "Would you like to check lunarvim's Rust dependencies?"
+  echo "Would you like to install lunarvim's Rust dependencies?"
   read -p "[y]es or [n]o (default: no) : " -r answer
   [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
 
