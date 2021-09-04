@@ -27,3 +27,9 @@ repos:
         entry: luacheck
         types: [lua]
         args: [.]
+      - id: commitlint
+        name: commitlint
+        language: system
+        entry: bash
+        args: [./utils/ci/run_commitlint.sh]
+        stages: [commit-msg]
