@@ -75,5 +75,5 @@ set ```lvim.builtin.project.manual_mode = true``` in ~/.config/lv-settings.lua t
 
 **extendable fuzzy finder over lists, built on the latest features from neovim core**  
 
-open with ```<leader> f```   ```<spacebar> f``` if using LunarVim defaults
+open with ```<leader> f```    , ```<spacebar> f``` if using LunarVim defaults
 
