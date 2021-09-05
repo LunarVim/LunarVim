@@ -698,6 +698,16 @@ lvim.lang = {
       setup = {},
     },
   },
+  solidity = {
+    formatters = {},
+    linters = {},
+    lsp = {
+      provider = "solang",
+      setup = {
+        cmd = { "solang", "--language-server" },
+      },
+    },
+  },
   sql = {
     formatters = {
       -- {
