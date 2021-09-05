@@ -1,16 +1,12 @@
 local M = {}
 
-function M.validate_theme()
-  local theme = lvim.builtins.lualine.config.options.theme
+function M.validate_theme(theme)
   if type(theme) == "table" then
-    return
+    return true
   end
 
   local lualine_loader = require "lualine.utils.loader"
-  local ok = pcall(lualine_loader.load_theme, theme)
-  if not ok then
-    lvim.builtins.lualine.config.options.theme = "auto"
-  end
+  return pcall(lualine_loader.load_theme, theme)
 end
 
 function M.env_cleanup(venv)

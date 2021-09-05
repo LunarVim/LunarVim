@@ -1,19 +1,14 @@
-local M = {
-  defaults = {
-    ---@usage disable telescope completely [not recommeded]
-    active = true,
-    on_config_done = nil,
-  },
+local M = {}
+
+local defaults = {
+  ---@usage disable telescope completely [not recommeded]
+  active = true,
+  on_config_done = nil,
 }
 
-function M:setup(config)
-  config:merge(self.defaults)
-
-  local status_ok, actions = pcall(require, "telescope.actions")
-  if not status_ok then
-    return
-  end
-  config:merge {
+local status_ok, actions = pcall(require, "telescope.actions")
+if status_ok then
+  defaults = vim.tbl_deep_extend("force", defaults, {
     config = {
       defaults = {
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -41,19 +36,26 @@ function M:setup(config)
         },
       },
     },
-  }
+  })
+end
+
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults)
+  self.config:merge(overrides)
 end
 
 function M:configure()
   local telescope = require "telescope"
 
-  telescope.setup(lvim.builtins.telescope.config)
-  if lvim.builtins.project.active then
-    telescope.load_extension "projects"
-  end
+  telescope.setup(self.config:get "config")
+  -- TODO
+  -- if lvim.builtins.project.active then
+  --   telescope.load_extension "projects"
+  -- end
 
-  if lvim.builtins.telescope.on_config_done then
-    lvim.builtins.telescope.on_config_done(telescope)
+  if self.config:get "on_config_done" then
+    self.config:get "on_config_done"(telescope)
   end
 end
 

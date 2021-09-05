@@ -1,31 +1,34 @@
-local M = {
-  defaults = {
-    active = true,
-    on_config_done = nil,
-    keymap = {
-      values = {
-        normal_mode = {
-          ["<S-l>"] = "<cmd>BufferNext<CR>",
-          ["<S-h>"] = "<cmd>BufferPrevious<CR>",
-        },
+local M = {}
+
+local defaults = {
+  active = true,
+  on_config_done = nil,
+  keymap = {
+    values = {
+      normal_mode = {
+        ["<S-l>"] = "<cmd>BufferNext<CR>",
+        ["<S-h>"] = "<cmd>BufferPrevious<CR>",
       },
-      opts = {
-        normal_mode = { noremap = true, silent = true },
-      },
+    },
+    opts = {
+      normal_mode = { noremap = true, silent = true },
     },
   },
 }
 
-function M:setup(config)
-  config:merge(self.defaults)
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults)
+  self.config:merge(overrides)
 end
 
 function M:configure()
   local keymap = require "core.service.keymap"
-  keymap.load(lvim.builtins.bufferline.keymap.values, lvim.builtins.bufferline.keymap.opts)
+  local mappings = self.config:get "keymap"
+  keymap.load(mappings.values, mappings.opts)
 
-  if lvim.builtins.bufferline.on_config_done then
-    lvim.builtins.bufferline.on_config_done()
+  if self.config:get "on_config_done" then
+    self.config:get "on_config_done"()
   end
 end
 

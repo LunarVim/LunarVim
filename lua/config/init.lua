@@ -13,7 +13,7 @@ function M:new(defaults, opts)
   opts = opts or {}
   local config = {}
 
-  config.entries = defaults
+  config.entries = vim.deepcopy(defaults)
   config.path = opts.path
 
   M.__index = M

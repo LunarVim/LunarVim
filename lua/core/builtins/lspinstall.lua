@@ -1,20 +1,22 @@
-local M = {
-  defaults = {
-    active = true,
-    on_config_done = nil,
-  },
+local M = {}
+
+local defaults = {
+  active = true,
+  on_config_done = nil,
 }
 
-function M:setup(config)
-  config:merge(self.defaults)
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults)
+  self.config:merge(overrides)
 end
 
 function M:configure()
   local lspinstall = require "lspinstall"
 
   lspinstall.setup()
-  if lvim.builtins.lspinstall.on_config_done then
-    lvim.builtins.lspinstall.on_config_done(lspinstall)
+  if self.config:get "on_config_done" then
+    self.config:get "on_config_done"(lspinstall)
   end
 end
 

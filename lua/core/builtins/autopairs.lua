@@ -1,19 +1,21 @@
-local M = {
-  defaults = {
-    active = true,
-    on_config_done = nil,
-    config = {
-      map_complete = vim.bo.filetype ~= "tex",
-      check_ts = true,
-      ts_config = {
-        java = false,
-      },
+local M = {}
+
+local defaults = {
+  active = true,
+  on_config_done = nil,
+  config = {
+    map_complete = vim.bo.filetype ~= "tex",
+    check_ts = true,
+    ts_config = {
+      java = false,
     },
   },
 }
 
-function M:setup(config)
-  config:merge(self.defaults)
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults)
+  self.config:merge(overrides)
 end
 
 function M:configure()
@@ -24,8 +26,8 @@ function M:configure()
   local cond = require "nvim-autopairs.conds"
 
   autopairs.setup {
-    check_ts = lvim.builtins.autopairs.config.check_ts,
-    ts_config = lvim.builtins.autopairs.config.ts_config,
+    check_ts = config.check_ts,
+    ts_config = config.ts_config,
   }
 
   -- vim.g.completion_confirm_key = ""
@@ -68,8 +70,8 @@ function M:configure()
     Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
   }
 
-  if lvim.builtins.autopairs.on_config_done then
-    lvim.builtins.autopairs.on_config_done(autopairs)
+  if self.config:get "on_config_done" then
+    self.config:get "on_config_done"(autopairs)
   end
 end
 

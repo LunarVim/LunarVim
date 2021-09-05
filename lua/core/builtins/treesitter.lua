@@ -1,24 +1,25 @@
-local M = {
-  defaults = {
-    active = true,
-    on_config_done = nil,
-    config = {
-      highlight = {
-        enable = true, -- false will disable the whole extension
-        additional_vim_regex_highlighting = true,
-      },
-      indent = {
-        enable = true,
-        disable = { "yaml" },
-      },
+local M = {}
+
+local defaults = {
+  active = true,
+  on_config_done = nil,
+  config = {
+    highlight = {
+      enable = true, -- false will disable the whole extension
+      additional_vim_regex_highlighting = true,
+    },
+    indent = {
+      enable = true,
+      disable = { "yaml" },
     },
   },
 }
-
 local Log = require "core.log"
 
-function M:setup(config)
-  config:merge(self.defaults)
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults)
+  self.config:merge(overrides)
 end
 
 function M:configure()
@@ -28,10 +29,10 @@ function M:configure()
     return
   end
 
-  treesitter_configs.setup(lvim.builtins.treesitter.config)
+  treesitter_configs.setup(self.config:get "config")
 
-  if lvim.builtins.treesitter.on_config_done then
-    lvim.builtins.treesitter.on_config_done(treesitter_configs)
+  if self.config:get "on_config_done" then
+    self.config:get "on_config_done"(treesitter_configs)
   end
 end
 

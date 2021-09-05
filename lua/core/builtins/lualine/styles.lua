@@ -108,7 +108,7 @@ styles.lvim = {
   extensions = { "nvim-tree" },
 }
 
-function M.get_style(style)
+function M.get(style)
   local style_keys = vim.tbl_keys(styles)
   if not vim.tbl_contains(style_keys, style) then
     local Log = require "core.log"
@@ -123,15 +123,6 @@ function M.get_style(style)
   end
 
   return vim.deepcopy(styles[style])
-end
-
-function M.update()
-  local style = M.get_style(lvim.builtins.lualine.config.style)
-  if lvim.builtins.lualine.config.options.theme == nil then
-    lvim.builtins.lualine.config.options.theme = lvim.colorscheme
-  end
-
-  lvim.builtins.lualine.config = vim.tbl_deep_extend("keep", lvim.builtins.lualine.config, style)
 end
 
 return M

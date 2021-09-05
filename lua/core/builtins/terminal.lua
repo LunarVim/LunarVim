@@ -1,60 +1,62 @@
-local M = {
-  defaults = {
-    active = true,
-    on_config_done = nil,
-    config = {},
-    -- Add executables on the config.lua
-    -- { exec, keymap, name}
-    -- lvim.builtins.terminal.execs = {{}} to overwrite
-    -- table.insert(lvim.builtins.terminal.execs, {"gdb", "tg", "GNU Debugger"})
-    execs = {
-      { "lazygit", "gg", "LazyGit" },
-    },
+local M = {}
+
+local defaults = {
+  active = true,
+  on_config_done = nil,
+  config = {},
+  -- Add executables on the config.lua
+  -- { exec, keymap, name}
+  -- lvim.builtins.terminal.execs = {{}} to overwrite
+  -- table.insert(lvim.builtins.terminal.execs, {"gdb", "tg", "GNU Debugger"})
+  execs = {
+    { "lazygit", "gg", "LazyGit" },
   },
 }
-
 local utils = require "utils"
 
-function M:setup(config)
-  config:merge(self.defaults)
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults)
+  self.config:merge(overrides)
 end
 
 function M:configure()
   local terminal = require "toggleterm"
 
-  for _, exec in pairs(lvim.builtins.terminal.execs) do
-    M.add_exec(exec[1], exec[2], exec[3])
+  for _, exec in pairs(self.config:get "execs") do
+    self.add_exec(exec[1], exec[2], exec[3])
   end
-  terminal.setup(lvim.builtins.terminal.config)
+  terminal.setup(self.config:get "config")
 
-  if lvim.builtins.terminal.on_config_done then
-    lvim.builtins.terminal.on_config_done(terminal)
+  if self.config:get "on_config_done" then
+    self.config:get "on_config_done"(terminal)
   end
 end
 
-M.add_exec = function(exec, keymap, name)
+function M.add_exec(exec, keymap, name)
   vim.api.nvim_set_keymap(
     "n",
     "<leader>" .. keymap,
     "<cmd>lua require('core.builtins.terminal')._exec_toggle('" .. exec .. "')<CR>",
     { noremap = true, silent = true }
   )
+  -- TODO
   lvim.builtins.which_key.mappings[keymap] = name
 end
 
-M._split = function(inputstr, sep)
-  if sep == nil then
-    sep = "%s"
-  end
-  local t = {}
-  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
-    table.insert(t, str)
-  end
-  return t
-end
-
 M._exec_toggle = function(exec)
-  local binary = M._split(exec)[1]
+  local split = function(inputstr, sep)
+    if sep == nil then
+      sep = "%s"
+    end
+    local t = {}
+    for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+      table.insert(t, str)
+    end
+    return t
+  end
+
+  local binary = split(exec)[1]
   if vim.fn.executable(binary) ~= 1 then
     local Log = require "core.log"
     Log:error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
