@@ -501,7 +501,7 @@ lvim.builtin.which_key.mappings["t"] = {
 {
   "Pocco81/AutoSave.nvim",
   config = function()
-    require("plugins.zenmode").autoSave()
+    require("autosave").setup()
   end,
 },
 ```
