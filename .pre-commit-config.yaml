@@ -7,20 +7,19 @@ repos:
         language: system
         types: [shell]
         entry: bash
-        args: [-c, "shfmt -f $(git rev-parse --show-toplevel) | grep -v jdtls | xargs shfmt -i=2 -ci -w"]
+        args: [-c, make lint-sh]
       - id: shellcheck
         name: shellcheck
         language: system
         types: [shell]
         entry: bash
-        args:
-          [-c, "shfmt -f $(git rev-parse --show-toplevel) | grep -v jdtls | xargs shellcheck"]
+        args: [-c, make style-sh]
       - id: stylua
         name: StyLua
         language: rust
         entry: stylua
         types: [lua]
-        args: ['-']
+        args: ["-"]
       - id: luacheck
         name: luacheck
         language: system
