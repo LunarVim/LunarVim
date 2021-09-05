@@ -116,7 +116,7 @@ return {
     "terrortylor/nvim-comment",
     event = "BufRead",
     config = function()
-      require("nvim_comment").setup()
+      require("core.comment").setup()
     end,
     disable = not lvim.builtin.comment.active,
   },
