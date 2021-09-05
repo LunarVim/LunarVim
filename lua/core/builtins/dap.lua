@@ -20,7 +20,7 @@ end
 function M:config()
   local dap = require "dap"
 
-  vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.config.breakpoint)
+  vim.fn.sign_define("DapBreakpoint", lvim.builtins.dap.config.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
   lvim.builtins.which_key.mappings["d"] = {
@@ -40,8 +40,8 @@ function M:config()
     q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   }
 
-  if lvim.builtin.dap.on_config_done then
-    lvim.builtin.dap.on_config_done(dap)
+  if lvim.builtins.dap.on_config_done then
+    lvim.builtins.dap.on_config_done(dap)
   end
 end
 

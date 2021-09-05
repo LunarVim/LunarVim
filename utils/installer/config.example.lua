@@ -60,11 +60,11 @@
 --       },
 --     }
 --
---    On top of that, each plugin will call builtin.plugin_name.on_config_done if defined
+--    On top of that, each plugin will call builtins.plugin_name.on_config_done if defined
 --    Example:
 --     Change Telescope navigation to use j and k for navigation
 --     and n and p for history in both input and normal mode.
---     builtin.telescope.on_config_done = function()
+--     builtins.telescope.on_config_done = function()
 --       local actions = require "telescope.actions"
 --       -- for input mode
 --       builtins.telescope.config.defaults.mappings.i["<C-j>"] = actions.move_selection_next
