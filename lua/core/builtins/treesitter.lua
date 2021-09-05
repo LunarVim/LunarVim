@@ -21,7 +21,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
     Log:get_default().error "Failed to load nvim-treesitter.configs"

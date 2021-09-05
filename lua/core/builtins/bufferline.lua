@@ -20,7 +20,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local keymap = require "core.service.keymap"
   keymap.load(lvim.builtins.bufferline.keymap.values, lvim.builtins.bufferline.keymap.opts)
 

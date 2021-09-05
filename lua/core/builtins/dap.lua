@@ -17,7 +17,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local dap = require "dap"
 
   vim.fn.sign_define("DapBreakpoint", lvim.builtins.dap.config.breakpoint)

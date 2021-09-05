@@ -12,7 +12,7 @@ function Plugins.defaults(config)
       "kabouzeid/nvim-lspinstall",
       event = "VimEnter",
       config = function()
-        require("core.builtins.lspinstall"):config()
+        require("core.builtins.lspinstall"):configure()
       end,
     },
 
@@ -22,7 +22,7 @@ function Plugins.defaults(config)
     {
       "nvim-telescope/telescope.nvim",
       config = function()
-        require("core.builtins.telescope"):config()
+        require("core.builtins.telescope"):configure()
       end,
       disable = not config:get("telescope.active", true),
     },
@@ -30,7 +30,7 @@ function Plugins.defaults(config)
     {
       "hrsh7th/nvim-cmp",
       config = function()
-        require("core.cmp"):config()
+        require("core.builtins.cmp"):configure()
       end,
       requires = {
         "L3MON4D3/LuaSnip",
@@ -53,7 +53,7 @@ function Plugins.defaults(config)
       -- event = "InsertEnter",
       after = "nvim-cmp",
       config = function()
-        require("core.builtins.autopairs"):config()
+        require("core.builtins.autopairs"):configure()
       end,
       disable = not config:get("autopairs.active", true),
     },
@@ -64,7 +64,7 @@ function Plugins.defaults(config)
       branch = "0.5-compat",
       -- run = ":TSUpdate",
       config = function()
-        require("core.builtins.treesitter"):config()
+        require("core.builtins.treesitter"):configure()
       end,
     },
 
@@ -75,7 +75,7 @@ function Plugins.defaults(config)
       -- cmd = "NvimTreeToggle",
       -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
       config = function()
-        require("core.builtins.nvimtree"):config()
+        require("core.builtins.nvimtree"):configure()
       end,
       disable = not config:get("nvimtree.active", true),
     },
@@ -84,7 +84,7 @@ function Plugins.defaults(config)
       "lewis6991/gitsigns.nvim",
 
       config = function()
-        require("core.builtins.gitsigns"):config()
+        require("core.builtins.gitsigns"):configure()
       end,
       event = "BufRead",
       disable = not config:get("gitsigns.active", true),
@@ -94,7 +94,7 @@ function Plugins.defaults(config)
     {
       "folke/which-key.nvim",
       config = function()
-        require("core.builtins.which-key"):config()
+        require("core.builtins.which-key"):configure()
       end,
       -- event = "BufWinEnter",
       event = "BufWinEnter",
@@ -106,7 +106,7 @@ function Plugins.defaults(config)
       "terrortylor/nvim-comment",
       event = "BufRead",
       config = function()
-        require("core.builtins.comment"):config()
+        require("core.builtins.comment"):configure()
       end,
       disable = not config:get("comment.active", true),
     },
@@ -115,7 +115,7 @@ function Plugins.defaults(config)
     {
       "ahmedkhalf/project.nvim",
       config = function()
-        require("core.builtins.project"):config()
+        require("core.builtins.project"):configure()
       end,
       disable = not config:get("project.active", true),
     },
@@ -129,7 +129,7 @@ function Plugins.defaults(config)
       "shadmansaleh/lualine.nvim",
       -- "Lunarvim/lualine.nvim",
       config = function()
-        require("core.builtins.lualine"):config()
+        require("core.builtins.lualine"):configure()
       end,
       disable = not config:get("lualine.active", true),
     },
@@ -137,7 +137,7 @@ function Plugins.defaults(config)
     {
       "romgrk/barbar.nvim",
       config = function()
-        require("core.builtins.bufferline"):config()
+        require("core.builtins.bufferline"):configure()
       end,
       event = "BufWinEnter",
       disable = not config:get("bufferline.active", true),
@@ -148,7 +148,7 @@ function Plugins.defaults(config)
       "mfussenegger/nvim-dap",
       -- event = "BufWinEnter",
       config = function()
-        require("core.builtins.dap"):config()
+        require("core.builtins.dap"):configure()
       end,
       disable = not config:get("dap.active", true),
     },
@@ -166,7 +166,7 @@ function Plugins.defaults(config)
       "ChristianChiarulli/dashboard-nvim",
       event = "BufWinEnter",
       config = function()
-        require("core.builtins.dashboard"):config()
+        require("core.builtins.dashboard"):configure()
       end,
       disable = not config:get("dashboard.active", true),
     },
@@ -176,7 +176,7 @@ function Plugins.defaults(config)
       "akinsho/toggleterm.nvim",
       event = "BufWinEnter",
       config = function()
-        require("core.builtins.terminal"):config()
+        require("core.builtins.terminal"):configure()
       end,
       disable = not config:get("terminal.active", true),
     },

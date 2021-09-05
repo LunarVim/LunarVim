@@ -44,7 +44,7 @@ function M:setup(config)
   }
 end
 
-function M:config()
+function M:configure()
   local telescope = require "telescope"
 
   telescope.setup(lvim.builtins.telescope.config)

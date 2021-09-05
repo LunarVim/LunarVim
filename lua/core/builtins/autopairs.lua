@@ -16,7 +16,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   -- skip it, if you use another global object
   _G.MUtils = {}
   local autopairs = require "nvim-autopairs"

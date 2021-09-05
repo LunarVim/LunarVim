@@ -18,7 +18,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local project = require "project_nvim"
 
   project.setup(lvim.builtins.project.config)

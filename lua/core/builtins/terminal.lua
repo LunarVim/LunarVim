@@ -19,7 +19,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local terminal = require "toggleterm"
 
   for _, exec in pairs(lvim.builtins.terminal.execs) do

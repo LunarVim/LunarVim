@@ -10,7 +10,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local gitsigns = require "gitsigns"
 
   gitsigns.setup(lvim.builtins.gitsigns.config)

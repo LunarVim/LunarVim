@@ -52,7 +52,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
   if not status_ok then
     local Log = require "core.log"

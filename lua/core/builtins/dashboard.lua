@@ -61,7 +61,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   vim.g.dashboard_disable_at_vimenter = lvim.builtins.dashboard.config.disable_at_vim_enter
   vim.g.dashboard_custom_header = lvim.builtins.dashboard.config.custom_header
   vim.g.dashboard_default_executive = lvim.builtins.dashboard.config.search_handler

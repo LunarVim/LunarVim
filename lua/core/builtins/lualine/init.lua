@@ -15,7 +15,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   require("core.builtins.lualine.styles").update()
   require("core.builtins.lualine.utils").validate_theme()
 

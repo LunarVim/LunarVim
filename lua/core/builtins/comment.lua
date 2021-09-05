@@ -10,7 +10,7 @@ function M:setup(config)
   config:merge(self.defaults)
 end
 
-function M:config()
+function M:configure()
   local nvim_comment = require "nvim_comment"
 
   nvim_comment.setup(lvim.builtins.comment.config)
