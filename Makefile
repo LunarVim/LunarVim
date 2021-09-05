@@ -2,11 +2,11 @@ SHELL := /bin/bash
 
 install:
 	@echo Starting LunarVim Installer
-	./utils/installer/install.sh
+	bash ./utils/installer/install.sh
 
 install-neovim-binary:
 	@echo Installing Neovim from github releases
-	./utils/installer/install-neovim-from-release
+	bash ./utils/installer/install-neovim-from-release
 
 uninstall:
 	@echo TODO: this is currently not supported
@@ -28,6 +28,6 @@ style-sh:
 	shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -l -d
 
 test:
-	./utils/bin/test_runner.sh "$(TEST)"
+	bash ./utils/bin/test_runner.sh "$(TEST)"
 
 .PHONY: install install-neovim-binary uninstall lint style test
