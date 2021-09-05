@@ -18,17 +18,16 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local keymap = require "core.service.keymap"
-  local mappings = self.config:get "keymap"
+  local mappings = self.config.keymap
   keymap.load(mappings.values, mappings.opts)
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"()
+  if self.config.on_config_done then
+    self.config.on_config_done()
   end
 end
 

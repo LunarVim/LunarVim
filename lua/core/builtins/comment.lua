@@ -8,16 +8,15 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local nvim_comment = require "nvim_comment"
 
-  nvim_comment.setup(self.config:get "config")
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(nvim_comment)
+  nvim_comment.setup(self.config.config)
+  if self.config.on_config_done then
+    self.config.on_config_done(nvim_comment)
   end
 end
 

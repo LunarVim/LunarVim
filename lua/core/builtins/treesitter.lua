@@ -18,8 +18,7 @@ local Log = require "core.log"
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
@@ -29,10 +28,10 @@ function M:configure()
     return
   end
 
-  treesitter_configs.setup(self.config:get "config")
+  treesitter_configs.setup(self.config.config)
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(treesitter_configs)
+  if self.config.on_config_done then
+    self.config.on_config_done(treesitter_configs)
   end
 end
 

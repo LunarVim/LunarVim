@@ -16,20 +16,19 @@ local utils = require "utils"
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local terminal = require "toggleterm"
 
-  for _, exec in pairs(self.config:get "execs") do
+  for _, exec in pairs(self.config.execs) do
     self.add_exec(exec[1], exec[2], exec[3])
   end
-  terminal.setup(self.config:get "config")
+  terminal.setup(self.config.config)
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(terminal)
+  if self.config.on_config_done then
+    self.config.on_config_done(terminal)
   end
 end
 

@@ -59,12 +59,11 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
-  local config = self.config:get "config"
+  local config = self.config.config
   vim.g.dashboard_disable_at_vimenter = config.disable_at_vim_enter
   vim.g.dashboard_custom_header = config.custom_header
   vim.g.dashboard_default_executive = config.search_handler
@@ -100,8 +99,8 @@ function M:configure()
     },
   }
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"()
+  if self.config.on_config_done then
+    self.config.on_config_done()
   end
 end
 

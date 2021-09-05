@@ -41,21 +41,20 @@ end
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local telescope = require "telescope"
 
-  telescope.setup(self.config:get "config")
+  telescope.setup(self.config.config)
   -- TODO
   -- if lvim.builtins.project.active then
   --   telescope.load_extension "projects"
   -- end
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(telescope)
+  if self.config.on_config_done then
+    self.config.on_config_done(telescope)
   end
 end
 

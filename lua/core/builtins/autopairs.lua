@@ -14,8 +14,7 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
@@ -23,7 +22,31 @@ function M:configure()
   _G.MUtils = {}
   local autopairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
+<<<<<<< HEAD
   local cond = require "nvim-autopairs.conds"
+=======
+  local config = self.config.config
+
+  vim.g.completion_confirm_key = ""
+  MUtils.completion_confirm = function()
+    if vim.fn.pumvisible() ~= 0 then
+      if vim.fn.complete_info()["selected"] ~= -1 then
+        return vim.fn["compe#confirm"](autopairs.esc "<cr>")
+      else
+        return autopairs.esc "<cr>"
+      end
+    else
+      return autopairs.autopairs_cr()
+    end
+  end
+
+  if package.loaded["compe"] then
+    require("nvim-autopairs.completion.compe").setup {
+      map_cr = config.map_cr,
+      map_complete = config.map_complete,
+    }
+  end
+>>>>>>> 3fe0552 (refactor(builtins): Store a table instead of a Config)
 
   autopairs.setup {
     check_ts = config.check_ts,
@@ -70,8 +93,8 @@ function M:configure()
     Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
   }
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(autopairs)
+  if self.config.on_config_done then
+    self.config.on_config_done(autopairs)
   end
 end
 

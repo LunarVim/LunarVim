@@ -235,19 +235,17 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local which_key = require "which-key"
-  local config = self.config.entries
 
-  which_key.setup(config.config)
-  which_key.register(config.mappings, config.opts)
-  which_key.register(config.vmappings, config.vopts)
-  if config.on_config_done then
-    config.on_config_done(which_key)
+  which_key.setup(self.config.config)
+  which_key.register(self.config.mappings, self.config.opts)
+  which_key.register(self.config.vmappings, self.config.vopts)
+  if self.config.on_config_done then
+    self.config.on_config_done(which_key)
   end
 end
 

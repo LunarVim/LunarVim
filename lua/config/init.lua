@@ -110,6 +110,7 @@ function M:merge(overrides, opts)
   end
 
   self.entries = walk_entries(self.entries, overrides, "")
+  return self
 end
 
 return M

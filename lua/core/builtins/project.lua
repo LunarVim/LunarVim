@@ -16,16 +16,15 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local project = require "project_nvim"
 
-  project.setup(self.config:get "config")
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(project)
+  project.setup(self.config.config)
+  if self.config.on_config_done then
+    self.config.on_config_done(project)
   end
 end
 

@@ -50,8 +50,7 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
@@ -63,7 +62,7 @@ function M:configure()
   end
   local g = vim.g
 
-  for opt, val in pairs(self.config:get "config") do
+  for opt, val in pairs(self.config.config) do
     g["nvim_tree_" .. opt] = val
   end
 
@@ -101,13 +100,13 @@ function M:configure()
 
   vim.cmd "au WinClosed * lua require('core.builtins.nvimtree').on_close()"
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(nvim_tree_config)
+  if self.config.on_config_done then
+    self.config.on_config_done(nvim_tree_config)
   end
 end
 
 function M:on_open()
-  local config = self.config:get "config"
+  local config = self.config.config
   if package.loaded["bufferline.state"] and config.side == "left" then
     require("bufferline.state").set_offset(config.width + 1, "")
   end

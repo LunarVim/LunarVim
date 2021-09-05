@@ -15,14 +15,13 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 end
 
 function M:configure()
   local dap = require "dap"
 
-  vim.fn.sign_define("DapBreakpoint", self.config:get "config.breakpoint")
+  vim.fn.sign_define("DapBreakpoint", self.config.config.breakpoint)
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
   -- TODO: Expose some king of interface to register whichkey mappings
@@ -43,8 +42,8 @@ function M:configure()
   --   q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   -- }
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(dap)
+  if self.config.on_config_done then
+    self.config.on_config_done(dap)
   end
 end
 

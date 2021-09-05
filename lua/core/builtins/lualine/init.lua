@@ -13,29 +13,28 @@ local defaults = {
 
 function M:setup(overrides)
   local Config = require "config"
-  self.config = Config(defaults)
-  self.config:merge(overrides)
+  self.config = Config(defaults):merge(overrides).entries
 
-  if not self.config:get "config.options.theme" then
+  if not self.config.config.options.theme then
     -- TODO: remove use of global
-    self.config:sub("config.options"):merge { theme = lvim.colorscheme }
+    self.config.config.options.theme = lvim.colorscheme
   end
   local styles = require "core.builtins.lualine.styles"
-  local style = styles.get(self.config:get "config.style")
-  self.config:sub("config"):merge(style, { force = false })
+  local style = styles.get(self.config.config.style)
+  self.config.config = vim.tbl_deep_extend("keep", self.config.config, style)
 
   local utils = require "core.builtins.lualine.utils"
-  if not utils.validate_theme(self.config:get "config.options.theme") then
-    self.config:sub("config.options"):merge { theme = "auto" }
+  if not utils.validate_theme(self.config.config.options.theme) then
+    self.config.config.options.theme = "auto"
   end
 end
 
 function M:configure()
   local lualine = require "lualine"
-  lualine.setup(self.config:get "config")
+  lualine.setup(self.config.config)
 
-  if self.config:get "on_config_done" then
-    self.config:get "on_config_done"(lualine)
+  if self.config.on_config_done then
+    self.config.on_config_done(lualine)
   end
 end
 
