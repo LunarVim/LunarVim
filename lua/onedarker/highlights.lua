@@ -65,7 +65,7 @@ local highlights = {
   Function = { fg = C.blue },
   Operator = { fg = C.purple },
   Type = { fg = C.yellow },
-  StorageClass = { fg = C.yellow },
+  StorageClass = { fg = C.cyan },
   Structure = { fg = C.purple },
   Typedef = { fg = C.purple },
   Keyword = { fg = C.purple },
