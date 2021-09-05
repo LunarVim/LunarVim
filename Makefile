@@ -1,8 +1,19 @@
-test:
-	nvim --headless -u ./init.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './init.lua' }"
 
-test-minimal:
-	nvim --headless -u tests/minimal_init.lua -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/minimal_init.lua' }"
+SHELL := /bin/bash
+
+install:
+	@echo Starting LunarVim Installer
+	bash ./utils/installer/install.sh
+
+uninstall:
+	@echo TODO: this is currently not supported 
+
+install-neovim-binary:
+	@echo Installing Neovim from github releases
+	bash ./utils/installer/install-neovim-from-release
+
+test:
+	bash ./utils/bin/test_runner.sh "$(UNIT)"
 
 lint: lint-lua lint-sh
 
@@ -18,4 +29,4 @@ style-lua:
 style-sh:
 	shfmt -f . | grep -v jdtls | xargs shfmt -i=2 -ci -w
 
-.PHONY: test test-minimal lint lint-sh lint-lua style style-lua style-sh
+.PHONY: test lint style install install-neovim-binary uninstall

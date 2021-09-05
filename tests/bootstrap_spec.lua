@@ -3,32 +3,35 @@ local a = require "plenary.async_lib.tests"
 a.describe("initial start", function()
   local uv = vim.loop
   local home_dir = uv.os_homedir()
+  -- TODO: update once #1381 is merged
   local lvim_config_path = home_dir .. "/.config/lvim"
   local lvim_runtime_path = home_dir .. "/.local/share/lunarvim/lvim"
+
   a.it("should not be reading default neovim directories in the home directoies", function()
     local rtp_list = vim.opt.rtp:get()
-    local found_illegal_path = vim.tbl_contains(rtp_list, vim.fn.stdpath "config")
-    assert.same(found_illegal_path, false)
+    assert.falsy(vim.tbl_contains(rtp_list, vim.fn.stdpath "config"))
   end)
+
   a.it("should be able to read lunarvim directories", function()
     local rtp_list = vim.opt.rtp:get()
-    assert.is_true(vim.tbl_contains(rtp_list, lvim_runtime_path))
-    assert.is_true(vim.tbl_contains(rtp_list, lvim_config_path))
+    assert.truthy(vim.tbl_contains(rtp_list, lvim_runtime_path))
+    assert.truthy(vim.tbl_contains(rtp_list, lvim_config_path))
   end)
+
   a.it("should be able to run treesitter without errors", function()
-    vim.cmd [[TSInstall lua]]
-    local status, _ = pcall(vim.treesitter.require_language, "lua")
-    assert.is_true(status)
+    assert.truthy(vim.treesitter.highlighter.active)
   end)
-  a.it("should be able to run packer compile without errors", function()
-    assert.truthy(package.loaded["packer"] ~= nil)
-    -- FIXME: this rest of the test is pointless, why is packer not returning a status?
-    local packer = require "packer"
-    _G.packer_compile_status = false
-    packer.on_compile_done = function()
-      _G.packer_compile_status = true
+
+  a.it("should be able to load default packages without errors", function()
+    -- TODO: maybe there's a way to avoid hard-coding the names of the modules?
+    local startup_plugins = {
+      "packer",
+      "lspconfig",
+      "nlspsettings",
+      "null-ls",
+    }
+    for _, plugin in pairs(startup_plugins) do
+      assert.truthy(package.loaded[tostring(plugin)])
     end
-    packer.compile()
-    assert.is_true(_G.packer_compile_status)
   end)
 end)

@@ -26,6 +26,8 @@ stds.nvim = {
 }
 std = "lua51+nvim"
 
+files["tests/*_spec.lua"].std = "lua51+nvim+busted"
+
 -- Don't report unused self arguments of methods.
 self = false
 
