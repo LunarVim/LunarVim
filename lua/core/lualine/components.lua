@@ -84,6 +84,9 @@ return {
       msg = msg or "LSP Inactive"
       local buf_clients = vim.lsp.buf_get_clients()
       if next(buf_clients) == nil then
+        if #msg == 0 then
+          return ""
+        end
         return msg
       end
       local buf_ft = vim.bo.filetype
