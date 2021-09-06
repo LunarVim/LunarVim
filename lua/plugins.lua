@@ -183,7 +183,7 @@ return {
 
   -- Terminal
   {
-    "akinsho/nvim-toggleterm.lua",
+    "akinsho/toggleterm.lua",
     event = "BufWinEnter",
     config = function()
       require("core.terminal").setup()
