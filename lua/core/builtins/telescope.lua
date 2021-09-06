@@ -4,6 +4,17 @@ local defaults = {
   ---@usage disable telescope completely [not recommeded]
   active = true,
   on_config_done = nil,
+  config = {
+    defaults = {
+      set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+      extensions = {
+        fzy_native = {
+          override_generic_sorter = false,
+          override_file_sorter = true,
+        },
+      },
+    },
+  },
 }
 
 local status_ok, actions = pcall(require, "telescope.actions")
@@ -11,12 +22,8 @@ if status_ok then
   defaults = vim.tbl_deep_extend("force", defaults, {
     config = {
       defaults = {
-        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         mappings = {
           i = {
-            ["<C-n>"] = actions.move_selection_next,
-            ["<C-p>"] = actions.move_selection_previous,
-            ["<C-c>"] = actions.close,
             ["<C-j>"] = actions.cycle_history_next,
             ["<C-k>"] = actions.cycle_history_prev,
             ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
@@ -27,12 +34,6 @@ if status_ok then
             ["<C-p>"] = actions.move_selection_previous,
             ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
-        },
-      },
-      extensions = {
-        fzy_native = {
-          override_generic_sorter = false,
-          override_file_sorter = true,
         },
       },
     },

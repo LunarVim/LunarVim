@@ -9,11 +9,31 @@ setmetatable(M, {
   end,
 })
 
+--- Return a deepcopy of the given object.
+-- This behaves like vim.deepcopy with the exception that it copies metatables.
+-- @param t The table to copy
+-- @return A deep copy of t
+local function deepcopy(t)
+  local function walk_entries(entries, overrides)
+    for key, override in pairs(overrides) do
+      if type(override) == "table" then
+        local new_entry = setmetatable({}, getmetatable(override))
+        entries[key] = walk_entries(new_entry, override)
+      else
+        entries[key] = override
+      end
+    end
+    return entries
+  end
+
+  return walk_entries({}, t)
+end
+
 function M:new(defaults, opts)
   opts = opts or {}
   local config = {}
 
-  config.entries = vim.deepcopy(defaults)
+  config.entries = deepcopy(defaults)
   config.path = opts.path
 
   M.__index = M
