@@ -3,7 +3,10 @@ local M = {}
 local defaults = {
   active = true,
   on_config_done = nil,
-  config = {},
+  config = {
+    -- Disable default keymaps
+    keymaps = {},
+  },
 }
 
 function M:setup(overrides)
