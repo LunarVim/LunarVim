@@ -41,7 +41,7 @@ local defaults = {
     show_help = true, -- show help message on the command line when the popup is visible
   },
 
-  mappings = {
+  mapping = {
     values = {
       normal_mode = {
         ["w"] = { "<cmd>w!<CR>", "Save" },
@@ -246,7 +246,7 @@ function M:configure()
   local which_key = require "which-key"
 
   which_key.setup(self.config.config)
-  self:register(self.config.mappings.values, self.config.mappings.opts)
+  self:register(self.config.mapping.values, self.config.mapping.opts)
   if self.config.on_config_done then
     self.config.on_config_done(which_key)
   end
@@ -255,6 +255,10 @@ end
 function M:register(mappings, opts)
   local status_ok, which_key = pcall(require, "which-key")
   if not status_ok then
+    -- NOTE: To remove once packer's 'after' flag works
+    for mode, mapping in pairs(mappings) do
+      self.config.mapping.values[mode] = vim.tbl_deep_extend("force", self.config.mapping.values[mode] or {}, mapping)
+    end
     return
   end
 
