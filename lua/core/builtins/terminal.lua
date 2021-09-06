@@ -85,12 +85,12 @@ end
 
 ---Toggles a log viewer according to log.viewer.layout_config
 ---@param name can be the name of any of the managed logs, e,g. "lunarvim" or the default ones {"nvim", "lsp", "packer.nvim"}
-M.toggle_log_view = function(name)
+function M:toggle_log_view(name)
   local logfile = get_log_path(name)
   if not logfile then
     return
   end
-  local term_opts = vim.tbl_deep_extend("force", lvim.builtins.terminal.config, {
+  local term_opts = vim.tbl_deep_extend("force", self.config.config, {
     cmd = lvim.log.viewer.cmd .. " " .. logfile,
     open_mapping = lvim.log.viewer.layout_config.open_mapping,
     direction = lvim.log.viewer.layout_config.direction,

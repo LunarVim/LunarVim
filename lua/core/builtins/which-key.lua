@@ -175,16 +175,16 @@ local defaults = {
           l = {
             name = "+logs",
             d = {
-              "<cmd>lua require('core.builtins.terminal').toggle_log_view('lunarvim')<cr>",
+              "<cmd>lua require('core.builtins.terminal'):toggle_log_view('lunarvim')<cr>",
               "view default log",
             },
             D = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
-            n = { "<cmd>lua require('core.builtins.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
+            n = { "<cmd>lua require('core.builtins.terminal'):toggle_log_view('lsp')<cr>", "view lsp log" },
             N = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
-            l = { "<cmd>lua require('core.builtins.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+            l = { "<cmd>lua require('core.builtins.terminal'):toggle_log_view('nvim')<cr>", "view neovim log" },
             L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
             p = {
-              "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",
+              "<cmd>lua require('core.builtins.terminal'):toggle_log_view('packer.nvim')<cr>",
               "view packer log",
             },
             P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
