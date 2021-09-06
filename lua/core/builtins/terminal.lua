@@ -33,14 +33,17 @@ function M:configure()
 end
 
 function M.add_exec(exec, keymap, name)
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>" .. keymap,
-    "<cmd>lua require('core.builtins.terminal')._exec_toggle('" .. exec .. "')<CR>",
-    { noremap = true, silent = true }
-  )
-  -- TODO
-  lvim.builtins.which_key.mappings[keymap] = name
+  local which_key = require "core.builtins.which-key"
+  which_key:register({
+    normal_mode = {
+      [keymap] = { "<cmd>lua require('core.builtins.terminal')._exec_toggle('" .. exec .. "')<CR>", name },
+    },
+  }, {
+    normal_mode = {
+      noremap = true,
+      silent = true,
+    },
+  })
 end
 
 M._exec_toggle = function(exec)

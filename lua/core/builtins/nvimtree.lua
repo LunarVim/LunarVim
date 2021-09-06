@@ -46,6 +46,20 @@ local defaults = {
       },
     },
   },
+  which_key = {
+    values = {
+      normal_mode = {
+        e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+      },
+    },
+    opts = {
+      normal_mode = {
+        silent = true,
+        noremap = true,
+        nowait = true,
+      },
+    },
+  },
 }
 
 function M:setup(overrides)
@@ -67,14 +81,14 @@ function M:configure()
   end
 
   -- Implicitly update nvim-tree when project module is active
-  -- TODO
-  -- if lvim.builtins.project.active then
-  --   vim.g.nvim_tree_update_cwd = 1
-  --   vim.g.nvim_tree_respect_buf_cwd = 1
-  --   vim.g.nvim_tree_disable_netrw = 0
-  --   vim.g.nvim_tree_hijack_netrw = 0
-  --   vim.g.netrw_banner = 0
-  -- end
+  local project = require "core.builtins.project"
+  if project.active then
+    vim.g.nvim_tree_update_cwd = 1
+    vim.g.nvim_tree_respect_buf_cwd = 1
+    vim.g.nvim_tree_disable_netrw = 0
+    vim.g.nvim_tree_hijack_netrw = 0
+    vim.g.netrw_banner = 0
+  end
 
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
@@ -86,8 +100,8 @@ function M:configure()
     }
   end
 
-  -- TODO
-  -- lvim.builtins.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
+  local which_key = require "core.builtins.which-key"
+  which_key:register(self.config.which_key.values, self.config.which_key.opts)
 
   local tree_view = require "nvim-tree.view"
 

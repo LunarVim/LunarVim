@@ -48,10 +48,11 @@ function M:configure()
   local telescope = require "telescope"
 
   telescope.setup(self.config.config)
-  -- TODO
-  -- if lvim.builtins.project.active then
-  --   telescope.load_extension "projects"
-  -- end
+
+  local project = require "core.builtins.project"
+  if project.active then
+    telescope.load_extension "projects"
+  end
 
   if self.config.on_config_done then
     self.config.on_config_done(telescope)

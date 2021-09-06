@@ -55,6 +55,20 @@ local defaults = {
       footer = { "lunarvim.org" },
     },
   },
+  which_key = {
+    values = {
+      normal_mode = {
+        [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },
+      },
+    },
+    opts = {
+      normal_mode = {
+        silent = true,
+        noremap = true,
+        nowait = true,
+      },
+    },
+  },
 }
 
 function M:setup(overrides)
@@ -70,8 +84,8 @@ function M:configure()
   vim.g.dashboard_custom_section = config.custom_section
   vim.g.dashboard_session_directory = config.session_directory
 
-  -- TODO
-  -- lvim.builtins.which_key.mappings[";"] = { "<cmd>Dashboard<CR>", "Dashboard" }
+  local which_key = require "core.builtins.which-key"
+  which_key:register(self.config.which_key.values, self.config.which_key.opts)
 
   vim.cmd "let packages = len(globpath('~/.local/share/lunarvim/site/pack/packer/start', '*', 0, 1))"
 

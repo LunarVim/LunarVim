@@ -22,6 +22,13 @@ local mode_adapters = {
   command_mode = "c",
 }
 
+--- Convert a long mode to a short one compatible with nvim_set_keymap
+-- @param long_mode The mode to convert
+-- @return The corresponding one char mode
+function KeyMap.get_short_mode(long_mode)
+  return mode_adapters[long_mode]
+end
+
 -- Set key mappings individually
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param key The key of keymap
