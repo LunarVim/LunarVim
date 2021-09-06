@@ -20,28 +20,16 @@ function M.config()
 end
 
 M.setup = function()
-  -- skip it, if you use another global object
-  _G.MUtils = {}
   local autopairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
 
-  vim.g.completion_confirm_key = ""
-  MUtils.completion_confirm = function()
-    if vim.fn.pumvisible() ~= 0 then
-      if vim.fn.complete_info()["selected"] ~= -1 then
-        return vim.fn["compe#confirm"](autopairs.esc "<cr>")
-      else
-        return autopairs.esc "<cr>"
-      end
-    else
-      return autopairs.autopairs_cr()
-    end
-  end
+  -- vim.g.completion_confirm_key = ""
 
-  if package.loaded["compe"] then
-    require("nvim-autopairs.completion.compe").setup {
-      map_cr = lvim.builtin.autopairs.map_cr,
-      map_complete = lvim.builtin.autopairs.map_complete,
+  if package.loaded["cmp"] then
+    require("nvim-autopairs.completion.cmp").setup {
+      map_cr = true, --  map <CR> on insert mode
+      map_complete = true, -- it will auto insert `(` after select function or method item
+      auto_select = true, -- automatically select the first item
     }
   end
 

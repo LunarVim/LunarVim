@@ -4,7 +4,7 @@ local builtins = {
   "keymappings",
   "core.which-key",
   "core.gitsigns",
-  "core.compe",
+  "core.cmp",
   "core.dashboard",
   "core.dap",
   "core.terminal",
