@@ -89,7 +89,8 @@ function M.show_line_diagnostics()
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
   for i, diag in ipairs(diags) do
-    vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { diag.message })
+    local message = diag.message:gsub("[\n\r]", " ")
+    vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { message })
     vim.api.nvim_buf_add_highlight(
       bufnr,
       -1,
