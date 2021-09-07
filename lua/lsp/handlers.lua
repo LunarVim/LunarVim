@@ -2,13 +2,13 @@
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
 local M = {}
 
-function M.setup()
-  local config = { -- your config
-    virtual_text = lvim.lsp.diagnostics.virtual_text,
-    signs = lvim.lsp.diagnostics.signs,
-    underline = lvim.lsp.diagnostics.underline,
-    update_in_insert = lvim.lsp.diagnostics.update_in_insert,
-    severity_sort = lvim.lsp.diagnostics.severity_sort,
+function M.setup(config)
+  local opts = { -- your options
+    virtual_text = config.diagnostics.virtual_text,
+    signs = config.diagnostics.signs,
+    underline = config.diagnostics.underline,
+    update_in_insert = config.diagnostics.update_in_insert,
+    severity_sort = config.diagnostics.severity_sort,
   }
   if vim.fn.has "nvim-0.5.1" > 0 then
     vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, _)
@@ -23,7 +23,7 @@ function M.setup()
       if not vim.api.nvim_buf_is_loaded(bufnr) then
         return
       end
-      vim.lsp.diagnostic.display(diagnostics, bufnr, ctx.client_id, config)
+      vim.lsp.diagnostic.display(diagnostics, bufnr, ctx.client_id, opts)
     end
   else
     vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
@@ -38,16 +38,16 @@ function M.setup()
       if not vim.api.nvim_buf_is_loaded(bufnr) then
         return
       end
-      vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
+      vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, opts)
     end
   end
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = lvim.lsp.popup_border,
+    border = config.popup_border,
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = lvim.lsp.popup_border,
+    border = config.popup_border,
   })
 end
 

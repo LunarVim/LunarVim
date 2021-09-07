@@ -23,5 +23,11 @@ require("impatient").enable_profile()
 -- GLOBAL configuration
 -- This varibale is required as packer cannot capture variables using string.dump
 lvim = {}
+CONFIG_PATH = home_dir .. "/.local/share/lunarvim/lvim"
+DATA_PATH = vim.fn.stdpath "data"
+CACHE_PATH = vim.fn.stdpath "cache"
+TERMINAL = vim.fn.expand "$TERMINAL"
+USER = vim.fn.expand "$USER"
+
 require "main"()
 

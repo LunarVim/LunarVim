@@ -57,14 +57,14 @@ local function main()
   local commands = require "core.commands"
   commands.load(commands.defaults)
 
-  require("lsp").configure(config:get "lsp")
+  local lsp = require "lsp"
+  lsp:setup(config:get "lsp")
 
   local null_status_ok, null_ls = pcall(require, "null-ls")
   if null_status_ok then
     null_ls.config {}
-    require("lspconfig")["null-ls"].setup(config:get "lsp.null_ls.setup")
+    require("lspconfig")["null-ls"].setup(lsp.config.null_ls.setup)
   end
-
   local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
   if lsp_settings_status_ok then
     local home_dir = vim.loop.os_homedir()
