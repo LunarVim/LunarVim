@@ -1,6 +1,6 @@
-local Plugins = {}
+local Config = {}
 
-function Plugins.defaults(config)
+function Config.load(builtins)
   return {
     -- Packer can manage itself as an optional plugin
     { "wbthomason/packer.nvim" },
@@ -24,7 +24,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.telescope"):configure()
       end,
-      disable = not config:get("telescope.active", true),
+      disable = builtins.telescope.active == false,
     },
     -- Install nvim-cmp, and buffer source as a dependency
     {
@@ -55,7 +55,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.autopairs"):configure()
       end,
-      disable = not config:get("autopairs.active", true),
+      disable = builtins.autopairs.active == false 
     },
 
     -- Treesitter
@@ -77,7 +77,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.nvimtree"):configure()
       end,
-      disable = not config:get("nvimtree.active", true),
+      disable = builtins.nvimtree.active == false,
     },
 
     {
@@ -87,7 +87,7 @@ function Plugins.defaults(config)
         require("core.builtins.gitsigns"):configure()
       end,
       event = "BufRead",
-      disable = not config:get("gitsigns.active", true),
+      disable = builtins.gitsigns.active == false,
     },
 
     -- Whichkey
@@ -98,7 +98,7 @@ function Plugins.defaults(config)
       end,
       -- event = "BufWinEnter",
       event = "BufWinEnter",
-      disable = not config:get("which_key.active", true),
+      disable = builtins.which_key.active == false,
     },
 
     -- Comments
@@ -108,7 +108,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.comment"):configure()
       end,
-      disable = not config:get("comment.active", true),
+      disable = builtins.comment.active == false,
     },
 
     -- project.nvim
@@ -117,7 +117,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.project"):configure()
       end,
-      disable = not config:get("project.active", true),
+      disable = builtins.project.active == false,
     },
 
     -- Icons
@@ -131,7 +131,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.lualine"):configure()
       end,
-      disable = not config:get("lualine.active", true),
+      disable = builtins.lualine.active == false,
     },
 
     {
@@ -140,7 +140,7 @@ function Plugins.defaults(config)
         require("core.builtins.bufferline"):configure()
       end,
       event = "BufWinEnter",
-      disable = not config:get("bufferline.active", true),
+      disable = builtins.bufferline.active == false,
     },
 
     -- Debugging
@@ -150,7 +150,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.dap"):configure()
       end,
-      disable = not config:get("dap.active", true),
+      disable = builtins.dap.active == false,
     },
 
     -- Debugger management
@@ -158,7 +158,7 @@ function Plugins.defaults(config)
       "Pocco81/DAPInstall.nvim",
       -- event = "BufWinEnter",
       -- event = "BufRead",
-      disable = not config:get("dap.active", true),
+      disable = builtins.dap.active == false,
     },
 
     -- Dashboard
@@ -168,7 +168,7 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.dashboard"):configure()
       end,
-      disable = not config:get("dashboard.active", true),
+      disable = builtins.dashboard.active == false,
     },
 
     -- Terminal
@@ -178,9 +178,9 @@ function Plugins.defaults(config)
       config = function()
         require("core.builtins.terminal"):configure()
       end,
-      disable = not config:get("terminal.active", true),
+      disable = builtins.terminal.active == false,
     },
   }
 end
 
-return Plugins
+return Config

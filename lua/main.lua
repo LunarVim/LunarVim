@@ -24,9 +24,6 @@ local function load_config()
   local autocommands = require "config.autocmds"
   autocommands.setup(config:sub "autocommands")
 
-  local builtins = require "core.builtins"
-  builtins.setup(config:sub "builtins")
-
   config:load()
   lvim = config.entries
 
@@ -37,16 +34,17 @@ local function load_config()
   autocmds.define_augroups(config:get "autocommands")
   settings.load_commands(config)
 
+  -- print("CONFIG:", vim.inspect(config))
   return config
 end
 
 local function main()
   local config = load_config()
 
-  local plugins = require "plugins"
-  local default_plugins = plugins.defaults(config:sub "builtins")
-  local plugin_loader = require("plugin-loader").init()
-  plugin_loader:load { default_plugins, config:get "plugins" }
+  local builtins = require "core.builtins"
+  local plugin_loader = require("core.plugin-loader").init()
+  builtins:setup(config:sub "builtins", plugin_loader)
+  builtins:load(config:get "plugins")
 
   local Log = require "core.log"
   Log:info "Starting LunarVim"
