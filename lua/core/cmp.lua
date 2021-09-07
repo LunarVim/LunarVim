@@ -65,7 +65,7 @@ M.config = function()
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      ["<Tab>"] = cmp.mapping(function()
         if vim.fn.pumvisible() == 1 then
           vim.fn.feedkeys(T "<C-n>", "n")
         elseif luasnip.expand_or_jumpable() then
