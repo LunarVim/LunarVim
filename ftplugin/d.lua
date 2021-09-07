@@ -1,1 +1,1 @@
-require("lsp").configure "d"
+require("lsp"):configure "d"

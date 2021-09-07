@@ -1,1 +1,1 @@
-require("lsp").configure "asm"
+require("lsp"):configure "asm"

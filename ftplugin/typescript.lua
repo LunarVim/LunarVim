@@ -1,1 +1,1 @@
-require("lsp").configure "typescript"
+require("lsp"):configure "typescript"

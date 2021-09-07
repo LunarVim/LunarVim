@@ -1,1 +1,1 @@
-require("lsp").configure "go"
+require("lsp"):configure "go"

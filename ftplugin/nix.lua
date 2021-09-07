@@ -1,1 +1,1 @@
-require("lsp").configure "nix"
+require("lsp"):configure "nix"

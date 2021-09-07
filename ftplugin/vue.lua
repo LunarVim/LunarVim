@@ -1,2 +1,2 @@
-require("lsp").configure "vue"
-require("lsp").configure "tailwindcss"
+require("lsp"):configure "vue"
+require("lsp"):configure "tailwindcss"

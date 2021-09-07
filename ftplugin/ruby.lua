@@ -1,2 +1,2 @@
 -- also support sorbet
-require("lsp").configure "ruby"
+require("lsp"):configure "ruby"

@@ -1,1 +1,1 @@
-require("lsp").configure "solidity"
+require("lsp"):configure "solidity"

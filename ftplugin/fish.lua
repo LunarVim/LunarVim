@@ -1,1 +1,1 @@
-require("lsp").configure "fish"
+require("lsp"):configure "fish"

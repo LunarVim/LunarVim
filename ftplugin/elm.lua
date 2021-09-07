@@ -1,1 +1,1 @@
-require("lsp").configure "elm"
+require("lsp"):configure "elm"

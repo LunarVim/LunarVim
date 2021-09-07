@@ -1,1 +1,1 @@
-require("lsp").configure "css"
+require("lsp"):configure "css"

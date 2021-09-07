@@ -1,1 +1,1 @@
-require("lsp").configure "bicep"
+require("lsp"):configure "bicep"

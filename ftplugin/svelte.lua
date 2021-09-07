@@ -1,2 +1,2 @@
-require("lsp").configure "svelte"
-require("lsp").configure "tailwindcss"
+require("lsp"):configure "svelte"
+require("lsp"):configure "tailwindcss"

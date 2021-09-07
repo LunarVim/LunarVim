@@ -1,2 +1,2 @@
-require("lsp").configure "typescript"
-require("lsp").configure "tailwindcss"
+require("lsp"):configure "typescript"
+require("lsp"):configure "tailwindcss"

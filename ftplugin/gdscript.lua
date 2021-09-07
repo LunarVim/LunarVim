@@ -1,1 +1,1 @@
-require("lsp").configure "gdscript"
+require("lsp"):configure "gdscript"

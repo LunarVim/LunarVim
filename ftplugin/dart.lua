@@ -1,1 +1,1 @@
-require("lsp").configure "dart"
+require("lsp"):configure "dart"

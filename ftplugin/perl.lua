@@ -1,1 +1,1 @@
-require("lsp").configure "perl"
+require("lsp"):configure "perl"

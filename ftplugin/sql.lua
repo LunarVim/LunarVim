@@ -1,1 +1,1 @@
-require("lsp").configure "sql"
+require("lsp"):configure "sql"

@@ -1,1 +1,1 @@
-require("lsp").configure "scala"
+require("lsp"):configure "scala"

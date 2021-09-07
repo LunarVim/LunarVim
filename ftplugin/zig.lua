@@ -1,1 +1,1 @@
-require("lsp").configure "zig"
+require("lsp"):configure "zig"

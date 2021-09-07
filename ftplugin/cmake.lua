@@ -1,1 +1,1 @@
-require("lsp").configure "cmake"
+require("lsp"):configure "cmake"

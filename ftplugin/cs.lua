@@ -1,1 +1,1 @@
-require("lsp").configure "cs"
+require("lsp"):configure "cs"

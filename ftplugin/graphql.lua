@@ -1,1 +1,1 @@
-require("lsp").configure "graphql"
+require("lsp"):configure "graphql"

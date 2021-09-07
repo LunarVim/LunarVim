@@ -1,1 +1,1 @@
-require("lsp").configure "json"
+require("lsp"):configure "json"

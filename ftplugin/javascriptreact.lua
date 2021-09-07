@@ -1,2 +1,2 @@
-require("lsp").configure "javascriptreact"
-require("lsp").configure "tailwindcss"
+require("lsp"):configure "javascriptreact"
+require("lsp"):configure "tailwindcss"

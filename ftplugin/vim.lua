@@ -1,1 +1,1 @@
-require("lsp").configure "vim"
+require("lsp"):configure "vim"
