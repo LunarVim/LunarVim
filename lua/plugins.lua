@@ -24,49 +24,36 @@ return {
     end,
     disable = not lvim.builtin.telescope.active,
   },
-
-  -- Completion & Snippets
+  -- Install nvim-cmp, and buffer source as a dependency
   {
-    "hrsh7th/nvim-compe",
-    event = "InsertEnter",
+    "hrsh7th/nvim-cmp",
     config = function()
-      require("core.compe").setup()
+      require("core.cmp").setup()
     end,
-    disable = not lvim.builtin.compe.active,
-    -- wants = "vim-vsnip",
-    -- requires = {
-    -- {
-    --   "hrsh7th/vim-vsnip",
-    --   wants = "friendly-snippets",
-    --   event = "InsertCharPre",
-    -- },
-    -- {
-    --   "rafamadriz/friendly-snippets",
-    --   event = "InsertCharPre",
-    -- },
-    -- },
-  },
-  {
-    "hrsh7th/vim-vsnip",
-    -- wants = "friendly-snippets",
-    event = "InsertEnter",
-    disable = not lvim.builtin.compe.active,
+    requires = {
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lua",
+    },
   },
   {
     "rafamadriz/friendly-snippets",
-    event = "InsertCharPre",
-    disable = not lvim.builtin.compe.active,
+    -- event = "InsertCharPre",
+    -- disable = not lvim.builtin.compe.active,
   },
 
   -- Autopairs
   {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
-    after = "nvim-compe",
+    after = "nvim-cmp",
     config = function()
       require("core.autopairs").setup()
     end,
-    disable = not lvim.builtin.autopairs.active or not lvim.builtin.compe.active,
+    disable = not lvim.builtin.autopairs.active,
   },
 
   -- Treesitter
@@ -98,6 +85,7 @@ return {
       require("core.gitsigns").setup()
     end,
     event = "BufRead",
+    commit = "25d4b182ece5b03cd4b2d8c196f3c38e0df58801",
     disable = not lvim.builtin.gitsigns.active,
   },
 

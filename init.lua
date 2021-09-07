@@ -52,10 +52,3 @@ if lsp_settings_status_ok then
 end
 
 require("keymappings").setup()
-
--- TODO: these guys need to be in language files
--- if lvim.lang.emmet.active then
---   require "lsp.emmet-ls"
--- end
--- if lvim.lang.tailwindcss.active then
---   require "lsp.tailwind
