@@ -1,18 +1,11 @@
 # Under the Hood
 
-To properly render the flowcharts below, please install a browser extension for mermaid syntax
-
-https://github.com/BackMarket/github-mermaid-extension
-Google Chrome: [GitHub + Mermaid - Chrome Web Store](https://chrome.google.com/webstore/detail/github-%20-mermaid/goiiopgdnkogdbjmncgedmgpoajilohe)
-Firefox: GitHub + Mermaid - [Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/github-mermaid/)
-
-# Logic from start to window load 
+# Logic from start to window load
 
 ![LunarVim initialization flowchart](./lunarvim_initialization.png "LunarVim initialization flowchart")
 
-
 The above chart was made with the following markdown using mermaid markdown
-Last updated Wed Aug  4 10:04:27 PM CEST 2021
+Last updated Wed Aug 4 10:04:27 PM CEST 2021
 
 ```mermaid
 graph TD
@@ -79,4 +72,3 @@ graph TD
   lsp_override_check -- No --> first_window_load["First window loads"]
   lsp_override --> first_window_load
 ```
-
