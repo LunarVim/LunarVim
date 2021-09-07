@@ -1,1 +1,1 @@
-require("lsp").setup "crystal"
+require("lsp").configure "crystal"

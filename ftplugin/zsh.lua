@@ -1,1 +1,1 @@
-require("lsp").setup "sh"
+require("lsp").configure "sh"

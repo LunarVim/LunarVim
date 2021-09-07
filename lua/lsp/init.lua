@@ -1,10 +1,10 @@
 local M = {}
 local Log = require "core.log"
 
-function M.config()
-  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
+function M.setup(config)
+  vim.lsp.protocol.CompletionItemKind = config.completion.item_kind
 
-  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
+  for _, sign in ipairs(config.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
 
@@ -128,7 +128,7 @@ function M.common_on_attach(client, bufnr)
   require("lsp.null-ls").setup(vim.bo.filetype)
 end
 
-function M.setup(lang)
+function M.configure(lang)
   local lsp_utils = require "lsp.utils"
   local lsp = lvim.lang[lang].lsp
   if (lsp.active ~= nil and not lsp.active) or lsp_utils.is_client_active(lsp.provider) then

@@ -1,1 +1,1 @@
-require("lsp").setup "java"
+require("lsp").configure "java"

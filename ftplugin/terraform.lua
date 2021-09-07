@@ -1,1 +1,1 @@
-require("lsp").setup "terraform"
+require("lsp").configure "terraform"

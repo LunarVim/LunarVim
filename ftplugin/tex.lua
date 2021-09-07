@@ -1,1 +1,1 @@
-require("lsp").setup "tex"
+require("lsp").configure "tex"

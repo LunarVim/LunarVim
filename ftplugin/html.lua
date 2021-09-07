@@ -1,2 +1,2 @@
-require("lsp").setup "html"
-require("lsp").setup "tailwindcss"
+require("lsp").configure "html"
+require("lsp").configure "tailwindcss"

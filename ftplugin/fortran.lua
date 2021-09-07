@@ -1,1 +1,1 @@
-require("lsp").setup "fortran"
+require("lsp").configure "fortran"

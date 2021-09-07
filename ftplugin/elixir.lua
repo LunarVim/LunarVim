@@ -1,4 +1,4 @@
-require("lsp").setup "elixir"
+require("lsp").configure "elixir"
 vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
 
 -- TODO: do we need this?

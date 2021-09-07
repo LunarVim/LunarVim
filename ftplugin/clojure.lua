@@ -1,1 +1,1 @@
-require("lsp").setup "clojure"
+require("lsp").configure "clojure"

@@ -1,1 +1,1 @@
-require("lsp").setup "dockerfile"
+require("lsp").configure "dockerfile"

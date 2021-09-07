@@ -1,1 +1,1 @@
-require("lsp").setup "puppet"
+require("lsp").configure "puppet"

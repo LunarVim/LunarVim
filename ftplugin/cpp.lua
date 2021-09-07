@@ -1,1 +1,1 @@
-require("lsp").setup "cpp"
+require("lsp").configure "cpp"

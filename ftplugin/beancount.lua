@@ -1,1 +1,1 @@
-require("lsp").setup "beancount"
+require("lsp").configure "beancount"

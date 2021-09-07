@@ -1,1 +1,1 @@
-require("lsp").setup "haskell"
+require("lsp").configure "haskell"
