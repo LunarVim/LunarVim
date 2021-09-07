@@ -20,27 +20,32 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunar
 
 Make sure you have the newest version of Neovim (0.5).
 
-``` bash
+```bash
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 ```
 
 After installation run `lvim` and then `:PackerInstall`
 
 ## Troubleshooting installation problems
-If you encounter problems with the installation check the following: 
-1. Make sure you have at least version 0.5 of neovim. There were some breaking changes in the development of 0.5 so upgrade to the newest available version to rule out incompatibilities.  
-1. Make sure neovim was compiled with luajit. 
-  ```bash
-  # The output of version information should include a line for: LuaJIT 
-  nvim -v
-  ```
+
+If you encounter problems with the installation check the following:
+
+1. Make sure you have at least version 0.5 of neovim. There were some breaking changes in the development of 0.5 so upgrade to the newest available version to rule out incompatibilities.
+1. Make sure neovim was compiled with luajit.
+
+```bash
+# The output of version information should include a line for: LuaJIT
+nvim -v
+```
+
 1. Make sure all the dependencies listed in [Manual Install](#manual-install) are actually installed on your system.
 1. Make sure your plugins are installed and updated. Run `:PackerSync`
-1. If you're upgrading your install, sometimes an old packer compiled file can cause errors at runtime.  Remove the folder.  `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`
+1. If you're upgrading your install, sometimes an old packer compiled file can cause errors at runtime. Remove the folder. `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`
+1. If you're upgrading from an older version of LunarVim, remove the old launcher. `sudo rm /usr/local/bin/lvim`
 
 ## Uninstall
 
-You can remove LunarVim entirely by running the following commands: 
+You can remove LunarVim entirely by running the following commands:
 
 ```bash
 rm -rf ~/.local/share/lunarvim
@@ -51,6 +56,3 @@ rm ~/.local/bin/lvim
 
 rm -rf ~/.local/share/applications/lvim.desktop
 ```
-
-
-
