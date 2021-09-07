@@ -9,6 +9,17 @@ local function T(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+local is_emmet_active = function()
+  local clients = vim.lsp.buf_get_clients()
+
+  for _, client in pairs(clients) do
+    if client.name == "emmet_ls" then
+      return true
+    end
+  end
+  return false
+end
+
 M.config = function()
   local status_cmp_ok, cmp = pcall(require, "cmp")
   if not status_cmp_ok then
@@ -72,6 +83,8 @@ M.config = function()
           vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
         elseif check_backspace() then
           vim.fn.feedkeys(T "<Tab>", "n")
+        elseif is_emmet_active() then
+          return vim.fn["cmp#complete"]()
         else
           vim.fn.feedkeys(T "<Tab>", "n")
         end
