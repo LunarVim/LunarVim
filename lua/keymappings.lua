@@ -25,9 +25,7 @@ local mode_adapters = {
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.append_to_defaults(keymaps)
   for mode, mappings in pairs(keymaps) do
-    for k, v in ipairs(mappings) do
-      lvim.keys[mode][k] = v
-    end
+     M.load_mode(mode, mappings)
   end
 end
 
