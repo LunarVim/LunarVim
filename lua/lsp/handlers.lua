@@ -3,12 +3,6 @@
 local M = {}
 
 function M.setup()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = lvim.lsp.diagnostics.virtual_text,
-    signs = lvim.lsp.diagnostics.signs.active,
-    underline = lvim.lsp.document_highlight,
-  })
-
   local config = { -- your config
     virtual_text = lvim.lsp.diagnostics.virtual_text,
     signs = lvim.lsp.diagnostics.signs,
@@ -19,13 +13,13 @@ function M.setup()
   if vim.fn.has "nvim-0.5.1" > 0 then
     vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, _)
       local uri = result.uri
-      local bufnr = ctx.bufnr
+      local bufnr = vim.uri_to_bufnr(uri)
       if not bufnr then
         return
       end
 
       local diagnostics = result.diagnostics
-      vim.lsp.diagnostic.save(diagnostics, ctx.bufnr, ctx.client_id)
+      vim.lsp.diagnostic.save(diagnostics, bufnr, ctx.client_id)
       if not vim.api.nvim_buf_is_loaded(bufnr) then
         return
       end
