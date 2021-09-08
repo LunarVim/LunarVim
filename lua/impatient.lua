@@ -86,7 +86,7 @@ function cachepack.unpack(str, raw_buf_size)
   local buf = {
     ptr = raw_buf_size and str or ffi.new("const char[?]", #str, str),
     pos = 0,
-    size = raw_buf_size,
+    size = raw_buf_size or #str,
   }
   local cache = {}
 
