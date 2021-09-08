@@ -1,14 +1,14 @@
 local M = {}
 local Log = require "core.log"
 
-local generic_opts_any = { noremap = true, silent = true }
-
-local generic_opts = {
-  insert_mode = generic_opts_any,
-  normal_mode = generic_opts_any,
-  visual_mode = generic_opts_any,
-  visual_block_mode = generic_opts_any,
-  command_mode = generic_opts_any,
+local generic_opts = { noremap = true, silent = true }
+local opts = {
+  insert_mode = generic_opts,
+  normal_mode = generic_opts,
+  visual_mode = generic_opts,
+  visual_block_mode = generic_opts,
+  command_mode = generic_opts,
+  operator_mode = generic_opts,
   term_mode = { silent = true },
 }
 
@@ -16,9 +16,10 @@ local mode_adapters = {
   insert_mode = "i",
   normal_mode = "n",
   term_mode = "t",
-  visual_mode = "v",
-  visual_block_mode = "x",
+  visual_and_select_mode = "v",
+  visual_mode = "x",
   command_mode = "c",
+  operator_mode = "o",
 }
 
 -- Append key mappings to lunarvim's defaults for a given mode
@@ -36,7 +37,7 @@ end
 -- @param key The key of keymap
 -- @param val Can be form as a mapping or tuple of mapping and user defined opt
 function M.set_keymaps(mode, key, val)
-  local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+  local opt = opts[mode] and opts[mode] or generic_opts
   if type(val) == "table" then
     opt = val[2]
     val = val[1]
@@ -125,7 +126,7 @@ function M.config()
     },
 
     ---@usage change or add keymappings for visual mode
-    visual_mode = {
+    visual_and_select_mode = {
       -- Better indenting
       ["<"] = "<gv",
       [">"] = ">gv",
@@ -135,7 +136,7 @@ function M.config()
     },
 
     ---@usage change or add keymappings for visual block mode
-    visual_block_mode = {
+    visual_mode = {
       -- Move selected line / block of text in visual mode
       ["K"] = ":move '<-2<CR>gv-gv",
       ["J"] = ":move '>+1<CR>gv-gv",
@@ -152,7 +153,21 @@ function M.config()
       ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
       ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
     },
+
+    operator_mode = {},
   }
+
+  -- Add some text objects
+  local chars = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "-", "#" }
+  for _, char in ipairs(chars) do
+    lvim.keys.visual_mode["i" .. char] = ":<C-u>normal! T" .. char .. "vt" .. char .. "<CR>"
+    lvim.keys.operator_mode["i" .. char] = ":normal vi" .. char .. "<CR>"
+
+    lvim.keys.visual_mode["a" .. char] = ":<C-u>normal! F" .. char .. "vf" .. char .. "<CR>"
+    lvim.keys.operator_mode["a" .. char] = ":normal va" .. char .. "<CR>"
+  end
+  lvim.keys.visual_mode["ae"] = ":<C-u>keepjumps normal! ggVG<CR>"
+  lvim.keys.operator_mode["ae"] = ":normal vae<CR>"
 
   if vim.fn.has "mac" == 1 then
     lvim.keys.normal_mode["<A-Up>"] = lvim.keys.normal_mode["<C-Up>"]
