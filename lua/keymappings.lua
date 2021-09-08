@@ -25,7 +25,7 @@ local mode_adapters = {
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.append_to_defaults(keymaps)
   for mode, mappings in pairs(keymaps) do
-     M.load_mode(mode, mappings)
+    M.load_mode(mode, mappings)
   end
 end
 
