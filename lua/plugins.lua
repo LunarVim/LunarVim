@@ -19,17 +19,13 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    config = function()
-      require("core.telescope").setup()
-    end,
+    config = "core.telescope",
     disable = not lvim.builtin.telescope.active,
   },
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
-    config = function()
-      require("core.cmp").setup()
-    end,
+    config = "core.cmp",
     requires = {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
@@ -50,9 +46,7 @@ return {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
     after = "nvim-cmp",
-    config = function()
-      require("core.autopairs").setup()
-    end,
+    config = "core.autopairs",
     disable = not lvim.builtin.autopairs.active,
   },
 
@@ -61,9 +55,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "0.5-compat",
     -- run = ":TSUpdate",
-    config = function()
-      require("core.treesitter").setup()
-    end,
+    config = "core.treesitter",
   },
 
   -- NvimTree
@@ -72,18 +64,13 @@ return {
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-    config = function()
-      require("core.nvimtree").setup()
-    end,
+    config = "core.nvimtree",
     disable = not lvim.builtin.nvimtree.active,
   },
 
   {
     "lewis6991/gitsigns.nvim",
-
-    config = function()
-      require("core.gitsigns").setup()
-    end,
+    config = "core.gitsigns",
     event = "BufRead",
     commit = "25d4b182ece5b03cd4b2d8c196f3c38e0df58801",
     disable = not lvim.builtin.gitsigns.active,
@@ -92,9 +79,7 @@ return {
   -- Whichkey
   {
     "folke/which-key.nvim",
-    config = function()
-      require("core.which-key").setup()
-    end,
+    config = "core.which-key",
     event = "BufWinEnter",
     disable = not lvim.builtin.which_key.active,
   },
@@ -103,18 +88,14 @@ return {
   {
     "terrortylor/nvim-comment",
     event = "BufRead",
-    config = function()
-      require("core.comment").setup()
-    end,
+    config = "core.comment",
     disable = not lvim.builtin.comment.active,
   },
 
   -- project.nvim
   {
     "ahmedkhalf/project.nvim",
-    config = function()
-      require("core.project").setup()
-    end,
+    config = "core.project",
     disable = not lvim.builtin.project.active,
   },
 
@@ -126,17 +107,13 @@ return {
     -- "hoob3rt/lualine.nvim",
     "shadmansaleh/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
-    config = function()
-      require("core.lualine").setup()
-    end,
+    config = "core.lualine",
     disable = not lvim.builtin.lualine.active,
   },
 
   {
     "romgrk/barbar.nvim",
-    config = function()
-      require("core.bufferline").setup()
-    end,
+    config = "core.bufferline",
     event = "BufWinEnter",
     disable = not lvim.builtin.bufferline.active,
   },
@@ -145,9 +122,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
-    config = function()
-      require("core.dap").setup()
-    end,
+    config = "core.dap",
     disable = not lvim.builtin.dap.active,
   },
 
@@ -163,9 +138,7 @@ return {
   {
     "ChristianChiarulli/dashboard-nvim",
     event = "BufWinEnter",
-    config = function()
-      require("core.dashboard").setup()
-    end,
+    config = "core.dashboard",
     disable = not lvim.builtin.dashboard.active,
   },
 
@@ -173,9 +146,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     event = "BufWinEnter",
-    config = function()
-      require("core.terminal").setup()
-    end,
+    config = "core.terminal",
     disable = not lvim.builtin.terminal.active,
   },
 }

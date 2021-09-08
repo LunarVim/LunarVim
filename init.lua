@@ -22,7 +22,7 @@ config:init()
 config:load()
 
 local plugins = require "plugins"
-local plugin_loader = require("plugin-loader").init()
+local plugin_loader = require("plugin_loader"):setup()
 plugin_loader:load { plugins, lvim.plugins }
 
 local Log = require "core.log"
