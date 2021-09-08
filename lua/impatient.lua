@@ -275,8 +275,8 @@ local function setup()
   if stat then
     log("Loading cache file %s", M.path)
     local ok
-    -- Linux lets us easily mmap the cache file for faster reads without passing to Lua
-    if jit.os == "Linux" then
+    -- Linux/macOS lets us easily mmap the cache file for faster reads without passing to Lua
+    if jit.os == "Linux" or jit.os == "OSX" then
       local size = stat.size
 
       local C = ffi.C
