@@ -136,40 +136,50 @@ function M:common_on_attach(client, bufnr)
     lsp_highlight_document(client)
   end
   add_lsp_buffer_keybindings(bufnr)
-  require("lsp.null-ls").setup(vim.bo.filetype)
+
+  local filetype = vim.bo.filetype
+  local providers = vim.tbl_deep_extend(
+    "force",
+    { formatters = {}, linters = {} },
+    { formatters = self.config.lang[filetype].formatters, linters = self.config.lang[filetype].linters }
+  )
+  require("lsp.null-ls").setup(providers, filetype)
 end
 
-function M:configure(lang)
+function M:configure(filetype)
   local lsp_utils = require "lsp.utils"
-  local lsp = self.config.lang[lang].lsp
-  if (lsp.active ~= nil and not lsp.active) or lsp_utils.is_client_active(lsp.provider) then
+  local client = self.config.lang[filetype].client or {}
+  if client.active == false or lsp_utils.is_client_active(client.name) then
     return
   end
 
+  -- TODO: override should be in 'lsp.'
   local overrides = self.config.override
   if type(overrides) == "table" then
-    if vim.tbl_contains(overrides, lang) then
+    if vim.tbl_contains(overrides, filetype) then
       return
     end
   end
 
-  if lsp.provider ~= nil and lsp.provider ~= "" then
-    local lspconfig = require "lspconfig"
+  if not self.config.lang[filetype] then
+    return
+  end
 
-    if not lsp.setup.on_attach then
-      lsp.setup.on_attach = function(...)
-        return self:common_on_attach(...)
-      end
+  local default_client = {
+    setup = {
+      on_attach = function(...)
+        return M:common_on_attach(...)
+      end,
+      on_init = function(...)
+        return M:common_on_init(...)
+      end,
+      capabilities = M:common_capabilities(),
+    },
+  }
+  client = vim.tbl_deep_extend("force", default_client, client)
+  local lspconfig = require "lspconfig"
+  lspconfig[client.name].setup(client.setup)
     end
-    if not lsp.setup.on_init then
-      lsp.setup.on_init = function(...)
-        return self:common_on_init(...)
-      end
-    end
-    if not lsp.setup.capabilities then
-      lsp.setup.capabilities = self:common_capabilities()
-    end
-    lspconfig[lsp.provider].setup(lsp.setup)
   end
 end
 

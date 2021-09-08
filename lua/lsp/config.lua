@@ -60,39 +60,18 @@ local Config = {
     setup = {},
   },
   lang = {
-    asm = {
-      formatters = {
-        -- {
-        --   exe = "asmfmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "",
-        setup = {},
-      },
-    },
+    asm = {},
     beancount = {
-      formatters = {
-        -- {
-        --   exe = "bean_format",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "beancount",
+      client = {
+        name = "beancount",
         setup = {
           cmd = { "beancount-langserver" },
         },
       },
     },
     bicep = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "bicep",
+      client = {
+        name = "bicep",
         setup = {
           cmd = {
             "dotnet",
@@ -103,19 +82,8 @@ local Config = {
       },
     },
     c = {
-      formatters = {
-        -- {
-        --   exe = "clang_format",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "uncrustify",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "clangd",
+      client = {
+        name = "clangd",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
@@ -129,19 +97,8 @@ local Config = {
       },
     },
     cpp = {
-      formatters = {
-        -- {
-        --   exe = "clang_format",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "uncrustify",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "clangd",
+      client = {
+        name = "clangd",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/cpp/clangd/bin/clangd",
@@ -155,34 +112,16 @@ local Config = {
       },
     },
     crystal = {
-      formatters = {
-        -- {
-        --   exe = "crystal_format",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "crystalline",
+      client = {
+        name = "crystalline",
         setup = {
           cmd = { "crystalline" },
         },
       },
     },
     cs = {
-      formatters = {
-        -- {
-        --   exe = "clang_format ",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "uncrustify",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "omnisharp",
+      client = {
+        name = "omnisharp",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/csharp/omnisharp/run",
@@ -194,15 +133,8 @@ local Config = {
       },
     },
     cmake = {
-      formatters = {
-        -- {
-        --   exe = "cmake_format",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "cmake",
+      client = {
+        name = "cmake",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/cmake/venv/bin/cmake-language-server",
@@ -211,10 +143,8 @@ local Config = {
       },
     },
     clojure = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "clojure_lsp",
+      client = {
+        name = "clojure_lsp",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/clojure/clojure-lsp",
@@ -223,19 +153,8 @@ local Config = {
       },
     },
     css = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "cssls",
+      client = {
+        name = "cssls",
         setup = {
           cmd = {
             "node",
@@ -246,19 +165,8 @@ local Config = {
       },
     },
     less = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "cssls",
+      client = {
+        name = "cssls",
         setup = {
           cmd = {
             "node",
@@ -269,30 +177,16 @@ local Config = {
       },
     },
     d = {
-      formatters = {
-        -- {
-        --   exe = "dfmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "serve_d",
+      client = {
+        name = "serve_d",
         setup = {
           cmd = { "serve-d" },
         },
       },
     },
     dart = {
-      formatters = {
-        -- {
-        --   exe = "dart_format",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "dartls",
+      client = {
+        name = "dartls",
         setup = {
           cmd = {
             "dart",
@@ -303,10 +197,8 @@ local Config = {
       },
     },
     dockerfile = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "dockerls",
+      client = {
+        name = "dockerls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
@@ -316,15 +208,8 @@ local Config = {
       },
     },
     elixir = {
-      formatters = {
-        -- {
-        --   exe = "mix",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "elixirls",
+      client = {
+        name = "elixirls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/elixir/elixir-ls/language_server.sh",
@@ -333,15 +218,8 @@ local Config = {
       },
     },
     elm = {
-      formatters = {
-        -- {
-        --   exe = "elm_format",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "elmls",
+      client = {
+        name = "elmls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/elm/node_modules/.bin/elm-language-server",
@@ -356,15 +234,8 @@ local Config = {
       },
     },
     erlang = {
-      formatters = {
-        -- {
-        --   exe = "erlfmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "erlangls",
+      client = {
+        name = "erlangls",
         setup = {
           cmd = {
             "erlang_ls",
@@ -373,24 +244,10 @@ local Config = {
       },
     },
     emmet = { active = false },
-    fish = {
-      formatters = {
-        -- {
-        --   exe = "fish_indent",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "",
-        setup = {},
-      },
-    },
+    fish = {},
     fortran = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "fortls",
+      client = {
+        name = "fortls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/fortran/venv/bin/fortls",
@@ -399,23 +256,8 @@ local Config = {
       },
     },
     go = {
-      formatters = {
-        -- {
-        --   exe = "gofmt",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "goimports",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "gofumpt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "gopls",
+      client = {
+        name = "gopls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/go/gopls",
@@ -424,10 +266,8 @@ local Config = {
       },
     },
     graphql = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "graphql",
+      client = {
+        name = "graphql",
         setup = {
           cmd = {
             "graphql-lsp",
@@ -439,29 +279,16 @@ local Config = {
       },
     },
     haskell = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "hls",
+      client = {
+        name = "hls",
         setup = {
           cmd = { DATA_PATH .. "/lspinstall/haskell/hls" },
         },
       },
     },
     html = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "html",
+      client = {
+        name = "html",
         setup = {
           cmd = {
             "node",
@@ -472,42 +299,16 @@ local Config = {
       },
     },
     java = {
-      formatters = {
-        -- {
-        --   exe = "clang_format",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "uncrustify",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "jdtls",
+      client = {
+        name = "jdtls",
         setup = {
           cmd = { DATA_PATH .. "/lspinstall/java/jdtls.sh" },
         },
       },
     },
     json = {
-      formatters = {
-        -- {
-        --   exe = "json_tool",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "jsonls",
+      client = {
+        name = "jsonls",
         setup = {
           cmd = {
             "node",
@@ -536,10 +337,8 @@ local Config = {
       },
     },
     julia = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "julials",
+      client = {
+        name = "julials",
         setup = {
           {
             "julia",
@@ -552,10 +351,8 @@ local Config = {
       },
     },
     kotlin = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "kotlin_language_server",
+      client = {
+        name = "kotlin_language_server",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/kotlin/server/bin/kotlin-language-server",
@@ -580,19 +377,8 @@ local Config = {
       },
     },
     lua = {
-      formatters = {
-        -- {
-        --   exe = "stylua",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "lua_format",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "sumneko_lua",
+      client = {
+        name = "sumneko_lua",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
@@ -626,67 +412,27 @@ local Config = {
         },
       },
     },
-    nginx = {
-      formatters = {
-        -- {
-        --   exe = "nginx_beautifier",
-        --   args = {
-        --     provider = "",
-        --     setup = {},
-        --   },
-        -- },
-      },
-      linters = {},
-      lsp = {},
-    },
-    perl = {
-      formatters = {
-        -- {
-        --   exe = "perltidy",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "",
-        setup = {},
-      },
-    },
+    nginx = {},
+    perl = {},
     solidity = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "solang",
+      client = {
+        name = "solang",
         setup = {
           cmd = { "solang", "--language-server" },
         },
       },
     },
     sql = {
-      formatters = {
-        -- {
-        --   exe = "sqlformat",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "sqls",
+      client = {
+        name = "sqls",
         setup = {
           cmd = { "sqls" },
         },
       },
     },
     php = {
-      formatters = {
-        -- {
-        --   exe = "phpcbf",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "intelephense",
+      client = {
+        name = "intelephense",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/php/node_modules/.bin/intelephense",
@@ -704,10 +450,8 @@ local Config = {
       },
     },
     puppet = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "puppet",
+      client = {
+        name = "puppet",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/puppet/puppet-editor-services/puppet-languageserver",
@@ -717,24 +461,8 @@ local Config = {
       },
     },
     javascript = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettier_d_slim",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      -- @usage can be {"eslint"} or {"eslint_d"}
-      linters = {},
-      lsp = {
-        provider = "tsserver",
+      client = {
+        name = "tsserver",
         setup = {
           cmd = {
             -- TODO:
@@ -745,23 +473,8 @@ local Config = {
       },
     },
     javascriptreact = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettier_d_slim",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "tsserver",
+      client = {
+        name = "tsserver",
         setup = {
           cmd = {
             -- TODO:
@@ -772,19 +485,8 @@ local Config = {
       },
     },
     python = {
-      formatters = {
-        -- {
-        --   exe = "yapf",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "isort",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "pyright",
+      client = {
+        name = "pyright",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/python/node_modules/.bin/pyright-langserver",
@@ -796,15 +498,8 @@ local Config = {
     -- R -e 'install.packages("formatR",repos = "http://cran.us.r-project.org")'
     -- R -e 'install.packages("readr",repos = "http://cran.us.r-project.org")'
     r = {
-      formatters = {
-        -- {
-        --   exe = "format_r",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "r_language_server",
+      client = {
+        name = "r_language_server",
         setup = {
           cmd = {
             "R",
@@ -816,15 +511,8 @@ local Config = {
       },
     },
     ruby = {
-      formatters = {
-        -- {
-        --   exe = "rufo",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "solargraph",
+      client = {
+        name = "solargraph",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/ruby/solargraph/solargraph",
@@ -847,15 +535,8 @@ local Config = {
       },
     },
     rust = {
-      formatters = {
-        -- {
-        --   exe = "rustfmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "rust_analyzer",
+      client = {
+        name = "rust_analyzer",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/rust/rust-analyzer",
@@ -864,28 +545,13 @@ local Config = {
       },
     },
     scala = {
-      formatters = {
-        -- {
-        --   exe = "scalafmt",
-        --   args = {},
-        -- },
-      },
-      linters = { "" },
-      lsp = {
-        provider = "metals",
-        setup = {},
+      client = {
+        name = "metals",
       },
     },
     sh = {
-      formatters = {
-        -- {
-        --   exe = "shfmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "bashls",
+      client = {
+        name = "bashls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
@@ -895,10 +561,8 @@ local Config = {
       },
     },
     svelte = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "svelte",
+      client = {
+        name = "svelte",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/svelte/node_modules/.bin/svelteserver",
@@ -908,15 +572,8 @@ local Config = {
       },
     },
     swift = {
-      formatters = {
-        -- {
-        --   exe = "swiftformat",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "sourcekit",
+      client = {
+        name = "sourcekit",
         setup = {
           cmd = {
             "xcrun",
@@ -926,9 +583,9 @@ local Config = {
       },
     },
     tailwindcss = {
-      lsp = {
+      client = {
         active = false,
-        provider = "tailwindcss",
+        name = "tailwindcss",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/tailwindcss/node_modules/.bin/tailwindcss-language-server",
@@ -938,15 +595,8 @@ local Config = {
       },
     },
     terraform = {
-      formatters = {
-        -- {
-        --   exe = "terraform_fmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "terraformls",
+      client = {
+        name = "terraformls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/terraform/terraform-ls",
@@ -956,33 +606,16 @@ local Config = {
       },
     },
     tex = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "texlab",
+      client = {
+        name = "texlab",
         setup = {
           cmd = { DATA_PATH .. "/lspinstall/latex/texlab" },
         },
       },
     },
     typescript = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettier_d_slim",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "tsserver",
+      client = {
+        name = "tsserver",
         setup = {
           cmd = {
             -- TODO:
@@ -993,24 +626,8 @@ local Config = {
       },
     },
     typescriptreact = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettier_d_slim",
-        --   args = {},
-        -- },
-      },
-      -- @usage can be {"eslint"} or {"eslint_d"}
-      linters = {},
-      lsp = {
-        provider = "tsserver",
+      client = {
+        name = "tsserver",
         setup = {
           cmd = {
             -- TODO:
@@ -1021,10 +638,8 @@ local Config = {
       },
     },
     vim = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "vimls",
+      client = {
+        name = "vimls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
@@ -1034,23 +649,8 @@ local Config = {
       },
     },
     vue = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettier_d_slim",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "vuels",
+      client = {
+        name = "vuels",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/vue/node_modules/.bin/vls",
@@ -1082,19 +682,8 @@ local Config = {
       },
     },
     yaml = {
-      formatters = {
-        -- {
-        --   exe = "prettier",
-        --   args = {},
-        -- },
-        -- {
-        --   exe = "prettierd",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "yamlls",
+      client = {
+        name = "yamlls",
         setup = {
           cmd = {
             DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
@@ -1104,10 +693,8 @@ local Config = {
       },
     },
     zig = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "zls",
+      client = {
+        name = "zls",
         setup = {
           cmd = {
             "zls",
@@ -1116,10 +703,8 @@ local Config = {
       },
     },
     gdscript = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "gdscript",
+      client = {
+        name = "gdscript",
         setup = {
           cmd = {
             "nc",
@@ -1130,25 +715,16 @@ local Config = {
       },
     },
     ps1 = {
-      formatters = {},
-      linters = {},
-      lsp = {
-        provider = "powershell_es",
+      client = {
+        name = "powershell_es",
         setup = {
           bundle_path = "",
         },
       },
     },
     nix = {
-      formatters = {
-        -- {
-        --   exe = "nixfmt",
-        --   args = {},
-        -- },
-      },
-      linters = {},
-      lsp = {
-        provider = "rnix",
+      client = {
+        name = "rnix",
         setup = {
           cmd = { "rnix-lsp" },
           filetypes = { "nix" },

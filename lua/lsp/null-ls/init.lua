@@ -3,6 +3,7 @@ local M = {}
 function M.list_supported_provider_names(filetype)
   local names = {}
 
+  print "PASS"
   local formatters = require "lsp.null-ls.formatters"
   local linters = require "lsp.null-ls.linters"
 
@@ -25,7 +26,7 @@ function M.list_unsupported_provider_names(filetype)
 end
 
 -- TODO: for linters and formatters with spaces and '-' replace with '_'
-function M.setup(filetype, options)
+function M.setup(providers, filetype, options)
   options = options or {}
 
   local ok, _ = pcall(require, "null-ls")
@@ -37,8 +38,8 @@ function M.setup(filetype, options)
   local formatters = require "lsp.null-ls.formatters"
   local linters = require "lsp.null-ls.linters"
 
-  formatters.setup(filetype, options)
-  linters.setup(filetype, options)
+  formatters.setup(providers.formatters, filetype, options)
+  linters.setup(providers.linters, filetype, options)
 end
 
 return M
