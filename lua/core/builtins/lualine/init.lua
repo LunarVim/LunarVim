@@ -22,15 +22,16 @@ function M:setup(overrides)
   local styles = require "core.builtins.lualine.styles"
   local style = styles.get(self.config.config.style)
   self.config.config = vim.tbl_deep_extend("keep", self.config.config, style)
+end
+
+function M:configure()
+  local lualine = require "lualine"
 
   local utils = require "core.builtins.lualine.utils"
   if not utils.validate_theme(self.config.config.options.theme) then
     self.config.config.options.theme = "auto"
   end
-end
 
-function M:configure()
-  local lualine = require "lualine"
   lualine.setup(self.config.config)
 
   if self.config.on_config_done then

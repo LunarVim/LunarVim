@@ -66,8 +66,8 @@ local function tbl_set_highlight(terms, highlight_group)
 end
 
 function M.toggle_popup(ft)
-  local lsp_utils = require "lsp.utils"
-  local client = lsp_utils.get_active_client_by_ft(ft)
+  local lsp = require "lsp"
+  local client = lsp:get_active_client_by_ft(ft)
   local is_client_active = false
   local client_enabled_caps = {}
   local client_name = ""
@@ -75,7 +75,7 @@ function M.toggle_popup(ft)
   local document_formatting = false
   if client ~= nil then
     is_client_active = not client.is_stopped()
-    client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
+    client_enabled_caps = lsp:get_ls_capabilities(client.id)
     client_name = client.name
     client_id = client.id
     document_formatting = client.resolved_capabilities.document_formatting

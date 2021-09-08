@@ -179,8 +179,21 @@ function M:configure(filetype)
   client = vim.tbl_deep_extend("force", default_client, client)
   local lspconfig = require "lspconfig"
   lspconfig[client.name].setup(client.setup)
+end
+
+-- FIXME: this should return a list instead
+function M:get_active_client_by_ft(filetype)
+  if not self.config.lang[filetype] or not self.config.lang[filetype].client then
+    return nil
+  end
+
+  local clients = vim.lsp.get_active_clients()
+  for _, client in pairs(clients) do
+    if client.name == self.config.lang[filetype].client.name then
+      return client
     end
   end
+  return nil
 end
 
 return M

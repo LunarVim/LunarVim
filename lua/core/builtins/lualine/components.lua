@@ -95,8 +95,8 @@ return {
       local buf_client_names = {}
 
       -- add client
-      local utils = require "lsp.utils"
-      local active_client = utils.get_active_client_by_ft(buf_ft)
+      local lsp = require "lsp"
+      local active_client = lsp:get_active_client_by_ft(buf_ft)
       for _, client in pairs(buf_clients) do
         if client.name ~= "null-ls" then
           table.insert(buf_client_names, client.name)
