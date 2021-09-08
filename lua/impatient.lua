@@ -1,14 +1,15 @@
 -- modified version from https://github.com/lewis6991/impatient.nvim
 
 local vim = vim
-local api = vim.api
 local uv = vim.loop
+local impatient_start = uv.hrtime()
+local api = vim.api
+local ffi = require "ffi"
 
 local get_option, set_option = api.nvim_get_option, api.nvim_set_option
 local get_runtime_file = api.nvim_get_runtime_file
-local home_dir = vim.loop.os_homedir()
+local home_dir = uv.os_homedir()
 
-local impatient_start = uv.hrtime()
 local impatient_dur
 
 local M = {
@@ -21,7 +22,88 @@ local M = {
 
 _G.__luacache = M
 
-local mpack = require "impatient.cachepack"
+--{{{
+local cachepack = {}
+
+-- using double for packing/unpacking numbers has no conversion overhead
+local c_double = ffi.typeof "double[1]"
+local sizeof_c_double = ffi.sizeof "double"
+
+local out_buf = {}
+
+function out_buf.write_number(buf, num)
+  buf[#buf + 1] = ffi.string(c_double(num), sizeof_c_double)
+end
+
+function out_buf.write_string(buf, str)
+  out_buf.write_number(buf, #str)
+  buf[#buf + 1] = str
+end
+
+function out_buf.to_string(buf)
+  return table.concat(buf)
+end
+
+local in_buf = {}
+
+function in_buf.read_number(buf)
+  if buf.size < buf.pos then
+    error "buffer access violation"
+  end
+  local res = ffi.cast("double*", buf.ptr + buf.pos)[0]
+  buf.pos = buf.pos + sizeof_c_double
+  return res
+end
+
+function in_buf.read_string(buf)
+  local len = in_buf.read_number(buf)
+  local res = ffi.string(buf.ptr + buf.pos, len)
+  buf.pos = buf.pos + len
+
+  return res
+end
+
+function cachepack.pack(cache)
+  local total_keys = vim.tbl_count(cache)
+  local buf = {}
+
+  out_buf.write_number(buf, total_keys)
+  for k, v in pairs(cache) do
+    out_buf.write_string(buf, k)
+    out_buf.write_string(buf, v[1] or "")
+    out_buf.write_number(buf, v[2] or 0)
+    out_buf.write_string(buf, v[3] or "")
+  end
+
+  return out_buf.to_string(buf)
+end
+
+function cachepack.unpack(str, raw_buf_size)
+  if raw_buf_size == 0 or str == nil or (raw_buf_size == nil and #str == 0) then
+    return {}
+  end
+
+  local buf = {
+    ptr = raw_buf_size and str or ffi.new("const char[?]", #str, str),
+    pos = 0,
+    size = raw_buf_size,
+  }
+  local cache = {}
+
+  local total_keys = in_buf.read_number(buf)
+  for _ = 1, total_keys do
+    local k = in_buf.read_string(buf)
+    local v = {
+      in_buf.read_string(buf),
+      in_buf.read_number(buf),
+      in_buf.read_string(buf),
+    }
+    cache[k] = v
+  end
+
+  return cache
+end
+--}}}
 
 local function log(...)
   M.log[#M.log + 1] = table.concat({ string.format(...) }, " ")
@@ -177,7 +259,7 @@ function M.save_cache()
   if M.dirty then
     log("Updating cache file: %s", M.path)
     local f = io.open(M.path, "w+b")
-    f:write(mpack.pack(M.cache))
+    f:write(cachepack.pack(M.cache))
     f:flush()
     M.dirty = false
   end
@@ -189,13 +271,42 @@ function M.clear_cache()
 end
 
 local function setup()
-  if uv.fs_stat(M.path) then
+  local stat = uv.fs_stat(M.path)
+  if stat then
     log("Loading cache file %s", M.path)
-    local f = io.open(M.path, "rb")
     local ok
-    ok, M.cache = pcall(function()
-      return mpack.unpack(f:read "*a")
-    end)
+    -- Linux lets us easily mmap the cache file for faster reads without passing to Lua
+    if jit.os == "Linux" then
+      local size = stat.size
+
+      local C = ffi.C
+      local O_RDONLY = 0x00
+      local PROT_READ = 0x01
+      local MAP_PRIVATE = 0x02
+
+      ffi.cdef [[
+      int open(const char *pathname, int flags);
+      int close(int fd);
+      void *mmap(void *addr, size_t length, int prot, int flags, int fd, long int offset);
+      int munmap(void *addr, size_t length);
+      ]]
+      local f = C.open(M.path, O_RDONLY)
+
+      local addr = C.mmap(nil, size, PROT_READ, MAP_PRIVATE, f, 0)
+      ok = ffi.cast("intptr_t", addr) ~= -1
+
+      if ok then
+        M.cache = cachepack.unpack(ffi.cast("char *", addr), size)
+        C.munmap(addr, size)
+      end
+
+      C.close(f)
+    else
+      local f = io.open(M.path, "rb")
+      ok, M.cache = pcall(function()
+        return cachepack.unpack(f:read "*a")
+      end)
+    end
 
     if not ok then
       log("Corrupted cache file, %s. Invalidating...", M.path)
