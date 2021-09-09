@@ -3,18 +3,6 @@ local function load_config()
   local Config = require "config"
   local config = Config(defaults)
 
-  -- Fallback config.lua to lv-config.lua
-  local home_dir = vim.loop.os_homedir()
-  local path = string.format("%s/.config/lvim/config.lua", home_dir)
-  local utils = require "utils"
-  if not utils.is_file(path) then
-    local lv_config = path:gsub("config.lua$", "lv-config.lua")
-    print(path, "not found, falling back to", lv_config)
-
-    path = lv_config
-  end
-  config.path = path
-
   local settings = require "config.settings"
   settings.load_options()
 
@@ -24,8 +12,25 @@ local function load_config()
   local autocommands = require "config.autocmds"
   autocommands.setup(config:sub "autocommands")
 
-  config:load()
+  -- Fallback config.lua to lv-config.lua
+  local home_dir = vim.loop.os_homedir()
+  local config_path = string.format("%s/.config/lvim/config.lua", home_dir)
+  local utils = require "utils"
+  if not utils.is_file(config_path) then
+    local lv_config = config_path:gsub("config.lua$", "lv-config.lua")
+    print(config_path, "not found, falling back to", lv_config)
+
+    config_path = lv_config
+  end
+  local user_config, err = loadfile(config_path)
+  if err then
+    print("Invalid configuration", config_path)
+    print(err)
+    return nil
+  end
+  config:merge(user_config())
   lvim = config.entries
+  config.path = config_path
 
   local Log = require "core.log"
   Log:config(config:sub "log")
@@ -34,12 +39,14 @@ local function load_config()
   autocmds.define_augroups(config:get "autocommands")
   settings.load_commands(config)
 
-  -- print("CONFIG:", vim.inspect(config))
   return config
 end
 
 local function main()
   local config = load_config()
+  if not config then
+    return
+  end
 
   local builtins = require "core.builtins"
   local plugin_loader = require("core.plugin-loader").init()

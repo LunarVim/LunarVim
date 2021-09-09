@@ -42,21 +42,6 @@ function M:new(defaults, opts)
   return config
 end
 
---- Override the configuration with a user provided one
--- @param config_path The path to the configuration overrides
-function M:load(config_path)
-  config_path = config_path or self.path
-  local config, err = loadfile(config_path)
-  if err then
-    print("Invalid configuration", config_path)
-    print(err)
-    return
-  end
-
-  self.path = config_path
-  self:merge(config(), { force = true })
-end
-
 --- Get a sub configuration
 -- @param path The path to the entry as a list of . separated keys
 -- @return A configuration wrapping the entries designated by path
@@ -97,7 +82,7 @@ end
 -- @param opts.force Use the given value, default: True
 function M:merge(overrides, opts)
   opts = opts or {}
-  local keep = not opts.force or false
+  local force = opts.force == nil or opts.force
   local Log = require "core.log"
 
   local function walk_entries(entries, _overrides, path)
@@ -115,10 +100,10 @@ function M:merge(overrides, opts)
         return entry
       end
       if override_type ~= "table" then
-        if keep then
-          return entry
+        if force then
+          return override
         end
-        return override
+        return entry
       end
       return walk_entries(entry, override, entry_path)
     end
