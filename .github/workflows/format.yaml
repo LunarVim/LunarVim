@@ -1,11 +1,11 @@
 name: format
 on:
   push:
-    branches: '**'
+    branches: "**"
   pull_request:
     branches:
-      - 'master'
-      - 'rolling'
+      - "master"
+      - "rolling"
 
 jobs:
   stylua-check:
@@ -14,14 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Prepare dependencies
-        run: |
-          sudo apt install -y curl unzip --no-install-recommends
-          bash ./utils/installer/install_stylua.sh
+      - name: Lint with stylua
+        uses: JohnnyMorganz/stylua-action@1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # CLI arguments
+          args: --check .
 
-      - name: Check formatting
-        run: |
-          ./utils/stylua --config-path .stylua.toml -c .
   shfmt-check:
     name: "Formatting check with shfmt"
     runs-on: ubuntu-20.04
@@ -31,14 +30,12 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.16'
-      
+          go-version: "1.16"
+
       - name: Use shfmt
         run: |
           GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
       # https://google.github.io/styleguide/shellguide.html
       - name: Check formatting
-        run: |
-          shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -l -d
-    
+        run: make style-sh
