@@ -85,7 +85,6 @@ return {
       require("core.gitsigns").setup()
     end,
     event = "BufRead",
-    commit = "25d4b182ece5b03cd4b2d8c196f3c38e0df58801",
     disable = not lvim.builtin.gitsigns.active,
   },
 
