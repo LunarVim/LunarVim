@@ -43,6 +43,11 @@ jobs:
           ln -s "$PWD"/* "$HOME"/.local/share/lunarvim/lvim/.
           bash ./utils/installer/install.sh
 
+      - name: Run unit-tests
+        # NOTE: make sure to adjust the timeout if you start adding a lot of tests
+        timeout-minutes: 4
+        run: make test
+
       - name: Test LunarVim PackerCompile
         run: if "$HOME"/.local/bin/lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
