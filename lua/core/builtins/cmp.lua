@@ -1,35 +1,9 @@
 local M = {}
 
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
-local function T(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local is_emmet_active = function()
-  local clients = vim.lsp.buf_get_clients()
-
-  for _, client in pairs(clients) do
-    if client.name == "emmet_ls" then
-      return true
-    end
-  end
-  return false
-end
-
-function M:setup()
-  local status_cmp_ok, cmp = pcall(require, "cmp")
-  if not status_cmp_ok then
-    return
-  end
-  local status_luasnip_ok, luasnip = pcall(require, "luasnip")
-  if not status_luasnip_ok then
-    return
-  end
-  lvim.builtin.cmp = {
+local defaults = {
+  active = true,
+  on_config_done = nil,
+  config = {
     formatting = {
       format = function(entry, vim_item)
         local icons = require("lsp.kind").icons
@@ -52,11 +26,6 @@ function M:setup()
         return vim_item
       end,
     },
-    snippet = {
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-      end,
-    },
     documentation = {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
@@ -72,53 +41,96 @@ function M:setup()
       { name = "treesitter" },
       { name = "crates" },
     },
-    mapping = {
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      -- TODO: potentially fix emmet nonsense
-      ["<Tab>"] = cmp.mapping(function()
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<C-n>", "n")
-        elseif luasnip.expand_or_jumpable() then
-          vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
-        elseif check_backspace() then
-          vim.fn.feedkeys(T "<Tab>", "n")
-        elseif is_emmet_active() then
-          return vim.fn["cmp#complete"]()
-        else
-          vim.fn.feedkeys(T "<Tab>", "n")
-        end
-      end, {
-        "i",
-        "s",
-      }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<C-p>", "n")
-        elseif luasnip.jumpable(-1) then
-          vim.fn.feedkeys(T "<Plug>luasnip-jump-prev", "")
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-      }),
+  },
+}
 
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
+local status_cmp_ok, cmp = pcall(require, "cmp")
+local status_luasnip_ok, luasnip = pcall(require, "luasnip")
+if status_cmp_ok and status_luasnip_ok then
+  local function T(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  end
+
+  local function check_backspace()
+    local col = vim.fn.col "." - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+  end
+
+  local function is_emmet_active()
+    local clients = vim.lsp.buf_get_clients()
+
+    for _, client in pairs(clients) do
+      if client.name == "emmet_ls" then
+        return true
+      end
+    end
+    return false
+  end
+
+  defaults = vim.tbl_deep_extend("force", defaults, {
+    config = {
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      mapping = {
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        -- TODO: potentially fix emmet nonsense
+        ["<Tab>"] = cmp.mapping(function()
+          if vim.fn.pumvisible() == 1 then
+            vim.fn.feedkeys(T "<C-n>", "n")
+          elseif luasnip.expand_or_jumpable() then
+            vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
+          elseif check_backspace() then
+            vim.fn.feedkeys(T "<Tab>", "n")
+          elseif is_emmet_active() then
+            return vim.fn["cmp#complete"]()
+          else
+            vim.fn.feedkeys(T "<Tab>", "n")
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if vim.fn.pumvisible() == 1 then
+            vim.fn.feedkeys(T "<C-p>", "n")
+          elseif luasnip.jumpable(-1) then
+            vim.fn.feedkeys(T "<Plug>luasnip-jump-prev", "")
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
       },
     },
-  }
-
+  })
 end
-  
-function M:config()
-    require("luasnip/loaders/from_vscode").lazy_load()
-    require("cmp").setup(lvim.builtin.cmp)
+
+function M:setup(overrides)
+  local Config = require "config"
+  self.config = Config(defaults):merge(overrides).entries
+end
+
+function M:configure()
+  require("luasnip/loaders/from_vscode").lazy_load()
+  cmp = require "cmp"
+  cmp.setup(self.config.config)
+
+  if self.config.on_config_done then
+    self.config.on_config_done(cmp)
+  end
 end
 
 return M

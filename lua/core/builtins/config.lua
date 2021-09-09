@@ -40,6 +40,7 @@ function Config.load(builtins)
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
       },
+      disable = builtins.cmp.active == false,
     },
     {
       "rafamadriz/friendly-snippets",
@@ -55,7 +56,7 @@ function Config.load(builtins)
       config = function()
         require("core.builtins.autopairs"):configure()
       end,
-      disable = builtins.autopairs.active == false 
+      disable = builtins.autopairs.active == false,
     },
 
     -- Treesitter

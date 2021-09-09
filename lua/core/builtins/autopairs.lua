@@ -22,35 +22,11 @@ function M:configure()
   _G.MUtils = {}
   local autopairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
-<<<<<<< HEAD
   local cond = require "nvim-autopairs.conds"
-=======
-  local config = self.config.config
-
-  vim.g.completion_confirm_key = ""
-  MUtils.completion_confirm = function()
-    if vim.fn.pumvisible() ~= 0 then
-      if vim.fn.complete_info()["selected"] ~= -1 then
-        return vim.fn["compe#confirm"](autopairs.esc "<cr>")
-      else
-        return autopairs.esc "<cr>"
-      end
-    else
-      return autopairs.autopairs_cr()
-    end
-  end
-
-  if package.loaded["compe"] then
-    require("nvim-autopairs.completion.compe").setup {
-      map_cr = config.map_cr,
-      map_complete = config.map_complete,
-    }
-  end
->>>>>>> 3fe0552 (refactor(builtins): Store a table instead of a Config)
 
   autopairs.setup {
-    check_ts = config.check_ts,
-    ts_config = config.ts_config,
+    check_ts = self.config.config.check_ts,
+    ts_config = self.config.config.ts_config,
   }
 
   -- vim.g.completion_confirm_key = ""
