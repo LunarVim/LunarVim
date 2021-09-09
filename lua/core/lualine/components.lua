@@ -71,7 +71,8 @@ return {
   },
   treesitter = {
     function()
-      if next(vim.treesitter.highlighter.active) then
+      local b = vim.api.nvim_get_current_buf()
+      if next(vim.treesitter.highlighter.active[b]) then
         return "  "
       end
       return ""
