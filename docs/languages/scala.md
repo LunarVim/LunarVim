@@ -19,14 +19,22 @@ Then use coursier to install the metals language server so that it is available 
 Add the following to your `config.lua`
 
 ```
-lvim.lang.scala.linters = {}
-
 lvim.plugins = {
-	{
-		"scalameta/nvim-metals",
-		config = function()
-			require("metals").initialize_or_attach({})
-		end,
-	},
+    {
+      "scalameta/nvim-metals",
+      config = function()
+        local metals_config = require("metals").bare_config
+        metals_config.on_attach = function()
+          require("lsp").common_on_attach()
+        end
+        metals_config.settings = {
+          showImplicitArguments = false,
+          showInferredType = true,
+          excludedPackages = {},
+        }
+        metals_config.init_options.statusBarProvider = false
+        require("metals").initialize_or_attach { metals_config }
+      end,
+    },
 }
 ```
