@@ -12,7 +12,7 @@ lvim.builtin.bufferline.active = true
 
 Settings for core plugins are accessible through `lvim.builtin`. You can press `TAB` to get autocomplete suggestions to explore these settings.
 
-If a plugin is lazy-loaded and you disable it, you need to let Packer know about it by running `:PackerCompile`.
+If a plugin is lazy-loaded and you disable it, you need to let Packer know about it by running `:PackerSync`.
 
 Example settings
 ``` lua
