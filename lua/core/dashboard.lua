@@ -70,7 +70,7 @@ M.setup = function()
   vim.g.dashboard_session_directory = lvim.builtin.dashboard.session_directory
 
   local lv_site = "lunarvim.org"
-  local lv_path = "$HOME/.local/share/lunarvim"
+  local lv_path = home_dir .. "/.local/share/lunarvim"
 
   local lv_ver_full = vim.fn.system("git -C " .. lv_path .. "/lvim describe --tag")
   local lv_ver = vim.fn.split(lv_ver_full, "-")[1]
