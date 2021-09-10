@@ -38,6 +38,12 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lua",
     },
+    run = function()
+      -- cmp's config requires cmp to be installed to run the first time
+      if not lvim.builtin.cmp then
+        require("core.cmp").config()
+      end
+    end,
   },
   {
     "rafamadriz/friendly-snippets",
