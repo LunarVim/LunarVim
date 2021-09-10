@@ -18,7 +18,7 @@ Then use coursier to install the metals language server so that it is available 
 
 Add the following to your `config.lua`
 
-```
+```lua
 lvim.plugins = {
     {
       "scalameta/nvim-metals",
