@@ -2,7 +2,7 @@
 
 local vim = vim
 local uv = vim.loop
-local impatient_start = uv.hrtime()
+local impatient_load_start = uv.hrtime()
 local api = vim.api
 local ffi = require "ffi"
 
@@ -273,7 +273,7 @@ function M.clear_cache()
   os.remove(M.path)
 end
 
-impatient_dur = uv.hrtime() - impatient_start
+impatient_dur = uv.hrtime() - impatient_load_start
 
 function M.setup(opts)
   opts = opts or {}
@@ -283,7 +283,7 @@ function M.setup(opts)
     M.enable_profile()
   end
 
-  impatient_start = uv.hrtime()
+  local impatient_setup_start = uv.hrtime()
   local stat = uv.fs_stat(M.path)
   if stat then
     log("Loading cache file %s", M.path)
@@ -354,7 +354,7 @@ function M.setup(opts)
     command! LuaCacheLog   lua _G.__luacache.print_log()
   ]]
 
-  impatient_dur = impatient_dur + (uv.hrtime() - impatient_start)
+  impatient_dur = impatient_dur + (uv.hrtime() - impatient_setup_start)
 end
 
 return M
