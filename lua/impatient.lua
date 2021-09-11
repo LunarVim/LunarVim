@@ -8,7 +8,6 @@ local ffi = require "ffi"
 
 local get_option, set_option = api.nvim_get_option, api.nvim_set_option
 local get_runtime_file = api.nvim_get_runtime_file
-local home_dir = uv.os_homedir()
 
 local impatient_dur
 
@@ -16,7 +15,7 @@ local M = {
   cache = {},
   profile = nil,
   dirty = false,
-  path = home_dir .. "/.local/share/lunarvim/cache",
+  path = nil,
   log = {},
 }
 
@@ -274,7 +273,17 @@ function M.clear_cache()
   os.remove(M.path)
 end
 
-local function setup()
+impatient_dur = uv.hrtime() - impatient_start
+
+function M.setup(opts)
+  opts = opts or {}
+  M.path = opts.path or vim.fn.stdpath "cache" .. "/luacache"
+
+  if opts.enable_profiling then
+    M.enable_profile()
+  end
+
+  impatient_start = uv.hrtime()
   local stat = uv.fs_stat(M.path)
   if stat then
     log("Loading cache file %s", M.path)
@@ -344,10 +353,8 @@ local function setup()
     command! LuaCacheClear lua _G.__luacache.clear_cache()
     command! LuaCacheLog   lua _G.__luacache.print_log()
   ]]
+
+  impatient_dur = impatient_dur + (uv.hrtime() - impatient_start)
 end
-
-setup()
-
-impatient_dur = uv.hrtime() - impatient_start
 
 return M
