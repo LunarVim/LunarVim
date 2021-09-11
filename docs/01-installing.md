@@ -1,3 +1,9 @@
+# Prerequisites
+
+* There were some breaking changes in the development. To rule out incompatibilities make sure you have installed the latest version of [``Noevim 0.5``](https://github.com/neovim/neovim/releases/tag/v0.5.0).
+* Have `npm` and `node` installed on your system
+* [Resolve `EACCES` permissions when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally) to avoid error when installing packages with npm
+
 # Install
 
 There are a few ways to install LunarVim
@@ -18,25 +24,47 @@ All the new features with all the new bugs:
 LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 ```
 
-Make sure you have the newest version of Neovim (0.5).
-
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 ```
 
-After installation run `lvim` and then `:PackerInstall`
+## After installation
+
+* Add lvim to `PATH`. LunarVim should installed to `~/.local/bin/` so add this to your shell configuration file (`.bashrc`, `.zshrc` etc.):
+
+    ```bash
+    export PATH="$HOME/.local/bin/:$PATH"
+    ```
+
+* Run lvim and then `:PackerInstall`
+* Make sure your plugins are installed and updated. Run `:PackerSync`
+* Restart lvim
 
 ## Troubleshooting installation problems
 
 If you encounter problems with the installation check the following:
 
-1. Make sure you have at least version 0.5 of neovim. There were some breaking changes in the development of 0.5 so upgrade to the newest available version to rule out incompatibilities.
-1. Make sure neovim was compiled with luajit. The output of version information `nvim -v` should include a line for: `LuaJIT`. 
-1. Make sure all the dependencies listed in [Manual Install](#manual-install) are actually installed on your system.
-1. Make sure your plugins are installed and updated. Run `:PackerSync`
-1. If you're upgrading your install, sometimes an old packer compiled file can cause errors at runtime. Remove the folder. `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`
-1. If you're upgrading from an older version of LunarVim, remove the old launcher. `sudo rm /usr/local/bin/lvim`
-1. If you get `EACCESS` errors during the install, follow npm's [suggested fix](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+1. If you get `EACCES` during the install,:
+
+    ```bash
+    npm ERR! code EACCES
+    npm ERR! syscall mkdir
+    npm ERR! path /usr/lib/node_modules/neovim
+    npm ERR! errno -13
+    npm ERR! Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/neovim'
+    npm ERR!  [Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/neovim'] {
+    npm ERR!   errno: -13,
+    npm ERR!   code: 'EACCES',
+    npm ERR!   syscall: 'mkdir',
+    npm ERR!   path: '/usr/lib/node_modules/neovim'
+    npm ERR! }
+    ```
+
+    follow npm's [suggested fix](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+2. Make sure neovim was compiled with luajit. The output of version information `nvim -v` should include a line for: `LuaJIT`.
+3. Make sure all the dependencies listed in [Manual Install](#manual-install) are actually installed on your system.
+4. If you're upgrading your install, sometimes an old packer compiled file can cause errors at runtime. Remove the folder. `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`
+5. If you're upgrading from an older version of LunarVim, remove the old launcher. `sudo rm /usr/local/bin/lvim`
 
 ## Uninstall
 
