@@ -26,13 +26,17 @@ _G.__luacache = M
 local cachepack = {}
 
 -- using double for packing/unpacking numbers has no conversion overhead
-local c_double = ffi.typeof "double[1]"
-local sizeof_c_double = ffi.sizeof "double"
+-- 32-bit ARM causes a bus error when casting to double, so use int there
+local number_t = jit.arch ~= "arm" and "double" or "int"
+ffi.cdef("typedef " .. number_t .. " number_t;")
+
+local c_number_t = ffi.typeof "number_t[1]"
+local c_sizeof_number_t = ffi.sizeof "number_t"
 
 local out_buf = {}
 
 function out_buf.write_number(buf, num)
-  buf[#buf + 1] = ffi.string(c_double(num), sizeof_c_double)
+  buf[#buf + 1] = ffi.string(c_number_t(num), c_sizeof_number_t)
 end
 
 function out_buf.write_string(buf, str)
@@ -50,8 +54,8 @@ function in_buf.read_number(buf)
   if buf.size < buf.pos then
     error "buffer access violation"
   end
-  local res = ffi.cast("double*", buf.ptr + buf.pos)[0]
-  buf.pos = buf.pos + sizeof_c_double
+  local res = ffi.cast("number_t*", buf.ptr + buf.pos)[0]
+  buf.pos = buf.pos + c_sizeof_number_t
   return res
 end
 
