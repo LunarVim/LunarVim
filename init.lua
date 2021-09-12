@@ -18,7 +18,10 @@ vim.cmd [[let &packpath = &runtimepath]]
 -- }}}
 
 _G.PLENARY_DEBUG = false -- Plenary destroys cache with this undocumented flag set to true by default
-require("impatient").enable_profile()
+require("impatient").setup {
+  path = vim.fn.stdpath "cache" .. "/lvim_cache",
+  enable_profiling = true,
+}
 
 local config = require "config"
 config:init()
