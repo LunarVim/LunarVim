@@ -52,3 +52,9 @@ rm ~/.local/bin/lvim
 
 rm -rf ~/.local/share/applications/lvim.desktop
 ```
+
+If reinstalling, also remove the packer_compiled folder
+
+```bash
+ rm -rf ~/.config/lvim/plugin
+ ```
