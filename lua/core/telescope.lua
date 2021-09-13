@@ -1,5 +1,7 @@
 local M = {}
 
+local utils = require "utils"
+
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
   lvim.builtin.telescope = {
@@ -96,7 +98,7 @@ function M.find_lunarvim_files(opts)
     },
     prompt = ">> ",
     prompt_title = "~ LunarVim files ~",
-    cwd = CONFIG_PATH,
+    cwd = utils.join_paths(get_runtime_dir(), "lvim"),
     find_command = { "git", "ls-files" },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
@@ -111,7 +113,7 @@ function M.grep_lunarvim_files(opts)
     layout_strategy = "bottom_pane",
     prompt = ">> ",
     prompt_title = "~ search LunarVim ~",
-    cwd = CONFIG_PATH,
+    cwd = utils.join_paths(get_runtime_dir(), "lvim"),
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   require("telescope.builtin").live_grep(opts)
