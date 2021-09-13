@@ -52,7 +52,7 @@ function download_neovim() {
 
 function verify_neovim() {
   echo "Verifying the installation.."
-  DOWNLOADED_SHA="$(sha256sum "$DOWNLOAD_DIR/$ARCHIVE_NAME.tar.gz" | awk '{print $1}')"
+  DOWNLOADED_SHA="$(openssl dgst -sha256 "$DOWNLOAD_DIR/$ARCHIVE_NAME.tar.gz" | awk '{print $2}')"
 
   if [ "$RELEASE_SHA" != "$DOWNLOADED_SHA" ]; then
     echo "Error! checksum mis-match."
