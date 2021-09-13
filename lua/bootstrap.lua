@@ -72,6 +72,7 @@ function M:init()
     cache_path = self.cache_path,
     runtime_dir = self.runtime_dir,
     config_dir = self.config_dir,
+    install_path = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim"),
     package_root = join_paths(self.runtime_dir, "site", "pack"),
     compile_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua"),
   }
