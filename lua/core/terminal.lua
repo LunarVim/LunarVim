@@ -95,7 +95,7 @@ local function get_log_path(name)
   local logger = require "core.log"
   local file
   if name == "nvim" then
-    file = CACHE_PATH .. "/log"
+    file = utils.join_paths(get_cache_dir(), "log")
   else
     file = logger:new({ plugin = name }):get_path()
   end

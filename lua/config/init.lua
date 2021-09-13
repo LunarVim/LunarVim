@@ -1,20 +1,13 @@
-local home_dir = vim.loop.os_homedir()
-local M = {
-  path = string.format("%s/.config/lvim/config.lua", home_dir),
-}
+local M = {}
 
 --- Initialize lvim default configuration
 -- Define lvim global variable
-function M:init()
+function M:init(opts)
+  opts = opts or {}
+  self.path = opts.path
   local utils = require "utils"
 
   require "config.defaults"
-
-  local builtins = require "core.builtins"
-  builtins.config(self)
-
-  local settings = require "config.settings"
-  settings.load_options()
 
   -- Fallback config.lua to lv-config.lua
   if not utils.is_file(self.path) then
@@ -23,6 +16,12 @@ function M:init()
 
     self.path = lv_config
   end
+
+  local builtins = require "core.builtins"
+  builtins.config(self)
+
+  local settings = require "config.settings"
+  settings.load_options()
 end
 
 --- Override the configuration with a user provided one

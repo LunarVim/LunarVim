@@ -3,9 +3,13 @@ local a = require "plenary.async_lib.tests"
 a.describe("initial start", function()
   local uv = vim.loop
   local home_dir = uv.os_homedir()
-  -- TODO: update once #1381 is merged
-  local lvim_config_path = home_dir .. "/.config/lvim"
-  local lvim_runtime_path = home_dir .. "/.local/share/lunarvim/lvim"
+  local lvim_config_path = get_config_dir() or home_dir .. "/.config/lvim"
+  local lvim_runtime_path = get_runtime_dir() or home_dir .. "/.local/share/lunarvim"
+
+  a.it("shoud be able to detect test environment", function()
+    assert.truthy(os.getenv "LVIM_TEST_ENV")
+    assert.falsy(package.loaded["impatient"])
+  end)
 
   a.it("should not be reading default neovim directories in the home directoies", function()
     local rtp_list = vim.opt.rtp:get()
@@ -14,7 +18,7 @@ a.describe("initial start", function()
 
   a.it("should be able to read lunarvim directories", function()
     local rtp_list = vim.opt.rtp:get()
-    assert.truthy(vim.tbl_contains(rtp_list, lvim_runtime_path))
+    assert.truthy(vim.tbl_contains(rtp_list, lvim_runtime_path .. "/lvim"))
     assert.truthy(vim.tbl_contains(rtp_list, lvim_config_path))
   end)
 

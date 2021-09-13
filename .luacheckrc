@@ -4,9 +4,6 @@ stds.nvim = {
   globals = {
     "lvim",
     vim = { fields = { "g" } },
-    "CONFIG_PATH",
-    "CACHE_PATH",
-    "DATA_PATH",
     "TERMINAL",
     "USER",
     "C",
@@ -21,6 +18,10 @@ stds.nvim = {
     "jit",
     "os",
     "vim",
+    "join_paths",
+    "get_runtime_dir",
+    "get_config_dir",
+    "get_cache_dir",
     -- vim = { fields = { "cmd", "api", "fn", "o" } },
   },
 }

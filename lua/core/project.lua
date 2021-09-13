@@ -35,7 +35,7 @@ function M.config()
 
     ---@type string
     ---@usage path to store the project history for use in telescope
-    datapath = CACHE_PATH,
+    datapath = get_cache_dir(),
   }
 end
 
