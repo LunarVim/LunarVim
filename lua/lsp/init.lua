@@ -57,10 +57,10 @@ function M.common_capabilities()
   }
 
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if not status_ok then
-    return
+  if status_ok then
+    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
   end
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+
   return capabilities
 end
 
