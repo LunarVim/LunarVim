@@ -2,7 +2,7 @@
 set -eo pipefail
 
 #Set branch to master unless specified by the user
-declare -r LV_BRANCH="${LV_BRANCH:-rolling}"
+declare LV_BRANCH="${LV_BRANCH:-"rolling"}"
 declare -r LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
 declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
@@ -10,16 +10,16 @@ declare -r XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
 declare -r XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
 declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
-# TODO: Use a dedicated cache directory #1256
-declare -r NEOVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
-
 declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
 declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
+# TODO: Use a dedicated cache directory #1256
+declare -r LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
+declare -r LUNARVIM_PACK_DIR="$LUNARVIM_RUNTIME_DIR/site/pack"
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
   "$LUNARVIM_RUNTIME_DIR"
-  "$NEOVIM_CACHE_DIR" # for now this is shared with neovim
+  "$LUNARVIM_CACHE_DIR"
 )
 
 declare -a __npm_deps=(
@@ -51,6 +51,7 @@ EOF
   detect_platform
 
   if [ -n "$GITHUB_ACTIONS" ]; then
+    LV_BRANCH="${GITHUB_REF##*/}"
     install_packer
     setup_lvim
     exit 0
@@ -91,11 +92,7 @@ EOF
       ;;
   esac
 
-  if [ -e "$LUNARVIM_RUNTIME_DIR/site/pack/packer/start/packer.nvim" ]; then
-    echo "Packer already installed"
-  else
-    install_packer
-  fi
+  install_packer
 
   __add_separator "80"
 
@@ -233,8 +230,15 @@ function backup_old_config() {
 }
 
 function install_packer() {
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-    "$LUNARVIM_RUNTIME_DIR/site/pack/packer/start/packer.nvim"
+  if [ -e "$LUNARVIM_PACK_DIR/packer/start/packer.nvim" ]; then
+    echo "Packer already installed"
+  else
+    if ! git clone --depth 1 "https://github.com/wbthomason/packer.nvim" \
+      "$LUNARVIM_PACK_DIR/packer/start/packer.nvim"; then
+      echo "Failed to clone Packer. Installation failed."
+      exit 1
+    fi
+  fi
 }
 
 function clone_lvim() {
@@ -271,7 +275,7 @@ function setup_lvim() {
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example-no-ts.lua" \
     "$LUNARVIM_CONFIG_DIR/config.lua"
 
-  nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --headless \
+  "$INSTALL_PREFIX/bin/lvim" --headless \
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
 
