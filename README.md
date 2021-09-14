@@ -42,6 +42,11 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 
 **NOTE** I recommend installing `lua` for autocomplete in `config.lua`
 
+
+![Demo1](./utils/media/demo1.png)
+![Demo2](./utils/media/demo2.png)
+![Demo3](./utils/media/demo3.png)
+
 ## Configuration file
 
 To install plugins configure LunarVim use the `config.lua` located here: `~/.config/lvim/config.lua`
