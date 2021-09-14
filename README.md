@@ -28,6 +28,8 @@ You can find all of the documentation for Lunarvim at [lunarvim.org](https://www
 
 Make sure you have the release version of Neovim (0.5).
 
+If you have previously installed LunarVim, make sure to remove `/usr/local/bin/lvim`, as we've moved to `.local/bin/lvim`
+
 ``` bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
