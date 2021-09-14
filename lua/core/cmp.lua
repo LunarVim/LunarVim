@@ -78,7 +78,7 @@ M.config = function()
       -- TODO: potentially fix emmet nonsense
       ["<Tab>"] = cmp.mapping(function()
         if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<C-n>", "n")
+          vim.fn.feedkeys(T "<down>", "n")
         elseif luasnip.expand_or_jumpable() then
           vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
         elseif check_backspace() then
@@ -94,7 +94,7 @@ M.config = function()
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<C-p>", "n")
+          vim.fn.feedkeys(T "<up>", "n")
         elseif luasnip.jumpable(-1) then
           vim.fn.feedkeys(T "<Plug>luasnip-jump-prev", "")
         else
