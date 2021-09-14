@@ -120,6 +120,42 @@ To update LunarVim:
 cd ~/.local/share/lunarvim/lvim && git pull
 :PackerSync
 ```
+## Known Issues
+If you get either of the following errors
+- init.lua:6: module 'bootstrap' not found:
+- /home/user/.config/nvim/config.lua not found, falling back to /home/user/.config/nvim/lv-config.lua
+
+Try the following:
+```bash
+which lvim
+# if output is /usr/local/bin/lvim remove it
+sudo rm /usr/local/bin/lvim
+
+which lvim
+# if output is ~/.local/bin/lvim, open lvim and run :PackerSync.  That should get you to a working state
+
+# otherwise if `which lvim` returns `not found`, 
+Make sure the `lvim` file exists in `~/.local/bin/lvim`.  
+If the file exists,make sure `~/.local/bin` is in your PATH.  If not, [add it](https://www.lunarvim.org/02-after-install.html#add-lvim-to-path)
+either reinstall again or manually add the lunarvim launcher
+
+If the file doesn't exist, create the file
+cd ~/.local/bin
+touch lvim
+chmod 755 lvim
+```
+
+And then add the following to the lvim file you created.  Replace all `torvalds` with your user name
+
+```bash
+#!/bin/sh
+
+export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-/home/torvalds/.config/lvim}"
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-/home/torvalds/.local/share/lunarvim}"
+
+exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+
+```
 
 ## Resources
 
