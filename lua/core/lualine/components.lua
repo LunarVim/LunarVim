@@ -17,31 +17,32 @@ return {
     function()
       return " "
     end,
-    left_padding = 0,
-    right_padding = 0,
+    padding = { left = 0, right = 0 },
     color = {},
-    condition = nil,
+    cond = nil,
   },
   branch = {
     "b:gitsigns_head",
     icon = " ",
     color = { gui = "bold" },
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
   },
   filename = {
     "filename",
     color = {},
-    condition = nil,
+    cond = nil,
   },
   diff = {
     "diff",
     source = diff_source,
     symbols = { added = "  ", modified = "柳", removed = " " },
-    color_added = { fg = colors.green },
-    color_modified = { fg = colors.yellow },
-    color_removed = { fg = colors.red },
+    diff_color = {
+      added = { fg = colors.green },
+      modified = { fg = colors.yellow },
+      removed = { fg = colors.red },
+    },
     color = {},
-    condition = nil,
+    cond = nil,
   },
   python_env = {
     function()
@@ -60,14 +61,14 @@ return {
       return ""
     end,
     color = { fg = colors.green },
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
   },
   diagnostics = {
     "diagnostics",
     sources = { "nvim_lsp" },
     symbols = { error = " ", warn = " ", info = " ", hint = " " },
     color = {},
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
   },
   treesitter = {
     function()
@@ -78,7 +79,7 @@ return {
       return ""
     end,
     color = { fg = colors.green },
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
   },
   lsp = {
     function(msg)
@@ -118,10 +119,10 @@ return {
     end,
     icon = " ",
     color = { gui = "bold" },
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
   },
-  location = { "location", condition = conditions.hide_in_width, color = {} },
-  progress = { "progress", condition = conditions.hide_in_width, color = {} },
+  location = { "location", cond = conditions.hide_in_width, color = {} },
+  progress = { "progress", cond = conditions.hide_in_width, color = {} },
   spaces = {
     function()
       local label = "Spaces: "
@@ -130,16 +131,16 @@ return {
       end
       return label .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
     end,
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
     color = {},
   },
   encoding = {
     "o:encoding",
-    upper = true,
+    fmt = string.upper,
     color = {},
-    condition = conditions.hide_in_width,
+    cond = conditions.hide_in_width,
   },
-  filetype = { "filetype", condition = conditions.hide_in_width, color = {} },
+  filetype = { "filetype", cond = conditions.hide_in_width, color = {} },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."
@@ -149,9 +150,8 @@ return {
       local index = math.ceil(line_ratio * #chars)
       return chars[index]
     end,
-    left_padding = 0,
-    right_padding = 0,
+    padding = { left = 0, right = 0 },
     color = { fg = colors.yellow, bg = colors.bg },
-    condition = nil,
+    cond = nil,
   },
 }

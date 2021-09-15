@@ -131,7 +131,6 @@ return {
     -- "hoob3rt/lualine.nvim",
     "shadmansaleh/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
-    commit = "62bfe80fb6e0cd51cec6fc9df9e1768f7d37d299",
     config = function()
       require("core.lualine").setup()
     end,
