@@ -37,7 +37,6 @@ return {
     source = diff_source,
     symbols = { added = "  ", modified = "柳", removed = " " },
     diff_color = {
-
       added = { fg = colors.green },
       modified = { fg = colors.yellow },
       removed = { fg = colors.red },
