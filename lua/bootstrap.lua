@@ -38,6 +38,8 @@ function M:init()
   self.cache_path = get_cache_dir()
 
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
+  self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
+  self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
 
   if os.getenv "LUNARVIM_RUNTIME_DIR" then
     vim.opt.rtp:remove(join_paths(vim.fn.stdpath "data", "site"))
@@ -69,12 +71,8 @@ function M:init()
   }
 
   require("plugin-loader"):init {
-    cache_path = self.cache_path,
-    runtime_dir = self.runtime_dir,
-    config_dir = self.config_dir,
-    install_path = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim"),
-    package_root = join_paths(self.runtime_dir, "site", "pack"),
-    compile_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua"),
+    package_root = self.pack_dir,
+    install_path = self.packer_install_dir,
   }
 
   return self
