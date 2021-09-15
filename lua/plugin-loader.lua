@@ -51,14 +51,13 @@ function plugin_loader:cache_reset()
 end
 
 function plugin_loader:load(configurations)
-  self.packer.startup(function(use)
+  return self.packer.startup(function(use)
     for _, plugins in ipairs(configurations) do
       for _, plugin in ipairs(plugins) do
         use(plugin)
       end
     end
   end)
-  return self.packer.compile()
 end
 
 return plugin_loader
