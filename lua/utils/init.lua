@@ -93,9 +93,11 @@ function utils.reload_lv_config()
   vim.cmd("source " .. utils.join_paths(get_runtime_dir(), "lvim", "lua", "plugins.lua"))
   local plugins = require "plugins"
   utils.toggle_autoformat()
-  require("plugin-loader"):load { plugins, lvim.plugins }
-  vim.cmd ":PackerCompile"
+  local plugin_loader = require "plugin-loader"
+  plugin_loader:cache_reset()
+  plugin_loader:load { plugins, lvim.plugins }
   vim.cmd ":PackerInstall"
+  vim.cmd ":PackerCompile"
   -- vim.cmd ":PackerClean"
   local null_ls = require "lsp.null-ls"
   null_ls.setup(vim.bo.filetype, { force_reload = true })
@@ -118,6 +120,18 @@ function utils.gsub_args(args)
   return args
 end
 
+--- Returns a table with the default values that are missing.
+--- either paramter can be empty.
+--@param config (table) table containing entries that take priority over defaults
+--@param default_config (table) table contatining default values if found
+function utils.apply_defaults(config, default_config)
+  config = config or {}
+  default_config = default_config or {}
+  local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
+  new_config = vim.tbl_deep_extend("keep", new_config, default_config)
+  return new_config
+end
+
 --- Checks whether a given path exists and is a file.
 --@param filename (string) path to check
 --@returns (bool)
@@ -131,6 +145,14 @@ function utils.join_paths(...)
   local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
   return result
 end
+
+function utils.lvim_cache_reset()
+  _G.__luacache.clear_cache()
+  _G.__luacache.save_cache()
+  require("plugin-loader"):cache_reset()
+end
+
+vim.cmd [[ command! LvimCacheReset lua require('utils').lvim_cache_reset() ]]
 
 return utils
 
