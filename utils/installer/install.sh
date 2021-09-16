@@ -34,10 +34,10 @@ declare -a __pip_deps=(
 function main() {
   cat <<'EOF'
 
-      88\                                                   88\               
-      88 |                                                  \__|              
-      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\  
-      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\ 
+      88\                                                   88\
+      88 |                                                  \__|
+      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\
+      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\
       88 |88 |  88 |88 |  88 | 888888$ |88 |  \__|\88\88  / 88 |88 / 88 / 88 |
       88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
       88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
@@ -138,8 +138,16 @@ function print_missing_dep_msg() {
 }
 
 function check_dep() {
-  if ! command -v "$1" &>/dev/null; then
-    print_missing_dep_msg "$1"
+  local failed_deps=''
+  while ! command -v "$1" &>/dev/null; do
+    failed_deps="$failed_deps $1"
+    shift
+  done
+  if [[ "$#" -ge 1 ]]; then
+    check_dep_return="$1"
+    return 0
+  else
+    print_missing_dep_msg "$failed_deps"
     exit 1
   fi
 }
@@ -156,14 +164,22 @@ function check_system_deps() {
 }
 
 function install_nodejs_deps() {
-  check_dep "npm"
-  echo "Installing node modules with npm.."
-  for dep in "${__npm_deps[@]}"; do
-    if ! npm ls -g "$dep" &>/dev/null; then
+  check_dep "yarn" "npm"
+  if [[ "$check_dep_return" == "npm" ]]; then
+    echo "Installing node modules with npm.."
+    for dep in "${__npm_deps[@]}"; do
+      if ! npm ls -g "$dep" &>/dev/null; then
+        printf "installing %s .." "$dep"
+        npm install -g "$dep"
+      fi
+    done
+  elif [[ "$check_dep_return" == "yarn" ]]; then
+    echo "Installing node modules with yarn.."
+    for dep in "${__npm_deps[@]}"; do
       printf "installing %s .." "$dep"
-      npm install -g "$dep"
-    fi
-  done
+      yarn global add "$dep"
+    done
+  fi
   echo "All NodeJS dependencies are succesfully installed"
 }
 
