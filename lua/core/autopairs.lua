@@ -7,8 +7,16 @@ function M.config()
     ---@usage  map <CR> on insert mode
     map_cr = true,
     ---@usage auto insert after select function or method item
-    -- NOTE: This should be wrapped into a function so that it is re-evaluated when opening new files
-    map_complete = vim.bo.filetype ~= "tex",
+    map_complete = true,
+    ---@usage automatically select the first item
+    auto_select = true,
+    ---@usage use insert confirm behavior instead of replace
+    insert = false,
+    ---@usage  -- modifies the function or method delimiter by filetypes
+    map_char = {
+      all = '(',
+      tex = '{'
+    },
     ---@usage check treesitter
     check_ts = true,
     ts_config = {
@@ -52,9 +60,11 @@ M.setup = function()
 
   if package.loaded["cmp"] then
     require("nvim-autopairs.completion.cmp").setup {
-      map_cr = true, --  map <CR> on insert mode
-      map_complete = true, -- it will auto insert `(` after select function or method item
-      auto_select = true, -- automatically select the first item
+      map_cr = lvim.builtin.autopairs.map_cr,
+      map_complete = lvim.builtin.autopairs.map_complete,
+      auto_select = lvim.builtin.autopairs.auto_select,
+      insert = lvim.builtin.autopairs.insert,
+      map_char = lvim.builtin.autopairs.map_char,
     }
   end
 
