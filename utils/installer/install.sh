@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#/ Usage: install.sh [<options>]
+#/
+#/ Options:
+#/     -h, --help    Print this help message
+#/     -y, --yes     Yes for all choices (Install NodeJS, Python, Rust dependencies)
+#/     -n, --no      No for all choices (Non interactive install)
+#/     --overwrite   Overwrite previous lvim configuration
+
 set -eo pipefail
 
 #Set branch to master unless specified by the user
@@ -31,7 +39,30 @@ declare -a __pip_deps=(
   "pynvim"
 )
 
+function parse_arguments() {
+  while (("$#")); do
+    case "$1" in
+      -y | --yes)
+        ARGS_INSTALL_NONINTERACTIVE="y"
+        ;;
+      -n | --no)
+        ARGS_INSTALL_NONINTERACTIVE="n"
+        ;;
+      --overwrite)
+        ARGS_OVERWRITE="y"
+        ;;
+      -h | --help)
+        grep "^#/" <"$0" | cut -c4-
+        exit 0
+        ;;
+    esac
+    shift
+  done
+}
+
 function main() {
+  parse_arguments "$@"
+
   cat <<'EOF'
 
       88\                                                   88\
@@ -61,17 +92,25 @@ EOF
 
   __add_separator "80"
 
-  echo "Would you like to install lunarvim's NodeJS dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
+  if [[ -z "$ARGS_INSTALL_NONINTERACTIVE" ]]; then
+    echo "Would you like to install lunarvim's NodeJS dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-  echo "Would you like to install lunarvim's Python dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
+    echo "Would you like to install lunarvim's Python dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
 
-  echo "Would you like to install lunarvim's Rust dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+    echo "Would you like to install lunarvim's Rust dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+  else
+    if [[ "$ARGS_INSTALL_NONINTERACTIVE" == y ]]; then
+      install_nodejs_deps
+      install_python_deps
+      install_rust_deps
+    fi
+  fi
 
   __add_separator "80"
 
@@ -80,17 +119,17 @@ EOF
 
   __add_separator "80"
 
-  case "$@" in
-    *--overwrite*)
-      echo "!!Warning!! -> Removing all lunarvim related config \
-        because of the --overwrite flag"
+  if [[ -n "$ARGS_OVERWRITE" ]]; then
+    echo "!!Warning!! -> Removing all lunarvim related config \
+      because of the --overwrite flag"
+    if [[ -z "$ARGS_INSTALL_NONINTERACTIVE" ]]; then
       read -p "Would you like to continue? [y]es or [n]o : " -r answer
       [ "$answer" == "${answer#[Yy]}" ] && exit 1
-      for dir in "${__lvim_dirs[@]}"; do
-        [ -d "$dir" ] && rm -rf "$dir"
-      done
-      ;;
-  esac
+    fi
+    for dir in "${__lvim_dirs[@]}"; do
+      [ -d "$dir" ] && rm -rf "$dir"
+    done
+  fi
 
   install_packer
 
