@@ -69,6 +69,8 @@ M.setup = function()
 
   vim.g.dashboard_session_directory = lvim.builtin.dashboard.session_directory
 
+  vim.g.dashboard_custom_footer = lvim.builtin.dashboard.footer
+
   require("core.autocmds").define_augroups {
     _dashboard = {
       -- seems to be nobuflisted that makes my stuff disappear will do more testing
