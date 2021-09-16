@@ -198,7 +198,7 @@ M.config = function()
             "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
             "view default log",
           },
-          D = { "<cmd>edit $LUNARVIM_CACHE_DIR/lunarvim.log<cr>", "Open the default logfile" },
+          D = { "<cmd>exe 'edit '.stdpath('cache').'/lunarvim.log'<cr>", "Open the default logfile" },
           n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
