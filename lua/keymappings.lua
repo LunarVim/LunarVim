@@ -5,8 +5,9 @@ local generic_opts = { noremap = true, silent = true }
 local opts = {
   insert_mode = generic_opts,
   normal_mode = generic_opts,
+  visual_select_mode = generic_opts,
   visual_mode = generic_opts,
-  visual_block_mode = generic_opts,
+  select_mode = generic_opts,
   command_mode = generic_opts,
   operator_mode = generic_opts,
   term_mode = { silent = true },
@@ -16,8 +17,9 @@ local mode_adapters = {
   insert_mode = "i",
   normal_mode = "n",
   term_mode = "t",
-  visual_and_select_mode = "v",
+  visual_select_mode = "v",
   visual_mode = "x",
+  select_mode = "s",
   command_mode = "c",
   operator_mode = "o",
 }
@@ -125,8 +127,8 @@ function M.config()
       ["<C-l>"] = "<C-\\><C-N><C-w>l",
     },
 
-    ---@usage change or add keymappings for visual mode
-    visual_and_select_mode = {
+    ---@usage change or add keymappings for visual and select mode
+    visual_select_mode = {
       -- Better indenting
       ["<"] = "<gv",
       [">"] = ">gv",
@@ -135,7 +137,7 @@ function M.config()
       -- ["P"] = '"0P',
     },
 
-    ---@usage change or add keymappings for visual block mode
+    ---@usage change or add keymappings for visual mode
     visual_mode = {
       -- Move selected line / block of text in visual mode
       ["K"] = ":move '<-2<CR>gv-gv",
@@ -145,6 +147,9 @@ function M.config()
       ["<A-j>"] = ":m '>+1<CR>gv-gv",
       ["<A-k>"] = ":m '<-2<CR>gv-gv",
     },
+
+    ---@usage change or add keymappings for select mode
+    select_mode = {},
 
     ---@usage change or add keymappings for command mode
     command_mode = {
@@ -169,6 +174,7 @@ function M.config()
   lvim.keys.visual_mode["ae"] = ":<C-u>keepjumps normal! ggVG<CR>"
   lvim.keys.operator_mode["ae"] = ":normal vae<CR>"
 
+  -- Replace <Alt> key with <Ctrl> key for MacOS
   if vim.fn.has "mac" == 1 then
     lvim.keys.normal_mode["<A-Up>"] = lvim.keys.normal_mode["<C-Up>"]
     lvim.keys.normal_mode["<A-Down>"] = lvim.keys.normal_mode["<C-Down>"]
