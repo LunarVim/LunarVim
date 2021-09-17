@@ -1,26 +1,27 @@
 local M = {}
 local Log = require "core.log"
 
-local generic_opts_any = { noremap = true, silent = true }
-
-local generic_opts = {
-  command_mode = generic_opts_any,
-  insert_mode = generic_opts_any,
-  normal_mode = generic_opts_any,
-  select_mode = generic_opts_any,
+local generic_opts = { noremap = true, silent = true }
+local opts = {
+  command_mode = generic_opts,
+  insert_mode = generic_opts,
+  normal_mode = generic_opts,
+  operator_mode = generic_opts,
+  select_mode = generic_opts,
   term_mode = { silent = true },
-  visual_mode = generic_opts_any,
-  visual_block_mode = generic_opts_any,
+  visual_mode = generic_opts,
+  visual_select_mode = generic_opts,
 }
 
 local mode_adapters = {
   command_mode = "c",
   insert_mode = "i",
   normal_mode = "n",
+  operator_mode = "o",
   select_mode = "s",
   term_mode = "t",
-  visual_mode = "v",
-  visual_block_mode = "x",
+  visual_mode = "x",
+  visual_select_mode = "v",
 }
 
 -- Append key mappings to lunarvim's defaults for a given mode
@@ -38,7 +39,7 @@ end
 -- @param key The key of keymap
 -- @param val Can be form as a mapping or tuple of mapping and user defined opt
 function M.set_keymaps(mode, key, val)
-  local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+  local opt = opts[mode] and opts[mode] or generic_opts
   if type(val) == "table" then
     opt = val[2] or opt
     val = val[1]
@@ -126,8 +127,8 @@ function M.config()
       ["<C-l>"] = "<C-\\><C-N><C-w>l",
     },
 
-    ---@usage change or add keymappings for visual mode
-    visual_mode = {
+    ---@usage change or add keymappings for visual and select mode
+    visual_select_mode = {
       -- Better indenting
       ["<"] = "<gv",
       [">"] = ">gv",
@@ -136,8 +137,8 @@ function M.config()
       -- ["P"] = '"0P',
     },
 
-    ---@usage change or add keymappings for visual block mode
-    visual_block_mode = {
+    ---@usage change or add keymappings for visual mode
+    visual_mode = {
       -- Move selected line / block of text in visual mode
       ["K"] = ":move '<-2<CR>gv-gv",
       ["J"] = ":move '>+1<CR>gv-gv",
@@ -147,6 +148,9 @@ function M.config()
       ["<A-k>"] = ":m '<-2<CR>gv-gv",
     },
 
+    ---@usage change or add keymappings for select mode
+    select_mode = {},
+
     ---@usage change or add keymappings for command mode
     command_mode = {
       -- navigate tab completion with <c-j> and <c-k>
@@ -154,6 +158,8 @@ function M.config()
       ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
       ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
     },
+
+    operator_mode = {},
   }
 
   if vim.fn.has "mac" == 1 then
