@@ -14,8 +14,8 @@ function M.config()
     insert = false,
     ---@usage  -- modifies the function or method delimiter by filetypes
     map_char = {
-      all = '(',
-      tex = '{'
+      all = "(",
+      tex = "{",
     },
     ---@usage check treesitter
     check_ts = true,
