@@ -33,7 +33,11 @@ function _G.get_cache_dir()
 end
 
 function _G.get_version(type)
-  local lvim_full_ver = vim.fn.system("git -C " .. get_runtime_dir() .. "/lvim describe --tag")
+  local lvim_full_ver = vim.fn.system("git -C " .. get_runtime_dir() .. "/lvim describe --tags")
+
+  if string.match(lvim_full_ver, "%d") == nil then
+    return nil
+  end
   if type == "short" then
     return vim.fn.split(lvim_full_ver, "-")[1]
   else
