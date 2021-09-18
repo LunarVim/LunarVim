@@ -31,7 +31,7 @@ Make sure you have the release version of Neovim (0.5).
 If you have previously installed LunarVim, make sure to remove `/usr/local/bin/lvim`, as we've moved the launcher to `~/.local/bin/lvim`
 
 ``` bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash
 ```
 
 ## Install Language support
