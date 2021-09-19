@@ -75,6 +75,7 @@ lvim = {
         prefix = "",
         spacing = 0,
       },
+      update_in_insert = false,
       underline = true,
       severity_sort = true,
     },

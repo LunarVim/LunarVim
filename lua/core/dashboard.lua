@@ -69,7 +69,23 @@ M.setup = function()
 
   vim.g.dashboard_session_directory = lvim.builtin.dashboard.session_directory
 
-  vim.g.dashboard_custom_footer = lvim.builtin.dashboard.footer
+  local lvim_site = "lunarvim.org"
+  local lvim_version = get_version "short"
+  local num_plugins_loaded = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/start", "*", 0, 1)
+
+  local footer = {
+    "LunarVim loaded " .. num_plugins_loaded .. " plugins ",
+    "",
+    lvim_site,
+  }
+
+  if lvim_version then
+    table.insert(footer, 2, "")
+    table.insert(footer, 3, "v" .. lvim_version)
+  end
+
+  local text = require "interface.text"
+  vim.g.dashboard_custom_footer = text.align_center({ width = 0 }, footer, 0.49) -- Use 0.49 as  counts for 2 characters
 
   require("core.autocmds").define_augroups {
     _dashboard = {

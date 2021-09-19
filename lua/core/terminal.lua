@@ -1,5 +1,6 @@
 local M = {}
 local utils = require "utils"
+local Log = require "core.log"
 
 M.config = function()
   lvim.builtin["terminal"] = {
@@ -81,7 +82,6 @@ end
 M._exec_toggle = function(exec)
   local binary = M._split(exec)[1]
   if vim.fn.executable(binary) ~= 1 then
-    local Log = require "core.log"
     Log:error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
@@ -92,12 +92,13 @@ end
 
 local function get_log_path(name)
   --handle custom paths not managed by Plenary.log
-  local logger = require "core.log"
   local file
   if name == "nvim" then
-    file = utils.join_paths(get_cache_dir(), "log")
+    file = utils.join_paths(vim.fn.stdpath "cache", "log")
+  elseif name == "packer.nvim" then
+    file = utils.join_paths(vim.fn.stdpath "cache", "packer.nvim.log")
   else
-    file = logger:new({ plugin = name }):get_path()
+    file = Log:get_path()
   end
   if utils.is_file(file) then
     return file
