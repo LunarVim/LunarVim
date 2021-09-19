@@ -43,11 +43,12 @@ function M.register(providers, filetype, options)
 end
 
 function M.setup()
-  local null_status_ok, null_ls = pcall(require, "null-ls")
-  if null_status_ok then
-    null_ls.config()
-    require("lspconfig")["null-ls"].setup {}
+  local status_ok, null_ls = pcall(require, "null-ls")
+  if not status_ok then
+    return
   end
+  null_ls.config()
+  require("lspconfig")["null-ls"].setup {}
 
   local formatters = require "lsp.null-ls.formatters"
   local linters = require "lsp.null-ls.linters"
