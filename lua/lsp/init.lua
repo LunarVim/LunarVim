@@ -1,7 +1,8 @@
 local M = {}
+local lspconfig = require "lspconfig"
 local Log = require "core.log"
-
 local utils = require "utils"
+local lsp_utils = require "lsp.utils"
 
 local function lsp_highlight_document(client)
   if lvim.lsp.document_highlight == false then
@@ -66,34 +67,6 @@ function M.common_capabilities()
   return capabilities
 end
 
-function M.get_ls_capabilities(client_id)
-  local client
-  if not client_id then
-    local buf_clients = vim.lsp.buf_get_clients()
-    for _, buf_client in ipairs(buf_clients) do
-      if buf_client.name ~= "null-ls" then
-        client_id = buf_client.id
-        break
-      end
-    end
-  end
-  if not client_id then
-    error "Unable to determine client_id"
-  end
-
-  client = vim.lsp.get_client_by_id(tonumber(client_id))
-
-  local enabled_caps = {}
-
-  for k, v in pairs(client.resolved_capabilities) do
-    if v == true then
-      table.insert(enabled_caps, k)
-    end
-  end
-
-  return enabled_caps
-end
-
 function M.common_on_init(client, bufnr)
   if lvim.lsp.on_init_callback then
     lvim.lsp.on_init_callback(client, bufnr)
@@ -111,26 +84,16 @@ function M.common_on_attach(client, bufnr)
   add_lsp_buffer_keybindings(bufnr)
 end
 
-function M.setup(lang, opts)
+function M.setup_by_ft(lang, opts)
   vim.validate {
     lang = { lang, "string" },
     opts = { opts, "table" },
+    provider = { opts.lsp.provider, "string" },
   }
-  local lsp_utils = require "lsp.utils"
 
-  if (opts.lsp.active ~= nil and not opts.lsp.active) or lsp_utils.is_client_active(opts.lsp.provider) then
+  if lsp_utils.is_client_active(opts.lsp.provider) then
     return
   end
-
-  -- FIXME: re-enable this
-  local overrides = lvim.lsp.override
-  if type(overrides) == "table" then
-    if vim.tbl_contains(overrides, lang) then
-      return
-    end
-  end
-
-  local lspconfig = require "lspconfig"
 
   if not opts.lsp.setup.on_attach then
     opts.lsp.setup.on_attach = M.common_on_attach
@@ -154,7 +117,16 @@ local function bootstrap_nlsp()
   end
 end
 
-function M.global_setup()
+local function is_overrided(lang)
+  local overrides = lvim.lsp.override
+  if type(overrides) == "table" then
+    if vim.tbl_contains(overrides, lang) then
+      return
+    end
+  end
+end
+
+function M.setup()
   vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
   for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
@@ -169,14 +141,18 @@ function M.global_setup()
   Log:debug("Loading " .. #configured_languages .. " language(s): " .. vim.inspect(configured_languages))
 
   for _, lang in ipairs(configured_languages) do
-    local lang_module = "lsp.providers." .. lang
-    local status_ok, config = pcall(require, lang_module)
-    if status_ok then
-      if config.lsp.provider ~= nil and config.lsp.provider ~= "" then
-        M.setup(lang, config)
+    if not is_overrided(lang) then
+      local lang_module = "lsp.providers." .. lang
+      local status_ok, config = pcall(require, lang_module)
+      if status_ok then
+        M.setup_by_ft(lang, config)
       end
     end
   end
+
+  require("lsp.null-ls").setup()
+
+  require("utils").toggle_autoformat()
 end
 
 return M
