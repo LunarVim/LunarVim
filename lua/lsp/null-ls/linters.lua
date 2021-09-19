@@ -62,12 +62,12 @@ function M.list_configured(linter_configs)
   return { supported = linters, unsupported = errors }
 end
 
-function M.setup(filetype, options)
-  if not lvim.lang[filetype] or (linters_by_ft[filetype] and not options.force_reload) then
+function M.setup(linter_configs, filetype, options)
+  if vim.tbl_isempty(linter_configs) or (linters_by_ft[filetype] and not options.force_reload) then
     return
   end
 
-  linters_by_ft[filetype] = M.list_configured(lvim.lang[filetype].linters)
+  linters_by_ft[filetype] = M.list_configured(linter_configs)
   null_ls.register { sources = linters_by_ft[filetype].supported }
 end
 

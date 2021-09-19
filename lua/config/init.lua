@@ -23,7 +23,8 @@ function M:init(opts)
   local settings = require "config.settings"
   settings.load_options()
 
-  require("lsp.manager").load_configs()
+  lvim.lsp = require "lsp.config"
+  require("lsp.manager").init_defaults()
 end
 
 --- Override the configuration with a user provided one

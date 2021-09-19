@@ -62,12 +62,12 @@ function M.list_configured(formatter_configs)
   return { supported = formatters, unsupported = errors }
 end
 
-function M.setup(filetype, options)
-  if not lvim.lang[filetype] or (formatters_by_ft[filetype] and not options.force_reload) then
+function M.setup(formatter_configs, filetype, options)
+  if vim.tbl_isempty(formatter_configs) or (formatters_by_ft[filetype] and not options.force_reload) then
     return
   end
 
-  formatters_by_ft[filetype] = M.list_configured(lvim.lang[filetype].formatters)
+  formatters_by_ft[filetype] = M.list_configured(formatter_configs)
   null_ls.register { sources = formatters_by_ft[filetype].supported }
 end
 

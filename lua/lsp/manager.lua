@@ -1,57 +1,54 @@
 local M = {}
+local utils = require "utils"
+local configs_dir = utils.join_paths(get_runtime_dir(), "lvim", "lua", "lsp", "providers")
+local ftplugin_dir = utils.join_paths(get_runtime_dir(), "lvim", "ftplugin")
 
-local uv = vim.loop
-
-local function write_async(path, txt, flag)
-  uv.fs_open(path, flag, 438, function(open_err, fd)
-    assert(not open_err, open_err)
-    uv.fs_write(fd, txt, -1, function(write_err)
-      assert(not write_err, write_err)
-      uv.fs_close(fd, function(close_err)
-        assert(not close_err, close_err)
-      end)
-    end)
-  end)
-end
-
-function M.load_configs()
-  lvim.lang = require "lsp.templates"
-end
-
-function M.gen_ftplugin()
-  local configs = require("lsp.templates").configs
-  for k, v in pairs(configs) do
-    -- local ft_runtime_dir = uv.os_homedir() .. "/.local/share/lunarvim/site/ftplugin"
-    local ft_runtime_dir = uv.os_homedir() .. "/.local/share/lunarvim/lvim/test"
-    local filename = ft_runtime_dir .. "/" .. k .. ".lua"
-    local prefix = [[local opts = ]]
-    local setup_cmd = [[ require("lsp").setup("]] .. k .. [[", opts.lsp.setup)]]
-    write_async(filename, prefix .. vim.inspect(v) .. "\n" .. setup_cmd, "w")
+function M.init_defaults(languages)
+  languages = languages or lvim.ensure_configured
+  for _, entry in ipairs(languages) do
+    if not lvim.lang[entry] then
+      lvim.lang[entry] = {
+        formatters = {},
+        linters = {},
+      }
+    end
   end
 end
 
-function M.global_setup()
-  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
-
-  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+function M.ensure_configured(languages)
+  local status_ok, lspinstall = pcall(require, "lspinstall")
+  if not status_ok then
+    return
   end
-
-  require("lsp.handlers").setup()
-
-  local null_status_ok, null_ls = pcall(require, "null-ls")
-  if null_status_ok then
-    null_ls.config()
-    require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
+  local installer_supported_languages = lspinstall.available_servers()
+  for _, entry in ipairs(languages) do
+    if vim.tbl_contains(installer_supported_languages, entry) then
+      if not lspinstall.is_server_installer(entry) then
+        lspinstall.install_server(entry)
+      end
+    end
   end
+end
 
-  local utils = require "utils"
-
-  local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
-  if lsp_settings_status_ok then
-    lsp_settings.setup {
-      config_home = utils.join_paths(get_config_dir(), "lsp-settings"),
-    }
+function M.gen_providers_configs()
+  local configs = require "lsp.templates"
+  for lang, config in pairs(configs) do
+    -- make sure the directory exists
+    if config.lsp and config.lsp.provider then
+      vim.fn.mkdir(configs_dir, "p")
+      local filename = utils.join_paths(configs_dir, lang .. ".lua")
+      local prefix = [[local opts = ]]
+      local postfix = "return opts"
+      utils.write_file(filename, prefix .. vim.inspect(config) .. "\n" .. postfix, "w")
+      -- local setup_cmd = [[ require("lsp").setup("]] .. lang .. [[", opts)]]
+      -- write_async(filename, prefix .. vim.inspect(config) .. "\n" .. setup_cmd, "w")
+    else
+      vim.fn.mkdir(ftplugin_dir, "p")
+      local filename = utils.join_paths(ftplugin_dir, lang .. ".lua")
+      local prefix = [[local opts = ]]
+      local postfix = "return opts"
+      utils.write_file(filename, prefix .. vim.inspect(config) .. "\n" .. postfix, "w")
+    end
   end
 end
 
