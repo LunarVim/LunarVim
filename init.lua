@@ -21,9 +21,10 @@ vim.cmd("colorscheme " .. lvim.colorscheme)
 local commands = require "core.commands"
 commands.load(commands.defaults)
 
-require("lsp.null-ls").setup()
-require("lsp").global_setup()
-
-require("utils").toggle_autoformat()
-
 require("keymappings").setup()
+
+local lsp_status_ok, _ = pcall(require, "lspconfig")
+
+if lsp_status_ok then
+  require("lsp").setup()
+end
