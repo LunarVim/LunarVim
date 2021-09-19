@@ -235,7 +235,7 @@ function install_python_deps() {
 }
 
 function __attempt_to_install_with_cargo() {
-  if ! command -v cargo &>/dev/null; then
+  if command -v cargo &>/dev/null; then
     echo "Installing missing Rust dependency with cargo"
     cargo install "$1"
   else
