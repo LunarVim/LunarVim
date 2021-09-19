@@ -18,10 +18,12 @@ Log:debug "Starting LunarVim"
 vim.g.colors_name = lvim.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
 vim.cmd("colorscheme " .. lvim.colorscheme)
 
-require("utils").toggle_autoformat()
 local commands = require "core.commands"
 commands.load(commands.defaults)
 
-require("lsp.manager").global_setup()
+require("lsp.null-ls").setup()
+require("lsp").global_setup()
+
+require("utils").toggle_autoformat()
 
 require("keymappings").setup()

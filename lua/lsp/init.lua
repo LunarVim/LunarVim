@@ -1,6 +1,8 @@
 local M = {}
 local Log = require "core.log"
 
+local utils = require "utils"
+
 local function lsp_highlight_document(client)
   if lvim.lsp.document_highlight == false then
     return -- we don't need further
@@ -98,14 +100,6 @@ function M.common_on_init(client, bufnr)
     Log:debug "Called lsp.on_init_callback"
     return
   end
-
-  local formatters = lvim.lang[vim.bo.filetype].formatters
-  if not vim.tbl_isempty(formatters) and formatters[1]["exe"] ~= nil and formatters[1].exe ~= "" then
-    client.resolved_capabilities.document_formatting = false
-    Log:debug(
-      string.format("Overriding language server [%s] with format provider [%s]", client.name, formatters[1].exe)
-    )
-  end
 end
 
 function M.common_on_attach(client, bufnr)
@@ -115,16 +109,20 @@ function M.common_on_attach(client, bufnr)
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)
-  require("lsp.null-ls").setup(vim.bo.filetype)
 end
 
-function M.setup(lang)
+function M.setup(lang, opts)
+  vim.validate {
+    lang = { lang, "string" },
+    opts = { opts, "table" },
+  }
   local lsp_utils = require "lsp.utils"
-  local lsp = lvim.lang[lang].lsp
-  if (lsp.active ~= nil and not lsp.active) or lsp_utils.is_client_active(lsp.provider) then
+
+  if (opts.lsp.active ~= nil and not opts.lsp.active) or lsp_utils.is_client_active(opts.lsp.provider) then
     return
   end
 
+  -- FIXME: re-enable this
   local overrides = lvim.lsp.override
   if type(overrides) == "table" then
     if vim.tbl_contains(overrides, lang) then
@@ -132,20 +130,52 @@ function M.setup(lang)
     end
   end
 
-  if lsp.provider ~= nil and lsp.provider ~= "" then
-    local lspconfig = require "lspconfig"
+  local lspconfig = require "lspconfig"
 
-    if not lsp.setup.on_attach then
-      lsp.setup.on_attach = M.common_on_attach
-    end
-    if not lsp.setup.on_init then
-      lsp.setup.on_init = M.common_on_init
-    end
-    if not lsp.setup.capabilities then
-      lsp.setup.capabilities = M.common_capabilities()
-    end
+  if not opts.lsp.setup.on_attach then
+    opts.lsp.setup.on_attach = M.common_on_attach
+  end
+  if not opts.lsp.setup.on_init then
+    opts.lsp.setup.on_init = M.common_on_init
+  end
+  if not opts.lsp.setup.capabilities then
+    opts.lsp.setup.capabilities = M.common_capabilities()
+  end
 
-    lspconfig[lsp.provider].setup(lsp.setup)
+  lspconfig[opts.lsp.provider].setup(opts.lsp.setup)
+end
+
+local function bootstrap_nlsp()
+  local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
+  if lsp_settings_status_ok then
+    lsp_settings.setup {
+      config_home = utils.join_paths(get_config_dir(), "lsp-settings"),
+    }
+  end
+end
+
+function M.global_setup()
+  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
+
+  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+  end
+
+  require("lsp.handlers").setup()
+
+  bootstrap_nlsp()
+
+  local configured_languages = lvim.ensure_configured
+  Log:debug("Loading " .. #configured_languages .. " language(s): " .. vim.inspect(configured_languages))
+
+  for _, lang in ipairs(configured_languages) do
+    local lang_module = "lsp.providers." .. lang
+    local status_ok, config = pcall(require, lang_module)
+    if status_ok then
+      if config.lsp.provider ~= nil and config.lsp.provider ~= "" then
+        M.setup(lang, config)
+      end
+    end
   end
 end
 
