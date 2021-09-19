@@ -1,0 +1,57 @@
+return {
+  -- FIXME: stop using hard-coded paths for LspInstall
+  ls_install_prefix = vim.fn.stdpath "data" .. "/lspinstall",
+  completion = {
+    -- FIXME: why is this not using 'lsp.kind'?
+    item_kind = {
+      "   (Text) ",
+      "   (Method)",
+      "   (Function)",
+      "   (Constructor)",
+      "   (Field)",
+      "   (Variable)",
+      "   (Class)",
+      " ﰮ  (Interface)",
+      "   (Module)",
+      "   (Property)",
+      " 塞 (Unit)",
+      "   (Value)",
+      " 練 (Enum)",
+      "   (Keyword)",
+      "   (Snippet)",
+      "   (Color)",
+      "   (File)",
+      "   (Reference)",
+      "   (Folder)",
+      "   (EnumMember)",
+      " ﲀ  (Constant)",
+      "   (Struct)",
+      "   (Event)",
+      "   (Operator)",
+      "   (TypeParameter)",
+    },
+  },
+  diagnostics = {
+    signs = {
+      active = true,
+      values = {
+        { name = "LspDiagnosticsSignError", text = "" },
+        { name = "LspDiagnosticsSignWarning", text = "" },
+        { name = "LspDiagnosticsSignHint", text = "" },
+        { name = "LspDiagnosticsSignInformation", text = "" },
+      },
+    },
+    virtual_text = {
+      prefix = "",
+      spacing = 0,
+    },
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+  },
+  override = {},
+  document_highlight = true,
+  popup_border = "single",
+  on_attach_callback = nil,
+  on_init_callback = nil,
+}
