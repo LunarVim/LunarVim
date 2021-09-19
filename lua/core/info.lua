@@ -75,7 +75,7 @@ function M.toggle_popup(ft)
   local document_formatting = false
   if client ~= nil then
     is_client_active = not client.is_stopped()
-    client_enabled_caps = require("lsp").get_ls_capabilities(client.id)
+    client_enabled_caps = require("lsp.utils").get_ls_capabilities(client.id)
     client_name = client.name
     client_id = client.id
     document_formatting = client.resolved_capabilities.document_formatting

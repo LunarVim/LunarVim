@@ -30,56 +30,32 @@ function M.get_active_client_by_ft(filetype)
   return nil
 end
 
-function M.get_all_supported_servers()
-  return {
-    "bashls",
-    "beancount",
-    "bicep",
-    "clangd",
-    "clojure_lsp",
-    "cmake",
-    "crystalline",
-    "cssls",
-    -- "dartls",
-    "dockerls",
-    "elixirls",
-    "elmls",
-    "erlangls",
-    "fortls",
-    "gdscript",
-    "gopls",
-    "graphql",
-    "hls",
-    "html",
-    "intelephense",
-    -- "jdtls",
-    "jsonls",
-    "julials",
-    "kotlin_language_server",
-    "metals",
-    "omnisharp",
-    "powershell_es",
-    "puppet",
-    "pyright",
-    "r_language_server",
-    "rnix",
-    "rust_analyzer",
-    "serve_d",
-    "solang",
-    "solargraph",
-    "sourcekit",
-    "sqls",
-    "sumneko_lua",
-    "svelte",
-    "tailwindcss",
-    "terraformls",
-    "texlab",
-    "tsserver",
-    "vimls",
-    "vuels",
-    "yamlls",
-    "zls",
-  }
+function M.get_ls_capabilities(client_id)
+  local client
+  if not client_id then
+    local buf_clients = vim.lsp.buf_get_clients()
+    for _, buf_client in ipairs(buf_clients) do
+      if buf_client.name ~= "null-ls" then
+        client_id = buf_client.id
+        break
+      end
+    end
+  end
+  if not client_id then
+    error "Unable to determine client_id"
+  end
+
+  client = vim.lsp.get_client_by_id(tonumber(client_id))
+
+  local enabled_caps = {}
+
+  for k, v in pairs(client.resolved_capabilities) do
+    if v == true then
+      table.insert(enabled_caps, k)
+    end
+  end
+
+  return enabled_caps
 end
 
 return M

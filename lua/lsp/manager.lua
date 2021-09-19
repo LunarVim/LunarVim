@@ -1,7 +1,56 @@
 local M = {}
-local utils = require "utils"
-local configs_dir = utils.join_paths(get_runtime_dir(), "lvim", "lua", "lsp", "providers")
-local ftplugin_dir = utils.join_paths(get_runtime_dir(), "lvim", "ftplugin")
+
+function M.get_all_supported_servers()
+  return {
+    "bashls",
+    "beancount",
+    "bicep",
+    "clangd",
+    "clojure_lsp",
+    "cmake",
+    "crystalline",
+    "cssls",
+    -- "dartls",
+    "dockerls",
+    "elixirls",
+    "elmls",
+    "erlangls",
+    "fortls",
+    "gdscript",
+    "gopls",
+    "graphql",
+    "hls",
+    "html",
+    "intelephense",
+    -- "jdtls",
+    "jsonls",
+    "julials",
+    "kotlin_language_server",
+    "metals",
+    "omnisharp",
+    "powershell_es",
+    "puppet",
+    "pyright",
+    "r_language_server",
+    "rnix",
+    "rust_analyzer",
+    "serve_d",
+    "solang",
+    "solargraph",
+    "sourcekit",
+    "sqls",
+    "sumneko_lua",
+    "svelte",
+    "tailwindcss",
+    "terraformls",
+    "texlab",
+    "tsserver",
+    "vimls",
+    "vuels",
+    "yamlls",
+    "zls",
+  }
+end
 
 function M.init_defaults(languages)
   languages = languages or lvim.ensure_configured
@@ -26,28 +75,6 @@ function M.ensure_configured(languages)
       if not lspinstall.is_server_installer(entry) then
         lspinstall.install_server(entry)
       end
-    end
-  end
-end
-
-function M.gen_providers_configs()
-  local configs = require "lsp.templates"
-  for lang, config in pairs(configs) do
-    -- make sure the directory exists
-    if config.lsp and config.lsp.provider then
-      vim.fn.mkdir(configs_dir, "p")
-      local filename = utils.join_paths(configs_dir, lang .. ".lua")
-      local prefix = [[local opts = ]]
-      local postfix = "return opts"
-      utils.write_file(filename, prefix .. vim.inspect(config) .. "\n" .. postfix, "w")
-      -- local setup_cmd = [[ require("lsp").setup("]] .. lang .. [[", opts)]]
-      -- write_async(filename, prefix .. vim.inspect(config) .. "\n" .. setup_cmd, "w")
-    else
-      vim.fn.mkdir(ftplugin_dir, "p")
-      local filename = utils.join_paths(ftplugin_dir, lang .. ".lua")
-      local prefix = [[local opts = ]]
-      local postfix = "return opts"
-      utils.write_file(filename, prefix .. vim.inspect(config) .. "\n" .. postfix, "w")
     end
   end
 end
