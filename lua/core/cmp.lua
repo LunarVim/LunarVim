@@ -73,10 +73,10 @@ M.config = function()
       { name = "crates" },
     },
     mapping = {
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-D>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-F>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
-      ["<Tab>"] = cmp.mapping(function()
+      ["<TAB>"] = cmp.mapping(function()
         if vim.fn.pumvisible() == 1 then
           vim.fn.feedkeys(T "<down>", "n")
         elseif luasnip.expand_or_jumpable() then
@@ -92,7 +92,7 @@ M.config = function()
         "i",
         "s",
       }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
+      ["<S-TAB>"] = cmp.mapping(function(fallback)
         if vim.fn.pumvisible() == 1 then
           vim.fn.feedkeys(T "<up>", "n")
         elseif luasnip.jumpable(-1) then
@@ -105,8 +105,8 @@ M.config = function()
         "s",
       }),
 
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
+      ["<C-SPACE>"] = cmp.mapping.complete(),
+      ["<C-E>"] = cmp.mapping.close(),
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
