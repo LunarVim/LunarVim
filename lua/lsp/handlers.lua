@@ -130,14 +130,19 @@ function M.show_line_diagnostics()
       width = string.len(diags[i].message)
     end
   end
+  local max_width = 120
+  if width < max_width then
+    max_width = width
+  end
 
-  opts = vim.lsp.util.make_floating_popup_options(width, height, opts)
+  opts = vim.lsp.util.make_floating_popup_options(max_width, height, opts)
   opts["style"] = "minimal"
   opts["border"] = "rounded"
 
   vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
+  vim.api.nvim_win_set_option(winnr, "wrap", true)
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
   for i, diag in ipairs(diags) do
     local message = diag.message:gsub("[\n\r]", " ")
