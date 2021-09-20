@@ -20,7 +20,7 @@ Configuration in `~/.config/lvim/config.lua`:
 
 ```lua
 -- exe value can be "rustfmt"
-lvim.lang.python.formatters = { { exe = "rustfmt" } }
+lvim.lang.rust.formatters = { { exe = "rustfmt" } }
 ```
 
 ## LSP Settings
@@ -46,25 +46,25 @@ dap_install.config("rust", {})
 ```lua
 lvim.lsp.override = { "rust" }
 lvim.plugins = {
-    {
-      "simrat39/rust-tools.nvim",
-      config = function()
-        require("rust-tools").setup({
-          tools = {
-            autoSetHints = true,
-            hover_with_actions = true,
-            runnables = {
-              use_telescope = true,
-            },
+  {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      require("rust-tools").setup({
+        tools = {
+          autoSetHints = true,
+          hover_with_actions = true,
+          runnables = {
+            use_telescope = true,
           },
-          server = {
-            cmd = { vim.fn.stdpath "data" .. "/lspinstall/rust/rust-analyzer" },
-            on_attach = require("lsp").common_on_attach,
-            on_init = require("lsp").common_on_init,
-          },
+        },
+        server = {
+          cmd = { vim.fn.stdpath "data" .. "/lspinstall/rust/rust-analyzer" },
+          on_attach = require("lsp").common_on_attach,
+          on_init = require("lsp").common_on_init,
+        },
         })
-      end,
-      ft = { "rust", "rs" },
-    },
+    end,
+    ft = { "rust", "rs" },
+  },
 }
 ```
