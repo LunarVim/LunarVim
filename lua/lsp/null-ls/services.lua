@@ -28,6 +28,7 @@ local local_providers = {
   prettier_d_slim = { find = from_node_modules },
   eslint_d = { find = from_node_modules },
   eslint = { find = from_node_modules },
+  stylelint = { find = from_node_modules },
 }
 
 function M.find_command(command)
