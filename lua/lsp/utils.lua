@@ -15,19 +15,17 @@ function M.disable_formatting_capability(client)
   client.resolved_capabilities.document_formatting = false
   require("core.log"):debug(string.format("Turning off formatting capability for language server [%s] ", client.name))
 end
--- FIXME: this should return a list instead
-function M.get_active_client_by_ft(filetype)
-  if not lvim.lang[filetype] or not lvim.lang[filetype].lsp then
-    return nil
-  end
 
+function M.get_active_client_by_ft(filetype)
+  local matches = {}
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
-    if client.name == lvim.lang[filetype].lsp.provider then
-      return client
+    local supported_filetypes = client.config.filetypes or {}
+    if client.name ~= "null-ls" and vim.tbl_contains(supported_filetypes, filetype) then
+      table.insert(matches, client)
     end
   end
-  return nil
+  return matches
 end
 
 function M.get_ls_capabilities(client_id)
@@ -43,6 +41,7 @@ function M.get_ls_capabilities(client_id)
   end
   if not client_id then
     error "Unable to determine client_id"
+    return
   end
 
   client = vim.lsp.get_client_by_id(tonumber(client_id))
