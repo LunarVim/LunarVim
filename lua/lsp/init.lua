@@ -114,7 +114,7 @@ local function bootstrap_nlsp()
   end
 end
 
-local function is_overrided(lang)
+local function is_overridden(lang)
   local overrides = lvim.lsp.override
   if type(overrides) == "table" then
     if vim.tbl_contains(overrides, lang) then
@@ -138,7 +138,7 @@ function M.setup()
   Log:debug("Loading " .. #configured_languages .. " language(s): " .. vim.inspect(configured_languages))
 
   for _, lang in ipairs(configured_languages) do
-    if not is_overrided(lang) then
+    if not is_overridden(lang) then
       local lang_module = "lsp.providers." .. lang
       local status_ok, config = pcall(require, lang_module)
       if status_ok then

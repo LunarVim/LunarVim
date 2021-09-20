@@ -10,6 +10,7 @@ local M = {
 }
 
 local fmt = string.format
+local text = require "interface.text"
 
 local function str_list(list)
   return fmt("[ %s ]", table.concat(list, ", "))
@@ -65,32 +66,14 @@ local function tbl_set_highlight(terms, highlight_group)
   end
 end
 
-function M.toggle_popup(ft)
-  local lsp_utils = require "lsp.utils"
-  local client = lsp_utils.get_active_client_by_ft(ft)
-  local is_client_active = false
-  local client_enabled_caps = {}
-  local client_name = ""
-  local client_id = 0
-  local document_formatting = false
-  if client ~= nil then
-    is_client_active = not client.is_stopped()
-    client_enabled_caps = require("lsp.utils").get_ls_capabilities(client.id)
-    client_name = client.name
-    client_id = client.id
-    document_formatting = client.resolved_capabilities.document_formatting
-  end
-
-  local header = {
-    fmt("Detected filetype:      %s", ft),
-    fmt("Treesitter active:      %s", tostring(next(vim.treesitter.highlighter.active) ~= nil)),
-  }
-
-  local text = require "interface.text"
-  local lsp_info = {
-    "Language Server Protocol (LSP) info",
-    fmt("* Associated server:    %s", client_name),
-    fmt("* Active:               %s (id: %d)", tostring(is_client_active), client_id),
+local function make_client_info(client)
+  local client_enabled_caps = require("lsp.utils").get_ls_capabilities(client.id)
+  local name = client.name
+  local id = client.id
+  local document_formatting = client.resolved_capabilities.document_formatting
+  local client_info = {
+    fmt("* Name:                 %s", name),
+    fmt("* Id:                   %s", tostring(id)),
     fmt("* Supports formatting:  %s", tostring(document_formatting)),
   }
   if not vim.tbl_isempty(client_enabled_caps) then
@@ -99,8 +82,32 @@ function M.toggle_popup(ft)
     local enabled_caps = text.format_table(client_enabled_caps, 3, " | ")
     enabled_caps = text.shift_right(enabled_caps, caps_text_len)
     enabled_caps[1] = fmt("%s%s", caps_text, enabled_caps[1]:sub(caps_text_len + 1))
-    vim.list_extend(lsp_info, enabled_caps)
+    vim.list_extend(client_info, enabled_caps)
   end
+
+  return client_info
+end
+
+function M.toggle_popup(ft)
+  local lsp_utils = require "lsp.utils"
+  local clients = lsp_utils.get_active_client_by_ft(ft)
+  local client_names = {}
+
+  local header = {
+    fmt("Detected filetype:      %s", ft),
+    fmt("Treesitter active:      %s", tostring(next(vim.treesitter.highlighter.active) ~= nil)),
+  }
+
+  local lsp_info = {
+    "Language Server Protocol (LSP) info",
+    fmt "* Associated server(s):",
+  }
+
+  for _, client in pairs(clients) do
+    vim.list_extend(lsp_info, make_client_info(client))
+    table.insert(client_names, client.name)
+  end
+
   local null_ls = require "lsp.null-ls"
   local registered_providers = null_ls.list_supported_provider_names(ft)
   local registered_count = vim.tbl_count(registered_providers)
@@ -171,7 +178,6 @@ function M.toggle_popup(ft)
     tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
     -- tbl_set_highlight(require("lsp.null-ls.formatters").list_available(ft), "LvimInfoIdentifier")
     -- tbl_set_highlight(require("lsp.null-ls.linters").list_available(ft), "LvimInfoIdentifier")
-    vim.cmd('let m=matchadd("LvimInfoIdentifier", "' .. client_name .. '")')
   end
 
   local Popup = require("interface.popup"):new {

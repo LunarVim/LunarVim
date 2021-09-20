@@ -96,14 +96,11 @@ return {
       local buf_client_names = {}
 
       -- add client
-      local utils = require "lsp.utils"
-      local active_client = utils.get_active_client_by_ft(buf_ft)
       for _, client in pairs(buf_clients) do
         if client.name ~= "null-ls" then
           table.insert(buf_client_names, client.name)
         end
       end
-      vim.list_extend(buf_client_names, active_client or {})
 
       -- add formatter
       local formatters = require "lsp.null-ls.formatters"
