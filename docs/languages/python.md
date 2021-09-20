@@ -42,7 +42,7 @@ lvim.lang.python.linters = { { exe = "flake8" } }
 ## Debugger
 
 ```vim
-:DIInstall python_dbg
+:DIInstall python
 ```
 
 ```lua
