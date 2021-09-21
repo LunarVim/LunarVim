@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -eo pipefail
 
 #Set branch to master unless specified by the user
@@ -31,13 +32,42 @@ declare -a __pip_deps=(
   "pynvim"
 )
 
+function usage() {
+  echo "Usage: install.sh [<options>]"
+  echo ""
+  echo "Options:"
+  echo "    -h, --help    Print this help message"
+  echo "    -y, --yes     Yes for all choices (Install NodeJS, Python, Rust dependencies)"
+  echo "    --overwrite   Overwrite previous lvim configuration"
+}
+
+function parse_arguments() {
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -y | --yes)
+        ARGS_INSTALL_NONINTERACTIVE="y"
+        ;;
+      --overwrite)
+        ARGS_OVERWRITE="y"
+        ;;
+      -h | --help)
+        usage
+        exit 0
+        ;;
+    esac
+    shift
+  done
+}
+
 function main() {
+  parse_arguments "$@"
+
   cat <<'EOF'
 
-      88\                                                   88\               
-      88 |                                                  \__|              
-      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\  
-      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\ 
+      88\                                                   88\
+      88 |                                                  \__|
+      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\
+      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\
       88 |88 |  88 |88 |  88 | 888888$ |88 |  \__|\88\88  / 88 |88 / 88 / 88 |
       88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
       88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
@@ -61,17 +91,23 @@ EOF
 
   __add_separator "80"
 
-  echo "Would you like to install lunarvim's NodeJS dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
+  if [ -z "$ARGS_INSTALL_NONINTERACTIVE" ]; then
+    echo "Would you like to install lunarvim's NodeJS dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-  echo "Would you like to install lunarvim's Python dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
+    echo "Would you like to install lunarvim's Python dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
 
-  echo "Would you like to install lunarvim's Rust dependencies?"
-  read -p "[y]es or [n]o (default: no) : " -r answer
-  [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+    echo "Would you like to install lunarvim's Rust dependencies?"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+  else
+    install_nodejs_deps
+    install_python_deps
+    install_rust_deps
+  fi
 
   __add_separator "80"
 
@@ -80,17 +116,17 @@ EOF
 
   __add_separator "80"
 
-  case "$@" in
-    *--overwrite*)
-      echo "!!Warning!! -> Removing all lunarvim related config \
-        because of the --overwrite flag"
+  if [ -n "$ARGS_OVERWRITE" ]; then
+    echo "!!Warning!! -> Removing all lunarvim related config \
+      because of the --overwrite flag"
+    if [ -z "$ARGS_INSTALL_NONINTERACTIVE" ]; then
       read -p "Would you like to continue? [y]es or [n]o : " -r answer
       [ "$answer" == "${answer#[Yy]}" ] && exit 1
-      for dir in "${__lvim_dirs[@]}"; do
-        [ -d "$dir" ] && rm -rf "$dir"
-      done
-      ;;
-  esac
+    fi
+    for dir in "${__lvim_dirs[@]}"; do
+      [ -d "$dir" ] && rm -rf "$dir"
+    done
+  fi
 
   install_packer
 
@@ -105,7 +141,6 @@ EOF
   fi
 
   __add_separator "80"
-
 }
 
 function detect_platform() {
@@ -133,14 +168,14 @@ function detect_platform() {
 }
 
 function print_missing_dep_msg() {
-  echo "[ERROR]: Unable to find dependency [$1]"
-  echo "Please install it first and re-run the installer. Try: $RECOMMEND_INSTALL $1"
-}
-
-function check_dep() {
-  if ! command -v "$1" &>/dev/null; then
-    print_missing_dep_msg "$1"
-    exit 1
+  if [ "$#" -eq 1 ]; then
+    echo "[ERROR]: Unable to find dependency [$1]"
+    echo "Please install it first and re-run the installer. Try: $RECOMMEND_INSTALL $1"
+  else
+    local cmds
+    cmds=$(for i in "$@"; do echo "$RECOMMEND_INSTALL $i"; done)
+    printf "[ERROR]: Unable to find dependencies [%s]" "$@"
+    printf "Please install any one of the dependencies and re-run the installer. Try: \n%s\n" "$cmds"
   fi
 }
 
@@ -155,8 +190,7 @@ function check_system_deps() {
   fi
 }
 
-function install_nodejs_deps() {
-  check_dep "npm"
+function __install_nodejs_deps_npm() {
   echo "Installing node modules with npm.."
   for dep in "${__npm_deps[@]}"; do
     if ! npm ls -g "$dep" &>/dev/null; then
@@ -165,6 +199,24 @@ function install_nodejs_deps() {
     fi
   done
   echo "All NodeJS dependencies are succesfully installed"
+}
+
+function __install_nodejs_deps_yarn() {
+  echo "Installing node modules with yarn.."
+  yarn global add "${__npm_deps[@]}"
+  echo "All NodeJS dependencies are succesfully installed"
+}
+
+function install_nodejs_deps() {
+  local -a pkg_managers=("yarn" "npm")
+  for pkg_manager in "${pkg_managers[@]}"; do
+    if command -v "$pkg_manager" &>/dev/null; then
+      eval "__install_nodejs_deps_$pkg_manager"
+      return
+    fi
+  done
+  print_missing_dep_msg "${pkg_managers[@]}"
+  exit 1
 }
 
 function install_python_deps() {
@@ -183,22 +235,23 @@ function install_python_deps() {
 }
 
 function __attempt_to_install_with_cargo() {
-  if ! command -v cargo &>/dev/null; then
+  if command -v cargo &>/dev/null; then
     echo "Installing missing Rust dependency with cargo"
     cargo install "$1"
   else
-    echo "[WARN]: Unable to find fd. Make sure to install it to avoid any problems"
+    echo "[WARN]: Unable to find cargo. Make sure to install it to avoid any problems"
+    exit 1
   fi
 }
 
 # we try to install the missing one with cargo even though it's unlikely to be found
 function install_rust_deps() {
-  if ! command -v fd &>/dev/null; then
-    __attempt_to_install_with_cargo "fd-find"
-  fi
-  if ! command -v rg &>/dev/null; then
-    __attempt_to_install_with_cargo "ripgrep"
-  fi
+  local -a deps=("fd::fd-find" "rg::ripgrep")
+  for dep in "${deps[@]}"; do
+    if ! command -v "${dep%%::*}" &>/dev/null; then
+      __attempt_to_install_with_cargo "${dep##*::}"
+    fi
+  done
   echo "All Rust dependencies are succesfully installed"
 }
 
