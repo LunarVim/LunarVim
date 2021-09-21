@@ -1,8 +1,6 @@
 local M = {}
-local lspconfig = require "lspconfig"
 local Log = require "core.log"
 local utils = require "utils"
-local lsp_utils = require "lsp.utils"
 
 local function lsp_highlight_document(client)
   if lvim.lsp.document_highlight == false then
@@ -81,30 +79,6 @@ function M.common_on_attach(client, bufnr)
   add_lsp_buffer_keybindings(bufnr)
 end
 
-function M.setup_by_ft(lang, opts)
-  vim.validate {
-    lang = { lang, "string" },
-    opts = { opts, "table" },
-    provider = { opts.lsp.provider, "string" },
-  }
-
-  if lsp_utils.is_client_active(opts.lsp.provider) then
-    return
-  end
-
-  if not opts.lsp.setup.on_attach then
-    opts.lsp.setup.on_attach = M.common_on_attach
-  end
-  if not opts.lsp.setup.on_init then
-    opts.lsp.setup.on_init = M.common_on_init
-  end
-  if not opts.lsp.setup.capabilities then
-    opts.lsp.setup.capabilities = M.common_capabilities()
-  end
-
-  lspconfig[opts.lsp.provider].setup(opts.lsp.setup)
-end
-
 local function bootstrap_nlsp()
   local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
   if lsp_settings_status_ok then
@@ -114,13 +88,14 @@ local function bootstrap_nlsp()
   end
 end
 
-local function is_overridden(lang)
-  local overrides = lvim.lsp.override
-  if type(overrides) == "table" then
-    if vim.tbl_contains(overrides, lang) then
-      return
-    end
-  end
+function M.get_common_opts()
+  return {
+    setup = {
+      on_attach = M.common_on_attach,
+      on_init = M.common_on_init,
+      capabilities = M.common_capabilities(),
+    },
+  }
 end
 
 function M.setup()
@@ -129,26 +104,13 @@ function M.setup()
   for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
-
   require("lsp.handlers").setup()
 
   bootstrap_nlsp()
 
-  local configured_languages = lvim.ensure_configured
-  Log:debug("Loading " .. #configured_languages .. " language(s): " .. vim.inspect(configured_languages))
-
-  for _, lang in ipairs(configured_languages) do
-    if not is_overridden(lang) then
-      local lang_module = "lsp.providers." .. lang
-      local status_ok, config = pcall(require, lang_module)
-      if status_ok then
-        M.setup_by_ft(lang, config)
-      end
-    end
-  end
-
   require("lsp.null-ls").setup()
 
+  require("lsp.manager").ensure_configured(lvim.ensure_configured, M.get_common_opts())
   require("utils").toggle_autoformat()
 end
 
