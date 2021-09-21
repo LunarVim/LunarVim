@@ -127,26 +127,22 @@ function M.show_line_diagnostics()
   end)
   for i, diagnostic in ipairs(diagnostics) do
     local source = diagnostic.source
+    diag_message = diagnostic.message:gsub("[\n\r]", " ")
     if source then
       if string.find(source, "/") then
         source = string.sub(diagnostic.source, string.find(diagnostic.source, "([%w-_]+)$"))
       end
-      diag_message = string.format("%d. %s: %s",i, source, diagnostic.message)
+      diag_message = string.format("%d. %s: %s", i, source, diag_message)
     else
-      diag_message = string.format("%d. %s", i, diagnostic.message)
+      diag_message = string.format("%d. %s", i, diag_message)
     end
     if diagnostic.code then
       diag_message = string.format("%s [%s]", diag_message, diagnostic.code)
     end
     local msgs = split_by_chunk(diag_message, max_width)
     for _, diag in ipairs(msgs) do
-      local message_lines = vim.split(diag, "\n", true)
-      table.insert(lines, { message = message_lines[1], severity = diagnostic.severity })
-      width = math.max(message_lines[1]:len(), width)
-      for j = 2, #message_lines do
-        table.insert(lines, { message = message_lines[j], severity = diagnostic.severity })
-        width = math.max(message_lines[j]:len(), width)
-      end
+      table.insert(lines, { message = diag, severity = diagnostic.severity })
+      width = math.max(diag:len(), width)
     end
   end
   height = #lines
