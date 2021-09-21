@@ -6,12 +6,7 @@ return {
   { "jose-elias-alvarez/null-ls.nvim" },
   { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
-    "kabouzeid/nvim-lspinstall",
-    event = "VimEnter",
-    config = function()
-      local lspinstall = require "core.lspinstall"
-      lspinstall.setup()
-    end,
+    "williamboman/nvim-lsp-installer",
   },
 
   { "nvim-lua/popup.nvim" },

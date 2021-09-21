@@ -24,7 +24,7 @@ function M:init(opts)
   settings.load_options()
 
   lvim.lsp = require "lsp.config"
-  require("lsp.manager").init_defaults()
+  require("lsp.manager").init_defaults { "lua", "python" }
 end
 
 --- Override the configuration with a user provided one
