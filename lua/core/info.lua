@@ -108,8 +108,13 @@ function M.toggle_popup(ft)
     table.insert(client_names, client.name)
   end
 
-  local null_ls = require "lsp.null-ls"
-  local registered_providers = null_ls.list_supported_provider_names(ft)
+  local null_formatters = require "lsp.null-ls.formatters"
+  local null_linters = require "lsp.null-ls.linters"
+  local registered_formatters = null_formatters.list_supported_names(ft)
+  local registered_linters = null_linters.list_supported_names(ft)
+  local registered_providers = {}
+  vim.list_extend(registered_providers, registered_formatters)
+  vim.list_extend(registered_providers, registered_linters)
   local registered_count = vim.tbl_count(registered_providers)
   local null_ls_info = {
     "Formatters and linters",
@@ -119,24 +124,6 @@ function M.toggle_popup(ft)
       registered_count > 0 and "  " or ""
     ),
   }
-
-  local null_formatters = require "lsp.null-ls.formatters"
-  local missing_formatters = null_formatters.list_unsupported_names(ft)
-  local missing_formatters_status = {}
-  if not vim.tbl_isempty(missing_formatters) then
-    missing_formatters_status = {
-      fmt("* Missing formatters:   %s", table.concat(missing_formatters, "  , ") .. "  "),
-    }
-  end
-
-  local null_linters = require "lsp.null-ls.linters"
-  local missing_linters = null_linters.list_unsupported_names(ft)
-  local missing_linters_status = {}
-  if not vim.tbl_isempty(missing_linters) then
-    missing_linters_status = {
-      fmt("* Missing linters:      %s", table.concat(missing_linters, "  , ") .. "  "),
-    }
-  end
 
   local content_provider = function(popup)
     local content = {}
@@ -150,8 +137,6 @@ function M.toggle_popup(ft)
       lsp_info,
       { "" },
       null_ls_info,
-      missing_formatters_status,
-      missing_linters_status,
       { "" },
       { "" },
       get_formatter_suggestion_msg(ft),
@@ -174,8 +159,6 @@ function M.toggle_popup(ft)
     vim.cmd 'let m=matchadd("string", "true")'
     vim.cmd 'let m=matchadd("error", "false")'
     tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
-    tbl_set_highlight(missing_formatters, "LvimInfoIdentifier")
-    tbl_set_highlight(missing_linters, "LvimInfoIdentifier")
     -- tbl_set_highlight(require("lsp.null-ls.formatters").list_available(ft), "LvimInfoIdentifier")
     -- tbl_set_highlight(require("lsp.null-ls.linters").list_available(ft), "LvimInfoIdentifier")
   end
