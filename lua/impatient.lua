@@ -277,7 +277,7 @@ impatient_dur = uv.hrtime() - impatient_load_start
 
 function M.setup(opts)
   opts = opts or {}
-  M.path = opts.path or vim.fn.stdpath "cache" .. "/luacache"
+  M.path = opts.path or vim.fn.stdpath "cache" .. "/lvim_cache"
 
   if opts.enable_profiling then
     M.enable_profile()

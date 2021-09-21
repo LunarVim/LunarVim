@@ -318,7 +318,23 @@ EOF
   chmod +x "$INSTALL_PREFIX/bin/lvim"
 }
 
+function remove_old_cache_files() {
+  local packer_cache="$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
+  if [ -e "$packer_cache" ]; then
+    echo "Removing old packer cache file"
+    rm -f "$packer_cache"
+  fi
+
+  if [ -e "$LUNARVIM_CACHE_DIR/luacache" ] || [ -e "$LUNARVIM_CACHE_DIR/lvim_cache" ]; then
+    echo "Removing old startup cache file"
+    rm -f "$LUNARVIM_CACHE_DIR/{luacache,lvim_cache}"
+  fi
+}
+
 function setup_lvim() {
+
+  remove_old_cache_files
+
   echo "Installing LunarVim shim"
 
   setup_shim
