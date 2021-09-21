@@ -30,6 +30,10 @@ M.config = function()
     return
   end
   lvim.builtin.cmp = {
+    confirm_opts = {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
     formatting = {
       format = function(entry, vim_item)
         local icons = require("lsp.kind").icons
@@ -107,10 +111,15 @@ M.config = function()
 
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      },
+      ["<CR>"] = cmp.mapping(function(fallback)
+        if not require("cmp").confirm(lvim.builtin.cmp.confirm_opts) then
+          if luasnip.jumpable() then
+            vim.fn.feedkeys(T "<Plug>luasnip-jump-next", "")
+          else
+            fallback()
+          end
+        end
+      end),
     },
   }
 end
