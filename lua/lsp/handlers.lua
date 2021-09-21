@@ -90,6 +90,7 @@ local function split_by_chunk(text, chunkSize)
 end
 
 function M.show_line_diagnostics()
+  -- TODO: replace all this with vim.diagnostic.show_position_diagnostics()
   local diagnostics = vim.lsp.diagnostic.get_line_diagnostics()
   local severity_highlight = {
     "LspDiagnosticsFloatingError",
