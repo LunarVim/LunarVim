@@ -138,6 +138,7 @@ function M.show_line_diagnostics()
   opts = vim.lsp.util.make_floating_popup_options(max_width, height, opts)
   opts["style"] = "minimal"
   opts["border"] = "rounded"
+  opts["focusable"] = true
 
   vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
