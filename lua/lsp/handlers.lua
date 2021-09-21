@@ -130,7 +130,7 @@ function M.show_line_diagnostics()
       width = string.len(diags[i].message)
     end
   end
-  local max_width = 120
+  local max_width = vim.fn.winwidth(0) - 10
   if width < max_width then
     max_width = width
   end
