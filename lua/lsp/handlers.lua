@@ -125,15 +125,15 @@ function M.show_line_diagnostics()
   table.sort(diagnostics, function(a, b)
     return a.severity < b.severity
   end)
-  for _, diagnostic in ipairs(diagnostics) do
+  for i, diagnostic in ipairs(diagnostics) do
     local source = diagnostic.source
     if source then
       if string.find(source, "/") then
         source = string.sub(diagnostic.source, string.find(diagnostic.source, "([%w-_]+)$"))
       end
-      diag_message = string.format("%s: %s", source, diagnostic.message)
+      diag_message = string.format("%d. %s: %s",i, source, diagnostic.message)
     else
-      diag_message = string.format("%s", diagnostic.message)
+      diag_message = string.format("%d. %s", i, diagnostic.message)
     end
     if diagnostic.code then
       diag_message = string.format("%s [%s]", diag_message, diagnostic.code)
@@ -150,7 +150,7 @@ function M.show_line_diagnostics()
     end
   end
   height = #lines
-  opts = vim.lsp.util.make_floating_popup_options(width + 5, height, opts)
+  opts = vim.lsp.util.make_floating_popup_options(width, height, opts)
   opts["style"] = "minimal"
   opts["border"] = "rounded"
   opts["focusable"] = true
@@ -160,10 +160,8 @@ function M.show_line_diagnostics()
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
   for i, diag in ipairs(lines) do
-    local prefix = string.format("%d. ", i)
-    local message = prefix .. diag.message
-    vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { message })
-    vim.api.nvim_buf_add_highlight(bufnr, -1, severity_highlight[diag.severity], i - 1, 0, message:len())
+    vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { diag.message })
+    vim.api.nvim_buf_add_highlight(bufnr, -1, severity_highlight[diag.severity], i - 1, 0, diag.message:len())
   end
 
   vim.api.nvim_command(
