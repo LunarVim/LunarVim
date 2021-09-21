@@ -126,16 +126,12 @@ function M.show_line_diagnostics()
     if diagnostic.code then
       diags[i].message = string.format("%s [%s]", diags[i].message, diagnostic.code)
     end
-    if diags[i].message:len() > width then
-      width = string.len(diags[i].message)
-    end
+    width = math.max(width, diags[i].message:len())
   end
   local max_width = vim.fn.winwidth(0) - 10
-  if width < max_width then
-    max_width = width
-  end
+  width = math.min(width, max_width)
 
-  opts = vim.lsp.util.make_floating_popup_options(max_width, height, opts)
+  opts = vim.lsp.util.make_floating_popup_options(width, height, opts)
   opts["style"] = "minimal"
   opts["border"] = "rounded"
   opts["focusable"] = true
