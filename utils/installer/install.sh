@@ -319,7 +319,7 @@ EOF
 }
 
 function remove_old_cache_files() {
-  local packer_cache = "$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
+  local packer_cache="$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
   if [ -e "$packer_cache" ]; then
     echo "Removing old packer cache file"
     rm -f "$packer_cache"
