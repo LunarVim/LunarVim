@@ -81,6 +81,14 @@ function M.setup()
   })
 end
 
+local function split_by_chunk(text, chunkSize)
+  local s = {}
+  for i = 1, #text, chunkSize do
+    s[#s + 1] = text:sub(i, i + chunkSize - 1)
+  end
+  return s
+end
+
 function M.show_line_diagnostics()
   local diagnostics = vim.lsp.diagnostic.get_line_diagnostics()
   local severity_highlight = {
@@ -102,7 +110,8 @@ function M.show_line_diagnostics()
     }
     diagnostics = vim_diag.get(buf_id, { lnum = cursor_position[1] - 1 })
   end
-  local diags = vim.deepcopy(diagnostics)
+  local lines = {}
+  local max_width = vim.fn.winwidth(0) - 10
   local height = #diagnostics
   local width = 0
   local opts = {}
@@ -111,27 +120,36 @@ function M.show_line_diagnostics()
     return
   end
   local bufnr = vim.api.nvim_create_buf(false, true)
-
-  for i, diagnostic in ipairs(diagnostics) do
+  local diag_message
+  table.sort(diagnostics, function(a, b)
+    return a.severity < b.severity
+  end)
+  for _, diagnostic in ipairs(diagnostics) do
     local source = diagnostic.source
     if source then
       if string.find(source, "/") then
         source = string.sub(diagnostic.source, string.find(diagnostic.source, "([%w-_]+)$"))
       end
-      diags[i].message = string.format("%s: %s", source, diagnostic.message)
+      diag_message = string.format("%s: %s", source, diagnostic.message)
     else
-      diags[i].message = string.format("%s", diagnostic.message)
+      diag_message = string.format("%s", diagnostic.message)
     end
-
     if diagnostic.code then
-      diags[i].message = string.format("%s [%s]", diags[i].message, diagnostic.code)
+      diag_message = string.format("%s [%s]", diag_message, diagnostic.code)
     end
-    width = math.max(width, diags[i].message:len())
+    local msgs = split_by_chunk(diag_message, max_width)
+    for _, diag in ipairs(msgs) do
+      local message_lines = vim.split(diag, "\n", true)
+      table.insert(lines, { message = message_lines[1], severity = diagnostic.severity })
+      width = math.max(message_lines[1]:len(), width)
+      for j = 2, #message_lines do
+        table.insert(lines, { message = message_lines[j], severity = diagnostic.severity })
+        width = math.max(message_lines[j]:len(), width)
+      end
+    end
   end
-  local max_width = vim.fn.winwidth(0) - 10
-  width = math.min(width, max_width)
-
-  opts = vim.lsp.util.make_floating_popup_options(width, height, opts)
+  height = #lines
+  opts = vim.lsp.util.make_floating_popup_options(width + 5, height, opts)
   opts["style"] = "minimal"
   opts["border"] = "rounded"
   opts["focusable"] = true
@@ -139,12 +157,12 @@ function M.show_line_diagnostics()
   vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
-  vim.api.nvim_win_set_option(winnr, "wrap", true)
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
-  for i, diag in ipairs(diags) do
-    local message = diag.message:gsub("[\n\r]", " ")
+  for i, diag in ipairs(lines) do
+    local prefix = string.format("%d. ", i)
+    local message = prefix .. diag.message
     vim.api.nvim_buf_set_lines(bufnr, i - 1, i - 1, 0, { message })
-    vim.api.nvim_buf_add_highlight(bufnr, -1, severity_highlight[diag.severity], i - 1, 0, diag.message:len())
+    vim.api.nvim_buf_add_highlight(bufnr, -1, severity_highlight[diag.severity], i - 1, 0, message:len())
   end
 
   vim.api.nvim_command(
