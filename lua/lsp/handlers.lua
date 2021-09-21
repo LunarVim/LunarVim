@@ -112,7 +112,7 @@ function M.show_line_diagnostics()
     diagnostics = vim_diag.get(buf_id, { lnum = cursor_position[1] - 1 })
   end
   local lines = {}
-  local max_width = vim.fn.winwidth(0) - 10
+  local max_width = vim.fn.winwidth(0) - 5
   local height = #diagnostics
   local width = 0
   local opts = {}
