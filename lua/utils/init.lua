@@ -99,7 +99,7 @@ function utils.reload_lv_config()
   vim.cmd ":PackerInstall"
   vim.cmd ":PackerCompile"
   -- vim.cmd ":PackerClean"
-  require("lsp.manager").ensure_configured(lvim.ensure_configured)
+  require("lsp").setup()
   Log:info "Reloaded configuration"
 end
 
