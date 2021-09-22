@@ -23,8 +23,4 @@ commands.load(commands.defaults)
 
 require("keymappings").setup()
 
-local lsp_status_ok, _ = pcall(require, "lspconfig")
-
-if lsp_status_ok then
-  require("lsp").setup()
-end
+require("lsp").setup()
