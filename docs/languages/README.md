@@ -39,6 +39,15 @@ If you want to enable formatting for javascript for example, install the formatt
 lvim.lang.javascript.formatters = { { exe = "prettier" } }
 ```
 
+It's also possible to add custom arguments to the formatters table.
+Note that you'll need to split the arguments into several quoted strings if they are separated by space.
+For example `--print-with 100` becomes
+```lua
+lvim.lang.javascript.formatters = { { exe = "prettier", args = { "--print-with", "100" } } }
+
+```
+in the formatter configuration.
+
 If the name of your formatter or linter includes a hyphen `-`, replace it with an underscore `_`. Dashes are not valid identifiers in lua.
 
 To enable format on save, add the following to your `~/.config/lvim/config.lua`
