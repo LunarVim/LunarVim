@@ -31,10 +31,6 @@ lvim = {
   plugins = {
     -- use config.lua for this not put here
   },
-  ensure_configured = {
-    "sumneko_lua",
-    "pyright",
-  },
 
   autocommands = {},
   lang = {},
