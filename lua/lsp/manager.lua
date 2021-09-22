@@ -37,13 +37,11 @@ function M.setup_by_ft(server, default_config)
     new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), custom_config)
     new_config = vim.tbl_deep_extend("keep", new_config, default_config)
     -- Log:debug("Using custom configuration for server: " .. server.name .. "with .. \n" .. vim.inspect(new_config))
-    --TODO: make sure these are actually applied
     server:setup(new_config)
   else
     -- Log:debug("Using the default configuration for server: " .. server.name)
     server:setup(default_config)
   end
-  vim.cmd [[ do User LspAttachBuffers ]]
 end
 
 function M.ensure_configured(servers, default_config)
