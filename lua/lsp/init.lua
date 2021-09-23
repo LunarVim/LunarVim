@@ -93,11 +93,9 @@ end
 
 function M.get_common_opts()
   return {
-    setup = {
-      on_attach = M.common_on_attach,
-      on_init = M.common_on_init,
-      capabilities = M.common_capabilities(),
-    },
+    on_attach = M.common_on_attach,
+    on_init = M.common_on_init,
+    capabilities = M.common_capabilities(),
   }
 end
 
