@@ -36,7 +36,7 @@ M.config = function()
     },
     formatting = {
       format = function(entry, vim_item)
-        local icons = require("lsp.kind").icons
+        local icons = lvim.lsp.kind_icons
         vim_item.kind = icons[vim_item.kind]
         vim_item.menu = ({
           nvim_lsp = "(LSP)",

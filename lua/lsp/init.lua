@@ -150,7 +150,8 @@ function M.setup(lang)
 end
 
 function M.global_setup()
-  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
+  -- Do we need this? ↓
+  -- vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
   for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
