@@ -24,6 +24,12 @@ To install a Language Server for your language:
 
 Sometimes the language server for your language will not have an obvious name.  For instance, the language server for ruby is solargraph.  Metals is the language server for scala, etc.  To find the corresponding language server for your language [look here](https://github.com/kabouzeid/nvim-lspinstall)
 
+## Formatting and Linting
+Formatting and Linting is not supported by some LSPs by default.
+This needs to be installed / configured separately. 
+
+See [languages](./languages/README.md) where each language with its formatting and linting can be addressed.
+
 ## Language Server Configuration
 To create a configuration file for your language server:
 
