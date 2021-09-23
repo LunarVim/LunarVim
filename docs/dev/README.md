@@ -1,4 +1,47 @@
-# Learning Lua
+# Development of Lunarvim
+
+## Getting started
+We recommend setting up a symlink to your fork:
+
+```bash
+cd ~/.local/share/lunarvim/
+ls -s ~/dev/Lunarvim ~/.local/share/lunarvim/lvim_dev
+```
+
+Your output should be something like:
+```bash
+$ ls -a
+lrwxrwxrwx  1 user user   37 sep 23 14:35 lvim_dev -> /home/user/dev/LunarVim
+```
+
+---
+Now switch your lvim to the development setup:
+
+```bash
+cd ~/.local/share/lunarvim/
+mv lvim lvim_back
+mv lvim_dev lvim
+```
+
+---
+Going back to lvim
+```bash
+cd ~/.local/share/lunarvim/
+mv lvim lvim_dev
+mv lvim_back lvim
+```
+
+To test that you can get some output from `lvim` add the following to your `init.lua` file in your fork.
+```lua
+print ("it works")
+```
+
+```bash
+lvim
+```
+Now type `:messages`. Happy contributing!
+
+## Lua + Neovim = :heart:
 
 To get started, [this guide](https://github.com/nanotee/nvim-lua-guide) covers many points that will get you going with Lua and how Neovim works.
 
