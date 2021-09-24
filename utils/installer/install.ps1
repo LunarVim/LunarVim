@@ -1,7 +1,8 @@
 $ErrorActionPreference = "Stop" # exit when command fails
 
 # set script variables
-$LV_BRANCH = ($LV_BRANCH, "rolling", 1 -ne $null)[0]
+# FIXME: temporarily set the branch to the new one
+$LV_BRANCH = ($LV_BRANCH, "lang-refactor", 1 -ne $null)[0]
 $LV_REMOTE = ($LV_REMOTE, "lunarvim/lunarvim.git", 1 -ne $null)[0]
 $INSTALL_PREFIX = ($INSTALL_PREFIX, "$HOME\.local", 1 -ne $null)[0]
 
