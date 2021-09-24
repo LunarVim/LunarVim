@@ -1,11 +1,14 @@
 local M = {}
 -- It's not safe to require 'utils' without adjusting the runtimepath
-function _G.join_paths(...)
-  local uv = vim.loop
+
+local uv = vim.loop
+local function join_paths(...)
   local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
   local result = table.concat({ ... }, path_sep)
   return result
 end
+
+_G.join_paths = join_paths
 
 function _G.get_runtime_dir()
   local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
@@ -70,13 +73,15 @@ function M:init()
     vim.cmd("set spellfile=" .. join_paths(self.config_dir, "spell", "en.utf-8.add"))
   end
 
+  vim.fn.mkdir(vim.fn.stdpath "cache", "p")
   -- FIXME: currently unreliable in unit-tests
-  if not os.getenv "LVIM_TEST_ENV" then
-    vim.fn.mkdir(vim.fn.stdpath "cache", "p")
-    require("impatient").setup {
-      path = vim.fn.stdpath "cache" .. "/lvim_cache",
-      enable_profiling = true,
-    }
+  if not vim.loop.os_uname().version:match "Windows" then
+    if not os.getenv "LVIM_TEST_ENV" then
+      require("impatient").setup {
+        path = vim.fn.stdpath "cache" .. "/lvim_cache",
+        enable_profiling = true,
+      }
+    end
   end
 
   local config = require "config"
