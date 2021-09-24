@@ -85,9 +85,9 @@ function M:init()
     vim.cmd("set spellfile=" .. join_paths(self.config_dir, "spell", "en.utf-8.add"))
   end
 
+  vim.fn.mkdir(vim.fn.stdpath "cache", "p")
   -- FIXME: currently unreliable in unit-tests
   if not os.getenv "LVIM_TEST_ENV" then
-    vim.fn.mkdir(vim.fn.stdpath "cache", "p")
     require("impatient").setup {
       path = vim.fn.stdpath "cache" .. "/lvim_cache",
       enable_profiling = true,
