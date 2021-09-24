@@ -226,9 +226,6 @@ function setup_lvim() {
     Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example-no-ts.lua" `
         "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
-    nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerInstall
-    nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerSync
-  
 	Write-Output "Packer setup complete"
 	
 	__add_separator "80"
