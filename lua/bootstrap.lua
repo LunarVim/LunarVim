@@ -75,13 +75,11 @@ function M:init()
 
   vim.fn.mkdir(vim.fn.stdpath "cache", "p")
   -- FIXME: currently unreliable in unit-tests
-  if not vim.loop.os_uname().version:match "Windows" then
-    if not os.getenv "LVIM_TEST_ENV" then
-      require("impatient").setup {
-        path = vim.fn.stdpath "cache" .. "/lvim_cache",
-        enable_profiling = true,
-      }
-    end
+  if not os.getenv "LVIM_TEST_ENV" then
+    require("impatient").setup {
+      path = vim.fn.stdpath "cache" .. "/lvim_cache",
+      enable_profiling = true,
+    }
   end
 
   local config = require "config"
