@@ -6,29 +6,18 @@ $LV_BRANCH = ($LV_BRANCH, "lang-refactor", 1 -ne $null)[0]
 $LV_REMOTE = ($LV_REMOTE, "lunarvim/lunarvim.git", 1 -ne $null)[0]
 $INSTALL_PREFIX = ($INSTALL_PREFIX, "$HOME\.local", 1 -ne $null)[0]
 
-$XDG_DATA_HOME = ($XDG_DATA_HOME, "$HOME\.local\share", 1 -ne $null)[0]
-$XDG_CACHE_HOME = ($XDG_CACHE_HOME, "$HOME\.cache", 1 -ne $null)[0]
-$XDG_CONFIG_HOME = ($XDG_CONFIG_HOME, "$HOME\.config", 1 -ne $null)[0]
+$env:XDG_DATA_HOME = ($env:XDG_DATA_HOME, "$env:APPDATA", 1 -ne $null)[0]
+$env:XDG_CONFIG_HOME = ($env:XDG_CONFIG_HOME, "$LOCALAPPDATA", 1 -ne $null)[0]
+$env:XDG_CACHE_HOME = ($env:XDG_CACHE_HOME, "$TEMP", 1 -ne $null)[0]
+$env:LUNARVIM_RUNTIME_DIR = ($env:LUNARVIM_RUNTIME_DIR, "$env:XDG_DATA_HOME\lunarvim", 1 -ne $null)[0]
+$env:LUNARVIM_CONFIG_DIR = ($env:LUNARVIM_CONFIG_DIR, "$env:XDG_CONFIG_HOME\lvim", 1 -ne $null)[0]
+$env:LUNARVIM_CACHE_DIR = ($env:LUNARVIM_CACHE_DIR, "$env:XDG_CACHE_HOME\lvim", 1 -ne $null)[0]
 
-$NEOVIM_CACHE_DIR = "$XDG_CACHE_HOME\nvim"
-
-
-$LUNARVIM_RUNTIME_DIR = ($LUNARVIM_RUNTIME_DIR, "$XDG_DATA_HOME\lunarvim", 1 -ne $null)[0]
-$LUNARVIM_CONFIG_DIR = ($LUNARVIM_CONFIG_DIR, "$XDG_CONFIG_HOME\lvim", 1 -ne $null)[0]
 
 $__lvim_dirs = (
-    "$LUNARVIM_CONFIG_DIR",
-    "$LUNARVIM_RUNTIME_DIR",
-    "$NEOVIM_CACHE_DIR" # for now this is shared with neovim
-)
-
-$__npm_deps = (
-    "neovim",
-    "tree-sitter-cli"
-)
-
-$__pip_deps = (
-    "pynvim"
+    "$env:LUNARVIM_CONFIG_DIR",
+    "$env:LUNARVIM_RUNTIME_DIR",
+    "$env:LUNARVIM_CACHE_DIR"
 )
 
 function main($cliargs) {
@@ -91,7 +80,7 @@ function main($cliargs) {
         }
     }
   
-    if (Test-Path "$LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim") {
+    if (Test-Path "$env:LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim") {
         Write-Output "Packer already installed"
     }
     else {
@@ -100,7 +89,7 @@ function main($cliargs) {
   
     __add_separator "80"
   
-    if (Test-Path "$LUNARVIM_RUNTIME_DIR\lvim\init.lua" ) {
+    if (Test-Path "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" ) {
         Write-Output "Updating LunarVim"
         update_lvim
     }
@@ -187,8 +176,8 @@ function backup_old_config() {
         # we create an empty folder for subsequent commands \
         # that require an existing directory	 
         if ( Test-Path "$dir") {
-            New-Item "$dir.bak" -ItemType "directory"
-            Copy-Item -Recurse "$dir\*" "$dir.bak\." -
+            New-Item "$dir.bak" -ItemType Directory -Force
+            Copy-Item -Recurse "$dir\*" "$dir.bak\."
         }
     }
 
@@ -197,18 +186,18 @@ function backup_old_config() {
 
 
 function install_packer() {
-    Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --depth 1 "https://github.com/wbthomason/packer.nvim" "$LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim" }
+    Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --depth 1 "https://github.com/wbthomason/packer.nvim" "$env:LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim" }
 }
   
 function copy_local_lvim_repository() {
     Write-Output "Copy local LunarVim configuration"
-    Copy-Item -Path "$((Get-Item $PWD).Parent.Parent.FullName)" -Destination "$LUNARVIM_RUNTIME_DIR/lvim" -Recurse
+    Copy-Item -Path "$((Get-Item $PWD).Parent.Parent.FullName)" -Destination "$env:LUNARVIM_RUNTIME_DIR/lvim" -Recurse
 }
 
 function clone_lvim() {
     Write-Output "Cloning LunarVim configuration"
     try {
-        Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --branch "$LV_BRANCH" --depth 1 "https://github.com/$LV_REMOTE" "$LUNARVIM_RUNTIME_DIR/lvim" } 
+        Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --branch "$LV_BRANCH" --depth 1 "https://github.com/$LV_REMOTE" "$env:LUNARVIM_RUNTIME_DIR/lvim" } 
     }
     catch {
         Write-Output "Failed to clone repository. Installation failed."
@@ -218,14 +207,9 @@ function clone_lvim() {
 
 function setup_shim() {
     if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
-        New-Item "$INSTALL_PREFIX\bin" -ItemType "directory"
+        New-Item "$INSTALL_PREFIX\bin" -ItemType Directory
     }
-
-    Set-Content -Path "$INSTALL_PREFIX\bin\lvim.ps1" ("
-		New-Variable -Name LUNARVIM_CONFIG_DIR -Value '$LUNARVIM_CONFIG_DIR'
-		New-Variable -Name LUNARVIM_RUNTIME_DIR -Value '$LUNARVIM_RUNTIME_DIR'
-		
-		nvim -u '$LUNARVIM_RUNTIME_DIR\lvim\init.lua' ", '"', "$args", '"')
+    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\utils\bin\lvim.ps1" "$INSTALL_PREFIX\bin\lvim.ps1" -Force
 }
 
 function setup_lvim() {
@@ -235,21 +219,21 @@ function setup_lvim() {
   
     Write-Output "Preparing Packer setup"
 
-    if ((Test-Path "$LUNARVIM_CONFIG_DIR") -eq $false) {
-        New-Item "$LUNARVIM_CONFIG_DIR" -ItemType "directory"
+    if ((Test-Path "$env:LUNARVIM_CONFIG_DIR") -eq $false) {
+        New-Item "$env:LUNARVIM_CONFIG_DIR" -ItemType Directory
     }
 
-    Copy-Item "$LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example-no-ts.lua" `
-        "$LUNARVIM_CONFIG_DIR\config.lua"
+    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example-no-ts.lua" `
+        "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
-    nvim -u "$LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerInstall
-    nvim -u "$LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerSync
+    nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerInstall
+    nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" -c 'autocmd User PackerComplete sleep 100m | qall' -c PackerSync
   
 	Write-Output "Packer setup complete"
 	
 	__add_separator "80"
 
-	Copy-Item "$LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$LUNARVIM_CONFIG_DIR\config.lua"
+	Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
 	$answer = Read-Host $(`
 	"Would you like to create an alias inside your Powershell profile?`n" +`
@@ -268,10 +252,10 @@ function setup_lvim() {
 
 function update_lvim() {
     try {
-        Invoke-Command git -C "$LUNARVIM_RUNTIME_DIR/lvim" status -uno
+        Invoke-Command git -C "$env:LUNARVIM_RUNTIME_DIR/lvim" status -uno
     }
     catch {
-        git -C "$LUNARVIM_RUNTIME_DIR/lvim" pull --ff-only --progress -or
+        git -C "$env:LUNARVIM_RUNTIME_DIR/lvim" pull --ff-only --progress -or
         Write-Output "Unable to guarantee data integrity while updating. Please do that manually instead."
         exit 1
     }
