@@ -47,6 +47,7 @@ M.config = function()
           vsnip = "(Snippet)",
           luasnip = "(Snippet)",
           buffer = "(Buffer)",
+          conjure = "(Conjure)"
         })[entry.source.name]
         vim_item.dup = ({
           buffer = 1,
@@ -75,6 +76,7 @@ M.config = function()
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
+      { name = "conjure" }
     },
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
