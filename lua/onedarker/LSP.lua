@@ -50,6 +50,7 @@ local LSP = {
   NvimTreeImageFile = { fg = C.purple },
   NvimTreeSpecialFile = { fg = C.orange },
   NvimTreeGitStaged = { fg = C.sign_add },
+  NvimTreeCursorLine = { bg = C.bg },
   NvimTreeGitNew = { fg = C.sign_add },
   NvimTreeGitDirty = { fg = C.sign_add },
   NvimTreeGitDeleted = { fg = C.sign_delete },
