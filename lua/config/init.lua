@@ -24,7 +24,8 @@ function M:init(opts)
   settings.load_options()
 
   lvim.lsp = require "lsp.config"
-  require("lsp.manager").init_defaults { "lua", "python" }
+  local ts_parsers = require("nvim-treesitter.parsers").available_parsers()
+  require("lsp.manager").init_defaults(ts_parsers)
 end
 
 --- Override the configuration with a user provided one
