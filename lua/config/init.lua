@@ -23,7 +23,8 @@ function M:init(opts)
   local settings = require "config.settings"
   settings.load_options()
 
-  lvim.lsp = require "lsp.config"
+  local lvim_lsp_config = require "lsp.config"
+  lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
   local supported_languages = {
     "asm",

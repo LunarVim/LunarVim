@@ -79,12 +79,11 @@ function M.common_on_attach(client, bufnr)
   add_lsp_buffer_keybindings(bufnr)
 end
 
-local function bootstrap_nlsp()
+local function bootstrap_nlsp(opts)
+  opts = opts or {}
   local lsp_settings_status_ok, lsp_settings = pcall(require, "nlspsettings")
   if lsp_settings_status_ok then
-    lsp_settings.setup {
-      config_home = utils.join_paths(get_config_dir(), "lsp-settings"),
-    }
+    lsp_settings.setup(opts)
   end
 end
 
@@ -101,20 +100,18 @@ function M.setup()
   if not lsp_status_ok then
     return
   end
-  local defaults = require "lsp.config"
-  local config = vim.tbl_deep_extend("force", defaults, lvim.lsp)
-  vim.lsp.protocol.CompletionItemKind = config.completion.item_kind
+  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
-  for _, sign in ipairs(config.diagnostics.signs.values) do
+  for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
   require("lsp.handlers").setup()
 
-  bootstrap_nlsp()
+  bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
 
   require("lsp.null-ls").setup()
 
-  require("lsp.manager").ensure_configured(config.ensure_configured, M.get_common_opts())
+  require("lsp.manager").ensure_configured(lvim.lsp.ensure_configured, M.get_common_opts())
   require("utils").toggle_autoformat()
 end
 
