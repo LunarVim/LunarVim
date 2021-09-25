@@ -54,7 +54,4 @@ return {
   popup_border = "single",
   on_attach_callback = nil,
   on_init_callback = nil,
-  ensure_configured = {
-    "sumneko_lua",
-  },
 }

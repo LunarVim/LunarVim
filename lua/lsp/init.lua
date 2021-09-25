@@ -111,7 +111,6 @@ function M.setup()
 
   require("lsp.null-ls").setup()
 
-  require("lsp.manager").ensure_configured(lvim.lsp.ensure_configured, M.get_common_opts())
   require("utils").toggle_autoformat()
 end
 
