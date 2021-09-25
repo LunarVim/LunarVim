@@ -30,4 +30,7 @@ style-sh:
 test:
 	bash ./utils/bin/test_runner.sh "$(TEST)"
 
+generate-ftplugins:
+	bash ./utils/installer/templates-installer.sh
+
 .PHONY: install install-neovim-binary uninstall lint style test
