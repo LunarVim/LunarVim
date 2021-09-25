@@ -57,16 +57,12 @@ function M.setup()
   end
   local g = vim.g
 
-  for opt, val in pairs(lvim.builtin.nvimtree) do
-    g["nvim_tree_" .. opt] = val
-  end
-
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then
-    vim.g.nvim_tree_update_cwd = 1
-    vim.g.nvim_tree_respect_buf_cwd = 1
-    vim.g.nvim_tree_disable_netrw = 0
-    vim.g.nvim_tree_hijack_netrw = 0
+    lvim.builtin.nvimtree.update_cwd = 1
+    lvim.builtin.nvimtree.respect_buf_cwd = 1
+    lvim.builtin.nvimtree.disable_netrw = 0
+    lvim.builtin.nvimtree.hijack_netrw = 0
     vim.g.netrw_banner = 0
   end
 
@@ -96,6 +92,7 @@ function M.setup()
   if lvim.builtin.nvimtree.on_config_done then
     lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
+  require("nvim-tree").setup(lvim.builtin.nvimtree)
 end
 
 function M.on_open()
