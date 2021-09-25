@@ -29,7 +29,6 @@ function M.get_active_client_by_ft(filetype)
 end
 
 function M.get_ls_capabilities(client_id)
-  local client
   if not client_id then
     local buf_clients = vim.lsp.buf_get_clients()
     for _, buf_client in ipairs(buf_clients) do
@@ -44,13 +43,12 @@ function M.get_ls_capabilities(client_id)
     return
   end
 
-  client = vim.lsp.get_client_by_id(tonumber(client_id))
+  local client = vim.lsp.get_client_by_id(tonumber(client_id))
 
   local enabled_caps = {}
-
-  for k, v in pairs(client.resolved_capabilities) do
-    if v == true then
-      table.insert(enabled_caps, k)
+  for capability, status in pairs(client.resolved_capabilities) do
+    if status == true then
+      table.insert(enabled_caps, capability)
     end
   end
 
