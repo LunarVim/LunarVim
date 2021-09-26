@@ -110,8 +110,8 @@ function M.setup()
 end
 
 function M.on_open()
-  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
-    require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
+  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.setup.view.side == "left" then
+    require("bufferline.state").set_offset(lvim.builtin.nvimtree.setup.view.width + 1, "")
   end
 end
 
