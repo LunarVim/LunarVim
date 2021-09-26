@@ -6,6 +6,14 @@ function M.config()
     active = true,
     on_config_done = nil,
     side = "left",
+    setup = {
+      auto_open = 0,
+      auto_close = 1,
+      tab_open = 0,
+      update_focused_file = {
+        enable = 1,
+      },
+    },
     width = 30,
     show_icons = {
       git = 1,
@@ -15,14 +23,10 @@ function M.config()
       tree_width = 30,
     },
     ignore = { ".git", "node_modules", ".cache" },
-    auto_open = 0,
-    auto_close = 1,
     quit_on_open = 0,
-    follow = 1,
     hide_dotfiles = 1,
     git_hl = 1,
     root_folder_modifier = ":t",
-    tab_open = 0,
     allow_resize = 1,
     lsp_diagnostics = 1,
     auto_ignore_ft = { "startify", "dashboard" },
@@ -57,12 +61,16 @@ function M.setup()
   end
   local g = vim.g
 
+  for opt, val in pairs(lvim.builtin.nvimtree) do
+    g["nvim_tree_" .. opt] = val
+  end
+
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then
-    lvim.builtin.nvimtree.update_cwd = 1
     lvim.builtin.nvimtree.respect_buf_cwd = 1
-    lvim.builtin.nvimtree.disable_netrw = 0
-    lvim.builtin.nvimtree.hijack_netrw = 0
+    lvim.builtin.nvimtree.setup.update_cwd = 1
+    lvim.builtin.nvimtree.setup.disable_netrw = 0
+    lvim.builtin.nvimtree.setup.hijack_netrw = 0
     vim.g.netrw_banner = 0
   end
 
@@ -92,7 +100,7 @@ function M.setup()
   if lvim.builtin.nvimtree.on_config_done then
     lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
-  require("nvim-tree").setup(lvim.builtin.nvimtree)
+  require("nvim-tree").setup(lvim.builtin.nvimtree.setup)
 end
 
 function M.on_open()
