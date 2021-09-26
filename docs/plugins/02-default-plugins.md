@@ -36,17 +36,17 @@ Automatically launching and initializing language servers that are installed on 
 
 can use tab completion with LspInstall to check for available language servers
 
-| Command                  | Description                                       |
-| ------------------------ | ------------------------------------------------- |
-| `:LspInstall <language>` | Installs a language server for the given language |
+| Command                   | Description                                       |
+| ------------------------- | ------------------------------------------------- |
+| `:LspInstall \<language>` | Installs a language server for the given language |
 
 ### [nlsp.settings.nvim](https://github.com/tamago324/nlsp-settings.nvim)
 
 **A plugin to configure Neovim LSP using json files like coc-settings.json.**
 
-| Command                                 | Description                                           |
-| --------------------------------------- | ----------------------------------------------------- |
-| `:NlspConfig <NAME_OF_LANGUAGE_SERVER>` | Creates a configuration file for your language server |
+| Command                                  | Description                                           |
+| ---------------------------------------- | ----------------------------------------------------- |
+| `:NlspConfig \<NAME_OF_LANGUAGE_SERVER>` | Creates a configuration file for your language server |
 
 See [Language Server Configuration](./02-after-install.md#language-server-configuration)
 
@@ -56,10 +56,10 @@ See [Language Server Configuration](./02-after-install.md#language-server-config
 
 **Easy way to use the tree-sitter interface in Neovim and provide some basic functionality such as highlighting**
 
-| Command                            | Description                     |
-| ---------------------------------- | ------------------------------- |
-| `:TSInstall <language_to_install>` | Tab to show available languages |
-| `:TSInstallInfo`                   | Check installation status       |
+| Command                             | Description                     |
+| ----------------------------------- | ------------------------------- |
+| `:TSInstall \<language_to_install>` | Tab to show available languages |
+| `:TSInstallInfo`                    | Check installation status       |
 
 See the nvim.treesitter documentation to see the [supported languages](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
 
@@ -209,8 +209,8 @@ or go to the [Debug-Adapter installation wiki](https://github.com/mfussenegger/n
 
 Provides a way to manage installation, configuration, and setup of debuggers.
 
-| Command                  | Description                                 |
-| ------------------------ | ------------------------------------------- |
-| `:DIInstall <debugger>`  | Checks dependencies and installs <debugger> |
-| `:DIUnistall <debugger>` | Uninstalls <debugger>                       |
-| `:DIList`                | Lists installed debuggers                   |
+| Command                  | Description                                  |
+| ------------------------ | -------------------------------------------- |
+| `:DIInstall <debugger>`  | Checks dependencies and installs \<debugger> |
+| `:DIUnistall <debugger>` | Uninstalls \<debugger>                       |
+| `:DIList`                | Lists installed debuggers                    |
