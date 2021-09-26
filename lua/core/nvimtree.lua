@@ -5,7 +5,6 @@ function M.config()
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
-    side = "left",
     setup = {
       auto_open = 0,
       auto_close = 1,
@@ -14,8 +13,15 @@ function M.config()
         enable = 1,
       },
       lsp_diagnostics = 1,
+      view = {
+        width = 30,
+        side = "left",
+        auto_resize = false,
+        mappings = {
+          custom_only = false,
+        },
+      },
     },
-    width = 30,
     show_icons = {
       git = 1,
       folders = 1,
@@ -76,8 +82,8 @@ function M.setup()
 
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
-  if not g.nvim_tree_bindings then
-    g.nvim_tree_bindings = {
+  if not lvim.builtin.nvimtree.setup.view.mappings.list then
+    lvim.builtin.nvimtree.setup.view.mappings.list = {
       { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
       { key = "h", cb = tree_cb "close_node" },
       { key = "v", cb = tree_cb "vsplit" },
