@@ -98,38 +98,44 @@ Finds the root of your project and changes the LunarVim working directory to the
 
 ### [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 
-A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced".
+**A completion engine plugin for neovim written in Lua.**
 
 ## Snippets
 
 ### [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 
-Provides a snippet engine for neovim written in Lua.
+**Provides a snippet engine for neovim written in Lua.**
 
 View example configurations [here](https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua)
 View the documentation with `:help luasnip`
 
 ### [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 
-A collection of snippets for different programming languages. LuaSnip uses friendly-snippets as it's snippet library.
+**A collection of snippets for different programming languages.**
+
+LuaSnip uses friendly-snippets as it's snippet library.
 
 ## Auto-Pair closing brackets
 
 ### [nvim-autopairs](Autopairs)
 
-Provides automatic closing of brackets.
+**Provides automatic closing of brackets.**
 
 ## Git
 
 ### [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 
-Adds visual identifiers to indicate which lines have changed since the last git commit. Adds commands for staging git hunks.
+**Provides visual indicators for which lines have changed since the last commit**
+
+Adds commands for staging git hunks.
 
 ## Keybindings
 
 ### [which-key](https://github.com/folke/which-key.nvim)
 
-Displays popup with possible key bindings. Triggered by default with `Spacebar`. The speed at which is opened is defined by `timeoutlen`. LunarVim defines a short `timeoutlen` of `100ms`. Some plugins might require a longer `timeoutlen` to work properly. The following command sets the timeoutlen to half a second.
+**Displays popup with possible key bindings.**
+
+Triggered by default with `Spacebar`. The speed whichkey opens is defined by `timeoutlen`. LunarVim defines a short `timeoutlen` of `100ms`. Some plugins might require a longer `timeoutlen` to work properly. The following command redifines the timeoutlen to half a second.
 
 ```lua
 vim.opt.timeoutlen = 500
@@ -154,13 +160,15 @@ barbar.nvim is a tabline plugin with re-orderable, auto-sizing, clickable tabs.
 
 ### [lualine](https://github.com/hoob3rt/lualine.nvim)
 
-A blazing fast and easy to configure neovim statusline written in pure lua.
+**A blazing fast and easy to configure neovim statusline written in pure lua.**
+
+[Go here](.configuration/06-statusline.md) for more information on configuration
 
 ## Terminal
 
 ### [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)
 
-A neovim plugin to persist and toggle multiple terminals during an editing session
+**A neovim plugin to persist and toggle multiple terminals during an editing session**
 
 | Command | Description     |
 | ------- | --------------- |
@@ -169,7 +177,7 @@ A neovim plugin to persist and toggle multiple terminals during an editing sessi
 Toggleterm can be used to launch command line programs. By default `gg` launches `LazyGit` assuming it is installed on your system. Other terminal executables can be added with:
 
 ```lua
-    -- Add executables on the config.lua
+    -- Add executables to config.lua
     -- { exec, keymap, name}
      lvim.builtin.terminal.execs = {{}} to overwrite
      lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
@@ -179,14 +187,15 @@ Toggleterm can be used to launch command line programs. By default `gg` launches
 
 ### [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 
-Provides a start screen with useful options.
+**Provides a start screen with useful options.**
 
 ## Debugging
 
 ### [nvim-dap](https://github.com/mfussenegger/nvim-dap)
 
-nvim-dap is a Debug Adapter Protocol client implementation for Neovim
-For more information
+**nvim-dap is a Debug Adapter Protocol client implementation for Neovim**
+
+For more information type the following commands
 
 ```lua
 :help dap.txt
