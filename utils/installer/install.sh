@@ -38,6 +38,7 @@ function usage() {
   echo "Options:"
   echo "    -h, --help    Print this help message"
   echo "    -y, --yes     Yes for all choices (Install NodeJS, Python, Rust dependencies)"
+  echo "    -l, --local   Install local copy of LunarVim"
   echo "    --overwrite   Overwrite previous lvim configuration"
 }
 
@@ -49,6 +50,9 @@ function parse_arguments() {
         ;;
       --overwrite)
         ARGS_OVERWRITE="y"
+        ;;
+      -l | --local)
+        ARGS_LOCAL="y"
         ;;
       -h | --help)
         usage
@@ -80,8 +84,10 @@ EOF
   echo "Detecting platform for managing any additional neovim dependencies"
   detect_platform
 
-  if [ -n "$GITHUB_ACTIONS" ]; then
-    LV_BRANCH="${GITHUB_REF##*/}"
+  if [ -n "$ARGS_LOCAL" ]; then
+    if [ -n "$GITHUB_ACTIONS" ]; then
+      LV_BRANCH="${GITHUB_REF##*/}"
+    fi
     install_packer
     setup_lvim
     exit 0

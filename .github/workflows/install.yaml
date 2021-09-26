@@ -34,7 +34,7 @@ jobs:
           mkdir -p "$HOME"/.local/share/lunarvim/lvim
           mkdir -p "$HOME"/.config/lvim
           ln -s "$PWD"/* "$HOME"/.local/share/lunarvim/lvim/.
-          bash ./utils/installer/install.sh
+          ./utils/installer/install.sh --local
 
       - name: Test LunarVim PackerCompile
         run: if "$HOME"/.local/bin/lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
