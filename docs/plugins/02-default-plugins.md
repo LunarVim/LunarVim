@@ -4,7 +4,7 @@ This page lists the default plugins installed Lunavim including descriptions, im
 
 ## Plugin management
 
-### [packer.nvim](https://github.com/wbthomason/packer.nvim)
+[packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 **'use-package' inspired plugin/package management for Neovim.**
 
@@ -20,7 +20,7 @@ This page lists the default plugins installed Lunavim including descriptions, im
 
 ## Language Server Protocol
 
-### [nvim.lspconfig](https://github.com/neovim/nvim-lspconfig)
+[nvim.lspconfig](https://github.com/neovim/nvim-lspconfig)
 
 **A collection of common configurations for Neovim's built-in language server client.**
 
@@ -30,7 +30,7 @@ Automatically launching and initializing language servers that are installed on 
 | ---------- | --------------------------- |
 | `:LspInfo` | Language server diagnostics |
 
-### [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)
+[nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)
 
 **Companion plugin for nvim-lspconfig to install language servers**
 
@@ -40,7 +40,7 @@ can use tab completion with LspInstall to check for available language servers
 | ------------------------- | ------------------------------------------------- |
 | `:LspInstall \<language>` | Installs a language server for the given language |
 
-### [nlsp.settings.nvim](https://github.com/tamago324/nlsp-settings.nvim)
+[nlsp.settings.nvim](https://github.com/tamago324/nlsp-settings.nvim)
 
 **A plugin to configure Neovim LSP using json files like coc-settings.json.**
 
@@ -52,7 +52,7 @@ See [Language Server Configuration](./02-after-install.md#language-server-config
 
 ## Highlighting, treesitter
 
-### [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
 **Easy way to use the tree-sitter interface in Neovim and provide some basic functionality such as highlighting**
 
@@ -65,7 +65,7 @@ See the nvim.treesitter documentation to see the [supported languages](https://g
 
 ## File explorer
 
-### [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
+[nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
 
 **A File Explorer For Neovim Written In Lua**
 
@@ -77,7 +77,7 @@ See the nvim.treesitter documentation to see the [supported languages](https://g
 
 ## Project management
 
-### [project.nvim](https://github.com/ahmedkhalf/project.nvim)
+[project.nvim](https://github.com/ahmedkhalf/project.nvim)
 
 **all in one project management.**
 
@@ -85,7 +85,7 @@ Finds the root of your project and changes the LunarVim working directory to the
 
 ## Fuzzy file finder
 
-### [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 
 **extendable fuzzy finder over lists, built on the latest features from neovim core**
 
@@ -96,20 +96,20 @@ Finds the root of your project and changes the LunarVim working directory to the
 
 ## Completion
 
-### [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 
 **A completion engine plugin for neovim written in Lua.**
 
 ## Snippets
 
-### [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+[LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 
 **Provides a snippet engine for neovim written in Lua.**
 
 View example configurations [here](https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua)
 View the documentation with `:help luasnip`
 
-### [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+[friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 
 **A collection of snippets for different programming languages.**
 
@@ -117,13 +117,13 @@ LuaSnip uses friendly-snippets as it's snippet library.
 
 ## Auto-Pair closing brackets
 
-### [nvim-autopairs](Autopairs)
+[nvim-autopairs](Autopairs)
 
 **Provides automatic closing of brackets.**
 
 ## Git
 
-### [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 
 **Provides visual indicators for which lines have changed since the last commit**
 
@@ -131,7 +131,7 @@ Adds commands for staging git hunks.
 
 ## Keybindings
 
-### [which-key](https://github.com/folke/which-key.nvim)
+[which-key](https://github.com/folke/which-key.nvim)
 
 **Displays popup with possible key bindings.**
 
@@ -143,13 +143,13 @@ vim.opt.timeoutlen = 500
 
 ## Icons
 
-### [nvim-web-devicons](kyazdani42/nvim-web-devicons)
+[nvim-web-devicons](kyazdani42/nvim-web-devicons)
 
 Provides icons for use with some plugins
 
 ## Status and Bufferline
 
-### [barbar.nvim](https://github.com/romgrk/barbar.nvim)
+[barbar.nvim](https://github.com/romgrk/barbar.nvim)
 
 barbar.nvim is a tabline plugin with re-orderable, auto-sizing, clickable tabs.
 
@@ -158,7 +158,7 @@ barbar.nvim is a tabline plugin with re-orderable, auto-sizing, clickable tabs.
 | `<S-l>` | Go to next buffer     |
 | `<S-h`  | Go to previous buffer |
 
-### [lualine](https://github.com/hoob3rt/lualine.nvim)
+[lualine](https://github.com/hoob3rt/lualine.nvim)
 
 **A blazing fast and easy to configure neovim statusline written in pure lua.**
 
@@ -166,7 +166,7 @@ barbar.nvim is a tabline plugin with re-orderable, auto-sizing, clickable tabs.
 
 ## Terminal
 
-### [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)
+[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)
 
 **A neovim plugin to persist and toggle multiple terminals during an editing session**
 
@@ -185,13 +185,13 @@ Toggleterm can be used to launch command line programs. By default `gg` launches
 
 ## Dashboard
 
-### [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
+[dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 
 **Provides a start screen with useful options.**
 
 ## Debugging
 
-### [nvim-dap](https://github.com/mfussenegger/nvim-dap)
+[nvim-dap](https://github.com/mfussenegger/nvim-dap)
 
 **nvim-dap is a Debug Adapter Protocol client implementation for Neovim**
 
@@ -205,7 +205,7 @@ For more information type the following commands
 
 or go to the [Debug-Adapter installation wiki](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
 
-### [DAPInstall](https://github.com/Pocco81/DAPInstall.nvim)
+[DAPInstall](https://github.com/Pocco81/DAPInstall.nvim)
 
 Provides a way to manage installation, configuration, and setup of debuggers.
 
