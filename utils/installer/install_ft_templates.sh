@@ -19,8 +19,7 @@ declare -x FT_GEN_DIR="$LUNARVIM_RUNTIME_DIR/site/after/ftplugin"
 rm -rf "$FT_GEN_DIR"
 mkdir -p "$FT_GEN_DIR"
 
-exec nvim -u NONE -E -R --headless \
-  +"set rtp+=$PWD" \
-  +"set rtp+=$LSP_CONFIG_DIR" \
-  +"set rtp+=$LSP_INSTALLER_DIR" \
+nvim -u NONE -E -R --headless \
+  --cmd "lua vim.opt.rtp:append({ [[$LUNARVIM_RUNTIME_DIR/lvim]], [[$LSP_CONFIG_DIR]], [[$LSP_INSTALLER_DIR]]})" \
+  --cmd "lua vim.opt.rtp:remove(vim.fn.stdpath 'config')" \
   +"lua require('utils/templates').generate_templates()" +q
