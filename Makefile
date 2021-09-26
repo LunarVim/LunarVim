@@ -11,6 +11,10 @@ install-neovim-binary:
 uninstall:
 	@echo TODO: this is currently not supported
 
+update:
+	@echo Starting LunarVim Updater
+	bash ./utils/installer/update_lvim.sh
+
 lint: lint-lua lint-sh
 
 lint-lua:
@@ -30,4 +34,4 @@ style-sh:
 test:
 	bash ./utils/bin/test_runner.sh "$(TEST)"
 
-.PHONY: install install-neovim-binary uninstall lint style test
+.PHONY: install install-neovim-binary uninstall lint style test update
