@@ -13,6 +13,7 @@ function M.config()
       update_focused_file = {
         enable = 1,
       },
+      lsp_diagnostics = 1,
     },
     width = 30,
     show_icons = {
@@ -28,7 +29,6 @@ function M.config()
     git_hl = 1,
     root_folder_modifier = ":t",
     allow_resize = 1,
-    lsp_diagnostics = 1,
     auto_ignore_ft = { "startify", "dashboard" },
     icons = {
       default = "",
