@@ -1,14 +1,7 @@
 local M = {}
+
 local configs = require "lspconfig/configs"
-local uv = vim.loop
-
-local utils = {}
-
-function utils.join_paths(...)
-  local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
-  local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
-  return result
-end
+local utils = require "utils"
 
 local generated_dir = os.getenv "FT_GEN_DIR"
   or utils.join_paths(os.getenv "LUNARVIM_RUNTIME_DIR", "site", "after", "ftplugin")
@@ -19,18 +12,6 @@ vim.fn.mkdir(generated_dir, "p")
 -- remove any outdated files
 for _, file in ipairs(vim.fn.glob(generated_dir .. "/*.lua", 1, 1)) do
   vim.fn.delete(file)
-end
-
-function utils.write_file(path, txt, flag)
-  uv.fs_open(path, flag, 438, function(open_err, fd)
-    assert(not open_err, open_err)
-    uv.fs_write(fd, txt, -1, function(write_err)
-      assert(not write_err, write_err)
-      uv.fs_close(fd, function(close_err)
-        assert(not close_err, close_err)
-      end)
-    end)
-  end)
 end
 
 local function get_supported_filetypes(server_name)
@@ -82,6 +63,7 @@ function M.generate_templates(servers_names)
   for _, server in ipairs(servers_names) do
     M.generate_ftplugin(server, generated_dir)
   end
+  print "Templates installation is complete\n"
 end
 
 return M

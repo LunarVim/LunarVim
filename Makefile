@@ -11,6 +11,10 @@ install-neovim-binary:
 uninstall:
 	@echo TODO: this is currently not supported
 
+update:
+	@echo Starting LunarVim Updateer
+	bash ./utils/installer/update_lvim.sh
+
 lint: lint-lua lint-sh
 
 lint-lua:
@@ -30,7 +34,7 @@ style-sh:
 test:
 	bash ./utils/bin/test_runner.sh "$(TEST)"
 
-generate-ftplugins:
-	bash ./utils/installer/templates-installer.sh
+install_ft_templates:
+	bash ./utils/installer/install_ft_templates.sh
 
-.PHONY: install install-neovim-binary uninstall lint style test
+.PHONY: install install-neovim-binary uninstall lint style test update install_ft_templates

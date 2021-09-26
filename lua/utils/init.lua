@@ -153,6 +153,18 @@ end
 
 utils.join_paths = _G.join_paths
 
+function utils.write_file(path, txt, flag)
+  uv.fs_open(path, flag, 438, function(open_err, fd)
+    assert(not open_err, open_err)
+    uv.fs_write(fd, txt, -1, function(write_err)
+      assert(not write_err, write_err)
+      uv.fs_close(fd, function(close_err)
+        assert(not close_err, close_err)
+      end)
+    end)
+  end)
+end
+
 return utils
 
 -- TODO: find a new home for these autocommands
