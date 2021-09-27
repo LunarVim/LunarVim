@@ -44,7 +44,7 @@ function M.setup_server(server, default_config)
   end
 end
 
-function M.ensure_configured(servers)
+function M.setup(servers)
   local status_ok, ls_installer = pcall(require, "nvim-lsp-installer")
   if not status_ok then
     return
@@ -55,15 +55,24 @@ function M.ensure_configured(servers)
     servers = { servers }
   end
 
-  for _, server in pairs(servers) do
+  local missing_servers = {}
+  for _, server in ipairs(servers) do
     local lsp_installer_servers = require "nvim-lsp-installer.servers"
-    local ok, requested_server = lsp_installer_servers.get_server(server)
-    if ok then
+    local server_available, requested_server = lsp_installer_servers.get_server(server)
+    if server_available then
       if not requested_server:is_installed() then
-        requested_server:install()
+        table.insert(missing_servers, server)
       end
     end
   end
+
+  -- TODO: this should handled more elegantly #1632
+  if #vim.tbl_keys(missing_servers) == #vim.tbl_keys(servers) then
+    Log:info(
+      "None of the supported language server(s) [" .. table.concat(missing_servers, ", ") .. "] is currently installed"
+    )
+  end
+
   ls_installer.on_server_ready(function(server)
     local default_config = {
       on_attach = require("lsp").common_on_attach,
