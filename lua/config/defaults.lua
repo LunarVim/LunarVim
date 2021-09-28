@@ -20,7 +20,7 @@ lvim = {
     level = "warn",
     viewer = {
       ---@usage this will fallback on "less +F" if not found
-      cmd = "less",
+      cmd = "less +F",
       layout_config = {
         ---@usage direction = 'vertical' | 'horizontal' | 'window' | 'float',
         direction = "horizontal",
