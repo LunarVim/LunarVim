@@ -155,9 +155,14 @@ end
 --FIXME: this is still broken
 function utils.lvim_update()
   local update_script = utils.join_paths(get_runtime_dir(), "lvim", "utils", "installer", "update_lvim.sh")
-  os.execute("bash " .. update_script)
-
-  vim.notify("Operation complete. Please reload LunarVim to see all the changes", vim.log.levels.INFO)
+  local cmd = string.format("bash %s", update_script)
+  local ret = string.format("\n%s\n", vim.fn.system(cmd))
+  Log:debug(ret)
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Update failed! Check the log for further information", vim.log.levels.WARN)
+  else
+    vim.notify("Update successful. Make sure to reload LunarVim to see all the changes", vim.log.levels.INFO)
+  end
 end
 
 return utils

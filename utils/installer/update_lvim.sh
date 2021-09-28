@@ -3,7 +3,46 @@
 LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
 LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$HOME/.config/lvim"}"
 
+function usage() {
+  echo "Usage: install.sh [<options>]"
+  echo ""
+  echo "Options:"
+  echo "    -h, --help    print this help message"
+  echo "    -q, --quiet   disable all output"
+}
+
+function main() {
+
+  parse_arguments "$@"
+
+  msg "Clearing up old startup cache"
+
+  lvim --headless -E -R +LvimCacheReset +q
+
+  msg "Your LunarVim installation is now up to date!"
+}
+
+function parse_arguments() {
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -q | --quiet)
+        QUIET="y"
+        ;;
+      -h | --help)
+        usage
+        exit 0
+        ;;
+    esac
+    shift
+  done
+}
+
 function msg() {
+
+  if [ -n "$QUIET" ]; then
+    return
+  fi
+
   local text="$1"
   local div_width="80"
   printf "%${div_width}s\n" ' ' | tr ' ' -
@@ -22,11 +61,6 @@ function update_lvim() {
     fi
   fi
 
-  msg "Clearing up old startup cache"
-
-  lvim --headless -E -R +LvimCacheReset +q
-
-  msg "Your LunarVim installation is now up to date!"
 }
 
-update_lvim "@"
+main "$@"
