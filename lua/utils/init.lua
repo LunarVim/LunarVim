@@ -140,30 +140,7 @@ function utils.is_file(filename)
   return stat and stat.type == "file" or false
 end
 
-function utils.join_paths(...)
-  local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
-  local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
-  return result
-end
-
-function utils.lvim_cache_reset()
-  _G.__luacache.clear_cache()
-  _G.__luacache.save_cache()
-  require("plugin-loader"):cache_reset()
-end
-
---FIXME: this is still broken
-function utils.lvim_update()
-  local update_script = utils.join_paths(get_runtime_dir(), "lvim", "utils", "installer", "update_lvim.sh")
-  local cmd = string.format("bash %s", update_script)
-  local ret = string.format("\n%s\n", vim.fn.system(cmd))
-  Log:debug(ret)
-  if vim.v.shell_error ~= 0 then
-    vim.notify("Update failed! Check the log for further information", vim.log.levels.WARN)
-  else
-    vim.notify("Update successful. Make sure to reload LunarVim to see all the changes", vim.log.levels.INFO)
-  end
-end
+utils.join_paths = _G.join_paths
 
 return utils
 

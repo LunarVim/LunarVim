@@ -47,6 +47,7 @@ function usage() {
   echo "    -h, --help                       Print this help message"
   echo "    -l, --local                      Install local copy of LunarVim"
   echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
+  echo "    -q, --quiet                      disable all output"
   echo "    --[no]-install-dependencies      Wheter to prompt to install external dependencies (will prompt by default)"
 }
 
@@ -65,6 +66,9 @@ function parse_arguments() {
       --no-install-dependencies)
         ARGS_INSTALL_DEPENDENCIES=0
         ;;
+      -q | --quiet)
+        QUIET="y"
+        ;;
       -h | --help)
         usage
         exit 0
@@ -74,21 +78,20 @@ function parse_arguments() {
   done
 }
 
+function msg() {
+
+  [ -n "$QUIET" ] && return
+
+  local text="$1"
+  local div_width="80"
+  printf "%${div_width}s\n" ' ' | tr ' ' -
+  printf "%s\n" "$text"
+}
+
 function main() {
   parse_arguments "$@"
 
-  cat <<'EOF'
-
-      88\                                                   88\
-      88 |                                                  \__|
-      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\
-      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\
-      88 |88 |  88 |88 |  88 | 888888$ |88 |  \__|\88\88  / 88 |88 / 88 / 88 |
-      88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
-      88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
-      \__| \______/ \__|  \__| \_______|\__|         \_/    \__|\__| \__| \__|
-
-EOF
+  print_logo
 
   msg "Detecting platform for managing any additional neovim dependencies"
   detect_platform
@@ -360,11 +363,23 @@ function setup_lvim() {
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
-function msg() {
-  local text="$1"
-  local div_width="80"
-  printf "%${div_width}s\n" ' ' | tr ' ' -
-  printf "%s\n" "$text"
+function update_lvim() {
+  "$INSTALL_PREFIX/bin/lvim" --headless +'LvimUpdate' +q
+}
+
+function print_logo() {
+  cat <<'EOF'
+
+      88\                                                   88\
+      88 |                                                  \__|
+      88 |88\   88\ 888888$\   888888\   888888\ 88\    88\ 88\ 888888\8888\
+      88 |88 |  88 |88  __88\  \____88\ 88  __88\\88\  88  |88 |88  _88  _88\
+      88 |88 |  88 |88 |  88 | 888888$ |88 |  \__|\88\88  / 88 |88 / 88 / 88 |
+      88 |88 |  88 |88 |  88 |88  __88 |88 |       \88$  /  88 |88 | 88 | 88 |
+      88 |\888888  |88 |  88 |\888888$ |88 |        \$  /   88 |88 | 88 | 88 |
+      \__| \______/ \__|  \__| \_______|\__|         \_/    \__|\__| \__| \__|
+
+EOF
 }
 
 main "$@"

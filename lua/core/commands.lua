@@ -12,8 +12,8 @@ M.defaults = {
   ]],
   -- :LvimInfo
   [[command! LvimInfo lua require('core.info').toggle_popup(vim.bo.filetype)]],
-  [[ command! LvimCacheReset lua require('utils').lvim_cache_reset() ]],
-  [[ command! LvimUpdate lua require('utils').lvim_update() ]],
+  [[ command! LvimCacheReset lua require('bootstrap').reset_cache() ]],
+  [[ command! LvimUpdate lua require('bootstrap').update() ]],
 }
 
 M.load = function(commands)
