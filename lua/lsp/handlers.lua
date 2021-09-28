@@ -3,72 +3,42 @@
 local M = {}
 
 function M.setup()
-  local config = { -- your config
-    virtual_text = lvim.lsp.diagnostics.virtual_text,
-    signs = lvim.lsp.diagnostics.signs,
-    underline = lvim.lsp.diagnostics.underline,
-    update_in_insert = lvim.lsp.diagnostics.update_in_insert,
-    severity_sort = lvim.lsp.diagnostics.severity_sort,
-  }
+  local function save_diagnostics(result, client_id)
+    local uri = result.uri
+    local bufnr = vim.uri_to_bufnr(uri)
+    if not bufnr then
+      return
+    end
+
+    local diagnostics = result.diagnostics
+    vim.lsp.diagnostic.save(diagnostics, bufnr, client_id)
+    if not vim.api.nvim_buf_is_loaded(bufnr) then
+      return
+    end
+    vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, lvim.lsp.diagnostics)
+  end
+
   if vim.fn.has "nvim-0.5.1" > 0 then
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, _)
-      local uri = result.uri
-      local bufnr = vim.uri_to_bufnr(uri)
-      if not bufnr then
-        return
+    local ok, _ = pcall(require, "vim.diagnostic")
+    if ok then
+      local sign_names = {
+        "DiagnosticSignError",
+        "DiagnosticSignWarn",
+        "DiagnosticSignInfo",
+        "DiagnosticSignHint",
+      }
+      for i, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
+        vim.fn.sign_define(sign_names[i], { texthl = sign_names[i], text = sign.text, numhl = "" })
       end
-
-      local diagnostics = result.diagnostics
-      local ok, vim_diag = pcall(require, "vim.diagnostic")
-      if ok then
-        -- FIX: why can't we just use vim.diagnostic.get(buf_id)?
-        config.signs = true
-        for i, diagnostic in ipairs(diagnostics) do
-          local rng = diagnostic.range
-          diagnostics[i].lnum = rng["start"].line
-          diagnostics[i].end_lnum = rng["end"].line
-          diagnostics[i].col = rng["start"].character
-          diagnostics[i].end_col = rng["end"].character
-        end
-        local namespace = vim.lsp.diagnostic.get_namespace(ctx.client_id)
-
-        vim_diag.set(namespace, bufnr, diagnostics, config)
-        if not vim.api.nvim_buf_is_loaded(bufnr) then
-          return
-        end
-
-        local sign_names = {
-          "DiagnosticSignError",
-          "DiagnosticSignWarn",
-          "DiagnosticSignInfo",
-          "DiagnosticSignHint",
-        }
-        for i, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
-          vim.fn.sign_define(sign_names[i], { texthl = sign_names[i], text = sign.text, numhl = "" })
-        end
-        vim_diag.show(namespace, bufnr, diagnostics, config)
-      else
-        vim.lsp.diagnostic.save(diagnostics, bufnr, ctx.client_id)
-        if not vim.api.nvim_buf_is_loaded(bufnr) then
-          return
-        end
-        vim.lsp.diagnostic.display(diagnostics, bufnr, ctx.client_id, config)
+      vim.diagnostic.config(lvim.lsp.diagnostics)
+    else
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, _)
+        save_diagnostics(result, ctx.client_id)
       end
     end
   else
     vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
-      local uri = params.uri
-      local bufnr = vim.uri_to_bufnr(uri)
-      if not bufnr then
-        return
-      end
-
-      local diagnostics = params.diagnostics
-      vim.lsp.diagnostic.save(diagnostics, bufnr, client_id)
-      if not vim.api.nvim_buf_is_loaded(bufnr) then
-        return
-      end
-      vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
+      save_diagnostics(params, client_id)
     end
   end
 
