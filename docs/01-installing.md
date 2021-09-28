@@ -39,6 +39,16 @@ If you encounter problems with the installation check the following:
 3. If you're upgrading your install, sometimes an old packer compiled file can cause errors at runtime. Remove the folder. `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`
 4. If you're upgrading from an older version of LunarVim, remove the old launcher. `sudo rm /usr/local/bin/lvim`
 
+
+## Tips when running in China
+This guide provides a few tips for users in China to get around some of the bandwidth issues or slowness they can suffer when downloading content on GitHub.
+
+[GitHub Proxy Mirror](https://mirror.ghproxy.com/) is a fast mirror for Chinese user to access github content. You can just add following lines to `/etc/hosts` to accelerate your installation.
+```
+mirror.ghproxy.com github.com
+mirror.ghproxy.com raw.githubusercontent.com
+```
+
 ## Uninstall
 
 You can remove LunarVim entirely by running the following commands:
