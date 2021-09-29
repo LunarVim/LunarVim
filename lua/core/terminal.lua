@@ -112,8 +112,14 @@ M.toggle_log_view = function(name)
   if not logfile then
     return
   end
+
+  local log_viewer = lvim.log.viewer.cmd
+  if vim.fn.executable(log_viewer) ~= 1 then
+    log_viewer = "less +F"
+  end
+  log_viewer = log_viewer .. " " .. logfile
   local term_opts = vim.tbl_deep_extend("force", lvim.builtin.terminal, {
-    cmd = lvim.log.viewer.cmd .. " " .. logfile,
+    cmd = log_viewer,
     open_mapping = lvim.log.viewer.layout_config.open_mapping,
     direction = lvim.log.viewer.layout_config.direction,
     -- TODO: this might not be working as expected
