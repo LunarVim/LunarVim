@@ -1,7 +1,7 @@
 name: install
 on:
   push:
-    branches: "**"
+    branches: ["**"]
   pull_request:
     branches:
       - "master"
@@ -31,10 +31,7 @@ jobs:
       - name: Install LunarVim
         timeout-minutes: 4
         run: |
-          mkdir -p "$HOME"/.local/share/lunarvim/lvim
-          mkdir -p "$HOME"/.config/lvim
-          ln -s "$PWD"/* "$HOME"/.local/share/lunarvim/lvim/.
-          ./utils/installer/install.sh --local
+          ./utils/installer/install.sh --no --local
 
       - name: Test LunarVim PackerCompile
         run: if "$HOME"/.local/bin/lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi

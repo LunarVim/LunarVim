@@ -38,6 +38,7 @@ function usage() {
   echo "Options:"
   echo "    -h, --help    Print this help message"
   echo "    -y, --yes     Yes for all choices (Install NodeJS, Python, Rust dependencies)"
+  echo "    -n, --no      No for all choices (Install NodeJS, Python, Rust dependencies)"
   echo "    -l, --local   Install local copy of LunarVim"
   echo "    --overwrite   Overwrite previous lvim configuration"
 }
@@ -47,6 +48,9 @@ function parse_arguments() {
     case "$1" in
       -y | --yes)
         ARGS_INSTALL_NONINTERACTIVE="y"
+        ;;
+      -n | --no)
+        ARGS_INSTALL_NONINTERACTIVE="n"
         ;;
       --overwrite)
         ARGS_OVERWRITE="y"
@@ -84,13 +88,8 @@ EOF
   echo "Detecting platform for managing any additional neovim dependencies"
   detect_platform
 
-  if [ -n "$ARGS_LOCAL" ]; then
-    if [ -n "$GITHUB_ACTIONS" ]; then
-      LV_BRANCH="${GITHUB_REF##*/}"
-    fi
-    install_packer
-    setup_lvim
-    exit 0
+  if [ -n "$GITHUB_ACTIONS" ]; then
+    LV_BRANCH="${GITHUB_REF##*/}"
   fi
 
   check_system_deps
@@ -109,7 +108,7 @@ EOF
     echo "Would you like to install lunarvim's Rust dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
-  else
+  elif [ "$ARGS_INSTALL_NONINTERACTIVE" = "y" ]; then
     install_nodejs_deps
     install_python_deps
     install_rust_deps
@@ -142,7 +141,11 @@ EOF
     echo "Updating LunarVim"
     update_lvim
   else
-    clone_lvim
+    if [ -n "$ARGS_LOCAL" ]; then
+      link_local_lvim
+    else
+      clone_lvim
+    fi
     setup_lvim
   fi
 
@@ -307,6 +310,16 @@ function clone_lvim() {
     echo "Failed to clone repository. Installation failed."
     exit 1
   fi
+}
+
+function link_local_lvim() {
+  echo "Linking local LunarVim repo"
+  mkdir -p "$LUNARVIM_RUNTIME_DIR"
+  local BASEDIR
+  BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+  BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
+  echo "   - $BASEDIR -> $LUNARVIM_RUNTIME_DIR/lvim"
+  ln -s "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
 }
 
 function setup_shim() {
