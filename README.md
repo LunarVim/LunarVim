@@ -140,8 +140,8 @@ or just call it manually when inside LunarVim `:LvimCacheReset`
 
 2. make sure your `lvim` binary is up-to-date
 ```bash
-LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
-bash "$LUNARVIM_RUNTIME_DIR/utils/installer/install_bin.sh"
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
+bash "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/install_bin.sh"
 ```
 
 ## Resources
