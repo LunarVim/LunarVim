@@ -139,7 +139,6 @@ return {
 
   {
     "romgrk/barbar.nvim",
-    commit = "7a19aac3d401c997a6fb7067a7756a4a77184c2e",
     config = function()
       require("core.bufferline").setup()
     end,
