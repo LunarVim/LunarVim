@@ -41,7 +41,6 @@ M.config = function()
       hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
       show_help = true, -- show help message on the command line when the popup is visible
     },
-
     opts = {
       mode = "n", -- NORMAL mode
       prefix = "<leader>",
@@ -103,14 +102,28 @@ M.config = function()
         S = { "<cmd>PackerStatus<cr>", "Status" },
         u = { "<cmd>PackerUpdate<cr>", "Update" },
       },
-
-      -- " Available Debug Adapters:
-      -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
-      -- " Adapter configuration and installation instructions:
-      -- "   https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-      -- " Debug Adapter protocol:
-      -- "   https://microsoft.github.io/debug-adapter-protocol/
-      -- " Debugging
+      d = {
+        -- " Available Debug Adapters:
+        -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
+        -- " Adapter configuration and installation instructions:
+        -- "   https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+        -- " Debug Adapter protocol:
+        -- "   https://microsoft.github.io/debug-adapter-protocol/
+        name = "Debug",
+        t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+        b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
+        c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+        C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
+        d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
+        g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
+        i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+        o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+        u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+        p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
+        r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+        s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
+        q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
+      },
       g = {
         name = "Git",
         j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -136,7 +149,6 @@ M.config = function()
           "Git Diff",
         },
       },
-
       l = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -241,6 +253,19 @@ M.config = function()
   }
 end
 
+-- Clean up mappings for inactive core plugins
+local function clean_up_inactive_mappings()
+  -- DAP
+  if not lvim.builtin.dap.active and lvim.builtin.which_key.mappings.d.name == "Debug" then
+    lvim.builtin.which_key.mappings.d = nil
+  end
+
+  -- nvimtree
+  if not lvim.builtin.nvimtree.active and lvim.builtin.which_key.mappings.e.name == "Explorer" then
+    lvim.builtin.which_key.mappings.e = nil
+  end
+end
+
 M.setup = function()
   local which_key = require "which-key"
 
@@ -248,6 +273,8 @@ M.setup = function()
 
   local opts = lvim.builtin.which_key.opts
   local vopts = lvim.builtin.which_key.vopts
+
+  clean_up_inactive_mappings()
 
   local mappings = lvim.builtin.which_key.mappings
   local vmappings = lvim.builtin.which_key.vmappings

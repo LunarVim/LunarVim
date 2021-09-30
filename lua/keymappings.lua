@@ -1,6 +1,5 @@
 local M = {}
 local Log = require "core.log"
-
 local generic_opts_any = { noremap = true, silent = true }
 
 local generic_opts = {
