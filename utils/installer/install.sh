@@ -17,6 +17,15 @@ declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
 declare -r LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
 declare -r LUNARVIM_PACK_DIR="$LUNARVIM_RUNTIME_DIR/site/pack"
 
+declare BASEDIR
+BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
+readonly BASEDIR
+
+declare ARGS_LOCAL=0
+declare ARGS_OVERWRITE=0
+declare ARGS_INSTALL_DEPENDENCIES=1
+
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
   "$LUNARVIM_RUNTIME_DIR"
@@ -36,19 +45,26 @@ function usage() {
   echo "Usage: install.sh [<options>]"
   echo ""
   echo "Options:"
-  echo "    -h, --help    Print this help message"
-  echo "    -y, --yes     Yes for all choices (Install NodeJS, Python, Rust dependencies)"
-  echo "    --overwrite   Overwrite previous lvim configuration"
+  echo "    -h, --help                       Print this help message"
+  echo "    -l, --local                      Install local copy of LunarVim"
+  echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
+  echo "    --[no]-install-dependencies      Wheter to prompt to install external dependencies (will prompt by default)"
 }
 
 function parse_arguments() {
   while [ "$#" -gt 0 ]; do
     case "$1" in
-      -y | --yes)
-        ARGS_INSTALL_NONINTERACTIVE="y"
+      -l | --local)
+        ARGS_LOCAL=1
         ;;
       --overwrite)
-        ARGS_OVERWRITE="y"
+        ARGS_OVERWRITE=1
+        ;;
+      --install-dependencies)
+        ARGS_INSTALL_DEPENDENCIES=1
+        ;;
+      --no-install-dependencies)
+        ARGS_INSTALL_DEPENDENCIES=0
         ;;
       -h | --help)
         usage
@@ -80,18 +96,11 @@ EOF
   echo "Detecting platform for managing any additional neovim dependencies"
   detect_platform
 
-  if [ -n "$GITHUB_ACTIONS" ]; then
-    LV_BRANCH="${GITHUB_REF##*/}"
-    install_packer
-    setup_lvim
-    exit 0
-  fi
-
   check_system_deps
 
   __add_separator "80"
 
-  if [ -z "$ARGS_INSTALL_NONINTERACTIVE" ]; then
+  if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     echo "Would you like to install lunarvim's NodeJS dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
@@ -103,10 +112,6 @@ EOF
     echo "Would you like to install lunarvim's Rust dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
-  else
-    install_nodejs_deps
-    install_python_deps
-    install_rust_deps
   fi
 
   __add_separator "80"
@@ -116,13 +121,7 @@ EOF
 
   __add_separator "80"
 
-  if [ -n "$ARGS_OVERWRITE" ]; then
-    echo "!!Warning!! -> Removing all lunarvim related config \
-      because of the --overwrite flag"
-    if [ -z "$ARGS_INSTALL_NONINTERACTIVE" ]; then
-      read -p "Would you like to continue? [y]es or [n]o : " -r answer
-      [ "$answer" == "${answer#[Yy]}" ] && exit 1
-    fi
+  if [ "$ARGS_OVERWRITE" -eq 1 ]; then
     for dir in "${__lvim_dirs[@]}"; do
       [ -d "$dir" ] && rm -rf "$dir"
     done
@@ -136,7 +135,11 @@ EOF
     echo "Updating LunarVim"
     update_lvim
   else
-    clone_lvim
+    if [ -n "$ARGS_LOCAL" ]; then
+      link_local_lvim
+    else
+      clone_lvim
+    fi
     setup_lvim
   fi
 
@@ -301,6 +304,20 @@ function clone_lvim() {
     echo "Failed to clone repository. Installation failed."
     exit 1
   fi
+}
+
+function link_local_lvim() {
+  echo "Linking local LunarVim repo"
+
+  # Detect whether it's a symlink or a folder
+  if [ -d "$LUNARVIM_RUNTIME_DIR/lvim" ]; then
+    echo "Removing old installation files"
+    rm -rf "$LUNARVIM_RUNTIME_DIR/lvim"
+  fi
+
+  mkdir -p "$LUNARVIM_RUNTIME_DIR"
+  echo "   - $BASEDIR -> $LUNARVIM_RUNTIME_DIR/lvim"
+  ln -s -f "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
 }
 
 function setup_shim() {
