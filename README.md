@@ -16,21 +16,19 @@
     <a href="https://twitter.com/intent/follow?screen_name=chrisatmachine">
       <img src="https://img.shields.io/twitter/follow/chrisatmachine?style=social&logo=twitter" alt="follow on Twitter">
     </a>
-</p>	
+</p>
 
 </div>
 
 ## Documentation
 
-You can find all of the documentation for Lunarvim at [lunarvim.org](https://www.lunarvim.org)
+You can find all the documentation for Lunarvim at [lunarvim.org](https://www.lunarvim.org)
 
 ## Install In One Command!
 
 Make sure you have the release version of Neovim (0.5).
 
-If you have previously installed LunarVim, make sure to remove `/usr/local/bin/lvim`, as we've moved the launcher to `~/.local/bin/lvim`
-
-``` bash
+```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
@@ -41,7 +39,6 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 - Enter `:TSInstall` followed by `<TAB>` to see your options for syntax highlighting
 
 **NOTE** I recommend installing `lua` for autocomplete in `config.lua`
-
 
 ![Demo1](./utils/media/demo1.png)
 ![Demo2](./utils/media/demo2.png)
@@ -111,38 +108,12 @@ lvim.plugins = {
 
 ## Updating LunarVim
 
-In order to update you should be aware of three things `Plugins`, `LunarVim` and `Neovim`
+- inside LunarVim `:LvimUpdate`
+- from the command-line `lvim +LvimUpdate +q`
 
-To update plugins:
+### Update the plugins
 
-```
-:PackerUpdate
-```
-
-To update LunarVim:
-
-```bash
-cd ~/.local/share/lunarvim/lvim && git pull
-lvim +LvimCacheReset +PackerUpdate
-```
-## Known Issues
-
-If you get either of the following errors
-- init.lua:6: module 'bootstrap' not found:
-- /home/user/.config/nvim/config.lua not found, falling back to /home/user/.config/nvim/lv-config.lua
-
-Try the following methods:
-1. clear up the cache files used by the startup processing. You can either pass it as an argument
-```bash
-lvim +LvimCacheReset
-```
-or just call it manually when inside LunarVim `:LvimCacheReset`
-
-2. make sure your `lvim` binary is up-to-date
-```bash
-export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
-bash "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/install_bin.sh"
-```
+- inside LunarVim `:PackerUpdate`
 
 ## Resources
 
@@ -157,9 +128,11 @@ bash "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/install_bin.sh"
 ## Testimonials
 
 > "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
+>
 > - @juanCortelezzi, LunarVim user.
 
 > "My minimal config with a good amount less code than LunarVim loads 40ms slower. Time to switch."
+>
 > - @mvllow, Potential LunarVim user.
 
 <div align="center" id="madewithlua">
