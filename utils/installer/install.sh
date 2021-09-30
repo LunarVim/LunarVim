@@ -17,6 +17,15 @@ declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
 declare -r LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
 declare -r LUNARVIM_PACK_DIR="$LUNARVIM_RUNTIME_DIR/site/pack"
 
+declare BASEDIR
+BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
+readonly BASEDIR
+
+declare ARGS_LOCAL=0
+declare ARGS_OVERWRITE=0
+declare ARGS_INSTALL_DEPENDENCIES=1
+
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
   "$LUNARVIM_RUNTIME_DIR"
@@ -37,26 +46,25 @@ function usage() {
   echo ""
   echo "Options:"
   echo "    -h, --help                       Print this help message"
-  echo "    -y, --yes                        Install all dependencies"
-  echo "    -n, --no-install-dependencies    Do not install any dependencies"
   echo "    -l, --local                      Install local copy of LunarVim"
-  echo "    --overwrite                      Overwrite previous LunarVim configuration"
+  echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
+  echo "    --[no]-install-dependencies      Wheter to prompt to install external dependencies (will prompt by default)"
 }
 
 function parse_arguments() {
   while [ "$#" -gt 0 ]; do
     case "$1" in
-      -y | --yes)
-        ARGS_INSTALL_NONINTERACTIVE="y"
-        ;;
-      -n | --no-install-dependencies)
-        ARGS_INSTALL_NONINTERACTIVE="n"
+      -l | --local)
+        ARGS_LOCAL=1
         ;;
       --overwrite)
-        ARGS_OVERWRITE="y"
+        ARGS_OVERWRITE=1
         ;;
-      -l | --local)
-        ARGS_LOCAL="y"
+      --install-dependencies)
+        ARGS_INSTALL_DEPENDENCIES=1
+        ;;
+      --no-install-dependencies)
+        ARGS_INSTALL_DEPENDENCIES=0
         ;;
       -h | --help)
         usage
@@ -92,7 +100,7 @@ EOF
 
   __add_separator "80"
 
-  if [ -z "$ARGS_INSTALL_NONINTERACTIVE" ]; then
+  if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     echo "Would you like to install lunarvim's NodeJS dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
@@ -104,10 +112,6 @@ EOF
     echo "Would you like to install lunarvim's Rust dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
-  elif [ "$ARGS_INSTALL_NONINTERACTIVE" = "y" ]; then
-    install_nodejs_deps
-    install_python_deps
-    install_rust_deps
   fi
 
   __add_separator "80"
@@ -117,13 +121,7 @@ EOF
 
   __add_separator "80"
 
-  if [ -n "$ARGS_OVERWRITE" ]; then
-    echo "!!Warning!! -> Removing all lunarvim related config \
-      because of the --overwrite flag"
-    if [ -z "$ARGS_INSTALL_NONINTERACTIVE" ]; then
-      read -p "Would you like to continue? [y]es or [n]o : " -r answer
-      [ "$answer" == "${answer#[Yy]}" ] && exit 1
-    fi
+  if [ "$ARGS_OVERWRITE" -eq 1 ]; then
     for dir in "${__lvim_dirs[@]}"; do
       [ -d "$dir" ] && rm -rf "$dir"
     done
@@ -310,10 +308,14 @@ function clone_lvim() {
 
 function link_local_lvim() {
   echo "Linking local LunarVim repo"
+
+  # Detect whether it's a symlink or a folder
+  if [ -d "$LUNARVIM_RUNTIME_DIR/lvim" ]; then
+    echo "Removing old installation files"
+    rm -rf "$LUNARVIM_RUNTIME_DIR/lvim"
+  fi
+
   mkdir -p "$LUNARVIM_RUNTIME_DIR"
-  local BASEDIR
-  BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-  BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
   echo "   - $BASEDIR -> $LUNARVIM_RUNTIME_DIR/lvim"
   ln -s -f "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
 }
