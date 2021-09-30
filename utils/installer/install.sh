@@ -135,7 +135,7 @@ EOF
     echo "Updating LunarVim"
     update_lvim
   else
-    if [ -n "$ARGS_LOCAL" ]; then
+    if [ "$ARGS_LOCAL" -eq 1 ]; then
       link_local_lvim
     else
       clone_lvim
