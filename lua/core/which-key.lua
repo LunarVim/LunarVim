@@ -69,6 +69,7 @@ M.config = function()
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
       ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+      e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "Jump" },
