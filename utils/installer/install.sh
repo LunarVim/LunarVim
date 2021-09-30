@@ -36,11 +36,11 @@ function usage() {
   echo "Usage: install.sh [<options>]"
   echo ""
   echo "Options:"
-  echo "    -h, --help    Print this help message"
-  echo "    -y, --yes     Yes for all choices (Install NodeJS, Python, Rust dependencies)"
-  echo "    -n, --no      No for all choices (Install NodeJS, Python, Rust dependencies)"
-  echo "    -l, --local   Install local copy of LunarVim"
-  echo "    --overwrite   Overwrite previous lvim configuration"
+  echo "    -h, --help                       Print this help message"
+  echo "    -y, --yes                        Install all dependencies"
+  echo "    -n, --no-install-dependencies    Do not install any dependencies"
+  echo "    -l, --local                      Install local copy of LunarVim"
+  echo "    --overwrite                      Overwrite previous LunarVim configuration"
 }
 
 function parse_arguments() {
@@ -49,7 +49,7 @@ function parse_arguments() {
       -y | --yes)
         ARGS_INSTALL_NONINTERACTIVE="y"
         ;;
-      -n | --no)
+      -n | --no-install-dependencies)
         ARGS_INSTALL_NONINTERACTIVE="n"
         ;;
       --overwrite)
@@ -87,10 +87,6 @@ EOF
 
   echo "Detecting platform for managing any additional neovim dependencies"
   detect_platform
-
-  if [ -n "$GITHUB_ACTIONS" ]; then
-    LV_BRANCH="${GITHUB_REF##*/}"
-  fi
 
   check_system_deps
 
@@ -319,7 +315,7 @@ function link_local_lvim() {
   BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
   BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
   echo "   - $BASEDIR -> $LUNARVIM_RUNTIME_DIR/lvim"
-  ln -s "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
+  ln -s -f "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
 }
 
 function setup_shim() {

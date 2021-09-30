@@ -31,7 +31,7 @@ jobs:
       - name: Install LunarVim
         timeout-minutes: 4
         run: |
-          ./utils/installer/install.sh --no --local
+          ./utils/installer/install.sh --local --no-install-dependencies
 
       - name: Test LunarVim PackerCompile
         run: if "$HOME"/.local/bin/lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
