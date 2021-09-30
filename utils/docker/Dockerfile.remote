@@ -4,7 +4,7 @@
 FROM ubuntu:latest
 
 # Build argument to point to correct branch on GitHub
-ARG LVBRANCH=rolling
+ARG LV_BRANCH=rolling
 
 # Set environment correctly
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,8 +17,8 @@ RUN apt update && \
   apt update && \
   apt -y install nodejs && \
   apt clean && rm -rf /var/lib/apt/lists/* /tmp/* && \
-  curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/${LVBRANCH}/utils/installer/install-neovim-from-release | bash && \
-  LVBRANCH=${LVBRANCH} curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/${LVBRANCH}/utils/installer/install.sh | bash -s -- -y
+  curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/${LV_BRANCH}/utils/installer/install-neovim-from-release | bash && \
+  LV_BRANCH=${LV_BRANCH} curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/${LV_BRANCH}/utils/installer/install.sh | bash -s -- -y
 
 # Setup LVIM to run on starup
 ENTRYPOINT ["/bin/bash"]
