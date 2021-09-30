@@ -18,7 +18,7 @@ RUN apt update && \
   apt -y install nodejs && \
   apt clean && rm -rf /var/lib/apt/lists/* /tmp/* && \
   /LunarVim/utils/installer/install-neovim-from-release && \
-  /LunarVim/utils/installer/install.sh -y --local
+  /LunarVim/utils/installer/install.sh --local --no-install-dependencies
 
 # Setup LVIM to run on starup
 ENTRYPOINT ["/bin/bash"]

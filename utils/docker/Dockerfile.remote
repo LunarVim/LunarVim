@@ -18,7 +18,7 @@ RUN apt update && \
   apt -y install nodejs && \
   apt clean && rm -rf /var/lib/apt/lists/* /tmp/* && \
   curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/${LV_BRANCH}/utils/installer/install-neovim-from-release | bash && \
-  LV_BRANCH=${LV_BRANCH} curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/${LV_BRANCH}/utils/installer/install.sh | bash -s -- -y
+  LV_BRANCH=${LV_BRANCH} curl -LSs https://raw.githubusercontent.com/lunarvim/lunarvim/${LV_BRANCH}/utils/installer/install.sh | bash -s -- --no-install-dependencies
 
 # Setup LVIM to run on starup
 ENTRYPOINT ["/bin/bash"]
