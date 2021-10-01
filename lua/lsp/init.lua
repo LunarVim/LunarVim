@@ -103,7 +103,6 @@ function M.setup()
   if not lsp_status_ok then
     return
   end
-  vim.lsp.protocol.CompletionItemKind = lvim.lsp.completion.item_kind
 
   for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })

@@ -1,35 +1,5 @@
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
-  completion = {
-    -- FIXME: why is this not using 'lsp.kind'?
-    item_kind = {
-      "   (Text) ",
-      "   (Method)",
-      "   (Function)",
-      "   (Constructor)",
-      "   (Field)",
-      "   (Variable)",
-      "   (Class)",
-      " ﰮ  (Interface)",
-      "   (Module)",
-      "   (Property)",
-      " 塞 (Unit)",
-      "   (Value)",
-      " 練 (Enum)",
-      "   (Keyword)",
-      "   (Snippet)",
-      "   (Color)",
-      "   (File)",
-      "   (Reference)",
-      "   (Folder)",
-      "   (EnumMember)",
-      " ﲀ  (Constant)",
-      "   (Struct)",
-      "   (Event)",
-      "   (Operator)",
-      "   (TypeParameter)",
-    },
-  },
   diagnostics = {
     signs = {
       active = true,
