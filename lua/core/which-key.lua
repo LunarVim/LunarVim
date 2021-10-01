@@ -1,5 +1,35 @@
 local M = {}
 
+-- Set which_key remaps with an enable condition
+-- @param mapping The user defined remap
+-- @param enable_mapping Function or boolean value to check if mapping should be enabled
+local function remap(mapping, condition)
+  if condition == nil then
+    condition = true
+  end
+  -- Set metatable to chech enable condition
+  setmetatable(mapping, {
+    __index = function(_, key)
+      if key == "enable_mapping" then
+        -- An enable_condition is set
+        if type(condition) == "function" then
+          return condition()
+        elseif type(condition) == "boolean" then
+          return condition
+        else
+          -- Bad value has been set
+          require("core.log"):error "Bad enable_mapping set for which_key mappging"
+          return nil
+        end
+      else
+        -- Key was not found
+        return nil
+      end
+    end,
+  })
+  return mapping
+end
+
 M.config = function()
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommeded]
@@ -57,23 +87,34 @@ M.config = function()
       noremap = true, -- use `noremap` when creating keymaps
       nowait = true, -- use `nowait` when creating keymaps
     },
+    conditional_remap = remap, -- Remap helper function to setup conditional remaps
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = { ":CommentToggle<CR>", "Comment" },
+      ["/"] = remap({ ":CommentToggle<CR>", "Comment" }, function()
+        return lvim.builtin.comment.active
+      end),
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
-      ["/"] = { "<cmd>CommentToggle<CR>", "Comment" },
+      ["/"] = remap({ "<cmd>CommentToggle<CR>", "Comment" }, function()
+        return lvim.builtin.comment.active
+      end),
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
-      ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
+      ["f"] = remap({ "<cmd>Telescope find_files<CR>", "Find File" }, function()
+        return lvim.builtin.telescope.active
+      end),
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+      e = remap({ "<cmd>NvimTreeToggle<CR>", "Explorer" }, function()
+        return lvim.builtin.nvimtree.active
+      end),
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "Jump" },
-        f = { "<cmd>Telescope buffers<cr>", "Find" },
+        f = remap({ "<cmd>Telescope buffers<cr>", "Find" }, function()
+          return lvim.builtin.telescope.active
+        end),
         b = { "<cmd>b#<cr>", "Previous" },
         w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
         e = {
@@ -103,7 +144,7 @@ M.config = function()
         S = { "<cmd>PackerStatus<cr>", "Status" },
         u = { "<cmd>PackerUpdate<cr>", "Update" },
       },
-      d = {
+      d = remap({
         -- " Available Debug Adapters:
         -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
         -- " Adapter configuration and installation instructions:
@@ -124,7 +165,9 @@ M.config = function()
         r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
         s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
         q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-      },
+      }, function()
+        return lvim.builtin.dap.active
+      end),
       g = {
         name = "Git",
         j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -153,14 +196,12 @@ M.config = function()
       l = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = {
-          "<cmd>Telescope lsp_document_diagnostics<cr>",
-          "Document Diagnostics",
-        },
-        w = {
-          "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-          "Workspace Diagnostics",
-        },
+        d = remap({ "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" }, function()
+          return lvim.builtin.telescope.active
+        end),
+        w = remap({ "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }, function()
+          return lvim.builtin.telescope.active
+        end),
         -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
@@ -180,11 +221,12 @@ M.config = function()
         },
         q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = {
-          "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-          "Workspace Symbols",
-        },
+        s = remap({ "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" }, function()
+          return lvim.builtin.telescope.active
+        end),
+        S = remap({ "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, function()
+          return lvim.builtin.telescope.active
+        end),
       },
       L = {
         name = "+LunarVim",
@@ -192,14 +234,12 @@ M.config = function()
           "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
-        f = {
-          "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>",
-          "Find LunarVim files",
-        },
-        g = {
-          "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>",
-          "Grep LunarVim files",
-        },
+        f = remap({ "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>", "Find LunarVim files" }, function()
+          return lvim.builtin.telescope.active
+        end),
+        g = remap({ "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>", "Grep LunarVim files" }, function()
+          return lvim.builtin.telescope.active
+        end),
         k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
         i = {
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
@@ -211,25 +251,33 @@ M.config = function()
         },
         l = {
           name = "+logs",
-          d = {
-            "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
-            "view default log",
-          },
+          d = remap(
+            { "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>", "view default log" },
+            function()
+              return lvim.builtin.terminal.active
+            end
+          ),
           D = { "<cmd>exe 'edit '.stdpath('cache').'/lunarvim.log'<cr>", "Open the default logfile" },
-          n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
+          n = remap({ "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" }, function()
+            return lvim.builtin.terminal.active
+          end),
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
-          l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+          l = remap({ "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" }, function()
+            return lvim.builtin.terminal.active
+          end),
           L = { "<cmd>exe 'edit '.stdpath('cache').'/lsp.log'<cr>", "Open the LSP logfile" },
-          p = {
-            "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",
-            "view packer log",
-          },
+          p = remap(
+            { "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>", "view packer log" },
+            function()
+              return lvim.builtin.terminal.active
+            end
+          ),
           P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
         },
         r = { "<cmd>lua require('utils').reload_lv_config()<cr>", "Reload configurations" },
         u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
       },
-      s = {
+      s = remap({
         name = "Search",
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -245,25 +293,40 @@ M.config = function()
           "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
           "Colorscheme with Preview",
         },
-      },
-      T = {
+      }, function()
+        return lvim.builtin.telescope.active
+      end),
+      T = remap({
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },
-      },
+      }, function()
+        return lvim.builtin.treesitter.active
+      end),
     },
   }
 end
 
--- Clean up mappings for inactive core plugins
-local function clean_up_inactive_mappings()
-  -- DAP
-  if not lvim.builtin.dap.active and lvim.builtin.which_key.mappings.d.name == "Debug" then
-    lvim.builtin.which_key.mappings.d = nil
-  end
+-- Check for leaf nodes in the lvim.builtin.which_key.(v)mappings tables
+local function is_leaf_node(v)
+  local command = type(v) == "string" -- Only has command
+  local command_and_name = #v == 2 -- Has only two entries command, name
+    and (type(v[1]) == "string" or type(v[1]) == "function") -- Command is string or func
+    and (type(v[2]) == "string") -- Name is string
+  local name = #v == 1 and v.name ~= nil -- Is name element
 
-  -- nvimtree
-  if not lvim.builtin.nvimtree.active and lvim.builtin.which_key.mappings.e.name == "Explorer" then
-    lvim.builtin.which_key.mappings.e = nil
+  return command_and_name or command or name
+end
+
+-- Clean up mappings for inactive core plugins
+local function clean_up_inactive_mappings(mapping)
+  for k, v in pairs(mapping) do
+    if v.enable_mapping == false then
+      -- This mapping has been explicitly disabled
+      mapping[k] = nil
+    elseif not is_leaf_node(v) then
+      -- This page of which_key has not been disabled --> Recurse into subpages
+      clean_up_inactive_mappings(v)
+    end
   end
 end
 
@@ -275,7 +338,8 @@ M.setup = function()
   local opts = lvim.builtin.which_key.opts
   local vopts = lvim.builtin.which_key.vopts
 
-  clean_up_inactive_mappings()
+  clean_up_inactive_mappings(lvim.builtin.which_key.mappings)
+  clean_up_inactive_mappings(lvim.builtin.which_key.vmappings)
 
   local mappings = lvim.builtin.which_key.mappings
   local vmappings = lvim.builtin.which_key.vmappings
