@@ -31,7 +31,7 @@ local function add_lsp_buffer_keybindings(bufnr)
   else
     -- Fallback to default keymap
     for key, remap in pairs(lvim.lsp_keys) do
-      vim.api.nvim_buf_set_keymap(bufnr, "n", key, remap[1], {})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", key, remap[1], { noremap = true, silent = true })
     end
   end
 end
