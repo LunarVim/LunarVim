@@ -132,11 +132,19 @@ function utils.apply_defaults(config, default_config)
 end
 
 --- Checks whether a given path exists and is a file.
---@param filename (string) path to check
+--@param path (string) path to check
 --@returns (bool)
-function utils.is_file(filename)
-  local stat = uv.fs_stat(filename)
+function utils.is_file(path)
+  local stat = uv.fs_stat(path)
   return stat and stat.type == "file" or false
+end
+
+--- Checks whether a given path exists and is a directory
+--@param path (string) path to check
+--@returns (bool)
+function utils.is_directory(path)
+  local stat = uv.fs_stat(path)
+  return stat and stat.type == "diretory" or false
 end
 
 function utils.write_file(path, txt, flag)

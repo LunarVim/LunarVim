@@ -1,6 +1,5 @@
 return {
-  -- FIXME: stop using hard-coded paths for LspInstall
-  ls_install_prefix = vim.fn.stdpath "data" .. "/lspinstall",
+  templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   completion = {
     -- FIXME: why is this not using 'lsp.kind'?
     item_kind = {

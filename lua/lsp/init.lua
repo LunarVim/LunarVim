@@ -107,6 +107,10 @@ function M.setup()
   end
   require("lsp.handlers").setup()
 
+  if not utils.is_directory(lvim.lsp.templates_dir) then
+    require("lsp.templates").generate_templates()
+  end
+
   bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
 
   require("lsp.null-ls").setup()
