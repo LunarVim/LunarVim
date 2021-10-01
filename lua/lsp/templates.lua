@@ -5,15 +5,15 @@ local configs = require "lspconfig/configs"
 local Log = require "core.log"
 local utils = require "utils"
 
+local ftplugin_dir = lvim.lsp.templates_dir
+
 local join_paths = _G.join_paths
 
-local generated_dir = os.getenv "FT_GEN_DIR" or join_paths(get_runtime_dir(), "site", "after", "ftplugin")
-
 -- create the directory if it didn't exist
-vim.fn.mkdir(generated_dir, "p")
+vim.fn.mkdir(ftplugin_dir, "p")
 
 -- remove any outdated files
-for _, file in ipairs(vim.fn.glob(generated_dir .. "/*.lua", 1, 1)) do
+for _, file in ipairs(vim.fn.glob(ftplugin_dir .. "/*.lua", 1, 1)) do
   vim.fn.delete(file)
 end
 
@@ -54,6 +54,7 @@ end
 ---@param servers_names table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
   servers_names = servers_names or {}
+  Log:debug "Templates installation in progress"
 
   if vim.tbl_isempty(servers_names) then
     local available_servers = require("nvim-lsp-installer.servers").get_available_servers()
@@ -64,7 +65,7 @@ function M.generate_templates(servers_names)
   end
 
   for _, server in ipairs(servers_names) do
-    M.generate_ftplugin(server, generated_dir)
+    M.generate_ftplugin(server, ftplugin_dir)
   end
   Log:debug "Templates installation is complete"
 end
