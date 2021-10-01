@@ -4,21 +4,22 @@ local M = {}
 -- @param mapping The user defined remap
 -- @param enable_mapping Function or boolean value to check if mapping should be enabled
 local function remap(mapping, condition)
-  if condition == nil then
-    condition = true
+  -- Dont accept bad conditions
+  if not (type(condition) == "function" or type(condition) == "boolean") then
+    require("core.log"):error "Bad condition set for which_key mappging"
+    return nil
   end
+
   -- Set metatable to chech enable condition
   setmetatable(mapping, {
     __index = function(_, key)
       if key == "enable_mapping" then
-        -- An enable_condition is set
         if type(condition) == "function" then
           return condition()
         elseif type(condition) == "boolean" then
           return condition
         else
           -- Bad value has been set
-          require("core.log"):error "Bad enable_mapping set for which_key mappging"
           return nil
         end
       else
@@ -27,6 +28,7 @@ local function remap(mapping, condition)
       end
     end,
   })
+
   return mapping
 end
 
