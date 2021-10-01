@@ -1,9 +1,8 @@
 local M = {}
 
-require "bootstrap"
-local _, Log = pcall(require, "core.log")
-
 local configs = require "lspconfig/configs"
+
+local Log = require "core.log"
 local utils = require "utils"
 
 local join_paths = _G.join_paths
