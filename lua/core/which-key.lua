@@ -192,6 +192,10 @@ M.config = function()
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
         },
+        I = {
+          "<cmd>lua require('core.telescope').view_lunarvim_changelog()<cr>",
+          "View LunarVim's changelog",
+        },
         l = {
           name = "+logs",
           d = {
@@ -210,6 +214,7 @@ M.config = function()
           P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
         },
         r = { "<cmd>lua require('utils').reload_lv_config()<cr>", "Reload configurations" },
+        u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
       },
       s = {
         name = "Search",

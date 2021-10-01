@@ -140,19 +140,7 @@ function utils.is_file(filename)
   return stat and stat.type == "file" or false
 end
 
-function utils.join_paths(...)
-  local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
-  local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
-  return result
-end
-
-function utils.lvim_cache_reset()
-  _G.__luacache.clear_cache()
-  _G.__luacache.save_cache()
-  require("plugin-loader"):cache_reset()
-end
-
-vim.cmd [[ command! LvimCacheReset lua require('utils').lvim_cache_reset() ]]
+utils.join_paths = _G.join_paths
 
 return utils
 
