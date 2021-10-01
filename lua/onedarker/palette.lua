@@ -1,4 +1,5 @@
 local colors = {
+  none = "NONE",
   fg = "#abb2bf",
   bg = "#1f2227",
   alt_bg = "#282c34",
@@ -34,6 +35,10 @@ local colors = {
   purple_test = "#ff007c",
   cyan_test = "#00dfff",
   ui_blue = "#264F78",
+  diff_add = "#303d27",
+  diff_delete = "#6e3b40",
+  diff_change = "#18344c",
+  diff_text = "#265478",
 }
 
 return colors

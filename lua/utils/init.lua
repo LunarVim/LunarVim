@@ -99,8 +99,7 @@ function utils.reload_lv_config()
   vim.cmd ":PackerInstall"
   vim.cmd ":PackerCompile"
   -- vim.cmd ":PackerClean"
-  local null_ls = require "lsp.null-ls"
-  null_ls.setup(vim.bo.filetype, { force_reload = true })
+  require("lsp").setup()
   Log:info "Reloaded configuration"
 end
 
@@ -133,26 +132,46 @@ function utils.apply_defaults(config, default_config)
 end
 
 --- Checks whether a given path exists and is a file.
---@param filename (string) path to check
+--@param path (string) path to check
 --@returns (bool)
-function utils.is_file(filename)
-  local stat = uv.fs_stat(filename)
+function utils.is_file(path)
+  local stat = uv.fs_stat(path)
   return stat and stat.type == "file" or false
 end
 
-function utils.join_paths(...)
-  local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
-  local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
-  return result
+--- Checks whether a given path exists and is a directory
+--@param path (string) path to check
+--@returns (bool)
+function utils.is_directory(path)
+  local stat = uv.fs_stat(path)
+  return stat and stat.type == "diretory" or false
 end
 
-function utils.lvim_cache_reset()
-  _G.__luacache.clear_cache()
-  _G.__luacache.save_cache()
-  require("plugin-loader"):cache_reset()
+function utils.write_file(path, txt, flag)
+  uv.fs_open(path, flag, 438, function(open_err, fd)
+    assert(not open_err, open_err)
+    uv.fs_write(fd, txt, -1, function(write_err)
+      assert(not write_err, write_err)
+      uv.fs_close(fd, function(close_err)
+        assert(not close_err, close_err)
+      end)
+    end)
+  end)
 end
 
-vim.cmd [[ command! LvimCacheReset lua require('utils').lvim_cache_reset() ]]
+utils.join_paths = _G.join_paths
+
+function utils.write_file(path, txt, flag)
+  uv.fs_open(path, flag, 438, function(open_err, fd)
+    assert(not open_err, open_err)
+    uv.fs_write(fd, txt, -1, function(write_err)
+      assert(not write_err, write_err)
+      uv.fs_close(fd, function(close_err)
+        assert(not close_err, close_err)
+      end)
+    end)
+  end)
+end
 
 return utils
 

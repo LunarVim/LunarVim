@@ -5,8 +5,23 @@ function M.config()
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
-    side = "left",
-    width = 30,
+    setup = {
+      auto_open = 0,
+      auto_close = 1,
+      tab_open = 0,
+      update_focused_file = {
+        enable = 1,
+      },
+      lsp_diagnostics = 1,
+      view = {
+        width = 30,
+        side = "left",
+        auto_resize = false,
+        mappings = {
+          custom_only = false,
+        },
+      },
+    },
     show_icons = {
       git = 1,
       folders = 1,
@@ -15,16 +30,11 @@ function M.config()
       tree_width = 30,
     },
     ignore = { ".git", "node_modules", ".cache" },
-    auto_open = 0,
-    auto_close = 1,
     quit_on_open = 0,
-    follow = 1,
     hide_dotfiles = 1,
     git_hl = 1,
     root_folder_modifier = ":t",
-    tab_open = 0,
     allow_resize = 1,
-    lsp_diagnostics = 1,
     auto_ignore_ft = { "startify", "dashboard" },
     icons = {
       default = "",
@@ -63,17 +73,17 @@ function M.setup()
 
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then
-    vim.g.nvim_tree_update_cwd = 1
-    vim.g.nvim_tree_respect_buf_cwd = 1
-    vim.g.nvim_tree_disable_netrw = 0
-    vim.g.nvim_tree_hijack_netrw = 0
+    lvim.builtin.nvimtree.respect_buf_cwd = 1
+    lvim.builtin.nvimtree.setup.update_cwd = 1
+    lvim.builtin.nvimtree.setup.disable_netrw = 0
+    lvim.builtin.nvimtree.setup.hijack_netrw = 0
     vim.g.netrw_banner = 0
   end
 
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
-  if not g.nvim_tree_bindings then
-    g.nvim_tree_bindings = {
+  if not lvim.builtin.nvimtree.setup.view.mappings.list then
+    lvim.builtin.nvimtree.setup.view.mappings.list = {
       { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
       { key = "h", cb = tree_cb "close_node" },
       { key = "v", cb = tree_cb "vsplit" },
@@ -96,11 +106,12 @@ function M.setup()
   if lvim.builtin.nvimtree.on_config_done then
     lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
+  require("nvim-tree").setup(lvim.builtin.nvimtree.setup)
 end
 
 function M.on_open()
-  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
-    require("bufferline.state").set_offset(lvim.builtin.nvimtree.width + 1, "")
+  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.setup.view.side == "left" then
+    require("bufferline.state").set_offset(lvim.builtin.nvimtree.setup.view.width + 1, "")
   end
 end
 

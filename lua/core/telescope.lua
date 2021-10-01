@@ -89,13 +89,8 @@ function M.find_lunarvim_files(opts)
   opts = opts or {}
   local themes = require "telescope.themes"
   local theme_opts = themes.get_ivy {
-    previewer = false,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 5,
-      width = 0.5,
-    },
     prompt = ">> ",
     prompt_title = "~ LunarVim files ~",
     cwd = utils.join_paths(get_runtime_dir(), "lvim"),
@@ -117,6 +112,51 @@ function M.grep_lunarvim_files(opts)
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   require("telescope.builtin").live_grep(opts)
+end
+
+function M.view_lunarvim_changelog()
+  local finders = require "telescope.finders"
+  local make_entry = require "telescope.make_entry"
+  local pickers = require "telescope.pickers"
+  local previewers = require "telescope.previewers"
+  local actions = require "telescope.actions"
+  local opts = {}
+
+  local conf = require("telescope.config").values
+  opts.entry_maker = make_entry.gen_from_git_commits(opts)
+
+  pickers.new(opts, {
+    prompt_title = "LunarVim changelog",
+
+    finder = finders.new_oneshot_job(
+      vim.tbl_flatten {
+        "git",
+        "log",
+        "--pretty=oneline",
+        "--abbrev-commit",
+        "--",
+        ".",
+      },
+      opts
+    ),
+    previewer = {
+      previewers.git_commit_diff_to_parent.new(opts),
+      previewers.git_commit_diff_to_head.new(opts),
+      previewers.git_commit_diff_as_was.new(opts),
+      previewers.git_commit_message.new(opts),
+    },
+
+    --TODO: consider opening a diff view when pressing enter
+    attach_mappings = function(_, map)
+      map("i", "<enter>", actions._close)
+      map("n", "<enter>", actions._close)
+      map("i", "<esc>", actions._close)
+      map("n", "<esc>", actions._close)
+      map("n", "q", actions._close)
+      return true
+    end,
+    sorter = conf.file_sorter(opts),
+  }):find()
 end
 
 function M.setup()
