@@ -1,10 +1,14 @@
 local M = {}
 
+require "bootstrap"
+local _, Log = pcall(require, "core.log")
+
 local configs = require "lspconfig/configs"
 local utils = require "utils"
 
-local generated_dir = os.getenv "FT_GEN_DIR"
-  or utils.join_paths(os.getenv "LUNARVIM_RUNTIME_DIR", "site", "after", "ftplugin")
+local join_paths = _G.join_paths
+
+local generated_dir = os.getenv "FT_GEN_DIR" or join_paths(get_runtime_dir(), "site", "after", "ftplugin")
 
 -- create the directory if it didn't exist
 vim.fn.mkdir(generated_dir, "p")
@@ -38,7 +42,7 @@ function M.generate_ftplugin(server_name, dir)
   -- print("got associated filetypes: " .. vim.inspect(filetypes))
 
   for _, filetype in ipairs(filetypes) do
-    local filename = utils.join_paths(dir, filetype .. ".lua")
+    local filename = join_paths(dir, filetype .. ".lua")
     local setup_cmd = string.format([[require("lsp.manager").setup(%q)]], server_name)
     -- print("using setup_cmd: " .. setup_cmd)
     -- overwrite the file completely
@@ -63,7 +67,7 @@ function M.generate_templates(servers_names)
   for _, server in ipairs(servers_names) do
     M.generate_ftplugin(server, generated_dir)
   end
-  print "Templates installation is complete\n"
+  Log:debug "Templates installation is complete"
 end
 
 return M
