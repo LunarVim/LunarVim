@@ -47,7 +47,6 @@ function usage() {
   echo "    -h, --help                       Print this help message"
   echo "    -l, --local                      Install local copy of LunarVim"
   echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
-  echo "    -q, --quiet                      disable all output"
   echo "    --[no]-install-dependencies      Wheter to prompt to install external dependencies (will prompt by default)"
 }
 
@@ -66,9 +65,6 @@ function parse_arguments() {
       --no-install-dependencies)
         ARGS_INSTALL_DEPENDENCIES=0
         ;;
-      -q | --quiet)
-        QUIET="y"
-        ;;
       -h | --help)
         usage
         exit 0
@@ -79,9 +75,6 @@ function parse_arguments() {
 }
 
 function msg() {
-
-  [ -n "$QUIET" ] && return
-
   local text="$1"
   local div_width="80"
   printf "%${div_width}s\n" ' ' | tr ' ' -
@@ -133,6 +126,10 @@ function main() {
     fi
     setup_lvim
   fi
+
+  msg "Thank you for installing LunarVim!!"
+  echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
+  echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
 function detect_platform() {
@@ -357,10 +354,6 @@ function setup_lvim() {
   echo "Packer setup complete"
 
   cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
-
-  msg "Thank you for installing LunarVim!!"
-  echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
-  echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
 function update_lvim() {
