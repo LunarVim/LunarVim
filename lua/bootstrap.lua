@@ -113,6 +113,7 @@ end
 function M:update()
   M:update_repo()
   M:reset_cache()
+  require("utils.templates").generate_templates()
   vim.schedule(function()
     -- TODO: add a changelog
     vim.notify("Update complete", vim.log.levels.INFO)
