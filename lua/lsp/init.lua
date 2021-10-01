@@ -25,10 +25,15 @@ end
 
 local function add_lsp_buffer_keybindings(bufnr)
   local status_ok, wk = pcall(require, "which-key")
-  if not status_ok then
-    return
+  if status_ok then
+    -- Map in Which Key
+    wk.register(lvim.lsp_keys, { mode = "n", buffer = bufnr })
+  else
+    -- Fallback to default keymap
+    for key, remap in pairs(lvim.lsp_keys) do
+      vim.api.nvim_buf_set_keymap(bufnr, "n", key, remap[1], {})
+    end
   end
-  wk.register(lvim.lsp_keys, { mode = "n", buffer = bufnr })
 end
 
 function M.common_capabilities()
