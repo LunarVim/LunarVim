@@ -231,7 +231,7 @@ M.config = function()
         end),
       },
       L = {
-        name = "+LunarVim",
+        name = "LunarVim",
         c = {
           "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
@@ -252,7 +252,7 @@ M.config = function()
           "View LunarVim's changelog",
         },
         l = {
-          name = "+logs",
+          name = "logs",
           d = remap(
             { "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>", "view default log" },
             function()
