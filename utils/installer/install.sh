@@ -117,7 +117,7 @@ function main() {
   install_packer
 
   if [ -e "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" ]; then
-    bash "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/update_lvim.sh"
+    update_lvim
   else
     if [ "$ARGS_LOCAL" -eq 1 ]; then
       link_local_lvim
