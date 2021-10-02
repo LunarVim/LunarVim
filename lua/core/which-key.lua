@@ -33,6 +33,29 @@ local function remap(mapping, condition)
 end
 
 M.config = function()
+  -- Conditional checks used in maps
+  local function has_dap()
+    return lvim.builtin.dap.active
+  end
+  local function has_telescope()
+    return lvim.builtin.telescope.active
+  end
+  local function has_comment()
+    return lvim.builtin.comment.active
+  end
+  local function has_nvimtree()
+    return lvim.builtin.nvimtree.active
+  end
+  local function has_terminal()
+    return lvim.builtin.terminal.active
+  end
+  local function has_treesitter()
+    return lvim.builtin.treesitter.active
+  end
+  local function has_gitsigns()
+    return lvim.builtin.gitsigns
+  end
+
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommeded]
     active = true,
@@ -93,49 +116,27 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = remap({ ":CommentToggle<CR>", "Comment" }, function()
-        return lvim.builtin.comment.active
-      end),
+      ["/"] = remap({ ":CommentToggle<CR>", "Comment" }, has_comment),
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
-      ["/"] = remap({ "<cmd>CommentToggle<CR>", "Comment" }, function()
-        return lvim.builtin.comment.active
-      end),
+      ["/"] = remap({ "<cmd>CommentToggle<CR>", "Comment" }, has_comment),
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
-      ["f"] = remap({ "<cmd>Telescope find_files<CR>", "Find File" }, function()
-        return lvim.builtin.telescope.active
-      end),
+      ["f"] = remap({ "<cmd>Telescope find_files<CR>", "Find File" }, has_telescope),
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      e = remap({ "<cmd>NvimTreeToggle<CR>", "Explorer" }, function()
-        return lvim.builtin.nvimtree.active
-      end),
+      e = remap({ "<cmd>NvimTreeToggle<CR>", "Explorer" }, has_nvimtree),
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "Jump" },
-        f = remap({ "<cmd>Telescope buffers<cr>", "Find" }, function()
-          return lvim.builtin.telescope.active
-        end),
+        f = remap({ "<cmd>Telescope buffers<cr>", "Find" }, has_telescope),
         b = { "<cmd>b#<cr>", "Previous" },
         w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
-        e = {
-          "<cmd>BufferCloseAllButCurrent<cr>",
-          "Close all but current",
-        },
+        e = { "<cmd>BufferCloseAllButCurrent<cr>", "Close all but current" },
         h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
-        l = {
-          "<cmd>BufferCloseBuffersRight<cr>",
-          "Close all to the right",
-        },
-        D = {
-          "<cmd>BufferOrderByDirectory<cr>",
-          "Sort by directory",
-        },
-        L = {
-          "<cmd>BufferOrderByLanguage<cr>",
-          "Sort by language",
-        },
+        l = { "<cmd>BufferCloseBuffersRight<cr>", "Close all to the right" },
+        D = { "<cmd>BufferOrderByDirectory<cr>", "Sort by directory" },
+        L = { "<cmd>BufferOrderByLanguage<cr>", "Sort by language" },
       },
       p = {
         name = "Packer",
@@ -154,56 +155,41 @@ M.config = function()
         -- " Debug Adapter protocol:
         -- "   https://microsoft.github.io/debug-adapter-protocol/
         name = "Debug",
-        t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-        b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-        c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-        C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
-        d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-        g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-        i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-        o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-        u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-        p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
-        r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-        s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-        q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-      }, function()
-        return lvim.builtin.dap.active
-      end),
+        t = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+        b = { "<cmd>lua require('dap').step_back()<cr>", "Step Back" },
+        c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+        C = { "<cmd>lua require('dap').run_to_cursor()<cr>", "Run To Cursor" },
+        d = { "<cmd>lua require('dap').disconnect()<cr>", "Disconnect" },
+        g = { "<cmd>lua require('dap').session()<cr>", "Get Session" },
+        i = { "<cmd>lua require('dap').step_into()<cr>", "Step Into" },
+        o = { "<cmd>lua require('dap').step_over()<cr>", "Step Over" },
+        u = { "<cmd>lua require('dap').step_out()<cr>", "Step Out" },
+        p = { "<cmd>lua require('dap').pause()<cr>", "Pause Thread" },
+        r = { "<cmd>lua require('dap').repl.toggle()<cr>", "Toggle Repl" },
+        s = { "<cmd>lua require('dap').continue()<cr>", "Start" },
+        q = { "<cmd>lua require('dap').close()<cr>", "Quit" },
+      }, has_dap),
       g = {
         name = "Git",
-        j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-        k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-        l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-        r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-        R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        u = {
-          "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-          "Undo Stage Hunk",
-        },
-        o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-        C = {
-          "<cmd>Telescope git_bcommits<cr>",
-          "Checkout commit(for current file)",
-        },
-        d = {
-          "<cmd>Gitsigns diffthis HEAD<cr>",
-          "Git Diff",
-        },
+        j = remap({ "<cmd>lua require('gitsigns').next_hunk()<cr>", "Next Hunk" }, has_gitsigns),
+        k = remap({ "<cmd>lua require('gitsigns').prev_hunk()<cr>", "Prev Hunk" }, has_gitsigns),
+        l = remap({ "<cmd>lua require('gitsigns').blame_line()<cr>", "Blame" }, has_gitsigns),
+        p = remap({ "<cmd>lua require('gitsigns').preview_hunk()<cr>", "Preview Hunk" }, has_gitsigns),
+        r = remap({ "<cmd>lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk" }, has_gitsigns),
+        R = remap({ "<cmd>lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer" }, has_gitsigns),
+        s = remap({ "<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk" }, has_gitsigns),
+        u = remap({ "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk" }, has_gitsigns),
+        o = remap({ "<cmd>Telescope git_status<cr>", "Open changed file" }, has_telescope),
+        b = remap({ "<cmd>Telescope git_branches<cr>", "Checkout branch" }, has_telescope),
+        c = remap({ "<cmd>Telescope git_commits<cr>", "Checkout commit" }, has_telescope),
+        C = remap({ "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)" }, has_telescope),
+        d = remap({ "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" }, has_gitsigns),
       },
       l = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = remap({ "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" }, function()
-          return lvim.builtin.telescope.active
-        end),
-        w = remap({ "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }, function()
-          return lvim.builtin.telescope.active
-        end),
+        d = remap({ "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" }, has_telescope),
+        w = remap({ "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }, has_telescope),
         -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
@@ -223,12 +209,8 @@ M.config = function()
         },
         q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = remap({ "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" }, function()
-          return lvim.builtin.telescope.active
-        end),
-        S = remap({ "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, function()
-          return lvim.builtin.telescope.active
-        end),
+        s = remap({ "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" }, has_telescope),
+        S = remap({ "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, has_telescope),
       },
       L = {
         name = "LunarVim",
@@ -236,12 +218,14 @@ M.config = function()
           "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
-        f = remap({ "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>", "Find LunarVim files" }, function()
-          return lvim.builtin.telescope.active
-        end),
-        g = remap({ "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>", "Grep LunarVim files" }, function()
-          return lvim.builtin.telescope.active
-        end),
+        f = remap(
+          { "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>", "Find LunarVim files" },
+          has_telescope
+        ),
+        g = remap(
+          { "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>", "Grep LunarVim files" },
+          has_telescope
+        ),
         k = { "<cmd>lua require('keymappings').print()<cr>", "View LunarVim's default keymappings" },
         i = {
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
@@ -255,24 +239,19 @@ M.config = function()
           name = "logs",
           d = remap(
             { "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>", "view default log" },
-            function()
-              return lvim.builtin.terminal.active
-            end
+            has_terminal
           ),
           D = { "<cmd>exe 'edit '.stdpath('cache').'/lunarvim.log'<cr>", "Open the default logfile" },
-          n = remap({ "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" }, function()
-            return lvim.builtin.terminal.active
-          end),
+          n = remap({ "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" }, has_terminal),
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
-          l = remap({ "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" }, function()
-            return lvim.builtin.terminal.active
-          end),
+          l = remap(
+            { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+            has_terminal
+          ),
           L = { "<cmd>exe 'edit '.stdpath('cache').'/lsp.log'<cr>", "Open the LSP logfile" },
           p = remap(
             { "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>", "view packer log" },
-            function()
-              return lvim.builtin.terminal.active
-            end
+            has_terminal
           ),
           P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
         },
@@ -295,15 +274,11 @@ M.config = function()
           "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
           "Colorscheme with Preview",
         },
-      }, function()
-        return lvim.builtin.telescope.active
-      end),
+      }, has_telescope),
       T = remap({
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },
-      }, function()
-        return lvim.builtin.treesitter.active
-      end),
+      }, has_treesitter),
     },
   }
 end
