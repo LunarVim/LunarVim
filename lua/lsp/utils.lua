@@ -55,4 +55,15 @@ function M.get_ls_capabilities(client_id)
   return enabled_caps
 end
 
+function M.get_supported_filetypes(server_name)
+  -- print("got filetypes query request for: " .. server_name)
+  local configs = require "lspconfig/configs"
+  pcall(require, ("lspconfig/" .. server_name))
+  for _, config in pairs(configs) do
+    if config.name == server_name then
+      return config.document_config.default_config.filetypes or {}
+    end
+  end
+end
+
 return M

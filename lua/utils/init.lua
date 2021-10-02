@@ -144,7 +144,7 @@ end
 --@returns (bool)
 function utils.is_directory(path)
   local stat = uv.fs_stat(path)
-  return stat and stat.type == "diretory" or false
+  return stat and stat.type == "directory" or false
 end
 
 function utils.write_file(path, txt, flag)
@@ -171,6 +171,34 @@ function utils.write_file(path, txt, flag)
       end)
     end)
   end)
+end
+
+function utils.debounce(ms, fn)
+  local timer = vim.loop.new_timer()
+  return function(...)
+    local argv = { ... }
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule_wrap(fn)(unpack(argv))
+    end)
+  end
+end
+
+function utils.search_lvim_log(args)
+  local logfile = require("core.log"):get_path()
+  local Job = require "plenary.job"
+  local stderr = {}
+  local stdout, ret = Job
+    :new({
+      command = "grep",
+      args = vim.list_extend(args, { logfile }),
+      cwd = get_cache_dir(),
+      on_stderr = function(_, data)
+        table.insert(stderr, data)
+      end,
+    })
+    :sync()
+  return stdout, ret, stderr
 end
 
 return utils

@@ -1,31 +1,32 @@
 local M = {}
 
-local configs = require "lspconfig/configs"
-
 local Log = require "core.log"
 local utils = require "utils"
+local get_supported_filetypes = require("lsp.utils").get_supported_filetypes
 
 local ftplugin_dir = lvim.lsp.templates_dir
 
 local join_paths = _G.join_paths
 
--- create the directory if it didn't exist
-vim.fn.mkdir(ftplugin_dir, "p")
-
--- remove any outdated files
-for _, file in ipairs(vim.fn.glob(ftplugin_dir .. "/*.lua", 1, 1)) do
-  vim.fn.delete(file)
+function M.remove_template_files()
+  -- remove any outdated files
+  for _, file in ipairs(vim.fn.glob(ftplugin_dir .. "/*.lua", 1, 1)) do
+    vim.fn.delete(file)
+  end
 end
 
-local function get_supported_filetypes(server_name)
-  -- print("got filetypes query request for: " .. server_name)
-  pcall(require, ("lspconfig/" .. server_name))
-
-  for _, config in pairs(configs) do
-    if config.name == server_name then
-      return config.document_config.default_config.filetypes or {}
-    end
+---Checks if a server is ignored by default because of a conflict
+---Only TSServer is enabled by default for the javascript-family
+---@param server_name string
+function M.is_ignored(server_name, filetypes)
+  filetypes = filetypes or get_supported_filetypes(server_name)
+  if vim.tbl_contains(filetypes, server_name) then
+    return server_name == "tsserver" and false or true
   end
+  local blacklist = {
+    "jedi_language_server",
+  }
+  return vim.tbl_contains(blacklist, server_name)
 end
 
 ---Generates an ftplugin file based on the server_name in the selected directory
@@ -35,6 +36,10 @@ function M.generate_ftplugin(server_name, dir)
   -- we need to go through lspconfig to get the corresponding filetypes currently
   local filetypes = get_supported_filetypes(server_name) or {}
   if not filetypes then
+    return
+  end
+
+  if vim.tbl_contains(filetypes, server_name) and server_name ~= "tsserver" then
     return
   end
 
@@ -54,7 +59,10 @@ end
 ---@param servers_names table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
   servers_names = servers_names or {}
+
   Log:debug "Templates installation in progress"
+
+  M.remove_template_files()
 
   if vim.tbl_isempty(servers_names) then
     local available_servers = require("nvim-lsp-installer.servers").get_available_servers()
@@ -63,6 +71,9 @@ function M.generate_templates(servers_names)
       table.insert(servers_names, server.name)
     end
   end
+
+  -- create the directory if it didn't exist
+  vim.fn.mkdir(ftplugin_dir, "p")
 
   for _, server in ipairs(servers_names) do
     M.generate_ftplugin(server, ftplugin_dir)
