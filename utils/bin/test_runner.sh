@@ -10,11 +10,11 @@ rm -f "$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
 
 lvim() {
   # TODO: allow running with a minimal_init.lua
-  nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "$@"
+  nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/tests/minimal_init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "$@"
 }
 
 if [ -n "$1" ]; then
   lvim --headless -c "lua require('plenary.busted').run('$1')"
 else
-  lvim --headless -c "PlenaryBustedDirectory tests/ { minimal_init = './init.lua' }"
+  lvim --headless -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/minimal_init.lua' }"
 fi
