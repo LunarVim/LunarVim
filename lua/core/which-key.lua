@@ -237,12 +237,15 @@ M.config = function()
         },
         l = {
           name = "logs",
-          d = remap(
-            { "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>", "view default log" },
+          d = remap({
+            "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>",
+            "view default log",
+          }, has_terminal),
+          D = { "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>", "Open the default logfile" },
+          n = remap(
+            { "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>", "view neovim log" },
             has_terminal
           ),
-          D = { "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>", "Open the default logfile" },
-          n = remap({ "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>", "view neovim log" }, has_terminal),
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           l = remap(
             { "<cmd>lua require('core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
