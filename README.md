@@ -115,6 +115,11 @@ lvim.plugins = {
 
 - inside LunarVim `:PackerUpdate`
 
+## Breaking changes
+
+- `lvim.lang.FOO.lsp` is no longer supported after #1584.
+  You can either use `:NlspConfig` for most of the settings you might need, or override the setup by adding an entry to `lvim.lsp.override = { "FOO" }`.
+
 ## Resources
 
 - [Documentation](https://www.lunarvim.org)

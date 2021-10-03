@@ -124,6 +124,20 @@ function M:init(opts)
   require("lsp.manager").init_defaults(supported_languages)
 end
 
+local function deprecation_notice()
+  for lang, entry in pairs(lvim.lang) do
+    if not vim.tbl_isempty(entry["lsp"]) then
+      local msg = string.format(
+        "Deprecation notice: [lvim.lang.%s.lsp] setting is no longer supported. See https://github.com/LunarVim/LunarVim#breaking-changes",
+        lang
+      )
+      vim.schedule(function()
+        vim.notify(msg, vim.log.levels.WARN)
+      end)
+    end
+  end
+end
+
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
@@ -136,6 +150,8 @@ function M:load(config_path)
     print(err)
     return
   end
+
+  deprecation_notice()
 
   self.path = config_path
 
