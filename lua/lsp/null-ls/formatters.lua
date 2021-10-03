@@ -1,29 +1,14 @@
 local M = {}
-local formatters_by_ft = {}
 
 local null_ls = require "null-ls"
 local services = require "lsp.null-ls.services"
 local Log = require "core.log"
 
-local function list_names(formatters, options)
-  options = options or {}
-  local filter = options.filter or "supported"
-
-  return vim.tbl_keys(formatters[filter])
-end
-
 function M.list_supported_names(filetype)
-  if not formatters_by_ft[filetype] then
-    return {}
-  end
-  return list_names(formatters_by_ft[filetype], { filter = "supported" })
-end
-
-function M.list_unsupported_names(filetype)
-  if not formatters_by_ft[filetype] then
-    return {}
-  end
-  return list_names(formatters_by_ft[filetype], { filter = "unsupported" })
+  local null_ls_methods = require "null-ls.methods"
+  local formatter_method = null_ls_methods.internal["FORMATTING"]
+  local registered_providers = services.list_registered_providers_names(filetype)
+  return registered_providers[formatter_method] or {}
 end
 
 function M.list_available(filetype)
@@ -62,12 +47,13 @@ function M.list_configured(formatter_configs)
   return { supported = formatters, unsupported = errors }
 end
 
-function M.setup(filetype, options)
-  if not lvim.lang[filetype] or (formatters_by_ft[filetype] and not options.force_reload) then
+function M.setup(formatter_configs, filetype)
+  if vim.tbl_isempty(formatter_configs) then
     return
   end
 
-  formatters_by_ft[filetype] = M.list_configured(lvim.lang[filetype].formatters)
+  local formatters_by_ft = {}
+  formatters_by_ft[filetype] = M.list_configured(formatter_configs)
   null_ls.register { sources = formatters_by_ft[filetype].supported }
 end
 

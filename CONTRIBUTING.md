@@ -11,7 +11,7 @@ One of the best ways to begin contributing in a meaningful way is by helping fin
 ## Getting Started
 
 1. Backup your ~/.config/nvim
-2. Follow the [Installation](https://github.com/lunarvim/LunarVim/wiki/Installation) guide
+2. Follow the [Installation](https://www.lunarvim.org/01-installing.html) guide
 3. Link your fork with the repository `git remote add upstream https://github.com/lunarvim/LunarVim.git`
 4. That's it ! You can now `git fetch upstream` and `git rebase [-i] upstream/rolling` to update your branches with the latest contributions.
 

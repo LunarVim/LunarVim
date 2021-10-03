@@ -190,9 +190,9 @@ M.config = function()
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = remap({ "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" }, has_telescope),
         w = remap({ "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }, has_telescope),
-        -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
+        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
         j = {
           "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Next Diagnostic",
@@ -238,17 +238,17 @@ M.config = function()
         l = {
           name = "logs",
           d = remap(
-            { "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>", "view default log" },
+            { "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>", "view default log" },
             has_terminal
           ),
-          D = { "<cmd>exe 'edit '.stdpath('cache').'/lunarvim.log'<cr>", "Open the default logfile" },
-          n = remap({ "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" }, has_terminal),
+          D = { "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>", "Open the default logfile" },
+          n = remap({ "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>", "view neovim log" }, has_terminal),
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           l = remap(
-            { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
+            { "<cmd>lua require('core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
             has_terminal
           ),
-          L = { "<cmd>exe 'edit '.stdpath('cache').'/lsp.log'<cr>", "Open the LSP logfile" },
+          L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
           p = remap(
             { "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>", "view packer log" },
             has_terminal

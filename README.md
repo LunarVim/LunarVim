@@ -22,7 +22,7 @@
 
 ## Documentation
 
-You can find all the documentation for Lunarvim at [lunarvim.org](https://www.lunarvim.org)
+You can find all the documentation for LunarVim at [lunarvim.org](https://www.lunarvim.org)
 
 ## Install In One Command!
 

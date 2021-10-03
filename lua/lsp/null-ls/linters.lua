@@ -1,29 +1,14 @@
 local M = {}
-local linters_by_ft = {}
 
 local null_ls = require "null-ls"
 local services = require "lsp.null-ls.services"
 local Log = require "core.log"
 
-local function list_names(linters, options)
-  options = options or {}
-  local filter = options.filter or "supported"
-
-  return vim.tbl_keys(linters[filter])
-end
-
 function M.list_supported_names(filetype)
-  if not linters_by_ft[filetype] then
-    return {}
-  end
-  return list_names(linters_by_ft[filetype], { filter = "supported" })
-end
-
-function M.list_unsupported_names(filetype)
-  if not linters_by_ft[filetype] then
-    return {}
-  end
-  return list_names(linters_by_ft[filetype], { filter = "unsupported" })
+  local null_ls_methods = require "null-ls.methods"
+  local linter_method = null_ls_methods.internal["DIAGNOSTICS"]
+  local registered_providers = services.list_registered_providers_names(filetype)
+  return registered_providers[linter_method] or {}
 end
 
 function M.list_available(filetype)
@@ -62,12 +47,13 @@ function M.list_configured(linter_configs)
   return { supported = linters, unsupported = errors }
 end
 
-function M.setup(filetype, options)
-  if not lvim.lang[filetype] or (linters_by_ft[filetype] and not options.force_reload) then
+function M.setup(linter_configs, filetype)
+  if vim.tbl_isempty(linter_configs) then
     return
   end
 
-  linters_by_ft[filetype] = M.list_configured(lvim.lang[filetype].linters)
+  local linters_by_ft = {}
+  linters_by_ft[filetype] = M.list_configured(linter_configs)
   null_ls.register { sources = linters_by_ft[filetype].supported }
 end
 

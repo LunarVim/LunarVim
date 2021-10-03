@@ -25,17 +25,4 @@ a.describe("initial start", function()
   a.it("should be able to run treesitter without errors", function()
     assert.truthy(vim.treesitter.highlighter.active)
   end)
-
-  a.it("should be able to load default packages without errors", function()
-    -- TODO: maybe there's a way to avoid hard-coding the names of the modules?
-    local startup_plugins = {
-      "packer",
-      "lspconfig",
-      "nlspsettings",
-      "null-ls",
-    }
-    for _, plugin in pairs(startup_plugins) do
-      assert.truthy(package.loaded[tostring(plugin)])
-    end
-  end)
 end)

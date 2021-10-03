@@ -6,6 +6,7 @@ local colors = {
   dark = "#282c34",
   accent = "#BBBBBB",
   dark_gray = "#2a2f3e",
+  fg_gutter = "#353d46",
   context = "#4b5263",
   popup_back = "#282c34",
   search_orange = "#613214",

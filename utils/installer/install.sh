@@ -47,7 +47,7 @@ function usage() {
   echo "    -h, --help                       Print this help message"
   echo "    -l, --local                      Install local copy of LunarVim"
   echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
-  echo "    --[no]-install-dependencies      Wheter to prompt to install external dependencies (will prompt by default)"
+  echo "    --[no]-install-dependencies      Whether to prompt to install external dependencies (will prompt by default)"
 }
 
 function parse_arguments() {
@@ -92,15 +92,15 @@ function main() {
   check_system_deps
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
-    msg "Would you like to install lunarvim's NodeJS dependencies?"
+    msg "Would you like to install LunarVim's NodeJS dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-    msg "Would you like to install lunarvim's Python dependencies?"
+    msg "Would you like to install LunarVim's Python dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
 
-    msg "Would you like to install lunarvim's Rust dependencies?"
+    msg "Would you like to install LunarVim's Rust dependencies?"
     read -p "[y]es or [n]o (default: no) : " -r answer
     [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
   fi
@@ -187,13 +187,13 @@ function __install_nodejs_deps_npm() {
       npm install -g "$dep"
     fi
   done
-  echo "All NodeJS dependencies are succesfully installed"
+  echo "All NodeJS dependencies are successfully installed"
 }
 
 function __install_nodejs_deps_yarn() {
   echo "Installing node modules with yarn.."
   yarn global add "${__npm_deps[@]}"
-  echo "All NodeJS dependencies are succesfully installed"
+  echo "All NodeJS dependencies are successfully installed"
 }
 
 function install_nodejs_deps() {
@@ -220,7 +220,7 @@ function install_python_deps() {
   for dep in "${__pip_deps[@]}"; do
     python3 -m pip install --user "$dep"
   done
-  echo "All Python dependencies are succesfully installed"
+  echo "All Python dependencies are successfully installed"
 }
 
 function __attempt_to_install_with_cargo() {
@@ -241,7 +241,7 @@ function install_rust_deps() {
       __attempt_to_install_with_cargo "${dep##*::}"
     fi
   done
-  echo "All Rust dependencies are succesfully installed"
+  echo "All Rust dependencies are successfully installed"
 }
 
 function backup_old_config() {
