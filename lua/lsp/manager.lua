@@ -32,10 +32,10 @@ function M.setup_server(server, default_config)
     return
   end
   local status_ok, custom_config = pcall(require, "lsp/providers/" .. server.name)
-  local new_config
   if status_ok then
-    new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), custom_config)
-    new_config = vim.tbl_deep_extend("keep", new_config, default_config)
+    local new_config = vim.tbl_deep_extend("force", default_config, custom_config)
+    -- local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), custom_config)
+    -- new_config = vim.tbl_deep_extend("keep", new_config, default_config)
     Log:debug("Using custom configuration for server: " .. server.name)
     server:setup(new_config)
   else
@@ -59,7 +59,7 @@ function M.setup(servers)
   for _, server in ipairs(servers) do
     local lsp_installer_servers = require "nvim-lsp-installer.servers"
     local server_available, requested_server = lsp_installer_servers.get_server(server)
-    if server_available then
+    if server_available and not lsp_utils.is_client_active(server.name) then
       if not requested_server:is_installed() then
         table.insert(missing_servers, server)
       end
