@@ -9,6 +9,7 @@ function M.init_defaults(languages)
       lvim.lang[entry] = {
         formatters = {},
         linters = {},
+        lsp = {},
       }
     end
   end
