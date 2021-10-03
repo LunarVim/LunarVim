@@ -18,7 +18,7 @@ local function is_overridden(server)
   local overrides = lvim.lsp.override
   if type(overrides) == "table" then
     if vim.tbl_contains(overrides, server) then
-      return
+      return true
     end
   end
 end
