@@ -23,4 +23,5 @@ return {
   popup_border = "single",
   on_attach_callback = nil,
   on_init_callback = nil,
+  automatic_servers_installation = true,
 }

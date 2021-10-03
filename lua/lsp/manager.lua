@@ -23,29 +23,48 @@ local function is_overridden(server)
   end
 end
 
-function M.setup_server(server, default_config)
+function M.setup_server(server_name)
   vim.validate {
-    name = { server.name, "string" },
-    default_config = { default_config, "table" },
+    name = { server_name, "string" },
   }
-  if lsp_utils.is_client_active(server) or is_overridden(server.name) then
+
+  if lsp_utils.is_client_active(server_name) or is_overridden(server_name) then
     return
   end
-  local status_ok, custom_config = pcall(require, "lsp/providers/" .. server.name)
+
+  local lsp_installer_servers = require "nvim-lsp-installer.servers"
+  local server_available, requested_server = lsp_installer_servers.get_server(server_name)
+  if server_available then
+    if not requested_server:is_installed() then
+      Log:debug(string.format("[%s] is not installed", server_name))
+      if lvim.lsp.automatic_servers_installation then
+        Log:debug(string.format("Installing [%s]", server_name))
+        requested_server:install()
+      else
+        return
+      end
+    end
+  end
+
+  local default_config = {
+    on_attach = require("lsp").common_on_attach,
+    on_init = require("lsp").common_on_init,
+    capabilities = require("lsp").common_capabilities(),
+  }
+
+  local status_ok, custom_config = pcall(require, "lsp/providers/" .. requested_server.name)
   if status_ok then
     local new_config = vim.tbl_deep_extend("force", default_config, custom_config)
-    -- local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), custom_config)
-    -- new_config = vim.tbl_deep_extend("keep", new_config, default_config)
-    Log:debug("Using custom configuration for server: " .. server.name)
-    server:setup(new_config)
+    Log:debug("Using custom configuration for requested server: " .. requested_server.name)
+    requested_server:setup(new_config)
   else
-    Log:debug("Using the default configuration for server: " .. server.name)
-    server:setup(default_config)
+    Log:debug("Using the default configuration for requested server: " .. requested_server.name)
+    requested_server:setup(default_config)
   end
 end
 
 function M.setup(servers)
-  local status_ok, ls_installer = pcall(require, "nvim-lsp-installer")
+  local status_ok, _ = pcall(require, "nvim-lsp-installer")
   if not status_ok then
     return
   end
@@ -55,32 +74,9 @@ function M.setup(servers)
     servers = { servers }
   end
 
-  local missing_servers = {}
   for _, server in ipairs(servers) do
-    local lsp_installer_servers = require "nvim-lsp-installer.servers"
-    local server_available, requested_server = lsp_installer_servers.get_server(server)
-    if server_available and not lsp_utils.is_client_active(server.name) then
-      if not requested_server:is_installed() then
-        table.insert(missing_servers, server)
-      end
-    end
+    M.setup_server(server)
   end
-
-  -- TODO: this should handled more elegantly #1632
-  if #vim.tbl_keys(missing_servers) == #vim.tbl_keys(servers) then
-    Log:info(
-      "None of the supported language server(s) [" .. table.concat(missing_servers, ", ") .. "] is currently installed"
-    )
-  end
-
-  ls_installer.on_server_ready(function(server)
-    local default_config = {
-      on_attach = require("lsp").common_on_attach,
-      on_init = require("lsp").common_on_init,
-      capabilities = require("lsp").common_capabilities(),
-    }
-    M.setup_server(server, default_config)
-  end)
 end
 
 return M

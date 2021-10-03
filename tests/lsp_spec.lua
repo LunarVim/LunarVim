@@ -38,7 +38,10 @@ a.describe("lsp workflow", function()
     assert.True(utils.is_directory(lvim.lsp.templates_dir))
     require("lsp").setup()
 
-    assert.False(utils.log_contains "templates")
+    -- we need to delay this check until the log gets populated
+    vim.schedule(function()
+      assert.False(utils.log_contains "templates")
+    end)
   end)
 
   a.it("shoud retrieve supported filetypes correctly", function()
