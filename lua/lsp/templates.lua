@@ -21,9 +21,15 @@ end
 function M.is_ignored(server_name, filetypes)
   --TODO: this is easy to be made configurable once stable
   filetypes = filetypes or get_supported_filetypes(server_name)
+
   if vim.tbl_contains(filetypes, "javascript") then
-    return server_name ~= "tsserver" and true or false
+    if server_name == "tsserver" or server_name == "tailwindcss" then
+      return false
+    else
+      return true
+    end
   end
+
   local blacklist = {
     "jedi_language_server",
     "pylsp",
@@ -56,7 +62,7 @@ function M.generate_ftplugin(server_name, dir)
     local setup_cmd = string.format([[require("lsp.manager").setup(%q)]], server_name)
     -- print("using setup_cmd: " .. setup_cmd)
     -- overwrite the file completely
-    utils.write_file(filename, setup_cmd .. "\n", "w")
+    utils.write_file(filename, setup_cmd .. "\n", "a")
   end
 end
 

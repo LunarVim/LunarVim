@@ -64,7 +64,7 @@ a.describe("lsp workflow", function()
     assert.True(vim.deep_equal(tsserver.filetypes, tsserver_fts))
   end)
 
-  a.it("shoud ignore all javascript servers except tsserver when generating templates", function()
+  a.it("shoud ignore all javascript servers except tsserver and tailwindcss when generating templates", function()
     local test_server = { name = "denols", filetypes = {} }
     test_server.filetypes = require("lsp.utils").get_supported_filetypes(test_server.name)
 
@@ -76,6 +76,7 @@ a.describe("lsp workflow", function()
     local ts_template = utils.join_paths(lvim.lsp.templates_dir, "typescript.lua")
 
     assert.True(utils.file_contains(ts_template, "tsserver"))
+    assert.True(utils.file_contains(ts_template, "tailwindcss"))
     assert.False(utils.file_contains(ts_template, test_server.name))
   end)
 
