@@ -19,12 +19,18 @@ end
 ---Only TSServer is enabled by default for the javascript-family
 ---@param server_name string
 function M.is_ignored(server_name, filetypes)
+  --TODO: this is easy to be made configurable once stable
   filetypes = filetypes or get_supported_filetypes(server_name)
-  if vim.tbl_contains(filetypes, server_name) then
-    return server_name == "tsserver" and false or true
+  if vim.tbl_contains(filetypes, "javascript") then
+    return server_name ~= "tsserver" and true or false
   end
   local blacklist = {
     "jedi_language_server",
+    "pylsp",
+    "sqlls",
+    "sqls",
+    "angularls",
+    "ansiblels",
   }
   return vim.tbl_contains(blacklist, server_name)
 end
@@ -39,7 +45,7 @@ function M.generate_ftplugin(server_name, dir)
     return
   end
 
-  if vim.tbl_contains(filetypes, server_name) and server_name ~= "tsserver" then
+  if M.is_ignored(server_name, filetypes) then
     return
   end
 
@@ -50,7 +56,7 @@ function M.generate_ftplugin(server_name, dir)
     local setup_cmd = string.format([[require("lsp.manager").setup(%q)]], server_name)
     -- print("using setup_cmd: " .. setup_cmd)
     -- overwrite the file completely
-    utils.write_file(filename, setup_cmd .. "\n", "a")
+    utils.write_file(filename, setup_cmd .. "\n", "w")
   end
 end
 
@@ -73,7 +79,9 @@ function M.generate_templates(servers_names)
   end
 
   -- create the directory if it didn't exist
-  vim.fn.mkdir(ftplugin_dir, "p")
+  if not utils.is_directory(lvim.lsp.templates_dir) then
+    vim.fn.mkdir(ftplugin_dir, "p")
+  end
 
   for _, server in ipairs(servers_names) do
     M.generate_ftplugin(server, ftplugin_dir)

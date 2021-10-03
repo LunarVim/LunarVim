@@ -1,5 +1,6 @@
 local a = require "plenary.async_lib.tests"
 local utils = require "utils"
+lvim.lsp.templates_dir = join_paths(get_runtime_dir(), "lvim", "tests", "artifacts")
 
 a.describe("lsp workflow", function()
   local Log = require "core.log"
@@ -37,7 +38,57 @@ a.describe("lsp workflow", function()
     assert.True(utils.is_directory(lvim.lsp.templates_dir))
     require("lsp").setup()
 
-    local _, ret, _ = utils.search_lvim_log { "templates" }
-    assert.equal(ret, 1)
+    assert.False(utils.log_contains "templates")
+  end)
+
+  a.it("shoud retrieve supported filetypes correctly", function()
+    local ocaml = {
+      name = "ocamlls",
+      filetypes = { "ocaml", "reason" },
+    }
+    local ocaml_fts = require("lsp.utils").get_supported_filetypes(ocaml.name)
+    assert.True(vim.deep_equal(ocaml.filetypes, ocaml_fts))
+
+    local tsserver = {
+      name = "tsserver",
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
+    }
+    local tsserver_fts = require("lsp.utils").get_supported_filetypes(tsserver.name)
+    assert.True(vim.deep_equal(tsserver.filetypes, tsserver_fts))
+  end)
+
+  a.it("shoud ignore all javascript servers except tsserver when generating templates", function()
+    local test_server = { name = "denols", filetypes = {} }
+    test_server.filetypes = require("lsp.utils").get_supported_filetypes(test_server.name)
+
+    assert.True(vim.tbl_contains(test_server.filetypes, "javascript"))
+
+    local is_ignored = require("lsp.templates").is_ignored(test_server.name)
+    assert.True(is_ignored)
+
+    local ts_template = utils.join_paths(lvim.lsp.templates_dir, "typescript.lua")
+
+    assert.True(utils.file_contains(ts_template, "tsserver"))
+    assert.False(utils.file_contains(ts_template, test_server.name))
+  end)
+
+  a.it("shoud not include blacklisted servers in the generated templates", function()
+    assert.True(utils.is_directory(lvim.lsp.templates_dir))
+    require("lsp").setup()
+
+    local blacklisted = { "jedi_language_server", "pylsp", "sqlls", "sqls", "angularls", "ansiblels" }
+
+    for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
+      for _, server in ipairs(blacklisted) do
+        assert.False(utils.file_contains(file, server))
+      end
+    end
   end)
 end)
