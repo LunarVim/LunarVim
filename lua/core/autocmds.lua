@@ -14,6 +14,11 @@ lvim.autocommands = {
       "nnoremap <silent> <buffer> q :q<CR>",
     },
     {
+      "InsertLeave",
+      "*",
+      "lua require'luasnip'.unlink_current()",
+    },
+    {
       "FileType",
       "lsp-installer",
       "nnoremap <silent> <buffer> q :q<CR>",

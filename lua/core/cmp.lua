@@ -4,7 +4,6 @@ local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
-
 local function T(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -139,11 +138,7 @@ M.config = function()
       ["<C-e>"] = cmp.mapping.close(),
       ["<CR>"] = cmp.mapping(function(fallback)
         if not require("cmp").confirm(lvim.builtin.cmp.confirm_opts) then
-          if luasnip.jumpable() then
-            vim.fn.feedkeys(T "<Plug>luasnip-jump-next", "")
-          else
-            fallback()
-          end
+          fallback()
         end
       end),
     },
