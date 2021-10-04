@@ -12,7 +12,7 @@ function M:setup()
   end
 
   null_ls.config()
-  require("lspconfig")["null-ls"].setup {}
+  require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
   for _, filetype in pairs(lvim.lang) do
     if filetype.formatters then
       formatters.setup(filetype.formatters, filetype)

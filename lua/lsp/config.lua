@@ -38,4 +38,7 @@ return {
     insert_mode = {},
     visual_mode = {},
   },
+  null_ls = {
+    setup = {},
+  },
 }
