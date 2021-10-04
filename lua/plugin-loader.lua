@@ -52,10 +52,21 @@ end
 
 function plugin_loader:load(configurations)
   return self.packer.startup(function(use)
-    for _, plugins in ipairs(configurations) do
-      for _, plugin in ipairs(plugins) do
-        use(plugin)
+    local ordered = {}
+    local plugins = {}
+
+    for _, config in ipairs(configurations) do
+      for _, plugin in ipairs(config) do
+        local name = type(plugin) == "table" and plugin[1] or plugin
+        if not plugins[name] then
+          ordered[#ordered + 1] = name
+        end
+        plugins[name] = plugin
       end
+    end
+
+    for _, plugin in ipairs(ordered) do
+      use(plugins[plugin])
     end
   end)
 end
