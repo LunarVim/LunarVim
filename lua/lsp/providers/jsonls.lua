@@ -130,10 +130,6 @@ local schemas = {
     url = "https://json.schemastore.org/golangci-lint.json",
   },
   {
-    description = "JSON Schema for Grafana 5.x Dashboards",
-    url = "https://json.schemastore.org/grafana-dashboard-5.x.json",
-  },
-  {
     description = "JSON schema for the JSON Feed format",
     fileMatch = {
       "feed.json",
@@ -159,10 +155,6 @@ local schemas = {
     url = "https://json.schemastore.org/package.json",
   },
   {
-    description = "Traefik v2 Dynamic Configuration File Provider",
-    url = "https://json.schemastore.org/traefik-v2-file-provider.json",
-  },
-  {
     description = "JSON schema for Visual Studio component configuration files",
     fileMatch = {
       "*.vsconfig",
@@ -186,18 +178,16 @@ end
 local extended_schemas = extend(schemas, default_schemas)
 
 local opts = {
-  setup = {
-    settings = {
-      json = {
-        schemas = extended_schemas,
-      },
+  settings = {
+    json = {
+      schemas = extended_schemas,
     },
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
-        end,
-      },
+  },
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
+      end,
     },
   },
 }
