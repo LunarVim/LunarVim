@@ -62,18 +62,37 @@ function M.common_capabilities()
   return capabilities
 end
 
+local function select_default_formater(client)
+  local client_formatting = client.resolved_capabilities.document_formatting
+    or client.resolved_capabilities.document_range_formatting
+  if client.name == "null-ls" or not client_formatting then
+    return
+  end
+  Log:debug("Checking for formatter overriding for " .. client.name)
+  local client_filetypes = client.config.filetypes or {}
+  for _, filetype in ipairs(client_filetypes) do
+    if not vim.tbl_isempty(lvim.lang[filetype].formatters) then
+      Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
+      client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
+      return
+    end
+  end
+end
+
 function M.common_on_init(client, bufnr)
   if lvim.lsp.on_init_callback then
     lvim.lsp.on_init_callback(client, bufnr)
     Log:debug "Called lsp.on_init_callback"
     return
   end
+  select_default_formater(client)
 end
 
 function M.common_on_attach(client, bufnr)
   if lvim.lsp.on_attach_callback then
     lvim.lsp.on_attach_callback(client, bufnr)
-    Log:debug "Called lsp.on_init_callback"
+    Log:debug "Called lsp.on_attach_callback"
   end
   lsp_highlight_document(client)
   add_lsp_buffer_keybindings(bufnr)
