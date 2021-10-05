@@ -25,4 +25,8 @@ a.describe("initial start", function()
   a.it("should be able to run treesitter without errors", function()
     assert.truthy(vim.treesitter.highlighter.active)
   end)
+
+  a.it("should not get interrupted by errors in user-config", function()
+    assert.True ""
+  end)
 end)
