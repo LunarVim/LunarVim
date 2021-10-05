@@ -159,6 +159,16 @@ function M.view_lunarvim_changelog()
   }):find()
 end
 
+function M.code_actions()
+  local opts = {
+    winblend = 10,
+    border = true,
+    previewer = false,
+    shorten_path = false,
+  }
+  require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_dropdown(opts))
+end
+
 function M.setup()
   local telescope = require "telescope"
 
