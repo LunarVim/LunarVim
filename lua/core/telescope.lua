@@ -162,7 +162,8 @@ end
 function M.code_actions()
   local opts = {
     winblend = 10,
-    border = true,
+    border = {},
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     previewer = false,
     shorten_path = false,
   }

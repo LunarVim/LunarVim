@@ -21,6 +21,25 @@ local function lsp_highlight_document(client)
   end
 end
 
+local function lsp_code_lens_refresh(client)
+  if lvim.lsp.code_lens_refresh == false then
+    return
+  end
+
+  if client.resolved_capabilities.code_lens then
+    vim.api.nvim_exec(
+      [[
+      augroup lsp_code_lens_refresh
+        autocmd! * <buffer>
+        autocmd InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+        autocmd InsertLeave <buffer> lua vim.lsp.codelens.display()
+      augroup END
+    ]],
+      false
+    )
+  end
+end
+
 local function add_lsp_buffer_keybindings(bufnr)
   local status_ok, wk = pcall(require, "which-key")
   if not status_ok then
@@ -29,6 +48,7 @@ local function add_lsp_buffer_keybindings(bufnr)
 
   local keys = {
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
+    ["ga"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
     ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
     ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
@@ -95,6 +115,7 @@ function M.common_on_attach(client, bufnr)
     Log:debug "Called lsp.on_attach_callback"
   end
   lsp_highlight_document(client)
+  lsp_code_lens_refresh(client)
   add_lsp_buffer_keybindings(bufnr)
 end
 
