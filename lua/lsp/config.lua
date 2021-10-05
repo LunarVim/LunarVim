@@ -17,6 +17,7 @@ return {
   },
   override = {},
   document_highlight = true,
+  code_lens_refresh = true,
   popup_border = "single",
   on_attach_callback = nil,
   on_init_callback = nil,

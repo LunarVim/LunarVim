@@ -159,6 +159,26 @@ function M.view_lunarvim_changelog()
   }):find()
 end
 
+function M.code_actions()
+  local opts = {
+    winblend = 15,
+    layout_config = {
+      prompt_position = "top",
+      width = 80,
+      height = 12,
+    },
+    borderchars = {
+      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    },
+    border = {},
+    previewer = false,
+    shorten_path = false,
+  }
+  require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_dropdown(opts))
+end
+
 function M.setup()
   local telescope = require "telescope"
 
