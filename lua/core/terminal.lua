@@ -58,6 +58,11 @@ M.setup = function()
 end
 
 M.add_exec = function(exec, keymap, name)
+  if vim.fn.executable(exec) ~= 1 then
+    -- exec was not found
+    return
+  end
+
   vim.api.nvim_set_keymap(
     "n",
     "<leader>" .. keymap,
