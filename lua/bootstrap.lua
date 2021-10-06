@@ -1,5 +1,7 @@
 local M = {}
 
+local in_headless = #vim.api.nvim_list_uis() == 0
+
 ---Join path segments that were passed as input
 ---@return string
 function _G.join_paths(...)
@@ -114,10 +116,13 @@ function M:update()
   M:update_repo()
   M:reset_cache()
   require("lsp.templates").generate_templates()
-  vim.schedule(function()
-    -- TODO: add a changelog
-    vim.notify("Update complete", vim.log.levels.INFO)
-  end)
+  if not in_headless then
+    vim.schedule(function()
+      require("packer").install()
+      -- TODO: add a changelog
+      vim.notify("Update complete", vim.log.levels.INFO)
+    end)
+  end
 end
 
 local function git_cmd(subcmd)
