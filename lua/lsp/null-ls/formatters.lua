@@ -23,7 +23,7 @@ function M.list_available(filetype)
   return formatters
 end
 
-function M.list_configured(formatter_configs)
+function M.list_configured(formatter_configs, filetype)
   local formatters, errors = {}, {}
 
   for _, fmt_config in ipairs(formatter_configs) do
@@ -39,7 +39,11 @@ function M.list_configured(formatter_configs)
         errors[fmt_config.exe] = {} -- Add data here when necessary
       else
         Log:debug("Using formatter: " .. formatter_cmd)
-        formatters[fmt_config.exe] = formatter.with { command = formatter_cmd, extra_args = fmt_config.args }
+        formatters[fmt_config.exe] = formatter.with {
+          command = formatter_cmd,
+          extra_args = fmt_config.args,
+          filetypes = { filetype },
+        }
       end
     end
   end
@@ -52,9 +56,8 @@ function M.setup(formatter_configs, filetype)
     return
   end
 
-  local formatters_by_ft = {}
-  formatters_by_ft[filetype] = M.list_configured(formatter_configs)
-  null_ls.register { sources = formatters_by_ft[filetype].supported }
+  local formatters_by_ft = M.list_configured(formatter_configs, filetype)
+  null_ls.register { sources = formatters_by_ft.supported }
 end
 
 return M
