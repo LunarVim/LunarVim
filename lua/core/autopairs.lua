@@ -4,14 +4,8 @@ function M.config()
   lvim.builtin.autopairs = {
     active = true,
     on_config_done = nil,
-    ---@usage  map <CR> on insert mode
-    map_cr = true,
     ---@usage auto insert after select function or method item
     map_complete = true,
-    ---@usage automatically select the first item
-    auto_select = true,
-    ---@usage use insert confirm behavior instead of replace
-    insert = false,
     ---@usage  -- modifies the function or method delimiter by filetypes
     map_char = {
       all = "(",
@@ -60,12 +54,14 @@ M.setup = function()
 
   if package.loaded["cmp"] then
     require("nvim-autopairs.completion.cmp").setup {
-      map_cr = lvim.builtin.autopairs.map_cr,
+      map_cr = false,
       map_complete = lvim.builtin.autopairs.map_complete,
       auto_select = lvim.builtin.autopairs.auto_select,
       insert = lvim.builtin.autopairs.insert,
       map_char = lvim.builtin.autopairs.map_char,
     }
+    -- we map CR explicitly in cmp.lua but we still need to setup the autopairs CR keymap
+    vim.api.nvim_set_keymap("i", "<CR>", "v:lua.MPairs.autopairs_cr()", { expr = true, noremap = true })
   end
 
   require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
