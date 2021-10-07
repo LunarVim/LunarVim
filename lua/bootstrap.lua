@@ -1,6 +1,7 @@
 local M = {}
 
-local in_headless = #vim.api.nvim_list_uis() == 0
+package.loaded["utils.hooks"] = nil
+local _, hooks = pcall(require, "utils.hooks")
 
 ---Join path segments that were passed as input
 ---@return string
@@ -42,12 +43,23 @@ function _G.get_cache_dir()
   return lvim_cache_dir
 end
 
+---Get the full path to the currently installed lunarvim repo
+---@return string
+local function get_install_path()
+  local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
+  if not lvim_runtime_dir then
+    -- when nvim is used directly
+    return vim.fn.stdpath "config"
+  end
+  return join_paths(lvim_runtime_dir, "lvim")
+end
+
 ---Get currently installed version of LunarVim
 ---@param type string can be "short"
 ---@return string
 function _G.get_version(type)
   type = type or ""
-  local lvim_full_ver = vim.fn.system("git -C " .. get_runtime_dir() .. "/lvim describe --tags")
+  local lvim_full_ver = vim.fn.system("git -C " .. get_install_path() .. " describe --tags")
 
   if string.match(lvim_full_ver, "%d") == nil then
     return nil
@@ -65,7 +77,7 @@ function M:init()
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_path = get_cache_dir()
-  self.repo_dir = join_paths(self.runtime_dir, "lvim")
+  self.install_path = get_install_path()
 
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
@@ -113,23 +125,15 @@ end
 ---Update LunarVim
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
+  hooks.run_pre_update()
   M:update_repo()
-  M:reset_cache()
-  require("lsp.templates").generate_templates()
-  if not in_headless then
-    vim.schedule(function()
-      require("packer").install()
-      -- TODO: add a changelog
-      vim.notify("Update complete", vim.log.levels.INFO)
-    end)
-  end
+  hooks.run_post_update()
 end
 
 local function git_cmd(subcmd)
   local Job = require "plenary.job"
   local Log = require "core.log"
-  local repo_dir = join_paths(get_runtime_dir(), "lvim")
-  local args = { "-C", repo_dir }
+  local args = { "-C", get_install_path() }
   vim.list_extend(args, subcmd)
 
   local stderr = {}
@@ -137,7 +141,7 @@ local function git_cmd(subcmd)
     :new({
       command = "git",
       args = args,
-      cwd = repo_dir,
+      cwd = get_install_path(),
       on_stderr = function(_, data)
         table.insert(stderr, data)
       end,
@@ -167,7 +171,8 @@ function M:update_repo()
 
   local ret = git_cmd(sub_commands.fetch)
   if ret ~= 0 then
-    error "Update failed! Check the log for further information"
+    Log:error "Update failed! Check the log for further information"
+    return
   end
 
   ret = git_cmd(sub_commands.diff)
@@ -180,17 +185,9 @@ function M:update_repo()
   ret = git_cmd(sub_commands.merge)
 
   if ret ~= 0 then
-    error "Error: unable to guarantee data integrity while updating your branch"
-    error "Please pull the changes manually instead."
+    Log:error "Update failed! Please pull the changes manually instead."
+    return
   end
-end
-
----Reset any startup cache files used by Packer and Impatient
----Tip: Useful for clearing any outdated settings
-function M:reset_cache()
-  _G.__luacache.clear_cache()
-  _G.__luacache.save_cache()
-  require("plugin-loader"):cache_reset()
 end
 
 return M

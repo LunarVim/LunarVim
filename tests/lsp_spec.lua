@@ -79,7 +79,6 @@ a.describe("lsp workflow", function()
     local ts_template = utils.join_paths(lvim.lsp.templates_dir, "typescript.lua")
 
     assert.True(utils.file_contains(ts_template, "tsserver"))
-    assert.True(utils.file_contains(ts_template, "tailwindcss"))
     assert.False(utils.file_contains(ts_template, test_server.name))
   end)
 
