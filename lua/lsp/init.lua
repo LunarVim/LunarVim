@@ -125,6 +125,7 @@ function M.setup()
   for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
+
   require("lsp.handlers").setup()
 
   if not utils.is_directory(lvim.lsp.templates_dir) then

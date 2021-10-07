@@ -23,7 +23,7 @@ function M.is_ignored(server_name, filetypes)
   filetypes = filetypes or get_supported_filetypes(server_name)
 
   if vim.tbl_contains(filetypes, "javascript") then
-    if server_name == "tsserver" or server_name == "tailwindcss" then
+    if server_name == "tsserver" then
       return false
     else
       return true
