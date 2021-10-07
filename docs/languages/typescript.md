@@ -9,7 +9,7 @@
 ## Install Language Server
 
 ```vim
-:LspInstall typescript
+:LspInstall tsserver
 ```
 
 Project root is recognized by having one of the folloing files/folders in the root directory of the project: `package.json`, `tsconfig.json`, `jsconfig.json`, `.git`
