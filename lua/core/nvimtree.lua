@@ -6,9 +6,9 @@ function M.config()
     active = true,
     on_config_done = nil,
     setup = {
-      auto_open = 0,
+      open_on_setup = 0,
       auto_close = 1,
-      tab_open = 0,
+      open_on_tab = 0,
       update_focused_file = {
         enable = 1,
       },
