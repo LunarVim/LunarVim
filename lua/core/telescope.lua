@@ -26,7 +26,6 @@ function M.config()
       layout_strategy = "horizontal",
       layout_config = {
         width = 0.75,
-        prompt_position = "bottom",
         preview_cutoff = 120,
         horizontal = { mirror = false },
         vertical = { mirror = false },
@@ -91,9 +90,6 @@ function M.find_lunarvim_files(opts)
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    layout_config = {
-      prompt_position = "top",
-    },
     prompt_prefix = ">> ",
     prompt_title = "~ LunarVim files ~",
     cwd = utils.join_paths(get_runtime_dir(), "lvim"),
@@ -109,9 +105,6 @@ function M.grep_lunarvim_files(opts)
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    layout_config = {
-      prompt_position = "top",
-    },
     prompt_prefix = ">> ",
     prompt_title = "~ search LunarVim ~",
     cwd = utils.join_paths(get_runtime_dir(), "lvim"),
