@@ -91,7 +91,10 @@ function M.find_lunarvim_files(opts)
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    prompt = ">> ",
+    layout_config = {
+      prompt_position = "top",
+    },
+    prompt_prefix = ">> ",
     prompt_title = "~ LunarVim files ~",
     cwd = utils.join_paths(get_runtime_dir(), "lvim"),
     find_command = { "git", "ls-files" },
@@ -106,7 +109,10 @@ function M.grep_lunarvim_files(opts)
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    prompt = ">> ",
+    layout_config = {
+      prompt_position = "top",
+    },
+    prompt_prefix = ">> ",
     prompt_title = "~ search LunarVim ~",
     cwd = utils.join_paths(get_runtime_dir(), "lvim"),
   }
