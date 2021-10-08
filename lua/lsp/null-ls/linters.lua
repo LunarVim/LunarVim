@@ -23,7 +23,7 @@ function M.list_available(filetype)
   return linters
 end
 
-function M.list_configured(linter_configs)
+function M.list_configured(linter_configs, filetype)
   local linters, errors = {}, {}
 
   for _, lnt_config in pairs(linter_configs) do
@@ -39,7 +39,11 @@ function M.list_configured(linter_configs)
         errors[lnt_config.exe] = {} -- Add data here when necessary
       else
         Log:debug("Using linter: " .. linter_cmd)
-        linters[lnt_config.exe] = linter.with { command = linter_cmd, extra_args = lnt_config.args }
+        linters[lnt_config.exe] = linter.with {
+          command = linter_cmd,
+          extra_args = lnt_config.args,
+          filetypes = { filetype },
+        }
       end
     end
   end
@@ -52,9 +56,8 @@ function M.setup(linter_configs, filetype)
     return
   end
 
-  local linters_by_ft = {}
-  linters_by_ft[filetype] = M.list_configured(linter_configs)
-  null_ls.register { sources = linters_by_ft[filetype].supported }
+  local linters_by_ft = M.list_configured(linter_configs, filetype)
+  null_ls.register { sources = linters_by_ft.supported }
 end
 
 return M
