@@ -94,6 +94,14 @@ local highlights = {
   TabLine = { fg = C.light_gray, bg = C.alt_bg },
   TabLineSel = { fg = C.fg, bg = C.alt_bg },
   TabLineFill = { fg = C.fg, bg = C.alt_bg },
+  CmpDocumentation = { fg = C.fg, bg = C.none },
+  CmpDocumentationBorder = { fg = C.fg_dark, bg = C.none },
+  CmpItemAbbr = { fg = C.fg, bg = C.none },
+  CmpItemAbbrDeprecated = { fg = C.gray, bg = C.none },
+  CmpItemAbbrMatch = { fg = C.cyan, bg = C.none },
+  CmpItemAbbrMatchFuzzy = { fg = C.cyan, bg = C.none },
+  CmpItemKind = { fg = C.blue, bg = C.none },
+  CmpItemMenu = { fg = C.light_gray, bg = C.none },
 }
 
 return highlights
