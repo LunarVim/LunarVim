@@ -3,7 +3,7 @@ local M = {}
 -- Set which_key remaps with an enable condition
 -- @param mapping The user defined remap
 -- @param enable_mapping Function or boolean value to check if mapping should be enabled
-local function remap(mapping, condition)
+local function conditional(mapping, condition)
   -- Dont accept bad conditions
   if not (type(condition) == "function" or type(condition) == "boolean") then
     require("core.log"):error "Bad condition set for which_key mappging"
@@ -112,24 +112,24 @@ M.config = function()
       noremap = true, -- use `noremap` when creating keymaps
       nowait = true, -- use `nowait` when creating keymaps
     },
-    conditional_remap = remap, -- Remap helper function to setup conditional remaps
+    conditional_remap = conditional, -- Remap helper function to setup conditional remaps
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = remap({ ":CommentToggle<CR>", "Comment" }, has_comment),
+      ["/"] = conditional({ ":CommentToggle<CR>", "Comment" }, has_comment),
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
-      ["/"] = remap({ "<cmd>CommentToggle<CR>", "Comment" }, has_comment),
+      ["/"] = conditional({ "<cmd>CommentToggle<CR>", "Comment" }, has_comment),
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
-      ["f"] = remap({ "<cmd>Telescope find_files<CR>", "Find File" }, has_telescope),
+      ["f"] = conditional({ "<cmd>Telescope find_files<CR>", "Find File" }, has_telescope),
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      e = remap({ "<cmd>NvimTreeToggle<CR>", "Explorer" }, has_nvimtree),
+      e = conditional({ "<cmd>NvimTreeToggle<CR>", "Explorer" }, has_nvimtree),
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "Jump" },
-        f = remap({ "<cmd>Telescope buffers<cr>", "Find" }, has_telescope),
+        f = conditional({ "<cmd>Telescope buffers<cr>", "Find" }, has_telescope),
         b = { "<cmd>b#<cr>", "Previous" },
         w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
         e = { "<cmd>BufferCloseAllButCurrent<cr>", "Close all but current" },
@@ -147,7 +147,7 @@ M.config = function()
         S = { "<cmd>PackerStatus<cr>", "Status" },
         u = { "<cmd>PackerUpdate<cr>", "Update" },
       },
-      d = remap({
+      d = conditional({
         -- " Available Debug Adapters:
         -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
         -- " Adapter configuration and installation instructions:
@@ -171,25 +171,25 @@ M.config = function()
       }, has_dap),
       g = {
         name = "Git",
-        j = remap({ "<cmd>lua require('gitsigns').next_hunk()<cr>", "Next Hunk" }, has_gitsigns),
-        k = remap({ "<cmd>lua require('gitsigns').prev_hunk()<cr>", "Prev Hunk" }, has_gitsigns),
-        l = remap({ "<cmd>lua require('gitsigns').blame_line()<cr>", "Blame" }, has_gitsigns),
-        p = remap({ "<cmd>lua require('gitsigns').preview_hunk()<cr>", "Preview Hunk" }, has_gitsigns),
-        r = remap({ "<cmd>lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk" }, has_gitsigns),
-        R = remap({ "<cmd>lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer" }, has_gitsigns),
-        s = remap({ "<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk" }, has_gitsigns),
-        u = remap({ "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk" }, has_gitsigns),
-        o = remap({ "<cmd>Telescope git_status<cr>", "Open changed file" }, has_telescope),
-        b = remap({ "<cmd>Telescope git_branches<cr>", "Checkout branch" }, has_telescope),
-        c = remap({ "<cmd>Telescope git_commits<cr>", "Checkout commit" }, has_telescope),
-        C = remap({ "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)" }, has_telescope),
-        d = remap({ "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" }, has_gitsigns),
+        j = conditional({ "<cmd>lua require('gitsigns').next_hunk()<cr>", "Next Hunk" }, has_gitsigns),
+        k = conditional({ "<cmd>lua require('gitsigns').prev_hunk()<cr>", "Prev Hunk" }, has_gitsigns),
+        l = conditional({ "<cmd>lua require('gitsigns').blame_line()<cr>", "Blame" }, has_gitsigns),
+        p = conditional({ "<cmd>lua require('gitsigns').preview_hunk()<cr>", "Preview Hunk" }, has_gitsigns),
+        r = conditional({ "<cmd>lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk" }, has_gitsigns),
+        R = conditional({ "<cmd>lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer" }, has_gitsigns),
+        s = conditional({ "<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk" }, has_gitsigns),
+        u = conditional({ "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk" }, has_gitsigns),
+        o = conditional({ "<cmd>Telescope git_status<cr>", "Open changed file" }, has_telescope),
+        b = conditional({ "<cmd>Telescope git_branches<cr>", "Checkout branch" }, has_telescope),
+        c = conditional({ "<cmd>Telescope git_commits<cr>", "Checkout commit" }, has_telescope),
+        C = conditional({ "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)" }, has_telescope),
+        d = conditional({ "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" }, has_gitsigns),
       },
       l = {
         name = "LSP",
-        a = remap({ "<cmd>lua require('core.telescope').code_actions()<cr>", "Code Action" }, has_telescope),
-        d = remap({ "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" }, has_telescope),
-        w = remap({ "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }, has_telescope),
+        a = conditional({ "<cmd>lua require('core.telescope').code_actions()<cr>", "Code Action" }, has_telescope),
+        d = conditional({ "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" }, has_telescope),
+        w = conditional({ "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }, has_telescope),
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
         I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -210,8 +210,8 @@ M.config = function()
         },
         q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        s = remap({ "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" }, has_telescope),
-        S = remap({ "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, has_telescope),
+        s = conditional({ "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" }, has_telescope),
+        S = conditional({ "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, has_telescope),
       },
       L = {
         name = "LunarVim",
@@ -219,11 +219,11 @@ M.config = function()
           "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
-        f = remap(
+        f = conditional(
           { "<cmd>lua require('core.telescope').find_lunarvim_files()<cr>", "Find LunarVim files" },
           has_telescope
         ),
-        g = remap(
+        g = conditional(
           { "<cmd>lua require('core.telescope').grep_lunarvim_files()<cr>", "Grep LunarVim files" },
           has_telescope
         ),
@@ -238,22 +238,22 @@ M.config = function()
         },
         l = {
           name = "logs",
-          d = remap({
+          d = conditional({
             "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>",
             "view default log",
           }, has_terminal),
           D = { "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>", "Open the default logfile" },
-          n = remap(
+          n = conditional(
             { "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>", "view neovim log" },
             has_terminal
           ),
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
-          l = remap(
+          l = conditional(
             { "<cmd>lua require('core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
             has_terminal
           ),
           L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
-          p = remap(
+          p = conditional(
             { "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>", "view packer log" },
             has_terminal
           ),
@@ -262,7 +262,7 @@ M.config = function()
         r = { "<cmd>lua require('utils').reload_lv_config()<cr>", "Reload configurations" },
         u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
       },
-      s = remap({
+      s = conditional({
         name = "Search",
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -279,7 +279,7 @@ M.config = function()
           "Colorscheme with Preview",
         },
       }, has_telescope),
-      T = remap({
+      T = conditional({
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },
       }, has_treesitter),
