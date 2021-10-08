@@ -106,13 +106,15 @@ M.config = function()
       { name = "treesitter" },
       { name = "crates" },
     },
+    ---@usage enable or disable preselection of autocompletion results when tabbing
+    preselect = true,
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
       ["<Tab>"] = cmp.mapping(function()
         if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<down>", "n")
+          vim.fn.feedkeys(T(lvim.builtin.cmp.preselect and "<C-n>" or "<down>"), "n")
         elseif luasnip.expand_or_jumpable() then
           vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
         elseif check_backspace() then
@@ -128,7 +130,7 @@ M.config = function()
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<up>", "n")
+          vim.fn.feedkeys(T(lvim.builtin.cmp.preselect and "<C-p>" or "<up>"), "n")
         elseif luasnip.jumpable(-1) then
           vim.fn.feedkeys(T "<Plug>luasnip-jump-prev", "")
         else
