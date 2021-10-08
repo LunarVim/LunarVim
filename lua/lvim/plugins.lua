@@ -8,6 +8,7 @@ return {
   {
     "williamboman/nvim-lsp-installer",
   },
+  { "Tastyep/structlog.nvim" },
 
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
