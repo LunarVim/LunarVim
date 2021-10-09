@@ -56,8 +56,6 @@ M.setup = function()
     require("nvim-autopairs.completion.cmp").setup {
       map_cr = false,
       map_complete = lvim.builtin.autopairs.map_complete,
-      auto_select = lvim.builtin.autopairs.auto_select,
-      insert = lvim.builtin.autopairs.insert,
       map_char = lvim.builtin.autopairs.map_char,
     }
     -- we map CR explicitly in cmp.lua but we still need to setup the autopairs CR keymap
