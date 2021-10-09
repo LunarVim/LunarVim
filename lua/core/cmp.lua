@@ -127,8 +127,8 @@ M.config = function()
       select = false,
     },
     experimental = {
-      ghost_text = false,
-      native_menu = true,
+      ghost_text = true,
+      native_menu = false,
     },
     formatting = {
       kind_icons = {
@@ -203,8 +203,8 @@ M.config = function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
       ["<Tab>"] = cmp.mapping(function()
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<down>", "n")
+        if cmp.visible() then
+          cmp.select_next_item()
         elseif luasnip.expandable() then
           luasnip.expand()
         elseif inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable() then
@@ -221,8 +221,8 @@ M.config = function()
         "s",
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(T "<up>", "n")
+        if cmp.visible() then
+          cmp.select_prev_item()
         elseif inside_snippet() and luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
@@ -236,7 +236,7 @@ M.config = function()
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
       ["<CR>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() ~= 0 and cmp.confirm(lvim.builtin.cmp.confirm_opts) then
+        if cmp.visible() and cmp.confirm(lvim.builtin.cmp.confirm_opts) then
           return
         end
 
