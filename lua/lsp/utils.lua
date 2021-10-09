@@ -10,12 +10,6 @@ function M.is_client_active(name)
   return false
 end
 
-function M.disable_formatting_capability(client)
-  -- FIXME: figure out a reasonable way to do this
-  client.resolved_capabilities.document_formatting = false
-  require("core.log"):debug(string.format("Turning off formatting capability for language server [%s] ", client.name))
-end
-
 function M.get_active_client_by_ft(filetype)
   local matches = {}
   local clients = vim.lsp.get_active_clients()
