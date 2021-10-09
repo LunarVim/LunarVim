@@ -11,6 +11,7 @@ local M = {
 
 local fmt = string.format
 local text = require "interface.text"
+local lsp_utils = require "lsp.utils"
 
 local function str_list(list)
   return fmt("[ %s ]", table.concat(list, ", "))
@@ -67,7 +68,7 @@ local function tbl_set_highlight(terms, highlight_group)
 end
 
 local function make_client_info(client)
-  local client_enabled_caps = require("lsp.utils").get_ls_capabilities(client.id)
+  local client_enabled_caps = lsp_utils.get_client_capabilities(client.id)
   local name = client.name
   local id = client.id
   local document_formatting = client.resolved_capabilities.document_formatting
@@ -89,8 +90,7 @@ local function make_client_info(client)
 end
 
 function M.toggle_popup(ft)
-  local lsp_utils = require "lsp.utils"
-  local clients = lsp_utils.get_active_client_by_ft(ft)
+  local clients = lsp_utils.get_active_clients_by_ft(ft)
   local client_names = {}
 
   local header = {

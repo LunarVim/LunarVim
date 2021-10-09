@@ -4,8 +4,8 @@ local function find_root_dir()
   local util = require "lspconfig/util"
   local lsp_utils = require "lsp.utils"
 
-  local status_ok, ts_client = lsp_utils.is_client_active "typescript"
-  if status_ok then
+  local ts_client = lsp_utils.is_client_active "typescript"
+  if ts_client then
     return ts_client.config.root_dir
   end
   local dirname = vim.fn.expand "%:p:h"
