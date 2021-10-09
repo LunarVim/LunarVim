@@ -94,11 +94,10 @@ local function select_default_formater(client)
   Log:debug("Checking for formatter overriding for " .. client.name)
   local client_filetypes = client.config.filetypes or {}
   for _, filetype in ipairs(client_filetypes) do
-    if not vim.tbl_isempty(lvim.lang[filetype].formatters) then
+    if lvim.lang[filetype] and #vim.tbl_keys(lvim.lang[filetype].formatters) > 0 then
       Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
       client.resolved_capabilities.document_formatting = false
       client.resolved_capabilities.document_range_formatting = false
-      return
     end
   end
 end
