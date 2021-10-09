@@ -158,23 +158,27 @@ M.config = function()
         Value = " ",
         Variable = " ",
       },
+      source_names = {
+        nvim_lsp = "(LSP)",
+        emoji = "(Emoji)",
+        path = "(Path)",
+        calc = "(Calc)",
+        cmp_tabnine = "(Tabnine)",
+        vsnip = "(Snippet)",
+        luasnip = "(Snippet)",
+        buffer = "(Buffer)",
+      },
+      duplicates = {
+        buffer = 1,
+        path = 1,
+        nvim_lsp = 0,
+      },
+      duplicates_default = 0,
       format = function(entry, vim_item)
         vim_item.kind = lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
-        vim_item.menu = ({
-          nvim_lsp = "(LSP)",
-          emoji = "(Emoji)",
-          path = "(Path)",
-          calc = "(Calc)",
-          cmp_tabnine = "(Tabnine)",
-          vsnip = "(Snippet)",
-          luasnip = "(Snippet)",
-          buffer = "(Buffer)",
-        })[entry.source.name]
-        vim_item.dup = ({
-          buffer = 1,
-          path = 1,
-          nvim_lsp = 0,
-        })[entry.source.name] or 0
+        vim_item.menu = lvim.builtin.cmp.formatting.source_names[entry.source.name]
+        vim_item.dup = lvim.builtin.cmp.formatting.duplicates[entry.source.name]
+          or lvim.builtin.cmp.formatting.duplicates_default
         return vim_item
       end,
     },
