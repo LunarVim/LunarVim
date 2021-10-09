@@ -37,9 +37,25 @@ M.config = function()
         height = { min = 4, max = 25 }, -- min and max height of the columns
         width = { min = 20, max = 50 }, -- min and max width of the columns
         spacing = 3, -- spacing between columns
+        align = "left", -- align columns left, center or right
       },
       hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
       show_help = true, -- show help message on the command line when the popup is visible
+      operators = { gc = "Comments" },
+      key_labels = {
+        -- override the label used to display some keys. It doesn't effect WK in any other way.
+        -- For example:
+        -- ["<space>"] = "SPC",
+        -- ["<cr>"] = "RET",
+        -- ["<tab>"] = "TAB",
+      },
+      triggers_nowait = {}, -- list of triggers, where WhichKey should not wait for timeoutlen and show immediately
+      triggers_blacklist = {
+        -- list of mode / prefixes that should never be hooked by WhichKey
+        -- this is mostly relevant for keymaps that start with a native binding
+        i = { "j", "k" },
+        v = { "j", "k" },
+      },
     },
 
     opts = {
