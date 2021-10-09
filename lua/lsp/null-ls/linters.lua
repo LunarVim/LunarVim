@@ -23,7 +23,7 @@ function M.list_available(filetype)
   return linters
 end
 
-function M.list_configured(linter_configs, filetype)
+function M.list_configured(linter_configs)
   local linters, errors = {}, {}
 
   for _, lnt_config in pairs(linter_configs) do
@@ -42,7 +42,7 @@ function M.list_configured(linter_configs, filetype)
         linters[lnt_config.exe] = linter.with {
           command = linter_cmd,
           extra_args = lnt_config.args,
-          filetypes = { filetype },
+          filetypes = lnt_config.filetypes,
         }
       end
     end
@@ -51,13 +51,13 @@ function M.list_configured(linter_configs, filetype)
   return { supported = linters, unsupported = errors }
 end
 
-function M.setup(linter_configs, filetype)
+function M.setup(linter_configs)
   if vim.tbl_isempty(linter_configs) then
     return
   end
 
-  local linters_by_ft = M.list_configured(linter_configs, filetype)
-  null_ls.register { sources = linters_by_ft.supported }
+  local linters = M.list_configured(linter_configs)
+  null_ls.register { sources = linters.supported }
 end
 
 return M

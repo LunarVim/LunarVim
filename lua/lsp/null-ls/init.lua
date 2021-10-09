@@ -15,10 +15,16 @@ function M:setup()
   require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
   for filetype, config in pairs(lvim.lang) do
     if not vim.tbl_isempty(config.formatters) then
-      formatters.setup(config.formatters, filetype)
+      vim.tbl_map(function(c)
+        c.filetypes = { filetype }
+      end, config.formatters)
+      formatters.setup(config.formatters)
     end
     if not vim.tbl_isempty(config.linters) then
-      linters.setup(config.linters, filetype)
+      vim.tbl_map(function(c)
+        c.filetypes = { filetype }
+      end, config.formatters)
+      linters.setup(config.linters)
     end
   end
 end

@@ -23,7 +23,7 @@ function M.list_available(filetype)
   return formatters
 end
 
-function M.list_configured(formatter_configs, filetype)
+function M.list_configured(formatter_configs)
   local formatters, errors = {}, {}
 
   for _, fmt_config in ipairs(formatter_configs) do
@@ -42,7 +42,7 @@ function M.list_configured(formatter_configs, filetype)
         formatters[fmt_config.exe] = formatter.with {
           command = formatter_cmd,
           extra_args = fmt_config.args,
-          filetypes = { filetype },
+          filetypes = fmt_config.filetypes,
         }
       end
     end
@@ -51,12 +51,12 @@ function M.list_configured(formatter_configs, filetype)
   return { supported = formatters, unsupported = errors }
 end
 
-function M.setup(formatter_configs, filetype)
+function M.setup(formatter_configs)
   if vim.tbl_isempty(formatter_configs) then
     return
   end
 
-  local formatters_by_ft = M.list_configured(formatter_configs, filetype)
+  local formatters_by_ft = M.list_configured(formatter_configs)
   null_ls.register { sources = formatters_by_ft.supported }
 end
 
