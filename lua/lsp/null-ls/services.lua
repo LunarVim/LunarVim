@@ -4,7 +4,7 @@ local function find_root_dir()
   local util = require "lspconfig/util"
   local lsp_utils = require "lsp.utils"
 
-  local ts_client = lsp_utils.get_active_client "typescript"
+  local ts_client = lsp_utils.is_client_active "typescript"
   if ts_client then
     return ts_client.config.root_dir
   end
