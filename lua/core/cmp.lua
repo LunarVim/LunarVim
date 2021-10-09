@@ -172,6 +172,7 @@ M.config = function()
         buffer = 1,
         path = 1,
         nvim_lsp = 0,
+        luasnip = 1,
       },
       duplicates_default = 0,
       format = function(entry, vim_item)
