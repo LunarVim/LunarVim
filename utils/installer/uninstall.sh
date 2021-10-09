@@ -1,5 +1,5 @@
 #!/bin/sh
-USER_BIN_DIR="/usr/local/bin"
+USER_BIN_DIR="$HOME/.local/bin"
 if [ -d "/data/data/com.termux" ]; then
   sudo() {
     eval "$@"

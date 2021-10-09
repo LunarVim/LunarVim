@@ -2,7 +2,7 @@ blank_issues_enabled: true
 
 contact_links:
   - name: Matrix community
-    url: https://matrix.to/#/+atmachine:matrix
+    url: https://matrix.to/#/#atmachine-neovim:matrix.org
     about: Please ask and answer questions on Matrix.
   - name: Discord community
     url: https://discord.gg/Xb9B4Ny

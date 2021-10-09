@@ -42,6 +42,7 @@ local function create_floating_file(location, opts)
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
 
+  vim.api.nvim_win_set_cursor(winnr, { range.start.line + 1, range.start.character })
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
 
   -- Set some autocmds to close the window
@@ -53,9 +54,8 @@ local function create_floating_file(location, opts)
   return bufnr, winnr
 end
 
-local function preview_location_callback(_, method, result)
+local function preview_location_callback(result)
   if result == nil or vim.tbl_isempty(result) then
-    print("peek: No location found: " .. method)
     return nil
   end
 
@@ -71,6 +71,14 @@ local function preview_location_callback(_, method, result)
     M.prev_result = result
     M.floating_buf, M.floating_win = create_floating_file(result, opts)
   end
+end
+
+local function preview_location_callback_old_signature(_, _, result)
+  return preview_location_callback(result)
+end
+
+local function preview_location_callback_new_signature(_, result)
+  return preview_location_callback(result)
 end
 
 function M.open_file()
@@ -128,7 +136,11 @@ function M.Peek(what)
   else
     -- Make a new request and then create the new window in the callback
     local params = vim.lsp.util.make_position_params()
-    local success, _ = pcall(vim.lsp.buf_request, 0, "textDocument/" .. what, params, preview_location_callback)
+    local preview_callback = preview_location_callback_old_signature
+    if vim.fn.has "nvim-0.5.1" > 0 then
+      preview_callback = preview_location_callback_new_signature
+    end
+    local success, _ = pcall(vim.lsp.buf_request, 0, "textDocument/" .. what, params, preview_callback)
     if not success then
       print(
         'peek: Error calling LSP method "textDocument/' .. what .. '". The current language lsp might not support it.'

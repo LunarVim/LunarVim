@@ -72,25 +72,26 @@ M.config = function()
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       b = {
         name = "Buffers",
-        j = { "<cmd>BufferPick<cr>", "jump to buffer" },
-        f = { "<cmd>Telescope buffers<cr>", "Find buffer" },
-        w = { "<cmd>BufferWipeout<cr>", "wipeout buffer" },
+        j = { "<cmd>BufferPick<cr>", "Jump" },
+        f = { "<cmd>Telescope buffers<cr>", "Find" },
+        b = { "<cmd>b#<cr>", "Previous" },
+        w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
         e = {
           "<cmd>BufferCloseAllButCurrent<cr>",
-          "close all but current buffer",
+          "Close all but current",
         },
-        h = { "<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left" },
+        h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
         l = {
           "<cmd>BufferCloseBuffersRight<cr>",
-          "close all BufferLines to the right",
+          "Close all to the right",
         },
         D = {
           "<cmd>BufferOrderByDirectory<cr>",
-          "sort BufferLines automatically by directory",
+          "Sort by directory",
         },
         L = {
           "<cmd>BufferOrderByLanguage<cr>",
-          "sort BufferLines automatically by language",
+          "Sort by language",
         },
       },
       p = {
@@ -130,11 +131,15 @@ M.config = function()
           "<cmd>Telescope git_bcommits<cr>",
           "Checkout commit(for current file)",
         },
+        d = {
+          "<cmd>Gitsigns diffthis HEAD<cr>",
+          "Git Diff",
+        },
       },
 
       l = {
         name = "LSP",
-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+        a = { "<cmd>lua require('core.telescope').code_actions()<cr>", "Code Action" },
         d = {
           "<cmd>Telescope lsp_document_diagnostics<cr>",
           "Document Diagnostics",
@@ -143,9 +148,9 @@ M.config = function()
           "<cmd>Telescope lsp_workspace_diagnostics<cr>",
           "Workspace Diagnostics",
         },
-        -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
+        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
         j = {
           "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Next Diagnostic",
@@ -154,6 +159,7 @@ M.config = function()
           "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
           "Prev Diagnostic",
         },
+        l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
         p = {
           name = "Peek",
           d = { "<cmd>lua require('lsp.peek').Peek('definition')<cr>", "Definition" },
@@ -171,7 +177,7 @@ M.config = function()
       L = {
         name = "+LunarVim",
         c = {
-          "<cmd>edit ~/.config/lvim/config.lua<cr>",
+          "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
         f = {
@@ -187,23 +193,32 @@ M.config = function()
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
         },
+        I = {
+          "<cmd>lua require('core.telescope').view_lunarvim_changelog()<cr>",
+          "View LunarVim's changelog",
+        },
         l = {
           name = "+logs",
           d = {
-            "<cmd>lua require('core.terminal').toggle_log_view('lunarvim')<cr>",
+            "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>",
             "view default log",
           },
-          D = { "<cmd>edit ~/.cache/nvim/lunarvim.log<cr>", "Open the default logfile" },
-          n = { "<cmd>lua require('core.terminal').toggle_log_view('lsp')<cr>", "view lsp log" },
-          N = { "<cmd>edit ~/.cache/nvim/log<cr>", "Open the Neovim logfile" },
-          l = { "<cmd>lua require('core.terminal').toggle_log_view('nvim')<cr>", "view neovim log" },
-          L = { "<cmd>edit ~/.cache/nvim/lsp.log<cr>", "Open the LSP logfile" },
+          D = { "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>", "Open the default logfile" },
+          l = { "<cmd>lua require('core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
+          L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
+          n = {
+            "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
+            "view neovim log",
+          },
+          N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           p = {
             "<cmd>lua require('core.terminal').toggle_log_view('packer.nvim')<cr>",
             "view packer log",
           },
-          P = { "<cmd>edit ~/.cache/nvim/packer.nvim.log<cr>", "Open the Packer logfile" },
+          P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
         },
+        r = { "<cmd>lua require('utils').reload_lv_config()<cr>", "Reload configurations" },
+        u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
       },
       s = {
         name = "Search",

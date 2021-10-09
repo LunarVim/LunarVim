@@ -4,11 +4,13 @@ function M.config()
   lvim.builtin.autopairs = {
     active = true,
     on_config_done = nil,
-    ---@usage  map <CR> on insert mode
-    map_cr = true,
     ---@usage auto insert after select function or method item
-    -- NOTE: This should be wrapped into a function so that it is re-evaluated when opening new files
-    map_complete = vim.bo.filetype ~= "tex",
+    map_complete = true,
+    ---@usage  -- modifies the function or method delimiter by filetypes
+    map_char = {
+      all = "(",
+      tex = "{",
+    },
     ---@usage check treesitter
     check_ts = true,
     ts_config = {
@@ -20,35 +22,45 @@ function M.config()
 end
 
 M.setup = function()
-  -- skip it, if you use another global object
-  _G.MUtils = {}
   local autopairs = require "nvim-autopairs"
   local Rule = require "nvim-autopairs.rule"
-
-  vim.g.completion_confirm_key = ""
-  MUtils.completion_confirm = function()
-    if vim.fn.pumvisible() ~= 0 then
-      if vim.fn.complete_info()["selected"] ~= -1 then
-        return vim.fn["compe#confirm"](autopairs.esc "<cr>")
-      else
-        return autopairs.esc "<cr>"
-      end
-    else
-      return autopairs.autopairs_cr()
-    end
-  end
-
-  if package.loaded["compe"] then
-    require("nvim-autopairs.completion.compe").setup {
-      map_cr = lvim.builtin.autopairs.map_cr,
-      map_complete = lvim.builtin.autopairs.map_complete,
-    }
-  end
+  local cond = require "nvim-autopairs.conds"
 
   autopairs.setup {
     check_ts = lvim.builtin.autopairs.check_ts,
     ts_config = lvim.builtin.autopairs.ts_config,
   }
+
+  -- vim.g.completion_confirm_key = ""
+
+  autopairs.add_rule(Rule("$$", "$$", "tex"))
+  autopairs.add_rules {
+    Rule("$", "$", { "tex", "latex" }) -- don't add a pair if the next character is %
+      :with_pair(cond.not_after_regex_check "%%") -- don't add a pair if  the previous character is xxx
+      :with_pair(cond.not_before_regex_check("xxx", 3)) -- don't move right when repeat character
+      :with_move(cond.none()) -- don't delete if the next character is xx
+      :with_del(cond.not_after_regex_check "xx") -- disable  add newline when press <cr>
+      :with_cr(cond.none()),
+  }
+  autopairs.add_rules {
+    Rule("$$", "$$", "tex"):with_pair(function(opts)
+      print(vim.inspect(opts))
+      if opts.line == "aa $$" then
+        -- don't add pair on that line
+        return false
+      end
+    end),
+  }
+
+  if package.loaded["cmp"] then
+    require("nvim-autopairs.completion.cmp").setup {
+      map_cr = false,
+      map_complete = lvim.builtin.autopairs.map_complete,
+      map_char = lvim.builtin.autopairs.map_char,
+    }
+    -- we map CR explicitly in cmp.lua but we still need to setup the autopairs CR keymap
+    vim.api.nvim_set_keymap("i", "<CR>", "v:lua.MPairs.autopairs_cr()", { expr = true, noremap = true })
+  end
 
   require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
 

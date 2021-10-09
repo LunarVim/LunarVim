@@ -90,16 +90,16 @@ function utils.reload_lv_config()
   config:load()
 
   require("keymappings").setup() -- this should be done before loading the plugins
-  vim.cmd "source ~/.local/share/lunarvim/lvim/lua/plugins.lua"
+  vim.cmd("source " .. utils.join_paths(get_runtime_dir(), "lvim", "lua", "plugins.lua"))
   local plugins = require "plugins"
-  local plugin_loader = require("plugin-loader").init()
   utils.toggle_autoformat()
+  local plugin_loader = require "plugin-loader"
+  plugin_loader:cache_reset()
   plugin_loader:load { plugins, lvim.plugins }
-  vim.cmd ":PackerCompile"
   vim.cmd ":PackerInstall"
+  vim.cmd ":PackerCompile"
   -- vim.cmd ":PackerClean"
-  local null_ls = require "lsp.null-ls"
-  null_ls.setup(vim.bo.filetype, { force_reload = true })
+  require("lsp").setup()
   Log:info "Reloaded configuration"
 end
 
@@ -119,12 +119,117 @@ function utils.gsub_args(args)
   return args
 end
 
+--- Returns a table with the default values that are missing.
+--- either paramter can be empty.
+--@param config (table) table containing entries that take priority over defaults
+--@param default_config (table) table contatining default values if found
+function utils.apply_defaults(config, default_config)
+  config = config or {}
+  default_config = default_config or {}
+  local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
+  new_config = vim.tbl_deep_extend("keep", new_config, default_config)
+  return new_config
+end
+
 --- Checks whether a given path exists and is a file.
---@param filename (string) path to check
+--@param path (string) path to check
 --@returns (bool)
-function utils.is_file(filename)
-  local stat = uv.fs_stat(filename)
+function utils.is_file(path)
+  local stat = uv.fs_stat(path)
   return stat and stat.type == "file" or false
+end
+
+--- Checks whether a given path exists and is a directory
+--@param path (string) path to check
+--@returns (bool)
+function utils.is_directory(path)
+  local stat = uv.fs_stat(path)
+  return stat and stat.type == "directory" or false
+end
+
+function utils.write_file(path, txt, flag)
+  uv.fs_open(path, flag, 438, function(open_err, fd)
+    assert(not open_err, open_err)
+    uv.fs_write(fd, txt, -1, function(write_err)
+      assert(not write_err, write_err)
+      uv.fs_close(fd, function(close_err)
+        assert(not close_err, close_err)
+      end)
+    end)
+  end)
+end
+
+utils.join_paths = _G.join_paths
+
+function utils.write_file(path, txt, flag)
+  uv.fs_open(path, flag, 438, function(open_err, fd)
+    assert(not open_err, open_err)
+    uv.fs_write(fd, txt, -1, function(write_err)
+      assert(not write_err, write_err)
+      uv.fs_close(fd, function(close_err)
+        assert(not close_err, close_err)
+      end)
+    end)
+  end)
+end
+
+function utils.debounce(ms, fn)
+  local timer = vim.loop.new_timer()
+  return function(...)
+    local argv = { ... }
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule_wrap(fn)(unpack(argv))
+    end)
+  end
+end
+
+function utils.search_file(file, args)
+  local Job = require "plenary.job"
+  local stderr = {}
+  local stdout, ret = Job
+    :new({
+      command = "grep",
+      args = { args, file },
+      cwd = get_cache_dir(),
+      on_stderr = function(_, data)
+        table.insert(stderr, data)
+      end,
+    })
+    :sync()
+  return stdout, ret, stderr
+end
+
+function utils.file_contains(file, query)
+  local stdout, ret, stderr = utils.search_file(file, query)
+  if ret == 0 then
+    return true
+  end
+  if not vim.tbl_isempty(stderr) then
+    error(vim.inspect(stderr))
+  end
+  if not vim.tbl_isempty(stdout) then
+    error(vim.inspect(stdout))
+  end
+  return false
+end
+
+function utils.log_contains(query)
+  local logfile = require("core.log"):get_path()
+  local stdout, ret, stderr = utils.search_file(logfile, query)
+  if ret == 0 then
+    return true
+  end
+  if not vim.tbl_isempty(stderr) then
+    error(vim.inspect(stderr))
+  end
+  if not vim.tbl_isempty(stdout) then
+    error(vim.inspect(stdout))
+  end
+  if not vim.tbl_isempty(stderr) then
+    error(vim.inspect(stderr))
+  end
+  return false
 end
 
 return utils

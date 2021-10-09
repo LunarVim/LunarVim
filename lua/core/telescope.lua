@@ -1,5 +1,7 @@
 local M = {}
 
+local utils = require "utils"
+
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
   lvim.builtin.telescope = {
@@ -24,7 +26,6 @@ function M.config()
       layout_strategy = "horizontal",
       layout_config = {
         width = 0.75,
-        prompt_position = "bottom",
         preview_cutoff = 120,
         horizontal = { mirror = false },
         vertical = { mirror = false },
@@ -87,16 +88,11 @@ function M.find_lunarvim_files(opts)
   opts = opts or {}
   local themes = require "telescope.themes"
   local theme_opts = themes.get_ivy {
-    previewer = false,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 5,
-      width = 0.5,
-    },
-    prompt = ">> ",
+    prompt_prefix = ">> ",
     prompt_title = "~ LunarVim files ~",
-    cwd = CONFIG_PATH,
+    cwd = utils.join_paths(get_runtime_dir(), "lvim"),
     find_command = { "git", "ls-files" },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
@@ -109,12 +105,77 @@ function M.grep_lunarvim_files(opts)
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
-    prompt = ">> ",
+    prompt_prefix = ">> ",
     prompt_title = "~ search LunarVim ~",
-    cwd = CONFIG_PATH,
+    cwd = utils.join_paths(get_runtime_dir(), "lvim"),
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   require("telescope.builtin").live_grep(opts)
+end
+
+function M.view_lunarvim_changelog()
+  local finders = require "telescope.finders"
+  local make_entry = require "telescope.make_entry"
+  local pickers = require "telescope.pickers"
+  local previewers = require "telescope.previewers"
+  local actions = require "telescope.actions"
+  local opts = {}
+
+  local conf = require("telescope.config").values
+  opts.entry_maker = make_entry.gen_from_git_commits(opts)
+
+  pickers.new(opts, {
+    prompt_title = "LunarVim changelog",
+
+    finder = finders.new_oneshot_job(
+      vim.tbl_flatten {
+        "git",
+        "log",
+        "--pretty=oneline",
+        "--abbrev-commit",
+        "--",
+        ".",
+      },
+      opts
+    ),
+    previewer = {
+      previewers.git_commit_diff_to_parent.new(opts),
+      previewers.git_commit_diff_to_head.new(opts),
+      previewers.git_commit_diff_as_was.new(opts),
+      previewers.git_commit_message.new(opts),
+    },
+
+    --TODO: consider opening a diff view when pressing enter
+    attach_mappings = function(_, map)
+      map("i", "<enter>", actions._close)
+      map("n", "<enter>", actions._close)
+      map("i", "<esc>", actions._close)
+      map("n", "<esc>", actions._close)
+      map("n", "q", actions._close)
+      return true
+    end,
+    sorter = conf.file_sorter(opts),
+  }):find()
+end
+
+function M.code_actions()
+  local opts = {
+    winblend = 15,
+    layout_config = {
+      prompt_position = "top",
+      width = 80,
+      height = 12,
+    },
+    borderchars = {
+      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    },
+    border = {},
+    previewer = false,
+    shorten_path = false,
+  }
+  require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_dropdown(opts))
 end
 
 function M.setup()

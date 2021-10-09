@@ -4,9 +4,6 @@ stds.nvim = {
   globals = {
     "lvim",
     vim = { fields = { "g" } },
-    "CONFIG_PATH",
-    "CACHE_PATH",
-    "DATA_PATH",
     "TERMINAL",
     "USER",
     "C",
@@ -21,10 +18,17 @@ stds.nvim = {
     "jit",
     "os",
     "vim",
+    "join_paths",
+    "get_runtime_dir",
+    "get_config_dir",
+    "get_cache_dir",
+    "get_version",
     -- vim = { fields = { "cmd", "api", "fn", "o" } },
   },
 }
 std = "lua51+nvim"
+
+files["tests/*_spec.lua"].std = "lua51+nvim+busted"
 
 -- Don't report unused self arguments of methods.
 self = false

@@ -1,7 +1,7 @@
 name: install
 on:
   push:
-    branches: "**"
+    branches: ["**"]
   pull_request:
     branches:
       - "master"
@@ -23,31 +23,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # sha256sum is not available by default
-      - name: Installl dependencies for OSX
-        if: matrix.os == 'osx'
-        run: |
-          echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-          brew install coreutils
-
       - name: Install neovim binary
         run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
           bash ./utils/installer/install-neovim-from-release
 
       - name: Install LunarVim
         timeout-minutes: 4
         run: |
-          mkdir -p "$HOME"/.local/share/lunarvim/lvim
-          mkdir -p "$HOME"/.config/lvim
-          ln -s "$PWD"/* "$HOME"/.local/share/lunarvim/lvim/.
-          bash ./utils/installer/install.sh
+          ./utils/installer/install.sh --local --no-install-dependencies
 
       - name: Test LunarVim PackerCompile
         run: if "$HOME"/.local/bin/lvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
       - name: Test LunarVim Health
         run: if "$HOME"/.local/bin/lvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+
+      - name: Run unit-tests
+        # NOTE: make sure to adjust the timeout if you start adding a lot of tests
+        timeout-minutes: 4
+        run: make test
 #   freebsd:
 #     runs-on: macos-latest
 #     if: github.event.pull_request.draft == false
