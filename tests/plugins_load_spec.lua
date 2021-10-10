@@ -1,9 +1,11 @@
 local a = require "plenary.async_lib.tests"
 
 a.describe("plugin-loader", function()
+  local plugins = require "lvim.plugins"
+  local loader = require "lvim.plugin-loader"
+
   a.it("should be able to load default packages without errors", function()
-    local plugins = require "lvim.plugins"
-    require("lvim.plugin-loader"):load { plugins, lvim.plugins }
+    loader:load { plugins, lvim.plugins }
 
     -- TODO: maybe there's a way to avoid hard-coding the names of the modules?
     local startup_plugins = {
@@ -16,8 +18,7 @@ a.describe("plugin-loader", function()
   end)
 
   a.it("should be able to load lsp packages without errors", function()
-    local plugins = require "lvim.plugins"
-    require("lvim.plugin-loader"):load { plugins, lvim.plugins }
+    loader:load { plugins, lvim.plugins }
 
     require("lvim.lsp").setup()
 

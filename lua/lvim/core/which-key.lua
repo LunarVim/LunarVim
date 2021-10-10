@@ -203,7 +203,10 @@ M.config = function()
             "<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",
             "view default log",
           },
-          D = { "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>", "Open the default logfile" },
+          D = {
+            "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>",
+            "Open the default logfile",
+          },
           l = { "<cmd>lua require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
           L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
           n = {
