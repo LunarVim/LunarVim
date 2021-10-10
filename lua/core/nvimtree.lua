@@ -12,7 +12,15 @@ function M.config()
       update_focused_file = {
         enable = true,
       },
-      lsp_diagnostics = true,
+      diagnostics = {
+        enable = true,
+        icons = {
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
+        },
+      },
       view = {
         width = 30,
         side = "left",
