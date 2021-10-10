@@ -32,6 +32,6 @@ a.describe("config-loader", function()
     end
     local err = xpcall(config:reload(), error_handler)
     assert.falsy(err)
-    assert.equal(vim.opt.undodir:get()[1], vim.fn.stdpath "cache" .. "/undo")
+    assert.equal(vim.opt.undodir:get()[1], get_cache_dir() .. "/undo")
   end)
 end)

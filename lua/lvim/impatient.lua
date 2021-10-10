@@ -121,12 +121,12 @@ end
 function M.enable_profile()
   M.profile = {}
   M.print_profile = function()
-    M.profile["impatient"] = {
+    M.profile["lvim.impatient"] = {
       resolve = 0,
       load = impatient_dur,
       loader = "standard",
     }
-    require("impatient.profile").print_profile(M.profile)
+    require("lvim.impatient.profile").print_profile(M.profile)
   end
   vim.cmd [[command! LuaCacheProfile lua _G.__luacache.print_profile()]]
 end
