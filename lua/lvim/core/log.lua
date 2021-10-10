@@ -80,7 +80,7 @@ function Log:add_entry(level, msg, event)
     self.__handle:log(level, msg, event)
   end
 
-  local logger = self.init()
+  local logger = self:init()
   if not logger then
     return
   end
