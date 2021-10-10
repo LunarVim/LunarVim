@@ -23,18 +23,18 @@ function M.config()
       },
     },
     show_icons = {
-      git = true,
-      folders = true,
-      files = true,
-      folder_arrows = true,
+      git = 1,
+      folders = 1,
+      files = 1,
+      folder_arrows = 1,
       tree_width = 30,
     },
     ignore = { ".git", "node_modules", ".cache" },
-    quit_on_open = false,
-    hide_dotfiles = true,
-    git_hl = true,
+    quit_on_open = 0,
+    hide_dotfiles = 1,
+    git_hl = 1,
     root_folder_modifier = ":t",
-    allow_resize = true,
+    allow_resize = 1,
     auto_ignore_ft = { "startify", "dashboard" },
     icons = {
       default = "",
@@ -73,7 +73,7 @@ function M.setup()
 
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then
-    lvim.builtin.nvimtree.respect_buf_cwd = true
+    lvim.builtin.nvimtree.respect_buf_cwd = 1
     lvim.builtin.nvimtree.setup.update_cwd = true
     lvim.builtin.nvimtree.setup.disable_netrw = false
     lvim.builtin.nvimtree.setup.hijack_netrw = false
