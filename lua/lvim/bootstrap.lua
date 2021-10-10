@@ -99,7 +99,7 @@ function M:init()
     vim.cmd("set spellfile=" .. join_paths(self.config_dir, "spell", "en.utf-8.add"))
   end
 
-  vim.fn.mkdir(vim.fn.stdpath "cache", "p")
+  vim.fn.mkdir(get_cache_dir(), "p")
 
   -- FIXME: currently unreliable in unit-tests
   if not os.getenv "LVIM_TEST_ENV" then
