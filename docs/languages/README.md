@@ -119,6 +119,18 @@ formatters.setup({{exe = "prettier", filetypes = {"javascript", "json"} }})
 
 _Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
 
+This method will not disable the formatting capability of the respective language server. Thus, you might start getting prompted to select it as a formatter. You need to disable this capability manually to avoid that.
+
+```lua
+-- here's an example to disable formatting in "tsserver" and "jsonls"
+lvim.lsp.on_attach_callback = function(client, _)
+  if client.name == "tsserver" or client.name == "jsonls" then
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+end
+```
+
 ### Formatting on save
 
 This is controlled by an auto-command and is to true by default.
