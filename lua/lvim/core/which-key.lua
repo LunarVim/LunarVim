@@ -139,7 +139,7 @@ M.config = function()
 
       l = {
         name = "LSP",
-        a = { "<cmd>lua require('core.telescope').code_actions()<cr>", "Code Action" },
+        a = { "<cmd>lua require('lvim.core.telescope').code_actions()<cr>", "Code Action" },
         d = {
           "<cmd>Telescope lsp_document_diagnostics<cr>",
           "Document Diagnostics",
