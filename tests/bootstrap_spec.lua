@@ -8,7 +8,7 @@ a.describe("initial start", function()
 
   a.it("shoud be able to detect test environment", function()
     assert.truthy(os.getenv "LVIM_TEST_ENV")
-    assert.falsy(package.loaded["impatient"])
+    assert.falsy(package.loaded["lvim.impatient"])
   end)
 
   a.it("should not be reading default neovim directories in the home directoies", function()
