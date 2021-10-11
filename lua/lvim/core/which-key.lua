@@ -116,12 +116,12 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = conditional({ ":CommentToggle<CR>", "Comment" }, has_comment),
+      ["/"] = conditional({ "<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<CR>", "Comment" }, has_comment),
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
-      ["/"] = conditional({ "<cmd>CommentToggle<CR>", "Comment" }, has_comment),
+      ["/"] = conditional({ "<cmd>lua require('Comment').toggle()<CR>", "Comment" }, has_comment),
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
       ["f"] = conditional({ "<cmd>Telescope find_files<CR>", "Find File" }, has_telescope),
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },

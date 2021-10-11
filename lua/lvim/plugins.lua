@@ -89,8 +89,10 @@ return {
   },
 
   -- Whichkey
+  -- TODO: change back to folke/which-key.nvim after folke got back
   {
-    "folke/which-key.nvim",
+    "abzcoding/which-key.nvim",
+    branch = "fix/neovim-6-position",
     config = function()
       require("lvim.core.which-key").setup()
     end,
@@ -100,7 +102,7 @@ return {
 
   -- Comments
   {
-    "terrortylor/nvim-comment",
+    "numToStr/Comment.nvim",
     event = "BufRead",
     config = function()
       require("lvim.core.comment").setup()
