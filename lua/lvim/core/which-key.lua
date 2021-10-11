@@ -242,11 +242,14 @@ M.config = function()
             "<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",
             "view default log",
           }, has_terminal),
-          D = { "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>", "Open the default logfile" },
-          n = conditional(
-            { "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>", "view neovim log" },
-            has_terminal
-          ),
+          D = {
+            "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>",
+            "Open the default logfile",
+          },
+          n = conditional({
+            "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
+            "view neovim log",
+          }, has_terminal),
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           l = conditional(
             { "<cmd>lua require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
