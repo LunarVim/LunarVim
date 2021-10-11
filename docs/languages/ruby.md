@@ -2,9 +2,29 @@
 
 ## Solargraph
 
-The recommended way to install the language server for ruby is to do it locally, per project by either including it in your Gemfile or `gem install solargraph`.  
+### Install Syntax Highlighting
+```vim
+:TSInstall ruby
+```
 
-`LspInstall ruby` works for basic cases but will fail silently for more complex projects.  This is a known [issue](https://github.com/LunarVim/LunarVim/issues/945)
+### Install Language Server
+```vim
+:LspInstall solargraph
+```
+Project root is recognized by having one of the following files/folders in the root directory of the project: `Gemfile` , `.git`. 
+
+### Formatting
+
+Solargraph should automatically detect and use `rubocop` for formatting.  To enable format on save add the following to your config
+```lua
+lvim.format_on_save = true
+```
+
+### Older versions of LunarVim
+
+Prior to commit d01ba08, the above did not work.  If you have a commit older than d01ba08, the recommended way to install the language server for ruby is to do it locally, per project by either including it in your Gemfile or `gem install solargraph`.  
+
+`LspInstall solargraph` works for basic cases but will fail silently for more complex projects.  This was an [issue](https://github.com/LunarVim/LunarVim/issues/945) with older builds of LunarVim
 
 Also add the following to your `config.lua`
 

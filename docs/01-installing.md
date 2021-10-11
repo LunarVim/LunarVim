@@ -30,16 +30,7 @@ LVBRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunar
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 ```
 
-## Troubleshooting installation problems
-
-If you encounter problems with the installation check the following:
-
-1. Open LunarVim with `~/.local/bin/lvim` and run `:LvimCacheReset` then run `:PackerSync`.  This will resolve most common errors. 
-2. Make sure neovim was compiled with luajit. The output of version information `nvim -v` should include a line for: `LuaJIT`.
-3. Make sure all the dependencies listed in [Manual Install](#manual-install) are actually installed on your system.
-4. If you're upgrading your install, sometimes an old packer compiled file can cause errors at runtime. Remove the folder. `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`
-5. If the result of `which lvim` is `/usr/local/bin/lvim`, remove the old launcher. `sudo rm /usr/local/bin/lvim`
-6. If the result of `which lvim` is that the command is not found.  Add `lvim` to your [path](.02-after-install.md#add-lvim-to-path)
+Make sure to check the [troubleshooting](./troubleshooting/README.md) section if you encounter any problems. 
 
 
 ## Tips when running in China
