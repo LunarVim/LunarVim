@@ -12,24 +12,6 @@ Log.levels = {
 
 vim.tbl_add_reverse_lookup(Log.levels)
 
-function Log:config()
-  return {
-    ---@usage can be { "trace", "debug", "info", "warn", "error", "fatal" },
-    level = "warn",
-    viewer = {
-      ---@usage this will fallback on "less +F" if not found
-      cmd = "lnav",
-      layout_config = {
-        ---@usage direction = 'vertical' | 'horizontal' | 'window' | 'float',
-        direction = "horizontal",
-        open_mapping = "",
-        size = 40,
-        float_opts = {},
-      },
-    },
-  }
-end
-
 function Log:init()
   local status_ok, structlog = pcall(require, "structlog")
   if not status_ok then

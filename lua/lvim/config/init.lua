@@ -33,8 +33,6 @@ function M:init()
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
-  lvim.log = require("lvim.core.log"):config()
-
   local supported_languages = {
     "asm",
     "bash",
