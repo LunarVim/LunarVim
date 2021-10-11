@@ -61,7 +61,7 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = { "<ESC><CMD>lua ___opfunc_gc(vim.fn.visualmode())<CR>", "Comment" },
+      ["/"] = { "<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<CR>", "Comment" },
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
