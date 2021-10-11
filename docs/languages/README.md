@@ -1,65 +1,166 @@
 # Overview
 
-LunarVim strives to have basic LSP, linting, formatting and syntax support for all major languages.
+LunarVim strives to have support for all major languages. The is made possible by utilizing some of the great plugins in Neovim's ecosystem. Such plugins are [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), for LSP support, and [Null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) to provide support for handling external formatters, such as [prettier](https://github.com/prettier/prettier) and [eslint](https://github.com/eslint/eslint). Furthermore, LunarVim integrates with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) to provider rich syntax highlighting and other language parsing magic.
 
-If your language is not supported please do the following: 
+If your language is not supported please check the following links and file a ticket so we can
 
 - Check if LSP support is available in the lspconfig [repo](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
-
 - Check if your linter or formatter is available in the null-ls [repo](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md)
-
 - Check if your syntax is supported in the treesitter [repo](https://github.com/nvim-treesitter/nvim-treesitter)
 
-If there is support for your language please file an issue with the LunarVim repo
+## At a glance
 
-If there is not file a ticket with one of the above repos
+You can use the following commands to check some information about any language servers that you have configured.
 
-## LunarVim Info
+- `:LvimInfo`
 
-Check LSP info, linter and formatter status for the currently opened file buffer
+  - Contains information about all the servers attached to the buffer you are editing and their current capabilities, such as formatting and go-to definition support. It also includes information related to any linters and formatters that are, or can be, configured.
+  - keybind: `<leader>Li`
+
+- `:LspInfo`
+
+  - Contains basic information about all the servers that are running.
+  - keybind: `<leader>li`
+
+- `:LspInstallInfo`
+
+  - Contains information about all the servers that you can manage with [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer).
+  - keybind: `<leader>lI`
+
+## LSP support
+
+### Automatic server installation
+
+By default, most supported language servers ^[Only TSServer is configured by default for JS-family languages] will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
+
+- configuration option
 
 ```lua
-:LvimInfo
+lvim.lsp.automatic_servers_installation = true
 ```
 
-## LSP
+Please refer to [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) to see the updated full list of currently available servers.
+
+### Installing and updating a server
 
 To install a supported language server:
 
-``` md
+```md
 :LspInstall `<your_language_server>`
 ```
 
-## Formatting 
+You can also toggle `<:LspInstallInfo>` and interactively choose which servers to install.
 
-Formatting is handled by Null-ls. It is off by default. Not all formatters are supported. For a list of supported formatters and linters [look here](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#available-sources). Formatters and linters are not installed with LunarVim and therefore they must be installed separately.
+### Server configuration
 
-If you want to enable formatting for javascript for example, install the formatter and then add the following to your config.lua
+To set a configuration for your language server:
+
+```vim
+:NlspConfig <TAB>
+:NlspConfig <NAME_OF_LANGUAGE_SERVER>
+```
+
+This will create a file in `~/.config/lvim/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
+
+_Note: Make sure to install `jsonls` for autocompletion._
+
+### Overriding the default configuration
+
+Add this to you `config.lua`
+
+```lua
+lvim.lsp.override = { "pyright" }
+```
+
+Now you can either set it up manually, or replace only a subset of LunarVim's default options
+
+```lua
+local opts = {} -- check the lspconfig documentation for a list of all possible options
+require("lvim.lsp.manager").setup("pyright", opts)
+```
+
+### Blacklisting a server
+
+If you want to exclude a certain server while maintaining the auto-installation functionality then you can choose to override it. This will prevent it from being re-installed again and will also mean that you have to configure it manually.
+
+## Formatting
+
+To enable formatting for `javascript` for example, add the following to your `config.lua`
+
 ```lua
 lvim.lang.javascript.formatters = { { exe = "prettier" } }
 ```
 
-It's also possible to add custom arguments to the formatters table.
-Note that you'll need to split the arguments into several quoted strings if they are separated by space.
-For example `--print-with 100` becomes
+_Note: Formatters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
+
+### Custom arguments
+
+It's also possible to add custom arguments for each formatter.
+
 ```lua
 lvim.lang.javascript.formatters = { { exe = "prettier", args = { "--print-with", "100" } } }
 
 ```
-in the formatter configuration.
 
-If the name of your formatter or linter includes a hyphen `-`, replace it with an underscore `_`. Dashes are not valid identifiers in lua.
+_Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
 
-To enable format on save, add the following to your `~/.config/lvim/config.lua`
+### Multi formatters per language
 
-``` lua
+```lua
+lvim.lang.python.formatters = { { exe = "black" }, { exe = "isort" } }
+```
+
+### Multi languages per formatter
+
+```lua
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup({{exe = "prettier", filetypes = {"javascript", "json"} }})
+```
+
+_Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
+
+### Formatting on save
+
+This is controlled by an auto-command and is to true by default.
+
+- configuration option
+
+```lua
 lvim.format_on_save = true
 ```
 
 ## Linting
-Linting is also handled by Null-ls. To set a linter for your language, install the linter and then enable the linter with configuration:
 
-``` lua
-lvim.lang.javascript.linters = { { exe = "eslint_d" } }
+To enable a linter for `bash` for example, add the following to your `config.lua`
+
+```lua
+lvim.lang.sh.linters = { { exe = "shellcheck" } }
 ```
 
+_Note: linters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
+
+### Custom arguments
+
+It's also possible to add custom arguments for each linter.
+
+```lua
+lvim.lang.sh.linters = { { exe = "shellcheck", args = { "--sverity", "error" } } }
+
+```
+
+_Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
+
+### Multi formatters per language
+
+```lua
+lvim.lang.python.linters = { { exe = "flake8" }, { exe = "pylint" } }
+```
+
+### Multi languages per formatter
+
+```lua
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup({{exe = "eslint", filetypes = {"javascript", "typescript", "vue"} }})
+```
+
+_Note: removing the `filetypes` argument will allow the linter to attach to all the default filetypes it supports._
