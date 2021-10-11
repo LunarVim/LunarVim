@@ -102,7 +102,7 @@ return {
 
   -- Comments
   {
-    "terrortylor/nvim-comment",
+    "numToStr/Comment.nvim",
     event = "BufRead",
     config = function()
       require("lvim.core.comment").setup()
