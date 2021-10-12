@@ -51,6 +51,25 @@ To install a supported language server:
 
 You can also toggle `<:LspInstallInfo>` and interactively choose which servers to install.
 
+## LSP setup
+
+
+LunarVim uses [../configuration/07-ftplugin.md] to enable lazy-loading the setup of a language server. A template generator is used to create `ftplugin` files and populate them with the setup call.
+- configuration option
+
+```lua
+lvim.lsp.templates_dir = join_paths(get_runtime_dir(), "after", "ftplugin")
+```
+
+A typical setup call with default arguments
+
+```lua
+-- edit this file by running `:lua vim.cmd("edit " .. lvim.lsp.templates_dir .. "/lua.lua"))`
+require("lvim.lsp.manager").setup("sumneko_lua")
+```
+
+_Tip: You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files"_
+
 ### Server configuration
 
 To set a configuration for your language server:
@@ -60,7 +79,7 @@ To set a configuration for your language server:
 :NlspConfig <NAME_OF_LANGUAGE_SERVER>
 ```
 
-This will create a file in `~/.config/lvim/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
+This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
 
 _Note: Make sure to install `jsonls` for autocompletion._
 
@@ -108,6 +127,21 @@ _Note: remember that arguments cannot contains spaces, options such as `--line-w
 
 ```lua
 lvim.lang.python.formatters = { { exe = "black" }, { exe = "isort" } }
+```
+
+### Lazy-loading the formatter setup
+
+By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
+then you can use [../configuration/07-ftplugin.md] for this purpose.
+
+Let's take `markdown` as an example:
+
+1. create a file called `markdown.lua` in the `$LUNARVIM_CONFIG_DIR/ftplugin` folder
+2. add the following snippet
+
+```lua
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup({{exe = "prettier", filetypes = {"markdown"} }})
 ```
 
 ### Multi languages per formatter
@@ -176,3 +210,19 @@ linters.setup({{exe = "eslint", filetypes = {"javascript", "typescript", "vue"} 
 ```
 
 _Note: removing the `filetypes` argument will allow the linter to attach to all the default filetypes it supports._
+
+### Lazy-loading the linter setup
+
+By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
+then you can use [../configuration/07-ftplugin.md] for this purpose.
+
+Let's take `typescript` as an example:
+
+1. create a file called `typescript.lua` in the `$LUNARVIM_CONFIG_DIR/ftplugin` folder
+2. add the following snippet
+
+```lua
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup({{exe = "eslint_d", filetypes = { "typescript" } }})
+```
+
