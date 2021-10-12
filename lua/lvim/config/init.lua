@@ -152,10 +152,10 @@ end
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
   config_path = config_path or self.get_user_config_path()
-  local ok, _ = pcall(dofile, config_path)
+  local ok, err = pcall(dofile, config_path)
   if not ok then
     if utils.is_file(user_config_file) then
-      Log:warn("Invalid configuration: " .. config_path)
+      Log:warn("Invalid configuration: " .. err)
     else
       Log:warn(string.format("Unable to find configuration file [%s]", config_path))
     end
