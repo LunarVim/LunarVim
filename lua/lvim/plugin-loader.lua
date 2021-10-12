@@ -43,7 +43,7 @@ function plugin_loader:cache_clear()
 end
 
 function plugin_loader:cache_reset()
-  self.cache_clear()
+  plugin_loader:cache_clear()
   require("packer").compile()
   if utils.is_file(compile_path) then
     Log:debug "generated packer_compiled.lua"

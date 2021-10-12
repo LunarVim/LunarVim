@@ -98,7 +98,7 @@ M.config = function()
         name = "Packer",
         c = { "<cmd>PackerCompile<cr>", "Compile" },
         i = { "<cmd>PackerInstall<cr>", "Install" },
-        r = { "<cmd>lua require('lvim.utils').reload_lv_config()<cr>", "Reload" },
+        r = { "<cmd>lua require('lvim.plugin-loader').cache_reset()<cr>", "Re-compile" },
         s = { "<cmd>PackerSync<cr>", "Sync" },
         S = { "<cmd>PackerStatus<cr>", "Status" },
         u = { "<cmd>PackerUpdate<cr>", "Update" },
@@ -220,7 +220,7 @@ M.config = function()
           },
           P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
         },
-        r = { "<cmd>lua require('lvim.utils').reload_lv_config()<cr>", "Reload configurations" },
+        r = { "<cmd>LvimReload<cr>", "Reload LunarVim's configuration" },
         u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
       },
       s = {
