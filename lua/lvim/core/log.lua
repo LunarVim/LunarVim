@@ -12,7 +12,7 @@ function Log:add_entry(msg, level)
   end
   local status_ok, plenary = pcall(require, "plenary")
   if status_ok then
-    local default_opts = { plugin = "lunarvim", level = lvim.log.level }
+    local default_opts = { plugin = "lunarvim", level = lvim.log.level, info_level = 4 }
     local handle = plenary.log.new(default_opts)
     handle[level:lower()](msg)
     self.__handle = handle
