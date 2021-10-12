@@ -181,11 +181,11 @@ M.config = function()
           "Edit config.lua",
         },
         f = {
-          "<cmd>lua require('lvim.core.telescope').find_lunarvim_files()<cr>",
+          "<cmd>lua require('lvim.core.telescope.custom-finders').find_lunarvim_files()<cr>",
           "Find LunarVim files",
         },
         g = {
-          "<cmd>lua require('lvim.core.telescope').grep_lunarvim_files()<cr>",
+          "<cmd>lua require('lvim.core.telescope.custom-finders').grep_lunarvim_files()<cr>",
           "Grep LunarVim files",
         },
         k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
@@ -194,7 +194,7 @@ M.config = function()
           "Toggle LunarVim Info",
         },
         I = {
-          "<cmd>lua require('lvim.core.telescope').view_lunarvim_changelog()<cr>",
+          "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
           "View LunarVim's changelog",
         },
         l = {
