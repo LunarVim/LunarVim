@@ -31,7 +31,7 @@ You can use the following commands to check some information about any language 
 
 ### Automatic server installation
 
-By default, most supported language servers ^[Only TSServer is configured by default for JS-family languages] will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
+By default, most supported language servers [^1] will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
 
 - configuration option
 
@@ -40,6 +40,8 @@ lvim.lsp.automatic_servers_installation = true
 ```
 
 Please refer to [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) to see the updated full list of currently available servers.
+
+[^1]: Please note that only `TSServer` is configured by default for JS-family languages, and when a language has more than one server available, then the most popular is usually chosen.
 
 ### Installing and updating a server
 
@@ -53,8 +55,8 @@ You can also toggle `<:LspInstallInfo>` and interactively choose which servers t
 
 ## LSP setup
 
+LunarVim uses [filetype plugins](../configuration/07-ftplugin.md) to enable lazy-loading the setup of a language server. A template generator is used to create `ftplugin` files and populate them with the setup call.
 
-LunarVim uses [../configuration/07-ftplugin.md] to enable lazy-loading the setup of a language server. A template generator is used to create `ftplugin` files and populate them with the setup call.
 - configuration option
 
 ```lua
@@ -132,7 +134,7 @@ lvim.lang.python.formatters = { { exe = "black" }, { exe = "isort" } }
 ### Lazy-loading the formatter setup
 
 By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
-then you can use [../configuration/07-ftplugin.md] for this purpose.
+then you can use [filetype plugins](../configuration/07-ftplugin.md) for this purpose.
 
 Let's take `markdown` as an example:
 
@@ -214,7 +216,7 @@ _Note: removing the `filetypes` argument will allow the linter to attach to all 
 ### Lazy-loading the linter setup
 
 By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
-then you can use [../configuration/07-ftplugin.md] for this purpose.
+then you can use [filetype plugins](../configuration/07-ftplugin.md) for this purpose.
 
 Let's take `typescript` as an example:
 
@@ -225,4 +227,3 @@ Let's take `typescript` as an example:
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup({{exe = "eslint_d", filetypes = { "typescript" } }})
 ```
-
