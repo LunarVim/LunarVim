@@ -2,17 +2,11 @@ local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 
 local M = {}
-
 local user_config_dir = get_config_dir()
 local user_config_file = utils.join_paths(user_config_dir, "config.lua")
 
--- Fallback config.lua to lv-config.lua
-if not utils.is_file(user_config_file) then
-  local lv_config = utils.join_paths(user_config_dir, "lv-config.lua")
-  Log:warn(string.format("[%s] not found, falling back to [%s]", user_config_file, lv_config))
-  user_config_file = lv_config
-end
-
+---Get the full path to the user configuration file
+---@return string
 function M:get_user_config_path()
   return user_config_file
 end
@@ -160,7 +154,11 @@ function M:load(config_path)
   config_path = config_path or self.get_user_config_path()
   local ok, _ = pcall(dofile, config_path)
   if not ok then
-    Log:warn("Invalid configuration: " .. config_path)
+    if utils.is_file(user_config_file) then
+      Log:warn("Invalid configuration: " .. config_path)
+    else
+      Log:warn(string.format("Unable to find configuration file [%s]", config_path))
+    end
   end
 
   deprecation_notice()

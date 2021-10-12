@@ -109,13 +109,7 @@ function M:init()
     }
   end
 
-  require("lvim.config"):init {
-    config_dir = self.config_dir,
-  }
-  local config = require "lvim.config"
-  config:init {
-    user_config = join_paths(self.config_dir, "config.lua"),
-  }
+  require("lvim.config"):init()
 
   require("lvim.plugin-loader"):init {
     package_root = self.pack_dir,
