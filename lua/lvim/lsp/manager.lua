@@ -1,7 +1,7 @@
 local M = {}
 
 local Log = require "lvim.core.log"
-local lsp_utils = require "lvim.lsp.utils"
+local lvim_lsp_utils = require "lvim.lsp.utils"
 
 function M.init_defaults(languages)
   for _, entry in ipairs(languages) do
@@ -11,15 +11,6 @@ function M.init_defaults(languages)
         linters = {},
         lsp = {},
       }
-    end
-  end
-end
-
-local function is_overridden(server)
-  local overrides = lvim.lsp.override
-  if type(overrides) == "table" then
-    if vim.tbl_contains(overrides, server) then
-      return true
     end
   end
 end
@@ -54,7 +45,7 @@ end
 function M.setup(server_name, user_config)
   vim.validate { name = { server_name, "string" } }
 
-  if lsp_utils.is_client_active(server_name) or is_overridden(server_name) then
+  if lvim_lsp_utils.is_client_active(server_name) then
     return
   end
 
@@ -65,7 +56,9 @@ function M.setup(server_name, user_config)
     if server:is_installed() then
       return true
     end
-    if not lvim.lsp.automatic_servers_installation then
+    if
+      not lvim.lsp.automatic_servers_installation or vim.tbl_contains(lvim.lsp.servers.manual_install_list, server_name)
+    then
       Log:debug(server.name .. " is not managed by the automatic installer")
       return false
     end

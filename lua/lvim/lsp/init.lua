@@ -102,7 +102,7 @@ local function select_default_formater(client)
     client.resolved_capabilities.document_range_formatting = false
   end
 
-  for _, name in ipairs(lvim.lsp.disabled_formatters) do
+  for _, name in ipairs(lvim.lsp.servers.disabled_formatting_list) do
     if client.name == name then
       disable_formatter()
       return

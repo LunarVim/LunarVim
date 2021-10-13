@@ -59,4 +59,12 @@ function M.get_supported_filetypes(server_name)
   end
 end
 
+---Checks if a server is overriden
+---This can be either by default because of a conflict, or set manually
+---Only TSServer is enabled by default for the javascript-family
+---@param server_name string
+function M.is_overridden(server_name)
+  return vim.tbl_contains(lvim.lsp.servers.manual_setup_list, server_name)
+end
+
 return M

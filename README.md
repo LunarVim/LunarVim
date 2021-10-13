@@ -117,8 +117,8 @@ lvim.plugins = {
 
 ## Breaking changes
 
-- `lvim.lang.FOO.lsp` is no longer supported after #1584.
-  You can either use `:NlspConfig` for most of the settings you might need, or override the setup by adding an entry to `lvim.lsp.override = { "FOO" }`.
+- `lvim.lang.FOO.lsp` is no longer supported (#1584).
+- `lvim.lsp.override` is replaced by `lvim.lsp.servers.manual_setup_list` (#1762).
 
 ## Resources
 

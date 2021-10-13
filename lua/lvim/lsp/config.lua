@@ -22,7 +22,6 @@ return {
   on_attach_callback = nil,
   on_init_callback = nil,
   automatic_servers_installation = true,
-  disabled_formatters = { "tsserver", "jsonls" },
   buffer_mappings = {
     normal_mode = {
       ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
@@ -42,5 +41,26 @@ return {
   },
   null_ls = {
     setup = {},
+  },
+  servers = {
+    manual_install_list = {},
+    disabled_formatting_list = {
+      "tsserver",
+      "jsonls",
+    },
+    manual_setup_list = {
+      "angularls",
+      "ansiblels",
+      "denols",
+      "ember",
+      "jedi_language_server",
+      "pylsp",
+      "rome",
+      "sqlls",
+      "sqls",
+      "stylelint_lsp",
+      "tailwindcss",
+      "volar",
+    },
   },
 }
