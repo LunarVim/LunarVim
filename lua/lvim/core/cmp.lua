@@ -222,7 +222,9 @@ M.config = function()
             exit = false
           end
         end
-        if exit then return end
+        if exit then
+          return
+        end
 
         if cmp.visible() then
           cmp.select_next_item()
@@ -251,7 +253,9 @@ M.config = function()
             exit = false
           end
         end
-        if exit then return end
+        if exit then
+          return
+        end
 
         if cmp.visible() then
           cmp.select_prev_item()
