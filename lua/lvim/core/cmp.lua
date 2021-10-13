@@ -203,11 +203,27 @@ M.config = function()
       { name = "treesitter" },
       { name = "crates" },
     },
+    supertab_snippets_precedence = false,
     mapping = {
+      ["<C-k>"] = cmp.mapping.select_prev_item(),
+      ["<C-j>"] = cmp.mapping.select_next_item(),
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
       ["<Tab>"] = cmp.mapping(function()
+        local exit = false
+        if lvim.builtin.cmp.supertab_snippets_precedence then
+          exit = true
+          if luasnip.expandable() then
+            luasnip.expand()
+          elseif inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable() then
+            luasnip.jump(1)
+          else
+            exit = false
+          end
+        end
+        if exit then return end
+
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expandable() then
@@ -226,6 +242,17 @@ M.config = function()
         "s",
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
+        local exit = false
+        if lvim.builtin.cmp.supertab_snippets_precedence then
+          exit = true
+          if inside_snippet() and luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            exit = false
+          end
+        end
+        if exit then return end
+
         if cmp.visible() then
           cmp.select_prev_item()
         elseif inside_snippet() and luasnip.jumpable(-1) then
