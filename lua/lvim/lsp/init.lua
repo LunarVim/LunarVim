@@ -88,16 +88,24 @@ end
 local function select_default_formater(client)
   local client_formatting = client.resolved_capabilities.document_formatting
     or client.resolved_capabilities.document_range_formatting
+
+  -- just in case this function is used for setting up null-ls
   if client.name == "null-ls" or not client_formatting then
     return
   end
+
   Log:debug("Checking for formatter overriding for " .. client.name)
-  local client_filetypes = client.config.filetypes or {}
-  for _, filetype in ipairs(client_filetypes) do
-    if lvim.lang[filetype] and #vim.tbl_keys(lvim.lang[filetype].formatters) > 0 then
-      Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
+
+  local disable_formatter = function()
+    Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+
+  for _, name in ipairs(lvim.lsp.disabled_formatters) do
+    if client.name == name then
+      disable_formatter()
+      return
     end
   end
 end
@@ -108,7 +116,9 @@ function M.common_on_init(client, bufnr)
     Log:debug "Called lsp.on_init_callback"
     return
   end
-  select_default_formater(client)
+  vim.schedule(function()
+    select_default_formater(client)
+  end)
 end
 
 function M.common_on_attach(client, bufnr)
