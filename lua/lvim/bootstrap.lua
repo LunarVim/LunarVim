@@ -103,6 +103,7 @@ function M:init()
 
   -- FIXME: currently unreliable in unit-tests
   if not os.getenv "LVIM_TEST_ENV" then
+    _G.PLENARY_DEBUG = false
     require("lvim.impatient").setup {
       path = vim.fn.stdpath "cache" .. "/lvim_cache",
       enable_profiling = true,
