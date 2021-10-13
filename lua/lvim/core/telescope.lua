@@ -82,6 +82,21 @@ function M.config()
   })
 end
 
+function M.find_files_relative(opts)
+  opts = opts or {}
+  local utils = require "telescope.themes"
+  local themes = require "telescope.themes"
+  local theme_opts = themes.get_ivy {
+    sorting_strategy = "ascending",
+    layout_strategy = "bottom_pane",
+    prompt_prefix = ">> ",
+    prompt_title = "~ relative files ~",
+    cwd = require("telescope.utils").buffer_dir(),
+  }
+  opts = vim.tbl_deep_extend("force", theme_opts, opts)
+  require("telescope.builtin").find_files(opts)
+end
+
 function M.find_lunarvim_files(opts)
   opts = opts or {}
   local themes = require "telescope.themes"
