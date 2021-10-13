@@ -146,6 +146,15 @@ function detect_platform() {
         RECOMMEND_INSTALL="sudo apt install -y"
       fi
       ;;
+    FreeBSD)
+      RECOMMEND_INSTALL="sudo pkg install -y"
+      ;;
+    NetBSD)
+      RECOMMEND_INSTALL="sudo pkgin install"
+      ;;
+    OpenBSD)
+      RECOMMEND_INSTALL="doas pkg_add"
+      ;;
     Darwin)
       RECOMMEND_INSTALL="brew install"
       ;;
@@ -256,7 +265,7 @@ function backup_old_config() {
     else
       OS="$(uname -s)"
       case "$OS" in
-        Linux)
+        Linux | *BSD)
           cp -r "$dir/"* "$dir.bak/."
           ;;
         Darwin)
