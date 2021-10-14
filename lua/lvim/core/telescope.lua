@@ -29,7 +29,7 @@ function M.config()
         horizontal = { mirror = false },
         vertical = { mirror = false },
       },
-      file_sorter = sorters.fuzzy_with_index_bias,
+      file_sorter = sorters.get_fuzzy_file,
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -108,6 +108,12 @@ function M.setup()
   telescope.setup(lvim.builtin.telescope)
   if lvim.builtin.project.active then
     telescope.load_extension "projects"
+  end
+
+  if lvim.builtin.telescope.extensions.fzf then
+    pcall(function()
+      require("telescope").load_extension "fzf"
+    end)
   end
 
   if lvim.builtin.telescope.on_config_done then
