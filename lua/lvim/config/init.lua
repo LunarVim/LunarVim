@@ -151,6 +151,7 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
+  local autocmds = require "lvim.core.autocmds"
   config_path = config_path or self.get_user_config_path()
   local ok, err = pcall(dofile, config_path)
   if not ok then
@@ -163,7 +164,6 @@ function M:load(config_path)
 
   deprecation_notice()
 
-  local autocmds = require "lvim.core.autocmds"
   autocmds.define_augroups(lvim.autocommands)
 
   local settings = require "lvim.config.settings"
