@@ -12,6 +12,12 @@ function M:setup()
   end
 
   null_ls.config()
+  local default_opts = require("lvim.lsp").get_common_opts()
+
+  if vim.tbl_isempty(lvim.lsp.null_ls.setup or {}) then
+    lvim.lsp.null_ls.setup = default_opts
+  end
+
   require("lspconfig")["null-ls"].setup(lvim.lsp.null_ls.setup)
   for filetype, config in pairs(lvim.lang) do
     if not vim.tbl_isempty(config.formatters) then
