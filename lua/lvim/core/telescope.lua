@@ -2,7 +2,6 @@ local M = {}
 
 local _, sorters = pcall(require, "telescope.sorters")
 local _, actions = pcall(require, "telescope.actions")
-local _, previewers = pcall(require, "telescope.previewers")
 local _, themes = pcall(require, "telescope.themes")
 local _, builtin = pcall(require, "telescope.builtin")
 
@@ -13,6 +12,12 @@ function M.config()
     active = true,
     on_config_done = nil,
   }
+
+  -- we need to have this check here to able to add `vim_buffer_cat`
+  local status_ok, previewers = pcall(require, "telescope.previewers")
+  if not status_ok then
+    return
+  end
 
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
@@ -107,7 +112,9 @@ function M.setup()
 
   telescope.setup(lvim.builtin.telescope)
   if lvim.builtin.project.active then
-    telescope.load_extension "projects"
+    pcall(function()
+      require("telescope").load_extension "projects"
+    end)
   end
 
   if lvim.builtin.telescope.extensions.fzf then
