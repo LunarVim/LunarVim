@@ -96,12 +96,12 @@ M.config = function()
       },
       p = {
         name = "Packer",
-        c = { "<cmd>PackerCompile<cr>", "Compile" },
-        i = { "<cmd>PackerInstall<cr>", "Install" },
-        r = { "<cmd>lua require('lvim.plugin-loader').cache_reset()<cr>", "Re-compile" },
-        s = { "<cmd>PackerSync<cr>", "Sync" },
+        c = { "<cmd>lua require('lvim.plugin-loader').compile()<cr>", "Compile" },
+        i = { "<cmd>lua require('lvim.plugin-loader').install()<cr>", "Install" },
+        r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
+        s = { "<cmd>lua require('lvim.plugin-loader').sync()<cr>", "Sync" },
         S = { "<cmd>PackerStatus<cr>", "Status" },
-        u = { "<cmd>PackerUpdate<cr>", "Update" },
+        u = { "<cmd>lua require('lvim.plugin-loader').update()<cr>", "Update" },
       },
 
       -- " Available Debug Adapters:

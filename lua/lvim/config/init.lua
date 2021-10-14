@@ -102,8 +102,8 @@ function M:reload()
   local plugins = require "lvim.plugins"
   utils.toggle_autoformat()
   local plugin_loader = require "lvim.plugin-loader"
-  plugin_loader:cache_reset()
-  plugin_loader:load { plugins, lvim.plugins }
+  plugin_loader.cache_clear()
+  plugin_loader.load { plugins, lvim.plugins }
   vim.cmd ":PackerInstall"
   vim.cmd ":PackerCompile"
   -- vim.cmd ":PackerClean"
