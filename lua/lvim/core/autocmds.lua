@@ -2,7 +2,7 @@ local M = {}
 
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
-  local user_config_file = require("lvim.config"):get_user_config_path()
+  local user_config_file = vim.fn.resolve(require("lvim.config"):get_user_config_path())
 
   return {
     _general_settings = {
