@@ -103,19 +103,14 @@ function M:init()
 
   -- FIXME: currently unreliable in unit-tests
   if not os.getenv "LVIM_TEST_ENV" then
+    _G.PLENARY_DEBUG = false
     require("lvim.impatient").setup {
       path = vim.fn.stdpath "cache" .. "/lvim_cache",
       enable_profiling = true,
     }
   end
 
-  require("lvim.config"):init {
-    config_dir = self.config_dir,
-  }
-  local config = require "lvim.config"
-  config:init {
-    user_config = join_paths(self.config_dir, "config.lua"),
-  }
+  require("lvim.config"):init()
 
   require("lvim.plugin-loader"):init {
     package_root = self.pack_dir,
