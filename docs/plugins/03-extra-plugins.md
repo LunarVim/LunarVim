@@ -663,7 +663,7 @@ lvim.builtin.which_key.mappings["t"] = {
 ```lua
 {
   "folke/persistence.nvim",
-    event = "VimEnter",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
     module = "persistence",
     config = function()
       require("persistence").setup {
@@ -677,11 +677,11 @@ lvim.builtin.which_key.mappings["t"] = {
 Also define keybindings in your `config.lua`
 
 ```lua
-  lvim.builtin.which_key.mappings["Q"]= {
-    name = "+Quit",
-    s = { "<cmd>lua require('persistence').load()<cr>", "Restore for current dir" },
-    l = { "<cmd>lua require('persistence').load(last=true)<cr>", "Restore last session" },
-    d = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+  lvim.builtin.which_key.mappings["S"]= {
+    name = "Session",
+    c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+    l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+    Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
   }
 ```
 
