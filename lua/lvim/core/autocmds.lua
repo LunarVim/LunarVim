@@ -11,16 +11,7 @@ function M.load_augroups()
         "*",
         "lua require('lvim.utils.ft').do_filetype(vim.fn.expand(\"<amatch>\"))",
       },
-      {
-        "FileType",
-        "qf",
-        "nnoremap <silent> <buffer> q :q<CR>",
-      },
-      {
-        "FileType",
-        "lsp-installer",
-        "nnoremap <silent> <buffer> q :q<CR>",
-      },
+      { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
       {
         "TextYankPost",
         "*",
@@ -90,7 +81,7 @@ function M.load_augroups()
       { "BufWritePost", "plugins.lua", "PackerCompile" },
     },
     _general_lsp = {
-      { "FileType", "lspinfo", "nnoremap <silent> <buffer> q :q<CR>" },
+      { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> q :close<CR>" },
     },
     -- _fterm_lazygit = {
     --   -- will cause esc key to exit lazy git
