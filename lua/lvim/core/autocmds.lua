@@ -1,10 +1,10 @@
-local autocommands = {}
+local M = {}
 
 --- Load the default set of autogroups and autocommands.
-function autocommands.load_config()
+function M.load_augroups()
   local user_config_file = require("lvim.config"):get_user_config_path()
 
-  lvim.autocommands = {
+  return {
     _general_settings = {
       {
         "Filetype",
@@ -107,7 +107,7 @@ function autocommands.load_config()
   }
 end
 
-function autocommands.define_augroups(definitions) -- {{{1
+function M.define_augroups(definitions) -- {{{1
   -- Create autocommand groups based on the passed definitions
   --
   -- The key will be the name of the group, and each definition
@@ -129,4 +129,4 @@ function autocommands.define_augroups(definitions) -- {{{1
   end
 end
 
-return autocommands
+return M
