@@ -1,10 +1,5 @@
 local M = {}
 
-local _, sorters = pcall(require, "telescope.sorters")
-local _, actions = pcall(require, "telescope.actions")
-local _, themes = pcall(require, "telescope.themes")
-local _, builtin = pcall(require, "telescope.builtin")
-
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
   lvim.builtin.telescope = {
@@ -28,7 +23,6 @@ function M.config()
         horizontal = { mirror = false },
         vertical = { mirror = false },
       },
-      file_sorter = sorters.get_fuzzy_file,
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -40,35 +34,12 @@ function M.config()
         "--hidden",
       },
       file_ignore_patterns = {},
-      generic_sorter = sorters.get_generic_fuzzy_sorter,
       path_display = { shorten = 5 },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-      ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
-      mappings = {
-        i = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-c>"] = actions.close,
-          ["<C-j>"] = actions.cycle_history_next,
-          ["<C-k>"] = actions.cycle_history_prev,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<CR>"] = actions.select_default + actions.center,
-          ["<M-space>"] = actions.which_key,
-        },
-        n = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<M-space>"] = actions.which_key,
-        },
-      },
       pickers = {
         find_files = {
           find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
@@ -107,13 +78,46 @@ function M.code_actions()
     previewer = false,
     shorten_path = false,
   }
+  local builtin = require "telescope.builtin"
+  local themes = require "telescope.themes"
   builtin.lsp_code_actions(themes.get_dropdown(opts))
 end
 
 function M.setup()
-  local telescope = require "telescope"
+  local previewers = require "telescope.previewers"
+  local sorters = require "telescope.sorters"
+  local actions = require "telescope.actions"
 
+  lvim.builtin.telescope = vim.tbl_extend("keep", {
+    file_previewer = previewers.vim_buffer_cat.new,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
+    file_sorter = sorters.get_fuzzy_file,
+    generic_sorter = sorters.get_generic_fuzzy_sorter,
+    ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
+    mappings = {
+      i = {
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
+        ["<C-c>"] = actions.close,
+        ["<C-j>"] = actions.cycle_history_next,
+        ["<C-k>"] = actions.cycle_history_prev,
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<CR>"] = actions.select_default + actions.center,
+        ["<M-space>"] = actions.which_key,
+      },
+      n = {
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<M-space>"] = actions.which_key,
+      },
+    },
+  }, lvim.builtin.telescope)
+
+  local telescope = require "telescope"
   telescope.setup(lvim.builtin.telescope)
+
   if lvim.builtin.project.active then
     pcall(function()
       require("telescope").load_extension "projects"
@@ -123,6 +127,7 @@ function M.setup()
   if lvim.builtin.telescope.on_config_done then
     lvim.builtin.telescope.on_config_done(telescope)
   end
+
   if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions.fzf then
     require("telescope").load_extension "fzf"
   end
