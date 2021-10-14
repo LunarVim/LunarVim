@@ -21,9 +21,8 @@ function Log:init()
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   structlog.configure {
     lvim = {
-      level = log_level,
       sinks = {
-        structlog.sinks.Console {
+        structlog.sinks.Console(log_level, {
           async = false,
           processors = {
             structlog.processors.Namer(),
@@ -31,19 +30,28 @@ function Log:init()
             structlog.processors.Timestamper "%H:%M:%S",
           },
           formatter = structlog.formatters.FormatColorizer( --
-            "%s [%s] %s: %-30s",
+            "%s [%-5s] %s: %-30s",
             { "timestamp", "level", "logger_name", "msg" },
             { level = structlog.formatters.FormatColorizer.color_level() }
           ),
-        },
-        structlog.sinks.File(logfile, {
+        }),
+        structlog.sinks.NvimNotify(Log.levels.INFO, {
+          processors = {
+            structlog.processors.StackWriter({ "line", "file" }, { max_parents = 0, stack_level = 2 }),
+          },
+          formatter = structlog.formatters.Format( --
+            "%s",
+            { "msg" }
+          ),
+        }),
+        structlog.sinks.File(Log.levels.TRACE, logfile, {
           processors = {
             structlog.processors.Namer(),
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 3, stack_level = 2 }),
             structlog.processors.Timestamper "%H:%M:%S",
           },
           formatter = structlog.formatters.Format( --
-            "%s [%s] %s: %-30s",
+            "%s [%-5s] %s: %-30s",
             { "timestamp", "level", "logger_name", "msg" }
           ),
         }),
