@@ -13,12 +13,6 @@ function M.config()
     on_config_done = nil,
   }
 
-  -- we need to have this check here to able to add `vim_buffer_cat`
-  local status_ok, previewers = pcall(require, "telescope.previewers")
-  if not status_ok then
-    return
-  end
-
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
       prompt_prefix = " ",
@@ -45,11 +39,6 @@ function M.config()
         "--smart-case",
         "--hidden",
       },
-      pickers = {
-        find_files = {
-          find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
-        },
-      },
       file_ignore_patterns = {},
       generic_sorter = sorters.get_generic_fuzzy_sorter,
       path_display = { shorten = 5 },
@@ -58,9 +47,9 @@ function M.config()
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      file_previewer = previewers.vim_buffer_cat.new,
-      grep_previewer = previewers.vim_buffer_vimgrep.new,
-      qflist_previewer = previewers.vim_buffer_qflist.new,
+      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
       ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
       mappings = {
         i = {
@@ -80,9 +69,23 @@ function M.config()
           ["<M-space>"] = actions.which_key,
         },
       },
+      pickers = {
+        find_files = {
+          find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
+        },
+        live_grep = {
+          --@usage don't include the filename in the search results
+          only_sort_text = true,
+        },
+      },
     },
     extensions = {
-      fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" },
+      fzf = {
+        fuzzy = true, -- false will only do exact matching
+        override_generic_sorter = true, -- override the generic sorter
+        override_file_sorter = true, -- override the file sorter
+        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+      },
     },
   })
 end
@@ -117,14 +120,11 @@ function M.setup()
     end)
   end
 
-  if lvim.builtin.telescope.extensions.fzf then
-    pcall(function()
-      require("telescope").load_extension "fzf"
-    end)
-  end
-
   if lvim.builtin.telescope.on_config_done then
     lvim.builtin.telescope.on_config_done(telescope)
+  end
+  if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions.fzf then
+    require("telescope").load_extension "fzf"
   end
 end
 

@@ -21,7 +21,6 @@ return {
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
     run = "make",
     disable = not lvim.builtin.telescope.active,
   },
