@@ -19,6 +19,11 @@ return {
     end,
     disable = not lvim.builtin.telescope.active,
   },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+    disable = not lvim.builtin.telescope.active,
+  },
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
