@@ -153,7 +153,7 @@ vim.opt.timeoutlen = 500
 
 **[lualine](https://github.com/hoob3rt/lualine.nvim): A blazing fast and easy to configure neovim statusline written in pure lua.**
 
-[Go here](.configuration/06-statusline.md) for more information on configuration
+[Go here](../configuration/06-statusline.md) for more information on configuration
 
 ## Terminal
 
