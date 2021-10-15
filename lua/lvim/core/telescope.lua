@@ -104,13 +104,11 @@ function M.setup()
         ["<C-k>"] = actions.cycle_history_prev,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<CR>"] = actions.select_default + actions.center,
-        ["<M-space>"] = actions.which_key,
       },
       n = {
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        ["<M-space>"] = actions.which_key,
       },
     },
   }, lvim.builtin.telescope)
