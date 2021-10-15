@@ -76,10 +76,6 @@ function M.load_augroups()
       -- will cause split windows to be resized evenly if main window is resized
       { "VimResized", "*", "tabdo wincmd =" },
     },
-    _packer_compile = {
-      -- will run PackerCompile after writing plugins.lua
-      { "BufWritePost", "plugins.lua", "PackerCompile" },
-    },
     _general_lsp = {
       { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> q :close<CR>" },
     },
