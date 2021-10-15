@@ -203,7 +203,7 @@ M.config = function()
       { name = "treesitter" },
       { name = "crates" },
     },
-    supertab_snippets_precedence = false,
+    tab_prefer_snippets = false,
     mapping = {
       ["<C-k>"] = cmp.mapping.select_prev_item(),
       ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -211,26 +211,14 @@ M.config = function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
       ["<Tab>"] = cmp.mapping(function()
-        local exit = false
-        if lvim.builtin.cmp.supertab_snippets_precedence then
-          exit = true
-          if luasnip.expandable() then
-            luasnip.expand()
-          elseif inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable() then
-            luasnip.jump(1)
-          else
-            exit = false
-          end
-        end
-        if exit then
-          return
-        end
+        local exp = luasnip.expandable()
+        local snip = inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable()
 
-        if cmp.visible() then
+        if cmp.visible() and not (lvim.builtin.cmp.tab_prefer_snippets and (exp or snip)) then
           cmp.select_next_item()
-        elseif luasnip.expandable() then
+        elseif exp then
           luasnip.expand()
-        elseif inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable() then
+        elseif snip then
           luasnip.jump(1)
         elseif check_backspace() then
           vim.fn.feedkeys(T "<Tab>", "n")
@@ -244,22 +232,11 @@ M.config = function()
         "s",
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
-        local exit = false
-        if lvim.builtin.cmp.supertab_snippets_precedence then
-          exit = true
-          if inside_snippet() and luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            exit = false
-          end
-        end
-        if exit then
-          return
-        end
+        local snip = inside_snippet() and luasnip.jumpable(-1)
 
-        if cmp.visible() then
+        if cmp.visible() and not (lvim.builtin.cmp.tab_prefer_snippets and snip) then
           cmp.select_prev_item()
-        elseif inside_snippet() and luasnip.jumpable(-1) then
+        elseif snip then
           luasnip.jump(-1)
         else
           fallback()
