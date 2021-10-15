@@ -18,7 +18,7 @@ function _G.get_runtime_dir()
   local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
   if not lvim_runtime_dir then
     -- when nvim is used directly
-    return vim.fn.stdpath "config"
+    return vim.fn.stdpath "data"
   end
   return lvim_runtime_dir
 end
