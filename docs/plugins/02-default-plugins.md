@@ -149,7 +149,7 @@ vim.opt.timeoutlen = 500
 | Command | Description           |
 | ------- | --------------------- |
 | `<S-l>` | Go to next buffer     |
-| `<S-h`  | Go to previous buffer |
+| `<S-h>`  | Go to previous buffer |
 
 **[lualine](https://github.com/hoob3rt/lualine.nvim): A blazing fast and easy to configure neovim statusline written in pure lua.**
 
