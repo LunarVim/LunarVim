@@ -19,27 +19,19 @@ function M.load_augroups()
       },
       {
         "BufWinEnter",
-        "*",
-        "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-      },
-      {
-        "BufWinEnter",
         "dashboard",
         "setlocal cursorline signcolumn=yes cursorcolumn number",
-      },
-      {
-        "BufRead",
-        "*",
-        "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-      },
-      {
-        "BufNewFile",
-        "*",
-        "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
       },
       { "BufWritePost", user_config_file, "lua require('lvim.config'):reload()" },
       { "FileType", "qf", "set nobuflisted" },
       -- { "VimLeavePre", "*", "set title set titleold=" },
+    },
+    _formatoptions = {
+      {
+        "BufWinEnter,BufRead,BufNewFile",
+        "*",
+        "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+      },
     },
     _filetypechanges = {
       { "BufWinEnter", ".tf", "setlocal filetype=terraform" },
