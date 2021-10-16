@@ -102,7 +102,7 @@ end
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
   hooks.run_pre_update()
-  M:update_repo()
+  --M:update_repo()
   hooks.run_post_update()
 end
 

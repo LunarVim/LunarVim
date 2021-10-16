@@ -1,6 +1,23 @@
 #!/bin/sh
 
-export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
-export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-$HOME/.config/lvim}"
+LUNARVIM_INIT="/usr/local/share/lunarvim/lvim/init.lua"
 
-exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+if [ -f "$HOME/.local/share/lunarvim/lvim/init.lua" ]; then
+  LUNARVIM_INIT="$HOME/.local/share/lunarvim/lvim/init.lua"
+fi
+
+export LUNARVIM_RUNTIME_DIR="$HOME/.local/share/lunarvim/data"
+export LUNARVIM_CACHE_DIR="$HOME/.local/share/lunarvim/cache"
+export LUNARVIM_CONFIG_DIR="$HOME/.config/lvim"
+
+#
+# When running as lvim the neovim process MUST never refer to the standard user config:
+# Anything that uses stdpath('data'), stdpath('cache') etc will get:
+#
+# LUNARVIM_x_DIR/nvim
+#
+export XDG_CONFIG_HOME="${LUNARVIM_CONFIG_DIR}"
+export XDG_DATA_HOME="${LUNARVIM_RUNTIME_DIR}"
+export XDG_CACHE_HOME="${LUNARVIM_CACHE_DIR}"
+
+exec nvim -u "${LUNARVIM_INIT}" "$@"
