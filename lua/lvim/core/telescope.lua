@@ -8,11 +8,6 @@ function M.config()
     on_config_done = nil,
   }
 
-  local status_ok, actions = pcall(require, "telescope.actions")
-  if not status_ok then
-    return
-  end
-
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
       prompt_prefix = " ",
@@ -28,133 +23,42 @@ function M.config()
         horizontal = { mirror = false },
         vertical = { mirror = false },
       },
-      file_sorter = require("telescope.sorters").get_fzy_sorter,
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "--hidden",
+      },
       file_ignore_patterns = {},
-      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       path_display = { shorten = 5 },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
-      use_less = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-
-      -- Developer configurations: Not meant for general override
-      -- buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
-      mappings = {
-        i = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-c>"] = actions.close,
-          ["<C-j>"] = actions.cycle_history_next,
-          ["<C-k>"] = actions.cycle_history_prev,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<CR>"] = actions.select_default + actions.center,
-          -- To disable a keymap, put [map] = false
-          -- So, to not map "<C-n>", just put
-          -- ["<c-t>"] = trouble.open_with_trouble,
-          -- ["<c-x>"] = false,
-          -- ["<esc>"] = actions.close,
-          -- Otherwise, just set the mapping to the function that you want it to be.
-          -- ["<C-i>"] = actions.select_horizontal,
-          -- Add up multiple actions
-          -- You can perform as many actions in a row as you like
-          -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
+      pickers = {
+        find_files = {
+          find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
         },
-        n = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          -- ["<c-t>"] = trouble.open_with_trouble,
-          -- ["<C-i>"] = my_cool_custom_action,
+        live_grep = {
+          --@usage don't include the filename in the search results
+          only_sort_text = true,
         },
       },
     },
     extensions = {
-      fzy_native = {
-        override_generic_sorter = false,
-        override_file_sorter = true,
+      fzf = {
+        fuzzy = true, -- false will only do exact matching
+        override_generic_sorter = true, -- override the generic sorter
+        override_file_sorter = true, -- override the file sorter
+        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
     },
   })
-end
-
-function M.find_lunarvim_files(opts)
-  opts = opts or {}
-  local themes = require "telescope.themes"
-  local theme_opts = themes.get_ivy {
-    sorting_strategy = "ascending",
-    layout_strategy = "bottom_pane",
-    prompt_prefix = ">> ",
-    prompt_title = "~ LunarVim files ~",
-    cwd = get_runtime_dir(),
-    search_dirs = { get_runtime_dir() .. "/lvim", lvim.lsp.templates_dir },
-  }
-  opts = vim.tbl_deep_extend("force", theme_opts, opts)
-  require("telescope.builtin").find_files(opts)
-end
-
-function M.grep_lunarvim_files(opts)
-  opts = opts or {}
-  local themes = require "telescope.themes"
-  local theme_opts = themes.get_ivy {
-    sorting_strategy = "ascending",
-    layout_strategy = "bottom_pane",
-    prompt_prefix = ">> ",
-    prompt_title = "~ search LunarVim ~",
-    cwd = get_runtime_dir(),
-    search_dirs = { get_runtime_dir() .. "/lvim", lvim.lsp.templates_dir },
-  }
-  opts = vim.tbl_deep_extend("force", theme_opts, opts)
-  require("telescope.builtin").live_grep(opts)
-end
-
-function M.view_lunarvim_changelog()
-  local finders = require "telescope.finders"
-  local make_entry = require "telescope.make_entry"
-  local pickers = require "telescope.pickers"
-  local previewers = require "telescope.previewers"
-  local actions = require "telescope.actions"
-  local opts = {}
-
-  local conf = require("telescope.config").values
-  opts.entry_maker = make_entry.gen_from_git_commits(opts)
-
-  pickers.new(opts, {
-    prompt_title = "LunarVim changelog",
-
-    finder = finders.new_oneshot_job(
-      vim.tbl_flatten {
-        "git",
-        "log",
-        "--pretty=oneline",
-        "--abbrev-commit",
-        "--",
-        ".",
-      },
-      opts
-    ),
-    previewer = {
-      previewers.git_commit_diff_to_parent.new(opts),
-      previewers.git_commit_diff_to_head.new(opts),
-      previewers.git_commit_diff_as_was.new(opts),
-      previewers.git_commit_message.new(opts),
-    },
-
-    --TODO: consider opening a diff view when pressing enter
-    attach_mappings = function(_, map)
-      map("i", "<enter>", actions._close)
-      map("n", "<enter>", actions._close)
-      map("i", "<esc>", actions._close)
-      map("n", "<esc>", actions._close)
-      map("n", "q", actions._close)
-      return true
-    end,
-    sorter = conf.file_sorter(opts),
-  }):find()
 end
 
 function M.code_actions()
@@ -174,19 +78,56 @@ function M.code_actions()
     previewer = false,
     shorten_path = false,
   }
-  require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_dropdown(opts))
+  local builtin = require "telescope.builtin"
+  local themes = require "telescope.themes"
+  builtin.lsp_code_actions(themes.get_dropdown(opts))
 end
 
 function M.setup()
-  local telescope = require "telescope"
+  local previewers = require "telescope.previewers"
+  local sorters = require "telescope.sorters"
+  local actions = require "telescope.actions"
 
+  lvim.builtin.telescope = vim.tbl_extend("keep", {
+    file_previewer = previewers.vim_buffer_cat.new,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
+    file_sorter = sorters.get_fuzzy_file,
+    generic_sorter = sorters.get_generic_fuzzy_sorter,
+    ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
+    mappings = {
+      i = {
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
+        ["<C-c>"] = actions.close,
+        ["<C-j>"] = actions.cycle_history_next,
+        ["<C-k>"] = actions.cycle_history_prev,
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<CR>"] = actions.select_default + actions.center,
+      },
+      n = {
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+      },
+    },
+  }, lvim.builtin.telescope)
+
+  local telescope = require "telescope"
   telescope.setup(lvim.builtin.telescope)
+
   if lvim.builtin.project.active then
-    telescope.load_extension "projects"
+    pcall(function()
+      require("telescope").load_extension "projects"
+    end)
   end
 
   if lvim.builtin.telescope.on_config_done then
     lvim.builtin.telescope.on_config_done(telescope)
+  end
+
+  if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions.fzf then
+    require("telescope").load_extension "fzf"
   end
 end
 
