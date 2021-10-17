@@ -81,10 +81,6 @@ function M.config()
       ["<A-Down>"] = "<C-\\><C-N><C-w>j",
       ["<A-Left>"] = "<C-\\><C-N><C-w>h",
       ["<A-Right>"] = "<C-\\><C-N><C-w>l",
-      -- navigate tab completion with <c-j> and <c-k>
-      -- runs conditionally
-      ["<C-j>"] = { 'pumvisible() ? "\\<down>" : "\\<C-j>"', { expr = true, noremap = true } },
-      ["<C-k>"] = { 'pumvisible() ? "\\<up>" : "\\<C-k>"', { expr = true, noremap = true } },
     },
 
     ---@usage change or add keymappings for normal mode
