@@ -4,32 +4,15 @@ vim.cmd [[set packpath=/tmp/nvim/site]]
 local package_root = "/tmp/nvim/site/pack"
 local install_path = package_root .. "/packer/start/packer.nvim"
 
+-- Choose whether to use the executable that's managed by lsp-installer
+local use_lsp_installer = true
+
 local function load_plugins()
   require("packer").startup {
     {
       "wbthomason/packer.nvim",
       "neovim/nvim-lspconfig",
-      {
-        "aserowy/tmux.nvim",
-        config = function()
-          require("tmux").setup {
-            navigation = {
-              -- cycles to opposite pane while navigating into the border
-              cycle_navigation = true,
-
-              -- enables default keybindings (C-hjkl) for normal mode
-              enable_default_keybindings = true,
-
-              -- prevents unzoom tmux when navigating beyond vim border
-              persist_zoom = true,
-            },
-            resize = {
-              -- enables default keybindings (A-hjkl) for normal mode
-              enable_default_keybindings = true,
-            },
-          }
-        end,
-      },
+      { "williamboman/nvim-lsp-installer", disable = not use_lsp_installer },
     },
     config = {
       package_root = package_root,
@@ -38,8 +21,17 @@ local function load_plugins()
   }
 end
 
+function _G.dump(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  print(unpack(objects))
+  return ...
+end
+
 _G.load_config = function()
   vim.lsp.set_log_level "trace"
+  if vim.fn.has "nvim-0.5.1" == 1 then
+    require("vim.lsp.log").set_format_func(vim.inspect)
+  end
   local nvim_lsp = require "lspconfig"
   local on_attach = function(_, bufnr)
     local function buf_set_keymap(...)
@@ -61,20 +53,32 @@ _G.load_config = function()
     buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
     buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
     buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-    buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-    buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    buf_set_keymap("n", "<space>lD", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+    buf_set_keymap("n", "<space>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-    buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-    buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-    buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+    buf_set_keymap("n", "gl", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+    buf_set_keymap("n", "<space>lk", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+    buf_set_keymap("n", "<space>lj", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+    buf_set_keymap("n", "<space>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
     buf_set_keymap("n", "<space>li", "<cmd>LspInfo<CR>", opts)
+    buf_set_keymap("n", "<space>lI", "<cmd>LspInstallInfo<CR>", opts)
   end
 
-  -- Add the server that troubles you here
-  local name = "sumneko_lua"
-  local sumneko_root_dir = vim.fn.stdpath "data" .. "/lsp_servers/sumneko_lua/extension/server"
-  local cmd = { sumneko_root_dir .. "/bin/Linux/lua-language-server", "-E", sumneko_root_dir .. "/main.lua" }
+  -- Add the server that troubles you here, e.g. "sumneko_lua", "pyright", "tsserver"
+  local name = "clangd"
+
+  -- You need to specify the server's command manually
+  local cmd
+
+  if use_lsp_installer then
+    local server_available, server = require("nvim-lsp-installer.servers").get_server(name)
+    if not server_available then
+      server:install()
+    end
+    local default_opts = server:get_default_options()
+    cmd = default_opts.cmd
+  end
+
   if not name then
     print "You have not defined a server name, please edit minimal_init.lua"
   end
