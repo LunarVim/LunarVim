@@ -38,7 +38,7 @@ lvim.builtin.lualine.sections.lualine_c = { "diff" }
 To set `LunarVim's "spaces" and "location"` components to section y and `lualine's "mode"` component to section a of `"lvim" style`,
 ``` lua
 -- no need to set style = "lvim"
-local components = require("core.lualine.components")
+local components = require("lvim.core.lualine.components")
 
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
 lvim.builtin.lualine.sections.lualine_y = { 
