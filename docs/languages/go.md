@@ -3,13 +3,13 @@
 ## Install Syntax Highlighting
 
 ```vim
-:TSInstall go
+:TSInstall gopls
 ```
 
 ## Install Language Server
 
 ```vim
-:LspInstall go
+:LspInstall gopls
 ```
 
 ## Formatters
