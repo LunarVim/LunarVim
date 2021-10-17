@@ -18,6 +18,20 @@ function Log:init()
     return nil
   end
 
+  local nvim_notify_params = {}
+  local nvim_notify_params_injecter = function(_, entry)
+    for key, value in pairs(nvim_notify_params) do
+      entry[key] = value
+    end
+    return entry
+  end
+
+  local nvim_notify_default_namer = function(logger, entry)
+    entry["title"] = logger.name
+    return entry
+  end
+
+  nvim_notify_params_injecter(nil, {})
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   structlog.configure {
     lvim = {
@@ -37,14 +51,15 @@ function Log:init()
         }),
         structlog.sinks.NvimNotify(Log.levels.INFO, {
           processors = {
-            structlog.processors.Namer(),
+            nvim_notify_default_namer,
+            nvim_notify_params_injecter,
           },
           formatter = structlog.formatters.Format( --
             "%s",
             { "msg" },
-            { blacklist = { "level", "logger_name" } }
+            { blacklist = { "level", "title" } }
           ),
-          params_map = { title = "logger_name" },
+          params_map = { title = "title" },
         }),
         structlog.sinks.File(Log.levels.TRACE, logfile, {
           processors = {
@@ -64,7 +79,8 @@ function Log:init()
   local logger = structlog.get_logger "lvim"
 
   -- Overwrite vim.notify to use the logger
-  vim.notify = function(msg, vim_log_level, _)
+  vim.notify = function(msg, vim_log_level, opts)
+    nvim_notify_params = opts or {}
     -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
     logger:log(vim_log_level + 1, msg)
   end
