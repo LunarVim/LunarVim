@@ -69,6 +69,8 @@ M.load_commands = function()
     cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
     cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
     cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
+    cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
+
     cmd "let &fcs='eob: '"
   end
 end
