@@ -70,6 +70,7 @@ end
 function Log:add_entry(level, msg, event)
   if self.__handle then
     self.__handle:log(level, msg, event)
+    return
   end
 
   local logger = self:init()
