@@ -85,11 +85,13 @@ function Log:init()
 
   local logger = structlog.get_logger "lvim"
 
-  -- Overwrite vim.notify to use the logger
-  vim.notify = function(msg, vim_log_level, opts)
-    nvim_notify_params = opts or {}
-    -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
-    logger:log(vim_log_level + 1, msg)
+  if lvim.log.override_notify then
+    -- Overwrite vim.notify to use the logger
+    vim.notify = function(msg, vim_log_level, opts)
+      nvim_notify_params = opts or {}
+      -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
+      logger:log(vim_log_level + 1, msg)
+    end
   end
 
   return logger
