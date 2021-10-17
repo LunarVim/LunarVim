@@ -1,5 +1,5 @@
 # Autocommands
-To set up autocommands use `lvim.autocommands.custom_groups.  Autocommands are defined in the form `{Event, filetype, command }`.  This will run a command at a given event for the given filetype.
+To set up autocommands use `lvim.autocommands.custom_groups`.  Autocommands are defined in the form `{ Event, filetype, command }`.  This will run a command at a given event for the given filetype.
 
 To view help on autocommands: `:h autocmd`
 
@@ -11,5 +11,5 @@ lvim.autocommands.custom_groups = {
 
   -- On entering insert mode in any file, scroll the window so the cursor line is centered
   {"InsertEnter", "*", ":normal zz"},
-  }
+}
 ```
