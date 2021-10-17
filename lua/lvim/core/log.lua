@@ -37,12 +37,14 @@ function Log:init()
         }),
         structlog.sinks.NvimNotify(Log.levels.INFO, {
           processors = {
-            structlog.processors.StackWriter({ "line", "file" }, { max_parents = 0, stack_level = 2 }),
+            structlog.processors.Namer(),
           },
           formatter = structlog.formatters.Format( --
             "%s",
-            { "msg" }
+            { "msg" },
+            { blacklist = { "level", "logger_name" } }
           ),
+          params_map = { title = "logger_name" },
         }),
         structlog.sinks.File(Log.levels.TRACE, logfile, {
           processors = {
