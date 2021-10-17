@@ -3,14 +3,24 @@ local M = {}
 package.loaded["lvim.utils.hooks"] = nil
 local _, hooks = pcall(require, "lvim.utils.hooks")
 
+local uv = vim.loop
+local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
+
 ---Join path segments that were passed as input
 ---@return string
 function _G.join_paths(...)
-  local uv = vim.loop
-  local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
   local result = table.concat({ ... }, path_sep)
   return result
 end
+
+---@private
+---Get the parent directory of a path, borrowed from Plenary.Path
+local _get_parent = (function()
+  local formatted = string.format("^(.+)%s[^%s]+", path_sep, path_sep)
+  return function(abs_path)
+    return abs_path:match(formatted)
+  end
+end)()
 
 ---Get the full path to `$LUNARVIM_RUNTIME_DIR`
 ---@return string
@@ -45,13 +55,17 @@ end
 
 ---Get the full path to the currently installed lunarvim repo
 ---@return string
-local function get_install_path()
-  local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
-  if not lvim_runtime_dir then
-    -- when nvim is used directly
-    return vim.fn.stdpath "config"
+local function get_lvim_base_dir()
+  -- we rely on `scriptnames` to get the path to init.lua
+  -- there should only be a single entry at startup
+  local init_lua_path = vim.fn.expand(vim.fn.execute("scriptnames"):match "%S+$")
+  local install_dir = _get_parent(init_lua_path)
+
+  -- we do a fallback just in case
+  if not install_dir:match "lvim$" then
+    install_dir = join_paths(get_runtime_dir(), "lvim")
   end
-  return join_paths(lvim_runtime_dir, "lvim")
+  return install_dir
 end
 
 ---Get currently installed version of LunarVim
@@ -59,7 +73,7 @@ end
 ---@return string
 function _G.get_version(type)
   type = type or ""
-  local lvim_full_ver = vim.fn.system("git -C " .. get_install_path() .. " describe --tags")
+  local lvim_full_ver = vim.fn.system("git -C " .. get_lvim_base_dir() .. " describe --tags")
 
   if string.match(lvim_full_ver, "%d") == nil then
     return nil
@@ -77,7 +91,7 @@ function M:init()
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_path = get_cache_dir()
-  self.install_path = get_install_path()
+  self.base_dir = get_lvim_base_dir()
 
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
@@ -131,7 +145,7 @@ end
 local function git_cmd(subcmd)
   local Job = require "plenary.job"
   local Log = require "lvim.core.log"
-  local args = { "-C", get_install_path() }
+  local args = { "-C", get_lvim_base_dir() }
   vim.list_extend(args, subcmd)
 
   local stderr = {}
@@ -139,7 +153,7 @@ local function git_cmd(subcmd)
     :new({
       command = "git",
       args = args,
-      cwd = get_install_path(),
+      cwd = get_lvim_base_dir(),
       on_stderr = function(_, data)
         table.insert(stderr, data)
       end,
