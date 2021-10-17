@@ -57,9 +57,16 @@ function Log:init()
           formatter = structlog.formatters.Format( --
             "%s",
             { "msg" },
-            { blacklist = { "level", "title" } }
+            { blacklist_all = true }
           ),
-          params_map = { title = "title" },
+          params_map = {
+            icon = "icon",
+            keep = "keep",
+            on_open = "on_open",
+            on_close = "on_close",
+            timeout = "timeout",
+            title = "title",
+          },
         }),
         structlog.sinks.File(Log.levels.TRACE, logfile, {
           processors = {
