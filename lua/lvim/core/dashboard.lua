@@ -70,7 +70,7 @@ M.setup = function()
   vim.g.dashboard_session_directory = lvim.builtin.dashboard.session_directory
 
   local lvim_site = "lunarvim.org"
-  local lvim_version = get_version "short"
+  local lvim_version = require("lvim.bootstrap"):get_version "short"
   local num_plugins_loaded = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/start", "*", 0, 1)
 
   local footer = {
