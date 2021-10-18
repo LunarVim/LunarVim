@@ -749,6 +749,18 @@ Also define keybindings in your `config.lua`
 },
 ```
 
+### [vim-wakatime](https://github.com/wakatime/vim-wakatime)
+
+**metrics, insights, and time tracking automatically generated from your programming activity**
+
+```lua
+{
+  "wakatime/vim-wakatime"
+}
+```
+
+Once installed and synced, add your WakaTime API Key via `:WakaTimeApiKey` command
+
 ## Language specific
 
 ### [bracey](https://github.com/turbio/bracey.vim)
