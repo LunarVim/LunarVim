@@ -1,13 +1,16 @@
 local M = {}
+M.methods = {}
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
+M.methods.check_backspace = check_backspace
 
 local function T(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
+M.methods.T = T
 
 local is_emmet_active = function()
   local clients = vim.lsp.buf_get_clients()
@@ -19,6 +22,7 @@ local is_emmet_active = function()
   end
   return false
 end
+M.methods.is_emmet_active = is_emmet_active
 
 M.config = function()
   local status_cmp_ok, cmp = pcall(require, "cmp")
@@ -48,6 +52,7 @@ M.config = function()
     pos[1] = pos[1] - 1 -- LuaSnip is 0-based not 1-based like nvim for rows
     return pos[1] >= snip_begin_pos[1] and pos[1] <= snip_end_pos[1]
   end
+  M.methods.inside_snippet = inside_snippet
 
   ---sets the current buffer's luasnip to the one nearest the cursor
   ---@return boolean true if a node is found, false otherwise
@@ -120,6 +125,7 @@ M.config = function()
     luasnip.session.current_nodes[get_current_buf()] = nil
     return false
   end
+  M.methods.seek_luasnip_cursor_node = seek_luasnip_cursor_node
 
   lvim.builtin.cmp = {
     confirm_opts = {
