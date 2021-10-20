@@ -19,7 +19,7 @@ end
 
 local function make_formatters_info(ft)
   local null_formatters = require "lvim.lsp.null-ls.formatters"
-  local registered_formatters = null_formatters.list_supported_names(ft)
+  local registered_formatters = null_formatters.list_registered_providers(ft)
   local supported_formatters = null_formatters.list_available(ft)
   local section = {
     "Formatters info",
@@ -37,7 +37,7 @@ end
 local function make_linters_info(ft)
   local null_linters = require "lvim.lsp.null-ls.linters"
   local supported_linters = null_linters.list_available(ft)
-  local registered_linters = null_linters.list_supported_names(ft)
+  local registered_linters = null_linters.list_registered_providers(ft)
   local section = {
     "Linters info",
     fmt(
@@ -151,6 +151,7 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
     vim.cmd 'let m=matchadd("string", "true")'
     vim.cmd 'let m=matchadd("string", "active")'
+    vim.cmd 'let m=matchadd("boolean", "inactive")'
     vim.cmd 'let m=matchadd("string", "")'
     vim.cmd 'let m=matchadd("error", "false")'
     -- tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
