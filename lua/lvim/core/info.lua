@@ -19,7 +19,7 @@ end
 
 local function make_formatters_info(ft)
   local null_formatters = require "lvim.lsp.null-ls.formatters"
-  local registered_formatters = null_formatters.list_supported_names(ft)
+  local registered_formatters = null_formatters.list_registered_providers(ft)
   local supported_formatters = null_formatters.list_available(ft)
   local section = {
     "Formatters info",
@@ -37,7 +37,7 @@ end
 local function make_linters_info(ft)
   local null_linters = require "lvim.lsp.null-ls.linters"
   local supported_linters = null_linters.list_available(ft)
-  local registered_linters = null_linters.list_supported_names(ft)
+  local registered_linters = null_linters.list_registered_providers(ft)
   local section = {
     "Linters info",
     fmt(
