@@ -23,7 +23,6 @@ local function make_formatters_info(ft)
   local supported_formatters = null_formatters.list_available(ft)
   local section = {
     "Formatters info",
-    "",
     fmt(
       "* Active: %s%s",
       table.concat(registered_formatters, "  , "),
@@ -40,9 +39,7 @@ local function make_linters_info(ft)
   local supported_linters = null_linters.list_available(ft)
   local registered_linters = null_linters.list_supported_names(ft)
   local section = {
-    "",
     "Linters info",
-    "",
     fmt(
       "* Active: %s%s",
       table.concat(registered_linters, "  , "),
@@ -104,7 +101,7 @@ function M.toggle_popup(ft)
   local ts_info = {
     "Treesitter info",
     fmt("* current buffer:            %s", is_treesitter_active()),
-    fmt("* other buffers:             [%s]", table.concat(ts_active_buffers, ", ")),
+    fmt("* list:                      [%s]", table.concat(ts_active_buffers, ", ")),
   }
 
   local lsp_info = {
