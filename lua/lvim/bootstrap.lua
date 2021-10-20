@@ -1,4 +1,5 @@
 local M = {}
+local lvim_base_dir
 
 package.loaded["lvim.utils.hooks"] = nil
 local _, hooks = pcall(require, "lvim.utils.hooks")
@@ -45,26 +46,16 @@ function _G.get_cache_dir()
 end
 
 function _G.get_lvim_base_dir()
-  -- assume it's cloned as a neovim configuration by default
-  local base_dir = vim.fn.stdpath "config"
-
-  -- otherwise it should found under **/lunarvim/lvim
-  for _, path in ipairs(vim.opt.rtp:get()) do
-    if path:match("lunarvim" .. path_sep .. "lvim") then
-      base_dir = path
-    end
-  end
-
-  return base_dir
+  return lvim_base_dir
 end
 
 ---Initialize the `&runtimepath` variables and prepare for startup
 ---@return table
-function M:init()
+function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_path = get_cache_dir()
-  self.base_dir = get_lvim_base_dir()
+  lvim_base_dir = base_dir
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
@@ -153,7 +144,7 @@ function M:update_repo()
     merge = { "merge", "--ff-only", "--progress" },
   }
   local opts = {
-    cwd = self.base_dir,
+    cwd = get_lvim_base_dir(),
   }
   Log:info "Checking for updates"
 
@@ -183,7 +174,7 @@ end
 ---@return string
 function M:get_version(type)
   type = type or ""
-  local opts = { cwd = self.base_dir }
+  local opts = { cwd = get_lvim_base_dir() }
   local status_ok, results = git_cmd({ "describe", "--tags" }, opts)
   local lvim_full_ver = results[1] or ""
 
