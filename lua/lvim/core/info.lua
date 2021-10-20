@@ -151,6 +151,7 @@ function M.toggle_popup(ft)
     vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
     vim.cmd 'let m=matchadd("string", "true")'
     vim.cmd 'let m=matchadd("string", "active")'
+    vim.cmd 'let m=matchadd("boolean", "inactive")'
     vim.cmd 'let m=matchadd("string", "")'
     vim.cmd 'let m=matchadd("error", "false")'
     -- tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
