@@ -1,5 +1,4 @@
 local M = {}
-local lvim_base_dir
 
 package.loaded["lvim.utils.hooks"] = nil
 local _, hooks = pcall(require, "lvim.utils.hooks")
@@ -45,20 +44,21 @@ function _G.get_cache_dir()
   return lvim_cache_dir
 end
 
-function _G.get_lvim_base_dir()
-  return lvim_base_dir
-end
-
 ---Initialize the `&runtimepath` variables and prepare for startup
 ---@return table
 function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_path = get_cache_dir()
-  lvim_base_dir = base_dir
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
+
+  ---Get the full path to LunarVim's base directory
+  ---@return string
+  function _G.get_lvim_base_dir()
+    return base_dir
+  end
 
   if os.getenv "LUNARVIM_RUNTIME_DIR" then
     -- vim.opt.rtp:append(os.getenv "LUNARVIM_RUNTIME_DIR" .. path_sep .. "lvim")
