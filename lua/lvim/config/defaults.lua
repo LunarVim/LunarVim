@@ -8,6 +8,12 @@ return {
 
   builtin = {},
 
+  plugins = {
+    -- use config.lua for this not put here
+  },
+
+  autocommands = {},
+  lang = {},
   log = {
     ---@usage can be { "trace", "debug", "info", "warn", "error", "fatal" },
     level = "warn",
@@ -22,11 +28,7 @@ return {
         float_opts = {},
       },
     },
+    ---@usage set to false to restore the default behavior of vim.notify
+    override_notify = true,
   },
-  plugins = {
-    -- use config.lua for this not put here
-  },
-
-  autocommands = {},
-  lang = {},
 }
