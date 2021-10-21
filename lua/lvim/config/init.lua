@@ -27,6 +27,9 @@ function M:init()
   local settings = require "lvim.config.settings"
   settings.load_options()
 
+  local autocmds = require "lvim.core.autocmds"
+  lvim.autocommands = autocmds.load_augroups()
+
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = vim.deepcopy(lvim_lsp_config)
 

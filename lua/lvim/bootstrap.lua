@@ -3,11 +3,12 @@ local M = {}
 package.loaded["lvim.utils.hooks"] = nil
 local _, hooks = pcall(require, "lvim.utils.hooks")
 
+local uv = vim.loop
+local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
+
 ---Join path segments that were passed as input
 ---@return string
 function _G.join_paths(...)
-  local uv = vim.loop
-  local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
   local result = table.concat({ ... }, path_sep)
   return result
 end
@@ -18,7 +19,7 @@ function _G.get_runtime_dir()
   local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
   if not lvim_runtime_dir then
     -- when nvim is used directly
-    return vim.fn.stdpath "config"
+    return vim.fn.stdpath "data"
   end
   return lvim_runtime_dir
 end
@@ -43,47 +44,24 @@ function _G.get_cache_dir()
   return lvim_cache_dir
 end
 
----Get the full path to the currently installed lunarvim repo
----@return string
-local function get_install_path()
-  local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
-  if not lvim_runtime_dir then
-    -- when nvim is used directly
-    return vim.fn.stdpath "config"
-  end
-  return join_paths(lvim_runtime_dir, "lvim")
-end
-
----Get currently installed version of LunarVim
----@param type string can be "short"
----@return string
-function _G.get_version(type)
-  type = type or ""
-  local lvim_full_ver = vim.fn.system("git -C " .. get_install_path() .. " describe --tags")
-
-  if string.match(lvim_full_ver, "%d") == nil then
-    return nil
-  end
-  if type == "short" then
-    return vim.fn.split(lvim_full_ver, "-")[1]
-  else
-    return string.sub(lvim_full_ver, 1, #lvim_full_ver - 1)
-  end
-end
-
 ---Initialize the `&runtimepath` variables and prepare for startup
 ---@return table
-function M:init()
+function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_path = get_cache_dir()
-  self.install_path = get_install_path()
-
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
 
+  ---Get the full path to LunarVim's base directory
+  ---@return string
+  function _G.get_lvim_base_dir()
+    return base_dir
+  end
+
   if os.getenv "LUNARVIM_RUNTIME_DIR" then
+    -- vim.opt.rtp:append(os.getenv "LUNARVIM_RUNTIME_DIR" .. path_sep .. "lvim")
     vim.opt.rtp:remove(join_paths(vim.fn.stdpath "data", "site"))
     vim.opt.rtp:remove(join_paths(vim.fn.stdpath "data", "site", "after"))
     vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
@@ -128,10 +106,10 @@ function M:update()
   hooks.run_post_update()
 end
 
-local function git_cmd(subcmd)
+local function git_cmd(subcmd, opts)
   local Job = require "plenary.job"
   local Log = require "lvim.core.log"
-  local args = { "-C", get_install_path() }
+  local args = { "-C", opts.cwd }
   vim.list_extend(args, subcmd)
 
   local stderr = {}
@@ -139,7 +117,7 @@ local function git_cmd(subcmd)
     :new({
       command = "git",
       args = args,
-      cwd = get_install_path(),
+      cwd = opts.cwd,
       on_stderr = function(_, data)
         table.insert(stderr, data)
       end,
@@ -154,7 +132,7 @@ local function git_cmd(subcmd)
     Log:debug(stdout)
   end
 
-  return ret
+  return ret, stdout
 end
 
 ---pulls the latest changes from github
@@ -165,26 +143,48 @@ function M:update_repo()
     diff = { "diff", "--quiet", "@{upstream}" },
     merge = { "merge", "--ff-only", "--progress" },
   }
+  local opts = {
+    cwd = get_lvim_base_dir(),
+  }
   Log:info "Checking for updates"
 
-  local ret = git_cmd(sub_commands.fetch)
+  local ret = git_cmd(sub_commands.fetch, opts)
   if ret ~= 0 then
     Log:error "Update failed! Check the log for further information"
     return
   end
 
-  ret = git_cmd(sub_commands.diff)
+  ret = git_cmd(sub_commands.diff, opts)
 
   if ret == 0 then
     Log:info "LunarVim is already up-to-date"
     return
   end
 
-  ret = git_cmd(sub_commands.merge)
+  ret = git_cmd(sub_commands.merge, opts)
 
   if ret ~= 0 then
     Log:error "Update failed! Please pull the changes manually instead."
     return
+  end
+end
+
+---Get currently installed version of LunarVim
+---@param type string can be "short"
+---@return string
+function M:get_version(type)
+  type = type or ""
+  local opts = { cwd = get_lvim_base_dir() }
+  local status_ok, results = git_cmd({ "describe", "--tags" }, opts)
+  local lvim_full_ver = results[1] or ""
+
+  if not status_ok or string.match(lvim_full_ver, "%d") == nil then
+    return nil
+  end
+  if type == "short" then
+    return vim.fn.split(lvim_full_ver, "-")[1]
+  else
+    return string.sub(lvim_full_ver, 1, #lvim_full_ver - 1)
   end
 end
 

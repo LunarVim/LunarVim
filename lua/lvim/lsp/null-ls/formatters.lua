@@ -4,7 +4,7 @@ local null_ls = require "null-ls"
 local services = require "lvim.lsp.null-ls.services"
 local Log = require "lvim.core.log"
 
-function M.list_supported_names(filetype)
+function M.list_registered_providers(filetype)
   local null_ls_methods = require "null-ls.methods"
   local formatter_method = null_ls_methods.internal["FORMATTING"]
   local registered_providers = services.list_registered_providers_names(filetype)

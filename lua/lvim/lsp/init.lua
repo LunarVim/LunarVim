@@ -86,15 +86,14 @@ function M.common_capabilities()
 end
 
 local function select_default_formater(client)
-  local client_formatting = client.resolved_capabilities.document_formatting
-    or client.resolved_capabilities.document_range_formatting
-  if client.name == "null-ls" or not client_formatting then
+  if client.name == "null-ls" or not client.resolved_capabilities.document_formatting then
     return
   end
   Log:debug("Checking for formatter overriding for " .. client.name)
+  local formatters = require "lvim.lsp.null-ls.formatters"
   local client_filetypes = client.config.filetypes or {}
   for _, filetype in ipairs(client_filetypes) do
-    if lvim.lang[filetype] and #vim.tbl_keys(lvim.lang[filetype].formatters) > 0 then
+    if #vim.tbl_keys(formatters.list_registered_providers(filetype)) > 0 then
       Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
       client.resolved_capabilities.document_formatting = false
       client.resolved_capabilities.document_range_formatting = false

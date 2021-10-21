@@ -8,6 +8,8 @@ return {
   {
     "williamboman/nvim-lsp-installer",
   },
+  { "rcarriga/nvim-notify" },
+  { "Tastyep/structlog.nvim" },
 
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
@@ -17,6 +19,11 @@ return {
     config = function()
       require("lvim.core.telescope").setup()
     end,
+    disable = not lvim.builtin.telescope.active,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
     disable = not lvim.builtin.telescope.active,
   },
   -- Install nvim-cmp, and buffer source as a dependency
