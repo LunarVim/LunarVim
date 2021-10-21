@@ -89,6 +89,10 @@ function Log:init()
     -- Overwrite vim.notify to use the logger
     vim.notify = function(msg, vim_log_level, opts)
       nvim_notify_params = opts or {}
+      -- vim_log_level can be omitted
+      if type(vim_log_level) == "string" then
+        vim_log_level = Log.levels[(vim_log_level):upper() or "INFO"]
+      end
       -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
       logger:log(vim_log_level + 1, msg)
     end
