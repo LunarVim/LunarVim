@@ -9,7 +9,7 @@
 ## Install Language Server
 
 ```vim
-:LspInstall rust
+:LspInstall rust_analyzer
 ```
 
 ## Formatters
@@ -58,9 +58,9 @@ lvim.plugins = {
           },
         },
         server = {
-          cmd = { vim.fn.stdpath "data" .. "/lspinstall/rust/rust-analyzer" },
-          on_attach = require("lsp").common_on_attach,
-          on_init = require("lsp").common_on_init,
+          cmd = { vim.fn.stdpath "data" .. "/lsp_servers/rust/rust-analyzer" },
+          on_attach = require("lvim.lsp").common_on_attach,
+          on_init = require("lvim.lsp").common_on_init,
         },
         })
     end,
