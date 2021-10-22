@@ -1,6 +1,7 @@
 local Log = {}
 
 local logfile = string.format("%s/%s.log", vim.fn.stdpath "cache", "lvim")
+local in_headless = #vim.api.nvim_list_uis() == 0
 
 Log.levels = {
   TRACE = 1,
@@ -33,7 +34,7 @@ function Log:init()
 
   nvim_notify_params_injecter(nil, {})
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
-  structlog.configure {
+  local lvim_log = {
     lvim = {
       sinks = {
         structlog.sinks.Console(log_level, {
@@ -48,25 +49,6 @@ function Log:init()
             { "timestamp", "level", "logger_name", "msg" },
             { level = structlog.formatters.FormatColorizer.color_level() }
           ),
-        }),
-        structlog.sinks.NvimNotify(Log.levels.INFO, {
-          processors = {
-            nvim_notify_default_namer,
-            nvim_notify_params_injecter,
-          },
-          formatter = structlog.formatters.Format( --
-            "%s",
-            { "msg" },
-            { blacklist_all = true }
-          ),
-          params_map = {
-            icon = "icon",
-            keep = "keep",
-            on_open = "on_open",
-            on_close = "on_close",
-            timeout = "timeout",
-            title = "title",
-          },
         }),
         structlog.sinks.File(Log.levels.TRACE, logfile, {
           processors = {
@@ -83,12 +65,39 @@ function Log:init()
     },
   }
 
+  if not in_headless and lvim.builtin.notify.active then
+    table.insert(
+      lvim_log.lvim.sinks,
+      structlog.sinks.NvimNotify(Log.levels.INFO, {
+        processors = {
+          nvim_notify_default_namer,
+          nvim_notify_params_injecter,
+        },
+        formatter = structlog.formatters.Format( --
+          "%s",
+          { "msg" },
+          { blacklist_all = true }
+        ),
+        params_map = {
+          icon = "icon",
+          keep = "keep",
+          on_open = "on_open",
+          on_close = "on_close",
+          timeout = "timeout",
+          title = "title",
+        },
+      })
+    )
+  end
+
+  structlog.configure(lvim_log)
+
   local logger = structlog.get_logger "lvim"
 
-  if lvim.log.override_notify then
+  if not in_headless and lvim.builtin.notify.active and lvim.log.override_notify then
     -- Overwrite vim.notify to use the logger
     vim.notify = function(msg, vim_log_level, opts)
-      nvim_notify_params = opts or {}
+      nvim_notify_params = vim.tbl_deep_extend("force", lvim.builtin.notify.opts, opts)
       -- vim_log_level can be omitted
       if vim_log_level == nil then
         vim_log_level = Log.levels["INFO"]
@@ -109,7 +118,7 @@ end
 ---@param level string [same as vim.log.log_levels]
 function Log:add_entry(level, msg, event)
   if self.__handle then
-    self.__handle:log(level, msg, event)
+    self.__handle:log(level, vim.inspect(msg), event)
     return
   end
 
@@ -119,7 +128,7 @@ function Log:add_entry(level, msg, event)
   end
 
   self.__handle = logger
-  self.__handle:log(level, msg, event)
+  self.__handle:log(level, vim.inspect(msg), event)
 end
 
 ---Retrieves the path of the logfile

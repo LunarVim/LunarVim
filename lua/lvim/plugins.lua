@@ -8,7 +8,10 @@ return {
   {
     "williamboman/nvim-lsp-installer",
   },
-  { "rcarriga/nvim-notify" },
+  {
+    "rcarriga/nvim-notify",
+    disable = not lvim.builtin.notify.active,
+  },
   { "Tastyep/structlog.nvim" },
 
   { "nvim-lua/popup.nvim" },
