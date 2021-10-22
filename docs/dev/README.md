@@ -5,7 +5,7 @@ We recommend setting up a symlink to your fork:
 
 ```bash
 cd ~/.local/share/lunarvim/
-ls -s ~/dev/Lunarvim ~/.local/share/lunarvim/lvim_dev
+ln -s ~/dev/Lunarvim ~/.local/share/lunarvim/lvim_dev
 ```
 
 Your output should be something like:
