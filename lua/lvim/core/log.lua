@@ -1,6 +1,7 @@
 local Log = {}
 
 local logfile = string.format("%s/%s.log", vim.fn.stdpath "cache", "lvim")
+local in_headless = #vim.api.nvim_list_uis() == 0
 
 Log.levels = {
   TRACE = 1,
@@ -64,7 +65,7 @@ function Log:init()
     },
   }
 
-  if lvim.builtin.notify.active then
+  if not in_headless and lvim.builtin.notify.active then
     table.insert(
       lvim_log.lvim.sinks,
       structlog.sinks.NvimNotify(Log.levels.INFO, {
@@ -93,7 +94,7 @@ function Log:init()
 
   local logger = structlog.get_logger "lvim"
 
-  if lvim.builtin.notify.active and lvim.log.override_notify then
+  if not in_headless and lvim.builtin.notify.active and lvim.log.override_notify then
     -- Overwrite vim.notify to use the logger
     vim.notify = function(msg, vim_log_level, opts)
       nvim_notify_params = vim.tbl_deep_extend("force", lvim.builtin.notify.opts, opts)
