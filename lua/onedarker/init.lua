@@ -13,6 +13,7 @@ local highlights = require "onedarker.highlights"
 local Treesitter = require "onedarker.Treesitter"
 local markdown = require "onedarker.markdown"
 local Whichkey = require "onedarker.Whichkey"
+local Notify = require "onedarker.Notify"
 local Git = require "onedarker.Git"
 local LSP = require "onedarker.LSP"
 local diff = require "onedarker.diff"
@@ -22,6 +23,7 @@ local skeletons = {
   Treesitter,
   markdown,
   Whichkey,
+  Notify,
   Git,
   LSP,
   diff,

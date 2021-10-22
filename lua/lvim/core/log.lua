@@ -109,7 +109,7 @@ end
 ---@param level string [same as vim.log.log_levels]
 function Log:add_entry(level, msg, event)
   if self.__handle then
-    self.__handle:log(level, msg, event)
+    self.__handle:log(level, vim.inspect(msg), event)
     return
   end
 
@@ -119,7 +119,7 @@ function Log:add_entry(level, msg, event)
   end
 
   self.__handle = logger
-  self.__handle:log(level, msg, event)
+  self.__handle:log(level, vim.inspect(msg), event)
 end
 
 ---Retrieves the path of the logfile
