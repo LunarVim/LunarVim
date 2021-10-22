@@ -90,6 +90,9 @@ function Log:init()
     vim.notify = function(msg, vim_log_level, opts)
       nvim_notify_params = opts or {}
       -- vim_log_level can be omitted
+      if vim_log_level == nil then
+        vim_log_level = Log.levels["INFO"]
+      end
       if type(vim_log_level) == "string" then
         vim_log_level = Log.levels[(vim_log_level):upper() or "INFO"]
       end
