@@ -18,20 +18,6 @@ function Log:init()
     return nil
   end
 
-  local notify_handler = require "lvim.core.notify"
-
-  ---Check if notify is available
-  ---@return boolean
-  local is_notify_available = function()
-    local in_headless = #vim.api.nvim_list_uis() == 0
-    --We can't rely on lvim.builtin.notify.active since this can be used before the config loader
-    local has_notify_plugin = pcall(require, "notify")
-    if not in_headless and has_notify_plugin then
-      return true
-    end
-    return false
-  end
-
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   local lvim_log = {
     lvim = {
@@ -64,49 +50,53 @@ function Log:init()
     },
   }
 
-  if is_notify_available() then
-    table.insert(
-      lvim_log.lvim.sinks,
-      structlog.sinks.NvimNotify(Log.levels.INFO, {
-        processors = {
-          notify_handler.default_namer,
-          notify_handler.params_injecter,
-        },
-        formatter = structlog.formatters.Format( --
-          "%s",
-          { "msg" },
-          { blacklist_all = true }
-        ),
-        params_map = {
-          icon = "icon",
-          keep = "keep",
-          on_open = "on_open",
-          on_close = "on_close",
-          timeout = "timeout",
-          title = "title",
-        },
-      })
-    )
-  end
-
   structlog.configure(lvim_log)
-
   local logger = structlog.get_logger "lvim"
 
-  if lvim.log.override_notify then
-    logger:log(Log.levels.INFO, "Ignoring request to override vim.notify with structlog due to instabilities")
+  -- Overwrite vim.notify to use the logger
+  vim.notify = function(msg, vim_log_level, opts)
+    -- nvim_notify_params = vim.tbl_deep_extend("force", lvim.builtin.notify.opts, opts)
+    -- vim_log_level can be omitted
+    opts = opts or {}
+    if vim_log_level == nil then
+      vim_log_level = Log.levels["INFO"]
+    end
+    if type(vim_log_level) == "string" then
+      vim_log_level = Log.levels[(vim_log_level):upper() or "INFO"]
+    end
+    logger.context = opts or {}
+    -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
+    logger:log(vim_log_level + 1, msg)
+    logger.context = {}
   end
 
   return logger
 end
 
+---Override the default configuration of a sink
+---@param name string Console|NvimNotify|File|RotatingFile
+---@param sink table same as the one returned by structlog.sinks.MODULE:new(...)
+function Log:configure_sink(name, sink)
+  if self.__handle.sinks[name] then
+    self.__handle.sinks[name] = sink
+  else
+    table.insert(self.__handle.sinks, sink)
+  end
+end
+
 --- Adds a log entry using Plenary.log
----@fparam msg any
+---@param msg any
 ---@param level string [same as vim.log.log_levels]
 function Log:add_entry(level, msg, event)
+  local logger = self:get_logger()
+  logger:log(level, vim.inspect(msg), event)
+end
+
+---Retrieves the handle of the logger object
+---@return table|nil logger handle if found
+function Log:get_logger()
   if self.__handle then
-    self.__handle:log(level, vim.inspect(msg), event)
-    return
+    return self.__handle
   end
 
   local logger = self:init()
@@ -115,7 +105,7 @@ function Log:add_entry(level, msg, event)
   end
 
   self.__handle = logger
-  self.__handle:log(level, vim.inspect(msg), event)
+  return logger
 end
 
 ---Retrieves the path of the logfile

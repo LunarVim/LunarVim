@@ -11,6 +11,10 @@ return {
   {
     "rcarriga/nvim-notify",
     disable = not lvim.builtin.notify.active,
+    config = function()
+      require("lvim.core.notify").setup()
+    end,
+    event = "BufRead",
   },
   { "Tastyep/structlog.nvim" },
 
