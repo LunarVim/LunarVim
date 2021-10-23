@@ -53,6 +53,10 @@ return {
     "rcarriga/nvim-notify",
     commit = commit.nvim_notify,
     disable = not lvim.builtin.notify.active,
+    config = function()
+      require("lvim.core.notify").setup()
+    end,
+    event = "BufRead",
   },
   { "Tastyep/structlog.nvim", commit = commit.structlog },
 
