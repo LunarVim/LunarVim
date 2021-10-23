@@ -49,14 +49,13 @@ function M.get_client_capabilities(client_id)
 end
 
 function M.get_supported_filetypes(server_name)
-  -- print("got filetypes query request for: " .. server_name)
-  local configs = require "lspconfig/configs"
-  pcall(require, ("lspconfig/" .. server_name))
-  for _, config in pairs(configs) do
-    if config.name == server_name then
-      return config.document_config.default_config.filetypes or {}
-    end
+  local lsp_installer_servers = require "nvim-lsp-installer.servers"
+  local server_available, requested_server = lsp_installer_servers.get_server(server_name)
+  if not server_available then
+    return {}
   end
+
+  return requested_server:get_supported_filetypes()
 end
 
 return M
