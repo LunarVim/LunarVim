@@ -10,15 +10,19 @@ local generic_opts = {
   visual_block_mode = generic_opts_any,
   command_mode = generic_opts_any,
   term_mode = { silent = true },
+  operator_mode = generic_opts_any,
+  map_mode = generic_opts_any,
 }
 
 local mode_adapters = {
   insert_mode = "i",
   normal_mode = "n",
-  term_mode = "t",
   visual_mode = "v",
   visual_block_mode = "x",
   command_mode = "c",
+  term_mode = "t",
+  operator_mode = "o",
+  map_mode = "",
 }
 
 -- Append key mappings to lunarvim's defaults for a given mode
@@ -36,7 +40,8 @@ end
 -- @param key The key of keymap
 -- @param val Can be form as a mapping or tuple of mapping and user defined opt
 function M.set_keymaps(mode, key, val)
-  local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+  local opt = generic_opts[mode] or generic_opts_any
+  mode = mode_adapters[mode]
   if type(val) == "table" then
     opt = val[2]
     val = val[1]
@@ -48,7 +53,6 @@ end
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param keymaps The list of key mappings
 function M.load_mode(mode, keymaps)
-  mode = mode_adapters[mode] and mode_adapters[mode] or mode
   for k, v in pairs(keymaps) do
     M.set_keymaps(mode, k, v)
   end
