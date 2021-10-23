@@ -111,7 +111,7 @@ function M.config()
       ["]q"] = ":cnext<CR>",
       ["[q"] = ":cprev<CR>",
       ["<C-q>"] = ":call QuickFixToggle()<CR>",
-      
+
       -- Remap for dealing with word wrap
       k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
       j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
@@ -124,7 +124,7 @@ function M.config()
       ["<C-j>"] = "<C-\\><C-N><C-w>j",
       ["<C-k>"] = "<C-\\><C-N><C-w>k",
       ["<C-l>"] = "<C-\\><C-N><C-w>l",
-      
+
       -- quitting insert mode
       JJ = "<C-\\><C-N>",
       JK = "<C-\\><C-N>",
@@ -138,7 +138,7 @@ function M.config()
 
       -- ["p"] = '"0p',
       -- ["P"] = '"0P',
-      
+
       -- Select to start and end quickly
       H = "^",
       L = "$",
