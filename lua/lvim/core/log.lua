@@ -1,7 +1,6 @@
 local Log = {}
 
 local logfile = string.format("%s/%s.log", vim.fn.stdpath "cache", "lvim")
-local in_headless = #vim.api.nvim_list_uis() == 0
 
 Log.levels = {
   TRACE = 1,
@@ -19,20 +18,20 @@ function Log:init()
     return nil
   end
 
-  local nvim_notify_params = {}
-  local nvim_notify_params_injecter = function(_, entry)
-    for key, value in pairs(nvim_notify_params) do
-      entry[key] = value
+  local notify_handler = require "lvim.core.notify"
+
+  ---Check if notify is available
+  ---@return boolean
+  local is_notify_available = function()
+    local in_headless = #vim.api.nvim_list_uis() == 0
+    --We can't rely on lvim.builtin.notify.active since this can be used before the config loader
+    local has_notify_plugin = pcall(require, "notify")
+    if not in_headless and has_notify_plugin then
+      return true
     end
-    return entry
+    return false
   end
 
-  local nvim_notify_default_namer = function(logger, entry)
-    entry["title"] = logger.name
-    return entry
-  end
-
-  nvim_notify_params_injecter(nil, {})
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   local lvim_log = {
     lvim = {
@@ -65,13 +64,13 @@ function Log:init()
     },
   }
 
-  if not in_headless and lvim.builtin.notify.active then
+  if is_notify_available() then
     table.insert(
       lvim_log.lvim.sinks,
       structlog.sinks.NvimNotify(Log.levels.INFO, {
         processors = {
-          nvim_notify_default_namer,
-          nvim_notify_params_injecter,
+          notify_handler.default_namer,
+          notify_handler.params_injecter,
         },
         formatter = structlog.formatters.Format( --
           "%s",
@@ -94,20 +93,8 @@ function Log:init()
 
   local logger = structlog.get_logger "lvim"
 
-  if not in_headless and lvim.builtin.notify.active and lvim.log.override_notify then
-    -- Overwrite vim.notify to use the logger
-    vim.notify = function(msg, vim_log_level, opts)
-      nvim_notify_params = vim.tbl_deep_extend("force", lvim.builtin.notify.opts, opts)
-      -- vim_log_level can be omitted
-      if vim_log_level == nil then
-        vim_log_level = Log.levels["INFO"]
-      end
-      if type(vim_log_level) == "string" then
-        vim_log_level = Log.levels[(vim_log_level):upper() or "INFO"]
-      end
-      -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
-      logger:log(vim_log_level + 1, msg)
-    end
+  if lvim.log.override_notify then
+    logger:log(Log.levels.INFO, "Ignoring request to override vim.notify with structlog due to instabilities")
   end
 
   return logger
