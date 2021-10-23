@@ -31,7 +31,7 @@ local mode_adapters = {
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.append_to_defaults(keymaps)
   for mode, mappings in pairs(keymaps) do
-    for k, v in ipairs(mappings) do
+    for k, v in pairs(mappings) do
       lvim.keys[mode][k] = v
     end
   end
@@ -103,10 +103,6 @@ function M.config()
       ["<C-Left>"] = ":vertical resize -2<CR>",
       ["<C-Right>"] = ":vertical resize +2<CR>",
 
-      -- Tab switch buffer
-      ["<S-l>"] = ":BufferNext<CR>",
-      ["<S-h>"] = ":BufferPrevious<CR>",
-
       -- Move current line / block with Alt-j/k a la vscode.
       ["<A-j>"] = ":m .+1<CR>==",
       ["<A-k>"] = ":m .-2<CR>==",
@@ -115,6 +111,10 @@ function M.config()
       ["]q"] = ":cnext<CR>",
       ["[q"] = ":cprev<CR>",
       ["<C-q>"] = ":call QuickFixToggle()<CR>",
+      
+      -- Remap for dealing with word wrap
+      k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
+      j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
     },
 
     ---@usage change or add keymappings for terminal mode
@@ -124,6 +124,10 @@ function M.config()
       ["<C-j>"] = "<C-\\><C-N><C-w>j",
       ["<C-k>"] = "<C-\\><C-N><C-w>k",
       ["<C-l>"] = "<C-\\><C-N><C-w>l",
+      
+      -- quitting insert mode
+      JJ = "<C-\\><C-N>",
+      JK = "<C-\\><C-N>",
     },
 
     ---@usage change or add keymappings for visual mode
@@ -134,6 +138,10 @@ function M.config()
 
       -- ["p"] = '"0p',
       -- ["P"] = '"0P',
+      
+      -- Select to start and end quickly
+      H = "^",
+      L = "$",
     },
 
     ---@usage change or add keymappings for visual block mode
@@ -153,6 +161,20 @@ function M.config()
       -- runs conditionally
       ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
       ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
+    },
+
+    operator_mode = {
+      -- Operate to start and end quickly
+      H = "^",
+      L = "$",
+    },
+
+    map_mode = {},
+
+    insert_command_mode = {
+      -- Words forward
+      ["<A-f>"] = "<S-Right>",
+      ["<A-b>"] = "<S-Left>",
     },
   }
 
