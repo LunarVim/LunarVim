@@ -12,6 +12,7 @@ local generic_opts = {
   term_mode = { silent = true },
   operator_mode = generic_opts_any,
   map_mode = generic_opts_any,
+  insert_command_mode = generic_opts_any,
 }
 
 local mode_adapters = {
@@ -23,6 +24,7 @@ local mode_adapters = {
   term_mode = "t",
   operator_mode = "o",
   map_mode = "",
+  insert_command_mode = "!",
 }
 
 -- Append key mappings to lunarvim's defaults for a given mode
