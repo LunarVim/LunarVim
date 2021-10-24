@@ -12,6 +12,8 @@
 :LspInstall jdtls
 ```
 
+NOTE: jdtls requires jdk-11 or newer to run.
+
 ## Formatters
 
 (TODO)
