@@ -70,6 +70,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Configure builtin plugins
 lvim.builtin.dashboard.active = true
+lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
