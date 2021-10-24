@@ -11,12 +11,11 @@ M.config = function()
       },
     },
   }
+  local keymap = require "lvim.keymappings"
+  keymap.append_to_defaults(lvim.builtin.bufferline.keymap)
 end
 
 M.setup = function()
-  local keymap = require "lvim.keymappings"
-  keymap.append_to_defaults(lvim.builtin.bufferline.keymap)
-
   if lvim.builtin.bufferline.on_config_done then
     lvim.builtin.bufferline.on_config_done()
   end
