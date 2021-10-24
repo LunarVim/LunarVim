@@ -152,7 +152,7 @@ formatters.setup({{exe = "prettier", filetypes = {"javascript", "json"} }})
 
 _Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
 
-This method will not disable the formatting capability of the respective language server. Thus, you might start getting prompted to select it as a formatter. You need to disable this capability manually to avoid that.
+If you start getting prompted to select some server as a formatter, then you will need to disable its formatting capabilities manually:
 
 ```lua
 -- here's an example to disable formatting in "tsserver" and "jsonls"
