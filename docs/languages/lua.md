@@ -8,7 +8,9 @@
 
 ## Install Language Server
 
-(TODO)
+```vim
+:LspInstall sumneko_lua
+```
 
 ## Formatters
 
