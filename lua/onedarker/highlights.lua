@@ -42,7 +42,7 @@ local highlights = {
   CursorIM = { fg = C.cursor_fg, bg = C.cursor_bg },
   TermCursor = { fg = C.cursor_fg, bg = C.cursor_bg },
   TermCursorNC = { fg = C.cursor_fg, bg = C.cursor_bg },
-  Conceal = { fg = C.accent },
+  Conceal = { fg = C.accent, bg = Config.transparent_background and "NONE" or C.bg },
   Directory = { fg = C.blue },
   SpecialKey = { fg = C.blue, style = "bold" },
   Title = { fg = C.blue, style = "bold" },

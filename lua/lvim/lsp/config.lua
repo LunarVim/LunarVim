@@ -15,7 +15,6 @@ return {
     underline = true,
     severity_sort = true,
   },
-  override = {},
   document_highlight = true,
   code_lens_refresh = true,
   popup_border = "single",
@@ -41,5 +40,19 @@ return {
   },
   null_ls = {
     setup = {},
+  },
+  override = {
+    "angularls",
+    "ansiblels",
+    "denols",
+    "ember",
+    "jedi_language_server",
+    "pylsp",
+    "rome",
+    "sqlls",
+    "sqls",
+    "stylelint_lsp",
+    "tailwindcss",
+    "volar",
   },
 }

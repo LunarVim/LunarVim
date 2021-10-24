@@ -28,7 +28,7 @@ return {
         float_opts = {},
       },
     },
-    ---@usage set to false to restore the default behavior of vim.notify
-    override_notify = true,
+    -- currently disabled due to instabilities
+    override_notify = false,
   },
 }

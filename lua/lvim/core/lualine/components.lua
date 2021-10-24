@@ -122,11 +122,14 @@ return {
   progress = { "progress", cond = conditions.hide_in_width, color = {} },
   spaces = {
     function()
-      local label = "Spaces: "
       if not vim.api.nvim_buf_get_option(0, "expandtab") then
-        label = "Tab size: "
+        return "Tab size: " .. vim.api.nvim_buf_get_option(0, "tabstop") .. " "
       end
-      return label .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
+      local size = vim.api.nvim_buf_get_option(0, "shiftwidth")
+      if size == 0 then
+        size = vim.api.nvim_buf_get_option(0, "tabstop")
+      end
+      return "Spaces: " .. size .. " "
     end,
     cond = conditions.hide_in_width,
     color = {},
