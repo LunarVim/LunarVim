@@ -126,6 +126,12 @@ M.config = function()
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
+    completion = {
+      ---@usage vim's `completeopt` setting. Warning: Be careful when changing this value.
+      completeopt = "menu,menuone,noinsert",
+      ---@usage The minimum length of a word to complete on.
+      keyword_length = 1,
+    },
     experimental = {
       ghost_text = true,
       native_menu = false,
@@ -241,7 +247,7 @@ M.config = function()
       }),
 
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
+      ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping(function(fallback)
         if cmp.visible() and cmp.confirm(lvim.builtin.cmp.confirm_opts) then
           return
