@@ -101,10 +101,6 @@ local opts = {} -- check the lspconfig documentation for a list of all possible 
 require("lvim.lsp.manager").setup("pyright", opts)
 ```
 
-### Blacklisting a server
-
-If you want to exclude a certain server while maintaining the auto-installation functionality then you can choose to override it. This will prevent it from being re-installed again and will also mean that you have to configure it manually.
-
 ## Formatting
 
 To enable formatting for `javascript` for example, add the following to your `config.lua`
