@@ -23,7 +23,7 @@ lvim.plugins = {
     {
       "scalameta/nvim-metals",
       config = function()
-        local metals_config = require("metals").bare_config
+        local metals_config = require("metals").bare_config()
         metals_config.on_attach = function()
           require("lsp").common_on_attach()
         end
