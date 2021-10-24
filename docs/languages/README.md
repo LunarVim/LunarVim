@@ -87,10 +87,11 @@ _Note: Make sure to install `jsonls` for autocompletion._
 
 ### Overriding the default configuration
 
-Add this to you `config.lua`
+To select which servers should be configured manually, add this to you `config.lua` and then do `LvimCacheReset`.
 
 ```lua
-lvim.lsp.override = { "pyright" }
+-- check the full default list `:lua print(vim.inspect(lvim.lsp.override))`
+vim.list_extend(lvim.lsp.override, { "pyright" })
 ```
 
 Now you can either set it up manually, or replace only a subset of LunarVim's default options
