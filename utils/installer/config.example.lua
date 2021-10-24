@@ -83,7 +83,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- lvim.lsp.automatic_servers_installation = false
 
 -- ---@usage select which servers should be configured manually. `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyrigh" })
+-- vim.list_extend(lvim.lsp.override, { "pyright" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options

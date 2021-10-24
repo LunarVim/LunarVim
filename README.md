@@ -80,7 +80,7 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.lsp.diagnostics.virtual_text = false
 
 -- Select which servers should be configured manually. `:lua print(vim.inspect(lvim.lsp.override))`
-vim.list_extend(lvim.lsp.override, { "pyrigh" })
+vim.list_extend(lvim.lsp.override, { "pyright" })
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
