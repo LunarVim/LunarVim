@@ -137,10 +137,10 @@ local function jumpable(dir)
     return false
   end
 
-  if dir ~= -1 then
-    return inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable()
-  else
+  if dir == -1 then
     return inside_snippet() and luasnip.jumpable(-1)
+  else
+    return inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable()
   end
 end
 M.methods.jumpable = jumpable
