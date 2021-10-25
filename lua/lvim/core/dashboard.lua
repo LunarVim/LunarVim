@@ -52,7 +52,7 @@ M.config = function(config)
       },
       f = {
         description = { "  Configuration      " },
-        command = ":e " .. config.path,
+        command = ":e " .. config.user_config_file,
       },
     },
 
