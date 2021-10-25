@@ -1,14 +1,29 @@
 local M = {}
+M.methods = {}
 
+---checks if the character preceding the cursor is a space character
+---@return boolean true if it is a space character, false otherwise
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
+M.methods.check_backspace = check_backspace
 
 local function T(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+---wraps vim.fn.feedkeys while replacing key codes with escape codes
+---Ex: feedkeys("<CR>", "n") becomes feedkeys("^M", "n")
+---@param key string
+---@param mode string
+local function feedkeys(key, mode)
+  vim.fn.feedkeys(T(key), mode)
+end
+M.methods.feedkeys = feedkeys
+
+---checks if emmet_ls is available and active in the buffer
+---@return boolean true if available, false otherwise
 local is_emmet_active = function()
   local clients = vim.lsp.buf_get_clients()
 
@@ -19,16 +34,17 @@ local is_emmet_active = function()
   end
   return false
 end
+M.methods.is_emmet_active = is_emmet_active
 
-M.config = function()
-  local status_cmp_ok, cmp = pcall(require, "cmp")
-  if not status_cmp_ok then
+---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
+---@param dir number 1 for forward, -1 for backward; defaults to 1
+---@return boolean true if a jumpable luasnip field is found while inside a snippet
+local function jumpable(dir)
+  local luasnip_ok, luasnip = pcall(require, "luasnip")
+  if not luasnip_ok then
     return
   end
-  local status_luasnip_ok, luasnip = pcall(require, "luasnip")
-  if not status_luasnip_ok then
-    return
-  end
+
   local win_get_cursor = vim.api.nvim_win_get_cursor
   local get_current_buf = vim.api.nvim_get_current_buf
 
@@ -119,6 +135,24 @@ M.config = function()
     snippet:remove_from_jumplist()
     luasnip.session.current_nodes[get_current_buf()] = nil
     return false
+  end
+
+  if dir == -1 then
+    return inside_snippet() and luasnip.jumpable(-1)
+  else
+    return inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable()
+  end
+end
+M.methods.jumpable = jumpable
+
+M.config = function()
+  local status_cmp_ok, cmp = pcall(require, "cmp")
+  if not status_cmp_ok then
+    return
+  end
+  local status_luasnip_ok, luasnip = pcall(require, "luasnip")
+  if not status_luasnip_ok then
+    return
   end
 
   lvim.builtin.cmp = {
@@ -215,19 +249,19 @@ M.config = function()
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
-      ["<Tab>"] = cmp.mapping(function()
+      ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expandable() then
           luasnip.expand()
-        elseif inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable() then
+        elseif jumpable() then
           luasnip.jump(1)
         elseif check_backspace() then
-          vim.fn.feedkeys(T "<Tab>", "n")
+          fallback()
         elseif is_emmet_active() then
           return vim.fn["cmp#complete"]()
         else
-          vim.fn.feedkeys(T "<Tab>", "n")
+          fallback()
         end
       end, {
         "i",
@@ -236,7 +270,7 @@ M.config = function()
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif inside_snippet() and luasnip.jumpable(-1) then
+        elseif jumpable(-1) then
           luasnip.jump(-1)
         else
           fallback()
@@ -253,7 +287,7 @@ M.config = function()
           return
         end
 
-        if inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable() then
+        if jumpable() then
           if not luasnip.jump(1) then
             fallback()
           end
