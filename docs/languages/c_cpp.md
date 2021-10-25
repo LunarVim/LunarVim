@@ -12,37 +12,69 @@
 
 ## Install Language Server
 
-Install `clangd` language server
+You can install `clangd` language server using the [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)
 
 ```vim
-:LspInstall cpp
+:LspInstall clangd
 ```
 
-List of other [available language servers](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md). If `:LspInstall` does not have support for installing the language server, you need to install it separately.
+Check the official documentation for other methods <https://clangd.llvm.org/installation>.
 
 ## Formatters
 
-`clangd` language server supports formatting. Optionally `uncrustify` and `clang_format` can be used as a formatter. Optional formatter will disable language server formatter.
+`clangd` language server supports formatting using `clang_format` by default. Optionally, you can use `uncrustify` or `clang-format` directly if you don't want to use `clangd`.
 
 Configuration in `~/.config/lvim/config.lua`
 
 ```lua
--- exe value can be "clang_format" or "uncrustify"
-lvim.lang.c.formatters = { { exe = "clang_format" } }
-lvim.lang.cpp.formatters = lvim.lang.c.formatters
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup { { exe = "uncrustify", args = {} } }
 ```
 
 The selected formatter must be installed separately.
 
 ## LSP Settings
 
-E.g. use of other language server:
+If you need specific settings for `clangd` then you can override it like this
 
-```vim
-lvim.lang.c.lsp.provider = "<LS identifier>"
-lvim.lang.c.lsp.setup.cmd = { "<path to executable>", "arg1", "arg2" }
-lvim.lang.cpp.lsp.provider = "<LS identifier>"
-lvim.lang.cpp.lsp.setup.cmd = { "<path to executable>", "arg1", "arg2" }
+```lua
+-- check the full default list `:lua print(vim.inspect(lvim.lsp.override))`
+vim.list_extend(lvim.lsp.override, { "clangd" })
+```
+Now you can customize the setup completely
+
+```lua
+-- some settings can only passed as commandline flags `clangd --help`
+local clangd_flags = {
+  "--all-scopes-completion",
+  "--suggest-missing-includes",
+  "--background-index",
+  "--pch-storage=disk",
+  "--cross-file-rename",
+  "--log=info",
+  "--completion-style=detailed",
+  "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
+  "--clang-tidy",
+  -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
+  -- "--fallback-style=Google",
+  -- "--header-insertion=never",
+  -- "--query-driver=<list-of-white-listed-complers>"
+}
+
+local clangd_bin = "clangd"
+
+local custom_on_attach = function(client, bufnr)
+  require("lvim.lsp").common_on_attach(client, bufnr)
+  local opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<Cmd>ClangdSwitchSourceHeader<CR>", opts)
+end
+
+local opts = {
+  cmd = { clangd_bin, unpack(clangd_flags) },
+  on_attach = custom_on_attach,
+}
+
+require("lvim.lsp.manager").setup("clangd", opts)
 ```
 
-`<LS identifier>` must be one supported by `nvim-lspconfig`. [List of available LSP  configs](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
+Refer to the official documentation if you face any issues <https://clangd.llvm.org/troubleshooting>.
