@@ -31,24 +31,28 @@ M.config = function(config)
 
     custom_section = {
       a = {
-        description = { "  Find File          " },
+        description = { "  Find File          " },
         command = "Telescope find_files",
       },
       b = {
-        description = { "  Recent Projects    " },
-        command = "Telescope projects",
+        description = { "  New File           " },
+        command = ":tabnew",
       },
       c = {
+        description = { "  Recent Projects    " },
+        command = "Telescope projects",
+      },
+      d = {
         description = { "  Recently Used Files" },
         command = "Telescope oldfiles",
       },
-      d = {
+      e = {
         description = { "  Find Word          " },
         command = "Telescope live_grep",
       },
-      e = {
+      f = {
         description = { "  Configuration      " },
-        command = ":e " .. config.user_config_file,
+        command = ":e " .. config.path,
       },
     },
 
