@@ -36,7 +36,7 @@ M.config = function(config)
       },
       b = {
         description = { "  New File           " },
-        command = ":tabnew",
+        command = ":ene!",
       },
       c = {
         description = { "  Recent Projects    " },
