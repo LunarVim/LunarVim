@@ -39,7 +39,7 @@ M.config = function(config)
         command = ":ene!",
       },
       c = {
-        description = { "  Recent Projects    " },
+        description = { "  Recent Projects    " },
         command = "Telescope projects",
       },
       d = {
