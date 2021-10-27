@@ -9,8 +9,9 @@ Log.levels = {
   WARN = 4,
   ERROR = 5,
 }
-
 vim.tbl_add_reverse_lookup(Log.levels)
+
+local notify_opts = {}
 
 function Log:init()
   local status_ok, structlog = pcall(require, "structlog")
@@ -55,33 +56,68 @@ function Log:init()
 
   -- Overwrite vim.notify to use the logger
   vim.notify = function(msg, vim_log_level, opts)
-    -- nvim_notify_params = vim.tbl_deep_extend("force", lvim.builtin.notify.opts, opts)
+    notify_opts = opts or {}
+
     -- vim_log_level can be omitted
-    opts = opts or {}
     if vim_log_level == nil then
       vim_log_level = Log.levels["INFO"]
+    elseif type(vim_log_level) == "string" then
+      vim_log_level = Log.levels[(vim_log_level):upper()] or Log.levels["INFO"]
+    else
+      -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
+      vim_log_level = vim_log_level + 1
     end
-    if type(vim_log_level) == "string" then
-      vim_log_level = Log.levels[(vim_log_level):upper() or "INFO"]
-    end
-    logger.context = opts or {}
-    -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
-    logger:log(vim_log_level + 1, msg)
-    logger.context = {}
+
+    logger:log(vim_log_level, msg)
   end
 
   return logger
 end
 
----Override the default configuration of a sink
----@param name string Console|NvimNotify|File|RotatingFile
----@param sink table same as the one returned by structlog.sinks.MODULE:new(...)
-function Log:configure_sink(name, sink)
-  if self.__handle.sinks[name] then
-    self.__handle.sinks[name] = sink
-  else
-    table.insert(self.__handle.sinks, sink)
+--- Configure the sink in charge of logging notifications
+---@param notif_handle table The implementation used by the sink for displaying the notifications
+function Log:configure_notifications(notif_handle)
+  local status_ok, structlog = pcall(require, "structlog")
+  if not status_ok then
+    return
   end
+
+  local default_namer = function(logger, entry)
+    entry["title"] = logger.name
+    return entry
+  end
+
+  local notify_opts_injecter = function(_, entry)
+    for key, value in pairs(notify_opts) do
+      entry[key] = value
+    end
+    notify_opts = {}
+    return entry
+  end
+
+  local sink = structlog.sinks.NvimNotify(Log.levels.INFO, {
+    processors = {
+      default_namer,
+      notify_opts_injecter,
+    },
+    formatter = structlog.formatters.Format( --
+      "%s",
+      { "msg" },
+      { blacklist_all = true }
+    ),
+    -- This should probably not be hard-coded
+    params_map = {
+      icon = "icon",
+      keep = "keep",
+      on_open = "on_open",
+      on_close = "on_close",
+      timeout = "timeout",
+      title = "title",
+    },
+    impl = notif_handle,
+  })
+
+  table.insert(self.__handle.sinks, sink)
 end
 
 --- Adds a log entry using Plenary.log
