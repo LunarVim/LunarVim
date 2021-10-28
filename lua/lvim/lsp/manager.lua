@@ -26,8 +26,8 @@ local function resolve_config(name, user_config)
     capabilities = require("lvim.lsp").common_capabilities(),
   }
 
-  local status_ok, custom_config = pcall(require, "lvim.lsp/providers/" .. name)
-  if status_ok then
+  local has_custom_provider, custom_config = pcall(require, "lvim/lsp/providers/" .. name)
+  if has_custom_provider then
     Log:debug("Using custom configuration for requested server: " .. name)
     config = vim.tbl_deep_extend("force", config, custom_config)
   end
@@ -70,7 +70,11 @@ function M.setup(server_name, user_config)
   if server_available and ensure_installed(requested_server) then
     requested_server:setup(config)
   else
-    require("lspconfig")[server_name].setup(config)
+    -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
+    local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
+    if has_custom_provider then
+      require("lspconfig")[server_name].setup(config)
+    end
   end
 end
 
