@@ -4,8 +4,6 @@ function M.config()
   lvim.builtin.autopairs = {
     active = true,
     on_config_done = nil,
-    ---@usage auto insert after select function or method item
-    map_complete = true,
     ---@usage  -- modifies the function or method delimiter by filetypes
     map_char = {
       all = "(",
@@ -56,7 +54,8 @@ M.setup = function()
   if cmp_status_ok then
     -- If you want insert `(` after select function or method item
     local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+    local map_char = lvim.builtin.autopairs.map_char
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = map_char })
   end
 
   require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
