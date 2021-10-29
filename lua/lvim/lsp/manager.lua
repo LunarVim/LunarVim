@@ -59,7 +59,6 @@ function M.setup(server_name, user_config)
     function requested_server:on_ready(cb)
       installer.on_server_ready(function(server)
         if server.name == server_name then
-          -- TODO: dismiss installer.display.toggle()
           cb()
         end
       end)
@@ -67,13 +66,17 @@ function M.setup(server_name, user_config)
 
     requested_server:on_ready(function()
       requested_server:setup(config)
+      local delay_ms = 1000
+      vim.defer_fn(function()
+        installer.info_window.close()
+      end, delay_ms)
     end)
 
     if not requested_server:is_installed() then
       if lvim.lsp.automatic_servers_installation then
         Log:info(string.format("Automatic server installation detected. Installing [%s]", requested_server.name))
+        installer.info_window.open()
         requested_server:install()
-        installer.display()
       else
         Log:debug(requested_server.name .. " is not managed by the automatic installer")
       end
