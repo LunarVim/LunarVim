@@ -54,27 +54,30 @@ function M.setup(server_name, user_config)
   local config = resolve_config(server_name, user_config)
   local server_available, requested_server = servers.get_server(server_name)
 
-  local function ensure_installed(server)
-    if server:is_installed() then
-      return true
+  if server_available then
+    -- until server:on_ready() fn exists upstream
+    function requested_server:on_ready(cb)
+      installer.on_server_ready(function(server)
+        if server.name == server_name then
+          -- TODO: dismiss installer.display.toggle()
+          cb()
+        end
+      end)
     end
-    if not lvim.lsp.automatic_servers_installation then
-      Log:debug(server.name .. " is not managed by the automatic installer")
-      return false
-    end
-    Log:info(string.format("Automatic server installation detected. Installing [%s]", server.name))
-    server:install()
-    installer.display()
-    installer.on_server_ready(function()
-      if server.name == server_name then
-        -- TODO: add installer.display.toggle()
-        server:setup(config)
-      end
-    end)
-  end
 
-  if server_available and ensure_installed(requested_server) then
-    requested_server:setup(config)
+    requested_server:on_ready(function()
+      requested_server:setup(config)
+    end)
+
+    if not requested_server:is_installed() then
+      if lvim.lsp.automatic_servers_installation then
+        Log:info(string.format("Automatic server installation detected. Installing [%s]", requested_server.name))
+        requested_server:install()
+        installer.display()
+      else
+        Log:debug(requested_server.name .. " is not managed by the automatic installer")
+      end
+    end
   else
     -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
     local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
