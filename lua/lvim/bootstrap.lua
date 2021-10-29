@@ -1,8 +1,5 @@
 local M = {}
 
-package.loaded["lvim.utils.hooks"] = nil
-local _, hooks = pcall(require, "lvim.utils.hooks")
-
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
 
@@ -101,6 +98,8 @@ end
 ---Update LunarVim
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
+  package.loaded["lvim.utils.hooks"] = nil
+  local _, hooks = pcall(require, "lvim.utils.hooks")
   hooks.run_pre_update()
   M:update_repo()
   hooks.run_post_update()
