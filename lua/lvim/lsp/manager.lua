@@ -64,23 +64,25 @@ function M.setup(server_name, user_config)
       end)
     end
 
-    requested_server:on_ready(function()
-      requested_server:setup(config)
-      local delay_ms = 1000
-      vim.defer_fn(function()
-        installer.info_window.close()
-      end, delay_ms)
-    end)
+    local install_notification = false
 
     if not requested_server:is_installed() then
       if lvim.lsp.automatic_servers_installation then
-        Log:info(string.format("Automatic server installation detected. Installing [%s]", requested_server.name))
-        installer.info_window.open()
+        install_notification = true
+        Log:debug "Automatic server installation detected"
         requested_server:install()
       else
         Log:debug(requested_server.name .. " is not managed by the automatic installer")
       end
     end
+
+    requested_server:on_ready(function()
+      requested_server:setup(config)
+      if install_notification then
+        Log:info(string.format("Installation complete for [%s] server", requested_server.name))
+        install_notification = false
+      end
+    end)
   else
     -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
     local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
