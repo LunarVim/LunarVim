@@ -39,6 +39,12 @@ local function resolve_config(name, user_config)
   return config
 end
 
+-- manually start the server and don't wait for the usual filetype trigger from lspconig
+local function buf_try_add(server_name, bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  require("lspconfig")[server_name].manager.try_add(bufnr)
+end
+
 ---Setup a language server by providing a name
 ---@param server_name string name of the language server
 ---@param user_config table [optional] when available it will take predence over any default configurations
@@ -48,46 +54,38 @@ function M.setup(server_name, user_config)
   if lvim_lsp_utils.is_client_active(server_name) then
     return
   end
-  local installer = require "nvim-lsp-installer"
   local servers = require "nvim-lsp-installer.servers"
 
   local config = resolve_config(server_name, user_config)
   local server_available, requested_server = servers.get_server(server_name)
 
   if server_available then
-    -- until server:on_ready() fn exists upstream
-    function requested_server:on_ready(cb)
-      installer.on_server_ready(function(server)
-        if server.name == server_name then
-          cb()
-        end
-      end)
-    end
-
     local install_notification = false
 
     if not requested_server:is_installed() then
       if lvim.lsp.automatic_servers_installation then
-        install_notification = true
         Log:debug "Automatic server installation detected"
         requested_server:install()
+        install_notification = true
       else
         Log:debug(requested_server.name .. " is not managed by the automatic installer")
       end
     end
 
     requested_server:on_ready(function()
-      requested_server:setup(config)
       if install_notification then
-        Log:info(string.format("Installation complete for [%s] server", requested_server.name))
-        install_notification = false
+        vim.notify(string.format("Installation complete for [%s] server", requested_server.name), vim.log.levels.INFO)
       end
+      install_notification = false
+      requested_server:setup(config)
+      buf_try_add(server_name)
     end)
   else
     -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
     local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
     if has_custom_provider then
       require("lspconfig")[server_name].setup(config)
+      buf_try_add(server_name)
     end
   end
 end
