@@ -222,8 +222,11 @@ function setup_lvim() {
         New-Item "$env:LUNARVIM_CONFIG_DIR" -ItemType Directory
     }
 
-    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example-no-ts.lua" `
-        "$env:LUNARVIM_CONFIG_DIR\config.lua"
+    if (Test-Path "$env:LUNARVIM_CONFIG_DIR\config.lua") {
+        Remove-Item -Force "$env:LUNARVIM_CONFIG_DIR\config.lua"
+    }
+
+    Out-File -FilePath "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
 	Write-Output "Packer setup complete"
 	

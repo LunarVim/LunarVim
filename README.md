@@ -79,19 +79,30 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 -- Disable virtual text
 lvim.lsp.diagnostics.virtual_text = false
 
--- set a formatter if you want to override the default lsp one (if it exists)
-lvim.lang.python.formatters = {
+-- Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
+-- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
+vim.list_extend(lvim.lsp.override, { "pyright" })
+
+-- set a formatter, this will override the language server formatting capabilities (if it exists)
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { exe = "black" },
   {
-    exe = "black",
-    args = {}
-  }
+    exe = "prettier",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
 }
--- set an additional linter
-lvim.lang.python.linters = {
+
+-- set additional linters
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { exe = "black" },
   {
-    exe = "flake8",
-    args = {}
-  }
+    exe = "eslint_d",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "javascriptreact" },
+  },
 }
 
 
@@ -118,7 +129,6 @@ lvim.plugins = {
 ## Breaking changes
 
 - `lvim.lang.FOO.lsp` is no longer supported after #1584.
-  You can either use `:NlspConfig` for most of the settings you might need, or override the setup by adding an entry to `lvim.lsp.override = { "FOO" }`.
 
 ## Resources
 

@@ -177,7 +177,7 @@ M.config = function()
       L = {
         name = "+LunarVim",
         c = {
-          "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
+          "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
         f = {
