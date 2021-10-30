@@ -39,7 +39,7 @@ local function resolve_config(name, user_config)
   return config
 end
 
--- manually start the server and don't wait for the usual filetype trigger from lspconig
+-- manually start the server and don't wait for the usual filetype trigger from lspconfig
 local function buf_try_add(server_name, bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   require("lspconfig")[server_name].manager.try_add(bufnr)
