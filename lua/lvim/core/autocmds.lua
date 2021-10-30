@@ -6,11 +6,6 @@ function M.load_augroups()
 
   return {
     _general_settings = {
-      {
-        "Filetype",
-        "*",
-        "lua require('lvim.utils.ft').do_filetype(vim.fn.expand(\"<amatch>\"))",
-      },
       { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
       {
         "TextYankPost",
