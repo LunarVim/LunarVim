@@ -81,7 +81,7 @@ return {
     "kyazdani42/nvim-tree.lua",
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
-    -- commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
+    commit = "f92b7e7627c5a36f4af6814c408211539882c4f3",
     config = function()
       require("lvim.core.nvimtree").setup()
     end,
