@@ -42,7 +42,7 @@ end
 -- manually start the server and don't wait for the usual filetype trigger from lspconfig
 local function buf_try_add(server_name, bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  require("lspconfig")[server_name].manager.try_add(bufnr)
+  require("lspconfig")[server_name].manager.try_add_wrapper(bufnr)
 end
 
 ---Setup a language server by providing a name
@@ -78,7 +78,6 @@ function M.setup(server_name, user_config)
       end
       install_notification = false
       requested_server:setup(config)
-      buf_try_add(server_name)
     end)
   else
     -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
