@@ -72,39 +72,39 @@ end
 
 function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
-  vim.cmd("PackerSync " .. unpack(core_plugins))
+  plugin_loader.sync(unpack(core_plugins))
 end
 
-function plugin_loader.install()
+function plugin_loader.install(...)
   Log:debug "installing any missing plugin(s)"
-  local status_ok, _ = xpcall(packer.install(), debug.traceback)
+  local status_ok, _ = xpcall(packer.install(...), debug.traceback)
   if not status_ok then
     Log:warn "installation interrupted"
     Log:trace(debug.traceback())
   end
 end
 
-function plugin_loader.compile()
+function plugin_loader.compile(...)
   Log:debug "compiling lazy_loaded plugin(s)"
-  local status_ok, _ = xpcall(packer.compile(), debug.traceback)
+  local status_ok, _ = xpcall(packer.compile(...), debug.traceback)
   if not status_ok then
     Log:warn "compilation interrupted"
     Log:trace(debug.traceback())
   end
 end
 
-function plugin_loader.update()
+function plugin_loader.update(...)
   Log:debug "updating any missing plugins"
-  local status_ok, _ = xpcall(packer.compile(), debug.traceback)
+  local status_ok, _ = xpcall(packer.compile(...), debug.traceback)
   if not status_ok then
     Log:warn "update interrupted"
     Log:trace(debug.traceback())
   end
 end
 
-function plugin_loader.sync()
+function plugin_loader.sync(...)
   Log:debug "syncing any missing plugins"
-  local status_ok, _ = xpcall(packer.sync(), debug.traceback)
+  local status_ok, _ = xpcall(packer.sync(...), debug.traceback)
   if not status_ok then
     Log:warn "sync interrupted"
     Log:trace(debug.traceback())
