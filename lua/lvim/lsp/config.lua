@@ -46,6 +46,8 @@ return {
     "ansiblels",
     "denols",
     "ember",
+    "eslint",
+    "eslintls",
     "jedi_language_server",
     "pylsp",
     "rome",

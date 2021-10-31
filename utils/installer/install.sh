@@ -366,6 +366,7 @@ function setup_lvim() {
   cp "$LUNARVIM_CONFIG_DIR/utils/installer/config.example-no-ts.lua" \
     "$LUNARVIM_CONFIG_DIR/config.lua"
 
+
   "$INSTALL_PREFIX/bin/lvim" --headless \
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
