@@ -1,0 +1,41 @@
+name: format
+on:
+  push:
+    branches: "**"
+  pull_request:
+    branches:
+      - "master"
+      - "rolling"
+
+jobs:
+  stylua-check:
+    name: "Formatting check with Stylua"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint with stylua
+        uses: JohnnyMorganz/stylua-action@1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # CLI arguments
+          args: --check .
+
+  shfmt-check:
+    name: "Formatting check with shfmt"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.16"
+
+      - name: Use shfmt
+        run: |
+          GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+
+      # https://google.github.io/styleguide/shellguide.html
+      - name: Check formatting
+        run: make style-sh

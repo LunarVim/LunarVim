@@ -1,0 +1,63 @@
+name: General Issue
+description: File a bug report
+title: "[Bug]: "
+labels: [bug]
+# assignees:
+#   - ChristianChiarulli 
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve !
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem description
+      description: Also tell us, what did you expect to happen?
+      placeholder: |
+        Steps to reproduce the behavior:
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: input
+    id: lunar-vim-version
+    attributes:
+      label: LunarVim version
+    validations:
+      required: true
+  - type: input
+    id: nvim-version
+    attributes:
+      label: Neovim version (>= 0.5)
+      placeholder: nvim --version
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      placeholder: |
+        nvim -v
+        :checkhealth
+        :messages
+      render: shell
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: I have
+      options:
+      - label: Read the readme
+        required: true
+      - label: Read the wiki
+        required: true
+      - label: Searched for similar issues
+        required: true
+
