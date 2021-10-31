@@ -71,9 +71,6 @@ function plugin_loader.load(configurations)
     Log:warn "problems detected while loading plugins' configurations"
     Log:trace(debug.traceback())
   end
-  if not utils.is_file(compile_path) then
-    pcall_packer_command "compile"
-  end
 end
 
 function plugin_loader.get_core_plugins()
