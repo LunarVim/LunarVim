@@ -49,6 +49,10 @@ function M.get_client_capabilities(client_id)
 end
 
 function M.get_supported_filetypes(server_name)
+  -- temporary workaround: https://github.com/neovim/nvim-lspconfig/pull/1358
+  if server_name == "dockerls" then
+    return { "dockerfile" }
+  end
   local lsp_installer_servers = require "nvim-lsp-installer.servers"
   local server_available, requested_server = lsp_installer_servers.get_server(server_name)
   if not server_available then
