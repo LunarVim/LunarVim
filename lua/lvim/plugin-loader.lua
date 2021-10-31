@@ -21,6 +21,7 @@ function plugin_loader.init(opts)
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
+    log = { level = "warn" },
     git = { clone_timeout = 300 },
     display = {
       open_fn = function()
@@ -28,6 +29,17 @@ function plugin_loader.init(opts)
       end,
     },
   }
+end
+
+-- packer expects a space separated list
+local function pcall_packer_command(cmd, kwargs)
+  local status_ok, msg = pcall(function()
+    require("packer")[cmd](unpack(kwargs or {}))
+  end)
+  if not status_ok then
+    Log:warn(cmd .. " failed with: " .. vim.inspect(msg))
+    Log:trace(vim.inspect(vim.fn.eval "v:errmsg"))
+  end
 end
 
 function plugin_loader.cache_clear()
@@ -38,7 +50,7 @@ end
 
 function plugin_loader.recompile()
   plugin_loader.cache_clear()
-  plugin_loader.compile()
+  pcall_packer_command "compile"
   if utils.is_file(compile_path) then
     Log:debug "generated packer_compiled.lua"
   end
@@ -59,6 +71,9 @@ function plugin_loader.load(configurations)
     Log:warn "problems detected while loading plugins' configurations"
     Log:trace(debug.traceback())
   end
+  if not utils.is_file(compile_path) then
+    pcall_packer_command "compile"
+  end
 end
 
 function plugin_loader.get_core_plugins()
@@ -72,43 +87,8 @@ end
 
 function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
-  plugin_loader.sync(unpack(core_plugins))
-end
-
-function plugin_loader.install(...)
-  Log:debug "installing any missing plugin(s)"
-  local status_ok, _ = xpcall(packer.install(...), debug.traceback)
-  if not status_ok then
-    Log:warn "installation interrupted"
-    Log:trace(debug.traceback())
-  end
-end
-
-function plugin_loader.compile(...)
-  Log:debug "compiling lazy_loaded plugin(s)"
-  local status_ok, _ = xpcall(packer.compile(...), debug.traceback)
-  if not status_ok then
-    Log:warn "compilation interrupted"
-    Log:trace(debug.traceback())
-  end
-end
-
-function plugin_loader.update(...)
-  Log:debug "updating any missing plugins"
-  local status_ok, _ = xpcall(packer.compile(...), debug.traceback)
-  if not status_ok then
-    Log:warn "update interrupted"
-    Log:trace(debug.traceback())
-  end
-end
-
-function plugin_loader.sync(...)
-  Log:debug "syncing any missing plugins"
-  local status_ok, _ = xpcall(packer.sync(...), debug.traceback)
-  if not status_ok then
-    Log:warn "sync interrupted"
-    Log:trace(debug.traceback())
-  end
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
+  pcall_packer_command("sync", core_plugins)
 end
 
 return plugin_loader
