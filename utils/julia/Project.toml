@@ -1,0 +1,3 @@
+[deps]
+LanguageServer = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
+SymbolServer = "cf896787-08d5-524d-9de7-132aaa0cb996"

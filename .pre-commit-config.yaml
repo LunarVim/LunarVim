@@ -1,0 +1,34 @@
+repos:
+  - repo: local
+    hooks:
+      - id: shfmt
+        name: shfmt
+        minimum_pre_commit_version: 2.4.0
+        language: system
+        types: [shell]
+        entry: bash
+        args: [-c, make lint-sh]
+      - id: shellcheck
+        name: shellcheck
+        language: system
+        types: [shell]
+        entry: bash
+        args: [-c, make style-sh]
+      - id: stylua
+        name: StyLua
+        language: rust
+        entry: stylua
+        types: [lua]
+        args: ["-"]
+      - id: luacheck
+        name: luacheck
+        language: system
+        entry: luacheck
+        types: [lua]
+        args: [.]
+      - id: commitlint
+        name: commitlint
+        language: system
+        entry: bash
+        args: [./utils/ci/run_commitlint.sh]
+        stages: [commit-msg]
