@@ -46,13 +46,19 @@ end
 
 function plugin_loader.load(configurations)
   Log:debug "loading plugins configuration"
-  packer.startup(function(use)
-    for _, plugins in ipairs(configurations) do
-      for _, plugin in ipairs(plugins) do
-        use(plugin)
+  local status_ok, _ = xpcall(function()
+    packer.startup(function(use)
+      for _, plugins in ipairs(configurations) do
+        for _, plugin in ipairs(plugins) do
+          use(plugin)
+        end
       end
-    end
-  end)
+    end)
+  end, debug.traceback)
+  if not status_ok then
+    Log:warn "problems detected while loading plugins' configurations"
+    Log:trace(debug.traceback())
+  end
 end
 
 function plugin_loader.get_core_plugins()
@@ -70,18 +76,20 @@ function plugin_loader.sync_core_plugins()
 end
 
 function plugin_loader.install()
-  Log:debug "installing any missing plugins"
+  Log:debug "installing any missing plugin(s)"
   local status_ok, _ = xpcall(packer.install(), debug.traceback)
   if not status_ok then
-    Log:warn(debug.traceback())
+    Log:warn "installation interrupted"
+    Log:trace(debug.traceback())
   end
 end
 
 function plugin_loader.compile()
-  Log:debug "compiling lazy_loaded plugins"
+  Log:debug "compiling lazy_loaded plugin(s)"
   local status_ok, _ = xpcall(packer.compile(), debug.traceback)
   if not status_ok then
-    Log:warn(debug.traceback())
+    Log:warn "compilation interrupted"
+    Log:trace(debug.traceback())
   end
 end
 
@@ -89,7 +97,8 @@ function plugin_loader.update()
   Log:debug "updating any missing plugins"
   local status_ok, _ = xpcall(packer.compile(), debug.traceback)
   if not status_ok then
-    Log:warn(debug.traceback())
+    Log:warn "update interrupted"
+    Log:trace(debug.traceback())
   end
 end
 
@@ -97,7 +106,8 @@ function plugin_loader.sync()
   Log:debug "syncing any missing plugins"
   local status_ok, _ = xpcall(packer.sync(), debug.traceback)
   if not status_ok then
-    Log:warn(debug.traceback())
+    Log:warn "sync interrupted"
+    Log:trace(debug.traceback())
   end
 end
 
