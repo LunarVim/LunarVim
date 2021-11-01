@@ -208,7 +208,8 @@ function setup_shim() {
     if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
         New-Item "$INSTALL_PREFIX\bin" -ItemType Directory
     }
-    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
+    # Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
+    New-Item -ItemType SymbolicLink -Path "$INSTALL_PREFIX\bin\lvim.ps1" -Target "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Force
 }
 
 function setup_lvim() {
