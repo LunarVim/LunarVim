@@ -5,7 +5,9 @@ local Log = require "lvim.core.log"
 -- we need to reuse this outside of init()
 local compile_path = get_config_dir() .. "/plugin/packer_compiled.lua"
 
-function plugin_loader:init(opts)
+local _, packer = pcall(require, "packer")
+
+function plugin_loader.init(opts)
   opts = opts or {}
 
   local install_path = opts.install_path or vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -16,14 +18,10 @@ function plugin_loader:init(opts)
     vim.cmd "packadd packer.nvim"
   end
 
-  local packer_ok, packer = pcall(require, "packer")
-  if not packer_ok then
-    return
-  end
-
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
+    log = { level = "warn" },
     git = { clone_timeout = 300 },
     display = {
       open_fn = function()
@@ -31,36 +29,51 @@ function plugin_loader:init(opts)
       end,
     },
   }
-
-  self.packer = packer
-  return self
 end
 
-function plugin_loader:cache_clear()
+-- packer expects a space separated list
+local function pcall_packer_command(cmd, kwargs)
+  local status_ok, msg = pcall(function()
+    require("packer")[cmd](unpack(kwargs or {}))
+  end)
+  if not status_ok then
+    Log:warn(cmd .. " failed with: " .. vim.inspect(msg))
+    Log:trace(vim.inspect(vim.fn.eval "v:errmsg"))
+  end
+end
+
+function plugin_loader.cache_clear()
   if vim.fn.delete(compile_path) == 0 then
     Log:debug "deleted packer_compiled.lua"
   end
 end
 
-function plugin_loader:cache_reset()
-  plugin_loader:cache_clear()
-  require("packer").compile()
+function plugin_loader.recompile()
+  plugin_loader.cache_clear()
+  pcall_packer_command "compile"
   if utils.is_file(compile_path) then
     Log:debug "generated packer_compiled.lua"
   end
 end
 
-function plugin_loader:load(configurations)
-  return self.packer.startup(function(use)
-    for _, plugins in ipairs(configurations) do
-      for _, plugin in ipairs(plugins) do
-        use(plugin)
+function plugin_loader.load(configurations)
+  Log:debug "loading plugins configuration"
+  local status_ok, _ = xpcall(function()
+    packer.startup(function(use)
+      for _, plugins in ipairs(configurations) do
+        for _, plugin in ipairs(plugins) do
+          use(plugin)
+        end
       end
-    end
-  end)
+    end)
+  end, debug.traceback)
+  if not status_ok then
+    Log:warn "problems detected while loading plugins' configurations"
+    Log:trace(debug.traceback())
+  end
 end
 
-function plugin_loader:get_core_plugins()
+function plugin_loader.get_core_plugins()
   local list = {}
   local plugins = require "lvim.plugins"
   for _, item in pairs(plugins) do
@@ -69,9 +82,10 @@ function plugin_loader:get_core_plugins()
   return list
 end
 
-function plugin_loader:sync_core_plugins()
+function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
-  vim.cmd("PackerSync " .. unpack(core_plugins))
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
+  pcall_packer_command("sync", core_plugins)
 end
 
 return plugin_loader
