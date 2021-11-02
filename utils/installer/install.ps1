@@ -205,10 +205,29 @@ function clone_lvim() {
 }
 
 function setup_shim() {
+    $lvim_ps1_path = "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1"
+
+    # 1. lvim.ps1
     if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
         New-Item "$INSTALL_PREFIX\bin" -ItemType Directory
     }
-    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
+    Copy-Item "$lvim_ps1_path" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
+
+    # 2. lvim: for git.exe use lvim as core editor
+    Set-Content -Path $INSTALL_PREFIX\bin\lvim -Value $(-join @("#!/bin/sh", "`r`n", ('powershell.exe -noprofile -ex unrestricted "{0}" "$@"' -f $lvim_ps1_path))) -Encoding ascii
+
+    # 3. lvim.cmd: makes lvim accessible from cmd.exe
+    $content = "@echo off
+setlocal enabledelayedexpansion
+set args=%*
+:: replace problem characters in arguments
+set args=%args:`"='%
+set args=%args:(=``(%
+set args=%args:)=``)%
+set invalid=`"='
+if !args! == !invalid! ( set args= )
+powershell -noprofile -ex unrestricted `"& '$lvim_ps1_path' $arg %args%;exit `$lastexitcode`"" 
+    $content | Out-File $INSTALL_PREFIX\bin\lvim.cmd -Encoding ascii
 }
 
 function setup_lvim() {
