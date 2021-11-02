@@ -86,11 +86,18 @@ _Note: Make sure to install `jsonls` for autocompletion._
 
 ### Manually-configured servers
 
-`lvim.lsp.override` contains a list of servers that are disabled by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. See the full list
+`lvim.lsp.override` contains a list of servers that are disabled by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. 
+
+See the current list
 
 ```lua
--- lua/lvim/lsp/config.lua
 :lua print(vim.inspect(lvim.lsp.override))
+```
+
+See the default list
+
+```lua
+:lua print(vim.inspect(require("lvim.lsp.config").override))
 ```
 
 _Note: any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect._
