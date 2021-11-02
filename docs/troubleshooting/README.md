@@ -37,4 +37,36 @@ If that doesn't work, try re-syncing your plugins:
 
 ## Language server XXX does not start for me!
 
+### is it overriden?
+
+This could be due to the fact that the server is [overridden](../languages/README.md#manually-configured-servers)
+
+```lua
+--- is it in this list?
+:lua print(vim.inspect(lvim.lsp.override))
+```
+
+If that's the case, then you need to either remove it from that list and re-run `:LvimCacheReset` or set it up [manually](../languages/README.md#overriding-the-default-setup-options).
+
+### is it supported by [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)?
+
+Any server that does not show up in `LspInstallInfo` needs to be installed manually.
+
+### is it at least showing up in `:LspInfo`?
+
 Check out the tips for [debugging nvim-lspconfig](https://github.com/neovim/nvim-lspconfig#debugging).
+
+## Too many language servers are starting at once!
+
+Are any of these servers [overridden](../languages/README.md#manually-configured-servers) by default?
+
+```lua
+:lua print(vim.inspect(require("lvim.lsp.config").override))
+```
+
+If they are then you are using the syntax prior to [LunarVim#1813](https://github.com/LunarVim/LunarVim/pull/1813).
+
+```lua
+-- this is the correct syntax since 3dd60bd
+vim.list_extend(lvim.lsp.override, { "jsonls" })
+```
