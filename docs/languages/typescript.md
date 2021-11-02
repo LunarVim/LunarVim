@@ -51,9 +51,3 @@ lvim.lang.typescriptreact.linters = lvim.lang.typescript.linters
 ## LSP Settings
 
 See [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver) for more information about the tsserver language server configuration options.
-
-E.g. modify the `root_dir` setup value:
-
-```lua
-lvim.lang.typescript.lsp.setup["root_dir"] = <new value>
-```
