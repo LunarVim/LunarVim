@@ -1,8 +1,25 @@
-vim.cmd [[set runtimepath=$VIMRUNTIME]]
-vim.cmd [[set packpath=/tmp/nvim/site]]
+local on_windows = vim.loop.os_uname().version:match "Windows"
 
-local package_root = "/tmp/nvim/site/pack"
-local install_path = package_root .. "/packer/start/packer.nvim"
+local function join_paths(...)
+  local path_sep = on_windows and "\\" or "/"
+  local result = table.concat({ ... }, path_sep)
+  return result
+end
+
+vim.cmd [[set runtimepath=$VIMRUNTIME]]
+
+local temp_dir
+if on_windows then
+  temp_dir = vim.loop.os_getenv "TEMP"
+else
+  temp_dir = "/tmp"
+end
+
+vim.cmd("set packpath=" .. join_paths(temp_dir, "nvim", "site"))
+
+local package_root = join_paths(temp_dir, "nvim", "site", "pack")
+local install_path = join_paths(package_root, "packer", "start", "packer.nvim")
+local compile_path = join_paths(install_path, "plugin", "packer_compiled.lua")
 
 -- Choose whether to use the executable that's managed by lsp-installer
 local use_lsp_installer = true
@@ -16,7 +33,7 @@ local function load_plugins()
     },
     config = {
       package_root = package_root,
-      compile_path = install_path .. "/plugin/packer_compiled.lua",
+      compile_path = compile_path,
     },
   }
 end

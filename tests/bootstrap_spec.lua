@@ -25,4 +25,12 @@ a.describe("initial start", function()
   a.it("should be able to run treesitter without errors", function()
     assert.truthy(vim.treesitter.highlighter.active)
   end)
+
+  a.it("should be able to pass basic checkhealth without errors", function()
+    vim.cmd "checkhealth nvim"
+    local errmsg = vim.fn.eval "v:errmsg"
+    local exception = vim.fn.eval "v:exception"
+    assert.equal("", errmsg) -- v:errmsg was not updated.
+    assert.equal("", exception)
+  end)
 end)

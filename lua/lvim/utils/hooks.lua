@@ -15,8 +15,7 @@ end
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
   _G.__luacache.clear_cache()
-
-  plugin_loader:cache_reset()
+  require("lvim.plugin-loader").recompile()
   package.loaded["lvim.lsp.templates"] = nil
 
   Log:debug "Re-generatring ftplugin template files"

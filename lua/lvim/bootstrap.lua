@@ -87,7 +87,7 @@ function M:init(base_dir)
 
   require("lvim.config"):init()
 
-  require("lvim.plugin-loader"):init {
+  require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
     install_path = self.packer_install_dir,
   }
