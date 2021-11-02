@@ -29,7 +29,9 @@ You can use the following commands to check some information about any language 
 
 ## LSP support
 
-### Automatic server installation
+### Installing and updating a server
+
+#### Automatic server installation
 
 By default, most supported language servers will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
 
@@ -41,9 +43,6 @@ lvim.lsp.automatic_servers_installation = true
 
 Please refer to [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) to see the updated full list of currently available servers.
 
-
-### Installing and updating a server
-
 To install a supported language server:
 
 ```md
@@ -52,7 +51,25 @@ To install a supported language server:
 
 You can also toggle `<:LspInstallInfo>` and interactively choose which servers to install.
 
-## LSP setup
+### Manually-configured servers
+
+`lvim.lsp.override` contains a list of servers that should **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. 
+
+See the current list
+
+```lua
+:lua print(vim.inspect(lvim.lsp.override))
+```
+
+See the default list
+
+```lua
+:lua print(vim.inspect(require("lvim.lsp.config").override))
+```
+
+_Note: any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect._
+
+### Server setup
 
 LunarVim uses [filetype plugins](../configuration/07-ftplugin.md) to enable lazy-loading the setup of a language server. A template generator is used to create `ftplugin` files and populate them with the setup call.
 
@@ -71,40 +88,9 @@ require("lvim.lsp.manager").setup("sumneko_lua")
 
 _Tip: You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files"_
 
-### Server configuration
+#### Overriding the default setup options
 
-To set a configuration for your language server:
-
-```vim
-:NlspConfig <TAB>
-:NlspConfig <NAME_OF_LANGUAGE_SERVER>
-```
-
-This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
-
-_Note: Make sure to install `jsonls` for autocompletion._
-
-### Manually-configured servers
-
-`lvim.lsp.override` contains a list of servers that are disabled by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. 
-
-See the current list
-
-```lua
-:lua print(vim.inspect(lvim.lsp.override))
-```
-
-See the default list
-
-```lua
-:lua print(vim.inspect(require("lvim.lsp.config").override))
-```
-
-_Note: any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect._
-
-### Overriding the default configuration
-
-To select which servers should be configured manually, add this to you `config.lua` and then do `LvimCacheReset`.
+Add the server you wish to configure manually to `lvim.lsp.override`
 
 ```lua
 vim.list_extend(lvim.lsp.override, { "pyright" })
@@ -126,6 +112,19 @@ Alternatively, set it up using the `lspconfig` API directly
 local opts = {} 
 require("lspconfig")["pyright"].setup(opts)
 ```
+
+### Server settings
+
+To set a setting for your language server:
+
+```vim
+:NlspConfig <TAB>
+:NlspConfig <NAME_OF_LANGUAGE_SERVER>
+```
+
+This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
+
+_Note: Make sure to install `jsonls` for autocompletion._
 
 ## Formatting
 
