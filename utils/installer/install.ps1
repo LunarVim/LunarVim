@@ -210,6 +210,9 @@ function setup_shim() {
     }
     # Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
     # New-Item -ItemType SymbolicLink -Path "$INSTALL_PREFIX\bin\lvim.ps1" -Target "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Force
+    if ((Test-Path "$INSTALL_PREFIX\bin\lvim.ps1") -eq $true) {
+        Remove-Item -Force "$INSTALL_PREFIX\bin\lvim.ps1"
+    }
     & "$env:COMSPEC" /c "mklink /h `"$INSTALL_PREFIX\bin\lvim.ps1`" `"$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1`"" | Out-Null
 }
 
