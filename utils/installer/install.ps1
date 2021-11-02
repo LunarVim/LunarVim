@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop" # exit when command fails
 # set script variables
 $LV_BRANCH = ($LV_BRANCH, "rolling", 1 -ne $null)[0]
 $LV_REMOTE = ($LV_REMOTE, "lunarvim/lunarvim.git", 1 -ne $null)[0]
-$INSTALL_PREFIX = ($INSTALL_PREFIX, "$HOME\.local", 1 -ne $null)[0]
+$INSTALL_BIN_DIR = ($INSTALL_BIN_DIR, "$HOME\.local\bin", 1 -ne $null)[0]
 
 $env:XDG_DATA_HOME = ($env:XDG_DATA_HOME, "$env:APPDATA", 1 -ne $null)[0]
 $env:XDG_CONFIG_HOME = ($env:XDG_CONFIG_HOME, "$env:LOCALAPPDATA", 1 -ne $null)[0]
@@ -208,13 +208,13 @@ function setup_shim() {
     $lvim_ps1_path = "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1"
 
     # 1. lvim.ps1
-    if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
-        New-Item "$INSTALL_PREFIX\bin" -ItemType Directory
+    if ((Test-Path "$INSTALL_BIN_DIR") -eq $false) {
+        New-Item "$INSTALL_BIN_DIR" -ItemType Directory
     }
-    Copy-Item "$lvim_ps1_path" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
+    Copy-Item "$lvim_ps1_path" -Destination "$INSTALL_BIN_DIR\lvim.ps1" -Force
 
     # 2. lvim: for git.exe use lvim as core editor
-    Set-Content -Path $INSTALL_PREFIX\bin\lvim -Value $(-join @("#!/bin/sh", "`r`n", ('powershell.exe -noprofile -ex unrestricted "{0}" "$@"' -f $lvim_ps1_path))) -Encoding ascii
+    Set-Content -Path $INSTALL_BIN_DIR\lvim -Value $(-join @("#!/bin/sh", "`r`n", ('powershell.exe -noprofile -ex unrestricted "{0}" "$@"' -f $lvim_ps1_path))) -Encoding ascii
 
     # 3. lvim.cmd: makes lvim accessible from cmd.exe
     $content = "@echo off
@@ -227,7 +227,7 @@ set args=%args:)=``)%
 set invalid=`"='
 if !args! == !invalid! ( set args= )
 powershell -noprofile -ex unrestricted `"& '$lvim_ps1_path' $arg %args%;exit `$lastexitcode`"" 
-    $content | Out-File $INSTALL_PREFIX\bin\lvim.cmd -Encoding ascii
+    $content | Out-File $INSTALL_BIN_DIR\lvim.cmd -Encoding ascii
 }
 
 function setup_lvim() {
@@ -263,7 +263,7 @@ function setup_lvim() {
 	__add_separator "80"
 
     Write-Output "Thank you for installing LunarVim!!"
-    Write-Output "You can start it by running: $INSTALL_PREFIX\bin\lvim.ps1"
+    Write-Output "You can start it by running: $INSTALL_BIN_DIR\lvim.ps1"
     Write-Output "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
@@ -287,7 +287,7 @@ function __add_separator($div_width) {
 
 function create_alias {
 	if($null -eq $(Get-Alias | Select-String "lvim")){
-		Add-Content -Path $PROFILE -Value $(-join @('Set-Alias lvim "', "$INSTALL_PREFIX", '\bin\lvim.ps1"'))
+		Add-Content -Path $PROFILE -Value $(-join @('Set-Alias lvim "', "$INSTALL_BIN_DIR", '\lvim.ps1"'))
 		
 		Write-Output ""
 		Write-Host 'To use the new alias in this window reload your profile with ". $PROFILE".' -ForegroundColor Yellow
