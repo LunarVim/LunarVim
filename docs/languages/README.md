@@ -31,7 +31,7 @@ You can use the following commands to check some information about any language 
 
 ### Automatic server installation
 
-By default, most supported language servers [^1] will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
+By default, most supported language servers will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
 
 - configuration option
 
@@ -41,7 +41,6 @@ lvim.lsp.automatic_servers_installation = true
 
 Please refer to [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) to see the updated full list of currently available servers.
 
-[^1]: Please note that only `TSServer` is configured by default for JS-family languages, and when a language has more than one server available, then the most popular is usually chosen.
 
 ### Installing and updating a server
 
@@ -85,20 +84,40 @@ This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persis
 
 _Note: Make sure to install `jsonls` for autocompletion._
 
+### Manually-configured servers
+
+`lvim.lsp.override` contains a list of servers that are disabled by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. See the full list
+
+```lua
+-- lua/lvim/lsp/config.lua
+:lua print(vim.inspect(lvim.lsp.override))
+```
+
+_Note: any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect._
+
 ### Overriding the default configuration
 
 To select which servers should be configured manually, add this to you `config.lua` and then do `LvimCacheReset`.
 
 ```lua
--- check the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 vim.list_extend(lvim.lsp.override, { "pyright" })
 ```
 
-Now you can either set it up manually, or replace only a subset of LunarVim's default options
+Now you can set it up manually using the builtin [lsp-manager](https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/lsp/manager.lua)
 
 ```lua
-local opts = {} -- check the lspconfig documentation for a list of all possible options
+--- list of options that should take predence over any of LunarVim's defaults
+--- check the lspconfig documentation for a list of all possible options
+local opts = {} 
 require("lvim.lsp.manager").setup("pyright", opts)
+```
+
+Alternatively, set it up using the `lspconfig` API directly
+
+```lua
+--- check the lspconfig documentation for a list of all possible options
+local opts = {} 
+require("lspconfig")["pyright"].setup(opts)
 ```
 
 ## Formatting
