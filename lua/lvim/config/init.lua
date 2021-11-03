@@ -101,7 +101,7 @@ function M:reload()
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" then
-      package.loaded.module = nil
+      package.loaded[module] = nil
       table.insert(lvim_modules, module)
     end
   end
