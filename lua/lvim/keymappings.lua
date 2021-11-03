@@ -57,13 +57,14 @@ end
 -- Load key mappings for all provided modes
 -- @param keymaps A list of key mappings for each mode
 function M.load(keymaps)
+  keymaps = keymaps or {}
   for mode, mapping in pairs(keymaps) do
     M.load_mode(mode, mapping)
   end
 end
 
-function M.config()
-  lvim.keys = {
+function M.get_defaults()
+  local keys = {
     ---@usage change or add keymappings for insert mode
     insert_mode = {
       -- 'jk' for quitting insert mode
@@ -151,12 +152,14 @@ function M.config()
   }
 
   if vim.fn.has "mac" == 1 then
-    lvim.keys.normal_mode["<A-Up>"] = lvim.keys.normal_mode["<C-Up>"]
-    lvim.keys.normal_mode["<A-Down>"] = lvim.keys.normal_mode["<C-Down>"]
-    lvim.keys.normal_mode["<A-Left>"] = lvim.keys.normal_mode["<C-Left>"]
-    lvim.keys.normal_mode["<A-Right>"] = lvim.keys.normal_mode["<C-Right>"]
+    keys.normal_mode["<A-Up>"] = keys.normal_mode["<C-Up>"]
+    keys.normal_mode["<A-Down>"] = keys.normal_mode["<C-Down>"]
+    keys.normal_mode["<A-Left>"] = keys.normal_mode["<C-Left>"]
+    keys.normal_mode["<A-Right>"] = keys.normal_mode["<C-Right>"]
     Log:debug "Activated mac keymappings"
   end
+
+  return keys
 end
 
 function M.print(mode)
@@ -166,11 +169,6 @@ function M.print(mode)
   else
     print(vim.inspect(lvim.keys))
   end
-end
-
-function M.setup()
-  vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
-  M.load(lvim.keys)
 end
 
 return M
