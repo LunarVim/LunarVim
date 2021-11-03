@@ -10,7 +10,7 @@ From `:h ftplugin`
 Example for setting specific `shiftwidth` and `tabstop` that only apply for `C` file-types.
 
 ```lua
--- create a file at $LUNARVIM_CONFIG_DIR/ftplugin/c.lua
+-- create a file at $LUNARVIM_CONFIG_DIR/after/ftplugin/c.lua
 vim.cmd("setlocal tabstop=4 shiftwidth=4")
 ```
 
