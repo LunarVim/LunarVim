@@ -353,16 +353,13 @@ function setup_lvim() {
 
   echo "Preparing Packer setup"
 
-  rm -f "$LUNARVIM_CONFIG_DIR/config.lua"
-  touch "$LUNARVIM_CONFIG_DIR/config.lua"
+  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
   "$INSTALL_PREFIX/bin/lvim" --headless \
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
 
   echo "Packer setup complete"
-
-  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 }
 
 function update_lvim() {
