@@ -169,6 +169,7 @@ M.config = function()
       native_menu = false,
     },
     formatting = {
+      fields = { "kind", "abbr", "menu" },
       kind_icons = {
         Class = " ",
         Color = " ",
