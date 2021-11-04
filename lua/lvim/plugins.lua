@@ -271,6 +271,15 @@ return {
     end,
     disable = not lvim.builtin.dashboard.active,
   },
+  -- alpha
+  {
+    "goolord/alpha-nvim",
+    event = "BufWinEnter",
+    config = function()
+      require("lvim.core.alpha").setup()
+    end,
+    -- disable = not lvim.builtin.alpha.active,
+  },
 
   -- Terminal
   {
