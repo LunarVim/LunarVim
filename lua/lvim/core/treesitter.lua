@@ -16,7 +16,7 @@ M.config = function()
       disable = { "latex" },
     },
     context_commentstring = {
-      enable = false,
+      enable = true,
       config = { css = "// %s" },
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},

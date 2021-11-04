@@ -75,6 +75,7 @@ return {
       require("lvim.core.treesitter").setup()
     end,
   },
+  { "JoosepAlviste/nvim-ts-context-commentstring" },
 
   -- NvimTree
   {
