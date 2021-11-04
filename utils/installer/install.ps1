@@ -213,7 +213,7 @@ function setup_shim() {
     if ((Test-Path "$INSTALL_PREFIX\bin\lvim.ps1") -eq $true) {
         Remove-Item -Force "$INSTALL_PREFIX\bin\lvim.ps1"
     }
-    & "$env:COMSPEC" /c "mklink /h `"$INSTALL_PREFIX\bin\lvim.ps1`" `"$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1`"" | Out-Null
+    & "$env:COMSPEC" /c "mklink `"$INSTALL_PREFIX\bin\lvim.ps1`" `"$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1`""
 }
 
 function setup_lvim() {
