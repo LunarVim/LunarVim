@@ -21,6 +21,4 @@ vim.cmd("colorscheme " .. lvim.colorscheme)
 local commands = require "lvim.core.commands"
 commands.load(commands.defaults)
 
-require("lvim.keymappings").setup()
-
 require("lvim.lsp").setup()
