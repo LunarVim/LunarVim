@@ -46,7 +46,7 @@ end
 function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
-  self.cache_path = get_cache_dir()
+  self.cache_dir = get_cache_dir()
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
@@ -80,7 +80,7 @@ function M:init(base_dir)
   if not os.getenv "LVIM_TEST_ENV" then
     _G.PLENARY_DEBUG = false
     require("lvim.impatient").setup {
-      path = vim.fn.stdpath "cache" .. "/lvim_cache",
+      path = join_paths(self.cache_dir, "lvim_cache"),
       enable_profiling = true,
     }
   end
