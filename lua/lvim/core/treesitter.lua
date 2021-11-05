@@ -17,7 +17,16 @@ M.config = function()
     },
     context_commentstring = {
       enable = true,
-      config = { css = "// %s" },
+      config = {
+            -- Languages that have a single comment style
+            typescript = '// %s',
+            css = '/* %s */',
+            scss = '/* %s */',
+            html = '<!-- %s -->',
+            svelte = '<!-- %s -->',
+            vue = '<!-- %s -->',
+            json = ''
+      },
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     -- TODO seems to be broken
