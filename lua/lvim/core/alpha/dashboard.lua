@@ -52,11 +52,11 @@ function M.config()
     -- Set menu
     buttons = {
       list = {
-        { "", "Find File", "<CMD>Telescope find_files<CR>" },
-        { "", "Recent Projects ", "<CMD>Telescope projects<CR>" },
-        { "", "Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
-        { "", "Find Word", "<CMD>Telescope live_grep<CR>" },
-        { "", "Configuration", "<CMD>edit " .. _G.get_config_dir() .. "/config.lua <CR>" },
+        { "SPC f", "  Find File", "<CMD>Telescope find_files<CR>" },
+        { "SPC p", "  Recent Projects ", "<CMD>Telescope projects<CR>" },
+        { "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+        { "SPC s t", "  Find Word", "<CMD>Telescope live_grep<CR>" },
+        { "SPC L c", "  Configuration", "<CMD>edit " .. _G.get_config_dir() .. "/config.lua <CR>" },
       },
     },
   }
