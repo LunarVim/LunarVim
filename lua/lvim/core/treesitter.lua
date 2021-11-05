@@ -18,14 +18,14 @@ M.config = function()
     context_commentstring = {
       enable = true,
       config = {
-            -- Languages that have a single comment style
-            typescript = '// %s',
-            css = '/* %s */',
-            scss = '/* %s */',
-            html = '<!-- %s -->',
-            svelte = '<!-- %s -->',
-            vue = '<!-- %s -->',
-            json = ''
+        -- Languages that have a single comment style
+        typescript = "// %s",
+        css = "/* %s */",
+        scss = "/* %s */",
+        html = "<!-- %s -->",
+        svelte = "<!-- %s -->",
+        vue = "<!-- %s -->",
+        json = "",
       },
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
