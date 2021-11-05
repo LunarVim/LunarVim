@@ -1,4 +1,3 @@
-
 local commit = {
   packer = "7f62848f3a92eac61ae61def5f59ddb5e2cc6823",
   lsp_config = "6224c54a9945a52bf43a8bc1a42a112084590c0b",
@@ -27,27 +26,16 @@ local commit = {
   barbar = "6e638309efcad2f308eb9c5eaccf6f62b794bbab",
   dap = "dd778f65dc95323f781f291fb7c5bf3c17d057b1",
   dap_install = "dd09e9dd3a6e29f02ac171515b8a089fb82bb425",
-  toggleterm = "5f9ba91157a25be5ee7395fbc11b1a8f25938365"
+  toggleterm = "5f9ba91157a25be5ee7395fbc11b1a8f25938365",
 }
 
 return {
   -- Packer can manage itself as an optional plugin
-  { "wbthomason/packer.nvim",
-    commit = commit.packer,
-  },
-  { "neovim/nvim-lspconfig",
-    commit = commit.lsp_config,
-
-  },
-  { "tamago324/nlsp-settings.nvim",
-    commit = commit.nlsp_settings,
-  },
-  { "jose-elias-alvarez/null-ls.nvim",
-    commit = commit.null_ls,
-  },
-  { "antoinemadec/FixCursorHold.nvim",
-    commit = commit.fix_cursor_hold,
-  }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  { "wbthomason/packer.nvim", commit = commit.packer },
+  { "neovim/nvim-lspconfig", commit = commit.lsp_config },
+  { "tamago324/nlsp-settings.nvim", commit = commit.nlsp_settings },
+  { "jose-elias-alvarez/null-ls.nvim", commit = commit.null_ls },
+  { "antoinemadec/FixCursorHold.nvim", commit = commit.fix_cursor_hold }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     "williamboman/nvim-lsp-installer",
     commit = commit.lsp_installer,
@@ -57,16 +45,10 @@ return {
     commit = commit.nvim_notify,
     disable = not lvim.builtin.notify.active,
   },
-  { "Tastyep/structlog.nvim",
-    commit = commit.structlog,
-  },
+  { "Tastyep/structlog.nvim", commit = commit.structlog },
 
-  { "nvim-lua/popup.nvim",
-    commit = commit.popup,
-  },
-  { "nvim-lua/plenary.nvim",
-    commit = commit.plenary,
-  },
+  { "nvim-lua/popup.nvim", commit = commit.popup },
+  { "nvim-lua/plenary.nvim", commit = commit.plenary },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -195,9 +177,7 @@ return {
   },
 
   -- Icons
-  { "kyazdani42/nvim-web-devicons",
-    commit = commit.nvim_web_devicons,
-  },
+  { "kyazdani42/nvim-web-devicons", commit = commit.nvim_web_devicons },
 
   -- Status Line and Bufferline
   {
