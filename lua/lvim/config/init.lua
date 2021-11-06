@@ -63,9 +63,9 @@ local function handle_deprecated_settings()
 
   ---lvim.lang.FOO.lsp
   for lang, entry in pairs(lvim.lang) do
-    local deprecated_config = entry["lsp"] or {}
+    local deprecated_config = entry.formatters or entry.linters or {}
     if not vim.tbl_isempty(deprecated_config) then
-      deprecation_notice(string.format("lvim.lang.%s.lsp", lang))
+      deprecation_notice(string.format("lvim.lang.%s", lang))
     end
   end
 end
