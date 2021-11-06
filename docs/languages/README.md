@@ -128,10 +128,19 @@ _Note: Make sure to install `jsonls` for autocompletion._
 
 ## Formatting
 
-To enable formatting for `javascript` for example, add the following to your `config.lua`
+Set a formatter, this will override the language server formatting capabilities (if it exists)
 
 ```lua
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { exe = "black" },
+  {
+    exe = "prettier",
+    args = { "--print-with", "100" },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
 ```
 
 _Note: Formatters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
@@ -140,17 +149,51 @@ _Note: Formatters' installation is not managed by LunarVim. Refer to the each to
 
 It's also possible to add custom arguments for each formatter.
 
-```lua
-lvim.lang.javascript.formatters = { { exe = "prettier", args = { "--print-with", "100" } } }
 
+```lua
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    exe = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = { "--print-with", "100" },
+  },
+}
 ```
 
 _Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
 
-### Multi formatters per language
+
+### Multi languages per formatter
+
+By default a formatter will attach to all the filetypes it supports.
 
 ```lua
-lvim.lang.python.formatters = { { exe = "black" }, { exe = "isort" } }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    exe = "prettier",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
+```
+
+_Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
+
+### Multi formatters per language
+
+There are no restrictions on setting up multiple formatters per language
+
+```lua
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+  { exe = "black", filetypes = { "python" } },
+  { exe = "isort", filetypes = { "python" } },
+  },
+}
 ```
 
 ### Lazy-loading the formatter setup
@@ -166,27 +209,6 @@ Let's take `markdown` as an example:
 ```lua
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup({{exe = "prettier", filetypes = {"markdown"} }})
-```
-
-### Multi languages per formatter
-
-```lua
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup({{exe = "prettier", filetypes = {"javascript", "json"} }})
-```
-
-_Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
-
-If you start getting prompted to select some server as a formatter, then you will need to disable its formatting capabilities manually:
-
-```lua
--- here's an example to disable formatting in "tsserver" and "jsonls"
-lvim.lsp.on_attach_callback = function(client, _)
-  if client.name == "tsserver" or client.name == "jsonls" then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  end
-end
 ```
 
 ### Formatting on save
