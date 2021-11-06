@@ -5,23 +5,17 @@
 ```vim
 :TSInstall rust
 ```
-
-## Install Language Server
-
-```vim
-:LspInstall rust_analyzer
-```
-
-## Formatters
-
-The configured formatter(s) must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported language servers
 
 ```lua
--- exe value can be "rustfmt"
-lvim.lang.rust.formatters = { { exe = "rustfmt" } }
+rust = { "rust_analyzer" }
 ```
+    
+## Supported formatters
+
+```lua
+rust = { "rustfmt" }
+``` 
 
 ## LSP Settings
 

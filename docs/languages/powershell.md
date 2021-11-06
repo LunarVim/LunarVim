@@ -22,14 +22,10 @@ Install the configured parser.
 :TSInstall powershell
 ```
 
-## Install Language Server
-
-Download and unzip [PowerShellEditorServices](https://github.com/PowerShell/PowerShellEditorServices/releases). [PowerShell v7+](https://github.com/PowerShell/PowerShell/releases) is also required.
-
-Set the location of unzipped PowerShell ES language server to e.g. `config.lua`
+## Supported language servers
 
 ```lua
-lvim.lang.ps1.bundle_path = "/path/to/unzipped/PowerShellEditorServices"
+ps1 = { "powershell_es" },
 ```
 
 For more information about the language server configuration, refer to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es)

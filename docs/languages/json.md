@@ -6,18 +6,17 @@
 :TSInstall json
 ```
 
-## Install Language Server
-
-```vim
-:LspInstall json
-```
-
-## Formatters
-
-The configured formatter(s) must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported language servers
 
 ```lua
-lvim.lang.json.formatters = { { exe = 'json_tool│prettier│prettierd' } }
+json = { "jsonls", "rome" }
 ```
+
+    
+## Supported formatters
+
+```lua
+json = { "fixjson", "prettier", "prettier_d_slim", "prettierd", "python" }
+```
+
+    

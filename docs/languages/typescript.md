@@ -1,53 +1,38 @@
 # TypeScript
 
-## Install Syntax Highlighting
+## Syntax highlighting
 
 ```vim
 :TSInstall typescript
 ```
 
-## Install Language Server
+## Supported language servers
 
-```vim
-:LspInstall tsserver
+```lua
+typescript = { "angularls", "denols", "ember", "eslint", "eslintls", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
 ```
 
-Project root is recognized by having one of the folloing files/folders in the root directory of the project: `package.json`, `tsconfig.json`, `jsconfig.json`, `.git`
+Note: Only `tsserver` is enabled by default.
 
-## Formatters
+### TypeScript standalone server (tsserver)
+
+`tsserver` requires one of the following files/folders : `package.json`, [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html), [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) or `.git.` in the root directory of the project
+
+See [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver) for more information about the tsserver language server configuration options.
+
+## Supported formatters
+
+```lua
+typescript = { "deno", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
+```
 
 The configured formatter(s) must be installed separately.
 
-Configuration in `~/.config/lvim/config.lua`:
+
+## Supported linters
 
 ```lua
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.typescript.formatters = { { exe = "prettier" } }
-lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
+typescript = { "eslint", "eslint_d" }
 ```
 
-Also combination of some prettier and eslint can be specified:
-
-```lua
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.typescript.formatters = { { exe = "eslint"}, { exe = "prettier" } }
-lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
-```
-
-With `eslint` and `eslint_d`, the `--fix` functionality is used for formatting. 
-
-## Linters
-
-The configured linter must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
-
-```lua
--- exe value can be "eslint" or "eslint_d"
-lvim.lang.typescript.linters = { { exe = "eslint" } }
-lvim.lang.typescriptreact.linters = lvim.lang.typescript.linters
-```
-
-## LSP Settings
-
-See [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver) for more information about the tsserver language server configuration options.
+The configured linter(s) must be installed separately.
