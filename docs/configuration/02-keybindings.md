@@ -20,7 +20,7 @@ vim.cmd([[
 ]])
 
 # Calling lua functions
-vim.cmd("vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")")
+vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")
 ```
 
 ### Neovim style
