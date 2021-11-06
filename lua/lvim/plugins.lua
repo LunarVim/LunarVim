@@ -177,7 +177,11 @@ return {
   },
 
   -- Icons
-  { "kyazdani42/nvim-web-devicons", commit = commit.nvim_web_devicons },
+  {
+    "kyazdani42/nvim-web-devicons",
+    commit = commit.nvim_web_devicons,
+    disable = lvim.builtin.nvim_web_devicons ~= nil,
+  },
 
   -- Status Line and Bufferline
   {
