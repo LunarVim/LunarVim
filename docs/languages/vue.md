@@ -1,46 +1,27 @@
 # Vue
 
-## Install Syntax Highlighting
+## Syntax highlighting
 
 ```vim
 :TSInstall vue
 ```
 
-## Install Language Server
-
-```vim
-:LspInstall vue
-```
-
-## Formatters
-
-The configured formatter(s) must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported language servers
 
 ```lua
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.vue.formatters = { { exe = "prettier" } }
+vue = { "eslint", "stylelint_lsp", "tailwindcss", "volar", "vuels" },
 ```
 
-Also combination of some prettier and eslint can be specified:
+## Supported formatters
 
 ```lua
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.vue.formatters = { { exe = "eslint"}, { exe = "prettier" } }
+vue = { "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
 ```
 
-With `eslint` and `eslint_d`, the `--fix` functionality is used for formatting. 
-
-## Linters
-
-The configured linter must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported linters
 
 ```lua
--- exe value can be "eslint" or "eslint_d"
-lvim.lang.vue.linters = { { exe = "eslint" } }
+vue = { "eslint", "eslint_d" }
 ```
 
 ## LSP Settings

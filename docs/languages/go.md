@@ -6,21 +6,16 @@
 :TSInstall gopls
 ```
 
-## Install Language Server
-
-```vim
-:LspInstall gopls
-```
-
-## Formatters
-
-The configured formatter(s) must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported language servers
 
 ```lua
--- exe value can be "gofmt", "goimports", or "gofumpt"
-lvim.lang.go.formatters = {{ exe = "goimports" }}
+go = { "gopls" }
+```
+
+## Supported formatters
+
+```lua
+go = { "gofmt", "gofumpt", "goimports", "golines" }
 ```
 
 ## LSP Settings

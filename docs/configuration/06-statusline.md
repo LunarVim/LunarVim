@@ -1,20 +1,24 @@
 # Statusline
+
 LunarVim uses `lualine` as a default statusline.
 
 Configuration is same as that of lualine with full support. See [Lualine README.md](https://github.com/shadmansaleh/lualine.nvim/blob/master/README.md)
 
-In addition, LunarVim provides predefined styles(layout) and components. 
+In addition, LunarVim provides predefined styles(layout) and components.
 
 ## Style
+
 There are three style options LunarVim accepts,
-- lvim   
-> LunarVim's default layout
-- default 
-> Lualine's default layout
+
+- lvim
+  > LunarVim's default layout
+- default
+  > Lualine's default layout
 - none
-> Empty layout
+  > Empty layout
 
 To set style other than `"lvim" style`,
+
 ```lua
 lvim.builtin.lualine.style = "default" -- or "none"
 ```
@@ -22,34 +26,37 @@ lvim.builtin.lualine.style = "default" -- or "none"
 <br />
 
 ## Component
+
 You can use any component that `lualine` provides and `LunarVim` provides.
 
 **LunarVim's components**
 
 `mode`, `branch`, `filename`, `diff`, `python_env`, `diagnostics`, `treesitter`, `lsp`, `location`, `progress`, `spaces`, `encoding`, `filetype`, `scrollbar`
 
-
 To set `lualine's "diff"` component to section c of `"default" style`,
-``` lua
+
+```lua
 lvim.builtin.lualine.style = "default"
 lvim.builtin.lualine.sections.lualine_c = { "diff" }
 ```
 
 To set `LunarVim's "spaces" and "location"` components to section y and `lualine's "mode"` component to section a of `"lvim" style`,
-``` lua
+
+```lua
 -- no need to set style = "lvim"
 local components = require("lvim.core.lualine.components")
 
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
-lvim.builtin.lualine.sections.lualine_y = { 
-  components.spaces, 
-  components.location 
+lvim.builtin.lualine.sections.lualine_y = {
+  components.spaces,
+  components.location
 }
 ```
+
 <br />
 
-
 ## Theme
+
 LunarVim automatically detects current colorscheme and set it as theme.
 
 To change your colorscheme, see [Colorscheme](./03-colorschemes.md)
@@ -57,12 +64,14 @@ To change your colorscheme, see [Colorscheme](./03-colorschemes.md)
 If there is no matching theme, it will fallback to `"auto"` theme provided by lualine.
 
 In case you want to use different theme, set it manually,
-``` lua
+
+```lua
 lvim.builtin.lualine.options.theme = "gruvbox"
 ```
 
 To customize existing theme,
-``` lua
+
+```lua
 custom_gruvbox = require "lualine.themes.gruvbox_dark"
 custom_gruvbox.insert.b = { fg = custom_gruvbox.insert.a.bg, gui = "bold" }
 custom_gruvbox.visual.b = { fg = custom_gruvbox.visual.a.bg, gui = "bold" }
@@ -73,7 +82,8 @@ lvim.builtin.lualine.options.theme = custom_gruvbox
 ```
 
 To create your own theme,
-``` lua
+
+```lua
 local colors = {
   color2 = "#0f1419",
   color3 = "#ffee99",
@@ -110,20 +120,22 @@ lvim.builtin.lualine.options.theme = {
   },
 }
 ```
+
 <br />
 
 ## Callback
+
 Callback function is available for more flexibility.
 
 It will run when configuration is done,
 
-``` lua
+```lua
 lvim.builtin.lualine.on_config_done = function(lualine)
   local config = lualine.get_config()
   local components = require "core.lualine.components"
-  
+
   config.sections.lualine_x[3].color.bg = "#2c2c2c"
-  table.remove(config.sections.lualine_x, 2) -- remove treesitter icon 
+  table.remove(config.sections.lualine_x, 2) -- remove treesitter icon
   table.insert(config.sections.lualine_x, components.location)
   lualine.setup(config)
 end

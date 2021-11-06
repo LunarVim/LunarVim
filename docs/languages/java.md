@@ -6,21 +6,19 @@
 :TSInstall java
 ```
 
-## Install Language Server
+## Supported language servers
 
-```vim
-:LspInstall jdtls
+```lua
+java = { "jdtls" }
 ```
 
 NOTE: jdtls requires jdk-11 or newer to run.
 
-## Formatters
+## Supported formatters
 
-(TODO)
-
-## Linters
-
-(TODO)
+```lua
+java = { "clang-format", "uncrustify" }
+```
 
 ## LSP Settings
 

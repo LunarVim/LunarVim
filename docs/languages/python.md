@@ -6,31 +6,22 @@
 :TSInstall python
 ```
 
-## Install Language Server
-
-```vim
-:LspInstall python
-```
-
-## Formatters
-
-The configured formatter(s) must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported language servers
 
 ```lua
--- exe value can be "black", "yapf", or "isort"
-lvim.lang.python.formatters = { { exe = "black" } }
+python = { "jedi_language_server", "pylsp", "pyright" }
 ```
 
-## Linters
-
-The configured linter must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported formatters
 
 ```lua
-lvim.lang.python.linters = { { exe = "flake8" } }
+python = { "autopep8", "black", "isort", "reorder-python-imports", "yapf" }
+```
+
+## Supported linters
+
+```lua
+python = { "flake8", "pylint" }
 ```
 
 ## LSP Settings

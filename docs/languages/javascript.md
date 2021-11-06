@@ -1,53 +1,57 @@
 # JavaScript
 
-## Install Syntax Highlighting
+## Syntax highlighting
 
 ```vim
 :TSInstall javascript
 ```
 
-## Install Language Server
+## Supported language servers
 
-JavaScript uses [TypeScript](/languages/typescript.html#install-language-server) language server.
+```lua
+javascript = {
+  "denols", "ember", "eslint", "eslintls", "rome", "stylelint_lsp", "tailwindcss", "tsserver"
+  }
+```
 
-## Formatters
+Note: Only `tsserver` is enabled by default.
+
+### JavaScript standalone server (tsserver)
+
+`tsserver` requires one of the following files/folders : `package.json`, [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html), [`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) or `.git.` in the root directory of the project
+
+See [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver) for more information about the tsserver language server configuration options.
+
+## Supported formatters
+
+```lua
+javascript = { "deno", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
+```
 
 The configured formatter(s) must be installed separately.
 
-Configuration in `~/.config/lvim/config.lua`:
+## Supported linters
 
 ```lua
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
-lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+javascript = { "eslint", "eslint_d" }
 ```
 
-Also combination of some prettier and eslint can be specified:
+The configured linter(s) must be installed separately.
+
+## Supported language servers
 
 ```lua
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.javascript.formatters = { { exe = "eslint"}, { exe = "prettier" } }
-lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+javascript = { "denols", "ember", "eslint", "eslintls", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
 ```
 
-With `eslint` and `eslint_d`, the `--fix` functionality is used for formatting. 
-
-## Linters
-
-The configured linter must be installed separately.
-
-Configuration in `~/.config/lvim/config.lua`:
+## Supported formatters
 
 ```lua
--- exe value can be "eslint" or "eslint_d"
-lvim.lang.javascript.linters = { { exe = "eslint" } }
-lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
+javascript = { "deno", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
 ```
 
-## LSP Settings
+## Supported linters
 
-More information in [TypeScript](/languages/typescript.html#lsp-settings).
-
-## Debugger
-
-(TODO)
+```lua
+javascript = { "eslint", "eslint_d" }
+```

@@ -53,7 +53,7 @@ You can also toggle `<:LspInstallInfo>` and interactively choose which servers t
 
 ### Manually-configured servers
 
-`lvim.lsp.override` contains a list of servers that should **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. 
+`lvim.lsp.override` contains a list of servers that should **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
 
 See the current list
 
@@ -101,7 +101,7 @@ Now you can set it up manually using the builtin [lsp-manager](https://github.co
 ```lua
 --- list of options that should take predence over any of LunarVim's defaults
 --- check the lspconfig documentation for a list of all possible options
-local opts = {} 
+local opts = {}
 require("lvim.lsp.manager").setup("pyright", opts)
 ```
 
@@ -109,7 +109,7 @@ Alternatively, set it up using the `lspconfig` API directly
 
 ```lua
 --- check the lspconfig documentation for a list of all possible options
-local opts = {} 
+local opts = {}
 require("lspconfig")["pyright"].setup(opts)
 ```
 
@@ -128,10 +128,18 @@ _Note: Make sure to install `jsonls` for autocompletion._
 
 ## Formatting
 
-To enable formatting for `javascript` for example, add the following to your `config.lua`
+Set a formatter, this will override the language server formatting capabilities (if it exists)
 
 ```lua
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { exe = "black" },
+  {
+    exe = "prettier",
+    args = { "--print-with", "100" },
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
 ```
 
 _Note: Formatters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
@@ -141,16 +149,48 @@ _Note: Formatters' installation is not managed by LunarVim. Refer to the each to
 It's also possible to add custom arguments for each formatter.
 
 ```lua
-lvim.lang.javascript.formatters = { { exe = "prettier", args = { "--print-with", "100" } } }
-
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    exe = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = { "--print-with", "100" },
+  },
+}
 ```
 
 _Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
 
-### Multi formatters per language
+### Multi languages per formatter
+
+By default a formatter will attach to all the filetypes it supports.
 
 ```lua
-lvim.lang.python.formatters = { { exe = "black" }, { exe = "isort" } }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    exe = "prettier",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
+```
+
+_Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
+
+### Multi formatters per language
+
+There are no restrictions on setting up multiple formatters per language
+
+```lua
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+  { exe = "black", filetypes = { "python" } },
+  { exe = "isort", filetypes = { "python" } },
+  },
+}
 ```
 
 ### Lazy-loading the formatter setup
@@ -160,7 +200,7 @@ then you can use [filetype plugins](../configuration/07-ftplugin.md) for this pu
 
 Let's take `markdown` as an example:
 
-1. create a file called `markdown.lua` in the `$LUNARVIM_CONFIG_DIR/ftplugin` folder
+1. create a file called `markdown.lua` in the `$LUNARVIM_CONFIG_DIR/after/ftplugin` folder
 2. add the following snippet
 
 ```lua
@@ -168,30 +208,9 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup({{exe = "prettier", filetypes = {"markdown"} }})
 ```
 
-### Multi languages per formatter
-
-```lua
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup({{exe = "prettier", filetypes = {"javascript", "json"} }})
-```
-
-_Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
-
-If you start getting prompted to select some server as a formatter, then you will need to disable its formatting capabilities manually:
-
-```lua
--- here's an example to disable formatting in "tsserver" and "jsonls"
-lvim.lsp.on_attach_callback = function(client, _)
-  if client.name == "tsserver" or client.name == "jsonls" then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  end
-end
-```
-
 ### Formatting on save
 
-This is controlled by an auto-command and is to true by default.
+You can disable auto-command and is to true by default.
 
 - configuration option
 
@@ -201,10 +220,21 @@ lvim.format_on_save = true
 
 ## Linting
 
-To enable a linter for `bash` for example, add the following to your `config.lua`
+Set additional linters
 
 ```lua
-lvim.lang.sh.linters = { { exe = "shellcheck" } }
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { exe = "flake8" },
+  {
+    exe = "shellcheck",
+    args = { "--severity", "warning" },
+  },
+  {
+    exe = "codespell",
+    filetypes = { "javascript", "python" },
+  },
+}
 ```
 
 _Note: linters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
@@ -214,23 +244,40 @@ _Note: linters' installation is not managed by LunarVim. Refer to the each tool'
 It's also possible to add custom arguments for each linter.
 
 ```lua
-lvim.lang.sh.linters = { { exe = "shellcheck", args = { "--sverity", "error" } } }
-
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    exe = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = { "--severity", "warning" },
+  },
+}
 ```
 
 _Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
 
-### Multi formatters per language
-
-```lua
-lvim.lang.python.linters = { { exe = "flake8" }, { exe = "pylint" } }
-```
-
-### Multi languages per formatter
+### Multi linters per language
 
 ```lua
 local linters = require "lvim.lsp.null-ls.linters"
-linters.setup({{exe = "eslint", filetypes = {"javascript", "typescript", "vue"} }})
+linters.setup {
+  { exe = "flake8", filetypes = { "python" } },
+  { exe = "codespell", filetypes = { "python" } },
+}
+```
+
+### Multi languages per linter
+
+```lua
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    exe = "codespell",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "python" },
+  },
+}
 ```
 
 _Note: removing the `filetypes` argument will allow the linter to attach to all the default filetypes it supports._
@@ -240,12 +287,12 @@ _Note: removing the `filetypes` argument will allow the linter to attach to all 
 By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
 then you can use [filetype plugins](../configuration/07-ftplugin.md) for this purpose.
 
-Let's take `typescript` as an example:
+Let's take `python` as an example:
 
-1. create a file called `typescript.lua` in the `$LUNARVIM_CONFIG_DIR/ftplugin` folder
+1. create a file called `python.lua` in the `$LUNARVIM_CONFIG_DIR/after/ftplugin` folder
 2. add the following snippet
 
 ```lua
 local linters = require "lvim.lsp.null-ls.linters"
-linters.setup({{exe = "eslint_d", filetypes = { "typescript" } }})
+linters.setup({{exe = "flake8", filetypes = { "python" } }})
 ```

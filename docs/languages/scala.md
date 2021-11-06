@@ -38,3 +38,9 @@ lvim.plugins = {
     },
 }
 ```
+
+## Supported formatters
+
+```lua
+scala = { "scalafmt" }
+```

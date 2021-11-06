@@ -34,7 +34,7 @@ lvim.keys.normal_mode["<C-Up>"] = ""
 lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 ```
 
-- You can also use the NeoVim API directly using [nvim_set_keymap](https://neovim.io/doc/user/api.html#nvim_set_keymap())
+- You can also use the NeoVim API directly using [nvim_set_keymap](<https://neovim.io/doc/user/api.html#nvim_set_keymap()>)
 
 ```lua
 vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
@@ -49,7 +49,7 @@ vim.cmd [[ nnoremap <F2> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i ]]
 
 ## What is `null-ls` and why do you use it?
 
-For C/C++ we have the `clangd` by `llvm` which can also use its siblings' abilities `clang-tidy` and `clang-format` to support additional linting and formatting. But something like `pyright` doesn't support formatting, so we use `null-ls` to register `black` and `flake8` for example, as a "fake" language server. 
+For C/C++ we have the `clangd` by `llvm` which can also use its siblings' abilities `clang-tidy` and `clang-format` to support additional linting and formatting. But something like `pyright` doesn't support formatting, so we use `null-ls` to register `black` and `flake8` for example, as a "fake" language server.
 
 Since it's not using a separate binary it's called `null-ls` or _null language server_.
 
@@ -57,7 +57,6 @@ Since it's not using a separate binary it's called `null-ls` or _null language s
 
 If you want ideas for configuring LunarVim you can look at these repositories.
 
-* Chris - [https://github.com/ChristianChiarulli/lvim](https://github.com/ChristianChiarulli/lvim)
-* Abouzar -[  https://github.com/abzcoding/lvim ](  https://github.com/abzcoding/lvim )
-* Nelson -[  https://github.com/rebuilt/lvim ](  https://github.com/rebuilt/lvim )
-
+- Chris - [https://github.com/ChristianChiarulli/lvim](https://github.com/ChristianChiarulli/lvim)
+- Abouzar -[ https://github.com/abzcoding/lvim ](https://github.com/abzcoding/lvim)
+- Nelson -[ https://github.com/rebuilt/lvim ](https://github.com/rebuilt/lvim)

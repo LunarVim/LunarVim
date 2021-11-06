@@ -1,6 +1,7 @@
 # Development of Lunarvim
 
 ## Getting started
+
 We recommend setting up a symlink to your fork:
 
 ```bash
@@ -9,12 +10,14 @@ ln -s ~/dev/Lunarvim ~/.local/share/lunarvim/lvim_dev
 ```
 
 Your output should be something like:
+
 ```bash
 $ ls -a
 lrwxrwxrwx  1 user user   37 sep 23 14:35 lvim_dev -> /home/user/dev/LunarVim
 ```
 
 ---
+
 Now switch your lvim to the development setup:
 
 ```bash
@@ -24,7 +27,9 @@ mv lvim_dev lvim
 ```
 
 ---
+
 Going back to lvim
+
 ```bash
 cd ~/.local/share/lunarvim/
 mv lvim lvim_dev
@@ -32,6 +37,7 @@ mv lvim_back lvim
 ```
 
 To test that you can get some output from `lvim` add the following to your `init.lua` file in your fork.
+
 ```lua
 print ("it works")
 ```
@@ -39,6 +45,7 @@ print ("it works")
 ```bash
 lvim
 ```
+
 Now type `:messages`. Happy contributing!
 
 ## Lua + Neovim = :heart:
@@ -71,7 +78,7 @@ To ensure code quality and a consistent style, our [CI](https://github.com/Lunar
 
 - Lua:
   - [Stylua](https://github.com/JohnnyMorganz/StyLua). An opinionated Lua code formatter.
-  - [Luacheck](https://github.com/mpeterv/luacheck). A tool for linting and static analysis of Lua code. 
+  - [Luacheck](https://github.com/mpeterv/luacheck). A tool for linting and static analysis of Lua code.
 - Shell
   - [Shfmt](https://github.com/mvdan/sh). A shell parser, formatter, and interpreter with bash support.
   - [Shellcheck](https://github.com/koalaman/shellcheck). A static analysis tool for shell scripts.

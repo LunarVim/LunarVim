@@ -1,13 +1,13 @@
 # Configuring a debugger
 
-LunarVim uses nvim-dap for debugging.  To set up your particular debugger, look here:
+LunarVim uses nvim-dap for debugging. To set up your particular debugger, look here:
 [link](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation)
 
 ## cpp
 
 To set up a debug adapter for cpp, place this in your `config.lua`
 
-``` lua
+```lua
 lvim.builtin.dap.on_config_done = function(dap)
     dap.adapters.lldb = {
       type = 'executable',
@@ -30,4 +30,3 @@ lvim.builtin.dap.on_config_done = function(dap)
     dap.configurations.c = dap.configurations.cpp
 end
 ```
-

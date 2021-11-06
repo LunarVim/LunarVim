@@ -6,16 +6,20 @@
 :TSInstall lua
 ```
 
-## Install Language Server
+## Supported language servers
 
-```vim
-:LspInstall sumneko_lua
+```lua
+lua = { "sumneko_lua" }
 ```
 
-## Formatters
+## Supported formatters
 
-(TODO)
+```lua
+lua = { "lua-format", "stylua" }
+```
 
-## LSP Settings
+## Supported linters
 
-(TODO)
+```lua
+lua = { "luacheck", "selene" }
+```
