@@ -12,7 +12,6 @@
 go = { "gopls" }
 ```
 
-    
 ## Supported formatters
 
 ```lua
@@ -38,5 +37,3 @@ Configure `json` to use auto-completion
 local dap_install = require "dap-install"
 dap_install.config("go_delve", {})
 ```
-
-    

@@ -12,13 +12,12 @@
 python = { "jedi_language_server", "pylsp", "pyright" }
 ```
 
-    
 ## Supported formatters
 
 ```lua
 python = { "autopep8", "black", "isort", "reorder-python-imports", "yapf" }
 ```
-    
+
 ## Supported linters
 
 ```lua

@@ -28,7 +28,6 @@ typescript = { "deno", "eslint", "eslint_d", "prettier", "prettier_d_slim", "pre
 
 The configured formatter(s) must be installed separately.
 
-
 ## Supported linters
 
 ```lua

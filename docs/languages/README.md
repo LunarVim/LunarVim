@@ -53,7 +53,7 @@ You can also toggle `<:LspInstallInfo>` and interactively choose which servers t
 
 ### Manually-configured servers
 
-`lvim.lsp.override` contains a list of servers that should **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen. 
+`lvim.lsp.override` contains a list of servers that should **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
 
 See the current list
 
@@ -101,7 +101,7 @@ Now you can set it up manually using the builtin [lsp-manager](https://github.co
 ```lua
 --- list of options that should take predence over any of LunarVim's defaults
 --- check the lspconfig documentation for a list of all possible options
-local opts = {} 
+local opts = {}
 require("lvim.lsp.manager").setup("pyright", opts)
 ```
 
@@ -109,7 +109,7 @@ Alternatively, set it up using the `lspconfig` API directly
 
 ```lua
 --- check the lspconfig documentation for a list of all possible options
-local opts = {} 
+local opts = {}
 require("lspconfig")["pyright"].setup(opts)
 ```
 
@@ -148,7 +148,6 @@ _Note: Formatters' installation is not managed by LunarVim. Refer to the each to
 
 It's also possible to add custom arguments for each formatter.
 
-
 ```lua
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -162,7 +161,6 @@ formatters.setup {
 ```
 
 _Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
-
 
 ### Multi languages per formatter
 
@@ -212,7 +210,7 @@ formatters.setup({{exe = "prettier", filetypes = {"markdown"} }})
 
 ### Formatting on save
 
-You can disable  auto-command and is to true by default.
+You can disable auto-command and is to true by default.
 
 - configuration option
 

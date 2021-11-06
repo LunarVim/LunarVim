@@ -112,7 +112,6 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-
 ### [rnvimr](https://github.com/kevinhwang91/rnvimr)
 
 **ranger file explorer window**
@@ -154,7 +153,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 **navigate and highlight matching words**
 
-``` lua
+```lua
 {
   "andymass/vim-matchup",
   event = "CursorMoved",
@@ -181,7 +180,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 **show git blame**
 
-``` lua
+```lua
 {
   "f-person/git-blame.nvim",
   event = "BufRead",
@@ -350,17 +349,18 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 **lsp diagnostics highlight groups for non lsp colorschemes**
 
-``` lua
+```lua
 {
   "folke/lsp-colors.nvim",
   event = "BufRead",
 },
 ```
+
 ### [lush.nvim](https://github.com/rktjmp/lush.nvim)
 
 **colorscheme creation aid**
 
-``` lua
+```lua
 {
   "rktjmp/lush.nvim",
 },
@@ -445,7 +445,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 **hint when you type**
 
-``` lua
+```lua
 {
   "ray-x/lsp_signature.nvim",
   event = "BufRead",

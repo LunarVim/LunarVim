@@ -22,7 +22,7 @@ vue = { "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rusty
 
 ```lua
 vue = { "eslint", "eslint_d" }
-```    
+```
 
 ## LSP Settings
 

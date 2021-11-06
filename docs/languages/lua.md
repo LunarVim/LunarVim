@@ -17,10 +17,9 @@ lua = { "sumneko_lua" }
 ```lua
 lua = { "lua-format", "stylua" }
 ```
-    
+
 ## Supported linters
 
 ```lua
 lua = { "luacheck", "selene" }
 ```
-

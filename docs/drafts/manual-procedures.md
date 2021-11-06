@@ -12,16 +12,16 @@ If you want to compile `neovim` from source and install, see [here](./dev/#compi
 
 ### Install `pip`
 
-|   OS  | Command     |
-|-------|-------------|
-|Mac    |sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py|
-|       |python3 get-pip.py|
-|       |rm get-pip.py|
-|Ubuntu |sudo apt install python3-pip \>/dev/null|
-|Arch   |sudo pacman -S python-pip|
-|Fedora |sudo dnf install -y pip \>/dev/null|
-|Gentoo |sudo emerge -avn dev-python/pip|
-|Termux |apt install python|
+| OS     | Command                                                      |
+| ------ | ------------------------------------------------------------ |
+| Mac    | sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py |
+|        | python3 get-pip.py                                           |
+|        | rm get-pip.py                                                |
+| Ubuntu | sudo apt install python3-pip \>/dev/null                     |
+| Arch   | sudo pacman -S python-pip                                    |
+| Fedora | sudo dnf install -y pip \>/dev/null                          |
+| Gentoo | sudo emerge -avn dev-python/pip                              |
+| Termux | apt install python                                           |
 
 ### Install [fnm](https://github.com/Schniz/fnm) or another [node version manager](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 
@@ -37,7 +37,7 @@ LunarVim also requires a python package called `neovim-remote`. Upon installatio
 
 ```bash
 export PATH=/home/$USER/.local/bin:$PATH
-``` 
+```
 
 Close and reopen your shell window or run `source ~/.bashrc` (or other shell config file) to effectuate the changes.
 
@@ -49,7 +49,7 @@ With the manual prep out of the way, we are ready to install LunarVim!
 
 No alarms and no surprises:
 
-``` bash
+```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
@@ -65,13 +65,14 @@ That's it! Please continue on to [Quick Start](./02-after-install.md)!
 
 ## Troubleshooting installation problems
 
-If you encounter problems with the installation check the following: 
+If you encounter problems with the installation check the following:
 
 1. Make sure you have at least version 0.5.0 of `neovim`. There were some breaking changes in the development of 0.5.0 so upgrade to the newest available version to rule out incompatibilities.
- 
-2. Make sure `neovim` was compiled with `luajit`: 
+
+2. Make sure `neovim` was compiled with `luajit`:
+
 ```bash
-# The output of version information should include a line for: LuaJIT 
+# The output of version information should include a line for: LuaJIT
 nvim -v
 ```
 
@@ -79,13 +80,13 @@ nvim -v
 
 4. Make sure you have followed the procedures in [Quick Start](./02-after-install.md) to install and update your plugins.
 
-5. If you're upgrading your install, sometimes an old `packer` compiled file can cause errors at runtime.  Remove the plugin folder with `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`.
+5. If you're upgrading your install, sometimes an old `packer` compiled file can cause errors at runtime. Remove the plugin folder with `rm -rf ~/.config/lvim/plugin` and run `:PackerSync`.
 
 6. If you got an EACCES `npm` error you need to be sure you can install global `npm` packages without `sudo` as described [here](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
 ## Uninstall
 
-You can remove LunarVim entirely (while preserving `neovim`) by running the following commands: 
+You can remove LunarVim entirely (while preserving `neovim`) by running the following commands:
 
 ```bash
 rm -rf ~/.local/share/lunarvim
@@ -95,9 +96,7 @@ sudo rm /usr/local/bin/lvim
 rm -rf ~/.local/share/applications/lvim.desktop
 ```
 
-
-## Manual Install 
-
+## Manual Install
 
 Install `xclip`, `python3`, `ripgrep` and `fzf` with the package manager for your distribution:
 
@@ -106,12 +105,12 @@ Install `xclip`, `python3`, `ripgrep` and `fzf` with the package manager for you
 sudo apt install xclip ripgrep fzf libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
 
 # Arch
-sudo pacman -S xclip python ripgrep fzf 
+sudo pacman -S xclip python ripgrep fzf
 
 # Fedora
 sudo dnf groupinstall "X Software Development"
 sudo dnf install -y xclip python3-devel ripgrep fzf
-pip3 install wheel 
+pip3 install wheel
 
 # Gentoo
 sudo emerge -avn sys-apps/ripgrep app-shells/fzf app-misc/dev-python/neovim-remote virtual/jpeg sys-libs/zlib
@@ -120,7 +119,7 @@ sudo flaggie net-libs/nodejs +npm
 sudo emerge -avnN net-libs/nodejs
 
 # Mac
-brew install lua ripgrep fzf 
+brew install lua ripgrep fzf
 
 # Termux
 sudo apt install ripgrep fzf xclip python
@@ -138,7 +137,7 @@ Install the `neovim`, `neovim-remote` and `pynvim` packages with `pip3`:
 pip3 install neovim neovim-remote pynvim --user
 ```
 
-Clone plugins: 
+Clone plugins:
 
 ```bash
 mkdir -p ~/.local/share/lunarvim/site/pack/packer/start/
@@ -164,6 +163,7 @@ cp ~/.local/share/lunarvim/lvim/utils/installer/config.example.lua ~/.config/lvi
 ```
 
 Install plugins
+
 ```bash
 #launch LunarVim
 lvim
@@ -171,5 +171,3 @@ lvim
 # Type this command
 :PackerSync
 ```
-
-

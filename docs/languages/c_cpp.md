@@ -41,6 +41,7 @@ If you need specific settings for `clangd` then you can override it like this
 -- check the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 vim.list_extend(lvim.lsp.override, { "clangd" })
 ```
+
 Now you can customize the setup completely
 
 ```lua

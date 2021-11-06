@@ -28,10 +28,12 @@ This might be the result of old cache files that need to be reset. LunarVim make
 and deliver a pleasant experience.
 
 You can run `LvimCacheReset` to fix most of these issues.
+
 1. while running LunarVim: `:LvimCacheReset`
 2. from the CLI: `lvim +LvimCacheReset`
 
 If that doesn't work, try re-syncing your plugins:
+
 1. while running LunarVim: `:PackerSync`
 2. from the CLI: `lvim +PackerSync`
 

@@ -44,4 +44,3 @@ lvim.plugins = {
 ```lua
 scala = { "scalafmt" }
 ```
-

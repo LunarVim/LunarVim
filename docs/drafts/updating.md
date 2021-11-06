@@ -5,6 +5,7 @@ Update your plugins, LunarVim and `neovim`:
 ### Plugins
 
 In `lvim`:
+
 ```vim
 :PackerUpdate
 ```
@@ -14,7 +15,9 @@ In `lvim`:
 ```bash
 cd ~/.local/share/lunarvim/lvim && git pull
 ```
+
 Then, in `lvim`:
+
 ```vim
 :PackerSync
 ```
