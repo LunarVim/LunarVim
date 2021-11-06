@@ -21,7 +21,7 @@ function M.list_available(filetype)
       table.insert(linters, provider.name)
     end
   end
-
+  table.sort(linters)
   return linters
 end
 

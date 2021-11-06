@@ -57,7 +57,7 @@ local function handle_deprecated_settings()
       setting
     )
     vim.schedule(function()
-      vim.notify(msg, vim.log.levels.WARN)
+      Log:warn(msg)
     end)
   end
 

@@ -27,6 +27,12 @@ local commit = {
   dap = "dd778f65dc95323f781f291fb7c5bf3c17d057b1",
   dap_install = "dd09e9dd3a6e29f02ac171515b8a089fb82bb425",
   toggleterm = "5f9ba91157a25be5ee7395fbc11b1a8f25938365",
+  luasnip = "bab7cc2c32fba00776d2f2fc4704bed4eee2d082",
+  cmp_luasnip = "16832bb50e760223a403ffa3042859845dd9ef9d",
+  cmp_buffer = "d1ca295ce584ec80763a6dc043080874b57ccffc",
+  cmp_nvim_lsp = "accbe6d97548d8d3471c04d512d36fa61d0e4be8",
+  cmp_path = "97661b00232a2fe145fe48e295875bc3299ed1f7",
+  cmp_nvim_lua = "d276254e7198ab7d00f117e88e223b4bd8c02d21",
 }
 
 return {
@@ -71,14 +77,6 @@ return {
     config = function()
       require("lvim.core.cmp").setup()
     end,
-    requires = {
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lua",
-    },
     run = function()
       -- cmp's config requires cmp to be installed to run the first time
       if not lvim.builtin.cmp then
@@ -91,6 +89,30 @@ return {
     commit = commit.friendly_snippets,
     -- event = "InsertCharPre",
     -- disable = not lvim.builtin.compe.active,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    commit = commit.luasnip,
+  },
+  {
+    "saadparwaiz1/cmp_luasnip",
+    commit = commit.cmp_luasnip,
+  },
+  {
+    "hrsh7th/cmp-buffer",
+    commit = commit.cmp_buffer,
+  },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+    commit = commit.cmp_nvim_lsp,
+  },
+  {
+    "hrsh7th/cmp-path",
+    commit = commit.cmp_path,
+  },
+  {
+    "hrsh7th/cmp-nvim-lua",
+    commit = commit.cmp_nvim_lua,
   },
 
   -- Autopairs
@@ -125,8 +147,7 @@ return {
     "kyazdani42/nvim-tree.lua",
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
-    -- commit = commit.nvim_tree,
-    commit = "f92b7e7627c5a36f4af6814c408211539882c4f3",
+    commit = commit.nvim_tree,
     config = function()
       require("lvim.core.nvimtree").setup()
     end,
