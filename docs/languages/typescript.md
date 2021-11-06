@@ -12,7 +12,7 @@
 typescript = { "angularls", "denols", "ember", "eslint", "eslintls", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
 ```
 
-Note: Only `tsserver` is enabled by default.
+Only `tsserver` is enabled by default and the other servers need to be [manually configured](./README.md#manually-configured-servers).
 
 ### TypeScript standalone server (tsserver)
 

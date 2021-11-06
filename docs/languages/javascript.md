@@ -14,7 +14,7 @@ javascript = {
   }
 ```
 
-Note: Only `tsserver` is enabled by default.
+Only `tsserver` is enabled by default and the other servers need to be [manually configured](./README.md#manually-configured-servers).
 
 ### JavaScript standalone server (tsserver)
 
