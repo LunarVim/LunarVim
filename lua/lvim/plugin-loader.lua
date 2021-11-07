@@ -23,6 +23,7 @@ function plugin_loader.init(opts)
     compile_path = compile_path,
     log = { level = "warn" },
     git = { clone_timeout = 300 },
+    max_jobs = 50,
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
