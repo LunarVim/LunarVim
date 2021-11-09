@@ -60,11 +60,19 @@ a.describe("lsp workflow", function()
     require("lvim.lsp").setup()
 
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
-      local count = 0
-      for _ in io.lines(file) do
-        count = count + 1
+      local content = {}
+      for entry in io.lines(file) do
+        table.insert(content, entry)
       end
-      assert.equal(count, 1)
+      local err_msg = ""
+      if #content > 1 then
+        err_msg = string.format(
+          "found more than one server for [%q]: \n{\n %q \n}",
+          file:match "[^/]*.lua$",
+          table.concat(content, ", ")
+        )
+      end
+      assert.equal(err_msg, "")
     end
   end)
 end)
