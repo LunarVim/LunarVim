@@ -283,6 +283,9 @@ M.config = function()
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping(function(fallback)
         if cmp.visible() and cmp.confirm(lvim.builtin.cmp.confirm_opts) then
+          if jumpable() then
+            luasnip.jump(1)
+          end
           return
         end
 
