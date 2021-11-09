@@ -55,6 +55,7 @@ return {
     "phpactor",
     "pylsp",
     "rome",
+    "sorbet",
     "sqlls",
     "sqls",
     "stylelint_lsp",
