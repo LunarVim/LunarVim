@@ -215,10 +215,7 @@ M.config = function()
       },
       L = {
         name = "LunarVim",
-        c = {
-          "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
-          "Edit config.lua",
-        },
+        c = { "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>", "Edit config.lua" },
         f = conditional(
           { "<cmd>lua require('lvim.core.telescope.custom-finders').find_lunarvim_files()<cr>", "Find LunarVim files" },
           has_telescope
@@ -232,10 +229,10 @@ M.config = function()
           "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
         },
-        I = {
+        I = conditional({
           "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
           "View LunarVim's changelog",
-        },
+        }, has_telescope),
         l = {
           name = "logs",
           d = conditional({
@@ -246,16 +243,16 @@ M.config = function()
             "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>",
             "Open the default logfile",
           },
-          n = conditional({
-            "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
-            "view neovim log",
-          }, has_terminal),
-          N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           l = conditional(
             { "<cmd>lua require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", "view lsp log" },
             has_terminal
           ),
           L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
+          n = conditional({
+            "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
+            "view neovim log",
+          }, has_terminal),
+          N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
           p = conditional(
             { "<cmd>lua require('lvim.core.terminal').toggle_log_view('packer.nvim')<cr>", "view packer log" },
             has_terminal
