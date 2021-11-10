@@ -125,7 +125,18 @@ function M.show_line_diagnostics()
   table.sort(diagnostics, function(a, b)
     return a.severity < b.severity
   end)
-  for i, diagnostic in ipairs(diagnostics) do
+
+  local hash = {}
+  local diagnostics_no_dupes = {}
+  for _, v in ipairs(diagnostics) do
+    if not hash[v["message"]] then
+      diagnostics_no_dupes[#diagnostics_no_dupes + 1] = v -- you could print here instead of saving to result table if you wanted
+      hash[v["message"]] = true
+    end
+  end
+  -- print(vim.inspect(diagnostics_no_dupes))
+
+  for i, diagnostic in ipairs(diagnostics_no_dupes) do
     local source = diagnostic.source
     diag_message = diagnostic.message:gsub("[\n\r]", " ")
     if source then

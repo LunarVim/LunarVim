@@ -6,4 +6,4 @@ $env:LUNARVIM_RUNTIME_DIR = ($env:LUNARVIM_RUNTIME_DIR, "$env:XDG_DATA_HOME\luna
 $env:LUNARVIM_CONFIG_DIR = ($env:LUNARVIM_CONFIG_DIR, "$env:XDG_CONFIG_HOME\lvim", 1 -ne $null)[0]
 $env:LUNARVIM_CACHE_DIR = ($env:LUNARVIM_CACHE_DIR, "$env:XDG_CACHE_HOME\lvim", 1 -ne $null)[0]
 
-nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua"
+nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" @args

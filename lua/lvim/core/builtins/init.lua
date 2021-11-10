@@ -1,7 +1,6 @@
 local M = {}
 
 local builtins = {
-  "lvim.keymappings",
   "lvim.core.which-key",
   "lvim.core.gitsigns",
   "lvim.core.cmp",
@@ -15,6 +14,7 @@ local builtins = {
   "lvim.core.bufferline",
   "lvim.core.autopairs",
   "lvim.core.comment",
+  "lvim.core.notify",
   "lvim.core.lualine",
 }
 

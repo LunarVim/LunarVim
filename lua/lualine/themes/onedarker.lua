@@ -1,7 +1,3 @@
--- Copyright (c) 2020-2021 shadmansaleh
--- MIT license, see LICENSE for more details.
--- Credit: Zoltan Dalmadi(lightline)
--- LuaFormatter off
 local colors = {
   blue = "#61afef",
   green = "#98c379",
@@ -16,7 +12,7 @@ local colors = {
   gray2 = "#2c323d",
   gray3 = "#3e4452",
 }
--- LuaFormatter on
+
 return {
   normal = {
     a = { fg = colors.fg, bg = colors.blue, gui = "bold" },

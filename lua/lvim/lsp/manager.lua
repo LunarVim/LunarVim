@@ -1,7 +1,7 @@
 local M = {}
 
 local Log = require "lvim.core.log"
-local lsp_utils = require "lvim.lsp.utils"
+local lvim_lsp_utils = require "lvim.lsp.utils"
 
 function M.init_defaults(languages)
   for _, entry in ipairs(languages) do
@@ -11,15 +11,6 @@ function M.init_defaults(languages)
         linters = {},
         lsp = {},
       }
-    end
-  end
-end
-
-local function is_overridden(server)
-  local overrides = lvim.lsp.override
-  if type(overrides) == "table" then
-    if vim.tbl_contains(overrides, server) then
-      return true
     end
   end
 end
@@ -35,8 +26,8 @@ local function resolve_config(name, user_config)
     capabilities = require("lvim.lsp").common_capabilities(),
   }
 
-  local status_ok, custom_config = pcall(require, "lvim.lsp/providers/" .. name)
-  if status_ok then
+  local has_custom_provider, custom_config = pcall(require, "lvim/lsp/providers/" .. name)
+  if has_custom_provider then
     Log:debug("Using custom configuration for requested server: " .. name)
     config = vim.tbl_deep_extend("force", config, custom_config)
   end
@@ -48,38 +39,53 @@ local function resolve_config(name, user_config)
   return config
 end
 
+-- manually start the server and don't wait for the usual filetype trigger from lspconfig
+local function buf_try_add(server_name, bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  require("lspconfig")[server_name].manager.try_add_wrapper(bufnr)
+end
+
 ---Setup a language server by providing a name
 ---@param server_name string name of the language server
 ---@param user_config table [optional] when available it will take predence over any default configurations
 function M.setup(server_name, user_config)
   vim.validate { name = { server_name, "string" } }
 
-  if lsp_utils.is_client_active(server_name) or is_overridden(server_name) then
+  if lvim_lsp_utils.is_client_active(server_name) then
     return
   end
+  local servers = require "nvim-lsp-installer.servers"
 
   local config = resolve_config(server_name, user_config)
-  local server_available, requested_server = require("nvim-lsp-installer.servers").get_server(server_name)
+  local server_available, requested_server = servers.get_server(server_name)
 
-  local function ensure_installed(server)
-    if server:is_installed() then
-      return true
+  if server_available then
+    local install_notification = false
+
+    if not requested_server:is_installed() then
+      if lvim.lsp.automatic_servers_installation then
+        Log:debug "Automatic server installation detected"
+        requested_server:install()
+        install_notification = true
+      else
+        Log:debug(requested_server.name .. " is not managed by the automatic installer")
+      end
     end
-    if not lvim.lsp.automatic_servers_installation then
-      Log:debug(server.name .. " is not managed by the automatic installer")
-      return false
-    end
-    Log:debug(string.format("Installing [%s]", server.name))
-    server:install()
-    vim.schedule(function()
-      vim.cmd [[LspStart]]
+
+    requested_server:on_ready(function()
+      if install_notification then
+        vim.notify(string.format("Installation complete for [%s] server", requested_server.name), vim.log.levels.INFO)
+      end
+      install_notification = false
+      requested_server:setup(config)
     end)
-  end
-
-  if server_available and ensure_installed(requested_server) then
-    requested_server:setup(config)
   else
-    require("lspconfig")[server_name].setup(config)
+    -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
+    local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
+    if has_custom_provider then
+      require("lspconfig")[server_name].setup(config)
+      buf_try_add(server_name)
+    end
   end
 end
 

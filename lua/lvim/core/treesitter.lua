@@ -16,8 +16,17 @@ M.config = function()
       disable = { "latex" },
     },
     context_commentstring = {
-      enable = false,
-      config = { css = "// %s" },
+      enable = true,
+      config = {
+        -- Languages that have a single comment style
+        typescript = "// %s",
+        css = "/* %s */",
+        scss = "/* %s */",
+        html = "<!-- %s -->",
+        svelte = "<!-- %s -->",
+        vue = "<!-- %s -->",
+        json = "",
+      },
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     -- TODO seems to be broken
@@ -71,7 +80,11 @@ M.setup = function()
     return
   end
 
-  treesitter_configs.setup(lvim.builtin.treesitter)
+  local opts = vim.deepcopy(lvim.builtin.treesitter)
+
+  -- avoid running any installers in headless mode since it's harder to detect failures
+  opts.ensure_installed = #vim.api.nvim_list_uis() == 0 and {} or opts.ensure_installed
+  treesitter_configs.setup(opts)
 
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)

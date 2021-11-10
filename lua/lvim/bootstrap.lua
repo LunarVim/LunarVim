@@ -1,8 +1,5 @@
 local M = {}
 
-package.loaded["lvim.utils.hooks"] = nil
-local _, hooks = pcall(require, "lvim.utils.hooks")
-
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
 
@@ -90,7 +87,7 @@ function M:init(base_dir)
 
   require("lvim.config"):init()
 
-  require("lvim.plugin-loader"):init {
+  require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
     install_path = self.packer_install_dir,
   }
@@ -101,6 +98,8 @@ end
 ---Update LunarVim
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
+  package.loaded["lvim.utils.hooks"] = nil
+  local _, hooks = pcall(require, "lvim.utils.hooks")
   hooks.run_pre_update()
   M:update_repo()
   hooks.run_post_update()
