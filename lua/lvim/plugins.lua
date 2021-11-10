@@ -1,8 +1,8 @@
 local commit = {
   packer = "7f62848f3a92eac61ae61def5f59ddb5e2cc6823",
-  lsp_config = "6224c54a9945a52bf43a8bc1a42a112084590c0b",
+  lsp_config = "903a1fbca91b74e6fbc905366ce38364b9d7ba98",
   nlsp_settings = "29f49afe27b43126d45a05baf3161a28b929f2f1",
-  null_ls = "64b269b51c7490660dcb2008f59ae260f2cdbbe4",
+  null_ls = "3bf64acca268f3d7e0455501b82cf3f02f38c292",
   fix_cursor_hold = "0e4e22d21975da60b0fd2d302285b3b603f9f71e",
   lsp_installer = "37d9326f4ca4093b04eabdb697fec3764e226f88",
   nvim_notify = "ee79a5e2f8bde0ebdf99880a98d1312da83a3caa",
