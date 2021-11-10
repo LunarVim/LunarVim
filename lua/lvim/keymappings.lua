@@ -42,7 +42,7 @@ function M.clear(keymaps)
     mode = mode_adapters[mode] and mode_adapters[mode] or mode
     for key, _ in pairs(mappings) do
       -- some plugins may override default bindings that the user hasn't manually overriden
-      if default[mode][key] ~= nil then
+      if default[mode] == nil or default[mode][key] ~= nil then
         pcall(vim.api.nvim_del_keymap, mode, key)
       end
     end
