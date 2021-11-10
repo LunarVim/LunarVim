@@ -114,7 +114,8 @@ function M:reload()
   M:load()
 
   local plugins = require "lvim.plugins"
-  utils.toggle_autoformat()
+  local autocmds = require "lvim.core.autocmds"
+  autocmds.configure_format_on_save()
   local plugin_loader = require "lvim.plugin-loader"
   plugin_loader.cache_clear()
   plugin_loader.load { plugins, lvim.plugins }

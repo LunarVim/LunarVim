@@ -1,4 +1,5 @@
 local M = {}
+local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
@@ -56,6 +57,50 @@ function M.load_augroups()
     },
     custom_groups = {},
   }
+end
+
+function M.enable_format_on_save(opts)
+  opts = opts or {}
+  opts.pattern = opts.pattern or "*"
+  opts.timeout_ms = opts.timeout_ms or 1000
+  local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout_ms)
+  M.define_augroups {
+    format_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
+  }
+  Log:debug "format-on-save set to true"
+end
+
+function M.disable_format_on_save()
+  M.remove_augroup "format_on_save"
+  Log:debug "format-on-save set to false"
+end
+
+function M.configure_format_on_save()
+  if lvim.format_on_save then
+    if vim.fn.exists "#format_on_save" == 1 then
+      M.remove_augroup "format_on_save"
+      Log:debug "reloading format-on-save configuration"
+    end
+    local opts = { pattern = lvim.format_on_save_pattern, timeout_ms = lvim.format_on_save_timeout }
+    M.enable_format_on_save(opts)
+  else
+    M.disable_format_on_save()
+  end
+end
+
+function M.toggle_format_on_save()
+  if vim.fn.exists "#format_on_save" == 0 then
+    local opts = { pattern = lvim.format_on_save_pattern, timeout_ms = lvim.format_on_save_timeout }
+    M.enable_format_on_save(opts)
+  else
+    M.disable_format_on_save()
+  end
+end
+
+function M.remove_augroup(name)
+  if vim.fn.exists("#" .. name) == 1 then
+    vim.cmd("au! " .. name)
+  end
 end
 
 function M.define_augroups(definitions) -- {{{1
