@@ -55,4 +55,5 @@ function main() {
   rm -f "$LVIM_BIN"
 }
 
+echo "Uninstalled LunarVim!"
 main "$@"
