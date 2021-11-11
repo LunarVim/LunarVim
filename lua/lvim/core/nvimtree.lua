@@ -7,6 +7,8 @@ function M.config()
     on_config_done = nil,
     setup = {
       open_on_setup = false,
+      ignore = { ".git", "node_modules", ".cache" },
+      hide_dotfiles = 1,
       auto_close = true,
       open_on_tab = false,
       update_focused_file = {
@@ -37,9 +39,7 @@ function M.config()
       folder_arrows = 1,
       tree_width = 30,
     },
-    ignore = { ".git", "node_modules", ".cache" },
     quit_on_open = 0,
-    hide_dotfiles = 1,
     git_hl = 1,
     root_folder_modifier = ":t",
     allow_resize = 1,
