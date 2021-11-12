@@ -40,7 +40,7 @@ function M.grep_lunarvim_files(opts)
 end
 
 function M.view_lunarvim_changelog()
-  local opts = {}
+  local opts = { cwd = get_lvim_base_dir() }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
 
   pickers.new(opts, {
@@ -52,8 +52,6 @@ function M.view_lunarvim_changelog()
         "log",
         "--pretty=oneline",
         "--abbrev-commit",
-        "--",
-        ".",
       },
       opts
     ),
