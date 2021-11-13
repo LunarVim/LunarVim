@@ -389,15 +389,15 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 
 ## LSP Enhancement
 
-### [compe-tabnine](https://github.com/tzachar/compe-tabnine)
+### [cmp-tabnine](https://github.com/tzachar/cmp-tabnine)
 
-**TabNine completion engine for hrsh7th/nvim-compe**
+**TabNine completion engine for hrsh7th/nvim-cmp**
 
 ```lua
 {
-  "tzachar/compe-tabnine",
+  "tzachar/cmp-tabnine",
   run = "./install.sh",
-  requires = "hrsh7th/nvim-compe",
+  requires = "hrsh7th/nvim-cmp",
   event = "InsertEnter",
 },
 ```
