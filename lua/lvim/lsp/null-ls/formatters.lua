@@ -4,6 +4,8 @@ local null_ls = require "null-ls"
 local services = require "lvim.lsp.null-ls.services"
 local Log = require "lvim.core.log"
 
+local is_registered = require("null-ls.sources").is_registered
+
 function M.list_registered_providers(filetype)
   local null_ls_methods = require "null-ls.methods"
   local formatter_method = null_ls_methods.internal["FORMATTING"]
@@ -36,6 +38,8 @@ function M.list_configured(formatter_configs)
     if not formatter then
       Log:error("Not a valid formatter: " .. fmt_config.exe)
       errors[1] = {} -- Add data here when necessary
+    elseif is_registered(fmt_config.exe) then
+      Log:trace "Skipping registering  the source more than once"
     else
       local formatter_cmd = services.find_command(formatter._opts.command)
       if not formatter_cmd then
