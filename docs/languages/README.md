@@ -4,7 +4,7 @@ LunarVim strives to have support for all major languages. The is made possible b
 
 If your language is not supported please check the following links and file a ticket so we can
 
-- Check if LSP support is available in the lspconfig [repo](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
+- Check if LSP support is available in the lspconfig [repo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 - Check if your linter or formatter is available in the null-ls [repo](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md)
 - Check if your syntax is supported in the treesitter [repo](https://github.com/nvim-treesitter/nvim-treesitter)
 

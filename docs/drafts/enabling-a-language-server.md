@@ -110,4 +110,4 @@ rm -rf ~/.local/share/nvim/lspinstall
 ```
 
 For a more in depth LSP support:
-[link](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md)
+[link](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)

@@ -28,7 +28,7 @@ Install the configured parser.
 ps1 = { "powershell_es" },
 ```
 
-For more information about the language server configuration, refer to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#powershell_es)
+For more information about the language server configuration, refer to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#powershell_es)
 
 ## Formatters
 
