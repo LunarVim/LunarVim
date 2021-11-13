@@ -109,7 +109,7 @@ LuaSnip uses friendly-snippets as it's snippet library.
 
 ## Auto-Pair closing brackets
 
-**[nvim-autopairs](Autopairs): Provides automatic closing of brackets.**
+**[nvim-autopairs](https://github.com/windwp/nvim-autopairs): Provides automatic closing of brackets.**
 
 ## Git
 
@@ -140,7 +140,7 @@ vim.opt.timeoutlen = 500
 
 ## Icons
 
-**[nvim-web-devicons](kyazdani42/nvim-web-devicons): Provides icons for use with some plugins**
+**[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons): Provides icons for use with some plugins**
 
 ## Status and Bufferline
 

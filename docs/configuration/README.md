@@ -12,7 +12,7 @@ Many LunarVim internal settings are exposed through the `lvim` global object.
 So see a list of all available settings, run this command from either `~/.config/lvim/` or `~/.local/share/lunarvim/lvim` to generate an lv-settings.lua file.
 
 ```bash
-lvim --headless +'lua require("utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
+lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,}
 ```
 
 Here is a sample of the output.
