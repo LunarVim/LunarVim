@@ -40,6 +40,7 @@ return {
   },
   null_ls = {
     setup = {},
+    config = {},
   },
   override = {
     "angularls",
