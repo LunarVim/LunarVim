@@ -46,39 +46,15 @@ function M.find_command(command)
 end
 
 function M.list_registered_providers_names(filetype)
-  local u = require "null-ls.utils"
-  -- local c = require "null-ls.config"
   local s = require "null-ls.sources"
-  -- print(vim.inspect(s.get_all()))
-  local method = nil
-
+  local available_sources = s.get_available(filetype)
   local registered = {}
-  for key, val in pairs(s.get_all()) do
-    -- print("key", vim.inspect(key))
-    -- print("val",vim.inspect(val))
-      -- print("ft", filetype)
-      -- print("fts", vim.inspect(filetypes.filetypes))
-      -- print("name", name)
-      -- print(vim.inspect(val.filetypes))
-      -- print(val.filetypes[1])
-      -- print("wtf", vim.inspect(val.methods["NULL_LS_FORMATTING"]))
-      if val.methods["NULL_LS_FORMATTING"] then
-        method = "NULL_LS_FORMATTING"
-      end
-
-      -- print("method", method)
-
-    for name, filetypes in pairs(val.filetypes) do
-      -- print("name", val.name)
-      -- print("wtf", vim.inspect(filetypes))
-      if filetype == name then
-        registered[method] = registered[val.name] or {}
-        table.insert(registered[method], val.name)
-        -- print("hi")
-      end
+  for _, source in ipairs(available_sources) do
+    for method in pairs(source.methods) do
+      registered[method] = registered[method] or {}
+      table.insert(registered[method], source.name)
     end
   end
-  -- print("registered", vim.inspect(registered))
   return registered
 end
 
