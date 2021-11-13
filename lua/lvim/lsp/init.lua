@@ -86,6 +86,7 @@ function M.common_capabilities()
 end
 
 local function select_default_formater(client)
+  print(client.name)
   if client.name == "null-ls" or not client.resolved_capabilities.document_formatting then
     return
   end

@@ -5,9 +5,12 @@ local services = require "lvim.lsp.null-ls.services"
 local Log = require "lvim.core.log"
 
 function M.list_registered_providers(filetype)
+  -- print(filetype)
   local null_ls_methods = require "null-ls.methods"
   local formatter_method = null_ls_methods.internal["FORMATTING"]
+  -- print(formatter_method )
   local registered_providers = services.list_registered_providers_names(filetype)
+  -- print("registered_providers", vim.inspect(registered_providers))
   return registered_providers[formatter_method] or {}
 end
 
@@ -35,15 +38,15 @@ function M.list_configured(formatter_configs)
 
     if not formatter then
       Log:error("Not a valid formatter: " .. fmt_config.exe)
-      errors[fmt_config.exe] = {} -- Add data here when necessary
+      errors[1] = {} -- Add data here when necessary
     else
       local formatter_cmd = services.find_command(formatter._opts.command)
       if not formatter_cmd then
         Log:warn("Not found: " .. formatter._opts.command)
-        errors[fmt_config.exe] = {} -- Add data here when necessary
+        errors[1] = {} -- Add data here when necessary
       else
         Log:debug("Using formatter: " .. formatter_cmd)
-        formatters[fmt_config.exe] = formatter.with {
+        formatters[1] = formatter.with {
           command = formatter_cmd,
           extra_args = fmt_config.args,
           filetypes = fmt_config.filetypes,
@@ -56,11 +59,13 @@ function M.list_configured(formatter_configs)
 end
 
 function M.setup(formatter_configs)
+  -- print(vim.inspect(formatter_configs))
   if vim.tbl_isempty(formatter_configs) then
     return
   end
 
   local formatters_by_ft = M.list_configured(formatter_configs)
+  print("THING we pass", vim.inspect(formatters_by_ft))
   null_ls.register { sources = formatters_by_ft.supported }
 end
 
