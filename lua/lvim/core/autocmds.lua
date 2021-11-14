@@ -59,20 +59,30 @@ function M.load_augroups()
   }
 end
 
+local get_format_on_save_opts = function()
+  local defaults = require("lvim.config.defaults").format_on_save
+  -- accept a basic boolean `lvim.format_on_save=true`
+  if type(lvim.format_on_save) ~= "table" then
+    return defaults
+  end
+
+  return {
+    pattern = lvim.format_on_save.pattern or defaults.pattern,
+    timeout = lvim.format_on_save.timeout or defaults.timeout,
+  }
+end
+
 function M.enable_format_on_save(opts)
-  opts = opts or {}
-  opts.pattern = opts.pattern or "*"
-  opts.timeout_ms = opts.timeout_ms or 1000
   local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout_ms)
   M.define_augroups {
     format_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
   }
-  Log:debug "format-on-save set to true"
+  Log:debug "enabled format-on-save"
 end
 
 function M.disable_format_on_save()
   M.remove_augroup "format_on_save"
-  Log:debug "format-on-save set to false"
+  Log:debug "disabled format-on-save"
 end
 
 function M.configure_format_on_save()
@@ -81,7 +91,7 @@ function M.configure_format_on_save()
       M.remove_augroup "format_on_save"
       Log:debug "reloading format-on-save configuration"
     end
-    local opts = { pattern = lvim.format_on_save_pattern, timeout_ms = lvim.format_on_save_timeout }
+    local opts = get_format_on_save_opts()
     M.enable_format_on_save(opts)
   else
     M.disable_format_on_save()
@@ -90,7 +100,7 @@ end
 
 function M.toggle_format_on_save()
   if vim.fn.exists "#format_on_save" == 0 then
-    local opts = { pattern = lvim.format_on_save_pattern, timeout_ms = lvim.format_on_save_timeout }
+    local opts = get_format_on_save_opts()
     M.enable_format_on_save(opts)
   else
     M.disable_format_on_save()

@@ -20,7 +20,7 @@ end
 -- Define lvim global variable
 function M:init()
   if vim.tbl_isempty(lvim or {}) then
-    lvim = require "lvim.config.defaults"
+    lvim = vim.deepcopy(require "lvim.config.defaults")
     local home_dir = vim.loop.os_homedir()
     lvim.vsnip_dir = utils.join_paths(home_dir, ".config", "snippets")
     lvim.database = { save_location = utils.join_paths(home_dir, ".config", "lunarvim_db"), auto_execute = 1 }
