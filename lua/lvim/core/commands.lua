@@ -16,6 +16,7 @@ M.defaults = {
   [[ command! LvimUpdate lua require('lvim.bootstrap').update() ]],
   [[ command! LvimSyncCorePlugins lua require('lvim.plugin-loader'):sync_core_plugins() ]],
   [[ command! LvimReload lua require('lvim.config'):reload() ]],
+  [[ command! LvimToggleFormatOnSave lua require('lvim.core.autocmds').toggle_format_on_save() ]],
 }
 
 M.load = function(commands)

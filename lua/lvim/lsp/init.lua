@@ -171,7 +171,7 @@ function M.setup()
 
   require("lvim.lsp.null-ls").setup()
 
-  require("lvim.utils").toggle_autoformat()
+  require("lvim.core.autocmds").configure_format_on_save()
 end
 
 return M

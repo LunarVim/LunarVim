@@ -1,5 +1,4 @@
 local utils = {}
-local Log = require "lvim.core.log"
 local uv = vim.loop
 
 -- recursive Print (structure, limit, separator)
@@ -56,31 +55,6 @@ function utils.generate_settings()
 
   -- closes the open file
   io.close(file)
-end
-
--- autoformat
-function utils.toggle_autoformat()
-  if lvim.format_on_save then
-    require("lvim.core.autocmds").define_augroups {
-      autoformat = {
-        {
-          "BufWritePre",
-          "*",
-          ":silent lua vim.lsp.buf.formatting_sync()",
-        },
-      },
-    }
-    Log:debug "Format on save active"
-  end
-
-  if not lvim.format_on_save then
-    vim.cmd [[
-      if exists('#autoformat#BufWritePre')
-        :autocmd! autoformat
-      endif
-    ]]
-    Log:debug "Format on save off"
-  end
 end
 
 function utils.unrequire(m)
