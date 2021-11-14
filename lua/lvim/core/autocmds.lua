@@ -87,7 +87,7 @@ end
 
 function M.configure_format_on_save()
   if lvim.format_on_save then
-    if vim.fn.exists "#format_on_save" == 1 then
+    if vim.fn.exists "#format_on_save#BufWritePre" == 1 then
       M.remove_augroup "format_on_save"
       Log:debug "reloading format-on-save configuration"
     end
@@ -99,7 +99,7 @@ function M.configure_format_on_save()
 end
 
 function M.toggle_format_on_save()
-  if vim.fn.exists "#format_on_save" == 0 then
+  if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
     local opts = get_format_on_save_opts()
     M.enable_format_on_save(opts)
   else
