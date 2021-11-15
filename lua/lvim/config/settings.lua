@@ -51,6 +51,8 @@ M.load_options = function()
 
   vim.opt.shortmess:append "c"
 
+  vim.opt.shadafile = utils.join_paths(get_cache_dir(), "lvim.shada")
+
   for k, v in pairs(default_options) do
     vim.opt[k] = v
   end
