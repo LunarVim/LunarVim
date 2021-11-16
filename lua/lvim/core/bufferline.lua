@@ -1,6 +1,7 @@
 local M = {}
 
 M.config = function()
+  vim.g.bufferline = { no_name_title = "Empty" }
   lvim.builtin.bufferline = {
     active = true,
     on_config_done = nil,
