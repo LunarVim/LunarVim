@@ -2,7 +2,7 @@ local commit = {
   packer = "7f62848f3a92eac61ae61def5f59ddb5e2cc6823",
   lsp_config = "903a1fbca91b74e6fbc905366ce38364b9d7ba98",
   nlsp_settings = "29f49afe27b43126d45a05baf3161a28b929f2f1",
-  null_ls = "3bf64acca268f3d7e0455501b82cf3f02f38c292",
+  null_ls = "cf2bc3185af066cb25f1bf6faa99727e2c47ef77",
   fix_cursor_hold = "0e4e22d21975da60b0fd2d302285b3b603f9f71e",
   lsp_installer = "37d9326f4ca4093b04eabdb697fec3764e226f88",
   nvim_notify = "ee79a5e2f8bde0ebdf99880a98d1312da83a3caa",
@@ -41,9 +41,8 @@ return {
   { "neovim/nvim-lspconfig", commit = commit.lsp_config },
   { "tamago324/nlsp-settings.nvim", commit = commit.nlsp_settings },
   {
-    "kylo252/null-ls.nvim",
-    branch = "logger",
-    -- commit = commit.null_ls
+    "jose-elias-alvarez/null-ls.nvim",
+    commit = commit.null_ls,
   },
   { "antoinemadec/FixCursorHold.nvim", commit = commit.fix_cursor_hold }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
