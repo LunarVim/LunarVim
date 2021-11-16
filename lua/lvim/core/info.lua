@@ -20,6 +20,7 @@ end
 local function make_formatters_info(ft)
   local null_formatters = require "lvim.lsp.null-ls.formatters"
   local registered_formatters = null_formatters.list_registered_providers(ft)
+  -- print("reg", vim.inspect(registered_formatters))
   local supported_formatters = null_formatters.list_available(ft)
   local section = {
     "Formatters info",
