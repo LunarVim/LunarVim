@@ -65,6 +65,7 @@ function M.config()
       },
     },
   }
+  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 end
 
 function M.setup()
@@ -97,8 +98,6 @@ function M.setup()
       { key = "v", cb = tree_cb "vsplit" },
     }
   end
-
-  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 
   local tree_view = require "nvim-tree.view"
 
