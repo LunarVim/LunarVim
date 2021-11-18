@@ -188,7 +188,7 @@ M.config = function()
           "<cmd>lua require('lvim.core.telescope.custom-finders').grep_lunarvim_files()<cr>",
           "Grep LunarVim files",
         },
-        k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
+        k = { "<cmd>Telescope keymaps<cr>", "View LunarVim's keymappings" },
         i = {
           "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",
