@@ -3,7 +3,12 @@ local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
-  local user_config_file = vim.fn.resolve(require("lvim.config"):get_user_config_path())
+  local user_config_file = require("lvim.config"):get_user_config_path()
+
+  if vim.loop.os_uname().version:match "Windows" then
+    -- autocmds require forward slashes even on windows
+    user_config_file = vim.fn.resolve(user_config_file:gsub("\\", "/"))
+  end
 
   return {
     _general_settings = {
