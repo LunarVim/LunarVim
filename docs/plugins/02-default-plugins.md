@@ -9,7 +9,6 @@ This page lists the default plugins installed Lunavim including descriptions, im
 | Command          | Description                                                                   |
 | ---------------- | ----------------------------------------------------------------------------- |
 | `:PackerInstall` | Installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua |
-| `:PackerInstall` | Installs packages that have a lvim.plugins entry in ~/.config/lvim/config.lua |
 | `:PackerStatus`  | Lists the installed plugins                                                   |
 | `:PackerUpdate`  | Fetches and installs updates to packages                                      |
 | `:PackerClean`   | Removes any disabled or no longer managed plugins                             |
