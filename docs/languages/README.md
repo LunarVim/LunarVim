@@ -136,7 +136,7 @@ formatters.setup {
   { exe = "black" },
   {
     exe = "prettier",
-    args = { "--print-with", "100" },
+    args = { "--print-width", "100" },
     filetypes = { "typescript", "typescriptreact" },
   },
 }
@@ -155,7 +155,7 @@ formatters.setup {
     exe = "prettier",
     ---@usage arguments to pass to the formatter
     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--print-with", "100" },
+    args = { "--print-width", "100" },
   },
 }
 ```
