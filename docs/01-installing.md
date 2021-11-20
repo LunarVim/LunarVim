@@ -8,11 +8,11 @@
 
 # Install
 
-There are a few ways to install LunarVim
+There are a few ways to install LunarVim.
 
 ## Stable
 
-No alarms and no surprises:
+No alarm or surprise:
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
@@ -32,13 +32,13 @@ You can use this helper script to get the latest neovim binary as well:
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 ```
 
-Make sure to check the [troubleshooting](./troubleshooting/README.md) section if you encounter any problems.
+Make sure to check the [troubleshooting](./troubleshooting/README.md) section if you encounter any problem.
 
-## Tips when running in China
+## Tips for users in Mainland China
 
-Bandwidth limiting will cause installation failures. To avoid bandwidth issues when downloading content from Github, use a mirror.
+Connection issues may cause installation failures. To avoid them when downloading content from GitHub, please use a mirror.
 
-[GitHub Proxy Mirror](https://mirror.ghproxy.com/) is a fast mirror for accessing github content. Add the following lines to `/etc/hosts` to accelerate your installation.
+For example, [GitHub Proxy Mirror](https://mirror.ghproxy.com/) is a fast mirror for accessing github content. Add the following lines to `/etc/hosts` to accelerate your installation.
 
 ```
 mirror.ghproxy.com github.com
