@@ -7,7 +7,7 @@ function M.load_augroups()
 
   if vim.loop.os_uname().version:match "Windows" then
     -- autocmds require forward slashes even on windows
-    user_config_file = vim.fn.resolve(user_config_file:gsub("\\", "/"))
+    user_config_file = user_config_file:gsub("\\", "/")
   end
 
   return {
