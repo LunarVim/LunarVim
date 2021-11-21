@@ -4,7 +4,13 @@ local null_ls = require "null-ls"
 local services = require "lvim.lsp.null-ls.services"
 local Log = require "lvim.core.log"
 
-local is_registered = require("null-ls.sources").is_registered
+local is_registered = function(name)
+  local query = {
+    name = name,
+    method = require("null-ls").methods.DIAGNOSTICS,
+  }
+  return require("null-ls.sources").is_registered(query)
+end
 
 function M.list_registered_providers(filetype)
   local null_ls_methods = require "null-ls.methods"
