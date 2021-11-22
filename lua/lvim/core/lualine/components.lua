@@ -112,9 +112,9 @@ return {
       local supported_linters = linters.list_registered_providers(buf_ft)
       vim.list_extend(buf_client_names, supported_linters)
 
-      return table.concat(buf_client_names, ", ")
+      return "[" .. table.concat(buf_client_names, ", ") .. "]"
     end,
-    icon = " ",
+    -- icon = " ",
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
