@@ -56,8 +56,8 @@ To remove keymappings set by Lunarvim
 
 ```lua
   -- use the default vim behavior for H and L
-  lvim.keys.normal_mode["<S-l>"] = nil
-  lvim.keys.normal_mode["<S-h>"] = nil
+  lvim.keys.normal_mode["<S-l>"] = false
+  lvim.keys.normal_mode["<S-h>"] = false
   -- vim.opt.scrolloff = 0 -- Required so L moves to the last line
 ```
 
