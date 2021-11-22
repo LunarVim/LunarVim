@@ -54,39 +54,41 @@ function M.setup(server_name, user_config)
   if lvim_lsp_utils.is_client_active(server_name) then
     return
   end
-  local servers = require "nvim-lsp-installer.servers"
 
   local config = resolve_config(server_name, user_config)
+
+  local servers = require "nvim-lsp-installer.servers"
   local server_available, requested_server = servers.get_server(server_name)
 
-  if server_available then
-    local install_notification = false
+  local is_overridden = vim.tbl_contains(lvim.lsp.override, server_name)
 
-    if not requested_server:is_installed() then
-      if lvim.lsp.automatic_servers_installation then
-        Log:debug "Automatic server installation detected"
-        requested_server:install()
-        install_notification = true
-      else
-        Log:debug(requested_server.name .. " is not managed by the automatic installer")
-      end
-    end
-
-    requested_server:on_ready(function()
-      if install_notification then
-        vim.notify(string.format("Installation complete for [%s] server", requested_server.name), vim.log.levels.INFO)
-      end
-      install_notification = false
-      requested_server:setup(config)
-    end)
-  else
-    -- since it may not be installed, don't attempt to configure the LSP unless there is a custom provider
-    local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
-    if has_custom_provider then
+  if not server_available or is_overridden then
+    pcall(function()
       require("lspconfig")[server_name].setup(config)
       buf_try_add(server_name)
+    end)
+    return
+  end
+
+  local install_notification = false
+
+  if not requested_server:is_installed() then
+    if lvim.lsp.automatic_servers_installation then
+      Log:debug "Automatic server installation detected"
+      requested_server:install()
+      install_notification = true
+    else
+      Log:debug(requested_server.name .. " is not managed by the automatic installer")
     end
   end
+
+  requested_server:on_ready(function()
+    if install_notification then
+      vim.notify(string.format("Installation complete for [%s] server", requested_server.name), vim.log.levels.INFO)
+    end
+    install_notification = false
+    requested_server:setup(config)
+  end)
 end
 
 return M
