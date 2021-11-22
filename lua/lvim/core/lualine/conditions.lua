@@ -1,4 +1,4 @@
-local window_width_limit = 80
+local window_width_limit = 70
 
 local conditions = {
   buffer_not_empty = function()
