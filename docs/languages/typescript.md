@@ -4,6 +4,7 @@
 
 ```vim
 :TSInstall typescript
+:TSInstall tsx
 ```
 
 ## Supported language servers
