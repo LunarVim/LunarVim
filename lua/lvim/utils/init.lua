@@ -174,6 +174,34 @@ function utils.log_contains(query)
   return false
 end
 
-return utils
+function utils.generate_plugins_sha(output)
+  local list = {}
+  output = output or "commits.lua"
 
--- TODO: find a new home for these autocommands
+  local function git_cmd(args)
+    local Job = require "plenary.job"
+    local stderr = {}
+    local stdout, ret = Job
+      :new({
+        command = "git",
+        args = args,
+        on_stderr = function(_, data)
+          table.insert(stderr, data)
+        end,
+      })
+      :sync()
+    return ret, stdout
+  end
+
+  for name, plugin in pairs(_G.packer_plugins) do
+    local retval, latest_sha = git_cmd { "-C", plugin.path, "rev-parse", "@{-1}" }
+    if retval == 0 then
+      -- replace dashes, remove postfixes and use lowercase
+      local normalize_name = (name:gsub("-", "_"):gsub("%.%S+", "")):lower()
+      list[normalize_name] = latest_sha[1]
+    end
+  end
+  utils.write_file(output, "local commits = " .. vim.inspect(list), "w")
+end
+
+return utils
