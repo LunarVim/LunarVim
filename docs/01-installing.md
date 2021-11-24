@@ -47,20 +47,10 @@ mirror.ghproxy.com raw.githubusercontent.com
 
 ## Uninstall
 
-You can remove LunarVim entirely by running the following commands:
+You can remove LunarVim (including the configuration files) using the bundled `uninstall` script
 
 ```bash
-rm -rf ~/.local/share/lunarvim
-
-sudo rm /usr/local/bin/lvim
-
-rm ~/.local/bin/lvim
-
-rm -rf ~/.local/share/applications/lvim.desktop
-```
-
-If reinstalling, also remove the packer_compiled folder
-
-```bash
- rm -rf ~/.config/lvim/plugin
+bash ~/.local/share/lunarvim/lvim/utils/installer/uninstall.sh
+# or
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.sh)
 ```
