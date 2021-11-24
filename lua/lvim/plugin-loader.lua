@@ -60,12 +60,15 @@ end
 function plugin_loader.load(configurations)
   Log:debug "loading plugins configuration"
   local status_ok, _ = xpcall(function()
-    packer.startup(function(use)
-      for _, plugins in ipairs(configurations) do
-        for _, plugin in ipairs(plugins) do
-          use(plugin)
+    -- https://github.com/wbthomason/packer.nvim/pull/636
+    vim.schedule_wrap(function()
+      packer.startup(function(use)
+        for _, plugins in ipairs(configurations) do
+          for _, plugin in ipairs(plugins) do
+            use(plugin)
+          end
         end
-      end
+      end)
     end)
   end, debug.traceback)
   if not status_ok then
