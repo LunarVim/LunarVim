@@ -33,12 +33,13 @@ function M.config()
     },
   }
 
+  local lvim_version = "v" .. require("lvim.bootstrap"):get_version "short" or ""
   local footer = {
     type = "text",
     val = {
       "",
       "lunarvim.org",
-      "",
+      lvim_version,
     },
     opts = {
       position = "center",
@@ -46,11 +47,14 @@ function M.config()
     },
   }
 
+  local text = require "lvim.interface.text"
+  footer.val = text.align_center({ width = 0 }, footer.val, 0.5)
+
   local buttons = {
     entries = {
       { keybind = "SPC f", description = "  Find File", command = "<CMD>Telescope find_files<CR>" },
       { keybind = "SPC n", description = "  New File", command = "<CMD>ene!<CR>" },
-      { keybind = "SPC p", description = "  Recent Projects ", command = "<CMD>Telescope projects<CR>" },
+      { keybind = "SPC P", description = "  Recent Projects ", command = "<CMD>Telescope projects<CR>" },
       { keybind = "SPC s r", description = "  Recently Used Files", command = "<CMD>Telescope oldfiles<CR>" },
       { keybind = "SPC s t", description = "  Find Word", command = "<CMD>Telescope live_grep<CR>" },
       {
