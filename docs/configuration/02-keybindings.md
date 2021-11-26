@@ -164,7 +164,7 @@ lvim.builtin.which_key.mappings = {
 
 ### Example mappings
 
-Consult the [LunarVim configuration for whichkey](https://github.com/LunarVim/LunarVim/blob/rolling/lua/core/which-key.lua) to see more examples of how to map keys.
+Consult the [LunarVim configuration for whichkey](https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/which-key.lua) to see more examples of how to map keys.
 
 ## Leader Key
 
