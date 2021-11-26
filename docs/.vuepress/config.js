@@ -62,8 +62,6 @@ module.exports = {
       "/sponsors/": getSideBar("sponsors", "Sponsors", true),
     },
   },
-  templateDev: path.join(__dirname, 'templates', 'index.dev.html'),
-  templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
 };
 
 function getSideBar(folder, title, include_readme) {
