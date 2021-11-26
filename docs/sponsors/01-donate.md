@@ -1,9 +1,6 @@
 # How to Donate
 
-Patreon
-
-Github Sponsors
-
-Crypto
-
-Merch
+- [Patreon](https://www.patreon.com/chrisatmachine)
+- [Github Sponsors](https://github.com/sponsors/ChristianChiarulli)
+- Crypto (to do)
+- Merch (to do)
