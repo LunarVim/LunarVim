@@ -1,5 +1,7 @@
 local plugin_loader = {}
 
+local in_headless = #vim.api.nvim_list_uis() == 0
+
 local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 -- we need to reuse this outside of init()
@@ -18,10 +20,15 @@ function plugin_loader.init(opts)
     vim.cmd "packadd packer.nvim"
   end
 
+  local log_level = in_headless and "debug" or "warn"
+  if lvim.log and lvim.log.level then
+    log_level = lvim.log.level
+  end
+
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
-    log = { level = "warn" },
+    log = { level = log_level },
     git = { clone_timeout = 300 },
     max_jobs = 50,
     display = {
