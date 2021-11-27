@@ -7,8 +7,6 @@ local Log = require "lvim.core.log"
 -- we need to reuse this outside of init()
 local compile_path = get_config_dir() .. "/plugin/packer_compiled.lua"
 
-local _, packer = pcall(require, "packer")
-
 function plugin_loader.init(opts)
   opts = opts or {}
 
@@ -25,6 +23,7 @@ function plugin_loader.init(opts)
     log_level = lvim.log.level
   end
 
+  local _, packer = pcall(require, "packer")
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
@@ -66,6 +65,11 @@ end
 
 function plugin_loader.load(configurations)
   Log:debug "loading plugins configuration"
+  local packer_available, packer = pcall(require, "packer")
+  if not packer_available then
+    Log:warn "skipping loading plugins until Packer is installed"
+    return
+  end
   local status_ok, _ = xpcall(function()
     -- https://github.com/wbthomason/packer.nvim/pull/636
     vim.schedule_wrap(function()
