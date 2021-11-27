@@ -2,6 +2,7 @@ local M = {}
 
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
+local in_headless = #vim.api.nvim_list_uis() == 0
 
 ---Join path segments that were passed as input
 ---@return string
@@ -77,7 +78,7 @@ function M:init(base_dir)
   vim.fn.mkdir(get_cache_dir(), "p")
 
   -- FIXME: currently unreliable in unit-tests
-  if not os.getenv "LVIM_TEST_ENV" then
+  if not in_headless then
     _G.PLENARY_DEBUG = false
     require("lvim.impatient").setup {
       path = join_paths(self.cache_dir, "lvim_cache"),
