@@ -71,15 +71,12 @@ function plugin_loader.load(configurations)
     return
   end
   local status_ok, _ = xpcall(function()
-    -- https://github.com/wbthomason/packer.nvim/pull/636
-    vim.schedule_wrap(function()
-      packer.startup(function(use)
-        for _, plugins in ipairs(configurations) do
-          for _, plugin in ipairs(plugins) do
-            use(plugin)
-          end
+    packer.startup(function(use)
+      for _, plugins in ipairs(configurations) do
+        for _, plugin in ipairs(plugins) do
+          use(plugin)
         end
-      end)
+      end
     end)
   end, debug.traceback)
   if not status_ok then
