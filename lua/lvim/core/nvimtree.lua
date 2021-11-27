@@ -29,6 +29,8 @@ function M.config()
           custom_only = false,
         },
       },
+      hide_dotfiles = false,
+      ignore = { ".git", "node_modules", ".cache" },
     },
     show_icons = {
       git = 1,
@@ -37,9 +39,7 @@ function M.config()
       folder_arrows = 1,
       tree_width = 30,
     },
-    ignore = { ".git", "node_modules", ".cache" },
     quit_on_open = 0,
-    hide_dotfiles = 1,
     git_hl = 1,
     root_folder_modifier = ":t",
     allow_resize = 1,

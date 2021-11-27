@@ -1,11 +1,11 @@
 local plugin_loader = {}
 
+local in_headless = #vim.api.nvim_list_uis() == 0
+
 local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 -- we need to reuse this outside of init()
 local compile_path = get_config_dir() .. "/plugin/packer_compiled.lua"
-
-local _, packer = pcall(require, "packer")
 
 function plugin_loader.init(opts)
   opts = opts or {}
@@ -18,10 +18,16 @@ function plugin_loader.init(opts)
     vim.cmd "packadd packer.nvim"
   end
 
+  local log_level = in_headless and "debug" or "warn"
+  if lvim.log and lvim.log.level then
+    log_level = lvim.log.level
+  end
+
+  local _, packer = pcall(require, "packer")
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
-    log = { level = "warn" },
+    log = { level = log_level },
     git = { clone_timeout = 300 },
     max_jobs = 50,
     display = {
@@ -59,6 +65,11 @@ end
 
 function plugin_loader.load(configurations)
   Log:debug "loading plugins configuration"
+  local packer_available, packer = pcall(require, "packer")
+  if not packer_available then
+    Log:warn "skipping loading plugins until Packer is installed"
+    return
+  end
   local status_ok, _ = xpcall(function()
     packer.startup(function(use)
       for _, plugins in ipairs(configurations) do
