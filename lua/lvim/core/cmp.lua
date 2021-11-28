@@ -146,8 +146,6 @@ end
 M.methods.jumpable = jumpable
 
 M.config = function()
-  lvim.builtin.cmp = {}
-
   local status_cmp_ok, cmp = pcall(require, "cmp")
   if not status_cmp_ok then
     return
