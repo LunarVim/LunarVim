@@ -15,7 +15,7 @@ local commit = {
   nlsp_settings = "1e75ac7733f6492b501a7594870cf75c4ee23e81",
   null_ls = "b07ce47f02c7b12ad65bfb4da215c6380228a959",
   nvim_autopairs = "fba2503bd8cd0d8861054523aae39c4ac0680c07",
-  nvim_cmp = "ca6386854982199a532150cf3bd711395475ebd2",
+  nvim_cmp = "092fb66b6ddb4b12b9b542d105d7af40e4fbd9f2",
   nvim_dap = "4e8bb7ca12dc8ca6f7a500cbb4ecea185665c7f1",
   nvim_lsp_installer = "52183c68baf9019c8241b1abf33ba0b6594ab3c8",
   nvim_lspconfig = "b53f89c16bcc8052aa56d3a903fcad3aaa774041",
@@ -78,44 +78,50 @@ return {
     "hrsh7th/nvim-cmp",
     commit = commit.nvim_cmp,
     config = function()
-      require("lvim.core.cmp").setup()
-    end,
-    run = function()
-      -- cmp's config requires cmp to be installed to run the first time
-      if not lvim.builtin.cmp then
-        require("lvim.core.cmp").config()
+      if lvim.builtin.cmp then
+        require("lvim.core.cmp").setup()
       end
     end,
+    requires = {
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+    },
+    module = "cmp",
   },
   {
     "rafamadriz/friendly-snippets",
     commit = commit.friendly_snippets,
-    -- event = "InsertCharPre",
-    -- disable = not lvim.builtin.compe.active,
   },
   {
     "L3MON4D3/LuaSnip",
+    config = function()
+      require("luasnip/loaders/from_vscode").lazy_load()
+    end,
     commit = commit.luasnip,
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-    commit = commit.cmp_luasnip,
-  },
-  {
-    "hrsh7th/cmp-buffer",
-    commit = commit.cmp_buffer,
   },
   {
     "hrsh7th/cmp-nvim-lsp",
     commit = commit.cmp_nvim_lsp,
   },
   {
+    "saadparwaiz1/cmp_luasnip",
+    commit = commit.cmp_luasnip,
+    after = "cmp",
+  },
+  {
+    "hrsh7th/cmp-buffer",
+    commit = commit.cmp_buffer,
+    after = "cmp",
+  },
+  {
     "hrsh7th/cmp-path",
     commit = commit.cmp_path,
+    after = "cmp",
   },
   {
     "hrsh7th/cmp-nvim-lua",
     commit = commit.cmp_nvim_lua,
+    after = "cmp",
   },
 
   -- Autopairs
