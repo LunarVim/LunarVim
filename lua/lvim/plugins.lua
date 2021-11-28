@@ -76,7 +76,6 @@ return {
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
-    event = "BufEnter",
     commit = commit.nvim_cmp,
     config = function()
       require("lvim.core.cmp").setup()
