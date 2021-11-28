@@ -106,22 +106,22 @@ return {
   {
     "saadparwaiz1/cmp_luasnip",
     commit = commit.cmp_luasnip,
-    after = "cmp",
+    after = "nvim-cmp",
   },
   {
     "hrsh7th/cmp-buffer",
     commit = commit.cmp_buffer,
-    after = "cmp",
+    after = "nvim-cmp",
   },
   {
     "hrsh7th/cmp-path",
     commit = commit.cmp_path,
-    after = "cmp",
+    after = "nvim-cmp",
   },
   {
     "hrsh7th/cmp-nvim-lua",
     commit = commit.cmp_nvim_lua,
-    after = "cmp",
+    after = "nvim-cmp",
   },
 
   -- Autopairs
