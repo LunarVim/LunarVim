@@ -193,12 +193,16 @@ function utils.generate_plugins_sha(output)
     return ret, stdout
   end
 
-  for name, plugin in pairs(_G.packer_plugins) do
-    local retval, latest_sha = git_cmd { "-C", plugin.path, "rev-parse", "@{-1}" }
+  local core_plugins = require "lvim.plugins"
+  for _, plugin in pairs(core_plugins) do
+    local name = plugin[1]:match "/(%S*)"
+    local url = "https://github.com/" .. plugin[1]
+    print("checking: " .. name .. ", at: " .. url)
+    local retval, latest_sha = git_cmd { "ls-remote", url, "origin", "HEAD" }
     if retval == 0 then
       -- replace dashes, remove postfixes and use lowercase
       local normalize_name = (name:gsub("-", "_"):gsub("%.%S+", "")):lower()
-      list[normalize_name] = latest_sha[1]
+      list[normalize_name] = latest_sha[1]:gsub("\tHEAD", "")
     end
   end
   utils.write_file(output, "local commits = " .. vim.inspect(list), "w")
