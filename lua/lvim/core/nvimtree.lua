@@ -2,6 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
+  local tree_cb = require'nvim-tree.config'.nvim_tree_callback
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
@@ -54,7 +55,11 @@ function M.config()
         relativenumber = false,
         mappings = {
           custom_only = false,
-          list = {},
+          list = {
+            { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+            { key = "h", cb = tree_cb "close_node" },
+            { key = "v", cb = tree_cb "vsplit" },
+          },
         },
       },
       filters = {
@@ -116,16 +121,6 @@ function M.setup()
     lvim.builtin.nvimtree.setup.disable_netrw = false
     lvim.builtin.nvimtree.setup.hijack_netrw = false
     vim.g.netrw_banner = false
-  end
-
-  local tree_cb = nvim_tree_config.nvim_tree_callback
-
-  if not lvim.builtin.nvimtree.setup.view.mappings.list then
-    lvim.builtin.nvimtree.setup.view.mappings.list = {
-      { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-      { key = "h", cb = tree_cb "close_node" },
-      { key = "v", cb = tree_cb "vsplit" },
-    }
   end
 
   local tree_view = require "nvim-tree.view"
