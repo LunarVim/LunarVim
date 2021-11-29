@@ -2,7 +2,13 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-  local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  if not status_ok then
+    Log:error "Failed to load nvim-tree.config"
+    return
+  end
+  local tree_cb = nvim_tree_config.nvim_tree_callback
+
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
