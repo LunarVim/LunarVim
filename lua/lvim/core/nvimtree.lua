@@ -7,6 +7,7 @@ function M.config()
     Log:error "Failed to load nvim-tree.config"
     return
   end
+  M.nvim_tree_config = nvim_tree_config
   local tree_cb = nvim_tree_config.nvim_tree_callback
 
   lvim.builtin.nvimtree = {
@@ -109,11 +110,6 @@ function M.config()
 end
 
 function M.setup()
-  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-  if not status_ok then
-    Log:error "Failed to load nvim-tree.config"
-    return
-  end
   local g = vim.g
 
   for opt, val in pairs(lvim.builtin.nvimtree) do
@@ -141,7 +137,7 @@ function M.setup()
   vim.cmd "au WinClosed * lua require('lvim.core.nvimtree').on_close()"
 
   if lvim.builtin.nvimtree.on_config_done then
-    lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
+    lvim.builtin.nvimtree.on_config_done(M.nvim_tree_config)
   end
   require("nvim-tree").setup(lvim.builtin.nvimtree.setup)
 end
