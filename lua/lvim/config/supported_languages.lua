@@ -26,7 +26,7 @@ return {
   "fennel",
   "fish",
   "fortran",
-  "fsautocomplete",
+  "fsharp",
   "gdscript",
   "glimmer",
   "go",
