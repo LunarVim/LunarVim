@@ -2,14 +2,6 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-  if not status_ok then
-    Log:error "Failed to load nvim-tree.config"
-    return
-  end
-  M.nvim_tree_config = nvim_tree_config
-  local tree_cb = nvim_tree_config.nvim_tree_callback
-
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
@@ -62,11 +54,7 @@ function M.config()
         relativenumber = false,
         mappings = {
           custom_only = false,
-          list = {
-            { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-            { key = "h", cb = tree_cb "close_node" },
-            { key = "v", cb = tree_cb "vsplit" },
-          },
+          list = {},
         },
       },
       filters = {
@@ -110,10 +98,14 @@ function M.config()
 end
 
 function M.setup()
-  local g = vim.g
+  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  if not status_ok then
+    Log:error "Failed to load nvim-tree.config"
+    return
+  end
 
   for opt, val in pairs(lvim.builtin.nvimtree) do
-    g["nvim_tree_" .. opt] = val
+    vim.g["nvim_tree_" .. opt] = val
   end
 
   -- Implicitly update nvim-tree when project module is active
@@ -125,9 +117,16 @@ function M.setup()
     vim.g.netrw_banner = false
   end
 
-  local tree_view = require "nvim-tree.view"
+  -- Add useful keymaps
+  local tree_cb = nvim_tree_config.nvim_tree_callback
+  vim.list_extend(lvim.builtin.nvimtree.setup.view.mappings.list, {
+    { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+    { key = "h", cb = tree_cb "close_node" },
+    { key = "v", cb = tree_cb "vsplit" },
+  })
 
   -- Add nvim_tree open callback
+  local tree_view = require "nvim-tree.view"
   local open = tree_view.open
   tree_view.open = function()
     M.on_open()
@@ -137,7 +136,7 @@ function M.setup()
   vim.cmd "au WinClosed * lua require('lvim.core.nvimtree').on_close()"
 
   if lvim.builtin.nvimtree.on_config_done then
-    lvim.builtin.nvimtree.on_config_done(M.nvim_tree_config)
+    lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
   require("nvim-tree").setup(lvim.builtin.nvimtree.setup)
 end
