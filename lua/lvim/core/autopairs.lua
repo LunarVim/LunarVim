@@ -9,6 +9,7 @@ function M.config()
       all = "(",
       tex = "{",
     },
+    enable_check_bracket_line = false,
     ---@usage check treesitter
     check_ts = true,
     ts_config = {
@@ -26,6 +27,7 @@ M.setup = function()
 
   autopairs.setup {
     check_ts = lvim.builtin.autopairs.check_ts,
+    enable_check_bracket_line = lvim.builtin.autopairs.enable_check_bracket_line,
     ts_config = lvim.builtin.autopairs.ts_config,
   }
 
