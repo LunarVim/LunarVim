@@ -45,6 +45,7 @@ return {
   override = {
     "angularls",
     "ansiblels",
+    "csharp_ls",
     "denols",
     "ember",
     "emmet_ls",
