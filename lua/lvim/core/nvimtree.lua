@@ -119,11 +119,13 @@ function M.setup()
 
   -- Add useful keymaps
   local tree_cb = nvim_tree_config.nvim_tree_callback
-  vim.list_extend(lvim.builtin.nvimtree.setup.view.mappings.list, {
-    { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-    { key = "h", cb = tree_cb "close_node" },
-    { key = "v", cb = tree_cb "vsplit" },
-  })
+  if #lvim.builtin.nvimtree.setup.view.mappings.list == 0 then
+    lvim.builtin.nvimtree.setup.view.mappings.list = {
+      { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+      { key = "h", cb = tree_cb "close_node" },
+      { key = "v", cb = tree_cb "vsplit" },
+    }
+  end
 
   -- Add nvim_tree open callback
   local tree_view = require "nvim-tree.view"
