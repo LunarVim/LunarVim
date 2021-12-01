@@ -84,7 +84,7 @@ M.setup = function()
 
   if lvim_version then
     table.insert(footer, 2, "")
-    table.insert(footer, 3, "v" .. lvim_version)
+    table.insert(footer, 2, lvim_version)
   end
 
   local text = require "lvim.interface.text"
