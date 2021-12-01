@@ -175,10 +175,23 @@ end
 function M:get_version(type)
   type = type or ""
   local opts = { cwd = get_lvim_base_dir() }
-  local status_ok, results = git_cmd({ "describe", "--tags" }, opts)
+
+  local _, branch = git_cmd({ "branch", "--show-current" }, opts)
+
+  local is_on_master = branch == "master"
+  if not is_on_master then
+    local log_status_ok, log_results = git_cmd({ "log", "--pretty=format:%h", "-1" }, opts)
+    local abbrev_version = log_results[1] or ""
+    if not log_status_ok or string.match(abbrev_version, "%d") == nil then
+      return nil
+    end
+    return "dev-" .. abbrev_version
+  end
+
+  local tag_status_ok, results = git_cmd({ "describe", "--tags" }, opts)
   local lvim_full_ver = results[1] or ""
 
-  if not status_ok or string.match(lvim_full_ver, "%d") == nil then
+  if not tag_status_ok or string.match(lvim_full_ver, "%d") == nil then
     return nil
   end
   if type == "short" then
