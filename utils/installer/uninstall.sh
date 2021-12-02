@@ -46,14 +46,16 @@ function parse_arguments() {
 
 function main() {
   parse_arguments "$@"
+  echo "Removing LunarVim directories..."
   for dir in "${__lvim_dirs[@]}"; do
     rm -rf "$dir"
     if [ "$ARGS_REMOVE_BACKUPS" -eq 1 ]; then
       rm -rf "$dir.bak"
     fi
   done
+  echo "Removing LunarVim binary..."
   rm -f "$LVIM_BIN"
+  echo "Uninstalled LunarVim!"
 }
 
-echo "Uninstalled LunarVim!"
 main "$@"
