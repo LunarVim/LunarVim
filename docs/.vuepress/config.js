@@ -8,7 +8,21 @@ module.exports = {
   description: "Documentation for LunarVim",
   head: [["link", { rel: "icon", href: "/assets/lunarvim_logo.png" }]],
   home: "/languages",
-
+  plugins: [
+    [
+      '@vuepress/plugin-search',
+      {
+        locales: {
+          '/': {
+            placeholder: 'Search',
+          },
+          '/zh/': {
+            placeholder: '搜索',
+          },
+        },
+      },
+    ],
+  ],
   themeConfig: {
     logo: "/assets/lunarvim_logo.png",
     navbar: [
