@@ -26,6 +26,7 @@ return {
   "fennel",
   "fish",
   "fortran",
+  "fsharp",
   "gdscript",
   "glimmer",
   "go",
