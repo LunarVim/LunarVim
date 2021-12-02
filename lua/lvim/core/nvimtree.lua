@@ -124,6 +124,9 @@ function M.setup()
       { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
       { key = "h", cb = tree_cb "close_node" },
       { key = "v", cb = tree_cb "vsplit" },
+      { key = "C", cb = tree_cb "cd" },
+      { key = "gtf", cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('find_files')<cr>" },
+      { key = "gtg", cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('live_grep')<cr>" },
     }
   end
 
@@ -161,6 +164,18 @@ function M.change_tree_dir(dir)
   local lib_status_ok, lib = pcall(require, "nvim-tree.lib")
   if lib_status_ok then
     lib.change_dir(dir)
+  end
+end
+
+function M.start_telescope(telescope_mode)
+  local node = require "nvim-tree.lib".get_node_at_cursor()
+  local abspath = node.link_to or node.absolute_path
+  local stats = vim.loop.fs_stat(abspath)
+  local is_dir = stats and stats.type == 'directory'
+  if is_dir then
+    vim.api.nvim_command("Telescope " .. telescope_mode .. " cwd=" .. abspath)
+  else
+    vim.api.nvim_command("Telescope " .. telescope_mode)
   end
 end
 
