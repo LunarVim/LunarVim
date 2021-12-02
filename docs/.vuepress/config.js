@@ -16,9 +16,6 @@ module.exports = {
           '/': {
             placeholder: 'Search',
           },
-          '/zh/': {
-            placeholder: '搜索',
-          },
         },
       },
     ],
