@@ -11,6 +11,7 @@ module.exports = {
 
   themeConfig: {
     logo: "/assets/lunarvim_logo.png",
+    logoDark: "/assets/lunarvim_logo_dark.png",
     navbar: [
       {
         text: "Getting Started",
