@@ -10,11 +10,11 @@ module.exports = {
   home: "/languages",
   plugins: [
     [
-      '@vuepress/plugin-search',
+      "@vuepress/plugin-search",
       {
         locales: {
-          '/': {
-            placeholder: 'Search',
+          "/": {
+            placeholder: "Search",
           },
         },
       },
