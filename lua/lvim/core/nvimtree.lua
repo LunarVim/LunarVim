@@ -170,13 +170,9 @@ end
 function M.start_telescope(telescope_mode)
   local node = require("nvim-tree.lib").get_node_at_cursor()
   local abspath = node.link_to or node.absolute_path
-  local stats = vim.loop.fs_stat(abspath)
-  local is_dir = stats and stats.type == "directory"
-  if is_dir then
-    vim.api.nvim_command("Telescope " .. telescope_mode .. " cwd=" .. abspath)
-  else
-    vim.api.nvim_command("Telescope " .. telescope_mode)
-  end
+  local is_folder = node.has_children and true
+  local basedir = is_folder and abspath or vim.fn.fnamemodify(abspath, ":h")
+  vim.api.nvim_command("Telescope " .. telescope_mode .. " cwd=" .. basedir)
 end
 
 return M
