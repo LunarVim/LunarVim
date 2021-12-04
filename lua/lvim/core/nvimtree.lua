@@ -172,7 +172,9 @@ function M.start_telescope(telescope_mode)
   local abspath = node.link_to or node.absolute_path
   local is_folder = node.open ~= nil
   local basedir = is_folder and abspath or vim.fn.fnamemodify(abspath, ":h")
-  vim.api.nvim_command("Telescope " .. telescope_mode .. " cwd=" .. string.gsub(basedir, " ", "\\ "))
+  require("telescope.builtin")[telescope_mode] {
+    cwd = basedir
+  }
 end
 
 return M
