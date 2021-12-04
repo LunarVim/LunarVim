@@ -205,7 +205,7 @@ function utils.generate_plugins_sha(output)
       list[normalize_name] = latest_sha[1]:gsub("\tHEAD", "")
     end
   end
-  utils.write_file(output, "local commits = " .. vim.inspect(list), "w")
+  utils.write_file(output, "local commit = " .. vim.inspect(list), "w")
 end
 
 return utils
