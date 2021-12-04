@@ -9,7 +9,12 @@ install-neovim-binary:
 	bash ./utils/installer/install-neovim-from-release
 
 uninstall:
-	@echo TODO: this is currently not supported
+	@echo Starting LunarVim Uninstaller
+	bash ./utils/installer/uninstall.sh
+
+generate_plugins_sha:
+	@echo generating core-plugins latest SHA list
+	lvim --headless -c 'lua require("lvim.utils").generate_plugins_sha("latest-sha.lua")' -c 'qall'
 
 lint: lint-lua lint-sh
 
