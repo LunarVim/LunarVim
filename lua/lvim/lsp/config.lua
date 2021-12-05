@@ -16,7 +16,8 @@ return {
     severity_sort = true,
     float = {
       source = "always",
-      show_header = false,
+      header = "",
+      prefix = "",
       format = function(d)
         local t = vim.deepcopy(d)
         if d.code then
