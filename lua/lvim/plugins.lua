@@ -134,7 +134,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     commit = commit.treesitter,
-    branch = "0.5-compat",
+    branch = vim.fn.has "nvim-0.6" == 1 and "master" or "0.5-compat",
     -- run = ":TSUpdate",
     config = function()
       require("lvim.core.treesitter").setup()
