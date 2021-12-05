@@ -24,6 +24,7 @@ local commit = {
   nvim_treesitter = "d6a0a26b8563409d4660def7320a4f4bc23954df",
   nvim_ts_context_commentstring = "9f5e422e1030e7073e593ad32c5354aa0bcb0176",
   nvim_web_devicons = "8df4988ecf8599fc1f8f387bbf2eae790e4c5ffb",
+  octo = "b33e00cd3066b03164d17e69d7ce9aa656caeda8",
   packer = "851c62c5ecd3b5adc91665feda8f977e104162a5",
   plenary = "1c31adb35fcebe921f65e5c6ff6d5481fa5fa5ac",
   popup = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
