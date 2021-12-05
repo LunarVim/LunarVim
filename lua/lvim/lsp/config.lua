@@ -14,6 +14,17 @@ return {
     update_in_insert = false,
     underline = true,
     severity_sort = true,
+    float = {
+      source = "always",
+      show_header = false,
+      format = function(d)
+        local t = vim.deepcopy(d)
+        if d.code then
+          t.message = string.format("%s [%s]", t.message, t.code):gsub("1. ", "")
+        end
+        return t.message
+      end,
+    },
   },
   document_highlight = true,
   code_lens_refresh = true,
