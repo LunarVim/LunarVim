@@ -174,6 +174,17 @@ function print_missing_dep_msg() {
   fi
 }
 
+function check_neovim_min_version() {
+  # TODO: consider locking the requirement to 0.6+
+  local verify_version_cmd='if !has("nvim-0.5.1") | cquit | else | quit | endif'
+
+  # exit with an error if min_version not found
+  if ! nvim --headless -u NONE -c "$verify_version_cmd"; then
+    echo "[ERROR]: LunarVim requires at least Neovim v0.5.1 or higher"
+    exit 1
+  fi
+}
+
 function check_system_deps() {
   if ! command -v git &>/dev/null; then
     print_missing_dep_msg "git"
@@ -183,20 +194,7 @@ function check_system_deps() {
     print_missing_dep_msg "neovim"
     exit 1
   fi
-
-  local major_version
-  major_version=$(nvim --version | head -n 1 | grep -oP "v0\.\K([0-9])")
-  if [ "$major_version" -eq 6 ]; then
-    return
-  fi
-
-  # TODO: consider locking the requirement to 0.6+
-  local minor_version
-  minor_version=$(nvim --version | head -n 1 | grep -oP "v0\.[0-9].\K([0-9])")
-  if [ ! "$minor_version" -eq 1 ]; then
-    echo "[ERROR]: LunarVim requires at least Neovim v0.5.1 or higher"
-    exit 1
-  fi
+  check_neovim_min_version
 }
 
 function __install_nodejs_deps_npm() {
