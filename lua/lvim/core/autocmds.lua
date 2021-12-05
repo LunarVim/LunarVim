@@ -38,9 +38,6 @@ function M.load_augroups()
       { "BufWinEnter", ".tf", "setlocal filetype=terraform" },
       { "BufRead", "*.tf", "setlocal filetype=terraform" },
       { "BufNewFile", "*.tf", "setlocal filetype=terraform" },
-      { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
-      { "BufRead", "*.zsh", "setlocal filetype=sh" },
-      { "BufNewFile", "*.zsh", "setlocal filetype=sh" },
     },
     _git = {
       { "FileType", "gitcommit", "setlocal wrap" },
