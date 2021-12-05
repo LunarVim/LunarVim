@@ -16,6 +16,7 @@ local builtins = {
   "lvim.core.comment",
   "lvim.core.notify",
   "lvim.core.lualine",
+  "lvim.core.octo",
 }
 
 function M.config(config)
