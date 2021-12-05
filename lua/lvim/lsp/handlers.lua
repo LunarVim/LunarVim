@@ -11,7 +11,7 @@ function M.setup()
     severity_sort = lvim.lsp.diagnostics.severity_sort,
     float = lvim.lsp.diagnostics.float,
   }
-  if vim.fn.has "nvim-0.6" > 1 then
+  if vim.fn.has "nvim-0.6" == 1 then
     vim.diagnostic.config(config)
   else
     vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
@@ -40,7 +40,7 @@ function M.setup()
 end
 
 function M.show_line_diagnostics()
-  if vim.fn.has "nvim-0.6" > 1 then
+  if vim.fn.has "nvim-0.6" == 1 then
     return vim.diagnostic.open_float(0, { scope = "line" })
   end
 
