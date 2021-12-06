@@ -51,9 +51,13 @@ To install a supported language server:
 
 You can also toggle `<:LspInstallInfo>` and interactively choose which servers to install.
 
-### Manually-configured servers
+### Server override
 
-`lvim.lsp.override` contains a list of servers that should **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
+`lvim.lsp.override` contains a list of servers that will **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
+
+::: warning Notice
+Overriding a server will completely bypass the lsp-installer, so you would have to manage the installation for any of those servers manually.
+:::
 
 See the current list
 
@@ -67,7 +71,9 @@ See the default list
 :lua print(vim.inspect(require("lvim.lsp.config").override))
 ```
 
-_Note: any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect._
+::: warning Notice
+Any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect.
+:::
 
 ### Server setup
 
@@ -85,8 +91,9 @@ A typical setup call with default arguments
 -- edit this file by running `:lua vim.cmd("edit " .. lvim.lsp.templates_dir .. "/lua.lua"))`
 require("lvim.lsp.manager").setup("sumneko_lua")
 ```
-
-_Tip: You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files"_
+::: tip
+You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files"
+:::
 
 #### Overriding the default setup options
 
@@ -124,7 +131,9 @@ To set a setting for your language server:
 
 This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
 
-_Note: Make sure to install `jsonls` for autocompletion._
+::: tip
+Make sure to install `jsonls` for autocompletion.
+:::
 
 ## Formatting
 
@@ -279,8 +288,9 @@ linters.setup {
   },
 }
 ```
-
-_Note: removing the `filetypes` argument will allow the linter to attach to all the default filetypes it supports._
+::: tip
+Removing the `filetypes` argument will allow the linter to attach to all the default filetypes it supports.
+:::
 
 ### Lazy-loading the linter setup
 
