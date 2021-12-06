@@ -40,53 +40,77 @@ M.config = function()
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     execs = {
-      { "lazygit", "gg", "LazyGit" },
+      -- TODO: this should probably be removed since it's hard to hit <leader>gg within the timeoutlen
+      { "lazygit", "<leader>gg", "LazyGit", "float" },
+      { "lazygit", "<c-\\>", "LazyGit", "float" },
     },
   }
 end
 
 M.setup = function()
   local terminal = require "toggleterm"
-  for _, exec in pairs(lvim.builtin.terminal.execs) do
-    require("lvim.core.terminal").add_exec(exec[1], exec[2], exec[3])
-  end
   terminal.setup(lvim.builtin.terminal)
+
+  -- setup the default terminal so it's always reachable
+  local default_term_opts = {
+    cmd = lvim.builtin.terminal.shell,
+    keymap = lvim.builtin.terminal.open_mapping,
+    label = "Toggle terminal",
+    count = 1,
+    direction = lvim.builtin.terminal.direction,
+    size = lvim.builtin.terminal.size,
+  }
+  M.add_exec(default_term_opts)
+
+  for i, exec in pairs(lvim.builtin.terminal.execs) do
+    local opts = {
+      cmd = exec[1],
+      keymap = exec[2],
+      label = exec[3],
+      count = i + 1,
+      direction = exec[4] or lvim.builtin.terminal.direction,
+      size = lvim.builtin.terminal.size,
+    }
+
+    M.add_exec(opts)
+  end
 
   if lvim.builtin.terminal.on_config_done then
     lvim.builtin.terminal.on_config_done(terminal)
   end
 end
 
-M.add_exec = function(exec, keymap, name)
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>" .. keymap,
-    "<cmd>lua require('lvim.core.terminal')._exec_toggle('" .. exec .. "')<CR>",
-    { noremap = true, silent = true }
-  )
-  lvim.builtin.which_key.mappings[keymap] = name
-end
-
-M._split = function(inputstr, sep)
-  if sep == nil then
-    sep = "%s"
-  end
-  local t = {}
-  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
-    table.insert(t, str)
-  end
-  return t
-end
-
-M._exec_toggle = function(exec)
-  local binary = M._split(exec)[1]
+M.add_exec = function(opts)
+  local binary = opts.cmd:match "(%S+)"
   if vim.fn.executable(binary) ~= 1 then
     Log:error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
+
+  local exec_func = string.format(
+    "<cmd>lua require('lvim.core.terminal')._exec_toggle({ cmd = '%s', count = %d, direction = '%s'})<CR>",
+    opts.cmd,
+    opts.count,
+    opts.direction
+  )
+
+  require("lvim.keymappings").load {
+    normal_mode = { [opts.keymap] = exec_func },
+    term_mode = { [opts.keymap] = exec_func },
+  }
+
+  local wk_status_ok, wk = pcall(require, "whichkey")
+  if not wk_status_ok then
+    return
+  end
+  wk.register({ [opts.keymap] = { opts.label } }, { mode = "n" })
+  wk.register({ [opts.keymap] = { opts.label } }, { mode = "t" })
+end
+
+M._exec_toggle = function(opts)
   local Terminal = require("toggleterm.terminal").Terminal
-  local exec_term = Terminal:new { cmd = exec, hidden = true }
-  exec_term:toggle()
+  local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
+  term:toggle(lvim.builtin.terminal.size, opts.direction)
 end
 
 ---Toggles a log viewer according to log.viewer.layout_config
