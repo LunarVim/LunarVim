@@ -59,7 +59,7 @@ module.exports = {
     ],
     repo: "https://github.com/LunarVim/LunarVim",
 
-    docsRepo: "https://github.com/LunarVim/LunarVim.com",
+    docsRepo: "https://github.com/LunarVim/LunarVim.org",
     docsBranch: "master",
     docsDir: "docs",
     // editLinkPattern: ":repo/-/edit/:branch/:path",

@@ -55,7 +55,7 @@ You can also toggle `<:LspInstallInfo>` and interactively choose which servers t
 
 `lvim.lsp.override` contains a list of servers that will **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
 
-::: warning Notice
+::: tip Notice
 Overriding a server will completely bypass the lsp-installer, so you would have to manage the installation for any of those servers manually.
 :::
 
@@ -71,7 +71,7 @@ See the default list
 :lua print(vim.inspect(require("lvim.lsp.config").override))
 ```
 
-::: warning Notice
+::: tip Notice
 Any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect.
 :::
 
