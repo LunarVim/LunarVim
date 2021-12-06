@@ -3,7 +3,7 @@ local commit = {
   cmp_buffer = "e26cdfb26f645cd4c6330b541b7e74ff69daa483",
   cmp_luasnip = "7bd2612533db6863381193df83f9934b373b21e1",
   cmp_nvim_lsp = "134117299ff9e34adde30a735cd8ca9cf8f3db81",
-  cmp_nvim_lua = "d276254e7198ab7d00f117e88e223b4bd8c02d21",
+  lua_dev = "4331626b02f636433b504b9ab6a8c11fb9de4a24",
   cmp_path = "81d88dfcafe26cc0cc856fc66f4677b20e6a9ffc",
   comment = "9e80d5146013275277238c89bbcaf4164f4e5140",
   dapinstall = "dd09e9dd3a6e29f02ac171515b8a089fb82bb425",
@@ -115,8 +115,8 @@ return {
     commit = commit.cmp_path,
   },
   {
-    "hrsh7th/cmp-nvim-lua",
-    commit = commit.cmp_nvim_lua,
+    "folke/lua-dev.nvim",
+    commit = commit.lua_dev,
   },
 
   -- Autopairs
