@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  _client_infos = {},
+}
 
 local Log = require "lvim.core.log"
 local lvim_lsp_utils = require "lvim.lsp.utils"
@@ -51,11 +53,22 @@ end
 function M.setup(server_name, user_config)
   vim.validate { name = { server_name, "string" } }
 
-  if lvim_lsp_utils.is_client_active(server_name) then
+  local client_info = M._client_infos[server_name]
+  if client_info or lvim_lsp_utils.is_client_active(server_name) then
+    Log:debug(string.format("Skip %s setup, status %s", server_name, client_info))
     return
   end
+  M._client_infos[server_name] = "loading"
+  Log:debug(string.format("Try %s setup", server_name))
 
   local config = resolve_config(server_name, user_config)
+  local on_attach_orig = config.on_attach
+  config.on_attach = function(...)
+    M._client_infos[server_name] = "loaded"
+    if on_attach_orig then
+      on_attach_orig(unpack { ... })
+    end
+  end
 
   local servers = require "nvim-lsp-installer.servers"
   local server_available, requested_server = servers.get_server(server_name)
