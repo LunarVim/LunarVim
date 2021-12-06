@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           # choose node.js version to use
-          node-version: '14'
+          node-version: '15'
 
       # cache node_modules
       - name: Cache dependencies
@@ -30,6 +30,9 @@ jobs:
         with:
           path: |
             **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
