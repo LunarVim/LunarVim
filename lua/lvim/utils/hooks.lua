@@ -7,7 +7,9 @@ local in_headless = #vim.api.nvim_list_uis() == 0
 function M.run_pre_update()
   Log:debug "Starting pre-update hook"
   _G.__luacache.clear_cache()
-  vim.cmd "LspStop"
+  if package.loaded["lspconfig"] then
+    vim.cmd [[ LspStop ]]
+  end
 end
 
 ---Reset any startup cache files used by Packer and Impatient
@@ -34,9 +36,14 @@ function M.run_post_update()
 
   if not in_headless then
     vim.schedule(function()
+      if package.loaded["nvim-treesitter"] then
+        vim.cmd [[ TSUpdateSync ]]
+      end
       -- TODO: add a changelog
       vim.notify("Update complete", vim.log.levels.INFO)
-      vim.cmd "LspRestart"
+      if package.loaded["lspconfig"] then
+        vim.cmd [[ LspRestart ]]
+      end
     end)
   end
 end
