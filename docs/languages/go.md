@@ -3,7 +3,7 @@
 ## Install Syntax Highlighting
 
 ```vim
-:TSInstall gopls
+:TSInstall go
 ```
 
 ## Supported language servers
