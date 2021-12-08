@@ -83,7 +83,7 @@ end
 M.add_exec = function(opts)
   local binary = opts.cmd:match "(%S+)"
   if vim.fn.executable(binary) ~= 1 then
-    Log:error("Unable to run executable " .. binary .. ". Please make sure it is installed properly.")
+    Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
 
