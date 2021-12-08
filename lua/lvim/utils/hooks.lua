@@ -17,20 +17,21 @@ function M.run_pre_reload()
   end
 end
 
+function M.run_on_packer_complete()
+  require("lvim.plugin-loader").recompile()
+  -- forcefully activate nvim-web-devicons
+  require("nvim-web-devicons").set_up_highlights()
+  Log:info "Reloaded configuration"
+end
+
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
   if package.loaded["lspconfig"] then
     vim.cmd [[ LspRestart ]]
   end
 
+  M.reset_cache()
   require("lvim.plugin-loader").ensure_installed()
-
-  -- forcefully activate nvim-web-devicons
-  vim.schedule(pcall(function()
-    require("nvim-web-devicons").set_up_highlights()
-    M.reset_cache()
-    Log:info "Reloaded configuration"
-  end))
 end
 
 ---Reset any startup cache files used by Packer and Impatient
@@ -47,7 +48,6 @@ function M.reset_cache()
   end
   Log:trace(string.format("Cache invalidated for core modules: { %s }", table.concat(lvim_modules, ", ")))
   require("lvim.lsp.templates").generate_templates()
-  require("lvim.plugin-loader").recompile()
 end
 
 function M.run_post_update()

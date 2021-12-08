@@ -36,6 +36,8 @@ function plugin_loader.init(opts)
       end,
     },
   }
+
+  vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
 end
 
 -- packer expects a space separated list
