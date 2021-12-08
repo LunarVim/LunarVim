@@ -28,7 +28,13 @@ function plugin_loader.init(opts)
     package_root = package_root,
     compile_path = compile_path,
     log = { level = log_level },
-    git = { clone_timeout = 300 },
+    git = {
+      clone_timeout = 300,
+      subcommands = {
+        -- this is more efficient than what Packer is using
+        fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
+      },
+    },
     max_jobs = 50,
     display = {
       open_fn = function()
