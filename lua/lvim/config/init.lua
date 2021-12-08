@@ -98,28 +98,20 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:reload()
-  local lvim_modules = {}
-  for module, _ in pairs(package.loaded) do
-    if module:match "lvim.core" then
-      package.loaded[module] = nil
-      table.insert(lvim_modules, module)
-    end
-  end
+  package.loaded["lvim.utils.hooks"] = nil
+  local _, hooks = pcall(require, "lvim.utils.hooks")
+  hooks.run_pre_reload()
 
   M:init()
   M:load()
 
+  require("lvim.core.autocmds").configure_format_on_save()
+
   local plugins = require "lvim.plugins"
-  local autocmds = require "lvim.core.autocmds"
-  autocmds.configure_format_on_save()
   local plugin_loader = require "lvim.plugin-loader"
-  plugin_loader.cache_clear()
+
   plugin_loader.load { plugins, lvim.plugins }
-  vim.cmd ":PackerInstall"
-  vim.cmd ":PackerCompile"
-  -- vim.cmd ":PackerClean"
-  require("lvim.lsp").setup()
-  Log:info "Reloaded configuration"
+  hooks.run_post_reload()
 end
 
 return M

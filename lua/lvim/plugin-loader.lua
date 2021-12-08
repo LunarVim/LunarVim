@@ -104,4 +104,11 @@ function plugin_loader.sync_core_plugins()
   pcall_packer_command("sync", core_plugins)
 end
 
+function plugin_loader.ensure_installed()
+  plugin_loader.cache_clear()
+  local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
+  pcall_packer_command("install", all_plugins)
+end
+
 return plugin_loader
