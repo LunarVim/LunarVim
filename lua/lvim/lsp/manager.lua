@@ -45,13 +45,28 @@ local function buf_try_add(server_name, bufnr)
   require("lspconfig")[server_name].manager.try_add_wrapper(bufnr)
 end
 
+-- check if the manager autocomd has already been configured since some servers can take a while to initialize
+-- this helps guarding against a data-race condition where a server can get configured twice
+-- which seems to occur only when attaching to single-files
+local function client_is_configured(server_name, ft)
+  ft = ft or vim.bo.filetype
+  local active_autocmds = vim.split(vim.fn.execute("autocmd FileType " .. ft), "\n")
+  for _, result in ipairs(active_autocmds) do
+    if result:match(server_name) then
+      return true
+    end
+  end
+  return false
+end
+
 ---Setup a language server by providing a name
 ---@param server_name string name of the language server
 ---@param user_config table [optional] when available it will take predence over any default configurations
 function M.setup(server_name, user_config)
   vim.validate { name = { server_name, "string" } }
 
-  if lvim_lsp_utils.is_client_active(server_name) then
+  if lvim_lsp_utils.is_client_active(server_name) or client_is_configured(server_name) then
+    Log:debug(string.format("[%q] is already configured. Ignoring repeated setup call.", server_name))
     return
   end
 
