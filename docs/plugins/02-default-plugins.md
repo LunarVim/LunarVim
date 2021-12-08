@@ -25,7 +25,7 @@ Automatically launch and initialize language servers
 | ---------- | --------------------------- |
 | `:LspInfo` | Language server diagnostics |
 
-**[nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall): Companion plugin for nvim-lspconfig to install language servers**
+**[nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer): Companion plugin for nvim-lspconfig to install language servers**
 
 Use tab completion with LspInstall to check for available language servers
 
