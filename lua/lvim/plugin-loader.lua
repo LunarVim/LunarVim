@@ -28,7 +28,13 @@ function plugin_loader.init(opts)
     package_root = package_root,
     compile_path = compile_path,
     log = { level = log_level },
-    git = { clone_timeout = 300 },
+    git = {
+      clone_timeout = 300,
+      subcommands = {
+        -- this is more efficient than what Packer is using
+        fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
+      },
+    },
     max_jobs = 50,
     display = {
       open_fn = function()
@@ -36,6 +42,8 @@ function plugin_loader.init(opts)
       end,
     },
   }
+
+  vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
 end
 
 -- packer expects a space separated list
@@ -102,6 +110,13 @@ function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
   Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
   pcall_packer_command("sync", core_plugins)
+end
+
+function plugin_loader.ensure_installed()
+  plugin_loader.cache_clear()
+  local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
+  pcall_packer_command("install", all_plugins)
 end
 
 return plugin_loader

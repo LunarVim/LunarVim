@@ -1,38 +1,64 @@
 local M = {}
 
-local plugin_loader = require "lvim.plugin-loader"
 local Log = require "lvim.core.log"
 local in_headless = #vim.api.nvim_list_uis() == 0
 
 function M.run_pre_update()
   Log:debug "Starting pre-update hook"
-  _G.__luacache.clear_cache()
   if package.loaded["lspconfig"] then
     vim.cmd [[ LspStop ]]
   end
+end
+
+function M.run_pre_reload()
+  Log:debug "Starting pre-reload hook"
+  if package.loaded["lspconfig"] then
+    vim.cmd [[ LspStop ]]
+  end
+end
+
+function M.run_on_packer_complete()
+  require("lvim.plugin-loader").recompile()
+  -- forcefully activate nvim-web-devicons
+  require("nvim-web-devicons").set_up_highlights()
+  Log:info "Reloaded configuration"
+end
+
+function M.run_post_reload()
+  Log:debug "Starting post-reload hook"
+  if package.loaded["lspconfig"] then
+    vim.cmd [[ LspRestart ]]
+  end
+
+  M.reset_cache()
+  require("lvim.plugin-loader").ensure_installed()
 end
 
 ---Reset any startup cache files used by Packer and Impatient
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
-  _G.__luacache.clear_cache()
-  require("lvim.plugin-loader").recompile()
-  package.loaded["lvim.lsp.templates"] = nil
-
-  Log:debug "Re-generatring ftplugin template files"
+  local impatient = _G.__luacache
+  if impatient then
+    impatient.clear_cache()
+  end
+  local lvim_modules = {}
+  for module, _ in pairs(package.loaded) do
+    if module:match "lvim.core" or module:match "lvim.lsp" then
+      package.loaded[module] = nil
+      table.insert(lvim_modules, module)
+    end
+  end
+  Log:trace(string.format("Cache invalidated for core modules: { %s }", table.concat(lvim_modules, ", ")))
   require("lvim.lsp.templates").generate_templates()
 end
 
 function M.run_post_update()
   Log:debug "Starting post-update hook"
-
-  Log:debug "Re-generatring ftplugin template files"
-  package.loaded["lvim.lsp.templates"] = nil
-  require("lvim.lsp.templates").generate_templates()
+  M.reset_cache()
 
   Log:debug "Updating core plugins"
-  plugin_loader:sync_core_plugins()
+  require("lvim.plugin-loader").ensure_installed()
 
   if not in_headless then
     vim.schedule(function()
