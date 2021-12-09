@@ -72,10 +72,7 @@ function M:init(base_dir)
     -- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
 
     vim.cmd [[let &packpath = &runtimepath]]
-    vim.cmd("set spellfile=" .. join_paths(self.config_dir, "spell", "en.utf-8.add"))
   end
-
-  vim.fn.mkdir(get_cache_dir(), "p")
 
   -- FIXME: currently unreliable in unit-tests
   if not in_headless then

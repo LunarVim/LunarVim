@@ -64,20 +64,8 @@ function main($cliargs) {
     backup_old_config
 
     __add_separator "80" 
-  
-    if ($cliargs.Contains("--overwrite")) {
-        Write-Output "!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag"
-        $answer = Read-Host "Would you like to continue? [y]es or [n]o "
-        if ("$answer" -ne "y" -and "$answer" -ne "Y") {
-            exit 1
-        } 
-		
-        foreach ($dir in $__lvim_dirs) {
-            if (Test-Path "$dir") {
-                Remove-Item -Force -Recurse "$dir"
-            }
-        }
-    }
+ 
+    verify_lvim_dirs
   
     if (Test-Path "$env:LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim") {
         Write-Output "Packer already installed"
@@ -211,16 +199,35 @@ function setup_shim() {
     Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
 }
 
+function verify_lvim_dirs() {
+    if ($cliargs.Contains("--overwrite")) {
+        Write-Output "!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag"
+        $answer = Read-Host "Would you like to continue? [y]es or [n]o "
+        if ("$answer" -ne "y" -and "$answer" -ne "Y") {
+            exit 1
+        } 
+		
+        foreach ($dir in $__lvim_dirs) {
+            if (Test-Path "$dir") {
+                Remove-Item -Force -Recurse "$dir"
+            }
+        }
+    }
+
+    foreach ($dir in $__lvim_dirs) {
+        if ((Test-Path "$dir") -eq $false) {
+            New-Item "$dir" -ItemType Directory
+        }
+    }
+
+}
+
 function setup_lvim() {
     Write-Output "Installing LunarVim shim"
   
     setup_shim
   
     Write-Output "Preparing Packer setup"
-
-    if ((Test-Path "$env:LUNARVIM_CONFIG_DIR") -eq $false) {
-        New-Item "$env:LUNARVIM_CONFIG_DIR" -ItemType Directory
-    }
 
     if (Test-Path "$env:LUNARVIM_CONFIG_DIR\config.lua") {
         Remove-Item -Force "$env:LUNARVIM_CONFIG_DIR\config.lua"
