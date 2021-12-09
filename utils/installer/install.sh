@@ -107,11 +107,7 @@ function main() {
   msg "Backing up old LunarVim configuration"
   backup_old_config
 
-  if [ "$ARGS_OVERWRITE" -eq 1 ]; then
-    for dir in "${__lvim_dirs[@]}"; do
-      [ -d "$dir" ] && rm -rf "$dir"
-    done
-  fi
+  verify_lvim_dirs
 
   if [ -e "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" ]; then
     update_lvim
@@ -262,11 +258,24 @@ function install_rust_deps() {
   echo "All Rust dependencies are successfully installed"
 }
 
+function verify_lvim_dirs() {
+  if [ "$ARGS_OVERWRITE" -eq 1 ]; then
+    for dir in "${__lvim_dirs[@]}"; do
+      [ -d "$dir" ] && rm -rf "$dir"
+    done
+  fi
+
+  for dir in "${__lvim_dirs[@]}"; do
+    mkdir -p "$dir"
+  done
+}
+
 function backup_old_config() {
   for dir in "${__lvim_dirs[@]}"; do
-    # we create an empty folder for subsequent commands \
-    # that require an existing directory
-    mkdir -p "$dir" "$dir.bak"
+    if [ ! -d "$dir" ]; then
+      continue
+    fi
+    mkdir -p "$dir.bak"
     touch "$dir/ignore"
     if command -v rsync &>/dev/null; then
       rsync --archive -hh --partial --progress --cvs-exclude \
@@ -307,7 +316,6 @@ function link_local_lvim() {
     rm -rf "$LUNARVIM_RUNTIME_DIR/lvim"
   fi
 
-  mkdir -p "$LUNARVIM_RUNTIME_DIR"
   echo "   - $BASEDIR -> $LUNARVIM_RUNTIME_DIR/lvim"
   ln -s -f "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
 }
