@@ -106,14 +106,13 @@ function main() {
     [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
   fi
 
-  msg "Backing up old LunarVim configuration"
   backup_old_config
 
   verify_lvim_dirs
 
   if [ "$ARGS_LOCAL" -eq 1 ]; then
     link_local_lvim
-  elif [ -e "$LUNARVIM_BASE_DIR/init.lua" ]; then
+  elif [ -d "$LUNARVIM_BASE_DIR" ]; then
     validate_lunarvim_files
   else
     clone_lvim
@@ -287,9 +286,9 @@ function backup_old_config() {
     fi
     mkdir -p "$dir.bak"
     touch "$dir/ignore"
+    msg "Backing up old $dir to $dir.bak"
     if command -v rsync &>/dev/null; then
-      rsync --archive -hh --partial --progress --cvs-exclude \
-        --modify-window=1 "$dir"/ "$dir.bak"
+      rsync --archive -hh --stats --partial --cvs-exclude "$dir"/ "$dir.bak"
     else
       OS="$(uname -s)"
       case "$OS" in
@@ -305,7 +304,7 @@ function backup_old_config() {
       esac
     fi
   done
-  echo "Backup operation complete"
+  msg "Backup operation complete"
 }
 
 function clone_lvim() {
