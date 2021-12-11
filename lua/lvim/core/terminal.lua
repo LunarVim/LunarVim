@@ -40,9 +40,8 @@ M.config = function()
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     execs = {
-      -- TODO: this should probably be removed since it's hard to hit <leader>gg within the timeoutlen
       { "lazygit", "<leader>gg", "LazyGit", "float" },
-      { "lazygit", "<c-\\>", "LazyGit", "float" },
+      { "lazygit", "<c-\\><c-g>", "LazyGit", "float" },
     },
   }
 end
