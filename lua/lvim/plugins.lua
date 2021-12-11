@@ -116,6 +116,7 @@ return {
   },
   {
     "folke/lua-dev.nvim",
+    module = "lua-dev",
     commit = commit.lua_dev,
   },
 
