@@ -60,7 +60,9 @@ M.setup = function()
     direction = lvim.builtin.terminal.direction,
     size = lvim.builtin.terminal.size,
   }
-  M.add_exec(default_term_opts)
+  if lvim.builtin.terminal.open_mapping then
+    M.add_exec(default_term_opts)
+  end
 
   for i, exec in pairs(lvim.builtin.terminal.execs) do
     local opts = {
