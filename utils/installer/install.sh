@@ -12,6 +12,8 @@ declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
 declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
 declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
+declare -r LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
+
 # TODO: Use a dedicated cache directory #1256
 declare -r LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
 
@@ -109,16 +111,15 @@ function main() {
 
   verify_lvim_dirs
 
-  if [ -e "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" ]; then
-    update_lvim
+  if [ "$ARGS_LOCAL" -eq 1 ]; then
+    link_local_lvim
+  elif [ -e "$LUNARVIM_BASE_DIR/init.lua" ]; then
+    validate_lunarvim_files
   else
-    if [ "$ARGS_LOCAL" -eq 1 ]; then
-      link_local_lvim
-    else
-      clone_lvim
-    fi
-    setup_lvim
+    clone_lvim
   fi
+
+  setup_lvim
 
   msg "Thank you for installing LunarVim!!"
   echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
@@ -178,6 +179,15 @@ function check_neovim_min_version() {
   if ! nvim --headless -u NONE -c "$verify_version_cmd"; then
     echo "[ERROR]: LunarVim requires at least Neovim v0.5.1 or higher"
     exit 1
+  fi
+}
+
+function validate_lunarvim_files() {
+  local verify_version_cmd='if v:errmsg != "" | cquit | else | quit | endif'
+  if ! "$INSTALL_PREFIX/bin/lvim" --headless -c 'LvimUpdate' -c "$verify_version_cmd" &>/dev/null; then
+    msg "Removing old installation files"
+    rm -rf "$LUNARVIM_BASE_DIR"
+    clone_lvim
   fi
 }
 
@@ -301,7 +311,7 @@ function backup_old_config() {
 function clone_lvim() {
   msg "Cloning LunarVim configuration"
   if ! git clone --branch "$LV_BRANCH" \
-    --depth 1 "https://github.com/${LV_REMOTE}" "$LUNARVIM_RUNTIME_DIR/lvim"; then
+    --depth 1 "https://github.com/${LV_REMOTE}" "$LUNARVIM_BASE_DIR"; then
     echo "Failed to clone repository. Installation failed."
     exit 1
   fi
@@ -311,13 +321,13 @@ function link_local_lvim() {
   echo "Linking local LunarVim repo"
 
   # Detect whether it's a symlink or a folder
-  if [ -d "$LUNARVIM_RUNTIME_DIR/lvim" ]; then
+  if [ -d "$LUNARVIM_BASE_DIR" ]; then
     echo "Removing old installation files"
-    rm -rf "$LUNARVIM_RUNTIME_DIR/lvim"
+    rm -rf "$LUNARVIM_BASE_DIR"
   fi
 
-  echo "   - $BASEDIR -> $LUNARVIM_RUNTIME_DIR/lvim"
-  ln -s -f "$BASEDIR" "$LUNARVIM_RUNTIME_DIR/lvim"
+  echo "   - $BASEDIR -> $LUNARVIM_BASE_DIR"
+  ln -s -f "$BASEDIR" "$LUNARVIM_BASE_DIR"
 }
 
 function setup_shim() {
@@ -356,7 +366,7 @@ function setup_lvim() {
 
   setup_shim
 
-  cp "$LUNARVIM_RUNTIME_DIR/lvim/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
+  cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
   echo "Preparing Packer setup"
 
@@ -365,10 +375,6 @@ function setup_lvim() {
     -c 'PackerSync'
 
   echo "Packer setup complete"
-}
-
-function update_lvim() {
-  "$INSTALL_PREFIX/bin/lvim" --headless +'LvimUpdate' +q
 }
 
 function print_logo() {
