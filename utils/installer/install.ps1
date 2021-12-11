@@ -64,20 +64,8 @@ function main($cliargs) {
     backup_old_config
 
     __add_separator "80" 
-  
-    if ($cliargs.Contains("--overwrite")) {
-        Write-Output "!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag"
-        $answer = Read-Host "Would you like to continue? [y]es or [n]o "
-        if ("$answer" -ne "y" -and "$answer" -ne "Y") {
-            exit 1
-        } 
-		
-        foreach ($dir in $__lvim_dirs) {
-            if (Test-Path "$dir") {
-                Remove-Item -Force -Recurse "$dir"
-            }
-        }
-    }
+ 
+    verify_lvim_dirs
   
     if (Test-Path "$env:LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim") {
         Write-Output "Packer already installed"
@@ -153,7 +141,7 @@ function check_system_deps() {
 function install_nodejs_deps() {
     try {
         check_system_dep "node"
-        Invoke-Command npm install -g neovim tree-sitter-cli  -ErrorAction Break
+        Invoke-Command npm install -g neovim tree-sitter-cli -ErrorAction Break
     }
     catch {
         print_missing_dep_msg "$dep"
@@ -211,6 +199,29 @@ function setup_shim() {
     Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
 }
 
+function verify_lvim_dirs() {
+    if ($cliargs.Contains("--overwrite")) {
+        Write-Output "!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag"
+        $answer = Read-Host "Would you like to continue? [y]es or [n]o "
+        if ("$answer" -ne "y" -and "$answer" -ne "Y") {
+            exit 1
+        } 
+
+        foreach ($dir in $__lvim_dirs) {
+            if (Test-Path "$dir") {
+                Remove-Item -Force -Recurse "$dir"
+            }
+        }
+    }
+
+    foreach ($dir in $__lvim_dirs) {
+        if ((Test-Path "$dir") -eq $false) {
+            New-Item "$dir" -ItemType Directory
+        }
+    }
+
+}
+
 function setup_lvim() {
     Write-Output "Installing LunarVim shim"
   
@@ -218,30 +229,26 @@ function setup_lvim() {
   
     Write-Output "Preparing Packer setup"
 
-    if ((Test-Path "$env:LUNARVIM_CONFIG_DIR") -eq $false) {
-        New-Item "$env:LUNARVIM_CONFIG_DIR" -ItemType Directory
-    }
-
     if (Test-Path "$env:LUNARVIM_CONFIG_DIR\config.lua") {
         Remove-Item -Force "$env:LUNARVIM_CONFIG_DIR\config.lua"
     }
 
     Out-File -FilePath "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
-	Write-Output "Packer setup complete"
+    Write-Output "Packer setup complete"
 	
-	__add_separator "80"
+    __add_separator "80"
 
-	Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
+    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
-	$answer = Read-Host $(`
-	"Would you like to create an alias inside your Powershell profile?`n" +`
-	"(This enables you to start lvim with the command 'lvim') [y]es or [n]o (default: no)" )
-	if ("$answer" -eq "y" -and "$answer" -eq "Y") {
-		create_alias
-	} 
+    $answer = Read-Host $(`
+            "Would you like to create an alias inside your Powershell profile?`n" + `
+            "(This enables you to start lvim with the command 'lvim') [y]es or [n]o (default: no)" )
+    if ("$answer" -eq "y" -and "$answer" -eq "Y") {
+        create_alias
+    } 
 
-	__add_separator "80"
+    __add_separator "80"
 
     Write-Output "Thank you for installing LunarVim!!"
     Write-Output "You can start it by running: $INSTALL_PREFIX\bin\lvim.ps1"
@@ -267,15 +274,16 @@ function __add_separator($div_width) {
 }
 
 function create_alias {
-	if($null -eq $(Get-Alias | Select-String "lvim")){
-		Add-Content -Path $PROFILE -Value $(-join @('Set-Alias lvim "', "$INSTALL_PREFIX", '\bin\lvim.ps1"'))
+    if ($null -eq $(Get-Alias | Select-String "lvim")) {
+        Add-Content -Path $PROFILE -Value $( -join @('Set-Alias lvim "', "$INSTALL_PREFIX", '\bin\lvim.ps1"'))
 		
-		Write-Output ""
-		Write-Host 'To use the new alias in this window reload your profile with ". $PROFILE".' -ForegroundColor Yellow
+        Write-Output ""
+        Write-Host 'To use the new alias in this window reload your profile with ". $PROFILE".' -ForegroundColor Yellow
 
-	}else {
-		Write-Output "Alias is already set and will not be reset."
-	}
+    }
+    else {
+        Write-Output "Alias is already set and will not be reset."
+    }
 }
 
 main "$args"

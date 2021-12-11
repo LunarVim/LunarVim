@@ -22,11 +22,12 @@ function M.get_active_clients_by_ft(filetype)
 end
 
 function M.get_client_capabilities(client_id)
+  local client
   if not client_id then
     local buf_clients = vim.lsp.buf_get_clients()
-    for _, buf_client in ipairs(buf_clients) do
+    for _, buf_client in pairs(buf_clients) do
       if buf_client.name ~= "null-ls" then
-        client_id = buf_client.id
+        client = buf_client
         break
       end
     end
@@ -35,8 +36,6 @@ function M.get_client_capabilities(client_id)
     error "Unable to determine client_id"
     return
   end
-
-  local client = vim.lsp.get_client_by_id(tonumber(client_id))
 
   local enabled_caps = {}
   for capability, status in pairs(client.resolved_capabilities) do

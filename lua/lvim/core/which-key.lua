@@ -61,7 +61,7 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = { "<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<CR>", "Comment" },
+      ["/"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
@@ -188,7 +188,7 @@ M.config = function()
           "<cmd>lua require('lvim.core.telescope.custom-finders').grep_lunarvim_files()<cr>",
           "Grep LunarVim files",
         },
-        k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
+        k = { "<cmd>Telescope keymaps<cr>", "View LunarVim's keymappings" },
         i = {
           "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle LunarVim Info",

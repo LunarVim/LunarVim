@@ -43,6 +43,7 @@ M.load_options = function()
     wrap = false, -- display lines as one long line
     spell = false,
     spelllang = "en",
+    spellfile = utils.join_paths(get_config_dir(), "spell", "en.utf-8.add"),
     scrolloff = 8, -- is one of my fav
     sidescrolloff = 8,
   }
@@ -50,6 +51,8 @@ M.load_options = function()
   ---  SETTINGS  ---
 
   vim.opt.shortmess:append "c"
+
+  vim.opt.shadafile = utils.join_paths(get_cache_dir(), "lvim.shada")
 
   for k, v in pairs(default_options) do
     vim.opt[k] = v

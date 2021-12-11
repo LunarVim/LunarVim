@@ -37,6 +37,7 @@ function M.config()
         "--column",
         "--smart-case",
         "--hidden",
+        "--glob=!.git/",
       },
       mappings = {
         i = {
