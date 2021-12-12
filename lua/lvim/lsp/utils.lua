@@ -31,8 +31,10 @@ function M.get_client_capabilities(client_id)
         break
       end
     end
+  else
+    client = vim.lsp.get_client_by_id(tonumber(client_id))
   end
-  if not client_id then
+  if not client then
     error "Unable to determine client_id"
     return
   end
