@@ -27,13 +27,13 @@ rust = { "rustfmt" }
 ## Debugger
 
 ```vim
-:DIInstall ccppr_lldb
+:DIInstall codelldb
 ```
 
 ```lua
 -- ~/.config/lvim/ftplugin/rust.lua
 local dap_install = require "dap-install"
-dap_install.config("rust", {})
+dap_install.config("codelldb", {})
 ```
 
 ## Extra Plugins
