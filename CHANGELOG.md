@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - _(installer)_ Better handling of existing files (#2066)
 - _(lsp)_ Avoid installing an overridden server (#1981)
 - _(lsp)_ Prevent repeated setup call (#2048)
+- _(lsp)_ Correct client_id parsing in lvim-info (#2071)
 - _(lualine)_ Change `fg` of section `a` in onedarker (#1909)
 - _(null-ls)_ Allow the same linter and formatter (#1968)
 - _(nvimtree)_ Update settings (#2001)
@@ -62,6 +63,7 @@ All notable changes to this project will be documented in this file.
 
 ### <!-- 4 --> Miscellaneous Tasks
 
+- _(terminal)_ Avoid problematic layzgit mapping (#2068)
 - Pin cmp related plugins (#1917)
 - Update lsp installer (#1930)
 - Bump core-plugins version (#1989)
