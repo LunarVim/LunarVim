@@ -1,8 +1,14 @@
 local M = {}
+local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
-  local user_config_file = vim.fn.resolve(require("lvim.config"):get_user_config_path())
+  local user_config_file = require("lvim.config"):get_user_config_path()
+
+  if vim.loop.os_uname().version:match "Windows" then
+    -- autocmds require forward slashes even on windows
+    user_config_file = user_config_file:gsub("\\", "/")
+  end
 
   return {
     _general_settings = {
@@ -56,6 +62,60 @@ function M.load_augroups()
     },
     custom_groups = {},
   }
+end
+
+local get_format_on_save_opts = function()
+  local defaults = require("lvim.config.defaults").format_on_save
+  -- accept a basic boolean `lvim.format_on_save=true`
+  if type(lvim.format_on_save) ~= "table" then
+    return defaults
+  end
+
+  return {
+    pattern = lvim.format_on_save.pattern or defaults.pattern,
+    timeout = lvim.format_on_save.timeout or defaults.timeout,
+  }
+end
+
+function M.enable_format_on_save(opts)
+  local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout_ms)
+  M.define_augroups {
+    format_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
+  }
+  Log:debug "enabled format-on-save"
+end
+
+function M.disable_format_on_save()
+  M.remove_augroup "format_on_save"
+  Log:debug "disabled format-on-save"
+end
+
+function M.configure_format_on_save()
+  if lvim.format_on_save then
+    if vim.fn.exists "#format_on_save#BufWritePre" == 1 then
+      M.remove_augroup "format_on_save"
+      Log:debug "reloading format-on-save configuration"
+    end
+    local opts = get_format_on_save_opts()
+    M.enable_format_on_save(opts)
+  else
+    M.disable_format_on_save()
+  end
+end
+
+function M.toggle_format_on_save()
+  if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
+    local opts = get_format_on_save_opts()
+    M.enable_format_on_save(opts)
+  else
+    M.disable_format_on_save()
+  end
+end
+
+function M.remove_augroup(name)
+  if vim.fn.exists("#" .. name) == 1 then
+    vim.cmd("au! " .. name)
+  end
 end
 
 function M.define_augroups(definitions) -- {{{1

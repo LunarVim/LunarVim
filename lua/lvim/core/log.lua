@@ -1,6 +1,6 @@
 local Log = {}
 
-local logfile = string.format("%s/%s.log", vim.fn.stdpath "cache", "lvim")
+local logfile = string.format("%s/%s.log", get_cache_dir(), "lvim")
 
 Log.levels = {
   TRACE = 1,

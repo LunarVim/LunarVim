@@ -4,6 +4,14 @@ local null_ls = require "null-ls"
 local services = require "lvim.lsp.null-ls.services"
 local Log = require "lvim.core.log"
 
+local is_registered = function(name)
+  local query = {
+    name = name,
+    method = require("null-ls").methods.DIAGNOSTICS,
+  }
+  return require("null-ls.sources").is_registered(query)
+end
+
 function M.list_registered_providers(filetype)
   local null_ls_methods = require "null-ls.methods"
   local linter_method = null_ls_methods.internal["DIAGNOSTICS"]
@@ -21,6 +29,7 @@ function M.list_available(filetype)
       table.insert(linters, provider.name)
     end
   end
+
   table.sort(linters)
   return linters
 end
@@ -29,24 +38,29 @@ function M.list_configured(linter_configs)
   local linters, errors = {}, {}
 
   for _, lnt_config in pairs(linter_configs) do
-    local linter_name = lnt_config.exe:gsub("-", "_")
-    local linter = null_ls.builtins.diagnostics[linter_name]
+    local name = lnt_config.exe:gsub("-", "_")
+    local linter = null_ls.builtins.diagnostics[name]
 
     if not linter then
       Log:error("Not a valid linter: " .. lnt_config.exe)
       errors[lnt_config.exe] = {} -- Add data here when necessary
+    elseif is_registered(lnt_config.exe) then
+      Log:trace "Skipping registering the source more than once"
     else
       local linter_cmd = services.find_command(linter._opts.command)
       if not linter_cmd then
         Log:warn("Not found: " .. linter._opts.command)
-        errors[lnt_config.exe] = {} -- Add data here when necessary
+        errors[name] = {} -- Add data here when necessary
       else
         Log:debug("Using linter: " .. linter_cmd)
-        linters[lnt_config.exe] = linter.with {
-          command = linter_cmd,
-          extra_args = lnt_config.args,
-          filetypes = lnt_config.filetypes,
-        }
+        table.insert(
+          linters,
+          linter.with {
+            command = linter_cmd,
+            extra_args = lnt_config.args,
+            filetypes = lnt_config.filetypes,
+          }
+        )
       end
     end
   end

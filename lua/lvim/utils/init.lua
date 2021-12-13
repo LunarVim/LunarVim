@@ -1,5 +1,4 @@
 local utils = {}
-local Log = require "lvim.core.log"
 local uv = vim.loop
 
 -- recursive Print (structure, limit, separator)
@@ -56,31 +55,6 @@ function utils.generate_settings()
 
   -- closes the open file
   io.close(file)
-end
-
--- autoformat
-function utils.toggle_autoformat()
-  if lvim.format_on_save then
-    require("lvim.core.autocmds").define_augroups {
-      autoformat = {
-        {
-          "BufWritePre",
-          "*",
-          ":silent lua vim.lsp.buf.formatting_sync()",
-        },
-      },
-    }
-    Log:debug "Format on save active"
-  end
-
-  if not lvim.format_on_save then
-    vim.cmd [[
-      if exists('#autoformat#BufWritePre')
-        :autocmd! autoformat
-      endif
-    ]]
-    Log:debug "Format on save off"
-  end
 end
 
 function utils.unrequire(m)
@@ -200,6 +174,38 @@ function utils.log_contains(query)
   return false
 end
 
-return utils
+function utils.generate_plugins_sha(output)
+  local list = {}
+  output = output or "commits.lua"
 
--- TODO: find a new home for these autocommands
+  local function git_cmd(args)
+    local Job = require "plenary.job"
+    local stderr = {}
+    local stdout, ret = Job
+      :new({
+        command = "git",
+        args = args,
+        on_stderr = function(_, data)
+          table.insert(stderr, data)
+        end,
+      })
+      :sync()
+    return ret, stdout
+  end
+
+  local core_plugins = require "lvim.plugins"
+  for _, plugin in pairs(core_plugins) do
+    local name = plugin[1]:match "/(%S*)"
+    local url = "https://github.com/" .. plugin[1]
+    print("checking: " .. name .. ", at: " .. url)
+    local retval, latest_sha = git_cmd { "ls-remote", url, "origin", "HEAD" }
+    if retval == 0 then
+      -- replace dashes, remove postfixes and use lowercase
+      local normalize_name = (name:gsub("-", "_"):gsub("%.%S+", "")):lower()
+      list[normalize_name] = latest_sha[1]:gsub("\tHEAD", "")
+    end
+  end
+  utils.write_file(output, "local commit = " .. vim.inspect(list), "w")
+end
+
+return utils

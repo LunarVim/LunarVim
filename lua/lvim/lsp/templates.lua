@@ -19,8 +19,7 @@ end
 ---@param server_name string name of a valid language server, e.g. pyright, gopls, tsserver, etc.
 ---@param dir string the full path to the desired directory
 function M.generate_ftplugin(server_name, dir)
-  local has_custom_provider, _ = pcall(require, "lvim/lsp/providers/" .. server_name)
-  if vim.tbl_contains(lvim.lsp.override, server_name) and not has_custom_provider then
+  if vim.tbl_contains(lvim.lsp.override, server_name) then
     return
   end
 

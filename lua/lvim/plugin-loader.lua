@@ -1,11 +1,11 @@
 local plugin_loader = {}
 
+local in_headless = #vim.api.nvim_list_uis() == 0
+
 local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 -- we need to reuse this outside of init()
 local compile_path = get_config_dir() .. "/plugin/packer_compiled.lua"
-
-local _, packer = pcall(require, "packer")
 
 function plugin_loader.init(opts)
   opts = opts or {}
@@ -18,17 +18,32 @@ function plugin_loader.init(opts)
     vim.cmd "packadd packer.nvim"
   end
 
+  local log_level = in_headless and "debug" or "warn"
+  if lvim.log and lvim.log.level then
+    log_level = lvim.log.level
+  end
+
+  local _, packer = pcall(require, "packer")
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
-    log = { level = "warn" },
-    git = { clone_timeout = 300 },
+    log = { level = log_level },
+    git = {
+      clone_timeout = 300,
+      subcommands = {
+        -- this is more efficient than what Packer is using
+        fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
+      },
+    },
+    max_jobs = 50,
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
       end,
     },
   }
+
+  vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
 end
 
 -- packer expects a space separated list
@@ -58,6 +73,11 @@ end
 
 function plugin_loader.load(configurations)
   Log:debug "loading plugins configuration"
+  local packer_available, packer = pcall(require, "packer")
+  if not packer_available then
+    Log:warn "skipping loading plugins until Packer is installed"
+    return
+  end
   local status_ok, _ = xpcall(function()
     packer.startup(function(use)
       for _, plugins in ipairs(configurations) do
@@ -71,6 +91,10 @@ function plugin_loader.load(configurations)
     Log:warn "problems detected while loading plugins' configurations"
     Log:trace(debug.traceback())
   end
+
+  -- Colorscheme must get called after plugins are loaded or it will break new installs.
+  vim.g.colors_name = lvim.colorscheme
+  vim.cmd("colorscheme " .. lvim.colorscheme)
 end
 
 function plugin_loader.get_core_plugins()
@@ -86,6 +110,13 @@ function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
   Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
   pcall_packer_command("sync", core_plugins)
+end
+
+function plugin_loader.ensure_installed()
+  plugin_loader.cache_clear()
+  local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
+  pcall_packer_command("install", all_plugins)
 end
 
 return plugin_loader

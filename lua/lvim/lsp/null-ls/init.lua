@@ -9,7 +9,7 @@ function M:setup()
     return
   end
 
-  null_ls.config()
+  null_ls.config(lvim.lsp.null_ls.config)
   local default_opts = require("lvim.lsp").get_common_opts()
 
   if vim.tbl_isempty(lvim.lsp.null_ls.setup or {}) then
