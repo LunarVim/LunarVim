@@ -55,12 +55,12 @@ commit_parsers = [
     { message = "^feat", group = "<!-- 1 --> Features"},
     { message = "(^bug|^Bug|^fix)", group = "<!-- 2 --> Bugfix"},
     { message = "^refactor", group = "<!-- 3 --> Refactor"},
-    { message = "^chore", group = "<!-- 4 --> Miscellaneous Tasks"},
-    { message = "^doc", group = "<!-- 5 --> Documentation"},
-    { message = "^revert", group = "<!-- 6 --> Revert"},
-    { message = "^perf", group = "<!-- 7 --> Performance"},
-    { message = "^test", group = "<!-- 8 --> Testing"},
-    { message = "^ci", group = "CI", skip = true},
+    { message = "^doc", group = "<!-- 4 --> Documentation"},
+    { message = "^revert", group = "<!-- 5 --> Revert"},
+    { message = "^perf", group = "<!-- 6 --> Performance"},
+    { message = "^chore", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
+    { message = "^ci", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
+    { message = "^test", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
 ]
 # filter out the commits that are not matched by commit parsers
 filter_commits = false
