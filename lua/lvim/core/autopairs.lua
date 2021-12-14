@@ -85,14 +85,6 @@ M.setup = function()
     end),
   }
 
-  local cmp_status_ok, cmp = pcall(require, "cmp")
-  if cmp_status_ok then
-    -- If you want insert `(` after select function or method item
-    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    local map_char = lvim.builtin.autopairs.map_char
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = map_char })
-  end
-
   require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
 
   local ts_conds = require "nvim-autopairs.ts-conds"
