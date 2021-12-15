@@ -288,7 +288,7 @@ function backup_old_config() {
     touch "$dir/ignore"
     msg "Backing up old $dir to $dir.bak"
     if command -v rsync &>/dev/null; then
-      rsync --archive -hh --stats --partial --cvs-exclude "$dir"/ "$dir.bak"
+      rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$dir"/ "$dir.bak"
     else
       OS="$(uname -s)"
       case "$OS" in
