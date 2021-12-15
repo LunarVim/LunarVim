@@ -250,6 +250,7 @@ return {
     commit = commit.dapinstall,
     -- event = "BufWinEnter",
     -- event = "BufRead",
+    module = "dap-install",
     disable = not lvim.builtin.dap.active,
   },
 
