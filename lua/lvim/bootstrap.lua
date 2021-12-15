@@ -1,3 +1,4 @@
+---@class bootstrap
 local M = {}
 
 if vim.fn.has "nvim-0.6" ~= 1 then
@@ -5,12 +6,11 @@ if vim.fn.has "nvim-0.6" ~= 1 then
   vim.wait(5000, function()
     return false
   end)
-  vim.cmd "cquit"
+  os.exit(1)
 end
 
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
-local in_headless = #vim.api.nvim_list_uis() == 0
 
 ---Join path segments that were passed as input
 ---@return string
@@ -61,14 +61,19 @@ function _G.get_cache_dir()
 end
 
 ---Initialize the `&runtimepath` variables and prepare for startup
----@return table
-function M:init(base_dir)
+---@return bootstrap
+function M:init(base_dir, updating)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_dir = get_cache_dir()
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
+  self.core_install_dir = join_paths(self.runtime_dir, "core")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
+  self.lua_cache_path = join_paths(self.cache_dir, "lvim_cache")
+
+  _G.__lvim_test_env = os.getenv "LVIM_TEST_ENV" == "true"
+  _G.__lvim_dev_env = os.getenv "LVIM_DEV" == "1"
 
   ---Get the full path to LunarVim's base directory
   ---@return string
@@ -92,13 +97,13 @@ function M:init(base_dir)
     vim.cmd [[let &packpath = &runtimepath]]
   end
 
-  -- FIXME: currently unreliable in unit-tests
-  if not in_headless then
-    _G.PLENARY_DEBUG = false
-    require("lvim.impatient").setup {
-      path = join_paths(self.cache_dir, "lvim_cache"),
-      enable_profiling = true,
-    }
+  _G.PLENARY_DEBUG = false
+  require("lvim.impatient").setup {
+    path = self.lua_cache_path,
+    enable_profiling = true,
+  }
+  if updating then
+    require("lvim.impatient").clear_cache()
   end
 
   require("lvim.config"):init()
@@ -106,17 +111,24 @@ function M:init(base_dir)
   require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
     install_path = self.packer_install_dir,
+    core_install_dir = self.core_install_dir,
+    updating = updating,
   }
+
+  if updating then
+    require("lvim.updater").init {
+      core_install_dir = self.core_install_dir,
+      packer_cache_path = self.packer_cache_path,
+      lua_cache_path = self.lua_cache_path,
+    }
+  end
 
   return self
 end
 
----Update LunarVim
----pulls the latest changes from github and, resets the startup cache
+---@deprecated
 function M:update()
-  require_clean("lvim.utils.hooks").run_pre_update()
-  require_clean("lvim.utils.git").update_base_lvim()
-  require_clean("lvim.utils.hooks").run_post_update()
+  vim.api.nvim_err_writeln "LvimUpdate has been deprecated. Exit lvim and use `lvim --update` instead"
 end
 
 return M

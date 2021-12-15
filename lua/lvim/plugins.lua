@@ -1,3 +1,5 @@
+local core_plugin_type = require "lvim.core_plugin_type"
+
 local commit = {
   barbar = "6e638309efcad2f308eb9c5eaccf6f62b794bbab",
   cmp_buffer = "f83773e2f433a923997c5faad7ea689ec24d1785",
@@ -36,7 +38,7 @@ local commit = {
   which_key = "312c386ee0eafc925c27869d2be9c11ebdb807eb",
 }
 
-return {
+local plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim", commit = commit.packer },
   { "neovim/nvim-lspconfig", commit = commit.nvim_lspconfig },
@@ -257,6 +259,7 @@ return {
   -- Dashboard
   {
     "ChristianChiarulli/dashboard-nvim",
+    commit = commit.dashboard_nvim,
     event = "BufWinEnter",
     config = function()
       require("lvim.core.dashboard").setup()
@@ -275,3 +278,14 @@ return {
     disable = not lvim.builtin.terminal.active,
   },
 }
+
+if not _G.__lvim_dev_env then
+  for _, plugin in ipairs(plugins) do
+    -- packer already exists, don't replace it
+    if plugin[1] ~= "wbthomason/packer.nvim" then
+      core_plugin_type.setup(plugin)
+    end
+  end
+end
+
+return plugins

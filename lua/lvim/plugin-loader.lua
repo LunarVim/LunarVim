@@ -12,6 +12,8 @@ function plugin_loader.init(opts)
 
   local install_path = opts.install_path or vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
   local package_root = opts.package_root or vim.fn.stdpath "data" .. "/site/pack"
+  local core_install_dir = opts.core_install_dir or vim.fn.stdpath "data" .. "/core"
+  local updating = opts.updating or false
 
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
@@ -27,7 +29,13 @@ function plugin_loader.init(opts)
   packer.init {
     package_root = package_root,
     compile_path = compile_path,
-    log = { level = log_level },
+    auto_reload_compiled = not updating,
+    auto_clean = true,
+    log = {
+      level = log_level,
+      highlights = not updating,
+      use_file = not updating,
+    },
     git = {
       clone_timeout = 300,
       subcommands = {
@@ -36,12 +44,31 @@ function plugin_loader.init(opts)
       },
     },
     max_jobs = 50,
-    display = {
+    display = not updating and {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
       end,
-    },
+    } or nil,
   }
+
+  -- patch Packer's guess_dir_type to support custom installs using symlinks
+  local guess_dir_type = require("packer.plugin_utils").guess_dir_type
+  require("packer.plugin_utils").guess_dir_type = function(dir)
+    local type = guess_dir_type(dir)
+    -- this is a false positive for custom plugins that use symlinks, fix it
+    if type == require("packer.plugin_utils").local_plugin_type then
+      local path = vim.loop.fs_readlink(dir)
+      if not path then
+        return type
+      end
+
+      if path:find(core_install_dir) then
+        return require("packer.plugin_utils").custom_plugin_type
+      end
+    end
+
+    return type
+  end
 
   vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
 end
@@ -79,13 +106,13 @@ function plugin_loader.load(configurations)
     return
   end
   local status_ok, _ = xpcall(function()
-    packer.startup(function(use)
-      for _, plugins in ipairs(configurations) do
-        for _, plugin in ipairs(plugins) do
-          use(plugin)
-        end
+    packer.reset()
+    local use = packer.use
+    for _, plugins in ipairs(configurations) do
+      for _, plugin in ipairs(plugins) do
+        use(plugin)
       end
-    end)
+    end
   end, debug.traceback)
   if not status_ok then
     Log:warn "problems detected while loading plugins' configurations"
@@ -93,8 +120,15 @@ function plugin_loader.load(configurations)
   end
 
   -- Colorscheme must get called after plugins are loaded or it will break new installs.
-  vim.g.colors_name = lvim.colorscheme
-  vim.cmd("colorscheme " .. lvim.colorscheme)
+  -- Needs to be caught in case the colorscheme is invalid, but it shouldn't break things
+  status_ok, _ = xpcall(function()
+    vim.g.colors_name = lvim.colorscheme
+    vim.cmd("colorscheme " .. lvim.colorscheme)
+  end, debug.traceback)
+  if not status_ok then
+    Log:warn("unable to find colorscheme " .. lvim.colorscheme)
+    Log:trace(debug.traceback())
+  end
 end
 
 function plugin_loader.get_core_plugins()
@@ -106,17 +140,9 @@ function plugin_loader.get_core_plugins()
   return list
 end
 
+-- @deprecated
 function plugin_loader.sync_core_plugins()
-  local core_plugins = plugin_loader.get_core_plugins()
-  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
-  pcall_packer_command("sync", core_plugins)
-end
-
-function plugin_loader.ensure_installed()
-  plugin_loader.cache_clear()
-  local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
-  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
-  pcall_packer_command("install", all_plugins)
+  vim.api.nvim_err_writeln "LvimSyncCorePlugins has been deprecated. Exit lvim and use `lvim --update-core` instead"
 end
 
 return plugin_loader

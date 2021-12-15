@@ -49,6 +49,7 @@ function usage() {
   echo "    -l, --local                      Install local copy of LunarVim"
   echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
   echo "    --[no]-install-dependencies      Whether to prompt to install external dependencies (will prompt by default)"
+  echo "    --bin-only                       Only installs $INSTALL_PREFIX/bin/lvim"
 }
 
 function parse_arguments() {
@@ -378,13 +379,7 @@ function setup_lvim() {
 
   cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
-  echo "Preparing Packer setup"
-
-  "$INSTALL_PREFIX/bin/lvim" --headless \
-    -c 'autocmd User PackerComplete quitall' \
-    -c 'PackerSync'
-
-  echo "Packer setup complete"
+  "$INSTALL_PREFIX/bin/lvim" --update-core
 }
 
 function print_logo() {

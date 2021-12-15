@@ -13,6 +13,8 @@ end
 ---Get the full path to the user configuration file
 ---@return string
 function M:get_user_config_path()
+  user_config_dir = get_config_dir()
+  user_config_file = utils.join_paths(user_config_dir, "config.lua")
   return user_config_file
 end
 

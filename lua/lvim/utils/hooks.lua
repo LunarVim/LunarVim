@@ -3,13 +3,6 @@ local M = {}
 local Log = require "lvim.core.log"
 local in_headless = #vim.api.nvim_list_uis() == 0
 
-function M.run_pre_update()
-  Log:debug "Starting pre-update hook"
-  if package.loaded["lspconfig"] then
-    vim.cmd [[ LspStop ]]
-  end
-end
-
 function M.run_pre_reload()
   Log:debug "Starting pre-reload hook"
   if package.loaded["lspconfig"] then
@@ -18,7 +11,6 @@ function M.run_pre_reload()
 end
 
 function M.run_on_packer_complete()
-  require("lvim.plugin-loader").recompile()
   -- forcefully activate nvim-web-devicons
   require("nvim-web-devicons").set_up_highlights()
   if package.loaded["lspconfig"] then
@@ -31,7 +23,6 @@ function M.run_post_reload()
   Log:debug "Starting post-reload hook"
 
   M.reset_cache()
-  require("lvim.plugin-loader").ensure_installed()
 end
 
 ---Reset any startup cache files used by Packer and Impatient
@@ -56,9 +47,6 @@ end
 function M.run_post_update()
   Log:debug "Starting post-update hook"
   M.reset_cache()
-
-  Log:debug "Updating core plugins"
-  require("lvim.plugin-loader").ensure_installed()
 
   if not in_headless then
     vim.schedule(function()

@@ -5,7 +5,18 @@ if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) then
   vim.opt.rtp:append(base_dir)
 end
 
-require("lvim.bootstrap"):init(base_dir)
+require "lvim.utils.headless_fix"
+
+-- This is only defined when updating using `lvim --update`
+---@diagnostic disable-next-line: undefined-field
+local updating = _G.__lvim_updating or false
+
+require("lvim.bootstrap"):init(base_dir, updating)
+
+-- prevents setup while updater callbacks complete
+if updating then
+  return
+end
 
 require("lvim.config"):load()
 

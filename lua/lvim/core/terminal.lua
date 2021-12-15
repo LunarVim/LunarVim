@@ -3,6 +3,8 @@ local Log = require "lvim.core.log"
 
 M.config = function()
   lvim.builtin["terminal"] = {
+    active = true,
+
     on_config_done = nil,
     -- size can be a number or function which is passed the current terminal
     size = 20,

@@ -18,6 +18,8 @@ function Log:init()
   if not status_ok then
     return nil
   end
+  -- if the cache dir doesn't exist, the file sink causes a crash
+  vim.fn.mkdir(get_cache_dir(), "p")
 
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   local lvim_log = {

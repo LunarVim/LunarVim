@@ -6,6 +6,10 @@ local function git_cmd(opts)
   local plenary_loaded, Job = pcall(require, "plenary.job")
   if not plenary_loaded then
     vim.cmd "packadd plenary.nvim"
+    plenary_loaded, Job = pcall(require, "plenary.job")
+  end
+  if not plenary_loaded then
+    return 1
   end
 
   opts = opts or {}
@@ -32,58 +36,6 @@ local function git_cmd(opts)
   end
 
   return ret, stdout
-end
-
-local function safe_deep_fetch()
-  local ret, result = git_cmd { args = { "rev-parse", "--is-shallow-repository" } }
-  if ret ~= 0 then
-    Log:error "Git fetch failed! Check the log for further information"
-    return
-  end
-  -- git fetch --unshallow will cause an error on a a complete clone
-  local fetch_mode = result[1] == "true" and "--unshallow" or "--all"
-  ret = git_cmd { args = { "fetch", fetch_mode } }
-  if ret ~= 0 then
-    Log:error "Git fetch failed! Check the log for further information"
-    return
-  end
-  return true
-end
-
----pulls the latest changes from github
-function M.update_base_lvim()
-  Log:info "Checking for updates"
-
-  local ret = git_cmd { args = { "fetch" } }
-  if ret ~= 0 then
-    Log:error "Update failed! Check the log for further information"
-    return
-  end
-
-  ret = git_cmd { args = { "diff", "--quiet", "@{upstream}" } }
-  if ret == 0 then
-    Log:info "LunarVim is already up-to-date"
-    return
-  end
-
-  ret = git_cmd { args = { "merge", "--ff-only", "--progress" } }
-  if ret ~= 0 then
-    Log:error "Update failed! Please pull the changes manually instead."
-    return
-  end
-end
-
----Switch Lunarvim to the specified development branch
----@param branch string
-function M.switch_lvim_branch(branch)
-  if not safe_deep_fetch() then
-    return
-  end
-  local ret = git_cmd { args = { "switch", branch } }
-  if ret ~= 0 then
-    Log:error "Unable to switch branches! Check the log for further information"
-    return
-  end
 end
 
 ---Get the current Lunarvim development branch
@@ -141,17 +93,26 @@ function M.generate_plugins_sha(output)
   output = output or "commits.lua"
 
   local core_plugins = require "lvim.plugins"
+  local Job = require "plenary.job"
+  local jobs = {}
+
   for _, plugin in pairs(core_plugins) do
     local name = plugin[1]:match "/(%S*)"
     local url = "https://github.com/" .. plugin[1]
     print("checking: " .. name .. ", at: " .. url)
-    local retval, latest_sha = git_cmd { args = { "ls-remote", url, "origin", "HEAD" } }
-    if retval == 0 then
+    local job = Job:new { command = "git", args = { "ls-remote", url, "HEAD" } }
+    job:after_success(function(this_job)
+      print("checked " .. name)
+      local latest_sha = this_job:result()
       -- replace dashes, remove postfixes and use lowercase
       local normalize_name = (name:gsub("-", "_"):gsub("%.%S+", "")):lower()
       list[normalize_name] = latest_sha[1]:gsub("\tHEAD", "")
-    end
+    end)
+    job:start()
+    table.insert(jobs, job)
   end
+  Job.join(unpack(jobs))
+
   require("lvim.utils").write_file(output, "local commit = " .. vim.inspect(list), "w")
 end
 return M
