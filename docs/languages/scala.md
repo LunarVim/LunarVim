@@ -36,7 +36,7 @@ lvim.plugins = {
     },
 }
 lvim.autocommands.custom_groups = {
-  { "FileType", "scala,sbt", "lua require("metals").initialize_or_attach({})" }
+  { "FileType", "scala,sbt", "lua require('metals').initialize_or_attach({})" }
 }
 ```
 
