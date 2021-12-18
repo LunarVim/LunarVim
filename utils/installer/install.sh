@@ -171,7 +171,6 @@ function print_missing_dep_msg() {
 }
 
 function check_neovim_min_version() {
-  # TODO: consider locking the requirement to 0.6+
   local verify_version_cmd='if !has("nvim-0.6.0") | cquit | else | quit | endif'
 
   # exit with an error if min_version not found
