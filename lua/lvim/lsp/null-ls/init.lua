@@ -9,7 +9,8 @@ function M:setup()
     return
   end
 
-  null_ls.setup(lvim.lsp.null_ls.config)
+  local default_opts = require("lvim.lsp").get_common_opts()
+  null_ls.setup(vim.tbl_deep_extend("force", default_opts, lvim.lsp.null_ls.setup))
 end
 
 return M
