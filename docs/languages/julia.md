@@ -21,7 +21,10 @@ Create the file `~/.config/lvim/ftplugin/julia.lua` with the following line to
 start the language server when opening Julia files.
 
 ```lua
-require('lspconfig').julials.setup{}
+local opts = {} 
+-- re-use common lsp configurations (keybindings, buffer-highlight and cmp integration)
+opts = require("lvim.lsp").get_common_opts() 
+require('lspconfig').julials.setup(opts)
 ```
 
 ## Supporting Plugins
