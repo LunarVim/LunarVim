@@ -51,7 +51,7 @@ local LSP = {
   NvimTreeFolderName = { fg = C.blue },
   NvimTreeOpenedFolderName = { fg = C.cyan, style = "italic" },
   NvimTreeImageFile = { fg = C.purple },
-  NvimTreeSpecialFile = { fg = C.orange },
+  NvimTreeSpecialFile = { fg = C.fg },
   NvimTreeGitStaged = { fg = C.sign_add },
   NvimTreeCursorLine = { bg = C.bg },
   NvimTreeGitNew = { fg = C.sign_add },
