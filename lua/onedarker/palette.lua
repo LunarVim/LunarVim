@@ -26,8 +26,8 @@ local colors = {
   magenta = "#D16D9E",
   cursor_fg = "#515052",
   cursor_bg = "#AEAFAD",
-  sign_add = "#587c0c",
-  sign_change = "#0c7d9d",
+  sign_add = "#D19A66",
+  sign_change = "#D19A66",
   sign_delete = "#94151b",
   error_red = "#F44747",
   warning_orange = "#ff8800",
@@ -43,3 +43,4 @@ local colors = {
 }
 
 return colors
+
