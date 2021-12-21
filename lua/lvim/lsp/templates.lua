@@ -53,6 +53,7 @@ function M.generate_templates(servers_names)
 
     for _, server in pairs(available_servers) do
       table.insert(servers_names, server.name)
+      table.sort(servers_names)
     end
   end
 
