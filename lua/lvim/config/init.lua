@@ -40,8 +40,7 @@ function M:init()
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = apply_defaults(lvim.lsp, vim.deepcopy(lvim_lsp_config))
 
-  local supported_languages = require "lvim.config.supported_languages"
-  require("lvim.lsp.manager").init_defaults(supported_languages)
+  require("lvim.lsp.manager").init_defaults()
 end
 
 local function handle_deprecated_settings()

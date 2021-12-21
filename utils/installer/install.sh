@@ -210,6 +210,7 @@ function __install_nodejs_deps_npm() {
       npm install -g "$dep"
     fi
   done
+
   echo "All NodeJS dependencies are successfully installed"
 }
 
@@ -219,10 +220,22 @@ function __install_nodejs_deps_yarn() {
   echo "All NodeJS dependencies are successfully installed"
 }
 
+function __validate_node_installation() {
+  local pkg_manager="$1"
+  local manager_home
+  manager_home="$($pkg_manager config get prefix 2>/dev/null)"
+
+  if [ ! -d "$manager_home" ] || [ ! -w "$manager_home" ]; then
+    echo "[ERROR] Unable to install without administrative privilages. Please set you NPM_HOME correctly and try again."
+    exit 1
+  fi
+}
+
 function install_nodejs_deps() {
   local -a pkg_managers=("yarn" "npm")
   for pkg_manager in "${pkg_managers[@]}"; do
     if command -v "$pkg_manager" &>/dev/null; then
+      __validate_node_installation "$pkg_manager"
       eval "__install_nodejs_deps_$pkg_manager"
       return
     fi
@@ -288,7 +301,7 @@ function backup_old_config() {
     touch "$dir/ignore"
     msg "Backing up old $dir to $dir.bak"
     if command -v rsync &>/dev/null; then
-      rsync --archive -hh --stats --partial --cvs-exclude "$dir"/ "$dir.bak"
+      rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$dir"/ "$dir.bak"
     else
       OS="$(uname -s)"
       case "$OS" in
