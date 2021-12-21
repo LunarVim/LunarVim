@@ -37,6 +37,18 @@ If that doesn't work, try re-syncing your plugins:
 1. while running LunarVim: `:PackerSync`
 2. from the CLI: `lvim +PackerSync`
 
+## LunarVim is slow!
+
+### are you using `fish`?
+
+> First of all, it is not recommended to set shell to fish in vim. Plenty of vim addons execute fish-incompatible shellscript, so setting it to /bin/sh is typically better, especially if you have no good reason to set it to fish.
+
+```lua
+vim.opt.shell = "/bin/sh"
+```
+
+See [fish-shell/fish-shell#7004](https://github.com/fish-shell/fish-shell/issues/7004) and `:h 'shell'` for more info.
+
 ## Language server XXX does not start for me!
 
 ### is it overriden?
