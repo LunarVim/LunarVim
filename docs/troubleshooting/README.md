@@ -41,14 +41,22 @@ If that doesn't work, try re-syncing your plugins:
 
 ### is it overriden?
 
-This could be due to the fact that the server is [overridden](../languages/README.md#manually-configured-servers)
+This could be due to the fact that the server is [overridden](../languages/README.md#server-override)
 
 ```lua
 --- is it in this list?
 :lua print(vim.inspect(lvim.lsp.override))
 ```
 
-If that's the case, then you need to either remove it from that list and re-run `:LvimCacheReset` or set it up [manually](../languages/README.md#overriding-the-default-setup-options).
+If that's the case, then you need to either remove it from that list and re-run `:LvimCacheReset`
+
+```lua
+lvim.lsp.override = vim.tbl_filter(function(name)
+  return name ~= "eslint"
+end, lvim.lsp.override)
+```
+
+or set it up [manually](../languages/README.md#server-setup).
 
 ### is it supported by [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)?
 
@@ -60,7 +68,7 @@ Check out the tips for [debugging nvim-lspconfig](https://github.com/neovim/nvim
 
 ## Too many language servers are starting at once!
 
-Are any of these servers [overridden](../languages/README.md#manually-configured-servers) by default?
+Are any of these servers [overridden](../languages/README.md#server-override) by default?
 
 ```lua
 :lua print(vim.inspect(require("lvim.lsp.config").override))
