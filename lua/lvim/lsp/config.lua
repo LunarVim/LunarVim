@@ -32,7 +32,11 @@ return {
   },
   document_highlight = true,
   code_lens_refresh = true,
-  popup_border = "single",
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+  },
   on_attach_callback = nil,
   on_init_callback = nil,
   automatic_servers_installation = true,
