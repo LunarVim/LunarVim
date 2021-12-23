@@ -67,14 +67,6 @@ local function handle_deprecated_settings()
     end
   end
 
-  -- lvim.lsp.diagnostics
-  for key, _ in pairs(lvim.lsp.diagnostics) do
-    local deprecated_config = { "virtual_text", "update_in_insert", "underline", "severity_sort", "float" }
-    if vim.tbl_contains(deprecated_config, key) then
-      deprecation_notice(string.format("lvim.lsp.diagnostics.%s", key))
-    end
-  end
-
   -- lvim.lsp.popup_border
   if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "popup_border") then
     deprecation_notice "lvim.lsp.popup_border"

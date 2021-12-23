@@ -77,7 +77,7 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- Disable virtual text
-lvim.lsp.diagnostics.config.virtual_text = false
+lvim.lsp.diagnostics.virtual_text = false
 
 -- Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
@@ -128,9 +128,8 @@ lvim.plugins = {
 
 ## Breaking changes
 
-- `lvim.lsp.diagnostics.virtual_text` has been renamed to `lvim.diagnostics.config.virtual_text`
-- `lvim.lsp.diagnostics.float` options are merged into `lvim.diagnostics.config`
 - `lvim.lang.FOO` is no longer supported. Refer to <https://www.lunarvim.org/languages> for up-to-date instructions.
+- `lvim.lsp.popup_border` has been deprecated in favor of `lvim.lsp.float.border` and `lvim.lsp.diagnostics.float.border`.
 
 ## Resources
 
