@@ -226,7 +226,7 @@ function __validate_node_installation() {
   manager_home="$($pkg_manager config get prefix 2>/dev/null)"
 
   if [ ! -d "$manager_home" ] || [ ! -w "$manager_home" ]; then
-    echo "[ERROR] Unable to install without administrative privilages. Please set you NPM_HOME correctly and try again."
+    echo "[ERROR] Unable to install without administrative privileges. Please set your NPM_HOME correctly and try again."
     exit 1
   fi
 }
