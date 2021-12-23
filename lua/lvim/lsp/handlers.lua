@@ -28,15 +28,11 @@ function M.setup()
       end
       vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
     end
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = lvim.lsp.popup_border,
-    })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = lvim.lsp.popup_border,
-    })
   end
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, lvim.lsp.float)
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, lvim.lsp.float)
 end
 
 function M.show_line_diagnostics()

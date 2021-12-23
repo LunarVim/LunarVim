@@ -129,6 +129,7 @@ lvim.plugins = {
 ## Breaking changes
 
 - `lvim.lang.FOO` is no longer supported. Refer to <https://www.lunarvim.org/languages> for up-to-date instructions.
+- `lvim.lsp.popup_border` has been deprecated in favor of `lvim.lsp.float.border` and `lvim.lsp.diagnostics.float.border`.
 
 ## Resources
 

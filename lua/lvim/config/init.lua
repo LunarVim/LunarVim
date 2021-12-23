@@ -66,6 +66,11 @@ local function handle_deprecated_settings()
       deprecation_notice(string.format("lvim.lang.%s", lang))
     end
   end
+
+  -- lvim.lsp.popup_border
+  if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "popup_border") then
+    deprecation_notice "lvim.lsp.popup_border"
+  end
 end
 
 --- Override the configuration with a user provided one
