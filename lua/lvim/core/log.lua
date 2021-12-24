@@ -125,6 +125,9 @@ end
 ---@param level string [same as vim.log.log_levels]
 function Log:add_entry(level, msg, event)
   local logger = self:get_logger()
+  if not logger then
+    return
+  end
   logger:log(level, vim.inspect(msg), event)
 end
 
