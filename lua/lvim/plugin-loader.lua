@@ -43,7 +43,9 @@ function plugin_loader.init(opts)
     },
   }
 
-  vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
+  if not in_headless then
+    vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
+  end
 end
 
 -- packer expects a space separated list
@@ -113,7 +115,6 @@ function plugin_loader.sync_core_plugins()
 end
 
 function plugin_loader.ensure_installed()
-  plugin_loader.cache_clear()
   local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
   Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
   pcall_packer_command("install", all_plugins)
