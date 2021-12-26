@@ -222,19 +222,29 @@ function __install_nodejs_deps_yarn() {
 function __validate_node_installation() {
   local pkg_manager="$1"
   local manager_home
-  manager_home="$($pkg_manager config get prefix 2>/dev/null)"
+
+  if ! command -v "$pkg_manager" &>/dev/null; then
+    return 1
+  fi
+
+  if [ "$pkg_manager" == "npm" ]; then
+    manager_home="$(npm config get prefix 2>/dev/null)"
+  else
+    manager_home="$(yarn global bin 2>/dev/null)"
+  fi
 
   if [ ! -d "$manager_home" ] || [ ! -w "$manager_home" ]; then
-    echo "[ERROR] Unable to install without administrative privileges. Please set your NPM_HOME correctly and try again."
-    exit 1
+    echo "[ERROR] Unable to install using [$pkg_manager] without administrative privileges."
+    return 1
   fi
+
+  return 0
 }
 
 function install_nodejs_deps() {
   local -a pkg_managers=("yarn" "npm")
   for pkg_manager in "${pkg_managers[@]}"; do
-    if command -v "$pkg_manager" &>/dev/null; then
-      __validate_node_installation "$pkg_manager"
+    if __validate_node_installation "$pkg_manager"; then
       eval "__install_nodejs_deps_$pkg_manager"
       return
     fi
