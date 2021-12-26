@@ -24,6 +24,7 @@ local function resolve_config(name, user_config)
   local config = {
     on_attach = require("lvim.lsp").common_on_attach,
     on_init = require("lvim.lsp").common_on_init,
+    on_exit = require("lvim.lsp").common_on_exit,
     capabilities = require("lvim.lsp").common_capabilities(),
   }
 

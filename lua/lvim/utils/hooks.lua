@@ -21,14 +21,14 @@ function M.run_on_packer_complete()
   require("lvim.plugin-loader").recompile()
   -- forcefully activate nvim-web-devicons
   require("nvim-web-devicons").set_up_highlights()
+  if package.loaded["lspconfig"] then
+    vim.cmd [[ LspStart ]]
+  end
   Log:info "Reloaded configuration"
 end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  if package.loaded["lspconfig"] then
-    vim.cmd [[ LspRestart ]]
-  end
 
   M.reset_cache()
   require("lvim.plugin-loader").ensure_installed()
@@ -68,7 +68,7 @@ function M.run_post_update()
       -- TODO: add a changelog
       vim.notify("Update complete", vim.log.levels.INFO)
       if package.loaded["lspconfig"] then
-        vim.cmd [[ LspRestart ]]
+        vim.cmd [[ LspStart ]]
       end
     end)
   end
