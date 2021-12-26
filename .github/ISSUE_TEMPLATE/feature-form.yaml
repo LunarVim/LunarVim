@@ -1,34 +1,25 @@
 name: Feature Request
 description: Suggest an idea for improving this project
-title: "[Feature]: "
 labels: [enhancement]
-# assignees:
-#   - ChristianChiarulli 
+
 body:
   - type: markdown
     attributes:
-      value: |
-        Thank you for helping us improve !
+      value: Thank you for helping us improve!
+
   - type: textarea
     id: motivation
     attributes:
-      label: Feature motivation
-      description: A clear and concise description of the problem or missing capability
-      placeholder: |
-        I am always frustrated when ...
+      label: Feature Description
+      placeholder: What is the expected behavior of this new feature?
     validations:
       required: true
   - type: textarea
-    id: solution
-    attributes:
-      label: Describe the expected solution
-  - type: textarea
     id: alternatives
     attributes:
-      label: Describe the alternatives you've considered
-      description: Let us know about other solutions you've tried or researched
+      label: Describe the alternatives you have considered
   - type: textarea
     id: additional-context
     attributes:
-      label: Additional context
+      label: Support information
       description: If applicable, add screenshots or link related issues
