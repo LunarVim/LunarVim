@@ -11,7 +11,7 @@ local commit = {
   friendly_snippets = "a4105d7d463ee2a36dc2c28d243f1d2c5b41c142",
   gitsigns = "a451f97117bd1ede582a6b9db61c387c48d880b6",
   lualine = "9e26823ea6c7361aba3253c8a5c56a6f35b4a0ee",
-  luasnip = "ab23007508af71169301a22e7fdeea613a64115e",
+  luasnip = "f654f947b80f5aad3f5849c0867e4cd5bbd9e40b",
   nlsp_settings = "5d74bcc8ae3795063cc8e35f634a8b3184568207",
   null_ls = "b7de45a0e62bf93f19db2b43ecded48c5763248d",
   nvim_autopairs = "a9b6b98de3bacacc0c986d9b0673cae6a87c4a41",
@@ -29,10 +29,10 @@ local commit = {
   popup = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
   project = "71d0e23dcfc43cfd6bb2a97dc5a7de1ab47a6538",
   structlog = "6f1403a192791ff1fa7ac845a73de9e860f781f1",
-  telescope = "9aaaa0c5f3eb665b51bbcafda084de4b0952fef0",
+  telescope = "88437804e157196f053d0fa62dc891facd9ab746",
   telescope_fzf_native = "b8662b076175e75e6497c59f3e2799b879d7b954",
   toggleterm = "265bbff68fbb8b2a5fb011272ec469850254ec9f",
-  which_key = "0fd9de78fe09215e1b7c6173ff1b0b90c8ed6ec4",
+  which_key = "312c386ee0eafc925c27869d2be9c11ebdb807eb",
 }
 
 return {
