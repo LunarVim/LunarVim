@@ -74,16 +74,20 @@ M.config = function()
 end
 
 M.setup = function()
+  -- avoid running in headless mode since it's harder to detect failures
+  if #vim.api.nvim_list_uis() == 0 then
+    Log:debug "headless mode detected, skipping running setup for treesitter"
+    return
+  end
+
   local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
-    Log:get_default().error "Failed to load nvim-treesitter.configs"
+    Log:error "Failed to load nvim-treesitter.configs"
     return
   end
 
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
-  -- avoid running any installers in headless mode since it's harder to detect failures
-  opts.ensure_installed = #vim.api.nvim_list_uis() == 0 and {} or opts.ensure_installed
   treesitter_configs.setup(opts)
 
   if lvim.builtin.treesitter.on_config_done then
