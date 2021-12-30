@@ -16,6 +16,26 @@ Then use coursier to install the metals language server so that it is available 
 
 ## Configure Lunarvim
 
+Create a file called `~/.config/lvim/user/metals.lua`:
+
+```lua
+local M = {}
+
+M.config = function()
+  local metals_config = require("metals").bare_config()
+  metals_config.on_attach = require("lvim.lsp").common_on_attach
+  metals_config.settings = {
+    showImplicitArguments = false,
+    showInferredType = true,
+    excludedPackages = {},
+  }
+  metals_config.init_options.statusBarProvider = false
+  require("metals").initialize_or_attach { metals_config }
+end
+
+return M
+```
+
 Add the following to your `config.lua`
 
 ```lua
@@ -23,20 +43,13 @@ lvim.plugins = {
     {
       "scalameta/nvim-metals",
       config = function()
-        local metals_config = require("metals").bare_config()
-        metals_config.on_attach = require("lvim.lsp").common_on_attach
-        metals_config.settings = {
-          showImplicitArguments = false,
-          showInferredType = true,
-          excludedPackages = {},
-        }
-        metals_config.init_options.statusBarProvider = false
-        require("metals").initialize_or_attach { metals_config }
+        require("user.metals").config()
       end,
     },
 }
+
 lvim.autocommands.custom_groups = {
-  { "FileType", "scala,sbt", "lua require('metals').initialize_or_attach({})" }
+  { "FileType", "scala,sbt", "lua require('user.metals').config()" }
 }
 ```
 
