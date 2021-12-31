@@ -20,18 +20,10 @@ function M.list_registered_providers(filetype)
 end
 
 function M.list_available(filetype)
-  local linters = {}
-  local tbl = require "lvim.utils.table"
-  for _, provider in pairs(null_ls.builtins.diagnostics) do
-    if tbl.contains(provider.filetypes or {}, function(ft)
-      return ft == "*" or ft == filetype
-    end) then
-      table.insert(linters, provider.name)
-    end
-  end
-
-  table.sort(linters)
-  return linters
+  local s = require "null-ls.sources"
+  local supported_linters = s.get_supported(filetype, "diagnostics")
+  table.sort(supported_linters)
+  return supported_linters
 end
 
 function M.list_configured(linter_configs)

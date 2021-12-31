@@ -20,18 +20,10 @@ function M.list_registered_providers(filetype)
 end
 
 function M.list_available(filetype)
-  local formatters = {}
-  local tbl = require "lvim.utils.table"
-  for _, provider in pairs(null_ls.builtins.formatting) do
-    if tbl.contains(provider.filetypes or {}, function(ft)
-      return ft == "*" or ft == filetype
-    end) then
-      table.insert(formatters, provider.name)
-    end
-  end
-
-  table.sort(formatters)
-  return formatters
+  local s = require "null-ls.sources"
+  local supported_formatters = s.get_supported(filetype, "formatting")
+  table.sort(supported_formatters)
+  return supported_formatters
 end
 
 function M.list_configured(formatter_configs)

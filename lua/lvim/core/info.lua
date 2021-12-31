@@ -38,7 +38,6 @@ end
 local function make_code_actions_info(ft)
   local null_actions = require "lvim.lsp.null-ls.code_actions"
   local registered_actions = null_actions.list_registered_providers(ft)
-  local supported_actions = null_actions.list_available(ft)
   local section = {
     "Code actions info",
     fmt(
@@ -46,7 +45,6 @@ local function make_code_actions_info(ft)
       table.concat(registered_actions, "  , "),
       vim.tbl_count(registered_actions) > 0 and "  " or ""
     ),
-    fmt("* Supported: %s", str_list(supported_actions)),
   }
 
   return section
