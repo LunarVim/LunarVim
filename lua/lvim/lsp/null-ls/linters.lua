@@ -12,14 +12,14 @@ local is_registered = function(name)
   return require("null-ls.sources").is_registered(query)
 end
 
-function M.list_registered_providers(filetype)
+function M.list_registered(filetype)
   local null_ls_methods = require "null-ls.methods"
   local linter_method = null_ls_methods.internal["DIAGNOSTICS"]
   local registered_providers = services.list_registered_providers_names(filetype)
   return registered_providers[linter_method] or {}
 end
 
-function M.list_available(filetype)
+function M.list_supported(filetype)
   local s = require "null-ls.sources"
   local supported_linters = s.get_supported(filetype, "diagnostics")
   table.sort(supported_linters)
