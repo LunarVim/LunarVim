@@ -19,9 +19,8 @@ end
 
 local function make_formatters_info(ft)
   local null_formatters = require "lvim.lsp.null-ls.formatters"
-  local registered_formatters = null_formatters.list_registered_providers(ft)
-  -- print("reg", vim.inspect(registered_formatters))
-  local supported_formatters = null_formatters.list_available(ft)
+  local registered_formatters = null_formatters.list_registered(ft)
+  local supported_formatters = null_formatters.list_supported(ft)
   local section = {
     "Formatters info",
     fmt(
@@ -37,8 +36,7 @@ end
 
 local function make_code_actions_info(ft)
   local null_actions = require "lvim.lsp.null-ls.code_actions"
-  local registered_actions = null_actions.list_registered_providers(ft)
-  local supported_actions = null_actions.list_available(ft)
+  local registered_actions = null_actions.list_registered(ft)
   local section = {
     "Code actions info",
     fmt(
@@ -46,7 +44,6 @@ local function make_code_actions_info(ft)
       table.concat(registered_actions, "  , "),
       vim.tbl_count(registered_actions) > 0 and "  " or ""
     ),
-    fmt("* Supported: %s", str_list(supported_actions)),
   }
 
   return section
@@ -54,8 +51,8 @@ end
 
 local function make_linters_info(ft)
   local null_linters = require "lvim.lsp.null-ls.linters"
-  local supported_linters = null_linters.list_available(ft)
-  local registered_linters = null_linters.list_registered_providers(ft)
+  local supported_linters = null_linters.list_supported(ft)
+  local registered_linters = null_linters.list_registered(ft)
   local section = {
     "Linters info",
     fmt(
@@ -168,21 +165,20 @@ function M.toggle_popup(ft)
   local function set_syntax_hl()
     vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
     vim.cmd [[highlight link LvimInfoHeader Type]]
-    vim.cmd [[let m=matchadd("LvimInfoHeader", "Treesitter info")]]
-    vim.cmd [[let m=matchadd("LvimInfoHeader", "Language Server Protocol (LSP) info")]]
-    vim.cmd [[let m=matchadd("LvimInfoHeader", "Formatters info")]]
-    vim.cmd [[let m=matchadd("LvimInfoHeader", "Linters info")]]
-    vim.cmd [[let m=matchadd("LvimInfoHeader", "Code actions info")]]
-    vim.cmd('let m=matchadd("LvimInfoIdentifier", " ' .. ft .. '$")')
-    vim.cmd 'let m=matchadd("string", "true")'
-    vim.cmd 'let m=matchadd("string", "active")'
-    vim.cmd 'let m=matchadd("boolean", "inactive")'
-    vim.cmd 'let m=matchadd("string", "")'
-    vim.cmd 'let m=matchadd("error", "false")'
-    -- tbl_set_highlight(registered_providers, "LvimInfoIdentifier")
-    tbl_set_highlight(require("lvim.lsp.null-ls.formatters").list_available(ft), "LvimInfoIdentifier")
-    tbl_set_highlight(require("lvim.lsp.null-ls.linters").list_available(ft), "LvimInfoIdentifier")
-    tbl_set_highlight(require("lvim.lsp.null-ls.code_actions").list_available(ft), "LvimInfoIdentifier")
+    vim.fn.matchadd("LvimInfoHeader", "Treesitter info")
+    vim.fn.matchadd("LvimInfoHeader", "Language Server Protocol (LSP) info")
+    vim.fn.matchadd("LvimInfoHeader", "Formatters info")
+    vim.fn.matchadd("LvimInfoHeader", "Linters info")
+    vim.fn.matchadd("LvimInfoHeader", "Code actions info")
+    vim.fn.matchadd("LvimInfoIdentifier", " " .. ft .. "$")
+    vim.fn.matchadd("string", "true")
+    vim.fn.matchadd("string", "active")
+    vim.fn.matchadd("string", "")
+    vim.fn.matchadd("boolean", "inactive")
+    vim.fn.matchadd("error", "false")
+    tbl_set_highlight(require("lvim.lsp.null-ls.formatters").list_registered(ft), "LvimInfoIdentifier")
+    tbl_set_highlight(require("lvim.lsp.null-ls.linters").list_registered(ft), "LvimInfoIdentifier")
+    tbl_set_highlight(require("lvim.lsp.null-ls.code_actions").list_registered(ft), "LvimInfoIdentifier")
   end
 
   local Popup = require("lvim.interface.popup"):new {

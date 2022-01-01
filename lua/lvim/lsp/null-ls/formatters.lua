@@ -12,26 +12,18 @@ local is_registered = function(name)
   return require("null-ls.sources").is_registered(query)
 end
 
-function M.list_registered_providers(filetype)
+function M.list_registered(filetype)
   local null_ls_methods = require "null-ls.methods"
   local formatter_method = null_ls_methods.internal["FORMATTING"]
   local registered_providers = services.list_registered_providers_names(filetype)
   return registered_providers[formatter_method] or {}
 end
 
-function M.list_available(filetype)
-  local formatters = {}
-  local tbl = require "lvim.utils.table"
-  for _, provider in pairs(null_ls.builtins.formatting) do
-    if tbl.contains(provider.filetypes or {}, function(ft)
-      return ft == "*" or ft == filetype
-    end) then
-      table.insert(formatters, provider.name)
-    end
-  end
-
-  table.sort(formatters)
-  return formatters
+function M.list_supported(filetype)
+  local s = require "null-ls.sources"
+  local supported_formatters = s.get_supported(filetype, "formatting")
+  table.sort(supported_formatters)
+  return supported_formatters
 end
 
 function M.list_configured(formatter_configs)
