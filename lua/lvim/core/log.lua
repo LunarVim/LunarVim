@@ -54,21 +54,23 @@ function Log:init()
   structlog.configure(lvim_log)
   local logger = structlog.get_logger "lvim"
 
-  -- Overwrite vim.notify to use the logger
-  vim.notify = function(msg, vim_log_level, opts)
-    notify_opts = opts or {}
+  -- Overwrite `vim.notify` to use the logger
+  if lvim.log.override_notify then
+    vim.notify = function(msg, vim_log_level, opts)
+      notify_opts = opts or {}
 
-    -- vim_log_level can be omitted
-    if vim_log_level == nil then
-      vim_log_level = Log.levels["INFO"]
-    elseif type(vim_log_level) == "string" then
-      vim_log_level = Log.levels[(vim_log_level):upper()] or Log.levels["INFO"]
-    else
-      -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
-      vim_log_level = vim_log_level + 1
+      -- vim_log_level can be omitted
+      if vim_log_level == nil then
+        vim_log_level = Log.levels["INFO"]
+      elseif type(vim_log_level) == "string" then
+        vim_log_level = Log.levels[(vim_log_level):upper()] or Log.levels["INFO"]
+      else
+        -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
+        vim_log_level = vim_log_level + 1
+      end
+
+      logger:log(vim_log_level, msg)
     end
-
-    logger:log(vim_log_level, msg)
   end
 
   return logger
