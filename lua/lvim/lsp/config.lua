@@ -81,7 +81,7 @@ return {
     "quick_lint_js",
     "rome",
     "solang",
-    "solc",
+    "solidity_ls",
     "sorbet",
     "sourcekit",
     "spectral",
