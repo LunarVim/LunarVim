@@ -16,7 +16,7 @@ Then use coursier to install the metals language server so that it is available 
 
 ## Configure Lunarvim
 
-Create a file called `~/.config/lvim/user/metals.lua`:
+Create a file called `~/.config/lvim/lua/user/metals.lua`:
 
 ```lua
 local M = {}
