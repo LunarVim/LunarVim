@@ -18,7 +18,7 @@ lvim() {
 if [ -n "$1" ]; then
   lvim --headless -c "lua require('plenary.busted').run('$1')"
 else
-  lvim --headless -c "PlenaryBustedDirectory tests/ { minimal_init = './tests/minimal_init.lua' }"
+  lvim --headless -c "PlenaryBustedDirectory tests/specs { minimal_init = './tests/minimal_init.lua' }"
 fi
 
 rm -rf "$TEST_BASE_DIR"

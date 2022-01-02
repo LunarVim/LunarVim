@@ -8,12 +8,7 @@ end
 
 vim.cmd [[set runtimepath=$VIMRUNTIME]]
 
-local temp_dir
-if on_windows then
-  temp_dir = vim.loop.os_getenv "TEMP"
-else
-  temp_dir = "/tmp"
-end
+local temp_dir = vim.loop.os_getenv "TEMP" or "/tmp"
 
 vim.cmd("set packpath=" .. join_paths(temp_dir, "nvim", "site"))
 
