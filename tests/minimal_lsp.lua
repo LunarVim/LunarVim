@@ -8,12 +8,7 @@ end
 
 vim.cmd [[set runtimepath=$VIMRUNTIME]]
 
-local temp_dir
-if on_windows then
-  temp_dir = vim.loop.os_getenv "TEMP"
-else
-  temp_dir = "/tmp"
-end
+local temp_dir = vim.loop.os_getenv "TEMP" or "/tmp"
 
 vim.cmd("set packpath=" .. join_paths(temp_dir, "nvim", "site"))
 
@@ -46,9 +41,7 @@ end
 
 _G.load_config = function()
   vim.lsp.set_log_level "trace"
-  if vim.fn.has "nvim-0.5.1" == 1 then
-    require("vim.lsp.log").set_format_func(vim.inspect)
-  end
+  require("vim.lsp.log").set_format_func(vim.inspect)
   local nvim_lsp = require "lspconfig"
   local on_attach = function(_, bufnr)
     local function buf_set_keymap(...)
@@ -73,10 +66,10 @@ _G.load_config = function()
     buf_set_keymap("n", "<space>lD", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
     buf_set_keymap("n", "<space>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    buf_set_keymap("n", "gl", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-    buf_set_keymap("n", "<space>lk", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-    buf_set_keymap("n", "<space>lj", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-    buf_set_keymap("n", "<space>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+    buf_set_keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float(0,{scope='line'})<CR>", opts)
+    buf_set_keymap("n", "<space>lk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+    buf_set_keymap("n", "<space>lj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+    buf_set_keymap("n", "<space>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     buf_set_keymap("n", "<space>li", "<cmd>LspInfo<CR>", opts)
     buf_set_keymap("n", "<space>lI", "<cmd>LspInstallInfo<CR>", opts)
   end

@@ -1,14 +1,14 @@
 name: General Issue
 description: File a bug report
-title: "[Bug]: "
 labels: [bug]
-# assignees:
-#   - ChristianChiarulli 
+
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for helping us improve !
+        _Before reporting:_ search [existing issues](https://github.com/lunarvim/lunarvim/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and check the [Troubleshooting guide](https://www.lunarvim.org/troubleshooting). 
+        If you need real-time help, join us on Discord. Thank you for helping us improve!
+
   - type: textarea
     id: problem-description
     attributes:
@@ -26,13 +26,25 @@ body:
     id: lunar-vim-version
     attributes:
       label: LunarVim version
+      placeholder: |
+        output of :LvimVersion
     validations:
       required: true
   - type: input
     id: nvim-version
     attributes:
-      label: Neovim version (>= 0.5)
-      placeholder: nvim --version
+      label: Neovim version (>= 0.6)
+      description: "Output of `nvim --version`"
+      placeholder: |
+        NVIM v0.6.0-dev+209-g0603eba6e
+        Build type: Release
+        LuaJIT 2.1.0-beta3
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Operating system/version"
+      placeholder: "macOS 11.5"
     validations:
       required: true
   - type: textarea
@@ -40,24 +52,14 @@ body:
     attributes:
       label: Relevant log output
       placeholder: |
-        nvim -v
         :checkhealth
         :messages
+        :e $LUNARVIM_CACHE/DIR/lvim.log
       render: shell
+    validations:
+      required: true
   - type: textarea
     id: screenshots
     attributes:
       label: Screenshots
       description: If applicable, add screenshots to help explain your problem
-  - type: checkboxes
-    id: checks
-    attributes:
-      label: I have
-      options:
-      - label: Read the readme
-        required: true
-      - label: Read the wiki
-        required: true
-      - label: Searched for similar issues
-        required: true
-

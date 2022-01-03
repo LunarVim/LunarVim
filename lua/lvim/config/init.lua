@@ -66,6 +66,11 @@ local function handle_deprecated_settings()
       deprecation_notice(string.format("lvim.lang.%s", lang))
     end
   end
+
+  -- lvim.lsp.popup_border
+  if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "popup_border") then
+    deprecation_notice "lvim.lsp.popup_border"
+  end
 end
 
 --- Override the configuration with a user provided one
@@ -97,9 +102,7 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:reload()
-  package.loaded["lvim.utils.hooks"] = nil
-  local _, hooks = pcall(require, "lvim.utils.hooks")
-  hooks.run_pre_reload()
+  require_clean("lvim.utils.hooks").run_pre_reload()
 
   M:init()
   M:load()
@@ -110,7 +113,7 @@ function M:reload()
   local plugin_loader = require "lvim.plugin-loader"
 
   plugin_loader.load { plugins, lvim.plugins }
-  hooks.run_post_reload()
+  require_clean("lvim.utils.hooks").run_post_reload()
 end
 
 return M

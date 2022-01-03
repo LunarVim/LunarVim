@@ -26,7 +26,7 @@ You can find all the documentation for LunarVim at [lunarvim.org](https://www.lu
 
 ## Install In One Command!
 
-Make sure you have the release version of Neovim (0.5).
+Make sure you have the release version of Neovim (0.6).
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
@@ -70,6 +70,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Configure builtin plugins
 lvim.builtin.dashboard.active = true
+lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
@@ -129,6 +130,7 @@ lvim.plugins = {
 ## Breaking changes
 
 - `lvim.lang.FOO` is no longer supported. Refer to <https://www.lunarvim.org/languages> for up-to-date instructions.
+- `lvim.lsp.popup_border` has been deprecated in favor of `lvim.lsp.float.border` and `lvim.lsp.diagnostics.float.border`.
 
 ## Resources
 

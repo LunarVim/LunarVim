@@ -14,18 +14,9 @@ local is_registered = function(name)
   return require("null-ls.sources").is_registered(query)
 end
 
-function M.list_registered_providers(filetype)
+function M.list_registered(filetype)
   local registered_providers = services.list_registered_providers_names(filetype)
   return registered_providers[METHOD] or {}
-end
-
-function M.list_available(filetype)
-  local availables = require("null-ls.sources").get_available(filetype, METHOD)
-  local actors = vim.tbl_map(function(src)
-    return src.name
-  end, availables)
-  table.sort(actors)
-  return actors
 end
 
 function M.list_configured(actions_configs)
