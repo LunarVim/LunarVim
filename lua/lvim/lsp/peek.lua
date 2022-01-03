@@ -47,9 +47,8 @@ local function create_floating_file(location, opts)
 
   -- Set some autocmds to close the window
   vim.api.nvim_command(
-    "autocmd QuitPre <buffer> ++nested ++once lua pcall(vim.api.nvim_win_close, " .. winnr .. ", true)"
+    string.format("autocmd %s <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)", unpack(close_events), winnr)
   )
-  vim.lsp.util.close_preview_autocmd(close_events, winnr)
 
   return bufnr, winnr
 end
@@ -71,10 +70,6 @@ local function preview_location_callback(result)
     M.prev_result = result
     M.floating_buf, M.floating_win = create_floating_file(result, opts)
   end
-end
-
-local function preview_location_callback_old_signature(_, _, result)
-  return preview_location_callback(result)
 end
 
 local function preview_location_callback_new_signature(_, result)
@@ -136,10 +131,7 @@ function M.Peek(what)
   else
     -- Make a new request and then create the new window in the callback
     local params = vim.lsp.util.make_position_params()
-    local preview_callback = preview_location_callback_old_signature
-    if vim.fn.has "nvim-0.5.1" > 0 then
-      preview_callback = preview_location_callback_new_signature
-    end
+    local preview_callback = preview_location_callback_new_signature
     local success, _ = pcall(vim.lsp.buf_request, 0, "textDocument/" .. what, params, preview_callback)
     if not success then
       print(

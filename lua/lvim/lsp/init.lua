@@ -126,13 +126,6 @@ function M.get_common_opts()
   }
 end
 
-local LSP_DEPRECATED_SIGN_MAP = {
-  ["DiagnosticSignError"] = "LspDiagnosticsSignError",
-  ["DiagnosticSignWarn"] = "LspDiagnosticsSignWarning",
-  ["DiagnosticSignHint"] = "LspDiagnosticsSignHint",
-  ["DiagnosticSignInfo"] = "LspDiagnosticsSignInformation",
-}
-
 function M.setup()
   Log:debug "Setting up LSP support"
 
@@ -141,13 +134,7 @@ function M.setup()
     return
   end
 
-  local is_neovim_5 = vim.fn.has "nvim-0.6" ~= 1
-
   for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
-    local lsp_sign_name = LSP_DEPRECATED_SIGN_MAP[sign.name]
-    if is_neovim_5 and lsp_sign_name then
-      vim.fn.sign_define(lsp_sign_name, { texthl = lsp_sign_name, text = sign.text, numhl = lsp_sign_name })
-    end
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
 

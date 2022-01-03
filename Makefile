@@ -14,7 +14,7 @@ uninstall:
 
 generate_plugins_sha:
 	@echo generating core-plugins latest SHA list
-	lvim --headless -c 'lua require("lvim.utils").generate_plugins_sha("latest-sha.lua")' -c 'qall'
+	lvim --headless -c 'lua require("lvim.utils.git").generate_plugins_sha("latest-sha.lua")' -c 'qall'
 
 lint: lint-lua lint-sh
 
