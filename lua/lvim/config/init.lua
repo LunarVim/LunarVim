@@ -95,8 +95,9 @@ function M:load(config_path)
 
   require("lvim.keymappings").load(lvim.keys)
 
-  local settings = require "lvim.config.settings"
-  settings.load_commands()
+  if lvim.transparent_window then
+    autocmds.enable_transparent_mode()
+  end
 end
 
 --- Override the configuration with a user provided one
