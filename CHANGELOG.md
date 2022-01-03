@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### <!-- 1 --> Features
+
+- _(luadev)_ Better vim api completion (#2043)
+- Add lualine config for darkplus
+- Last updates before 1.0.0 (#1953)
+- Use Telescope's git_files with fallback (#2089)
+- Plugin version bump (#2120)
+- Lazyload notify's configuration (#1855)
+- Plugin version bump (#2131)
+
+### <!-- 2 --> Bugfix
+
+- _(installer)_ Backup linked files with rsync (#2081)
+- _(installer)_ Check if npm-prefix is writable (#2091)
+- _(installer)_ More robust yarn validation (#2113)
+- _(lsp)_ Set the handlers opts for v0.6 as well (#2109)
+- Bump nvim-tree version
+- Formatting
+- Remove duplicate lint messages
+- Remove autopairs cmp completion (#2083)
+
+### <!-- 3 --> Refactor
+
+- _(bootstrap)_ More robust git module (#2127)
+- _(info)_ Use new null-ls api for sources (#2125)
+- _(install.sh)_ Fix typo in node error message (#2107)
+- _(test)_ Cleanup test utilities (#2132)
+- Deprecate lvim.lang.FOO (#1913) (#1914)
+- Remove unused old language configs (#2094)
+- Uplift neovim's minimum version requirement to 0.6.0 (#2093)
+- Avoid running ts.setup in headless (#2119)
+- More consistent autocmds (#2133)
+- Use a static lvim binary template (#1444)
+
 ## [1.0.0-rc]
 
 ### <!-- 1 --> Features
