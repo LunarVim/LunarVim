@@ -91,7 +91,9 @@ function M.register_sources(configs, method)
     end
   end
 
-  null_ls.register { sources = sources }
+  if #sources > 0 then
+    null_ls.register { sources = sources }
+  end
   return registered_names
 end
 
