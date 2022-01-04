@@ -106,7 +106,6 @@ function M.get_lvim_tag(type)
   local lvim_full_ver = results[1] or ""
 
   if ret ~= 0 or string.match(lvim_full_ver, "%d") == nil then
-    Log:error "Unable to retrieve current tag. Check the log for further information"
     return nil
   end
   if type == "short" then
