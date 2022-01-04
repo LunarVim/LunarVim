@@ -1,9 +1,6 @@
 local M = {}
 
 local Log = require "lvim.core.log"
-local null_ls = require "null-ls"
-local s = require "null-ls.sources"
-local fmt = string.format
 
 local function find_root_dir()
   local util = require "lspconfig/util"
@@ -24,7 +21,8 @@ local function from_node_modules(command)
     return nil
   end
 
-  return root_dir .. "/node_modules/.bin/" .. command
+  local join_paths = require("lvim.utils").join_paths
+  return join_paths(root_dir, "node_modules", ".bin", command)
 end
 
 local local_providers = {
@@ -51,6 +49,7 @@ function M.find_command(command)
 end
 
 function M.list_registered_providers_names(filetype)
+  local s = require "null-ls.sources"
   local available_sources = s.get_available(filetype)
   local registered = {}
   for _, source in ipairs(available_sources) do
@@ -63,6 +62,9 @@ function M.list_registered_providers_names(filetype)
 end
 
 function M.register_sources(configs, method)
+  local null_ls = require "null-ls"
+  local is_registered = require("null-ls.sources").is_registered
+
   local sources, registered_names = {}, {}
 
   for _, config in ipairs(configs) do
@@ -70,10 +72,10 @@ function M.register_sources(configs, method)
     local name = config.name or cmd:gsub("-", "_")
     local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
     local source = type and null_ls.builtins[type][name]
-    Log:debug(fmt("Received request to register source [%s] as a %s", cmd, type))
+    Log:debug(string.format("Received request to register [%s] as a %s source", cmd, type))
     if not source then
-      Log:error("Not a valid command for a source: " .. name)
-    elseif s.is_registered { command = cmd or name, method = method } then
+      Log:error("Not a valid source: " .. name)
+    elseif is_registered { command = cmd or name, method = method } then
       Log:trace "Skipping registering the source more than once"
     else
       local command = M.find_command(source._opts.command) or source._opts.command
