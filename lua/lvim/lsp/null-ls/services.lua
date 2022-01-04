@@ -1,5 +1,10 @@
 local M = {}
 
+local Log = require "lvim.core.log"
+local null_ls = require "null-ls"
+local s = require "null-ls.sources"
+local fmt = string.format
+
 local function find_root_dir()
   local util = require "lspconfig/util"
   local lsp_utils = require "lvim.lsp.utils"
@@ -46,7 +51,6 @@ function M.find_command(command)
 end
 
 function M.list_registered_providers_names(filetype)
-  local s = require "null-ls.sources"
   local available_sources = s.get_available(filetype)
   local registered = {}
   for _, source in ipairs(available_sources) do
@@ -58,4 +62,34 @@ function M.list_registered_providers_names(filetype)
   return registered
 end
 
+function M.register_sources(configs, method)
+  local sources, registered_names = {}, {}
+
+  for _, config in ipairs(configs) do
+    local cmd = config.exe or config.command
+    local name = cmd:gsub("-", "_")
+    local type = null_ls.methods[method]:lower()
+    local source = type and null_ls.builtins[type][name]
+    Log:debug(fmt("Received request to register source [%s] as a %s", cmd, type))
+    if not source then
+      Log:error("Not a valid command for a source: " .. cmd)
+    elseif s.is_registered { command = cmd, method = method } then
+      Log:trace "Skipping registering the source more than once"
+    else
+      local formatter_cmd = M.find_command(source._opts.command) or source._opts.command
+      local compat_opts = {
+        command = formatter_cmd,
+        -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
+        extra_args = config.args or config.extra_args,
+      }
+      local opts = vim.tbl_deep_extend("keep", compat_opts, config)
+      Log:debug("Registering source command: " .. vim.inspect(formatter_cmd))
+      table.insert(sources, source.with(opts))
+      vim.list_extend(registered_names, { name })
+    end
+  end
+
+  null_ls.register { sources = sources }
+  return registered_names
+end
 return M
