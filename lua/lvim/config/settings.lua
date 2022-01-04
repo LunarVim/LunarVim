@@ -1,6 +1,7 @@
 local M = {}
-local utils = require "lvim.utils"
-M.load_options = function()
+local join_paths = require("lvim.utils").join_paths
+
+M.load_default_options = function()
   local default_options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -28,7 +29,7 @@ M.load_options = function()
     timeoutlen = 100, -- time to wait for a mapped sequence to complete (in milliseconds)
     title = true, -- set the title of window to the value of the titlestring
     -- opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
-    undodir = utils.join_paths(get_cache_dir(), "undo"), -- set an undo directory
+    undodir = join_paths(get_cache_dir(), "undo"), -- set an undo directory
     undofile = true, -- enable persistent undo
     updatetime = 300, -- faster completion
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
@@ -43,38 +44,35 @@ M.load_options = function()
     wrap = false, -- display lines as one long line
     spell = false,
     spelllang = "en",
-    spellfile = utils.join_paths(get_config_dir(), "spell", "en.utf-8.add"),
-    scrolloff = 8, -- is one of my fav
-    sidescrolloff = 8,
+    spellfile = join_paths(get_config_dir(), "spell", "en.utf-8.add"),
+    shadafile = join_paths(get_cache_dir(), "lvim.shada"),
+    scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor.
+    sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
   }
 
   ---  SETTINGS  ---
-
   vim.opt.shortmess:append "c"
-
-  vim.opt.shadafile = utils.join_paths(get_cache_dir(), "lvim.shada")
+  vim.opt.whichwrap:append "<,>,[,],h,l"
 
   for k, v in pairs(default_options) do
     vim.opt[k] = v
   end
 end
 
-M.load_commands = function()
-  local cmd = vim.cmd
-  if lvim.line_wrap_cursor_movement then
-    cmd "set whichwrap+=<,>,[,],h,l"
-  end
+M.load_headless_options = function()
+  vim.opt.shortmess = "" -- try to prevent echom from cutting messages off or prompting
+  vim.opt.more = false -- don't pause listing when screen is filled
+  vim.opt.cmdheight = 9999 -- helps avoiding |hit-enter| prompts.
+  vim.opt.columns = 9999 -- set the widest screen possible
+  vim.opt.swapfile = false -- don't use a swap file
+end
 
-  if lvim.transparent_window then
-    cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-    cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
-    cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
-    cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
-    cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
-    cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
-    cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
-    cmd "let &fcs='eob: '"
+M.load_options = function()
+  if #vim.api.nvim_list_uis() == 0 then
+    M.load_headless_options()
+    return
   end
+  M.load_default_options()
 end
 
 return M

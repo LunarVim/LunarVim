@@ -150,6 +150,17 @@ function M.disable_code_lens_refresh()
   M.disable_augroup "lsp_code_lens_refresh"
 end
 
+function M.enable_transparent_mode()
+  vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
+  vim.cmd "let &fcs='eob: '"
+end
+
 --- Disable autocommand groups if it exists
 --- This is more reliable than trying to delete the augroup itself
 ---@param name string the augroup name
