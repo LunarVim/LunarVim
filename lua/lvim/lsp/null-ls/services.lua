@@ -44,7 +44,7 @@ function M.find_command(command)
     end
   end
 
-  if vim.fn.executable(command) == 1 then
+  if command and vim.fn.executable(command) == 1 then
     return command
   end
   return nil
@@ -67,23 +67,23 @@ function M.register_sources(configs, method)
 
   for _, config in ipairs(configs) do
     local cmd = config.exe or config.command
-    local name = cmd:gsub("-", "_")
-    local type = null_ls.methods[method]:lower()
+    local name = config.name or cmd:gsub("-", "_")
+    local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
     local source = type and null_ls.builtins[type][name]
     Log:debug(fmt("Received request to register source [%s] as a %s", cmd, type))
     if not source then
-      Log:error("Not a valid command for a source: " .. cmd)
-    elseif s.is_registered { command = cmd, method = method } then
+      Log:error("Not a valid command for a source: " .. name)
+    elseif s.is_registered { command = cmd or name, method = method } then
       Log:trace "Skipping registering the source more than once"
     else
-      local formatter_cmd = M.find_command(source._opts.command) or source._opts.command
+      local command = M.find_command(source._opts.command) or source._opts.command
       local compat_opts = {
-        command = formatter_cmd,
+        command = command,
         -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
         extra_args = config.args or config.extra_args,
       }
       local opts = vim.tbl_deep_extend("keep", compat_opts, config)
-      Log:debug("Registering source command: " .. vim.inspect(formatter_cmd))
+      Log:debug("Registering source: " .. source.name)
       table.insert(sources, source.with(opts))
       vim.list_extend(registered_names, { name })
     end
@@ -92,4 +92,5 @@ function M.register_sources(configs, method)
   null_ls.register { sources = sources }
   return registered_names
 end
+
 return M
