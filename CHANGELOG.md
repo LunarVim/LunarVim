@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.0.0]
 
 ### <!-- 1 --> Features
 
@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - _(installer)_ Check if npm-prefix is writable (#2091)
 - _(installer)_ More robust yarn validation (#2113)
 - _(lsp)_ Set the handlers opts for v0.6 as well (#2109)
+- _(lsp)_ Formatter now use new null-ls api function (#2135)
 - Bump nvim-tree version
 - Formatting
 - Remove duplicate lint messages
@@ -30,6 +31,7 @@ All notable changes to this project will be documented in this file.
 - _(bootstrap)_ More robust git module (#2127)
 - _(info)_ Use new null-ls api for sources (#2125)
 - _(install.sh)_ Fix typo in node error message (#2107)
+- _(settings)_ Add headless-mode settings (#2134)
 - _(test)_ Cleanup test utilities (#2132)
 - Deprecate lvim.lang.FOO (#1913) (#1914)
 - Remove unused old language configs (#2094)
