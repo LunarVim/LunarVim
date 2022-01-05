@@ -121,7 +121,7 @@ lvim.plugins = {
 ## Updating LunarVim
 
 - inside LunarVim `:LvimUpdate`
-- from the command-line `lvim +LvimUpdate +q`
+- from the command-line `nvim +LvimUpdate +q`
 
 ### Update the plugins
 
