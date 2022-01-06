@@ -43,15 +43,3 @@ The configured linter(s) must be installed separately.
 ```lua
 javascript = { "denols", "ember", "eslint", "eslintls", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
 ```
-
-## Supported formatters
-
-```lua
-javascript = { "deno", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
-```
-
-## Supported linters
-
-```lua
-javascript = { "eslint", "eslint_d" }
-```
