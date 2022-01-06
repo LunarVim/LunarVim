@@ -1,5 +1,7 @@
 local M = {}
 
+local Log = require "lvim.core.log"
+
 local function find_root_dir()
   local util = require "lspconfig/util"
   local lsp_utils = require "lvim.lsp.utils"
@@ -19,7 +21,8 @@ local function from_node_modules(command)
     return nil
   end
 
-  return root_dir .. "/node_modules/.bin/" .. command
+  local join_paths = require("lvim.utils").join_paths
+  return join_paths(root_dir, "node_modules", ".bin", command)
 end
 
 local local_providers = {
@@ -39,7 +42,7 @@ function M.find_command(command)
     end
   end
 
-  if vim.fn.executable(command) == 1 then
+  if command and vim.fn.executable(command) == 1 then
     return command
   end
   return nil
@@ -56,6 +59,42 @@ function M.list_registered_providers_names(filetype)
     end
   end
   return registered
+end
+
+function M.register_sources(configs, method)
+  local null_ls = require "null-ls"
+  local is_registered = require("null-ls.sources").is_registered
+
+  local sources, registered_names = {}, {}
+
+  for _, config in ipairs(configs) do
+    local cmd = config.exe or config.command
+    local name = config.name or cmd:gsub("-", "_")
+    local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
+    local source = type and null_ls.builtins[type][name]
+    Log:debug(string.format("Received request to register [%s] as a %s source", cmd, type))
+    if not source then
+      Log:error("Not a valid source: " .. name)
+    elseif is_registered { command = cmd or name, method = method } then
+      Log:trace "Skipping registering the source more than once"
+    else
+      local command = M.find_command(source._opts.command) or source._opts.command
+      local compat_opts = {
+        command = command,
+        -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
+        extra_args = config.args or config.extra_args,
+      }
+      local opts = vim.tbl_deep_extend("keep", compat_opts, config)
+      Log:debug("Registering source: " .. source.name)
+      table.insert(sources, source.with(opts))
+      vim.list_extend(registered_names, { name })
+    end
+  end
+
+  if #sources > 0 then
+    null_ls.register { sources = sources }
+  end
+  return registered_names
 end
 
 return M

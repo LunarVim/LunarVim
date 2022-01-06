@@ -176,8 +176,10 @@ return {
 
   -- Whichkey
   {
-    "folke/which-key.nvim",
-    commit = commit.which_key,
+    -- "folke/which-key.nvim",
+    -- commit = commit.which_key,
+    "zeertzjq/which-key.nvim",
+    branch = "patch-1",
     config = function()
       require("lvim.core.which-key").setup()
     end,
