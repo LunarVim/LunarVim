@@ -72,11 +72,11 @@ function M.register_sources(configs, method)
     local name = config.name or cmd:gsub("-", "_")
     local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
     local source = type and null_ls.builtins[type][name]
-    Log:debug(string.format("Received request to register [%s] as a %s source", cmd, type))
+    Log:debug(string.format("Received request to register [%s] as a %s source", name, type))
     if not source then
       Log:error("Not a valid source: " .. name)
-    elseif is_registered { command = cmd or name, method = method } then
-      Log:trace "Skipping registering the source more than once"
+    elseif is_registered { name = source.name or name, method = method } then
+      Log:trace(string.format("Skipping registering [%s] more than once", name))
     else
       local command = M.find_command(source._opts.command) or source._opts.command
 
@@ -91,7 +91,7 @@ function M.register_sources(configs, method)
       Log:debug("Registering source " .. name)
       Log:trace(vim.inspect(opts))
       table.insert(sources, source.with(opts))
-      vim.list_extend(registered_names, { name })
+      vim.list_extend(registered_names, { source.name })
     end
   end
 
