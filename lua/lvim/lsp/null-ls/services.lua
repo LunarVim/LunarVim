@@ -79,13 +79,17 @@ function M.register_sources(configs, method)
       Log:trace "Skipping registering the source more than once"
     else
       local command = M.find_command(source._opts.command) or source._opts.command
-      local compat_opts = {
-        command = command,
-        -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
-        extra_args = config.args or config.extra_args,
-      }
-      local opts = vim.tbl_deep_extend("keep", compat_opts, config)
-      Log:debug("Registering source: " .. source.name)
+
+      -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
+      local compat_opts = vim.deepcopy(config)
+      if config.args then
+        compat_opts.extra_args = config.args or config.extra_args
+        compat_opts.args = nil
+      end
+
+      local opts = vim.tbl_deep_extend("keep", { command = command }, compat_opts)
+      Log:debug("Registering source " .. name)
+      Log:trace(vim.inspect(opts))
       table.insert(sources, source.with(opts))
       vim.list_extend(registered_names, { name })
     end
