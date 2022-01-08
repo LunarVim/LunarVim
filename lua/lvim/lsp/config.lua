@@ -79,6 +79,7 @@ return {
     "phpactor",
     "pylsp",
     "quick_lint_js",
+    "remark_ls",
     "rome",
     "solang",
     "solidity_ls",

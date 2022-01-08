@@ -66,6 +66,14 @@ function M.get_supported_filetypes(server_name)
   return requested_server:get_supported_filetypes()
 end
 
+---Get supported servers per filetype
+---@param filetype string
+---@return table list of names of supported servers
+function M.get_supported_servers_per_filetype(filetype)
+  local filetype_server_map = require "nvim-lsp-installer._generated.filetype_map"
+  return filetype_server_map[filetype]
+end
+
 ---Get all supported filetypes by nvim-lsp-installer
 ---@return table supported filestypes as a list of strings
 function M.get_all_supported_filetypes()
