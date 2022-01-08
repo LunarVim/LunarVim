@@ -48,11 +48,11 @@ function Popup:display(content_provider)
   )
 
   local lines = content_provider(self.layout)
-  vim.api.nvim_buf_set_lines(self.bufnr, 0, -1, false, lines)
+  vim.api.nvim_buf_set_lines(self.bufnr or 0, 0, -1, false, lines)
 
   -- window options
   for key, value in pairs(self.win_opts) do
-    vim.api.nvim_win_set_option(self.win_id, key, value)
+    vim.api.nvim_win_set_option(self.win_id or 0, key, value)
   end
 
   -- buffer options
