@@ -22,7 +22,7 @@ function M.run_post_reload()
   require("lvim.plugin-loader").ensure_installed()
   M.reset_cache()
   if package.loaded["lspconfig"] then
-    vim.cmd [[ LspRestart ]]
+    pcall(vim.cmd, "LspRestart")
   end
 end
 

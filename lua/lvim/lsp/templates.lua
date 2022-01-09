@@ -43,7 +43,7 @@ end
 ---@param servers_names table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
   if package.loaded["lspconfig"] then
-    vim.cmd [[ LspStop ]]
+    pcall(vim.cmd, "LspStop")
   end
 
   servers_names = servers_names or {}
