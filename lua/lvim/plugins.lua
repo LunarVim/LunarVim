@@ -1,5 +1,3 @@
-local core_plugin_type = require "lvim.core_plugin_type"
-
 local commit = {
   barbar = "6e638309efcad2f308eb9c5eaccf6f62b794bbab",
   cmp_buffer = "f83773e2f433a923997c5faad7ea689ec24d1785",
@@ -277,14 +275,5 @@ local plugins = {
     disable = not lvim.builtin.terminal.active,
   },
 }
-
-if not _G.__lvim_dev_env then
-  for _, plugin in ipairs(plugins) do
-    -- packer already exists, don't replace it
-    if plugin[1] ~= "wbthomason/packer.nvim" then
-      core_plugin_type.setup(plugin)
-    end
-  end
-end
 
 return plugins

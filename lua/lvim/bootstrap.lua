@@ -68,12 +68,10 @@ function M:init(base_dir, updating)
   self.cache_dir = get_cache_dir()
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
-  self.core_install_dir = join_paths(self.runtime_dir, "core")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
   self.lua_cache_path = join_paths(self.cache_dir, "lvim_cache")
 
   _G.__lvim_test_env = os.getenv "LVIM_TEST_ENV" == "true"
-  _G.__lvim_dev_env = os.getenv "LVIM_DEV" == "1"
 
   ---Get the full path to LunarVim's base directory
   ---@return string
@@ -111,13 +109,11 @@ function M:init(base_dir, updating)
   require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
     install_path = self.packer_install_dir,
-    core_install_dir = self.core_install_dir,
     updating = updating,
   }
 
   if updating then
     require("lvim.updater").init {
-      core_install_dir = self.core_install_dir,
       packer_cache_path = self.packer_cache_path,
       lua_cache_path = self.lua_cache_path,
     }

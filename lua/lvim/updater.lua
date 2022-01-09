@@ -2,18 +2,9 @@ local M = {}
 
 local uv = vim.loop
 local packer = require "packer"
-local utils = require "lvim.utils"
 local a = require "packer.async"
 local async = a.sync
 local await = a.wait
-local wrap = a.wrap
-local jobs = require "packer.jobs"
-local result = require "packer.result"
-local async_stat = wrap(uv.fs_stat)
-local async_readdir = wrap(uv.fs_readdir)
-local async_closedir = wrap(uv.fs_closedir)
-
-local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
 
 local timer = {}
 function timer:start()
@@ -23,16 +14,6 @@ function timer:stop()
   return (uv.hrtime() - self.time) * 1e-6
 end
 timer.__index = timer
-
-local function mkdir_tmp()
-  local tmpFilePath = os.tmpname()
-  vim.fn.delete(tmpFilePath)
-
-  local sep_idx = tmpFilePath:reverse():find(path_sep)
-  local path = tmpFilePath:sub(1, #tmpFilePath - sep_idx)
-  uv.fs_mkdtemp(path .. path_sep .. "lvim_core_dl_XXXXXX")
-  return path
-end
 
 local function get_lvim_after_user_config()
   local original_lvim = lvim
@@ -49,101 +30,6 @@ local function get_lvim_after_user_config()
   _G.package.loaded = original_package_loaded
 
   return user_lvim
-end
-
-local function plug_extracted_dir(plug)
-  local commit = plug.commit
-  local repo = plug[1]
-  local name = repo:match "/(%S*)"
-  return name .. "-" .. commit
-end
-
----downloads and installs from a core plugin entry
----@param plug table plugin entry
----@return function
-local function download_and_install(plug, core_install_dir, download_dir)
-  local commit = plug.commit
-  local repo = plug[1]
-  local zip_name = commit .. ".zip"
-  local extracted_dir = join_paths(core_install_dir, plug_extracted_dir(plug))
-
-  return async(function()
-    if not plug.commit then
-      error("commit missing for plugin: " .. repo)
-    end
-    local _, dir_exists = await(async_stat(extracted_dir))
-    local r = result.ok()
-    -- skip plugins that are already installed
-    if dir_exists then
-      return r
-    end
-
-    local url = "https://github.com/" .. repo .. "/archive/" .. zip_name
-
-    return r
-      :and_then(await, jobs.run({ "curl", "-LO", url }, { cwd = download_dir }))
-      :and_then(await, jobs.run({ "unzip", "-o", join_paths(download_dir, zip_name), "-d", core_install_dir }, {}))
-      :or_else(function()
-        error("download and install failed for plugin '" .. repo .. "'")
-      end)
-  end)
-end
-
-local function opendir(dir, callback)
-  uv.fs_opendir(dir, callback, 9999)
-end
-
-local async_opendir = a.wrap(opendir)
-
--- don't want to remove any unintended directory
-local function safer_rm_rf(parent_dir, child_dir)
-  local path_to_remove = parent_dir .. path_sep .. child_dir
-  if parent_dir == nil or #parent_dir == 0 then
-    return
-  end
-  if child_dir == nil or #child_dir == 0 then
-    return
-  end
-
-  vim.fn.delete(path_to_remove, "rf")
-end
-
-local function assert_or_fail(condition, message)
-  if not condition then
-    print(message)
-    os.exit(1)
-  else
-    return condition
-  end
-end
-
-local function cleanup_stale(core_install_dir, core_plugins)
-  return async(function()
-    local err, dir = await(async_opendir(core_install_dir))
-    assert_or_fail(not err, "unable to open core plugin install directory")
-    local entries
-    err, entries = await(async_readdir(dir))
-    assert_or_fail(not err, "unable to read core plugin install directory")
-    await(async_closedir(dir))
-
-    if entries then
-      local plugin_lookup = {}
-      for _, plug in ipairs(core_plugins) do
-        plugin_lookup[plug_extracted_dir(plug)] = true
-      end
-
-      await(a.main)
-      for _, entry in ipairs(entries) do
-        local plugin_name = entry.name
-        if plugin_name ~= nil and plugin_lookup[plugin_name] == nil then
-          safer_rm_rf(core_install_dir, plugin_name)
-        end
-      end
-    end
-
-    print("Cleaned up stale plugins in:", timer:stop(), "ms")
-    timer:start()
-  end)
 end
 
 function M:task_update(plugin_name, status)
@@ -216,7 +102,9 @@ local function inject_treesitter_progress_check()
     end
     if i == #cmd_list + 1 then
       treesitter_installed = treesitter_installed + 1
-      treesitter_print_update()
+      if not _G.__lvim_test_env then
+        treesitter_print_update()
+      end
     end
 
     ts_install_iter_cmd(cmd_list, i, lang, success_message)
@@ -241,40 +129,6 @@ function M.init(opts)
     -- enable all core plugins initially until after the user config is loaded
     for _, plug in ipairs(core_plugins) do
       plug.disable = false
-    end
-
-    if not _G.__lvim_dev_env then
-      local core_install_dir = opts.core_install_dir or vim.fn.stdpath "data" .. "/core"
-      assert_or_fail(vim.fn.executable "curl", "curl is not installed")
-      assert_or_fail(vim.fn.executable "unzip", "unzip is not installed")
-
-      if not utils.is_directory(core_install_dir) then
-        assert_or_fail(vim.fn.mkdir(core_install_dir), "unable to create core plugin install directory")
-      end
-
-      local download_dir = mkdir_tmp()
-      assert_or_fail(download_dir, "unable to create core plugin download directory")
-
-      timer:start()
-      print "Cleaning up stale plugins..."
-      print "Downloading core plugins..."
-
-      local tasks = {
-        cleanup_stale(core_install_dir, core_plugins),
-      }
-
-      for _, plug in ipairs(core_plugins) do
-        -- packer already exists, don't download it
-        if plug[1] ~= "wbthomason/packer.nvim" then
-          table.insert(tasks, download_and_install(plug, core_install_dir, download_dir))
-        end
-      end
-      a.wait_all(unpack(tasks))
-      await(a.main)
-
-      print("Downloaded core plugins in:", timer:stop(), "ms")
-      vim.fn.delete(download_dir, "rf")
-      vim.fn.delete(download_dir, "d")
     end
 
     if opts.packer_cache_path then
