@@ -74,11 +74,12 @@ _G.load_config = function()
     buf_set_keymap("n", "<space>lI", "<cmd>LspInstallInfo<CR>", opts)
   end
 
-  -- Add the server that troubles you here, e.g. "sumneko_lua", "pyright", "tsserver"
-  local name = "clangd"
+  -- Add the server that troubles you here, e.g. "clangd", "pyright", "tsserver"
+  local name = "sumneko_lua"
 
-  -- You need to specify the server's command manually
-  local cmd
+  local setup_opts = {
+    on_attach = on_attach,
+  }
 
   if use_lsp_installer then
     local server_available, server = require("nvim-lsp-installer.servers").get_server(name)
@@ -86,22 +87,18 @@ _G.load_config = function()
       server:install()
     end
     local default_opts = server:get_default_options()
-    cmd = default_opts.cmd
+    setup_opts.cmd_env = default_opts.cmd_env
   end
 
   if not name then
     print "You have not defined a server name, please edit minimal_init.lua"
   end
-  if not nvim_lsp[name].document_config.default_config.cmd and not cmd then
+  if not nvim_lsp[name].document_config.default_config.cmd and not setup_opts.cmd then
     print [[You have not defined a server default cmd for a server
       that requires it please edit minimal_init.lua]]
   end
 
-  nvim_lsp[name].setup {
-    cmd = cmd,
-    on_attach = on_attach,
-  }
-
+  nvim_lsp[name].setup(setup_opts)
   print [[You can find your log at $HOME/.cache/nvim/lsp.log. Please paste in a github issue under a details tag as described in the issue template.]]
 end
 

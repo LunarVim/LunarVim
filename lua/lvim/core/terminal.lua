@@ -50,25 +50,13 @@ M.setup = function()
   local terminal = require "toggleterm"
   terminal.setup(lvim.builtin.terminal)
 
-  -- setup the default terminal so it's always reachable
-  local default_term_opts = {
-    cmd = lvim.builtin.terminal.shell,
-    keymap = lvim.builtin.terminal.open_mapping,
-    label = "Toggle terminal",
-    count = 1,
-    direction = lvim.builtin.terminal.direction,
-    size = lvim.builtin.terminal.size,
-  }
-  if lvim.builtin.terminal.open_mapping then
-    M.add_exec(default_term_opts)
-  end
-
   for i, exec in pairs(lvim.builtin.terminal.execs) do
     local opts = {
       cmd = exec[1],
       keymap = exec[2],
       label = exec[3],
-      count = i + 1,
+      -- NOTE: unable to consistently bind id/count <= 9, see #2146
+      count = i + 100,
       direction = exec[4] or lvim.builtin.terminal.direction,
       size = lvim.builtin.terminal.size,
     }
