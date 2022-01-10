@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### <!-- 1 --> Features
 
+- _(info)_ Display overridden servers for filetype (#2155)
 - _(luadev)_ Better vim api completion (#2043)
 - Add lualine config for darkplus
 - Last updates before 1.0.0 (#1953)
@@ -16,22 +17,27 @@ All notable changes to this project will be documented in this file.
 
 ### <!-- 2 --> Bugfix
 
+- _(gitsigns)_ Rounded border (#2142)
+- _(install)_ Avoid data-races for `on_packer_complete` (#2157)
 - _(installer)_ Backup linked files with rsync (#2081)
 - _(installer)_ Check if npm-prefix is writable (#2091)
 - _(installer)_ More robust yarn validation (#2113)
 - _(lsp)_ Set the handlers opts for v0.6 as well (#2109)
 - _(lsp)_ Formatter now use new null-ls api function (#2135)
-- Bump nvim-tree version
-- Formatting
-- Remove duplicate lint messages
+- _(lsp)_ Formatter now use new null-ls api function (#2135)
+- _(null-ls)_ Avoid sending invalid opts.args (#2154)
+- _(which-key)_ Temporary solution for which-key (#2150)
 - Remove autopairs cmp completion (#2083)
+- Remove "error" message from git tag (#2141)
 
 ### <!-- 3 --> Refactor
 
 - _(bootstrap)_ More robust git module (#2127)
 - _(info)_ Use new null-ls api for sources (#2125)
 - _(install.sh)_ Fix typo in node error message (#2107)
+- _(null-ls)_ Allow passing full list of options for sources (#2137)
 - _(settings)_ Add headless-mode settings (#2134)
+- _(term)_ Leave the first few ids unassigned (#2156)
 - _(test)_ Cleanup test utilities (#2132)
 - Deprecate lvim.lang.FOO (#1913) (#1914)
 - Remove unused old language configs (#2094)
