@@ -11,9 +11,6 @@ TEST_BASE_DIR="$(mktemp -d)"
 export LUNARVIM_CONFIG_DIR="$TEST_BASE_DIR"
 export LUNARVIM_CACHE_DIR="$TEST_BASE_DIR"
 
-# update
-nvim --cmd 'lua _G.__lvim_updating=true' -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" --noplugin -n -i NONE --headless
-
 lvim() {
   nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/tests/minimal_init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "$@"
 }
