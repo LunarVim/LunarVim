@@ -15,20 +15,27 @@ function timer:stop()
 end
 timer.__index = timer
 
+-- the user's config.lua can run arbitrary code, which can have unintended side-effects.
+-- this sandboxes the execution of config.lua in such a way that it does not affect the loaded packages
+-- nor the lvim global, but instead returns the version of the lvim global after the "sandbox" terminates
 local function get_lvim_after_user_config()
   local original_lvim = lvim
   local user_lvim = vim.deepcopy(lvim)
   local original_package_loaded = package.loaded
   local user_package_loaded = {}
+
+  -- swizzle the globals for loaded packages and lvim, preventing user config from breaking the updater
   _G.lvim = user_lvim
   _G.package.loaded = user_package_loaded
   local ok, err = pcall(dofile, require("lvim.config"):get_user_config_path())
   if not ok then
     print(err)
   end
+  -- restore the original globals
   _G.lvim = original_lvim
   _G.package.loaded = original_package_loaded
 
+  -- return the mutated lvim global
   return user_lvim
 end
 
