@@ -42,8 +42,8 @@ end
 ---The files are generated to a runtimepath: "$LUNARVIM_RUNTIME_DIR/site/after/ftplugin/template.lua"
 ---@param servers_names table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
-  if package.loaded["lspconfig"] then
-    pcall(vim.cmd, "LspStop")
+  for _, client in pairs(vim.lsp.get_active_clients()) do
+    client:stop()
   end
 
   servers_names = servers_names or {}
