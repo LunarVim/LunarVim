@@ -30,7 +30,6 @@ end
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
-  -- require("lvim.plugin-loader").recompile()
   local impatient = _G.__luacache
   if impatient then
     impatient.clear_cache()
