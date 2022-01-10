@@ -21,9 +21,6 @@ function M.run_post_reload()
   Log:debug "Starting post-reload hook"
   require("lvim.plugin-loader").ensure_installed()
   M.reset_cache()
-  if package.loaded["lspconfig"] then
-    pcall(vim.cmd, "LspRestart")
-  end
 end
 
 ---Reset any startup cache files used by Packer and Impatient
