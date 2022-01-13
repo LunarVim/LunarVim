@@ -33,7 +33,7 @@ local commit = {
   telescope = "015a35626d5a293dc9c19dc2bb301f25850961f6",
   telescope_fzf_native = "b8662b076175e75e6497c59f3e2799b879d7b954",
   toggleterm = "463843d1ba0288eedaf834872c3eca114d45bddf",
-  which_key = "312c386ee0eafc925c27869d2be9c11ebdb807eb",
+  which_key = "387fd676d3f9b419d38890820f6e262dc0fadb46",
 }
 
 return {
@@ -177,10 +177,8 @@ return {
 
   -- Whichkey
   {
-    -- "folke/which-key.nvim",
-    -- commit = commit.which_key,
-    "zeertzjq/which-key.nvim",
-    branch = "patch-1",
+    "folke/which-key.nvim",
+    commit = commit.which_key,
     config = function()
       require("lvim.core.which-key").setup()
     end,
