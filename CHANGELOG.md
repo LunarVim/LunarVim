@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### <!-- 2 --> Bugfix
+
+- _(installer)_ Usernames can contain @ symbol (#2167)
+- _(which-key)_ The PR has been merged to the original repo (#2172)
+- _(zsh)_ Don't set filetype to sh (#2035)
+
 ## [1.0.0]
 
 ### <!-- 1 --> Features
