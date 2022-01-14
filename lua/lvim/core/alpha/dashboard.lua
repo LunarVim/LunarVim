@@ -33,7 +33,7 @@ function M.config()
     },
   }
 
-  local lvim_version = "v" .. require("lvim.bootstrap"):get_version "short" or ""
+  local lvim_version = require("lvim.utils.git"):get_lvim_version "short"
   local footer = {
     type = "text",
     val = {
