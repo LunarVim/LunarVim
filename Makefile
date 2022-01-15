@@ -37,6 +37,6 @@ style-sh:
 	shfmt -f . | grep -v jdtls | xargs shfmt -i 2 -ci -bn -l -d
 
 test:
-	bash ./utils/bin/test_runner.sh "$(TEST)"
+	bash ./utils/ci/run_test.sh "$(TEST)"
 
 .PHONY: install install-neovim-binary uninstall lint style test
