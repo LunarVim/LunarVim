@@ -37,7 +37,7 @@ lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 - You can also use the NeoVim API directly using [nvim_set_keymap](<https://neovim.io/doc/user/api.html#nvim_set_keymap()>)
 
 ```lua
-vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<C-p>", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true, expr = true })
 ```
 
 - Or you can use the native vim way for those tricky bindings that you are not sure how to translate just yet
