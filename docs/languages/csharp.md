@@ -9,7 +9,7 @@
 ## Install Language Server
 
 ```vim
-:LspInstall csharp
+:LspInstall c#
 ```
 
 ## Formatters
