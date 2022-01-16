@@ -78,6 +78,7 @@ return {
     "jedi_language_server",
     "ltex",
     "phpactor",
+    "psalm",
     "pylsp",
     "quick_lint_js",
     "remark_ls",
