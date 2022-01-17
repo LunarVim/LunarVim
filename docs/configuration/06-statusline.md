@@ -2,7 +2,7 @@
 
 LunarVim uses `lualine` as a default statusline.
 
-Configuration is same as that of lualine with full support. See [Lualine README.md](https://github.com/shadmansaleh/lualine.nvim/blob/master/README.md)
+Configuration is same as that of lualine with full support. See [Lualine README.md](https://github.com/nvim-lualine/lualine.nvim/blob/master/README.md)
 
 In addition, LunarVim provides predefined styles(layout) and components.
 
