@@ -139,9 +139,10 @@ function check_system_deps() {
 }
 
 function install_nodejs_deps() {
+    $dep = "node"
     try {
-        check_system_dep "node"
-        Invoke-Command npm install -g neovim tree-sitter-cli -ErrorAction Break
+        check_system_dep "$dep"
+        Invoke-Command -ScriptBlock { npm install --global neovim tree-sitter-cli } -ErrorAction Break
     }
     catch {
         print_missing_dep_msg "$dep"
@@ -149,9 +150,10 @@ function install_nodejs_deps() {
 }
 
 function install_python_deps() {
+    $dep = "pip"
     try {
-        check_system_dep "pip"
-        Invoke-Command python -m pip install --user pynvim -ErrorAction Break
+        check_system_dep "$dep"
+        Invoke-Command -ScriptBlock { python -m pip install --user pynvim } -ErrorAction Break
     }
     catch {
         print_missing_dep_msg "$dep"
