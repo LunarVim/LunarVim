@@ -1,6 +1,6 @@
 local M = {}
-function M.config()
-  local user_config_file = require("lvim.config").get_user_config_path()
+
+function M.get_sections()
   local header = {
     type = "text",
     val = {
@@ -33,42 +33,40 @@ function M.config()
     },
   }
 
-  local lvim_version = require("lvim.utils.git"):get_lvim_version "short"
+  local text = require "lvim.interface.text"
+
   local footer = {
     type = "text",
-    val = {
+    val = text.align_center({ width = 0 }, {
       "",
       "lunarvim.org",
-      lvim_version,
-    },
+      require("lvim.utils.git"):get_lvim_version "short",
+    }, 0.5),
     opts = {
       position = "center",
       hl = "Number",
     },
   }
 
-  local text = require "lvim.interface.text"
-  footer.val = text.align_center({ width = 0 }, footer.val, 0.5)
-
   local buttons = {
     entries = {
-      { keybind = "SPC f", description = "  Find File", command = "<CMD>Telescope find_files<CR>" },
-      { keybind = "SPC n", description = "  New File", command = "<CMD>ene!<CR>" },
-      { keybind = "SPC P", description = "  Recent Projects ", command = "<CMD>Telescope projects<CR>" },
-      { keybind = "SPC s r", description = "  Recently Used Files", command = "<CMD>Telescope oldfiles<CR>" },
-      { keybind = "SPC s t", description = "  Find Word", command = "<CMD>Telescope live_grep<CR>" },
+      { "SPC f", "  Find File", "<CMD>Telescope find_files<CR>" },
+      { "SPC n", "  New File", "<CMD>ene!<CR>" },
+      { "SPC P", "  Recent Projects ", "<CMD>Telescope projects<CR>" },
+      { "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+      { "SPC s t", "  Find Word", "<CMD>Telescope live_grep<CR>" },
       {
-        keybind = "SPC L c",
-        description = "  Configuration",
-        command = "<CMD>edit " .. user_config_file .. " <CR>",
+        "SPC L c",
+        "  Configuration",
+        "<CMD>edit " .. require("lvim.config").get_user_config_path() .. " <CR>",
       },
     },
   }
 
   return {
     header = header,
-    footer = footer,
     buttons = buttons,
+    footer = footer,
   }
 end
 

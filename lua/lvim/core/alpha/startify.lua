@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.get_sections()
   local header = {
     type = "text",
     val = {
@@ -19,21 +19,16 @@ function M.config()
 
   local top_buttons = {
     entries = {
-      { keybind = "e", description = "  New File", command = "<CMD>ene!<CR>" },
+      { "e", "  New File", "<CMD>ene!<CR>" },
     },
     val = {},
   }
 
   local bottom_buttons = {
     entries = {
-      { keybind = "q", description = "Quit", command = "<CMD>quit<CR>" },
+      { "q", "Quit", "<CMD>quit<CR>" },
     },
     val = {},
-  }
-
-  local nvim_web_devicons = {
-    enabled = true,
-    highlight = true,
   }
 
   local footer = {
@@ -43,7 +38,6 @@ function M.config()
 
   return {
     header = header,
-    nvim_web_devicons = nvim_web_devicons,
     top_buttons = top_buttons,
     bottom_buttons = bottom_buttons,
     -- this is probably broken
