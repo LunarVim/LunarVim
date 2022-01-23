@@ -36,7 +36,7 @@ function Log:init()
             { level = structlog.formatters.FormatColorizer.color_level() }
           ),
         }),
-        structlog.sinks.File(Log.levels.TRACE, logfile, {
+        structlog.sinks.File(log_level, logfile, {
           processors = {
             structlog.processors.Namer(),
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 3, stack_level = 2 }),
