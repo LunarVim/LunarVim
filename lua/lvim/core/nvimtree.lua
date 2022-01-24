@@ -18,7 +18,7 @@ function M.config()
         enable = true,
         auto_open = true,
       },
-      auto_close = true,
+      auto_close = false,
       open_on_tab = false,
       hijack_cursor = false,
       update_cwd = false,
@@ -42,24 +42,30 @@ function M.config()
       },
       git = {
         enable = true,
-        ignore = true,
+        ignore = false,
         timeout = 200,
       },
       view = {
         width = 30,
         height = 30,
+        hide_root_folder = false,
         side = "left",
-        auto_resize = true,
-        number = false,
-        relativenumber = false,
+        auto_resize = false,
         mappings = {
           custom_only = false,
           list = {},
         },
+        number = false,
+        relativenumber = false,
+        signcolumn = "yes",
       },
       filters = {
         dotfiles = false,
-        custom = { ".git", "node_modules", ".cache" },
+        custom = { "node_modules", ".cache" },
+      },
+      trash = {
+        cmd = "trash",
+        require_confirm = true,
       },
     },
     show_icons = {
@@ -130,41 +136,39 @@ function M.setup()
     }
   end
 
-  -- Add nvim_tree open callback
-  local tree_view = require "nvim-tree.view"
-  local open = tree_view.open
-  tree_view.open = function()
-    M.on_open()
-    open()
+  local function on_open()
+    if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.setup.view.side == "left" then
+      require("bufferline.state").set_offset(lvim.builtin.nvimtree.setup.view.width + 1, "")
+    end
   end
 
-  vim.cmd "au WinClosed * lua require('lvim.core.nvimtree').on_close()"
+  local function on_close()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+    if ft == "NvimTree" and package.loaded["bufferline.state"] then
+      require("bufferline.state").set_offset(0)
+    end
+  end
+
+  local tree_view = require "nvim-tree.view"
+  local default_open = tree_view.open
+  local default_close = tree_view.close
+
+  tree_view.open = function()
+    on_open()
+    default_open()
+  end
+
+  tree_view.close = function()
+    on_close()
+    default_close()
+  end
 
   if lvim.builtin.nvimtree.on_config_done then
     lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
   end
+
   require("nvim-tree").setup(lvim.builtin.nvimtree.setup)
-end
-
-function M.on_open()
-  if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.setup.view.side == "left" then
-    require("bufferline.state").set_offset(lvim.builtin.nvimtree.setup.view.width + 1, "")
-  end
-end
-
-function M.on_close()
-  local buf = tonumber(vim.fn.expand "<abuf>")
-  local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-  if ft == "NvimTree" and package.loaded["bufferline.state"] then
-    require("bufferline.state").set_offset(0)
-  end
-end
-
-function M.change_tree_dir(dir)
-  local lib_status_ok, lib = pcall(require, "nvim-tree.lib")
-  if lib_status_ok then
-    lib.change_dir(dir)
-  end
 end
 
 function M.start_telescope(telescope_mode)

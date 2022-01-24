@@ -23,8 +23,9 @@ return {
       prefix = "",
       format = function(d)
         local t = vim.deepcopy(d)
-        if d.code then
-          t.message = string.format("%s [%s]", t.message, t.code):gsub("1. ", "")
+        local code = d.code or d.user_data.lsp.code
+        if code then
+          t.message = string.format("%s [%s]", t.message, code):gsub("1. ", "")
         end
         return t.message
       end,
@@ -77,6 +78,7 @@ return {
     "jedi_language_server",
     "ltex",
     "phpactor",
+    "psalm",
     "pylsp",
     "quick_lint_js",
     "remark_ls",
