@@ -73,6 +73,7 @@ return {
     "emmet_ls",
     "eslint",
     "eslintls",
+    "golangci_lint_ls",
     "grammarly",
     "graphql",
     "jedi_language_server",
