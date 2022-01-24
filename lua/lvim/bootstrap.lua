@@ -1,7 +1,7 @@
 local M = {}
 
-if vim.fn.has "nvim-0.6" ~= 1 then
-  vim.notify("Please upgrade your Neovim base installation. Lunarvim requires v0.6+", vim.log.levels.WARN)
+if vim.fn.has "nvim-0.6.1" ~= 1 then
+  vim.notify("Please upgrade your Neovim base installation. Lunarvim requires v0.6.1+", vim.log.levels.WARN)
   vim.wait(5000, function()
     return false
   end)
