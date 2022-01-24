@@ -6,9 +6,18 @@ All notable changes to this project will be documented in this file.
 
 ### <!-- 2 --> Bugfix
 
+- _(autopairs)_ Remove weird tex rules from autopairs (#2206)
+- _(diag)_ Show lsp-diag code in open_float (#2180)
 - _(installer)_ Usernames can contain @ symbol (#2167)
+- _(logging)_ Disable insane amount of logging inside lvim.log (#2205)
+- _(lsp)_ Use temporary fork of lua-dev (#2187)
 - _(which-key)_ The PR has been merged to the original repo (#2172)
 - _(zsh)_ Don't set filetype to sh (#2035)
+
+### <!-- 3 --> Refactor
+
+- _(nvim-tree)_ Cleanup and update settings (#2182)
+- Remove unused outdated files (#2184)
 
 ## [1.0.0]
 
