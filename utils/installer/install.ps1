@@ -1,3 +1,4 @@
+#Requires -Version 7.1
 $ErrorActionPreference = "Stop" # exit when command fails
 
 # set script variables
