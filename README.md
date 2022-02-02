@@ -35,7 +35,7 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 
 Windows (Powershell):
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1'))
+iwr https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 | iex
 ```
 
 ## Install Language support
