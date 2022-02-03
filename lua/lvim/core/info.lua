@@ -100,11 +100,18 @@ local function make_client_info(client)
   return client_info
 end
 
-local function make_override_info(ft)
+local function make_ignore_info(ft)
+  local ignored_filetypes = lvim.lsp.automatic_configuration.ignored_filetypes
+  local ignored_servers = lvim.lsp.automatic_configuration.ignored_servers
+
+  if vim.tbl_contains(ignored_filetypes, ft) then
+    return { "Automatic configuration is not active for " .. ft }
+  end
+
   local available = lsp_utils.get_supported_servers_per_filetype(ft)
   local overridden = vim.tbl_filter(function(name)
     return vim.tbl_contains(available, name)
-  end, lvim.lsp.override)
+  end, ignored_servers)
 
   local info_lines = { "" }
   if #overridden == 0 then
@@ -150,7 +157,7 @@ function M.toggle_popup(ft)
     table.insert(client_names, client.name)
   end
 
-  local override_info = make_override_info(ft)
+  local override_info = make_ignore_info(ft)
 
   local formatters_info = make_formatters_info(ft)
 
