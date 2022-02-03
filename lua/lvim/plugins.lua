@@ -29,6 +29,7 @@ local commit = {
   plenary = "e86dc9b11241ff69ece50c15a5cdd49d20d4c27c",
   popup = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
   project = "cef52b8da07648b750d7f1e8fb93f12cb9482988",
+  schemastore = "058575f0bd94b115604bef9c4c48c5d02e21ffef",
   structlog = "6f1403a192791ff1fa7ac845a73de9e860f781f1",
   telescope = "f262e7d56d37625613c5de0df5a933cccacf13c5",
   telescope_fzf_native = "b8662b076175e75e6497c59f3e2799b879d7b954",
@@ -271,5 +272,11 @@ return {
       require("lvim.core.terminal").setup()
     end,
     disable = not lvim.builtin.terminal.active,
+  },
+
+  -- SchemaStore
+  {
+    "b0o/schemastore.nvim",
+    commit = commit.schemastore,
   },
 }
