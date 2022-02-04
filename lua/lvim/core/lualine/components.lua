@@ -114,7 +114,6 @@ return {
 
       return "[" .. table.concat(buf_client_names, ", ") .. "]"
     end,
-    color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
   location = { "location", cond = conditions.hide_in_width, color = {} },
