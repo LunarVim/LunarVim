@@ -25,10 +25,10 @@ function M.config()
       diagnostics = {
         enable = true,
         icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
+          hint = " ",
+          info = " ",
+          warning = " ",
+          error = " ",
         },
       },
       update_focused_file = {
@@ -42,11 +42,11 @@ function M.config()
       },
       git = {
         enable = true,
-        ignore = true,
+        ignore = false,
         timeout = 200,
       },
       view = {
-        width = 30,
+        width = 40,
         height = 30,
         side = "left",
         auto_resize = true,
@@ -58,8 +58,8 @@ function M.config()
         },
       },
       filters = {
-        dotfiles = true,
-        custom = { ".git", "node_modules", ".cache" },
+        dotfiles = false,
+        custom = { ".git", "node_modules", ".cache", ".DS_Store", "dist" },
       },
     },
     show_icons = {
