@@ -84,6 +84,7 @@ return {
     "quick_lint_js",
     "remark_ls",
     "rome",
+    "scry",
     "solang",
     "solidity_ls",
     "sorbet",
@@ -95,6 +96,7 @@ return {
     "tailwindcss",
     "tflint",
     "vuels",
+    "zeta_note",
     "zk",
   },
 }
