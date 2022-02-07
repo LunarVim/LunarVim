@@ -40,6 +40,14 @@ M.config = function()
     keymap = {
       normal_mode = {},
     },
+    highlights = {
+      background = {
+        gui = "italic",
+      },
+      buffer_selected = {
+        gui = "bold",
+      },
+    },
     options = {
       numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
       close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -121,7 +129,11 @@ end
 
 M.setup = function()
   require("lvim.keymappings").load(lvim.builtin.bufferline.keymap)
-  require("bufferline").setup { options = lvim.builtin.bufferline.options }
+  require("bufferline").setup {
+    options = lvim.builtin.bufferline.options,
+    highlights = lvim.builtin.bufferline.highlights,
+  }
+
   if lvim.builtin.bufferline.on_config_done then
     lvim.builtin.bufferline.on_config_done()
   end
