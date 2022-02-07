@@ -1,5 +1,5 @@
 local commit = {
-  barbar = "6e638309efcad2f308eb9c5eaccf6f62b794bbab",
+  bufferline = "7451dfc97d28e6783dbeb1cdcff12619a9323c98",
   cmp_buffer = "f83773e2f433a923997c5faad7ea689ec24d1785",
   cmp_luasnip = "d6f837f4e8fe48eeae288e638691b91b97d1737f",
   cmp_nvim_lsp = "ebdfc204afb87f15ce3d3d3f5df0b8181443b5ba",
@@ -224,8 +224,8 @@ return {
   },
 
   {
-    "romgrk/barbar.nvim",
-    commit = commit.barbar,
+    "akinsho/bufferline.nvim",
+    commit = commit.bufferline,
     config = function()
       require("lvim.core.bufferline").setup()
     end,
