@@ -10,10 +10,9 @@ One of the best ways to begin contributing in a meaningful way is by helping fin
 
 ## Getting Started
 
-1. Backup your ~/.config/nvim
-2. Follow the [Installation](https://www.lunarvim.org/01-installing.html) guide
-3. Link your fork with the repository `git remote add upstream https://github.com/lunarvim/LunarVim.git`
-4. That's it ! You can now `git fetch upstream` and `git rebase [-i] upstream/rolling` to update your branches with the latest contributions.
+1. Follow the [Installation](https://www.lunarvim.org/01-installing.html) guide
+2. Link your fork with the repository `git remote add upstream https://github.com/lunarvim/LunarVim.git`, or use `gh fork`
+3. That's it! You can now `git fetch upstream` and `git rebase [-i] upstream/rolling` to update your branches with the latest contributions.
 
 <br />
 
@@ -38,23 +37,25 @@ Install [pre-commit](https://github.com/pre-commit/pre-commit) which will run al
 ## Code Conventions
 
 All lua code is formatted with [Stylua](https://github.com/JohnnyMorganz/StyLua).
-* Use snake_case
-* Avoid platform-dependent code
 ```bash
-stylua --config-path ./utils/.stylua.toml -c .
+# configurations are already stored in .stylua.toml
+stylua -c .
 ```
 
 All shell code is formatted according to [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
 * use two spaces instead of tabs
 ```bash
-shfmt -i 2 -ci -l -d .
+shfmt -i 2 -ci -bn -l -d .
 ```
 
 <br />
 
 ## Pull Requests (PRs)
 
-To avoid duplicate work, create a draft pull request.
+- To avoid duplicate work, create a draft pull request.
+- Your PR must pass all the [automated-ci-tests](https://github.com/neovim/neovim/actions).
+- Use a [git-feature-branch](https://www.atlassian.com/git/tutorials/comparing-workflows) instead of the master/rolling branch.
+- Use a [rebase-workflow](http://git-scm.com/book/en/v2/Git-Branching-Rebasing).
 
 ### Commit Messages
 * Commit header is limited to 72 characters.
@@ -81,11 +82,12 @@ To avoid duplicate work, create a draft pull request.
 * **build**: changes that affect the build system or external dependencies (example scopes: npm, pip, rg)
 * **ci**: changes to CI configuration files and scripts (example scopes: format, lint, issue_templates)
 * **docs**: changes to the documentation only
-* **feat**: a new feature for the user
-* **fix**: a bug fix
-* **perf**: a performance improvement
-* **refactor**: a code change that neither fixes a bug nor adds a feature
-* **test**: Adding missing tests or correcting existing tests
+* **feat**: new feature for the user
+* **fix**: bug fix
+* **perf**: performance improvement
+* **refactor**: code change that neither fixes a bug nor adds a feature
+* **test**: adding missing tests or correcting existing tests
+* **chore**: all the rest, including version bump for plugins
 
 **Real world examples:**
 ```

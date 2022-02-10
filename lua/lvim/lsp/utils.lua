@@ -49,18 +49,49 @@ function M.get_client_capabilities(client_id)
   return enabled_caps
 end
 
+---Get supported filetypes per server
+---@param server_name string can be any server supported by nvim-lsp-installer
+---@return table supported filestypes as a list of strings
 function M.get_supported_filetypes(server_name)
-  -- temporary workaround: https://github.com/neovim/nvim-lspconfig/pull/1358
-  if server_name == "dockerls" then
-    return { "dockerfile" }
+  local status_ok, lsp_installer_servers = pcall(require, "nvim-lsp-installer.servers")
+  if not status_ok then
+    return {}
   end
-  local lsp_installer_servers = require "nvim-lsp-installer.servers"
+
   local server_available, requested_server = lsp_installer_servers.get_server(server_name)
   if not server_available then
     return {}
   end
 
   return requested_server:get_supported_filetypes()
+end
+
+---Get supported servers per filetype
+---@param filetype string
+---@return table list of names of supported servers
+function M.get_supported_servers_per_filetype(filetype)
+  local filetype_server_map = require "nvim-lsp-installer._generated.filetype_map"
+  return filetype_server_map[filetype]
+end
+
+---Get all supported filetypes by nvim-lsp-installer
+---@return table supported filestypes as a list of strings
+function M.get_all_supported_filetypes()
+  local status_ok, lsp_installer_filetypes = pcall(require, "nvim-lsp-installer._generated.filetype_map")
+  if not status_ok then
+    return {}
+  end
+  return vim.tbl_keys(lsp_installer_filetypes or {})
+end
+
+function M.conditional_document_highlight(id)
+  local client_ok, method_supported = pcall(function()
+    return vim.lsp.get_client_by_id(id).resolved_capabilities.document_highlight
+  end)
+  if not client_ok or not method_supported then
+    return
+  end
+  vim.lsp.buf.document_highlight()
 end
 
 return M

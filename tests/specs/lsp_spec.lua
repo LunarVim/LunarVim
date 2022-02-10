@@ -1,6 +1,8 @@
 local a = require "plenary.async_lib.tests"
 local utils = require "lvim.utils"
-lvim.lsp.templates_dir = join_paths(get_runtime_dir(), "lvim", "tests", "artifacts")
+local helpers = require "tests.helpers"
+local temp_dir = vim.loop.os_getenv "TEMP" or "/tmp"
+lvim.lsp.templates_dir = join_paths(temp_dir, "lvim", "tests", "artifacts")
 
 a.describe("lsp workflow", function()
   local Log = require "lvim.core.log"
@@ -40,7 +42,7 @@ a.describe("lsp workflow", function()
 
     -- we need to delay this check until the log gets populated
     vim.schedule(function()
-      assert.False(utils.log_contains "templates")
+      assert.False(helpers.log_contains "templates")
     end)
   end)
 
@@ -50,7 +52,7 @@ a.describe("lsp workflow", function()
 
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
       for _, server in ipairs(lvim.lsp.override) do
-        assert.False(utils.file_contains(file, server))
+        assert.False(helpers.file_contains(file, server))
       end
     end
   end)

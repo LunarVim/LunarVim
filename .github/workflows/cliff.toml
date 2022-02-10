@@ -51,8 +51,9 @@ conventional_commits = true
 filter_unconventional = true
 # regex for parsing and grouping commits
 commit_parsers = [
+    { message = "(.*bump|.*Bump)", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
     { message = "^build", group = "<!-- 0 --> Packaging"},
-    { message = "^feat", group = "<!-- 1 --> Features"},
+    { message = "(^feat|^Feat|^\\[Feat)", group = "<!-- 1 --> Features"},
     { message = "(^bug|^Bug|^fix)", group = "<!-- 2 --> Bugfix"},
     { message = "^refactor", group = "<!-- 3 --> Refactor"},
     { message = "^doc", group = "<!-- 4 --> Documentation"},

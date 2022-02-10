@@ -4,6 +4,7 @@ local Log = require "lvim.core.log"
 local lvim_lsp_utils = require "lvim.lsp.utils"
 
 function M.init_defaults(languages)
+  languages = languages or lvim_lsp_utils.get_all_supported_filetypes()
   for _, entry in ipairs(languages) do
     if not lvim.lang[entry] then
       lvim.lang[entry] = {
@@ -23,6 +24,7 @@ local function resolve_config(name, user_config)
   local config = {
     on_attach = require("lvim.lsp").common_on_attach,
     on_init = require("lvim.lsp").common_on_init,
+    on_exit = require("lvim.lsp").common_on_exit,
     capabilities = require("lvim.lsp").common_capabilities(),
   }
 

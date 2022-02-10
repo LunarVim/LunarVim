@@ -34,14 +34,7 @@ function M.load_augroups()
         "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
       },
     },
-    _filetypechanges = {
-      { "BufWinEnter", ".tf", "setlocal filetype=terraform" },
-      { "BufRead", "*.tf", "setlocal filetype=terraform" },
-      { "BufNewFile", "*.tf", "setlocal filetype=terraform" },
-      { "BufWinEnter", ".zsh", "setlocal filetype=sh" },
-      { "BufRead", "*.zsh", "setlocal filetype=sh" },
-      { "BufNewFile", "*.zsh", "setlocal filetype=sh" },
-    },
+    _filetypechanges = {},
     _git = {
       { "FileType", "gitcommit", "setlocal wrap" },
       { "FileType", "gitcommit", "setlocal spell" },
@@ -78,7 +71,7 @@ local get_format_on_save_opts = function()
 end
 
 function M.enable_format_on_save(opts)
-  local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout_ms)
+  local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout)
   M.define_augroups {
     format_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
   }
@@ -86,16 +79,12 @@ function M.enable_format_on_save(opts)
 end
 
 function M.disable_format_on_save()
-  M.remove_augroup "format_on_save"
+  M.disable_augroup "format_on_save"
   Log:debug "disabled format-on-save"
 end
 
 function M.configure_format_on_save()
   if lvim.format_on_save then
-    if vim.fn.exists "#format_on_save#BufWritePre" == 1 then
-      M.remove_augroup "format_on_save"
-      Log:debug "reloading format-on-save configuration"
-    end
     local opts = get_format_on_save_opts()
     M.enable_format_on_save(opts)
   else
@@ -112,24 +101,84 @@ function M.toggle_format_on_save()
   end
 end
 
-function M.remove_augroup(name)
-  if vim.fn.exists("#" .. name) == 1 then
-    vim.cmd("au! " .. name)
-  end
+function M.enable_lsp_document_highlight(client_id)
+  M.define_augroups({
+    lsp_document_highlight = {
+      {
+        "CursorHold",
+        "<buffer>",
+        string.format("lua require('lvim.lsp.utils').conditional_document_highlight(%d)", client_id),
+      },
+      {
+        "CursorMoved",
+        "<buffer>",
+        "lua vim.lsp.buf.clear_references()",
+      },
+    },
+  }, true)
 end
 
-function M.define_augroups(definitions) -- {{{1
-  -- Create autocommand groups based on the passed definitions
-  --
-  -- The key will be the name of the group, and each definition
-  -- within the group should have:
-  --    1. Trigger
-  --    2. Pattern
-  --    3. Text
-  -- just like how they would normally be defined from Vim itself
+function M.disable_lsp_document_highlight()
+  M.disable_augroup "lsp_document_highlight"
+end
+
+function M.enable_code_lens_refresh()
+  M.define_augroups({
+    lsp_code_lens_refresh = {
+      {
+        "InsertLeave ",
+        "<buffer>",
+        "lua vim.lsp.codelens.refresh()",
+      },
+      {
+        "InsertLeave ",
+        "<buffer>",
+        "lua vim.lsp.codelens.display()",
+      },
+    },
+  }, true)
+end
+
+function M.disable_code_lens_refresh()
+  M.disable_augroup "lsp_code_lens_refresh"
+end
+
+function M.enable_transparent_mode()
+  vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
+  vim.cmd "let &fcs='eob: '"
+end
+
+--- Disable autocommand groups if it exists
+--- This is more reliable than trying to delete the augroup itself
+---@param name string the augroup name
+function M.disable_augroup(name)
+  -- defer the function in case the autocommand is still in-use
+  vim.schedule(function()
+    if vim.fn.exists("#" .. name) == 1 then
+      vim.cmd("augroup " .. name)
+      vim.cmd "autocmd!"
+      vim.cmd "augroup END"
+    end
+  end)
+end
+
+--- Create autocommand groups based on the passed definitions
+---@param definitions table contains trigger, pattern and text. The key will be used as a group name
+---@param buffer boolean indicate if the augroup should be local to the buffer
+function M.define_augroups(definitions, buffer)
   for group_name, definition in pairs(definitions) do
     vim.cmd("augroup " .. group_name)
-    vim.cmd "autocmd!"
+    if buffer then
+      vim.cmd [[autocmd! * <buffer>]]
+    else
+      vim.cmd [[autocmd!]]
+    end
 
     for _, def in pairs(definition) do
       local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")

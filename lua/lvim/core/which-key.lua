@@ -61,14 +61,14 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
+      ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
     },
     mappings = {
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
-      ["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
+      ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
-      ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
+      ["f"] = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       b = {
         name = "Buffers",
@@ -140,23 +140,17 @@ M.config = function()
       l = {
         name = "LSP",
         a = { "<cmd>lua require('lvim.core.telescope').code_actions()<cr>", "Code Action" },
-        d = {
-          "<cmd>Telescope lsp_document_diagnostics<cr>",
-          "Document Diagnostics",
-        },
-        w = {
-          "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-          "Workspace Diagnostics",
-        },
+        d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+        w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
         I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
         j = {
-          "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
+          "<cmd>lua vim.diagnostic.goto_next()<cr>",
           "Next Diagnostic",
         },
         k = {
-          "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
+          "<cmd>lua vim.diagnostic.goto_prev()<cr>",
           "Prev Diagnostic",
         },
         l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
@@ -166,7 +160,7 @@ M.config = function()
           t = { "<cmd>lua require('lvim.lsp.peek').Peek('typeDefinition')<cr>", "Type Definition" },
           i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
         },
-        q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+        q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = {

@@ -43,14 +43,16 @@ end
 -- @param content_provider A function accepting the popup's layout and returning the content to display
 function Popup:display(content_provider)
   self.win_id = vim.api.nvim_open_win(self.buffer, true, self.layout)
-  vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, self.win_id)
+  vim.api.nvim_command(
+    string.format("autocmd BufHidden,BufLeave <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)", self.win_id)
+  )
 
   local lines = content_provider(self.layout)
-  vim.api.nvim_buf_set_lines(self.bufnr, 0, -1, false, lines)
+  vim.api.nvim_buf_set_lines(self.bufnr or 0, 0, -1, false, lines)
 
   -- window options
   for key, value in pairs(self.win_opts) do
-    vim.api.nvim_win_set_option(self.win_id, key, value)
+    vim.api.nvim_win_set_option(self.win_id or 0, key, value)
   end
 
   -- buffer options

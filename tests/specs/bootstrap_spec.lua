@@ -27,6 +27,7 @@ a.describe("initial start", function()
   end)
 
   a.it("should be able to pass basic checkhealth without errors", function()
+    vim.cmd "set cmdheight&"
     vim.cmd "checkhealth nvim"
     local errmsg = vim.fn.eval "v:errmsg"
     local exception = vim.fn.eval "v:exception"
