@@ -1,5 +1,6 @@
 local commit = {
   bufferline = "7451dfc97d28e6783dbeb1cdcff12619a9323c98",
+  bufdel = "af537a915b8c60c6dcb6416e0e9382a5bed94bb3",
   cmp_buffer = "f83773e2f433a923997c5faad7ea689ec24d1785",
   cmp_luasnip = "d6f837f4e8fe48eeae288e638691b91b97d1737f",
   cmp_nvim_lsp = "ebdfc204afb87f15ce3d3d3f5df0b8181443b5ba",
@@ -231,6 +232,10 @@ return {
     end,
     event = "BufWinEnter",
     disable = not lvim.builtin.bufferline.active,
+  },
+  {
+    "ojroques/nvim-bufdel",
+    commit = commit.bufdel,
   },
 
   -- Debugging
