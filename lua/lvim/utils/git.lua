@@ -1,6 +1,7 @@
 local M = {}
 
 local Log = require "lvim.core.log"
+local if_nil = vim.F.if_nil
 
 local function git_cmd(opts)
   local plenary_loaded, Job = pcall(require, "plenary.job")
@@ -89,12 +90,9 @@ end
 ---Get the current Lunarvim development branch
 ---@return string|nil
 function M.get_lvim_branch()
-  local ret, branch = git_cmd { args = { "rev-parse", "--abbrev-ref", "HEAD" } }
-  if ret ~= 0 or (not branch or branch[1] == "") then
-    Log:error "Unable to retrieve the name of the current branch. Check the log for further information"
-    return
-  end
-  return branch[1]
+  local _, results = git_cmd { args = { "rev-parse", "--abbrev-ref", "HEAD" } }
+  local branch = if_nil(results[1], "")
+  return branch
 end
 
 ---Get currently checked-out tag of Lunarvim
@@ -102,24 +100,16 @@ end
 function M.get_lvim_tag()
   local args = { "describe", "--tags", "--abbrev=0" }
 
-  local ret, results = git_cmd { args = args }
-  if ret ~= 0 then
-    return
-  end
-  local tag = results and results[1] or ""
+  local _, results = git_cmd { args = args }
+  local tag = if_nil(results[1], "")
   return tag
 end
 
 ---Get the commit hash of currently checked-out commit of Lunarvim
 ---@return string|nil
 function M.get_lvim_current_sha()
-  local fallback = "NA"
-  local ret, log_results = git_cmd { args = { "log", "--pretty=format:%h", "-1" } }
-  local abbrev_version = log_results and log_results[1] or ""
-  if ret ~= 0 or string.match(abbrev_version, "%d") == nil then
-    Log:error "Unable to retrieve current version. Check the log for further information"
-    return fallback
-  end
+  local _, log_results = git_cmd { args = { "log", "--pretty=format:%h", "-1" } }
+  local abbrev_version = if_nil(log_results[1], "")
   return abbrev_version
 end
 
