@@ -4,7 +4,6 @@ local builtins = {
   "lvim.core.which-key",
   "lvim.core.gitsigns",
   "lvim.core.cmp",
-  "lvim.core.dashboard",
   "lvim.core.dap",
   "lvim.core.terminal",
   "lvim.core.telescope",

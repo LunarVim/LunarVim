@@ -98,45 +98,29 @@ function M.get_lvim_branch()
 end
 
 ---Get currently checked-out tag of Lunarvim
----@param type string can be "short"
----@return string|nil
-function M.get_lvim_tag(type)
-  type = type or ""
-  local ret, results = git_cmd { args = { "describe", "--tags" } }
+---@return string
+function M.get_lvim_tag()
+  local args = { "describe", "--tags", "--abbrev=0" }
+
+  local ret, results = git_cmd { args = args }
   if ret ~= 0 then
     return
   end
   local tag = results and results[1] or ""
-  if string.match(tag, "%d") == nil then
-    return
-  end
-  if type == "short" then
-    return vim.fn.split(tag, "-")[1]
-  else
-    return string.sub(tag, 1, #tag - 1)
-  end
+  return tag
 end
 
 ---Get the commit hash of currently checked-out commit of Lunarvim
----@param type string can be "short"
 ---@return string|nil
-function M.get_lvim_version(type)
-  type = type or ""
+function M.get_lvim_current_sha()
   local fallback = "NA"
-  local branch = M.get_lvim_branch()
-  if branch == "master" then
-    return M.get_lvim_tag(type) or fallback
-  end
   local ret, log_results = git_cmd { args = { "log", "--pretty=format:%h", "-1" } }
-  local abbrev_version = log_results[1] or ""
+  local abbrev_version = log_results and log_results[1] or ""
   if ret ~= 0 or string.match(abbrev_version, "%d") == nil then
     Log:error "Unable to retrieve current version. Check the log for further information"
     return fallback
   end
-  if type == "short" then
-    return abbrev_version
-  end
-  return branch .. "-" .. abbrev_version
+  return abbrev_version
 end
 
 function M.generate_plugins_sha(output)

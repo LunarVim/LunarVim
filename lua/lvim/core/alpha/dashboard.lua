@@ -34,7 +34,16 @@ function M.get_sections()
   }
 
   local text = require "lvim.interface.text"
-  local lvim_version = require("lvim.utils.git"):get_lvim_version "short"
+  local git_utils = require "lvim.utils.git"
+
+  local current_branch = git_utils.get_lvim_branch()
+
+  local lvim_version
+  if current_branch ~= "HEAD" or "" then
+    lvim_version = current_branch .. "-" .. git_utils.get_lvim_current_sha()
+  else
+    lvim_version = "v" .. git_utils.get_lvim_tag()
+  end
 
   local footer = {
     type = "text",
