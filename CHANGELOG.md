@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1]
+
+### <!-- 2 --> Bugfix
+
+- Add tsx to treesitter ensure_installed list (#2268)
+- Correct a path to bufferline module (#2270)
+
 ## [1.1.0]
 
 ### <!-- 1 --> Features
