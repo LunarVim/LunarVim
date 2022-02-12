@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - _(lualine)_ Use 1-char width symbol for changed (#2246)
 - _(which-key)_ The PR has been merged to the original repo (#2172)
 - _(zsh)_ Don't set filetype to sh (#2035)
+- Added -ScriptBlock to run commands ```install.ps1``` (#2188)
 
 ### <!-- 3 --> Refactor
 
@@ -36,10 +37,6 @@ All notable changes to this project will be documented in this file.
 ### <!-- 4 --> Documentation
 
 - _(readme)_ Add powershell installer script for Windows (#2208)
-
-### [Bugfix]
-
-- Added -ScriptBlock to run commands ```install.ps1``` (#2188)
 
 ## [1.0.0]
 
