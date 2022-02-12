@@ -1,7 +1,6 @@
 name: install
+
 on:
-  push:
-    branches: ["**"]
   pull_request:
     branches:
       - "master"
