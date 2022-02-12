@@ -5,7 +5,7 @@ local Log = require "lvim.core.log"
 local function git_cmd(opts)
   local plenary_loaded, Job = pcall(require, "plenary.job")
   if not plenary_loaded then
-    vim.cmd "packadd plenary.nvim"
+    return 1, { "" }
   end
 
   opts = opts or {}
@@ -103,15 +103,17 @@ end
 function M.get_lvim_tag(type)
   type = type or ""
   local ret, results = git_cmd { args = { "describe", "--tags" } }
-  local lvim_full_ver = results[1] or ""
-
-  if ret ~= 0 or string.match(lvim_full_ver, "%d") == nil then
-    return nil
+  if ret ~= 0 then
+    return
+  end
+  local tag = results and results[1] or ""
+  if string.match(tag, "%d") == nil then
+    return
   end
   if type == "short" then
-    return vim.fn.split(lvim_full_ver, "-")[1]
+    return vim.fn.split(tag, "-")[1]
   else
-    return string.sub(lvim_full_ver, 1, #lvim_full_ver - 1)
+    return string.sub(tag, 1, #tag - 1)
   end
 end
 
@@ -120,15 +122,16 @@ end
 ---@return string|nil
 function M.get_lvim_version(type)
   type = type or ""
+  local fallback = "NA"
   local branch = M.get_lvim_branch()
   if branch == "master" then
-    return M.get_lvim_tag(type)
+    return M.get_lvim_tag(type) or fallback
   end
   local ret, log_results = git_cmd { args = { "log", "--pretty=format:%h", "-1" } }
   local abbrev_version = log_results[1] or ""
   if ret ~= 0 or string.match(abbrev_version, "%d") == nil then
     Log:error "Unable to retrieve current version. Check the log for further information"
-    return nil
+    return fallback
   end
   if type == "short" then
     return abbrev_version
