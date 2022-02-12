@@ -28,8 +28,14 @@ You can find all the documentation for LunarVim at [lunarvim.org](https://www.lu
 
 Make sure you have the release version of Neovim (0.6.1+).
 
+Linux:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+```
+
+Windows (Powershell):
+```powershell
+Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 ## Install Language support
