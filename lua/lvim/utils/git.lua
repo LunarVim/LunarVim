@@ -89,7 +89,7 @@ end
 ---Get the current Lunarvim development branch
 ---@return string|nil
 function M.get_lvim_branch()
-  local ret, branch = git_cmd { args = { "branch", "--show-current" } }
+  local ret, branch = git_cmd { args = { "rev-parse", "--abbrev-ref", "HEAD" } }
   if ret ~= 0 or (not branch or branch[1] == "") then
     Log:error "Unable to retrieve the name of the current branch. Check the log for further information"
     return

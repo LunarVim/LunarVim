@@ -2,22 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.1.1]
+
+### <!-- 2 --> Bugfix
+
+- Add tsx to treesitter ensure_installed list (#2268)
+- Correct a path to bufferline module (#2270)
+
+## [1.1.0]
+
+### <!-- 1 --> Features
+
+- _(vue)_ Set volar as default language server instead of vuels (#2230)
+- Use schemastore.nvim to provide extended json schema support (#2239)
+- Use bufferline instead of barbar (#2254)
+- Add a minimal implementation of bbye (#2267)
 
 ### <!-- 2 --> Bugfix
 
 - _(autopairs)_ Remove weird tex rules from autopairs (#2206)
 - _(diag)_ Show lsp-diag code in open_float (#2180)
 - _(installer)_ Usernames can contain @ symbol (#2167)
+- _(installer)_ Universal bash (#2241)
 - _(logging)_ Disable insane amount of logging inside lvim.log (#2205)
+- _(lsp)_ No need to stop clients on LvimReload (#2160)
 - _(lsp)_ Use temporary fork of lua-dev (#2187)
+- _(lsp)_ Avoid accessing undefined user_data (#2216)
+- _(lualine)_ Add space to diff components (#1897)
+- _(lualine)_ Compacter size for treesitter icon (#2247)
+- _(lualine)_ Use 1-char width symbol for changed (#2246)
 - _(which-key)_ The PR has been merged to the original repo (#2172)
 - _(zsh)_ Don't set filetype to sh (#2035)
+- Added -ScriptBlock to run commands ```install.ps1``` (#2188)
 
 ### <!-- 3 --> Refactor
 
 - _(nvim-tree)_ Cleanup and update settings (#2182)
+- _(nvim-tree)_ Remove unused code (#2266)
 - Remove unused outdated files (#2184)
+
+### <!-- 4 --> Documentation
+
+- _(readme)_ Add powershell installer script for Windows (#2208)
 
 ## [1.0.0]
 
