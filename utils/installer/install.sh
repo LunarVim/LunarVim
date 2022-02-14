@@ -201,6 +201,12 @@ function check_system_deps() {
   check_neovim_min_version
 }
 
+function __install_nodejs_deps_pnpm() {
+  echo "Installing node modules with pnpm.."
+  pnpm install -g "${__npm_deps[@]}"
+  echo "All NodeJS dependencies are successfully installed"
+}
+
 function __install_nodejs_deps_npm() {
   echo "Installing node modules with npm.."
   for dep in "${__npm_deps[@]}"; do
@@ -229,6 +235,8 @@ function __validate_node_installation() {
 
   if [ "$pkg_manager" == "npm" ]; then
     manager_home="$(npm config get prefix 2>/dev/null)"
+  elif [ "$pkg_manager" == "pnpm" ]; then
+    manager_home="$(pnpm config get prefix 2>/dev/null)"
   else
     manager_home="$(yarn global bin 2>/dev/null)"
   fi
@@ -242,7 +250,7 @@ function __validate_node_installation() {
 }
 
 function install_nodejs_deps() {
-  local -a pkg_managers=("yarn" "npm")
+  local -a pkg_managers=("pnpm" "yarn" "npm")
   for pkg_manager in "${pkg_managers[@]}"; do
     if __validate_node_installation "$pkg_manager"; then
       eval "__install_nodejs_deps_$pkg_manager"
