@@ -34,7 +34,7 @@ return {
   document_highlight = true,
   code_lens_refresh = true,
   float = {
-    focusable = false,
+    focusable = true,
     style = "minimal",
     border = "rounded",
   },

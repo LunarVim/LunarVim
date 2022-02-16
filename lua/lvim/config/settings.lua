@@ -26,7 +26,7 @@ M.load_default_options = function()
     splitright = true, -- force all vertical splits to go to the right of current window
     swapfile = false, -- creates a swapfile
     termguicolors = true, -- set term gui colors (most terminals support this)
-    timeoutlen = 100, -- time to wait for a mapped sequence to complete (in milliseconds)
+    timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
     title = true, -- set the title of window to the value of the titlestring
     -- opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
     undodir = join_paths(get_cache_dir(), "undo"), -- set an undo directory
