@@ -8,14 +8,14 @@ a.describe("lsp workflow", function()
   local Log = require "lvim.core.log"
   local logfile = Log:get_path()
 
-  a.it("shoud be able to delete ftplugin templates", function()
+  a.it("should be able to delete ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
       assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
     end
     assert.False(utils.is_directory(lvim.lsp.templates_dir))
   end)
 
-  a.it("shoud be able to generate ftplugin templates", function()
+  a.it("should be able to generate ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
       assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
     end
@@ -27,7 +27,7 @@ a.describe("lsp workflow", function()
     end)
   end)
 
-  a.it("shoud not attempt to re-generate ftplugin templates", function()
+  a.it("should not attempt to re-generate ftplugin templates", function()
     lvim.log.level = "debug"
 
     local plugins = require "lvim.plugins"
@@ -46,7 +46,7 @@ a.describe("lsp workflow", function()
     end)
   end)
 
-  a.it("shoud not include blacklisted servers in the generated templates", function()
+  a.it("should not include blacklisted servers in the generated templates", function()
     assert.True(utils.is_directory(lvim.lsp.templates_dir))
     require("lvim.lsp").setup()
 
@@ -57,7 +57,7 @@ a.describe("lsp workflow", function()
     end
   end)
 
-  a.it("shoud only include one server per generated template", function()
+  a.it("should only include one server per generated template", function()
     assert.True(utils.is_directory(lvim.lsp.templates_dir))
     require("lvim.lsp").setup()
 

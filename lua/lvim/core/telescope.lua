@@ -4,7 +4,7 @@ function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
 
   lvim.builtin.telescope = {
-    ---@usage disable telescope completely [not recommeded]
+    ---@usage disable telescope completely [not recommended]
     active = true,
     on_config_done = nil,
   }

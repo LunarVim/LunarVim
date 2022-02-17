@@ -58,7 +58,7 @@ function M.generate_settings()
 end
 
 --- Returns a table with the default values that are missing.
---- either paramter can be empty.
+--- either parameter can be empty.
 --@param config (table) table containing entries that take priority over defaults
 --@param default_config (table) table contatining default values if found
 function M.apply_defaults(config, default_config)

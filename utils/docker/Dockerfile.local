@@ -20,7 +20,7 @@ RUN apt update && \
   /LunarVim/utils/installer/install-neovim-from-release && \
   /LunarVim/utils/installer/install.sh --local --no-install-dependencies
 
-# Setup LVIM to run on starup
+# Setup LVIM to run on startup
 ENTRYPOINT ["/bin/bash"]
 CMD ["lvim"]
 

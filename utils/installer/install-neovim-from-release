@@ -55,7 +55,7 @@ function verify_neovim() {
   DOWNLOADED_SHA="$(openssl dgst -sha256 "$DOWNLOAD_DIR/$ARCHIVE_NAME.tar.gz" | awk '{print $2}')"
 
   if [ "$RELEASE_SHA" != "$DOWNLOADED_SHA" ]; then
-    echo "Error! checksum mis-match."
+    echo "Error! checksum mismatch."
     echo "Expected: $RELEASE_SHA but got: $DOWNLOADED_SHA"
     exit 1
   fi
