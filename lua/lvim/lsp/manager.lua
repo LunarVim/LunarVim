@@ -29,7 +29,8 @@ local function resolve_config(name, user_config)
   }
 
   local has_custom_provider, custom_config = pcall(require, "lvim/lsp/providers/" .. name)
-  if has_custom_provider then
+  local use_custom_provider = not user_config or (user_config.lvim_provider ~= false)
+  if has_custom_provider and use_custom_provider then
     Log:debug("Using custom configuration for requested server: " .. name)
     config = vim.tbl_deep_extend("force", config, custom_config)
   end
