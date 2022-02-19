@@ -74,7 +74,7 @@ M.config = function()
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
         f = { "<cmd>Telescope buffers<cr>", "Find" },
-        b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+        b = { "<cmd>b#<cr>", "Previous" },
         -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
         e = {
           "<cmd>BufferLinePickClose<cr>",
