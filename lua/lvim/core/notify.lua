@@ -4,6 +4,7 @@ local Log = require "lvim.core.log"
 
 local defaults = {
   active = false,
+  event = "BufRead",
   on_config_done = nil,
   opts = {
     ---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }

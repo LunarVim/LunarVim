@@ -4,6 +4,7 @@ M.config = function()
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommended]
     active = true,
+    event = "BufWinEnter",
     on_config_done = nil,
     setup = {
       plugins = {
