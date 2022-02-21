@@ -6,12 +6,12 @@ a.describe("initial start", function()
   local lvim_config_path = get_config_dir() or home_dir .. "/.config/lvim"
   local lvim_runtime_path = get_runtime_dir() or home_dir .. "/.local/share/lunarvim"
 
-  a.it("shoud be able to detect test environment", function()
+  a.it("should be able to detect test environment", function()
     assert.truthy(os.getenv "LVIM_TEST_ENV")
     assert.falsy(package.loaded["lvim.impatient"])
   end)
 
-  a.it("should not be reading default neovim directories in the home directoies", function()
+  a.it("should not be reading default neovim directories in the home directories", function()
     local rtp_list = vim.opt.rtp:get()
     assert.falsy(vim.tbl_contains(rtp_list, vim.fn.stdpath "config"))
   end)
