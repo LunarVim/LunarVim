@@ -14,6 +14,12 @@ function M.config()
         "dashboard",
         "alpha",
       },
+      auto_reload_on_write = true,
+      hijack_unnamed_buffer_when_opening = false,
+      hijack_directories = {
+        enable = true,
+        auto_open = true,
+      },
       update_to_buf_dir = {
         enable = true,
         auto_open = true,
@@ -66,6 +72,14 @@ function M.config()
       trash = {
         cmd = "trash",
         require_confirm = true,
+      },
+      actions = {
+        change_dir = {
+          global = false,
+        },
+        open_file = {
+          quit_on_open = false,
+        },
       },
     },
     show_icons = {
@@ -123,16 +137,22 @@ function M.setup()
     vim.g.netrw_banner = false
   end
 
+  local function telescope_find_files(_)
+    require("lvim.core.nvimtree").start_telescope "find_files"
+  end
+  local function telescope_find_str(_)
+    require("lvim.core.nvimtree").start_telescope "live_grep"
+  end
+
   -- Add useful keymaps
-  local tree_cb = nvim_tree_config.nvim_tree_callback
   if #lvim.builtin.nvimtree.setup.view.mappings.list == 0 then
     lvim.builtin.nvimtree.setup.view.mappings.list = {
-      { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-      { key = "h", cb = tree_cb "close_node" },
-      { key = "v", cb = tree_cb "vsplit" },
-      { key = "C", cb = tree_cb "cd" },
-      { key = "gtf", cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('find_files')<cr>" },
-      { key = "gtg", cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('live_grep')<cr>" },
+      { key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
+      { key = "h", action = "close_node" },
+      { key = "v", action = "vsplit" },
+      { key = "C", action = "cd" },
+      { key = "gtf", action_cb = telescope_find_files },
+      { key = "gtg", action_cb = telescope_find_str },
     }
   end
 
