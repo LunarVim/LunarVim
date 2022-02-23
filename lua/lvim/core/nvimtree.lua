@@ -80,6 +80,11 @@ function M.config()
         open_file = {
           quit_on_open = false,
         },
+      	window_picker = {
+	    enable = false,
+	    chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+	    exclude = {} -- not sure if we need to define this or not
+	 },
       },
     },
     show_icons = {
@@ -140,7 +145,7 @@ function M.setup()
   local function telescope_find_files(_)
     require("lvim.core.nvimtree").start_telescope "find_files"
   end
-  local function telescope_find_str(_)
+  local function telescope_live_grep(_)
     require("lvim.core.nvimtree").start_telescope "live_grep"
   end
 
@@ -151,8 +156,8 @@ function M.setup()
       { key = "h", action = "close_node" },
       { key = "v", action = "vsplit" },
       { key = "C", action = "cd" },
-      { key = "gtf", action_cb = telescope_find_files },
-      { key = "gtg", action_cb = telescope_find_str },
+      { key = "gtf", action = "telescope_find_files", action_cb = telescope_find_files },
+      { key = "gtg", action = "telescope_live_grep", action_cb = telescope_live_grep },
     }
   end
 
