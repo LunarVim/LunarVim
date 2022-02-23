@@ -80,11 +80,11 @@ function M.config()
         open_file = {
           quit_on_open = false,
         },
-      	window_picker = {
-	    enable = false,
-	    chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-	    exclude = {} -- not sure if we need to define this or not
-	 },
+        window_picker = {
+          enable = false,
+          chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+          exclude = {},
+        },
       },
     },
     show_icons = {
@@ -92,11 +92,8 @@ function M.config()
       folders = 1,
       files = 1,
       folder_arrows = 1,
-      tree_width = 30,
     },
-    quit_on_open = 0,
     git_hl = 1,
-    disable_window_picker = 0,
     root_folder_modifier = ":t",
     icons = {
       default = "",
@@ -137,9 +134,7 @@ function M.setup()
   if lvim.builtin.project.active then
     lvim.builtin.nvimtree.respect_buf_cwd = 1
     lvim.builtin.nvimtree.setup.update_cwd = true
-    lvim.builtin.nvimtree.setup.disable_netrw = false
-    lvim.builtin.nvimtree.setup.hijack_netrw = false
-    vim.g.netrw_banner = false
+    lvim.builtin.nvimtree.setup.update_focused_file = { enable = true, update_cwd = true }
   end
 
   local function telescope_find_files(_)
