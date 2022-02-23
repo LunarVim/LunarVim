@@ -45,9 +45,9 @@ function usage() {
   echo "Usage: install.sh [<options>]"
   echo ""
   echo "Options:"
-  echo "    -h, --help                       Print this help message"
-  echo "    -l, --local                      Install local copy of LunarVim"
-  echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
+  echo "    -h, --help                               Print this help message"
+  echo "    -l, --local                              Install local copy of LunarVim"
+  echo "    --overwrite                              Overwrite previous LunarVim configuration (a backup is always performed first)"
   echo "    -y, -n, --[no]-install-dependencies      Whether to automatically install external dependencies (will prompt by default)"
 }
 
