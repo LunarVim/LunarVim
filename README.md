@@ -33,6 +33,8 @@ Linux:
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
+> If you want to run it without any interaction you can pass the `-y` or `--install-dependencies` flag to automatically install all dependencies and have no prompts. The same way, you can use `-n` or `--no-install-dependencies` to skip the dependency installation.
+
 Windows (Powershell):
 ```powershell
 Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
@@ -159,7 +161,7 @@ lvim.plugins = {
 > - @mvllow, Potential LunarVim user.
 
 <div align="center" id="madewithlua">
-	
+
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)](#madewithlua)
-	
+
 </div>
