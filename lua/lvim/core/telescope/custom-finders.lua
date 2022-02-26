@@ -14,6 +14,7 @@ local utils = require "lvim.utils"
 function M.find_lunarvim_files(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
+    borderchars = lvim.builtin.telescope.defaults.borderchars,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
     prompt_prefix = ">> ",
@@ -28,6 +29,7 @@ end
 function M.grep_lunarvim_files(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
+    borderchars = lvim.builtin.telescope.defaults.borderchars,
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
     prompt_prefix = ">> ",
@@ -50,7 +52,10 @@ local copy_to_clipboard_action = function(prompt_bufnr)
 end
 
 function M.view_lunarvim_changelog()
-  local opts = themes.get_ivy { cwd = get_lvim_base_dir() }
+  local opts = themes.get_ivy {
+    borderchars = lvim.builtin.telescope.defaults.borderchars,
+    cwd = get_lvim_base_dir(),
+  }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
 
   pickers.new(opts, {

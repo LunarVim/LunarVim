@@ -91,11 +91,7 @@ function M.code_actions()
       width = 80,
       height = 12,
     },
-    borderchars = {
-      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    },
+    borderchars = lvim.builtin.telescope.defaults.borderchars,
     border = {},
     previewer = false,
     shorten_path = false,
