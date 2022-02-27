@@ -50,7 +50,9 @@ local copy_to_clipboard_action = function(prompt_bufnr)
 end
 
 function M.view_lunarvim_changelog()
-  local opts = themes.get_ivy { cwd = get_lvim_base_dir() }
+  local opts = themes.get_ivy {
+    cwd = get_lvim_base_dir(),
+  }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
 
   pickers.new(opts, {
