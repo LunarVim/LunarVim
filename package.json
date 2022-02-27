@@ -21,8 +21,8 @@
   "author": "Christian Chiarulli",
   "license": "ISC",
   "dependencies": {
-    "@vuepress/plugin-search": "^2.0.0-beta.27",
-    "vuepress": "^2.0.0-beta.27",
-    "vuepress-plugin-mermaidjs": "^1.8.1"
+    "@vuepress/plugin-search": "^2.0.0-beta.35",
+    "vuepress": "^2.0.0-beta.35",
+    "vuepress-plugin-mermaidjs": "^1.9.0"
   }
 }
