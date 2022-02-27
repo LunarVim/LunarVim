@@ -24,7 +24,8 @@ readonly BASEDIR
 
 declare ARGS_LOCAL=0
 declare ARGS_OVERWRITE=0
-declare ARGS_INSTALL_DEPENDENCIES=2
+declare ARGS_INSTALL_DEPENDENCIES=1
+declare INTERACTIVE_MODE=1
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
@@ -47,8 +48,9 @@ function usage() {
   echo "Options:"
   echo "    -h, --help                               Print this help message"
   echo "    -l, --local                              Install local copy of LunarVim"
+  echo "    -y, --yes                                Disable confirmation prompts (answer yes to all questions)"
   echo "    --overwrite                              Overwrite previous LunarVim configuration (a backup is always performed first)"
-  echo "    -y, -n, --[no]-install-dependencies      Whether to automatically install external dependencies (will prompt by default)"
+  echo "    --[no]-install-dependencies              Whether to automatically install external dependencies (will prompt by default)"
 }
 
 function parse_arguments() {
@@ -60,10 +62,13 @@ function parse_arguments() {
       --overwrite)
         ARGS_OVERWRITE=1
         ;;
-      -y | --install-dependencies)
+      -y | --yes)
+        INTERACTIVE_MODE=0
+        ;;
+      --install-dependencies)
         ARGS_INSTALL_DEPENDENCIES=1
         ;;
-      -n | --no-install-dependencies)
+      --no-install-dependencies)
         ARGS_INSTALL_DEPENDENCIES=0
         ;;
       -h | --help)
@@ -92,22 +97,24 @@ function main() {
 
   check_system_deps
 
-  if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 2 ]; then
-    msg "Would you like to install LunarVim's NodeJS dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
+  if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
+    if [ "$INTERACTIVE_MODE" -eq 1 ]; then
+      msg "Would you like to install LunarVim's NodeJS dependencies?"
+      read -p "[y]es or [n]o (default: no) : " -r answer
+      [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-    msg "Would you like to install LunarVim's Python dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
+      msg "Would you like to install LunarVim's Python dependencies?"
+      read -p "[y]es or [n]o (default: no) : " -r answer
+      [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
 
-    msg "Would you like to install LunarVim's Rust dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
-  elif [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
-    install_nodejs_deps
-    install_python_deps
-    install_rust_deps
+      msg "Would you like to install LunarVim's Rust dependencies?"
+      read -p "[y]es or [n]o (default: no) : " -r answer
+      [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+    else
+      install_nodejs_deps
+      install_python_deps
+      install_rust_deps
+    fi
   fi
 
   backup_old_config
