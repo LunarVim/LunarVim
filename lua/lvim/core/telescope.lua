@@ -25,7 +25,6 @@ function M.config()
       layout_config = {
         width = 0.75,
         preview_cutoff = 120,
-        prompt_position = "bottom",
         horizontal = {
           preview_width = function(_, cols, _)
             if cols < 120 then
