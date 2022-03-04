@@ -26,7 +26,7 @@ To install a Language Server for your language:
 :LspInstall <TAB>
 ```
 
-Sometimes the language server for your language will not have an obvious name. For instance, the language server for ruby is solargraph. Metals is the language server for scala, etc. To find the corresponding language server for your language [look here](https://github.com/kabouzeid/nvim-lspinstall)
+Sometimes the language server for your language will not have an obvious name. For instance, the language server for ruby is solargraph. Metals is the language server for scala, etc. To find the corresponding language server for your language [look here](https://github.com/williamboman/nvim-lsp-installer)
 
 ## Formatting and Linting
 
