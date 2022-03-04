@@ -144,7 +144,10 @@ function M.setup()
     require("lvim.lsp.templates").generate_templates()
   end
 
-  bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
+  bootstrap_nlsp {
+    config_home = utils.join_paths(get_config_dir(), "lsp-settings"),
+    append_default_schemas = true,
+  }
 
   require("lvim.lsp.null-ls").setup()
 
