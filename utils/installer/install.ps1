@@ -26,7 +26,7 @@ function msg($text){
 }
 
 function main($cliargs) {
-    Write-Output "  
+    Write-Output "
 
 		88\                                                   88\               
 		88 |                                                  \__|              
@@ -164,7 +164,8 @@ function backup_old_config() {
 
 
 function copy_local_lvim_repository() {
-    Copy-Item -Path "$((Get-Item $PWD).Parent.Parent.FullName)" -Destination "$env:LUNARVIM_RUNTIME_DIR/lvim" -Recurse
+    $baseDir = git rev-parse --show-toplevel
+    Copy-Item -Path $baseDir -Destination $env:LUNARVIM_RUNTIME_DIR\lvim -Recurse -Verbose
 }
 
 function clone_lvim() {
