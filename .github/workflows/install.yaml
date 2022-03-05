@@ -58,14 +58,10 @@ jobs:
         timeout-minutes: 4
         run: |
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          pwsh ./utils/installer/install.ps1 --local
+          Invoke-Command -ScriptBlock { ./utils/installer/install.ps1 --local }
 
       - name: Check LunarVim's version
+        timeout-minutes: 1
         run: |
-          pwsh "$HOME/.local/bin/lvim.ps1" --version
-          pwsh "$HOME/.local/bin/lvim.ps1" --headless +'lua require("lvim.utils.git"):get_lvim_version "short"' -c ':qall'
-
-      - name: Test LunarVim Health
-        run: |
-          if pwsh "$HOME/.local/bin/lvim.ps1" --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
-
+          Invoke-Command -ScriptBlock { "$HOME/.local/bin/lvim.ps1" --version }
+          Invoke-Command -ScriptBlock { "$HOME/.local/bin/lvim.ps1" --headless +'lua print(require("lvim.utils.git"):get_lvim_version("short"))' +'qall' }
