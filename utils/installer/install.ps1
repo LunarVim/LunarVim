@@ -96,18 +96,21 @@ function main($cliargs) {
 
 function print_missing_dep_msg($dep) {
     Write-Output "[ERROR]: Unable to find dependency [$dep]"
-    Write-Output "Please install it first and re-run the installer. Try: $RECOMMEND_INSTALL $dep"
+    Write-Output "Please install it first and re-run the installer."
 }
+
+$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "nvim.nvim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
+$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
 
 function install_system_package($dep) {
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
         Write-Output "[INFO]: Attempting to install dependency [$dep] with winget"
-        $install_cmd = "winget install --interactive"
+        $install_cmd = "winget install --interactive $winget_package_matrix[$dep]"
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "[INFO]: Attempting to install dependency [$dep] with scoop"
         # TODO: check if it's fine to not run it with --global
-        $install_cmd = "scoop install"
+        $install_cmd = "scoop install $scoop_package_matrix[$dep]"
     }
     else {
         print_missing_dep_msg "$dep"
@@ -115,7 +118,7 @@ function install_system_package($dep) {
     }
 
     try {
-        Invoke-Command $install_cmd $dep -ErrorAction Stop
+        Invoke-Command $install_cmd -ErrorAction Stop
     }
     catch {
         print_missing_dep_msg "$dep"
@@ -136,7 +139,7 @@ function check_system_deps() {
     Write-Output "[INFO]: Checking dependencies.."
     check_system_dep "git"
     check_system_dep "nvim"
-	
+    check_system_dep "make"
 }
 
 function install_nodejs_deps() {
@@ -242,7 +245,7 @@ function setup_lvim() {
 	
     __add_separator "80"
 
-    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
+    Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config_win.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
     $answer = Read-Host $(`
             "Would you like to create an alias inside your Powershell profile?`n" + `
