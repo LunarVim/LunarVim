@@ -165,7 +165,7 @@ function backup_old_config() {
 
 function copy_local_lvim_repository() {
     $baseDir = git rev-parse --show-toplevel
-    Copy-Item -Path $baseDir -Destination $env:LUNARVIM_RUNTIME_DIR\lvim -Recurse -Verbose
+    Copy-Item -Path $baseDir -Destination $env:LUNARVIM_RUNTIME_DIR\lvim -Recurse
 }
 
 function clone_lvim() {

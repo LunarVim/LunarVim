@@ -42,6 +42,9 @@ jobs:
     runs-on: windows-latest
     if: github.event.pull_request.draft == false
     continue-on-error: true # windows support is still experimental
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - uses: actions/checkout@v2
 
@@ -59,10 +62,10 @@ jobs:
 
       - name: Check LunarVim's version
         run: |
-          lvim --version
-          lvim --headless +'lua require("lvim.utils.git"):get_lvim_version "short"' -c ':qall'
+          "$HOME/.local/bin/lvim.ps1" --version;
+          "$HOME/.local/bin/lvim.ps1" --headless +'lua require("lvim.utils.git"):get_lvim_version "short"' -c ':qall'
 
       - name: Test LunarVim Health
         run: |
-          if lvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+          if "$HOME/.local/bin/lvim.ps1" --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
