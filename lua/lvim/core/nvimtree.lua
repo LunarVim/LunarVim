@@ -57,7 +57,7 @@ function M.config()
         height = 30,
         hide_root_folder = false,
         side = "left",
-        auto_resize = false,
+        preserve_window_proportions = false,
         mappings = {
           custom_only = false,
           list = {},
@@ -76,15 +76,20 @@ function M.config()
       },
       actions = {
         change_dir = {
+          enable = true,
           global = false,
         },
         open_file = {
           quit_on_open = false,
-        },
-        window_picker = {
-          enable = false,
-          chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-          exclude = {},
+          resize_window = false,
+          window_picker = {
+            enable = false,
+            chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+            exclude = {
+              filetype = {},
+              buftype = {},
+            },
+          },
         },
       },
     },
