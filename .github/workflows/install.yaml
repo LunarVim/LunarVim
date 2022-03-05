@@ -63,5 +63,8 @@ jobs:
       - name: Check LunarVim's version
         timeout-minutes: 1
         run: |
-          Invoke-Command -ScriptBlock { "$HOME/.local/bin/lvim.ps1" --version }
-          Invoke-Command -ScriptBlock { "$HOME/.local/bin/lvim.ps1" --headless +'lua print(require("lvim.utils.git"):get_lvim_version("short"))' +'qall' }
+          Invoke-Command -ScriptBlock {
+            Set-Alias lvim "$HOME\.local\bin\lvim.ps1";
+            lvim --version;
+            lvim  --headless +'lua print(require("lvim.utils.git"):get_lvim_version("short"))' +'qall'
+          }
