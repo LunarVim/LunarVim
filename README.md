@@ -31,7 +31,7 @@ Make sure you have the release version of Neovim (0.6.1+).
 ### Linux:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/BlueDruddigon/LunarVim/rolling/utils/installer/install.sh) -y
+bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install.sh) -y
 ```
 
 To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
