@@ -1,0 +1,18 @@
+{
+  "python.venvPath": "/home/beo/anaconda3/envs/hai",
+  "python.pythonPath": "/home/beo/anaconda3/envs/hai/bin/python",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.typeshedPaths": [],
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.stubPath": "/home/beo/Documents/typings",
+  "python.analysis.logLevel": "Information",
+  "python.analysis.extraPaths": [],
+  "python.analysis.diagnosticSeverityOverrides": {},
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.autoImportCompletions": true,
+  "pyright.useLibraryCodeForTypes": true,
+  "pyright.openFilesOnly": true,
+  "pyright.disableOrganizeImports": false,
+  "pyright.disableLanguageServices": false
+}

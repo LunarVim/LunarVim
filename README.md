@@ -31,7 +31,7 @@ Make sure you have the release version of Neovim (0.6.1+).
 ### Linux:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install.sh) -y
 ```
 
 To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
@@ -41,7 +41,7 @@ The same way, you can use `--no-install-dependencies` to skip the dependency ins
 ### Windows (Powershell):
 
 ```powershell
-Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+Invoke-WebRequest https://raw.githubusercontent.com/BlueDruddigon/LunarVim/rolling/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 ## Install Language support
