@@ -38,7 +38,7 @@ function main($cliargs) {
   
     # skip this in a Github workflow
     if ( $null -eq "$GITHUB_ACTIONS" ) {
-        install_packer
+        copy_local_lvim_repository
         setup_shim
         exit
     }
@@ -67,13 +67,6 @@ function main($cliargs) {
     __add_separator "80" 
  
     verify_lvim_dirs
-  
-    if (Test-Path "$env:LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim") {
-        Write-Output "Packer already installed"
-    }
-    else {
-        install_packer
-    }
   
     __add_separator "80"
   
@@ -178,10 +171,6 @@ function backup_old_config() {
 }
 
 
-function install_packer() {
-    Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --depth 1 "https://github.com/wbthomason/packer.nvim" "$env:LUNARVIM_RUNTIME_DIR\site\pack\packer\start\packer.nvim" }
-}
-  
 function copy_local_lvim_repository() {
     Write-Output "Copy local LunarVim configuration"
     Copy-Item -Path "$((Get-Item $PWD).Parent.Parent.FullName)" -Destination "$env:LUNARVIM_RUNTIME_DIR/lvim" -Recurse
