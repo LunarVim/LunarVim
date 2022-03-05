@@ -37,27 +37,33 @@ jobs:
         # NOTE: make sure to adjust the timeout if you start adding a lot of tests
         timeout-minutes: 4
         run: make test
-#   freebsd:
-#     runs-on: macos-latest
-#     if: github.event.pull_request.draft == false
-#     continue-on-error: true # we don't support freebsd yet
-#     name: "FreeBSD macos-latest"
-#     steps:
-#       - uses: actions/checkout@v2
 
-#       - name: Install dependencies for FreeBSD
-#         uses: vmactions/freebsd-vm@v0.1.5
-#         with:
-#           prepare: pkg install -y curl neovim
-#           run: bash ./utils/installer/install.sh
+  windows:
+    name: "windows-latest"
+    runs-on: windows-latest
+    if: github.event.pull_request.draft == false
+    continue-on-error: true # windows support is still experimental
+    steps:
+      - uses: actions/checkout@v2
 
-#       - name: Test LunarVim PackerCompile
-#         uses: vmactions/freebsd-vm@v0.1.5
-#         with:
-#           run: if nvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: nightly
 
-#       - name: Test LunarVim Health
-#         uses: vmactions/freebsd-vm@v0.1.5
-#         with:
-#           run: if nvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+      - name: Install LunarVim
+        timeout-minutes: 4
+        run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          pwsh ./utils/installer/install.ps1 
+
+      - name: Check LunarVim's version
+        run: |
+          lvim --version
+          lvim --headless +'lua require("lvim.utils.git"):get_lvim_version "short"' -c ':qall'
+
+      - name: Test LunarVim Health
+        run: |
+          if lvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
