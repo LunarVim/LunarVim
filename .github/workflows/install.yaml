@@ -62,10 +62,10 @@ jobs:
 
       - name: Check LunarVim's version
         run: |
-          "$HOME/.local/bin/lvim.ps1" --version;
-          "$HOME/.local/bin/lvim.ps1" --headless +'lua require("lvim.utils.git"):get_lvim_version "short"' -c ':qall'
+          pwsh "$HOME/.local/bin/lvim.ps1" --version
+          pwsh "$HOME/.local/bin/lvim.ps1" --headless +'lua require("lvim.utils.git"):get_lvim_version "short"' -c ':qall'
 
       - name: Test LunarVim Health
         run: |
-          if "$HOME/.local/bin/lvim.ps1" --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+          if pwsh "$HOME/.local/bin/lvim.ps1" --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
 
