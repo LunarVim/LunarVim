@@ -20,6 +20,11 @@ $__lvim_dirs = (
     "$env:LUNARVIM_CACHE_DIR"
 )
 
+function msg($text){
+    Write-Output $text
+    __add_separator "80"
+}
+
 function main($cliargs) {
     Write-Output "  
 
@@ -34,53 +39,41 @@ function main($cliargs) {
   
   "
   
-    __add_separator "80"
-  
-    # skip this in a Github workflow
-    if ( $null -eq "$GITHUB_ACTIONS" ) {
+    if ($cliargs.Contains("--local") -or $cliargs.Contains("--testing")) {
+        msg "Using local LunarVim installation"
         copy_local_lvim_repository
         setup_shim
         exit
     }
 
-    __add_separator "80"
-
+    msg "[INFO]: Checking dependencies.."
     check_system_deps
 
-    Write-Output "Would you like to check lunarvim's NodeJS dependencies?"
+    msg "Would you like to check lunarvim's NodeJS dependencies?"
     $answer = Read-Host "[y]es or [n]o (default: no) "
     if ("$answer" -eq "y" -or "$answer" -eq "Y") {
         install_nodejs_deps
     } 
 
-    Write-Output "Would you like to check lunarvim's Python dependencies?"
+    msg "Would you like to check lunarvim's Python dependencies?"
     $answer = Read-Host "[y]es or [n]o (default: no) "
     if ("$answer" -eq "y" -or "$answer" -eq "Y") {
         install_python_deps
     } 
 
-    __add_separator "80"
 
-    Write-Output "Backing up old LunarVim configuration"
+    msg "Backing up old LunarVim configuration"
     backup_old_config
 
-    __add_separator "80" 
- 
     verify_lvim_dirs
   
-    __add_separator "80"
-  
     if (Test-Path "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" ) {
-        Write-Output "Updating LunarVim"
+        msg "Updating LunarVim"
         update_lvim
     }
     else {
-        if ($cliargs.Contains("--testing")) {
-            copy_local_lvim_repository
-        }
-        else {
-            clone_lvim
-        }
+        msg "Cloning Lunarvim"
+        clone_lvim
         setup_lvim
     }
   
@@ -129,7 +122,6 @@ function check_system_dep($dep) {
 }
 
 function check_system_deps() {
-    Write-Output "[INFO]: Checking dependencies.."
     check_system_dep "git"
     check_system_dep "nvim"
     check_system_dep "make"
@@ -172,12 +164,10 @@ function backup_old_config() {
 
 
 function copy_local_lvim_repository() {
-    Write-Output "Copy local LunarVim configuration"
     Copy-Item -Path "$((Get-Item $PWD).Parent.Parent.FullName)" -Destination "$env:LUNARVIM_RUNTIME_DIR/lvim" -Recurse
 }
 
 function clone_lvim() {
-    Write-Output "Cloning LunarVim configuration"
     try {
         Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --branch "$LV_BRANCH" --depth 1 "https://github.com/$LV_REMOTE" "$env:LUNARVIM_RUNTIME_DIR/lvim" } 
     }
@@ -218,22 +208,15 @@ function verify_lvim_dirs() {
 }
 
 function setup_lvim() {
-    Write-Output "Installing LunarVim shim"
-  
+    msg "Installing LunarVim shim"
     setup_shim
   
-    Write-Output "Preparing Packer setup"
-
+    msg "Preparing Packer setup"
     if (Test-Path "$env:LUNARVIM_CONFIG_DIR\config.lua") {
         Remove-Item -Force "$env:LUNARVIM_CONFIG_DIR\config.lua"
     }
 
     Out-File -FilePath "$env:LUNARVIM_CONFIG_DIR\config.lua"
-  
-    Write-Output "Packer setup complete"
-	
-    __add_separator "80"
-
     Copy-Item "$env:LUNARVIM_RUNTIME_DIR\lvim\utils\installer\config_win.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
   
     $answer = Read-Host $(`

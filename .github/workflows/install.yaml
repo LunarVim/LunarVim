@@ -55,7 +55,7 @@ jobs:
         timeout-minutes: 4
         run: |
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          pwsh ./utils/installer/install.ps1 
+          pwsh ./utils/installer/install.ps1 --local
 
       - name: Check LunarVim's version
         run: |
