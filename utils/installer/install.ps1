@@ -178,17 +178,10 @@ function clone_lvim() {
 
 function setup_shim() {
     if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
-        New-Item "$INSTALL_PREFIX\bin" -ItemType Directory
+        New-Item "$INSTALL_PREFIX\bin" -ItemType Directory | Out-Null
     }
 
     Copy-Item -Force "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.ps1" "$INSTALL_PREFIX\bin\lvim.ps1"
-
-    $answer = Read-Host $(`
-            "Would you like to create an alias inside your Powershell profile?`n" + `
-            "(This enables you to start lvim with the command 'lvim') [y]es or [n]o (default: no)" )
-    if ("$answer" -eq "y" -and "$answer" -eq "Y") {
-        create_alias
-    }
 }
 
 function uninstall_lvim() {
@@ -224,6 +217,10 @@ function setup_lvim() {
     $exampleConfig = "$env:LUNARVIM_BASE_DIR\utils\installer\config_win.example.lua"
     Copy-Item -Force "$exampleConfig" "$env:LUNARVIM_CONFIG_DIR\config.lua"
 
+    Invoke-Expression "$INSTALL_PREFIX\bin\lvim.ps1 --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+
+    create_alias
+
     msg "Thank you for installing LunarVim!!"
 
     Write-Output "You can start it by running: $INSTALL_PREFIX\bin\lvim.ps1"
@@ -245,6 +242,20 @@ function validate_lunarvim_files() {
 }
 
 function create_alias {
+    try {
+        $answer = Read-Host $(`
+                "Would you like to create an alias inside your Powershell profile?`n" + `
+                "(This enables you to start lvim with the command 'lvim') [y]es or [n]o (default: no)" )
+    }
+    catch {
+        msg "Non-interactive mode detected. Skipping alias creation"
+        return
+    }
+
+    if ("$answer" -ne "y" -or "$answer" -ne "Y") {
+        return
+    }
+
     $lvim_bin="$INSTALL_PREFIX\bin\lvim.ps1"
     $lvim_alias = Get-Alias lvim -ErrorAction SilentlyContinue
 

@@ -59,4 +59,4 @@ jobs:
         timeout-minutes: 4
         run: |
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          Invoke-Command -ScriptBlock { ./utils/installer/install.ps1 --local }
+          pwsh.exe -NoLogo -ExecutionPolicy Bypass -NonInteractive -Command "./utils/installer/install.ps1 --local"
