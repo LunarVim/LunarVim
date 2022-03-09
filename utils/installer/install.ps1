@@ -142,7 +142,7 @@ function backup_old_config() {
         # that require an existing directory
         if ( Test-Path "$dir") {
             New-Item "$dir.bak" -ItemType Directory -Force
-            Copy-Item -Recurse "$dir\*" "$dir.bak\."
+            Copy-Item -Force -Recurse "$dir\*" "$dir.bak\." | Out-Null
         }
     }
 
@@ -151,12 +151,18 @@ function backup_old_config() {
 
 
 function copy_local_lvim_repository() {
-    Copy-Item -Path "$((Get-Item $PWD).Parent.Parent.FullName)" -Destination "$env:LUNARVIM_BASE_DIR" -Recurse
+    $repoDir = git rev-parse --show-toplevel
+    Copy-Item -Force -Recurse "$repoDir" "$env:LUNARVIM_BASE_DIR" | Out-Null
 }
 
 function clone_lvim() {
     try {
-        Invoke-Command -ErrorAction Stop -ScriptBlock { git clone --progress --branch "$LV_BRANCH" --depth 1 "https://github.com/$LV_REMOTE" $env:LUNARVIM_BASE_DIR }
+        $gitCloneCmd = {
+            git clone --progress --depth 1 --branch "$LV_BRANCH" `
+                "https://github.com/$LV_REMOTE" `
+                $env:LUNARVIM_BASE_DIR
+        }
+        Invoke-Command -ErrorAction Stop -ScriptBlock $gitCloneCmd
     }
     catch {
         msg "Failed to clone repository. Installation failed."
@@ -168,7 +174,8 @@ function setup_shim() {
     if ((Test-Path "$INSTALL_PREFIX\bin") -eq $false) {
         New-Item "$INSTALL_PREFIX\bin" -ItemType Directory
     }
-    Copy-Item "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.ps1" -Destination "$INSTALL_PREFIX\bin\lvim.ps1" -Force
+
+    Copy-Item -Force "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.ps1" "$INSTALL_PREFIX\bin\lvim.ps1"
 
     $answer = Read-Host $(`
             "Would you like to create an alias inside your Powershell profile?`n" + `
@@ -216,7 +223,9 @@ function setup_lvim() {
     }
 
     New-Item -ItemType File -Path "$env:LUNARVIM_CONFIG_DIR\config.lua"
-    Copy-Item "$env:LUNARVIM_BASE_DIR\utils\installer\config_win.example.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua"
+
+    $exampleConfig = "$env:LUNARVIM_BASE_DIR\utils\installer\config_win.example.lua"
+    Copy-Item "$exampleConfig" "$env:LUNARVIM_CONFIG_DIR\config.lua"
 
     msg "Thank you for installing LunarVim!!"
 
