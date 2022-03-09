@@ -216,7 +216,7 @@ function setup_lvim() {
     msg "Preparing Packer setup"
 
     if (Test-Path "$env:LUNARVIM_CONFIG_DIR\config.lua") {
-        Move-Item "$env:LUNARVIM_CONFIG_DIR\config.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua.bak"
+        Move-Item "$env:LUNARVIM_CONFIG_DIR\config.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua.old"
     }
 
     New-Item -ItemType File -Path "$env:LUNARVIM_CONFIG_DIR\config.lua" | Out-Null

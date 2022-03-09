@@ -26,7 +26,11 @@ function main($cliargs) {
     Write-Output "Removing LunarVim binary..."
     remove_lvim_bin
     Write-Output "Removing LunarVim directories..."
-    remove_lvim_dirs
+    $force = $false
+    if ($cliargs.Contains("--remove-backups")) {
+        $force = $true
+    }
+    remove_lvim_dirs $force
     Write-Output "Uninstalled LunarVim!"
 }
 
@@ -40,10 +44,13 @@ function remove_lvim_bin(){
     }
 }
 
-function remove_lvim_dirs() {
+function remove_lvim_dirs($force) {
     foreach ($dir in $__lvim_dirs) {
         if (Test-Path $dir) {
             Remove-Item -Force -Recurse $dir
+        }
+        if ($force -eq $true -and (Test-Path "$dir.bak" -or Test-Path "$dir.old")) {
+            Remove-Item -Force -Recurse "$dir.{bak,old}"
         }
     }
 }

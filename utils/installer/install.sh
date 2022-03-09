@@ -321,30 +321,29 @@ function verify_lvim_dirs() {
 }
 
 function backup_old_config() {
-  for dir in "${__lvim_dirs[@]}"; do
-    if [ ! -d "$dir" ]; then
-      continue
-    fi
-    mkdir -p "$dir.bak"
-    touch "$dir/ignore"
-    msg "Backing up old $dir to $dir.bak"
-    if command -v rsync &>/dev/null; then
-      rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$dir"/ "$dir.bak"
-    else
-      OS="$(uname -s)"
-      case "$OS" in
-        Linux | *BSD)
-          cp -r "$dir/"* "$dir.bak/."
-          ;;
-        Darwin)
-          cp -R "$dir/"* "$dir.bak/."
-          ;;
-        *)
-          echo "OS $OS is not currently supported."
-          ;;
-      esac
-    fi
-  done
+  local src="$LUNARVIM_CONFIG_DIR"
+  if [ ! -d "$dir" ]; then
+    return
+  fi
+  mkdir -p "$src.old"
+  touch "$src/ignore"
+  msg "Backing up old $src to $src.old"
+  if command -v rsync &>/dev/null; then
+    rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$src"/ "$src.old"
+  else
+    OS="$(uname -s)"
+    case "$OS" in
+      Linux | *BSD)
+        cp -r "$src/"* "$src.old/."
+        ;;
+      Darwin)
+        cp -R "$src/"* "$src.old/."
+        ;;
+      *)
+        echo "OS $OS is not currently supported."
+        ;;
+    esac
+  fi
   msg "Backup operation complete"
 }
 
