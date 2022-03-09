@@ -206,7 +206,7 @@ function setup_lvim() {
     msg "Installing LunarVim shim"
     setup_shim
 
-    msg "Preparing Packer setup"
+    msg "Installing sample configuration"
 
     if (Test-Path "$env:LUNARVIM_CONFIG_DIR\config.lua") {
         Move-Item "$env:LUNARVIM_CONFIG_DIR\config.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua.old"
@@ -217,7 +217,10 @@ function setup_lvim() {
     $exampleConfig = "$env:LUNARVIM_BASE_DIR\utils\installer\config_win.example.lua"
     Copy-Item -Force "$exampleConfig" "$env:LUNARVIM_CONFIG_DIR\config.lua"
 
-    Invoke-Expression "$INSTALL_PREFIX\bin\lvim.ps1 --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+    # FIXME: this has never worked
+    # Invoke-Expression "$INSTALL_PREFIX\bin\lvim.ps1 --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+
+    Write-Host "Make sure to run `:PackerSync` at first launch" -ForegroundColor Green
 
     create_alias
 
