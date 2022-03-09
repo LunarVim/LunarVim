@@ -46,6 +46,7 @@ jobs:
       run:
         shell: pwsh
     steps:
+      # it's not currently possbile to run tests on windows, see nvim-lua/plenary.nvim#255
       - uses: actions/checkout@v2
 
       - name: Install neovim binary
@@ -59,11 +60,3 @@ jobs:
         run: |
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           Invoke-Command -ScriptBlock { ./utils/installer/install.ps1 --local }
-
-      - name: Check LunarVim's version
-        timeout-minutes: 1
-        run: |
-          Invoke-Command -ErrorAction "Stop" -ScriptBlock {
-            Set-Alias lvim "$HOME\.local\bin\lvim.ps1";
-            lvim --headless +'lua print(require("lvim.utils.git"):get_lvim_version("short"))' +'qall'
-          }
