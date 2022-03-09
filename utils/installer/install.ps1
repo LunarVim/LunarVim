@@ -1,6 +1,8 @@
 #Requires -Version 7.1
 $ErrorActionPreference = "Stop" # exit when command fails
 
+Import-Module BitsTransfer
+
 # set script variables
 $LV_BRANCH = $LV_BRANCH ?? "rolling"
 $LV_REMOTE = $LV_REMOTE ??  "lunarvim/lunarvim.git"
@@ -22,6 +24,11 @@ $__lvim_dirs = (
     $env:LUNARVIM_CACHE_DIR
 )
 
+function __add_separator($div_width) {
+    "-" * $div_width
+    Write-Output ""
+}
+
 function msg($text){
     Write-Output $text
     __add_separator "80"
@@ -31,9 +38,19 @@ function main($cliargs) {
 
     print_logo
 
+    verify_lvim_dirs
+
+    if ($cliargs.Contains("--overwrite")) {
+        Write-Output "!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag"
+        $answer = Read-Host "Would you like to continue? [y]es or [n]o "
+        if ("$answer" -ne "y" -and "$answer" -ne "Y") {
+            exit 1
+        }
+        uninstall_lvim
+    }
     if ($cliargs.Contains("--local") -or $cliargs.Contains("--testing")) {
         msg "Using local LunarVim installation"
-        copy_local_lvim_repository
+        local_install
         setup_shim
         exit
     }
@@ -51,10 +68,6 @@ function main($cliargs) {
         install_python_deps
     }
 
-
-    msg "Backing up old LunarVim configuration"
-    backup_old_config
-    verify_lvim_dirs
 
     if (Test-Path "$env:LUNARVIM_BASE_DIR\init.lua" ) {
         msg "Updating LunarVim"
@@ -138,21 +151,31 @@ function install_python_deps() {
 
 function backup_old_config() {
     foreach ($dir in $__lvim_dirs) {
-        # we create an empty folder for subsequent commands \
-        # that require an existing directory
         if ( Test-Path "$dir") {
             New-Item "$dir.bak" -ItemType Directory -Force
-            Copy-Item -Force -Recurse "$dir\*" "$dir.bak\." | Out-Null
+            $params = @{
+                "Source" = "$dir\*";
+                "Destination" = "$dir.bak\.";
+                "Description" = "Lunarvim backup";
+                "DisplayName" = "Lunarvim backup"
+            }
+            Start-BitsTransfer @params | Out-Null
         }
     }
-
     msg "Backup operation complete"
 }
 
 
-function copy_local_lvim_repository() {
+function local_install() {
+    verify_lvim_dirs
     $repoDir = git rev-parse --show-toplevel
-    Copy-Item -Force -Recurse "$repoDir" "$env:LUNARVIM_BASE_DIR" | Out-Null
+    $params = @{
+        "Source" = "$repoDir\*";
+        "Destination" = "$env:LUNARVIM_BASE_DIR\.";
+        "Description" = "Lunarvim local install";
+        "DisplayName" = "Lunarvim local install"
+    }
+    Start-BitsTransfer @params | Out-Null
 }
 
 function clone_lvim() {
@@ -194,21 +217,12 @@ function uninstall_lvim() {
 }
 
 function verify_lvim_dirs() {
-    if ($cliargs.Contains("--overwrite")) {
-        Write-Output "!!Warning!! -> Removing all lunarvim related config because of the --overwrite flag"
-        $answer = Read-Host "Would you like to continue? [y]es or [n]o "
-        if ("$answer" -ne "y" -and "$answer" -ne "Y") {
-            exit 1
-        }
-
-        uninstall_lvim
-    }
-
     foreach ($dir in $__lvim_dirs) {
         if ((Test-Path "$dir") -eq $false) {
             New-Item "$dir" -ItemType Directory
         }
     }
+    backup_old_config
 }
 
 
@@ -225,7 +239,7 @@ function setup_lvim() {
     New-Item -ItemType File -Path "$env:LUNARVIM_CONFIG_DIR\config.lua"
 
     $exampleConfig = "$env:LUNARVIM_BASE_DIR\utils\installer\config_win.example.lua"
-    Copy-Item "$exampleConfig" "$env:LUNARVIM_CONFIG_DIR\config.lua"
+    Copy-Item -Force "$exampleConfig" "$env:LUNARVIM_CONFIG_DIR\config.lua"
 
     msg "Thank you for installing LunarVim!!"
 
@@ -235,23 +249,16 @@ function setup_lvim() {
 
 
 function validate_lunarvim_files() {
-    Set-Alias lvim
-    clone_lvim
+    Set-Alias lvim "$INSTALL_PREFIX\bin\lvim.ps1"
     try {
         $verify_version_cmd='if v:errmsg != "" | cquit | else | quit | endif'
         Invoke-Command -ScriptBlock { lvim --headless -c 'LvimUpdate' -c "$verify_version_cmd" } -ErrorAction SilentlyContinue
     }
     catch {
-        git -C $env:LUNARVIM_BASE_DIR pull --ff-only --progress -or
-        Write-Output "Unable to guarantee data integrity while updating. Please do that manually instead."
+        Write-Output "Unable to guarantee data integrity while updating. Please run `:LvimUpdate` manually instead."
         exit 1
     }
     Write-Output "Your LunarVim installation is now up to date!"
-}
-
-function __add_separator($div_width) {
-    "-" * $div_width
-    Write-Output ""
 }
 
 function create_alias {
