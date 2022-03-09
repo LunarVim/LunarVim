@@ -1,8 +1,6 @@
 #Requires -Version 7.1
 $ErrorActionPreference = "Stop" # exit when command fails
 
-Import-Module BitsTransfer
-
 # set script variables
 $LV_BRANCH = $LV_BRANCH ?? "rolling"
 $LV_REMOTE = $LV_REMOTE ??  "lunarvim/lunarvim.git"
@@ -51,7 +49,6 @@ function main($cliargs) {
     if ($cliargs.Contains("--local") -or $cliargs.Contains("--testing")) {
         msg "Using local LunarVim installation"
         local_install
-        setup_shim
         exit
     }
 
@@ -150,17 +147,10 @@ function install_python_deps() {
 }
 
 function backup_old_config() {
-    foreach ($dir in $__lvim_dirs) {
-        if ( Test-Path "$dir") {
-            New-Item "$dir.bak" -ItemType Directory -Force
-            $params = @{
-                "Source" = "$dir\*";
-                "Destination" = "$dir.bak\.";
-                "Description" = "Lunarvim backup";
-                "DisplayName" = "Lunarvim backup"
-            }
-            Start-BitsTransfer @params | Out-Null
-        }
+    $src = "$env:LUNARVIM_CONFIG_DIR"
+    if (Test-Path $src) {
+        New-Item "$src.old" -ItemType Directory -Force | Out-Null
+        Copy-Item -Force -Recurse "$src\*" "$src.old\." | Out-Null
     }
     msg "Backup operation complete"
 }
@@ -169,23 +159,16 @@ function backup_old_config() {
 function local_install() {
     verify_lvim_dirs
     $repoDir = git rev-parse --show-toplevel
-    $params = @{
-        "Source" = "$repoDir\*";
-        "Destination" = "$env:LUNARVIM_BASE_DIR\.";
-        "Description" = "Lunarvim local install";
-        "DisplayName" = "Lunarvim local install"
-    }
-    Start-BitsTransfer @params | Out-Null
+    $gitLocalCloneCmd = git clone --progress "$repoDir" "$env:LUNARVIM_BASE_DIR"
+    Invoke-Command -ErrorAction Stop -ScriptBlock { $gitLocalCloneCmd; setup_lvim }
 }
 
 function clone_lvim() {
     try {
-        $gitCloneCmd = {
-            git clone --progress --depth 1 --branch "$LV_BRANCH" `
+        $gitCloneCmd = git clone --progress --depth 1 --branch "$LV_BRANCH" `
                 "https://github.com/$LV_REMOTE" `
-                $env:LUNARVIM_BASE_DIR
-        }
-        Invoke-Command -ErrorAction Stop -ScriptBlock $gitCloneCmd
+                "$env:LUNARVIM_BASE_DIR"
+        Invoke-Command -ErrorAction Stop -ScriptBlock { $gitCloneCmd }
     }
     catch {
         msg "Failed to clone repository. Installation failed."
@@ -219,7 +202,7 @@ function uninstall_lvim() {
 function verify_lvim_dirs() {
     foreach ($dir in $__lvim_dirs) {
         if ((Test-Path "$dir") -eq $false) {
-            New-Item "$dir" -ItemType Directory
+            New-Item "$dir" -ItemType Directory | Out-Null
         }
     }
     backup_old_config
@@ -236,7 +219,7 @@ function setup_lvim() {
         Move-Item "$env:LUNARVIM_CONFIG_DIR\config.lua" "$env:LUNARVIM_CONFIG_DIR\config.lua.bak"
     }
 
-    New-Item -ItemType File -Path "$env:LUNARVIM_CONFIG_DIR\config.lua"
+    New-Item -ItemType File -Path "$env:LUNARVIM_CONFIG_DIR\config.lua" | Out-Null
 
     $exampleConfig = "$env:LUNARVIM_BASE_DIR\utils\installer\config_win.example.lua"
     Copy-Item -Force "$exampleConfig" "$env:LUNARVIM_CONFIG_DIR\config.lua"
