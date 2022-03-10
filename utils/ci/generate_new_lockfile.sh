@@ -4,6 +4,10 @@ set -e
 REPO_DIR=$(git rev-parse --show-toplevel)
 
 export SNAPSHOT_NAME="default.json"
+export SNAPSHOT_DIR="${REPO_DIR}/snapshots"
+
+mkdir -p "${SNAPSHOT_DIR}"
+
 export SNAPSHOT_PATH="${REPO_DIR}/snapshots/${SNAPSHOT_NAME}"
 
 time lvim --headless \
