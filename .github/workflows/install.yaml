@@ -1,7 +1,6 @@
 name: install
+
 on:
-  push:
-    branches: ["**"]
   pull_request:
     branches:
       - "master"
@@ -37,27 +36,27 @@ jobs:
         # NOTE: make sure to adjust the timeout if you start adding a lot of tests
         timeout-minutes: 4
         run: make test
-#   freebsd:
-#     runs-on: macos-latest
-#     if: github.event.pull_request.draft == false
-#     continue-on-error: true # we don't support freebsd yet
-#     name: "FreeBSD macos-latest"
-#     steps:
-#       - uses: actions/checkout@v2
 
-#       - name: Install dependencies for FreeBSD
-#         uses: vmactions/freebsd-vm@v0.1.5
-#         with:
-#           prepare: pkg install -y curl neovim
-#           run: bash ./utils/installer/install.sh
+  windows:
+    name: "windows-latest"
+    runs-on: windows-latest
+    if: github.event.pull_request.draft == false
+    continue-on-error: true # windows support is still experimental
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      # it's not currently possbile to run tests on windows, see nvim-lua/plenary.nvim#255
+      - uses: actions/checkout@v2
 
-#       - name: Test LunarVim PackerCompile
-#         uses: vmactions/freebsd-vm@v0.1.5
-#         with:
-#           run: if nvim --headless +PackerCompile -c ':qall' 2>&1|grep -q 'Error'; then false; fi
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: v0.6.1
 
-#       - name: Test LunarVim Health
-#         uses: vmactions/freebsd-vm@v0.1.5
-#         with:
-#           run: if nvim --headless +checkhealth -c ':qall' 2>&1|grep -q 'Error'; then false; fi
-
+      - name: Install LunarVim
+        timeout-minutes: 4
+        run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          pwsh.exe -NoLogo -ExecutionPolicy Bypass -NonInteractive -Command "./utils/installer/install.ps1 --local"
