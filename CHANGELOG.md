@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2]
+
+### <!-- 1 --> Features
+
+- _(installer)_ Use pnpm to install nodejs dependencies(#2279) (#2280)
+- _(windows)_ Add custom config_win.example.lua (#2330)
+- Add option to automatically answer 'yes' for sh install script (#2306)
+- Enable nlsp-settings schemas (#2322)
+
+### <!-- 2 --> Bugfix
+
+- _(nlsp-settings)_ Cross platform issue (#2335)
+- _(timeoutlen)_ This has caused way too many issues in the past (#2287)
+- Disable the default intro message (#2340)
+
+### <!-- 3 --> Refactor
+
+- _(nvim-tree)_ Update settings structure (#2304)
+
+### <!-- 4 --> Documentation
+
+- _(readme)_ Fix typo in example config (#2333)
+
 ## [1.1.1]
 
 ### <!-- 2 --> Bugfix
