@@ -3,6 +3,7 @@ local M = {}
 M.config = function()
   lvim.builtin.gitsigns = {
     active = true,
+    event = "BufRead",
     on_config_done = nil,
     opts = {
       signs = {

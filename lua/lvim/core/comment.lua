@@ -9,6 +9,7 @@ function M.config()
   end
   lvim.builtin.comment = {
     active = true,
+    event = "BufRead",
     on_config_done = nil,
     ---Add a space b/w comment and the line
     ---@type boolean

@@ -4,6 +4,7 @@ local utils = require "lvim.utils"
 M.config = function(config)
   lvim.builtin.dashboard = {
     active = false,
+    event = "BufWinEnter",
     on_config_done = nil,
     search_handler = "telescope",
     disable_at_vim_enter = 0,

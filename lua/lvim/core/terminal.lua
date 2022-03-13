@@ -3,6 +3,7 @@ local Log = require "lvim.core.log"
 
 M.config = function()
   lvim.builtin["terminal"] = {
+    event = "BufWinEnter",
     on_config_done = nil,
     -- size can be a number or function which is passed the current terminal
     size = 20,

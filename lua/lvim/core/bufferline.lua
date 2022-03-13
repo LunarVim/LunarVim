@@ -36,6 +36,7 @@ end
 M.config = function()
   lvim.builtin.bufferline = {
     active = true,
+    event = "BufWinEnter",
     on_config_done = nil,
     keymap = {
       normal_mode = {},

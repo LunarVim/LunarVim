@@ -58,7 +58,7 @@ return {
     config = function()
       require("lvim.core.notify").setup()
     end,
-    event = "BufRead",
+    event = lvim.builtin.notify.event,
   },
   { "Tastyep/structlog.nvim", commit = commit.structlog },
 
@@ -172,7 +172,7 @@ return {
     config = function()
       require("lvim.core.gitsigns").setup()
     end,
-    event = "BufRead",
+    event = lvim.builtin.gitsigns.event,
     disable = not lvim.builtin.gitsigns.active,
   },
 
@@ -183,7 +183,7 @@ return {
     config = function()
       require("lvim.core.which-key").setup()
     end,
-    event = "BufWinEnter",
+    event = lvim.builtin.which_key.event,
     disable = not lvim.builtin.which_key.active,
   },
 
@@ -191,7 +191,7 @@ return {
   {
     "numToStr/Comment.nvim",
     commit = commit.comment,
-    event = "BufRead",
+    event = lvim.builtin.comment.event,
     config = function()
       require("lvim.core.comment").setup()
     end,
@@ -229,7 +229,7 @@ return {
     config = function()
       require("lvim.core.bufferline").setup()
     end,
-    event = "BufWinEnter",
+    event = lvim.builtin.bufferline.event,
     disable = not lvim.builtin.bufferline.active,
   },
 
@@ -256,7 +256,7 @@ return {
   -- Dashboard
   {
     "ChristianChiarulli/dashboard-nvim",
-    event = "BufWinEnter",
+    event = lvim.builtin.dashboard.event,
     config = function()
       require("lvim.core.dashboard").setup()
     end,
@@ -267,7 +267,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     commit = commit.toggleterm,
-    event = "BufWinEnter",
+    event = lvim.builtin.terminal.event,
     config = function()
       require("lvim.core.terminal").setup()
     end,
