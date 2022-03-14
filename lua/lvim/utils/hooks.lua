@@ -1,7 +1,6 @@
 local M = {}
 
 local Log = require "lvim.core.log"
-local in_headless = #vim.api.nvim_list_uis() == 0
 
 function M.run_pre_update()
   Log:debug "Starting pre-update hook"
@@ -19,9 +18,15 @@ function M.run_on_packer_complete()
   Log:info "Reloaded configuration"
 end
 
+function M.run_on_packer_complete_headless()
+  Log:info "PackerComplete triggered, quitting now."
+  vim.schedule(function()
+    vim.cmd [[qall]]
+  end)
+end
+
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  require("lvim.plugin-loader").ensure_installed()
   M.reset_cache()
 end
 
@@ -48,9 +53,9 @@ function M.run_post_update()
   Log:debug "Starting post-update hook"
   M.reset_cache()
 
-  Log:debug "Updating core plugins"
-  require("lvim.plugin-loader").ensure_installed()
+  Log:debug "Syncing core plugins"
 
+  local in_headless = #vim.api.nvim_list_uis() == 0
   if not in_headless then
     vim.schedule(function()
       if package.loaded["nvim-treesitter"] then
@@ -59,6 +64,8 @@ function M.run_post_update()
       -- TODO: add a changelog
       vim.notify("Update complete", vim.log.levels.INFO)
     end)
+  else
+    vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete_headless()]]
   end
 end
 
