@@ -8,7 +8,6 @@ local commit = {
   dapinstall = "24923c3819a450a772bb8f675926d530e829665f",
   dashboard_nvim = "d82ddae95fd4dc4c3b7bbe87f09b1840fbf20ecb",
   fixcursorhold = "1bfb32e7ba1344925ad815cb0d7f901dbc0ff7c1",
-  friendly_snippets = "ad07b2844021b20797adda5b483265802559a693",
   gitsigns = "7de953329ff696408bd38d3218b0239839d285e0",
   lua_dev = "a0ee77789d9948adce64d98700cc90cecaef88d5",
   lualine = "88a44ade818f9ee7ba730aa4096250e22b243808",
@@ -90,12 +89,11 @@ return {
     end,
     requires = {
       "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets",
+      "gilsondev/friendly-snippets",
     },
   },
   {
-    "rafamadriz/friendly-snippets",
-    commit = commit.friendly_snippets,
+    "gilsondev/friendly-snippets"
   },
   {
     "L3MON4D3/LuaSnip",

@@ -1,14 +1,14 @@
 ![LunarVim Demo](./utils/media/lunarvim_logo_dark.png)
 
 <div align="center"><p>
-    <a href="https://github.com/lunarvim/LunarVim/releases/latest">
-      <img alt="Latest release" src="https://img.shields.io/github/v/release/lunarvim/LunarVim" />
+    <a href="https://github.com/gilsondev/LunarVim/releases/latest">
+      <img alt="Latest release" src="https://img.shields.io/github/v/release/gilsondev/LunarVim" />
     </a>
-    <a href="https://github.com/lunarvim/LunarVim/pulse">
-      <img alt="Last commit" src="https://img.shields.io/github/last-commit/lunarvim/LunarVim"/>
+    <a href="https://github.com/gilsondev/LunarVim/pulse">
+      <img alt="Last commit" src="https://img.shields.io/github/last-commit/gilsondev/LunarVim"/>
     </a>
-    <a href="https://github.com/lunarvim/LunarVim/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/lunarvim/lunarvim?style=flat-square&logo=GNU&label=License" alt="License"
+    <a href="https://github.com/gilsondev/LunarVim/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/gilsondev/lunarvim?style=flat-square&logo=GNU&label=License" alt="License"
     />
     <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon">
       <img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" />
@@ -31,7 +31,7 @@ Make sure you have the release version of Neovim (0.6.1+).
 ### Linux:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/gilsondev/lunarvim/master/utils/installer/install.sh)
 ```
 
 To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
@@ -41,7 +41,7 @@ The same way, you can use `--no-install-dependencies` to skip the dependency ins
 ### Windows (Powershell):
 
 ```powershell
-Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+Invoke-WebRequest https://raw.githubusercontent.com/gilsondev/lunarvim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 ## Install Language support
