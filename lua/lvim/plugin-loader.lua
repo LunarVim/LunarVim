@@ -7,6 +7,7 @@ local join_paths = utils.join_paths
 -- we need to reuse this outside of init()
 local compile_path = join_paths(get_config_dir(), "plugin", "packer_compiled.lua")
 local snapshot_path = join_paths(get_lvim_base_dir(), "snapshots")
+local default_snapshot = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 
 function plugin_loader.init(opts)
   opts = opts or {}
@@ -14,16 +15,11 @@ function plugin_loader.init(opts)
   local install_path = opts.install_path
     or join_paths(vim.fn.stdpath "data", "site", "pack", "packer", "start", "packer.nvim")
 
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
-    vim.cmd "packadd packer.nvim"
-  end
-
   local init_opts = {
     package_root = opts.package_root or join_paths(vim.fn.stdpath "data", "site", "pack"),
     compile_path = compile_path,
     snapshot_path = snapshot_path,
-    log = { level = "warn" },
+    log = { level = "debug" },
     git = {
       clone_timeout = 300,
       subcommands = {
@@ -46,6 +42,14 @@ function plugin_loader.init(opts)
     init_opts.log.level = "debug"
   else
     vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
+  end
+
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
+    vim.cmd "packadd packer.nvim"
+    -- IMPORTANT: we only set this the very first time to avoid constantly triggering the rollback function
+    -- https://github.com/wbthomason/packer.nvim/blob/c576ab3f1488ee86d60fd340d01ade08dcabd256/lua/packer.lua#L998-L995
+    init_opts.snapshot = default_snapshot
   end
 
   local status_ok, packer = pcall(require, "packer")
@@ -115,9 +119,8 @@ function plugin_loader.get_core_plugins()
 end
 
 function plugin_loader.sync_core_plugins()
-  local snapshot_name = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
-  Log:debug(string.format("Syncing core plugins with snapshot file [%s]", snapshot_name))
-  vim.cmd("PackerSnapshotRollback " .. snapshot_name)
+  Log:debug(string.format("Syncing core plugins with snapshot file [%s]", default_snapshot))
+  vim.cmd("PackerSnapshotRollback " .. default_snapshot)
 end
 
 return plugin_loader
