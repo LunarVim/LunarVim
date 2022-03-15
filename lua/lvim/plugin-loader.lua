@@ -31,7 +31,6 @@ function plugin_loader.init(opts)
         fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
       },
     },
-    max_jobs = 50,
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -45,9 +44,6 @@ function plugin_loader.init(opts)
 
     -- NOTE: `lvim.log.level` wouldn't be loaded from the user's config yet
     init_opts.log.level = "debug"
-
-    -- this one seems to get packer stuck in headless mode
-    init_opts.max_jobs = nil
   else
     vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
   end
@@ -118,10 +114,10 @@ function plugin_loader.get_core_plugins()
   return list
 end
 
-function plugin_loader.sync_core_plugins(snapshot_name)
-  snapshot_name = snapshot_name or "default.json"
-  Log:trace(string.format("Syncing core plugins with snapshot file [%s]", snapshot_name))
-  pcall_packer_command("rollback", snapshot_name)
+function plugin_loader.sync_core_plugins()
+  local snapshot_name = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
+  Log:debug(string.format("Syncing core plugins with snapshot file [%s]", snapshot_name))
+  vim.cmd("PackerSnapshotRollback " .. snapshot_name)
 end
 
 return plugin_loader
