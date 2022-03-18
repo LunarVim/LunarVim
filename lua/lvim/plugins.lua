@@ -52,13 +52,20 @@ return {
     commit = commit.nvim_lsp_installer,
   },
   {
+    "lunarvim/onedarker.nvim",
+    config = function()
+      require("onedarker").setup()
+    end,
+    disable = lvim.colorscheme ~= "onedarker",
+  },
+  {
     "rcarriga/nvim-notify",
     commit = commit.nvim_notify,
-    disable = not lvim.builtin.notify.active,
     config = function()
       require("lvim.core.notify").setup()
     end,
-    event = "BufRead",
+    requires = { "nvim-telescope/telescope.nvim" },
+    disable = not lvim.builtin.notify.active or not lvim.builtin.telescope.active,
   },
   { "Tastyep/structlog.nvim", commit = commit.structlog },
 
@@ -75,6 +82,7 @@ return {
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    requires = { "nvim-telescope/telescope.nvim" },
     commit = commit.telescope_fzf_native,
     run = "make",
     disable = not lvim.builtin.telescope.active,
