@@ -1,7 +1,7 @@
 local M = {}
 
 function M.validate_theme()
-  local theme = lvim.builtin.lualine.options.theme
+  local theme = lvim.builtin.lualine.options.theme or "auto"
   if type(theme) == "table" then
     return
   end
