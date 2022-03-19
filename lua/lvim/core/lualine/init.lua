@@ -9,6 +9,7 @@ M.config = function()
       section_separators = nil,
       theme = nil,
       disabled_filetypes = nil,
+      globalstatus = false,
     },
     sections = {
       lualine_a = nil,
