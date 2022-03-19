@@ -15,7 +15,15 @@ local function resolve_buttons(theme_name, entries)
   local selected_theme = require("alpha.themes." .. theme_name)
   local val = {}
   for _, entry in pairs(entries) do
-    table.insert(val, selected_theme.button(entry[1], entry[2], entry[3]))
+    local on_press = function()
+      local sc_ = entry[1]:gsub("%s", ""):gsub("SPC", "<leader>")
+      local key = vim.api.nvim_replace_termcodes(sc_, true, false, true)
+      vim.api.nvim_feedkeys(key, "normal", false)
+    end
+    local button_element = selected_theme.button(entry[1], entry[2], entry[3])
+    -- this became necessary after recent changes in alpha.nvim (06ade3a20ca9e79a7038b98d05a23d7b6c016174)
+    button_element.on_press = on_press
+    table.insert(val, button_element)
   end
   return val
 end
