@@ -85,8 +85,12 @@ local function handle_deprecated_settings()
     deprecation_notice "lvim.lsp.popup_border"
   end
 
-  if vim.tbl_contains(vim.tbl_keys(lvim.builtin.dashboard.custom_section), "dashboard") then
-    deprecation_notice "Deprecation notice: lvim.builtin.dashboard has been replaced with lvim.builtin.alpha"
+  -- dashboard.nvim
+  if lvim.builtin.dashboard.active then
+    deprecation_notice(
+      "dashboard",
+      "Deprecation notice: `lvim.builtin.dashboard` has been replaced with `lvim.builtin.alpha`. See LunarVim#1906"
+    )
   end
 end
 
