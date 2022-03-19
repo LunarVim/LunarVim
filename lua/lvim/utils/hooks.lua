@@ -12,8 +12,10 @@ function M.run_pre_reload()
 end
 
 function M.run_on_packer_complete()
-  -- manually trigger event to fix colors
-  vim.cmd [[ doautocmd ColorScheme ]]
+  if not in_headless then
+    -- manually trigger event to fix colors
+    vim.cmd [[ doautocmd ColorScheme ]]
+  end
   Log:info "Reloaded configuration"
 end
 
