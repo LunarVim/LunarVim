@@ -1,12 +1,12 @@
 local commit = {
-  bufferline = "f63be9a3a3429a726af14c9085d547281bdf38cc",
+  alpha_nvim = "14be0ac200f44009672046123c6fcb30724018a5",
+  bufferline = "5e101b1b4e1ea5b868b8865a5f749b0b5b8f3ccd",
   cmp_buffer = "d66c4c2d376e5be99db68d2362cd94d250987525",
   cmp_luasnip = "d6f837f4e8fe48eeae288e638691b91b97d1737f",
   cmp_nvim_lsp = "ebdfc204afb87f15ce3d3d3f5df0b8181443b5ba",
   cmp_path = "466b6b8270f7ba89abd59f402c73f63c7331ff6e",
   comment = "a841f73523440c4f32d39f0290cf1e691311db2a",
   dapinstall = "24923c3819a450a772bb8f675926d530e829665f",
-  dashboard_nvim = "d82ddae95fd4dc4c3b7bbe87f09b1840fbf20ecb",
   fixcursorhold = "1bfb32e7ba1344925ad815cb0d7f901dbc0ff7c1",
   friendly_snippets = "ad07b2844021b20797adda5b483265802559a693",
   gitsigns = "2df360de757c39c04076cb04bcbbd361dec3c8c2",
@@ -25,6 +25,7 @@ local commit = {
   nvim_treesitter = "fd92e70c69330dd8f2f6753d3d987c34e7dacd24",
   nvim_ts_context_commentstring = "097df33c9ef5bbd3828105e4bee99965b758dc3f",
   nvim_web_devicons = "4415d1aaa56f73b9c05795af84d625c610b05d3b",
+  onedarker = "b00dd2189f264c5aeb4cf04c59439655ecd573ec",
   packer = "c576ab3f1488ee86d60fd340d01ade08dcabd256",
   plenary = "14dfb4071022b22e08384ee125a5607464b6d397",
   popup = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
@@ -57,6 +58,7 @@ return {
       require("onedarker").setup()
       lvim.builtin.lualine.options.theme = "onedarker"
     end,
+    commit = commit.onedarker,
     disable = lvim.colorscheme ~= "onedarker",
   },
   {
@@ -262,14 +264,14 @@ return {
     disable = not lvim.builtin.dap.active,
   },
 
-  -- Dashboard
+  -- alpha
   {
-    "ChristianChiarulli/dashboard-nvim",
-    event = "BufWinEnter",
+    "goolord/alpha-nvim",
     config = function()
-      require("lvim.core.dashboard").setup()
+      require("lvim.core.alpha").setup()
     end,
-    disable = not lvim.builtin.dashboard.active,
+    commit = commit.alpha_nvim,
+    disable = not lvim.builtin.alpha.active,
   },
 
   -- Terminal

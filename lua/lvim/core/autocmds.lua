@@ -53,6 +53,19 @@ function M.load_augroups()
     _general_lsp = {
       { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> q :close<CR>" },
     },
+    _alpha = {
+      {
+        "FileType",
+        "alpha",
+        "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. vim.opt.showtabline._value,
+      },
+      -- https://github.com/goolord/alpha-nvim/issues/42
+      {
+        "FileType",
+        "alpha",
+        "set laststatus=0 | autocmd BufUnload <buffer> set laststatus=" .. vim.opt.laststatus._value,
+      },
+    },
     custom_groups = {},
   }
 end
