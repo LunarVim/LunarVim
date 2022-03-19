@@ -1,6 +1,6 @@
 local commit = {
-  alpha_nvim = "8ad63ffb2888a30019d082f08e0b63b9a96ee77c",
-  bufferline = "871495d9e2dbe3314a421fd2d5e46f47de7ee537",
+  alpha_nvim = "14be0ac200f44009672046123c6fcb30724018a5",
+  bufferline = "5e101b1b4e1ea5b868b8865a5f749b0b5b8f3ccd",
   cmp_buffer = "d66c4c2d376e5be99db68d2362cd94d250987525",
   cmp_luasnip = "d6f837f4e8fe48eeae288e638691b91b97d1737f",
   cmp_nvim_lsp = "ebdfc204afb87f15ce3d3d3f5df0b8181443b5ba",
@@ -25,6 +25,7 @@ local commit = {
   nvim_treesitter = "fd92e70c69330dd8f2f6753d3d987c34e7dacd24",
   nvim_ts_context_commentstring = "097df33c9ef5bbd3828105e4bee99965b758dc3f",
   nvim_web_devicons = "4415d1aaa56f73b9c05795af84d625c610b05d3b",
+  onedarker = "316b1c939977c6e368b6088ed9ced8b4c441ae35",
   packer = "c576ab3f1488ee86d60fd340d01ade08dcabd256",
   plenary = "14dfb4071022b22e08384ee125a5607464b6d397",
   popup = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
