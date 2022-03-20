@@ -88,6 +88,9 @@ function plugin_loader.load(configurations)
         end
       end
     end)
+    -- colorscheme must get called after plugins are loaded or it will break new installs.
+    vim.g.colors_name = lvim.colorscheme
+    vim.cmd("colorscheme " .. lvim.colorscheme)
   end, debug.traceback)
   if not status_ok then
     Log:warn "problems detected while loading plugins' configurations"
