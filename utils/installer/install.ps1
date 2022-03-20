@@ -262,7 +262,7 @@ function create_alias {
     $lvim_bin="$INSTALL_PREFIX\bin\lvim.ps1"
     $lvim_alias = Get-Alias lvim -ErrorAction SilentlyContinue
 
-    if ($lvim_alias.Definition == $lvim_bin) {
+    if ($lvim_alias.Definition -eq $lvim_bin) {
         Write-Output "Alias is already set and will not be reset."
         return
     }
