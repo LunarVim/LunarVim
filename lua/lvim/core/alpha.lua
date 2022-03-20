@@ -46,6 +46,26 @@ local function resolve_config(theme_name)
   return selected_theme.config
 end
 
+local function configure_additional_autocmds()
+  local aucmds = {
+    {
+      "FileType",
+      "alpha",
+      "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. vim.opt.showtabline._value,
+    },
+  }
+  if not lvim.builtin.lualine.options.globalstatus then
+    aucmds[#aucmds + 1] =
+      -- https://github.com/goolord/alpha-nvim/issues/42
+      {
+        "FileType",
+        "alpha",
+        "set laststatus=0 | autocmd BufUnload <buffer> set laststatus=" .. vim.opt.laststatus._value,
+      }
+  end
+  require("lvim.core.autocmds").define_augroups { _alpha = aucmds }
+end
+
 function M.setup()
   local alpha = require "alpha"
   local mode = lvim.builtin.alpha.mode
@@ -57,6 +77,7 @@ function M.setup()
   end
 
   alpha.setup(config)
+  configure_additional_autocmds()
 end
 
 return M
