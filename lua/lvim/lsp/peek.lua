@@ -32,6 +32,10 @@ local function create_floating_file(location, opts)
     math.min(range["end"].line + 1 + (opts.context or 10), range.start.line + (opts.max_height or 15)), -- Don't let the window be more that 15 lines long(height)
     false
   )
+  if next(contents) == nil then
+    print "peek: Unable to get contents of the file!"
+    return
+  end
   local width, height = vim.lsp.util._make_floating_popup_size(contents, opts)
   local if_nil = vim.F.if_nil
   opts = vim.lsp.util.make_floating_popup_options(if_nil(width, 30), if_nil(height, 10), opts)
