@@ -52,8 +52,7 @@ a.describe("lsp workflow", function()
 
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
       for _, server in ipairs(lvim.lsp.override) do
-        local ret, _, _ = helpers.file_contains(file, server)
-        assert.equal(ret, 1)
+        assert.False(helpers.file_contains(file, server))
       end
     end
   end)

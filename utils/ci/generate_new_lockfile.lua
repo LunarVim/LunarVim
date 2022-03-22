@@ -1,12 +1,4 @@
-local utils = require "lvim.utils"
-local sp = utils.join_paths(get_lvim_base_dir(), "snapshots", "default.json")
-
-local function load_lockfile()
-  local fd = assert(io.open(sp, "r"))
-  local lockfile = vim.json.decode(fd:read "*all") or {}
-  fd:close()
-  return lockfile
-end
+local sp = os.getenv "SNAPSHOT_PATH"
 
 local function call_proc(process, opts, cb)
   local std_output = ""
@@ -61,7 +53,7 @@ local function call_proc(process, opts, cb)
   return handle
 end
 
-local locked_parsers = load_lockfile()
+local plugins_list = {}
 
 local completed = 0
 
@@ -93,7 +85,7 @@ local function write_lockfile(verbose)
         return
       end
       local latest_sha = result:gsub("\tHEAD\n", ""):sub(1, 7)
-      locked_parsers[entry.name] = {
+      plugins_list[entry.name] = {
         commit = latest_sha,
       }
     end
@@ -110,11 +102,11 @@ local function write_lockfile(verbose)
   end)
 
   if verbose then
-    print(vim.inspect(locked_parsers))
+    print(vim.inspect(plugins_list))
   end
 
   local fd = assert(io.open(sp, "w"))
-  fd:write(vim.json.encode(locked_parsers), "\n")
+  fd:write(vim.json.encode(plugins_list), "\n")
   fd:flush()
 end
 

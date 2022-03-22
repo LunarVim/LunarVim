@@ -6,7 +6,7 @@ local join_paths = utils.join_paths
 
 -- we need to reuse this outside of init()
 local compile_path = join_paths(get_config_dir(), "plugin", "packer_compiled.lua")
-local snapshot_path = join_paths(get_lvim_base_dir(), "snapshots")
+local snapshot_path = join_paths(get_cache_dir(), "snapshots")
 local default_snapshot = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 
 function plugin_loader.init(opts)
@@ -19,7 +19,7 @@ function plugin_loader.init(opts)
     package_root = opts.package_root or join_paths(vim.fn.stdpath "data", "site", "pack"),
     compile_path = compile_path,
     snapshot_path = snapshot_path,
-    log = { level = "debug" },
+    log = { level = "warn" },
     git = {
       clone_timeout = 300,
       subcommands = {
@@ -38,8 +38,8 @@ function plugin_loader.init(opts)
   if in_headless then
     init_opts.display = nil
 
-    -- NOTE: `lvim.log.level` wouldn't be loaded from the user's config yet
-    init_opts.log.level = "debug"
+    -- NOTE: `lvim.log.level` may not be loaded from the user's config yet
+    init_opts.log.level = lvim.log and lvim.log.level or "info"
   else
     vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
   end
