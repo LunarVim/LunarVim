@@ -1,6 +1,6 @@
 local a = require "plenary.async_lib.tests"
 local utils = require "lvim.utils"
-local helpers = require "tests.helpers"
+local helpers = require "tests.lvim.helpers"
 local temp_dir = vim.loop.os_getenv "TEMP" or "/tmp"
 lvim.lsp.templates_dir = join_paths(temp_dir, "lvim", "tests", "artifacts")
 
@@ -52,7 +52,8 @@ a.describe("lsp workflow", function()
 
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
       for _, server in ipairs(lvim.lsp.override) do
-        assert.False(helpers.file_contains(file, server))
+        local ret, _, _ = helpers.file_contains(file, server)
+        assert.equal(ret, 1)
       end
     end
   end)
