@@ -11,6 +11,7 @@ function M.run_pre_reload()
 end
 
 function M.run_on_packer_complete()
+  local in_headless = #vim.api.nvim_list_uis() == 0
   if not in_headless then
     -- manually trigger event to fix colors
     vim.cmd [[ doautocmd ColorScheme ]]
