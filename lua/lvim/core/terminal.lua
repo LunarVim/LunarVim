@@ -85,7 +85,6 @@ M.add_exec = function(opts)
 
   require("lvim.keymappings").load {
     normal_mode = { [opts.keymap] = exec_func },
-    term_mode = { [opts.keymap] = exec_func },
   }
 
   local wk_status_ok, wk = pcall(require, "which-key")
