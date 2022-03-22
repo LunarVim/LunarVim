@@ -93,7 +93,6 @@ M.add_exec = function(opts)
     return
   end
   wk.register({ [opts.keymap] = { opts.label } }, { mode = "n" })
-  wk.register({ [opts.keymap] = { opts.label } }, { mode = "t" })
 end
 
 M._exec_toggle = function(opts)
