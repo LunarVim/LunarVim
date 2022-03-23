@@ -113,14 +113,38 @@ function plugin_loader.get_core_plugins()
   local list = {}
   local plugins = require "lvim.plugins"
   for _, item in pairs(plugins) do
-    table.insert(list, item[1]:match "/(%S*)")
+    if not item.disable then
+      table.insert(list, item[1]:match "/(%S*)")
+    end
   end
   return list
 end
 
-function plugin_loader.sync_core_plugins()
+function plugin_loader.sync_core_plugins(opts)
+  opts = opts or {}
   Log:debug(string.format("Syncing core plugins with snapshot file [%s]", default_snapshot))
-  vim.cmd("PackerSnapshotRollback " .. default_snapshot)
+  local packer = require "packer"
+  local a = require "packer.async"
+  local async = a.sync
+  local await = a.wait
+  local main = a.main
+  local core_plugins = plugin_loader.get_core_plugins()
+  async(function()
+    await(packer.rollback(default_snapshot, unpack(core_plugins)))
+      :map_ok(function(ok) --NOTE: these may not be doing anything, use PackerComplete for now
+        await(main)
+        Log:debug(string.format("Rollback snapshot file [%s] completed", default_snapshot))
+        if next(ok.failed) then
+          Log:warn(string.format("Couldn't rollback %s", vim.inspect(ok.failed)))
+        end
+        pcall(opts.on_complete, ok)
+      end)
+      :map_err(function(err)
+        await(main)
+        Log:error(err)
+        pcall(opts.on_error, err)
+      end)
+  end)()
 end
 
 return plugin_loader
