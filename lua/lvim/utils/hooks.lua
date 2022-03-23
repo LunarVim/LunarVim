@@ -1,6 +1,7 @@
 local M = {}
 
 local Log = require "lvim.core.log"
+local in_headless = #vim.api.nvim_list_uis() == 0
 
 function M.run_pre_update()
   Log:debug "Starting pre-update hook"
@@ -11,24 +12,25 @@ function M.run_pre_reload()
 end
 
 function M.run_on_packer_complete()
-  local in_headless = #vim.api.nvim_list_uis() == 0
-  if not in_headless then
-    -- manually trigger event to fix colors
-    vim.cmd [[ doautocmd ColorScheme ]]
-  end
-  Log:info "Reloaded configuration"
-end
-
-function M.run_on_packer_complete_headless()
-  Log:info "PackerComplete triggered, quitting now."
   vim.schedule(function()
-    vim.cmd [[qall]]
+    if not in_headless then
+      -- colorscheme must get called after plugins are loaded or it will break new installs.
+      vim.g.colors_name = lvim.colorscheme
+      vim.cmd("colorscheme " .. lvim.colorscheme)
+    else
+      Log:debug "Packer operation complete"
+    end
   end)
 end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
   M.reset_cache()
+  vim.schedule(function()
+    if not in_headless then
+      Log:info "Reloaded configuration"
+    end
+  end)
 end
 
 ---Reset any startup cache files used by Packer and Impatient
@@ -55,8 +57,8 @@ function M.run_post_update()
   M.reset_cache()
 
   Log:debug "Syncing core plugins"
+  require("lvim.plugin-loader").sync_core_plugins()
 
-  local in_headless = #vim.api.nvim_list_uis() == 0
   if not in_headless then
     vim.schedule(function()
       if package.loaded["nvim-treesitter"] then
@@ -65,8 +67,6 @@ function M.run_post_update()
       -- TODO: add a changelog
       vim.notify("Update complete", vim.log.levels.INFO)
     end)
-  else
-    vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete_headless()]]
   end
 end
 
