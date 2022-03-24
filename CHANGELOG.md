@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3]
+
+### <!-- 1 --> Features
+
+- add alpha.nvim integration (#1906)
+
+### <!-- 2 --> Bugfix
+
+- _(alpha)_ globalstatus after openning files from dashboard (#2366)
+- _(bufferline)_ add an additional space before diagnostics (#2367)
+- _(lualine)_ conditional theme loading (#2363)
+- _(peek)_ make sure popup_options are positive (#2373)
+- _(peek)_ print error if lsp is unable to get file contents (#2379)
+- _(terminal)_ whichkey -> which-key (#2380)
+- _(terminal)_ weird lazygit commit message bug (#2382)
+- _(windows)_ use correct validation for the alias (#2371)
+- nvim-tree taking half the window on open (#2357)
+- correct typo in backup function (#2358)
+- automatically set colorscheme (#2370)
+
+### <!-- 3 --> Refactor
+
+- load onedarker theme externally (#2359)
+
+### <!-- 4 --> Documentation
+
+- update demo images on the main readme (#2386)
+
 ## [1.1.2]
 
 ### <!-- 1 --> Features
