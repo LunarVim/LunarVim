@@ -20,9 +20,12 @@
 
 </div>
 
-## Documentation
+## Showcase
 
-You can find all the documentation for LunarVim at [lunarvim.org](https://www.lunarvim.org)
+![Intro1](./utils/media/intro1.png)
+![Info](./utils/media/info.png)
+![Demo1](./utils/media/demo1.png)
+![Demo2](./utils/media/demo2.png)
 
 ## Install In One Command!
 
@@ -44,17 +47,9 @@ The same way, you can use `--no-install-dependencies` to skip the dependency ins
 Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
-## Install Language support
+## Automatic LSP support
 
-- Enter `:LspInstall` followed by `<TAB>` to see your options for LSP
-
-- Enter `:TSInstall` followed by `<TAB>` to see your options for syntax highlighting
-
-**NOTE** I recommend installing `lua` for autocomplete in `config.lua`
-
-![Demo1](./utils/media/demo1.png)
-![Demo2](./utils/media/demo2.png)
-![Demo3](./utils/media/demo3.png)
+By default, most supported language servers will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
 
 ## Configuration file
 
@@ -117,7 +112,6 @@ linters.setup {
     filetypes = { "javascript", "javascriptreact" },
   },
 }
-
 
 -- Additional Plugins
 lvim.plugins = {
