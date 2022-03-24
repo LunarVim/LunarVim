@@ -13,11 +13,11 @@ function M.search_file(file, args)
       end,
     })
     :sync()
-  return stdout, ret, stderr
+  return ret, stdout, stderr
 end
 
 function M.file_contains(file, query)
-  local stdout, ret, stderr = M.search_file(file, query)
+  local ret, stdout, stderr = M.search_file(file, query)
   if ret == 0 then
     return true
   end
@@ -32,7 +32,7 @@ end
 
 function M.log_contains(query)
   local logfile = require("lvim.core.log"):get_path()
-  local stdout, ret, stderr = M.search_file(logfile, query)
+  local ret, stdout, stderr = M.search_file(logfile, query)
   if ret == 0 then
     return true
   end
@@ -41,9 +41,6 @@ function M.log_contains(query)
   end
   if not vim.tbl_isempty(stdout) then
     error(vim.inspect(stdout))
-  end
-  if not vim.tbl_isempty(stderr) then
-    error(vim.inspect(stderr))
   end
   return false
 end
