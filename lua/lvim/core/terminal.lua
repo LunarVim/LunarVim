@@ -88,12 +88,11 @@ M.add_exec = function(opts)
     term_mode = { [opts.keymap] = exec_func },
   }
 
-  local wk_status_ok, wk = pcall(require, "whichkey")
+  local wk_status_ok, wk = pcall(require, "which-key")
   if not wk_status_ok then
     return
   end
   wk.register({ [opts.keymap] = { opts.label } }, { mode = "n" })
-  wk.register({ [opts.keymap] = { opts.label } }, { mode = "t" })
 end
 
 M._exec_toggle = function(opts)

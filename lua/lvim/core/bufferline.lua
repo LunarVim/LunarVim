@@ -9,7 +9,7 @@ local function diagnostics_indicator(_, _, diagnostics)
   local symbols = { error = "", warning = "", info = "" }
   for name, count in pairs(diagnostics) do
     if symbols[name] and count > 0 then
-      table.insert(result, symbols[name] .. count)
+      table.insert(result, symbols[name] .. " " .. count)
     end
   end
   result = table.concat(result, " ")

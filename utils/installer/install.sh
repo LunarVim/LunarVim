@@ -322,7 +322,7 @@ function verify_lvim_dirs() {
 
 function backup_old_config() {
   local src="$LUNARVIM_CONFIG_DIR"
-  if [ ! -d "$dir" ]; then
+  if [ ! -d "$src" ]; then
     return
   fi
   mkdir -p "$src.old"
