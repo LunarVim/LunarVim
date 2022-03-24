@@ -1,4 +1,4 @@
-![LunarVim Demo](./utils/media/lunarvim_logo_dark.png)
+![lunarvim_logo_dark](https://user-images.githubusercontent.com/59826753/159940098-54284f26-f1da-4481-8b03-1deb34c57533.png)
 
 <div align="center"><p>
     <a href="https://github.com/lunarvim/LunarVim/releases/latest">
@@ -21,11 +21,11 @@
 </div>
 
 ## Showcase
+![intro1](https://user-images.githubusercontent.com/59826753/159939936-3a9a8e94-05ea-48fa-8c46-69378276451b.png)
+![info](https://user-images.githubusercontent.com/59826753/159939984-ac0190d7-a3fb-46c0-95ca-a6fec626bbac.png)
 
-![Intro1](./utils/media/intro1.png)
-![Info](./utils/media/info.png)
-![Demo1](./utils/media/demo1.png)
-![Demo2](./utils/media/demo2.png)
+![demo1](https://user-images.githubusercontent.com/59826753/159940004-84975294-5703-4bf1-aa98-2cc97cb38d96.png)
+![demo2](https://user-images.githubusercontent.com/59826753/159940040-375a0a28-4c81-4fdf-80f2-62853edf9b4f.png)
 
 ## Install In One Command!
 
