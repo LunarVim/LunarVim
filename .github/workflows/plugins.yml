@@ -1,0 +1,61 @@
+name: plugins-version-bump
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: false
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+  schedule:
+    - cron: "30 18 * * 1,5"
+
+jobs:
+  plugins-version-bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: v0.6.1
+
+      - name: Install LunarVim
+        timeout-minutes: 4
+        run: |
+          ./utils/installer/install.sh --local --no-install-dependencies
+
+      - name: run upgrade script
+        run: make generate_new_lockfile
+
+      - name: Re-install LunarVim
+        timeout-minutes: 4
+        run: |
+          ./utils/installer/uninstall.sh --remove-backups
+          ./utils/installer/install.sh --local --no-install-dependencies
+
+      - name: Run unit-tests
+        # NOTE: make sure to adjust the timeout if you start adding a lot of tests
+        timeout-minutes: 4
+        run: make test
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: plugins-bump
+          delete-branch: true # Delete the branch when closing pull requests, and when undeleted after merging.
+          base: test-ci
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "chore: bump plugins version"
+          commit_message: "chore: bump plugins version"
