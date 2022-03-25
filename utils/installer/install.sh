@@ -25,6 +25,7 @@ readonly BASEDIR
 declare ARGS_LOCAL=0
 declare ARGS_OVERWRITE=0
 declare ARGS_INSTALL_DEPENDENCIES=1
+declare INTERACTIVE_MODE=1
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
@@ -45,10 +46,11 @@ function usage() {
   echo "Usage: install.sh [<options>]"
   echo ""
   echo "Options:"
-  echo "    -h, --help                       Print this help message"
-  echo "    -l, --local                      Install local copy of LunarVim"
-  echo "    --overwrite                      Overwrite previous LunarVim configuration (a backup is always performed first)"
-  echo "    --[no]-install-dependencies      Whether to prompt to install external dependencies (will prompt by default)"
+  echo "    -h, --help                               Print this help message"
+  echo "    -l, --local                              Install local copy of LunarVim"
+  echo "    -y, --yes                                Disable confirmation prompts (answer yes to all questions)"
+  echo "    --overwrite                              Overwrite previous LunarVim configuration (a backup is always performed first)"
+  echo "    --[no]-install-dependencies              Whether to automatically install external dependencies (will prompt by default)"
 }
 
 function parse_arguments() {
@@ -59,6 +61,9 @@ function parse_arguments() {
         ;;
       --overwrite)
         ARGS_OVERWRITE=1
+        ;;
+      -y | --yes)
+        INTERACTIVE_MODE=0
         ;;
       --install-dependencies)
         ARGS_INSTALL_DEPENDENCIES=1
@@ -93,17 +98,23 @@ function main() {
   check_system_deps
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
-    msg "Would you like to install LunarVim's NodeJS dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
+    if [ "$INTERACTIVE_MODE" -eq 1 ]; then
+      msg "Would you like to install LunarVim's NodeJS dependencies?"
+      read -p "[y]es or [n]o (default: no) : " -r answer
+      [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
 
-    msg "Would you like to install LunarVim's Python dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
+      msg "Would you like to install LunarVim's Python dependencies?"
+      read -p "[y]es or [n]o (default: no) : " -r answer
+      [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
 
-    msg "Would you like to install LunarVim's Rust dependencies?"
-    read -p "[y]es or [n]o (default: no) : " -r answer
-    [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+      msg "Would you like to install LunarVim's Rust dependencies?"
+      read -p "[y]es or [n]o (default: no) : " -r answer
+      [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+    else
+      install_nodejs_deps
+      install_python_deps
+      install_rust_deps
+    fi
   fi
 
   backup_old_config
@@ -201,6 +212,12 @@ function check_system_deps() {
   check_neovim_min_version
 }
 
+function __install_nodejs_deps_pnpm() {
+  echo "Installing node modules with pnpm.."
+  pnpm install -g "${__npm_deps[@]}"
+  echo "All NodeJS dependencies are successfully installed"
+}
+
 function __install_nodejs_deps_npm() {
   echo "Installing node modules with npm.."
   for dep in "${__npm_deps[@]}"; do
@@ -229,6 +246,8 @@ function __validate_node_installation() {
 
   if [ "$pkg_manager" == "npm" ]; then
     manager_home="$(npm config get prefix 2>/dev/null)"
+  elif [ "$pkg_manager" == "pnpm" ]; then
+    manager_home="$(pnpm config get prefix 2>/dev/null)"
   else
     manager_home="$(yarn global bin 2>/dev/null)"
   fi
@@ -242,7 +261,7 @@ function __validate_node_installation() {
 }
 
 function install_nodejs_deps() {
-  local -a pkg_managers=("yarn" "npm")
+  local -a pkg_managers=("pnpm" "yarn" "npm")
   for pkg_manager in "${pkg_managers[@]}"; do
     if __validate_node_installation "$pkg_manager"; then
       eval "__install_nodejs_deps_$pkg_manager"
@@ -302,30 +321,29 @@ function verify_lvim_dirs() {
 }
 
 function backup_old_config() {
-  for dir in "${__lvim_dirs[@]}"; do
-    if [ ! -d "$dir" ]; then
-      continue
-    fi
-    mkdir -p "$dir.bak"
-    touch "$dir/ignore"
-    msg "Backing up old $dir to $dir.bak"
-    if command -v rsync &>/dev/null; then
-      rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$dir"/ "$dir.bak"
-    else
-      OS="$(uname -s)"
-      case "$OS" in
-        Linux | *BSD)
-          cp -r "$dir/"* "$dir.bak/."
-          ;;
-        Darwin)
-          cp -R "$dir/"* "$dir.bak/."
-          ;;
-        *)
-          echo "OS $OS is not currently supported."
-          ;;
-      esac
-    fi
-  done
+  local src="$LUNARVIM_CONFIG_DIR"
+  if [ ! -d "$src" ]; then
+    return
+  fi
+  mkdir -p "$src.old"
+  touch "$src/ignore"
+  msg "Backing up old $src to $src.old"
+  if command -v rsync &>/dev/null; then
+    rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$src"/ "$src.old"
+  else
+    OS="$(uname -s)"
+    case "$OS" in
+      Linux | *BSD)
+        cp -r "$src/"* "$src.old/."
+        ;;
+      Darwin)
+        cp -R "$src/"* "$src.old/."
+        ;;
+      *)
+        echo "OS $OS is not currently supported."
+        ;;
+    esac
+  fi
   msg "Backup operation complete"
 }
 

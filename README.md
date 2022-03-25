@@ -1,4 +1,4 @@
-![LunarVim Demo](./utils/media/lunarvim_logo_dark.png)
+![lunarvim_logo_dark](https://user-images.githubusercontent.com/59826753/159940098-54284f26-f1da-4481-8b03-1deb34c57533.png)
 
 <div align="center"><p>
     <a href="https://github.com/lunarvim/LunarVim/releases/latest">
@@ -20,29 +20,38 @@
 
 </div>
 
-## Documentation
+## Showcase
+![intro1](https://user-images.githubusercontent.com/59826753/159939936-3a9a8e94-05ea-48fa-8c46-69378276451b.png)
+![info](https://user-images.githubusercontent.com/59826753/159939984-ac0190d7-a3fb-46c0-95ca-a6fec626bbac.png)
 
-You can find all the documentation for LunarVim at [lunarvim.org](https://www.lunarvim.org)
+![demo1](https://user-images.githubusercontent.com/59826753/159940004-84975294-5703-4bf1-aa98-2cc97cb38d96.png)
+![demo2](https://user-images.githubusercontent.com/59826753/159940040-375a0a28-4c81-4fdf-80f2-62853edf9b4f.png)
 
 ## Install In One Command!
 
 Make sure you have the release version of Neovim (0.6.1+).
 
+### Linux:
+
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
-## Install Language support
+To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
 
-- Enter `:LspInstall` followed by `<TAB>` to see your options for LSP
+The same way, you can use `--no-install-dependencies` to skip the dependency installation.
 
-- Enter `:TSInstall` followed by `<TAB>` to see your options for syntax highlighting
+### Windows (Powershell 7+):
 
-**NOTE** I recommend installing `lua` for autocomplete in `config.lua`
+Powershell v7+ is required for this script. For instructions on how to install, [click here.](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.2)
 
-![Demo1](./utils/media/demo1.png)
-![Demo2](./utils/media/demo2.png)
-![Demo3](./utils/media/demo3.png)
+```powershell
+Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+```
+
+## Automatic LSP support
+
+By default, most supported language servers will get automatically installed once you open the supported file-type, e.g, opening a Python file for the first time will install `Pyright` and configure it automatically for you.
 
 ## Configuration file
 
@@ -69,7 +78,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- Configure builtin plugins
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 
@@ -80,7 +89,7 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 -- Disable virtual text
 lvim.lsp.diagnostics.virtual_text = false
 
--- Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
+-- Select which servers should be configured manually. Requires `:LvimCacheReset` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 vim.list_extend(lvim.lsp.override, { "pyright" })
 
@@ -106,7 +115,6 @@ linters.setup {
   },
 }
 
-
 -- Additional Plugins
 lvim.plugins = {
     {"lunarvim/colorschemes"},
@@ -131,6 +139,7 @@ lvim.plugins = {
 
 - `lvim.lang.FOO` is no longer supported. Refer to <https://www.lunarvim.org/languages> for up-to-date instructions.
 - `lvim.lsp.popup_border` has been deprecated in favor of `lvim.lsp.float.border` and `lvim.lsp.diagnostics.float.border`.
+- `lvim.builtin.dashboard` has been replaced with `lvim.builtin.alpha`, see <https://github.com/LunarVim/LunarVim/pull/1906>
 
 ## Resources
 
@@ -153,7 +162,7 @@ lvim.plugins = {
 > - @mvllow, Potential LunarVim user.
 
 <div align="center" id="madewithlua">
-	
+
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)](#madewithlua)
-	
+
 </div>

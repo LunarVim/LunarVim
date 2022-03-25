@@ -56,7 +56,7 @@ end
 --- Pretty format tables
 -- @param entries The table to format
 -- @param col_count The number of column to span the table on
--- @param col_sep The separator between each colummn, default: " "
+-- @param col_sep The separator between each column, default: " "
 function M.format_table(entries, col_count, col_sep)
   col_sep = col_sep or " "
 

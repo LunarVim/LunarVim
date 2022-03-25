@@ -46,7 +46,7 @@ function remove_lvim_dirs() {
   for dir in "${__lvim_dirs[@]}"; do
     rm -rf "$dir"
     if [ "$ARGS_REMOVE_BACKUPS" -eq 1 ]; then
-      rm -rf "$dir.bak"
+      rm -rf "$dir.{bak,old}"
     fi
   done
 }

@@ -1,33 +1,25 @@
 local plugin_loader = {}
 
-local in_headless = #vim.api.nvim_list_uis() == 0
-
 local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
+local join_paths = utils.join_paths
+
 -- we need to reuse this outside of init()
-local compile_path = get_config_dir() .. "/plugin/packer_compiled.lua"
+local compile_path = join_paths(get_config_dir(), "plugin", "packer_compiled.lua")
+local snapshot_path = join_paths(get_cache_dir(), "snapshots")
+local default_snapshot = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 
 function plugin_loader.init(opts)
   opts = opts or {}
 
-  local install_path = opts.install_path or vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-  local package_root = opts.package_root or vim.fn.stdpath "data" .. "/site/pack"
+  local install_path = opts.install_path
+    or join_paths(vim.fn.stdpath "data", "site", "pack", "packer", "start", "packer.nvim")
 
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
-    vim.cmd "packadd packer.nvim"
-  end
-
-  local log_level = in_headless and "debug" or "warn"
-  if lvim.log and lvim.log.level then
-    log_level = lvim.log.level
-  end
-
-  local _, packer = pcall(require, "packer")
-  packer.init {
-    package_root = package_root,
+  local init_opts = {
+    package_root = opts.package_root or join_paths(vim.fn.stdpath "data", "site", "pack"),
     compile_path = compile_path,
-    log = { level = log_level },
+    snapshot_path = snapshot_path,
+    log = { level = "warn" },
     git = {
       clone_timeout = 300,
       subcommands = {
@@ -35,7 +27,6 @@ function plugin_loader.init(opts)
         fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
       },
     },
-    max_jobs = 50,
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -43,8 +34,27 @@ function plugin_loader.init(opts)
     },
   }
 
-  if not in_headless then
+  local in_headless = #vim.api.nvim_list_uis() == 0
+  if in_headless then
+    init_opts.display = nil
+
+    -- NOTE: `lvim.log.level` may not be loaded from the user's config yet
+    init_opts.log.level = lvim.log and lvim.log.level or "info"
+  else
     vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
+  end
+
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
+    vim.cmd "packadd packer.nvim"
+    -- IMPORTANT: we only set this the very first time to avoid constantly triggering the rollback function
+    -- https://github.com/wbthomason/packer.nvim/blob/c576ab3f1488ee86d60fd340d01ade08dcabd256/lua/packer.lua#L998-L995
+    init_opts.snapshot = default_snapshot
+  end
+
+  local status_ok, packer = pcall(require, "packer")
+  if status_ok then
+    packer.init(init_opts)
   end
 end
 
@@ -81,6 +91,7 @@ function plugin_loader.load(configurations)
     return
   end
   local status_ok, _ = xpcall(function()
+    packer.reset()
     packer.startup(function(use)
       for _, plugins in ipairs(configurations) do
         for _, plugin in ipairs(plugins) do
@@ -88,36 +99,52 @@ function plugin_loader.load(configurations)
         end
       end
     end)
+    -- colorscheme must get called after plugins are loaded or it will break new installs.
+    vim.g.colors_name = lvim.colorscheme
+    vim.cmd("colorscheme " .. lvim.colorscheme)
   end, debug.traceback)
   if not status_ok then
     Log:warn "problems detected while loading plugins' configurations"
     Log:trace(debug.traceback())
   end
-
-  -- Colorscheme must get called after plugins are loaded or it will break new installs.
-  vim.g.colors_name = lvim.colorscheme
-  vim.cmd("colorscheme " .. lvim.colorscheme)
 end
 
 function plugin_loader.get_core_plugins()
   local list = {}
   local plugins = require "lvim.plugins"
   for _, item in pairs(plugins) do
-    table.insert(list, item[1]:match "/(%S*)")
+    if not item.disable then
+      table.insert(list, item[1]:match "/(%S*)")
+    end
   end
   return list
 end
 
-function plugin_loader.sync_core_plugins()
+function plugin_loader.sync_core_plugins(opts)
+  opts = opts or {}
+  Log:debug(string.format("Syncing core plugins with snapshot file [%s]", default_snapshot))
+  local packer = require "packer"
+  local a = require "packer.async"
+  local async = a.sync
+  local await = a.wait
+  local main = a.main
   local core_plugins = plugin_loader.get_core_plugins()
-  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
-  pcall_packer_command("sync", core_plugins)
-end
-
-function plugin_loader.ensure_installed()
-  local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
-  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
-  pcall_packer_command("install", all_plugins)
+  async(function()
+    await(packer.rollback(default_snapshot, unpack(core_plugins)))
+      :map_ok(function(ok) --NOTE: these may not be doing anything, use PackerComplete for now
+        await(main)
+        Log:debug(string.format("Rollback snapshot file [%s] completed", default_snapshot))
+        if next(ok.failed) then
+          Log:warn(string.format("Couldn't rollback %s", vim.inspect(ok.failed)))
+        end
+        pcall(opts.on_complete, ok)
+      end)
+      :map_err(function(err)
+        await(main)
+        Log:error(err)
+        pcall(opts.on_error, err)
+      end)
+  end)()
 end
 
 return plugin_loader

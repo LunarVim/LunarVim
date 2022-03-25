@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   lvim.builtin.which_key = {
-    ---@usage disable which-key completely [not recommeded]
+    ---@usage disable which-key completely [not recommended]
     active = true,
     on_config_done = nil,
     setup = {
@@ -64,33 +64,34 @@ M.config = function()
       ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
     },
     mappings = {
+      [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>q!<CR>", "Quit" },
       ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
-      ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
+      ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
       ["f"] = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       b = {
         name = "Buffers",
-        j = { "<cmd>BufferPick<cr>", "Jump" },
+        j = { "<cmd>BufferLinePick<cr>", "Jump" },
         f = { "<cmd>Telescope buffers<cr>", "Find" },
-        b = { "<cmd>b#<cr>", "Previous" },
-        w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
+        b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+        -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
         e = {
-          "<cmd>BufferCloseAllButCurrent<cr>",
-          "Close all but current",
+          "<cmd>BufferLinePickClose<cr>",
+          "Pick which buffer to close",
         },
-        h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
+        h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
         l = {
-          "<cmd>BufferCloseBuffersRight<cr>",
+          "<cmd>BufferLineCloseRight<cr>",
           "Close all to the right",
         },
         D = {
-          "<cmd>BufferOrderByDirectory<cr>",
+          "<cmd>BufferLineSortByDirectory<cr>",
           "Sort by directory",
         },
         L = {
-          "<cmd>BufferOrderByLanguage<cr>",
+          "<cmd>BufferLineSortByExtension<cr>",
           "Sort by language",
         },
       },
@@ -167,6 +168,7 @@ M.config = function()
           "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
           "Workspace Symbols",
         },
+        e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
       },
       L = {
         name = "+LunarVim",

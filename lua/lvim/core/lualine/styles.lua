@@ -10,6 +10,7 @@ local styles = {
 styles.none = {
   style = "none",
   options = {
+    theme = "auto",
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -38,6 +39,7 @@ styles.none = {
 styles.default = {
   style = "default",
   options = {
+    theme = "auto",
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -66,10 +68,11 @@ styles.default = {
 styles.lvim = {
   style = "lvim",
   options = {
+    theme = "auto",
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
+    disabled_filetypes = { "alpha", "NvimTree", "Outline" },
   },
   sections = {
     lualine_a = {
@@ -113,10 +116,10 @@ function M.get_style(style)
   if not vim.tbl_contains(style_keys, style) then
     local Log = require "lvim.core.log"
     Log:error(
-      "Invalid lualine style",
-      string.format('"%s"', style),
-      "options are: ",
-      string.format('"%s"', table.concat(style_keys, '", "'))
+      "Invalid lualine style"
+        .. string.format('"%s"', style)
+        .. "options are: "
+        .. string.format('"%s"', table.concat(style_keys, '", "'))
     )
     Log:debug '"lvim" style is applied.'
     style = "lvim"
@@ -127,9 +130,6 @@ end
 
 function M.update()
   local style = M.get_style(lvim.builtin.lualine.style)
-  if lvim.builtin.lualine.options.theme == nil then
-    lvim.builtin.lualine.options.theme = lvim.colorscheme
-  end
 
   lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
 end
