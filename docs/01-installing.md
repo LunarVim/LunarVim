@@ -64,6 +64,23 @@ if vim.fn.has "wsl" == 1 then
 end
 
 ```
+3. Some WSL2 users have experienced that opening buffers at startup takes a lot of time. 
+A possible solution is to add the following to your `/etc/wsl.conf` file:
+
+```ini
+[automount]
+# Set to true will automount fixed drives (C:/ or D:/) with DrvFs under the root directory set above. Set to false means drives won't be mounted automatically, but need to be mounted manually or with fstab.
+enabled = false
+
+# Sets the `/etc/fstab` file to be processed when a WSL distribution is launched.
+mountFsTab = false
+
+# Set whether WSL supports interop process like launching Windows apps and adding path variables. Setting these to false will block the launch of Windows processes and block adding $PATH environment variables.
+[interop]
+enabled = false
+appendWindowsPath = false
+```
+Reference: [WSL automount settings](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#automount-settings)
 
 ## Uninstall
 
