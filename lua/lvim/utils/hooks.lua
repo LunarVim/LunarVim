@@ -15,8 +15,8 @@ function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
   vim.cmd [[doautocmd User PackerComplete]]
 
-  -- NOTE: disabled for now, but might be needed again..
-  -- vim.cmd [[doautocmd ColorScheme]]
+  vim.g.colors_name = lvim.colorscheme
+  pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
 
   if M._reload_triggered then
     Log:info "Reloaded configuration"

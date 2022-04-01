@@ -23,10 +23,6 @@ function plugin_loader.init(opts)
     log = { level = "warn" },
     git = {
       clone_timeout = 300,
-      subcommands = {
-        -- this is more efficient than what Packer is using
-        fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
-      },
     },
     display = {
       open_fn = function()
