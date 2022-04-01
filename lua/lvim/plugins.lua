@@ -13,8 +13,12 @@ local core_plugins = {
   {
     "lunarvim/onedarker.nvim",
     config = function()
-      require("onedarker").setup()
-      lvim.builtin.lualine.options.theme = "onedarker"
+      pcall(function()
+        if lvim and lvim.colorscheme == "onedarker" then
+          require("onedarker").setup()
+          lvim.builtin.lualine.options.theme = "onedarker"
+        end
+      end)
     end,
     disable = lvim.colorscheme ~= "onedarker",
   },
