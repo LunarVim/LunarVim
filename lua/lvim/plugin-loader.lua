@@ -3,6 +3,7 @@ local plugin_loader = {}
 local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 local join_paths = utils.join_paths
+local in_headless = #vim.api.nvim_list_uis() == 0
 
 -- we need to reuse this outside of init()
 local compile_path = join_paths(get_config_dir(), "plugin", "packer_compiled.lua")
@@ -34,7 +35,6 @@ function plugin_loader.init(opts)
     },
   }
 
-  local in_headless = #vim.api.nvim_list_uis() == 0
   if in_headless then
     init_opts.display = nil
 
@@ -135,7 +135,9 @@ end
 
 function plugin_loader.load_snapshot(snapshot_file)
   snapshot_file = snapshot_file or default_snapshot
-  vim.notify("Syncing core plugins is in progress..", vim.log.levels.INFO, { title = "lvim" })
+  if not in_headless then
+    vim.notify("Syncing core plugins is in progress..", vim.log.levels.INFO, { title = "lvim" })
+  end
   Log:debug(string.format("Using snapshot file [%s]", snapshot_file))
   local core_plugins = plugin_loader.get_core_plugins()
   require("packer").rollback(snapshot_file, unpack(core_plugins))
