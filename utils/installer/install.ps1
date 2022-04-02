@@ -267,7 +267,7 @@ function create_alias {
         return
     }
 
-    Add-Content -Path $PROFILE -Value $("Set-Alias lvim $lvim_bin")
+    Add-Content -Path $PROFILE -Value $("`r`nSet-Alias lvim $lvim_bin")
 
     Write-Host 'To use the new alias in this window reload your profile with: `. $PROFILE`' -ForegroundColor Green
 }
