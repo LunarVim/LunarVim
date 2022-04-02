@@ -161,24 +161,22 @@ function M.toggle_popup(ft)
   local content_provider = function(popup)
     local content = {}
 
-    for _, section in
-      ipairs {
-        M.banner,
-        { "" },
-        { "" },
-        header,
-        { "" },
-        lsp_info,
-        { "" },
-        override_info,
-        { "" },
-        formatters_info,
-        { "" },
-        linters_info,
-        { "" },
-        code_actions_info,
-      }
-    do
+    for _, section in ipairs {
+      M.banner,
+      { "" },
+      { "" },
+      header,
+      { "" },
+      lsp_info,
+      { "" },
+      override_info,
+      { "" },
+      formatters_info,
+      { "" },
+      linters_info,
+      { "" },
+      code_actions_info,
+    } do
       vim.list_extend(content, section)
     end
 
