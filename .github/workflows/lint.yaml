@@ -4,6 +4,11 @@ on:
   pull_request:
     branches:
       - "rolling"
+    paths:
+      - 'lua/**'
+      - 'snapshots/**'
+      - 'tests/**'
+      - 'utils/**'
 
 jobs:
   lua-linter:
