@@ -60,5 +60,6 @@ jobs:
           branch: plugins-bump
           delete-branch: true # Delete the branch when closing pull requests, and when undeleted after merging.
           token: ${{ secrets.GITHUB_TOKEN }}
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           title: "chore: bump plugins version"
           commit-message: "chore: bump plugins version"
