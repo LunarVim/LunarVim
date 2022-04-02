@@ -137,36 +137,8 @@ function M.generate_supported_table(filetypes)
 	utils.write_file("supported.json", info_json, "w")
 end
 
-function M.generate_core_plugins_list(output)
-	output = output or "scripts/core_plugins.json"
-	local info_table = {}
-
-	local core_plugins = require("lvim.plugins")
-	local Job = require("plenary.job")
-	local jobs = {}
-
-	for _, plugin in pairs(core_plugins) do
-		local repo = plugin[1]
-		local job = Job:new({ command = "gh", args = { "api", "/repos/" .. repo, "-q", ".description" } })
-		job:after_success(function(this_job)
-			local description = this_job:result()
-			info_table[#info_table + 1] = {
-				name = string.format("<a href='https://github.com/%s'>%s</a>", repo, repo),
-				description = description,
-				default = not plugin.disable,
-			}
-		end)
-		job:start()
-		table.insert(jobs, job)
-	end
-	Job.join(unpack(jobs))
-
-	utils.write_file(output, vim.json.encode(info_table):gsub("\\", ""), "w")
-end
-
 -- M.generate_supported_table(supported_filetypes)
 -- M.generate_docs_languages(supported_filetypes)
 -- M.generate_doc_global_supported(supported_filetypes)
-M.generate_core_plugins_list()
 
 return M
