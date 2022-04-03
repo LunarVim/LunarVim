@@ -33,9 +33,6 @@ function plugin_loader.init(opts)
 
   if in_headless then
     init_opts.display = nil
-
-    -- NOTE: `lvim.log.level` may not be loaded from the user's config yet
-    init_opts.log.level = lvim.log and lvim.log.level or "info"
   end
 
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then

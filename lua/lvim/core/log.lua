@@ -19,6 +19,9 @@ function Log:init()
     return nil
   end
 
+  package.loaded["packer.log"] = nil
+  require("packer.log").new { level = lvim.log.level }
+
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   local lvim_log = {
     lvim = {
