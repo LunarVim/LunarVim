@@ -2,7 +2,7 @@ local opts = {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { "vim", "lvim" },
+        globals = { "vim", "lvim", "packer_plugins" },
       },
       workspace = {
         library = {

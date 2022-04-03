@@ -124,18 +124,20 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:reload()
-  require_clean("lvim.utils.hooks").run_pre_reload()
+  vim.schedule(function()
+    require_clean("lvim.utils.hooks").run_pre_reload()
 
-  M:init()
-  M:load()
+    M:init()
+    M:load()
 
-  require("lvim.core.autocmds").configure_format_on_save()
+    require("lvim.core.autocmds").configure_format_on_save()
 
-  local plugins = require "lvim.plugins"
-  local plugin_loader = require "lvim.plugin-loader"
+    local plugins = require "lvim.plugins"
+    local plugin_loader = require "lvim.plugin-loader"
 
-  plugin_loader.load { plugins, lvim.plugins }
-  require_clean("lvim.utils.hooks").run_post_reload()
+    plugin_loader.reload { plugins, lvim.plugins }
+    require_clean("lvim.utils.hooks").run_post_reload()
+  end)
 end
 
 return M
