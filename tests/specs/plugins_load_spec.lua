@@ -57,8 +57,8 @@ a.describe("plugin-loader", function()
         _G.completed = true
       end
     end
-    vim.cmd [[autocmd User PackerComplete lua _G.verify_sha()]]
-    loader.sync_core_plugins()
+    vim.cmd [[autocmd User PackerComplete ++once lua _G.verify_sha()]]
+    loader.load_snapshot()
     local ret = vim.wait(30 * 10 * 1000, function()
       return _G.completed == true
     end, 200)

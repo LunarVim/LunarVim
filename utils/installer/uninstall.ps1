@@ -49,9 +49,15 @@ function remove_lvim_dirs($force) {
         if (Test-Path $dir) {
             Remove-Item -Force -Recurse $dir
         }
-        if ($force -eq $true -and (Test-Path "$dir.bak" -or Test-Path "$dir.old")) {
-            Remove-Item -Force -Recurse "$dir.{bak,old}"
+        if ($force -eq $true) {
+            if (Test-Path "$dir.bak") {
+                Remove-Item -Force -Recurse "$dir.bak"
+            }
+            if (Test-Path "$dir.old") {
+                Remove-Item -Force -Recurse "$dir.old"
+            }
         }
     }
 }
 
+main($args)

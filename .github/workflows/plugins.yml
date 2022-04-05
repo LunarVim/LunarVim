@@ -13,13 +13,17 @@ on:
         - warning
         - debug
   schedule:
-    - cron: "30 18 * * 1,5"
+    # note: this will keep updating the existing branch
+    - cron: "*/15 10-14 * * 0,6"
+    - cron: "0 14 * * 1-5"
 
 jobs:
   plugins-version-bump:
     runs-on: ubuntu-latest
+    continue-on-error: true
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -55,7 +59,7 @@ jobs:
         with:
           branch: plugins-bump
           delete-branch: true # Delete the branch when closing pull requests, and when undeleted after merging.
-          base: test-ci
           token: ${{ secrets.GITHUB_TOKEN }}
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           title: "chore: bump plugins version"
-          commit_message: "chore: bump plugins version"
+          commit-message: "chore: bump plugins version"
