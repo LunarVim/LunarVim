@@ -91,6 +91,7 @@ A typical setup call with default arguments
 -- edit this file by running `:lua vim.cmd("edit " .. lvim.lsp.templates_dir .. "/lua.lua"))`
 require("lvim.lsp.manager").setup("sumneko_lua")
 ```
+
 ::: tip
 You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files"
 :::
@@ -135,43 +136,107 @@ This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persis
 Make sure to install `jsonls` for autocompletion.
 :::
 
-## Formatting
+## Linting/Formatting
 
-Set a formatter, this will override the language server formatting capabilities (if it exists)
+Set a linter/formatter, this will override the language server formatting capabilities (if it exists)
 
 ```lua
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { exe = "black" },
+  { command = "black" },
   {
-    exe = "prettier",
+    command = "prettier",
     args = { "--print-width", "100" },
     filetypes = { "typescript", "typescriptreact" },
   },
 }
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "flake8" },
+  {
+    command = "shellcheck",
+    args = { "--severity", "warning" },
+  },
+  {
+    command = "codespell",
+    filetypes = { "javascript", "python" },
+  },
+}
+
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    command = "proselint"
+  },
+}
 ```
 
-_Note: Formatters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
+Another method is to reference the linter/formatter/code_actions by their names, as referenced in [null-ls docs](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md), if you do not want to customize the command
+
+```lua
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { name = "black" },
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { name = "flake8" },
+  { name = "shellcheck" },
+  {
+    name = "codespell",
+    filetypes = { "javascript", "python" },
+  },
+}
+
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    name = "proselint"
+  },
+}
+```
+
+_Note: Formatters' or Linters' or Code Actions installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
 
 ### Custom arguments
 
-It's also possible to add custom arguments for each formatter.
+It's also possible to add custom arguments for each linter/formatter/code_actions.
 
 ```lua
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    exe = "prettier",
+    command = "prettier",
     ---@usage arguments to pass to the formatter
     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
     args = { "--print-width", "100" },
+  },
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    command = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    args = { "--severity", "warning" },
+  },
+}
+
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    command = "proselint",
+    args = { "--json" },
   },
 }
 ```
 
 _Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
 
-### Multi languages per formatter
+### Multi languages per linter/formatter
 
 By default a formatter will attach to all the filetypes it supports.
 
@@ -179,7 +244,7 @@ By default a formatter will attach to all the filetypes it supports.
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    exe = "prettier",
+    command = "prettier",
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "typescript", "typescriptreact" },
   },
@@ -188,7 +253,7 @@ formatters.setup {
 
 _Note: removing the `filetypes` argument will allow the formatter to attach to all the default filetypes it supports._
 
-### Multi formatters per language
+### Multi linters/formatters/code_actions per language
 
 There are no restrictions on setting up multiple formatters per language
 
@@ -196,103 +261,31 @@ There are no restrictions on setting up multiple formatters per language
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-  { exe = "black", filetypes = { "python" } },
-  { exe = "isort", filetypes = { "python" } },
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
   },
 }
-```
 
-### Lazy-loading the formatter setup
-
-By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
-then you can use [filetype plugins](../configuration/07-ftplugin.md) for this purpose.
-
-Let's take `markdown` as an example:
-
-1. create a file called `markdown.lua` in the `$LUNARVIM_CONFIG_DIR/after/ftplugin` folder
-2. add the following snippet
-
-```lua
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup({{exe = "prettier", filetypes = {"markdown"} }})
-```
-
-### Formatting on save
-
-You can disable auto-command and is to true by default.
-
-- configuration option
-
-```lua
-lvim.format_on_save = true
-```
-
-## Linting
-
-Set additional linters
-
-```lua
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { exe = "flake8" },
-  {
-    exe = "shellcheck",
-    args = { "--severity", "warning" },
-  },
-  {
-    exe = "codespell",
-    filetypes = { "javascript", "python" },
-  },
-}
-```
-
-_Note: linters' installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
-
-### Custom arguments
-
-It's also possible to add custom arguments for each linter.
-
-```lua
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
-    exe = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--severity", "warning" },
-  },
-}
-```
-
-_Note: remember that arguments cannot contains spaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`._
-
-### Multi linters per language
-
-```lua
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { exe = "flake8", filetypes = { "python" } },
-  { exe = "codespell", filetypes = { "python" } },
-}
-```
-
-### Multi languages per linter
-
-```lua
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  {
-    exe = "codespell",
+    command = "codespell",
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "javascript", "python" },
   },
 }
-```
-::: tip
-Removing the `filetypes` argument will allow the linter to attach to all the default filetypes it supports.
-:::
 
-### Lazy-loading the linter setup
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    command = "proselint",
+    args = { "--json" },
+    filetypes = { "markdown", "tex" },
+  },
+}
+```
+
+### Lazy-loading the linter/formatter/code_actions setup
 
 By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
 then you can use [filetype plugins](../configuration/07-ftplugin.md) for this purpose.
@@ -304,5 +297,15 @@ Let's take `python` as an example:
 
 ```lua
 local linters = require "lvim.lsp.null-ls.linters"
-linters.setup({{exe = "flake8", filetypes = { "python" } }})
+linters.setup({{command = "flake8", filetypes = { "python" } }})
+```
+
+### Formatting on save
+
+You can disable auto-command and is to true by default.
+
+- configuration option
+
+```lua
+lvim.format_on_save = true
 ```
