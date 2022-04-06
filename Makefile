@@ -16,9 +16,9 @@ uninstall:
 	@echo starting LunarVim uninstaller
 	bash ./utils/installer/uninstall.sh
 
-generate_plugins_sha:
-	@echo generating core-plugins latest SHA list
-	lvim --headless -c 'lua require("lvim.utils.git").generate_plugins_sha("latest-sha.lua")' -c 'qall'
+generate_new_lockfile:
+	@echo generating core-plugins latest lockfile
+	bash ./utils/ci/generate_new_lockfile.sh
 
 lint: lint-lua lint-sh
 

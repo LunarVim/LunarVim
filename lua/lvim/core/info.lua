@@ -120,7 +120,7 @@ local function make_override_info(ft)
 end
 
 function M.toggle_popup(ft)
-  local clients = vim.lsp.get_active_clients(ft)
+  local clients = vim.lsp.get_active_clients()
   local client_names = {}
   local bufnr = vim.api.nvim_get_current_buf()
   local ts_active_buffers = vim.tbl_keys(vim.treesitter.highlighter.active)
@@ -161,24 +161,22 @@ function M.toggle_popup(ft)
   local content_provider = function(popup)
     local content = {}
 
-    for _, section in
-      ipairs {
-        M.banner,
-        { "" },
-        { "" },
-        header,
-        { "" },
-        lsp_info,
-        { "" },
-        override_info,
-        { "" },
-        formatters_info,
-        { "" },
-        linters_info,
-        { "" },
-        code_actions_info,
-      }
-    do
+    for _, section in ipairs {
+      M.banner,
+      { "" },
+      { "" },
+      header,
+      { "" },
+      lsp_info,
+      { "" },
+      override_info,
+      { "" },
+      formatters_info,
+      { "" },
+      linters_info,
+      { "" },
+      code_actions_info,
+    } do
       vim.list_extend(content, section)
     end
 

@@ -41,7 +41,9 @@ To run the install script without any interaction you can pass the `-y` flag to 
 
 The same way, you can use `--no-install-dependencies` to skip the dependency installation.
 
-### Windows (Powershell):
+### Windows (Powershell 7+):
+
+Powershell v7+ is required for this script. For instructions on how to install, [click here.](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.2)
 
 ```powershell
 Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
@@ -76,7 +78,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- Configure builtin plugins
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 

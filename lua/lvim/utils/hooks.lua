@@ -12,17 +12,22 @@ function M.run_pre_reload()
 end
 
 function M.run_on_packer_complete()
-  if not in_headless then
-    -- manually trigger event to fix colors
-    vim.cmd [[ doautocmd ColorScheme ]]
+  Log:debug "Packer operation complete"
+  vim.cmd [[doautocmd User PackerComplete]]
+
+  vim.g.colors_name = lvim.colorscheme
+  pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
+
+  if M._reload_triggered then
+    Log:info "Reloaded configuration"
+    M._reload_triggered = nil
   end
-  Log:info "Reloaded configuration"
 end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  require("lvim.plugin-loader").ensure_installed()
   M.reset_cache()
+  M._reload_triggered = true
 end
 
 ---Reset any startup cache files used by Packer and Impatient
@@ -48,8 +53,8 @@ function M.run_post_update()
   Log:debug "Starting post-update hook"
   M.reset_cache()
 
-  Log:debug "Updating core plugins"
-  require("lvim.plugin-loader").ensure_installed()
+  Log:debug "Syncing core plugins"
+  require("lvim.plugin-loader").sync_core_plugins()
 
   if not in_headless then
     vim.schedule(function()

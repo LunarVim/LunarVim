@@ -1,41 +1,29 @@
 local plugin_loader = {}
 
-local in_headless = #vim.api.nvim_list_uis() == 0
-
 local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
+local join_paths = utils.join_paths
+local in_headless = #vim.api.nvim_list_uis() == 0
+
 -- we need to reuse this outside of init()
-local compile_path = get_config_dir() .. "/plugin/packer_compiled.lua"
+local compile_path = join_paths(get_config_dir(), "plugin", "packer_compiled.lua")
+local snapshot_path = join_paths(get_cache_dir(), "snapshots")
+local default_snapshot = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 
 function plugin_loader.init(opts)
   opts = opts or {}
 
-  local install_path = opts.install_path or vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-  local package_root = opts.package_root or vim.fn.stdpath "data" .. "/site/pack"
+  local install_path = opts.install_path
+    or join_paths(vim.fn.stdpath "data", "site", "pack", "packer", "start", "packer.nvim")
 
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
-    vim.cmd "packadd packer.nvim"
-  end
-
-  local log_level = in_headless and "debug" or "warn"
-  if lvim.log and lvim.log.level then
-    log_level = lvim.log.level
-  end
-
-  local _, packer = pcall(require, "packer")
-  packer.init {
-    package_root = package_root,
+  local init_opts = {
+    package_root = opts.package_root or join_paths(vim.fn.stdpath "data", "site", "pack"),
     compile_path = compile_path,
-    log = { level = log_level },
+    snapshot_path = snapshot_path,
+    log = { level = "warn" },
     git = {
       clone_timeout = 300,
-      subcommands = {
-        -- this is more efficient than what Packer is using
-        fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
-      },
     },
-    max_jobs = 50,
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -43,8 +31,24 @@ function plugin_loader.init(opts)
     },
   }
 
-  if not in_headless then
-    vim.cmd [[autocmd User PackerComplete lua require('lvim.utils.hooks').run_on_packer_complete()]]
+  if in_headless then
+    init_opts.display = nil
+  end
+
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
+    vim.cmd "packadd packer.nvim"
+    -- IMPORTANT: we only set this the very first time to avoid constantly triggering the rollback function
+    -- https://github.com/wbthomason/packer.nvim/blob/c576ab3f1488ee86d60fd340d01ade08dcabd256/lua/packer.lua#L998-L995
+    init_opts.snapshot = default_snapshot
+  end
+
+  local status_ok, packer = pcall(require, "packer")
+  if status_ok then
+    packer.on_complete = vim.schedule_wrap(function()
+      require("lvim.utils.hooks").run_on_packer_complete()
+    end)
+    packer.init(init_opts)
   end
 end
 
@@ -73,6 +77,18 @@ function plugin_loader.recompile()
   end
 end
 
+function plugin_loader.reload(configurations)
+  _G.packer_plugins = _G.packer_plugins or {}
+  for k, v in pairs(_G.packer_plugins) do
+    if k ~= "packer.nvim" then
+      _G.packer_plugins[v] = nil
+    end
+  end
+  plugin_loader.load(configurations)
+
+  pcall_packer_command "sync"
+end
+
 function plugin_loader.load(configurations)
   Log:debug "loading plugins configuration"
   local packer_available, packer = pcall(require, "packer")
@@ -81,6 +97,7 @@ function plugin_loader.load(configurations)
     return
   end
   local status_ok, _ = xpcall(function()
+    packer.reset()
     packer.startup(function(use)
       for _, plugins in ipairs(configurations) do
         for _, plugin in ipairs(plugins) do
@@ -102,21 +119,29 @@ function plugin_loader.get_core_plugins()
   local list = {}
   local plugins = require "lvim.plugins"
   for _, item in pairs(plugins) do
-    table.insert(list, item[1]:match "/(%S*)")
+    if not item.disable then
+      table.insert(list, item[1]:match "/(%S*)")
+    end
   end
   return list
 end
 
-function plugin_loader.sync_core_plugins()
+function plugin_loader.load_snapshot(snapshot_file)
+  snapshot_file = snapshot_file or default_snapshot
+  if not in_headless then
+    vim.notify("Syncing core plugins is in progress..", vim.log.levels.INFO, { title = "lvim" })
+  end
+  Log:debug(string.format("Using snapshot file [%s]", snapshot_file))
   local core_plugins = plugin_loader.get_core_plugins()
-  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
-  pcall_packer_command("sync", core_plugins)
+  require("packer").rollback(snapshot_file, unpack(core_plugins))
 end
 
-function plugin_loader.ensure_installed()
-  local all_plugins = _G.packer_plugins or plugin_loader.get_core_plugins()
-  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(all_plugins, ", ")))
-  pcall_packer_command("install", all_plugins)
+function plugin_loader.sync_core_plugins()
+  -- problem: rollback() will get stuck if a plugin directory doesn't exist
+  -- solution: call sync() beforehand
+  -- see https://github.com/wbthomason/packer.nvim/issues/862
+  vim.cmd [[autocmd User PackerComplete ++once lua require("lvim.plugin-loader").load_snapshot() ]]
+  pcall_packer_command "sync"
 end
 
 return plugin_loader

@@ -5,6 +5,11 @@ on:
     branches:
       - "master"
       - "rolling"
+    paths:
+      - 'lua/**'
+      - 'snapshots/**'
+      - 'tests/**'
+      - 'utils/**'
 
 jobs:
   unixish:
