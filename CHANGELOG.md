@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### <!-- 1 --> Features
+
+- _(plugins)_ add support for packer snapshots (#2351)
+
+### <!-- 2 --> Bugfix
+
+- _(installer/pwsh)_ fixes some details on installer and uninstaller (#2404)
+- _(telescope)_ set <cr> binding to actions.select_default only (#2395)
+- _(theme)_ make sure the new theme is fully loaded (#2392)
+- _(windows)_ specify required powershell version for the installation script (#2376)
+- update deprecated methods in example configuration for trouble.nvim (#2416)
+
+### <!-- 3 --> Refactor
+
+- _(lsp)_ replace deprecated ocamllsp with ocamlls (#2402)
+- re-enable packer.sync() in LvimReload (#2410)
+
+### <!-- 4 --> Documentation
+
+- _(README)_ change forgotten breaking change in example (#2377)
+
 ## [1.1.3]
 
 ### <!-- 1 --> Features
