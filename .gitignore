@@ -27,3 +27,5 @@ lua/lv-user-config/
 *.bak
 *.backup
 *.old
+
+.luarc.json

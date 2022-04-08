@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### <!-- 1 --> Features
 
 - _(plugins)_ add support for packer snapshots (#2351)
+- add option to set maximum cmp menu width (#2425)
 
 ### <!-- 2 --> Bugfix
 
