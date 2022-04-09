@@ -9,13 +9,13 @@
     "commit": "1bfb32e"
   },
   "LuaSnip": {
-    "commit": "eb5b77e"
+    "commit": "69cb81c"
   },
   "alpha-nvim": {
-    "commit": "534a86b"
+    "commit": "6655228"
   },
   "bufferline.nvim": {
-    "commit": "004cd57"
+    "commit": "874f869"
   },
   "cmp-buffer": {
     "commit": "d66c4c2"
@@ -33,7 +33,7 @@
     "commit": "e302658"
   },
   "gitsigns.nvim": {
-    "commit": "83ab3ca"
+    "commit": "acdd74b"
   },
   "lua-dev.nvim": {
     "commit": "a0ee777"
@@ -42,37 +42,37 @@
     "commit": "c8e5a69"
   },
   "nlsp-settings.nvim": {
-    "commit": "995b5e6"
+    "commit": "2c962d6"
   },
   "null-ls.nvim": {
-    "commit": "899785c"
+    "commit": "8d23981"
   },
   "nvim-autopairs": {
     "commit": "06535b1"
   },
   "nvim-cmp": {
-    "commit": "7dbe34e"
+    "commit": "3192a0c"
   },
   "nvim-dap": {
-    "commit": "c20c78d"
+    "commit": "10b5781"
   },
   "nvim-lsp-installer": {
-    "commit": "c7f1437"
+    "commit": "918ef1d"
   },
   "nvim-lspconfig": {
-    "commit": "3d1baa8"
+    "commit": "f183d35"
   },
   "nvim-notify": {
-    "commit": "da10302"
+    "commit": "7fed925"
   },
   "nvim-tree.lua": {
-    "commit": "6368880"
+    "commit": "618ea25"
   },
   "nvim-treesitter": {
-    "commit": "2472e47"
+    "commit": "9c1fb16"
   },
   "nvim-ts-context-commentstring": {
-    "commit": "7810f1f"
+    "commit": "8834375"
   },
   "nvim-web-devicons": {
     "commit": "09e6231"
@@ -84,7 +84,7 @@
     "commit": "4dedd3b"
   },
   "plenary.nvim": {
-    "commit": "f9c65cd"
+    "commit": "470d0e8"
   },
   "popup.nvim": {
     "commit": "b7404d3"
@@ -93,7 +93,7 @@
     "commit": "cef52b8"
   },
   "schemastore.nvim": {
-    "commit": "d423f6c"
+    "commit": "597d8f6"
   },
   "structlog.nvim": {
     "commit": "6f1403a"
@@ -102,10 +102,10 @@
     "commit": "8ec164b"
   },
   "telescope.nvim": {
-    "commit": "6e7ee38"
+    "commit": "8af0d38"
   },
   "toggleterm.nvim": {
-    "commit": "5733b24"
+    "commit": "e62008f"
   },
   "which-key.nvim": {
     "commit": "a3c19ec"
