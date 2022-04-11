@@ -69,7 +69,15 @@ local core_plugins = {
   {
     "L3MON4D3/LuaSnip",
     config = function()
-      require("luasnip/loaders/from_vscode").lazy_load()
+      local utils = require "lvim.utils"
+      require("luasnip.loaders.from_lua").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load {
+        paths = {
+          utils.join_paths(get_config_dir(), "snippets"),
+          utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets"),
+        },
+      }
+      require("luasnip.loaders.from_snipmate").lazy_load()
     end,
   },
   {
