@@ -203,6 +203,10 @@ function M.update_reduced_rtp()
 end
 
 local function load_package_with_cache_reduced_rtp(name)
+  if vim.in_fast_event() then
+    -- Can't set/get options in the fast handler
+    return load_package_with_cache(name, "fast")
+  end
   local orig_rtp = get_option "runtimepath"
   local orig_ei = get_option "eventignore"
 
