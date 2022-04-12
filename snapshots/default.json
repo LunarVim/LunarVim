@@ -33,7 +33,7 @@
     "commit": "e302658"
   },
   "gitsigns.nvim": {
-    "commit": "ac5ba87"
+    "commit": "a680c32"
   },
   "lua-dev.nvim": {
     "commit": "a0ee777"
@@ -42,7 +42,7 @@
     "commit": "c8e5a69"
   },
   "nlsp-settings.nvim": {
-    "commit": "c4afb0f"
+    "commit": "137aa86"
   },
   "null-ls.nvim": {
     "commit": "82be4bf"
@@ -69,7 +69,7 @@
     "commit": "9c272b9"
   },
   "nvim-treesitter": {
-    "commit": "d0fc684"
+    "commit": "846941a"
   },
   "nvim-ts-context-commentstring": {
     "commit": "8834375"
