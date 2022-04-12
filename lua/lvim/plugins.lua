@@ -190,6 +190,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.bufferline").setup()
     end,
+    branch = "main",
     event = "BufWinEnter",
     disable = not lvim.builtin.bufferline.active,
   },
@@ -225,6 +226,7 @@ local core_plugins = {
   {
     "akinsho/toggleterm.nvim",
     event = "BufWinEnter",
+    branch = "main",
     config = function()
       require("lvim.core.terminal").setup()
     end,
