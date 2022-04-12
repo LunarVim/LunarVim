@@ -302,9 +302,9 @@ M.config = function()
           fallback()
         end
       end, {
-			"i",
-			"s",
-		}),
+	"i",
+	"s",
+      }),
     },
   }
 end
