@@ -18,6 +18,7 @@ local skipped_servers = {
   "pylsp",
   "quick_lint_js",
   "rome",
+  "scry",
   "solang",
   "solidity_ls",
   "sorbet",

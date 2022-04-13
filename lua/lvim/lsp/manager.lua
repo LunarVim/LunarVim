@@ -77,9 +77,7 @@ function M.setup(server_name, user_config)
   local servers = require "nvim-lsp-installer.servers"
   local server_available, requested_server = servers.get_server(server_name)
 
-  local is_overridden = vim.tbl_contains(lvim.lsp.override, server_name)
-
-  if not server_available or is_overridden then
+  if not server_available then
     pcall(function()
       require("lspconfig")[server_name].setup(config)
       buf_try_add(server_name)
