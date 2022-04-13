@@ -103,6 +103,6 @@ return {
     setup = {},
     config = {},
   },
-  ---@deprecated use automatic_configuration.ignored_servers instead
+  ---@deprecated use automatic_configuration.skipped_servers instead
   override = {},
 }

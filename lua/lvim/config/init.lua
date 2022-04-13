@@ -68,7 +68,7 @@ local function handle_deprecated_settings()
       new_setting or "See https://github.com/LunarVim/LunarVim#breaking-changes"
     )
     vim.schedule(function()
-      Log:warn(msg)
+      vim.notify_once(msg, vim.log.levels.WARN)
     end)
   end
 
@@ -81,8 +81,13 @@ local function handle_deprecated_settings()
   end
 
   -- lvim.lsp.override
-  if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "override") then
+  if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
     deprecation_notice("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
+    vim.tbl_map(function(c)
+      if not vim.tbl_contains(lvim.lsp.automatic_configuration.skipped_servers, c) then
+        table.insert(lvim.lsp.automatic_configuration.skipped_servers, c)
+      end
+    end, lvim.lsp.override)
   end
 
   -- lvim.lsp.popup_border
