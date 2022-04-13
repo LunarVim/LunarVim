@@ -1,4 +1,4 @@
-local ignored_servers = {
+local skipped_servers = {
   "angularls",
   "ansiblels",
   "ccls",
@@ -31,7 +31,7 @@ local ignored_servers = {
   "vuels",
 }
 
-local ignored_filetypes = { "markdown", "rst", "plaintext" }
+local skipped_filetypes = { "markdown", "rst", "plaintext" }
 
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
@@ -77,10 +77,10 @@ return {
   on_init_callback = nil,
   automatic_servers_installation = true,
   automatic_configuration = {
-    ---@usage list of servers that the automatic installer will ignore
-    ignored_servers = ignored_servers,
-    ---@usage list of filetypes that the automatic installer will ignore
-    ignored_filetypes = ignored_filetypes,
+    ---@usage list of servers that the automatic installer will skip
+    skipped_servers = skipped_servers,
+    ---@usage list of filetypes that the automatic installer will skip
+    skipped_filetypes = skipped_filetypes,
   },
   buffer_mappings = {
     normal_mode = {

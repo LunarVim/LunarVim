@@ -82,7 +82,7 @@ local function handle_deprecated_settings()
 
   -- lvim.lsp.override
   if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "override") then
-    deprecation_notice("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.ignored_servers` instead")
+    deprecation_notice("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
   end
 
   -- lvim.lsp.popup_border
