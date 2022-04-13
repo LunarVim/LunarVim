@@ -88,7 +88,7 @@ lvim.lsp.templates_dir = join_paths(get_runtime_dir(), "after", "ftplugin")
 A typical setup call with default arguments
 
 ```lua
--- edit this file by running `:lua vim.cmd("edit " .. lvim.lsp.templates_dir .. "/lua.lua"))`
+-- edit this file by running `:lua vim.cmd("edit " .. lvim.lsp.templates_dir .. "/lua.lua")`
 require("lvim.lsp.manager").setup("sumneko_lua")
 ```
 
