@@ -29,6 +29,7 @@ return {
   },
   filename = {
     "filename",
+    color = {},
     cond = nil,
   },
   diff = {
@@ -136,7 +137,7 @@ return {
     color = {},
     cond = conditions.hide_in_width,
   },
-  filetype = { "filetype", cond = conditions.hide_in_width, color = {} },
+  filetype = { "filetype", cond = conditions.hide_in_width },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."
