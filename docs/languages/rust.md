@@ -39,7 +39,8 @@ dap_install.config("codelldb", {})
 ## Extra Plugins
 
 ```lua
-vim.list_extend(lvim.lsp.override, { "rust_analyzer" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
 lvim.plugins = {
   {
     "simrat39/rust-tools.nvim",

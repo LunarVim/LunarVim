@@ -38,8 +38,8 @@ The selected formatter must be installed separately.
 If you need specific settings for `clangd` then you can override it like this
 
 ```lua
--- check the full default list `:lua print(vim.inspect(lvim.lsp.override))`
-vim.list_extend(lvim.lsp.override, { "clangd" })
+-- check the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.set_keymappings))`
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 ```
 
 Now you can customize the setup completely

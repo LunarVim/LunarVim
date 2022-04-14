@@ -53,7 +53,7 @@ You can also toggle `<:LspInstallInfo>` and interactively choose which servers t
 
 ### Server override
 
-`lvim.lsp.override` contains a list of servers that will **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
+`lvim.lsp.automatic_configuration.skipped_servers` contains a list of servers that will **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
 
 ::: tip Notice
 Overriding a server will completely bypass the lsp-installer, so you would have to manage the installation for any of those servers manually.
@@ -62,17 +62,17 @@ Overriding a server will completely bypass the lsp-installer, so you would have 
 See the current list
 
 ```lua
-:lua print(vim.inspect(lvim.lsp.override))
+:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))
 ```
 
 See the default list
 
 ```lua
-:lua print(vim.inspect(require("lvim.lsp.config").override))
+:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))
 ```
 
 ::: tip Notice
-Any changes to `lvim.lsp.override` **must** be followed by `:LvimCacheReset` to take effect.
+Any changes to `lvim.lsp.automatic_configuration.skipped_servers` **must** be followed by `:LvimCacheReset` to take effect.
 :::
 
 ### Server setup
@@ -98,10 +98,10 @@ You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files
 
 #### Overriding the default setup options
 
-Add the server you wish to configure manually to `lvim.lsp.override`
+Add the server you wish to configure manually to `lvim.lsp.auto_configuration.skipped_servers`.
 
 ```lua
-vim.list_extend(lvim.lsp.override, { "pyright" })
+vim.list_extend(lvim.lsp.auto_configuration.skipped_servers, { "pyright" })
 ```
 
 Now you can set it up manually using the builtin [lsp-manager](https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/lsp/manager.lua)
