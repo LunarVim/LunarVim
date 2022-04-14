@@ -29,7 +29,6 @@ return {
   },
   filename = {
     "filename",
-    color = {},
     cond = nil,
   },
   diff = {
@@ -41,7 +40,6 @@ return {
       modified = { fg = colors.yellow },
       removed = { fg = colors.red },
     },
-    color = {},
     cond = nil,
   },
   python_env = {
@@ -67,7 +65,6 @@ return {
     "diagnostics",
     sources = { "nvim_diagnostic" },
     symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    color = {},
     cond = conditions.hide_in_width,
   },
   treesitter = {
