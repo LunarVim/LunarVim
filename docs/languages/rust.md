@@ -21,7 +21,7 @@ rust = { "rustfmt" }
 ## LSP Settings
 
 ```vim
-:NlspConfig rust_analyzer
+:LspSettings rust_analyzer
 ```
 
 ## Debugger

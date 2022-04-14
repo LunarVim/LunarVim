@@ -29,5 +29,5 @@ vue = { "eslint", "eslint_d" }
 ## LSP Settings
 
 ```lua
-:NlspConfig vuels
+:LspSettings vuels
 ```

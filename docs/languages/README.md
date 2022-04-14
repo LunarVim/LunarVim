@@ -126,8 +126,8 @@ require("lspconfig")["pyright"].setup(opts)
 To set a setting for your language server:
 
 ```vim
-:NlspConfig <TAB>
-:NlspConfig <NAME_OF_LANGUAGE_SERVER>
+:LspSettings <TAB>
+:LspSettings <NAME_OF_LANGUAGE_SERVER>
 ```
 
 This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.

@@ -27,7 +27,7 @@ python = { "flake8", "pylint" }
 ## LSP Settings
 
 ```vim
-:NlspConfig pyright
+:LspSettings pyright
 ```
 
 ## Debugger

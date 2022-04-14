@@ -21,7 +21,7 @@ go = { "gofmt", "gofumpt", "goimports", "golines" }
 ## LSP Settings
 
 ```vim
-:NlspConfig gopls
+:LspSettings gopls
 ```
 
 Configure `json` to use auto-completion
