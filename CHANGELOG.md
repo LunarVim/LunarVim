@@ -6,12 +6,16 @@ All notable changes to this project will be documented in this file.
 
 ### <!-- 1 --> Features
 
+- _(cmp)_ documentation is deprecated in favor of window.documentation (#2461)
 - _(plugins)_ add support for packer snapshots (#2351)
 - add option to set maximum cmp menu width (#2425)
 
 ### <!-- 2 --> Bugfix
 
+- _(impatient)_ avoid get_options in fast handler (#2451)
 - _(installer/pwsh)_ fixes some details on installer and uninstaller (#2404)
+- _(luasnip)_ make sure all snippets are loaded (#2447)
+- _(readme)_ update lsp server ignore syntax
 - _(telescope)_ set <cr> binding to actions.select_default only (#2395)
 - _(theme)_ make sure the new theme is fully loaded (#2392)
 - _(windows)_ specify required powershell version for the installation script (#2376)
@@ -20,11 +24,13 @@ All notable changes to this project will be documented in this file.
 ### <!-- 3 --> Refactor
 
 - _(lsp)_ replace deprecated ocamllsp with ocamlls (#2402)
+- _(lsp)_ cleanup servers' override configuration (#2243)
 - re-enable packer.sync() in LvimReload (#2410)
 
 ### <!-- 4 --> Documentation
 
 - _(README)_ change forgotten breaking change in example (#2377)
+- _(windows)_ use alpha in config_win.example.lua (#2452)
 
 ## [1.1.3]
 
