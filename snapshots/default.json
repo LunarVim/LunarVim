@@ -9,13 +9,13 @@
     "commit": "1bfb32e"
   },
   "LuaSnip": {
-    "commit": "eb5b77e"
+    "commit": "5d3b468"
   },
   "alpha-nvim": {
-    "commit": "534a86b"
+    "commit": "6655228"
   },
   "bufferline.nvim": {
-    "commit": "004cd57"
+    "commit": "bb3ac30"
   },
   "cmp-buffer": {
     "commit": "d66c4c2"
@@ -33,46 +33,46 @@
     "commit": "e302658"
   },
   "gitsigns.nvim": {
-    "commit": "83ab3ca"
+    "commit": "f2e9e30"
   },
   "lua-dev.nvim": {
     "commit": "a0ee777"
   },
   "lualine.nvim": {
-    "commit": "c8e5a69"
+    "commit": "385580e"
   },
   "nlsp-settings.nvim": {
-    "commit": "995b5e6"
+    "commit": "21a00be"
   },
   "null-ls.nvim": {
-    "commit": "899785c"
+    "commit": "82be4bf"
   },
   "nvim-autopairs": {
-    "commit": "06535b1"
+    "commit": "6fb0479"
   },
   "nvim-cmp": {
-    "commit": "7dbe34e"
+    "commit": "dbc7229"
   },
   "nvim-dap": {
-    "commit": "c20c78d"
+    "commit": "10b5781"
   },
   "nvim-lsp-installer": {
-    "commit": "c7f1437"
+    "commit": "39f84cd"
   },
   "nvim-lspconfig": {
-    "commit": "3d1baa8"
+    "commit": "fd7843a"
   },
   "nvim-notify": {
-    "commit": "da10302"
+    "commit": "9655936"
   },
   "nvim-tree.lua": {
-    "commit": "6368880"
+    "commit": "477536c"
   },
   "nvim-treesitter": {
-    "commit": "2472e47"
+    "commit": "05ba924"
   },
   "nvim-ts-context-commentstring": {
-    "commit": "7810f1f"
+    "commit": "8834375"
   },
   "nvim-web-devicons": {
     "commit": "09e6231"
@@ -84,7 +84,7 @@
     "commit": "4dedd3b"
   },
   "plenary.nvim": {
-    "commit": "f9c65cd"
+    "commit": "13f9959"
   },
   "popup.nvim": {
     "commit": "b7404d3"
@@ -93,7 +93,7 @@
     "commit": "cef52b8"
   },
   "schemastore.nvim": {
-    "commit": "d423f6c"
+    "commit": "71a0a25"
   },
   "structlog.nvim": {
     "commit": "6f1403a"
@@ -102,10 +102,10 @@
     "commit": "8ec164b"
   },
   "telescope.nvim": {
-    "commit": "6e7ee38"
+    "commit": "b7ae91c"
   },
   "toggleterm.nvim": {
-    "commit": "5733b24"
+    "commit": "1a608cc"
   },
   "which-key.nvim": {
     "commit": "a3c19ec"

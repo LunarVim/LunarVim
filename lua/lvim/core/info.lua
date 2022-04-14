@@ -100,21 +100,26 @@ local function make_client_info(client)
   return client_info
 end
 
-local function make_override_info(ft)
-  local available = lsp_utils.get_supported_servers_per_filetype(ft)
-  local overridden = vim.tbl_filter(function(name)
-    return vim.tbl_contains(available, name)
-  end, lvim.lsp.override)
+local function make_auto_lsp_info(ft)
+  local skipped_filetypes = lvim.lsp.automatic_configuration.skipped_filetypes
+  local skipped_servers = lvim.lsp.automatic_configuration.skipped_servers
+  local info_lines = { "Automatic LSP info" }
 
-  local info_lines = { "" }
-  if #overridden == 0 then
+  if vim.tbl_contains(skipped_filetypes, ft) then
+    vim.list_extend(info_lines, { "* Status: disabled for " .. ft })
     return info_lines
   end
 
-  info_lines = {
-    fmt("Overridden %s server(s)", ft),
-    fmt("* list: %s", str_list(overridden)),
-  }
+  local available = lsp_utils.get_supported_servers_per_filetype(ft)
+  local skipped = vim.tbl_filter(function(name)
+    return vim.tbl_contains(available, name)
+  end, skipped_servers)
+
+  if #skipped == 0 then
+    return { "" }
+  end
+
+  vim.list_extend(info_lines, { fmt("* Skipped servers: %s", str_list(skipped)) })
 
   return info_lines
 end
@@ -150,7 +155,7 @@ function M.toggle_popup(ft)
     table.insert(client_names, client.name)
   end
 
-  local override_info = make_override_info(ft)
+  local auto_lsp_info = make_auto_lsp_info(ft)
 
   local formatters_info = make_formatters_info(ft)
 
@@ -169,7 +174,7 @@ function M.toggle_popup(ft)
       { "" },
       lsp_info,
       { "" },
-      override_info,
+      auto_lsp_info,
       { "" },
       formatters_info,
       { "" },
@@ -192,6 +197,7 @@ function M.toggle_popup(ft)
     vim.fn.matchadd("LvimInfoHeader", "Formatters info")
     vim.fn.matchadd("LvimInfoHeader", "Linters info")
     vim.fn.matchadd("LvimInfoHeader", "Code actions info")
+    vim.fn.matchadd("LvimInfoHeader", "Automatic LSP info")
     vim.fn.matchadd("LvimInfoIdentifier", " " .. ft .. "$")
     vim.fn.matchadd("string", "true")
     vim.fn.matchadd("string", "active")

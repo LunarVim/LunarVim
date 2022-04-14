@@ -1,7 +1,5 @@
 local Log = {}
 
-local logfile = string.format("%s/%s.log", get_cache_dir(), "lvim")
-
 Log.levels = {
   TRACE = 1,
   DEBUG = 2,
@@ -39,7 +37,7 @@ function Log:init()
             { level = structlog.formatters.FormatColorizer.color_level() }
           ),
         }),
-        structlog.sinks.File(log_level, logfile, {
+        structlog.sinks.File(log_level, self:get_path(), {
           processors = {
             structlog.processors.Namer(),
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 3, stack_level = 2 }),
@@ -155,7 +153,7 @@ end
 ---Retrieves the path of the logfile
 ---@return string path of the logfile
 function Log:get_path()
-  return logfile
+  return string.format("%s/%s.log", get_cache_dir(), "lvim")
 end
 
 ---Add a log entry at TRACE level

@@ -56,19 +56,19 @@ function M:init()
 end
 
 local function handle_deprecated_settings()
-  local function deprecation_notice(setting, msg)
+  local function deprecation_notice(setting, new_setting)
     local in_headless = #vim.api.nvim_list_uis() == 0
     if in_headless then
       return
     end
 
-    msg = msg
-      or string.format(
-        "Deprecation notice: [%s] setting is no longer supported. See https://github.com/LunarVim/LunarVim#breaking-changes",
-        setting
-      )
+    local msg = string.format(
+      "Deprecation notice: [%s] setting is no longer supported. %s",
+      setting,
+      new_setting or "See https://github.com/LunarVim/LunarVim#breaking-changes"
+    )
     vim.schedule(function()
-      Log:warn(msg)
+      vim.notify_once(msg, vim.log.levels.WARN)
     end)
   end
 
@@ -80,6 +80,16 @@ local function handle_deprecated_settings()
     end
   end
 
+  -- lvim.lsp.override
+  if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
+    deprecation_notice("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
+    vim.tbl_map(function(c)
+      if not vim.tbl_contains(lvim.lsp.automatic_configuration.skipped_servers, c) then
+        table.insert(lvim.lsp.automatic_configuration.skipped_servers, c)
+      end
+    end, lvim.lsp.override)
+  end
+
   -- lvim.lsp.popup_border
   if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "popup_border") then
     deprecation_notice "lvim.lsp.popup_border"
@@ -87,10 +97,7 @@ local function handle_deprecated_settings()
 
   -- dashboard.nvim
   if lvim.builtin.dashboard.active then
-    deprecation_notice(
-      "dashboard",
-      "Deprecation notice: `lvim.builtin.dashboard` has been replaced with `lvim.builtin.alpha`. See LunarVim#1906"
-    )
+    deprecation_notice("lvim.builtin.dashboard", "Use `lvim.builtin.alpha` instead. See LunarVim#1906")
   end
 end
 
