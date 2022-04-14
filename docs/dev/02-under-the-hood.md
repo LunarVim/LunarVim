@@ -67,7 +67,7 @@ graph TD
   validate_provider_request -- Executable does not exist --> print_provider_error["Print error about not being able to find formatting executable"]
   add_provider_to_table --> lsp_setup
   print_provider_error --> lsp_setup
-  lsp_setup --> lsp_override_check["Is there an lvim.lsp.override set?"]
+  lsp_setup --> lsp_override_check["Is there an lvim.lsp.automatic_configuration.skipped_servers set?"]
   lsp_override_check -- Yes --> lsp_override["Use the override table"]
   lsp_override_check -- No --> first_window_load["First window loads"]
   lsp_override --> first_window_load

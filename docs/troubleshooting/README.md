@@ -57,15 +57,15 @@ This could be due to the fact that the server is [overridden](../languages/READM
 
 ```lua
 --- is it in this list?
-:lua print(vim.inspect(lvim.lsp.override))
+:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))
 ```
 
 If that's the case, then you need to either remove it from that list and re-run `:LvimCacheReset`
 
 ```lua
-lvim.lsp.override = vim.tbl_filter(function(name)
-  return name ~= "eslint"
-end, lvim.lsp.override)
+vim.tbl_map(function(server)
+  return server ~= "emmet_ls"
+end, lvim.lsp.automatic_configuration.skipped_servers)
 ```
 
 or set it up [manually](../languages/README.md#server-setup).
@@ -91,4 +91,9 @@ If they are then you are using the syntax prior to [LunarVim#1813](https://githu
 ```lua
 -- this is the correct syntax since 3dd60bd
 vim.list_extend(lvim.lsp.override, { "jsonls" })
+```
+
+```lua
+-- this the correct syntax since 198577a
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jsonls" })
 ```
