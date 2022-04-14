@@ -55,6 +55,7 @@ local function client_is_configured(server_name, ft)
   local active_autocmds = vim.split(vim.fn.execute("autocmd FileType " .. ft), "\n")
   for _, result in ipairs(active_autocmds) do
     if result:match(server_name) then
+      Log:debug(string.format("[%q] is already configured", server_name))
       return true
     end
   end
@@ -68,7 +69,6 @@ function M.setup(server_name, user_config)
   vim.validate { name = { server_name, "string" } }
 
   if lvim_lsp_utils.is_client_active(server_name) or client_is_configured(server_name) then
-    Log:debug(string.format("[%q] is already configured. Ignoring repeated setup call.", server_name))
     return
   end
 
