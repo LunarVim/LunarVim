@@ -302,7 +302,10 @@ M.config = function()
         else
           fallback()
         end
-      end),
+      end, {
+        "i",
+        "s",
+      }),
     },
   }
 end
