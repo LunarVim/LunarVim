@@ -96,7 +96,8 @@ function M:init(base_dir)
   if not in_headless then
     _G.PLENARY_DEBUG = false
     require("lvim.impatient").setup {
-      path = join_paths(self.cache_dir, "lvim_cache"),
+      chunks = { path = join_paths(get_cache_dir(), "lvim_luacache_chunks") },
+      modpaths = { path = join_paths(get_cache_dir(), "lvim_luacache_modpaths") },
       enable_profiling = true,
     }
   end
