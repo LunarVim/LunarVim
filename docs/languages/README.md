@@ -98,10 +98,10 @@ You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files
 
 #### Overriding the default setup options
 
-Add the server you wish to configure manually to `lvim.lsp.auto_configuration.skipped_servers`.
+Add the server you wish to configure manually to `lvim.lsp.automatic_configuration.skipped_servers`.
 
 ```lua
-vim.list_extend(lvim.lsp.auto_configuration.skipped_servers, { "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 ```
 
 Now you can set it up manually using the builtin [lsp-manager](https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/lsp/manager.lua)
