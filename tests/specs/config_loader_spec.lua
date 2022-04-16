@@ -4,16 +4,28 @@ local config = require "lvim.config"
 a.describe("config-loader", function()
   local user_config_path = config:get_user_config_path()
 
+  before_each(function()
+    vim.cmd [[
+	    let v:errmsg = ""
+      let v:errors = []
+    ]]
+  end)
+
+  after_each(function()
+    local errmsg = vim.fn.eval "v:errmsg"
+    local exception = vim.fn.eval "v:exception"
+    local errors = vim.fn.eval "v:errors"
+    assert.equal("", errmsg)
+    assert.equal("", exception)
+    assert.True(vim.tbl_isempty(errors))
+  end)
+
   a.it("should be able to find user-config", function()
     assert.equal(user_config_path, get_config_dir() .. "/config.lua")
   end)
 
   a.it("should be able to load user-config without errors", function()
     config:load(user_config_path)
-    local errmsg = vim.fn.eval "v:errmsg"
-    local exception = vim.fn.eval "v:exception"
-    assert.equal("", errmsg) -- v:errmsg was not updated.
-    assert.equal("", exception)
   end)
 
   a.it("should be able to reload user-config without errors", function()

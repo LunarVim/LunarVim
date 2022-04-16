@@ -41,7 +41,6 @@ return {
       modified = { fg = colors.yellow },
       removed = { fg = colors.red },
     },
-    color = {},
     cond = nil,
   },
   python_env = {
@@ -67,7 +66,6 @@ return {
     "diagnostics",
     sources = { "nvim_diagnostic" },
     symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    color = {},
     cond = conditions.hide_in_width,
   },
   treesitter = {
@@ -139,7 +137,7 @@ return {
     color = {},
     cond = conditions.hide_in_width,
   },
-  filetype = { "filetype", cond = conditions.hide_in_width, color = {} },
+  filetype = { "filetype", cond = conditions.hide_in_width },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."

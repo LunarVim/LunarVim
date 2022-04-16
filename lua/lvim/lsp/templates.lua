@@ -15,16 +15,22 @@ function M.remove_template_files()
   end
 end
 
+local skipped_filetypes = lvim.lsp.automatic_configuration.skipped_filetypes
+local skipped_servers = lvim.lsp.automatic_configuration.skipped_servers
+
 ---Generates an ftplugin file based on the server_name in the selected directory
 ---@param server_name string name of a valid language server, e.g. pyright, gopls, tsserver, etc.
 ---@param dir string the full path to the desired directory
 function M.generate_ftplugin(server_name, dir)
-  if vim.tbl_contains(lvim.lsp.override, server_name) then
+  if vim.tbl_contains(skipped_servers, server_name) then
     return
   end
 
-  -- we need to go through lspconfig to get the corresponding filetypes currently
-  local filetypes = lvim_lsp_utils.get_supported_filetypes(server_name) or {}
+  -- get the supported filetypes and remove any ignored ones
+  local filetypes = vim.tbl_filter(function(ft)
+    return not vim.tbl_contains(skipped_filetypes, ft)
+  end, lvim_lsp_utils.get_supported_filetypes(server_name) or {})
+
   if not filetypes then
     return
   end
