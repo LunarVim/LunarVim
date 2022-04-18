@@ -23,7 +23,11 @@ else
   exit 1
 fi
 
-declare -r RELEASE_URL="https://github.com/neovim/neovim/releases/$RELEASE_VER/download/$ARCHIVE_NAME.tar.gz"
+if [[ "${RELEASE_VER}" == "latest" ]]; then
+  declare -r RELEASE_URL="https://github.com/neovim/neovim/releases/${RELEASE_VER}/download/${ARCHIVE_NAME}.tar.gz"
+else
+  declare -r RELEASE_URL="https://github.com/neovim/neovim/releases/download/${RELEASE_VER}/${ARCHIVE_NAME}.tar.gz"
+fi
 declare -r CHECKSUM_URL="$RELEASE_URL.sha256sum"
 
 DOWNLOAD_DIR="$(mktemp -d)"
