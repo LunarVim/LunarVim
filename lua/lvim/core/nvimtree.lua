@@ -68,7 +68,7 @@ function M.config()
       },
       filters = {
         dotfiles = false,
-        custom = { "node_modules", ".cache" },
+        custom = { "node_modules", "\\.cache" },
       },
       trash = {
         cmd = "trash",
