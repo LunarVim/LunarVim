@@ -9,9 +9,7 @@ declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
 declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
 declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
-
-# TODO: Use a dedicated cache directory #1256
-declare -r LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
+declare -r LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"

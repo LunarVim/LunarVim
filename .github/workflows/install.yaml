@@ -23,7 +23,6 @@ jobs:
           - runner: macos-10.15
             os: osx
     runs-on: ${{ matrix.runner }}
-    if: github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v2
 

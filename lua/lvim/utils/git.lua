@@ -72,6 +72,8 @@ function M.update_base_lvim()
     Log:error "Update failed! Please pull the changes manually instead."
     return
   end
+
+  return true
 end
 
 ---Switch Lunarvim to the specified development branch
@@ -80,11 +82,19 @@ function M.switch_lvim_branch(branch)
   if not safe_deep_fetch() then
     return
   end
-  local ret = git_cmd { args = { "switch", branch } }
+  local args = { "switch", branch }
+
+  if branch:match "^[0-9]" then
+    -- avoids producing an error for tags
+    vim.list_extend(args, { "--detach" })
+  end
+
+  local ret = git_cmd { args = args }
   if ret ~= 0 then
     Log:error "Unable to switch branches! Check the log for further information"
     return
   end
+  return true
 end
 
 ---Get the current Lunarvim development branch
