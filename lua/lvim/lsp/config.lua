@@ -78,6 +78,11 @@ return {
     style = "minimal",
     border = "rounded",
   },
+  peek = {
+    max_height = 15,
+    max_width = 30,
+    context = 10,
+  },
   on_attach_callback = nil,
   on_init_callback = nil,
   automatic_servers_installation = true,
