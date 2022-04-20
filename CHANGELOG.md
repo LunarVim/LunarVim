@@ -8,13 +8,18 @@ All notable changes to this project will be documented in this file.
 
 - _(cmp)_ documentation is deprecated in favor of window.documentation (#2461)
 - _(plugins)_ add support for packer snapshots (#2351)
-- add option to set maximum cmp menu width (#2425)
+- lock nvim <0.7 to a specific tag (#2491)
 
 ### <!-- 2 --> Bugfix
 
+- _(cmp)_ update nvim-cmp to the latest version (#2467)
+- _(cmp)_ hotfix nvim-cmp version
+- _(cmp)_ bring back default keybindings (#2470)
 - _(impatient)_ avoid get_options in fast handler (#2451)
 - _(installer/pwsh)_ fixes some details on installer and uninstaller (#2404)
+- _(lualine)_ color theme gaps in some components (#2465)
 - _(luasnip)_ make sure all snippets are loaded (#2447)
+- _(luasnip)_ only use user snippets if the folder exists (#2481)
 - _(readme)_ update lsp server ignore syntax
 - _(telescope)_ set <cr> binding to actions.select_default only (#2395)
 - _(theme)_ make sure the new theme is fully loaded (#2392)
@@ -26,6 +31,7 @@ All notable changes to this project will be documented in this file.
 - _(lsp)_ replace deprecated ocamllsp with ocamlls (#2402)
 - _(lsp)_ cleanup servers' override configuration (#2243)
 - re-enable packer.sync() in LvimReload (#2410)
+- update impatient (#2477)
 
 ### <!-- 4 --> Documentation
 
