@@ -2,8 +2,8 @@ local M = {}
 
 local api, uv = vim.api, vim.loop
 
-local std_data = get_runtime_dir() -- vim.fn.stdpath "data"
-local std_config = get_config_dir() -- vim.fn.stdpath "config"
+local std_data = vim.fn.stdpath "data"
+local std_config = vim.fn.stdpath "config"
 local vimruntime = os.getenv "VIMRUNTIME"
 
 local function load_buffer(title, lines)
