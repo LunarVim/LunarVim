@@ -1,4 +1,6 @@
 local a = require "plenary.async_lib.tests"
+local uv = vim.loop
+local home_dir = uv.os_homedir()
 
 a.describe("initial start", function()
   local lvim_config_path = get_config_dir()
@@ -17,7 +19,7 @@ a.describe("initial start", function()
   end)
 
   a.it("should be to retrieve default neovim directories", function()
-    local xdg_config = os.getenv "XDG_CONFIG_HOME"
+    local xdg_config = os.getenv "XDG_CONFIG_HOME" or join_paths(home_dir, ".config")
     assert.equal(join_paths(xdg_config, "nvim"), vim.call("stdpath", "config"))
   end)
 
