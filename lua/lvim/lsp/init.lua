@@ -149,6 +149,11 @@ function M.setup()
     append_default_schemas = true,
   }
 
+  require("nvim-lsp-installer").settings {
+    -- use the default nvim_data_dir, since the server binaries are independent
+    install_root_dir = utils.join_paths(vim.call("stdpath", "data"), "lsp_servers"),
+  }
+
   require("lvim.lsp.null-ls").setup()
 
   autocmds.configure_format_on_save()
