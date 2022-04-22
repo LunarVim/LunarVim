@@ -209,6 +209,14 @@ local core_plugins = {
     disable = not lvim.builtin.dap.active,
   },
 
+  -- Debugger management
+  {
+    "Pocco81/dap-buddy.nvim",
+    -- event = "BufWinEnter",
+    -- event = "BufRead",
+    disable = not lvim.builtin.dap.active,
+  },
+
   -- alpha
   {
     "goolord/alpha-nvim",

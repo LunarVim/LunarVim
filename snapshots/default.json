@@ -2,6 +2,9 @@
   "Comment.nvim": {
     "commit": "8f37791"
   },
+  "dap-buddy.nvim": {
+    "commit": "bbda2b0"
+  },
   "FixCursorHold.nvim": {
     "commit": "1bfb32e"
   },
