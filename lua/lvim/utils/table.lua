@@ -21,4 +21,18 @@ function Table.contains(t, predicate)
   return Table.find_first(t, predicate) ~= nil
 end
 
+-- Remove item from table by it's value
+-- @param t The table
+-- @param value The item to remove
+-- @return True if item was removed, false otherwise
+function Table.remove(t, value)
+  for i, v in ipairs(t) do
+    if v == value then
+      table.remove(t, i)
+      return true
+    end
+  end
+  return false
+end
+
 return Table

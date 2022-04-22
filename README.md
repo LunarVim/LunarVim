@@ -93,6 +93,11 @@ lvim.lsp.diagnostics.virtual_text = false
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 
+-- remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
+-- LvimInfo` lists which server(s) are skiipped for the current filetype
+local tbl = require "lvim.utils.table"
+tbl.remove(lvim.lsp.automatic_configuration.skipped_servers, "tailwindcss")
+
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
