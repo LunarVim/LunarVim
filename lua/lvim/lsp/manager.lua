@@ -31,6 +31,13 @@ local function resolve_config(name, user_config)
   local has_custom_provider, custom_config = pcall(require, "lvim/lsp/providers/" .. name)
   if has_custom_provider then
     Log:debug("Using custom configuration for requested server: " .. name)
+    local lsp_installer_servers = require "nvim-lsp-installer.servers"
+    local server_available, requested_server = lsp_installer_servers.get_server(name)
+    if server_available then
+      config.server = {
+        cmd_env = requested_server._default_options.cmd_env,
+      }
+    end
     config = vim.tbl_deep_extend("force", config, custom_config)
   end
 
