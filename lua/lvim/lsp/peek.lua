@@ -29,7 +29,10 @@ local function create_floating_file(location, opts)
   local contents = vim.api.nvim_buf_get_lines(
     bufnr,
     range.start.line,
-    math.min(range["end"].line + 1 + (opts.context or 10), range.start.line + (opts.max_height or 15)), -- Don't let the window be more that 15 lines long(height)
+    math.min(
+      range["end"].line + 1 + (opts.context or lvim.lsp.peek.max_height),
+      range.start.line + (opts.max_height or lvim.lsp.peek.max_height)
+    ),
     false
   )
   if next(contents) == nil then
@@ -38,7 +41,11 @@ local function create_floating_file(location, opts)
   end
   local width, height = vim.lsp.util._make_floating_popup_size(contents, opts)
   local if_nil = vim.F.if_nil
-  opts = vim.lsp.util.make_floating_popup_options(if_nil(width, 30), if_nil(height, 10), opts)
+  opts = vim.lsp.util.make_floating_popup_options(
+    if_nil(width, lvim.lsp.peek.max_width),
+    if_nil(height, lvim.lsp.peek.max_height),
+    opts
+  )
   -- Don't make it minimal as it is meant to be fully featured
   opts["style"] = nil
 
@@ -65,7 +72,7 @@ local function preview_location_callback(result)
 
   local opts = {
     border = "rounded",
-    context = 10,
+    context = lvim.lsp.peek.context,
   }
 
   if vim.tbl_islist(result) then
