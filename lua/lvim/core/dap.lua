@@ -28,9 +28,11 @@ end
 M.setup = function()
   local dap = require "dap"
 
-  vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
-  vim.fn.sign_define("DapBreakpointRejected", lvim.builtin.dap.breakpoint_rejected)
-  vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
+  if lvim.use_icons then
+    vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
+    vim.fn.sign_define("DapBreakpointRejected", lvim.builtin.dap.breakpoint_rejected)
+    vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
+  end
 
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
