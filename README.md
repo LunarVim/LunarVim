@@ -29,7 +29,7 @@
 
 ## Install In One Command!
 
-Make sure you have the release version of Neovim (0.6.1+).
+Make sure you have the release version of Neovim (0.7+).
 
 ### Linux:
 
