@@ -198,6 +198,8 @@ code_actions.setup {
 }
 ```
 
+This will lookup the provided name in the builtin configurations of `null_ls` and apply them. It can be considered equivalent to `null_ls.builtins.diagnostics.{name}`/`null_ls.builtins.formatting.{name}`/`null_ls.builtins.code_actions.{name}`
+
 _Note: Formatters' or Linters' or Code Actions installation is not managed by LunarVim. Refer to the each tool's respective manual for installation steps._
 
 ### Custom arguments
