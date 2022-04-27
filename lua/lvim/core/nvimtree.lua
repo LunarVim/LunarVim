@@ -68,7 +68,7 @@ function M.config()
       },
       filters = {
         dotfiles = false,
-        custom = { "node_modules", ".cache" },
+        custom = { "node_modules", "\\.cache" },
       },
       trash = {
         cmd = "trash",
@@ -122,9 +122,9 @@ function M.config()
 end
 
 function M.setup()
-  local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+  local status_ok, nvim_tree = pcall(require, "nvim-tree")
   if not status_ok then
-    Log:error "Failed to load nvim-tree.config"
+    Log:error "Failed to load nvim-tree"
     return
   end
 
@@ -158,11 +158,11 @@ function M.setup()
     }
   end
 
-  if lvim.builtin.nvimtree.on_config_done then
-    lvim.builtin.nvimtree.on_config_done(nvim_tree_config)
-  end
+  nvim_tree.setup(lvim.builtin.nvimtree.setup)
 
-  require("nvim-tree").setup(lvim.builtin.nvimtree.setup)
+  if lvim.builtin.nvimtree.on_config_done then
+    lvim.builtin.nvimtree.on_config_done(nvim_tree)
+  end
 end
 
 function M.start_telescope(telescope_mode)

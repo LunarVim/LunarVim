@@ -82,7 +82,7 @@ function print_missing_dep_msg($dep) {
     Write-Output "Please install it first and re-run the installer."
 }
 
-$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "nvim.nvim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
+$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
 $scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
 
 function install_system_package($dep) {
