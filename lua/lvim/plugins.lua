@@ -175,7 +175,10 @@ local core_plugins = {
   },
 
   -- Icons
-  { "kyazdani42/nvim-web-devicons" },
+  {
+    "kyazdani42/nvim-web-devicons",
+    disable = not lvim.use_icons,
+  },
 
   -- Status Line and Bufferline
   {

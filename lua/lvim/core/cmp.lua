@@ -220,7 +220,9 @@ M.config = function()
         if max_width ~= 0 and #vim_item.abbr > max_width then
           vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. "…"
         end
-        vim_item.kind = lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
+        if lvim.use_icons then
+          vim_item.kind = lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
+        end
         vim_item.menu = lvim.builtin.cmp.formatting.source_names[entry.source.name]
         vim_item.dup = lvim.builtin.cmp.formatting.duplicates[entry.source.name]
           or lvim.builtin.cmp.formatting.duplicates_default

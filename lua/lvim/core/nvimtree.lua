@@ -2,6 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
+  local vim_show_icons = lvim.use_icons and 1 or 0
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
@@ -27,7 +28,7 @@ function M.config()
       hijack_cursor = false,
       update_cwd = false,
       diagnostics = {
-        enable = true,
+        enable = lvim.use_icons,
         show_on_dirs = false,
         icons = {
           hint = "",
@@ -120,10 +121,10 @@ function M.config()
       },
     },
     show_icons = {
-      git = 1,
-      folders = 1,
-      files = 1,
-      folder_arrows = 1,
+      git = vim_show_icons,
+      folders = vim_show_icons,
+      files = vim_show_icons,
+      folder_arrows = vim_show_icons,
     },
     git_hl = 1,
     root_folder_modifier = ":t",
