@@ -4,9 +4,12 @@ local function is_ft(b, ft)
   return vim.bo[b].filetype == ft
 end
 
-local function diagnostics_indicator(_, _, diagnostics)
+local function diagnostics_indicator(num, _, diagnostics, _)
   local result = {}
   local symbols = { error = "", warning = "", info = "" }
+  if not lvim.use_icons then
+    return "(" .. num .. ")"
+  end
   for name, count in pairs(diagnostics) do
     if symbols[name] and count > 0 then
       table.insert(result, symbols[name] .. " " .. count)
@@ -112,8 +115,8 @@ M.config = function()
           padding = 1,
         },
       },
-      show_buffer_icons = true, -- disable filetype icons for buffers
-      show_buffer_close_icons = true,
+      show_buffer_icons = lvim.use_icons, -- disable filetype icons for buffers
+      show_buffer_close_icons = lvim.use_icons,
       show_close_icon = false,
       show_tab_indicators = true,
       persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
