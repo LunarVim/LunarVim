@@ -87,7 +87,7 @@ _G.load_config = function()
       server:install()
     end
     local default_opts = server:get_default_options()
-    setup_opts.cmd_env = default_opts.cmd_env
+    setup_opts = vim.tbl_deep_extend("force", setup_opts, default_opts)
   end
 
   if not name then

@@ -42,10 +42,10 @@
     "commit": "18a07f7"
   },
   "nlsp-settings.nvim": {
-    "commit": "114e2ff"
+    "commit": "fc3007e"
   },
   "null-ls.nvim": {
-    "commit": "a887bd6"
+    "commit": "d871b41"
   },
   "nvim-autopairs": {
     "commit": "38d486a"
@@ -57,10 +57,10 @@
     "commit": "d6d8317"
   },
   "nvim-lsp-installer": {
-    "commit": "d86aad8"
+    "commit": "090c8a8"
   },
   "nvim-lspconfig": {
-    "commit": "ad9903c"
+    "commit": "86df1c8"
   },
   "nvim-notify": {
     "commit": "2c8f744"
