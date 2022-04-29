@@ -70,77 +70,42 @@ local get_format_on_save_opts = function()
   }
 end
 
-function M.enable_format_on_save(opts)
-  local fmd_cmd = string.format(":silent lua vim.lsp.buf.formatting_sync({}, %s)", opts.timeout)
-  M.define_augroups {
-    format_on_save = { { "BufWritePre", opts.pattern, fmd_cmd } },
-  }
+function M.enable_format_on_save()
+  local opts = get_format_on_save_opts()
+  vim.api.nvim_create_augroup("lsp_format_on_save", {})
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = "lsp_format_on_save",
+    pattern = opts.pattern,
+    callback = function()
+      vim.lsp.buf.format { timeout_ms = opts.timeout, filter = opts.filter }
+    end,
+  })
   Log:debug "enabled format-on-save"
 end
 
 function M.disable_format_on_save()
-  M.disable_augroup "format_on_save"
+  pcall(vim.api.nvim_del_augroup_by_name, "lsp_format_on_save")
   Log:debug "disabled format-on-save"
 end
 
 function M.configure_format_on_save()
   if lvim.format_on_save then
-    local opts = get_format_on_save_opts()
-    M.enable_format_on_save(opts)
+    M.enable_format_on_save()
   else
     M.disable_format_on_save()
   end
 end
 
 function M.toggle_format_on_save()
-  if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
-    local opts = get_format_on_save_opts()
-    M.enable_format_on_save(opts)
+  local status, _ = pcall(vim.api.nvim_get_autocmds, {
+    group = "lsp_format_on_save",
+    event = "BufWritePre",
+  })
+  if not status then
+    M.enable_format_on_save()
   else
     M.disable_format_on_save()
   end
-end
-
-function M.enable_lsp_document_highlight(client_id)
-  M.define_augroups({
-    lsp_document_highlight = {
-      {
-        "CursorHold",
-        "<buffer>",
-        string.format("lua require('lvim.lsp.utils').conditional_document_highlight(%d)", client_id),
-      },
-      {
-        "CursorMoved",
-        "<buffer>",
-        "lua vim.lsp.buf.clear_references()",
-      },
-    },
-  }, true)
-end
-
-function M.disable_lsp_document_highlight()
-  M.disable_augroup "lsp_document_highlight"
-end
-
-function M.enable_code_lens_refresh()
-  M.define_augroups({
-    lsp_code_lens_refresh = {
-      {
-        "InsertLeave ",
-        "<buffer>",
-        "lua vim.lsp.codelens.refresh()",
-      },
-      {
-        "InsertLeave ",
-        "<buffer>",
-        "lua vim.lsp.codelens.display()",
-      },
-    },
-  }, true)
-end
-
-function M.disable_code_lens_refresh()
-  M.disable_augroup "lsp_code_lens_refresh"
 end
 
 function M.enable_transparent_mode()
@@ -170,7 +135,6 @@ end
 
 --- Create autocommand groups based on the passed definitions
 ---@param definitions table contains trigger, pattern and text. The key will be used as a group name
----@param buffer boolean indicate if the augroup should be local to the buffer
 function M.define_augroups(definitions, buffer)
   for group_name, definition in pairs(definitions) do
     vim.cmd("augroup " .. group_name)
