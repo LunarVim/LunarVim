@@ -97,7 +97,8 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    "folke/lua-dev.nvim",
+    -- NOTE: Temporary fix till folke comes back
+    "max397574/lua-dev.nvim",
     module = "lua-dev",
   },
 
