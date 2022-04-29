@@ -5,6 +5,8 @@ local api, uv = vim.api, vim.loop
 local std_data = vim.fn.stdpath "data"
 local std_config = vim.fn.stdpath "config"
 local vimruntime = os.getenv "VIMRUNTIME"
+local lvim_runtime = get_runtime_dir()
+local lvim_config = get_config_dir()
 
 local function load_buffer(title, lines)
   local bufnr = api.nvim_create_buf(false, false)
@@ -25,6 +27,8 @@ local function mod_path(path)
   path = path:gsub(std_data .. "/", "<STD_DATA>/")
   path = path:gsub(std_config .. "/", "<STD_CONFIG>/")
   path = path:gsub(vimruntime .. "/", "<VIMRUNTIME>/")
+  path = path:gsub(lvim_runtime .. "/", "<LVIM_RUNTIME>/")
+  path = path:gsub(lvim_config .. "/", "<LVIM_CONFIG>/")
   return path
 end
 
