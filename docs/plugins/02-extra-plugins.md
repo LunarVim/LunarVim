@@ -315,7 +315,7 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 },
 ```
 
-### [nvim-ts-autotag](https://github.com/romgrk/nvim-treesitter-context)
+### [nvim-treesitter-context](https://github.com/romgrk/nvim-treesitter-context)
 
 **Show current function at the top of the screen when function does not fit in screen**
 
