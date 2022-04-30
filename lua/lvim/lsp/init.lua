@@ -15,7 +15,7 @@ local function lsp_code_lens_refresh(client)
     return
   end
 
-  if client.resolved_capabilities.code_lens then
+  if vim.tbl_get(client.server_capabilities, "codeLensProvider") then
     autocmds.enable_code_lens_refresh()
   end
 end
@@ -66,7 +66,7 @@ function M.common_capabilities()
 end
 
 local function select_default_formater(client)
-  if client.name == "null-ls" or not client.resolved_capabilities.document_formatting then
+  if client.name == "null-ls" or not vim.tbl_get(client.server_capabilities, "documentFormattingProvider") then
     return
   end
   Log:debug("Checking for formatter overriding for " .. client.name)
@@ -75,8 +75,8 @@ local function select_default_formater(client)
   for _, filetype in ipairs(client_filetypes) do
     if #vim.tbl_keys(formatters.list_registered(filetype)) > 0 then
       Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
     end
   end
 end

@@ -40,7 +40,7 @@ function M.get_client_capabilities(client_id)
   end
 
   local enabled_caps = {}
-  for capability, status in pairs(client.resolved_capabilities) do
+  for capability, status in pairs(client.server_capabilities) do
     if status == true then
       table.insert(enabled_caps, capability)
     end
@@ -86,7 +86,8 @@ end
 
 function M.conditional_document_highlight(id)
   local client_ok, method_supported = pcall(function()
-    return vim.lsp.get_client_by_id(id).resolved_capabilities.document_highlight
+    local server_id = vim.lsp.get_client_by_id(id)
+    return vim.tbl_get(server_id.server_capabilities, "documentHighlightProvider")
   end)
   if not client_ok or not method_supported then
     return
