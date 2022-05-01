@@ -13,7 +13,7 @@ end
 
 function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
-  vim.cmd [[doautocmd User PackerComplete]]
+  vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
 
   vim.g.colors_name = lvim.colorscheme
   pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
