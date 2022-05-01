@@ -156,7 +156,7 @@ M.config = function()
 
       l = {
         name = "LSP",
-        a = { "<cmd>lua require('lvim.core.telescope').code_actions()<cr>", "Code Action" },
+        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
         w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
