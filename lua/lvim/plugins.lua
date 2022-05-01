@@ -58,19 +58,20 @@ local core_plugins = {
     end,
     requires = {
       "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets",
     },
   },
   {
     "rafamadriz/friendly-snippets",
+    disable = not lvim.builtin.luasnip.sources.friendly_snippets,
   },
   {
     "L3MON4D3/LuaSnip",
     config = function()
       local utils = require "lvim.utils"
-      local paths = {
-        utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets"),
-      }
+      local paths = {}
+      if lvim.builtin.luasnip.sources.friendly_snippets then
+        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets")
+      end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
       if utils.is_directory(user_snippets) then
         paths[#paths + 1] = user_snippets
