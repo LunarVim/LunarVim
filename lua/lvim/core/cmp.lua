@@ -207,6 +207,7 @@ M.config = function()
         vsnip = "(Snippet)",
         luasnip = "(Snippet)",
         buffer = "(Buffer)",
+        tmux = "(TMUX)",
       },
       duplicates = {
         buffer = 1,
@@ -249,6 +250,7 @@ M.config = function()
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
+      { name = "tmux" },
     },
     mapping = cmp.mapping.preset.insert {
       ["<C-k>"] = cmp.mapping.select_prev_item(),
