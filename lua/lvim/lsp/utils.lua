@@ -84,16 +84,9 @@ function M.get_all_supported_filetypes()
   return vim.tbl_keys(lsp_installer_filetypes or {})
 end
 
-local function _client_supports(client, pattern)
-  local capabilities = M.get_client_capabilities(client.id)
-  return require("lvim.utils.table").contains(capabilities, function(c)
-    return c:match(pattern)
-  end)
-end
-
 function M.setup_document_highlight(client, bufnr)
   local status_ok, highlight_supported = pcall(function()
-    return _client_supports(client, "document_?h?Highlight")
+    return client.supports_method "textDocument/documentHighlight"
   end)
   if not status_ok or not highlight_supported then
     return
@@ -118,7 +111,7 @@ end
 
 function M.setup_codelens_refresh(client, bufnr)
   local status_ok, codelens_supported = pcall(function()
-    return _client_supports(client, "code_?l?L?ens")
+    return client.supports_method "textDocument/codeLens"
   end)
   if not status_ok or not codelens_supported then
     return
@@ -148,7 +141,7 @@ end
 function M.format_filter(clients)
   return vim.tbl_filter(function(client)
     local status_ok, formatting_supported = pcall(function()
-      return _client_supports(client, "document_?f?F?ormatting")
+      return client.supports_method "textDocument/formatting"
     end)
     -- give higher prio to null-ls
     if status_ok and formatting_supported and client.name == "null-ls" then
