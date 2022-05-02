@@ -9,7 +9,7 @@ function M.config()
     setup = {
       disable_netrw = true,
       hijack_netrw = true,
-      open_on_setup = false,
+--       open_on_setup = false,
       open_on_setup_file = false,
       sort_by = "name",
       ignore_buffer_on_setup = false,
@@ -24,8 +24,8 @@ function M.config()
         enable = true,
         auto_open = true,
       },
-      open_on_tab = false,
-      hijack_cursor = false,
+--       open_on_tab = false,
+--       hijack_cursor = false,
       update_cwd = false,
       diagnostics = {
         enable = lvim.use_icons,
@@ -42,10 +42,10 @@ function M.config()
         update_cwd = true,
         ignore_list = {},
       },
-      system_open = {
-        cmd = nil,
-        args = {},
-      },
+--       system_open = {
+--         cmd = nil,
+--         args = {},
+--       },
       git = {
         enable = true,
         ignore = false,
@@ -78,15 +78,15 @@ function M.config()
           webdev_colors = lvim.use_icons,
         },
       },
-      filters = {
-        dotfiles = false,
-        custom = { "node_modules", "\\.cache" },
-        exclude = {},
-      },
-      trash = {
-        cmd = "trash",
-        require_confirm = true,
-      },
+--       filters = {
+--         dotfiles = false,
+--         custom = { "node_modules", "\\.cache" },
+--         exclude = {},
+--       },
+--       trash = {
+--         cmd = "trash",
+--         require_confirm = true,
+--       },
       log = {
         enable = false,
         truncate = false,
@@ -120,14 +120,14 @@ function M.config()
         },
       },
     },
-    show_icons = {
-      git = vim_show_icons,
-      folders = vim_show_icons,
-      files = vim_show_icons,
-      folder_arrows = vim_show_icons,
-    },
-    git_hl = 1,
-    root_folder_modifier = ":t",
+--     show_icons = {
+--       git = vim_show_icons,
+--       folders = vim_show_icons,
+--       files = vim_show_icons,
+--       folder_arrows = vim_show_icons,
+--     },
+--     git_hl = 1,
+--     root_folder_modifier = ":t",
     icons = {
       default = "",
       symlink = "",
