@@ -143,7 +143,9 @@ function plugin_loader.sync_core_plugins()
   vim.api.nvim_create_autocmd("User", {
     pattern = "PackerComplete",
     once = true,
-    callback = require("lvim.plugin-loader").load_snapshot,
+    callback = function()
+      require("lvim.plugin-loader").load_snapshot(default_snapshot)
+    end,
   })
   pcall_packer_command "sync"
 end

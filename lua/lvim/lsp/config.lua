@@ -94,15 +94,24 @@ return {
   },
   buffer_mappings = {
     normal_mode = {
-      ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
-      ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
-      ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
-      ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
-      ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
-      ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "show signature help" },
-      ["gp"] = { "<cmd>lua require'lvim.lsp.peek'.Peek('definition')<CR>", "Peek definition" },
+      ["K"] = { vim.lsp.buf.hover, "Show hover" },
+      ["gd"] = { vim.lsp.buf.definition, "Goto Definition" },
+      ["gD"] = { vim.lsp.buf.declaration, "Goto declaration" },
+      ["gr"] = { vim.lsp.buf.references, "Goto references" },
+      ["gI"] = { vim.lsp.buf.implementation, "Goto Implementation" },
+      ["gs"] = { vim.lsp.buf.signature_help, "show signature help" },
+      ["gp"] = {
+        function()
+          require("lvim.lsp.peek").Peek "definition"
+        end,
+        "Peek definition",
+      },
       ["gl"] = {
-        "<cmd>lua require'lvim.lsp.handlers'.show_line_diagnostics()<CR>",
+        function()
+          local config = lvim.lsp.diagnostics.float
+          config.scope = "line"
+          vim.diagnostic.open_float(0, config)
+        end,
         "Show line diagnostics",
       },
     },

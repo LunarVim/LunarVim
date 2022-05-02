@@ -15,7 +15,7 @@
     "commit": "4781fcf"
   },
   "bufferline.nvim": {
-    "commit": "f02e19b"
+    "commit": "2d5266d"
   },
   "cmp-buffer": {
     "commit": "d66c4c2"
@@ -33,13 +33,13 @@
     "commit": "6e0881a"
   },
   "gitsigns.nvim": {
-    "commit": "b800663"
+    "commit": "61c8398"
   },
   "lua-dev.nvim": {
     "commit": "54149d1"
   },
   "lualine.nvim": {
-    "commit": "030eb62"
+    "commit": "45d07fc"
   },
   "nlsp-settings.nvim": {
     "commit": "fc3007e"
@@ -57,7 +57,7 @@
     "commit": "d6d8317"
   },
   "nvim-lsp-installer": {
-    "commit": "3068a47"
+    "commit": "193f171"
   },
   "nvim-lspconfig": {
     "commit": "21102d5"
@@ -102,7 +102,7 @@
     "commit": "281b07a"
   },
   "telescope.nvim": {
-    "commit": "544c5ee"
+    "commit": "23e28d0"
   },
   "toggleterm.nvim": {
     "commit": "6c7f5db"

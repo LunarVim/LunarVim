@@ -3,23 +3,6 @@ local Log = require "lvim.core.log"
 local utils = require "lvim.utils"
 local autocmds = require "lvim.core.autocmds"
 
-local function lsp_highlight_document(client)
-  if lvim.lsp.document_highlight == false then
-    return -- we don't need further
-  end
-  autocmds.enable_lsp_document_highlight(client.id)
-end
-
-local function lsp_code_lens_refresh(client)
-  if lvim.lsp.code_lens_refresh == false then
-    return
-  end
-
-  if client.resolved_capabilities.code_lens then
-    autocmds.enable_code_lens_refresh()
-  end
-end
-
 local function add_lsp_buffer_keybindings(bufnr)
   local mappings = {
     normal_mode = "n",
@@ -65,28 +48,12 @@ function M.common_capabilities()
   return capabilities
 end
 
-local function select_default_formater(client)
-  if client.name == "null-ls" or not client.resolved_capabilities.document_formatting then
-    return
-  end
-  Log:debug("Checking for formatter overriding for " .. client.name)
-  local formatters = require "lvim.lsp.null-ls.formatters"
-  local client_filetypes = client.config.filetypes or {}
-  for _, filetype in ipairs(client_filetypes) do
-    if #vim.tbl_keys(formatters.list_registered(filetype)) > 0 then
-      Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-    end
-  end
-end
-
 function M.common_on_exit(_, _)
   if lvim.lsp.document_highlight then
-    autocmds.disable_lsp_document_highlight()
+    pcall(vim.api.nvim_del_augroup_by_name, "lsp_document_highlight")
   end
   if lvim.lsp.code_lens_refresh then
-    autocmds.disable_code_lens_refresh()
+    pcall(vim.api.nvim_del_augroup_by_name, "lsp_code_lens_refresh")
   end
 end
 
@@ -96,7 +63,6 @@ function M.common_on_init(client, bufnr)
     Log:debug "Called lsp.on_init_callback"
     return
   end
-  select_default_formater(client)
 end
 
 function M.common_on_attach(client, bufnr)
@@ -104,8 +70,13 @@ function M.common_on_attach(client, bufnr)
     lvim.lsp.on_attach_callback(client, bufnr)
     Log:debug "Called lsp.on_attach_callback"
   end
-  lsp_highlight_document(client)
-  lsp_code_lens_refresh(client)
+  local lu = require "lvim.lsp.utils"
+  if lvim.lsp.document_highlight then
+    lu.setup_document_highlight(client, bufnr)
+  end
+  if lvim.lsp.code_lens_refresh == false then
+    lu.setup_codelens_refresh(client, bufnr)
+  end
   add_lsp_buffer_keybindings(bufnr)
 end
 
