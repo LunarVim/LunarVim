@@ -10,8 +10,10 @@ M.load_default_options = function()
     completeopt = { "menuone", "noselect" },
     conceallevel = 0, -- so that `` is visible in markdown files
     fileencoding = "utf-8", -- the encoding written to a file
-    foldmethod = "manual", -- folding, set to "expr" for treesitter based folding
-    foldexpr = "", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
+    foldmethod = "expr", -- folding, set to "expr" for treesitter based folding
+    foldexpr = "nvim_treesitter#foldexpr()", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
+    foldenable = false,                      -- no fold to be applied when open a file
+    foldlevel = 99,                          -- if not set this, fold will be everywhere
     guifont = "monospace:h17", -- the font used in graphical neovim applications
     hidden = true, -- required to keep multiple buffers and open multiple buffers
     hlsearch = true, -- highlight all matches on previous search pattern
@@ -49,6 +51,13 @@ M.load_default_options = function()
     scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor.
     sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
   }
+
+  vim.cmd [[
+    augroup _fold_bug_solution  " https://github.com/nvim-telescope/telescope.nvim/issues/559
+      autocmd!
+      autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
+    augroup end
+  ]]
 
   ---  SETTINGS  ---
   vim.opt.shortmess:append "c" -- don't show redundant messages from ins-completion-menu
