@@ -7,10 +7,15 @@ All notable changes to this project will be documented in this file.
 ### <!-- 1 --> Features
 
 - _(cmp)_ documentation is deprecated in favor of window.documentation (#2461)
+- _(icons)_ make it possible to disable icons (#2529)
 - _(installer)_ ensure correct responses when prompting user (#2506)
+- _(lua-dev)_ use the newer lua-dev branch till folke comes back (#2538)
+- _(neovim)_ neovim 0.8 compatibility (#2544)
 - _(peek)_ make sure max width and height are customizable (#2492)
 - _(plugins)_ add support for packer snapshots (#2351)
 - lock nvim <0.7 to a specific tag (#2491)
+- gitsigns yadm support (#2535)
+- add cmp-tmux to the list of sources (#2542)
 
 ### <!-- 2 --> Bugfix
 
@@ -19,12 +24,15 @@ All notable changes to this project will be documented in this file.
 - _(cmp)_ bring back default keybindings (#2470)
 - _(cmp)_ update nvim-cmp to the latest version (#2467) (#2469)
 - _(impatient)_ avoid get_options in fast handler (#2451)
+- _(installer)_ latest and specified release version for neovim have different urls (#2484)
 - _(installer/pwsh)_ fixes some details on installer and uninstaller (#2404)
+- _(lsp)_ undo stdpath overload to avoid datarace (#2540)
 - _(lualine)_ color theme gaps in some components (#2465)
 - _(luasnip)_ make sure all snippets are loaded (#2447)
 - _(luasnip)_ only use user snippets if the folder exists (#2481)
 - _(nvimtree)_ escape the dot character in custom filter (#2493)
 - _(nvimtree)_ make sure on_config_done is using the correct require (#2509)
+- _(nvimtree)_ add latest changes from nvimtree (#2537)
 - _(readme)_ update lsp server ignore syntax
 - _(readme)_ remove black as linter (#2510)
 - _(telescope)_ set <cr> binding to actions.select_default only (#2395)
@@ -36,14 +44,20 @@ All notable changes to this project will be documented in this file.
 
 - _(lsp)_ replace deprecated ocamllsp with ocamlls (#2402)
 - _(lsp)_ cleanup servers' override configuration (#2243)
+- _(lsp)_ decouple the installer setup-hook (#2536)
 - re-enable packer.sync() in LvimReload (#2410)
 - update impatient (#2477)
 - lock new installations to nvim v0.7+ (#2526)
+- use api-autocmds for lsp functions (#2549)
 
 ### <!-- 4 --> Documentation
 
 - _(README)_ change forgotten breaking change in example (#2377)
 - _(windows)_ use alpha in config_win.example.lua (#2452)
+
+### <!-- 5 --> Revert
+
+- do not run packer.sync() on every reload (#2548)
 
 ## [1.1.3]
 
