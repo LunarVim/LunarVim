@@ -11,7 +11,7 @@ styles.none = {
   style = "none",
   options = {
     theme = "auto",
-    icons_enabled = true,
+    icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = {},
@@ -40,7 +40,7 @@ styles.default = {
   style = "default",
   options = {
     theme = "auto",
-    icons_enabled = true,
+    icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = {},
@@ -69,7 +69,7 @@ styles.lvim = {
   style = "lvim",
   options = {
     theme = "auto",
-    icons_enabled = true,
+    icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "alpha", "NvimTree", "Outline" },

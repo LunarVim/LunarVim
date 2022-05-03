@@ -35,7 +35,7 @@ function plugin_loader.init(opts)
     init_opts.display = nil
   end
 
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  if not utils.is_directory(install_path) then
     vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
     vim.cmd "packadd packer.nvim"
     -- IMPORTANT: we only set this the very first time to avoid constantly triggering the rollback function
@@ -86,7 +86,7 @@ function plugin_loader.reload(configurations)
   end
   plugin_loader.load(configurations)
 
-  pcall_packer_command "sync"
+  plugin_loader.ensure_plugins()
 end
 
 function plugin_loader.load(configurations)
@@ -140,8 +140,27 @@ function plugin_loader.sync_core_plugins()
   -- problem: rollback() will get stuck if a plugin directory doesn't exist
   -- solution: call sync() beforehand
   -- see https://github.com/wbthomason/packer.nvim/issues/862
-  vim.cmd [[autocmd User PackerComplete ++once lua require("lvim.plugin-loader").load_snapshot() ]]
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerComplete",
+    once = true,
+    callback = function()
+      require("lvim.plugin-loader").load_snapshot(default_snapshot)
+    end,
+  })
   pcall_packer_command "sync"
+end
+
+function plugin_loader.ensure_plugins()
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerComplete",
+    once = true,
+    callback = function()
+      Log:debug "calling packer.clean()"
+      pcall_packer_command "clean"
+    end,
+  })
+  Log:debug "calling packer.install()"
+  pcall_packer_command "install"
 end
 
 return plugin_loader

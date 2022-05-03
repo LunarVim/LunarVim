@@ -46,7 +46,7 @@ end
 
 ---Generates ftplugin files based on a list of server_names
 ---The files are generated to a runtimepath: "$LUNARVIM_RUNTIME_DIR/site/after/ftplugin/template.lua"
----@param servers_names table list of servers to be enabled. Will add all by default
+---@param servers_names? table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
   servers_names = servers_names or {}
 

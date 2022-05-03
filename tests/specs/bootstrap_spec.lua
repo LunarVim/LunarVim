@@ -12,9 +12,7 @@ a.describe("initial start", function()
     assert.falsy(package.loaded["lvim.impatient"])
   end)
 
-  a.it("should be able to use lunarvim directories using vim.fn", function()
-    assert.equal(lvim_runtime_path, vim.fn.stdpath "data")
-    assert.equal(lvim_config_path, vim.fn.stdpath "config")
+  a.it("should be able to use lunarvim cache directory using vim.fn", function()
     assert.equal(lvim_cache_path, vim.fn.stdpath "cache")
   end)
 

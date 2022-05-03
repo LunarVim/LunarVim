@@ -97,7 +97,8 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    "folke/lua-dev.nvim",
+    -- NOTE: Temporary fix till folke comes back
+    "max397574/lua-dev.nvim",
     module = "lua-dev",
   },
 
@@ -147,7 +148,7 @@ local core_plugins = {
 
   -- Whichkey
   {
-    "folke/which-key.nvim",
+    "max397574/which-key.nvim",
     config = function()
       require("lvim.core.which-key").setup()
     end,
@@ -175,7 +176,10 @@ local core_plugins = {
   },
 
   -- Icons
-  { "kyazdani42/nvim-web-devicons" },
+  {
+    "kyazdani42/nvim-web-devicons",
+    disable = not lvim.use_icons,
+  },
 
   -- Status Line and Bufferline
   {

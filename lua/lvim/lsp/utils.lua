@@ -40,7 +40,7 @@ function M.get_client_capabilities(client_id)
   end
 
   local enabled_caps = {}
-  for capability, status in pairs(client.resolved_capabilities) do
+  for capability, status in pairs(client.server_capabilities or client.resolved_capabilities) do
     if status == true then
       table.insert(enabled_caps, capability)
     end
@@ -84,14 +84,116 @@ function M.get_all_supported_filetypes()
   return vim.tbl_keys(lsp_installer_filetypes or {})
 end
 
-function M.conditional_document_highlight(id)
-  local client_ok, method_supported = pcall(function()
-    return vim.lsp.get_client_by_id(id).resolved_capabilities.document_highlight
+function M.setup_document_highlight(client, bufnr)
+  local status_ok, highlight_supported = pcall(function()
+    return client.supports_method "textDocument/documentHighlight"
   end)
-  if not client_ok or not method_supported then
+  if not status_ok or not highlight_supported then
     return
   end
-  vim.lsp.buf.document_highlight()
+  local augroup_exist, _ = pcall(vim.api.nvim_get_autocmds, {
+    group = "lsp_document_highlight",
+  })
+  if not augroup_exist then
+    vim.api.nvim_create_augroup("lsp_document_highlight", {})
+  end
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = "lsp_document_highlight",
+    buffer = bufnr,
+    callback = vim.lsp.buf.document_highlight,
+  })
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    group = "lsp_document_highlight",
+    buffer = bufnr,
+    callback = vim.lsp.buf.clear_references,
+  })
+end
+
+function M.setup_codelens_refresh(client, bufnr)
+  local status_ok, codelens_supported = pcall(function()
+    return client.supports_method "textDocument/codeLens"
+  end)
+  if not status_ok or not codelens_supported then
+    return
+  end
+  local augroup_exist, _ = pcall(vim.api.nvim_get_autocmds, {
+    group = "lsp_code_lens_refresh",
+  })
+  if not augroup_exist then
+    vim.api.nvim_create_augroup("lsp_code_lens_refresh", {})
+  end
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    group = "lsp_code_lens_refresh",
+    buffer = bufnr,
+    callback = vim.lsp.codelens.refresh,
+  })
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    group = "lsp_code_lens_refresh",
+    buffer = bufnr,
+    callback = vim.lsp.codelens.display,
+  })
+end
+
+---filter passed to vim.lsp.buf.format
+---gives higher priority to null-ls
+---@param clients table clients attached to a buffer
+---@return table chosen clients
+function M.format_filter(clients)
+  return vim.tbl_filter(function(client)
+    local status_ok, formatting_supported = pcall(function()
+      return client.supports_method "textDocument/formatting"
+    end)
+    -- give higher prio to null-ls
+    if status_ok and formatting_supported and client.name == "null-ls" then
+      return "null-ls"
+    else
+      return status_ok and formatting_supported and client.name
+    end
+  end, clients)
+end
+
+---Provide vim.lsp.buf.format for nvim <0.8
+---@param opts table
+function M.format(opts)
+  opts = opts or { filter = M.format_filter }
+
+  if vim.lsp.buf.format then
+    vim.lsp.buf.format(opts)
+  end
+
+  local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.buf_get_clients(bufnr)
+
+  if opts.filter then
+    clients = opts.filter(clients)
+  elseif opts.id then
+    clients = vim.tbl_filter(function(client)
+      return client.id == opts.id
+    end, clients)
+  elseif opts.name then
+    clients = vim.tbl_filter(function(client)
+      return client.name == opts.name
+    end, clients)
+  end
+
+  clients = vim.tbl_filter(function(client)
+    return client.supports_method "textDocument/formatting"
+  end, clients)
+
+  if #clients == 0 then
+    vim.notify "[LSP] Format request failed, no matching language servers."
+  end
+
+  local timeout_ms = opts.timeout_ms or 1000
+  for _, client in pairs(clients) do
+    local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
+    local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
+    if result and result.result then
+      vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
+    elseif err then
+      vim.notify(string.format("[LSP][%s] %s", client.name, err), vim.log.levels.WARN)
+    end
+  end
 end
 
 return M
