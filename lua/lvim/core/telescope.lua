@@ -89,7 +89,7 @@ function M.config()
       },
       ["ui-select"] = {
         require("telescope.themes").get_dropdown {},
-      }
+      },
     },
   })
 end
@@ -144,7 +144,9 @@ function M.setup()
   end
 
   if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions["ui-select"] then
-    pcall(function() require("telescope").load_extension "ui-select" end)
+    pcall(function()
+      require("telescope").load_extension "ui-select"
+    end)
   end
 end
 
