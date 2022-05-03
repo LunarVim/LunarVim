@@ -45,6 +45,11 @@ local core_plugins = {
     disable = not lvim.builtin.telescope.active,
   },
   {
+    "nvim-telescope/telescope-ui-select.nvim",
+    requires = { "nvim-telescope/telescope.nvim" },
+    disable = not lvim.builtin.telescope.active,
+  },
+  {
     "nvim-telescope/telescope-fzf-native.nvim",
     requires = { "nvim-telescope/telescope.nvim" },
     run = "make",

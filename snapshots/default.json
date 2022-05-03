@@ -104,6 +104,9 @@
   "telescope.nvim": {
     "commit": "23e28d0"
   },
+  "telescope-ui-select.nvim": {
+    "commit": "62ea5e5"
+  },
   "toggleterm.nvim": {
     "commit": "6c7f5db"
   },
