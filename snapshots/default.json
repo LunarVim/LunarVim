@@ -2,14 +2,11 @@
   "Comment.nvim": {
     "commit": "cb0de89"
   },
-  "DAPInstall.nvim": {
-    "commit": "bbda2b0"
-  },
   "FixCursorHold.nvim": {
     "commit": "1bfb32e"
   },
   "LuaSnip": {
-    "commit": "5076091"
+    "commit": "cc00863"
   },
   "alpha-nvim": {
     "commit": "4781fcf"
@@ -28,6 +25,9 @@
   },
   "cmp_luasnip": {
     "commit": "a9de941"
+  },
+  "dap-buddy.nvim": {
+    "commit": "bbda2b0"
   },
   "friendly-snippets": {
     "commit": "6e0881a"
@@ -93,7 +93,7 @@
     "commit": "612443b"
   },
   "schemastore.nvim": {
-    "commit": "89aa7e8"
+    "commit": "aaf3d78"
   },
   "structlog.nvim": {
     "commit": "6f1403a"
