@@ -60,7 +60,7 @@
     "commit": "91fe454"
   },
   "nvim-lspconfig": {
-    "commit": "b6d9e42"
+    "commit": "2f37b2c"
   },
   "nvim-notify": {
     "commit": "d4a01ee"
@@ -93,7 +93,7 @@
     "commit": "612443b"
   },
   "schemastore.nvim": {
-    "commit": "24e03a0"
+    "commit": "89aa7e8"
   },
   "structlog.nvim": {
     "commit": "6f1403a"
