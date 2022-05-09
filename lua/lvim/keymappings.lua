@@ -180,10 +180,6 @@ end
 -- Load the default keymappings
 function M.load_defaults()
   M.load(M.get_defaults())
-  lvim.keys = {}
-  for idx, _ in pairs(defaults) do
-    lvim.keys[idx] = {}
-  end
 end
 
 -- Get the default keymappings

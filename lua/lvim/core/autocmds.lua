@@ -2,7 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
-function M.load_augroups()
+function M.load_defaults()
   local user_config_file = require("lvim.config"):get_user_config_path()
 
   if vim.loop.os_uname().version:match "Windows" then
