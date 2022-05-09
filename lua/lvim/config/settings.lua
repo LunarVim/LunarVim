@@ -5,14 +5,9 @@ M.load_default_options = function()
   local join_paths = utils.join_paths
 
   local undodir = join_paths(get_cache_dir(), "undo")
-  local spelldir = join_paths(get_config_dir(), "spell")
 
   if not utils.is_directory(undodir) then
     vim.fn.mkdir(undodir, "p")
-  end
-
-  if not utils.is_directory(spelldir) then
-    vim.fn.mkdir(spelldir, "p")
   end
 
   local default_options = {
@@ -55,8 +50,6 @@ M.load_default_options = function()
     numberwidth = 4, -- set number column width to 2 {default 4}
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = false, -- display lines as one long line
-    spell = false,
-    spellfile = join_paths(spelldir, "en.utf-8.add"),
     shadafile = join_paths(get_cache_dir(), "lvim.shada"),
     scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor.
     sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
