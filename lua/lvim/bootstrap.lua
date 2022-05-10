@@ -55,7 +55,7 @@ end
 function _G.get_cache_dir()
   local lvim_cache_dir = os.getenv "LUNARVIM_CACHE_DIR"
   if not lvim_cache_dir then
-    return vim.call("stdpath", "config")
+    return vim.call("stdpath", "cache")
   end
   return lvim_cache_dir
 end
