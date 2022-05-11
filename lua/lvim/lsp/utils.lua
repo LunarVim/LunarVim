@@ -153,7 +153,7 @@ function M.format(opts)
   opts = opts or { filter = M.format_filter }
 
   if vim.lsp.buf.format then
-    vim.lsp.buf.format(opts)
+    return vim.lsp.buf.format(opts)
   end
 
   local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
