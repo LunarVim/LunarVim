@@ -21,8 +21,15 @@ local mode_adapters = {
   command_mode = "c",
 }
 
+---@class Keys
+---@field insert_mode table
+---@field normal_mode table
+---@field terminal_mode table
+---@field visual_mode table
+---@field visual_block_mode table
+---@field command_mode table
+
 local defaults = {
-  ---@usage change or add keymappings for insert mode
   insert_mode = {
     -- 'jk' for quitting insert mode
     ["jk"] = "<ESC>",
@@ -41,7 +48,6 @@ local defaults = {
     ["<A-Right>"] = "<C-\\><C-N><C-w>l",
   },
 
-  ---@usage change or add keymappings for normal mode
   normal_mode = {
     -- Better window movement
     ["<C-h>"] = "<C-w>h",
@@ -69,7 +75,6 @@ local defaults = {
     ["<C-q>"] = ":call QuickFixToggle()<CR>",
   },
 
-  ---@usage change or add keymappings for terminal mode
   term_mode = {
     -- Terminal window navigation
     ["<C-h>"] = "<C-\\><C-N><C-w>h",
@@ -78,7 +83,6 @@ local defaults = {
     ["<C-l>"] = "<C-\\><C-N><C-w>l",
   },
 
-  ---@usage change or add keymappings for visual mode
   visual_mode = {
     -- Better indenting
     ["<"] = "<gv",
@@ -88,7 +92,6 @@ local defaults = {
     -- ["P"] = '"0P',
   },
 
-  ---@usage change or add keymappings for visual block mode
   visual_block_mode = {
     -- Move selected line / block of text in visual mode
     ["K"] = ":move '<-2<CR>gv-gv",
@@ -99,7 +102,6 @@ local defaults = {
     ["<A-k>"] = ":m '<-2<CR>gv-gv",
   },
 
-  ---@usage change or add keymappings for command mode
   command_mode = {
     -- navigate tab completion with <c-j> and <c-k>
     -- runs conditionally
@@ -180,6 +182,12 @@ end
 -- Load the default keymappings
 function M.load_defaults()
   M.load(M.get_defaults())
+  lvim.keys = lvim.keys or {}
+  for idx, _ in pairs(defaults) do
+    if not lvim.keys[idx] then
+      lvim.keys[idx] = {}
+    end
+  end
 end
 
 -- Get the default keymappings
