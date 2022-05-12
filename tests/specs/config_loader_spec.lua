@@ -1,10 +1,13 @@
 local a = require "plenary.async_lib.tests"
 local config = require "lvim.config"
+local fmt = string.format
 
 a.describe("config-loader", function()
-  local user_config_path = config:get_user_config_path()
+  local user_config_path = join_paths(get_config_dir(), "config.lua")
+  local default_config_path = join_paths(get_lvim_base_dir(), "utils", "installer", "config.example.lua")
 
   before_each(function()
+    os.execute(fmt("cp -f %s %s", default_config_path, user_config_path))
     vim.cmd [[
 	    let v:errmsg = ""
       let v:errors = []
@@ -41,23 +44,12 @@ a.describe("config-loader", function()
   a.it("should not get interrupted by errors in user-config", function()
     local test_path = "/tmp/lunarvim"
     os.execute(string.format([[echo "vim.opt.undodir = '%s'" >> %s]], test_path, user_config_path))
-    config:reload()
-    vim.schedule(function()
-      assert.equal(vim.opt.undodir:get()[1], test_path)
-    end)
-    os.execute(string.format("echo 'bad_string_test' >> %s", user_config_path))
-    local error_handler = function(msg)
-      return msg
-    end
-    local err = xpcall(config:reload(), error_handler)
-    assert.falsy(err)
-    vim.schedule(function()
-      assert.equal(vim.opt.undodir:get()[1], test_path)
-      local errmsg = vim.fn.eval "v:errmsg"
-      local exception = vim.fn.eval "v:exception"
-      assert.equal("", errmsg) -- v:errmsg was not updated.
-      assert.equal("", exception)
-      os.execute(string.format("echo '' > %s", user_config_path))
-    end)
+    config:load(user_config_path)
+    assert.equal(vim.opt.undodir:get()[1], test_path)
+    require("lvim.core.log"):set_level "error"
+    os.execute(string.format("echo 'invalid_function()' >> %s", user_config_path))
+    config:load(user_config_path)
+    require("lvim.core.log"):set_level "error"
+    assert.equal(vim.opt.undodir:get()[1], test_path)
   end)
 end)
