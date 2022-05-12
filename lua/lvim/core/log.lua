@@ -11,14 +11,25 @@ vim.tbl_add_reverse_lookup(Log.levels)
 
 local notify_opts = {}
 
+function Log:set_level(level)
+  -- package.loaded["lvim.core.log"] = nil
+  local log_level = Log.levels[level:upper()]
+  local status_ok, logger = pcall(require("structlog").get_logger, "lvim")
+  if status_ok then
+    for _, s in ipairs(logger.sinks) do
+      s.level = log_level
+    end
+  end
+
+  package.loaded["packer.log"] = nil
+  require("packer.log").new { level = lvim.log.level }
+end
+
 function Log:init()
   local status_ok, structlog = pcall(require, "structlog")
   if not status_ok then
     return nil
   end
-
-  package.loaded["packer.log"] = nil
-  require("packer.log").new { level = lvim.log.level }
 
   local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
   local lvim_log = {
