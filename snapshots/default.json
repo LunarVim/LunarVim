@@ -54,13 +54,13 @@
     "commit": "a226b6a"
   },
   "nvim-dap": {
-    "commit": "d73ebd6"
+    "commit": "2249fcf"
   },
   "nvim-lsp-installer": {
-    "commit": "ab335a6"
+    "commit": "f5569f6"
   },
   "nvim-lspconfig": {
-    "commit": "2f37b2c"
+    "commit": "ce8a4d8"
   },
   "nvim-notify": {
     "commit": "d4a01ee"
@@ -69,7 +69,7 @@
     "commit": "82ec79a"
   },
   "nvim-treesitter": {
-    "commit": "aaf5d37"
+    "commit": "10d57b3"
   },
   "nvim-ts-context-commentstring": {
     "commit": "8834375"
