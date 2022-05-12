@@ -51,10 +51,14 @@ body:
     id: logs
     attributes:
       label: Relevant log output
-      placeholder: |
+      description: |
         :checkhealth
         :messages
         :e $LUNARVIM_CACHE/DIR/lvim.log
+      placeholder: |
+      ```
+      paste here
+      ```
       render: shell
     validations:
       required: true
