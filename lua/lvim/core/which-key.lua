@@ -234,6 +234,7 @@ M.config = function()
           },
           P = { "<cmd>edit $LUNARVIM_CACHE_DIR/packer.nvim.log<cr>", "Open the Packer logfile" },
         },
+        n = { "<cmd>Telescope notify<cr>", "View Notifications" },
         r = { "<cmd>LvimReload<cr>", "Reload LunarVim's configuration" },
         u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
       },
