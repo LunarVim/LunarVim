@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Make sure you have installed the latest version of [`Neovim 0.6.1`](https://github.com/neovim/neovim/releases/tag/v0.6.1).
+- Make sure you have installed the latest version of [`Neovim v0.7.0+`](https://github.com/neovim/neovim/releases/latest).
 - Have `git`, `pip`, `npm`, `node` and `cargo` installed on your system.
 - [Resolve `EACCES` permissions when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally) to avoid error when installing packages with npm.
 
