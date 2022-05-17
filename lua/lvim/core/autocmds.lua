@@ -73,7 +73,6 @@ function M.load_defaults()
         command = "tabdo wincmd =",
       },
     },
-    custom_groups = {},
   }
 end
 
