@@ -117,11 +117,11 @@ function M.configure_format_on_save()
 end
 
 function M.toggle_format_on_save()
-  local status, _ = pcall(vim.api.nvim_get_autocmds, {
+  local exists, _ = pcall(vim.api.nvim_get_autocmds, {
     group = "lsp_format_on_save",
     event = "BufWritePre",
   })
-  if not status then
+  if not exists then
     M.enable_format_on_save()
   else
     M.disable_format_on_save()
@@ -154,7 +154,8 @@ end
 ---@param name string the augroup name
 function M.clear_augroup(name)
   -- defer the function in case the autocommand is still in-use
-  if vim.api.nvim_get_autocmds { group = name } then
+  local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = name })
+  if not exists then
     Log:debug("ignoring request to clear autocmds from non-existent group " .. name)
     return
   end
