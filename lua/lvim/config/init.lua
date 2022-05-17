@@ -86,6 +86,13 @@ local function handle_deprecated_settings()
   if lvim.builtin.dashboard.active then
     deprecation_notice("lvim.builtin.dashboard", "Use `lvim.builtin.alpha` instead. See LunarVim#1906")
   end
+
+  if lvim.autocommands.custom_groups then
+    deprecation_notice(
+      "lvim.autocommands.custom_groups",
+      "Use vim.api.nvim_create_autocmd instead or check LunarVim#2592 to learn about the new syntax"
+    )
+  end
 end
 
 --- Override the configuration with a user provided one
