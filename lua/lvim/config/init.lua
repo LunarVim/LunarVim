@@ -104,7 +104,7 @@ function M:load(config_path)
 
   handle_deprecated_settings()
 
-  autocmds.define_augroups(lvim.autocommands)
+  autocmds.define_autocmds(lvim.autocommands)
 
   vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
 
