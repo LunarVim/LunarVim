@@ -118,16 +118,6 @@ if vim.fn.has "mac" == 1 then
   Log:debug "Activated mac keymappings"
 end
 
--- Append key mappings to lunarvim's defaults for a given mode
--- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
-function M.append_to_defaults(keymaps)
-  for mode, mappings in pairs(keymaps) do
-    for k, v in pairs(mappings) do
-      defaults[mode][k] = v
-    end
-  end
-end
-
 -- Unsets all keybindings defined in keymaps
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.clear(keymaps)
@@ -137,7 +127,7 @@ function M.clear(keymaps)
     for key, _ in pairs(mappings) do
       -- some plugins may override default bindings that the user hasn't manually overridden
       if default[mode][key] ~= nil or (default[translated_mode] ~= nil and default[translated_mode][key] ~= nil) then
-        pcall(vim.api.nvim_del_keymap, translated_mode, key)
+        pcall(vim.keymap.del, translated_mode, key)
       end
     end
   end
@@ -154,7 +144,7 @@ function M.set_keymaps(mode, key, val)
     val = val[1]
   end
   if val then
-    vim.api.nvim_set_keymap(mode, key, val, opt)
+    vim.keymap.set(mode, key, val, opt)
   else
     pcall(vim.api.nvim_del_keymap, mode, key)
   end
