@@ -2,8 +2,6 @@ local M = {}
 local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
--- TODO: adding a description seems to mess with the output of `nvim_get_autocmds`
--- see https://github.com/mrjones2014/legendary.nvim/issues/39
 function M.load_defaults()
   local user_config_file = require("lvim.config"):get_user_config_path()
 
@@ -12,12 +10,13 @@ function M.load_defaults()
     user_config_file = user_config_file:gsub("\\", "/")
   end
 
-  return {
+  local definitions = {
     {
       "TextYankPost",
       {
         group = "_general_settings",
         pattern = "*",
+        desc = "Highlight text on yank",
         callback = function()
           require("vim.highlight").on_yank { higroup = "Search", timeout = 200 }
         end,
@@ -28,6 +27,7 @@ function M.load_defaults()
       {
         group = "_general_settings",
         pattern = user_config_file,
+        desc = "Trigger LvimReload on saving " .. vim.fn.expand "%:~",
         callback = function()
           require("lvim.config"):reload()
         end,
@@ -74,6 +74,8 @@ function M.load_defaults()
       },
     },
   }
+
+  M.define_autocmds(definitions)
 end
 
 local get_format_on_save_opts = function()
