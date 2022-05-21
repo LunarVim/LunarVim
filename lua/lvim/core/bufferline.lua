@@ -144,9 +144,9 @@ end
 
 -- Common kill function for bdelete and bwipeout
 -- credits: based on bbye and nvim-bufdel
----@param kill_command String defaults to "bd"
----@param bufnr Number defaults to the current buffer
----@param force Boolean defaults to false
+---@param kill_command string defaults to "bd"
+---@param bufnr? number defaults to the current buffer
+---@param force? boolean defaults to false
 function M.buf_kill(kill_command, bufnr, force)
   local bo = vim.bo
   local api = vim.api

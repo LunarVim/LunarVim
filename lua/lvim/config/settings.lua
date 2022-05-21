@@ -1,7 +1,15 @@
 local M = {}
-local join_paths = require("lvim.utils").join_paths
 
 M.load_default_options = function()
+  local utils = require "lvim.utils"
+  local join_paths = utils.join_paths
+
+  local undodir = join_paths(get_cache_dir(), "undo")
+
+  if not utils.is_directory(undodir) then
+    vim.fn.mkdir(undodir, "p")
+  end
+
   local default_options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -29,7 +37,7 @@ M.load_default_options = function()
     timeoutlen = 250, -- time to wait for a mapped sequence to complete (in milliseconds)
     title = true, -- set the title of window to the value of the titlestring
     -- opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
-    undodir = join_paths(get_cache_dir(), "undo"), -- set an undo directory
+    undodir = undodir, -- set an undo directory
     undofile = true, -- enable persistent undo
     updatetime = 300, -- faster completion
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
@@ -42,9 +50,6 @@ M.load_default_options = function()
     numberwidth = 4, -- set number column width to 2 {default 4}
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
     wrap = false, -- display lines as one long line
-    spell = false,
-    spelllang = "en",
-    spellfile = join_paths(get_config_dir(), "spell", "en.utf-8.add"),
     shadafile = join_paths(get_cache_dir(), "lvim.shada"),
     scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor.
     sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
@@ -68,7 +73,7 @@ M.load_headless_options = function()
   vim.opt.swapfile = false -- don't use a swap file
 end
 
-M.load_options = function()
+M.load_defaults = function()
   if #vim.api.nvim_list_uis() == 0 then
     M.load_headless_options()
     return

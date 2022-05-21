@@ -50,10 +50,10 @@ end
 
 function M.common_on_exit(_, _)
   if lvim.lsp.document_highlight then
-    pcall(vim.api.nvim_del_augroup_by_name, "lsp_document_highlight")
+    autocmds.clear_augroup "lsp_document_highlight"
   end
   if lvim.lsp.code_lens_refresh then
-    pcall(vim.api.nvim_del_augroup_by_name, "lsp_code_lens_refresh")
+    autocmds.clear_augroup "lsp_code_lens_refresh"
   end
 end
 
