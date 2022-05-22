@@ -67,7 +67,7 @@ shfmt -i 2 -ci -bn -l -d .
   │       │           │
   │       │           └─> Present tense.     'add something...'(O) vs 'added something...'(X)
   │       │               Imperative mood.   'move cursor to...'(O) vs 'moves cursor to...'(X)
-  │       │               Not capitalized. 
+  │       │               Not capitalized.
   │       │               No period at the end.
   │       │
   │       └─> Commit Scope is optional, but strongly recommended.
@@ -91,10 +91,10 @@ shfmt -i 2 -ci -bn -l -d .
 
 **Real world examples:**
 ```
-feat(quickfix): add 'q' binding to quit quickfix window when focused 
+feat(quickfix): add 'q' binding to quit quickfix window when focused
 ```
 ```
-fix(installer): add missing "HOME" variable 
+fix(installer): add missing "HOME" variable
 ```
 
 

@@ -5,26 +5,15 @@ local M = {}
 local user_config_dir = get_config_dir()
 local user_config_file = utils.join_paths(user_config_dir, "config.lua")
 
-local function apply_defaults(configs, defaults)
-  configs = configs or {}
-  return vim.tbl_deep_extend("keep", configs, defaults)
-end
-
 ---Get the full path to the user configuration file
 ---@return string
 function M:get_user_config_path()
   return user_config_file
 end
 
---- Initialize lvim default configuration
--- Define lvim global variable
+--- Initialize lvim default configuration and variables
 function M:init()
-  if vim.tbl_isempty(lvim or {}) then
-    lvim = vim.deepcopy(require "lvim.config.defaults")
-    local home_dir = vim.loop.os_homedir()
-    lvim.vsnip_dir = utils.join_paths(home_dir, ".config", "snippets")
-    lvim.database = { save_location = utils.join_paths(home_dir, ".config", "lunarvim_db"), auto_execute = 1 }
-  end
+  lvim = vim.deepcopy(require "lvim.config.defaults")
 
   require("lvim.keymappings").load_defaults()
 
@@ -32,13 +21,13 @@ function M:init()
   builtins.config { user_config_file = user_config_file }
 
   local settings = require "lvim.config.settings"
-  settings.load_options()
+  settings.load_defaults()
 
   local autocmds = require "lvim.core.autocmds"
-  lvim.autocommands = apply_defaults(lvim.autocommands, autocmds.load_augroups())
+  autocmds.load_defaults()
 
   local lvim_lsp_config = require "lvim.lsp.config"
-  lvim.lsp = apply_defaults(lvim.lsp, vim.deepcopy(lvim_lsp_config))
+  lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
   ---@deprecated replaced with lvim.builtin.alpha
   lvim.builtin.dashboard = {
@@ -51,8 +40,6 @@ function M:init()
     custom_section = {},
     footer = {},
   }
-
-  require("lvim.lsp.manager").init_defaults()
 end
 
 local function handle_deprecated_settings()
@@ -99,25 +86,32 @@ local function handle_deprecated_settings()
   if lvim.builtin.dashboard.active then
     deprecation_notice("lvim.builtin.dashboard", "Use `lvim.builtin.alpha` instead. See LunarVim#1906")
   end
+
+  if lvim.autocommands.custom_groups then
+    deprecation_notice(
+      "lvim.autocommands.custom_groups",
+      "Use vim.api.nvim_create_autocmd instead or check LunarVim#2592 to learn about the new syntax"
+    )
+  end
 end
 
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
   local autocmds = require "lvim.core.autocmds"
-  config_path = config_path or self.get_user_config_path()
+  config_path = config_path or self:get_user_config_path()
   local ok, err = pcall(dofile, config_path)
   if not ok then
     if utils.is_file(user_config_file) then
       Log:warn("Invalid configuration: " .. err)
     else
-      Log:warn(string.format("Unable to find configuration file [%s]", config_path))
+      vim.notify_once(string.format("Unable to find configuration file [%s]", config_path), vim.log.levels.WARN)
     end
   end
 
   handle_deprecated_settings()
 
-  autocmds.define_augroups(lvim.autocommands)
+  autocmds.define_autocmds(lvim.autocommands)
 
   vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
 
@@ -134,7 +128,6 @@ function M:reload()
   vim.schedule(function()
     require_clean("lvim.utils.hooks").run_pre_reload()
 
-    M:init()
     M:load()
 
     require("lvim.core.autocmds").configure_format_on_save()
