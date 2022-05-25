@@ -24,7 +24,6 @@ local core_plugins = {
   },
   {
     "rcarriga/nvim-notify",
-
     config = function()
       require("lvim.core.notify").setup()
     end,
@@ -38,7 +37,6 @@ local core_plugins = {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-
     config = function()
       require("lvim.core.telescope").setup()
     end,
@@ -214,7 +212,8 @@ local core_plugins = {
 
   -- Debugger management
   {
-    "Pocco81/DAPInstall.nvim",
+    "Pocco81/dap-buddy.nvim",
+    branch = "dev",
     -- event = "BufWinEnter",
     -- event = "BufRead",
     disable = not lvim.builtin.dap.active,

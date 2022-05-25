@@ -17,7 +17,7 @@ body:
     validations:
       required: true
   - type: input
-    id: lunar-vim-version
+    id: version
     attributes:
       label: LunarVim version
       placeholder: |
@@ -30,18 +30,18 @@ body:
       label: Neovim version (>= 0.7)
       description: "Output of `nvim --version`"
       placeholder: |
-        NVIM v0.7-dev+209-g0603eba6e
-        Build type: Release
-        LuaJIT 2.1.0-beta3
+        NVIM v0.8.0-dev+199-g2875d45e7
     validations:
       required: true
   - type: input
+    id: system-version
     attributes:
       label: "Operating system/version"
       placeholder: "macOS 11.5"
     validations:
       required: true
   - type: input
+    id: servers
     attributes:
       label: "Affected language servers"
       description: "If this issue is specific to one or more language servers, list them here. If not, write 'all'."
@@ -49,6 +49,7 @@ body:
     validations:
       required: true
   - type: textarea
+    id: steps
     attributes:
       label: "Steps to reproduce"
       description: "Steps to reproduce using the minimal config."
@@ -56,30 +57,37 @@ body:
         1. `nvim -u ~/.local/share/lunarvim/lvim/tests/minimal_lsp.lua`
         2. ...
   - type: textarea
+    id: behavior
     attributes:
       label: "Actual behavior"
       description: "Observed behavior."
     validations:
       required: true
   - type: textarea
+    id: expected-behavior
     attributes:
       label: "Expected behavior"
       description: "A description of the behavior you expected."
   - type: textarea
-    id: logs
+    id: support-info
     attributes:
-      label: log and support info
+      label: support info
+      description: Information from LspInfo and LvimInfo
       placeholder: |
-        :LspInfo
-        :LvimInfo
-        :messages
-        :checkhealth
-        :e $LUNARVIM_CACHE/DIR/lsp.log
-        :e $LUNARVIM_CACHE/DIR/lvim.log
-        :e $LUNARVIM_CACHE/DIR/log
-      render: shell
+        ```console
+        # :LspInfo
+        ```
+        ```console
+        # :LvimInfo
+        ```
     validations:
       required: true
+  - type: textarea
+    id: lsp-logs
+    attributes:
+      label: logs
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: console
   - type: textarea
     id: screenshots
     attributes:

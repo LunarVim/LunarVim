@@ -23,7 +23,7 @@ body:
     validations:
       required: true
   - type: input
-    id: lunar-vim-version
+    id: version
     attributes:
       label: LunarVim version
       placeholder: |
@@ -36,26 +36,36 @@ body:
       label: Neovim version (>= 0.7)
       description: "Output of `nvim --version`"
       placeholder: |
-        NVIM v0.7-dev+209-g0603eba6e
-        Build type: Release
-        LuaJIT 2.1.0-beta3
+        NVIM v0.8.0-dev+199-g2875d45e7
     validations:
       required: true
   - type: input
+    id: system-version
     attributes:
       label: "Operating system/version"
       placeholder: "macOS 11.5"
     validations:
       required: true
   - type: textarea
-    id: logs
+    id: steps
     attributes:
-      label: Relevant log output
+      label: "Steps to reproduce"
+      description: "Steps to reproduce using the minimal config."
       placeholder: |
-        :checkhealth
-        :messages
-        :e $LUNARVIM_CACHE/DIR/lvim.log
-      render: shell
+        1. `nvim -u ~/.local/share/lunarvim/lvim/tests/minimal_lsp.lua`
+        2. ...
+  - type: textarea
+    id: support-info
+    attributes:
+      label: support info
+      description: Information from LspInfo and LvimInfo
+      placeholder: |
+        ```console
+        # :LspInfo
+        ```
+        ```console
+        # :LvimInfo
+        ```
     validations:
       required: true
   - type: textarea

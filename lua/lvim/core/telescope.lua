@@ -72,7 +72,7 @@ function M.config()
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
       pickers = {
         find_files = {
-          find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
+          hidden = true,
         },
         live_grep = {
           --@usage don't include the filename in the search results
@@ -127,6 +127,12 @@ function M.setup()
   if lvim.builtin.project.active then
     pcall(function()
       require("telescope").load_extension "projects"
+    end)
+  end
+
+  if lvim.builtin.notify.active then
+    pcall(function()
+      require("telescope").load_extension "notify"
     end)
   end
 

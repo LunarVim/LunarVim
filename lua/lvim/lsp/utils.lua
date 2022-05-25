@@ -122,15 +122,10 @@ function M.setup_codelens_refresh(client, bufnr)
   if not augroup_exist then
     vim.api.nvim_create_augroup("lsp_code_lens_refresh", {})
   end
-  vim.api.nvim_create_autocmd("InsertLeave", {
+  vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
     group = "lsp_code_lens_refresh",
     buffer = bufnr,
     callback = vim.lsp.codelens.refresh,
-  })
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    group = "lsp_code_lens_refresh",
-    buffer = bufnr,
-    callback = vim.lsp.codelens.display,
   })
 end
 
@@ -158,7 +153,7 @@ function M.format(opts)
   opts = opts or { filter = M.format_filter }
 
   if vim.lsp.buf.format then
-    vim.lsp.buf.format(opts)
+    return vim.lsp.buf.format(opts)
   end
 
   local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()

@@ -3,19 +3,6 @@ local M = {}
 local Log = require "lvim.core.log"
 local lvim_lsp_utils = require "lvim.lsp.utils"
 
-function M.init_defaults(languages)
-  languages = languages or lvim_lsp_utils.get_all_supported_filetypes()
-  for _, entry in ipairs(languages) do
-    if not lvim.lang[entry] then
-      lvim.lang[entry] = {
-        formatters = {},
-        linters = {},
-        lsp = {},
-      }
-    end
-  end
-end
-
 ---Resolve the configuration for a server by merging with the default config
 ---@param server_name string
 ---@vararg any config table [optional]
