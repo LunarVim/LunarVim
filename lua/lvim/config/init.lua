@@ -40,6 +40,12 @@ function M:init()
     custom_section = {},
     footer = {},
   }
+
+  lvim.builtin.luasnip = {
+    sources = {
+      friendly_snippets = true,
+    },
+  }
 end
 
 local function handle_deprecated_settings()
