@@ -66,6 +66,8 @@ function M.config()
         signcolumn = "yes",
       },
       renderer = {
+        highlight_git = true,
+        root_folder_modifier = ":t",
         indent_markers = {
           enable = false,
           icons = {
@@ -76,6 +78,32 @@ function M.config()
         },
         icons = {
           webdev_colors = lvim.use_icons,
+          show = {
+            git = true,
+            folder = true,
+            file = true,
+            folder_arrow = true,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            git = {
+              unstaged = "",
+              staged = "S",
+              unmerged = "",
+              renamed = "➜",
+              deleted = "",
+              untracked = "U",
+              ignored = "◌",
+            },
+            folder = {
+              default = "",
+              open = "",
+              empty = "",
+              empty_open = "",
+              symlink = "",
+            },
+          },
         },
       },
       filters = {
@@ -119,35 +147,7 @@ function M.config()
           },
         },
       },
-    },
-    show_icons = {
-      git = vim_show_icons,
-      folders = vim_show_icons,
-      files = vim_show_icons,
-      folder_arrows = vim_show_icons,
-    },
-    git_hl = 1,
-    root_folder_modifier = ":t",
-    icons = {
-      default = "",
-      symlink = "",
-      git = {
-        unstaged = "",
-        staged = "S",
-        unmerged = "",
-        renamed = "➜",
-        deleted = "",
-        untracked = "U",
-        ignored = "◌",
-      },
-      folder = {
-        default = "",
-        open = "",
-        empty = "",
-        empty_open = "",
-        symlink = "",
-      },
-    },
+    }
   }
   lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 end
