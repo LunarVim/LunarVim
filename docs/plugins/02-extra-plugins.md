@@ -351,6 +351,21 @@ lvim.builtin.treesitter.rainbow.enable = true
 
 ## Telescope Extensions
 
+### How to install telescope extensions
+
+First **add your telescope extension to the list of plugins** as usual (`lvim.plugins = { ... }`) following the extension instructions.
+There are several ways to register extensions within telescope, but the safer is using the `on_config_done` callback for telescope.
+Create the callback function anywhere in your `config.lua`. This function will be called when telescope has finished loading and will get telescope as its only parameter.
+Finally, within the `on_config_done` callback register your extension :
+
+```lua
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "frecency")
+  pcall(telescope.load_extension, "neoclip")
+  -- any other extensions loading
+end
+```
+
 ### [telescope-fzy-native.nvim](https://github.com/nvim-telescope/telescope-fzy-native.nvim)
 
 **fzy style sorter that is compiled**
