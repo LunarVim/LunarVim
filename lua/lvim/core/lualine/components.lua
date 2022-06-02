@@ -110,7 +110,8 @@ return {
       local supported_linters = linters.list_registered(buf_ft)
       vim.list_extend(buf_client_names, supported_linters)
 
-      return "[" .. table.concat(buf_client_names, ", ") .. "]"
+      local unique_client_names = vim.fn.uniq(buf_client_names)
+      return "[" .. table.concat(unique_client_names, ", ") .. "]"
     end,
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
