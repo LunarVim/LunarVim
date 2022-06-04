@@ -16,7 +16,7 @@ Visit [this repo](https://github.com/ronniedroid/getnf) for an easy way to insta
 
 ### Manual Install
 
-1. To to the [pached fonts directory](https://www.nerdfonts.com/font-downloads)
+1. Go to the [pached fonts directory](https://www.nerdfonts.com/font-downloads)
 1. Copy the downloaded files to `~/.local/share/fonts`
 
 ### Curl Download
