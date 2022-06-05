@@ -52,7 +52,7 @@ function Log:init()
           processors = {
             structlog.processors.Namer(),
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 3, stack_level = 2 }),
-            structlog.processors.Timestamper "%H:%M:%S",
+            structlog.processors.Timestamper "%F %H:%M:%S",
           },
           formatter = structlog.formatters.Format( --
             "%s [%-5s] %s: %-30s",
