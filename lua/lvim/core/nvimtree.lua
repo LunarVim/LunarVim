@@ -2,7 +2,6 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-  local vim_show_icons = lvim.use_icons and 1 or 0
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
@@ -76,7 +75,35 @@ function M.config()
         },
         icons = {
           webdev_colors = lvim.use_icons,
+          show = {
+            git = lvim.use_icons,
+            folder = lvim.use_icons,
+            file = lvim.use_icons,
+            folder_arrow = lvim.use_icons,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            git = {
+              unstaged = "",
+              staged = "S",
+              unmerged = "",
+              renamed = "➜",
+              deleted = "",
+              untracked = "U",
+              ignored = "◌",
+            },
+            folder = {
+              default = "",
+              open = "",
+              empty = "",
+              empty_open = "",
+              symlink = "",
+            },
+          },
         },
+        highlight_git = true,
+        root_folder_modifier = ":t",
       },
       filters = {
         dotfiles = false,
@@ -120,34 +147,6 @@ function M.config()
         },
       },
     },
-    show_icons = {
-      git = vim_show_icons,
-      folders = vim_show_icons,
-      files = vim_show_icons,
-      folder_arrows = vim_show_icons,
-    },
-    git_hl = 1,
-    root_folder_modifier = ":t",
-    icons = {
-      default = "",
-      symlink = "",
-      git = {
-        unstaged = "",
-        staged = "S",
-        unmerged = "",
-        renamed = "➜",
-        deleted = "",
-        untracked = "U",
-        ignored = "◌",
-      },
-      folder = {
-        default = "",
-        open = "",
-        empty = "",
-        empty_open = "",
-        symlink = "",
-      },
-    },
   }
   lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 end
@@ -165,7 +164,7 @@ function M.setup()
 
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then
-    lvim.builtin.nvimtree.respect_buf_cwd = 1
+    lvim.builtin.nvimtree.setup.respect_buf_cwd = true
     lvim.builtin.nvimtree.setup.update_cwd = true
     lvim.builtin.nvimtree.setup.update_focused_file = { enable = true, update_cwd = true }
   end
@@ -173,6 +172,7 @@ function M.setup()
   local function telescope_find_files(_)
     require("lvim.core.nvimtree").start_telescope "find_files"
   end
+
   local function telescope_live_grep(_)
     require("lvim.core.nvimtree").start_telescope "live_grep"
   end
