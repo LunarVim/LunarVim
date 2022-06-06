@@ -6,4 +6,6 @@ lvim.plugins = {
   { "norcalli/nvim-colorizer.lua" }
 }
 
+lvim.transparent_window = true
+
 require 'colorizer'.setup()
