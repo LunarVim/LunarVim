@@ -118,11 +118,11 @@ function M.configure_format_on_save()
 end
 
 function M.toggle_format_on_save()
-  local exists, _ = pcall(vim.api.nvim_get_autocmds, {
+  local exists, autocmds = pcall(vim.api.nvim_get_autocmds, {
     group = "lsp_format_on_save",
     event = "BufWritePre",
   })
-  if not exists then
+  if not exists or #autocmds == 0 then
     M.enable_format_on_save()
   else
     M.disable_format_on_save()
