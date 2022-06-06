@@ -12,10 +12,8 @@ declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
 declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
 declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
+declare -r LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
 declare -r LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
-
-# TODO: Use a dedicated cache directory #1256
-declare -r LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/nvim"
 
 declare BASEDIR
 BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
@@ -87,6 +85,25 @@ function msg() {
   printf "%s\n" "$text"
 }
 
+function confirm() {
+  local question="$1"
+  while true; do
+    msg "$question"
+    read -p "[y]es or [n]o (default: no) : " -r answer
+    case "$answer" in
+      y | Y | yes | YES | Yes)
+        return 0
+        ;;
+      n | N | no | NO | No | *[[:blank:]]* | "")
+        return 1
+        ;;
+      *)
+        msg "Please answer [y]es or [n]o."
+        ;;
+    esac
+  done
+}
+
 function main() {
   parse_arguments "$@"
 
@@ -99,17 +116,15 @@ function main() {
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     if [ "$INTERACTIVE_MODE" -eq 1 ]; then
-      msg "Would you like to install LunarVim's NodeJS dependencies?"
-      read -p "[y]es or [n]o (default: no) : " -r answer
-      [ "$answer" != "${answer#[Yy]}" ] && install_nodejs_deps
-
-      msg "Would you like to install LunarVim's Python dependencies?"
-      read -p "[y]es or [n]o (default: no) : " -r answer
-      [ "$answer" != "${answer#[Yy]}" ] && install_python_deps
-
-      msg "Would you like to install LunarVim's Rust dependencies?"
-      read -p "[y]es or [n]o (default: no) : " -r answer
-      [ "$answer" != "${answer#[Yy]}" ] && install_rust_deps
+      if confirm "Would you like to install LunarVim's NodeJS dependencies?"; then
+        install_nodejs_deps
+      fi
+      if confirm "Would you like to install LunarVim's Python dependencies?"; then
+        install_python_deps
+      fi
+      if confirm "Would you like to install LunarVim's Rust dependencies?"; then
+        install_rust_deps
+      fi
     else
       install_nodejs_deps
       install_python_deps
@@ -182,11 +197,11 @@ function print_missing_dep_msg() {
 }
 
 function check_neovim_min_version() {
-  local verify_version_cmd='if !has("nvim-0.6.1") | cquit | else | quit | endif'
+  local verify_version_cmd='if !has("nvim-0.7") | cquit | else | quit | endif'
 
   # exit with an error if min_version not found
   if ! nvim --headless -u NONE -c "$verify_version_cmd"; then
-    echo "[ERROR]: LunarVim requires at least Neovim v0.6.1 or higher"
+    echo "[ERROR]: LunarVim requires at least Neovim v0.7 or higher"
     exit 1
   fi
 }

@@ -108,6 +108,7 @@ M.toggle_log_view = function(logfile)
   if vim.fn.executable(log_viewer) ~= 1 then
     log_viewer = "less +F"
   end
+  Log:debug("attempting to open: " .. logfile)
   log_viewer = log_viewer .. " " .. logfile
   local term_opts = vim.tbl_deep_extend("force", lvim.builtin.terminal, {
     cmd = log_viewer,

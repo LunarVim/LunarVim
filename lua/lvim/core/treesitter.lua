@@ -12,11 +12,12 @@ M.config = function()
     },
     highlight = {
       enable = true, -- false will disable the whole extension
-      additional_vim_regex_highlighting = true,
+      additional_vim_regex_highlighting = false,
       disable = { "latex" },
     },
     context_commentstring = {
       enable = true,
+      enable_autocmd = false,
       config = {
         -- Languages that have a single comment style
         typescript = "// %s",
@@ -28,9 +29,7 @@ M.config = function()
         json = "",
       },
     },
-    -- indent = {enable = true, disable = {"python", "html", "javascript"}},
-    -- TODO seems to be broken
-    indent = { enable = true, disable = { "yaml" } },
+    indent = { enable = true, disable = { "yaml", "python" } },
     autotag = { enable = false },
     textobjects = {
       swap = {

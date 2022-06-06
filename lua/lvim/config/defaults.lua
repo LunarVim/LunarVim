@@ -7,8 +7,12 @@ return {
     pattern = "*",
     ---@usage timeout number timeout in ms for the format request (Default: 1000)
     timeout = 1000,
+    ---@usage filter func to select client
+    filter = require("lvim.lsp.handlers").format_filter,
   },
   keys = {},
+
+  use_icons = true,
 
   builtin = {},
 

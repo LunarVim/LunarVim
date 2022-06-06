@@ -72,6 +72,8 @@ function M.update_base_lvim()
     Log:error "Update failed! Please pull the changes manually instead."
     return
   end
+
+  return true
 end
 
 ---Switch Lunarvim to the specified development branch
@@ -80,11 +82,19 @@ function M.switch_lvim_branch(branch)
   if not safe_deep_fetch() then
     return
   end
-  local ret = git_cmd { args = { "switch", branch } }
+  local args = { "switch", branch }
+
+  if branch:match "^[0-9]" then
+    -- avoids producing an error for tags
+    vim.list_extend(args, { "--detach" })
+  end
+
+  local ret = git_cmd { args = args }
   if ret ~= 0 then
     Log:error "Unable to switch branches! Check the log for further information"
     return
   end
+  return true
 end
 
 ---Get the current Lunarvim development branch
@@ -103,6 +113,20 @@ function M.get_lvim_tag()
   local _, results = git_cmd { args = args }
   local tag = if_nil(results[1], "")
   return tag
+end
+
+---Get currently running version of Lunarvim
+---@return string
+function M.get_lvim_version()
+  local current_branch = M.get_lvim_branch()
+
+  local lvim_version
+  if current_branch ~= "HEAD" or "" then
+    lvim_version = current_branch .. "-" .. M.get_lvim_current_sha()
+  else
+    lvim_version = "v" .. M.get_lvim_tag()
+  end
+  return lvim_version
 end
 
 ---Get the commit hash of currently checked-out commit of Lunarvim

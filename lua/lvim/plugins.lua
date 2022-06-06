@@ -24,7 +24,6 @@ local core_plugins = {
   },
   {
     "rcarriga/nvim-notify",
-
     config = function()
       require("lvim.core.notify").setup()
     end,
@@ -38,7 +37,6 @@ local core_plugins = {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-
     config = function()
       require("lvim.core.telescope").setup()
     end,
@@ -60,19 +58,20 @@ local core_plugins = {
     end,
     requires = {
       "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets",
     },
   },
   {
     "rafamadriz/friendly-snippets",
+    disable = not lvim.builtin.luasnip.sources.friendly_snippets,
   },
   {
     "L3MON4D3/LuaSnip",
     config = function()
       local utils = require "lvim.utils"
-      local paths = {
-        utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets"),
-      }
+      local paths = {}
+      if lvim.builtin.luasnip.sources.friendly_snippets then
+        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets")
+      end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
       if utils.is_directory(user_snippets) then
         paths[#paths + 1] = user_snippets
@@ -97,7 +96,8 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    "folke/lua-dev.nvim",
+    -- NOTE: Temporary fix till folke comes back
+    "max397574/lua-dev.nvim",
     module = "lua-dev",
   },
 
@@ -114,7 +114,6 @@ local core_plugins = {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = vim.fn.has "nvim-0.6" == 1 and "master" or "0.5-compat",
     -- run = ":TSUpdate",
     config = function()
       require("lvim.core.treesitter").setup()
@@ -148,7 +147,7 @@ local core_plugins = {
 
   -- Whichkey
   {
-    "folke/which-key.nvim",
+    "max397574/which-key.nvim",
     config = function()
       require("lvim.core.which-key").setup()
     end,
@@ -176,7 +175,10 @@ local core_plugins = {
   },
 
   -- Icons
-  { "kyazdani42/nvim-web-devicons" },
+  {
+    "kyazdani42/nvim-web-devicons",
+    disable = not lvim.use_icons,
+  },
 
   -- Status Line and Bufferline
   {
@@ -211,7 +213,8 @@ local core_plugins = {
 
   -- Debugger management
   {
-    "Pocco81/DAPInstall.nvim",
+    "Pocco81/dap-buddy.nvim",
+    branch = "dev",
     -- event = "BufWinEnter",
     -- event = "BufRead",
     disable = not lvim.builtin.dap.active,

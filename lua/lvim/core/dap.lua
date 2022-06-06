@@ -28,9 +28,11 @@ end
 M.setup = function()
   local dap = require "dap"
 
-  vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
-  vim.fn.sign_define("DapBreakpointRejected", lvim.builtin.dap.breakpoint_rejected)
-  vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
+  if lvim.use_icons then
+    vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
+    vim.fn.sign_define("DapBreakpointRejected", lvim.builtin.dap.breakpoint_rejected)
+    vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
+  end
 
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
 
@@ -45,7 +47,7 @@ M.setup = function()
     i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
     o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
     u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
+    p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
     q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },

@@ -29,7 +29,7 @@
 
 ## Install In One Command!
 
-Make sure you have the release version of Neovim (0.6.1+).
+Make sure you have the release version of Neovim (0.7+).
 
 ### Linux:
 
@@ -107,7 +107,6 @@ formatters.setup {
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "black" },
   {
     command = "eslint_d",
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.

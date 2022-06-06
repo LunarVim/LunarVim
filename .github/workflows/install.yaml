@@ -23,7 +23,6 @@ jobs:
           - runner: macos-10.15
             os: osx
     runs-on: ${{ matrix.runner }}
-    if: github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v2
 
@@ -58,7 +57,7 @@ jobs:
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: v0.6.1
+          version: v0.7.0
 
       - name: Install LunarVim
         timeout-minutes: 4

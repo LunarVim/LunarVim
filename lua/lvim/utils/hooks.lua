@@ -13,7 +13,7 @@ end
 
 function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
-  vim.cmd [[doautocmd User PackerComplete]]
+  vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
 
   vim.g.colors_name = lvim.colorscheme
   pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
@@ -51,6 +51,23 @@ end
 
 function M.run_post_update()
   Log:debug "Starting post-update hook"
+
+  if vim.fn.has "nvim-0.7" ~= 1 then
+    local compat_tag = "1.1.3"
+    vim.notify(
+      "Please upgrade your Neovim base installation. Newer version of Lunarvim requires v0.7+",
+      vim.log.levels.WARN
+    )
+    vim.wait(1000, function()
+      return false
+    end)
+    local ret = require_clean("lvim.utils.git").switch_lvim_branch(compat_tag)
+    if ret then
+      vim.notify("Reverted to the last known compatibile version: " .. compat_tag, vim.log.levels.WARN)
+    end
+    return
+  end
+
   M.reset_cache()
 
   Log:debug "Syncing core plugins"

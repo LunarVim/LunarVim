@@ -39,6 +39,15 @@ local defaults = {
 }
 
 function M.config()
+  if not lvim.use_icons then
+    defaults.opts.icons = {
+      ERROR = "[ERROR]",
+      WARN = "[WARNING]",
+      INFO = "[INFo]",
+      DEBUG = "[DEBUG]",
+      TRACE = "[TRACE]",
+    }
+  end
   lvim.builtin.notify = vim.tbl_deep_extend("force", defaults, lvim.builtin.notify or {})
 end
 

@@ -4,9 +4,12 @@ local function is_ft(b, ft)
   return vim.bo[b].filetype == ft
 end
 
-local function diagnostics_indicator(_, _, diagnostics)
+local function diagnostics_indicator(num, _, diagnostics, _)
   local result = {}
   local symbols = { error = "", warning = "", info = "" }
+  if not lvim.use_icons then
+    return "(" .. num .. ")"
+  end
   for name, count in pairs(diagnostics) do
     if symbols[name] and count > 0 then
       table.insert(result, symbols[name] .. " " .. count)
@@ -112,8 +115,8 @@ M.config = function()
           padding = 1,
         },
       },
-      show_buffer_icons = true, -- disable filetype icons for buffers
-      show_buffer_close_icons = true,
+      show_buffer_icons = lvim.use_icons, -- disable filetype icons for buffers
+      show_buffer_close_icons = lvim.use_icons,
       show_close_icon = false,
       show_tab_indicators = true,
       persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
@@ -139,26 +142,42 @@ M.setup = function()
   end
 end
 
+--stylua: ignore
+
 -- Common kill function for bdelete and bwipeout
 -- credits: based on bbye and nvim-bufdel
----@param kill_command String defaults to "bd"
----@param bufnr Number defaults to the current buffer
----@param force Boolean defaults to false
+---@param kill_command? string defaults to "bd"
+---@param bufnr? number defaults to the current buffer
+---@param force? boolean defaults to false
 function M.buf_kill(kill_command, bufnr, force)
+  kill_command = kill_command or "bd"
+
   local bo = vim.bo
   local api = vim.api
+  local fmt = string.format
+  local fnamemodify = vim.fn.fnamemodify
 
   if bufnr == 0 or bufnr == nil then
     bufnr = api.nvim_get_current_buf()
   end
 
-  kill_command = kill_command or "bd"
+  local bufname = api.nvim_buf_get_name(bufnr)
 
-  -- If buffer is modified and force isn't true, print error and abort
-  if not force and bo[bufnr].modified then
-    return api.nvim_err_writeln(
-      string.format("No write since last change for buffer %d (set force to true to override)", bufnr)
-    )
+  if not force then
+    local warning
+    if bo[bufnr].modified then
+      warning = fmt([[No write since last change for (%s)]], fnamemodify(bufname, ":t"))
+    elseif api.nvim_buf_get_option(bufnr, "buftype") == "terminal" then
+      warning = fmt([[Terminal %s will be killed]], bufname)
+    end
+    if warning then
+      vim.ui.input({
+        prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
+      }, function(choice)
+        if choice:match "ye?s?" then force = true end
+      end)
+      if not force then return end
+    end
   end
 
   -- Get list of windows IDs with the buffer to close
@@ -166,9 +185,7 @@ function M.buf_kill(kill_command, bufnr, force)
     return api.nvim_win_get_buf(win) == bufnr
   end, api.nvim_list_wins())
 
-  if #windows == 0 then
-    return
-  end
+  if #windows == 0 then return end
 
   if force then
     kill_command = kill_command .. "!"
