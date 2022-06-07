@@ -119,6 +119,8 @@ return {
     insert_mode = {},
     visual_mode = {},
   },
+  ---@usage list of settings of nvim-lsp-installer
+  installer = {},
   null_ls = {
     setup = {},
     config = {},
