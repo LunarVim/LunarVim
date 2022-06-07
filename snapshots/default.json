@@ -45,7 +45,7 @@
     "commit": "f27faa4"
   },
   "null-ls.nvim": {
-    "commit": "1b777bc"
+    "commit": "474372a"
   },
   "nvim-autopairs": {
     "commit": "b9cc0a2"
@@ -57,7 +57,7 @@
     "commit": "688cb52"
   },
   "nvim-lsp-installer": {
-    "commit": "72968ba"
+    "commit": "ce70a78"
   },
   "nvim-lspconfig": {
     "commit": "eb03999"
@@ -66,7 +66,7 @@
     "commit": "8252aae"
   },
   "nvim-tree.lua": {
-    "commit": "821f050"
+    "commit": "1caca62"
   },
   "nvim-treesitter": {
     "commit": "178f24e"
@@ -93,7 +93,7 @@
     "commit": "541115e"
   },
   "schemastore.nvim": {
-    "commit": "5af1129"
+    "commit": "3a15757"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
