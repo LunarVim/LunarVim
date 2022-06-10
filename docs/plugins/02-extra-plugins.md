@@ -579,7 +579,7 @@ lvim.plugins = {
     config = function()
       vim.defer_fn(function()
         require("copilot").setup {
-	  plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+	        plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
         }
       end, 100)
     end,
@@ -592,7 +592,8 @@ lvim.plugins = {
 }
 
 -- Can not be placed into the config method of the plugins.
-table.insert(lvim.builtin.cmp.sources, { name = "copilot", group_index = 0 })
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 ``` 
 
 ### [dial.nvim](https://github.com/monaqa/dial.nvim)
