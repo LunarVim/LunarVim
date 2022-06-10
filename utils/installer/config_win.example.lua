@@ -85,8 +85,8 @@ lvim.builtin.nvimtree.setup.git.enable = false
 lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.git_hl = false
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.nvimtree.setup.renderer.highlight_git = false
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
