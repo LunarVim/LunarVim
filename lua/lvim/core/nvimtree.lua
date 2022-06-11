@@ -158,9 +158,12 @@ function M.setup()
     return
   end
 
-  for opt, val in pairs(lvim.builtin.nvimtree) do
-    vim.g["nvim_tree_" .. opt] = val
+  if lvim.builtin.nvimtree._setup_called then
+    Log:debug "ignoring repeated setup call for nvim-tree, see kyazdani42/nvim-tree.lua#1308"
+    return
   end
+
+  lvim.builtin.nvimtree._setup_called = true
 
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then

@@ -32,6 +32,7 @@ local skipped_servers = {
   "stylelint_lsp",
   "tailwindcss",
   "tflint",
+  "svlangserver",
   "verible",
   "vuels",
 }
