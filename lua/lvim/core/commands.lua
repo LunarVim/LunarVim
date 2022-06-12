@@ -65,6 +65,12 @@ M.defaults = {
       print(require("lvim.utils.git").get_lvim_version())
     end,
   },
+  {
+    name = "LvimOpenlog",
+    fn = function()
+      vim.fn.execute("edit " .. require("lvim.core.log").get_path())
+    end,
+  },
 }
 
 function M.load(collection)
