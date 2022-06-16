@@ -148,10 +148,13 @@ function M.config()
       },
     },
   }
-  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 end
 
 function M.setup()
+  if not lvim.builtin.nvimtree.active then
+    return
+  end
+
   local status_ok, nvim_tree = pcall(require, "nvim-tree")
   if not status_ok then
     Log:error "Failed to load nvim-tree"
@@ -162,6 +165,9 @@ function M.setup()
     Log:debug "ignoring repeated setup call for nvim-tree, see kyazdani42/nvim-tree.lua#1308"
     return
   end
+
+  -- Add which_key mapping
+  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 
   lvim.builtin.nvimtree._setup_called = true
 
