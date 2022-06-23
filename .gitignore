@@ -29,3 +29,4 @@ lua/lv-user-config/
 *.old
 
 .luarc.json
+.luacheckcache

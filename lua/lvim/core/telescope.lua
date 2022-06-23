@@ -70,14 +70,14 @@ function M.config()
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      pickers = {
-        find_files = {
-          hidden = true,
-        },
-        live_grep = {
-          --@usage don't include the filename in the search results
-          only_sort_text = true,
-        },
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
+      },
+      live_grep = {
+        --@usage don't include the filename in the search results
+        only_sort_text = true,
       },
     },
     extensions = {

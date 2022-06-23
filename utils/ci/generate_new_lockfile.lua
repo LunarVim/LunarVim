@@ -1,18 +1,18 @@
 local sp = os.getenv "SNAPSHOT_PATH"
 
 local function call_proc(process, opts, cb)
-  local std_output = ""
-  local error_output = ""
+  local output, error_output = "", ""
+  local handle_stdout = function(err, chunk)
+    assert(not err, err)
+    if chunk then
+      output = output .. chunk
+    end
+  end
 
-  local function onread(_, is_stderr)
-    return function(err, data)
-      if data then
-        if is_stderr then
-          error_output = (error_output or "") .. err
-        else
-          std_output = (std_output or "") .. data
-        end
-      end
+  local handle_stderr = function(err, chunk)
+    assert(not err, err)
+    if chunk then
+      error_output = error_output .. chunk
     end
   end
 
@@ -26,7 +26,7 @@ local function call_proc(process, opts, cb)
 
   handle = uv.spawn(
     process,
-    { args = opts.args, cwd = uv.cwd(), stdio = stdio },
+    { args = opts.args, cwd = opts.cwd or uv.cwd(), stdio = stdio },
     vim.schedule_wrap(function(code)
       if code ~= 0 then
         stdout:read_stop()
@@ -42,13 +42,13 @@ local function call_proc(process, opts, cb)
         end
         check:stop()
         handle:close()
-        cb(code, std_output, error_output)
+        cb(code, output, error_output)
       end)
     end)
   )
 
-  uv.read_start(stdout, onread(handle, false))
-  uv.read_start(stderr, onread(handle, true))
+  uv.read_start(stdout, handle_stdout)
+  uv.read_start(stderr, handle_stderr)
 
   return handle
 end
@@ -91,11 +91,12 @@ local function write_lockfile(verbose)
     end
 
     local handle = call_proc("git", { args = { "ls-remote", entry.url, "HEAD" } }, on_done)
+    assert(handle)
     table.insert(active_jobs, handle)
   end
 
   print("active: " .. #active_jobs)
-  print("parsers: " .. #default_plugins)
+  print("plugins: " .. #default_plugins)
 
   vim.wait(#active_jobs * 60 * 1000, function()
     return completed == #active_jobs

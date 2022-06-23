@@ -160,7 +160,7 @@ function detect_platform() {
       elif [ -f "/etc/fedora-release" ] || [ -f "/etc/redhat-release" ]; then
         RECOMMEND_INSTALL="sudo dnf install -y"
       elif [ -f "/etc/gentoo-release" ]; then
-        RECOMMEND_INSTALL="emerge install -y"
+        RECOMMEND_INSTALL="emerge -tv"
       else # assume debian based
         RECOMMEND_INSTALL="sudo apt install -y"
       fi
@@ -204,6 +204,15 @@ function check_neovim_min_version() {
     echo "[ERROR]: LunarVim requires at least Neovim v0.7 or higher"
     exit 1
   fi
+}
+
+function verify_core_plugins() {
+  msg "Verifying core plugins"
+  if ! bash "$LUNARVIM_BASE_DIR/utils/ci/verify_plugins.sh"; then
+    echo "[ERROR]: Unable to verify plugins, makde sure to manually run ':PackerSync' when starting lvim for the first time."
+    exit 1
+  fi
+  echo "Verification complete!"
 }
 
 function validate_lunarvim_files() {
@@ -418,6 +427,8 @@ function setup_lvim() {
     -c 'PackerSync'
 
   echo "Packer setup complete"
+
+  verify_core_plugins
 }
 
 function print_logo() {
