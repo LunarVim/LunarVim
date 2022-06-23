@@ -38,7 +38,8 @@ a.describe("plugin-loader", function()
       assert.truthy(package.loaded[plugin])
     end
   end)
-  a.it("should be able to rollback plugins without errors", function()
+
+  pending("should be able to rollback plugins without errors", function()
     local plugin = { name = "onedarker.nvim" }
     plugin.path = vim.tbl_filter(function(package)
       return package:match(plugin.name)
