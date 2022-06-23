@@ -246,9 +246,19 @@ local core_plugins = {
   },
 }
 
-for _, entry in ipairs(core_plugins) do
-  if not os.getenv "LVIM_DEV_MODE" then
-    entry["lock"] = true
+local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
+local content = vim.fn.readfile(default_snapshot_path)
+local default_sha1 = vim.fn.json_decode(content)
+
+local get_default_sha1 = function(spec)
+  local short_name, _ = require("packer.util").get_plugin_short_name(spec)
+  return default_sha1[short_name] and default_sha1[short_name].commit
+end
+
+for _, spec in ipairs(core_plugins) do
+  if not vim.env.LVIM_DEV_MODE then
+    -- Manually lock the commit hash since Packer's snapshots are unreliable in headless mode
+    spec["commit"] = get_default_sha1(spec)
   end
 end
 
