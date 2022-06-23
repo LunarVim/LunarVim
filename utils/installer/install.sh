@@ -160,7 +160,7 @@ function detect_platform() {
       elif [ -f "/etc/fedora-release" ] || [ -f "/etc/redhat-release" ]; then
         RECOMMEND_INSTALL="sudo dnf install -y"
       elif [ -f "/etc/gentoo-release" ]; then
-        RECOMMEND_INSTALL="emerge install -y"
+        RECOMMEND_INSTALL="emerge -tv"
       else # assume debian based
         RECOMMEND_INSTALL="sudo apt install -y"
       fi
