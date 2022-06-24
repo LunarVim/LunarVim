@@ -121,18 +121,16 @@ return {
   },
   ---@usage list of settings of nvim-lsp-installer
   installer = {
-    ensure_installed = {
-      "sumneko_lua",
-      "jsonls",
-    },
-    ui = {
-      icons = {
-        server_installed = "✓",
-        server_pending = "",
-        server_uninstalled = "✗",
+    setup = {
+      ensure_installed = {},
+      ui = {
+        icons = {
+          server_installed = "✓",
+          server_pending = "",
+          server_uninstalled = "✗",
+        },
       },
     },
-    log_level = lvim.log and lvim.log.level or vim.log.levels.INFO,
   },
   null_ls = {
     setup = {},

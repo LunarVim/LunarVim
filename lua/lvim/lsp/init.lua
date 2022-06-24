@@ -122,7 +122,7 @@ function M.setup()
     append_default_schemas = true,
   }
 
-  require("nvim-lsp-installer").setup(lvim.lsp.installer)
+  require("nvim-lsp-installer").setup(lvim.lsp.installer.setup)
 
   require("lvim.lsp.null-ls").setup()
 
