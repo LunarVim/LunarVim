@@ -43,16 +43,21 @@ jobs:
       - name: Install LunarVim
         timeout-minutes: 4
         env:
-          LV_BRANCH: ${{ github.head_ref }}
-          LV_REMOTE: ${{ github.event.pull_request.head.repo.full_name }}
+          LV_BRANCH: ${{ github.head_ref || github.ref_name }}
+          LV_REMOTE: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+
+          installer_url="https://raw.githubusercontent.com/${LV_REMOTE}/${LV_BRANCH}/utils/installer/install.sh"
+          curl -LSsO "$installer_url"
+          bash ./install.sh --no-install-dependencies
 
       - name: Run unit-tests
         # NOTE: make sure to adjust the timeout if you start adding a lot of tests
         timeout-minutes: 4
-        run: make test
+        run: |
+          nvim --version
+          make test
 
   windows:
     name: "windows-latest"
