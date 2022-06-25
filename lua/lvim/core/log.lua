@@ -36,7 +36,7 @@ function Log:init()
     lvim = {
       sinks = {
         structlog.sinks.Console(log_level, {
-          async = false,
+          async = true,
           processors = {
             structlog.processors.Namer(),
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 0, stack_level = 2 }),
