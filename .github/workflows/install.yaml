@@ -35,17 +35,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install neovim binary
-        uses: rhysd/action-setup-vim@v1
-        with:
-          neovim: true
-          version: ${{ matrix.neovim }}
+      - name: Install neovim binary from release
+        env:
+          RELEASE_VER: ${{ matrix.neovim }}
+        run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          bash ./utils/installer/install-neovim-from-release
 
       - name: Install LunarVim
         timeout-minutes: 4
         env:
           LV_BRANCH: ${{ github.head_ref || github.ref_name }}
           LV_REMOTE: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          LUNARVIM_LOG_LEVEL: "debug"
         run: |
           export PATH="$HOME/.local/bin:$PATH"
 
