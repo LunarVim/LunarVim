@@ -46,6 +46,7 @@ jobs:
         env:
           LV_BRANCH: ${{ github.head_ref || github.ref_name }}
           LV_REMOTE: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          LUNARVIM_LOG_LEVEL: "debug"
         run: |
           export PATH="$HOME/.local/bin:$PATH"
 
