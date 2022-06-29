@@ -276,7 +276,6 @@ Every plugin that works with Neovim works with LunarVim, here are some examples 
 ```lua
 {
   "windwp/nvim-ts-autotag",
-  event = "InsertEnter",
   config = function()
     require("nvim-ts-autotag").setup()
   end,
