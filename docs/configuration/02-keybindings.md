@@ -61,20 +61,6 @@ To remove keymappings set by Lunarvim
   -- vim.opt.scrolloff = 0 -- Required so L moves to the last line
 ```
 
-Erase Lunarvim bindings and replace them with your own mappings
-
-```lua
- lvim.keys.normal_mode = {
-   -- Page down/up
-   ["[d"] = "<PageUp>",
-   ["]d"] = "<PageDown>",
-
-   -- Navigate buffers
-   ["<Tab>"] = ":bnext<CR>",
-   ["<S-Tab>"] = ":bprevious<CR>",
- }
-```
-
 ### Listing what is mapped
 
 Use `<Leader>Lk` to view the keybindings set by Lunarvim.
