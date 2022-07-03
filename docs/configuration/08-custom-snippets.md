@@ -8,7 +8,7 @@ Custom snippets can be defined as json or lua.
 
 ### json version
 
-First create a folder : `~/.config/snippets/` next to your `config.lua`
+First create a folder : `~/.config/lvim/snippets/` next to your `config.lua`
 
 Then in there you need at least 2 files.
 
