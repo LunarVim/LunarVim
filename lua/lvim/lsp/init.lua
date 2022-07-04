@@ -10,21 +10,10 @@ local function add_lsp_buffer_keybindings(bufnr)
     visual_mode = "v",
   }
 
-  if lvim.builtin.which_key.active then
-    -- Remap using which_key
-    local status_ok, wk = pcall(require, "which-key")
-    if not status_ok then
-      return
-    end
-    for mode_name, mode_char in pairs(mappings) do
-      wk.register(lvim.lsp.buffer_mappings[mode_name], { mode = mode_char, buffer = bufnr })
-    end
-  else
-    -- Remap using nvim api
-    for mode_name, mode_char in pairs(mappings) do
-      for key, remap in pairs(lvim.lsp.buffer_mappings[mode_name]) do
-        vim.api.nvim_buf_set_keymap(bufnr, mode_char, key, remap[1], { noremap = true, silent = true })
-      end
+  for mode_name, mode_char in pairs(mappings) do
+    for key, remap in pairs(lvim.lsp.buffer_mappings[mode_name]) do
+      local opts = { buffer = bufnr, desc = remap[2], noremap = true, silent = true }
+      vim.keymap.set(mode_char, key, remap[1], opts)
     end
   end
 end
