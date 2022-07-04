@@ -33,7 +33,7 @@ body:
   - type: input
     id: nvim-version
     attributes:
-      label: Neovim version (>= 0.7)
+      label: Neovim version (>= 0.7.2)
       description: "Output of `nvim --version`"
       placeholder: |
         NVIM v0.8.0-dev+199-g2875d45e7
