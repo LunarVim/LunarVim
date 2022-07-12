@@ -268,7 +268,7 @@ function create_alias {
         Get-Content $PROFILE -ErrorAction Stop
     }
     catch {
-        New-Item -Path $profile -ItemType "file" -Force
+        New-Item -Path $PROFILE -ItemType "file" -Force
     }
 
     Add-Content -Path $PROFILE -Value $("`r`nSet-Alias lvim $lvim_bin")
