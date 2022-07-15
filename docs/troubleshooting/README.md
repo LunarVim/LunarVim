@@ -79,6 +79,10 @@ See [fish-shell/fish-shell#7004](https://github.com/fish-shell/fish-shell/issues
 
 ## Language server XXX does not start for me!
 
+### Update node
+
+Some language servers depend on newer versions of node.  Update your version of node to the latest.
+
 ### is it overriden?
 
 This could be due to the fact that the server is [overridden](../languages/README.md#server-override)
