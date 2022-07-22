@@ -13,16 +13,14 @@ local function git_cmd(opts)
   opts.cwd = opts.cwd or get_lvim_base_dir()
 
   local stderr = {}
-  local stdout, ret = Job
-    :new({
-      command = "git",
-      args = opts.args,
-      cwd = opts.cwd,
-      on_stderr = function(_, data)
-        table.insert(stderr, data)
-      end,
-    })
-    :sync()
+  local stdout, ret = Job:new({
+    command = "git",
+    args = opts.args,
+    cwd = opts.cwd,
+    on_stderr = function(_, data)
+      table.insert(stderr, data)
+    end,
+  }):sync()
 
   if not vim.tbl_isempty(stderr) then
     Log:debug(stderr)
