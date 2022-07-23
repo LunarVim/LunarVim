@@ -129,3 +129,16 @@ vim.list_extend(lvim.lsp.override, { "jsonls" })
 -- this the correct syntax since 198577a
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jsonls" })
 ```
+
+
+## My LunarVim looks ugly!
+
+- Make sure that you have a terminal that supports 24-bit colors. If not, you might face some issues regarding the default colorscheme, and other colorschemes. 
+  - For a explainer on what 24-bit colors are, and to test if your terminal supports it, we like this usefull repository: https://github.com/termstandard/colors
+
+- Another issue might be `termguicolors`. If this is the case, we advice you to look at the official neovim docs:
+  - What is `termguicolors`? see <https://neovim.io/doc/user/options.html#'termguicolors'>
+
+- Another case might be that your `$TERM` variable changes the colors in your terminal.
+  - For this, we advice you to look and see if anyone else has the same `$TERM` variable as you, and what they did https://github.com/neovim/neovim/issues?q=label%3Atui+color
+
