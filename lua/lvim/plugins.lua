@@ -12,6 +12,7 @@ local core_plugins = {
   },
   {
     "lunarvim/onedarker.nvim",
+    branch = "freeze",
     config = function()
       pcall(function()
         if lvim and lvim.colorscheme == "onedarker" then
@@ -37,6 +38,7 @@ local core_plugins = {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     config = function()
       require("lvim.core.telescope").setup()
     end,
