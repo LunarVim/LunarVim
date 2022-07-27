@@ -34,16 +34,6 @@ bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils
 
 Make sure to check the [troubleshooting](./troubleshooting/README.md) section if you encounter any problem.
 
-## Tips for users in Mainland China
-
-Connection issues may cause installation failures. To avoid them when downloading content from GitHub, please use a mirror.
-
-For example, [GitHub Proxy Mirror](https://mirror.ghproxy.com/) is a fast mirror for accessing github content. Add the following lines to `/etc/hosts` to accelerate your installation.
-
-```
-mirror.ghproxy.com github.com
-mirror.ghproxy.com raw.githubusercontent.com
-```
 ## Tips for WSL 2 users
 
 While using LunarVim within WSL2, there are a few things one should be aware off:
