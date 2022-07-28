@@ -36,7 +36,7 @@ Make sure to check the [troubleshooting](./troubleshooting/README.md) section if
 
 ## Tips for WSL 2 users
 
-While using LunarVim within WSL2, there are a few things one should be aware off:
+While using LunarVim within WSL2, there are a few things one should be aware of:
 1. Avoid using LunarVim within the Windows directory, e.g. `/mnt/c`, due to filesystem performance issues, see [WSL#4197](https://github.com/microsoft/WSL/issues/4197).
 2. Some WSL2 users have experienced that sourcing the clipboard may be slow. A workaround for that is calling a clipboard manager from the Windows side. Neovim tries using [win32yank.exe](https://github.com/equalsraf/win32yank) if it's available. so install it and set the value of `clipboard` explicitly:
 ```lua
