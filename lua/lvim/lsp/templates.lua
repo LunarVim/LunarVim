@@ -17,12 +17,20 @@ end
 
 local skipped_filetypes = lvim.lsp.automatic_configuration.skipped_filetypes
 local skipped_servers = lvim.lsp.automatic_configuration.skipped_servers
+local ensure_installed_servers = lvim.lsp.installer.setup.ensure_installed
+
+---Check if we should skip generating an ftplugin file based on the server_name
+---@param server_name string name of a valid language server
+local function should_skip(server_name)
+  -- ensure_installed_servers should take priority over skipped_servers
+  return vim.tbl_contains(skipped_servers, server_name) and not vim.tbl_contains(ensure_installed_servers, server_name)
+end
 
 ---Generates an ftplugin file based on the server_name in the selected directory
 ---@param server_name string name of a valid language server, e.g. pyright, gopls, tsserver, etc.
 ---@param dir string the full path to the desired directory
 function M.generate_ftplugin(server_name, dir)
-  if vim.tbl_contains(skipped_servers, server_name) then
+  if should_skip(server_name) then
     return
   end
 

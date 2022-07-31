@@ -6,6 +6,7 @@ on:
       - "master"
       - "rolling"
     paths:
+      - '.github/workflows/**'
       - 'lua/**'
       - 'snapshots/**'
       - 'tests/**'
@@ -13,33 +14,53 @@ on:
 
 jobs:
   unixish:
-    name: ${{ matrix.os }} ${{ matrix.runner }}
+    name: ${{ matrix.os }} ${{ matrix.runner }} (${{ matrix.neovim }})
     strategy:
       fail-fast: false
       matrix:
         include:
-          - runner: ubuntu-20.04
+          - runner: ubuntu-latest
             os: linux
-          - runner: macos-10.15
+            neovim: v0.7.0
+          - runner: macos-latest
             os: osx
+            neovim: v0.7.0
+          - runner: ubuntu-22.04
+            os: linux
+            neovim: nightly
+          - runner: macos-12
+            os: osx
+            neovim: nightly
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install neovim binary
+      - name: Install neovim binary from release
+        env:
+          RELEASE_VER: ${{ matrix.neovim }}
         run: |
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           bash ./utils/installer/install-neovim-from-release
 
       - name: Install LunarVim
         timeout-minutes: 4
+        env:
+          LV_BRANCH: ${{ github.head_ref || github.ref_name }}
+          LV_REMOTE: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          LUNARVIM_LOG_LEVEL: "debug"
         run: |
-          ./utils/installer/install.sh --local --no-install-dependencies
+          export PATH="$HOME/.local/bin:$PATH"
+
+          installer_url="https://raw.githubusercontent.com/${LV_REMOTE}/${LV_BRANCH}/utils/installer/install.sh"
+          curl -LSsO "$installer_url"
+          bash ./install.sh --no-install-dependencies
 
       - name: Run unit-tests
         # NOTE: make sure to adjust the timeout if you start adding a lot of tests
         timeout-minutes: 4
-        run: make test
+        run: |
+          nvim --version
+          make test
 
   windows:
     name: "windows-latest"

@@ -55,33 +55,35 @@ function M.view_lunarvim_changelog()
   }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
 
-  pickers.new(opts, {
-    prompt_title = "~ LunarVim Changelog ~",
+  pickers
+    .new(opts, {
+      prompt_title = "~ LunarVim Changelog ~",
 
-    finder = finders.new_oneshot_job(
-      vim.tbl_flatten {
-        "git",
-        "log",
-        "--pretty=oneline",
-        "--abbrev-commit",
+      finder = finders.new_oneshot_job(
+        vim.tbl_flatten {
+          "git",
+          "log",
+          "--pretty=oneline",
+          "--abbrev-commit",
+        },
+        opts
+      ),
+      previewer = {
+        previewers.git_commit_diff_as_was.new(opts),
       },
-      opts
-    ),
-    previewer = {
-      previewers.git_commit_diff_as_was.new(opts),
-    },
 
-    --TODO: consider opening a diff view when pressing enter
-    attach_mappings = function(_, map)
-      map("i", "<enter>", copy_to_clipboard_action)
-      map("n", "<enter>", copy_to_clipboard_action)
-      map("i", "<esc>", actions._close)
-      map("n", "<esc>", actions._close)
-      map("n", "q", actions._close)
-      return true
-    end,
-    sorter = sorters.generic_sorter,
-  }):find()
+      --TODO: consider opening a diff view when pressing enter
+      attach_mappings = function(_, map)
+        map("i", "<enter>", copy_to_clipboard_action)
+        map("n", "<enter>", copy_to_clipboard_action)
+        map("i", "<esc>", actions._close)
+        map("n", "<esc>", actions._close)
+        map("n", "q", actions._close)
+        return true
+      end,
+      sorter = sorters.generic_sorter,
+    })
+    :find()
 end
 
 -- Smartly opens either git_files or find_files, depending on whether the working directory is

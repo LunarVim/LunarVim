@@ -3,16 +3,14 @@ local M = {}
 function M.search_file(file, args)
   local Job = require "plenary.job"
   local stderr = {}
-  local stdout, ret = Job
-    :new({
-      command = "grep",
-      args = { args, file },
-      cwd = get_cache_dir(),
-      on_stderr = function(_, data)
-        table.insert(stderr, data)
-      end,
-    })
-    :sync()
+  local stdout, ret = Job:new({
+    command = "grep",
+    args = { args, file },
+    cwd = get_cache_dir(),
+    on_stderr = function(_, data)
+      table.insert(stderr, data)
+    end,
+  }):sync()
   return ret, stdout, stderr
 end
 

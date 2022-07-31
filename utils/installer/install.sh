@@ -15,6 +15,8 @@ declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
 declare -r LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
 declare -r LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
 
+declare -r LUNARVIM_LOG_LEVEL="${LUNARVIM_LOG_LEVEL:-warn}"
+
 declare BASEDIR
 BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
@@ -209,7 +211,7 @@ function check_neovim_min_version() {
 function verify_core_plugins() {
   msg "Verifying core plugins"
   if ! bash "$LUNARVIM_BASE_DIR/utils/ci/verify_plugins.sh"; then
-    echo "[ERROR]: Unable to verify plugins, makde sure to manually run ':PackerSync' when starting lvim for the first time."
+    echo "[ERROR]: Unable to verify plugins, make sure to manually run ':PackerSync' when starting lvim for the first time."
     exit 1
   fi
   echo "Verification complete!"
@@ -423,6 +425,7 @@ function setup_lvim() {
   echo "Preparing Packer setup"
 
   "$INSTALL_PREFIX/bin/lvim" --headless \
+    -c "lua require('lvim.core.log'):set_level([[$LUNARVIM_LOG_LEVEL]])" \
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
 

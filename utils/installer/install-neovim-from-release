@@ -72,6 +72,10 @@ function install_neovim() {
   pushd "$DOWNLOAD_DIR"
   tar -xzf "$DOWNLOAD_DIR/$ARCHIVE_NAME.tar.gz"
   popd
+  if [ ! -d "$DOWNLOAD_DIR/$RELEASE_NAME" ]; then
+    # fallback to archive name
+    RELEASE_NAME="$ARCHIVE_NAME"
+  fi
   # https://dev.to/ackshaey/macos-vs-linux-the-cp-command-will-trip-you-up-2p00
   cp -r "$DOWNLOAD_DIR/$RELEASE_NAME/." "$LV_INSTALL_PREFIX"
   echo "Installation complete!"

@@ -39,6 +39,8 @@ local skipped_servers = {
 
 local skipped_filetypes = { "markdown", "rst", "plaintext" }
 
+local join_paths = require("lvim.utils").join_paths
+
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
@@ -118,6 +120,34 @@ return {
     },
     insert_mode = {},
     visual_mode = {},
+  },
+  buffer_options = {
+    --- enable completion triggered by <c-x><c-o>
+    omnifunc = "v:lua.vim.lsp.omnifunc",
+    --- use gq for formatting
+    formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
+  },
+  ---@usage list of settings of nvim-lsp-installer
+  installer = {
+    setup = {
+      ensure_installed = {},
+      ui = {
+        icons = {
+          server_installed = "✓",
+          server_pending = "",
+          server_uninstalled = "✗",
+        },
+      },
+    },
+  },
+  nlsp_settings = {
+    setup = {
+      config_home = join_paths(get_config_dir(), "lsp-settings"),
+      -- set to false to overwrite schemastore.nvim
+      append_default_schemas = true,
+      ignored_servers = {},
+      loader = "json",
+    },
   },
   null_ls = {
     setup = {},
