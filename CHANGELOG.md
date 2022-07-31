@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 - _(icons)_ make it possible to disable icons ([#2529](https://github.com/lunarvim/lunarvim/pull/2529))
 - _(installer)_ ensure correct responses when prompting user ([#2506](https://github.com/lunarvim/lunarvim/pull/2506))
 - _(installer)_ add verify-plugins hook ([#2751](https://github.com/lunarvim/lunarvim/pull/2751))
+- _(lsp)_ add option to override default `nvim-lsp-installer` settings ([#2698](https://github.com/lunarvim/lunarvim/pull/2698))
+- _(lsp)_ add option to override nlsp-settings ([#2769](https://github.com/lunarvim/lunarvim/pull/2769))
+- _(lsp)_ bind formatexpr and omnifunc by default ([#2865](https://github.com/lunarvim/lunarvim/pull/2865))
 - _(lua-dev)_ use the newer lua-dev branch till folke comes back ([#2538](https://github.com/lunarvim/lunarvim/pull/2538))
 - _(neovim)_ neovim 0.8 compatibility ([#2544](https://github.com/lunarvim/lunarvim/pull/2544))
 - _(peek)_ make sure max width and height are customizable ([#2492](https://github.com/lunarvim/lunarvim/pull/2492))
@@ -23,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - add cmp-tmux to the list of sources ([#2542](https://github.com/lunarvim/lunarvim/pull/2542))
 - prompt when closing modified/term buffers ([#2658](https://github.com/lunarvim/lunarvim/pull/2658))
 - fix a couple of issues ([#2750](https://github.com/lunarvim/lunarvim/pull/2750))
+- add commands to open/edit lvim logs ([#2709](https://github.com/lunarvim/lunarvim/pull/2709))
 
 ### <!-- 2 --> Bugfix
 
@@ -34,13 +38,17 @@ All notable changes to this project will be documented in this file.
 - _(cmp)_ hotfix nvim-cmp version
 - _(cmp)_ bring back default keybindings ([#2470](https://github.com/lunarvim/lunarvim/pull/2470))
 - _(cmp)_ update nvim-cmp to the latest version ([#2467](https://github.com/lunarvim/lunarvim/pull/2467)) ([#2469](https://github.com/lunarvim/lunarvim/pull/2469))
+- _(core.comment)_ fix default extra mappings ([#2768](https://github.com/lunarvim/lunarvim/pull/2768))
 - _(dap)_ temporarily use dap-buddy dev branch which has older code ([#2567](https://github.com/lunarvim/lunarvim/pull/2567))
 - _(dap)_ pause key binding commmand ([#2573](https://github.com/lunarvim/lunarvim/pull/2573))
 - _(impatient)_ avoid get_options in fast handler ([#2451](https://github.com/lunarvim/lunarvim/pull/2451))
 - _(installer)_ latest and specified release version for neovim have different urls ([#2484](https://github.com/lunarvim/lunarvim/pull/2484))
+- _(installer)_ use full path to verify_plugins.lua ([#2755](https://github.com/lunarvim/lunarvim/pull/2755))
+- _(installer)_ always use check shallow clones ([#2763](https://github.com/lunarvim/lunarvim/pull/2763))
 - _(installer/pwsh)_ fixes some details on installer and uninstaller ([#2404](https://github.com/lunarvim/lunarvim/pull/2404))
 - _(log)_ add date to the timestamp of logs ([#2669](https://github.com/lunarvim/lunarvim/pull/2669))
 - _(lsp)_ undo stdpath overload to avoid datarace ([#2540](https://github.com/lunarvim/lunarvim/pull/2540))
+- _(lsp)_ update format filter for nightly ([#2773](https://github.com/lunarvim/lunarvim/pull/2773))
 - _(lualine)_ color theme gaps in some components ([#2465](https://github.com/lunarvim/lunarvim/pull/2465))
 - _(lualine)_ unique buf client names ([#2683](https://github.com/lunarvim/lunarvim/pull/2683))
 - _(luasnip)_ make sure all snippets are loaded ([#2447](https://github.com/lunarvim/lunarvim/pull/2447))
@@ -49,6 +57,7 @@ All notable changes to this project will be documented in this file.
 - _(nvimtree)_ make sure on_config_done is using the correct require ([#2509](https://github.com/lunarvim/lunarvim/pull/2509))
 - _(nvimtree)_ add latest changes from nvimtree ([#2537](https://github.com/lunarvim/lunarvim/pull/2537))
 - _(nvimtree)_ update nvim-tree setup ([#2681](https://github.com/lunarvim/lunarvim/pull/2681))
+- _(packer)_ add max_jobs = 40 ([#2781](https://github.com/lunarvim/lunarvim/pull/2781))
 - _(readme)_ update lsp server ignore syntax
 - _(readme)_ remove black as linter ([#2510](https://github.com/lunarvim/lunarvim/pull/2510))
 - _(telescope)_ set <cr> binding to actions.select_default only ([#2395](https://github.com/lunarvim/lunarvim/pull/2395))
@@ -58,6 +67,7 @@ All notable changes to this project will be documented in this file.
 - use correct cache path ([#2593](https://github.com/lunarvim/lunarvim/pull/2593))
 - load notify's telescope extension properly ([#2586](https://github.com/lunarvim/lunarvim/pull/2586))
 - skip calling nvim-tree.setup() more than once ([#2707](https://github.com/lunarvim/lunarvim/pull/2707))
+- typo in utils/installer/install.sh ([#2776](https://github.com/lunarvim/lunarvim/pull/2776))
 
 ### <!-- 3 --> Refactor
 
@@ -65,6 +75,7 @@ All notable changes to this project will be documented in this file.
 - _(lsp)_ cleanup servers' override configuration ([#2243](https://github.com/lunarvim/lunarvim/pull/2243))
 - _(lsp)_ decouple the installer setup-hook ([#2536](https://github.com/lunarvim/lunarvim/pull/2536))
 - _(telescope)_ don't overwrite default cmd to show hidden files
+- _(whichkey)_ use vim.keymap.set directly ([#2786](https://github.com/lunarvim/lunarvim/pull/2786))
 - re-enable packer.sync() in LvimReload ([#2410](https://github.com/lunarvim/lunarvim/pull/2410))
 - update impatient ([#2477](https://github.com/lunarvim/lunarvim/pull/2477))
 - lock new installations to nvim v0.7+ ([#2526](https://github.com/lunarvim/lunarvim/pull/2526))
