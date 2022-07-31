@@ -121,6 +121,12 @@ return {
     insert_mode = {},
     visual_mode = {},
   },
+  buffer_options = {
+    --- enable completion triggered by <c-x><c-o>
+    omnifunc = "v:lua.vim.lsp.omnifunc",
+    --- use gq for formatting
+    formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
+  },
   ---@usage list of settings of nvim-lsp-installer
   installer = {
     setup = {
