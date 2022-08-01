@@ -1,5 +1,4 @@
 local M = {}
-
 M.config = function()
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommended]
@@ -92,6 +91,7 @@ M.config = function()
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
         f = { "<cmd>Telescope buffers<cr>", "Find" },
         b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+        n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
         -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
         e = {
           "<cmd>BufferLinePickClose<cr>",
