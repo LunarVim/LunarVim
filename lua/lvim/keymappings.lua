@@ -61,10 +61,6 @@ local defaults = {
     ["<C-Left>"] = ":vertical resize -2<CR>",
     ["<C-Right>"] = ":vertical resize +2<CR>",
 
-    -- Tab switch buffer
-    ["<S-l>"] = ":BufferLineCycleNext<CR>",
-    ["<S-h>"] = ":BufferLineCyclePrev<CR>",
-
     -- Move current line / block with Alt-j/k a la vscode.
     ["<A-j>"] = ":m .+1<CR>==",
     ["<A-k>"] = ":m .-2<CR>==",
