@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.1.4]
 
 ### <!-- 1 --> Features
 
@@ -53,10 +53,12 @@ All notable changes to this project will be documented in this file.
 - _(lualine)_ unique buf client names ([#2683](https://github.com/lunarvim/lunarvim/pull/2683))
 - _(luasnip)_ make sure all snippets are loaded ([#2447](https://github.com/lunarvim/lunarvim/pull/2447))
 - _(luasnip)_ only use user snippets if the folder exists ([#2481](https://github.com/lunarvim/lunarvim/pull/2481))
+- _(lvim/lsp/manager)_ make client_is_configured more reliable ([#2851](https://github.com/lunarvim/lunarvim/pull/2851))
 - _(nvimtree)_ escape the dot character in custom filter ([#2493](https://github.com/lunarvim/lunarvim/pull/2493))
 - _(nvimtree)_ make sure on_config_done is using the correct require ([#2509](https://github.com/lunarvim/lunarvim/pull/2509))
 - _(nvimtree)_ add latest changes from nvimtree ([#2537](https://github.com/lunarvim/lunarvim/pull/2537))
 - _(nvimtree)_ update nvim-tree setup ([#2681](https://github.com/lunarvim/lunarvim/pull/2681))
+- _(nvimtree)_ remove `indent_markers` icons trailing space ([#2854](https://github.com/lunarvim/lunarvim/pull/2854))
 - _(packer)_ add max_jobs = 40 ([#2781](https://github.com/lunarvim/lunarvim/pull/2781))
 - _(readme)_ update lsp server ignore syntax
 - _(readme)_ remove black as linter ([#2510](https://github.com/lunarvim/lunarvim/pull/2510))
@@ -68,6 +70,7 @@ All notable changes to this project will be documented in this file.
 - load notify's telescope extension properly ([#2586](https://github.com/lunarvim/lunarvim/pull/2586))
 - skip calling nvim-tree.setup() more than once ([#2707](https://github.com/lunarvim/lunarvim/pull/2707))
 - typo in utils/installer/install.sh ([#2776](https://github.com/lunarvim/lunarvim/pull/2776))
+- use pcall for setting up project.nvim ([#2762](https://github.com/lunarvim/lunarvim/pull/2762))
 
 ### <!-- 3 --> Refactor
 
@@ -91,6 +94,10 @@ All notable changes to this project will be documented in this file.
 ### <!-- 5 --> Revert
 
 - do not run packer.sync() on every reload ([#2548](https://github.com/lunarvim/lunarvim/pull/2548))
+
+### <!-- 6 --> Performance
+
+- _(cmp)_ remove redundant check for emmet-ls ([#2830](https://github.com/lunarvim/lunarvim/pull/2830))
 
 ## [1.1.3]
 
