@@ -41,7 +41,10 @@ function M.config()
 end
 
 function M.setup()
-  local project = require "project_nvim"
+  local status_ok, project = pcall(require, "project_nvim")
+  if not status_ok then
+    return
+  end
 
   project.setup(lvim.builtin.project)
   if lvim.builtin.project.on_config_done then
