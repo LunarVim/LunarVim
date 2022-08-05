@@ -65,35 +65,8 @@ function M.setup(server_name, user_config)
     return
   end
 
-  local servers = require "nvim-lsp-installer.servers"
-  local server_available, server = servers.get_server(server_name)
-
-  if not server_available then
-    local config = resolve_config(server_name, user_config)
-    launch_server(server_name, config)
-    return
-  end
-
-  local install_in_progress = false
-
-  if not server:is_installed() then
-    if lvim.lsp.automatic_servers_installation then
-      Log:debug "Automatic server installation detected"
-      server:install()
-      install_in_progress = true
-    else
-      Log:debug(server.name .. " is not managed by the automatic installer")
-    end
-  end
-
-  server:on_ready(function()
-    if install_in_progress then
-      vim.notify(string.format("Installation complete for [%s] server", server.name), vim.log.levels.INFO)
-    end
-    install_in_progress = false
-    local config = resolve_config(server_name, server:get_default_options(), user_config)
-    launch_server(server_name, config)
-  end)
+  local config = resolve_config(server_name, user_config)
+  launch_server(server_name, config)
 end
 
 return M

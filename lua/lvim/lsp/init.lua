@@ -110,7 +110,9 @@ function M.setup()
   end)
 
   pcall(function()
-    require("nvim-lsp-installer").setup(lvim.lsp.installer.setup)
+    local automatic_installation = lvim.lsp.automatic_servers_installation
+      and { exclude = lvim.lsp.automatic_configuration.skipped_servers }
+    require("mason-lspconfig").setup { automatic_installation = automatic_installation }
   end)
 
   require("lvim.lsp.null-ls").setup()
