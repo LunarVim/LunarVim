@@ -53,10 +53,14 @@ a.describe("lsp workflow", function()
   a.it("should only include one server per generated template", function()
     require("lvim.lsp").setup()
 
+    local allowed_dupes = { "tailwindcss" }
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
       local content = {}
       for entry in io.lines(file) do
-        table.insert(content, entry)
+        local server_name = entry:match [[.*setup%("(.*)"%)]]
+        if not vim.tbl_contains(allowed_dupes, server_name) then
+          table.insert(content, server_name)
+        end
       end
       local err_msg = ""
       if #content > 1 then
