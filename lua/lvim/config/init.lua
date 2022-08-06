@@ -99,6 +99,13 @@ local function handle_deprecated_settings()
       "Use vim.api.nvim_create_autocmd instead or check LunarVim#2592 to learn about the new syntax"
     )
   end
+
+  if lvim.lsp.automatic_servers_installation then
+    deprecation_notice(
+      "lvim.lsp.automatic_servers_installation",
+      "Use `lvim.lsp.installer.setup.automatic_installation` instead"
+    )
+  end
 end
 
 --- Override the configuration with a user provided one

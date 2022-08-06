@@ -98,8 +98,14 @@ function M.setup(server_name, user_config)
     return
   end
 
+  local should_auto_install = function()
+    local installer_settings = lvim.lsp.installer.setup
+    return installer_settings.automatic_installation
+      and not vim.tbl_contains(installer_settings.automatic_installation.exclude, server_name)
+  end
+
   if not registry.is_installed(pkg_name) then
-    if lvim.lsp.automatic_servers_installation then
+    if should_auto_install(server_name) then
       Log:debug "Automatic server installation detected"
       vim.notify_once(string.format("Installation in progoress for [%s] server", server_name), vim.log.levels.INFO)
       local pkg = registry.get_package(pkg_name)
