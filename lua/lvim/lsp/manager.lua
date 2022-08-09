@@ -22,8 +22,8 @@ local function resolve_mason_config(server_name)
       conf.cmd[1] = exepath
     end
   end
-  Log:debug(fmt("resolved mason configuration for %s, got %s", server_name, vim.inspect(mason_config)))
-  return mason_config or {}
+  Log:debug(fmt("resolved mason configuration for %s, got %s", server_name, vim.inspect(conf)))
+  return conf or {}
 end
 
 ---Resolve the configuration for a server by merging with the default config
@@ -107,12 +107,12 @@ function M.setup(server_name, user_config)
   if not registry.is_installed(pkg_name) then
     if should_auto_install(server_name) then
       Log:debug "Automatic server installation detected"
-      vim.notify_once(string.format("Installation in progoress for [%s] server", server_name), vim.log.levels.INFO)
+      vim.notify_once(string.format("Installation in progress for [%s]", server_name), vim.log.levels.INFO)
       local pkg = registry.get_package(pkg_name)
       pkg:install():once("closed", function()
         if pkg:is_installed() then
           vim.schedule(function()
-            vim.notify_once(string.format("Installation complete for [%s] server", server_name), vim.log.levels.INFO)
+            vim.notify_once(string.format("Installation complete for [%s]", server_name), vim.log.levels.INFO)
             -- mason config is only available once the server has been installed
             local config = resolve_config(server_name, resolve_mason_config(server_name), user_config)
             launch_server(server_name, config)
