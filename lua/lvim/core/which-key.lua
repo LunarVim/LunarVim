@@ -160,7 +160,7 @@ M.config = function()
         w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
         f = { require("lvim.lsp.utils").format, "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
-        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+        I = { "<cmd>Mason<cr>", "Mason Info" },
         j = {
           vim.diagnostic.goto_next,
           "Next Diagnostic",

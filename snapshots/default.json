@@ -41,6 +41,12 @@
   "lualine.nvim": {
     "commit": "8d956c1"
   },
+  "mason-lspconfig.nvim": {
+    "commit": "e48a41e"
+  },
+  "mason.nvim": {
+    "commit": "6fa15d7"
+  },
   "nlsp-settings.nvim": {
     "commit": "6c4e1a4"
   },
@@ -55,9 +61,6 @@
   },
   "nvim-dap": {
     "commit": "c0f43f4"
-  },
-  "nvim-lsp-installer": {
-    "commit": "45571e1"
   },
   "nvim-lspconfig": {
     "commit": "3479473"

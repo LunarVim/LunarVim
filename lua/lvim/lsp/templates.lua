@@ -56,20 +56,11 @@ end
 ---The files are generated to a runtimepath: "$LUNARVIM_RUNTIME_DIR/site/after/ftplugin/template.lua"
 ---@param servers_names? table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
-  servers_names = servers_names or {}
+  servers_names = servers_names or lvim_lsp_utils.get_supported_servers()
 
   Log:debug "Templates installation in progress"
 
   M.remove_template_files()
-
-  if vim.tbl_isempty(servers_names) then
-    local available_servers = require("nvim-lsp-installer.servers").get_available_servers()
-
-    for _, server in pairs(available_servers) do
-      table.insert(servers_names, server.name)
-      table.sort(servers_names)
-    end
-  end
 
   -- create the directory if it didn't exist
   if not utils.is_directory(lvim.lsp.templates_dir) then
