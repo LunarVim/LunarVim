@@ -151,5 +151,5 @@ return {
   ---@deprecated use lvim.lsp.automatic_configuration.skipped_servers instead
   override = {},
   ---@deprecated use lvim.lsp.installer.setup.automatic_installation instead
-  automatic_servers_installation = true,
+  automatic_servers_installation = nil,
 }
