@@ -22,8 +22,8 @@ local function resolve_mason_config(server_name)
       conf.cmd[1] = exepath
     end
   end
-  Log:debug(fmt("resolved mason configuration for %s, got %s", server_name, vim.inspect(mason_config)))
-  return mason_config or {}
+  Log:debug(fmt("resolved mason configuration for %s, got %s", server_name, vim.inspect(conf)))
+  return conf or {}
 end
 
 ---Resolve the configuration for a server by merging with the default config
