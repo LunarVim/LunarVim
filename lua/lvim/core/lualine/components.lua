@@ -70,13 +70,13 @@ return {
   },
   treesitter = {
     function()
-      local b = vim.api.nvim_get_current_buf()
-      if next(vim.treesitter.highlighter.active[b]) then
-        return ""
-      end
-      return ""
+      return ""
     end,
-    color = { fg = colors.green },
+    color = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local ts = vim.treesitter.highlighter.active[buf]
+      return { fg = ts and not vim.tbl_isempty(ts) and colors.green or colors.red }
+    end,
     cond = conditions.hide_in_width,
   },
   lsp = {
