@@ -299,7 +299,6 @@ function __validate_node_installation() {
   fi
 
   if [ ! -d "$manager_home" ] || [ ! -w "$manager_home" ]; then
-    echo "[ERROR] Unable to install using [$pkg_manager] without administrative privileges."
     return 1
   fi
 
@@ -314,21 +313,21 @@ function install_nodejs_deps() {
       return
     fi
   done
-  print_missing_dep_msg "${pkg_managers[@]}"
-  exit 1
+  echo "[WARN]: skipping installing optional nodejs dependencies due to insufficient permissions."
+  echo "check how to solve it: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally"
 }
 
 function install_python_deps() {
   echo "Verifying that pip is available.."
-  if ! python3 -m ensurepip &>/dev/null; then
+  if ! python3 -m ensurepip >/dev/null; then
     if ! python3 -m pip --version &>/dev/null; then
-      print_missing_dep_msg "pip"
-      exit 1
+      echo "[WARN]: skipping installing optional python dependencies"
+      return 1
     fi
   fi
   echo "Installing with pip.."
   for dep in "${__pip_deps[@]}"; do
-    python3 -m pip install --user "$dep"
+    python3 -m pip install --user "$dep" || return 1
   done
   echo "All Python dependencies are successfully installed"
 }
