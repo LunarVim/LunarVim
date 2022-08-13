@@ -25,39 +25,21 @@ M.methods.feedkeys = feedkeys
 local function jumpable(dir)
   local luasnip_ok, luasnip = pcall(require, "luasnip")
   if not luasnip_ok then
-    return
+    return false
   end
 
   local win_get_cursor = vim.api.nvim_win_get_cursor
   local get_current_buf = vim.api.nvim_get_current_buf
 
-  local function inside_snippet()
-    -- for outdated versions of luasnip
-    if not luasnip.session.current_nodes then
-      return false
-    end
-
-    local node = luasnip.session.current_nodes[get_current_buf()]
-    if not node then
-      return false
-    end
-
-    local snip_begin_pos, snip_end_pos = node.parent.snippet.mark:pos_begin_end()
-    local pos = win_get_cursor(0)
-    pos[1] = pos[1] - 1 -- LuaSnip is 0-based not 1-based like nvim for rows
-    return pos[1] >= snip_begin_pos[1] and pos[1] <= snip_end_pos[1]
-  end
-
   ---sets the current buffer's luasnip to the one nearest the cursor
   ---@return boolean true if a node is found, false otherwise
   local function seek_luasnip_cursor_node()
+    -- TODO(kylo252): upstream this
     -- for outdated versions of luasnip
     if not luasnip.session.current_nodes then
       return false
     end
 
-    local pos = win_get_cursor(0)
-    pos[1] = pos[1] - 1
     local node = luasnip.session.current_nodes[get_current_buf()]
     if not node then
       return false
@@ -65,6 +47,9 @@ local function jumpable(dir)
 
     local snippet = node.parent.snippet
     local exit_node = snippet.insert_nodes[0]
+
+    local pos = win_get_cursor(0)
+    pos[1] = pos[1] - 1
 
     -- exit early if we're past the exit node
     if exit_node then
@@ -121,9 +106,9 @@ local function jumpable(dir)
   end
 
   if dir == -1 then
-    return inside_snippet() and luasnip.jumpable(-1)
+    return luasnip.in_snippet() and luasnip.jumpable(-1)
   else
-    return inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable()
+    return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
   end
 end
 M.methods.jumpable = jumpable
