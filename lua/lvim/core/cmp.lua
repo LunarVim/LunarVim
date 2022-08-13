@@ -1,24 +1,21 @@
 local M = {}
 M.methods = {}
 
----checks if the character preceding the cursor is a space character
----@return boolean true if it is a space character, false otherwise
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
-M.methods.check_backspace = check_backspace
+M.methods.has_words_before = has_words_before
 
-local function T(str)
+---@deprecated use M.methods.has_words_before instead
+M.methods.check_backspace = not has_words_before
+
+local T = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
----wraps vim.fn.feedkeys while replacing key codes with escape codes
----Ex: feedkeys("<CR>", "n") becomes feedkeys("^M", "n")
----@param key string
----@param mode string
 local function feedkeys(key, mode)
-  vim.fn.feedkeys(T(key), mode)
+  vim.api.nvim_feedkeys(T(key), mode, true)
 end
 M.methods.feedkeys = feedkeys
 
@@ -241,48 +238,53 @@ M.config = function()
     mapping = cmp.mapping.preset.insert {
       ["<C-k>"] = cmp.mapping.select_prev_item(),
       ["<C-j>"] = cmp.mapping.select_next_item(),
+      ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
+      ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-y>"] = cmp.mapping {
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          else
+            fallback()
+          end
+        end,
+      },
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expandable() then
-          luasnip.expand()
-        elseif jumpable() then
+        elseif luasnip.expand_or_locally_jumpable() then
+          luasnip.expand_or_jump()
+        elseif jumpable(1) then
           luasnip.jump(1)
-        elseif check_backspace() then
-          fallback()
+        elseif has_words_before() then
+          cmp.complete()
         else
           fallback()
         end
-      end, {
-        "i",
-        "s",
-      }),
+      end, { "i", "s" }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif jumpable(-1) then
+        elseif luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
           fallback()
         end
-      end, {
-        "i",
-        "s",
-      }),
-
+      end, { "i", "s" }),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping(function(fallback)
         if cmp.visible() and cmp.confirm(lvim.builtin.cmp.confirm_opts) then
-          if jumpable() then
+          if jumpable(1) then
             luasnip.jump(1)
           end
           return
         end
 
-        if jumpable() then
+        if jumpable(1) then
           if not luasnip.jump(1) then
             fallback()
           end
