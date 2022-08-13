@@ -26,6 +26,7 @@ declare ARGS_LOCAL=0
 declare ARGS_OVERWRITE=0
 declare ARGS_INSTALL_DEPENDENCIES=1
 declare INTERACTIVE_MODE=1
+declare ADDITIONAL_WARNINGS=""
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
@@ -148,6 +149,7 @@ function main() {
 
   setup_lvim
 
+  msg "$ADDITIONAL_WARNINGS"
   msg "Thank you for installing LunarVim!!"
   echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
@@ -226,7 +228,25 @@ function validate_lunarvim_files() {
   fi
 }
 
+function validate_install_prefix() {
+  local prefix="$1"
+  case $PATH in
+    *"$prefix/bin"*)
+      return
+      ;;
+  esac
+  local profile="$HOME/.profile"
+  test -z "$ZSH_VERSION" && profile="$HOME/.zshenv"
+  ADDITIONAL_WARNINGS="[WARN] the folder $prefix/bin is not on PATH, consider adding 'export PATH=$prefix/bin:\$PATH' to your $profile"
+
+  # avoid problems when calling any verify_* function
+  export PATH="$prefix/bin:$PATH"
+}
+
 function check_system_deps() {
+
+  validate_install_prefix "$INSTALL_PREFIX"
+
   if ! command -v git &>/dev/null; then
     print_missing_dep_msg "git"
     exit 1
