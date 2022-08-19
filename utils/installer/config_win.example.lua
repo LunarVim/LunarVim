@@ -73,7 +73,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 -- }
 
--- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
