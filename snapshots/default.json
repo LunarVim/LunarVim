@@ -1,6 +1,6 @@
 {
   "Comment.nvim": {
-    "commit": "ab63cc9"
+    "commit": "350bf0c"
   },
   "FixCursorHold.nvim": {
     "commit": "5aa5ff1"
@@ -12,7 +12,7 @@
     "commit": "d688f46"
   },
   "bufferline.nvim": {
-    "commit": "06eb4ad"
+    "commit": "13a532e"
   },
   "cmp-buffer": {
     "commit": "3022dbc"
@@ -27,7 +27,7 @@
     "commit": "a9de941"
   },
   "dap-buddy.nvim": {
-    "commit": "bbda2b0"
+    "commit": "3679132"
   },
   "friendly-snippets": {
     "commit": "6227548"
@@ -45,10 +45,10 @@
     "commit": "d9365e7"
   },
   "mason.nvim": {
-    "commit": "4fa97ef"
+    "commit": "5dbb22a"
   },
   "nlsp-settings.nvim": {
-    "commit": "1f08b49"
+    "commit": "48d02d1"
   },
   "null-ls.nvim": {
     "commit": "9d1f8dc"
@@ -69,19 +69,19 @@
     "commit": "60bb6bf"
   },
   "nvim-tree.lua": {
-    "commit": "09a5126"
+    "commit": "81eb718"
   },
   "nvim-treesitter": {
-    "commit": "d76b0de"
+    "commit": "2bb9bb7"
   },
   "nvim-ts-context-commentstring": {
-    "commit": "4befb89"
+    "commit": "37a97a0"
   },
   "nvim-web-devicons": {
     "commit": "2d02a56"
   },
   "onedarker.nvim": {
-    "commit": "4eaa5e8"
+    "commit": "b00dd21"
   },
   "packer.nvim": {
     "commit": "90b323b"
@@ -105,7 +105,7 @@
     "commit": "6791f74"
   },
   "telescope.nvim": {
-    "commit": "28dc08f"
+    "commit": "5103387"
   },
   "toggleterm.nvim": {
     "commit": "62683d9"
