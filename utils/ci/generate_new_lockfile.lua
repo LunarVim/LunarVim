@@ -70,6 +70,7 @@ local function write_lockfile(verbose)
       name = name,
       url = url,
       commit = commit,
+      branch = plugin.branch or "HEAD",
     })
   end
 
@@ -90,7 +91,7 @@ local function write_lockfile(verbose)
       }
     end
 
-    local handle = call_proc("git", { args = { "ls-remote", entry.url, "HEAD" } }, on_done)
+    local handle = call_proc("git", { args = { "ls-remote", entry.url, entry.branch } }, on_done)
     assert(handle)
     table.insert(active_jobs, handle)
   end
