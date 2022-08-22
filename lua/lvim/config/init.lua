@@ -116,7 +116,7 @@ function M:load(config_path)
   local ok, err = pcall(dofile, config_path)
   if not ok then
     if utils.is_file(user_config_file) then
-      Log:warn("Invalid configuration: " .. err)
+      Log:warn(string.format("Invalid configuration(%s): %s", user_config_file, err))
     else
       vim.notify_once(string.format("Unable to find configuration file [%s]", config_path), vim.log.levels.WARN)
     end
