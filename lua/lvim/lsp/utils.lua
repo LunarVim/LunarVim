@@ -94,16 +94,28 @@ function M.setup_document_highlight(client, bufnr)
   if not augroup_exist then
     vim.api.nvim_create_augroup("lsp_document_highlight", {})
   end
-  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  local aucmd = vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     group = "lsp_document_highlight",
     buffer = bufnr,
     callback = vim.lsp.buf.document_highlight,
   })
-  vim.api.nvim_create_autocmd("CursorMoved", {
+  local aucmd2 = vim.api.nvim_create_autocmd("CursorMoved", {
     group = "lsp_document_highlight",
     buffer = bufnr,
     callback = vim.lsp.buf.clear_references,
   })
+
+  if vim.fn.has "nvim-0.8" > 0 then
+    vim.api.nvim_create_autocmd("LspDetach", {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = function()
+        for _, v in pairs { aucmd, aucmd2 } do
+          pcall(vim.api.nvim_del_autocmd, v)
+        end
+      end,
+    })
+  end
 end
 
 function M.setup_codelens_refresh(client, bufnr)
@@ -119,11 +131,21 @@ function M.setup_codelens_refresh(client, bufnr)
   if not augroup_exist then
     vim.api.nvim_create_augroup("lsp_code_lens_refresh", {})
   end
-  vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+  local aucmd = vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
     group = "lsp_code_lens_refresh",
     buffer = bufnr,
     callback = vim.lsp.codelens.refresh,
   })
+
+  if vim.fn.has "nvim-0.8" > 0 then
+    vim.api.nvim_create_autocmd("LspDetach", {
+      group = "lsp_code_lens_refresh",
+      buffer = bufnr,
+      callback = function()
+        pcall(vim.api.nvim_del_autocmd, aucmd)
+      end,
+    })
+  end
 end
 
 ---filter passed to vim.lsp.buf.format
