@@ -98,10 +98,10 @@ function M.setup(server_name, user_config)
     return
   end
 
-  local should_auto_install = function()
+  local should_auto_install = function(name)
     local installer_settings = lvim.lsp.installer.setup
     return installer_settings.automatic_installation
-      and not vim.tbl_contains(installer_settings.automatic_installation.exclude, server_name)
+      and not vim.tbl_contains(installer_settings.automatic_installation.exclude, name)
   end
 
   if not registry.is_installed(pkg_name) then
