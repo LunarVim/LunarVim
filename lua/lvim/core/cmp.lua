@@ -8,7 +8,9 @@ end
 M.methods.has_words_before = has_words_before
 
 ---@deprecated use M.methods.has_words_before instead
-M.methods.check_backspace = not has_words_before
+M.methods.check_backspace = function()
+  return not has_words_before()
+end
 
 local T = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
