@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### <!-- 1 --> Features
+
+- _(installer)_ handle INSTALL_PREFIX not on PATH ([#2912](https://github.com/lunarvim/lunarvim/pull/2912))
+- _(lvim/lsp)_ enable tailwindcss by default ([#2870](https://github.com/lunarvim/lunarvim/pull/2870))
+- _(whichkey)_ add default keybindings to cycle to next buffer ([#2873](https://github.com/lunarvim/lunarvim/pull/2873))
+
+### <!-- 2 --> Bugfix
+
+- _(installer)_ create profile.ps1 if nonexistent ([#2810](https://github.com/lunarvim/lunarvim/pull/2810))
+- _(lsp)_ return the actual resolved mason-config ([#2889](https://github.com/lunarvim/lunarvim/pull/2889))
+- _(lsp)_ pass name arg to should_auto_install ([#2958](https://github.com/lunarvim/lunarvim/pull/2958))
+- _(lualine)_ set icon color according to the status of treesitter ([#2754](https://github.com/lunarvim/lunarvim/pull/2754))
+- _(statusline)_ display null-ls linters properly ([#2921](https://github.com/lunarvim/lunarvim/pull/2921))
+- _(ts_context_commentstring)_ block comment match new api ([#2948](https://github.com/lunarvim/lunarvim/pull/2948))
+- handle deprecated telescope.builtin.internal ([#2885](https://github.com/lunarvim/lunarvim/pull/2885))
+- update key bindings for comment.nvim to use new api ([#2926](https://github.com/lunarvim/lunarvim/pull/2926))
+
+### <!-- 3 --> Refactor
+
+- [**breaking**] _(cmp)_ adapt new recommendations ([#2913](https://github.com/lunarvim/lunarvim/pull/2913))
+- [**breaking**] _(keymaps)_ don't hijack H/L by default ([#2874](https://github.com/lunarvim/lunarvim/pull/2874))
+- [**breaking**] migrate to mason.nvim ([#2880](https://github.com/lunarvim/lunarvim/pull/2880))
+
+### <!-- 4 --> Documentation
+
+- _(windows)_ update example config for nvim-tree ([#2766](https://github.com/lunarvim/lunarvim/pull/2766))
+- _(windows)_ update example config ([#2919](https://github.com/lunarvim/lunarvim/pull/2919))
+- fix some typos and enhance readability ([#2917](https://github.com/lunarvim/lunarvim/pull/2917))
+- fix automatic_servers_installation example ([#2918](https://github.com/lunarvim/lunarvim/pull/2918))
+
 ## [1.1.4]
 
 ### <!-- 1 --> Features
