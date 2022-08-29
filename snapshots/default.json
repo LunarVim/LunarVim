@@ -6,7 +6,7 @@
     "commit": "5aa5ff1"
   },
   "LuaSnip": {
-    "commit": "faa5257"
+    "commit": "9f454cc"
   },
   "alpha-nvim": {
     "commit": "d688f46"
@@ -57,7 +57,7 @@
     "commit": "0a18e10"
   },
   "nvim-cmp": {
-    "commit": "b1ebdb0"
+    "commit": "058100d"
   },
   "nvim-dap": {
     "commit": "ad8b0de"
