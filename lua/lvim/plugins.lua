@@ -72,6 +72,18 @@ local core_plugins = {
         paths = paths,
       }
       require("luasnip.loaders.from_snipmate").lazy_load()
+      local luasnip = require "luasnip"
+      local types = require "luasnip.util.types"
+
+      local ext_opts = {
+        [types.insertNode] = {
+          active = {
+            virt_text = { { "<-- snip insert", "BufferInactiveIndex" } },
+          },
+        },
+      }
+      vim.tbl_deep_extend(lvim.builtin.config.ext_opts, ext_opts)
+      luasnip.config.set_config(lvim.builtin.luasnip.config)
     end,
   },
   {
