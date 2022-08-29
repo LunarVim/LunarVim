@@ -33,6 +33,12 @@ function M:init()
     sources = {
       friendly_snippets = true,
     },
+    config = {
+      updateevents = "TextChanged,TextChangedI",
+      ext_opts = {
+        -- Will be populated within config function
+      },
+    },
   }
 
   lvim.builtin.bigfile = {
