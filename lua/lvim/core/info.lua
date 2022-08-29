@@ -111,9 +111,9 @@ local function make_auto_lsp_info(ft)
     return info_lines
   end
 
-  local available = lsp_utils.get_supported_servers_per_filetype(ft)
+  local supported = lsp_utils.get_supported_servers(ft)
   local skipped = vim.tbl_filter(function(name)
-    return vim.tbl_contains(available, name)
+    return vim.tbl_contains(supported, name)
   end, skipped_servers)
 
   if #skipped == 0 then

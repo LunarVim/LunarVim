@@ -51,37 +51,34 @@ end
 
 ---Get supported filetypes per server
 ---@param server_name string can be any server supported by nvim-lsp-installer
----@return table supported filestypes as a list of strings
+---@return string[] supported filestypes as a list of strings
 function M.get_supported_filetypes(server_name)
-  local status_ok, lsp_installer_servers = pcall(require, "nvim-lsp-installer.servers")
+  local status_ok, config = pcall(require, ("lspconfig.server_configurations.%s"):format(server_name))
   if not status_ok then
     return {}
   end
 
-  local server_available, requested_server = lsp_installer_servers.get_server(server_name)
-  if not server_available then
-    return {}
-  end
-
-  return requested_server:get_supported_filetypes()
+  return config.default_config.filetypes or {}
 end
 
 ---Get supported servers per filetype
----@param filetype string
----@return table list of names of supported servers
-function M.get_supported_servers_per_filetype(filetype)
-  local filetype_server_map = require "nvim-lsp-installer._generated.filetype_map"
-  return filetype_server_map[filetype]
+---@param filter { filetype: string | string[] }?: (optional) Used to filter the list of server names.
+---@return string[] list of names of supported servers
+function M.get_supported_servers(filter)
+  local _, supported_servers = pcall(function()
+    return require("mason-lspconfig").get_available_servers(filter)
+  end)
+  return supported_servers or {}
 end
 
 ---Get all supported filetypes by nvim-lsp-installer
----@return table supported filestypes as a list of strings
+---@return string[] supported filestypes as a list of strings
 function M.get_all_supported_filetypes()
-  local status_ok, lsp_installer_filetypes = pcall(require, "nvim-lsp-installer._generated.filetype_map")
+  local status_ok, filetype_server_map = pcall(require, "mason-lspconfig.mappings.filetype")
   if not status_ok then
     return {}
   end
-  return vim.tbl_keys(lsp_installer_filetypes or {})
+  return vim.tbl_keys(filetype_server_map or {})
 end
 
 function M.setup_document_highlight(client, bufnr)

@@ -36,6 +36,8 @@ lvim.colorscheme = "onedarker"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+-- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+-- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -79,14 +81,14 @@ lvim.builtin.terminal.active = false
 -- lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
 
 -- nvim-tree has some performance issues on windows, see kyazdani42/nvim-tree.lua#549
-lvim.builtin.nvimtree.setup.diagnostics.enable = false
-lvim.builtin.nvimtree.setup.filters.custom = false
-lvim.builtin.nvimtree.setup.git.enable = false
-lvim.builtin.nvimtree.setup.update_cwd = false
-lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
+lvim.builtin.nvimtree.setup.diagnostics.enable = nil
+lvim.builtin.nvimtree.setup.filters.custom = nil
+lvim.builtin.nvimtree.setup.git.enable = nil
+lvim.builtin.nvimtree.setup.update_cwd = nil
+lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = nil
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.highlight_git = false
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.renderer.highlight_git = nil
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = nil
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -114,7 +116,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 -- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
+-- lvim.lsp.installer.setup.automatic_installation = false
 
 -- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`

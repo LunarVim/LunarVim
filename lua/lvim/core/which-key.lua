@@ -1,5 +1,4 @@
 local M = {}
-
 M.config = function()
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommended]
@@ -77,13 +76,13 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+      ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
     },
     mappings = {
       [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
-      ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
+      ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
       ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
       ["f"] = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
@@ -92,6 +91,7 @@ M.config = function()
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
         f = { "<cmd>Telescope buffers<cr>", "Find" },
         b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+        n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
         -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
         e = {
           "<cmd>BufferLinePickClose<cr>",
@@ -160,7 +160,7 @@ M.config = function()
         w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
         f = { require("lvim.lsp.utils").format, "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
-        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+        I = { "<cmd>Mason<cr>", "Mason Info" },
         j = {
           vim.diagnostic.goto_next,
           "Next Diagnostic",
@@ -252,7 +252,7 @@ M.config = function()
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
         p = {
-          "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+          "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
           "Colorscheme with Preview",
         },
       },

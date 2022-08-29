@@ -1,7 +1,30 @@
 local M = {}
 
 local Log = require "lvim.core.log"
+local fmt = string.format
 local lvim_lsp_utils = require "lvim.lsp.utils"
+local is_windows = vim.loop.os_uname().version:match "Windows"
+
+local function resolve_mason_config(server_name)
+  local found, mason_config = pcall(require, "mason-lspconfig.server_configurations." .. server_name)
+  if not found then
+    Log:debug(fmt("mason configuration not found for %s", server_name))
+    return {}
+  end
+  local server_mapping = require "mason-lspconfig.mappings.server"
+  local path = require "mason-core.path"
+  local pkg_name = server_mapping.lspconfig_to_package[server_name]
+  local install_dir = path.package_prefix(pkg_name)
+  local conf = mason_config(install_dir)
+  if is_windows and conf.cmd and conf.cmd[1] then
+    local exepath = vim.fn.exepath(conf.cmd[1])
+    if exepath ~= "" then
+      conf.cmd[1] = exepath
+    end
+  end
+  Log:debug(fmt("resolved mason configuration for %s, got %s", server_name, vim.inspect(conf)))
+  return conf or {}
+end
 
 ---Resolve the configuration for a server by merging with the default config
 ---@param server_name string
@@ -65,35 +88,45 @@ function M.setup(server_name, user_config)
     return
   end
 
-  local servers = require "nvim-lsp-installer.servers"
-  local server_available, server = servers.get_server(server_name)
+  local server_mapping = require "mason-lspconfig.mappings.server"
+  local registry = require "mason-registry"
 
-  if not server_available then
+  local pkg_name = server_mapping.lspconfig_to_package[server_name]
+  if not pkg_name then
     local config = resolve_config(server_name, user_config)
     launch_server(server_name, config)
     return
   end
 
-  local install_in_progress = false
+  local should_auto_install = function(name)
+    local installer_settings = lvim.lsp.installer.setup
+    return installer_settings.automatic_installation
+      and not vim.tbl_contains(installer_settings.automatic_installation.exclude, name)
+  end
 
-  if not server:is_installed() then
-    if lvim.lsp.automatic_servers_installation then
+  if not registry.is_installed(pkg_name) then
+    if should_auto_install(server_name) then
       Log:debug "Automatic server installation detected"
-      server:install()
-      install_in_progress = true
+      vim.notify_once(string.format("Installation in progress for [%s]", server_name), vim.log.levels.INFO)
+      local pkg = registry.get_package(pkg_name)
+      pkg:install():once("closed", function()
+        if pkg:is_installed() then
+          vim.schedule(function()
+            vim.notify_once(string.format("Installation complete for [%s]", server_name), vim.log.levels.INFO)
+            -- mason config is only available once the server has been installed
+            local config = resolve_config(server_name, resolve_mason_config(server_name), user_config)
+            launch_server(server_name, config)
+          end)
+        end
+      end)
+      return
     else
-      Log:debug(server.name .. " is not managed by the automatic installer")
+      Log:debug(server_name .. " is not managed by the automatic installer")
     end
   end
 
-  server:on_ready(function()
-    if install_in_progress then
-      vim.notify(string.format("Installation complete for [%s] server", server.name), vim.log.levels.INFO)
-    end
-    install_in_progress = false
-    local config = resolve_config(server_name, server:get_default_options(), user_config)
-    launch_server(server_name, config)
-  end)
+  local config = resolve_config(server_name, resolve_mason_config(server_name), user_config)
+  launch_server(server_name, config)
 end
 
 return M
