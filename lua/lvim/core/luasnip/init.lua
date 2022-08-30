@@ -6,6 +6,7 @@ function M.config()
       lunarvim = true,
     },
     config = {
+      history = false,
       updateevents = "TextChanged,TextChangedI",
       ext_opts = {
         -- Will be populated within config function
@@ -49,7 +50,7 @@ function M.setup()
     },
   }
   -- Add lunarvim options giving preference to user ones
-  vim.tbl_deep_extend("keep", lvim.builtin.luasnip.config.ext_opts, ext_opts)
+  lvim.builtin.luasnip.config.ext_opts = vim.tbl_deep_extend("keep", lvim.builtin.luasnip.config.ext_opts, ext_opts)
   luasnip.config.set_config(lvim.builtin.luasnip.config)
   if lvim.builtin.luasnip.sources.lunarvim then
     luasnip.add_snippets("lua", require "lvim.core.luasnip.snippets")
