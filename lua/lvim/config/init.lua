@@ -29,18 +29,6 @@ function M:init()
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
-  lvim.builtin.luasnip = {
-    sources = {
-      friendly_snippets = true,
-    },
-    config = {
-      updateevents = "TextChanged,TextChangedI",
-      ext_opts = {
-        -- Will be populated within config function
-      },
-    },
-  }
-
   require("lvim.config._deprecated").handle()
 end
 
