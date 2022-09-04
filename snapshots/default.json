@@ -1,15 +1,15 @@
 {
   "Comment.nvim": {
-    "commit": "80e7746"
+    "commit": "30d23aa"
   },
   "FixCursorHold.nvim": {
     "commit": "5aa5ff1"
   },
   "LuaSnip": {
-    "commit": "9f454cc"
+    "commit": "a45cd5f"
   },
   "alpha-nvim": {
-    "commit": "f457f7f"
+    "commit": "09e5374"
   },
   "bufferline.nvim": {
     "commit": "13a532e"
@@ -33,7 +33,7 @@
     "commit": "e5a16f9"
   },
   "gitsigns.nvim": {
-    "commit": "1e107c9"
+    "commit": "d7e0bcb"
   },
   "lua-dev.nvim": {
     "commit": "54149d1"
@@ -42,37 +42,37 @@
     "commit": "3cf4540"
   },
   "mason-lspconfig.nvim": {
-    "commit": "74c45b3"
+    "commit": "328eb72"
   },
   "mason.nvim": {
-    "commit": "9249238"
+    "commit": "f1cb597"
   },
   "nlsp-settings.nvim": {
-    "commit": "1ffdeff"
+    "commit": "633feef"
   },
   "null-ls.nvim": {
-    "commit": "753ad51"
+    "commit": "7cd491b"
   },
   "nvim-autopairs": {
     "commit": "0a18e10"
   },
   "nvim-cmp": {
-    "commit": "058100d"
+    "commit": "33fbb2c"
   },
   "nvim-dap": {
-    "commit": "57003a0"
+    "commit": "ea25d6d"
   },
   "nvim-lspconfig": {
-    "commit": "636ce36"
+    "commit": "0fafc3e"
   },
   "nvim-notify": {
-    "commit": "cf5dc4f"
+    "commit": "6b779c9"
   },
   "nvim-tree.lua": {
-    "commit": "4a725c0"
+    "commit": "951e10a"
   },
   "nvim-treesitter": {
-    "commit": "f3c53d2"
+    "commit": "1506334"
   },
   "nvim-ts-context-commentstring": {
     "commit": "4d3a68c"
@@ -84,10 +84,10 @@
     "commit": "b00dd21"
   },
   "packer.nvim": {
-    "commit": "3a9f980"
+    "commit": "537669b"
   },
   "plenary.nvim": {
-    "commit": "a3dafaa"
+    "commit": "4b66054"
   },
   "popup.nvim": {
     "commit": "b7404d3"
@@ -96,7 +96,7 @@
     "commit": "090bb11"
   },
   "schemastore.nvim": {
-    "commit": "8f3a6e8"
+    "commit": "e729173"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
@@ -108,7 +108,7 @@
     "commit": "8dce937"
   },
   "toggleterm.nvim": {
-    "commit": "f494c61"
+    "commit": "7abb25e"
   },
   "which-key.nvim": {
     "commit": "f03a259"
