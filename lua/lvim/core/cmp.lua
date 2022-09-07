@@ -272,20 +272,15 @@ M.config = function()
           if is_insert_mode() then -- prevent overwriting brackets
             confirm_opts.behavior = cmp.ConfirmBehavior.Insert
           end
-          cmp.confirm(confirm_opts)
-          if jumpable(1) then
-            luasnip.jump(1)
+          if cmp.confirm(confirm_opts) then
+            return -- success, exit early
           end
-          return
         end
 
-        if jumpable(1) then
-          if not luasnip.jump(1) then
-            fallback()
-          end
-        else
-          fallback()
+        if jumpable(1) and luasnip.jump(1) then
+          return -- success, exit early
         end
+        fallback() -- if not exited early, always fallback
       end),
     },
   }
