@@ -102,8 +102,7 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    -- NOTE: Temporary fix till folke comes back
-    "max397574/lua-dev.nvim",
+    "folke/lua-dev.nvim",
     module = "lua-dev",
   },
 
@@ -153,7 +152,7 @@ local core_plugins = {
 
   -- Whichkey
   {
-    "max397574/which-key.nvim",
+    "folke/which-key.nvim",
     config = function()
       require("lvim.core.which-key").setup()
     end,
