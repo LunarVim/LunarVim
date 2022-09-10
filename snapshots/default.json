@@ -12,7 +12,7 @@
     "commit": "09e5374"
   },
   "bufferline.nvim": {
-    "commit": "13a532e"
+    "commit": "0b4b863"
   },
   "cmp-buffer": {
     "commit": "3022dbc"
@@ -36,7 +36,7 @@
     "commit": "d7e0bcb"
   },
   "lua-dev.nvim": {
-    "commit": "54149d1"
+    "commit": "9381ad0"
   },
   "lualine.nvim": {
     "commit": "3cf4540"
@@ -111,6 +111,6 @@
     "commit": "7abb25e"
   },
   "which-key.nvim": {
-    "commit": "f03a259"
+    "commit": "439637d"
   }
 }
