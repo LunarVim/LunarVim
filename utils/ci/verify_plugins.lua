@@ -120,7 +120,7 @@ local function verify_core_plugins(verbose)
       end
     end
 
-    local handle = call_proc("git", { args = { "log", "--pretty='%h'", "-1" }, cwd = entry.path }, on_done)
+    local handle = call_proc("git", { args = { "rev-parse", "--short", "HEAD" }, cwd = entry.path }, on_done)
     assert(handle)
     table.insert(active_jobs, handle)
   end
