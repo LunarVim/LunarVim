@@ -112,7 +112,7 @@ local function verify_core_plugins(verbose)
           io.write(fmt("verified [%s]\n", entry.name))
         end
       end
-      local current_commit = result:gsub("\n", ""):gsub([[']], [[]])
+      local current_commit = result:gsub("\n", ""):gsub([[']], [[]]):sub(1, 7)
       -- just in case there are some extra qutoes or it's a longer commit hash
       if current_commit ~= entry.commit then
         io.write(fmt("mismatch at [%s]: expected [%s], got [%s]\n", entry.name, entry.commit, current_commit))
@@ -120,7 +120,7 @@ local function verify_core_plugins(verbose)
       end
     end
 
-    local handle = call_proc("git", { args = { "log", "--pretty='%h'", "-1" }, cwd = entry.path }, on_done)
+    local handle = call_proc("git", { args = { "rev-parse", "--short", "HEAD" }, cwd = entry.path }, on_done)
     assert(handle)
     table.insert(active_jobs, handle)
   end
