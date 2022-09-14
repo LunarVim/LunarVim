@@ -51,13 +51,13 @@ function M.get_sections()
 
   local buttons = {
     entries = {
-      { "SPC f", "  Find File", "<CMD>Telescope find_files<CR>" },
-      { "SPC n", "  New File", "<CMD>ene!<CR>" },
-      { "SPC P", "  Recent Projects ", "<CMD>Telescope projects<CR>" },
-      { "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
-      { "SPC s t", "  Find Word", "<CMD>Telescope live_grep<CR>" },
+      { "f", "  Find File", "<CMD>Telescope find_files<CR>" },
+      { "n", "  New File", "<CMD>ene!<CR>" },
+      { "p", "  Recent Projects ", "<CMD>Telescope projects<CR>" },
+      { "r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+      { "t", "  Find Word", "<CMD>Telescope live_grep<CR>" },
       {
-        "SPC L c",
+        "c",
         "  Configuration",
         "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>",
       },

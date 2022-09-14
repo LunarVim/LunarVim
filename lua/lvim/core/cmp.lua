@@ -135,7 +135,7 @@ M.config = function()
       keyword_length = 1,
     },
     experimental = {
-      ghost_text = true,
+      ghost_text = false,
       native_menu = false,
     },
     formatting = {

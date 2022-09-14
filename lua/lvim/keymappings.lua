@@ -31,12 +31,6 @@ local mode_adapters = {
 
 local defaults = {
   insert_mode = {
-    -- 'jk' for quitting insert mode
-    ["jk"] = "<ESC>",
-    -- 'kj' for quitting insert mode
-    ["kj"] = "<ESC>",
-    -- 'jj' for quitting insert mode
-    ["jj"] = "<ESC>",
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-j>"] = "<Esc>:m .+1<CR>==gi",
     -- Move current line / block with Alt-j/k ala vscode.
