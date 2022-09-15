@@ -90,11 +90,10 @@ end
 -- contained in a Git repo.
 function M.find_project_files(opts)
   opts = opts or {}
-  local show_untracked = vim.F.if_nil(opts.show_untracked, false)
-  local ok = pcall(builtin.git_files, { show_untracked = show_untracked })
+  local ok = pcall(builtin.git_files, opts)
 
   if not ok then
-    builtin.find_files()
+    builtin.find_files(opts)
   end
 end
 
