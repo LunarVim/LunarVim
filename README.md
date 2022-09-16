@@ -31,10 +31,18 @@
 
 Make sure you have the release version of Neovim (0.7+).
 
-### Linux:
+### Linux/MacOS:
+
+If you are running Neovim 0.7+
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+```
+
+If you are running Neovim 0.8+
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
@@ -133,12 +141,6 @@ lvim.plugins = {
 ### Update the plugins
 
 - inside LunarVim `:PackerUpdate`
-
-## Breaking changes
-
-- `lvim.lang.FOO` is no longer supported. Refer to <https://www.lunarvim.org/languages> for up-to-date instructions.
-- `lvim.lsp.popup_border` has been deprecated in favor of `lvim.lsp.float.border` and `lvim.lsp.diagnostics.float.border`.
-- `lvim.builtin.dashboard` has been replaced with `lvim.builtin.alpha`, see <https://github.com/LunarVim/LunarVim/pull/1906>
 
 ## Resources
 
