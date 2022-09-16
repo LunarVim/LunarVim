@@ -132,16 +132,10 @@ local core_plugins = {
   -- NvimTree
   {
     "kyazdani42/nvim-tree.lua",
+    -- event = "BufWinOpen",
+    -- cmd = "NvimTreeToggle",
     config = function()
       require("lvim.core.nvimtree").setup()
-    end,
-    disable = not lvim.builtin.nvimtree.active,
-  },
-  {
-
-    "christianchiarulli/lir.nvim",
-    config = function()
-      require("lvim.core.lir").setup()
     end,
     disable = not lvim.builtin.nvimtree.active,
   },
