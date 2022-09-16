@@ -255,6 +255,8 @@ local core_plugins = {
   {
     "b0o/schemastore.nvim",
   },
+
+  { "RRethy/vim-illuminate" },
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
