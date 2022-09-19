@@ -97,7 +97,7 @@ end
 
 function M.setup()
   if lvim.builtin.nvimtree.active then
-    Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
+    -- Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
     return
   end
 
