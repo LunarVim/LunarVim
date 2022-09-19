@@ -1,6 +1,6 @@
 local M = {}
 
-local Log = require "lvim.core.log"
+-- local Log = require "lvim.core.log"
 
 M.config = function()
   lvim.builtin.lir = {
