@@ -1,6 +1,13 @@
 local M = {}
 
+local Log = require "lvim.core.log"
+
 M.config = function()
+  lvim.builtin.lir = {
+    active = true,
+    on_config_done = nil,
+  }
+
   local status_ok, lir = pcall(require, "lir")
   if not status_ok then
     return
@@ -87,4 +94,24 @@ M.config = function()
     },
   }
 end
+
+function M.setup()
+  if lvim.builtin.nvimtree.active then
+    Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
+    return
+  end
+
+  local status_ok, lir = pcall(require, "lir")
+  if not status_ok then
+    return
+  end
+
+  lir.setup(lvim.builtin.lir.setup)
+  require("nvim-web-devicons").set_icon(lvim.builtin.lir.icons)
+
+  if lvim.builtin.lir.on_config_done then
+    lvim.builtin.lir.on_config_done(lir)
+  end
+end
+
 return M
