@@ -83,8 +83,8 @@
   "nvim-web-devicons": {
     "commit": "2d02a56"
   },
-  "onedarker.nvim": {
-    "commit": "b00dd21"
+  "tokyonight.nvim": {
+    "commit": "48fc163"
   },
   "packer.nvim": {
     "commit": "6afb674"

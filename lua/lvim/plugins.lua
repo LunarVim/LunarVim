@@ -15,17 +15,16 @@ local core_plugins = {
     end,
   },
   {
-    "lunarvim/onedarker.nvim",
-    branch = "freeze",
+    "lunarvim/tokyonight.nvim",
     config = function()
       pcall(function()
-        if lvim and lvim.colorscheme == "onedarker" then
-          require("onedarker").setup()
-          lvim.builtin.lualine.options.theme = "onedarker"
+        if lvim and lvim.colorscheme == "tokyonight-night" then
+          require("tokyonight-night").setup()
+          lvim.builtin.lualine.options.theme = "tokyonight-night"
         end
       end)
     end,
-    disable = lvim.colorscheme ~= "onedarker",
+    disable = lvim.colorscheme ~= "tokyonight-night",
   },
   {
     "rcarriga/nvim-notify",
