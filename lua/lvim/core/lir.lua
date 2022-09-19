@@ -4,11 +4,12 @@ local Log = require "lvim.core.log"
 
 M.config = function()
   lvim.builtin.lir = {
-    active = true,
+    active = false,
     on_config_done = nil,
   }
 
   local status_ok, lir = pcall(require, "lir")
+
   if not status_ok then
     return
   end
@@ -96,13 +97,14 @@ M.config = function()
 end
 
 function M.setup()
-  if lvim.builtin.nvimtree.active then
-    Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
+  local status_ok, lir = pcall(require, "lir")
+
+  if not status_ok then
     return
   end
 
-  local status_ok, lir = pcall(require, "lir")
-  if not status_ok then
+  if lvim.builtin.nvimtree.active then
+    Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
     return
   end
 
