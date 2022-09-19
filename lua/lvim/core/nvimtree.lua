@@ -2,13 +2,12 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-
   local status_ok, utils = pcall(require, "nvim-tree.utils")
   if not status_ok then
     return
   end
 
-  local function notify_level(level)
+  local function notify_level()
     return function(msg)
       vim.schedule(function()
         vim.api.nvim_echo({ { msg, "WarningMsg" } }, false, {})
