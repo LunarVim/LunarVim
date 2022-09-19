@@ -31,7 +31,7 @@ local make_on_new_config = function(on_new_config, _)
     if server_name ~= "sumneko_lua" then
       return
     end
-    local plugins = { "plenary", "telescope", "packer", "nvim-treesitter", "LuaSnip" }
+    local plugins = { "plenary.nvim", "telescope.nvim", "nvim-treesitter", "LuaSnip" }
     add_packages_to_workspace(plugins, new_config)
   end)
 end
