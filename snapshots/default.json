@@ -35,6 +35,9 @@
   "gitsigns.nvim": {
     "commit": "d7e0bcb"
   },
+  "lir.nvim": {
+    "commit": "7d8c6c4"
+  },
   "lua-dev.nvim": {
     "commit": "fd7a18e"
   },
