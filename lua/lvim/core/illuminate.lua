@@ -1,8 +1,12 @@
 local M = {}
 
 M.config = function()
+  local status_ok, illuminate = pcall(require, "illuminate")
+  if not status_ok then
+    return
+  end
   -- default configuration
-  require("illuminate").configure {
+  illuminate.configure {
     -- providers: provider used to get references in the buffer, ordered by priority
     providers = {
       "lsp",
@@ -45,4 +49,5 @@ M.config = function()
     under_cursor = true,
   }
 end
+
 return M
