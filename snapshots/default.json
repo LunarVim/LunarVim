@@ -115,5 +115,8 @@
   },
   "which-key.nvim": {
     "commit": "d5f0c63"
+  },
+  "vim-illuminate": {
+    "commit": "b545262"
   }
 }
