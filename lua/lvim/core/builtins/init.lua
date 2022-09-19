@@ -9,6 +9,7 @@ local builtins = {
   "lvim.core.telescope",
   "lvim.core.treesitter",
   "lvim.core.nvimtree",
+  "lvim.core.lir",
   "lvim.core.project",
   "lvim.core.bufferline",
   "lvim.core.autopairs",

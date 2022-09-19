@@ -139,7 +139,14 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.nvimtree.active,
   },
-
+  -- Lir
+  {
+    "christianchiarulli/lir.nvim",
+    config = function()
+      require("lvim.core.lir").setup()
+    end,
+    disable = not lvim.builtin.lir.active,
+  },
   {
     "lewis6991/gitsigns.nvim",
 
