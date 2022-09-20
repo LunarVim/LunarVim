@@ -114,6 +114,16 @@ function M.setup_document_highlight(client, bufnr)
   })
 end
 
+function M.setup_document_symbols(client, bufnr)
+  vim.g.navic_silence = false -- can be set to true to supress error
+  local symbols_supported = client.supports_method "textDocument/documentSymbol"
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok or not symbols_supported then
+    return
+  end
+  navic.attach(client, bufnr)
+end
+
 function M.setup_codelens_refresh(client, bufnr)
   local status_ok, codelens_supported = pcall(function()
     return client.supports_method "textDocument/codeLens"
