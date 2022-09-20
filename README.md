@@ -70,7 +70,7 @@ Example:
 ```lua
 -- general
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "tokyonight"
 
 lvim.leader = "space"
 -- add your own keymapping
@@ -125,7 +125,7 @@ linters.setup {
 -- Additional Plugins
 lvim.plugins = {
     {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"}, {
+    {
         "ray-x/lsp_signature.nvim",
         config = function() require"lsp_signature".on_attach() end,
         event = "BufRead"

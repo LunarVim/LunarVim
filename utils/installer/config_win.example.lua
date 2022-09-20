@@ -28,7 +28,7 @@ vim.g.clipboard = {
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "tokyonight"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -60,6 +60,10 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --     ["<C-k>"] = actions.move_selection_previous,
 --   },
 -- }
+
+-- Change theme settings
+-- lvim.builtin.theme.options.dim_inactive = true
+-- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -176,7 +180,6 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 -- lvim.plugins = {
---     {"folke/tokyonight.nvim"},
 --     {
 --       "folke/trouble.nvim",
 --       cmd = "TroubleToggle",

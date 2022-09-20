@@ -3,60 +3,66 @@ local M = {}
 -- local Log = require "lvim.core.log"
 
 M.config = function()
+  lvim.builtin.breadcrumbs = {
+    active = false,
+    on_config_done = nil,
+    options = {
+      icons = {
+        Text = " ",
+        Method = " ",
+        Function = " ",
+        Constructor = " ",
+        Field = " ",
+        Variable = " ",
+        Class = " ",
+        Interface = " ",
+        Module = " ",
+        Property = " ",
+        Unit = " ",
+        Value = " ",
+        Enum = " ",
+        Keyword = " ",
+        Snippet = " ",
+        Color = " ",
+        File = " ",
+        Reference = " ",
+        Folder = " ",
+        EnumMember = " ",
+        Constant = " ",
+        Struct = " ",
+        Event = " ",
+        Operator = " ",
+        TypeParameter = " ",
+        Array = " ",
+        Number = " ",
+        String = " ",
+        Boolean = "蘒",
+        Object = " ",
+        Package = " ",
+        Namespace = "",
+        Key = "",
+        Null = "ﳠ",
+      },
+      highlight = true,
+      separator = " " .. ">" .. " ",
+      depth_limit = 0,
+      depth_limit_indicator = "..",
+    },
+  }
+end
+
+M.setup = function()
   local status_ok, navic = pcall(require, "nvim-navic")
   if not status_ok then
     return
   end
 
-  navic.setup {
-    icons = {
-      Text = " ",
-      -- Method = "m",
-      -- Function = "",
-      -- Constructor = "",
-      Method = " ",
-      Function = " ",
-      Constructor = " ",
-      Field = " ",
-      -- Variable = "",
-      Variable = " ",
-      Class = " ",
-      Interface = " ",
-      -- Module = "",
-      Module = " ",
-      Property = " ",
-      Unit = " ",
-      Value = " ",
-      Enum = " ",
-      -- Keyword = "",
-      Keyword = " ",
-      -- Snippet = "",
-      Snippet = " ",
-      Color = " ",
-      File = " ",
-      Reference = " ",
-      Folder = " ",
-      EnumMember = " ",
-      Constant = " ",
-      Struct = " ",
-      Event = " ",
-      Operator = " ",
-      TypeParameter = " ",
-      Array = " ",
-      Number = " ",
-      String = " ",
-      Boolean = "蘒",
-      Object = " ",
-      Package = " ",
-      Namespace = "",
-      Key = "",
-      Null = "ﳠ",
-    },
-    highlight = true,
-    separator = " " .. ">" .. " ",
-    depth_limit = 0,
-    depth_limit_indicator = "..",
-  }
+  M.create_winbar()
+  navic.setup(lvim.builtin.breadcrumbs.options)
+
+  if lvim.builtin.breadcrumbs.on_config_done then
+    lvim.builtin.breadcrumbs.on_config_done()
+  end
 end
 
 M.winbar_filetype_exclude = {
@@ -198,7 +204,5 @@ M.create_winbar = function()
     )
   end
 end
-
-M.create_winbar()
 
 return M

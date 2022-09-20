@@ -1,6 +1,7 @@
 local M = {}
 
 local builtins = {
+  "lvim.core.theme",
   "lvim.core.which-key",
   "lvim.core.gitsigns",
   "lvim.core.cmp",
