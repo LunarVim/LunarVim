@@ -208,7 +208,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.breadcrumbs").setup()
     end,
-    -- disable = not lvim.builtin.breadcrumbs.active,
+    disable = not lvim.builtin.breadcrumbs.active,
   },
 
   {
