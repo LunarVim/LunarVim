@@ -12,10 +12,26 @@ local function diff_source()
   end
 end
 
+local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
+local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
+
+vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
+vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
+vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.background })
+
+local location_color = nil
+local branch = ""
+
+if lvim.colorscheme == "tokyonight-night" then
+  location_color = "SLBranchName"
+  branch = "%#SLGitIcon#" .. "" .. "%*" .. "%#SLBranchName#"
+end
+
 return {
   mode = {
     function()
-      return " "
+      return "  "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -23,9 +39,8 @@ return {
   },
   branch = {
     "b:gitsigns_head",
-    icon = " ",
+    icon = branch,
     color = { gui = "bold" },
-    cond = conditions.hide_in_width,
   },
   filename = {
     "filename",
@@ -61,7 +76,7 @@ return {
     "diagnostics",
     sources = { "nvim_diagnostic" },
     symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    cond = conditions.hide_in_width,
+    -- cond = conditions.hide_in_width,
   },
   treesitter = {
     function()
@@ -111,8 +126,14 @@ return {
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
-  location = { "location", cond = conditions.hide_in_width, color = {} },
-  progress = { "progress", cond = conditions.hide_in_width, color = {} },
+  location = { "location", color = location_color },
+  progress = {
+    "progress",
+    fmt = function()
+      return "%P/%L"
+    end,
+    color = {},
+  },
   spaces = {
     function()
       if not vim.api.nvim_buf_get_option(0, "expandtab") then
@@ -144,7 +165,7 @@ return {
       return chars[index]
     end,
     padding = { left = 0, right = 0 },
-    color = { fg = colors.yellow, bg = colors.bg },
+    color = "SLProgress",
     cond = nil,
   },
 }

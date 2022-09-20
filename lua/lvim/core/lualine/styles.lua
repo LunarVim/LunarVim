@@ -80,7 +80,6 @@ styles.lvim = {
     },
     lualine_b = {
       components.branch,
-      components.filename,
     },
     lualine_c = {
       components.diff,
@@ -88,13 +87,12 @@ styles.lvim = {
     },
     lualine_x = {
       components.diagnostics,
-      components.treesitter,
       components.lsp,
       components.filetype,
     },
-    lualine_y = {},
+    lualine_y = { components.location },
     lualine_z = {
-      components.scrollbar,
+      components.progress,
     },
   },
   inactive_sections = {
