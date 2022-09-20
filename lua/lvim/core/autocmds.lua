@@ -33,6 +33,19 @@ function M.load_defaults()
   })
 
   vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = {
+      "alpha",
+    },
+    callback = function()
+      vim.cmd [[
+      nnoremap <silent> <buffer> q :qa<CR>
+      nnoremap <silent> <buffer> <esc> :qa<CR>
+      set nobuflisted
+    ]]
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "lir" },
     callback = function()
       vim.opt_local.number = false
