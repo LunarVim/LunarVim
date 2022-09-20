@@ -72,7 +72,7 @@ return {
       end,
     },
   },
-  document_highlight = true,
+  document_highlight = false,
   code_lens_refresh = true,
   float = {
     focusable = true,

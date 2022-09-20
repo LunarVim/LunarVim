@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   lvim.builtin.illuminate = {
-    active = false,
+    active = true,
     on_config_done = nil,
     options = {
       -- providers: provider used to get references in the buffer, ordered by priority
@@ -55,7 +55,7 @@ M.setup = function()
     return
   end
 
-  illuminate.configure { lvim.builtin.illuminate.options }
+  illuminate.configure(lvim.builtin.illuminate.options)
 
   if lvim.builtin.illuminate.on_config_done then
     lvim.builtin.illuminate.on_config_done()

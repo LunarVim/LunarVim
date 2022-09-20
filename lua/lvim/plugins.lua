@@ -15,16 +15,11 @@ local core_plugins = {
     end,
   },
   {
-    "lunarvim/tokyonight.nvim",
+    "folke/tokyonight.nvim",
     config = function()
-      pcall(function()
-        if lvim and lvim.colorscheme == "tokyonight-night" then
-          require("tokyonight-night").setup()
-          lvim.builtin.lualine.options.theme = "tokyonight-night"
-        end
-      end)
+      require("lvim.core.theme").setup()
     end,
-    disable = lvim.colorscheme ~= "tokyonight-night",
+    disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
   {
     "rcarriga/nvim-notify",
@@ -271,6 +266,19 @@ local core_plugins = {
       require("lvim.core.illuminate").setup()
     end,
     disable = not lvim.builtin.illuminate.active,
+  },
+  {
+    "lunarvim/onedarker.nvim",
+    branch = "freeze",
+    config = function()
+      pcall(function()
+        if lvim and lvim.colorscheme == "onedarker" then
+          require("onedarker").setup()
+          lvim.builtin.lualine.options.theme = "onedarker"
+        end
+      end)
+    end,
+    disable = lvim.colorscheme ~= "onedarker",
   },
 }
 

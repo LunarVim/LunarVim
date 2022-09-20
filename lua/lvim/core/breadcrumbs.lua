@@ -57,7 +57,8 @@ M.setup = function()
     return
   end
 
-  navic.setup { lvim.builtin.breadcrumbs.options }
+  M.create_winbar()
+  navic.setup(lvim.builtin.breadcrumbs.options)
 
   if lvim.builtin.breadcrumbs.on_config_done then
     lvim.builtin.breadcrumbs.on_config_done()
@@ -203,7 +204,5 @@ M.create_winbar = function()
     )
   end
 end
-
-M.create_winbar()
 
 return M

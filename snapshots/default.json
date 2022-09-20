@@ -84,7 +84,10 @@
     "commit": "2d02a56"
   },
   "tokyonight.nvim": {
-    "commit": "4bd6ba8"
+    "commit": "e0bdba5"
+  },
+  "onedarker.nvim": {
+    "commit": "b00dd21"
   },
   "packer.nvim": {
     "commit": "6afb674"
