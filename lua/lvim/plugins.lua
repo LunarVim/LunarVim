@@ -202,6 +202,15 @@ local core_plugins = {
     disable = not lvim.builtin.lualine.active,
   },
 
+  -- breadcrumbs
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("lvim.core.breadcrumbs").setup()
+    end,
+    -- disable = not lvim.builtin.breadcrumbs.active,
+  },
+
   {
     "akinsho/bufferline.nvim",
     config = function()
