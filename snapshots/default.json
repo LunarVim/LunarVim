@@ -68,6 +68,9 @@
   "nvim-lspconfig": {
     "commit": "f8b3c24"
   },
+  "nvim-navic": {
+    "commit": "202312e"
+  },
   "nvim-notify": {
     "commit": "7076ce8"
   },
@@ -83,11 +86,8 @@
   "nvim-web-devicons": {
     "commit": "2d02a56"
   },
-  "tokyonight.nvim": {
-    "commit": "e0bdba5"
-  },
   "onedarker.nvim": {
-    "commit": "b00dd21"
+    "commit": "4eaa5e8"
   },
   "packer.nvim": {
     "commit": "6afb674"
@@ -116,13 +116,13 @@
   "toggleterm.nvim": {
     "commit": "5e393e5"
   },
-  "which-key.nvim": {
-    "commit": "d5f0c63"
+  "tokyonight.nvim": {
+    "commit": "e0bdba5"
   },
   "vim-illuminate": {
     "commit": "b545262"
   },
-  "nvim-navic": {
-    "commit": "202312e"
+  "which-key.nvim": {
+    "commit": "d5f0c63"
   }
 }
