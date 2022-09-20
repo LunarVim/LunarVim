@@ -1,6 +1,7 @@
 local M = {}
 
 local tbl = require "lvim.utils.table"
+local Log = require "lvim.core.log"
 
 function M.is_client_active(name)
   local clients = vim.lsp.get_active_clients()
@@ -82,6 +83,10 @@ function M.get_all_supported_filetypes()
 end
 
 function M.setup_document_highlight(client, bufnr)
+  if lvim.builtin.illuminate.active then
+    Log:debug "skipping setup for document_highlight, illuminate already active"
+    return
+  end
   local status_ok, highlight_supported = pcall(function()
     return client.supports_method "textDocument/documentHighlight"
   end)
@@ -117,11 +122,14 @@ end
 function M.setup_document_symbols(client, bufnr)
   vim.g.navic_silence = false -- can be set to true to supress error
   local symbols_supported = client.supports_method "textDocument/documentSymbol"
-  local status_ok, navic = pcall(require, "nvim-navic")
-  if not status_ok or not symbols_supported then
+  if not symbols_supported then
+    Log:debug("skipping setup for document_symbols, method not supported by " .. client.name)
     return
   end
-  navic.attach(client, bufnr)
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if status_ok then
+    navic.attach(client, bufnr)
+  end
 end
 
 function M.setup_codelens_refresh(client, bufnr)
