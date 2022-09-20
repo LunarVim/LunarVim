@@ -60,6 +60,15 @@ function M.common_on_init(client, bufnr)
   end
 end
 
+local function attach_navic(client, bufnr)
+  vim.g.navic_silence = true
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok then
+    return
+  end
+  navic.attach(client, bufnr)
+end
+
 function M.common_on_attach(client, bufnr)
   if lvim.lsp.on_attach_callback then
     lvim.lsp.on_attach_callback(client, bufnr)
@@ -74,6 +83,7 @@ function M.common_on_attach(client, bufnr)
   end
   add_lsp_buffer_keybindings(bufnr)
   add_lsp_buffer_options(bufnr)
+  attach_navic(client, bufnr)
 end
 
 function M.get_common_opts()

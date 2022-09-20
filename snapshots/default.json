@@ -84,7 +84,7 @@
     "commit": "2d02a56"
   },
   "tokyonight.nvim": {
-    "commit": "48fc163"
+    "commit": "4bd6ba8"
   },
   "packer.nvim": {
     "commit": "6afb674"
@@ -118,5 +118,8 @@
   },
   "vim-illuminate": {
     "commit": "b545262"
+  },
+  "nvim-navic": {
+    "commit": "202312e"
   }
 }
