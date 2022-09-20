@@ -48,16 +48,15 @@ M.config = function()
       Boolean = "蘒 ",
       Object = " ",
       Package = " ",
-      Namespace = '',
-      Key = '',
-      Null = 'ﳠ',
+      Namespace = "",
+      Key = "",
+      Null = "ﳠ",
     },
     highlight = true,
     separator = " " .. ">" .. " ",
     depth_limit = 0,
     depth_limit_indicator = "..",
   }
-
 end
 
 M.winbar_filetype_exclude = {
@@ -95,7 +94,7 @@ M.get_filename = function()
 
   if not f.isempty(filename) then
     local file_icon, file_icon_color =
-    require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+      require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
 
     local hl_group = "FileIconColor" .. extension
 
@@ -126,7 +125,6 @@ local get_gps = function()
   if not gps.is_available() or gps_location == "error" then
     return ""
   end
-
 
   if not require("lvim.utils.functions").isempty(gps_location) then
     -- TODO: replace with chevron
