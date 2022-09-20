@@ -49,6 +49,13 @@ M.config = function()
       depth_limit_indicator = "..",
     },
   }
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok then
+    return
+  end
+
+  navic.setup(lvim.builtin.breadcrumbs.options)
+  M.create_winbar()
 end
 
 M.setup = function()
@@ -57,7 +64,6 @@ M.setup = function()
     return
   end
 
-  M.create_winbar()
   navic.setup(lvim.builtin.breadcrumbs.options)
 
   if lvim.builtin.breadcrumbs.on_config_done then
