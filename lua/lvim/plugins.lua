@@ -262,10 +262,10 @@ local core_plugins = {
 
   {
     "RRethy/vim-illuminate",
-    setup = function()
+    config = function()
       require("lvim.core.illuminate").setup()
     end,
-    disable = not lvim.builtin.illuminate.active,
+    -- disable = not lvim.builtin.illuminate.active,
   },
   {
     "lunarvim/onedarker.nvim",
