@@ -267,6 +267,10 @@ local core_plugins = {
 
   {
     "RRethy/vim-illuminate",
+    setup = function()
+      require("lvim.core.illuminate").setup()
+    end,
+    disable = not lvim.builtin.illuminate.active,
   },
 }
 
