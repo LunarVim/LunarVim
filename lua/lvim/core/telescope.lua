@@ -79,6 +79,9 @@ function M.config()
         --@usage don't include the filename in the search results
         only_sort_text = true,
       },
+      git_files = {
+        show_untracked = true,
+      },
     },
     extensions = {
       fzf = {
