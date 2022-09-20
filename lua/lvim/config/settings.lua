@@ -53,6 +53,7 @@ M.load_default_options = function()
     sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
     showcmd = false,
     ruler = false,
+    laststatus = 3,
   }
 
   ---  SETTINGS  ---
