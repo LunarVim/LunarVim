@@ -94,7 +94,7 @@ M.get_filename = function()
 
   if not f.isempty(filename) then
     local file_icon, file_icon_color =
-    require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+      require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
 
     local hl_group = "FileIconColor" .. extension
 
