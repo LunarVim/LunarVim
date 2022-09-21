@@ -30,4 +30,6 @@ function M.config(config)
   end
 end
 
+vim.opt.laststatus = 3
+
 return M
