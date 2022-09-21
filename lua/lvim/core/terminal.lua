@@ -39,6 +39,7 @@ M.config = function()
     -- { exec, keymap, name}
     -- lvim.builtin.terminal.execs = {{}} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
+    -- TODO: pls add mappings in which key and refactor this
     execs = {
       { "lazygit", "<leader>gg", "LazyGit", "float" },
     },
@@ -75,7 +76,7 @@ M.add_exec = function(opts)
     return
   end
 
-  vim.keymap.set({ "n", "t" }, opts.keymap, function()
+  vim.keymap.set({ "n" }, opts.keymap, function()
     M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction }
   end, { desc = opts.label, noremap = true, silent = true })
 end
