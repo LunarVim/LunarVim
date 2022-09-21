@@ -267,6 +267,15 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.illuminate.active,
   },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("lvim.core.indent-blankline").setup()
+    end,
+    disable = not lvim.builtin.indentlines.active,
+  },
+
   {
     "lunarvim/onedarker.nvim",
     branch = "freeze",
