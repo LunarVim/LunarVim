@@ -122,6 +122,7 @@ function M.config()
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
+    pickers = pickers,
     extensions = {
       fzf = {
         fuzzy = true, -- false will only do exact matching
