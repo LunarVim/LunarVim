@@ -154,7 +154,7 @@ return {
     color = {},
     cond = conditions.hide_in_width,
   },
-  filetype = { "filetype", cond = conditions.hide_in_width, padding = { left = 0, right = 1 } },
+  filetype = { "filetype", cond = conditions.hide_in_width, padding = { left = 1, right = 2 } },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."
