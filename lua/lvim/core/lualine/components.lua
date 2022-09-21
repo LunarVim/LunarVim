@@ -22,10 +22,18 @@ vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.backgr
 
 local location_color = nil
 local branch = ""
+local separator = "│"
 
 if lvim.colorscheme == "tokyonight" then
   location_color = "SLBranchName"
   branch = "%#SLGitIcon#" .. "" .. "%*" .. "%#SLBranchName#"
+
+  local status_ok, tnc = pcall(require, "tokyonight.colors")
+  if status_ok then
+    local tncolors = tnc.setup { transform = true }
+    vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
+    separator = "%#SLSeparator#" .. "│" .. "%*"
+  end
 end
 
 return {
@@ -124,6 +132,7 @@ return {
       local unique_client_names = vim.fn.uniq(buf_client_names)
       return "[" .. table.concat(unique_client_names, ", ") .. "]"
     end,
+    separator = separator,
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
@@ -135,19 +144,14 @@ return {
     end,
     color = {},
   },
+
   spaces = {
     function()
-      if not vim.api.nvim_buf_get_option(0, "expandtab") then
-        return "Tab size: " .. vim.api.nvim_buf_get_option(0, "tabstop") .. " "
-      end
-      local size = vim.api.nvim_buf_get_option(0, "shiftwidth")
-      if size == 0 then
-        size = vim.api.nvim_buf_get_option(0, "tabstop")
-      end
-      return "Spaces: " .. size .. " "
+      local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
+      return " " .. shiftwidth
     end,
-    cond = conditions.hide_in_width,
-    color = {},
+    separator = separator,
+    padding = 1,
   },
   encoding = {
     "o:encoding",
@@ -155,7 +159,7 @@ return {
     color = {},
     cond = conditions.hide_in_width,
   },
-  filetype = { "filetype", cond = conditions.hide_in_width, padding = { left = 1, right = 2 } },
+  filetype = { "filetype", cond = nil, padding = { left = 1, right = 1 } },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."

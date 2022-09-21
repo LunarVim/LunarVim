@@ -90,6 +90,7 @@ styles.lvim = {
     lualine_x = {
       components.diagnostics,
       components.lsp,
+      components.spaces,
       components.filetype,
     },
     lualine_y = { components.location },
