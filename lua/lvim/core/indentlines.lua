@@ -33,7 +33,7 @@ M.setup = function()
     return
   end
 
-  indent_blankline.configure(lvim.builtin.indentlines.options)
+  indent_blankline.setup(lvim.builtin.indentlines.options)
 
   if lvim.builtin.indentlines.on_config_done then
     lvim.builtin.indentlines.on_config_done()

@@ -4,6 +4,11 @@ M.config = function()
   lvim.builtin.theme = {
     name = "tokyonight",
     options = {
+      on_highlights = function(hl, c)
+        hl.IndentBlanklineContextChar = {
+          fg = c.dark5,
+        }
+      end,
       style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
       transparent = lvim.transparent_window, -- Enable this to disable setting the background color
       terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim

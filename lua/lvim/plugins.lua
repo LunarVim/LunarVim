@@ -271,7 +271,7 @@ local core_plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("lvim.core.indent-blankline").setup()
+      require("lvim.core.indentlines").setup()
     end,
     disable = not lvim.builtin.indentlines.active,
   },
