@@ -23,7 +23,7 @@ vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.backgr
 local location_color = nil
 local branch = ""
 
-if lvim.colorscheme == "tokyonight-night" then
+if lvim.colorscheme == "tokyonight" then
   location_color = "SLBranchName"
   branch = "%#SLGitIcon#" .. "" .. "%*" .. "%#SLBranchName#"
 end
