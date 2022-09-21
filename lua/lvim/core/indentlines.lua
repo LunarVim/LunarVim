@@ -10,7 +10,7 @@ M.config = function()
     "neogitstatus",
     "NvimTree",
     "Trouble",
-    "text"
+    "text",
   }
   vim.g.indentLine_enabled = 1
   vim.g.indent_blankline_char = "▏"
@@ -23,12 +23,11 @@ M.config = function()
     on_config_done = nil,
     options = {
       show_current_context = true,
-    }
+    },
   }
 end
 
 M.setup = function()
-
   local status_ok, indent_blankline = pcall(require, "indent_blankline")
   if not status_ok then
     return
