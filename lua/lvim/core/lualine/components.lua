@@ -50,7 +50,8 @@ return {
   diff = {
     "diff",
     source = diff_source,
-    symbols = { added = "  ", modified = " ", removed = " " },
+    symbols = { added = " ", modified = " ", removed = " " },
+    padding = { left = 2, right = 1 },
     diff_color = {
       added = { fg = colors.green },
       modified = { fg = colors.yellow },
