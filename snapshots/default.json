@@ -124,5 +124,8 @@
   },
   "which-key.nvim": {
     "commit": "d5f0c63"
+  },
+  "indent-blankline.nvim": {
+    "commit": "db7cbcb"
   }
 }
