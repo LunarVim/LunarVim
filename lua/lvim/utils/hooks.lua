@@ -19,7 +19,7 @@ function M.run_on_packer_complete()
   pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
 
   if M._reload_triggered then
-    Log:info "Reloaded configuration"
+    Log:debug "Reloaded configuration"
     M._reload_triggered = nil
   end
 end
