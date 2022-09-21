@@ -40,6 +40,12 @@ M.config = function()
       use_background = true, -- can be light/dark/auto. When auto, background will be set to vim.o.background
     },
   }
+  local status_ok, theme = pcall(require, "tokyonight")
+  if not status_ok then
+    return
+  end
+
+  theme.setup(lvim.builtin.theme.options)
 end
 
 M.setup = function()
