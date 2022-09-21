@@ -109,7 +109,7 @@ function M.get_sections()
       { "n", "  New File", "<CMD>ene!<CR>" },
       { "p", "  Projects ", "<CMD>Telescope projects<CR>" },
       { "r", "  Recent Files", "<CMD>Telescope oldfiles<CR>" },
-      { "t", "  Find Word", "<CMD>Telescope live_grep<CR>" },
+      { "t", "  Find Text", "<CMD>Telescope live_grep<CR>" },
       {
         "c",
         "  Configuration",
