@@ -56,11 +56,13 @@ function M.config()
           ["<C-k>"] = actions.cycle_history_prev,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           ["<CR>"] = actions.select_default,
+          ["<C-d>"] = require("telescope.actions").delete_buffer,
         },
         n = {
           ["<C-n>"] = actions.move_selection_next,
           ["<C-p>"] = actions.move_selection_previous,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["dd"] = require("telescope.actions").delete_buffer,
         },
       },
       file_ignore_patterns = {},
