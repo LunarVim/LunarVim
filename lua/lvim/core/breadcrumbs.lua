@@ -70,6 +70,7 @@ M.winbar_filetype_exclude = {
   "startify",
   "dashboard",
   "packer",
+  "neo-tree",
   "neogitstatus",
   "NvimTree",
   "Trouble",
@@ -141,7 +142,6 @@ end
 
 local excludes = function()
   if vim.tbl_contains(M.winbar_filetype_exclude, vim.bo.filetype) then
-    vim.opt_local.winbar = nil
     return true
   end
   return false

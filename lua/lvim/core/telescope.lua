@@ -163,7 +163,6 @@ function M.setup()
         ["dd"] = require("telescope.actions").delete_buffer,
       },
     },
-    pickers = pickers,
   }, lvim.builtin.telescope)
 
   local telescope = require "telescope"
