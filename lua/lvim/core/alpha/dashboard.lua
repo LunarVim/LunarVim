@@ -102,25 +102,26 @@ function M.get_sections()
       hl = "Number",
     },
   }
+  local buttons = {}
 
-  local dashboard = require "alpha.themes.dashboard"
-
-  local function button(sc, txt, keybind, keybind_opts)
-    local b = dashboard.button(sc, txt, keybind, keybind_opts)
-    b.opts.hl_shortcut = "Macro"
-    return b
+  local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
+  if status_ok then
+    local function button(sc, txt, keybind, keybind_opts)
+      local b = dashboard.button(sc, txt, keybind, keybind_opts)
+      b.opts.hl_shortcut = "Macro"
+      return b
+    end
+    buttons = {
+      val = {
+        button("f", "  Find File", "<CMD>Telescope find_files<CR>"),
+        button("n", "  New File", "<CMD>ene!<CR>"),
+        button("p", "  Projects ", "<CMD>Telescope projects<CR>"),
+        button("r", " Recent files", ":Telescope oldfiles <CR>"),
+        button("t", "  Find Text", "<CMD>Telescope live_grep<CR>"),
+        button("c", "  Configuration", "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"),
+      },
+    }
   end
-
-  local buttons = {
-    val = {
-      button("f", "  Find File", "<CMD>Telescope find_files<CR>"),
-      button("n", "  New File", "<CMD>ene!<CR>"),
-      button("p", "  Projects ", "<CMD>Telescope projects<CR>"),
-      button("r", " Recent files", ":Telescope oldfiles <CR>"),
-      button("t", "  Find Text", "<CMD>Telescope live_grep<CR>"),
-      button("c", "  Configuration", "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"),
-    },
-  }
 
   return {
     header = header,
