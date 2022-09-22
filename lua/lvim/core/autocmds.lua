@@ -53,6 +53,14 @@ function M.load_defaults()
     end,
   })
 
+  -- TODO: figure out what keeps overriding laststatus
+  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+    pattern = { "*" },
+    callback = function()
+      vim.opt.laststatus = 3
+    end,
+  })
+
   local definitions = {
     {
       "TextYankPost",
