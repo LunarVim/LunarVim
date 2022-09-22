@@ -75,7 +75,7 @@ styles.lvim = {
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "alpha", "NvimTree", "Outline" },
+    disabled_filetypes = { "alpha" },
   },
   sections = {
     lualine_a = {
@@ -122,7 +122,7 @@ styles.lvim = {
     },
   },
   tabline = {},
-  extensions = { "nvim-tree" },
+  extensions = {},
 }
 
 function M.get_style(style)
