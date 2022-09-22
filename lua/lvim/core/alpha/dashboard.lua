@@ -116,7 +116,7 @@ function M.get_sections()
         button("f", "  Find File", "<CMD>Telescope find_files<CR>"),
         button("n", "  New File", "<CMD>ene!<CR>"),
         button("p", "  Projects ", "<CMD>Telescope projects<CR>"),
-        button("r", " Recent files", ":Telescope oldfiles <CR>"),
+        button("r", "  Recent files", ":Telescope oldfiles <CR>"),
         button("t", "  Find Text", "<CMD>Telescope live_grep<CR>"),
         button("c", "  Configuration", "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"),
       },
