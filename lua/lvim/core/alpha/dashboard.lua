@@ -103,18 +103,22 @@ function M.get_sections()
     },
   }
 
+  local dashboard = require "alpha.themes.dashboard"
+
+  local function button(sc, txt, keybind, keybind_opts)
+    local b = dashboard.button(sc, txt, keybind, keybind_opts)
+    b.opts.hl_shortcut = "Macro"
+    return b
+  end
+
   local buttons = {
-    entries = {
-      { "f", "  Find File", "<CMD>Telescope find_files<CR>" },
-      { "n", "  New File", "<CMD>ene!<CR>" },
-      { "p", "  Projects ", "<CMD>Telescope projects<CR>" },
-      { "r", "  Recent Files", "<CMD>Telescope oldfiles<CR>" },
-      { "t", "  Find Text", "<CMD>Telescope live_grep<CR>" },
-      {
-        "c",
-        "  Configuration",
-        "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>",
-      },
+    val = {
+      button("f", "  Find File", "<CMD>Telescope find_files<CR>"),
+      button("n", "  New File", "<CMD>ene!<CR>"),
+      button("p", "  Projects ", "<CMD>Telescope projects<CR>"),
+      button("r", " Recent files", ":Telescope oldfiles <CR>"),
+      button("t", "  Find Text", "<CMD>Telescope live_grep<CR>"),
+      button("c", "  Configuration", "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"),
     },
   }
 
