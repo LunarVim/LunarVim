@@ -113,13 +113,14 @@ function plugin_loader.load(configurations)
     Log:trace(debug.traceback())
   end
 
-  -- colorscheme must get called after plugins are loaded or it will break new installs.
-  vim.g.colors_name = lvim.colorscheme
-  local set_colorscheme_ok, _ = pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
-
-  if not set_colorscheme_ok then
-    Log:warn(string.format("problem detected: could not find '%s' colorscheme", lvim.colorscheme))
+  -- ref: https://github.com/neovim/neovim/issues/18201#issuecomment-1104754564
+  local colors = vim.api.nvim_get_runtime_file(("colors/%s*"):format(lvim.colorscheme), false)
+  if #colors == 0 then
+    Log:warn(string.format("Could not find '%s' colorscheme", lvim.colorscheme))
+    return
   end
+  vim.g.colors_name = lvim.colorscheme
+  vim.cmd("colorscheme " .. lvim.colorscheme)
 end
 
 function plugin_loader.get_core_plugins()
