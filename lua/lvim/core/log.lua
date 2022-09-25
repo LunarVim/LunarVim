@@ -145,8 +145,9 @@ function Log:configure_notifications(notif_handle)
 end
 
 --- Adds a log entry using Plenary.log
+---@param level integer [same as vim.log.levels]
 ---@param msg any
----@param level string [same as vim.log.log_levels]
+---@param event any
 function Log:add_entry(level, msg, event)
   local logger = self:get_logger()
   if not logger then
