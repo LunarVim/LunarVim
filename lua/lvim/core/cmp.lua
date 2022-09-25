@@ -247,7 +247,8 @@ M.config = function()
         elseif jumpable(1) then
           luasnip.jump(1)
         elseif has_words_before() then
-          cmp.complete()
+          -- cmp.complete()
+          fallback()
         else
           fallback()
         end
