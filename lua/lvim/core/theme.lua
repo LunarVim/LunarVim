@@ -8,7 +8,13 @@ M.config = function()
         hl.IndentBlanklineContextChar = {
           fg = c.dark5,
         }
-        local prompt = "#2d3149"
+        hl.TSConstructor = {
+          fg = c.blue1,
+        }
+        hl.TSTagDelimiter = {
+          fg = c.dark5,
+        }
+        -- local prompt = "#2d3149"
         -- hl.TelescopeNormal = {
         --   bg = c.bg_dark,
         --   fg = c.fg_dark,
