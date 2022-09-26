@@ -1,30 +1,41 @@
+# Website
 
-# [LunarVim.org](https://www.lunarvim.org/)
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-Website for [LunarVim](https://github.com/lunarvim/LunarVim)
-
-## Run this site locally
-
-- Clone the repo:
+### Installation
 
 ```
-git clone https://github.com/LunarVim/lunarvim.org.git
+$ yarn
 ```
 
-- Install:
+### Local Development
 
 ```
-cd lunarvim.org && npm install
+$ yarn start
 ```
 
-- Start the server:
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
 
 ```
-npm run docs:dev
+$ yarn build
 ```
 
-- Run the site in your browser:
- 
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+Using SSH:
+
 ```
-http://localhost:8080/
+$ USE_SSH=true yarn deploy
 ```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

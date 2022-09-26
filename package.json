@@ -1,31 +1,43 @@
 {
-  "name": "LunarVim.com",
-  "version": "1.0.0",
-  "description": "LunarVim an IDE layer for Neovim",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "name": "lunarvim",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
   },
-  "keywords": [
-    "lunarvim",
-    "neovim",
-    "vim",
-    "ide",
-    "chrisatmachine",
-    "christian chiarulli"
-  ],
-  "author": "Christian Chiarulli",
-  "license": "ISC",
   "dependencies": {
-    "@vuepress/plugin-search": "^2.0.0-beta.35",
-    "vuepress": "^2.0.0-beta.35",
-    "webpack": "^5.0.0"
+    "@docusaurus/core": "2.1.0",
+    "@docusaurus/preset-classic": "2.1.0",
+    "@mdx-js/react": "^1.6.22",
+    "clsx": "^1.2.1",
+    "prism-react-renderer": "^1.3.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "prettier": "^2.6.1"
+    "@docusaurus/module-type-aliases": "2.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.14"
   }
 }
