@@ -22,6 +22,7 @@ local skipped_servers = {
   "reason_ls",
   "scry",
   "solang",
+  "solc",
   "solidity_ls",
   "sorbet",
   "sourcekit",
