@@ -92,7 +92,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = "all"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- Disable virtual text
