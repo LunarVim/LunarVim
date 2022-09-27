@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Autocommands
 
 To set up autocommands use the native nvim api `vim.api.nvim_create_autocmd`, or use the helper Lunarvim table `lvim.autocommands` which will be passed to [define_autocmds()](https://github.com/LunarVim/lunarvim/blob/3475f7675d8928b49c85878dfc2912407de57342/lua/lvim/core/autocmds.lua#L177) automatically.

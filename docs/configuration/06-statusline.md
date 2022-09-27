@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Statusline
 
 LunarVim uses `lualine` as a default statusline.

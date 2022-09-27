@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # General Settings
 
 To set options use

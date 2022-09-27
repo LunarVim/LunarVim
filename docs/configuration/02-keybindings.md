@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Keybindings
 
 ## General Bindings
