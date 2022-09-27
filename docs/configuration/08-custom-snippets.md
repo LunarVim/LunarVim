@@ -1,6 +1,5 @@
 ---
 sidebar_position: 8
-title: Custom snippets
 ---
 
 # Custom snippets

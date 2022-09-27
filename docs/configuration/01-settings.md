@@ -1,6 +1,5 @@
 ---
 sidebar_position: 1
-title: General Settings
 ---
 
 # General Settings

@@ -1,6 +1,5 @@
 ---
 sidebar_position: 5
-title: Auto Commands
 ---
 
 # Autocommands

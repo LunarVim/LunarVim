@@ -1,6 +1,5 @@
 ---
 sidebar_position: 7
-title: FTPlugin (filetype plugin)
 ---
 
 # FTPlugin (filetype plugin)
