@@ -32,35 +32,6 @@ function M.load_defaults()
     end,
   })
 
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = {
-      "alpha",
-    },
-    callback = function()
-      vim.cmd [[
-      nnoremap <silent> <buffer> q :qa<CR>
-      nnoremap <silent> <buffer> <esc> :qa<CR>
-      set nobuflisted
-    ]]
-    end,
-  })
-
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "lir" },
-    callback = function()
-      vim.opt_local.number = false
-      vim.opt_local.relativenumber = false
-    end,
-  })
-
-  -- TODO: figure out what keeps overriding laststatus
-  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    pattern = { "*" },
-    callback = function()
-      vim.opt.laststatus = 3
-    end,
-  })
-
   local definitions = {
     {
       "TextYankPost",
@@ -122,6 +93,42 @@ function M.load_defaults()
         group = "_auto_resize",
         pattern = "*",
         command = "tabdo wincmd =",
+      },
+    },
+    {
+      "FileType",
+      {
+        group = "_filetype_settings",
+        pattern = "alpha",
+        callback = function()
+          vim.cmd [[
+            nnoremap <silent> <buffer> q :qa<CR>
+            nnoremap <silent> <buffer> <esc> :qa<CR>
+            set nobuflisted
+          ]]
+        end,
+      },
+    },
+    {
+      "FileType",
+      {
+        group = "_filetype_settings",
+        pattern = "lir",
+        callback = function()
+          vim.opt_local.number = false
+          vim.opt_local.relativenumber = false
+        end,
+      },
+    },
+    -- TODO: figure out what keeps overriding laststatus
+    {
+      "BufWinEnter",
+      {
+        group = "_last_status",
+        pattern = "*",
+        callback = function()
+          vim.opt.laststatus = 3
+        end,
       },
     },
   }
