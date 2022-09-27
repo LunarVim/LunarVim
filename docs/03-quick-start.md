@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Quick start
 
 After installing you should be able to start LunarVim with the `lvim` command.
