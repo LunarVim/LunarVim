@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-<img src="https://www.lunarvim.org/assets/lunarvim_logo.png" alt="LunarVim Logo" />
+<img src="/img/lunarvim_logo.png" alt="LunarVim Logo" />
 
 # Introduction
 
