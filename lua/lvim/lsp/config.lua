@@ -133,7 +133,9 @@ return {
     },
   },
   null_ls = {
-    setup = {},
+    setup = {
+      debug = false,
+    },
     config = {},
   },
   ---@deprecated use lvim.lsp.automatic_configuration.skipped_servers instead
