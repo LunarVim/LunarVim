@@ -71,7 +71,7 @@ _G.load_config = function()
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
     vim.keymap.set("n", "<space>li", "<cmd>LspInfo<CR>", opts)
-    vim.keymap.set("n", "<space>lI", "<cmd>MasonCR>", opts)
+    vim.keymap.set("n", "<space>lI", "<cmd>Mason<CR>", opts)
   end
 
   -- Add the server that troubles you here, e.g. "clangd", "pyright", "tsserver"
