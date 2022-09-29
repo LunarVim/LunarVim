@@ -7,7 +7,6 @@ M.config = function()
     -- size can be a number or function which is passed the current terminal
     size = 20,
     open_mapping = [[<c-\>]],
-    -- open_mapping = [[<c-t>]],
     hide_numbers = true, -- hide the number column in toggleterm buffers
     shade_filetypes = {},
     shade_terminals = true,
@@ -41,7 +40,9 @@ M.config = function()
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     -- TODO: pls add mappings in which key and refactor this
     execs = {
-      { "lazygit", "<leader>gg", "LazyGit", "float" },
+      { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", 10 },
+      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", 60 },
+      { vim.o.shell, "<M-3>", "Float Terminal", "float", nil },
     },
   }
 end
@@ -58,7 +59,7 @@ M.setup = function()
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
       count = i + 100,
       direction = exec[4] or lvim.builtin.terminal.direction,
-      size = lvim.builtin.terminal.size,
+      size = exec[5] or lvim.builtin.terminal.size,
     }
 
     M.add_exec(opts)
@@ -76,15 +77,15 @@ M.add_exec = function(opts)
     return
   end
 
-  vim.keymap.set({ "n" }, opts.keymap, function()
-    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction }
+  vim.keymap.set({ "n", "t" }, opts.keymap, function()
+    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size }
   end, { desc = opts.label, noremap = true, silent = true })
 end
 
 M._exec_toggle = function(opts)
   local Terminal = require("toggleterm.terminal").Terminal
   local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
-  term:toggle(lvim.builtin.terminal.size, opts.direction)
+  term:toggle(opts.size, opts.direction)
 end
 
 ---Toggles a log viewer according to log.viewer.layout_config
@@ -108,6 +109,26 @@ M.toggle_log_view = function(logfile)
   local Terminal = require("toggleterm.terminal").Terminal
   local log_view = Terminal:new(term_opts)
   log_view:toggle()
+end
+
+M.lazygit_toggle = function()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local lazygit = Terminal:new {
+    cmd = "lazygit",
+    hidden = true,
+    direction = "float",
+    float_opts = {
+      border = "none",
+      width = 100000,
+      height = 100000,
+    },
+    on_open = function(_)
+      vim.cmd "startinsert!"
+    end,
+    on_close = function(_) end,
+    count = 99,
+  }
+  lazygit:toggle()
 end
 
 return M
