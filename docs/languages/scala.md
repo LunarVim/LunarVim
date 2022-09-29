@@ -48,9 +48,10 @@ lvim.plugins = {
     },
 }
 
-lvim.autocommands.custom_groups = {
-  { "FileType", "scala,sbt", "lua require('user.metals').config()" }
-}
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.scala", "*.sbt", "*.sc" },
+  callback = function() require('user.metals').config() end,
+})
 ```
 
 ## Supported formatters
