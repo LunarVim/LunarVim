@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/lunarvim_icon.png',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -60,7 +60,7 @@ const config = {
         title: 'LunarVim',
         logo: {
           alt: 'LunarVim Logo',
-          src: 'img/logo.svg',
+		  src: 'img/lunarvim_icon.png',
         },
         items: [
           {
