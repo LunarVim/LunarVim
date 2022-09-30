@@ -1,5 +1,6 @@
 local M = {}
 local Log = require "lvim.core.log"
+local Functions = require "lvim.utils.functions"
 
 M.config = function()
   lvim.builtin["terminal"] = {
@@ -40,8 +41,8 @@ M.config = function()
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     -- TODO: pls add mappings in which key and refactor this
     execs = {
-      { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", 10 },
-      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", 60 },
+      { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", nil },
+      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", nil },
       { vim.o.shell, "<M-3>", "Float Terminal", "float", nil },
     },
   }
@@ -52,6 +53,20 @@ M.setup = function()
   terminal.setup(lvim.builtin.terminal)
 
   for i, exec in pairs(lvim.builtin.terminal.execs) do
+
+    local function get_term_size()
+      local direction = exec[4]
+      if direction == "float" then return lvim.builtin.terminal.size end
+      local size = lvim.terminal_split_size[direction]
+      if size.unit == "percent" then
+        local buf_sizes = Functions.get_buf_size()
+        local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
+        return buf_size * size.amount / 100
+      else
+        return lvim.terminal_split_size[direction].amount
+      end
+    end
+
     local opts = {
       cmd = exec[1],
       keymap = exec[2],
@@ -59,7 +74,7 @@ M.setup = function()
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
       count = i + 100,
       direction = exec[4] or lvim.builtin.terminal.direction,
-      size = exec[5] or lvim.builtin.terminal.size,
+      size = get_term_size,
     }
 
     M.add_exec(opts)
@@ -78,7 +93,7 @@ M.add_exec = function(opts)
   end
 
   vim.keymap.set({ "n", "t" }, opts.keymap, function()
-    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size }
+    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() }
   end, { desc = opts.label, noremap = true, silent = true })
 end
 
