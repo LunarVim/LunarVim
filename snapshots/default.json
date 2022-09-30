@@ -2,9 +2,6 @@
   "Comment.nvim": {
     "commit": "0860b5f"
   },
-  "FixCursorHold.nvim": {
-    "commit": "70a9516"
-  },
   "LuaSnip": {
     "commit": "d36c063"
   },
