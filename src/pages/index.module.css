@@ -4,7 +4,7 @@
  */
 
 .heroBanner {
-  padding: 4rem 0 calc(4rem + 100px);
+  padding: 2rem 0 calc(2rem + 100px);
   position: relative;
   background-color: var(--primary-bg);
   color: var(--primary-fg);
@@ -28,6 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   gap: 2rem;
 }
 
@@ -43,20 +44,33 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem 0 calc(2rem + 100px);
-  }
-  .heroBanner > .container {
-    flex-direction: column;
-  }
+  max-width: 500px;
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.buttons > * {
+  width: 100%;
+}
+
+@media screen and (min-width: 996px) {
+  .heroBanner {
+    padding: 4rem 0 calc(4rem + 100px);
+  }
+  .buttons,
+  .heroBanner > .container {
+    flex-direction: row;
+  }
+  .buttons > * {
+    width: auto;
+  }
+  .heroImage > img {
+    max-width: max-content;
+  }
 }
