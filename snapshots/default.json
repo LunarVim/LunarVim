@@ -1,12 +1,12 @@
 {
   "Comment.nvim": {
-    "commit": "0860b5f"
+    "commit": "d9cfae1"
   },
   "FixCursorHold.nvim": {
     "commit": "70a9516"
   },
   "LuaSnip": {
-    "commit": "d36c063"
+    "commit": "8f8d493"
   },
   "alpha-nvim": {
     "commit": "0bb6fc0"
@@ -42,7 +42,7 @@
     "commit": "7d8c6c4"
   },
   "lua-dev.nvim": {
-    "commit": "9da602d"
+    "commit": "ef1d211"
   },
   "lualine.nvim": {
     "commit": "a52f078"
@@ -51,13 +51,13 @@
     "commit": "0051870"
   },
   "mason.nvim": {
-    "commit": "b36bdad"
+    "commit": "a3a243c"
   },
   "nlsp-settings.nvim": {
-    "commit": "65d6c1d"
+    "commit": "aabd318"
   },
   "null-ls.nvim": {
-    "commit": "8af89c5"
+    "commit": "c862432"
   },
   "nvim-autopairs": {
     "commit": "14cc2a4"
@@ -66,10 +66,10 @@
     "commit": "2427d06"
   },
   "nvim-dap": {
-    "commit": "764899d"
+    "commit": "5d57c40"
   },
   "nvim-lspconfig": {
-    "commit": "dc4dac8"
+    "commit": "af43c30"
   },
   "nvim-navic": {
     "commit": "e0cfb25"
@@ -78,16 +78,16 @@
     "commit": "142069b"
   },
   "nvim-tree.lua": {
-    "commit": "9914780"
+    "commit": "45d386a"
   },
   "nvim-treesitter": {
-    "commit": "aa736f5"
+    "commit": "aebc6cf"
   },
   "nvim-ts-context-commentstring": {
     "commit": "4d3a68c"
   },
   "nvim-web-devicons": {
-    "commit": "9697285"
+    "commit": "563f363"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -105,7 +105,7 @@
     "commit": "628de7e"
   },
   "schemastore.nvim": {
-    "commit": "b11510e"
+    "commit": "33873c7"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
@@ -120,7 +120,7 @@
     "commit": "2a787c4"
   },
   "tokyonight.nvim": {
-    "commit": "c0e7573"
+    "commit": "4092905"
   },
   "vim-illuminate": {
     "commit": "a2e8476"
