@@ -4,20 +4,59 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+  padding: 4rem 0 calc(4rem + 100px);
   position: relative;
-  overflow: hidden;
+  background-color: var(--primary-bg);
+  color: var(--primary-fg);
+  min-height: 60vh;
+}
+
+.heroBanner::after {
+	content: "";
+  background-image: url("/static/img/clouds.png");
+  background-position: center bottom;
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 100px;
+  background-size: contain;
+  background-repeat: repeat-x;
+  z-index: 1;
+}
+
+.heroBanner > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.heroContent {
+  flex: .45;
+}
+
+.heroImage {
+  flex: .55;
+}
+
+.heroImage > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 2rem 0 calc(2rem + 100px);
+  }
+  .heroBanner > .container {
+    flex-direction: column;
   }
 }
 
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 1rem;
 }

@@ -53,6 +53,21 @@ const config = {
     ],
   ],
 
+  customFields: {
+    primaryCTA: {
+      text: "Install",
+      to: "/docs/installation",
+    },
+    secondaryCTA: {
+      text:"Support" ,
+      to: "/docs/sponsors/donate",
+    },
+    heroImage: {
+      url: "/img/lunarvim_logo.png",
+      alt: "LunarVim Logo",
+    },
+  },
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -83,5 +98,7 @@ const config = {
       },
     }),
 };
+
+
 
 module.exports = config;
