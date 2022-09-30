@@ -11,9 +11,17 @@
   min-height: 60vh;
 }
 
+html[data-theme="light"] {
+  --clouds: url("/img/lunarvim_logo.png");
+}
+html[data-theme="dark"] {
+  --clouds: url("/img/clouds.png");
+}
+
+
 .heroBanner::after {
-	content: "";
-  background-image: url("/static/img/clouds.png");
+  content: "";
+	background-image: var(--clouds);
   background-position: center bottom;
   position: absolute;
   inset: auto 0 0 0;

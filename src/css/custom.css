@@ -7,6 +7,7 @@
 /* You can override the default Infima variables here. */
 :root {
   --ifm-code-font-size: 95%;
+  --ifm-button-border-color: var(--ifm-color-primary);
 }
 
 html[data-theme="light"] {
@@ -77,5 +78,6 @@ html[data-theme="dark"] {
   --ifm-color-primary-light: #d4bffa;
   --ifm-color-primary-lighter: #e1d2fb;
   --ifm-color-primary-lightest: #ffffff;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }

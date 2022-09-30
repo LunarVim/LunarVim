@@ -23,7 +23,7 @@ function HomepageHeader() {
             </Link>
             {siteConfig.customFields.secondaryCTA ? (
               <Link
-                className="button button--secondary button--lg"
+                className="button button--outline button--lg"
                 to={siteConfig.customFields.secondaryCTA.to}
               >
                 {siteConfig.customFields.secondaryCTA.text}

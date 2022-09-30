@@ -58,6 +58,7 @@ const config = {
       text: "Install",
       to: "/docs/installation",
     },
+   // secondaryCTA optional
     secondaryCTA: {
       text:"Support" ,
       to: "/docs/sponsors/donate",
@@ -75,7 +76,7 @@ const config = {
         title: 'LunarVim',
         logo: {
           alt: 'LunarVim Logo',
-		  src: 'img/lunarvim_icon.png',
+          src: 'img/lunarvim_icon.png',
         },
         items: [
           {
