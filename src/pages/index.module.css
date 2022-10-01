@@ -38,11 +38,12 @@ html[data-theme="dark"] {
   justify-content: space-between;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .heroContent {
   flex: .45;
-  background-color: var(--primary-bg);
 }
 
 .heroImage {

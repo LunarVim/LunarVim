@@ -44,14 +44,19 @@
 @keyframes tail {
   0% {
     width: 0;
+    opacity: 0;
   }
 
   30% {
-    width: 100px;
+    width: 150px;
+    opacity: .75;
   }
-
+  70% {
+    opacity: .75;
+  }
   100% {
     width: 0;
+    opacity: 0;
   }
 }
 
@@ -59,8 +64,7 @@
   0% {
     transform: translate(0) rotate(45deg);
   }
-
   100% {
-    transform: translate(500px, 500px) rotate(45deg);
+    transform: translate(300px, 300px) rotate(45deg);
   }
 }

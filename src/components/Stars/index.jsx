@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 const STAR_SIZES = [1, 1, 2, 3, 4]; // in px
 const STARS_COUNT = 75;
-const FALLING_STARS_COUNT = 5;
+const FALLING_STARS_COUNT = 3;
 
 //get random number between min and max
 const randomNumber = (min, max) => {
@@ -40,7 +40,7 @@ const Stars = ({ children }) => (
         className={styles.fallingStar}
         style={{
           top: `${randomNumber(0, 30)}%`,
-          left: `${randomNumber(20, 90)}%`,
+          left: `${randomNumber(0, 70)}%`,
           animationDelay: `${randomNumber(0, 10)}s`,
           animationDuration: `${randomNumber(3, 10)}s`,
         }}
