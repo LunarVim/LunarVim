@@ -21,25 +21,25 @@ vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorl
 vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.background })
 
 local location_color = nil
-local branch = ""
-local separator = "│"
+local branch = lvim.icons.git.Branch
+local separator = lvim.icons.ui.LineMiddle
 
 if lvim.colorscheme == "tokyonight" then
   location_color = "SLBranchName"
-  branch = "%#SLGitIcon#" .. "" .. "%*" .. "%#SLBranchName#"
+  branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
 
   local status_ok, tnc = pcall(require, "tokyonight.colors")
   if status_ok then
     local tncolors = tnc.setup { transform = true }
     vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
-    separator = "%#SLSeparator#" .. "│" .. "%*"
+    separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
   end
 end
 
 return {
   mode = {
     function()
-      return "  "
+      return " " .. lvim.icons.ui.Target .. " "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -58,7 +58,11 @@ return {
   diff = {
     "diff",
     source = diff_source,
-    symbols = { added = " ", modified = " ", removed = " " },
+    symbols = {
+      added = lvim.icons.git.LineAdded .. " ",
+      modified = lvim.icons.git.LineModified .. " ",
+      removed = lvim.icons.git.LineRemoved .. " ",
+    },
     padding = { left = 2, right = 1 },
     diff_color = {
       added = { fg = colors.green },
@@ -73,7 +77,9 @@ return {
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV" or os.getenv "VIRTUAL_ENV"
         if venv then
-          return string.format("  (%s)", utils.env_cleanup(venv))
+          local icons = require "nvim-web-devicons"
+          local py_icon, _ = icons.get_icon ".py"
+          return string.format(" " .. py_icon .. " (%s)", utils.env_cleanup(venv))
         end
       end
       return ""
@@ -84,12 +90,17 @@ return {
   diagnostics = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
-    symbols = { error = " ", warn = " ", info = " ", hint = " " },
+    symbols = {
+      error = lvim.icons.diagnostics.BoldError .. " ",
+      warn = lvim.icons.diagnostics.BoldWarning .. " ",
+      info = lvim.icons.diagnostics.BoldInformation .. " ",
+      hint = lvim.icons.diagnostics.BoldHint .. " ",
+    },
     -- cond = conditions.hide_in_width,
   },
   treesitter = {
     function()
-      return ""
+      return lvim.icons.ui.Tree
     end,
     color = function()
       local buf = vim.api.nvim_get_current_buf()
@@ -148,7 +159,7 @@ return {
   spaces = {
     function()
       local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
-      return " " .. shiftwidth
+      return lvim.icons.ui.Tab .. " " .. shiftwidth
     end,
     separator = separator,
     padding = 1,

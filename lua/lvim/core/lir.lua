@@ -85,7 +85,7 @@ M.config = function()
   -- custom folder icon
   reload("nvim-web-devicons").set_icon {
     lir_folder_icon = {
-      icon = "",
+      icon = lvim.icons.ui.Folder,
       color = "#42A5F5",
       name = "LirFolderNode",
     },
