@@ -12,10 +12,10 @@
 }
 
 html[data-theme="light"] {
-  --clouds: url("/img/cloudsdark.png");
+  --clouds: url("/img/cloudsdark.avif");
 }
 html[data-theme="dark"] {
-  --clouds: url("/img/cloudslight.png");
+  --clouds: url("/img/cloudslight.avif");
 }
 
 
