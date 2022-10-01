@@ -53,20 +53,7 @@ M.setup = function()
   terminal.setup(lvim.builtin.terminal)
 
   for i, exec in pairs(lvim.builtin.terminal.execs) do
-    local function get_term_size()
-      local direction = exec[4]
-      if direction == "float" then
-        return lvim.builtin.terminal.size
-      end
-      local size = lvim.terminal_split_size[direction]
-      if size.unit == "percent" then
-        local buf_sizes = Functions.get_buf_size()
-        local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
-        return buf_size * size.amount / 100
-      else
-        return lvim.terminal_split_size[direction].amount
-      end
-    end
+    local direction = exec[4] or lvim.builtin.terminal.direction
 
     local opts = {
       cmd = exec[1],
@@ -74,8 +61,20 @@ M.setup = function()
       label = exec[3],
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
       count = i + 100,
-      direction = exec[4] or lvim.builtin.terminal.direction,
-      size = get_term_size,
+      direction = direction,
+      size = function()
+        if direction == "float" then
+          return lvim.builtin.terminal.size
+        end
+        local size = lvim.terminal_split_size[direction]
+        if size.unit == "percent" then
+          local buf_sizes = Functions.get_buf_size()
+          local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
+          return buf_size * size.amount / 100
+        else
+          return lvim.terminal_split_size[direction].amount
+        end
+      end,
     }
 
     M.add_exec(opts)
