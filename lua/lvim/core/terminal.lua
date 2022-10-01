@@ -53,10 +53,11 @@ M.setup = function()
   terminal.setup(lvim.builtin.terminal)
 
   for i, exec in pairs(lvim.builtin.terminal.execs) do
-
     local function get_term_size()
       local direction = exec[4]
-      if direction == "float" then return lvim.builtin.terminal.size end
+      if direction == "float" then
+        return lvim.builtin.terminal.size
+      end
       local size = lvim.terminal_split_size[direction]
       if size.unit == "percent" then
         local buf_sizes = Functions.get_buf_size()
