@@ -58,7 +58,7 @@ const config = {
       text: "Install",
       to: "/docs/installation",
     },
-   // secondaryCTA optional
+   // secondary all to action optional
     secondaryCTA: {
       text:"Support" ,
       to: "/docs/sponsors/donate",
