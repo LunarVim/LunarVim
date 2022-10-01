@@ -23,7 +23,7 @@ function plugin_loader.init(opts)
     max_jobs = 100,
     log = { level = "warn" },
     git = {
-      clone_timeout = 300,
+      clone_timeout = 120,
     },
     display = {
       open_fn = function()
