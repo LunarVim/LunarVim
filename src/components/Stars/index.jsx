@@ -41,8 +41,8 @@ const Stars = ({ children }) => (
         style={{
           top: `${randomNumber(0, 30)}%`,
           left: `${randomNumber(0, 70)}%`,
-          animationDelay: `${randomNumber(0, 10)}s`,
-          animationDuration: `${randomNumber(3, 10)}s`,
+          animationDelay: `${randomNumber(0, 5)}s`,
+          animationDuration: `${randomNumber(10, 20)}s`,
         }}
       />
     ))}

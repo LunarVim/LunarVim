@@ -65,9 +65,13 @@ const config = {
       to: "/docs/sponsors/donate",
     },
     heroImage: {
-      url: "/img/lunarvim_logo.png",
+      src: "/img/lunarvim_logo.png",
       alt: "LunarVim Logo",
     },
+    previewImg: {
+      src: "/img/lunarvim_preview.png",
+      alt: "LunarVim Preview",
+    }
   },
 
   themeConfig:

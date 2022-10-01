@@ -6,6 +6,7 @@ import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Stars from "../components/Stars";
 import styles from "./index.module.css";
+import Preview from "@site/src/components/Preview";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -34,7 +35,7 @@ function HomepageHeader() {
         </div>
         <div className={styles.heroImage}>
           <img
-            src={siteConfig.customFields.heroImage.url}
+            src={siteConfig.customFields.heroImage.src}
             alt={siteConfig.customFields.heroImage.alt}
           />
         </div>
@@ -47,13 +48,14 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={siteConfig.title}
       description="Description will go into a meta tag in <head />"
     >
       <Stars>
         <HomepageHeader />
       </Stars>
       <main>
+        <Preview />
         <HomepageFeatures />
       </main>
     </Layout>

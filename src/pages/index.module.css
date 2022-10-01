@@ -4,32 +4,11 @@
  */
 
 .heroBanner {
-  padding: 2rem 0 calc(2rem + 100px);
+  padding-block: 2rem;
   position: relative;
   background-color: var(--primary-bg);
   color: var(--primary-fg);
-  min-height: 60vh;
-}
-
-html[data-theme="light"] {
-  --clouds: url("/img/cloudsdark.avif");
-}
-html[data-theme="dark"] {
-  --clouds: url("/img/cloudslight.avif");
-}
-
-
-.heroBanner::after {
-  content: "";
-	background-image: var(--clouds);
-  background-position: center bottom;
-  position: absolute;
-  inset: auto 0 0 0;
-  width: 100%;
-  height: 125px;
-  background-size: contain;
-  background-repeat: repeat-x;
-  z-index: 1;
+  min-height: 50vh;
 }
 
 .heroBanner > .container {

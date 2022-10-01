@@ -1,0 +1,40 @@
+.preview {
+  background-color: var(--primary-fg);
+  color: var(--primary-bg);
+  position: relative;
+  margin-block: 125px;
+}
+
+html[data-theme="light"] {
+  --clouds: url("/img/cloudsdark.avif");
+}
+html[data-theme="dark"] {
+  --clouds: url("/img/cloudslight.avif");
+}
+
+.preview::before,
+.preview::after {
+  content: "";
+	background-image: var(--clouds);
+  position: absolute;
+  width: 100%;
+  height: 125px;
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  z-index: 1;
+  user-select: none;
+}
+
+.preview::before {
+  transform: translateY(-100%);
+}
+.preview::after {
+  transform: rotate(180deg) scaleX(-1);
+}
+
+.container > img {
+  margin-block: 1rem;
+  width: 100%;
+  border-radius: 1rem;
+}
