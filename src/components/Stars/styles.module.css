@@ -15,16 +15,52 @@
   animation-iteration-count: infinite;
 }
 
+.fallingStar {
+  position: absolute;
+  height: 4px;
+  background: linear-gradient(-45deg, var(--primary-fg), transparent);
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px var(--primary-fg));
+  z-index: 1;
+  animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite;
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+
 @keyframes twinkle {
   0% {
     opacity: 1;
   }
   50% {
     box-shadow: 0;
-    transform: scale(.5);
+    transform: scale(0.5);
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes tail {
+  0% {
+    width: 0;
+  }
+
+  30% {
+    width: 100px;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes shooting {
+  0% {
+    transform: translate(0) rotate(45deg);
+  }
+
+  100% {
+    transform: translate(500px, 500px) rotate(45deg);
   }
 }
