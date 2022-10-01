@@ -1,0 +1,66 @@
+name: Check Spelling
+on: [push, pull_request]
+jobs:
+  spelling:
+    name: Check Spelling
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
+    outputs:
+      followup: ${{ steps.spelling.outputs.followup }}
+    runs-on: ubuntu-latest
+    if: "contains(github.event_name, 'pull_request') || github.event_name == 'push'"
+    concurrency:
+      group: spelling-${{ github.event.pull_request.number || github.ref }}
+      # note: If you use only_check_changed_files, you do not want cancel-in-progress
+      cancel-in-progress: true
+    steps:
+    - name: check-spelling
+      id: spelling
+      uses: check-spelling/check-spelling@main
+      with:
+        suppress_push_for_open_pull_request: 1
+        checkout: true
+        spell_check_this: check-spelling/spell-check-this@prerelease
+        post_comment: 0
+        experimental_apply_changes_via_bot: 1
+
+  comment:
+    name: Report
+    runs-on: ubuntu-latest
+    needs: spelling
+    permissions:
+      contents: write
+      pull-requests: write
+    if: (success() || failure()) && needs.spelling.outputs.followup
+    steps:
+    - name: comment
+      uses: check-spelling/check-spelling@main
+      with:
+        checkout: true
+        spell_check_this: check-spelling/spell-check-this@prerelease
+        task: ${{ needs.spelling.outputs.followup }}
+        experimental_apply_changes_via_bot: 1
+
+  update:
+    name: Update PR
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    if: ${{
+        github.event_name == 'issue_comment' &&
+        github.event.issue.pull_request &&
+        contains(github.event.comment.body, '@check-spelling-bot apply')
+      }}
+    concurrency:
+      group: spelling-update-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    steps:
+    - name: apply spelling updates
+      uses: check-spelling/check-spelling@main
+      with:
+        experimental_apply_changes_via_bot: 1
+        checkout: true
+        ssh_key: "${{ secrets.CHECK_SPELLING }}"
