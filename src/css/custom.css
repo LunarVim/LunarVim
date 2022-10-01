@@ -42,6 +42,7 @@ html[data-theme="light"] {
   --ifm-color-primary-light: #aa72f3;
   --ifm-color-primary-lighter: #b381f5;
   --ifm-color-primary-lightest: #ceaef8;
+  --ifm-navbar-background-color: var(--primary-bg);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 

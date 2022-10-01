@@ -1,0 +1,37 @@
+.starsContainer {
+  position: relative;
+}
+
+.star {
+  position: absolute;
+  background-color: var(--primary-fg);
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 3px 1px var(--primary-fg);
+}
+
+.star1 {
+  animation: 4s linear 2s infinite alternate twinkle;
+}
+
+.star2 {
+  animation: 5s linear 3s infinite alternate twinkle;
+}
+
+.star3 {
+  animation: 6s linear 4s infinite alternate twinkle;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0;
+    transform: scale(.5);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

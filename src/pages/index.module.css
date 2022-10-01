@@ -12,10 +12,10 @@
 }
 
 html[data-theme="light"] {
-  --clouds: url("/img/lunarvim_logo.png");
+  --clouds: url("/img/cloudsdark.png");
 }
 html[data-theme="dark"] {
-  --clouds: url("/img/clouds.png");
+  --clouds: url("/img/cloudslight.png");
 }
 
 
@@ -26,7 +26,7 @@ html[data-theme="dark"] {
   position: absolute;
   inset: auto 0 0 0;
   width: 100%;
-  height: 100px;
+  height: 125px;
   background-size: contain;
   background-repeat: repeat-x;
   z-index: 1;
@@ -42,6 +42,7 @@ html[data-theme="dark"] {
 
 .heroContent {
   flex: .45;
+  background-color: var(--primary-bg);
 }
 
 .heroImage {

@@ -4,6 +4,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import Stars from "../components/Stars";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
@@ -11,7 +12,7 @@ function HomepageHeader() {
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className={`container ${styles.container}`}>
-        <div className={ styles.heroContent }>
+        <div className={styles.heroContent}>
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
@@ -32,7 +33,10 @@ function HomepageHeader() {
           </div>
         </div>
         <div className={styles.heroImage}>
-          <img src={siteConfig.customFields.heroImage.url} alt={siteConfig.customFields.heroImage.alt} />
+          <img
+            src={siteConfig.customFields.heroImage.url}
+            alt={siteConfig.customFields.heroImage.alt}
+          />
         </div>
       </div>
     </header>
@@ -46,7 +50,9 @@ export default function Home() {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <HomepageHeader />
+      <Stars>
+        <HomepageHeader />
+      </Stars>
       <main>
         <HomepageFeatures />
       </main>
