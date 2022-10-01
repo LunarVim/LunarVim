@@ -9,22 +9,10 @@
   z-index: 1;
   box-shadow: 0 0 3px 1px var(--primary-fg);
   user-select: none;
-}
-
-.star1 {
-  animation: 3s linear 5s infinite alternate twinkle;
-}
-
-.star2 {
-  animation: 4s linear 3s infinite alternate twinkle;
-}
-
-.star3 {
-  animation: 5s linear 4s infinite alternate twinkle;
-}
-
-.star4 {
-  animation: 6s linear 5s infinite alternate twinkle;
+  animation-name: twinkle;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
 }
 
 @keyframes twinkle {

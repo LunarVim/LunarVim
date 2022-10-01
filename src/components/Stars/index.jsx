@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-// sizes of star in px
+// star sizes in px
 const SIZES = [1, 1, 2, 3, 4];
-// count of stars
+// stars count
 const COUNT = 100;
 
 //get random position
-function randomPosition(min, max) {
+function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -16,24 +16,22 @@ const Stars = ({ children }) => (
     {/* generating array with length = count */}
     {[...Array(COUNT)].map((_, i) => {
       /* randomize position and size */
-      const top = randomPosition(1, 100);
-      const left = randomPosition(1, 100);
-      const random = Math.floor(Math.random() * SIZES.length);
-      const randomSize = SIZES[random];
-
-      /* give the star different class name for different animations  */
-      const num = i <= COUNT / 4 ? "star1" : i <= COUNT / 3 ? "star2" : i <= COUNT / 2 ? "star3" : "star4";
+      const top = randomNumber(1, 100);
+      const left = randomNumber(1, 100);
+      const size = SIZES[Math.floor(Math.random() * SIZES.length)];
 
       return (
         <div
           key={i}
-          className={`${styles.star} ${styles[num] || ""}`}
+          className={styles.star}
           style={{
             position: "absolute",
-            top: top + "%",
-            left: left + "%",
-            height: randomSize + "px",
-            width: randomSize + "px",
+            top: `${top}%`,
+            left: `${left}%`,
+            height: `${size}px`,
+            width: `${size}px`,
+            animationDelay: `${randomNumber(2, 6)}s`,
+            animationDuration: `${randomNumber(2, 6)}s`,
           }}
         />
       );
