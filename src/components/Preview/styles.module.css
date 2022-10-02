@@ -33,7 +33,12 @@ html[data-theme="dark"] {
   transform: rotate(180deg) scaleX(-1);
 }
 
-.container > img {
+.container {
+  position: relative;
+  padding-block: 1rem 4rem;
+}
+
+.container img {
   margin-block: 1rem;
   width: 100%;
   border-radius: 1rem;
