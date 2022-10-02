@@ -59,9 +59,9 @@ const config = {
       text: "Install",
       to: "/docs/installation",
     },
-   // secondary all to action optional
+    // secondary all to action optional
     secondaryCTA: {
-      text:"Support" ,
+      text: "Support",
       to: "/docs/sponsors/donate",
     },
     heroImage: {
@@ -76,33 +76,62 @@ const config = {
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      navbar: {
-        title: 'LunarVim',
-        logo: {
-          alt: 'LunarVim Logo',
-          src: 'img/lunarvim_icon.png',
-        },
-        items: [
-          {
-            type: 'doc',
-            docId: 'introduction',
-            position: 'left',
-            label: 'Docs',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/lunarvim/lunarvim',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
+({
+  colorMode: {
+    defaultMode: 'dark',
+  },
+  image: 'img/lunarvim_preview',
+  navbar: {
+    title: 'LunarVim',
+    logo: {
+      alt: 'LunarVim Logo',
+      src: 'img/lunarvim_icon.png',
+    },
+    items: [
+      {
+        type: 'doc',
+        docId: 'introduction',
+        position: 'left',
+        label: 'Docs',
       },
-      prism: {
-        theme: codeTheme,
-        darkTheme: codeTheme,
+      { to: '/blog', label: 'Blog', position: 'left' },
+      {
+        href: "https://twitter.com/chrisatmachine",
+        position: "right",
+        className: "navbar-icon navbar-icon-twitter"
       },
-    }),
+      {
+        href: "https://www.reddit.com/r/lunarvim/",
+        position: "right",
+        className: "navbar-icon navbar-icon-reddit"
+      },
+      {
+        href: "https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA",
+        position: "right",
+        className: "navbar-icon navbar-icon-youtube"
+      },
+      {
+        href: "https://matrix.to/#/#the-machine:matrix.org",
+        position: "right",
+        className: "navbar-icon navbar-icon-matrix"
+      },
+      {
+        href: "https://discord.gg/Xb9B4Ny",
+        position: "right",
+        className: "navbar-icon navbar-icon-discord"
+      },
+      {
+        href: 'https://github.com/lunarvim/lunarvim',
+        position: 'right',
+        className: "navbar-icon navbar-icon-github"
+      },
+    ],
+  },
+  prism: {
+    theme: codeTheme,
+    darkTheme: codeTheme,
+  },
+}),
 };
 
 module.exports = config;
