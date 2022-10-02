@@ -41,5 +41,6 @@ html[data-theme="dark"] {
 .container img {
   margin-block: 1rem;
   width: 100%;
+  max-width: var(--ifm-container-width-xl);
   border-radius: 1rem;
 }

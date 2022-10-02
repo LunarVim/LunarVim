@@ -83,6 +83,11 @@ html[data-theme="dark"] {
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .navbar-icon {
   display: flex;
   align-items: center;
