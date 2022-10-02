@@ -8,7 +8,7 @@ const Preview = () => {
     <div className={styles.preview}>
       <div className={`container ${styles.container}`}>
         <img
-          src={siteConfig.customFields.previewImg.src}
+          src={require('@site/static/img/Lunarvim_preview.png').default}
           alt={siteConfig.customFields.previewImg.alt}
         />
       </div>
