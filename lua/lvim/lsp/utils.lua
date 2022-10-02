@@ -167,9 +167,9 @@ function M.format_filter(client)
   local n = require "null-ls"
   local s = require "null-ls.sources"
   local method = n.methods.FORMATTING
-  local avalable_formatters = s.get_available(filetype, method)
+  local available_formatters = s.get_available(filetype, method)
 
-  if #avalable_formatters > 0 then
+  if #available_formatters > 0 then
     return client.name == "null-ls"
   elseif client.supports_method "textDocument/formatting" then
     return true
