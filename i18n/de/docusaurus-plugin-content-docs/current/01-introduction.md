@@ -12,12 +12,12 @@ LunarVim verwendet neue Neovim Funktionen wie [Treesitter](https://tree-sitter.g
 
 ## Meinungsstark
 
-LunarVim wird mit einer vernünftigen Standardkonfiguration ausgeliefert, auf der Sie aufbauen können. Zu den Funktionen gehören Autovervollständigung, integrierte Terminals, Datei-Explorer, Fuzzy-Finder, LSP, Linting, Formatierung und Debugging.
+LunarVim wird mit einer vernünftigen Standardkonfiguration ausgeliefert. Zu den Funktionen gehören Autovervollständigung, integrierte Terminals, Datei-Explorer, Fuzzy-Finder, LSP, Linting, Formatierung Debugging.
 
 ## Erweiterbar
 
-Nur weil LunarVim eine stark von den Meinungen der Entwickler beeinflusst ist, heißt das nicht, dass Sie diese teilen müssen. Jedes eingebaute Plugin kann in der Datei `config.lua` ein- oder ausgeschaltet werden. Hier können Sie Ihre eigenen Plugins, Keymaps, Autocommands, Leader Bindings und alle anderen benutzerdefinierten Einstellungen hinzufügen.
+Nur weil LunarVim stark von den Meinungen der Entwickler beeinflusst ist, heißt das nicht, dass Sie diese teilen müssen. Jedes eingebaute Plugin kann in der Datei `config.lua` ein- oder ausgeschaltet werden. Hier können Sie Ihre eigenen Plugins, Keymaps, Autocommands, Leader Bindings und alle anderen benutzerdefinierten Einstellungen hinzufügen.
 
 ## Schnell
 
-Damit Sie nicht zwischen Funtkionen und Geschwindigkeit entscheiden müssen, versucht LunarVim alle Plugins "lazy" zu laden. So spielt es keine Rolle, ob sie ein Plugin aktiviert oder deaktiviert haben.
+Damit Sie nicht zwischen Funktionen und Geschwindigkeit entscheiden müssen, versucht LunarVim alle Plugins "lazy" zu laden. So spielt es keine Rolle, ob sie ein Plugin aktiviert oder deaktiviert haben.
