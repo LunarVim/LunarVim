@@ -2,7 +2,7 @@
 title: Einleitung
 ---
 
-<img src="/img/lunarvim_logo.png" alt="LunarVim Logo" />
+<img src="../img/lunarvim_logo.png" alt="LunarVim Logo" />
 
 # Einleitung
 
