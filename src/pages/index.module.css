@@ -11,11 +11,15 @@
   min-height: 50vh;
 }
 
+.heroTitle {
+  display: none;
+}
+
 .heroBanner > .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 2rem;
   position: relative;
   z-index: 2;
@@ -49,6 +53,9 @@
 }
 
 @media screen and (min-width: 996px) {
+  .heroTitle {
+    display: flex;
+  }
   .heroBanner {
     padding: 4rem 0 calc(4rem + 100px);
   }

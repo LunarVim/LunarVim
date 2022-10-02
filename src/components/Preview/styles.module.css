@@ -27,10 +27,10 @@ html[data-theme="dark"] {
 }
 
 .preview::before {
-  transform: translateY(-100%);
+  transform: translateY(calc(-100% + 1px));
 }
 .preview::after {
-  transform: rotate(180deg) scaleX(-1);
+  transform: rotate(180deg) scaleX(-1) translateY(1px);
 }
 
 .container > img {
