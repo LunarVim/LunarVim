@@ -120,7 +120,7 @@ function M.setup_document_highlight(client, bufnr)
 end
 
 function M.setup_document_symbols(client, bufnr)
-  vim.g.navic_silence = false -- can be set to true to supress error
+  vim.g.navic_silence = false -- can be set to true to suppress error
   local symbols_supported = client.supports_method "textDocument/documentSymbol"
   if not symbols_supported then
     Log:debug("skipping setup for document_symbols, method not supported by " .. client.name)
