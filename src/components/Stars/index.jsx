@@ -1,21 +1,21 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-const STAR_SIZES = [1, 1, 2, 3, 4]; // in px
-const STARS_COUNT = 75;
-const FALLING_STARS_COUNT = 3;
-
 //get random number between min and max
 const randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+const STAR_SIZES = [1, 1, 2, 3, 4]; // in px
+const STARS_COUNT = 75;
+const FALLING_STARS_COUNT = randomNumber(3, 4);
 
 const Stars = ({ children }) => (
   <div className={styles.starsContainer}>
     {/* generating array with length = STARS_COUNT */}
     {[...Array(STARS_COUNT)].map((_, i) => {
       /* random and size */
-      const size = STAR_SIZES[Math.floor(Math.random() * STAR_SIZES.length)];
+      const size = STAR_SIZES[Math.round(Math.random() * STAR_SIZES.length)];
 
       return (
         <div

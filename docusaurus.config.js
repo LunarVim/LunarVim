@@ -87,6 +87,7 @@ const config = {
       alt: 'LunarVim Logo',
       src: 'img/lunarvim_icon.png',
     },
+    hideOnScroll: true,
     items: [
       {
         type: 'doc',
@@ -95,6 +96,12 @@ const config = {
         label: 'Docs',
       },
       { to: '/blog', label: 'Blog', position: 'left' },
+        {
+          type: 'doc',
+          position: 'left',
+          docId: 'sponsors/donate',
+          label: 'Donate',
+        },
       {
         href: "https://twitter.com/chrisatmachine",
         position: "right",
