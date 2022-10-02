@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+/* const lightCodeTheme = require('prism-react-renderer/themes/github'); */
+/* const darkCodeTheme = require('prism-react-renderer/themes/dracula'); */
+const codeTheme = require("./src/themes/code-theme");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -12,7 +13,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/lunarvim_icon.png',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -53,6 +54,26 @@ const config = {
     ],
   ],
 
+  customFields: {
+    primaryCTA: {
+      text: "Install",
+      to: "/docs/installation",
+    },
+   // secondary all to action optional
+    secondaryCTA: {
+      text:"Support" ,
+      to: "/docs/sponsors/donate",
+    },
+    heroImage: {
+      src: "/img/lunarvim_logo.png",
+      alt: "LunarVim Logo",
+    },
+    previewImg: {
+      src: "/img/lunarvim_preview.png",
+      alt: "LunarVim Preview",
+    }
+  },
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -60,7 +81,7 @@ const config = {
         title: 'LunarVim',
         logo: {
           alt: 'LunarVim Logo',
-          src: 'img/logo.svg',
+          src: 'img/lunarvim_icon.png',
         },
         items: [
           {
@@ -78,8 +99,8 @@ const config = {
         ],
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: codeTheme,
+        darkTheme: codeTheme,
       },
     }),
 };

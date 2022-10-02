@@ -6,31 +6,79 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  /* --ifm-font-color-base: #ffffff; */
-  /* --ifm-background-color: #1A1B26; */
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
+  --ifm-button-border-color: var(--ifm-color-primary);
+}
+
+html[data-theme="light"] {
+  /* tokyonight day */
+  --primary-bg: #e1e2e7;
+  --primary-fg: #414868;
+  /* normal */
+  --normal-black: #e9e9ed;
+  --normal-red: #f52a65;
+  --normal-green: #587539;
+  --normal-yellow: #8c6c3e;
+  --normal-blue: #2e7de9;
+  --normal-magenta: #9854f1;
+  --normal-cyan: #007197;
+  --normal-white: #6172b0;
+  /* bright */
+  --bright-black: #a1a6c5;
+  --bright-red: var(--normal-red);
+  --bright-green: var(--normal-green);
+  --bright-yellow: var(--normal-yellow);
+  --bright-blue: var(--normal-blue);
+  --bright-magenta: var(--normal-magenta);
+  --bright-cyan: var(--normal-cyan);
+  --bright-white: var(--primary-fg);
+
+  --ifm-font-color-base: var(--primary-fg);
+  --ifm-background-color: var(--primary-bg);
+  --ifm-color-primary: #9854f1;
+  --ifm-color-primary-dark: #8636ef;
+  --ifm-color-primary-darker: #7d27ed;
+  --ifm-color-primary-darkest: #6511d2;
+  --ifm-color-primary-light: #aa72f3;
+  --ifm-color-primary-lighter: #b381f5;
+  --ifm-color-primary-lightest: #ceaef8;
+  --ifm-navbar-background-color: var(--primary-bg);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
+html[data-theme="dark"] {
+  /* tokyonight night */
+  --primary-bg: #1a1b26;
+  --primary-fg: #c0caf5;
+  /* normal */
+  --normal-black: #15161e;
+  --normal-red: #f7768e;
+  --normal-green: #9ece6a;
+  --normal-yellow: #e0af68;
+  --normal-blue: #7aa2f7;
+  --normal-magenta: #bb9af7;
+  --normal-cyan: #7dcfff;
+  --normal-white: #a9b1d6;
+  /* bright */
+  --bright-black: #414868;
+  --bright-red: var(--normal-red);
+  --bright-green: var(--normal-green);
+  --bright-yellow: var(--normal-yellow);
+  --bright-blue: var(--normal-blue);
+  --bright-magenta: var(--normal-magenta);
+  --bright-cyan: var(--normal-cyan);
+  --bright-white: var(--primary-fg);
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-html[data-theme='dark'] {
-  --ifm-font-color-base: #d0daf5;
-  --ifm-background-color: #1A1B26;
-  --ifm-background-surface-color: #1A1B26;
-  --ifm-color-primary: #4fd6be;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-font-color-base: var(--primary-fg);
+  --ifm-background-color: var(--primary-bg);
+  --ifm-background-surface-color: var(--primary-bg);
+  --ifm-color-primary: #bb9af7;
+  --ifm-color-primary-dark: #a275f4;
+  --ifm-color-primary-darker: #9562f3;
+  --ifm-color-primary-darkest: #702bee;
+  --ifm-color-primary-light: #d4bffa;
+  --ifm-color-primary-lighter: #e1d2fb;
+  --ifm-color-primary-lightest: #ffffff;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
