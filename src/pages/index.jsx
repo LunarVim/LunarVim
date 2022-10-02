@@ -1,4 +1,5 @@
 import React from "react";
+import Translate, { translate } from "@docusaurus/Translate";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -14,28 +15,28 @@ function HomepageHeader() {
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className={`container ${styles.container}`}>
         <div className={styles.heroContent}>
-          <h1 className={`hero__title ${styles.heroTitle}`}>{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <h1 className={`hero__title ${styles.heroTitle}`}><Translate>LunarVim</Translate></h1>
+          <p className="hero__subtitle"><Translate>Cool slogan about LunarVim</Translate></p>
           <div className={styles.buttons}>
             <Link
               className="button button--primary button--lg"
               to={siteConfig.customFields.primaryCTA.to}
             >
-              {siteConfig.customFields.primaryCTA.text}
+              <Translate>Install</Translate>
             </Link>
             {siteConfig.customFields.secondaryCTA ? (
               <Link
                 className="button button--outline button--lg"
                 to={siteConfig.customFields.secondaryCTA.to}
               >
-                {siteConfig.customFields.secondaryCTA.text}
+                <Translate>Support</Translate>
               </Link>
             ) : null}
           </div>
         </div>
         <div className={styles.heroImage}>
           <img
-            src={siteConfig.customFields.heroImage.src}
+            src={require('@site/static/img/lunarvim_logo.png').default}
             alt={siteConfig.customFields.heroImage.alt}
           />
         </div>
