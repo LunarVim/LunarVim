@@ -59,7 +59,7 @@ a.describe("plugin-loader", function()
     _G.completed = false
     _G.verify_sha = function()
       if _G.locked_sha ~= get_current_sha(plugin.path) then
-        error "unmached results!"
+        error "unmatched results!"
       else
         _G.completed = true
       end
