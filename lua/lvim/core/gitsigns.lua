@@ -79,7 +79,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local gitsigns = require "gitsigns"
+  local gitsigns = reload "gitsigns"
 
   gitsigns.setup(lvim.builtin.gitsigns.opts)
   if lvim.builtin.gitsigns.on_config_done then
