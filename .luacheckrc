@@ -24,6 +24,7 @@ stds.nvim = {
     "get_cache_dir",
     "get_lvim_base_dir",
     "require_clean",
+    "reload",
   },
 }
 std = "lua51+nvim"
