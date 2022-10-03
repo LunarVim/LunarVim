@@ -12,7 +12,7 @@ There are a few ways to install LunarVim.
 
 ## Stable
 
-No alarm or surprise:
+No alarms and No surprises:
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
