@@ -4,6 +4,11 @@ import Link from "@docusaurus/Link";
 
 const LanguagesList = [
   {
+    Svg: require("@site/static/img/hcl.svg").default,
+    title: "HCL",
+    docPath: "/docs/languages/hcl",
+  },
+  {
     Svg: require("@site/static/img/terraform.svg").default,
     title: "Terraform",
     docPath: "/docs/languages/Terraform",
