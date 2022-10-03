@@ -90,6 +90,7 @@ function M:init(base_dir)
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
     vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
+    vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
     vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
 
     vim.opt.rtp:remove(vim.call("stdpath", "config"))
