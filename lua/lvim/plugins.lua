@@ -135,6 +135,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.lir").setup()
     end,
+    requires = { "kyazdani42/nvim-web-devicons" },
     disable = not lvim.builtin.lir.active,
   },
   {
