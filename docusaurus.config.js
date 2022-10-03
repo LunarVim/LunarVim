@@ -67,7 +67,7 @@ const config = {
       text: "Install",
       to: "/docs/installation",
     },
-    // secondary all to action optional
+    // secondary call to action is optional
     secondaryCTA: {
       text: "Support",
       to: "/docs/sponsors/donate",
@@ -117,6 +117,10 @@ const config = {
         title: "Neovim from Scratch",
       },
     ],
+    Contributors: {
+      owner: "LunarVim",
+      repos: ["LunarVim.org"],
+    }
   },
 
   themeConfig:

@@ -1,0 +1,79 @@
+.sc-bcXHqe.fEaFoO {
+  gap: 1rem;
+  justify-content: center;
+}
+
+.sc-gswNZR.ibxbuv {
+  min-width: 5.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: 0;
+  padding: 0.5rem;
+  background-color: var(--bright-black);
+  border-radius: 100vmax;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sc-gswNZR.ibxbuv:active,
+.sc-gswNZR.ibxbuv:focus,
+.sc-gswNZR.ibxbuv:hover {
+  border-radius: 100vmax;
+  outline: 0;
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.sc-hLBbgP.gpWQdS {
+  min-width: 5.5rem;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  height: 5.5rem;
+  width: max-content;
+  max-height: 5.5rem;
+  background-color: var(--bright-black);
+  position: absolute;
+  right: 2px;
+  top: -2px;
+  transform: translateX(100%);
+  z-index: 100;
+  border-radius: 0 100vmax 100vmax 0;
+  border: 2px solid var(--ifm-color-primary);
+  border-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sc-hLBbgP.gpWQdS {
+  display: none;
+}
+
+.sc-hLBbgP.gpWQdS small,
+.sc-hLBbgP.gpWQdS h4 {
+  color: var(--primary-fg);
+}
+
+@media screen and (min-width: 996px) {
+  .sc-gswNZR.ibxbuv:active .sc-hLBbgP.gpWQdS,
+  .sc-gswNZR.ibxbuv:focus .sc-hLBbgP.gpWQdS,
+  .sc-gswNZR.ibxbuv:hover .sc-hLBbgP.gpWQdS {
+    display: block;
+  }
+
+  .sc-gswNZR.ibxbuv:active,
+  .sc-gswNZR.ibxbuv:focus,
+  .sc-gswNZR.ibxbuv:hover {
+    border-radius: 100vmax 0 0 100vmax;
+    outline: 0;
+  }
+
+  .sc-gswNZR.ibxbuv {
+    border-right: 0;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-block: 1rem 3rem;
+}

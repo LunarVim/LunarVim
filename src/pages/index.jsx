@@ -10,6 +10,7 @@ import Preview from "@site/src/components/Preview";
 import YouTube from "@site/src/components/YouTube";
 import Languages from "@site/src/components/Languages";
 import Stars from "../components/Stars";
+import Contributors from "../components/Contributors";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -62,6 +63,7 @@ export default function Home() {
         <HomepageFeatures />
         <YouTube />
         <Languages />
+        <Contributors />
       </main>
     </Layout>
   );
