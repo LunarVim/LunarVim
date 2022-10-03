@@ -1,3 +1,4 @@
+local reload = require("lvim.utils.reload").reload
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
