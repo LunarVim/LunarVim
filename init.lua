@@ -13,11 +13,7 @@ reload("lvim.config"):load()
 
 local plugins = reload "lvim.plugins"
 
--- if lvim.builtin.lir.active then
--- end
-
 reload("lvim.plugin-loader").load { plugins, lvim.plugins }
-reload("lvim.core.lir").setup()
 
 local Log = reload "lvim.core.log"
 Log:debug "Starting LunarVim"
