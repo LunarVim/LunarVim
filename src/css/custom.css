@@ -49,7 +49,7 @@ html[data-theme="light"] {
 html[data-theme="dark"] {
   /* tokyonight night */
   --primary-bg: #1a1b26;
-  --primary-fg: #c0caf5;
+  --primary-fg: #c1caf4;
   /* normal */
   --normal-black: #15161e;
   --normal-red: #f7768e;
