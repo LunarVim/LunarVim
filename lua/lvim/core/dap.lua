@@ -23,8 +23,8 @@ M.config = function()
       numhl = "LspDiagnosticsSignInformation",
     },
     ui = {
-      auto_open = true
-    }
+      auto_open = true,
+    },
   }
 end
 
@@ -80,8 +80,8 @@ end
 -- end
 
 M.setup_ui = function()
-  local dap = require("dap")
-  local dapui = require("dapui")
+  local dap = require "dap"
+  local dapui = require "dapui"
   dapui.setup {
     icons = { expanded = "", collapsed = "" },
     mappings = {
