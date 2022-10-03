@@ -700,39 +700,6 @@ table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 },
 ```
 
-### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
-
-**indentation guides for every line**
-
-```lua
-{
-  "lukas-reineke/indent-blankline.nvim",
-  event = "BufRead",
-  config = function()
-    local opts = {
-      -- char = "▏",
-      filetype_exclude = {
-        "alpha",
-        "help",
-        "terminal",
-        "dashboard",
-        "lspinfo",
-        "lsp-installer",
-	"mason",
-      },
-      buftype_exclude = { "terminal" },
-      bufname_exclude = { "config.lua" },
-
-      show_trailing_blankline_indent = false,
-      show_first_indent_level = false,
-      -- use_treesitter = false,
-    }
-
-    require("indent_blankline").setup(opts)
-  end
-},
-```
-
 ### [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 
 **preview markdown in the browser**

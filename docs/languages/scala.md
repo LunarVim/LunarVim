@@ -1,18 +1,23 @@
 # Scala
 
 ## Install Syntax Highlighting
-
+ 
 ```vim
 :TSInstall scala
 ```
+The support for Scala 3 like syntax is limited.
 
 ## Install Language Server
 
-To get scala LSP support working in Lunarvim, first you need to do the prerequisites listed here https://github.com/scalameta/nvim-metals#prerequisites.
+To get scala LSP support working in Lunarvim, first you need to do the prerequisites listed [here](https://github.com/scalameta/nvim-metals#prerequisites) 
 
 Then use coursier to install the metals language server so that it is available on your PATH:
 
-`cs install metals`
+`coursier install metals`
+
+Also, you can install the scala formatter
+
+`coursier install scalafmt`
 
 ## Configure Lunarvim
 
@@ -48,12 +53,16 @@ lvim.plugins = {
     },
 }
 
-lvim.autocommands.custom_groups = {
-  { "FileType", "scala,sbt", "lua require('user.metals').config()" }
-}
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.scala", "*.sbt", "*.sc" },
+  callback = function() require('user.metals').config() end,
+})
 ```
+When you open the first scala file, you should run `:MetalsInstall` in order to complete the plugin instalation.
 
 ## Supported formatters
+
+In most cases, isn't necessary enable the [scalafmt](https://scalameta.org/scalafmt/) formatter, this is already integrated with metals to format on save creating a `.scalafmt.conf` file in your project root, see more [here](https://scalameta.org/scalafmt/docs/configuration.html)
 
 ```lua
 scala = { "scalafmt" }
