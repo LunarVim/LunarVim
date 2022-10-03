@@ -17,8 +17,13 @@
 .lang {
   background-color: var(--bright-black);
   text-align: center;
+  height: 100%;
   border-radius: 1rem;
   padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .lang > h3 {

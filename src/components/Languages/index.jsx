@@ -103,6 +103,10 @@ const LanguagesList = [
     title: "Vue",
     docPath: "/docs/languages/vue",
   },
+  {
+    title: "and more",
+    docPath: "/docs/languages",
+  },
 ];
 
 const Languages = () => {
@@ -123,7 +127,7 @@ const Languages = () => {
 const Language = ({ Svg, title, docPath }) => (
   <Link to={docPath}>
     <div className={styles.lang}>
-      <Svg role="img" />
+      {Svg ? <Svg role="img" /> : null}
       <h3>{title}</h3>
     </div>
   </Link>
