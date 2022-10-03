@@ -12,7 +12,7 @@ const YouTube = () => {
 
   return (
     <Clouds>
-      <div className={`container ${styles.container}`}>
+      <section className={`container ${styles.container}`}>
         {YouTube.map((yt) => (
           <div key={yt.id} className={styles.yt}>
             <h2>{yt.title}</h2>
@@ -28,7 +28,7 @@ const YouTube = () => {
             ></iframe>
           </div>
         ))}
-      </div>
+      </section>
     </Clouds>
   );
 };

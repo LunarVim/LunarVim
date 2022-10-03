@@ -84,8 +84,9 @@ html[data-theme="dark"] {
 }
 
 * {
-  transition: background-color 300ms ease-in-out,
-    color 300ms ease-in-out;
+  transition: background-color 400ms ease-in-out,
+    fill 400ms ease-in-out,
+    color 400ms ease-in-out;
 }
 
 html,

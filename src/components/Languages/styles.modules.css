@@ -1,0 +1,51 @@
+.container {
+  padding-block: 4rem;
+}
+
+.title {
+  text-align: center;
+  margin-block-end: 3rem;
+}
+
+.languages {
+  display: grid;
+  justify-content: space-between;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.lang {
+  background-color: var(--bright-black);
+  text-align: center;
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+}
+
+.lang > h3 {
+  color: var(--primary-fg);
+  margin: 0;
+}
+
+.lang svg {
+  width: 100%;
+  max-width: 100px;
+  margin-bottom: 2rem;
+}
+
+.lang > svg,
+.lang > svg path {
+  fill: var(--primary-fg);
+}
+
+.lang:hover {
+  background-color: var(--primary-fg);
+}
+
+.lang:hover > h3 {
+  color: var(--primary-bg);
+}
+
+.lang:hover svg,
+.lang:hover svg path {
+  fill: var(--primary-bg);
+}

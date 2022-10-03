@@ -8,6 +8,7 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import styles from "./index.module.css";
 import Preview from "@site/src/components/Preview";
 import YouTube from "@site/src/components/YouTube";
+import Languages from "@site/src/components/Languages";
 import Stars from "../components/Stars";
 
 function HomepageHeader() {
@@ -60,6 +61,7 @@ export default function Home() {
         <Preview />
         <HomepageFeatures />
         <YouTube />
+        <Languages />
       </main>
     </Layout>
   );

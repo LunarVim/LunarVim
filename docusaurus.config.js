@@ -125,7 +125,7 @@ const config = {
       colorMode: {
         defaultMode: "dark",
       },
-      image: "img/lunarvim_preview",
+      image: "img/lunarvim_preview.png",
       navbar: {
         title: "LunarVim",
         logo: {
