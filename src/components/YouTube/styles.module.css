@@ -1,0 +1,32 @@
+.yt {
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+}
+
+.yt > iframe {
+  border: 2px solid var(--primary-bg);
+  border-radius: 1rem;
+  aspect-ratio: 16/9;
+  height: auto;
+  width: 100%;
+}
+
+.yt > h2 {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-block-start: 1rem;
+}
+
+@media screen  and (min-width: 996px ) {
+  .container{
+    flex-direction: row;
+  }
+}

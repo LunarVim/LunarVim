@@ -98,6 +98,25 @@ const config = {
         alt: "LunarVim Preview",
       },
     ],
+    YouTube: [
+      /* NOTE: max 3 preferred */
+      /* type: video | playlist */
+      {
+        type: "playlist",
+        id: "PLhoH5vyxr6QoYP4bKw0krF4aEn_3_pfWA",
+        title: "LunarVim (IDE for Neovim)",
+      },
+      {
+        type: "video",
+        id: "NPmKRygD7DU",
+        title: "Neovim v0.8 release",
+      },
+      {
+        type: "playlist",
+        id: "PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ",
+        title: "Neovim from Scratch",
+      },
+    ],
   },
 
   themeConfig:
