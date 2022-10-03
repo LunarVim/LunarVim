@@ -55,7 +55,7 @@ local function _replace(old, new, repeat_tbl)
   end
 end
 
-function reload(mod)
+M.reload = function(mod)
   if not package.loaded[mod] then
     local m = require(mod)
     return m
