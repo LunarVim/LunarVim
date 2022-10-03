@@ -83,6 +83,11 @@ html[data-theme="dark"] {
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+* {
+  transition: background-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
 html,
 body {
   overflow-x: hidden;

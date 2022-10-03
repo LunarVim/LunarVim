@@ -27,7 +27,6 @@ const Stars = ({ children }) => (
             left: `${randomNumber(1, 100)}%`,
             height: `${size}px`,
             width: `${size}px`,
-            animationDelay: `${randomNumber(2, 6)}s`,
             animationDuration: `${randomNumber(2, 6)}s`,
           }}
         />

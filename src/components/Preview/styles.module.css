@@ -1,46 +1,84 @@
-.preview {
-  background-color: var(--primary-fg);
-  color: var(--primary-bg);
-  position: relative;
-  margin-block: 125px;
-}
-
-html[data-theme="light"] {
-  --clouds: url("/img/cloudsdark.avif");
-}
-html[data-theme="dark"] {
-  --clouds: url("/img/cloudslight.avif");
-}
-
-.preview::before,
-.preview::after {
-  content: "";
-	background-image: var(--clouds);
-  position: absolute;
-  width: 100%;
-  height: 125px;
-  background-size: contain;
-  background-repeat: repeat-x;
-  background-position: center bottom;
-  z-index: 1;
-  user-select: none;
-}
-
-.preview::before {
-  transform: translateY(calc(-100% + 1px));
-}
-.preview::after {
-  transform: rotate(180deg) scaleX(-1) translateY(1px);
-}
-
-.container {
-  position: relative;
-  padding-block: 1rem 4rem;
-}
-
 .container img {
   margin-block: 1rem;
   width: 100%;
   max-width: var(--ifm-container-width-xl);
   border-radius: 1rem;
+}
+
+.container {
+  padding-block: 1rem 1.5rem;
+  position: relative;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.dot {
+  --size: 1rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid var(--primary-bg);
+  display: block;
+  cursor: pointer;
+}
+
+.dot:hover {
+  outline: 2px solid var(--ifm-color-primary);
+}
+
+.dot.active {
+  background-color: var(--primary-bg);
+  border: 2px solid transparent;
+}
+
+.btn {
+  --size: 3rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: var(--primary-bg);
+  border: 3px solid var(--primary-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+}
+
+.btn > svg path {
+  stroke: var(--primary-fg);
+}
+
+.btn:hover {
+  border: 3px solid var(--ifm-color-primary);
+}
+
+.btn:hover > svg path {
+  stroke: var(--ifm-color-primary);
+}
+
+.btn.prev {
+  transform: translate(-50%, calc(-50% - 1rem)) rotate(90deg);
+  left: 2rem;
+}
+
+.btn.next {
+  transform: translate(50%, calc(-50% - 1rem)) rotate(-90deg);
+  right: 2rem;
+}
+
+@media screen and (min-width: 996px) {
+  .btn.prev {
+    left: 1rem;
+  }
+  .btn.next {
+    right: 1rem;
+  }
 }

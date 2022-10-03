@@ -1,5 +1,5 @@
 import React from "react";
-import Translate, { translate } from "@docusaurus/Translate";
+import Translate from "@docusaurus/Translate";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -56,8 +56,10 @@ export default function Home() {
         <HomepageHeader />
       </Stars>
       <main>
-        <Preview />
+      <Preview />
+      <Stars>
         <HomepageFeatures />
+      </Stars>
       </main>
     </Layout>
   );

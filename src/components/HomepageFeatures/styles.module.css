@@ -9,3 +9,8 @@
   height: 200px;
   width: 200px;
 }
+
+.container {
+  position: relative;
+  z-index: 2;
+}

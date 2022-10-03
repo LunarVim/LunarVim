@@ -1,41 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./styles.module.css";
-import "./flickity.css"
-import Flickity from "react-flickity-component";
-
-const flickityOptions = {
-  initialIndex: 0,
-  contain: true,
-  pageDots: false,
-  fullscreen: true,
-  lazyLoad: 1,
-  autoPlay: false,
-  prevNextButtons: true,
-}
+import Clouds from "../Clouds/";
 
 const Preview = () => {
-  const { siteConfig } = useDocusaurusContext();
+  const {
+    siteConfig: {
+      customFields: { previewImgs },
+    },
+  } = useDocusaurusContext();
+
+  const [previewIdx, setPreviewIdx] = useState(0);
+  const imgsCount = previewImgs.length;
+
+  const nextImg = () => {
+    if (previewIdx === imgsCount - 1) {
+      setPreviewIdx(0);
+    } else {
+      setPreviewIdx((current) => current + 1);
+    }
+  };
+
+  const prevImg = () => {
+    if (previewIdx === 0) {
+      setPreviewIdx(imgsCount - 1);
+    } else {
+      setPreviewIdx((current) => current - 1);
+    }
+  };
+
   return (
-    <div className={styles.preview}>
+    <Clouds>
       <div className={`container ${styles.container}`}>
-        <Flickity
-          className={styles.carousel} // default ''
-          elementType={"div"} // default 'div'
-          options={flickityOptions} // takes flickity options {}
-          disableImagesLoaded={false} // default false
-          reloadOnUpdate // default false
-          static
-        >
-          {siteConfig.customFields.previewImgs.map((img, idx) => (
-            <div key={img.src + idx}>
-              <img src={img.src} alt={img.alt} loading="lazy" /> // does not work with i18n at the moment...
-            </div>
+        <div className={styles.slider}>
+          <img
+            src={previewImgs[previewIdx].src}
+            alt={previewImgs[previewIdx].alt}
+            loading="lazy"
+          />
+        </div>
+        <div className={styles.dots}>
+          {previewImgs.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setPreviewIdx(idx)}
+              className={`${styles.dot} ${idx === previewIdx ? styles.active : null
+                }`}
+            />
           ))}
-        </Flickity>
+        </div>
+        <button className={`${styles.btn} ${styles.prev}`} onClick={prevImg}>
+          <Arrow />
+        </button>
+        <button className={`${styles.btn} ${styles.next}`} onClick={nextImg}>
+          <Arrow />
+        </button>
       </div>
-    </div>
+    </Clouds>
   );
 };
+
+const Arrow = (props) => (
+  <svg width="29" height="30" viewBox="0 0 18 19" fill="none" {...props}>
+    <path
+      d="M4.5 7.05497L9 11.7325L13.5 7.05497"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export default Preview;
