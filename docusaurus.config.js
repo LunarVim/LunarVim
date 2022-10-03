@@ -25,7 +25,15 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "de"],
+    localeConfigs: {
+      en: {
+        label: "English",
+      },
+      de: {
+        label: "Deutsch",
+      },
+    },
   },
 
   presets: [
@@ -149,6 +157,10 @@ const config = {
             href: "https://github.com/lunarvim/lunarvim",
             position: "right",
             className: "navbar-icon navbar-icon-github",
+          },
+          {
+            type: "localeDropdown",
+            position: "right",
           },
         ],
       },

@@ -29,7 +29,7 @@ const Preview = () => {
         >
           {siteConfig.customFields.previewImgs.map((img, idx) => (
             <div key={img.src + idx}>
-              <img src={img.src} alt={img.alt} loading="lazy" />
+              <img src={img.src} alt={img.alt} loading="lazy" /> // does not work with i18n at the moment...
             </div>
           ))}
         </Flickity>
