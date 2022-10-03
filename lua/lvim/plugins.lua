@@ -1,4 +1,4 @@
-local reload = require("lvim.utils.reload").reload
+-- local require = require("lvim.utils.require").require
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
@@ -11,20 +11,20 @@ local core_plugins = {
   {
     "williamboman/mason.nvim",
     config = function()
-      reload("lvim.core.mason").setup()
+      require("lvim.core.mason").setup()
     end,
   },
   {
     "folke/tokyonight.nvim",
     config = function()
-      reload("lvim.core.theme").setup()
+      require("lvim.core.theme").setup()
     end,
     -- disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
   {
     "rcarriga/nvim-notify",
     config = function()
-      reload("lvim.core.notify").setup()
+      require("lvim.core.notify").setup()
     end,
     requires = { "nvim-telescope/telescope.nvim" },
     disable = not lvim.builtin.notify.active or not lvim.builtin.telescope.active,
@@ -38,7 +38,7 @@ local core_plugins = {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function()
-      reload("lvim.core.telescope").setup()
+      require("lvim.core.telescope").setup()
     end,
     disable = not lvim.builtin.telescope.active,
   },
@@ -53,7 +53,7 @@ local core_plugins = {
     "hrsh7th/nvim-cmp",
     config = function()
       if lvim.builtin.cmp then
-        reload("lvim.core.cmp").setup()
+        require("lvim.core.cmp").setup()
       end
     end,
     requires = {
@@ -67,7 +67,7 @@ local core_plugins = {
   {
     "L3MON4D3/LuaSnip",
     config = function()
-      local utils = reload "lvim.utils"
+      local utils = require "lvim.utils"
       local paths = {}
       if lvim.builtin.luasnip.sources.friendly_snippets then
         paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets")
@@ -76,11 +76,11 @@ local core_plugins = {
       if utils.is_directory(user_snippets) then
         paths[#paths + 1] = user_snippets
       end
-      reload("luasnip.loaders.from_lua").lazy_load()
-      reload("luasnip.loaders.from_vscode").lazy_load {
+      require("luasnip.loaders.from_lua").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load {
         paths = paths,
       }
-      reload("luasnip.loaders.from_snipmate").lazy_load()
+      require("luasnip.loaders.from_snipmate").lazy_load()
     end,
   },
   {
@@ -105,7 +105,7 @@ local core_plugins = {
     "windwp/nvim-autopairs",
     -- event = "InsertEnter",
     config = function()
-      reload("lvim.core.autopairs").setup()
+      require("lvim.core.autopairs").setup()
     end,
     disable = not lvim.builtin.autopairs.active,
   },
@@ -115,7 +115,7 @@ local core_plugins = {
     "nvim-treesitter/nvim-treesitter",
     -- run = ":TSUpdate",
     config = function()
-      reload("lvim.core.treesitter").setup()
+      require("lvim.core.treesitter").setup()
     end,
   },
   {
@@ -129,7 +129,7 @@ local core_plugins = {
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     config = function()
-      reload("lvim.core.nvimtree").setup()
+      require("lvim.core.nvimtree").setup()
     end,
     disable = not lvim.builtin.nvimtree.active,
   },
@@ -137,7 +137,7 @@ local core_plugins = {
   {
     "christianchiarulli/lir.nvim",
     config = function()
-      reload("lvim.core.lir").setup()
+      require("lvim.core.lir").setup()
     end,
     disable = not lvim.builtin.lir.active,
   },
@@ -145,7 +145,7 @@ local core_plugins = {
     "lewis6991/gitsigns.nvim",
 
     config = function()
-      reload("lvim.core.gitsigns").setup()
+      require("lvim.core.gitsigns").setup()
     end,
     event = "BufRead",
     disable = not lvim.builtin.gitsigns.active,
@@ -155,7 +155,7 @@ local core_plugins = {
   {
     "folke/which-key.nvim",
     config = function()
-      reload("lvim.core.which-key").setup()
+      require("lvim.core.which-key").setup()
     end,
     event = "BufWinEnter",
     disable = not lvim.builtin.which_key.active,
@@ -166,7 +166,7 @@ local core_plugins = {
     "numToStr/Comment.nvim",
     event = "BufRead",
     config = function()
-      reload("lvim.core.comment").setup()
+      require("lvim.core.comment").setup()
     end,
     disable = not lvim.builtin.comment.active,
   },
@@ -175,7 +175,7 @@ local core_plugins = {
   {
     "ahmedkhalf/project.nvim",
     config = function()
-      reload("lvim.core.project").setup()
+      require("lvim.core.project").setup()
     end,
     disable = not lvim.builtin.project.active,
   },
@@ -192,7 +192,7 @@ local core_plugins = {
     "nvim-lualine/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
     config = function()
-      reload("lvim.core.lualine").setup()
+      require("lvim.core.lualine").setup()
     end,
     disable = not lvim.builtin.lualine.active,
   },
@@ -201,7 +201,7 @@ local core_plugins = {
   {
     "SmiteshP/nvim-navic",
     config = function()
-      reload("lvim.core.breadcrumbs").setup()
+      require("lvim.core.breadcrumbs").setup()
     end,
     disable = not lvim.builtin.breadcrumbs.active,
   },
@@ -209,7 +209,7 @@ local core_plugins = {
   {
     "akinsho/bufferline.nvim",
     config = function()
-      reload("lvim.core.bufferline").setup()
+      require("lvim.core.bufferline").setup()
     end,
     branch = "main",
     event = "BufWinEnter",
@@ -221,7 +221,7 @@ local core_plugins = {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
     config = function()
-      reload("lvim.core.dap").setup()
+      require("lvim.core.dap").setup()
     end,
     disable = not lvim.builtin.dap.active,
   },
@@ -239,7 +239,7 @@ local core_plugins = {
   {
     "goolord/alpha-nvim",
     config = function()
-      reload("lvim.core.alpha").setup()
+      require("lvim.core.alpha").setup()
     end,
     disable = not lvim.builtin.alpha.active,
   },
@@ -250,7 +250,7 @@ local core_plugins = {
     event = "BufWinEnter",
     branch = "main",
     config = function()
-      reload("lvim.core.terminal").setup()
+      require("lvim.core.terminal").setup()
     end,
     disable = not lvim.builtin.terminal.active,
   },
@@ -263,7 +263,7 @@ local core_plugins = {
   {
     "RRethy/vim-illuminate",
     config = function()
-      reload("lvim.core.illuminate").setup()
+      require("lvim.core.illuminate").setup()
     end,
     disable = not lvim.builtin.illuminate.active,
   },
@@ -271,7 +271,7 @@ local core_plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      reload("lvim.core.indentlines").setup()
+      require("lvim.core.indentlines").setup()
     end,
     disable = not lvim.builtin.indentlines.active,
   },
@@ -282,7 +282,7 @@ local core_plugins = {
     config = function()
       pcall(function()
         if lvim and lvim.colorscheme == "onedarker" then
-          reload("onedarker").setup()
+          require("onedarker").setup()
           lvim.builtin.lualine.options.theme = "onedarker"
         end
       end)
@@ -296,7 +296,7 @@ local content = vim.fn.readfile(default_snapshot_path)
 local default_sha1 = vim.fn.json_decode(content)
 
 local get_default_sha1 = function(spec)
-  local short_name, _ = reload("packer.util").get_plugin_short_name(spec)
+  local short_name, _ = require("packer.util").get_plugin_short_name(spec)
   return default_sha1[short_name] and default_sha1[short_name].commit
 end
 
