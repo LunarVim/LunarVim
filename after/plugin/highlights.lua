@@ -1,1 +1,1 @@
-reload('lvim.core.lir').icon_setup()
+reload("lvim.core.lir").icon_setup()
