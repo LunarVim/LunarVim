@@ -7,42 +7,7 @@ M.config = function()
     active = false,
     on_config_done = nil,
     options = {
-      icons = {
-        Text = " ",
-        Method = " ",
-        Function = " ",
-        Constructor = " ",
-        Field = " ",
-        Variable = " ",
-        Class = " ",
-        Interface = " ",
-        Module = " ",
-        Property = " ",
-        Unit = " ",
-        Value = " ",
-        Enum = " ",
-        Keyword = " ",
-        Snippet = " ",
-        Color = " ",
-        File = " ",
-        Reference = " ",
-        Folder = " ",
-        EnumMember = " ",
-        Constant = " ",
-        Struct = " ",
-        Event = " ",
-        Operator = " ",
-        TypeParameter = " ",
-        Array = " ",
-        Number = " ",
-        String = " ",
-        Boolean = "蘒",
-        Object = " ",
-        Package = " ",
-        Namespace = "",
-        Key = "",
-        Null = "ﳠ",
-      },
+      icons = lvim.icons.kind,
       highlight = true,
       separator = " " .. ">" .. " ",
       depth_limit = 0,
@@ -107,7 +72,7 @@ M.get_filename = function()
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if f.isempty(file_icon) then
-      file_icon = ""
+      file_icon = lvim.icons.kind.File
     end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
@@ -165,7 +130,7 @@ M.get_winbar = function()
 
   if not f.isempty(value) and f.get_buf_option "mod" then
     -- TODO: replace with circle
-    local mod = "%#LspCodeLens#" .. "" .. "%*"
+    local mod = "%#LspCodeLens#" .. lvim.icons.ui.Circle .. "%*"
     if gps_added then
       value = value .. " " .. mod
     else

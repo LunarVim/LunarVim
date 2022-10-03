@@ -13,6 +13,7 @@ return {
   keys = {},
 
   use_icons = true,
+  icons = require "lvim.icons",
 
   builtin = {},
 

@@ -113,12 +113,16 @@ function M.get_sections()
     end
     buttons = {
       val = {
-        button("f", "  Find File", "<CMD>Telescope find_files<CR>"),
-        button("n", "  New File", "<CMD>ene!<CR>"),
-        button("p", "  Projects ", "<CMD>Telescope projects<CR>"),
-        button("r", "  Recent files", ":Telescope oldfiles <CR>"),
-        button("t", "  Find Text", "<CMD>Telescope live_grep<CR>"),
-        button("c", "  Configuration", "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"),
+        button("f", lvim.icons.ui.FindFile .. "  Find File", "<CMD>Telescope find_files<CR>"),
+        button("n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>"),
+        button("p", lvim.icons.ui.Project .. "  Projects ", "<CMD>Telescope projects<CR>"),
+        button("r", lvim.icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>"),
+        button("t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>"),
+        button(
+          "c",
+          lvim.icons.ui.Gear .. "  Configuration",
+          "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"
+        ),
       },
     }
   end

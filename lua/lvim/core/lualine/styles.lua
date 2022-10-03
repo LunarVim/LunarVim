@@ -43,8 +43,14 @@ styles.default = {
     theme = "auto",
     globalstatus = true,
     icons_enabled = lvim.use_icons,
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    component_separators = {
+      left = lvim.icons.ui.DividerRight,
+      right = lvim.icons.ui.DividerLeft,
+    },
+    section_separators = {
+      left = lvim.icons.ui.BoldDividerRight,
+      right = lvim.icons.ui.BoldDividerLeft,
+    },
     disabled_filetypes = {},
   },
   sections = {
