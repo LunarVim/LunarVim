@@ -43,7 +43,7 @@ function M.config()
     defaults.opts.icons = {
       ERROR = "[ERROR]",
       WARN = "[WARNING]",
-      INFO = "[INFo]",
+      INFO = "[INFO]",
       DEBUG = "[DEBUG]",
       TRACE = "[TRACE]",
     }

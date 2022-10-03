@@ -63,7 +63,7 @@ function M.run_post_update()
     end)
     local ret = require_clean("lvim.utils.git").switch_lvim_branch(compat_tag)
     if ret then
-      vim.notify("Reverted to the last known compatibile version: " .. compat_tag, vim.log.levels.WARN)
+      vim.notify("Reverted to the last known compatible version: " .. compat_tag, vim.log.levels.WARN)
     end
     return
   end

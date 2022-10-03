@@ -120,7 +120,7 @@ function M.setup_document_highlight(client, bufnr)
 end
 
 function M.setup_document_symbols(client, bufnr)
-  vim.g.navic_silence = false -- can be set to true to supress error
+  vim.g.navic_silence = false -- can be set to true to suppress error
   local symbols_supported = client.supports_method "textDocument/documentSymbol"
   if not symbols_supported then
     Log:debug("skipping setup for document_symbols, method not supported by " .. client.name)
@@ -167,9 +167,9 @@ function M.format_filter(client)
   local n = require "null-ls"
   local s = require "null-ls.sources"
   local method = n.methods.FORMATTING
-  local avalable_formatters = s.get_available(filetype, method)
+  local available_formatters = s.get_available(filetype, method)
 
-  if #avalable_formatters > 0 then
+  if #available_formatters > 0 then
     return client.name == "null-ls"
   elseif client.supports_method "textDocument/formatting" then
     return true
