@@ -11,7 +11,7 @@ function M.config()
         "dashboard",
         "alpha",
       },
-      auto_reload_on_write = true,
+      auto_reload_on_write = false,
       hijack_directories = {
         enable = false,
       },

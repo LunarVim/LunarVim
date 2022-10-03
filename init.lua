@@ -5,17 +5,24 @@ if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) then
   vim.opt.rtp:append(base_dir)
 end
 
-require("lvim.bootstrap"):init(base_dir)
+require "lvim.utils.reload"
 
-require("lvim.config"):load()
+reload("lvim.bootstrap"):init(base_dir)
 
-local plugins = require "lvim.plugins"
-require("lvim.plugin-loader").load { plugins, lvim.plugins }
+reload("lvim.config"):load()
 
-local Log = require "lvim.core.log"
+local plugins = reload "lvim.plugins"
+
+-- if lvim.builtin.lir.active then
+-- end
+
+reload("lvim.plugin-loader").load { plugins, lvim.plugins }
+reload("lvim.core.lir").setup()
+
+local Log = reload "lvim.core.log"
 Log:debug "Starting LunarVim"
 
-local commands = require "lvim.core.commands"
+local commands = reload "lvim.core.commands"
 commands.load(commands.defaults)
 
-require("lvim.lsp").setup()
+reload("lvim.lsp").setup()

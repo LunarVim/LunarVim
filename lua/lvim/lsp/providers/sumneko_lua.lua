@@ -44,6 +44,12 @@ local opts = {
   settings = {
     Lua = {
       telemetry = { enable = false },
+      runtime = {
+        version = "LuaJIT",
+        special = {
+          reload = "require",
+        },
+      },
       diagnostics = {
         globals = { "vim", "lvim", "packer_plugins" },
       },
