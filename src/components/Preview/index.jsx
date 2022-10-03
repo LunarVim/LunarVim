@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from "./styles.module.css";
 import Clouds from "../Clouds/";
 
@@ -34,7 +35,7 @@ const Preview = () => {
       <div className={`container ${styles.container}`}>
         <div className={styles.slider}>
           <img
-            src={previewImgs[previewIdx].src}
+            src={useBaseUrl(previewImgs[previewIdx].src)}
             alt={previewImgs[previewIdx].alt}
             loading="lazy"
           />
