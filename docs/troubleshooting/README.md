@@ -83,7 +83,7 @@ See [fish-shell/fish-shell#7004](https://github.com/fish-shell/fish-shell/issues
 
 Some language servers depend on newer versions of node.  Update your version of node to the latest.
 
-### is it overriden?
+### is it overridden?
 
 This could be due to the fact that the server is [overridden](../languages/README.md#server-override)
 

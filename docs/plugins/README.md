@@ -64,7 +64,7 @@ Snapshot support has been added in [lunarvim#2351](https://github.com/LunarVim/L
 > 1. add a default snapshot, `snapshots/default.json`, to hold the commits of all the core plugins
 > 2. `LvimSyncCorePlugins` now uses `:PackerSnapshotRollback`
 > 3. reduce errors caused by breaking changes in user plugins since they're not handled anymore with `packer.sync()`
-> 4. `PackerSync` will now ignore all the core plugins which are already handled with snapshots, this makes it signficantly faster to finish.
+> 4. `PackerSync` will now ignore all the core plugins which are already handled with snapshots, this makes it significantly faster to finish.
 > 5. allow "unlocking" all the core plugins, by setting an environment variable `$LVIM_DEV_MODE`, e.g. can be defined in `~/.local/bin/lvim`
 > 6. `$LUNARVIM_CACHE_DIR/snapshots/` can be used to store complete snapshots of _all_ the installed plugins, `:h packer.snapshot()`.
 > 7. add a new handler to allow updating `snapshots/default.json` that does not rely on packer or lvim's runtime. It could be completely re-written in any other language.

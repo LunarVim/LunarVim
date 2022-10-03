@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   callback = function() require('user.metals').config() end,
 })
 ```
-When you open the first scala file, you should run `:MetalsInstall` in order to complete the plugin instalation.
+When you open the first scala file, you should run `:MetalsInstall` in order to complete the plugin installation.
 
 ## Supported formatters
 
