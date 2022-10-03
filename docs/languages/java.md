@@ -29,7 +29,7 @@ This will generate the `jdtls.json` file where you can change the settings, the 
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "This is onyl an example, the full document has mora than 700 lines",
+  "description": "This is only an example, the full document has mora than 700 lines",
   "properties": {
     "java.autobuild.enabled": {
       "default": true,
