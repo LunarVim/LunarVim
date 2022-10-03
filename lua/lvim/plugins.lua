@@ -235,6 +235,15 @@ local core_plugins = {
     disable = not lvim.builtin.dap.active,
   },
 
+  -- Debugger user interface
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("lvim.core.dap").setup_ui()
+    end,
+    disable = not lvim.builtin.dap.active,
+  },
+
   -- alpha
   {
     "goolord/alpha-nvim",
