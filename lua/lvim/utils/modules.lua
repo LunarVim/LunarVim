@@ -1,5 +1,6 @@
 local M = {}
 
+local Log = require "lvim.core.log"
 -- revisit this
 -- function prequire(package)
 --   local status, lib = pcall(require, package)
@@ -42,7 +43,9 @@ local function _replace(old, new, repeat_tbl)
       old[k] = new[k]
     else
       if type(old[k]) ~= type(new[k]) then
-        vim.notify(string.format("warning: attr %s old type no equal new type!!!", k))
+        Log:debug(
+          string.format("Reloader: mismatch between old [%s] and new [%s] type for [%s]", type(old[k]), type(new[k]), k)
+        )
         _assign(old, new, k)
       else
         if type(old[k]) == "table" then
@@ -55,25 +58,40 @@ local function _replace(old, new, repeat_tbl)
   end
 end
 
+M.require_clean = function(m)
+  package.loaded[m] = nil
+  _G[m] = nil
+  local _, module = pcall(require, m)
+  return module
+end
+
+M.require_safe = function(mod)
+  local status_ok, module = pcall(require, mod)
+  if not status_ok then
+    local trace = debug.getinfo(2, "SL")
+    local shorter_src = trace.short_src
+    local lineinfo = shorter_src .. ":" .. (trace.currentline or trace.linedefined)
+    local msg = string.format("%s : skipped loading [%s]", lineinfo, mod)
+    Log:debug(msg)
+  end
+  return module
+end
+
 M.reload = function(mod)
   if not package.loaded[mod] then
-    local m = require(mod)
-    return m
+    return M.require_safe(mod)
   end
-  -- vim.notify "begin reload!!!"
 
   local old = package.loaded[mod]
   package.loaded[mod] = nil
-  local new = require(mod)
+  local new = M.require_safe(mod)
 
   if type(old) == "table" and type(new) == "table" then
-    -- vim.notify "pick object in new module to old module!!!"
     local repeat_tbl = {}
     _replace(old, new, repeat_tbl)
   end
 
   package.loaded[mod] = old
-  -- vim.notify "finish reload!!!"
   return old
 end
 
