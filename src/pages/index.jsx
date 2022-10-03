@@ -15,7 +15,7 @@ import Contributors from "../components/Contributors";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Stars>
+    <Stars FALLING_STARS_COUNT={3}>
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className={`container ${styles.container}`}>
           <div className={styles.heroContent}>
@@ -62,8 +62,10 @@ export default function Home() {
         <Preview />
         <HomepageFeatures />
         <YouTube />
-        <Languages />
-        <Contributors />
+        <Stars starsCount={120} >
+          <Languages />
+          <Contributors />
+        </Stars>
       </main>
     </Layout>
   );

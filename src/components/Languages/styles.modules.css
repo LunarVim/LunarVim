@@ -1,5 +1,7 @@
 .container {
   padding-block: 4rem;
+  position: relative;
+  z-index: 2;
 }
 
 .title {

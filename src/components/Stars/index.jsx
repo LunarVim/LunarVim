@@ -7,13 +7,11 @@ const randomNumber = (min, max) => {
 };
 
 const STAR_SIZES = [1, 1, 2, 3, 4]; // in px
-const STARS_COUNT = 75;
-const FALLING_STARS_COUNT = randomNumber(3, 4);
 
-const Stars = ({ children }) => (
+const Stars = ({ children, starsCount = 75, FALLING_STARS_COUNT = 0 }) => (
   <div className={styles.starsContainer}>
     {/* generating array with length = STARS_COUNT */}
-    {[...Array(STARS_COUNT)].map((_, i) => {
+    {[...Array(starsCount)].map((_, i) => {
       /* random and size */
       const size = STAR_SIZES[Math.round(Math.random() * STAR_SIZES.length)];
 
