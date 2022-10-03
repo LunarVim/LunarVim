@@ -5,7 +5,7 @@ if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) then
   vim.opt.rtp:append(base_dir)
 end
 
-reload = require "lvim.utils.reload".reload
+reload = require("lvim.utils.reload").reload
 
 reload("lvim.bootstrap"):init(base_dir)
 
