@@ -16,10 +16,6 @@ local core_plugins = {
   },
   {
     "folke/tokyonight.nvim",
-    config = function()
-      require("lvim.core.theme").setup()
-    end,
-    -- disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
   {
     "rcarriga/nvim-notify",

@@ -149,6 +149,7 @@ function M:reload()
     local plugin_loader = reload "lvim.plugin-loader"
 
     plugin_loader.reload { plugins, lvim.plugins }
+    reload("lvim.core.theme").setup()
     reload("lvim.utils.hooks").run_post_reload()
   end)
 end
