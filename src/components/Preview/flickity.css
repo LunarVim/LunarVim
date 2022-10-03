@@ -1,0 +1,45 @@
+.flickity-slider > div {
+  padding-inline: .5rem;
+}
+
+.flickity-button {
+  position: absolute;
+  bottom: 0;
+  border: 0;
+  background-color: transparent;
+  transform: translateY(-35%);
+}
+
+.flickity-button svg {
+  display: none;
+}
+
+.previous.flickity-button {
+  left: 2rem;
+}
+
+.next.flickity-button {
+  right: 2rem;
+}
+
+.next.flickity-button::before,
+.previous.flickity-button::before {
+  content: url("data:image/svg+xml,%3Csvg width='24' height='17' viewBox='0 0 28 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M27.3837 16.3499C26.9889 16.7662 26.4536 17 25.8954 17C25.3372 17 24.8019 16.7662 24.4072 16.3499L13.9873 5.35937L3.56741 16.3499C3.1704 16.7544 2.63866 16.9782 2.08673 16.9731C1.5348 16.968 1.00683 16.7345 0.616543 16.3229C0.226254 15.9112 0.00487332 15.3543 7.72362e-05 14.7722C-0.00471885 14.19 0.207456 13.6292 0.590903 13.2104L12.499 0.650078C12.8938 0.233833 13.4291 -1.77672e-07 13.9873 -1.28875e-07C14.5455 -8.00775e-08 15.0808 0.233834 15.4755 0.650078L27.3837 13.2104C27.7783 13.6268 28 14.1914 28 14.7802C28 15.3689 27.7783 15.9336 27.3837 16.3499V16.3499Z' fill='%23c0caf5'/%3E%3C/svg%3E%0A");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1b26;
+  width: 1rem;
+  height: 1rem;
+  padding: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.previous.flickity-button::before {
+  transform: rotate(-90deg);
+}
+
+.next.flickity-button::before {
+  transform: rotate(90deg);
+}

@@ -28,3 +28,4 @@ lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 ```
 
 If you want to keep launching LunarVim with the nvim command, add an alias entry to your shell's config file: `alias nvim=lvim`. To temporarily revert to the default nvim prefix it with a backslash `\nvim`. If you create this alias, you may also want to explicitly set your editor as well `export EDITOR='lvim'`. This will tell command line tools like git to use LunarVim as your editor.
+

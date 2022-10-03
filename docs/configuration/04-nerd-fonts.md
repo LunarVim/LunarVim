@@ -1,3 +1,7 @@
+---
+title: Nerd Fonts
+---
+
 # [ Nerd Fonts ](https://www.nerdfonts.com/)
 
 From the repo:
@@ -35,3 +39,4 @@ OTF is a newer standard based on TTF, when given the option you should generally
 ## Terminal settings
 
 After installing your font, you will have to refresh your font cache by doing `fc-cache -f -v`. Then you will have to change your terminal settings to use the font you just installed. Please refer to your terminal's documentation for changing the terminal font.
+

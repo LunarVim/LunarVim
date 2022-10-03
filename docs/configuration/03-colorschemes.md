@@ -41,3 +41,4 @@ cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
 cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
 cmd "let &fcs='eob: '"
 ```
+

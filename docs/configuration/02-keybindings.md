@@ -175,3 +175,4 @@ Enabling maps the following command
 ```vim
 set whichwrap+=<,>,h,l,[,]
 ```
+
