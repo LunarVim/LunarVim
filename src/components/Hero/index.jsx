@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AnimationsContext } from "../../hooks/useAnimations";
 import Translate from "@docusaurus/Translate";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import styles from "./index.module.css";
 import Stars from "../Stars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import ShootingStar from "../Icons/ShootingStar";
+import DisabledStar from "../Icons/DisabledStar";
 
 const Hero = () => {
   const { siteConfig: { customFields: { primaryCTA, secondaryCTA, heroImage } } } = useDocusaurusContext();
+  const { animate, setAnimate } = useContext(AnimationsContext);
 
   return (
     <Stars FALLING_STARS_COUNT={3}>
+      <button className={styles.toggleAnimations} onClick={ () => setAnimate(currentState => !currentState)}>
+        { animate ? 
+          <DisabledStar /> :
+          <ShootingStar /> 
+        }
+      </button>
+
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className={`container ${styles.container}`}>
           <div className={styles.heroContent}>
-            <h1 className="hero__title">
-              <Translate>LunarVim</Translate>
-            </h1>
+            <h1 className={`hero__title ${styles.heroTitle}`}>LunarVim</h1>
             <p className="hero__subtitle">
               <Translate>Cool slogan about LunarVim</Translate>
             </p>

@@ -8,25 +8,29 @@ import Stars from "../components/Stars";
 import Contributors from "../components/Contributors";
 import Hero from "../components/Hero";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import AnimationsContextProvider from "../hooks/useAnimations";
 
-const  Home = () => {
+const Home = () => {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout title={siteConfig.title}
-      description="Description will go into a meta tag in <head />"
-    >
-      <Hero />
-      <main>
-        <Preview />
-        <Features />
-        <YouTube />
-        <Stars starsCount={120}>
-          <Languages />
-          <Contributors />
-        </Stars>
-      </main>
-    </Layout>
+    <AnimationsContextProvider>
+      <Layout
+        title={siteConfig.title}
+        description="Description will go into a meta tag in <head />"
+      >
+        <Hero />
+        <main>
+          <Preview />
+          <Features />
+          <YouTube />
+          <Stars starsCount={120}>
+            <Languages />
+            <Contributors />
+          </Stars>
+        </main>
+      </Layout>
+    </AnimationsContextProvider>
   );
-}
+};
 
 export default Home;

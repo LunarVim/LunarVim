@@ -5,6 +5,10 @@
 /* const darkCodeTheme = require('prism-react-renderer/themes/dracula'); */
 const codeTheme = require("./src/themes/code-theme");
 
+const test = () => {
+  console.log("HI");
+};
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "LunarVim",
@@ -120,7 +124,7 @@ const config = {
     Contributors: {
       owner: "LunarVim",
       repos: ["LunarVim.org"],
-    }
+    },
   },
 
   themeConfig:
@@ -184,8 +188,13 @@ const config = {
             type: "localeDropdown",
             position: "right",
           },
+        {
+          href: '#login',
+          label: 'Login'
+        },
         ],
       },
+      scripts: ["http://localhost:3000/customscript.js"],
       prism: {
         theme: codeTheme,
         darkTheme: codeTheme,
