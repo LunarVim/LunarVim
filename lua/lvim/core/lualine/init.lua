@@ -34,16 +34,13 @@ M.config = function()
 end
 
 M.setup = function()
-  -- avoid running in headless mode since it's harder to detect failures
-  if #vim.api.nvim_list_uis() == 0 then
-    local Log = require "lvim.core.log"
-    Log:debug "headless mode detected, skipping running setup for lualine"
+  local status_ok, lualine = pcall(require, "lualine")
+  if not status_ok then
     return
   end
 
   require("lvim.core.lualine.styles").update()
 
-  local lualine = require "lualine"
   lualine.setup(lvim.builtin.lualine)
 
   if lvim.builtin.lualine.on_config_done then

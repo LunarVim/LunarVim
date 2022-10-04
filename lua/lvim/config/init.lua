@@ -111,7 +111,7 @@ end
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
 function M:load(config_path)
-  local autocmds = require "lvim.core.autocmds"
+  local autocmds = reload "lvim.core.autocmds"
   config_path = config_path or self:get_user_config_path()
   local ok, err = pcall(dofile, config_path)
   if not ok then
@@ -128,7 +128,7 @@ function M:load(config_path)
 
   vim.g.mapleader = (lvim.leader == "space" and " ") or lvim.leader
 
-  require("lvim.keymappings").load(lvim.keys)
+  reload("lvim.keymappings").load(lvim.keys)
 
   if lvim.transparent_window then
     autocmds.enable_transparent_mode()
@@ -139,17 +139,18 @@ end
 -- @param config_path The path to the configuration overrides
 function M:reload()
   vim.schedule(function()
-    require_clean("lvim.utils.hooks").run_pre_reload()
+    reload("lvim.utils.hooks").run_pre_reload()
 
     M:load()
 
-    require("lvim.core.autocmds").configure_format_on_save()
+    reload("lvim.core.autocmds").configure_format_on_save()
 
-    local plugins = require "lvim.plugins"
-    local plugin_loader = require "lvim.plugin-loader"
+    local plugins = reload "lvim.plugins"
+    local plugin_loader = reload "lvim.plugin-loader"
 
     plugin_loader.reload { plugins, lvim.plugins }
-    require_clean("lvim.utils.hooks").run_post_reload()
+    reload("lvim.core.theme").setup()
+    reload("lvim.utils.hooks").run_post_reload()
   end)
 end
 

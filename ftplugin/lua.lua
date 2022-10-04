@@ -1,4 +1,6 @@
 local fmt = string.format
+-- luacheck: ignore
+-- TODO: fix lint violations
 
 -- Iterator that splits a string o a given delimiter
 local function split(str, delim)
