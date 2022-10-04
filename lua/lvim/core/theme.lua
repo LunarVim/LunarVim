@@ -96,7 +96,6 @@ M.setup = function()
   end
 
   theme.setup(lvim.builtin.theme.options)
-  lvim.builtin.lualine.options.theme = "tokyonight"
 
   require("lvim.core.lualine").setup()
 
