@@ -70,7 +70,7 @@ const config = {
     // secondary call to action is optional
     secondaryCTA: {
       text: "Support",
-      to: "/docs/sponsors/donate",
+      to: "/donate",
     },
     heroImage: {
       src: "/img/lunarvim_logo.png",
@@ -146,9 +146,8 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            type: "doc",
             position: "left",
-            docId: "sponsors/donate",
+            to: "/donate",
             label: "Donate",
           },
           {

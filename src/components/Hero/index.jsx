@@ -25,14 +25,14 @@ const Hero = () => {
                 className="button button--primary button--lg"
                 to={primaryCTA.to}
               >
-                <Translate>Install</Translate>
+                <Translate>{primaryCTA.text}</Translate>
               </Link>
               {secondaryCTA ? (
                 <Link
                   className="button button--outline button--lg"
                   to={secondaryCTA.to}
                 >
-                  <Translate>Support</Translate>
+                  <Translate>{secondaryCTA.text}</Translate>
                 </Link>
               ) : null}
             </div>
