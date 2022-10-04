@@ -1,12 +1,9 @@
 {
   "Comment.nvim": {
-    "commit": "0860b5f"
-  },
-  "FixCursorHold.nvim": {
-    "commit": "70a9516"
+    "commit": "97a188a"
   },
   "LuaSnip": {
-    "commit": "d36c063"
+    "commit": "8f8d493"
   },
   "alpha-nvim": {
     "commit": "0bb6fc0"
@@ -42,7 +39,7 @@
     "commit": "7d8c6c4"
   },
   "lua-dev.nvim": {
-    "commit": "9da602d"
+    "commit": "2ffe2f6"
   },
   "lualine.nvim": {
     "commit": "a52f078"
@@ -51,43 +48,43 @@
     "commit": "0051870"
   },
   "mason.nvim": {
-    "commit": "b36bdad"
+    "commit": "59e6fee"
   },
   "nlsp-settings.nvim": {
-    "commit": "65d6c1d"
+    "commit": "019ea0b"
   },
   "null-ls.nvim": {
-    "commit": "8af89c5"
+    "commit": "c0c19f3"
   },
   "nvim-autopairs": {
-    "commit": "14cc2a4"
+    "commit": "4fc96c8"
   },
   "nvim-cmp": {
-    "commit": "2427d06"
+    "commit": "b0dff0e"
   },
   "nvim-dap": {
-    "commit": "764899d"
+    "commit": "0b320f5"
   },
   "nvim-lspconfig": {
-    "commit": "dc4dac8"
+    "commit": "f11fdff"
   },
   "nvim-navic": {
-    "commit": "e0cfb25"
+    "commit": "132b273"
   },
   "nvim-notify": {
-    "commit": "142069b"
+    "commit": "4144654"
   },
   "nvim-tree.lua": {
-    "commit": "9914780"
+    "commit": "7282f7d"
   },
   "nvim-treesitter": {
-    "commit": "aa736f5"
+    "commit": "8e76333"
   },
   "nvim-ts-context-commentstring": {
     "commit": "4d3a68c"
   },
   "nvim-web-devicons": {
-    "commit": "9697285"
+    "commit": "563f363"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -96,7 +93,7 @@
     "commit": "6afb674"
   },
   "plenary.nvim": {
-    "commit": "9e7c628"
+    "commit": "4b7e520"
   },
   "popup.nvim": {
     "commit": "b7404d3"
@@ -105,7 +102,7 @@
     "commit": "628de7e"
   },
   "schemastore.nvim": {
-    "commit": "b11510e"
+    "commit": "33873c7"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
@@ -120,7 +117,7 @@
     "commit": "2a787c4"
   },
   "tokyonight.nvim": {
-    "commit": "c0e7573"
+    "commit": "4092905"
   },
   "vim-illuminate": {
     "commit": "a2e8476"

@@ -3,6 +3,7 @@
 stds.nvim = {
   globals = {
     "lvim",
+    "reload",
     vim = { fields = { "g" } },
     "TERMINAL",
     "USER",

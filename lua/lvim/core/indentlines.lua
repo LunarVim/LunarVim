@@ -17,7 +17,7 @@ M.config = function()
         "Trouble",
         "text",
       },
-      char = "▏",
+      char = lvim.icons.ui.LineLeft,
       show_trailing_blankline_indent = false,
       show_first_indent_level = true,
       use_treesitter = true,
@@ -27,7 +27,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, indent_blankline = pcall(require, "indent_blankline")
+  local status_ok, indent_blankline = pcall(reload, "indent_blankline")
   if not status_ok then
     return
   end

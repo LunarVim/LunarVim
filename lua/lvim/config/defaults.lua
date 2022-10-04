@@ -13,6 +13,7 @@ return {
   keys = {},
 
   use_icons = true,
+  icons = require "lvim.icons",
 
   ---@usage terminal_hsplit_size string percentage or number of rows
   terminal_split_size = {

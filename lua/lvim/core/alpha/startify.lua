@@ -19,7 +19,7 @@ function M.get_sections()
 
   local top_buttons = {
     entries = {
-      { "e", "  New File", "<CMD>ene!<CR>" },
+      { "e", lvim.icons.ui.NewFile .. " New File", "<CMD>ene!<CR>" },
     },
     val = {},
   }

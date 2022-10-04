@@ -1,3 +1,4 @@
+-- local require = require("lvim.utils.require").require
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
@@ -6,7 +7,6 @@ local core_plugins = {
   {
     "jose-elias-alvarez/null-ls.nvim",
   },
-  { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   { "williamboman/mason-lspconfig.nvim" },
   {
     "williamboman/mason.nvim",

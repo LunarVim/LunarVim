@@ -8,31 +8,31 @@ M.config = function()
       signs = {
         add = {
           hl = "GitSignsAdd",
-          text = "▎",
+          text = lvim.icons.ui.BoldLineLeft,
           numhl = "GitSignsAddNr",
           linehl = "GitSignsAddLn",
         },
         change = {
           hl = "GitSignsChange",
-          text = "▎",
+          text = lvim.icons.ui.BoldLineLeft,
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },
         delete = {
           hl = "GitSignsDelete",
-          text = "契",
+          text = lvim.icons.ui.Triangle,
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         topdelete = {
           hl = "GitSignsDelete",
-          text = "契",
+          text = lvim.icons.ui.Triangle,
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         changedelete = {
           hl = "GitSignsChange",
-          text = "▎",
+          text = lvim.icons.ui.BoldLineLeft,
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },
@@ -79,7 +79,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local gitsigns = require "gitsigns"
+  local gitsigns = reload "gitsigns"
 
   gitsigns.setup(lvim.builtin.gitsigns.opts)
   if lvim.builtin.gitsigns.on_config_done then

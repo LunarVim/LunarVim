@@ -31,7 +31,7 @@ function M.config()
 end
 
 function M.setup()
-  local status_ok, mason = pcall(require, "mason")
+  local status_ok, mason = pcall(reload, "mason")
   if not status_ok then
     return
   end

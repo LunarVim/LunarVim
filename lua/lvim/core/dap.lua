@@ -5,19 +5,19 @@ M.config = function()
     active = false,
     on_config_done = nil,
     breakpoint = {
-      text = "",
+      text = lvim.icons.ui.Bug,
       texthl = "LspDiagnosticsSignError",
       linehl = "",
       numhl = "",
     },
     breakpoint_rejected = {
-      text = "",
+      text = lvim.icons.ui.Bug,
       texthl = "LspDiagnosticsSignHint",
       linehl = "",
       numhl = "",
     },
     stopped = {
-      text = "",
+      text = lvim.icons.ui.BoldArrowRight,
       texthl = "LspDiagnosticsSignInformation",
       linehl = "DiagnosticUnderlineInfo",
       numhl = "LspDiagnosticsSignInformation",

@@ -70,7 +70,7 @@ function M:init(base_dir)
   self.packer_install_dir = join_paths(self.runtime_dir, "site", "pack", "packer", "start", "packer.nvim")
   self.packer_cache_path = join_paths(self.config_dir, "plugin", "packer_compiled.lua")
 
-  ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function interally
+  ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
   ---NOTE: changes to "data" are currently unstable, see #2507
   vim.fn.stdpath = function(what)
     if what == "cache" then
@@ -90,6 +90,7 @@ function M:init(base_dir)
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
     vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
+    vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
     vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
 
     vim.opt.rtp:remove(vim.call("stdpath", "config"))

@@ -1,21 +1,20 @@
 local M = {}
 
--- local Log = require "lvim.core.log"
-
 M.config = function()
   lvim.builtin.lir = {
     active = true,
     on_config_done = nil,
+    icon = "",
   }
 
-  local status_ok, lir = pcall(require, "lir")
+  local status_ok, lir = pcall(reload, "lir")
   if not status_ok then
     return
   end
 
-  local actions = require "lir.actions"
-  local mark_actions = require "lir.mark.actions"
-  local clipboard_actions = require "lir.clipboard.actions"
+  local actions = reload "lir.actions"
+  local mark_actions = reload "lir.mark.actions"
+  local clipboard_actions = reload "lir.clipboard.actions"
 
   lir.setup {
     show_hidden_files = false,
@@ -84,12 +83,30 @@ M.config = function()
   }
 
   -- custom folder icon
-  require("nvim-web-devicons").set_icon {
+  reload("nvim-web-devicons").set_icon {
     lir_folder_icon = {
-      icon = "",
-      -- color = "#7ebae4",
-      -- color = "#569CD6",
+      icon = lvim.icons.ui.Folder,
       color = "#42A5F5",
+      name = "LirFolderNode",
+    },
+  }
+end
+
+function M.icon_setup()
+  local function get_hl_by_name(name)
+    local ret = vim.api.nvim_get_hl_by_name(name.group, true)
+    return string.format("#%06x", ret[name.property])
+  end
+
+  local found, icon_hl = pcall(get_hl_by_name, { group = "NvimTreeFolderIcon", property = "foreground" })
+  if not found then
+    icon_hl = "#42A5F5"
+  end
+
+  reload("nvim-web-devicons").set_icon {
+    lir_folder_icon = {
+      icon = lvim.builtin.lir.icon,
+      color = icon_hl,
       name = "LirFolderNode",
     },
   }
@@ -97,17 +114,13 @@ end
 
 function M.setup()
   if lvim.builtin.nvimtree.active then
-    -- Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
     return
   end
 
-  local status_ok, lir = pcall(require, "lir")
+  local status_ok, lir = pcall(reload, "lir")
   if not status_ok then
     return
   end
-
-  lir.setup(lvim.builtin.lir.setup)
-  require("nvim-web-devicons").set_icon(lvim.builtin.lir.icons)
 
   if lvim.builtin.lir.on_config_done then
     lvim.builtin.lir.on_config_done(lir)

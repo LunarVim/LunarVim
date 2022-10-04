@@ -25,8 +25,8 @@ local function make_formatters_info(ft)
     "Formatters info",
     fmt(
       "* Active: %s%s",
-      table.concat(registered_formatters, "  , "),
-      vim.tbl_count(registered_formatters) > 0 and "  " or ""
+      table.concat(registered_formatters, " " .. lvim.icons.ui.BoxChecked .. " , "),
+      vim.tbl_count(registered_formatters) > 0 and " " .. lvim.icons.ui.BoxChecked .. " " or ""
     ),
     fmt("* Supported: %s", str_list(supported_formatters)),
   }
@@ -41,8 +41,8 @@ local function make_code_actions_info(ft)
     "Code actions info",
     fmt(
       "* Active: %s%s",
-      table.concat(registered_actions, "  , "),
-      vim.tbl_count(registered_actions) > 0 and "  " or ""
+      table.concat(registered_actions, " " .. lvim.icons.ui.BoxChecked .. " , "),
+      vim.tbl_count(registered_actions) > 0 and " " .. lvim.icons.ui.BoxChecked .. " " or ""
     ),
   }
 
@@ -57,8 +57,8 @@ local function make_linters_info(ft)
     "Linters info",
     fmt(
       "* Active: %s%s",
-      table.concat(registered_linters, "  , "),
-      vim.tbl_count(registered_linters) > 0 and "  " or ""
+      table.concat(registered_linters, " " .. lvim.icons.ui.BoxChecked .. " , "),
+      vim.tbl_count(registered_linters) > 0 and " " .. lvim.icons.ui.BoxChecked .. " " or ""
     ),
     fmt("* Supported: %s", str_list(supported_linters)),
   }
@@ -202,7 +202,7 @@ function M.toggle_popup(ft)
     vim.fn.matchadd("LvimInfoIdentifier", " " .. ft .. "$")
     vim.fn.matchadd("string", "true")
     vim.fn.matchadd("string", "active")
-    vim.fn.matchadd("string", "")
+    vim.fn.matchadd("string", lvim.icons.ui.BoxChecked)
     vim.fn.matchadd("boolean", "inactive")
     vim.fn.matchadd("error", "false")
     tbl_set_highlight(require("lvim.lsp.null-ls.formatters").list_registered(ft), "LvimInfoIdentifier")

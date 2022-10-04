@@ -29,11 +29,11 @@ local defaults = {
 
     ---@usage Icons for the different levels
     icons = {
-      ERROR = "",
-      WARN = "",
-      INFO = "",
-      DEBUG = "",
-      TRACE = "✎",
+      ERROR = lvim.icons.diagnostics.Error,
+      WARN = lvim.icons.diagnostics.Warning,
+      INFO = lvim.icons.diagnostics.Information,
+      DEBUG = lvim.icons.diagnostics.Debug,
+      TRACE = lvim.icons.diagnostics.Trace,
     },
   },
 }
@@ -43,7 +43,7 @@ function M.config()
     defaults.opts.icons = {
       ERROR = "[ERROR]",
       WARN = "[WARNING]",
-      INFO = "[INFo]",
+      INFO = "[INFO]",
       DEBUG = "[DEBUG]",
       TRACE = "[TRACE]",
     }
