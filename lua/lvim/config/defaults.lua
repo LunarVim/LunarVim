@@ -15,22 +15,6 @@ return {
   use_icons = true,
   icons = require "lvim.icons",
 
-  ---@usage terminal_hsplit_size string percentage or number of rows
-  terminal_split_size = {
-    horizontal = {
-      ---@usage amount number number of rows or percentage for horizontal split terminal
-      amount = 30,
-      ---@usage unit = 'cell' | 'percent'
-      unit = "percent",
-    },
-    vertical = {
-      ---@usage amount number number of columns or percentage for vertical split terminal
-      amount = 30,
-      ---@usage unit = 'cell' | 'percent'
-      unit = "percent",
-    },
-  },
-
   builtin = {},
 
   plugins = {

@@ -41,8 +41,8 @@ M.config = function()
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     -- TODO: pls add mappings in which key and refactor this
     execs = {
-      { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", nil },
-      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", nil },
+      { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
+      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", 0.3 },
       { vim.o.shell, "<M-3>", "Float Terminal", "float", nil },
     },
   }
@@ -50,6 +50,7 @@ end
 
 M.setup = function()
   local terminal = require "toggleterm"
+  local max = require("math").max
   terminal.setup(lvim.builtin.terminal)
 
   for i, exec in pairs(lvim.builtin.terminal.execs) do
@@ -63,14 +64,16 @@ M.setup = function()
       count = i + 100,
       direction = direction,
       size = function()
-        if direction == "float" then
+        local size = exec[5]
+        if direction == "float" or not size then
           return lvim.builtin.terminal.size
         end
-        local size = lvim.terminal_split_size[direction]
-        if size.unit == "percent" then
+        -- check if size is float
+        if tostring(size):find(".", 1, true) then
+          size = max(size, 1.0)
           local buf_sizes = Functions.get_buf_size()
           local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
-          return buf_size * size.amount / 100
+          return buf_size * size.amount
         else
           return lvim.terminal_split_size[direction].amount
         end
