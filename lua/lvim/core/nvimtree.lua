@@ -92,6 +92,7 @@ function M.config()
           },
         },
         highlight_git = true,
+        group_empty = false,
         root_folder_modifier = ":t",
       },
       filters = {
