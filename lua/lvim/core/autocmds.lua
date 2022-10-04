@@ -21,12 +21,10 @@ function M.load_defaults()
       "lir",
       "DressingSelect",
       "tsplayground",
-      "Markdown",
     },
     callback = function()
       vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR>
-      nnoremap <silent> <buffer> <esc> :close<CR>
       set nobuflisted
     ]]
     end,
