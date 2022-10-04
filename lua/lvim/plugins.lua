@@ -58,6 +58,7 @@ local core_plugins = {
     end,
     requires = {
       "L3MON4D3/LuaSnip",
+      "hrsh7th/cmp-cmdline"
     },
   },
   {

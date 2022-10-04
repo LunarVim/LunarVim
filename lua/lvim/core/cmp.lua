@@ -197,8 +197,8 @@ M.config = function()
       { name = "tmux" },
     },
     mapping = cmp.mapping.preset.insert {
-      ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["<C-j>"] = cmp.mapping.select_next_item(),
+      ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+      ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
       ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
       ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -262,7 +262,22 @@ M.config = function()
 end
 
 function M.setup()
-  require("cmp").setup(lvim.builtin.cmp)
+    local cmp = require("cmp")
+    cmp.setup(lvim.builtin.cmp)
+
+    cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = "cmdline" },
+            { name = "path" },
+        },
+    })
+    cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = "buffer" },
+        },
+    })
 end
 
 return M
