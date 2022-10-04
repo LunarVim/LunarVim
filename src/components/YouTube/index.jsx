@@ -4,11 +4,7 @@ import Clouds from "../Clouds";
 import styles from "./styles.module.css";
 
 const YouTube = () => {
-  const {
-    siteConfig: {
-      customFields: { YouTube },
-    },
-  } = useDocusaurusContext();
+  const { siteConfig: { customFields: { YouTube } } } = useDocusaurusContext();
 
   return (
     <Clouds>

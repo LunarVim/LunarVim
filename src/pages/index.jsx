@@ -1,68 +1,26 @@
 import React from "react";
-import Translate from "@docusaurus/Translate";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import styles from "./index.module.css";
+import Features from "@site/src/components/Features";
 import Preview from "@site/src/components/Preview";
 import YouTube from "@site/src/components/YouTube";
 import Languages from "@site/src/components/Languages";
 import Stars from "../components/Stars";
 import Contributors from "../components/Contributors";
+import Hero from "../components/Hero";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
-function HomepageHeader() {
+const  Home = () => {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Stars FALLING_STARS_COUNT={3}>
-      <header className={clsx("hero hero--primary", styles.heroBanner)}>
-        <div className={`container ${styles.container}`}>
-          <div className={styles.heroContent}>
-            <h1 className="hero__title"><Translate>LunarVim</Translate></h1>
-            <p className="hero__subtitle"><Translate>Cool slogan about LunarVim</Translate></p>
-            <div className={styles.buttons}>
-              <Link
-                className="button button--primary button--lg"
-                to={siteConfig.customFields.primaryCTA.to}
-              >
-                <Translate>Install</Translate>
-              </Link>
-              {siteConfig.customFields.secondaryCTA ? (
-                <Link
-                  className="button button--outline button--lg"
-                  to={siteConfig.customFields.secondaryCTA.to}
-                >
-                  <Translate>Support</Translate>
-                </Link>
-              ) : null}
-            </div>
-          </div>
-          <div className={styles.heroImage}>
-            <img
-              src={require('@site/static/img/lunarvim_logo.png').default}
-              alt={siteConfig.customFields.heroImage.alt}
-            />
-          </div>
-        </div>
-      </header>
-    </Stars>
-  );
-}
-
-export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <Layout
-      title={siteConfig.title}
+    <Layout title={siteConfig.title}
       description="Description will go into a meta tag in <head />"
     >
-      <HomepageHeader />
+      <Hero />
       <main>
         <Preview />
-        <HomepageFeatures />
+        <Features />
         <YouTube />
-        <Stars starsCount={120} >
+        <Stars starsCount={120}>
           <Languages />
           <Contributors />
         </Stars>
@@ -70,3 +28,5 @@ export default function Home() {
     </Layout>
   );
 }
+
+export default Home;

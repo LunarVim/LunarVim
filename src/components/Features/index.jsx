@@ -33,23 +33,21 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
+const Feature = ({Svg, title, description}) => (
+  <div className={clsx('col col--4')}>
+    <div className="text--center">
+      <Svg className={styles.featureSvg} role="img" />
     </div>
-  );
-}
+    <div className="text--center padding-horiz--md">
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  </div>
+);
 
-export default function HomepageFeatures() {
+const Features = () => {
   return (
-    <Stars starsCount={50}>
+    <Stars starsCount={40}>
       <section className={styles.features}>
         <div className={`container ${styles.container}`}>
           <div className="row">
@@ -62,3 +60,5 @@ export default function HomepageFeatures() {
     </Stars>
   );
 }
+
+export default Features;
