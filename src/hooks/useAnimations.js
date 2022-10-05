@@ -3,8 +3,11 @@ import React, { createContext, useEffect, useState } from "react";
 export const AnimationsContext = createContext(true);
 
 const AnimationsContextProvider = (props) => {
-  const storedAnimate = JSON.parse(localStorage.getItem("animate") || "true");
-  const [animate, setAnimate] = useState(storedAnimate);
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(JSON.parse(localStorage.getItem("animate") || "true"));
+  }, [])
 
   useEffect(() => {
     localStorage.setItem("animate", JSON.stringify(animate));
