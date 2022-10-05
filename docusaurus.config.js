@@ -4,6 +4,7 @@
 /* const lightCodeTheme = require('prism-react-renderer/themes/github'); */
 /* const darkCodeTheme = require('prism-react-renderer/themes/dracula'); */
 const codeTheme = require("./src/themes/code-theme");
+const socials = require("./socials");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -120,7 +121,7 @@ const config = {
     Contributors: {
       owner: "LunarVim",
       repos: ["LunarVim.org"],
-    }
+    },
   },
 
   themeConfig:
@@ -150,36 +151,7 @@ const config = {
             to: "/donate",
             label: "Donate",
           },
-          {
-            href: "https://twitter.com/chrisatmachine",
-            position: "right",
-            className: "navbar-icon navbar-icon-twitter",
-          },
-          {
-            href: "https://www.reddit.com/r/lunarvim/",
-            position: "right",
-            className: "navbar-icon navbar-icon-reddit",
-          },
-          {
-            href: "https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA",
-            position: "right",
-            className: "navbar-icon navbar-icon-youtube",
-          },
-          {
-            href: "https://matrix.to/#/#the-machine:matrix.org",
-            position: "right",
-            className: "navbar-icon navbar-icon-matrix",
-          },
-          {
-            href: "https://discord.gg/Xb9B4Ny",
-            position: "right",
-            className: "navbar-icon navbar-icon-discord",
-          },
-          {
-            href: "https://github.com/lunarvim/lunarvim",
-            position: "right",
-            className: "navbar-icon navbar-icon-github",
-          },
+          ...socials,
           {
             type: "localeDropdown",
             position: "right",
