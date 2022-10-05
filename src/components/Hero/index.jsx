@@ -15,10 +15,10 @@ const Hero = () => {
 
   return (
     <Stars FALLING_STARS_COUNT={3}>
-      <button className={styles.toggleAnimations} onClick={ () => setAnimate(currentState => !currentState)}>
-        { animate ? 
+      <button className={styles.toggleAnimations} onClick={() => setAnimate(currentState => !currentState)}>
+        {animate ?
           <DisabledStar /> :
-          <ShootingStar /> 
+          <ShootingStar />
         }
       </button>
 

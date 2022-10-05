@@ -6,8 +6,9 @@
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  height: 185px;
+  width: 185px;
+  margin-bottom: 1rem;
 }
 
 .container {

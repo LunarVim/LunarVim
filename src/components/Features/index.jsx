@@ -6,7 +6,7 @@ import Stars from "../Stars";
 const FeatureList = [
   {
     title: 'Opinionated',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/telescope.svg').default,
     description: (
       <>
         LunarVim ships with a sane default config for you to build on top of. Features include autocompletion, integrated terminal, file explorer, fuzzy finder, LSP, linting, formatting and debugging.
@@ -15,7 +15,7 @@ const FeatureList = [
   },
   {
     title: 'Extensible',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/img/astronaut.svg').default,
     description: (
       <>
         Just because LunarVim has an opinion doesn't mean you need to share it. Every builtin plugin can be toggled on or off in the config.lua file. This is the place to add your own plugins, keymaps, autocommands, leader bindings and all other custom settings.
@@ -24,7 +24,7 @@ const FeatureList = [
   },
   {
     title: 'Fast',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/rocket.svg').default,
     description: (
       <>
         LunarVim lazyloads plugins wherever possible to maximize speed. Disabled plugins also will not decrease speed due to the plugin list being compiled with only the active plugins. This strategy allows LunarVim to not have to choose between features and speed.
