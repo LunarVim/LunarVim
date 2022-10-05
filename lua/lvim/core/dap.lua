@@ -6,21 +6,21 @@ M.config = function()
     on_config_done = nil,
     breakpoint = {
       text = lvim.icons.ui.Bug,
-      texthl = "LspDiagnosticsSignError",
+      texthl = "DiagnosticSignError",
       linehl = "",
       numhl = "",
     },
     breakpoint_rejected = {
       text = lvim.icons.ui.Bug,
-      texthl = "LspDiagnosticsSignHint",
+      texthl = "DiagnosticSignError",
       linehl = "",
       numhl = "",
     },
     stopped = {
       text = lvim.icons.ui.BoldArrowRight,
-      texthl = "LspDiagnosticsSignInformation",
-      linehl = "DiagnosticUnderlineInfo",
-      numhl = "LspDiagnosticsSignInformation",
+      texthl = "DiagnosticSignWarn",
+      linehl = "Visual",
+      numhl = "DiagnosticSignWarn",
     },
     ui = {
       auto_open = true,
@@ -119,3 +119,4 @@ M.setup_ui = function()
 end
 
 return M
+
