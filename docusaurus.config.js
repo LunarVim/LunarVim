@@ -163,6 +163,13 @@ const config = {
         darkTheme: codeTheme,
       },
     }),
+  plugins: [
+    ["./plugins/asciinema", {
+      output_dir: 'static/casts',
+      font_name: 'glyphs.ttf',
+      source_font: 'src/themes/fura_code_nerd.ttf'
+    }],
+  ],
 };
 
 module.exports = config;
