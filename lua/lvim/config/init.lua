@@ -122,6 +122,8 @@ function M:load(config_path)
     end
   end
 
+  Log:set_level(lvim.log.level)
+
   handle_deprecated_settings()
 
   autocmds.define_autocmds(lvim.autocommands)
