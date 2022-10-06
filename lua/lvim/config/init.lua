@@ -118,7 +118,9 @@ function M:load(config_path)
     if utils.is_file(user_config_file) then
       Log:warn("Invalid configuration: " .. err)
     else
-      vim.notify_once(string.format("User-configuration not found. Creating an example configuration in %s", config_path))
+      vim.notify_once(
+        string.format("User-configuration not found. Creating an example configuration in %s", config_path)
+      )
       local example_config = join_paths(get_lvim_base_dir(), "utils", "installer", "config.example.lua")
       vim.loop.fs_copyfile(example_config, config_path)
     end
