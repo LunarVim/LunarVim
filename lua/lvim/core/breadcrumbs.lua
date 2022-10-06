@@ -84,13 +84,8 @@ M.winbar_filetype_exclude = {
   "DressingSelect",
   "Jaq",
   "harpoon",
-  "dapui_scopes",
-  "dapui_breakpoints",
-  "dapui_stacks",
-  "dapui_watches",
   "dap-repl",
   "dap-terminal",
-  "dapui_console",
   "lab",
   "Markdown",
   "",
@@ -110,6 +105,28 @@ M.get_filename = function()
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if f.isempty(file_icon) then
       file_icon = lvim.icons.kind.File
+    end
+
+    local buf_ft = vim.bo.filetype
+
+    if buf_ft == "dapui_breakpoints" then
+      file_icon = lvim.icons.ui.Bug
+    end
+
+    if buf_ft == "dapui_stacks" then
+      file_icon = lvim.icons.ui.Stacks
+    end
+
+    if buf_ft == "dapui_scopes" then
+      file_icon = lvim.icons.ui.Scopes
+    end
+
+    if buf_ft == "dapui_watches" then
+      file_icon = lvim.icons.ui.Watches
+    end
+
+    if buf_ft == "dapui_console" then
+      file_icon = lvim.icons.ui.DebugConsole
     end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)

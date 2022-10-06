@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   lvim.builtin.dap = {
-    active = true,
+    active = false,
     on_config_done = nil,
     breakpoint = {
       text = lvim.icons.ui.Bug,
@@ -119,4 +119,3 @@ M.setup_ui = function()
 end
 
 return M
-
