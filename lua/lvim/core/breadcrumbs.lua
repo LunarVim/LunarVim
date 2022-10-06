@@ -6,7 +6,7 @@ local icons = lvim.icons.kind
 
 M.config = function()
   lvim.builtin.breadcrumbs = {
-    active = false,
+    active = true,
     on_config_done = nil,
     options = {
       icons = {
