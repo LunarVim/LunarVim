@@ -112,15 +112,6 @@ function plugin_loader.load(configurations)
     Log:warn "problems detected while loading plugins' configurations"
     Log:trace(debug.traceback())
   end
-
-  -- ref: https://github.com/neovim/neovim/issues/18201#issuecomment-1104754564
-  local colors = vim.api.nvim_get_runtime_file(("colors/%s.*"):format(lvim.colorscheme), false)
-  if #colors == 0 then
-    Log:warn(string.format("Could not find '%s' colorscheme", lvim.colorscheme))
-    return
-  end
-  vim.g.colors_name = lvim.colorscheme
-  vim.cmd("colorscheme " .. lvim.colorscheme)
 end
 
 function plugin_loader.get_core_plugins()
