@@ -12,26 +12,23 @@ vim.tbl_add_reverse_lookup(Log.levels)
 local notify_opts = {}
 
 function Log:set_level(level)
-  local logger_ok, _ = xpcall(function()
-    local log_level = Log.levels[level:upper()]
-    local structlog = require "structlog"
-    if structlog then
-      local logger = structlog.get_logger "lvim"
-      for _, s in ipairs(logger.sinks) do
-        s.level = log_level
-      end
+  local logger_ok, logger = pcall(function()
+    return require("structlog").get_logger "lvim"
+  end)
+  local log_level = Log.levels[level:upper()]
+  if logger_ok and logger and log_level then
+    for _, s in ipairs(logger.sinks) do
+      s.level = log_level
     end
-  end, debug.traceback)
-  if not logger_ok then
-    Log:debug("Unable to set logger's level: " .. debug.traceback())
+  else
+    vim.notify_once("Unable to set logger's level to " .. level)
   end
 
   local packer_ok, _ = xpcall(function()
-    package.loaded["packer.log"] = nil
-    require("packer.log").new { level = lvim.log.level }
+    require("packer.log").cfg { log = { level = level } }
   end, debug.traceback)
   if not packer_ok then
-    Log:debug("Unable to set packer's log level: " .. debug.traceback())
+    vim.notify_once("Unable to set packer's log level to " .. level)
   end
 end
 
@@ -91,7 +88,7 @@ function Log:init()
         vim_log_level = vim_log_level + 1
       end
 
-      logger:log(vim_log_level, msg)
+      self:info(vim_log_level, msg)
     end
   end
 
@@ -159,11 +156,15 @@ end
 ---Retrieves the handle of the logger object
 ---@return table|nil logger handle if found
 function Log:get_logger()
-  if self.__handle then
-    return self.__handle
+  local logger_ok, logger = pcall(function()
+    return require("structlog").get_logger "lvim"
+  end)
+  if logger_ok and logger then
+    return logger
   end
 
-  local logger = self:init()
+  logger = self:init()
+
   if not logger then
     return
   end
