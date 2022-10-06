@@ -156,7 +156,9 @@ end
 ---Retrieves the handle of the logger object
 ---@return table|nil logger handle if found
 function Log:get_logger()
-  local logger_ok, logger = pcall(require("structlog").get_logger, "lvim")
+  local logger_ok, logger = pcall(function()
+    return require("structlog").get_logger "lvim"
+  end)
   if logger_ok and logger then
     return logger
   end
