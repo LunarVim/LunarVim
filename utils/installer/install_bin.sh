@@ -27,6 +27,7 @@ function setup_shim() {
   sed -e s"#RUNTIME_DIR_VAR#\"${LUNARVIM_RUNTIME_DIR}\"#"g \
     -e s"#CONFIG_DIR_VAR#\"${LUNARVIM_CONFIG_DIR}\"#"g \
     -e s"#CACHE_DIR_VAR#\"${LUNARVIM_CACHE_DIR}\"#"g "$src" \
+    -e s"#BASE_DIR_VAR#\"${LUNARVIM_BASE_DIR}\"#"g "$src" \
     | tee "$dst" >/dev/null
 
   chmod u+x "$dst"
