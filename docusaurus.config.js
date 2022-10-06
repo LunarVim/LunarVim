@@ -3,7 +3,7 @@
 
 /* const lightCodeTheme = require('prism-react-renderer/themes/github'); */
 /* const darkCodeTheme = require('prism-react-renderer/themes/dracula'); */
-const codeTheme = require("./src/themes/code-theme");
+const codeTheme = require("./src/theme/code-theme");
 const socials = require("./socials");
 
 /** @type {import('@docusaurus/types').Config} */
@@ -167,7 +167,7 @@ const config = {
     ["./plugins/asciinema", {
       casts_folder: 'static/casts',
       font_name: 'glyphs.ttf',
-      source_font: 'src/themes/fura_code_nerd.ttf'
+      source_font: 'src/theme/fura_code_nerd.ttf'
     }],
   ],
 };
