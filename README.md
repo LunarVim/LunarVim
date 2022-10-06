@@ -30,11 +30,11 @@
 
 ## Install In One Command!
 
-Make sure you have the release version of Neovim (0.7+).
+Make sure you have the release version of Neovim (0.8+).
 
 ### Linux/MacOS:
 
-If you are running Neovim 0.7+
+If you are running Neovim 0.8+
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
