@@ -29,7 +29,6 @@ function M.load_defaults()
     ]]
     end,
   })
-
   local definitions = {
     {
       "TextYankPost",
@@ -51,6 +50,14 @@ function M.load_defaults()
         callback = function()
           require("lvim.config"):reload()
         end,
+      },
+    },
+    {
+      "FileType",
+      {
+        group = "_hide_dap_repl",
+        pattern = "dap-repl",
+        command = "set nobuflisted",
       },
     },
     {
