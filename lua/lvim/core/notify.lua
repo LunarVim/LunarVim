@@ -3,7 +3,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 local defaults = {
-  active = true,
+  active = false,
   on_config_done = nil,
   opts = {
     ---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
