@@ -223,15 +223,6 @@ local core_plugins = {
     disable = not lvim.builtin.dap.active,
   },
 
-  -- Debugger management
-  {
-    "Pocco81/dap-buddy.nvim",
-    branch = "dev",
-    -- event = "BufWinEnter",
-    -- event = "BufRead",
-    disable = not lvim.builtin.dap.active,
-  },
-
   -- Debugger user interface
   {
     "rcarriga/nvim-dap-ui",

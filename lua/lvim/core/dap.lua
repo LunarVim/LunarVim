@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   lvim.builtin.dap = {
-    active = false,
+    active = true,
     on_config_done = nil,
     breakpoint = {
       text = lvim.icons.ui.Bug,
@@ -29,7 +29,10 @@ M.config = function()
 end
 
 M.setup = function()
-  local dap = require "dap"
+  local status_ok, dap = pcall(require, "dap")
+  if not status_ok then
+    return
+  end
 
   if lvim.use_icons then
     vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
@@ -61,7 +64,10 @@ M.setup = function()
 end
 
 M.setup_ui = function()
-  local dap = require "dap"
+  local status_ok, dap = pcall(require, "dap")
+  if not status_ok then
+    return
+  end
   local dapui = require "dapui"
   dapui.setup {
     expand_lines = true,
