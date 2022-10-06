@@ -62,7 +62,7 @@ module.exports = function(_, options) {
   return {
     name: 'asciinema-font',
     async loadContent() {
-      castsFolder = options.output_dir || 'static/casts';
+      castsFolder = options.casts_folder || 'static/casts';
       font_name = options.font_name || 'glyphs.ttf';
       sourceFont = options.source_font;
 

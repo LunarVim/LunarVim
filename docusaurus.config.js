@@ -165,7 +165,7 @@ const config = {
     }),
   plugins: [
     ["./plugins/asciinema", {
-      output_dir: 'static/casts',
+      casts_folder: 'static/casts',
       font_name: 'glyphs.ttf',
       source_font: 'src/themes/fura_code_nerd.ttf'
     }],
