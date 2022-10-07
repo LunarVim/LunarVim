@@ -1,6 +1,5 @@
 local M = {}
 local Log = require "lvim.core.log"
-local Functions = require "lvim.utils.functions"
 
 M.config = function()
   lvim.builtin["terminal"] = {
@@ -48,9 +47,40 @@ M.config = function()
   }
 end
 
+--- Get current buffer size
+---@return {width: number, height: number}
+local function get_buf_size()
+  local cbuf = vim.api.nvim_get_current_buf()
+  local bufinfo = vim.tbl_filter(function(buf)
+    return buf.bufnr == cbuf
+  end, vim.fn.getwininfo(vim.api.nvim_get_current_win()))[1]
+  if bufinfo == nil then
+    return { width = -1, height = -1 }
+  end
+  return { width = bufinfo.width, height = bufinfo.height }
+end
+
+--- Get the dynamic terminal size in cells
+---@param direction number
+---@param size integer
+---@return integer
+local function get_dynamic_terminal_size(direction, size)
+  if direction == "float" or not size then
+    return lvim.builtin.terminal.size
+  end
+  -- check if size is float
+  if tostring(size):find(".", 1, true) then
+    size = math.max(size, 1.0)
+    local buf_sizes = get_buf_size()
+    local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
+    return buf_size * size.amount
+  else
+    return lvim.terminal_split_size[direction].amount
+  end
+end
+
 M.setup = function()
   local terminal = require "toggleterm"
-  local max = require("math").max
   terminal.setup(lvim.builtin.terminal)
 
   for i, exec in pairs(lvim.builtin.terminal.execs) do
@@ -64,19 +94,7 @@ M.setup = function()
       count = i + 100,
       direction = direction,
       size = function()
-        local size = exec[5]
-        if direction == "float" or not size then
-          return lvim.builtin.terminal.size
-        end
-        -- check if size is float
-        if tostring(size):find(".", 1, true) then
-          size = max(size, 1.0)
-          local buf_sizes = Functions.get_buf_size()
-          local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
-          return buf_size * size.amount
-        else
-          return lvim.terminal_split_size[direction].amount
-        end
+        get_dynamic_terminal_size(direction, exec[5])
       end,
     }
 
