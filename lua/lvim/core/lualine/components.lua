@@ -16,6 +16,7 @@ local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
 local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
 local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
 
+vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
 vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
 vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.background })
@@ -122,11 +123,16 @@ return {
       end
       local buf_ft = vim.bo.filetype
       local buf_client_names = {}
+      local copilot_active = false
 
       -- add client
       for _, client in pairs(buf_clients) do
-        if client.name ~= "null-ls" then
+        if client.name ~= "null-ls" and client.name ~= "copilot" then
           table.insert(buf_client_names, client.name)
+        end
+
+        if client.name == "copilot" then
+          copilot_active = true
         end
       end
 
@@ -141,7 +147,14 @@ return {
       vim.list_extend(buf_client_names, supported_linters)
 
       local unique_client_names = vim.fn.uniq(buf_client_names)
-      return "[" .. table.concat(unique_client_names, ", ") .. "]"
+
+      local language_servers = "[" .. table.concat(unique_client_names, ", ") .. "]"
+
+      if copilot_active then
+        language_servers = language_servers .. "%#SLCopilot#" .. " " .. lvim.icons.git.Octoface .. "%*"
+      end
+
+      return language_servers
     end,
     separator = separator,
     color = { gui = "bold" },
@@ -185,3 +198,4 @@ return {
     cond = nil,
   },
 }
+
