@@ -7,7 +7,7 @@ import Clouds from "../Clouds/";
 const Preview = () => {
   const { siteConfig: { customFields: { previewImgs } } } = useDocusaurusContext();
 
-  const [previewIdx, setPreviewIdx] = useState(0);
+  const [previewIdx, setPreviewIdx] = useState(1);
   const imgsCount = previewImgs.length;
 
   const nextImg = () => {

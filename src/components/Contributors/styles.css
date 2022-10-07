@@ -1,8 +1,10 @@
+.sc-bcXHqe.hlyuwO,
 .sc-bcXHqe.fEaFoO {
   gap: 1rem;
   justify-content: center;
 }
 
+.sc-gswNZR.eMDKPr,
 .sc-gswNZR.ibxbuv {
   min-width: 5.5rem;
   width: 5.5rem;
@@ -17,6 +19,9 @@
   position: relative;
 }
 
+.sc-gswNZR.eMDKPr:active,
+.sc-gswNZR.eMDKPr:focus,
+.sc-gswNZR.eMDKPr:hover,
 .sc-gswNZR.ibxbuv:active,
 .sc-gswNZR.ibxbuv:focus,
 .sc-gswNZR.ibxbuv:hover {
@@ -25,6 +30,7 @@
   border: 2px solid var(--ifm-color-primary);
 }
 
+.sc-hLBbgP.gDAwEa,
 .sc-hLBbgP.gpWQdS {
   min-width: 5.5rem;
   padding: 0.5rem 2.5rem 0.5rem 1rem;
@@ -40,27 +46,30 @@
   border-radius: 0 100vmax 100vmax 0;
   border: 2px solid var(--ifm-color-primary);
   border-left: 0;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-.sc-hLBbgP.gpWQdS {
   display: none;
 }
 
+.sc-hLBbgP.gDAwEa small,
+.sc-hLBbgP.gDAwEa h4,
 .sc-hLBbgP.gpWQdS small,
 .sc-hLBbgP.gpWQdS h4 {
   color: var(--primary-fg);
 }
 
 @media screen and (min-width: 996px) {
+  .sc-gswNZR.eMDKPr:active .sc-hLBbgP.gDAwEa,
+  .sc-gswNZR.eMDKPr:focus .sc-hLBbgP.gDAwEa,
+  .sc-gswNZR.eMDKPr:hover .sc-hLBbgP.gDAwEa,
   .sc-gswNZR.ibxbuv:active .sc-hLBbgP.gpWQdS,
   .sc-gswNZR.ibxbuv:focus .sc-hLBbgP.gpWQdS,
   .sc-gswNZR.ibxbuv:hover .sc-hLBbgP.gpWQdS {
     display: block;
   }
 
+  .sc-gswNZR.eMDKPr:active,
+  .sc-gswNZR.eMDKPr:focus,
+  .sc-gswNZR.eMDKPr:hover,
   .sc-gswNZR.ibxbuv:active,
   .sc-gswNZR.ibxbuv:focus,
   .sc-gswNZR.ibxbuv:hover {
@@ -68,6 +77,7 @@
     outline: 0;
   }
 
+  .sc-gswNZR.eMDKPr,
   .sc-gswNZR.ibxbuv {
     border-right: 0;
   }
