@@ -92,7 +92,7 @@ M.config = function()
         f = { "<cmd>Telescope buffers<cr>", "Find" },
         b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
         n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-        W = {"<cmd>noautocmd w<cr>", "Save without formatting" },
+        W = { "<cmd>noautocmd w<cr>", "Save without formatting" },
         -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
         e = {
           "<cmd>BufferLinePickClose<cr>",
