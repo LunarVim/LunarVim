@@ -247,7 +247,20 @@ M.config = function()
           },
         },
       },
-      { name = "nvim_lsp" },
+      {
+        name = "nvim_lsp",
+        entry_filter = function(entry, ctx)
+          local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+          if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+            return false
+          end
+          if kind == "Text" then
+            return false
+          end
+          return true
+        end,
+      },
+
       { name = "path" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
