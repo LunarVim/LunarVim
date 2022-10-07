@@ -10,4 +10,4 @@ $env:LUNARVIM_CONFIG_DIR = $env:LUNARVIM_CONFIG_DIR ?? "$env:XDG_CONFIG_HOME\lvi
 $env:LUNARVIM_CACHE_DIR = $env:LUNARVIM_CACHE_DIR ?? "$env:XDG_CACHE_HOME\lvim"
 $env:LUNARVIM_BASE_DIR = $env:LUNARVIM_BASE_DIR ?? "$env:LUNARVIM_RUNTIME_DIR\lvim"
 
-nvim -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" @args
+nvim -u "$env:LUNARVIM_BASE_DIR\init.lua" @args

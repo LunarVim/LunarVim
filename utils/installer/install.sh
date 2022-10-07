@@ -2,20 +2,20 @@
 set -eo pipefail
 
 #Set branch to master unless specified by the user
-declare LV_BRANCH="${LV_BRANCH:-"master"}"
-declare -r LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
-declare -r INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
+declare -x LV_BRANCH="${LV_BRANCH:-"master"}"
+declare -xr LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
+declare -xr INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 
-declare -r XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
-declare -r XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
-declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+declare -xr XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
+declare -xr XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+declare -xr XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
-declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
-declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
-declare -r LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
-declare -r LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
+declare -xr LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
+declare -xr LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
+declare -xr LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
+declare -xr LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
 
-declare -r LUNARVIM_LOG_LEVEL="${LUNARVIM_LOG_LEVEL:-warn}"
+declare -xr LUNARVIM_LOG_LEVEL="${LUNARVIM_LOG_LEVEL:-warn}"
 
 declare BASEDIR
 BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
