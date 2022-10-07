@@ -1,14 +1,13 @@
 local M = {}
 
--- local Log = require "lvim.core.log"
-
 M.config = function()
   lvim.builtin.lir = {
     active = true,
     on_config_done = nil,
+    icon = "",
   }
 
-  local status_ok, lir = pcall(require, "lir")
+  local status_ok, _ = pcall(require, "lir")
   if not status_ok then
     return
   end
@@ -17,7 +16,7 @@ M.config = function()
   local mark_actions = require "lir.mark.actions"
   local clipboard_actions = require "lir.clipboard.actions"
 
-  lir.setup {
+  lvim.builtin.lir = vim.tbl_extend("force", lvim.builtin.lir, {
     show_hidden_files = false,
     devicons_enable = true,
     mappings = {
@@ -81,33 +80,35 @@ M.config = function()
       -- echo cwd
       -- vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
     end,
-  }
+  })
+end
 
-  -- custom folder icon
-  require("nvim-web-devicons").set_icon {
+function M.icon_setup()
+  local function get_hl_by_name(name)
+    local ret = vim.api.nvim_get_hl_by_name(name.group, true)
+    return string.format("#%06x", ret[name.property])
+  end
+
+  local found, icon_hl = pcall(get_hl_by_name, { group = "NvimTreeFolderIcon", property = "foreground" })
+  if not found then
+    icon_hl = "#42A5F5"
+  end
+
+  reload("nvim-web-devicons").set_icon {
     lir_folder_icon = {
-      icon = "",
-      -- color = "#7ebae4",
-      -- color = "#569CD6",
-      color = "#42A5F5",
+      icon = lvim.builtin.lir.icon,
+      color = icon_hl,
       name = "LirFolderNode",
     },
   }
 end
 
 function M.setup()
-  if lvim.builtin.nvimtree.active then
-    -- Log:warn "Unable to configure lir while nvimtree is active! Please set 'lvim.builtin.nvimtree.active=false'"
-    return
-  end
-
-  local status_ok, lir = pcall(require, "lir")
+  local status_ok, lir = pcall(reload, "lir")
   if not status_ok then
     return
   end
-
-  lir.setup(lvim.builtin.lir.setup)
-  require("nvim-web-devicons").set_icon(lvim.builtin.lir.icons)
+  lir.setup(lvim.builtin.lir)
 
   if lvim.builtin.lir.on_config_done then
     lvim.builtin.lir.on_config_done(lir)

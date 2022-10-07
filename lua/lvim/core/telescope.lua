@@ -63,8 +63,8 @@ function M.config()
   end
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
-      prompt_prefix = " ",
-      selection_caret = " ",
+      prompt_prefix = lvim.icons.ui.Telescope .. " ",
+      selection_caret = lvim.icons.ui.Forward .. " ",
       entry_prefix = "  ",
       initial_mode = "insert",
       selection_strategy = "reset",

@@ -2,46 +2,48 @@ local M = {}
 
 -- local Log = require "lvim.core.log"
 
+local icons = lvim.icons.kind
+
 M.config = function()
   lvim.builtin.breadcrumbs = {
-    active = false,
+    active = true,
     on_config_done = nil,
     options = {
       icons = {
-        Text = " ",
-        Method = " ",
-        Function = " ",
-        Constructor = " ",
-        Field = " ",
-        Variable = " ",
-        Class = " ",
-        Interface = " ",
-        Module = " ",
-        Property = " ",
-        Unit = " ",
-        Value = " ",
-        Enum = " ",
-        Keyword = " ",
-        Snippet = " ",
-        Color = " ",
-        File = " ",
-        Reference = " ",
-        Folder = " ",
-        EnumMember = " ",
-        Constant = " ",
-        Struct = " ",
-        Event = " ",
-        Operator = " ",
-        TypeParameter = " ",
-        Array = " ",
-        Number = " ",
-        String = " ",
-        Boolean = "蘒",
-        Object = " ",
-        Package = " ",
-        Namespace = "",
-        Key = "",
-        Null = "ﳠ",
+        Array = icons.Array .. " ",
+        Boolean = icons.Boolean,
+        Class = icons.Class .. " ",
+        Color = icons.Color .. " ",
+        Constant = icons.Constant .. " ",
+        Constructor = icons.Constructor .. " ",
+        Enum = icons.Enum .. " ",
+        EnumMember = icons.EnumMember .. " ",
+        Event = icons.Event .. " ",
+        Field = icons.Field .. " ",
+        File = icons.File .. " ",
+        Folder = icons.Folder .. " ",
+        Function = icons.Function .. " ",
+        Interface = icons.Interface .. " ",
+        Key = icons.Key .. " ",
+        Keyword = icons.Keyword .. " ",
+        Method = icons.Method .. " ",
+        Module = icons.Module .. " ",
+        Namespace = icons.Namespace .. " ",
+        Null = icons.Null .. " ",
+        Number = icons.Number .. " ",
+        Object = icons.Object .. " ",
+        Operator = icons.Operator .. " ",
+        Package = icons.Package .. " ",
+        Property = icons.Property .. " ",
+        Reference = icons.Reference .. " ",
+        Snippet = icons.Snippet .. " ",
+        String = icons.String .. " ",
+        Struct = icons.Struct .. " ",
+        Text = icons.Text .. " ",
+        TypeParameter = icons.TypeParameter .. " ",
+        Unit = icons.Unit .. " ",
+        Value = icons.Value .. " ",
+        Variable = icons.Variable .. " ",
       },
       highlight = true,
       separator = " " .. ">" .. " ",
@@ -82,10 +84,6 @@ M.winbar_filetype_exclude = {
   "DressingSelect",
   "Jaq",
   "harpoon",
-  "dapui_scopes",
-  "dapui_breakpoints",
-  "dapui_stacks",
-  "dapui_watches",
   "dap-repl",
   "dap-terminal",
   "dapui_console",
@@ -107,8 +105,30 @@ M.get_filename = function()
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if f.isempty(file_icon) then
-      file_icon = ""
+      file_icon = lvim.icons.kind.File
     end
+
+    local buf_ft = vim.bo.filetype
+
+    if buf_ft == "dapui_breakpoints" then
+      file_icon = lvim.icons.ui.Bug
+    end
+
+    if buf_ft == "dapui_stacks" then
+      file_icon = lvim.icons.ui.Stacks
+    end
+
+    if buf_ft == "dapui_scopes" then
+      file_icon = lvim.icons.ui.Scopes
+    end
+
+    if buf_ft == "dapui_watches" then
+      file_icon = lvim.icons.ui.Watches
+    end
+
+    -- if buf_ft == "dapui_console" then
+    --   file_icon = lvim.icons.ui.DebugConsole
+    -- end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
     vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text.foreground })
@@ -165,7 +185,7 @@ M.get_winbar = function()
 
   if not f.isempty(value) and f.get_buf_option "mod" then
     -- TODO: replace with circle
-    local mod = "%#LspCodeLens#" .. "" .. "%*"
+    local mod = "%#LspCodeLens#" .. lvim.icons.ui.Circle .. "%*"
     if gps_added then
       value = value .. " " .. mod
     else

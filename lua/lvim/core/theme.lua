@@ -83,13 +83,23 @@ M.config = function()
 end
 
 M.setup = function()
+  -- avoid running in headless mode since it's harder to detect failures
+  if #vim.api.nvim_list_uis() == 0 then
+    local Log = require "lvim.core.log"
+    Log:debug "headless mode detected, skipping running setup for lualine"
+    return
+  end
+
   local status_ok, theme = pcall(require, "tokyonight")
   if not status_ok then
     return
   end
 
   theme.setup(lvim.builtin.theme.options)
-  lvim.builtin.lualine.options.theme = "tokyonight"
+
+  require("lvim.core.lualine").setup()
+
+  require("lvim.core.lir").icon_setup()
 end
 
 return M

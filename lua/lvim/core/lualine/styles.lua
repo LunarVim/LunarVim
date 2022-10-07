@@ -43,8 +43,14 @@ styles.default = {
     theme = "auto",
     globalstatus = true,
     icons_enabled = lvim.use_icons,
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    component_separators = {
+      left = lvim.icons.ui.DividerRight,
+      right = lvim.icons.ui.DividerLeft,
+    },
+    section_separators = {
+      left = lvim.icons.ui.BoldDividerRight,
+      right = lvim.icons.ui.BoldDividerLeft,
+    },
     disabled_filetypes = {},
   },
   sections = {
@@ -146,6 +152,14 @@ function M.update()
   local style = M.get_style(lvim.builtin.lualine.style)
 
   lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
+
+  local color_template = vim.g.colors_name or lvim.colorscheme
+  local theme_supported, template = pcall(function()
+    require("lualine.utils.loader").load_theme(color_template)
+  end)
+  if theme_supported and template then
+    lvim.builtin.lualine.options.theme = color_template
+  end
 end
 
 return M
