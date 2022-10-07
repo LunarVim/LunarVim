@@ -19,6 +19,7 @@ end
 local function feedkeys(key, mode)
   vim.api.nvim_feedkeys(T(key), mode, true)
 end
+
 M.methods.feedkeys = feedkeys
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
@@ -113,6 +114,7 @@ local function jumpable(dir)
     return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
   end
 end
+
 M.methods.jumpable = jumpable
 
 M.config = function()
@@ -152,6 +154,7 @@ M.config = function()
         luasnip = "(Snippet)",
         buffer = "(Buffer)",
         tmux = "(TMUX)",
+        copilot = "(Copilot)",
       },
       duplicates = {
         buffer = 1,
@@ -167,6 +170,36 @@ M.config = function()
         end
         if lvim.use_icons then
           vim_item.kind = lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
+
+          -- TODO: not sure why I can't put this anywhere else
+          vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+          if entry.source.name == "copilot" then
+            vim_item.kind = lvim.icons.git.Octoface
+            vim_item.kind_hl_group = "CmpItemKindCopilot"
+          end
+
+          vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
+          if entry.source.name == "cmp_tabnine" then
+            vim_item.kind = lvim.icons.misc.Robot
+            vim_item.kind_hl_group = "CmpItemKindTabnine"
+          end
+
+          vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
+          if entry.source.name == "crates" then
+            vim_item.kind = lvim.icons.misc.Package
+            vim_item.kind_hl_group = "CmpItemKindCrate"
+          end
+
+          if entry.source.name == "lab.quick_data" then
+            vim_item.kind = lvim.icons.misc.CircuitBoard
+            vim_item.kind_hl_group = "CmpItemKindConstant"
+          end
+
+          vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
+          if entry.source.name == "emoji" then
+            vim_item.kind = lvim.icons.misc.Smiley
+            vim_item.kind_hl_group = "CmpItemKindEmoji"
+          end
         end
         vim_item.menu = lvim.builtin.cmp.formatting.source_names[entry.source.name]
         vim_item.dup = lvim.builtin.cmp.formatting.duplicates[entry.source.name]
@@ -184,6 +217,36 @@ M.config = function()
       documentation = cmp.config.window.bordered(),
     },
     sources = {
+      {
+        name = "copilot",
+        -- keyword_length = 0,
+        max_item_count = 3,
+        trigger_characters = {
+          {
+            ".",
+            ":",
+            "(",
+            "'",
+            '"',
+            "[",
+            ",",
+            "#",
+            "*",
+            "@",
+            "|",
+            "=",
+            "-",
+            "{",
+            "/",
+            "\\",
+            "+",
+            "?",
+            " ",
+            -- "\t",
+            -- "\n",
+          },
+        },
+      },
       { name = "nvim_lsp" },
       { name = "path" },
       { name = "luasnip" },
