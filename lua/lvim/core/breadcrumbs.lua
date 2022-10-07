@@ -226,4 +226,3 @@ M.create_winbar = function()
 end
 
 return M
-
