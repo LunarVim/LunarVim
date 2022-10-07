@@ -91,7 +91,7 @@ html[data-theme="dark"] {
 
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 .social {
