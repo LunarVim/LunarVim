@@ -19,6 +19,14 @@ local pickers = {
     theme = "dropdown",
     previewer = false,
     initial_mode = "normal",
+    mappings = {
+      i = {
+        ["<C-d>"] = require("telescope.actions").delete_buffer,
+      },
+      n = {
+        ["dd"] = require("telescope.actions").delete_buffer,
+      },
+    },
   },
   planets = {
     show_pluto = true,
@@ -95,6 +103,7 @@ function M.config()
         "--hidden",
         "--glob=!.git/",
       },
+      ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
       mappings = {
         i = {
           ["<C-n>"] = actions.move_selection_next,
@@ -104,13 +113,11 @@ function M.config()
           ["<C-k>"] = actions.cycle_history_prev,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           ["<CR>"] = actions.select_default,
-          ["<C-d>"] = require("telescope.actions").delete_buffer,
         },
         n = {
           ["<C-n>"] = actions.move_selection_next,
           ["<C-p>"] = actions.move_selection_previous,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["dd"] = require("telescope.actions").delete_buffer,
         },
       },
       pickers = pickers,
@@ -137,7 +144,6 @@ end
 function M.setup()
   local previewers = require "telescope.previewers"
   local sorters = require "telescope.sorters"
-  local actions = require "telescope.actions"
 
   lvim.builtin.telescope = vim.tbl_extend("keep", {
     file_previewer = previewers.vim_buffer_cat.new,
@@ -145,24 +151,6 @@ function M.setup()
     qflist_previewer = previewers.vim_buffer_qflist.new,
     file_sorter = sorters.get_fuzzy_file,
     generic_sorter = sorters.get_generic_fuzzy_sorter,
-    ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
-    mappings = {
-      i = {
-        ["<C-n>"] = actions.move_selection_next,
-        ["<C-p>"] = actions.move_selection_previous,
-        ["<C-c>"] = actions.close,
-        ["<C-j>"] = actions.cycle_history_next,
-        ["<C-k>"] = actions.cycle_history_prev,
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        ["<CR>"] = actions.select_default + actions.center,
-      },
-      n = {
-        ["<C-n>"] = actions.move_selection_next,
-        ["<C-p>"] = actions.move_selection_previous,
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        ["dd"] = require("telescope.actions").delete_buffer,
-      },
-    },
   }, lvim.builtin.telescope)
 
   local telescope = require "telescope"
