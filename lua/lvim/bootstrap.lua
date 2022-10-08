@@ -1,7 +1,7 @@
 local M = {}
 
-if vim.fn.has "nvim-0.7" ~= 1 then
-  vim.notify("Please upgrade your Neovim base installation. Lunarvim requires v0.7+", vim.log.levels.WARN)
+if vim.fn.has "nvim-0.8" ~= 1 then
+  vim.notify("Please upgrade your Neovim base installation. Lunarvim requires v0.8+", vim.log.levels.WARN)
   vim.wait(5000, function()
     return false
   end)
@@ -19,15 +19,9 @@ function _G.join_paths(...)
   return result
 end
 
----Require a module in protected mode without relying on its cached value
----@param module string
----@return any
-function _G.require_clean(module)
-  package.loaded[module] = nil
-  _G[module] = nil
-  local _, requested = pcall(require, module)
-  return requested
-end
+_G.require_clean = require("lvim.utils.modules").require_clean
+_G.require_safe = require("lvim.utils.modules").require_safe
+_G.reload = require("lvim.utils.modules").reload
 
 ---Get the full path to `$LUNARVIM_RUNTIME_DIR`
 ---@return string
@@ -121,10 +115,10 @@ end
 ---Update LunarVim
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
-  require_clean("lvim.utils.hooks").run_pre_update()
-  local ret = require_clean("lvim.utils.git").update_base_lvim()
+  reload("lvim.utils.hooks").run_pre_update()
+  local ret = reload("lvim.utils.git").update_base_lvim()
   if ret then
-    require_clean("lvim.utils.hooks").run_post_update()
+    reload("lvim.utils.hooks").run_post_update()
   end
 end
 

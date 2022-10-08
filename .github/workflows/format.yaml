@@ -22,6 +22,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # CLI arguments
+          version: 0.15.1
           args: --check .
 
   shfmt-check:

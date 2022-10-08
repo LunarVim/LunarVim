@@ -7,16 +7,16 @@ M.config = function()
     icon = "",
   }
 
-  local status_ok, lir = pcall(reload, "lir")
+  local status_ok, _ = pcall(require, "lir")
   if not status_ok then
     return
   end
 
-  local actions = reload "lir.actions"
-  local mark_actions = reload "lir.mark.actions"
-  local clipboard_actions = reload "lir.clipboard.actions"
+  local actions = require "lir.actions"
+  local mark_actions = require "lir.mark.actions"
+  local clipboard_actions = require "lir.clipboard.actions"
 
-  lir.setup {
+  lvim.builtin.lir = vim.tbl_extend("force", lvim.builtin.lir, {
     show_hidden_files = false,
     devicons_enable = true,
     mappings = {
@@ -80,16 +80,7 @@ M.config = function()
       -- echo cwd
       -- vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
     end,
-  }
-
-  -- custom folder icon
-  reload("nvim-web-devicons").set_icon {
-    lir_folder_icon = {
-      icon = lvim.icons.ui.Folder,
-      color = "#42A5F5",
-      name = "LirFolderNode",
-    },
-  }
+  })
 end
 
 function M.icon_setup()
@@ -113,14 +104,11 @@ function M.icon_setup()
 end
 
 function M.setup()
-  if lvim.builtin.nvimtree.active then
-    return
-  end
-
   local status_ok, lir = pcall(reload, "lir")
   if not status_ok then
     return
   end
+  lir.setup(lvim.builtin.lir)
 
   if lvim.builtin.lir.on_config_done then
     lvim.builtin.lir.on_config_done(lir)
