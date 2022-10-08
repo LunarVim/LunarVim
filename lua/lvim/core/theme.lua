@@ -100,7 +100,7 @@ M.setup = function()
   local colors = vim.api.nvim_get_runtime_file(("colors/%s.*"):format(lvim.colorscheme), false)
   if #colors == 0 then
     Log:warn(string.format("Could not find '%s' colorscheme", lvim.colorscheme))
-    return
+    lvim.colorscheme = "tokyonight"
   end
 
   vim.g.colors_name = lvim.colorscheme
