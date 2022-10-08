@@ -71,10 +71,10 @@ local function get_dynamic_terminal_size(direction, size)
   end
   -- check if size is float
   if tostring(size):find(".", 1, true) then
-    size = math.max(size, 1.0)
+    size = math.min(size, 1.0)
     local buf_sizes = get_buf_size()
     local buf_size = direction == "horizontal" and buf_sizes.height or buf_sizes.width
-    return buf_size * size.amount
+    return buf_size * size
   else
     return lvim.terminal_split_size[direction].amount
   end
@@ -95,7 +95,7 @@ M.setup = function()
       count = i + 100,
       direction = direction,
       size = function()
-        get_dynamic_terminal_size(direction, exec[5])
+        return get_dynamic_terminal_size(direction, exec[5])
       end,
     }
 
