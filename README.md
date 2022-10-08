@@ -34,13 +34,14 @@ Make sure you have the release version of Neovim (0.8+).
 
 ### Linux/MacOS:
 
-If you are running Neovim 0.8+
+To install the latest stable release, run the following command in your terminal:
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
-If you are running Neovim 0.8+
+If you want to be on the bleeding edge,
+install from the rolling branch with the following command:
 
 ```bash
 export LV_BRANCH="rolling"; bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
