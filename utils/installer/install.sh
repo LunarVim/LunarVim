@@ -445,7 +445,6 @@ function setup_lvim() {
   echo "Preparing Packer setup"
 
   "$INSTALL_PREFIX/bin/lvim" --headless \
-    -c "lua require('lvim.core.log'):set_level([[$LUNARVIM_LOG_LEVEL]])" \
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
 
