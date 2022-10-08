@@ -1,65 +1,62 @@
 local M = {}
 
-local ok, actions = pcall(require, "telescope.actions")
-if not ok then
-  return
-end
-
-local pickers = {
-  find_files = {
-    theme = "dropdown",
-    hidden = true,
-    previewer = false,
-  },
-  live_grep = {
-    --@usage don't include the filename in the search results
-    only_sort_text = true,
-    theme = "dropdown",
-  },
-  grep_string = {
-    only_sort_text = true,
-    theme = "dropdown",
-  },
-  buffers = {
-    theme = "dropdown",
-    previewer = false,
-    initial_mode = "normal",
-    mappings = {
-      i = {
-        ["<C-d>"] = actions.delete_buffer,
-      },
-      n = {
-        ["dd"] = actions.delete_buffer,
+local function get_pickers(actions)
+  return {
+    find_files = {
+      theme = "dropdown",
+      hidden = true,
+      previewer = false,
+    },
+    live_grep = {
+      --@usage don't include the filename in the search results
+      only_sort_text = true,
+      theme = "dropdown",
+    },
+    grep_string = {
+      only_sort_text = true,
+      theme = "dropdown",
+    },
+    buffers = {
+      theme = "dropdown",
+      previewer = false,
+      initial_mode = "normal",
+      mappings = {
+        i = {
+          ["<C-d>"] = actions.delete_buffer,
+        },
+        n = {
+          ["dd"] = actions.delete_buffer,
+        },
       },
     },
-  },
-  planets = {
-    show_pluto = true,
-    show_moon = true,
-  },
-  git_files = {
-    theme = "dropdown",
-    hidden = true,
-    previewer = false,
-    show_untracked = true,
-  },
-  lsp_references = {
-    theme = "dropdown",
-    initial_mode = "normal",
-  },
-  lsp_definitions = {
-    theme = "dropdown",
-    initial_mode = "normal",
-  },
-  lsp_declarations = {
-    theme = "dropdown",
-    initial_mode = "normal",
-  },
-  lsp_implementations = {
-    theme = "dropdown",
-    initial_mode = "normal",
-  },
-}
+    planets = {
+      show_pluto = true,
+      show_moon = true,
+    },
+    git_files = {
+      theme = "dropdown",
+      hidden = true,
+      previewer = false,
+      show_untracked = true,
+    },
+    lsp_references = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+    lsp_definitions = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+    lsp_declarations = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+    lsp_implementations = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+  }
+end
 
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
@@ -70,6 +67,10 @@ function M.config()
     on_config_done = nil,
   }
 
+  local ok, actions = pcall(require, "telescope.actions")
+  if not ok then
+    return
+  end
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
@@ -121,7 +122,7 @@ function M.config()
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         },
       },
-      pickers = pickers,
+      pickers = get_pickers(actions),
       file_ignore_patterns = {},
       path_display = { "smart" },
       winblend = 0,
@@ -130,7 +131,7 @@ function M.config()
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
-    pickers = pickers,
+    pickers = get_pickers(actions),
     extensions = {
       fzf = {
         fuzzy = true, -- false will only do exact matching
