@@ -1,5 +1,10 @@
 local M = {}
 
+local ok, actions = pcall(require, "telescope.actions")
+if not ok then
+  return
+end
+
 local pickers = {
   find_files = {
     theme = "dropdown",
@@ -21,10 +26,10 @@ local pickers = {
     initial_mode = "normal",
     mappings = {
       i = {
-        ["<C-d>"] = require("telescope.actions").delete_buffer,
+        ["<C-d>"] = actions.delete_buffer,
       },
       n = {
-        ["dd"] = require("telescope.actions").delete_buffer,
+        ["dd"] = actions.delete_buffer,
       },
     },
   },
@@ -65,10 +70,6 @@ function M.config()
     on_config_done = nil,
   }
 
-  local ok, actions = pcall(require, "telescope.actions")
-  if not ok then
-    return
-  end
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
