@@ -17,6 +17,8 @@ declare -xr LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"
 
 declare -xr LUNARVIM_LOG_LEVEL="${LUNARVIM_LOG_LEVEL:-warn}"
 
+declare -xr LUNARVIM_DESKTOP_FILE="${LUNARVIM_DESKTOP_FILE:-"$XDG_DATA_HOME/applications/lvim.desktop"}"
+
 declare BASEDIR
 BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
@@ -439,6 +441,8 @@ function setup_lvim() {
 
   setup_shim
 
+  create_desktop_file
+
   [ ! -f "$LUNARVIM_CONFIG_DIR/config.lua" ] \
     && cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
@@ -452,6 +456,13 @@ function setup_lvim() {
   echo "Packer setup complete"
 
   verify_core_plugins
+}
+
+function create_desktop_file() {
+    echo "Creating desktop file"
+
+    cp "$LUNARVIM_BASE_DIR"/utils/desktop/lvim.desktop "$LUNARVIM_DESKTOP_FILE"
+    sed -ie "s|Icon=.*|Icon=${LUNARVIM_BASE_DIR}/utils/desktop/lunarvim_icon.png|g" "$LUNARVIM_DESKTOP_FILE"
 }
 
 function print_logo() {
