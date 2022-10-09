@@ -162,6 +162,7 @@ const config = {
       prism: {
         theme: codeTheme,
         darkTheme: codeTheme,
+        additionalLanguages: ["lua", "markup", "javascript", "css", "bash", "powershell", "python"],
       },
     }),
   plugins: [
