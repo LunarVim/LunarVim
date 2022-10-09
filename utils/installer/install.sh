@@ -463,7 +463,7 @@ function create_desktop_file() {
   echo "Creating desktop file"
 
   for d in "$LUNARVIM_BASE_DIR"/utils/desktop/*/; do
-    size_folder=$(basename $d)
+    size_folder=$(basename "$d")
     mkdir -p "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps/"
     cp "$LUNARVIM_BASE_DIR/utils/desktop/$size_folder/lvim.svg" "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps"
   done
