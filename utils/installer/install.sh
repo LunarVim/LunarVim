@@ -459,6 +459,9 @@ function setup_lvim() {
 }
 
 function create_desktop_file() {
+    OS="$(uname -s)"
+    # TODO: Any other OSes that use desktop files?
+    [ "$OS" != "Linux" ] && return
     echo "Creating desktop file"
 
     sed -e "s|Icon=.*|Icon=${LUNARVIM_BASE_DIR}/utils/desktop/lunarvim_icon.png|g" \
