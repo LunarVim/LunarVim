@@ -17,8 +17,6 @@ declare -xr LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"
 
 declare -xr LUNARVIM_LOG_LEVEL="${LUNARVIM_LOG_LEVEL:-warn}"
 
-declare -xr LUNARVIM_DESKTOP_FILE="${LUNARVIM_DESKTOP_FILE:-"$XDG_DATA_HOME/applications/lvim.desktop"}"
-
 declare BASEDIR
 BASEDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 BASEDIR="$(dirname -- "$(dirname -- "$BASEDIR")")"
@@ -464,8 +462,13 @@ function create_desktop_file() {
   [ "$OS" != "Linux" ] && return
   echo "Creating desktop file"
 
-  sed -e "s|Icon=.*|Icon=${LUNARVIM_BASE_DIR}/utils/desktop/lunarvim_icon.png|g" \
-    "$LUNARVIM_BASE_DIR"/utils/desktop/lvim.desktop >"$LUNARVIM_DESKTOP_FILE"
+  for d in "$LUNARVIM_BASE_DIR"/utils/desktop/*/; do
+    size_folder=$(basename $d)
+    mkdir -p "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps/"
+    cp "$LUNARVIM_BASE_DIR/utils/desktop/$size_folder/lvim.svg" "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps"
+  done
+
+  cp "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop" "$XDG_DATA_HOME/applications/lvim.desktop"
   xdg-desktop-menu forceupdate
 }
 
