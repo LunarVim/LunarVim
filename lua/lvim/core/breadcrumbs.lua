@@ -88,7 +88,7 @@ M.winbar_filetype_exclude = {
   "dap-terminal",
   "dapui_console",
   "lab",
-  "Markdown",
+  "markdown",
   "",
 }
 
