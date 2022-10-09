@@ -461,8 +461,9 @@ function setup_lvim() {
 function create_desktop_file() {
     echo "Creating desktop file"
 
-    cp "$LUNARVIM_BASE_DIR"/utils/desktop/lvim.desktop "$LUNARVIM_DESKTOP_FILE"
-    sed -ie "s|Icon=.*|Icon=${LUNARVIM_BASE_DIR}/utils/desktop/lunarvim_icon.png|g" "$LUNARVIM_DESKTOP_FILE"
+    sed -e "s|Icon=.*|Icon=${LUNARVIM_BASE_DIR}/utils/desktop/lunarvim_icon.png|g" \
+        "$LUNARVIM_BASE_DIR"/utils/desktop/lvim.desktop > "$LUNARVIM_DESKTOP_FILE"
+    xdg-desktop-menu forceupdate
 }
 
 function print_logo() {
