@@ -439,6 +439,8 @@ function setup_lvim() {
 
   setup_shim
 
+  create_desktop_file
+
   [ ! -f "$LUNARVIM_CONFIG_DIR/config.lua" ] \
     && cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
@@ -451,6 +453,22 @@ function setup_lvim() {
   echo "Packer setup complete"
 
   verify_core_plugins
+}
+
+function create_desktop_file() {
+  OS="$(uname -s)"
+  # TODO: Any other OSes that use desktop files?
+  [ "$OS" != "Linux" ] && return
+  echo "Creating desktop file"
+
+  for d in "$LUNARVIM_BASE_DIR"/utils/desktop/*/; do
+    size_folder=$(basename "$d")
+    mkdir -p "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps/"
+    cp "$LUNARVIM_BASE_DIR/utils/desktop/$size_folder/lvim.svg" "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps"
+  done
+
+  cp "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop" "$XDG_DATA_HOME/applications/lvim.desktop"
+  xdg-desktop-menu forceupdate
 }
 
 function print_logo() {
