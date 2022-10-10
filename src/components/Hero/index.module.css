@@ -52,6 +52,17 @@
   width: 100%;
 }
 
+.slogan::after {
+  content: "│";
+  animation: cursor-blink 1s linear infinite;
+}
+
+@keyframes cursor-blink {
+  50%{
+    opacity: 0;
+  }
+}
+
 .toggleAnimations {
   position: absolute;
   top: 1rem;
