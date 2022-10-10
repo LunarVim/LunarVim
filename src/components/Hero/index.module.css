@@ -55,6 +55,8 @@
 }
 
 .slogan::after {
+   /* [cursor]: │ ▏ ▎ ▍ ▌ ▋ ▊ ▉ █ */
+  /* content: " ▊"; */
   content: "│";
   animation: cursor-blink 2s linear infinite;
 }
