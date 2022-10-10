@@ -180,7 +180,7 @@ M.config = function()
         },
         e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
       },
-      L = {
+      V = {
         name = "+LunarVim",
         c = {
           "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
