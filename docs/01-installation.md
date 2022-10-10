@@ -106,6 +106,15 @@ lvim-gui
 lvim-gui some-file
 ```
 
+## Updating LunarVim
+
+- inside LunarVim `:LvimUpdate`
+- from the command-line `lvim +LvimUpdate +q`
+
+### Update the plugins
+
+- inside LunarVim `:PackerUpdate`
+
 ## Uninstall
 
 You can remove LunarVim (including the configuration files) using the bundled `uninstall` script
