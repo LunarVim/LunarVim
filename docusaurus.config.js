@@ -74,7 +74,6 @@ const config = {
       "The IDE that's too cool for planet earth",
       '"Houston, how do I exit?"',
       "A stellar Neovim experience",
-      "An opinionated, extensible, and fast IDE layer for Neovim",
     ],
     primaryCTA: {
       text: "Install",
