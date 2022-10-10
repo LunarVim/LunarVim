@@ -56,7 +56,7 @@
 
 .slogan::after {
   content: "│";
-  animation: cursor-blink 1s linear infinite;
+  animation: cursor-blink 2s linear infinite;
 }
 
 @keyframes cursor-blink {

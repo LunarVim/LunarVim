@@ -66,13 +66,13 @@ const config = {
   customFields: {
     taglineList: [
       "Interstellar Developement Experience",
-      "Taking Neovim to the moon",
+      "Taking Neovim to the Moon",
       "Neovim in <Space>",
       "An IDE layer for Neovim",
       "A community driven IDE for Neovim",
       "The Neovim config from another world",
-      "The IDE that's too cool for planet earth",
-      '"Houston, how do I exit?"',
+      "The IDE that's too cool for planet Earth",
+      'Houston, how do I exit?',
       "A stellar Neovim experience",
     ],
     primaryCTA: {

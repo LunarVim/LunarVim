@@ -6,7 +6,7 @@ import Translate from "@docusaurus/Translate";
 const Slogan = () => {
   const { siteConfig: { customFields: { taglineList } } } = useDocusaurusContext();
   const [{sloganText, currentSloganIdx, currentTaglineIdx}, setAnimation] = useState({sloganText: "" , currentSloganIdx: 0 , currentTaglineIdx: 0 })
-  const TYPING_SPEED = 100;
+  const TYPING_SPEED = 115;
   const WAIT_DURATION = 2500;
 
   useEffect(() => {
