@@ -55,7 +55,10 @@ M.setup = function()
     return
   end
 
-  illuminate.configure(lvim.builtin.illuminate.options)
+  local config_ok, _ = pcall(illuminate.configure, lvim.builtin.illuminate.options)
+  if not config_ok then
+    return
+  end
 
   if lvim.builtin.illuminate.on_config_done then
     lvim.builtin.illuminate.on_config_done()
