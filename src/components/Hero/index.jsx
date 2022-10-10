@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AnimationsContext } from "../../hooks/useAnimations";
 import Translate from "@docusaurus/Translate";
 import clsx from "clsx";
@@ -8,6 +8,7 @@ import Stars from "../Stars";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import ShootingStar from "../Icons/ShootingStar";
 import DisabledStar from "../Icons/DisabledStar";
+import Slogan from "./Slogan";
 
 const Hero = () => {
   const { siteConfig: { customFields: { primaryCTA, secondaryCTA, heroImage } } } = useDocusaurusContext();
@@ -26,9 +27,7 @@ const Hero = () => {
         <div className={`container ${styles.container}`}>
           <div className={styles.heroContent}>
             <h1 className={`hero__title ${styles.heroTitle}`}>LunarVim</h1>
-            <p className="hero__subtitle">
-              <Translate>Cool slogan about LunarVim</Translate>
-            </p>
+            <Slogan />
             <div className={styles.buttons}>
               <Link
                 className="button button--primary button--lg"

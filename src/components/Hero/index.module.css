@@ -27,6 +27,8 @@
 
 .heroContent {
   flex: .45;
+  width: 100%;
+  max-width: 28rem;
 }
 
 .heroImage {
@@ -50,6 +52,17 @@
 
 .buttons > * {
   width: 100%;
+}
+
+.slogan::after {
+  content: " ▋";
+  animation: cursor-blink 2s linear infinite;
+}
+
+@keyframes cursor-blink {
+  50%{
+    opacity: 0;
+  }
 }
 
 .toggleAnimations {
@@ -101,5 +114,8 @@
   }
   .heroImage > img {
     max-width: max-content;
+  }
+  .heroContent {
+    max-width: unset;
   }
 }

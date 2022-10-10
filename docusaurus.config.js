@@ -9,7 +9,6 @@ const socials = require("./socials");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "LunarVim",
-  tagline: "Cool Slogan about LunarVim",
   url: "https://lunarvim.org",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -65,6 +64,17 @@ const config = {
   ],
 
   customFields: {
+    taglineList: [
+      "Interstellar Developement Experience",
+      "Taking Neovim to the Moon",
+      "Neovim in <Space>",
+      "An IDE layer for Neovim",
+      "A community driven IDE for Neovim",
+      "The Neovim config from another world",
+      "The IDE that's too cool for planet Earth",
+      'Houston, how do I exit?',
+      "A stellar Neovim experience",
+    ],
     primaryCTA: {
       text: "Install",
       to: "/docs/installation",
@@ -162,15 +172,26 @@ const config = {
       prism: {
         theme: codeTheme,
         darkTheme: codeTheme,
-        additionalLanguages: ["lua", "markup", "javascript", "css", "bash", "powershell", "python"],
+        additionalLanguages: [
+          "lua",
+          "markup",
+          "javascript",
+          "css",
+          "bash",
+          "powershell",
+          "python",
+        ],
       },
     }),
   plugins: [
-    ["./plugins/asciinema", {
-      casts_folder: 'static/casts',
-      font_name: 'glyphs.ttf',
-      source_font: 'src/theme/fura_code_nerd.ttf'
-    }],
+    [
+      "./plugins/asciinema",
+      {
+        casts_folder: "static/casts",
+        font_name: "glyphs.ttf",
+        source_font: "src/theme/fura_code_nerd.ttf",
+      },
+    ],
   ],
 };
 
