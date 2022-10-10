@@ -64,7 +64,7 @@ const config = {
   ],
 
   customFields: {
-    tagline: [
+    taglineList: [
       "The ide that's too cool for planet earth",
       "IDE: Interstellar Developement Experience",
       'LunarVim: "Houston, how do I exit?"',
