@@ -29,7 +29,6 @@ M.config = function()
       "dap-terminal",
       "dapui_console",
       "lab",
-      "Markdown",
       "notify",
       "noice",
       "",
