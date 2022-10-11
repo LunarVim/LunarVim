@@ -9,14 +9,6 @@ First, within LunarVim run the following:
 :TSInstall hcl
 ```
 
-To enable Syntax Highlighting for `.tf` files as well, just add this to your `config.lua`:
-```lua
-local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-parser_configs.hcl = {
-  filetype = "hcl", "terraform",
-}
-```
-
 ## Supported language servers
 
 ```lua

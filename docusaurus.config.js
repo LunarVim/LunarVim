@@ -66,13 +66,11 @@ const config = {
   customFields: {
     taglineList: [
       "Interstellar Developement Experience",
-      "Taking Neovim to the Moon",
       "Neovim in <Space>",
-      "An IDE layer for Neovim",
+      "Houston, how do I exit?",
       "A community driven IDE for Neovim",
       "The Neovim config from another world",
       "The IDE that's too cool for planet Earth",
-      'Houston, how do I exit?',
       "A stellar Neovim experience",
     ],
     primaryCTA: {
@@ -131,7 +129,7 @@ const config = {
     ],
     Contributors: {
       owner: "LunarVim",
-      repos: ["LunarVim.org"],
+      repos: ["LunarVim", "lunarvim.org", "starter.lvim",],
     },
   },
 
