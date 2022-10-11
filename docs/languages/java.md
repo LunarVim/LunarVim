@@ -12,7 +12,11 @@
 java = { "jdtls" }
 ```
 
-NOTE: jdtls requires jdk-17 or newer to run.
+:::note
+
+jdtls requires *jdk-17 or newer** to run.
+
+:::
 
 ## Supported formatters
 
