@@ -20,7 +20,7 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 
 (Neovim 0.9.0)
 
-All the n features with all the new bugs:
+All the new features with all the new bugs:
 
 ```bash
 LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
