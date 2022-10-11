@@ -1,48 +1,5 @@
 # Keybindings
 
-## General Bindings
-
-There are three style options for settings keybindings.
-
-### Vim style
-
-Set bindings with vim.cmd. For more details read `:help vim.cmd`
-
-```lua
-# Just take your vim keybindings and wrap them in vim.cmd
-vim.cmd("nnoremap W :w<CR>")
-
-# Multiline Statements
-vim.cmd([[
-    map <Leader>bb :!bundle install<cr>
-    map <Leader>gdm :Git diff master<cr>
-    imap jj <esc>
-]])
-
-# Calling lua functions
-vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")
-```
-
-### Neovim style
-
-Use the `vim.api.nvim_set_keymap` function. Arguments for the function are: (mode, keybind, command, options). For more details read `:help map-arguments`
-
-```lua
-vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
--- Vim equivalent
--- :nnoremap <silent> <Leader><Space> :set hlsearch<CR>
-
-vim.api.nvim_set_keymap('n', '<Leader>tegf',  [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], { noremap = true, silent = true })
--- Vim equivalent
--- :nnoremap <silent> <Leader>tegf <Cmd>lua require('telescope.builtin').git_files()<CR>
-
-vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { noremap = true, expr = true })
--- Vim equivalent
--- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
-```
-
-### LunarVim keybindings
-
 Use `<Leader>Lk` to view the keybindings set by Lunarvim.
 
 To modify a single Lunarvim keymapping
@@ -55,15 +12,15 @@ To modify a single Lunarvim keymapping
 To remove keymappings set by Lunarvim
 
 ```lua
-  -- use the default vim behavior for H and L
-  lvim.keys.normal_mode["<S-l>"] = false
-  lvim.keys.normal_mode["<S-h>"] = false
-  -- vim.opt.scrolloff = 0 -- Required so L moves to the last line
+  lvim.keys.normal_mode["<C-h>"] = false
+  lvim.keys.normal_mode["<C-j>"] = false
+  lvim.keys.normal_mode["<C-k>"] = false
+  lvim.keys.normal_mode["<C-l>"] = false
 ```
 
 ### Listing what is mapped
 
-Use `<Leader>Lk` to view the keybindings set by Lunarvim.
+Use `<Leader>Vk` to view the keybindings set by Lunarvim.
 
 To see if a particular key has already been bound:
 
@@ -81,13 +38,15 @@ Or just list every mapping
 :map
 ```
 
-To output this to a searchable buffer
-
-```lua
-:enew|pu=execute('map')
-```
+## Explorer Bindings
 
 To view keybindings for the nvimtree plugin. Make sure you're in an nvimtree buffer and type `g?` to toggle the keybindings help
+
+## LSP Bindings
+
+TODO
+
+lvim.lsp.buffer_mappings.normal_mode
 
 ## Whichkey Bindings
 
@@ -120,10 +79,10 @@ lvim.builtin.which_key.mappings["t"] = {
   name = "Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
 ```
 
@@ -148,10 +107,6 @@ lvim.builtin.which_key.mappings = {
 }
 ```
 
-### Example mappings
-
-Consult the [LunarVim configuration for whichkey](https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/which-key.lua) to see more examples of how to map keys.
-
 ## Leader Key
 
 The default leader key is `Space`. This can be changed with the following
@@ -159,20 +114,3 @@ The default leader key is `Space`. This can be changed with the following
 ```lua
 lvim.leader = "space"
 ```
-
-## Cursor Movement
-
-By default, when pressing left/right cursor keys, Vim will not move to the previous/next line after reaching first/last character in the line. This can be quite annoying for new users. Fortunately this behaviour can be easily changed by putting this in your vimrc file:
-
-To enable:
-
-```lua
-lvim.line_wrap_cursor_movement = true
-```
-
-Enabling maps the following command
-
-```vim
-set whichwrap+=<,>,h,l,[,]
-```
-
