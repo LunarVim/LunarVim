@@ -23,21 +23,3 @@ python = { "autopep8", "black", "isort", "reorder-python-imports", "yapf" }
 ```lua
 python = { "flake8", "pylint" }
 ```
-
-## LSP Settings
-
-```vim
-:LspSettings pyright
-```
-
-## Debugger
-
-```vim
-:DIInstall python
-```
-
-```lua
--- ~/.config/lvim/ftplugin/python.lua
-local dap_install = require "dap-install"
-dap_install.config("python", {})
-```
