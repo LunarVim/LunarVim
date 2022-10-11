@@ -14,7 +14,7 @@ java = { "jdtls" }
 
 :::note
 
-jdtls requires *jdk-17 or newer** to run.
+jdtls requires **jdk-17 or newer** to run.
 
 :::
 
