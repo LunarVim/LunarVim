@@ -141,7 +141,7 @@ lvim.plugins = {
 
 ### Update the plugins
 
-- inside LunarVim `:PackerUpdate`
+- inside LunarVim `:LvimSyncCorePlugins`
 
 ## Resources
 
