@@ -151,6 +151,8 @@ lvim.plugins = {
 
 - [Discord](https://discord.gg/Xb9B4Ny)
 
+- [Reddit](https://www.reddit.com/r/lunarvim/)
+
 - [Twitter](https://twitter.com/chrisatmachine)
 
 ## Testimonials
