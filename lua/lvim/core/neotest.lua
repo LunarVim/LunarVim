@@ -30,8 +30,6 @@ M.setup = function(config)
     o = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Output" },
     S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
     s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
-    v = { "<cmd>TestVisit<cr>", "Visit" },
-    x = { "<cmd>TestSuite<cr>", "Suite" },
   }
 end
 
