@@ -40,7 +40,7 @@ local function safe_deep_fetch()
     Log:error(vim.inspect(error))
     return
   end
-  -- git fetch --unshallow will cause an error on a a complete clone
+  -- git fetch --unshallow will cause an error on a complete clone
   local fetch_mode = result[1] == "true" and "--unshallow" or "--all"
   ret = git_cmd { args = { "fetch", fetch_mode } }
   if ret ~= 0 then
