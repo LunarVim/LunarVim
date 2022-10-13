@@ -3,6 +3,8 @@ local M = {}
 local Log = require "lvim.core.log"
 local fmt = string.format
 local if_nil = vim.F.if_nil
+local text = require "lvim.interface.text"
+local banner = require("lvim.core.info").banner
 
 local function git_cmd(opts)
   local plenary_loaded, Job = pcall(require, "plenary.job")
@@ -78,11 +80,49 @@ function M.update_base_lvim()
     return
   end
 
+  -- Get the messages before merging
+  local _, stdout =
+    git_cmd { args = { "--no-pager", "log", "--pretty=format:* %h -%d %s (%cr) <%an>", "HEAD..@{upstream}" } }
+
+  local function set_syntax_hl()
+    vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
+    vim.cmd [[highlight link LvimInfoHeader Type]]
+    vim.fn.matchadd("LvimInfoHeader", "changelog:")
+    vim.fn.matchadd("LvimInfoHeader", "[0-9a-f]\\{7,8}")
+  end
+
+  local content_provider = function(popup)
+    local content = {}
+
+    for _, section in ipairs {
+      banner,
+      { "" },
+      { "" },
+      { "changelog: " },
+      { "" },
+      stdout,
+      { "" },
+    } do
+      vim.list_extend(content, section)
+    end
+
+    return text.align_left(popup, content, 0.1)
+  end
+
+  local Popup = require("lvim.interface.popup"):new {
+    win_opts = { number = false },
+    buf_opts = { modifiable = false, filetype = "lspinfo" },
+  }
+
   ret = git_cmd { args = { "merge", "--ff-only", "--progress" } }
   if ret ~= 0 then
     Log:error("Update failed! Please pull the changes manually in " .. get_lvim_base_dir())
     return
   end
+
+  -- Display the window after merging
+  Popup:display(content_provider)
+  set_syntax_hl()
 
   return true
 end
