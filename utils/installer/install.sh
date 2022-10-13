@@ -458,7 +458,7 @@ function setup_lvim() {
 function create_desktop_file() {
   OS="$(uname -s)"
   # TODO: Any other OSes that use desktop files?
-  [ "$OS" != "Linux" ] && return
+  ([ "$OS" != "Linux" ] || ! command -v xdg-desktop-menu &> /dev/null) && return
   echo "Creating desktop file"
 
   for d in "$LUNARVIM_BASE_DIR"/utils/desktop/*/; do
