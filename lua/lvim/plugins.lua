@@ -235,26 +235,11 @@ local core_plugins = {
   -- Test
   {
     "nvim-neotest/neotest",
-		-- wants = {
-		-- 	"plenary.nvim",
-		-- 	"nvim-treesitter",
-		-- 	"neotest-python",
-		-- 	"neotest-plenary",
-		-- 	"neotest-vim-test",
-		-- 	"vim-test",
-		-- },
     requires = {
-      "vim-test/vim-test",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-plenary",
-      "nvim-neotest/neotest-vim-test",
-      "nvim-neotest/neotest-python",
     },
-    config = function()
-      require("lvim.core.neotest").setup()
-    end,
-    disable = false,
+    disable = not lvim.builtin.test.active,
   },
 
   -- alpha

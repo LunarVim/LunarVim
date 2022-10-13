@@ -22,6 +22,7 @@ local builtins = {
   "lvim.core.lualine",
   "lvim.core.alpha",
   "lvim.core.mason",
+  "lvim.core.neotest",
 }
 
 function M.config(config)
