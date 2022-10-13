@@ -14,8 +14,8 @@ M.setup = function(config)
   end
 
   if vim.tbl_isempty(config) then
-      return
-    end
+    return
+  end
 
   neotest.setup(config)
   lvim.builtin.which_key.mappings["t"] = {
