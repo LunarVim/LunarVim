@@ -5,12 +5,5 @@
     "param-type-mismatch",
     "missing-parameter"
   ],
-  "Lua.diagnostics.globals": [
-    "vim",
-    "lvim"
-  ],
-  "diagnostics.libraryFiles": "Disable",
-  "runtime": {
-    "version": "LuaJIT"
-  }
+  "diagnostics.libraryFiles": "Disable"
 }
