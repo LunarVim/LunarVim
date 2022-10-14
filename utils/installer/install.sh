@@ -467,8 +467,7 @@ function create_desktop_file() {
     cp "$LUNARVIM_BASE_DIR/utils/desktop/$size_folder/lvim.svg" "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps"
   done
 
-  cp "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop" "$XDG_DATA_HOME/applications/lvim.desktop"
-  xdg-desktop-menu forceupdate
+  xdg-desktop-menu install --novendor "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop"
 }
 
 function print_logo() {

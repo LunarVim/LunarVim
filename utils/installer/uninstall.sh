@@ -67,7 +67,7 @@ function remove_desktop_file() {
   echo "Removing desktop file..."
 
   find "$XDG_DATA_HOME/icons/hicolor" -name "lvim.svg" -type f -delete
-  rm "$XDG_DATA_HOME/applications/lvim.desktop"
+  xdg-desktop-menu uninstall lvim.desktop
 }
 
 function main() {
