@@ -1,4 +1,5 @@
 local M = {}
+
 function M.config()
   local lvim_dashboard = require "lvim.core.alpha.dashboard"
   local lvim_startify = require "lvim.core.alpha.startify"
