@@ -34,10 +34,7 @@ end
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
-  local impatient = _G.__luacache
-  if impatient then
-    impatient.clear_cache()
-  end
+  vim.cmd [[LuaCacheClear]]
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" or module:match "lvim.lsp" then

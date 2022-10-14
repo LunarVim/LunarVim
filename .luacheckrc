@@ -1,3 +1,4 @@
+---@diagnostic disable
 -- vim: ft=lua tw=80
 
 stds.nvim = {
@@ -30,6 +31,7 @@ stds.nvim = {
 std = "lua51+nvim"
 
 files["tests/*_spec.lua"].std = "lua51+nvim+busted"
+files["lua/lvim/impatient*"].ignore = {"121"}
 
 -- Don't report unused self arguments of methods.
 self = false
