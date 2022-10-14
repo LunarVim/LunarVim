@@ -458,7 +458,7 @@ function setup_lvim() {
 function create_desktop_file() {
   OS="$(uname -s)"
   # TODO: Any other OSes that use desktop files?
-  [ "$OS" != "Linux" ] && return
+  ([ "$OS" != "Linux" ] || ! command -v xdg-desktop-menu &>/dev/null) && return
   echo "Creating desktop file"
 
   for d in "$LUNARVIM_BASE_DIR"/utils/desktop/*/; do
@@ -467,8 +467,7 @@ function create_desktop_file() {
     cp "$LUNARVIM_BASE_DIR/utils/desktop/$size_folder/lvim.svg" "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps"
   done
 
-  cp "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop" "$XDG_DATA_HOME/applications/lvim.desktop"
-  xdg-desktop-menu forceupdate
+  xdg-desktop-menu install --novendor "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop"
 }
 
 function print_logo() {
