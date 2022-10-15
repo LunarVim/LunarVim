@@ -15,7 +15,7 @@
     "commit": "3022dbc"
   },
   "cmp-nvim-lsp": {
-    "commit": "affe808"
+    "commit": "389f06d"
   },
   "cmp-path": {
     "commit": "447c87c"
@@ -36,7 +36,7 @@
     "commit": "7d8c6c4"
   },
   "neodev.nvim": {
-    "commit": "b2fd8b7"
+    "commit": "d785dc8"
   },
   "lualine.nvim": {
     "commit": "a52f078"
@@ -66,7 +66,7 @@
     "commit": "c8ce83a"
   },
   "nvim-lspconfig": {
-    "commit": "f11fdff"
+    "commit": "35a731b"
   },
   "nvim-navic": {
     "commit": "132b273"
