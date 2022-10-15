@@ -1,27 +1,12 @@
 local M = {}
 
 function M.config()
-  local pre_hook = nil
-  if lvim.builtin.treesitter.context_commentstring.enable then
-    pre_hook = function(ctx)
-      local U = require "Comment.utils"
-
-      -- Determine whether to use linewise or blockwise commentstring
-      local type = ctx.ctype == U.ctype.linewise and "__default" or "__multiline"
-
-      -- Determine the location where to calculate commentstring from
-      local location = nil
-      if ctx.ctype == U.ctype.blockwise then
-        location = require("ts_context_commentstring.utils").get_cursor_location()
-      elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-        location = require("ts_context_commentstring.utils").get_visual_start_location()
-      end
-
-      return require("ts_context_commentstring.internal").calculate_commentstring {
-        key = type,
-        location = location,
-      }
+  local pre_hook = function(_)
+    local loaded, ts_comment = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+    if not loaded then
+      return
     end
+    return ts_comment.create_pre_hook()
   end
   lvim.builtin.comment = {
     active = true,
@@ -29,6 +14,11 @@ function M.config()
     ---Add a space b/w comment and the line
     ---@type boolean
     padding = true,
+
+    ---Whether cursor should stay at the
+    ---same position. Only works in NORMAL
+    ---mode mappings
+    sticky = true,
 
     ---Lines to be ignored while comment/uncomment.
     ---Could be a regex string or a function that returns a regex string.
@@ -45,9 +35,6 @@ function M.config()
       ---Extra mapping
       ---Includes `gco`, `gcO`, `gcA`
       extra = true,
-      ---Extended mapping
-      ---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-      extended = false,
     },
 
     ---LHS of line and block comment toggle mapping in NORMAL/VISUAL mode
@@ -66,6 +53,17 @@ function M.config()
       line = "gc",
       ---block-comment opfunc mapping
       block = "gb",
+    },
+
+    ---LHS of extra mappings
+    ---@type table
+    extra = {
+      ---Add comment on the line above
+      above = "gcO",
+      ---Add comment on the line below
+      below = "gco",
+      ---Add comment at the end of line
+      eol = "gcA",
     },
 
     ---Pre-hook, called before commenting the line
