@@ -35,8 +35,8 @@
   "lir.nvim": {
     "commit": "7d8c6c4"
   },
-  "lua-dev.nvim": {
-    "commit": "2410be2"
+  "neodev.nvim": {
+    "commit": "b2fd8b7"
   },
   "lualine.nvim": {
     "commit": "a52f078"
@@ -72,7 +72,7 @@
     "commit": "132b273"
   },
   "nvim-notify": {
-    "commit": "4144654"
+    "commit": "af935fd"
   },
   "nvim-tree.lua": {
     "commit": "b01e7be"

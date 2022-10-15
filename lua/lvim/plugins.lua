@@ -92,8 +92,8 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    "folke/lua-dev.nvim",
-    module = "lua-dev",
+    "folke/neodev.nvim",
+    module = "neodev",
   },
 
   -- Autopairs
