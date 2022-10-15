@@ -1,12 +1,10 @@
 local M = {}
 
 function M.config()
-  local pre_hook = function(_)
-    local loaded, ts_comment = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
-    if not loaded then
-      return
-    end
-    return ts_comment.create_pre_hook()
+  local pre_hook
+  local loaded, ts_comment = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+  if loaded and ts_comment then
+    pre_hook = ts_comment.create_pre_hook()
   end
   lvim.builtin.comment = {
     active = true,
