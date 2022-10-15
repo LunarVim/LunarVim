@@ -83,10 +83,6 @@ local defaults = {
   },
 
   visual_block_mode = {
-    -- Move selected line / block of text in visual mode
-    ["K"] = ":move '<-2<CR>gv-gv",
-    ["J"] = ":move '>+1<CR>gv-gv",
-
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-j>"] = ":m '>+1<CR>gv-gv",
     ["<A-k>"] = ":m '<-2<CR>gv-gv",

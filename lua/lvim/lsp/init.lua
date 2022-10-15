@@ -25,6 +25,11 @@ local function add_lsp_buffer_keybindings(bufnr)
 end
 
 function M.common_capabilities()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -34,11 +39,6 @@ function M.common_capabilities()
       "additionalTextEdits",
     },
   }
-
-  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if status_ok then
-    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-  end
 
   return capabilities
 end

@@ -2,10 +2,10 @@ local default_workspace = {
   library = {
     vim.fn.expand "$VIMRUNTIME",
     get_lvim_base_dir(),
-    require("lua-dev.sumneko").types(),
+    require("neodev.config").types(),
   },
 
-  maxPreload = 1000,
+  maxPreload = 5000,
   preloadFileSize = 10000,
 }
 

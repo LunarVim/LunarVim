@@ -25,15 +25,13 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
+      - uses: actions/checkout@v3
 
       - name: Install neovim binary
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: v0.8.0
+          version: nightly
 
       - name: Install LunarVim
         timeout-minutes: 4

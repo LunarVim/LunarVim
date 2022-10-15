@@ -155,6 +155,7 @@ M.config = function()
         buffer = "(Buffer)",
         tmux = "(TMUX)",
         copilot = "(Copilot)",
+        treesitter = "(TreeSitter)",
       },
       duplicates = {
         buffer = 1,
