@@ -173,7 +173,7 @@ function M.enable_reload_config_on_save()
   vim.api.nvim_create_autocmd("BufWritePost", {
     group = "_general_settings",
     pattern = user_config_file,
-    desc = "Trigger LvimReload on saving " .. vim.fn.expand "%:~",
+    desc = "Trigger LvimReload on saving config.lua",
     callback = function()
       require("lvim.config"):reload()
     end,
