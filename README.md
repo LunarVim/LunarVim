@@ -40,7 +40,7 @@ If you are running Neovim 0.8+
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
-If you are running Neovim 0.9+
+If you are running Neovim nightly 
 
 ```bash
 export LV_BRANCH="rolling"; bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
