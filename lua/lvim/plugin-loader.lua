@@ -16,11 +16,16 @@ function plugin_loader.init(opts)
   local install_path = opts.install_path
     or join_paths(vim.fn.stdpath "data", "site", "pack", "packer", "start", "packer.nvim")
 
+  local max_jobs = 100
+  if vim.fn.has "mac" == 1 then
+    max_jobs = 50
+  end
+
   local init_opts = {
     package_root = opts.package_root or join_paths(vim.fn.stdpath "data", "site", "pack"),
     compile_path = compile_path,
     snapshot_path = snapshot_path,
-    max_jobs = 100,
+    max_jobs = max_jobs,
     log = { level = "warn" },
     git = {
       clone_timeout = 120,

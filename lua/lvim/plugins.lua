@@ -92,8 +92,8 @@ local core_plugins = {
     "hrsh7th/cmp-path",
   },
   {
-    "folke/lua-dev.nvim",
-    module = "lua-dev",
+    "folke/neodev.nvim",
+    module = "neodev",
   },
 
   -- Autopairs
@@ -297,8 +297,8 @@ local get_default_sha1 = function(spec)
   return default_sha1[short_name] and default_sha1[short_name].commit
 end
 
-for _, spec in ipairs(core_plugins) do
-  if not vim.env.LVIM_DEV_MODE then
+if not vim.env.LVIM_DEV_MODE then
+  for _, spec in ipairs(core_plugins) do
     -- Manually lock the commit hash since Packer's snapshots are unreliable in headless mode
     spec["commit"] = get_default_sha1(spec)
   end

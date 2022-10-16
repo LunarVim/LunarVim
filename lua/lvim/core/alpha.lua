@@ -65,7 +65,10 @@ local function configure_additional_autocmds()
 end
 
 function M.setup()
-  local alpha = require "alpha"
+  local status_ok, alpha = pcall(require, "alpha")
+  if not status_ok then
+    return
+  end
   local mode = lvim.builtin.alpha.mode
   local config = lvim.builtin.alpha[mode].config
 

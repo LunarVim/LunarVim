@@ -125,17 +125,6 @@ function M.load_defaults()
         end,
       },
     },
-    -- TODO: figure out what keeps overriding laststatus
-    {
-      "BufWinEnter",
-      {
-        group = "_last_status",
-        pattern = "*",
-        callback = function()
-          vim.opt.laststatus = 3
-        end,
-      },
-    },
   }
 
   M.define_autocmds(definitions)

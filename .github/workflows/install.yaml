@@ -33,13 +33,13 @@ jobs:
             neovim: nightly
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install neovim binary from release
         env:
           RELEASE_VER: ${{ matrix.neovim }}
         run: |
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           bash ./utils/installer/install-neovim-from-release
 
       - name: Install LunarVim
@@ -72,7 +72,7 @@ jobs:
         shell: pwsh
     steps:
       # it's not currently possbile to run tests on windows, see nvim-lua/plenary.nvim#255
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install neovim binary
         uses: rhysd/action-setup-vim@v1
