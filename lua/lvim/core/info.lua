@@ -7,6 +7,7 @@ local M = {
     [[ / /___/ /_/ / / / / /_/ / /   | |/ / / / / / / /]],
     [[/_____/\__,_/_/ /_/\__,_/_/    |___/_/_/ /_/ /_/ ]],
   },
+  changelog = "",
 }
 
 local fmt = string.format
@@ -218,5 +219,40 @@ function M.toggle_popup(ft)
   set_syntax_hl()
 
   return Popup
+end
+
+M.make_changelog = function()
+  local content_provider = function(popup)
+    local content = {}
+
+    for _, section in ipairs {
+      M.banner,
+      { "" },
+      { "" },
+      { "changelog: " },
+      { "" },
+      M.changelog,
+      { "" },
+    } do
+      vim.list_extend(content, section)
+    end
+
+    return text.align_left(popup, content, 0.1)
+  end
+
+  local function set_syntax_hl()
+    vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
+    vim.cmd [[highlight link LvimInfoHeader Type]]
+    vim.fn.matchadd("LvimInfoHeader", "changelog:")
+    vim.fn.matchadd("LvimInfoHeader", "[0-9a-f]\\{7,8}")
+  end
+
+  local Popup = require("lvim.interface.popup"):new {
+    win_opts = { number = false },
+    buf_opts = { modifiable = false, filetype = "lspinfo" },
+  }
+
+  Popup:display(content_provider)
+  set_syntax_hl()
 end
 return M

@@ -1,6 +1,7 @@
 local M = {}
 
 local Log = require "lvim.core.log"
+local Info = require "lvim.core.info"
 local in_headless = #vim.api.nvim_list_uis() == 0
 
 function M.run_pre_update()
@@ -68,14 +69,15 @@ function M.run_post_update()
   M.reset_cache()
 
   Log:debug "Syncing core plugins"
-  require("lvim.plugin-loader").sync_core_plugins()
+  require("lvim.plugin-loader").sync_core_plugins(function()
+    Info.make_changelog()
+  end)
 
   if not in_headless then
     vim.schedule(function()
       if package.loaded["nvim-treesitter"] then
         vim.cmd [[ TSUpdateSync ]]
       end
-      -- TODO: add a changelog
       vim.notify("Update complete", vim.log.levels.INFO)
     end)
   end
