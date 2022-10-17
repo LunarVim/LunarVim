@@ -48,17 +48,18 @@ commit_preprocessors = [
     { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](https://github.com/lunarvim/lunarvim/pull/${2}))"},
 ]
 commit_parsers = [
-    { message = "(.*bump|.*Bump)", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
-    { message = "^build", group = "<!-- 0 --> Packaging"},
-    { message = "(^feat|^Feat|^\\[Feat)", group = "<!-- 1 --> Features"},
-    { message = "(^bug|^Bug|^fix|^\\[Bug)", group = "<!-- 2 --> Bugfix"},
-    { message = "(^refactor|^ref)", group = "<!-- 3 --> Refactor"},
-    { message = "^doc", group = "<!-- 4 --> Documentation"},
-    { message = "^revert", group = "<!-- 5 --> Revert"},
-    { message = "^perf", group = "<!-- 6 --> Performance"},
-    { message = "^chore", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
+    { message = "(.*[bB]ump)", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
+    { message = "^[bB]uild", group = "<!-- 0 --> Packaging"},
+    { message = "(^[fF]eat|^\\[Feat)", group = "<!-- 1 --> Features"},
+    { message = "(^[bB]ug|^[Ff]ix|^\\[Bug)", group = "<!-- 2 --> Bugfix"},
+    { message = "(^[rR]efactor|^ref)", group = "<!-- 3 --> Refactor"},
+    { message = "^[dD]oc", group = "<!-- 4 --> Documentation"},
+    { message = "^[rR]evert", group = "<!-- 5 --> Revert"},
+    { message = "^[pP]erf", group = "<!-- 6 --> Performance"},
+    { message = "^[cC]hore", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
     { message = "^ci", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
     { message = "^test", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
+    { message = "[wW]orkflow", group = "<!-- 7 --> Miscellaneous Tasks", skip = true},
 ]
 # filter out the commits that are not matched by commit parsers
 filter_commits = false
@@ -72,6 +73,8 @@ ignore_tags = ""
 topo_order = false
 # sort the commits inside sections by oldest/newest order
 sort_commits = "oldest"
+# protect breaking changes from being skipped due to matching a skipping commit_parser
+protect_breaking_commits = false
 
 [features]
 preserve_order = ["serde_json/preserve_order"]
