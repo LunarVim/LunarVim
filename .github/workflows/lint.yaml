@@ -15,7 +15,7 @@ jobs:
     name: "Linting with luacheck"
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: leafo/gh-actions-lua@v8
       - uses: leafo/gh-actions-luarocks@v4
@@ -30,7 +30,7 @@ jobs:
     name: Shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         with:

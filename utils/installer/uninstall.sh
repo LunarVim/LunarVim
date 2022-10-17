@@ -63,11 +63,11 @@ function remove_lvim_bin() {
 function remove_desktop_file() {
   OS="$(uname -s)"
   # TODO: Any other OSes that use desktop files?
-  [ "$OS" != "Linux" ] && return
+  ([ "$OS" != "Linux" ] || ! command -v xdg-desktop-menu &>/dev/null) && return
   echo "Removing desktop file..."
 
   find "$XDG_DATA_HOME/icons/hicolor" -name "lvim.svg" -type f -delete
-  rm "$XDG_DATA_HOME/applications/lvim.desktop"
+  xdg-desktop-menu uninstall lvim.desktop
 }
 
 function main() {

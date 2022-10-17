@@ -1,0 +1,22 @@
+name: changelog
+on: release
+
+jobs:
+  changelog-gen:
+    name: Generate changelog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: orhun/git-cliff-action@v1
+        with:
+          config: cliff.toml
+          args: -vv --latest --strip header -c .github/workflows/cliff.toml
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Print the changelog
+        run: cat "${{ steps.git-cliff.outputs.changelog }}"

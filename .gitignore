@@ -27,4 +27,5 @@ lua/lv-user-config/
 *.backup
 *.old
 
+.luarc.json
 .luacheckcache

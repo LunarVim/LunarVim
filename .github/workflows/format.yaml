@@ -15,7 +15,7 @@ jobs:
     name: "Formatting check with Stylua"
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Lint with stylua
         uses: JohnnyMorganz/stylua-action@v1
@@ -29,7 +29,7 @@ jobs:
     name: "Formatting check with shfmt"
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Go
         uses: actions/setup-go@v2

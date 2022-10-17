@@ -8,6 +8,32 @@ M.config = function()
   lvim.builtin.breadcrumbs = {
     active = true,
     on_config_done = nil,
+    winbar_filetype_exclude = {
+      "help",
+      "startify",
+      "dashboard",
+      "packer",
+      "neo-tree",
+      "neogitstatus",
+      "NvimTree",
+      "Trouble",
+      "alpha",
+      "lir",
+      "Outline",
+      "spectre_panel",
+      "toggleterm",
+      "DressingSelect",
+      "Jaq",
+      "harpoon",
+      "dap-repl",
+      "dap-terminal",
+      "dapui_console",
+      "lab",
+      "Markdown",
+      "notify",
+      "noice",
+      "",
+    },
     options = {
       icons = {
         Array = icons.Array .. " ",
@@ -66,31 +92,6 @@ M.setup = function()
     lvim.builtin.breadcrumbs.on_config_done()
   end
 end
-
-M.winbar_filetype_exclude = {
-  "help",
-  "startify",
-  "dashboard",
-  "packer",
-  "neo-tree",
-  "neogitstatus",
-  "NvimTree",
-  "Trouble",
-  "alpha",
-  "lir",
-  "Outline",
-  "spectre_panel",
-  "toggleterm",
-  "DressingSelect",
-  "Jaq",
-  "harpoon",
-  "dap-repl",
-  "dap-terminal",
-  "dapui_console",
-  "lab",
-  "Markdown",
-  "",
-}
 
 M.get_filename = function()
   local filename = vim.fn.expand "%:t"
@@ -161,10 +162,7 @@ local get_gps = function()
 end
 
 local excludes = function()
-  if vim.tbl_contains(M.winbar_filetype_exclude, vim.bo.filetype) then
-    return true
-  end
-  return false
+  return vim.tbl_contains(lvim.builtin.breadcrumbs.winbar_filetype_exclude or {}, vim.bo.filetype)
 end
 
 M.get_winbar = function()
