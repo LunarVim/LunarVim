@@ -1,5 +1,63 @@
 local M = {}
 
+local function get_pickers(actions)
+  return {
+    find_files = {
+      theme = "dropdown",
+      hidden = true,
+      previewer = false,
+    },
+    live_grep = {
+      --@usage don't include the filename in the search results
+      only_sort_text = true,
+      theme = "dropdown",
+    },
+    grep_string = {
+      only_sort_text = true,
+      theme = "dropdown",
+    },
+    buffers = {
+      theme = "dropdown",
+      previewer = false,
+      initial_mode = "normal",
+      mappings = {
+        i = {
+          ["<C-d>"] = actions.delete_buffer,
+        },
+        n = {
+          ["dd"] = actions.delete_buffer,
+        },
+      },
+    },
+    planets = {
+      show_pluto = true,
+      show_moon = true,
+    },
+    git_files = {
+      theme = "dropdown",
+      hidden = true,
+      previewer = false,
+      show_untracked = true,
+    },
+    lsp_references = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+    lsp_definitions = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+    lsp_declarations = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+    lsp_implementations = {
+      theme = "dropdown",
+      initial_mode = "normal",
+    },
+  }
+end
+
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
 
@@ -15,8 +73,8 @@ function M.config()
   end
   lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
     defaults = {
-      prompt_prefix = " ",
-      selection_caret = " ",
+      prompt_prefix = lvim.icons.ui.Telescope .. " ",
+      selection_caret = lvim.icons.ui.Forward .. " ",
       entry_prefix = "  ",
       initial_mode = "insert",
       selection_strategy = "reset",
@@ -47,6 +105,7 @@ function M.config()
         "--hidden",
         "--glob=!.git/",
       },
+      ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
       mappings = {
         i = {
           ["<C-n>"] = actions.move_selection_next,
@@ -63,23 +122,16 @@ function M.config()
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         },
       },
+      pickers = get_pickers(actions),
       file_ignore_patterns = {},
-      path_display = { shorten = 5 },
+      path_display = { "smart" },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
-    pickers = {
-      find_files = {
-        hidden = true,
-      },
-      live_grep = {
-        --@usage don't include the filename in the search results
-        only_sort_text = true,
-      },
-    },
+    pickers = get_pickers(actions),
     extensions = {
       fzf = {
         fuzzy = true, -- false will only do exact matching
@@ -94,7 +146,6 @@ end
 function M.setup()
   local previewers = require "telescope.previewers"
   local sorters = require "telescope.sorters"
-  local actions = require "telescope.actions"
 
   lvim.builtin.telescope = vim.tbl_extend("keep", {
     file_previewer = previewers.vim_buffer_cat.new,
@@ -102,23 +153,6 @@ function M.setup()
     qflist_previewer = previewers.vim_buffer_qflist.new,
     file_sorter = sorters.get_fuzzy_file,
     generic_sorter = sorters.get_generic_fuzzy_sorter,
-    ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
-    mappings = {
-      i = {
-        ["<C-n>"] = actions.move_selection_next,
-        ["<C-p>"] = actions.move_selection_previous,
-        ["<C-c>"] = actions.close,
-        ["<C-j>"] = actions.cycle_history_next,
-        ["<C-k>"] = actions.cycle_history_prev,
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        ["<CR>"] = actions.select_default + actions.center,
-      },
-      n = {
-        ["<C-n>"] = actions.move_selection_next,
-        ["<C-p>"] = actions.move_selection_previous,
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-      },
-    },
   }, lvim.builtin.telescope)
 
   local telescope = require "telescope"

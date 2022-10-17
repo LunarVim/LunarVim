@@ -60,12 +60,23 @@ function remove_lvim_bin() {
   rm -f "$lvim_bin"
 }
 
+function remove_desktop_file() {
+  OS="$(uname -s)"
+  # TODO: Any other OSes that use desktop files?
+  ([ "$OS" != "Linux" ] || ! command -v xdg-desktop-menu &>/dev/null) && return
+  echo "Removing desktop file..."
+
+  find "$XDG_DATA_HOME/icons/hicolor" -name "lvim.svg" -type f -delete
+  xdg-desktop-menu uninstall lvim.desktop
+}
+
 function main() {
   parse_arguments "$@"
   echo "Removing LunarVim binary..."
   remove_lvim_bin
   echo "Removing LunarVim directories..."
   remove_lvim_dirs
+  remove_desktop_file
   echo "Uninstalled LunarVim!"
 }
 

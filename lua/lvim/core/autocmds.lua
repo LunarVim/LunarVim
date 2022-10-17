@@ -3,13 +3,25 @@ local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
 function M.load_defaults()
-  local user_config_file = require("lvim.config"):get_user_config_path()
-
-  if vim.loop.os_uname().version:match "Windows" then
-    -- autocmds require forward slashes even on windows
-    user_config_file = user_config_file:gsub("\\", "/")
-  end
-
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = {
+      "Jaq",
+      "qf",
+      "help",
+      "man",
+      "lspinfo",
+      "spectre_panel",
+      "lir",
+      "DressingSelect",
+      "tsplayground",
+    },
+    callback = function()
+      vim.cmd [[
+      nnoremap <silent> <buffer> q :close<CR>
+      set nobuflisted
+    ]]
+    end,
+  })
   local definitions = {
     {
       "TextYankPost",
@@ -18,19 +30,16 @@ function M.load_defaults()
         pattern = "*",
         desc = "Highlight text on yank",
         callback = function()
-          require("vim.highlight").on_yank { higroup = "Search", timeout = 200 }
+          require("vim.highlight").on_yank { higroup = "Search", timeout = 100 }
         end,
       },
     },
     {
-      "BufWritePost",
+      "FileType",
       {
-        group = "_general_settings",
-        pattern = user_config_file,
-        desc = "Trigger LvimReload on saving " .. vim.fn.expand "%:~",
-        callback = function()
-          require("lvim.config"):reload()
-        end,
+        group = "_hide_dap_repl",
+        pattern = "dap-repl",
+        command = "set nobuflisted",
       },
     },
     {
@@ -71,6 +80,31 @@ function M.load_defaults()
         group = "_auto_resize",
         pattern = "*",
         command = "tabdo wincmd =",
+      },
+    },
+    {
+      "FileType",
+      {
+        group = "_filetype_settings",
+        pattern = "alpha",
+        callback = function()
+          vim.cmd [[
+            nnoremap <silent> <buffer> q :qa<CR>
+            nnoremap <silent> <buffer> <esc> :qa<CR>
+            set nobuflisted
+          ]]
+        end,
+      },
+    },
+    {
+      "FileType",
+      {
+        group = "_filetype_settings",
+        pattern = "lir",
+        callback = function()
+          vim.opt_local.number = false
+          vim.opt_local.relativenumber = false
+        end,
       },
     },
   }
@@ -127,6 +161,23 @@ function M.toggle_format_on_save()
   else
     M.disable_format_on_save()
   end
+end
+
+function M.enable_reload_config_on_save()
+  local user_config_file = require("lvim.config"):get_user_config_path()
+
+  if vim.loop.os_uname().version:match "Windows" then
+    -- autocmds require forward slashes even on windows
+    user_config_file = user_config_file:gsub("\\", "/")
+  end
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    group = "_general_settings",
+    pattern = user_config_file,
+    desc = "Trigger LvimReload on saving config.lua",
+    callback = function()
+      require("lvim.config"):reload()
+    end,
+  })
 end
 
 function M.enable_transparent_mode()

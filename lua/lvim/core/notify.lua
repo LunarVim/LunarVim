@@ -3,7 +3,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 local defaults = {
-  active = false,
+  active = true,
   on_config_done = nil,
   opts = {
     ---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
@@ -29,11 +29,11 @@ local defaults = {
 
     ---@usage Icons for the different levels
     icons = {
-      ERROR = "",
-      WARN = "",
-      INFO = "",
-      DEBUG = "",
-      TRACE = "✎",
+      ERROR = lvim.icons.diagnostics.Error,
+      WARN = lvim.icons.diagnostics.Warning,
+      INFO = lvim.icons.diagnostics.Information,
+      DEBUG = lvim.icons.diagnostics.Debug,
+      TRACE = lvim.icons.diagnostics.Trace,
     },
   },
 }
@@ -43,7 +43,7 @@ function M.config()
     defaults.opts.icons = {
       ERROR = "[ERROR]",
       WARN = "[WARNING]",
-      INFO = "[INFo]",
+      INFO = "[INFO]",
       DEBUG = "[DEBUG]",
       TRACE = "[TRACE]",
     }
@@ -58,7 +58,11 @@ function M.setup()
   end
 
   local opts = lvim.builtin.notify and lvim.builtin.notify.opts or defaults
-  local notify = require "notify"
+
+  local status_ok, notify = pcall(require, "notify")
+  if not status_ok then
+    return
+  end
 
   notify.setup(opts)
   vim.notify = notify

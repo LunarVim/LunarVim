@@ -1,6 +1,7 @@
 local M = {}
 
 local Log = require "lvim.core.log"
+local fmt = string.format
 local if_nil = vim.F.if_nil
 
 local function git_cmd(opts)
@@ -39,12 +40,19 @@ local function safe_deep_fetch()
     Log:error(vim.inspect(error))
     return
   end
-  -- git fetch --unshallow will cause an error on a a complete clone
+  -- git fetch --unshallow will cause an error on a complete clone
   local fetch_mode = result[1] == "true" and "--unshallow" or "--all"
   ret = git_cmd { args = { "fetch", fetch_mode } }
   if ret ~= 0 then
-    Log:error("Git fetch failed! Please pull the changes manually in " .. get_lvim_base_dir())
+    Log:error(fmt "Git fetch %s failed! Please pull the changes manually in %s", fetch_mode, get_lvim_base_dir())
     return
+  end
+  if fetch_mode == "--unshallow" then
+    ret = git_cmd { args = { "remote", "set-branches", "origin", "*" } }
+    if ret ~= 0 then
+      Log:error(fmt "Git fetch %s failed! Please pull the changes manually in %s", fetch_mode, get_lvim_base_dir())
+      return
+    end
   end
   return true
 end
@@ -52,6 +60,11 @@ end
 ---pulls the latest changes from github
 function M.update_base_lvim()
   Log:info "Checking for updates"
+
+  if not vim.loop.fs_access(get_lvim_base_dir(), "w") then
+    Log:warn(fmt("Lunarvim update aborted! cannot write to %s", get_lvim_base_dir()))
+    return
+  end
 
   if not safe_deep_fetch() then
     return

@@ -33,8 +33,7 @@ end
 local get_install_path = function(spec)
   local prefix = is_optional(spec) and packer_config.opt_dir or packer_config.start_dir
   local path = join_paths(prefix, get_short_name(spec))
-  assert(is_directory(path))
-  return path
+  return is_directory(path) and path
 end
 
 local function call_proc(process, opts, cb)
@@ -92,11 +91,12 @@ end
 
 local function verify_core_plugins(verbose)
   for _, spec in pairs(core_plugins) do
-    if not spec.disable then
+    local path = get_install_path(spec)
+    if not spec.disable and path then
       table.insert(collection, {
         name = get_short_name(spec),
         commit = get_default_sha1(spec),
-        path = get_install_path(spec),
+        path = path,
       })
     end
   end

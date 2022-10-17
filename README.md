@@ -21,20 +21,29 @@
 </div>
 
 ## Showcase
-![intro1](https://user-images.githubusercontent.com/59826753/159939936-3a9a8e94-05ea-48fa-8c46-69378276451b.png)
-![info](https://user-images.githubusercontent.com/59826753/159939984-ac0190d7-a3fb-46c0-95ca-a6fec626bbac.png)
+![intro1](https://user-images.githubusercontent.com/29136904/191624232-a7b13f11-cc9f-495e-879e-67ea0444c568.png)
+![info](https://user-images.githubusercontent.com/29136904/191624942-3d75ef87-35cf-434d-850e-3e7cd5ce2ad0.png)
 
-![demo1](https://user-images.githubusercontent.com/59826753/159940004-84975294-5703-4bf1-aa98-2cc97cb38d96.png)
-![demo2](https://user-images.githubusercontent.com/59826753/159940040-375a0a28-4c81-4fdf-80f2-62853edf9b4f.png)
+![demo1](https://user-images.githubusercontent.com/29136904/191625579-ce9efb1f-1e23-4a05-aebc-915a0f614d72.png)
+![demo2](https://user-images.githubusercontent.com/29136904/191626018-2e9ee682-043c-4ce5-a5dd-c11b94759782.png)
+![demo3](https://user-images.githubusercontent.com/29136904/191626246-ce0cc0c5-4b41-49e3-9cb7-4b1867ab0dcb.png)
 
 ## Install In One Command!
 
-Make sure you have the release version of Neovim (0.7+).
+Make sure you have the release version of Neovim (0.8+).
 
-### Linux:
+### Linux/MacOS:
+
+If you are running Neovim 0.8+
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+```
+
+If you are running Neovim 0.8+
+
+```bash
+export LV_BRANCH="rolling"; bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
@@ -62,7 +71,7 @@ Example:
 ```lua
 -- general
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "tokyonight"
 
 lvim.leader = "space"
 -- add your own keymapping
@@ -83,7 +92,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 
 -- Treesitter parsers change this to a table of the languages you want i.e. {"java", "python", javascript}
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = "all"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- Disable virtual text
@@ -117,7 +126,7 @@ linters.setup {
 -- Additional Plugins
 lvim.plugins = {
     {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"}, {
+    {
         "ray-x/lsp_signature.nvim",
         config = function() require"lsp_signature".on_attach() end,
         event = "BufRead"
@@ -133,12 +142,6 @@ lvim.plugins = {
 ### Update the plugins
 
 - inside LunarVim `:PackerUpdate`
-
-## Breaking changes
-
-- `lvim.lang.FOO` is no longer supported. Refer to <https://www.lunarvim.org/languages> for up-to-date instructions.
-- `lvim.lsp.popup_border` has been deprecated in favor of `lvim.lsp.float.border` and `lvim.lsp.diagnostics.float.border`.
-- `lvim.builtin.dashboard` has been replaced with `lvim.builtin.alpha`, see <https://github.com/LunarVim/LunarVim/pull/1906>
 
 ## Resources
 

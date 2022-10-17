@@ -19,7 +19,7 @@ function M.run_on_packer_complete()
   pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
 
   if M._reload_triggered then
-    Log:info "Reloaded configuration"
+    Log:debug "Reloaded configuration"
     M._reload_triggered = nil
   end
 end
@@ -34,10 +34,7 @@ end
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
-  local impatient = _G.__luacache
-  if impatient then
-    impatient.clear_cache()
-  end
+  vim.cmd [[LuaCacheClear]]
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" or module:match "lvim.lsp" then
@@ -52,8 +49,8 @@ end
 function M.run_post_update()
   Log:debug "Starting post-update hook"
 
-  if vim.fn.has "nvim-0.7" ~= 1 then
-    local compat_tag = "1.1.3"
+  if vim.fn.has "nvim-0.8" ~= 1 then
+    local compat_tag = "1.1.4"
     vim.notify(
       "Please upgrade your Neovim base installation. Newer version of Lunarvim requires v0.7+",
       vim.log.levels.WARN
@@ -61,9 +58,9 @@ function M.run_post_update()
     vim.wait(1000, function()
       return false
     end)
-    local ret = require_clean("lvim.utils.git").switch_lvim_branch(compat_tag)
+    local ret = reload("lvim.utils.git").switch_lvim_branch(compat_tag)
     if ret then
-      vim.notify("Reverted to the last known compatibile version: " .. compat_tag, vim.log.levels.WARN)
+      vim.notify("Reverted to the last known compatible version: " .. compat_tag, vim.log.levels.WARN)
     end
     return
   end

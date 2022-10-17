@@ -6,7 +6,11 @@ end
 
 local function diagnostics_indicator(num, _, diagnostics, _)
   local result = {}
-  local symbols = { error = "", warning = "", info = "" }
+  local symbols = {
+    error = lvim.icons.diagnostics.Error,
+    warning = lvim.icons.diagnostics.Warning,
+    info = lvim.icons.diagnostics.Information,
+  }
   if not lvim.use_icons then
     return "(" .. num .. ")"
   end
@@ -59,14 +63,14 @@ M.config = function()
       left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
       middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
       indicator = {
-        icon = "▎", -- this should be omitted if indicator style is not 'icon'
+        icon = lvim.icons.ui.BoldLineLeft, -- this should be omitted if indicator style is not 'icon'
         style = "icon", -- can also be 'underline'|'none',
       },
-      buffer_close_icon = "",
-      modified_icon = "●",
-      close_icon = "",
-      left_trunc_marker = "",
-      right_trunc_marker = "",
+      buffer_close_icon = lvim.icons.ui.Close,
+      modified_icon = lvim.icons.ui.Circle,
+      close_icon = lvim.icons.ui.BoldClose,
+      left_trunc_marker = lvim.icons.ui.ArrowCircleLeft,
+      right_trunc_marker = lvim.icons.ui.ArrowCircleRight,
       --- name_formatter can be used to change the buffer's label in the bufferline.
       --- Please note some names can/will break the
       --- bufferline so use this at your discretion knowing that it has
@@ -140,7 +144,13 @@ end
 
 M.setup = function()
   require("lvim.keymappings").load(lvim.builtin.bufferline.keymap)
-  require("bufferline").setup {
+
+  local status_ok, bufferline = pcall(require, "bufferline")
+  if not status_ok then
+    return
+  end
+
+  bufferline.setup {
     options = lvim.builtin.bufferline.options,
     highlights = lvim.builtin.bufferline.highlights,
   }

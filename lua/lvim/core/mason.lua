@@ -3,6 +3,7 @@ local M = {}
 function M.config()
   lvim.builtin.mason = {
     ui = {
+      border = "rounded",
       keymaps = {
         toggle_package_expand = "<CR>",
         install_package = "i",
@@ -30,7 +31,7 @@ function M.config()
 end
 
 function M.setup()
-  local status_ok, mason = pcall(require, "mason")
+  local status_ok, mason = pcall(reload, "mason")
   if not status_ok then
     return
   end

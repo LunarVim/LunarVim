@@ -12,10 +12,35 @@ local function diff_source()
   end
 end
 
+local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
+local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
+
+vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = statusline_hl.background })
+vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
+vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
+vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.background })
+
+local location_color = nil
+local branch = lvim.icons.git.Branch
+local separator = lvim.icons.ui.LineMiddle
+
+if lvim.colorscheme == "tokyonight" then
+  location_color = "SLBranchName"
+  branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
+
+  local status_ok, tnc = pcall(require, "tokyonight.colors")
+  if status_ok then
+    local tncolors = tnc.setup { transform = true }
+    vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
+    separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
+  end
+end
+
 return {
   mode = {
     function()
-      return " "
+      return " " .. lvim.icons.ui.Target .. " "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -23,9 +48,8 @@ return {
   },
   branch = {
     "b:gitsigns_head",
-    icon = " ",
+    icon = branch,
     color = { gui = "bold" },
-    cond = conditions.hide_in_width,
   },
   filename = {
     "filename",
@@ -35,7 +59,12 @@ return {
   diff = {
     "diff",
     source = diff_source,
-    symbols = { added = "  ", modified = " ", removed = " " },
+    symbols = {
+      added = lvim.icons.git.LineAdded .. " ",
+      modified = lvim.icons.git.LineModified .. " ",
+      removed = lvim.icons.git.LineRemoved .. " ",
+    },
+    padding = { left = 2, right = 1 },
     diff_color = {
       added = { fg = colors.green },
       modified = { fg = colors.yellow },
@@ -49,7 +78,9 @@ return {
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV" or os.getenv "VIRTUAL_ENV"
         if venv then
-          return string.format("  (%s)", utils.env_cleanup(venv))
+          local icons = require "nvim-web-devicons"
+          local py_icon, _ = icons.get_icon ".py"
+          return string.format(" " .. py_icon .. " (%s)", utils.env_cleanup(venv))
         end
       end
       return ""
@@ -60,12 +91,17 @@ return {
   diagnostics = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
-    symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    cond = conditions.hide_in_width,
+    symbols = {
+      error = lvim.icons.diagnostics.BoldError .. " ",
+      warn = lvim.icons.diagnostics.BoldWarning .. " ",
+      info = lvim.icons.diagnostics.BoldInformation .. " ",
+      hint = lvim.icons.diagnostics.BoldHint .. " ",
+    },
+    -- cond = conditions.hide_in_width,
   },
   treesitter = {
     function()
-      return ""
+      return lvim.icons.ui.Tree
     end,
     color = function()
       local buf = vim.api.nvim_get_current_buf()
@@ -87,11 +123,16 @@ return {
       end
       local buf_ft = vim.bo.filetype
       local buf_client_names = {}
+      local copilot_active = false
 
       -- add client
       for _, client in pairs(buf_clients) do
-        if client.name ~= "null-ls" then
+        if client.name ~= "null-ls" and client.name ~= "copilot" then
           table.insert(buf_client_names, client.name)
+        end
+
+        if client.name == "copilot" then
+          copilot_active = true
         end
       end
 
@@ -106,26 +147,35 @@ return {
       vim.list_extend(buf_client_names, supported_linters)
 
       local unique_client_names = vim.fn.uniq(buf_client_names)
-      return "[" .. table.concat(unique_client_names, ", ") .. "]"
+
+      local language_servers = "[" .. table.concat(unique_client_names, ", ") .. "]"
+
+      if copilot_active then
+        language_servers = language_servers .. "%#SLCopilot#" .. " " .. lvim.icons.git.Octoface .. "%*"
+      end
+
+      return language_servers
     end,
+    separator = separator,
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
-  location = { "location", cond = conditions.hide_in_width, color = {} },
-  progress = { "progress", cond = conditions.hide_in_width, color = {} },
+  location = { "location", color = location_color },
+  progress = {
+    "progress",
+    fmt = function()
+      return "%P/%L"
+    end,
+    color = {},
+  },
+
   spaces = {
     function()
-      if not vim.api.nvim_buf_get_option(0, "expandtab") then
-        return "Tab size: " .. vim.api.nvim_buf_get_option(0, "tabstop") .. " "
-      end
-      local size = vim.api.nvim_buf_get_option(0, "shiftwidth")
-      if size == 0 then
-        size = vim.api.nvim_buf_get_option(0, "tabstop")
-      end
-      return "Spaces: " .. size .. " "
+      local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
+      return lvim.icons.ui.Tab .. " " .. shiftwidth
     end,
-    cond = conditions.hide_in_width,
-    color = {},
+    separator = separator,
+    padding = 1,
   },
   encoding = {
     "o:encoding",
@@ -133,7 +183,7 @@ return {
     color = {},
     cond = conditions.hide_in_width,
   },
-  filetype = { "filetype", cond = conditions.hide_in_width },
+  filetype = { "filetype", cond = nil, padding = { left = 1, right = 1 } },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."
@@ -144,7 +194,7 @@ return {
       return chars[index]
     end,
     padding = { left = 0, right = 0 },
-    color = { fg = colors.yellow, bg = colors.bg },
+    color = "SLProgress",
     cond = nil,
   },
 }

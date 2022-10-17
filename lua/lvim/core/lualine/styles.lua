@@ -11,6 +11,7 @@ styles.none = {
   style = "none",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -40,9 +41,16 @@ styles.default = {
   style = "default",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    component_separators = {
+      left = lvim.icons.ui.DividerRight,
+      right = lvim.icons.ui.DividerLeft,
+    },
+    section_separators = {
+      left = lvim.icons.ui.BoldDividerRight,
+      right = lvim.icons.ui.BoldDividerLeft,
+    },
     disabled_filetypes = {},
   },
   sections = {
@@ -69,10 +77,11 @@ styles.lvim = {
   style = "lvim",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "alpha", "NvimTree", "Outline" },
+    disabled_filetypes = { "alpha" },
   },
   sections = {
     lualine_a = {
@@ -80,7 +89,6 @@ styles.lvim = {
     },
     lualine_b = {
       components.branch,
-      components.filename,
     },
     lualine_c = {
       components.diff,
@@ -88,27 +96,39 @@ styles.lvim = {
     },
     lualine_x = {
       components.diagnostics,
-      components.treesitter,
       components.lsp,
+      components.spaces,
       components.filetype,
     },
-    lualine_y = {},
+    lualine_y = { components.location },
     lualine_z = {
-      components.scrollbar,
+      components.progress,
     },
   },
   inactive_sections = {
     lualine_a = {
-      "filename",
+      components.mode,
     },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
+    lualine_b = {
+      components.branch,
+    },
+    lualine_c = {
+      components.diff,
+      components.python_env,
+    },
+    lualine_x = {
+      components.diagnostics,
+      components.lsp,
+      components.spaces,
+      components.filetype,
+    },
+    lualine_y = { components.location },
+    lualine_z = {
+      components.progress,
+    },
   },
   tabline = {},
-  extensions = { "nvim-tree" },
+  extensions = {},
 }
 
 function M.get_style(style)
@@ -132,6 +152,14 @@ function M.update()
   local style = M.get_style(lvim.builtin.lualine.style)
 
   lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
+
+  local color_template = vim.g.colors_name or lvim.colorscheme
+  local theme_supported, template = pcall(function()
+    require("lualine.utils.loader").load_theme(color_template)
+  end)
+  if theme_supported and template then
+    lvim.builtin.lualine.options.theme = color_template
+  end
 end
 
 return M

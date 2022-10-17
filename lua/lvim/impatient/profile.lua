@@ -1,12 +1,13 @@
 local M = {}
 
-local api, uv = vim.api, vim.loop
+local sep
+if jit.os == "Windows" then
+  sep = "\\"
+else
+  sep = "/"
+end
 
-local std_data = vim.fn.stdpath "data"
-local std_config = vim.fn.stdpath "config"
-local vimruntime = os.getenv "VIMRUNTIME"
-local lvim_runtime = get_runtime_dir()
-local lvim_config = get_config_dir()
+local api, uv = vim.api, vim.loop
 
 local function load_buffer(title, lines)
   local bufnr = api.nvim_create_buf(false, false)
@@ -17,19 +18,6 @@ local function load_buffer(title, lines)
   api.nvim_buf_set_option(bufnr, "modifiable", false)
   api.nvim_buf_set_name(bufnr, title)
   api.nvim_set_current_buf(bufnr)
-end
-
-local function mod_path(path)
-  if not path then
-    return "?"
-  end
-  path = path:gsub(std_data .. "/site/pack/packer/", "<PACKER>/")
-  path = path:gsub(std_data .. "/", "<STD_DATA>/")
-  path = path:gsub(std_config .. "/", "<STD_CONFIG>/")
-  path = path:gsub(vimruntime .. "/", "<VIMRUNTIME>/")
-  path = path:gsub(lvim_runtime .. "/", "<LVIM_RUNTIME>/")
-  path = path:gsub(lvim_config .. "/", "<LVIM_CONFIG>/")
-  return path
 end
 
 local function time_tostr(x)
@@ -51,7 +39,7 @@ local function mem_tostr(x)
   return string.format("%1.1f%s", x, unit)
 end
 
-function M.print_profile(I)
+function M.print_profile(I, std_dirs)
   local mod_profile = I.modpaths.profile
   local chunk_profile = I.chunks.profile
 
@@ -67,42 +55,50 @@ function M.print_profile(I)
   for path, m in pairs(chunk_profile) do
     m.load = m.load_end - m.load_start
     m.load = m.load / 1000000
-    m.path = mod_path(path)
+    m.path = path or "?"
   end
 
   local module_content_width = 0
 
+  local unloaded = {}
+
   for module, m in pairs(mod_profile) do
-    m.resolve = 0
-    if m.resolve_end then
-      m.resolve = m.resolve_end - m.resolve_start
-      m.resolve = m.resolve / 1000000
-    end
+    local module_dot = module:gsub(sep, ".")
+    m.module = module_dot
 
-    m.module = module:gsub("/", ".")
-    m.loader = m.loader or m.loader_guess
-
-    local path = I.modpaths.cache[module]
-    local path_prof = chunk_profile[path]
-    m.path = mod_path(path)
-
-    if path_prof then
-      chunk_profile[path] = nil
-      m.load = path_prof.load
-      m.ploader = path_prof.loader
+    if not package.loaded[module_dot] and not package.loaded[module] then
+      unloaded[#unloaded + 1] = m
     else
-      m.load = 0
-      m.ploader = "NA"
+      m.resolve = 0
+      if m.resolve_start and m.resolve_end then
+        m.resolve = m.resolve_end - m.resolve_start
+        m.resolve = m.resolve / 1000000
+      end
+
+      m.loader = m.loader or m.loader_guess
+
+      local path = I.modpaths.cache[module]
+      local path_prof = chunk_profile[path]
+      m.path = path or "?"
+
+      if path_prof then
+        chunk_profile[path] = nil
+        m.load = path_prof.load
+        m.ploader = path_prof.loader
+      else
+        m.load = 0
+        m.ploader = "NA"
+      end
+
+      total_resolve = total_resolve + m.resolve
+      total_load = total_load + m.load
+
+      if #module > module_content_width then
+        module_content_width = #module
+      end
+
+      modules[#modules + 1] = m
     end
-
-    total_resolve = total_resolve + m.resolve
-    total_load = total_load + m.load
-
-    if #module > module_content_width then
-      module_content_width = #module
-    end
-
-    modules[#modules + 1] = m
   end
 
   table.sort(modules, function(a, b)
@@ -181,6 +177,12 @@ function M.print_profile(I)
   end
   add ""
 
+  add "Standard directories:"
+  for alias, path in pairs(std_dirs) do
+    add("  %-12s -> %s", alias, path)
+  end
+  add ""
+
   add("%s─%s┬%s─%s┐", tcwl, lcwl, tcwl, lcwl)
   add(title1_fmt, "Resolve", "Load")
   add("%s┬%s┼%s┬%s┼%s┬%s", tcwl, lcwl, tcwl, lcwl, mcwl, n)
@@ -207,7 +209,17 @@ function M.print_profile(I)
       add(f3, p.load, p.loader, p.path)
     end
     add("%s┴%s┴%s", tcwl, lcwl, n)
+  end
+
+  if #unloaded > 0 then
     add ""
+    add(n)
+    add "Modules which were unable to loaded"
+    add(n)
+    for _, p in ipairs(unloaded) do
+      lines[#lines + 1] = p.module
+    end
+    add(n)
   end
 
   load_buffer("Impatient Profile Report", lines)
@@ -216,13 +228,12 @@ end
 M.setup = function(profile)
   local _require = require
 
-  -- luacheck: ignore 121
   require = function(mod)
-    local basename = mod:gsub("%.", "/")
+    local basename = mod:gsub("%.", sep)
     if not profile[basename] then
       profile[basename] = {}
       profile[basename].resolve_start = uv.hrtime()
-      profile[basename].loader_guess = "C"
+      profile[basename].loader_guess = ""
     end
     return _require(mod)
   end
@@ -232,7 +243,7 @@ M.setup = function(profile)
   for i = 1, #pl do
     local l = pl[i]
     pl[i] = function(mod)
-      local basename = mod:gsub("%.", "/")
+      local basename = mod:gsub("%.", sep)
       profile[basename].loader_guess = i == 1 and "preloader" or "loader #" .. i
       return l(mod)
     end
