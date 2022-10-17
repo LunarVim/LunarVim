@@ -13,7 +13,42 @@ M.config = function()
     highlight = {
       enable = true, -- false will disable the whole extension
       additional_vim_regex_highlighting = false,
-      disable = { "latex" },
+      disable = function(lang, buf)
+        if vim.tbl_contains({ "latex" }, lang) then
+          return true
+        end
+
+        local max_filesize = 1024 * 1024
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          if lvim.builtin.illuminate.active then
+            vim.cmd "IlluminatePauseBuf"
+          end
+          vim.b.indent_blankline_use_treesitter = false
+          vim.b.indent_blankline_show_current_context = false
+
+          if vim.tbl_contains({ "json" }, lang) then
+            vim.cmd "NoMatchParen"
+            vim.cmd "syntax clear"
+
+            vim.api.nvim_create_autocmd({ "BufUnload" }, {
+              command = "DoMatchParen",
+              buffer = buf,
+            })
+          end
+
+          vim.notify "File larger than 1MB, turned off treesitter"
+
+          return true
+        else
+          vim.b.indent_blankline_use_treesitter = lvim.builtin.indentlines.options.use_treesitter
+          vim.b.indent_blankline_show_current_context = lvim.builtin.indentlines.options.show_current_context
+
+          if vim.opt.foldexpr:get() == "nvim_treesitter#foldexpr()" then
+            vim.opt_local.foldmethod = "expr"
+          end
+        end
+      end,
     },
     context_commentstring = {
       enable = true,
@@ -88,6 +123,13 @@ M.setup = function()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
+
+  if vim.opt.foldmethod:get() == "expr" and vim.opt.foldexpr:get() == "nvim_treesitter#foldexpr()" then
+    vim.opt.foldmethod = "manual"
+  end
+
+  vim.g.indent_blankline_use_treesitter = false
+  vim.g.indent_blankline_show_current_context = false
 
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)
