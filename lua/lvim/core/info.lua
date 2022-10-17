@@ -7,6 +7,7 @@ local M = {
     [[ / /___/ /_/ / / / / /_/ / /   | |/ / / / / / / /]],
     [[/_____/\__,_/_/ /_/\__,_/_/    |___/_/_/ /_/ /_/ ]],
   },
+  changelog = "",
 }
 
 local fmt = string.format
@@ -220,7 +221,7 @@ function M.toggle_popup(ft)
   return Popup
 end
 
-M.make_changelog = function(messages)
+M.make_changelog = function()
   local content_provider = function(popup)
     local content = {}
 
@@ -230,7 +231,7 @@ M.make_changelog = function(messages)
       { "" },
       { "changelog: " },
       { "" },
-      messages,
+      M.changelog,
       { "" },
     } do
       vim.list_extend(content, section)

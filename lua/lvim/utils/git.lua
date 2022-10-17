@@ -3,7 +3,7 @@ local M = {}
 local Log = require "lvim.core.log"
 local fmt = string.format
 local if_nil = vim.F.if_nil
-local info = require "lvim.core.info"
+local Info = require "lvim.core.info"
 
 local function git_cmd(opts)
   local plenary_loaded, Job = pcall(require, "plenary.job")
@@ -90,9 +90,7 @@ function M.update_base_lvim()
   end
 
   -- Display the window after merging
-  if next(stdout) ~= nil then
-    info.make_changelog(stdout)
-  end
+  Info.changelog = stdout
   return true
 end
 
