@@ -139,6 +139,10 @@ function M:load(config_path)
   if lvim.transparent_window then
     autocmds.enable_transparent_mode()
   end
+
+  if lvim.reload_config_on_save then
+    autocmds.enable_reload_config_on_save()
+  end
 end
 
 --- Override the configuration with a user provided one
