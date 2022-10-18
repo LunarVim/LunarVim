@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Siguiente",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Configuration": {
+    "message": "Configuración",
+    "description": "The label for category Configuration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Languages": {
+    "message": "Lenguajes",
+    "description": "The label for category Languages in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Plugins": {
+    "message": "Complementos",
+    "description": "The label for category Plugins in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.For Developers": {
+    "message": "Para Desarrolladores",
+    "description": "The label for category For Developers in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Community": {
+    "message": "Comunidad",
+    "description": "The label for category Community in sidebar tutorialSidebar"
+  }
+}
