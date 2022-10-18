@@ -3,13 +3,6 @@ local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
 function M.load_defaults()
-  local user_config_file = require("lvim.config"):get_user_config_path()
-
-  if vim.loop.os_uname().version:match "Windows" then
-    -- autocmds require forward slashes even on windows
-    user_config_file = user_config_file:gsub("\\", "/")
-  end
-
   vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = {
       "Jaq",
@@ -38,17 +31,6 @@ function M.load_defaults()
         desc = "Highlight text on yank",
         callback = function()
           require("vim.highlight").on_yank { higroup = "Search", timeout = 100 }
-        end,
-      },
-    },
-    {
-      "BufWritePost",
-      {
-        group = "_general_settings",
-        pattern = user_config_file,
-        desc = "Trigger LvimReload on saving " .. vim.fn.expand "%:~",
-        callback = function()
-          require("lvim.config"):reload()
         end,
       },
     },
@@ -179,6 +161,23 @@ function M.toggle_format_on_save()
   else
     M.disable_format_on_save()
   end
+end
+
+function M.enable_reload_config_on_save()
+  local user_config_file = require("lvim.config"):get_user_config_path()
+
+  if vim.loop.os_uname().version:match "Windows" then
+    -- autocmds require forward slashes even on windows
+    user_config_file = user_config_file:gsub("\\", "/")
+  end
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    group = "_general_settings",
+    pattern = user_config_file,
+    desc = "Trigger LvimReload on saving config.lua",
+    callback = function()
+      require("lvim.config"):reload()
+    end,
+  })
 end
 
 function M.enable_transparent_mode()

@@ -162,10 +162,7 @@ local get_gps = function()
 end
 
 local excludes = function()
-  if vim.tbl_contains(lvim.builtin.breadcrumbs.winbar_filetype_exclude, vim.bo.filetype) then
-    return true
-  end
-  return false
+  return vim.tbl_contains(lvim.builtin.breadcrumbs.winbar_filetype_exclude or {}, vim.bo.filetype)
 end
 
 M.get_winbar = function()
