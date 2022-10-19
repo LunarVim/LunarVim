@@ -45,6 +45,15 @@ A community driven Neovim IDE
 [Troubleshoot]: https://www.lunarvim.org/docs/troubleshooting
 [Configure]: https://www.lunarvim.org/docs/configuration
 
+## Resources
+
+- [Documentation](https://www.lunarvim.org)
+
+- [YouTube](https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA)
+
+- [Discord](https://discord.gg/Xb9B4Ny)
+
+- [Twitter](https://twitter.com/chrisatmachine)
 ## Thanks to all contributors
 
 <a href="https://github.com/Lunarvim/Lunarvim/graphs/contributors">
