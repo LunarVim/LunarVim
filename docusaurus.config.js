@@ -193,6 +193,17 @@ const config = {
         source_font: "src/theme/fura_code_nerd.ttf",
       },
     ],
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      ({
+        hashed: true,
+        language: ["en", "es", "de"],
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        explicitSearchResultPath: true
+      }),
+    ],
   ],
 };
 
