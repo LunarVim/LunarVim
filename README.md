@@ -163,6 +163,10 @@ lvim.plugins = {
 >
 > - @mvllow, Potential LunarVim user.
 
+> "Not only does LunarVim have insane startup times, it has everything that I need from an IDE. 10/10 Would recommend."
+>
+> - @jackm245, LunarVim user.
+
 <div align="center" id="madewithlua">
 
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)](#madewithlua)
