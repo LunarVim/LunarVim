@@ -65,14 +65,6 @@ local defaults = {
     ["<C-q>"] = ":call QuickFixToggle()<CR>",
   },
 
-  term_mode = {
-    -- Terminal window navigation
-    ["<C-h>"] = "<C-\\><C-N><C-w>h",
-    ["<C-j>"] = "<C-\\><C-N><C-w>j",
-    ["<C-k>"] = "<C-\\><C-N><C-w>k",
-    ["<C-l>"] = "<C-\\><C-N><C-w>l",
-  },
-
   visual_mode = {
     -- Better indenting
     ["<"] = "<gv",
