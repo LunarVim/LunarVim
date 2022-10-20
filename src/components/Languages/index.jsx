@@ -4,14 +4,9 @@ import Link from "@docusaurus/Link";
 
 const LanguagesList = [
   {
-    Svg: require("@site/static/img/hcl.svg").default,
-    title: "HCL",
-    docPath: "/docs/languages/hcl",
-  },
-  {
-    Svg: require("@site/static/img/terraform.svg").default,
-    title: "Terraform",
-    docPath: "/docs/languages/Terraform",
+    Svg: require("@site/static/img/angular.svg").default,
+    title: "Angular",
+    docPath: "/docs/frameworks/angular",
   },
   {
     Svg: require("@site/static/img/c.svg").default,
@@ -32,6 +27,11 @@ const LanguagesList = [
     Svg: require("@site/static/img/go.svg").default,
     title: "Go",
     docPath: "/docs/languages/go",
+  },
+  {
+    Svg: require("@site/static/img/hcl.svg").default,
+    title: "HCL",
+    docPath: "/docs/languages/hcl",
   },
   {
     Svg: require("@site/static/img/java.svg").default,
@@ -94,6 +94,11 @@ const LanguagesList = [
     docPath: "/docs/languages/swift",
   },
   {
+    Svg: require("@site/static/img/terraform.svg").default,
+    title: "Terraform",
+    docPath: "/docs/languages/Terraform",
+  },
+  {
     Svg: require("@site/static/img/typescript.svg").default,
     title: "TypeScript",
     docPath: "/docs/languages/typescript",
@@ -102,11 +107,6 @@ const LanguagesList = [
     Svg: require("@site/static/img/vue.svg").default,
     title: "Vue",
     docPath: "/docs/frameworks/vue",
-  },
-  {
-    Svg: require("@site/static/img/angular.svg").default,
-    title: "Angular",
-    docPath: "/docs/frameworks/angular",
   },
   {
     title: "and more",
