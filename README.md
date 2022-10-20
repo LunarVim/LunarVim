@@ -19,9 +19,6 @@
     <a href="https://github.com/LunarVim/LunarVim">
       <img alt="Repo Size" src="https://img.shields.io/github/repo-size/LunarVim/LunarVim?color=%23DDB6F2&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41" />
     </a>
-    <a href="https://github.com/LunarVim/LunarVim">
-      <img alt="License" src="https://img.shields.io/github/license/LunarVim/LunarVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"/>
-    </a>
     <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon">
       <img alt="Patreon donate button" src="https://img.shields.io/badge/patreon-donate-yellow.svg?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41" />
     </a>
