@@ -14,10 +14,10 @@
       <img alt="Stars" src="https://img.shields.io/github/stars/LunarVim/LunarVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41" />
     </a>
     <a href="https://github.com/LunarVim/LunarVim/issues">
-      <img alt="Issues" src="https://img.shields.io/github/issues/LunarVim/LunarVim?style=for-the-badge&logo=bilibili&color=F5E0DC&logoColor=D9E0EE&labelColor=302D41" />
+      <img alt="Issues" src="https://img.shields.io/github/issues/LunarVim/LunarVim?style=for-the-badge&logo=bilibili&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41" />
     </a>
     <a href="https://github.com/LunarVim/LunarVim">
-      <img alt="Repo Size" src="https://img.shields.io/github/repo-size/LunarVim/LunarVim?color=%23DDB6F2&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41" />
+      <img alt="Repo Size" src="https://img.shields.io/github/repo-size/LunarVim/LunarVim?color=C9CBFF&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41" />
     </a>
     <a href="https://patreon.com/chrisatmachine" title="Donate to this project using Patreon">
       <img alt="Patreon donate button" src="https://img.shields.io/badge/patreon-donate-yellow.svg?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41" />
@@ -31,7 +31,8 @@
   </p>
 </p>
 
-A community driven Neovim IDE
+An IDE layer for Neovim with sane defaults. Completely free and community
+driven.
 
 ---
 
