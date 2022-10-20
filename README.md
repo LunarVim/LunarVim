@@ -35,6 +35,13 @@ A community driven Neovim IDE
 
 ---
 
+**[<kbd> <br> Install <br> </kbd>][Install]** 
+**[<kbd> <br> Configure <br> </kbd>][Configure]** 
+**[<kbd> <br> Troubleshooting <br> </kbd>][Troubleshoot]** 
+**[<kbd> <br> Contribute <br> </kbd>][Contribute]**
+
+---
+
 ## Showcase
 ![intro1](https://user-images.githubusercontent.com/29136904/191624232-a7b13f11-cc9f-495e-879e-67ea0444c568.png)
 ![info](https://user-images.githubusercontent.com/29136904/191624942-3d75ef87-35cf-434d-850e-3e7cd5ce2ad0.png)
