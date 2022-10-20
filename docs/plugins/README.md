@@ -28,8 +28,10 @@ local init_opts = {
 packer.init(init_opts)
 ```
 
-::: tip
+:::tip
+
 use `:PackerStatus` to see a list of all installed plugins!
+
 :::
 
 ## Core plugins
@@ -41,8 +43,11 @@ lvim.builtin.alpha.active = true
 lvim.builtin.dap.active = true -- (default: false)
 lvim.builtin.terminal.active = true
 ```
-::: warning IMPORTANT
-disabling a plugin will not take effect until you run `:PackerSync` or preferably `:LvimSyncCorePlugins`
+
+:::caution
+
+Disabling a plugin will not take effect until you run `:PackerSync` or preferably `:LvimSyncCorePlugins`
+
 :::
 
 You can press `<TAB>` to get autocomplete suggestions to explore these settings.
@@ -53,8 +58,10 @@ lvim.builtin.telescope.defaults.layout_config.width = 0.95
 lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
 ```
 
-::: tip
+:::tip
+
 A plugin's README (and `docs/` folder if it exists) typically contain excellent documentation, so it may be worthwhile to create an alias for if you use them often.
+
 :::
 
 ### Pinning strategy
@@ -79,6 +86,7 @@ lvim.plugins = {
   {"folke/tokyonight.nvim"},
 }
 ```
+
 Check the [extra plugins](./02-extra-plugins.md) for some suggestions.
 
 _Note: removing a plugin from the `lvim.plugin` table removes it from your configuration but not your system. Any plugins left in the `start` directory will still autostart. To remove them completely, run `:PackerSync`._
