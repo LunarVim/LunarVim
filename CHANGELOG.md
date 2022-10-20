@@ -6,7 +6,6 @@ All notable changes to this project will be documented in this file.
 
 ### <!-- 1 --> Features
 
-- _(notify)_ remove nvim.notify ([#3300](https://github.com/LunarVim/LunarVim/pull/3300))
 - _(autocmds)_ make sure all autocmds are modifiable ([#3087](https://github.com/lunarvim/lunarvim/pull/3087))
 - _(cmp)_ add configs for cmp.setup.cmdline ([#3180](https://github.com/lunarvim/lunarvim/pull/3180))
 - _(config)_ allow disabling reload-on-save ([#3261](https://github.com/lunarvim/lunarvim/pull/3261))
