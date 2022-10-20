@@ -22,14 +22,18 @@ M.config = function()
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
         if ok and stats and stats.size > max_filesize then
           if lvim.builtin.illuminate.active then
-            vim.cmd "IlluminatePauseBuf"
+            pcall(require('illuminate').pause_buf)
           end
           vim.b.indent_blankline_use_treesitter = false
           vim.b.indent_blankline_show_current_context = false
 
           if vim.tbl_contains({ "json" }, lang) then
-            vim.cmd "NoMatchParen"
-            vim.cmd "syntax clear"
+            vim.schedule(function()
+              vim.api.nvim_buf_call(buf, function()
+                vim.cmd "NoMatchParen"
+                vim.cmd "syntax clear"
+              end)
+            end)
 
             vim.api.nvim_create_autocmd({ "BufUnload" }, {
               command = "DoMatchParen",
@@ -37,16 +41,13 @@ M.config = function()
             })
           end
 
-          vim.notify "File larger than 1MB, turned off treesitter"
+          Log:info "File larger than 1MB, turned off treesitter for this buffer"
 
           return true
         else
           vim.b.indent_blankline_use_treesitter = lvim.builtin.indentlines.options.use_treesitter
           vim.b.indent_blankline_show_current_context = lvim.builtin.indentlines.options.show_current_context
 
-          if vim.opt.foldexpr:get() == "nvim_treesitter#foldexpr()" then
-            vim.opt_local.foldmethod = "expr"
-          end
         end
       end,
     },
@@ -124,9 +125,6 @@ M.setup = function()
 
   treesitter_configs.setup(opts)
 
-  if vim.opt.foldmethod:get() == "expr" and vim.opt.foldexpr:get() == "nvim_treesitter#foldexpr()" then
-    vim.opt.foldmethod = "manual"
-  end
 
   vim.g.indent_blankline_use_treesitter = false
   vim.g.indent_blankline_show_current_context = false
