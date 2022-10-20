@@ -101,7 +101,7 @@ const LanguagesList = [
   {
     Svg: require("@site/static/img/vue.svg").default,
     title: "Vue",
-    docPath: "/docs/languages/vue",
+    docPath: "/docs/frameworks/vue",
   },
   {
     title: "and more",

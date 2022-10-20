@@ -55,8 +55,10 @@ You can also toggle `<:LspInstallInfo>` and interactively choose which servers t
 
 `lvim.lsp.automatic_configuration.skipped_servers` contains a list of servers that will **not** be automatically configured by default, for example only `tsserver` is allowed for JS-family languages, and when a language has more than one server available, then the most popular one is usually chosen.
 
-::: tip Notice
+:::tip
+
 Overriding a server will completely bypass the lsp-installer, so you would have to manage the installation for any of those servers manually.
+
 :::
 
 See the current list
@@ -71,8 +73,10 @@ See the default list
 :lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))
 ```
 
-::: tip Notice
+:::tip
+
 Any changes to `lvim.lsp.automatic_configuration.skipped_servers` **must** be followed by `:LvimCacheReset` to take effect.
+
 :::
 
 ### Server setup
@@ -92,8 +96,10 @@ A typical setup call with default arguments
 require("lvim.lsp.manager").setup("sumneko_lua")
 ```
 
-::: tip
+:::tip
+
 You can quickly find these files by running `<leader>Lf` -> "Find LunarVim Files"
+
 :::
 
 #### Overriding the default setup options
@@ -132,8 +138,10 @@ To set a setting for your language server:
 
 This will create a file in `$LUNARVIM_CONFIG_DIR/lsp-settings`, to enable persistent changes. Refer to the documentation of [nlsp-settings](https://github.com/tamago324/nlsp-settings.nvim/blob/main/schemas/README.md) for a full updated list of supported language servers.
 
-::: tip
+:::tip
+
 Make sure to install `jsonls` for autocompletion.
+
 :::
 
 ## Linting/Formatting
