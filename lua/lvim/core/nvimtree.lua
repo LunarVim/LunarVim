@@ -147,10 +147,6 @@ function M.setup()
     return
   end
 
-  local status_ok_1 = pcall(require, "nvim-tree.utils")
-  if not status_ok_1 then
-    return
-  end
 
   if lvim.builtin.nvimtree._setup_called then
     Log:debug "ignoring repeated setup call for nvim-tree, see kyazdani42/nvim-tree.lua#1308"
