@@ -30,12 +30,9 @@ A community driven Neovim IDE
 ---
 
 ## Showcase
-![intro1](https://user-images.githubusercontent.com/29136904/191624232-a7b13f11-cc9f-495e-879e-67ea0444c568.png)
-![info](https://user-images.githubusercontent.com/29136904/191624942-3d75ef87-35cf-434d-850e-3e7cd5ce2ad0.png)
 
-![demo1](https://user-images.githubusercontent.com/29136904/191625579-ce9efb1f-1e23-4a05-aebc-915a0f614d72.png)
-![demo2](https://user-images.githubusercontent.com/29136904/191626018-2e9ee682-043c-4ce5-a5dd-c11b94759782.png)
 ![demo3](https://user-images.githubusercontent.com/29136904/191626246-ce0cc0c5-4b41-49e3-9cb7-4b1867ab0dcb.png)
+![info](https://user-images.githubusercontent.com/29136904/191624942-3d75ef87-35cf-434d-850e-3e7cd5ce2ad0.png)
 
 </div>
 <!----------------------------------------------------------------------------->
