@@ -22,7 +22,7 @@ M.config = function()
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
         if ok and stats and stats.size > max_filesize then
           if lvim.builtin.illuminate.active then
-            pcall(require('illuminate').pause_buf)
+            pcall(require("illuminate").pause_buf)
           end
           vim.b.indent_blankline_use_treesitter = false
           vim.b.indent_blankline_show_current_context = false
@@ -47,7 +47,6 @@ M.config = function()
         else
           vim.b.indent_blankline_use_treesitter = lvim.builtin.indentlines.options.use_treesitter
           vim.b.indent_blankline_show_current_context = lvim.builtin.indentlines.options.show_current_context
-
         end
       end,
     },
@@ -124,7 +123,6 @@ M.setup = function()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
-
 
   vim.g.indent_blankline_use_treesitter = false
   vim.g.indent_blankline_show_current_context = false
