@@ -133,3 +133,13 @@ body {
   font-family: "Terminal Glyphs", Consolas, Menlo, "Bitstream Vera Sans Mono",
     monospace, "Powerline Symbols";
 }
+
+/* youtube embedded videos */
+iframe[src*="youtube.com"] {
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: .5rem;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16/9;
+  height: auto;
+}
