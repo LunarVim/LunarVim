@@ -67,14 +67,6 @@ function M.load_defaults()
       },
     },
     {
-      { "BufWinEnter", "BufRead", "BufNewFile" },
-      {
-        group = "_format_options",
-        pattern = "*",
-        command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-      },
-    },
-    {
       "VimResized",
       {
         group = "_auto_resize",
