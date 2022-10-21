@@ -18,7 +18,6 @@ local builtins = {
   "lvim.core.bufferline",
   "lvim.core.autopairs",
   "lvim.core.comment",
-  "lvim.core.notify",
   "lvim.core.lualine",
   "lvim.core.alpha",
   "lvim.core.mason",

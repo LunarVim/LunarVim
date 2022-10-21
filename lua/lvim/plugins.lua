@@ -17,14 +17,6 @@ local core_plugins = {
   {
     "folke/tokyonight.nvim",
   },
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      require("lvim.core.notify").setup()
-    end,
-    requires = { "nvim-telescope/telescope.nvim" },
-    disable = not lvim.builtin.notify.active or not lvim.builtin.telescope.active,
-  },
   { "Tastyep/structlog.nvim" },
 
   { "nvim-lua/popup.nvim" },

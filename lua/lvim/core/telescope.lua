@@ -164,12 +164,6 @@ function M.setup()
     end)
   end
 
-  if lvim.builtin.notify.active then
-    pcall(function()
-      require("telescope").load_extension "notify"
-    end)
-  end
-
   if lvim.builtin.telescope.on_config_done then
     lvim.builtin.telescope.on_config_done(telescope)
   end
