@@ -71,9 +71,6 @@
   "nvim-navic": {
     "commit": "132b273"
   },
-  "nvim-notify": {
-    "commit": "af935fd"
-  },
   "nvim-tree.lua": {
     "commit": "c446527"
   },
