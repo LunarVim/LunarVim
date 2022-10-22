@@ -2,6 +2,7 @@
 set -e
 
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
+export LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
 
 export LVIM_TEST_ENV=true
 
@@ -11,12 +12,10 @@ LUNARVIM_CACHE_DIR="$(mktemp -d)"
 
 export LUNARVIM_CONFIG_DIR LUNARVIM_CACHE_DIR
 
-echo "cache: $LUNARVIM_CACHE_DIR
-
-config: $LUNARVIM_CONFIG_DIR"
+printf "cache_dir: %s\nconfig_dir: %s\n" "$LUNARVIM_CACHE_DIR" "$LUNARVIM_CONFIG_DIR"
 
 lvim() {
-  nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/tests/minimal_init.lua" --cmd "set runtimepath+=$LUNARVIM_RUNTIME_DIR/lvim" "$@"
+  nvim -u "$LUNARVIM_BASE_DIR/tests/minimal_init.lua" --cmd "set runtimepath+=$LUNARVIM_BASE_DIR" "$@"
 }
 
 if [ -n "$1" ]; then

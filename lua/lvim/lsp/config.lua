@@ -39,7 +39,7 @@ local skipped_servers = {
   "vuels",
 }
 
-local skipped_filetypes = { "markdown", "rst", "plaintext" }
+local skipped_filetypes = { "markdown", "rst", "plaintext", "toml" }
 
 local join_paths = require("lvim.utils").join_paths
 

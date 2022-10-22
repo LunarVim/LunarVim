@@ -1,5 +1,5 @@
 local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
-local base_dir = os.getenv "LUNARVIM_RUNTIME_DIR" .. path_sep .. "lvim"
+local base_dir = vim.env.LUNARVIM_BASE_DIR
 local tests_dir = base_dir .. path_sep .. "tests"
 
 vim.opt.rtp:append(tests_dir)

@@ -10,7 +10,6 @@ end
 
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
-local in_headless = #vim.api.nvim_list_uis() == 0
 
 ---Join path segments that were passed as input
 ---@return string
@@ -96,9 +95,7 @@ function M:init(base_dir)
     vim.cmd [[let &packpath = &runtimepath]]
   end
 
-  -- FIXME: currently unreliable in unit-tests
-  if not in_headless then
-    _G.PLENARY_DEBUG = false
+  if not vim.env.LVIM_TEST_ENV then
     require "lvim.impatient"
   end
 
