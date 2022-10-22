@@ -24,15 +24,11 @@ M.config = function()
           if lvim.builtin.illuminate.active then
             pcall(require("illuminate").pause_buf)
           end
-          vim.b.indent_blankline_use_treesitter = false
-          vim.b.indent_blankline_show_current_context = false
 
           if vim.tbl_contains({ "json" }, lang) then
-            vim.schedule(function()
-              vim.api.nvim_buf_call(buf, function()
-                vim.cmd "NoMatchParen"
-                vim.cmd "syntax clear"
-              end)
+            vim.api.nvim_buf_call(buf, function()
+              vim.cmd "NoMatchParen"
+              vim.cmd "syntax clear"
             end)
 
             vim.api.nvim_create_autocmd({ "BufUnload" }, {
@@ -44,9 +40,6 @@ M.config = function()
           Log:info "File larger than 1MB, turned off treesitter for this buffer"
 
           return true
-        else
-          vim.b.indent_blankline_use_treesitter = lvim.builtin.indentlines.options.use_treesitter
-          vim.b.indent_blankline_show_current_context = lvim.builtin.indentlines.options.show_current_context
         end
       end,
     },
@@ -123,9 +116,6 @@ M.setup = function()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
-
-  vim.g.indent_blankline_use_treesitter = false
-  vim.g.indent_blankline_show_current_context = false
 
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)
