@@ -8,6 +8,7 @@ M.config = function()
   lvim.builtin.breadcrumbs = {
     active = true,
     on_config_done = nil,
+    winbar_path_contains_exclude = { "noice://" },
     winbar_filetype_exclude = {
       "help",
       "startify",
@@ -162,7 +163,18 @@ local get_gps = function()
 end
 
 local excludes = function()
-  return vim.tbl_contains(lvim.builtin.breadcrumbs.winbar_filetype_exclude or {}, vim.bo.filetype)
+  if vim.tbl_contains(lvim.builtin.breadcrumbs.winbar_filetype_exclude or {}, vim.bo.filetype) then
+    return true
+  end
+
+  local bufname = vim.api.nvim_buf_get_name(0)
+  for _, value in ipairs(lvim.builtin.breadcrumbs.winbar_path_contains_exclude or {}) do
+    if bufname:find(value) then
+      return true
+    end
+  end
+
+  return false
 end
 
 M.get_winbar = function()
