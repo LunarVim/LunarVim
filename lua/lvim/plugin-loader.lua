@@ -80,10 +80,17 @@ end
 
 function plugin_loader.recompile()
   plugin_loader.cache_clear()
+  vim.cmd [[LuaCacheClear]]
   pcall_packer_command "compile"
-  if utils.is_file(compile_path) then
-    Log:debug "generated packer_compiled.lua"
-  end
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerCompileDone",
+    once = true,
+    callback = function()
+      if utils.is_file(compile_path) then
+        Log:debug "generated packer_compiled.lua"
+      end
+    end,
+  })
 end
 
 function plugin_loader.reload(configurations)
@@ -156,7 +163,6 @@ function plugin_loader.sync_core_plugins()
   })
 
   plugin_loader.cache_clear()
-  vim.cmd [[LuaCacheClear]]
   local core_plugins = plugin_loader.get_core_plugins()
   Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
   pcall_packer_command("sync", core_plugins)

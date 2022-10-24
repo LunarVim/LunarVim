@@ -2,6 +2,7 @@ local M = {}
 
 local Log = require "lvim.core.log"
 local in_headless = #vim.api.nvim_list_uis() == 0
+local plugin_loader = require "lvim.plugin-loader"
 
 function M.run_pre_update()
   Log:debug "Starting pre-update hook"
@@ -34,7 +35,7 @@ end
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
-  vim.cmd [[LuaCacheClear]]
+  plugin_loader.recompile()
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" or module:match "lvim.lsp" then
@@ -68,7 +69,7 @@ function M.run_post_update()
   M.reset_cache()
 
   Log:debug "Syncing core plugins"
-  require("lvim.plugin-loader").sync_core_plugins()
+  plugin_loader.sync_core_plugins()
 
   if not in_headless then
     vim.schedule(function()
