@@ -70,6 +70,9 @@ local function pcall_packer_command(cmd, kwargs)
 end
 
 function plugin_loader.cache_clear()
+  if not utils.is_file(compile_path) then
+    return
+  end
   if vim.fn.delete(compile_path) == 0 then
     Log:debug "deleted packer_compiled.lua"
   end
@@ -151,7 +154,12 @@ function plugin_loader.sync_core_plugins()
       require("lvim.plugin-loader").load_snapshot(default_snapshot)
     end,
   })
-  pcall_packer_command "sync"
+
+  plugin_loader.cache_clear()
+  vim.cmd [[LuaCacheClear]]
+  local core_plugins = plugin_loader.get_core_plugins()
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
+  pcall_packer_command("sync", core_plugins)
 end
 
 function plugin_loader.ensure_plugins()
