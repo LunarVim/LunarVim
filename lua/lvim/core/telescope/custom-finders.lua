@@ -9,8 +9,6 @@ local _, actions = pcall(require, "telescope.actions")
 local _, previewers = pcall(require, "telescope.previewers")
 local _, make_entry = pcall(require, "telescope.make_entry")
 
-local utils = require "lvim.utils"
-
 function M.find_lunarvim_files(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
@@ -19,7 +17,7 @@ function M.find_lunarvim_files(opts)
     prompt_prefix = ">> ",
     prompt_title = "~ LunarVim files ~",
     cwd = get_runtime_dir(),
-    search_dirs = { utils.join_paths(get_runtime_dir(), "lvim"), lvim.lsp.templates_dir },
+    search_dirs = { get_lvim_base_dir(), lvim.lsp.templates_dir },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   builtin.find_files(opts)
@@ -33,7 +31,7 @@ function M.grep_lunarvim_files(opts)
     prompt_prefix = ">> ",
     prompt_title = "~ search LunarVim ~",
     cwd = get_runtime_dir(),
-    search_dirs = { utils.join_paths(get_runtime_dir(), "lvim"), lvim.lsp.templates_dir },
+    search_dirs = { get_lvim_base_dir(), lvim.lsp.templates_dir },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   builtin.live_grep(opts)
