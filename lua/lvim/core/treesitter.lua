@@ -26,9 +26,11 @@ M.config = function()
           end
 
           if vim.tbl_contains({ "json" }, lang) then
-            vim.api.nvim_buf_call(buf, function()
-              vim.cmd "NoMatchParen"
-              vim.cmd "syntax clear"
+            vim.schedule(function()
+              vim.api.nvim_buf_call(buf, function()
+                vim.cmd "NoMatchParen"
+                vim.cmd "syntax clear"
+              end)
             end)
 
             vim.api.nvim_create_autocmd({ "BufUnload" }, {
