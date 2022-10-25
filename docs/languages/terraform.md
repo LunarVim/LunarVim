@@ -12,11 +12,11 @@ First, within LunarVim run the following:
 ## Supported language servers
 
 ```lua
-terraform = { "terraform", "terraformls"},
+terraform = { "terraform", "terraformls" }
 ```
 
 ## Supported formatters
 
 ```lua
-terraform = { "terraform"} }
+terraform = { "terraform" }
 ```
