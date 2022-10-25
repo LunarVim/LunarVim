@@ -5,6 +5,7 @@
 - Make sure you have installed the latest version of [`Neovim v0.8.0+`](https://github.com/neovim/neovim/releases/latest).
 - Have `git`, `make`, `pip`, `npm`, `node` and `cargo` installed on your system.
 - [Resolve `EACCES` permissions when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally) to avoid error when installing packages with npm.
+- [`PowerShell 7+`](https://learn.microsoft.com/en-us/powershell/scripting/whats-new/migrating-from-windows-powershell-51-to-powershell-7?view=powershell-7.2) (for Windows)
 
 ## Release
 
@@ -12,9 +13,25 @@
 
 No alarms and No surprises:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="linux/macos" label="Linux/MacOs">
+
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```powershell
+Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+```
+
+</TabItem>
+</Tabs>
 
 ## Nightly
 
