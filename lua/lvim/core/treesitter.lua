@@ -30,6 +30,7 @@ M.config = function()
               vim.api.nvim_buf_call(buf, function()
                 vim.cmd "NoMatchParen"
                 vim.cmd "syntax clear"
+                vim.cmd "setlocal nocursorline"
               end)
             end)
 
