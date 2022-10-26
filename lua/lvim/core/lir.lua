@@ -94,7 +94,7 @@ function M.icon_setup()
     icon_hl = "#42A5F5"
   end
 
-  reload("nvim-web-devicons").set_icon {
+  require("nvim-web-devicons").set_icon {
     lir_folder_icon = {
       icon = lvim.builtin.lir.icon,
       color = icon_hl,
