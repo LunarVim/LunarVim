@@ -17,6 +17,7 @@ To install syntax highlighting and treesitter support for your language:
 **NOTE:** `<TAB>` indicates that you should press the `<TAB>` key and cycle through your options
 
 Not all languages are supported. For a list of supported languages [look here](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hkxPa5w3bZ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
 
 ## Language Server
 

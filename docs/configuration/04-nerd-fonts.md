@@ -12,7 +12,7 @@ From the repo:
 
 ### Video Explanation
 
-[Installing fonts with included icon sets](https://www.youtube.com/watch?v=fR4ThXzhQYI&t=364s)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fR4ThXzhQYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
 
 ### Easy Installer
 
