@@ -20,7 +20,7 @@ on:
 jobs:
   plugins-version-bump:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: false
     permissions:
       contents: write
       pull-requests: write
