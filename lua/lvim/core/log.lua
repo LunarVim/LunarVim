@@ -87,7 +87,7 @@ function Log:init()
         -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
         vim_log_level = vim_log_level + 1
       end
-      
+
       self:add_entry(vim_log_level, msg)
     end
   end
