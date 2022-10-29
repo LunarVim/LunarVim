@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+OS="$(uname -s)"
+
 #Set branch to master unless specified by the user
 declare -x LV_BRANCH="${LV_BRANCH:-"master"}"
 declare -xr LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
@@ -32,6 +34,12 @@ declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
   "$LUNARVIM_RUNTIME_DIR"
   "$LUNARVIM_CACHE_DIR"
+)
+
+declare -a __lvim_cache_files=(
+  "$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
+  "$LUNARVIM_CACHE_DIR/luacache_chunks"
+  "$LUNARVIM_CACHE_DIR/luacache_modpaths"
 )
 
 declare -a __npm_deps=(
@@ -141,8 +149,6 @@ function main() {
 
   if [ "$ARGS_LOCAL" -eq 1 ]; then
     link_local_lvim
-  elif [ -d "$LUNARVIM_BASE_DIR" ]; then
-    validate_lunarvim_files
   else
     clone_lvim
   fi
@@ -156,7 +162,6 @@ function main() {
 }
 
 function detect_platform() {
-  OS="$(uname -s)"
   case "$OS" in
     Linux)
       if [ -f "/etc/arch-release" ] || [ -f "/etc/artix-release" ]; then
@@ -217,15 +222,6 @@ function verify_core_plugins() {
     exit 1
   fi
   echo "Verification complete!"
-}
-
-function validate_lunarvim_files() {
-  local verify_version_cmd='if v:errmsg != "" | cquit | else | quit | endif'
-  if ! "$INSTALL_PREFIX/bin/lvim" --headless -c 'LvimUpdate' -c "$verify_version_cmd" &>/dev/null; then
-    msg "Removing old installation files"
-    rm -rf "$LUNARVIM_BASE_DIR"
-    clone_lvim
-  fi
 }
 
 function validate_install_prefix() {
@@ -354,14 +350,27 @@ function install_rust_deps() {
 }
 
 function verify_lvim_dirs() {
-  if [ "$ARGS_OVERWRITE" -eq 1 ]; then
-    for dir in "${__lvim_dirs[@]}"; do
-      [ -d "$dir" ] && rm -rf "$dir"
-    done
+  for dir in "${__lvim_dirs[@]}"; do
+    if [ -d "$dir" ] && [ "$ARGS_OVERWRITE" -eq 1 ]; then
+      rm -rf "$dir"
+    fi
+    mkdir -p "$dir"
+  done
+
+  if [ -d "$LUNARVIM_BASE_DIR" ]; then
+    msg "Moving old installation files to ${LUNARVIM_BASE_DIR}.old"
+    mv "$LUNARVIM_BASE_DIR" "${LUNARVIM_BASE_DIR}".old
   fi
 
-  for dir in "${__lvim_dirs[@]}"; do
-    mkdir -p "$dir"
+  if [ -d "$LUNARVIM_RUNTIME_DIR" ]; then
+    msg "Moving old runtime files to ${LUNARVIM_RUNTIME_DIR}.old"
+    mv "$LUNARVIM_RUNTIME_DIR" "${LUNARVIM_RUNTIME_DIR}".old
+  fi
+
+  for cf in "${__lvim_cache_files[@]}"; do
+    if [ -f "$cf" ]; then
+      rm -f "$cf"
+    fi
   done
 }
 
@@ -376,7 +385,6 @@ function backup_old_config() {
   if command -v rsync &>/dev/null; then
     rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$src"/ "$src.old"
   else
-    OS="$(uname -s)"
     case "$OS" in
       Linux | *BSD)
         cp -r "$src/"* "$src.old/."
@@ -385,10 +393,11 @@ function backup_old_config() {
         cp -R "$src/"* "$src.old/."
         ;;
       *)
-        echo "OS $OS is not currently supported."
+        mv "$src" "${src}".old
         ;;
     esac
   fi
+  [ -d "$src" ] && rm -rf "$src"
   msg "Backup operation complete"
 }
 
@@ -456,7 +465,6 @@ function setup_lvim() {
 }
 
 function create_desktop_file() {
-  OS="$(uname -s)"
   # TODO: Any other OSes that use desktop files?
   ([ "$OS" != "Linux" ] || ! command -v xdg-desktop-menu &>/dev/null) && return
   echo "Creating desktop file"
