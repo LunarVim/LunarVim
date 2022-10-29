@@ -3,6 +3,28 @@ local M = {}
 local tbl = require "lvim.utils.table"
 local Log = require "lvim.core.log"
 
+local function highlight_references()
+  local status_ok, ts_utils = pcall(function()
+    return require "nvim-treesitter.ts_utils"
+  end)
+  if status_ok then
+    local node = ts_utils.get_node_at_cursor()
+    while node ~= nil do
+      local node_type = node:type()
+      if
+        node_type == "string"
+        or node_type == "string_fragment"
+        or node_type == "template_string"
+        or node_type == "document"
+      then
+        return
+      end
+      node = node:parent()
+    end
+  end
+  vim.lsp.buf.document_highlight()
+end
+
 function M.is_client_active(name)
   local clients = vim.lsp.get_active_clients()
   return tbl.find_first(clients, function(client)
@@ -99,7 +121,7 @@ function M.setup_document_highlight(client, bufnr)
   vim.api.nvim_create_autocmd(hl_events, {
     group = group,
     buffer = bufnr,
-    callback = vim.lsp.buf.document_highlight,
+    callback = highlight_references,
   })
   vim.api.nvim_create_autocmd("CursorMoved", {
     group = group,
