@@ -119,10 +119,10 @@ function M.setup(server_name, user_config)
           end)
         end
       end)
-      return
     else
       Log:debug(server_name .. " is not managed by the automatic installer")
     end
+    return
   end
 
   local config = resolve_config(server_name, resolve_mason_config(server_name), user_config)
