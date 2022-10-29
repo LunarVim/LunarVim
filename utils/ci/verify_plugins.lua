@@ -26,6 +26,20 @@ end
 local is_directory = require("lvim.utils").is_directory
 -- see packer.init()
 local packdir = join_paths(get_runtime_dir(), "site", "pack", "packer")
+
+local verify_packer = function()
+  if not is_directory(packdir) then
+    io.write "Packer not installed!"
+    os.exit(1)
+  end
+  local status_ok, packer = pcall(require, "packer")
+  if status_ok and packer then
+    return
+  end
+  io.write "Packer not installed!"
+  os.exit(1)
+end
+
 local packer_config = { opt_dir = join_paths(packdir, "opt"), start_dir = join_paths(packdir, "start") }
 local is_optional = function(spec)
   return spec.opt or spec.event or spec.cmd or spec.module
@@ -130,5 +144,6 @@ local function verify_core_plugins(verbose)
   end)
 end
 
+verify_packer()
 verify_core_plugins()
 vim.cmd "q"
