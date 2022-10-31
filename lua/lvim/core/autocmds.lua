@@ -99,6 +99,21 @@ function M.load_defaults()
         end,
       },
     },
+    {
+      "ColorScheme",
+      {
+        group = "_lvim_colorscheme",
+        callback = function()
+          local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+          local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
+          local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
+          vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = statusline_hl.background })
+          vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
+          vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
+          vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = statusline_hl.background })
+        end,
+      },
+    },
   }
 
   M.define_autocmds(definitions)
