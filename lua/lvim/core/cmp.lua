@@ -172,20 +172,16 @@ M.config = function()
         if lvim.use_icons then
           vim_item.kind = lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
 
-          -- TODO: not sure why I can't put this anywhere else
-          vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
           if entry.source.name == "copilot" then
             vim_item.kind = lvim.icons.git.Octoface
             vim_item.kind_hl_group = "CmpItemKindCopilot"
           end
 
-          vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
           if entry.source.name == "cmp_tabnine" then
             vim_item.kind = lvim.icons.misc.Robot
             vim_item.kind_hl_group = "CmpItemKindTabnine"
           end
 
-          vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
           if entry.source.name == "crates" then
             vim_item.kind = lvim.icons.misc.Package
             vim_item.kind_hl_group = "CmpItemKindCrate"
@@ -196,7 +192,6 @@ M.config = function()
             vim_item.kind_hl_group = "CmpItemKindConstant"
           end
 
-          vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
           if entry.source.name == "emoji" then
             vim_item.kind = lvim.icons.misc.Smiley
             vim_item.kind_hl_group = "CmpItemKindEmoji"
