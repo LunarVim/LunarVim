@@ -103,7 +103,7 @@ function M.load_defaults()
       "ColorScheme",
       {
         group = "_lvim_colorscheme",
-        callback = function()
+        callback = function(vim.schedule(function()
           if lvim.builtin.breadcrumbs.active then
             require("lvim.core.breadcrumbs").get_winbar()
           end
