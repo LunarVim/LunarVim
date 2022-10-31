@@ -3,7 +3,6 @@ local M = {}
 -- local Log = require "lvim.core.log"
 
 local icons = lvim.icons.kind
-local icons_ui = lvim.icons.ui
 
 M.config = function()
   lvim.builtin.breadcrumbs = {
@@ -73,7 +72,7 @@ M.config = function()
         Variable = icons.Variable .. " ",
       },
       highlight = true,
-      separator = " " .. icons_ui.ChevronShortRight .. " ",
+      separator = " " .. lvim.icons.ui.ChevronShortRight .. " ",
       depth_limit = 0,
       depth_limit_indicator = "..",
     },
@@ -155,7 +154,7 @@ local get_gps = function()
   end
 
   if not require("lvim.utils.functions").isempty(gps_location) then
-    return "%#NavicSeparator#".. icons_ui.ChevronShortRight .. "%* " .. gps_location
+    return "%#NavicSeparator#".. lvim.icons.ui.ChevronShortRight .. "%* " .. gps_location
   else
     return ""
   end
