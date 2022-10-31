@@ -34,12 +34,7 @@ declare -a __lvim_dirs=(
   "$LUNARVIM_CONFIG_DIR"
   "$LUNARVIM_RUNTIME_DIR"
   "$LUNARVIM_CACHE_DIR"
-)
-
-declare -a __lvim_cache_files=(
-  "$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
-  "$LUNARVIM_CACHE_DIR/luacache_chunks"
-  "$LUNARVIM_CACHE_DIR/luacache_modpaths"
+  "$LUNARVIM_BASE_DIR"
 )
 
 declare -a __npm_deps=(
@@ -143,7 +138,7 @@ function main() {
     fi
   fi
 
-  backup_old_config
+  remove_old_cache_files
 
   verify_lvim_dirs
 
@@ -349,56 +344,37 @@ function install_rust_deps() {
   echo "All Rust dependencies are successfully installed"
 }
 
-function verify_lvim_dirs() {
-  for dir in "${__lvim_dirs[@]}"; do
-    if [ -d "$dir" ] && [ "$ARGS_OVERWRITE" -eq 1 ]; then
-      rm -rf "$dir"
-    fi
-    mkdir -p "$dir"
-  done
-
-  if [ -d "$LUNARVIM_BASE_DIR" ]; then
-    msg "Moving old installation files to ${LUNARVIM_BASE_DIR}.old"
-    mv "$LUNARVIM_BASE_DIR" "${LUNARVIM_BASE_DIR}".old
-  fi
-
-  if [ -d "$LUNARVIM_RUNTIME_DIR" ]; then
-    msg "Moving old runtime files to ${LUNARVIM_RUNTIME_DIR}.old"
-    mv "$LUNARVIM_RUNTIME_DIR" "${LUNARVIM_RUNTIME_DIR}".old
-  fi
-
-  for cf in "${__lvim_cache_files[@]}"; do
-    if [ -f "$cf" ]; then
-      rm -f "$cf"
-    fi
-  done
-}
-
-function backup_old_config() {
-  local src="$LUNARVIM_CONFIG_DIR"
+function __backup_dir() {
+  local src="$1"
   if [ ! -d "$src" ]; then
     return
   fi
   mkdir -p "$src.old"
-  touch "$src/ignore"
   msg "Backing up old $src to $src.old"
   if command -v rsync &>/dev/null; then
-    rsync --archive -hh --stats --partial --copy-links --cvs-exclude "$src"/ "$src.old"
+    rsync --archive --quiet --partial --copy-links --cvs-exclude "$src"/ "$src.old"
   else
     case "$OS" in
-      Linux | *BSD)
-        cp -r "$src/"* "$src.old/."
-        ;;
       Darwin)
         cp -R "$src/"* "$src.old/."
         ;;
       *)
-        mv "$src" "${src}".old
+        cp -r "$src/"* "$src.old/."
         ;;
     esac
   fi
-  [ -d "$src" ] && rm -rf "$src"
-  msg "Backup operation complete"
+}
+
+function verify_lvim_dirs() {
+  for dir in "${__lvim_dirs[@]}"; do
+    if [ -d "$dir" ]; then
+      if [ "$ARGS_OVERWRITE" -eq 0 ]; then
+        __backup_dir "$dir"
+      fi
+      rm -rf "$dir"
+    fi
+    mkdir -p "$dir"
+  done
 }
 
 function clone_lvim() {
@@ -415,8 +391,8 @@ function link_local_lvim() {
 
   # Detect whether it's a symlink or a folder
   if [ -d "$LUNARVIM_BASE_DIR" ]; then
-    echo "Removing old installation files"
-    rm -rf "$LUNARVIM_BASE_DIR"
+    msg "Moving old files to ${LUNARVIM_BASE_DIR}.old"
+    mv "$LUNARVIM_BASE_DIR" "${LUNARVIM_BASE_DIR}".old
   fi
 
   echo "   - $BASEDIR -> $LUNARVIM_BASE_DIR"
@@ -441,8 +417,6 @@ function remove_old_cache_files() {
 }
 
 function setup_lvim() {
-
-  remove_old_cache_files
 
   msg "Installing LunarVim shim"
 
