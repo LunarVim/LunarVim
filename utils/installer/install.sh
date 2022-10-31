@@ -352,7 +352,7 @@ function __backup_dir() {
   mkdir -p "$src.old"
   msg "Backing up old $src to $src.old"
   if command -v rsync &>/dev/null; then
-    rsync --archive --quiet --partial --copy-links --cvs-exclude "$src"/ "$src.old"
+    rsync --archive --quiet --backup --partial --copy-links --cvs-exclude "$src"/ "$src.old"
   else
     case "$OS" in
       Darwin)
