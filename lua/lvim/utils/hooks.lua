@@ -16,10 +16,12 @@ function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
   vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
 
-  vim.g.colors_name = lvim.colorscheme
-  pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
-
   if M._reload_triggered then
+    if not in_headless then
+      vim.schedule(function()
+        pcall(vim.api.nvim_exec_autocmds, "ColorScheme", { pattern = "*" })
+      end)
+    end
     Log:debug "Reloaded configuration"
     M._reload_triggered = nil
   end
