@@ -116,6 +116,9 @@
   "tokyonight.nvim": {
     "commit": "29e2c68"
   },
+  "lunar.nvim": {
+    "commit": "29eedf7"
+  },
   "vim-illuminate": {
     "commit": "fb83d83"
   },

@@ -12,22 +12,18 @@ local function diff_source()
   end
 end
 
-local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
-
 local location_color = nil
 local branch = lvim.icons.git.Branch
 local separator = lvim.icons.ui.LineMiddle
 
-if lvim.colorscheme == "tokyonight" then
+if lvim.colorscheme == "lunar" then
   location_color = "SLBranchName"
   branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
 
-  local status_ok, tnc = pcall(require, "tokyonight.colors")
-  if status_ok then
-    local tncolors = tnc.setup { transform = true }
-    vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
-    separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
-  end
+  local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
+  local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+  vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = statusline_hl.background })
+  separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
 end
 
 return {
