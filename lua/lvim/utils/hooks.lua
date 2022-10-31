@@ -16,8 +16,8 @@ function M.run_on_packer_complete()
   vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
 
   vim.g.colors_name = lvim.colorscheme
-  pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
 
+  pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
   -- lunarvim specific hl groups can be defined here
   local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
   local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
