@@ -21,19 +21,16 @@ function M.get_sections()
     entries = {
       { "e", lvim.icons.ui.NewFile .. " New File", "<CMD>ene!<CR>" },
     },
-    val = {},
   }
 
   local bottom_buttons = {
     entries = {
       { "q", "Quit", "<CMD>quit<CR>" },
     },
-    val = {},
   }
 
   local footer = {
     type = "group",
-    val = {},
   }
 
   return {
