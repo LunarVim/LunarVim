@@ -19,22 +19,17 @@ local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
 vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = statusline_hl.background })
 vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
 vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
-vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.background })
 
 local location_color = nil
 local branch = lvim.icons.git.Branch
 local separator = lvim.icons.ui.LineMiddle
 
-if lvim.colorscheme == "tokyonight" then
+if lvim.colorscheme == "lunar" then
   location_color = "SLBranchName"
   branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
 
-  local status_ok, tnc = pcall(require, "tokyonight.colors")
-  if status_ok then
-    local tncolors = tnc.setup { transform = true }
-    vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
-    separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
-  end
+  vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = statusline_hl.background })
+  separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
 end
 
 return {

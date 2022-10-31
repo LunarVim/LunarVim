@@ -1,7 +1,7 @@
 return {
   leader = "space",
   reload_config_on_save = true,
-  colorscheme = "tokyonight",
+  colorscheme = "lunar",
   transparent_window = false,
   format_on_save = {
     ---@usage pattern string pattern used for the autocommand (Default: '*')

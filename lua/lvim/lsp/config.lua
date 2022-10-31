@@ -9,7 +9,6 @@ local skipped_servers = {
   "emmet_ls",
   "eslint",
   "eslintls",
-  "glint",
   "golangci_lint_ls",
   "gradle_ls",
   "graphql",
@@ -40,7 +39,7 @@ local skipped_servers = {
   "vuels",
 }
 
-local skipped_filetypes = { "markdown", "rst", "plaintext", "toml", "proto" }
+local skipped_filetypes = { "markdown", "rst", "plaintext", "toml" }
 
 local join_paths = require("lvim.utils").join_paths
 
