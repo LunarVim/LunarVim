@@ -147,7 +147,6 @@ function M.setup()
     return
   end
 
-
   if lvim.builtin.nvimtree._setup_called then
     Log:debug "ignoring repeated setup call for nvim-tree, see kyazdani42/nvim-tree.lua#1308"
     return
