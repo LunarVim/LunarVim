@@ -62,6 +62,13 @@ lvim.builtin.which_key.mappings["P"] = {
 }
 ```
 
+### Removing a single mapping
+
+Remove a single Whichkey keybind
+```lua
+lvim.builtin.which_key.mappings['w'] = {}
+```
+
 Adding a key to a existing submenu.
 
 ```lua
