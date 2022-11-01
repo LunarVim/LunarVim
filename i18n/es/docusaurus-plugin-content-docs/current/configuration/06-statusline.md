@@ -1,49 +1,51 @@
-# Statusline
+# Barra de Estado
 
-LunarVim uses `lualine` as a default statusline.
+LunarVim usa `lualine` como barra de estado predeterminada.
 
-Configuration is same as that of lualine with full support. See [Lualine README.md](https://github.com/nvim-lualine/lualine.nvim/blob/master/README.md)
+La configuración esta barra de estado, es identica a le de lualine. Para mas información visita [Lualine](https://github.com/nvim-lualine/lualine.nvim/blob/master/README.md).
 
-In addition, LunarVim provides predefined styles(layout) and components.
+Adicionalmente, LunarVim te ofrece multiples diseños y componentes para tu barra.
 
-## Style
+## Diseños
 
-There are three style options LunarVim accepts,
+Hay tres opciones de diseño que puedes establecer en tu LunarVim.
 
 - lvim
-  > LunarVim's default layout
+  > El diseño por defecto de LunarVim.
 - default
-  > Lualine's default layout
+  > El diseño por defecto de lualine.
 - none
-  > Empty layout
+  > Es un diseño vacio.
 
-To set style other than `"lvim" style`,
+Para cambiar el diseño, basta con agregar la siguiente linea a la configuración. 
 
 ```lua
-lvim.builtin.lualine.style = "default" -- or "none"
+lvim.builtin.lualine.style = "default" -- o "none"
 ```
 
 <br />
 
-## Component
+## Componentes
 
-You can use any component that `lualine` provides and `LunarVim` provides.
+Puedes usar cualquier componente proporcionado por `lualine` o `LunarVim` .
 
-**LunarVim's components**
+**Componentes de LunarVim**
 
 `mode`, `branch`, `filename`, `diff`, `python_env`, `diagnostics`, `treesitter`, `lsp`, `location`, `progress`, `spaces`, `encoding`, `filetype`, `scrollbar`
 
-To set `lualine's "diff"` component to section c of `"default" style`,
+Puedes cambiar y combinar estos componentes a tu gusto, a continuación se muestran ejemplos de algunas de las combinaciones que se pueden hacer.
+
+- Para establecer el componente `"diff"` de `lualine` a la sección c del diseño `"default"`.
 
 ```lua
 lvim.builtin.lualine.style = "default"
 lvim.builtin.lualine.sections.lualine_c = { "diff" }
 ```
 
-To set `LunarVim's "spaces" and "location"` components to section y and `lualine's "mode"` component to section a of `"lvim" style`,
+- Para establecer los componentes de `"spaces" y "location"` de LunarVim a la sección y y el componentes de `"mode"` de lualine a la sección a con el diseño `"lvim"`.
 
 ```lua
--- no need to set style = "lvim"
+-- No es necesario establecer el diseño = "lvim"
 local components = require("lvim.core.lualine.components")
 
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
@@ -55,21 +57,21 @@ lvim.builtin.lualine.sections.lualine_y = {
 
 <br />
 
-## Theme
+## Tema
 
-LunarVim automatically detects current colorscheme and set it as theme.
+LunarVim detecta automaticamente el esquema de colores que tienes activado y lo establece como el tema de la barra de estado.
 
-To change your colorscheme, see [Colorscheme](./03-colorschemes.md)
+Para cambiar el esquema de colores, puedes revisar [Esquemas de Colores](./03-colorschemes.md).
 
-If there is no matching theme, it will fallback to `"auto"` theme provided by lualine.
+Si no tienes un tema compatible con `lualine`, el sistema te mostrará automaticamente el tema por defecto de `lualine`.
 
-In case you want to use different theme, set it manually,
+Si quieres usar un tema diferente a tu esquema de colores en tu barra de estado, puedes seleccionarlo manualmente de esta forma.
 
 ```lua
 lvim.builtin.lualine.options.theme = "gruvbox"
 ```
 
-To customize existing theme,
+También puedes personalizar un tema ya existente.
 ```lua
 local custom_gruvbox = require "lualine.themes.gruvbox_dark"
 custom_gruvbox.insert.b = { fg = custom_gruvbox.insert.a.bg, gui = "bold" }
@@ -80,7 +82,7 @@ custom_gruvbox.command.b = { fg = custom_gruvbox.command.a.bg, gui = "bold" }
 lvim.builtin.lualine.options.theme = custom_gruvbox
 ```
 
-To create your own theme,
+Puedes crear tu propio tema, debes seguir el siguiente esquema para que funcione.
 
 ```lua
 local colors = {
@@ -124,9 +126,9 @@ lvim.builtin.lualine.options.theme = {
 
 ## Callback
 
-Callback function is available for more flexibility.
+La función de callback está disponible para darle mas flexibilidad a la configuración.
 
-It will run when configuration is done,
+Va a ejecutarse automaticamente cuando la configuración allá sido aplicada, a continuación encuentras un ejemplo de esta función.
 
 ```lua
 lvim.builtin.lualine.on_config_done = function(lualine)
@@ -134,10 +136,9 @@ lvim.builtin.lualine.on_config_done = function(lualine)
   local components = require "core.lualine.components"
 
   config.sections.lualine_x[3].color.bg = "#2c2c2c"
-  table.remove(config.sections.lualine_x, 2) -- remove treesitter icon
+  table.remove(config.sections.lualine_x, 2) -- Elimina el icono de treesitter
   table.insert(config.sections.lualine_x, components.location)
   lualine.setup(config)
 end
 ```
-
-If you want to go way beyond with configuration, check [jimcornmell's setup](https://github.com/jimcornmell/lvim/blob/main/lua/user/lualine.lua) as a reference.
+Si quieres profundizar más en esta configuración, puedes tomar la [configuración de jimcornmell](https://github.com/jimcornmell/lvim/blob/main/lua/user/lualine.lua) como referencia.
