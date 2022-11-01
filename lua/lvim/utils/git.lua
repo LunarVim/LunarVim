@@ -3,6 +3,7 @@ local M = {}
 local Log = require "lvim.core.log"
 local fmt = string.format
 local if_nil = vim.F.if_nil
+local Info = require "lvim.core.info"
 
 local function git_cmd(opts)
   local plenary_loaded, Job = pcall(require, "plenary.job")
@@ -77,6 +78,11 @@ function M.update_base_lvim()
     Log:info "LunarVim is already up-to-date"
     return
   end
+
+  -- Get the messages before merging
+  local _, stdout =
+    git_cmd { args = { "--no-pager", "log", "--pretty=format:* %h -%d %s (%cr) <%an>", "HEAD..@{upstream}" } }
+  Info.changelog = stdout
 
   ret = git_cmd { args = { "merge", "--ff-only", "--progress" } }
   if ret ~= 0 then

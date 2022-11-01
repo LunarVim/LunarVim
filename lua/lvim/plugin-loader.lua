@@ -139,7 +139,7 @@ function plugin_loader.load_snapshot(snapshot_file)
   require("packer").rollback(snapshot_file, unpack(core_plugins))
 end
 
-function plugin_loader.sync_core_plugins()
+function plugin_loader.sync_core_plugins(callback)
   -- problem: rollback() will get stuck if a plugin directory doesn't exist
   -- solution: call sync() beforehand
   -- see https://github.com/wbthomason/packer.nvim/issues/862
@@ -148,6 +148,9 @@ function plugin_loader.sync_core_plugins()
     once = true,
     callback = function()
       require("lvim.plugin-loader").load_snapshot(default_snapshot)
+      if callback then
+        callback()
+      end
     end,
   })
   pcall_packer_command "sync"
