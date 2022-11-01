@@ -72,6 +72,15 @@ end
 
 local function launch_server(server_name, config)
   pcall(function()
+    local command = config.cmd
+      or (function()
+        local default_config = require("lspconfig.server_configurations." .. server_name).default_config
+        return default_config.cmd
+      end)()
+    if vim.fn.executable(command[1]) ~= 1 then
+      Log:debug(string.format("[%q] is either not installed, missing from PATH, or not executable.", server_name))
+      return
+    end
     require("lspconfig")[server_name].setup(config)
     buf_try_add(server_name)
   end)
@@ -122,7 +131,6 @@ function M.setup(server_name, user_config)
     else
       Log:debug(server_name .. " is not managed by the automatic installer")
     end
-    return
   end
 
   local config = resolve_config(server_name, resolve_mason_config(server_name), user_config)
