@@ -42,13 +42,13 @@
     "commit": "a910b4d"
   },
   "mason.nvim": {
-    "commit": "311a14f"
+    "commit": "bf170f8"
   },
   "neodev.nvim": {
-    "commit": "1d5b7f0"
+    "commit": "532f0be"
   },
   "nlsp-settings.nvim": {
-    "commit": "e509646"
+    "commit": "eca46df"
   },
   "null-ls.nvim": {
     "commit": "f1add23"
@@ -66,16 +66,16 @@
     "commit": "f889edb"
   },
   "nvim-lspconfig": {
-    "commit": "2315a39"
+    "commit": "67f0d00"
   },
   "nvim-navic": {
     "commit": "eebc4f1"
   },
   "nvim-tree.lua": {
-    "commit": "3845039"
+    "commit": "cbb5313"
   },
   "nvim-treesitter": {
-    "commit": "9ada5f7"
+    "commit": "80503a9"
   },
   "nvim-ts-context-commentstring": {
     "commit": "32d9627"
@@ -96,10 +96,10 @@
     "commit": "b7404d3"
   },
   "project.nvim": {
-    "commit": "628de7e"
+    "commit": "685bc8e"
   },
   "schemastore.nvim": {
-    "commit": "0cd69c8"
+    "commit": "5ee185c"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
