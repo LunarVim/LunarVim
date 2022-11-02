@@ -7,12 +7,12 @@ local user_config_file = utils.join_paths(user_config_dir, "config.lua")
 
 ---Get the full path to the user configuration file
 ---@return string
-function M.get_user_config_path()
+function M:get_user_config_path()
   return user_config_file
 end
 
 --- Initialize lvim default configuration and variables
-function M.init()
+function M:init()
   lvim = vim.deepcopy(require "lvim.config.defaults")
 
   require("lvim.keymappings").load_defaults()
@@ -29,20 +29,100 @@ function M.init()
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
+  ---@deprecated replaced with lvim.builtin.alpha
+  lvim.builtin.dashboard = {
+    active = false,
+    on_config_done = nil,
+    search_handler = "",
+    disable_at_vim_enter = 0,
+    session_directory = "",
+    custom_header = {},
+    custom_section = {},
+    footer = {},
+  }
+
   lvim.builtin.luasnip = {
     sources = {
       friendly_snippets = true,
     },
   }
 
-  require("lvim.config._deprecated").handle()
+  ---@deprecated
+  lvim.builtin.notify = {
+    active = false,
+  }
+end
+
+local function handle_deprecated_settings()
+  local function deprecation_notice(setting, new_setting)
+    local in_headless = #vim.api.nvim_list_uis() == 0
+    if in_headless then
+      return
+    end
+
+    local msg = string.format(
+      "Deprecation notice: [%s] setting is no longer supported. %s",
+      setting,
+      new_setting or "See https://github.com/LunarVim/LunarVim#breaking-changes"
+    )
+    vim.schedule(function()
+      vim.notify_once(msg, vim.log.levels.WARN)
+    end)
+  end
+
+  ---lvim.lang.FOO.lsp
+  for lang, entry in pairs(lvim.lang) do
+    local deprecated_config = entry.formatters or entry.linters or {}
+    if not vim.tbl_isempty(deprecated_config) then
+      deprecation_notice(string.format("lvim.lang.%s", lang))
+    end
+  end
+
+  -- lvim.lsp.override
+  if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
+    deprecation_notice("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
+    vim.tbl_map(function(c)
+      if not vim.tbl_contains(lvim.lsp.automatic_configuration.skipped_servers, c) then
+        table.insert(lvim.lsp.automatic_configuration.skipped_servers, c)
+      end
+    end, lvim.lsp.override)
+  end
+
+  -- lvim.lsp.popup_border
+  if vim.tbl_contains(vim.tbl_keys(lvim.lsp), "popup_border") then
+    deprecation_notice "lvim.lsp.popup_border"
+  end
+
+  -- dashboard.nvim
+  if lvim.builtin.dashboard.active then
+    deprecation_notice("lvim.builtin.dashboard", "Use `lvim.builtin.alpha` instead. See LunarVim#1906")
+  end
+
+  -- notify.nvim
+  if lvim.builtin.notify.active then
+    deprecation_notice("lvim.builtin.notify", "See LunarVim#3294")
+  end
+
+  if lvim.autocommands.custom_groups then
+    deprecation_notice(
+      "lvim.autocommands.custom_groups",
+      "Use vim.api.nvim_create_autocmd instead or check LunarVim#2592 to learn about the new syntax"
+    )
+  end
+
+  if lvim.lsp.automatic_servers_installation then
+    deprecation_notice(
+      "lvim.lsp.automatic_servers_installation",
+      "Use `lvim.lsp.installer.setup.automatic_installation` instead"
+    )
+  end
 end
 
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
-function M.load(config_path)
+function M:load(config_path)
   local autocmds = reload "lvim.core.autocmds"
-  config_path = config_path or M.get_user_config_path()
+  config_path = config_path or self:get_user_config_path()
   local ok, err = pcall(dofile, config_path)
   if not ok then
     if utils.is_file(user_config_file) then
@@ -57,6 +137,8 @@ function M.load(config_path)
   end
 
   Log:set_level(lvim.log.level)
+
+  handle_deprecated_settings()
 
   autocmds.define_autocmds(lvim.autocommands)
 
@@ -75,7 +157,7 @@ end
 
 --- Override the configuration with a user provided one
 -- @param config_path The path to the configuration overrides
-function M.reload()
+function M:reload()
   vim.schedule(function()
     reload("lvim.utils.hooks").run_pre_reload()
 
