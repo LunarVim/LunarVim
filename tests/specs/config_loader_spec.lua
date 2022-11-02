@@ -28,14 +28,14 @@ a.describe("config-loader", function()
   end)
 
   a.it("should be able to load user-config without errors", function()
-    config:load(user_config_path)
+    config.load(user_config_path)
   end)
 
   a.it("should be able to reload user-config without errors", function()
-    config:load(user_config_path)
+    config.load(user_config_path)
     local test_path = "/tmp/lvim"
     os.execute(string.format([[echo "vim.opt.undodir = '%s'" >> %s]], test_path, user_config_path))
-    config:reload()
+    config.reload()
     vim.schedule(function()
       assert.equal(vim.opt.undodir:get()[1], test_path)
     end)
@@ -44,11 +44,11 @@ a.describe("config-loader", function()
   a.it("should not get interrupted by errors in user-config", function()
     local test_path = "/tmp/lunarvim"
     os.execute(string.format([[echo "vim.opt.undodir = '%s'" >> %s]], test_path, user_config_path))
-    config:load(user_config_path)
+    config.load(user_config_path)
     assert.equal(vim.opt.undodir:get()[1], test_path)
     require("lvim.core.log"):set_level "error"
     os.execute(string.format("echo 'invalid_function()' >> %s", user_config_path))
-    config:load(user_config_path)
+    config.load(user_config_path)
     require("lvim.core.log"):set_level "error"
     assert.equal(vim.opt.undodir:get()[1], test_path)
   end)

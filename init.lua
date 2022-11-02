@@ -10,7 +10,7 @@ end
 
 require("lvim.bootstrap"):init(base_dir)
 
-require("lvim.config"):load()
+require("lvim.config").load()
 
 local plugins = require "lvim.plugins"
 
