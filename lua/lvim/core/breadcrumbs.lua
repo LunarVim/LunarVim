@@ -212,10 +212,12 @@ M.create_winbar = function()
       {
         group = "_winbar",
         callback = function()
-          local status_ok, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
-          if not status_ok then
-            -- TODO:
-            require("lvim.core.breadcrumbs").get_winbar()
+          if lvim.builtin.breadcrumbs.active then
+            local status_ok, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
+            if not status_ok then
+              -- TODO:
+              require("lvim.core.breadcrumbs").get_winbar()
+            end
           end
         end,
       }
