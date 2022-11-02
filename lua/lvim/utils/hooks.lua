@@ -19,7 +19,9 @@ function M.run_on_packer_complete()
   if M._reload_triggered then
     if not in_headless then
       vim.schedule(function()
-        pcall(vim.api.nvim_exec_autocmds, "ColorScheme", { pattern = "*" })
+        -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
+        -- pcall(vim.api.nvim_exec_autocmds, "ColorScheme", { pattern = "*" })
+        pcall(vim.cmd.colorscheme, lvim.colorscheme)
       end)
     end
     Log:debug "Reloaded configuration"
