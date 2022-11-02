@@ -128,6 +128,10 @@ M.config = function()
   end
 
   lvim.builtin.cmp = {
+    active = true,
+    enabled = function()
+      return lvim.builtin.cmp.active
+    end,
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
