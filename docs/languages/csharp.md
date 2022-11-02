@@ -6,14 +6,19 @@
 :TSInstall c_sharp
 ```
 
-## Install Language Server
+## Supported language servers
 
-```vim
-:LspInstall c#
+```lua
+{ "csharp_ls", "omnisharp", "omnisharp_mono" }
 ```
 
-## Formatters
+### OmniSharp
 
-The csharp language server OmniSharp supports formatting. Formatting is automatically enabled by installing the csharp language server. The formatting options can be changed by with the [OmniSharp configuration options](https://github.com/OmniSharp/omnisharp-roslyn/wiki/Configuration-Options).
+Formatting is automatically enabled. The formatting options can be changed by with the [OmniSharp
+configuration options](https://github.com/OmniSharp/omnisharp-roslyn/wiki/Configuration-Options).
 
-[clang-format](https://www.electronjs.org/docs/development/clang-format) can optionally be used as a C# formatter. After installing the `clang-format` the formatter is enabled with configuration. OmniSharp formatter is then automatically disabled.
+## Supported formatters
+
+```lua
+{ "astyle", "clang_format", "csharpier", "uncrustify" }
+```

@@ -1,0 +1,207 @@
+[
+  {
+    "name": "<a href='https://github.com/neovim/nvim-lspconfig'>neovim/nvim-lspconfig</a>",
+    "enabled": true,
+    "description": "Quickstart configs for Nvim LSP"
+  },
+  {
+    "name": "<a href='https://github.com/folke/neodev.nvim'>folke/neodev.nvim</a>",
+    "enabled": true,
+    "description": "💻  Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API."
+  },
+  {
+    "name": "<a href='https://github.com/nvim-telescope/telescope-fzf-native.nvim'>nvim-telescope/telescope-fzf-native.nvim</a>",
+    "enabled": true,
+    "description": "FZF sorter for telescope written in c"
+  },
+  {
+    "name": "<a href='https://github.com/nvim-telescope/telescope.nvim'>nvim-telescope/telescope.nvim</a>",
+    "enabled": true,
+    "description": "Find, Filter, Preview, Pick. All lua, all the time."
+  },
+  {
+    "name": "<a href='https://github.com/williamboman/mason-lspconfig.nvim'>williamboman/mason-lspconfig.nvim</a>",
+    "enabled": true,
+    "description": "Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim. Strongly recommended for Windows users."
+  },
+  {
+    "name": "<a href='https://github.com/tamago324/nlsp-settings.nvim'>tamago324/nlsp-settings.nvim</a>",
+    "enabled": true,
+    "description": "A plugin for setting Neovim LSP with JSON or YAML files"
+  },
+  {
+    "name": "<a href='https://github.com/jose-elias-alvarez/null-ls.nvim'>jose-elias-alvarez/null-ls.nvim</a>",
+    "enabled": true,
+    "description": "Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua."
+  },
+  {
+    "name": "<a href='https://github.com/wbthomason/packer.nvim'>wbthomason/packer.nvim</a>",
+    "enabled": true,
+    "description": "A use-package inspired plugin manager for Neovim. Uses native packages, supports Luarocks dependencies, written in Lua, allows for expressive config"
+  },
+  {
+    "name": "<a href='https://github.com/folke/tokyonight.nvim'>folke/tokyonight.nvim</a>",
+    "enabled": true,
+    "description": "🏙  A clean, dark Neovim theme written in Lua, with support for lsp, treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish."
+  },
+  {
+    "name": "<a href='https://github.com/nvim-lua/plenary.nvim'>nvim-lua/plenary.nvim</a>",
+    "enabled": true,
+    "description": "plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice."
+  },
+  {
+    "name": "<a href='https://github.com/nvim-lua/popup.nvim'>nvim-lua/popup.nvim</a>",
+    "enabled": true,
+    "description": "[WIP] An implementation of the Popup API from vim in Neovim. Hope to upstream when complete"
+  },
+  {
+    "name": "<a href='https://github.com/Tastyep/structlog.nvim'>Tastyep/structlog.nvim</a>",
+    "enabled": true,
+    "description": "Structured Logging for nvim, using Lua"
+  },
+  {
+    "name": "<a href='https://github.com/rafamadriz/friendly-snippets'>rafamadriz/friendly-snippets</a>",
+    "enabled": true,
+    "description": "Set of preconfigured snippets for different languages. "
+  },
+  {
+    "name": "<a href='https://github.com/williamboman/mason.nvim'>williamboman/mason.nvim</a>",
+    "enabled": true,
+    "description": "Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters."
+  },
+  {
+    "name": "<a href='https://github.com/ahmedkhalf/project.nvim'>ahmedkhalf/project.nvim</a>",
+    "enabled": true,
+    "description": "The superior project management solution for neovim."
+  },
+  {
+    "name": "<a href='https://github.com/SmiteshP/nvim-navic'>SmiteshP/nvim-navic</a>",
+    "enabled": true,
+    "description": "Simple winbar/statusline plugin that shows your current code context"
+  },
+  {
+    "name": "<a href='https://github.com/hrsh7th/cmp-nvim-lsp'>hrsh7th/cmp-nvim-lsp</a>",
+    "enabled": true,
+    "description": "nvim-cmp source for neovim builtin LSP client"
+  },
+  {
+    "name": "<a href='https://github.com/RRethy/vim-illuminate'>RRethy/vim-illuminate</a>",
+    "enabled": true,
+    "description": "illuminate.vim - (Neo)Vim plugin for automatically highlighting other uses of the word under the cursor using either LSP, Tree-sitter, or regex matching."
+  },
+  {
+    "name": "<a href='https://github.com/folke/which-key.nvim'>folke/which-key.nvim</a>",
+    "enabled": true,
+    "description": "💥   Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing."
+  },
+  {
+    "name": "<a href='https://github.com/lukas-reineke/indent-blankline.nvim'>lukas-reineke/indent-blankline.nvim</a>",
+    "enabled": true,
+    "description": "Indent guides  for Neovim"
+  },
+  {
+    "name": "<a href='https://github.com/goolord/alpha-nvim'>goolord/alpha-nvim</a>",
+    "enabled": true,
+    "description": "a lua powered greeter like vim-startify / dashboard-nvim"
+  },
+  {
+    "name": "<a href='https://github.com/windwp/nvim-autopairs'>windwp/nvim-autopairs</a>",
+    "enabled": true,
+    "description": "autopairs for neovim written by lua"
+  },
+  {
+    "name": "<a href='https://github.com/hrsh7th/cmp-buffer'>hrsh7th/cmp-buffer</a>",
+    "enabled": true,
+    "description": "nvim-cmp source for buffer words"
+  },
+  {
+    "name": "<a href='https://github.com/mfussenegger/nvim-dap'>mfussenegger/nvim-dap</a>",
+    "enabled": true,
+    "description": "Debug Adapter Protocol client implementation for Neovim"
+  },
+  {
+    "name": "<a href='https://github.com/saadparwaiz1/cmp_luasnip'>saadparwaiz1/cmp_luasnip</a>",
+    "enabled": true,
+    "description": "luasnip completion source for nvim-cmp"
+  },
+  {
+    "name": "<a href='https://github.com/akinsho/toggleterm.nvim'>akinsho/toggleterm.nvim</a>",
+    "enabled": true,
+    "description": "A neovim lua plugin to help easily manage multiple terminal windows"
+  },
+  {
+    "name": "<a href='https://github.com/nvim-lualine/lualine.nvim'>nvim-lualine/lualine.nvim</a>",
+    "enabled": true,
+    "description": "A blazing fast and easy to configure neovim statusline plugin written in pure lua."
+  },
+  {
+    "name": "<a href='https://github.com/rcarriga/nvim-dap-ui'>rcarriga/nvim-dap-ui</a>",
+    "enabled": true,
+    "description": "A UI for nvim-dap"
+  },
+  {
+    "name": "<a href='https://github.com/numToStr/Comment.nvim'>numToStr/Comment.nvim</a>",
+    "enabled": true,
+    "description": ":brain: :muscle: // Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more"
+  },
+  {
+    "name": "<a href='https://github.com/hrsh7th/nvim-cmp'>hrsh7th/nvim-cmp</a>",
+    "enabled": true,
+    "description": "A completion plugin for neovim coded in Lua."
+  },
+  {
+    "name": "<a href='https://github.com/hrsh7th/cmp-path'>hrsh7th/cmp-path</a>",
+    "enabled": true,
+    "description": "nvim-cmp source for path"
+  },
+  {
+    "name": "<a href='https://github.com/akinsho/bufferline.nvim'>akinsho/bufferline.nvim</a>",
+    "enabled": true,
+    "description": "A snazzy bufferline for Neovim"
+  },
+  {
+    "name": "<a href='https://github.com/lewis6991/gitsigns.nvim'>lewis6991/gitsigns.nvim</a>",
+    "enabled": true,
+    "description": "Git integration for buffers"
+  },
+  {
+    "name": "<a href='https://github.com/JoosepAlviste/nvim-ts-context-commentstring'>JoosepAlviste/nvim-ts-context-commentstring</a>",
+    "enabled": true,
+    "description": "Neovim treesitter plugin for setting the commentstring based on the cursor location in a file."
+  },
+  {
+    "name": "<a href='https://github.com/b0o/schemastore.nvim'>b0o/schemastore.nvim</a>",
+    "enabled": true,
+    "description": "🛍 JSON schemas for Neovim"
+  },
+  {
+    "name": "<a href='https://github.com/christianchiarulli/lir.nvim'>christianchiarulli/lir.nvim</a>",
+    "enabled": true,
+    "description": "Neovim file explorer"
+  },
+  {
+    "name": "<a href='https://github.com/lunarvim/onedarker.nvim'>lunarvim/onedarker.nvim</a>",
+    "enabled": false,
+    "description": "Onedark inspired colorscheme written in lua."
+  },
+  {
+    "name": "<a href='https://github.com/nvim-treesitter/nvim-treesitter'>nvim-treesitter/nvim-treesitter</a>",
+    "enabled": true,
+    "description": "Nvim Treesitter configurations and abstraction layer"
+  },
+  {
+    "name": "<a href='https://github.com/L3MON4D3/LuaSnip'>L3MON4D3/LuaSnip</a>",
+    "enabled": true,
+    "description": "Snippet Engine for Neovim written in Lua."
+  },
+  {
+    "name": "<a href='https://github.com/kyazdani42/nvim-tree.lua'>kyazdani42/nvim-tree.lua</a>",
+    "enabled": true,
+    "description": "A file explorer tree for neovim written in lua"
+  },
+  {
+    "name": "<a href='https://github.com/kyazdani42/nvim-web-devicons'>kyazdani42/nvim-web-devicons</a>",
+    "enabled": true,
+    "description": "lua `fork` of vim-web-devicons for neovim"
+  }
+]

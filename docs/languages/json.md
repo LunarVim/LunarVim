@@ -9,11 +9,17 @@
 ## Supported language servers
 
 ```lua
-json = { "jsonls", "rome" }
+{ "jsonls", "rome" }
 ```
 
 ## Supported formatters
 
 ```lua
-json = { "fixjson", "prettier", "prettier_d_slim", "prettierd", "python" }
+{ "deno_fmt", "dprint", "fixjson", "jq", "json_tool", "prettier", "prettier_d_slim", "prettierd" }
+```
+
+## Supported linters
+
+```lua
+{ "cfn_lint", "jsonlint", "spectral" }
 ```

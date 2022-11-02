@@ -9,17 +9,17 @@
 ## Supported language servers
 
 ```lua
-lua = { "sumneko_lua" }
+{ "sumneko_lua" }
 ```
 
 ## Supported formatters
 
 ```lua
-lua = { "lua-format", "stylua" }
+{ "lua_format", "stylua" }
 ```
 
 ## Supported linters
 
 ```lua
-lua = { "luacheck", "selene" }
+{ "luacheck", "selene" }
 ```

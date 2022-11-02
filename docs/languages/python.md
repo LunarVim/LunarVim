@@ -9,17 +9,17 @@
 ## Supported language servers
 
 ```lua
-python = { "jedi_language_server", "pylsp", "pyright" }
+{ "jedi_language_server", "pylsp", "pyright", "sourcery" }
 ```
 
 ## Supported formatters
 
 ```lua
-python = { "autopep8", "black", "isort", "reorder-python-imports", "yapf" }
+{ "autopep8", "black", "blue", "isort", "reorder_python_imports", "usort", "yapf" }
 ```
 
 ## Supported linters
 
 ```lua
-python = { "flake8", "pylint" }
+{ "flake8", "mypy", "pycodestyle", "pydocstyle", "pylama", "pylint", "pyproject_flake8", "semgrep", "vulture" }
 ```

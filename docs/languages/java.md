@@ -9,7 +9,7 @@
 ## Supported language servers
 
 ```lua
-java = { "jdtls" }
+{ "jdtls" }
 ```
 
 :::note
@@ -21,5 +21,11 @@ jdtls requires **jdk-17 or newer** to run.
 ## Supported formatters
 
 ```lua
-java = { "clang-format", "uncrustify" }
+{ "astyle", "clang_format", "google_java_format", "npm_groovy_lint", "uncrustify" }
+```
+
+## Supported linters
+
+```lua
+{ "checkstyle", "pmd", "semgrep" }
 ```

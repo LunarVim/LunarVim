@@ -7,7 +7,12 @@
 ```
 ## Supported language servers
 
-(TODO)
+```lua
+{ "terraform_lsp", "tflint" }
+```
 
 ## Supported formatters
-(TODO)
+
+```lua
+{ "packer" }
+```

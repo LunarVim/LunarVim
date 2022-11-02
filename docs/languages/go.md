@@ -9,11 +9,17 @@
 ## Supported language servers
 
 ```lua
-go = { "gopls" }
+{ "golangci_lint_ls", "gopls" }
 ```
 
 ## Supported formatters
 
 ```lua
-go = { "gofmt", "gofumpt", "goimports", "golines" }
+{ "gofmt", "gofumpt", "goimports", "goimports_reviser", "golines" }
+```
+
+## Supported linters
+
+```lua
+{ "golangci_lint", "revive", "semgrep", "staticcheck" }
 ```

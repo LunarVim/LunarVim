@@ -9,7 +9,7 @@
 ## Supported language servers
 
 ```lua
-vue = { "eslint", "stylelint_lsp", "tailwindcss", "volar", "vuels" },
+{ "eslint", "stylelint_lsp", "tailwindcss", "volar", "vuels" }
 ```
 
 Only `vuels` is enabled by default and the other servers need to be [manually configured](./../languages/README.md#manually-configured-servers).
@@ -17,13 +17,13 @@ Only `vuels` is enabled by default and the other servers need to be [manually co
 ## Supported formatters
 
 ```lua
-vue = { "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
+{ "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
 ```
 
 ## Supported linters
 
 ```lua
-vue = { "eslint", "eslint_d" }
+{ "eslint", "eslint_d" }
 ```
 
 ## LSP Settings

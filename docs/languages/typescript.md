@@ -10,10 +10,10 @@
 ## Supported language servers
 
 ```lua
-typescript = { "angularls", "denols", "ember", "eslint", "eslintls", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
+{ "angularls", "cssmodules_ls", "denols", "ember", "eslint", "glint", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
 ```
 
-Only `tsserver` is enabled by default and the other servers need to be [manually configured](./README.md#manually-configured-servers).
+Only `tsserver` and `tailwindcss` is enabled by default and the other servers need to be [manually configured](./README.md#manually-configured-servers).
 
 ### TypeScript standalone server (tsserver)
 
@@ -24,7 +24,7 @@ See [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/se
 ## Supported formatters
 
 ```lua
-typescript = { "deno", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rustywind" }
+{ "deno_fmt", "dprint", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rome", "rustywind" }
 ```
 
 The configured formatter(s) must be installed separately.
@@ -32,7 +32,7 @@ The configured formatter(s) must be installed separately.
 ## Supported linters
 
 ```lua
-typescript = { "eslint", "eslint_d" }
+{ "eslint", "eslint_d", "semgrep", "tsc", "xo" }
 ```
 
 The configured linter(s) must be installed separately.
