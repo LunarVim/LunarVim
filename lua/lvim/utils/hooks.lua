@@ -2,6 +2,7 @@ local M = {}
 
 local Log = require "lvim.core.log"
 local in_headless = #vim.api.nvim_list_uis() == 0
+local plugin_loader = require "lvim.plugin-loader"
 
 function M.run_pre_update()
   Log:debug "Starting pre-update hook"
@@ -15,8 +16,9 @@ function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
   vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
 
-  vim.g.colors_name = lvim.colorscheme
-  pcall(vim.cmd, "colorscheme " .. lvim.colorscheme)
+  -- -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
+  -- vim.g.colors_name = lvim.colorscheme
+  -- pcall(vim.cmd.colorscheme, lvim.colorscheme)
 
   if M._reload_triggered then
     Log:debug "Reloaded configuration"
@@ -26,7 +28,6 @@ end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  M.reset_cache()
   M._reload_triggered = true
 end
 
@@ -35,6 +36,7 @@ end
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
   vim.cmd [[LuaCacheClear]]
+  plugin_loader.recompile()
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" or module:match "lvim.lsp" then
@@ -68,7 +70,7 @@ function M.run_post_update()
   M.reset_cache()
 
   Log:debug "Syncing core plugins"
-  require("lvim.plugin-loader").sync_core_plugins()
+  plugin_loader.sync_core_plugins()
 
   if not in_headless then
     vim.schedule(function()
