@@ -72,7 +72,7 @@ M.config = function()
         Variable = icons.Variable .. " ",
       },
       highlight = true,
-      separator = " " .. lvim.icons.ui.ChevronShortRight .. " ",
+      separator = " " .. lvim.icons.ui.ChevronRight .. " ",
       depth_limit = 0,
       depth_limit_indicator = "..",
     },
@@ -154,7 +154,7 @@ local get_gps = function()
   end
 
   if not require("lvim.utils.functions").isempty(gps_location) then
-    return "%#NavicSeparator#".. lvim.icons.ui.ChevronShortRight .. "%* " .. gps_location
+    return "%#NavicSeparator#".. lvim.icons.ui.ChevronRight .. "%* " .. gps_location
   else
     return ""
   end
