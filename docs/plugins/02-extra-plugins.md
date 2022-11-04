@@ -595,13 +595,13 @@ lvim.builtin.which_key.mappings["t"] = {
 
 ## General
 
-### [autosave](https://github.com/Pocco81/AutoSave.nvim)
+### [auto-save](https://github.com/Pocco81/auto-save.nvim)
 
 **automatically saving your work whenever you make changes to it**
 
 ```lua
 {
-  "Pocco81/AutoSave.nvim",
+  "Pocco81/auto-save.nvim",
   config = function()
     require("autosave").setup()
   end,
