@@ -158,7 +158,9 @@ function M.disable_format_on_save()
 end
 
 function M.configure_format_on_save()
-  if lvim.format_on_save then
+  if type(lvim.format_on_save) == "table" and lvim.format_on_save.enabled then
+    M.enable_format_on_save()
+  elseif lvim.format_on_save == true then
     M.enable_format_on_save()
   else
     M.disable_format_on_save()
