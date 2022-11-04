@@ -4,7 +4,11 @@ local M = {}
 
 M.config = function()
   lvim.builtin.theme = {
-    name = "tokyonight",
+    name = "lunar",
+    lunar = {
+      options = { -- currently unused
+      },
+    },
     tokyonight = {
       options = {
         on_highlights = function(hl, c)

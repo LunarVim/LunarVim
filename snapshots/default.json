@@ -38,6 +38,9 @@
   "lualine.nvim": {
     "commit": "3325d5d"
   },
+  "lunar.nvim": {
+    "commit": "29eedf7"
+  },
   "mason-lspconfig.nvim": {
     "commit": "a910b4d"
   },

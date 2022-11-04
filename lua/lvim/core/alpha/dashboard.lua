@@ -108,7 +108,7 @@ function M.get_sections()
   if status_ok then
     local function button(sc, txt, keybind, keybind_opts)
       local b = dashboard.button(sc, txt, keybind, keybind_opts)
-      b.opts.hl_shortcut = "Macro"
+      b.opts.hl_shortcut = "Include"
       return b
     end
     buttons = {
