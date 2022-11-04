@@ -12,7 +12,11 @@ local function diff_source()
   end
 end
 
-local branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
+local branch = lvim.icons.git.Branch
+
+if lvim.colorscheme == "lunar" then
+  branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
+end
 
 return {
   mode = {
