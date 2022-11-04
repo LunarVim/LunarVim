@@ -14,7 +14,6 @@ end
 
 local location_color = "SLBranchName"
 local branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
-local separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
 
 return {
   mode = {
@@ -135,7 +134,6 @@ return {
 
       return language_servers
     end,
-    separator = separator,
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
@@ -153,7 +151,6 @@ return {
       local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
       return lvim.icons.ui.Tab .. " " .. shiftwidth
     end,
-    separator = separator,
     padding = 1,
   },
   encoding = {
