@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="linux/macos" label="Linux/MacOs">
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
 </TabItem>
@@ -40,7 +40,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/uti
 All the new features with all the new bugs:
 
 ```bash
-LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
 Make sure to check the [troubleshooting](./troubleshooting/README.md) section if you encounter any problem.
