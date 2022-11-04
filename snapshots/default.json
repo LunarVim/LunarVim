@@ -38,6 +38,9 @@
   "lualine.nvim": {
     "commit": "3325d5d"
   },
+  "lunar.nvim": {
+    "commit": "29eedf7"
+  },
   "mason-lspconfig.nvim": {
     "commit": "a910b4d"
   },
@@ -115,9 +118,6 @@
   },
   "tokyonight.nvim": {
     "commit": "29e2c68"
-  },
-  "lunar.nvim": {
-    "commit": "29eedf7"
   },
   "vim-illuminate": {
     "commit": "fb83d83"

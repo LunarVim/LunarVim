@@ -16,6 +16,8 @@ local core_plugins = {
   },
   {
     "folke/tokyonight.nvim",
+  },
+  {
     "lunarvim/lunar.nvim",
   },
   { "Tastyep/structlog.nvim" },
