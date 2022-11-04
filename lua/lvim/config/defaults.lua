@@ -26,7 +26,7 @@ return {
   lang = {},
   log = {
     ---@usage can be { "trace", "debug", "info", "warn", "error", "fatal" },
-    level = "warn",
+    level = "info",
     viewer = {
       ---@usage this will fallback on "less +F" if not found
       cmd = "lnav",

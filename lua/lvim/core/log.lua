@@ -41,7 +41,7 @@ function Log:init()
     lvim = {
       sinks = {
         structlog.sinks.Console(log_level, {
-          async = true,
+          async = false,
           processors = {
             structlog.processors.Namer(),
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 0, stack_level = 2 }),
@@ -68,6 +68,7 @@ function Log:init()
     },
   }
 
+  lvim_log.lvim.sinks[1].async = false -- HACK: Bug in structlog prevents setting async to false
   structlog.configure(lvim_log)
   local logger = structlog.get_logger "lvim"
 
