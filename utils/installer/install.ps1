@@ -2,7 +2,7 @@
 $ErrorActionPreference = "Stop" # exit when command fails
 
 # set script variables
-$LV_BRANCH = $LV_BRANCH ?? "rolling"
+$LV_BRANCH = $LV_BRANCH ?? "master"
 $LV_REMOTE = $LV_REMOTE ??  "lunarvim/lunarvim.git"
 $INSTALL_PREFIX = $INSTALL_PREFIX ?? "$HOME\.local"
 
