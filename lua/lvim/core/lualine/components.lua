@@ -12,7 +12,6 @@ local function diff_source()
   end
 end
 
-local location_color = "SLBranchName"
 local branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
 
 return {
@@ -137,7 +136,7 @@ return {
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
-  location = { "location", color = location_color },
+  location = { "location" },
   progress = {
     "progress",
     fmt = function()
