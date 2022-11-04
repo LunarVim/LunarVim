@@ -27,7 +27,7 @@
     "commit": "c93311f"
   },
   "gitsigns.nvim": {
-    "commit": "d3a8ba0"
+    "commit": "2b4fc5e"
   },
   "indent-blankline.nvim": {
     "commit": "db7cbcb"
@@ -42,13 +42,13 @@
     "commit": "a910b4d"
   },
   "mason.nvim": {
-    "commit": "bd7e9f6"
+    "commit": "991007a"
   },
   "neodev.nvim": {
-    "commit": "a9ddee2"
+    "commit": "d41f7e1"
   },
   "nlsp-settings.nvim": {
-    "commit": "758adec"
+    "commit": "1ca1666"
   },
   "null-ls.nvim": {
     "commit": "1ac465b"
@@ -99,7 +99,7 @@
     "commit": "685bc8e"
   },
   "schemastore.nvim": {
-    "commit": "3aaa816"
+    "commit": "6d856dc"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
