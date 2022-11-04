@@ -42,7 +42,7 @@ M.config = function()
     -- TODO: pls add mappings in which key and refactor this
     execs = {
       { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", 0.3 },
+      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
       { vim.o.shell, "<M-3>", "Float Terminal", "float", nil },
     },
   }
