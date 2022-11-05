@@ -1,5 +1,7 @@
 local M = {}
 
+local join_paths = require("lvim.utils").join_paths
+
 function M.config()
   lvim.builtin.mason = {
     ui = {
@@ -16,7 +18,27 @@ function M.config()
         apply_language_filter = "<C-f>",
       },
     },
+
+    -- NOTE: should be available in $PATH
+    install_root_dir = join_paths(vim.fn.stdpath "data", "mason"),
+
+    -- NOTE: already handled in the bootstrap stage
+    PATH = "skip",
+
+    pip = {
+      -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
+      -- and is not recommended.
+      --
+      -- Example: { "--proxy", "https://proxyserver" }
+      install_args = {},
+    },
+
+    -- Controls to which degree logs are written to the log file. It's useful to set this to vim.log.levels.DEBUG when
+    -- debugging issues with package installations.
     log_level = vim.log.levels.INFO,
+
+    -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
+    -- packages that are requested to be installed will be put in a queue.
     max_concurrent_installers = 4,
 
     github = {
@@ -30,11 +52,36 @@ function M.config()
   }
 end
 
+function M.get_prefix()
+  local default_prefix = join_paths(vim.fn.stdpath "data", "mason")
+  return vim.tbl_get(lvim.builtin, "mason", "install_root_dir") or default_prefix
+end
+
+---@param append boolean|nil whether to append to prepend to PATH
+local function add_to_path(append)
+  local p = join_paths(M.get_prefix(), "bin")
+  if vim.env.PATH:match(p) then
+    return
+  end
+  local string_separator = vim.loop.os_uname().version:match "Windows" and ";" or ":"
+  if append then
+    vim.env.PATH = vim.env.PATH .. string_separator .. p
+  else
+    vim.env.PATH = p .. string_separator .. vim.env.PATH
+  end
+end
+
+function M.bootstrap()
+  add_to_path()
+end
+
 function M.setup()
   local status_ok, mason = pcall(reload, "mason")
   if not status_ok then
     return
   end
+
+  add_to_path(lvim.builtin.mason.PATH == "append")
 
   mason.setup(lvim.builtin.mason)
 end
