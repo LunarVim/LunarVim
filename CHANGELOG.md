@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.2.0]
 
 ### <!-- 1 --> Features
 
@@ -57,27 +57,46 @@ All notable changes to this project will be documented in this file.
 - reduce noise from LSP text comes from buffer source anyway
 - warn user when setting un-installed colorscheme ([#2982](https://github.com/lunarvim/lunarvim/pull/2982))
 - latest impatient updates from upstream ([#3236](https://github.com/lunarvim/lunarvim/pull/3236))
+- dynamic or fixed toggle terminal size ([#3110](https://github.com/lunarvim/lunarvim/pull/3110))
+- toggle cmp active ([#3398](https://github.com/lunarvim/lunarvim/pull/3398))
+- breadcrumbs autocommand only runs when active ([#3399](https://github.com/lunarvim/lunarvim/pull/3399))
+- Add chevron to breadcrumbs (with matching highlight group) ([#3380](https://github.com/lunarvim/lunarvim/pull/3380))
+- use our own colorscheme, decouple from tokyonight ([#3378](https://github.com/lunarvim/lunarvim/pull/3378))
+- only use orange branch for lunar colorscheme
 
 ### <!-- 2 --> Bugfix
 
 - _(alpha)_ can't set button hl without doing this
 - _(alpha)_ check alpha module ([#3233](https://github.com/lunarvim/lunarvim/pull/3233))
+- _(alpha)_ make startify sections always appear ([#3371](https://github.com/lunarvim/lunarvim/pull/3371))
+- _(autocmds)_ remove _format_options group ([#3278](https://github.com/lunarvim/lunarvim/pull/3278))
 - _(breadcrumbs)_ make sure winbar_filetype_exclude is customizable ([#3221](https://github.com/lunarvim/lunarvim/pull/3221))
+- _(bufferline)_ use buf kill on close ([#3422](https://github.com/lunarvim/lunarvim/pull/3422))
 - _(ci)_ resolve stylua ci rare error ([#3065](https://github.com/lunarvim/lunarvim/pull/3065))
 - _(cmp)_ do not mutate the original confirm_opts on CR ([#2979](https://github.com/lunarvim/lunarvim/pull/2979))
 - _(cmp)_ fix cmp select on CR ([#2980](https://github.com/lunarvim/lunarvim/pull/2980))
+- _(config)_ more comprehensive cache reset ([#3416](https://github.com/lunarvim/lunarvim/pull/3416))
 - _(core/autocmds)_ do not check for existence on clear_augroup ([#2963](https://github.com/lunarvim/lunarvim/pull/2963))
 - _(dashboard)_ add missing space ([#3063](https://github.com/lunarvim/lunarvim/pull/3063))
+- _(defaults)_ don't use smartindent ([#3363](https://github.com/lunarvim/lunarvim/pull/3363))
 - _(example config)_ fix config for treesitter ([#3016](https://github.com/lunarvim/lunarvim/pull/3016))
+- _(finders)_ use lunarvim basedir ([#3332](https://github.com/lunarvim/lunarvim/pull/3332))
+- _(icons)_ do not reload `nvim-web-devicons` module ([#3344](https://github.com/lunarvim/lunarvim/pull/3344))
 - _(indentblankline)_ make sure to use the new syntax for all options ([#3058](https://github.com/lunarvim/lunarvim/pull/3058))
 - _(installer)_ create profile.ps1 if nonexistent ([#2810](https://github.com/lunarvim/lunarvim/pull/2810))
 - _(installer)_ small fix in help message of install.sh ([#3032](https://github.com/lunarvim/lunarvim/pull/3032))
 - _(installer)_ don't overwrite previous config ([#3154](https://github.com/lunarvim/lunarvim/pull/3154))
 - _(installer)_ don't set log level
+- _(installer)_ Use master in windows installer ([#3421](https://github.com/lunarvim/lunarvim/pull/3421))
+- _(installer)_ use quotes in set-alias ([#3408](https://github.com/lunarvim/lunarvim/pull/3408))
 - _(log)_ correct add_entry code documentation ([#3081](https://github.com/lunarvim/lunarvim/pull/3081))
+- _(logger)_ set console logging to sync ([#3379](https://github.com/lunarvim/lunarvim/pull/3379))
 - _(lsp)_ return the actual resolved mason-config ([#2889](https://github.com/lunarvim/lunarvim/pull/2889))
 - _(lsp)_ pass name arg to should_auto_install ([#2958](https://github.com/lunarvim/lunarvim/pull/2958))
 - _(lsp)_ enforce lvim completion for lua-server ([#3035](https://github.com/lunarvim/lunarvim/pull/3035))
+- _(lsp)_ don't start servers multiple times ([#3347](https://github.com/lunarvim/lunarvim/pull/3347))
+- _(lsp)_ do a nil check before string matching autocmd desc ([#3354](https://github.com/lunarvim/lunarvim/pull/3354))
+- _(lsp)_ only launch installed servers ([#3366](https://github.com/lunarvim/lunarvim/pull/3366))
 - _(lsp/utils)_ do not register duplicate autocommands ([#3004](https://github.com/lunarvim/lunarvim/pull/3004))
 - _(lua-dev)_ make sure we are loading the correct types ([#3208](https://github.com/lunarvim/lunarvim/pull/3208))
 - _(luadev)_ this plugin has been renamed ([#3235](https://github.com/lunarvim/lunarvim/pull/3235))
@@ -91,6 +110,8 @@ All notable changes to this project will be documented in this file.
 - _(plugins)_ handle deprecated options ([#3014](https://github.com/lunarvim/lunarvim/pull/3014))
 - _(plugins)_ set max jobs to 50 on mac
 - _(statusline)_ display null-ls linters properly ([#2921](https://github.com/lunarvim/lunarvim/pull/2921))
+- _(terminal)_ slightly bigger vertical terminal
+- _(theme)_ do not fallback to tokyonight if no user's theme found ([#3327](https://github.com/lunarvim/lunarvim/pull/3327))
 - _(ts_context_commentstring)_ block comment match new api ([#2948](https://github.com/lunarvim/lunarvim/pull/2948))
 - _(typo)_ fix language server name typo in config example ([#3176](https://github.com/lunarvim/lunarvim/pull/3176))
 - _(typo)_ fix language server name typo in config example #3176 ([#3183](https://github.com/lunarvim/lunarvim/pull/3183))
@@ -136,15 +157,27 @@ All notable changes to this project will be documented in this file.
 - copilot background should matcha statusline
 - disable unsupported asian characters spellchecking ([#3259](https://github.com/lunarvim/lunarvim/pull/3259))
 - nil table in breadcrumbs in autocommand ([#3267](https://github.com/lunarvim/lunarvim/pull/3267))
+- Remove notify which key mapping ([#3335](https://github.com/lunarvim/lunarvim/pull/3335))
+- call proper log function in notify override ([#3337](https://github.com/lunarvim/lunarvim/pull/3337))
+- statusline and breadcrumbs hls reload with config reload ([#3376](https://github.com/lunarvim/lunarvim/pull/3376))
+- revert ColorScheme autocmd execution ([#3397](https://github.com/lunarvim/lunarvim/pull/3397))
+- don't complete in prompt ft
+- rollback plugin loader changes ([#3402](https://github.com/lunarvim/lunarvim/pull/3402))
 
 ### <!-- 3 --> Refactor
 
 - [**breaking**] _(cmp)_ adapt new recommendations ([#2913](https://github.com/lunarvim/lunarvim/pull/2913))
+- _(config)_ better deprecation handling ([#3419](https://github.com/lunarvim/lunarvim/pull/3419))
+- _(hooks)_ use colorscheme event after reload ([#3375](https://github.com/lunarvim/lunarvim/pull/3375))
+- _(installer)_ skip unstable headless update ([#3338](https://github.com/lunarvim/lunarvim/pull/3338))
 - [**breaking**] _(keymaps)_ don't hijack H/L by default ([#2874](https://github.com/lunarvim/lunarvim/pull/2874))
+- [**breaking**] _(plugins)_ remove nvim-notify from core ([#3300](https://github.com/lunarvim/lunarvim/pull/3300))
+- [**breaking**] _(theme)_ decouple tokyonight options ([#3384](https://github.com/lunarvim/lunarvim/pull/3384))
 - [**breaking**] migrate to mason.nvim ([#2880](https://github.com/lunarvim/lunarvim/pull/2880))
 - small improvements ([#3021](https://github.com/lunarvim/lunarvim/pull/3021))
 - smaller timeout for packer ([#2910](https://github.com/lunarvim/lunarvim/pull/2910))
 - more deliberate reload ([#3133](https://github.com/lunarvim/lunarvim/pull/3133))
+- clean up test env paths ([#3318](https://github.com/lunarvim/lunarvim/pull/3318))
 
 ### <!-- 4 --> Documentation
 
@@ -157,6 +190,10 @@ All notable changes to this project will be documented in this file.
 - update images
 - Replace Tree-sitter `maintained` with `all` in README ([#3088](https://github.com/lunarvim/lunarvim/pull/3088))
 - Update contributing readme with new url for install docs. ([#3254](https://github.com/lunarvim/lunarvim/pull/3254))
+- Update Readme ([#3282](https://github.com/lunarvim/lunarvim/pull/3282))
+- remove and reorganize images ([#3302](https://github.com/lunarvim/lunarvim/pull/3302))
+- update readme ([#3303](https://github.com/lunarvim/lunarvim/pull/3303))
+- update colors for links in readme
 
 ### <!-- 5 --> Revert
 
@@ -167,6 +204,7 @@ All notable changes to this project will be documented in this file.
 ### <!-- 6 --> Performance
 
 - _(plugins)_ move assert `vim.env.LVIM_DEV_MODE` logic ([#3238](https://github.com/lunarvim/lunarvim/pull/3238))
+- _(treesitter)_ disable in big files ([#3268](https://github.com/lunarvim/lunarvim/pull/3268))
 
 ## [1.1.4]
 
