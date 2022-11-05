@@ -1,20 +1,26 @@
 name: "Commit Linter"
 on:
-  pull_request:
-    branches:
-      - "rolling"
-
+  pull_request: # By default, a workflow only runs when a pull_request event's activity type is opened, synchronize, or reopened.
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
 jobs:
-  lint-commits:
+  lint-pr-title:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HELP_URL: "https://github.com/LunarVim/LunarVim/blob/rolling/CONTRIBUTING.md#commit-messages"
+      COMMITLINT_CONFIG: ${{ format('{0}/.github/workflows/commitlint.config.js', github.workspace) }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@v5
-        with:
-          configFile: .github/workflows/commitlint.config.js
-          helpURL: https://github.com/LunarVim/LunarVim/blob/rolling/CONTRIBUTING.md#commit-messages
-          firstParent: true
+      - name: install commitlint
+        run: |
+          npm install --save-dev @commitlint/cli
+      - name: run commitlint
+        run: |
+          echo "$PR_TITLE" | npx commitlint --verbose --help-url "$HELP_URL" --config "$COMMITLINT_CONFIG"
