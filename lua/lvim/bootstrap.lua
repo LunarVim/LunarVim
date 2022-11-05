@@ -106,6 +106,8 @@ function M:init(base_dir)
     install_path = self.packer_install_dir,
   }
 
+  require("lvim.core.mason").bootstrap()
+
   return self
 end
 
