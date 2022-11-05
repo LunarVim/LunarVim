@@ -58,9 +58,9 @@ M.config = function()
     options = {
       mode = "buffers", -- set to "tabs" to only show tabpages instead
       numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
-      close_command = function(bufnr)
-        M.buf_kill("bd", bufnr, true)
-      end, -- can be a string | function, see "Mouse actions"
+      close_command = function(bufnr) -- can be a string | function, see "Mouse actions"
+        M.buf_kill("bd", bufnr, false)
+      end,
       right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
       left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
       middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
@@ -217,7 +217,7 @@ function M.buf_kill(kill_command, bufnr, force)
   -- If there is only one buffer (which has to be the current one), vim will
   -- create a new buffer on :bd.
   -- For more than one buffer, pick the previous buffer (wrapping around if necessary)
-  if #buffers > 1 and #windows ~= 0 then
+  if #buffers > 1 and #windows > 0 then
     for i, v in ipairs(buffers) do
       if v == bufnr then
         local prev_buf_idx = i == 1 and (#buffers - 1) or (i - 1)
