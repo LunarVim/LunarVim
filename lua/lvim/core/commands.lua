@@ -10,6 +10,8 @@ vim.cmd [[
   endfunction
 ]]
 
+vim.cmd [[command! LvimDocs execute 'silent !open "https://www.lunarvim.org/docs/installation"']]
+
 M.defaults = {
   {
     name = "BufferKill",
