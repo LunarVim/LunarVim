@@ -81,7 +81,7 @@ function M.setup()
     return
   end
 
-  add_to_path()
+  add_to_path(lvim.builtin.mason.PATH == "append")
 
   mason.setup(lvim.builtin.mason)
 end
