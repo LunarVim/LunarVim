@@ -181,11 +181,20 @@ end
 
 function M.enable_reload_config_on_save()
   local user_config_file = require("lvim.config"):get_user_config_path()
-
   if vim.loop.os_uname().version:match "Windows" then
     -- autocmds require forward slashes even on windows
     user_config_file = user_config_file:gsub("\\", "/")
   end
+
+  local exists, autocmds = pcall(vim.api.nvim_get_autocmds, {
+    group = "_general_settings",
+    event = "BufWritePost",
+    pattern = user_config_file,
+  })
+  if exists and #autocmds > 0 then
+    return
+  end
+
   vim.api.nvim_create_autocmd("BufWritePost", {
     group = "_general_settings",
     pattern = user_config_file,
