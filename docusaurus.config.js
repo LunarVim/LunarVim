@@ -183,6 +183,13 @@ const config = {
           "python",
         ],
       },
+      announcementBar: {
+        id: 'new_release',
+        content: 'New Release! <a target="_blank" rel="noopener noreferrer" href="https://github.com/LunarVim/LunarVim">install</a>',
+        backgroundColor: 'var(--primary-fg)',
+        textColor: 'var(--primary-bg)',
+        isCloseable: true,
+      },
     }),
   plugins: [
     [
