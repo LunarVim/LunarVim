@@ -67,11 +67,7 @@ See the current list
 :lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))
 ```
 
-See the default list
-
-```lua
-:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))
-```
+See the default list in [`lua/lvim/lsp/config.lua`](https://github.com/LunarVim/LunarVim/blob/master/lua/lvim/lsp/config.lua#L1-L40)
 
 :::tip
 
