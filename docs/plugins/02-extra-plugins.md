@@ -279,7 +279,14 @@ vim.keymap.set('n', ',W', swap_windows, { desc = 'Swap windows' })
 ```lua
 {
   "pwntester/octo.nvim",
-  event = "BufRead",
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
+    'kyazdani42/nvim-web-devicons',
+  },
+  config = function()
+    require("octo").setup()
+  end,
 },
 ```
 
