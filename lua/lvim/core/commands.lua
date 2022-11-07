@@ -32,7 +32,7 @@ M.defaults = {
   {
     name = "LvimDocs",
     fn = function()
-      local documentation_url = "https://www.lunarvim.org/docs/installation"
+      local documentation_url = "https://www.lunarvim.org/docs/quick-start"
       if vim.fn.has "mac" == 1 or vim.fn.has "macunix" == 1 then
         vim.fn.execute("!open " .. documentation_url)
       elseif vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1 then
@@ -41,7 +41,6 @@ M.defaults = {
         vim.fn.execute("!xdg-open " .. documentation_url)
       else
         vim.notify "Opening docs in a browser is not supported on your OS"
-
       end
     end,
   },
