@@ -10,8 +10,6 @@ vim.cmd [[
   endfunction
 ]]
 
-vim.cmd [[command! LvimDocs execute 'silent !open "https://www.lunarvim.org/docs/installation"']]
-
 M.defaults = {
   {
     name = "BufferKill",
@@ -29,6 +27,19 @@ M.defaults = {
     name = "LvimInfo",
     fn = function()
       require("lvim.core.info").toggle_popup(vim.bo.filetype)
+    end,
+  },
+  {
+    name = "LvimDocs",
+    fn = function()
+      local documentation_url = "https://www.lunarvim.org/docs/installation"
+      if vim.fn.has "mac" == 1 or vim.fn.has "macunix" == 1 then
+        vim.fn.execute("!open " .. documentation_url)
+      elseif vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1 then
+        vim.fn.execute("!start " .. documentation_url)
+      else
+        vim.fn.execute("!xdg-open " .. documentation_url)
+      end
     end,
   },
   {
