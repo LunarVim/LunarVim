@@ -37,7 +37,7 @@ Asegúrate de comprobar la sección de [troubleshooting](./troubleshooting/) si 
 
 ### Actualizar los plugins
 
-- Dentro de LunarVim `:LvimSyncPlugins`
+- Dentro de LunarVim `:LvimSyncCorePlugins`
 
 ## Desinstalar
 

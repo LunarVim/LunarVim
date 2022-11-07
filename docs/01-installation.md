@@ -53,7 +53,7 @@ Make sure to check the [troubleshooting](./troubleshooting/README.md) section if
 
 ### Update the plugins
 
-- Inside LunarVim `:LvimSyncPlugins`
+- Inside LunarVim `:LvimSyncCorePlugins`
 
 ## Uninstall
 
