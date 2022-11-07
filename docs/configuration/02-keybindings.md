@@ -44,9 +44,25 @@ To view keybindings for the nvimtree plugin. Make sure you're in an nvimtree buf
 
 ## LSP Bindings
 
-TODO
+To modify your LSP keybindings use `lvim.lsp.buffer_mappings.[normal|visual|insert]_mode`.
 
-lvim.lsp.buffer_mappings.normal_mode
+### (Re)map a key
+Map your own functionality
+```lua
+lvim.lsp.buffer_mappings.normal_mode['H'] = { vim.lsp.buf.hover, "Show documentation" }
+```
+Or map default functionality to a different key
+```lua
+lvim.lsp.buffer_mappings.normal_mode['gk'] = lvim.lsp.buffer_mappings.normal_mode['K']
+```
+
+### Remove a binding
+LSP bindings take precendence over regular keybdings. So in order to use a key for a regular binding, we have to remove
+it first
+```lua
+lvim.lsp.buffer_mappings.normal_mode['K'] = nil
+lvim.keys.normal_mode['K'] = "<Cmd>echo Okay!<CR>"
+```
 
 ## Whichkey Bindings
 
