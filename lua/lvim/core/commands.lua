@@ -37,8 +37,11 @@ M.defaults = {
         vim.fn.execute("!open " .. documentation_url)
       elseif vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1 then
         vim.fn.execute("!start " .. documentation_url)
-      else
+      elseif vim.fn.has "unix" == 1 then
         vim.fn.execute("!xdg-open " .. documentation_url)
+      else
+        vim.notify "Opening docs in a browser is not supported on your OS"
+
       end
     end,
   },
