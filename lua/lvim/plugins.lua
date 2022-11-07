@@ -1,6 +1,16 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
+  {
+    "cbochs/portal.nvim",
+    config = function()
+        require("portal").setup()
+    end,
+    requires = {
+        "cbochs/grapple.nvim",  -- Optional: provides the "grapple" query item
+        "ThePrimeagen/harpoon", -- Optional: provides the "harpoon" query item
+    },
+  },
   { "wbthomason/packer.nvim" },
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },

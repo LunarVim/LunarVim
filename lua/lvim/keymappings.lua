@@ -59,6 +59,10 @@ local defaults = {
     ["<A-j>"] = ":m .+1<CR>==",
     ["<A-k>"] = ":m .-2<CR>==",
 
+    -- portal to jump between buffers history
+    ["<A-i>"] = require("portal").jump_forward, {},
+    ["<A-o>"] = require("portal").jump_backward, {},
+
     -- QuickFix
     ["]q"] = ":cnext<CR>",
     ["[q"] = ":cprev<CR>",
