@@ -186,6 +186,7 @@ M.config = function()
           "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
+        d = { "<cmd>LvimDocs<cr>", "View LunarVim's docs" },
         f = {
           "<cmd>lua require('lvim.core.telescope.custom-finders').find_lunarvim_files()<cr>",
           "Find LunarVim files",

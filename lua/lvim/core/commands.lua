@@ -30,6 +30,21 @@ M.defaults = {
     end,
   },
   {
+    name = "LvimDocs",
+    fn = function()
+      local documentation_url = "https://www.lunarvim.org/docs/quick-start"
+      if vim.fn.has "mac" == 1 or vim.fn.has "macunix" == 1 then
+        vim.fn.execute("!open " .. documentation_url)
+      elseif vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1 then
+        vim.fn.execute("!start " .. documentation_url)
+      elseif vim.fn.has "unix" == 1 then
+        vim.fn.execute("!xdg-open " .. documentation_url)
+      else
+        vim.notify "Opening docs in a browser is not supported on your OS"
+      end
+    end,
+  },
+  {
     name = "LvimCacheReset",
     fn = function()
       require("lvim.utils.hooks").reset_cache()
