@@ -46,6 +46,10 @@ function M.config()
   }
 end
 
+local function on_confirm_done(...)
+  require("nvim-autopairs.completion.cmp").on_confirm_done()(...)
+end
+
 M.setup = function()
   local status_ok, autopairs = pcall(require, "nvim-autopairs")
   if not status_ok then
@@ -83,8 +87,9 @@ M.setup = function()
     lvim.builtin.autopairs.on_config_done(autopairs)
   end
   pcall(function()
-    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    require "nvim-autopairs.completion.cmp"
+    require("cmp").event:off("confirm_done", on_confirm_done)
+    require("cmp").event:on("confirm_done", on_confirm_done)
   end)
 end
 
