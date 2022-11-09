@@ -187,11 +187,11 @@ const config = {
         ],
       },
       announcementBar: {
-        id: 'new_release',
+        id: 'new_release_2.0',
         content: 'New Release! <a target="_blank" rel="noopener noreferrer" href="https://github.com/LunarVim/LunarVim">install</a>',
         backgroundColor: 'var(--primary-fg)',
         textColor: 'var(--primary-bg)',
-        isCloseable: true,
+        isCloseable: false,
       },
     }),
   plugins: [
