@@ -75,6 +75,9 @@ const config = {
       "The Neovim config from another world",
       "The IDE that's too cool for planet Earth",
       "A stellar Neovim experience",
+      "The universe's most lightweight IDE",
+      "No-Configuration-Required Neovim",
+      "Support for +10 Languages"
     ],
     primaryCTA: {
       text: "Install",
