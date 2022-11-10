@@ -9,6 +9,11 @@ const LanguagesList = [
     docPath: "/docs/frameworks/angular",
   },
   {
+    Svg: require("@site/static/img/ansible.svg").default,
+    title: "Ansible",
+    docPath: "/docs/languages/ansible",
+  },
+  {
     Svg: require("@site/static/img/c.svg").default,
     title: "C",
     docPath: "/docs/languages/c_cpp",
@@ -107,11 +112,6 @@ const LanguagesList = [
     Svg: require("@site/static/img/vue.svg").default,
     title: "Vue",
     docPath: "/docs/frameworks/vue",
-  },
-  {
-    Svg: require("@site/static/img/ansible.svg").default,
-    title: "Ansible",
-    docPath: "/docs/languages/ansible",
   },
   {
     title: "and more",
