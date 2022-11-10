@@ -109,6 +109,11 @@ const LanguagesList = [
     docPath: "/docs/frameworks/vue",
   },
   {
+    Svg: require("@site/static/img/ansible.svg").default,
+    title: "Ansible",
+    docPath: "/docs/languages/ansible",
+  },
+  {
     title: "and more",
     docPath: "/docs/languages",
   },
