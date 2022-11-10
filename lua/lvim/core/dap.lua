@@ -140,8 +140,13 @@ M.setup_ui = function()
       return vim.notify(msg, level, opts)
     end
 
-    opts = opts or {}
-    opts.title = opts.title or "dapui"
+    opts = vim.tbl_extend("keep", opts or {}, {
+      title = "dap-ui",
+      icon = "",
+      on_open = function(win)
+        vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
+      end,
+    })
 
     -- vim_log_level can be omitted
     if level == nil then
