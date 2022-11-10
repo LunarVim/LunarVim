@@ -331,15 +331,11 @@ M.config = function()
             return -- success, exit early
           end
         end
-
-        if jumpable(1) and luasnip.jump(1) then
-          return -- success, exit early
-        end
         fallback() -- if not exited early, always fallback
       end),
     },
     cmdline = {
-      enable = true,
+      enable = false,
       options = {
         {
           type = ":",
