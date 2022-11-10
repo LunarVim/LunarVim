@@ -101,6 +101,4 @@ Any Lunarvim builtin debug commands, which could be displayed by pressing `<lead
 
 In most cases, isn't necessary enable the [scalafmt](https://scalameta.org/scalafmt/) formatter, this is already integrated with metals to format on save creating a `.scalafmt.conf` file in your project root, see more [here](https://scalameta.org/scalafmt/docs/configuration.html)
 
-```lua
-{ "scalafmt" }
-```
+- scalafmt

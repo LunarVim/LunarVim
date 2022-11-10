@@ -8,18 +8,14 @@
 
 ## Supported language servers
 
-```lua
-{ "sumneko_lua" }
-```
+- sumneko_lua
 
 ## Supported formatters
 
-```lua
-{ "lua_format", "stylua" }
-```
+- lua_format
+- stylua
 
 ## Supported linters
 
-```lua
-{ "luacheck", "selene" }
-```
+- luacheck
+- selene

@@ -12,18 +12,18 @@
 
 ## Supported language servers
 
-```lua
-{ "clangd", "ccls" }
-```
+- clangd
+- ccls
 
 ## Supported formatters
 
-```lua
-{ "astyle", "clang_format", "uncrustify" }
-```
+- astyle
+- clang_format
+- uncrustify
 
 ## Supported linters
 
-```lua
-{ "clang_check", "cppcheck", "cpplint", "gccdiag" }
-```
+- clang_format
+- cppcheck
+- cpplint
+- gccdiag

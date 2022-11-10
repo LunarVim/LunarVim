@@ -24,9 +24,7 @@ Install the configured parser.
 
 ## Supported language servers
 
-```lua
-ps1 = { "powershell_es" },
-```
+- powershell_es
 
 For more information about the language server configuration, refer to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#powershell_es)
 

@@ -33,6 +33,4 @@ default_config = {
 ```
 ## Supported formatters
 
-```lua
-swift = { "swiftformat" }
-```
+- swiftformat

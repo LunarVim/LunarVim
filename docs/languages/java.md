@@ -8,9 +8,19 @@
 
 ## Supported language servers
 
-```lua
-{ "jdtls" }
-```
+- jdtls
+
+## Supported formatters
+
+- astyle
+- clang_format
+- google_java_format
+- npm_groovy_lint
+- uncrustify
+
+The Java language server (jdtls) also supports formatting, and it is enabled by default. It is possible to fine-tune its formatting rules, but it is also possible to use a different formatter from the above list. When such a formatter is used, jdtls formatting will be disabled to avoid conflict.
+
+### jdtls
 
 jdtls is installed automatically once you open a `.java` file.
 
@@ -19,16 +29,6 @@ jdtls is installed automatically once you open a `.java` file.
 jdtls requires **jdk-17 or newer** to run.
 
 :::
-
-## Supported formatters
-
-```lua
-{ "astyle", "clang_format", "google_java_format", "npm_groovy_lint", "uncrustify" }
-```
-
-The Java language server (jdtls) also supports formatting, and it is enabled by default. It is possible to fine-tune its formatting rules, but it is also possible to use a different formatter from the above list. When such a formatter is used, jdtls formatting will be disabled to avoid conflict.
-
-### jdtls
 
 Neovim (by default) passes basic options (such as `vim.opt.shiftwidth` and `vim.opt.tabstop`) to the language server when formatting.
 

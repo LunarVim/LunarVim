@@ -8,12 +8,9 @@
 
 ## Supported language servers
 
-```lua
-{ "rust_analyzer" }
-```
+- rust_analyzer
 
 ## Supported formatters
 
-```lua
-{ "dprint", "rustfmt" }
-```
+- dprint
+- rustfmt

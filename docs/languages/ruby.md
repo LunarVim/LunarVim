@@ -8,9 +8,9 @@
 
 ## Supported language servers
 
-```lua
-{ "ruby_ls", "solargraph", "sorbet" }
-```
+- ruby_ls
+- solargraph
+- sorbet
 
 ### Solargraph
 
@@ -20,12 +20,12 @@ Note: `Solargraph` should automatically detect and use `rubocop` for formatting.
 
 ## Supported formatters
 
-```lua
-{ "rubocop", "rufo", "standardrb" }
-```
+- rubocop
+- rufo
+- standardrb
 
 ## Supported linters
 
-```lua
-{ "rubocop", "semgrep", "standardrb" }
-```
+- rubocop
+- semgrep
+- standardrb

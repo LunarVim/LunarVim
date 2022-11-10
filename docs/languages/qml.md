@@ -20,15 +20,11 @@ Currently QML does not have an official LSP, but its development is currently
 
 ## Supported formatters
 
-```lua
-qml = { "qmlformat" }
-```
+- qmlformat
 
 ## Supported linters
 
-```lua
-qml = { "qmllint" }
-```
+- qmllint
 
 ## See also
 

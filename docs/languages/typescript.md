@@ -9,9 +9,16 @@
 
 ## Supported language servers
 
-```lua
-{ "angularls", "cssmodules_ls", "denols", "ember", "eslint", "glint", "rome", "stylelint_lsp", "tailwindcss", "tsserver" }
-```
+- angularls
+- cssmodules_ls
+- denols
+- ember
+- eslint
+- glint
+- rome
+- stylelint_lsp
+- tailwindcss
+- tsserver
 
 Only `tsserver` and `tailwindcss` is enabled by default and the other servers need to be [manually configured](./README.md#manually-configured-servers).
 
@@ -23,16 +30,24 @@ See [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/se
 
 ## Supported formatters
 
-```lua
-{ "deno_fmt", "dprint", "eslint", "eslint_d", "prettier", "prettier_d_slim", "prettierd", "rome", "rustywind" }
-```
+- deno_fmt
+- dprint
+- eslint
+- eslint_d
+- prettier
+- prettier_d_slim
+- prettierd
+- rome
+- rustywind
 
 The configured formatter(s) must be installed separately.
 
 ## Supported linters
 
-```lua
-{ "eslint", "eslint_d", "semgrep", "tsc", "xo" }
-```
+- eslint
+- eslint_d
+- semgrep
+- tsc
+- xo
 
 The configured linter(s) must be installed separately.
