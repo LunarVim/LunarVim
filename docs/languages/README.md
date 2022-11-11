@@ -77,7 +77,7 @@ Any changes to `lvim.lsp.automatic_configuration.skipped_servers` **must** be fo
 
 ### Server setup
 
-LunarVim uses [filetype plugins](../configuration/07-ftplugin.md) to enable lazy-loading the setup of a language server. A template generator is used to create `ftplugin` files and populate them with the setup call.
+LunarVim uses [filetype plugins](/configuration/07-ftplugin.md) to enable lazy-loading the setup of a language server. A template generator is used to create `ftplugin` files and populate them with the setup call.
 
 - configuration option
 
@@ -294,7 +294,7 @@ code_actions.setup {
 ### Lazy-loading the linter/formatter/code_actions setup
 
 By default, all null-ls providers are checked on startup. If you want to avoid that or want to only set up the provider when you opening the associated file-type,
-then you can use [filetype plugins](../configuration/07-ftplugin.md) for this purpose.
+then you can use [filetype plugins](configuration/07-ftplugin.md) for this purpose.
 
 Let's take `python` as an example:
 
