@@ -12,9 +12,25 @@
 
 Sin alarmas y sin sorpresas:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="linux/macos" label="Linux/MacOs">
+
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```powershell
+Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+```
+
+</TabItem>
+</Tabs>
 
 ## Nightly
 
@@ -23,7 +39,7 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 Todas las nuevas características con todos los nuevos errores:
 
 ```bash
-LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
 Asegúrate de comprobar la sección de [troubleshooting](./troubleshooting/) si te encuentras con algún problema.

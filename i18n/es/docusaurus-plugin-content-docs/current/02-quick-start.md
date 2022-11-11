@@ -17,6 +17,7 @@ Para instalar el resaltado de sintaxis y el soporte treesitter para su lenguaje:
 **NOTA:** `<TAB>` indica que debe presionar la tecla `<TAB>` y desplazarse por sus opciones
 
 No se admiten todos los idiomas. Para obtener una lista de los idiomas admitidos [mira aquí](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages).
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hkxPa5w3bZ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
 
 ## Servidor de Lenguajes
 
