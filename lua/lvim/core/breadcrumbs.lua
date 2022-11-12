@@ -154,7 +154,7 @@ local get_gps = function()
   end
 
   if not require("lvim.utils.functions").isempty(gps_location) then
-    return "%#NavicSeparator#".. lvim.icons.ui.ChevronRight .. "%* " .. gps_location
+    return "%#NavicSeparator#" .. lvim.icons.ui.ChevronRight .. "%* " .. gps_location
   else
     return ""
   end
