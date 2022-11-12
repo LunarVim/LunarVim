@@ -4,7 +4,7 @@
 FROM ubuntu:latest
 
 # Build argument to point to correct branch on GitHub
-ARG LV_BRANCH=rolling
+ARG LV_BRANCH=release-1.2/neovim-0.8
 
 # Set environment correctly
 ENV DEBIAN_FRONTEND=noninteractive
