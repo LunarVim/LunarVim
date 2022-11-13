@@ -39,6 +39,7 @@ function plugin_loader.init(opts)
 
   if in_headless then
     init_opts.display = nil
+    init_opts.git.clone_timeout = 300
   end
 
   if not utils.is_directory(install_path) then
