@@ -77,7 +77,8 @@ local function launch_server(server_name, config)
         local default_config = require("lspconfig.server_configurations." .. server_name).default_config
         return default_config.cmd
       end)()
-    if vim.fn.executable(command[1]) ~= 1 then
+    -- some servers have dynamic commands defined with on_new_config
+    if type(command) == "table" and type(command[1]) == "string" and vim.fn.executable(command[1]) ~= 1 then
       Log:debug(string.format("[%q] is either not installed, missing from PATH, or not executable.", server_name))
       return
     end
