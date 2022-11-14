@@ -26,7 +26,7 @@ end
 local function custom_filter(buf, buf_nums)
   local logs = vim.tbl_filter(function(b)
     return is_ft(b, "log")
-  end, buf_nums)
+  end, buf_nums or {})
   if vim.tbl_isempty(logs) then
     return true
   end
