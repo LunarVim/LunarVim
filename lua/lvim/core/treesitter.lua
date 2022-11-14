@@ -1,7 +1,7 @@
 local M = {}
 local Log = require "lvim.core.log"
 
-M.config = function()
+function M.config()
   lvim.builtin.treesitter = {
     on_config_done = nil,
     ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -109,7 +109,53 @@ M.config = function()
   }
 end
 
-M.setup = function()
+---@class bundledParsersOpts
+---@field name_only boolean
+
+---Retrives a list of bundled parsers paths (any parser not found in default `install_dir`)
+---@param opts bundledParsersOpts
+---@return string[]
+local function get_bundled_parsers(opts)
+  local configs = require "nvim-treesitter.configs"
+  local install_dir = configs.get_parser_install_dir()
+
+  local bundled_parsers = vim.tbl_filter(function(parser)
+    return not vim.startswith(parser, install_dir)
+  end, vim.api.nvim_get_runtime_file("parser/*.so", true))
+
+  if opts.name_only then
+    bundled_parsers = vim.tbl_map(function(parser)
+      return vim.fn.fnamemodify(parser, ":t:r")
+    end, bundled_parsers)
+  end
+
+  return bundled_parsers
+end
+
+---Checks if parser is installed with nvim-treesitter
+---@param lang string
+---@return boolean
+local function is_installed(lang)
+  local utils = require "nvim-treesitter.utils"
+  local configs = require "nvim-treesitter.configs"
+  local lang_file = utils.join_path(configs.get_parser_info_dir(), lang .. ".revision")
+  local stat = vim.loop.fs_stat(lang_file)
+  return stat and stat.type == "file"
+end
+
+local function ensure_updated_bundled()
+  vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+      local missing = vim.tbl_filter(function(parser)
+        return not is_installed(parser)
+      end, get_bundled_parsers { name_only = true })
+
+      vim.cmd { cmd = "TSInstall", args = missing, bang = true }
+    end,
+  })
+end
+
+function M.setup()
   -- avoid running in headless mode since it's harder to detect failures
   if #vim.api.nvim_list_uis() == 0 then
     Log:debug "headless mode detected, skipping running setup for treesitter"
@@ -125,6 +171,8 @@ M.setup = function()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
+
+  ensure_updated_bundled()
 
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)
