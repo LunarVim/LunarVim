@@ -56,6 +56,7 @@ shfmt -i 2 -ci -bn -l -d .
 - Your PR must pass all the [automated-ci-tests](https://github.com/neovim/neovim/actions).
 - Use a [git-feature-branch](https://www.atlassian.com/git/tutorials/comparing-workflows) instead of the master/rolling branch.
 - Use a [rebase-workflow](http://git-scm.com/book/en/v2/Git-Branching-Rebasing).
+- Title the PR the same way as commit headers
 
 ### Commit Messages
 * Commit header is limited to 72 characters.
