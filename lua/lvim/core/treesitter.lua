@@ -4,8 +4,24 @@ local Log = require "lvim.core.log"
 function M.config()
   lvim.builtin.treesitter = {
     on_config_done = nil,
-    ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+
+    -- A list of parser names, or "all"
+    ensure_installed = {},
+
+    -- List of parsers to ignore installing (for "all")
     ignore_install = {},
+
+    -- A directory to install the parsers into.
+    -- By default parsers are installed to either the package dir, or the "site" dir.
+    -- If a custom path is used (not nil) it must be added to the runtimepath.
+    parser_install_dir = nil,
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- Automatically install missing parsers when entering buffer
+    auto_install = false,
+
     matchup = {
       enable = false, -- mandatory, false will disable the whole extension
       -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
