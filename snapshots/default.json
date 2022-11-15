@@ -3,10 +3,10 @@
     "commit": "ad7ffa8"
   },
   "LuaSnip": {
-    "commit": "619796e"
+    "commit": "95ccfd9"
   },
   "alpha-nvim": {
-    "commit": "0bb6fc0"
+    "commit": "a858e4e"
   },
   "bufferline.nvim": {
     "commit": "7c07dee"
@@ -27,7 +27,7 @@
     "commit": "c93311f"
   },
   "gitsigns.nvim": {
-    "commit": "284b253"
+    "commit": "9ff7dfb"
   },
   "indent-blankline.nvim": {
     "commit": "db7cbcb"
@@ -42,49 +42,49 @@
     "commit": "29eedf7"
   },
   "mason-lspconfig.nvim": {
-    "commit": "a910b4d"
+    "commit": "a1e2219"
   },
   "mason.nvim": {
-    "commit": "8f49e1a"
+    "commit": "6dbeebe"
   },
   "neodev.nvim": {
-    "commit": "879a17b"
+    "commit": "7f8b73f"
   },
   "nlsp-settings.nvim": {
-    "commit": "a6cbab7"
+    "commit": "bfab219"
   },
   "null-ls.nvim": {
-    "commit": "1ac465b"
+    "commit": "07d4ed4"
   },
   "nvim-autopairs": {
     "commit": "6b6e35f"
   },
   "nvim-cmp": {
-    "commit": "9bb8ee6"
+    "commit": "aee4011"
   },
   "nvim-dap": {
     "commit": "6164368"
   },
   "nvim-dap-ui": {
-    "commit": "0f385f7"
+    "commit": "a861906"
   },
   "nvim-lspconfig": {
-    "commit": "f40eae0"
+    "commit": "2b802ab"
   },
   "nvim-navic": {
     "commit": "2fad334"
   },
   "nvim-tree.lua": {
-    "commit": "7e89276"
+    "commit": "9d241e5"
   },
   "nvim-treesitter": {
-    "commit": "00b42ac"
+    "commit": "2072692"
   },
   "nvim-ts-context-commentstring": {
     "commit": "32d9627"
   },
   "nvim-web-devicons": {
-    "commit": "520776f"
+    "commit": "3b1b794"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -102,7 +102,7 @@
     "commit": "685bc8e"
   },
   "schemastore.nvim": {
-    "commit": "142e0b9"
+    "commit": "f92c7fc"
   },
   "structlog.nvim": {
     "commit": "232a8e2"
@@ -117,10 +117,10 @@
     "commit": "3ba6838"
   },
   "tokyonight.nvim": {
-    "commit": "d6dcfa2"
+    "commit": "ec144d9"
   },
   "vim-illuminate": {
-    "commit": "fb83d83"
+    "commit": "a6d0b28"
   },
   "which-key.nvim": {
     "commit": "61553ae"
