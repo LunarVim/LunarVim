@@ -3,8 +3,9 @@ local default_workspace = {
     vim.fn.expand "$VIMRUNTIME",
     get_lvim_base_dir(),
     require("neodev.config").types(),
+    "${3rd}/busted/library",
+    "${3rd}/luassert/library",
   },
-  checkThirdParty = false,
 
   maxPreload = 5000,
   preloadFileSize = 10000,
