@@ -22,9 +22,9 @@ You can use the following commands to check some information about any language 
   - Contains basic information about all the servers that are running.
   - keybind: `<leader>li`
 
-- `:LspInstallInfo`
+- `:Mason`
 
-  - Contains information about all the servers that you can manage with [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer).
+  - Contains information about all the servers that you can manage with [mason](https://github.com/williamboman/mason.nvim).
   - keybind: `<leader>lI`
 
 ## LSP support
@@ -41,7 +41,7 @@ By default, most supported language servers will get automatically installed onc
 lvim.lsp.automatic_servers_installation = true
 ```
 
-Please refer to [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) to see the updated full list of currently available servers.
+Please refer to [mason](https://github.com/williamboman/mason.nvim) to see the updated full list of currently available servers.
 
 To install a supported language server:
 
@@ -49,7 +49,7 @@ To install a supported language server:
 :LspInstall `<your_language_server>`
 ```
 
-You can also toggle `<:LspInstallInfo>` and interactively choose which servers to install.
+You can also toggle `<:Mason>` and interactively choose which servers to install.
 
 ### Server override
 
