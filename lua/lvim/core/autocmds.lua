@@ -53,14 +53,6 @@ function M.load_defaults()
     {
       "FileType",
       {
-        group = "_filetype_settings",
-        pattern = { "gitcommit", "markdown" },
-        command = "setlocal wrap spell",
-      },
-    },
-    {
-      "FileType",
-      {
         group = "_buffer_mappings",
         pattern = { "qf", "help", "man", "floaterm", "lspinfo", "lsp-installer", "null-ls-info" },
         command = "nnoremap <silent> <buffer> q :close<CR>",
