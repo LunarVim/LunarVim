@@ -194,7 +194,7 @@ function M.buf_kill(kill_command, bufnr, force)
       vim.ui.input({
         prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
       }, function(choice)
-        if choice:match "ye?s?" then force = true end
+        if choice ~= nil and choice:match "ye?s?" then force = true end
       end)
       if not force then return end
     end
