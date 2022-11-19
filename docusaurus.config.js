@@ -51,6 +51,16 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             "https://github.com/LunarVim/lunarvim.org/tree/master/",
+          versions: {
+            current: {
+              label: 'master',
+              path: 'master',
+            },
+            '1.2': {
+              label: '1.2',
+              path: '1.2',
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -167,6 +177,11 @@ const config = {
             label: "Donate",
           },
           ...socials,
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
+          },
           {
             type: "localeDropdown",
             position: "right",
