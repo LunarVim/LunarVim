@@ -56,10 +56,6 @@ const config = {
               label: 'master',
               path: 'master',
             },
-            '1.2': {
-              label: '1.2',
-              path: '1.2',
-            },
           },
         },
         blog: {
