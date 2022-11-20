@@ -296,13 +296,12 @@ M.config = function()
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
+        elseif luasnip.choice_active() then
+          luasnip.change_choice(1)
         elseif luasnip.expand_or_locally_jumpable() then
           luasnip.expand_or_jump()
         elseif jumpable(1) then
           luasnip.jump(1)
-        elseif has_words_before() then
-          -- cmp.complete()
-          fallback()
         else
           fallback()
         end
