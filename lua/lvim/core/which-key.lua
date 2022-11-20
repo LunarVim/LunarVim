@@ -76,13 +76,13 @@ M.config = function()
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {
-      ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
+      ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle" },
     },
     mappings = {
       [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
-      ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+      ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle" },
       ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
       ["f"] = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
