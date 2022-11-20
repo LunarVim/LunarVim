@@ -1,6 +1,7 @@
 # Keybindings
 
 Use `<Leader>Lk` to view the keybindings set by Lunarvim.
+See the [keybind overview](../03-keybind-overview.md) for most commonly use keybinds
 
 To modify a single Lunarvim keymapping
 
@@ -20,7 +21,7 @@ To remove keymappings set by Lunarvim
 
 ### Listing what is mapped
 
-Use `<Leader>Vk` to view the keybindings set by Lunarvim.
+Use `<Leader>Lk` to view the keybindings set by Lunarvim.
 
 To see if a particular key has already been bound:
 
@@ -67,6 +68,7 @@ lvim.keys.normal_mode['K'] = "<Cmd>echo Okay!<CR>"
 ## Whichkey Bindings
 
 To add or remap keybindings for whichkey use `lvim.builtin.which_key.mappings`
+The leader key is already included in whichkey mappings
 
 ### Single mapping
 
