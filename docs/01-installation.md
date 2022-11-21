@@ -27,7 +27,7 @@ LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.
 <TabItem value="windows" label="Windows">
 
 ```powershell
-Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+$LV_BRANCH='release-1.2/neovim-0.8'; Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 </TabItem>
@@ -39,9 +39,22 @@ Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/uti
 
 All the new features with all the new bugs:
 
+<Tabs>
+<TabItem value="linux/macos" label="Linux/MacOs">
+
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```powershell
+Invoke-WebRequest https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/install.ps1 -UseBasicParsing | Invoke-Expression
+```
+
+</TabItem>
+</Tabs>
 
 Make sure to check the [troubleshooting](./troubleshooting/README.md) section if you encounter any problem.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NlRxRtGpHHk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
@@ -59,8 +72,21 @@ Make sure to check the [troubleshooting](./troubleshooting/README.md) section if
 
 You can remove LunarVim (including the configuration files) using the bundled `uninstall` script
 
+<Tabs>
+<TabItem value="linux/macos" label="Linux/MacOs">
+
 ```bash
 bash ~/.local/share/lunarvim/lvim/utils/installer/uninstall.sh
 # or
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.sh)
 ```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```powershell
+Invoke-WebRequest https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.ps1 -UseBasicParsing | Invoke-Expression
+```
+
+</TabItem>
+</Tabs>
