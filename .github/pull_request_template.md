@@ -1,11 +1,20 @@
 <!-- This won't be rendered!
 [CHECKLIST]
 I prefixed the title with one of the following tags:
+<<<<<<< HEAD
  - feature: for feature addition / improvements
+=======
+ - feat: for feature addition / improvements
+>>>>>>> 2df17bbc (docs: github pull request template update)
  - fix: when fixing a functionality
  - refactor: when moving code without adding any functionality
  - doc: on documentation updates
 
+<<<<<<< HEAD
+=======
+Aditionally you can specify the scope of the PR in parenthesis, ex `fix(cmp):` or `feat(which-key):` or `docs(readme):`
+
+>>>>>>> 2df17bbc (docs: github pull request template update)
 - I read the contributing guide [CONTRIBUTING.md](../CONTRIBUTING.md)
 - My code follows the style guidelines of this project
 - I have performed a self-review of my code
