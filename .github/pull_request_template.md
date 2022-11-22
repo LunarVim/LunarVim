@@ -8,7 +8,7 @@ I prefixed the title with one of the following tags:
 >>>>>>> 2df17bbc (docs: github pull request template update)
  - fix: when fixing a functionality
  - refactor: when moving code without adding any functionality
- - doc: on documentation updates
+ - docs: on documentation updates
 
 <<<<<<< HEAD
 =======
