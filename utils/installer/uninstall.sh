@@ -24,7 +24,7 @@ function usage() {
   echo ""
   echo "Options:"
   echo "    -h, --help                       Print this help message"
-  echo "    --remove-config                  Remove old backup folders as well"
+  echo "    --remove-config                  Remove user config files as well"
   echo "    --remove-backups                 Remove old backup folders as well"
 }
 
