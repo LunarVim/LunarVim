@@ -4,7 +4,7 @@ I prefixed the title with one of the following tags:
  - feat: for feature addition / improvements
  - fix: when fixing a functionality
  - refactor: when moving code without adding any functionality
- - doc: on documentation updates
+ - docs: on documentation updates
 
 Aditionally you can specify the scope of the PR in parenthesis, ex `fix(cmp):` or `feat(which-key):` or `docs(readme):`
 
