@@ -90,7 +90,7 @@ function M.register_sources(configs, method)
       local check_exit_code
       if method == null_ls.methods.FORMATTING then
         check_exit_code = function(code, stderr)
-          local success = code <= 1
+          local success = code == 0
 
           if not success then
             Log:warn "Formatting failed!"
