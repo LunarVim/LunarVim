@@ -93,8 +93,11 @@ function M.register_sources(configs, method)
           local success = code <= 1
 
           if not success then
-            Log:warn "Formatting failed!"
-            Log:debug(stderr)
+            vim.defer_fn(function()
+              vim.api.nvim_out_write(stderr)
+              vim.cmd "redraw"
+              Log:warn "Formatting failed!"
+            end, 100)
           end
 
           return success
