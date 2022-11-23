@@ -87,7 +87,21 @@ function M.register_sources(configs, method)
         compat_opts.args = nil
       end
 
-      local opts = vim.tbl_deep_extend("keep", { command = command }, compat_opts)
+      local check_exit_code
+      if method == null_ls.methods.FORMATTING then
+        check_exit_code = function(code, stderr)
+          local success = code <= 1
+
+          if not success then
+            Log:warn "Formatting failed!"
+            Log:debug(stderr)
+          end
+
+          return success
+        end
+      end
+
+      local opts = vim.tbl_deep_extend("keep", { command = command, check_exit_code = check_exit_code }, compat_opts)
       Log:debug("Registering source " .. name)
       Log:trace(vim.inspect(opts))
       table.insert(sources, source.with(opts))
