@@ -344,8 +344,7 @@ function __attempt_to_install_with_cargo() {
 
 # we try to install the missing one with cargo even though it's unlikely to be found
 function install_rust_deps() {
-  local -a deps=("fd::fd-find" "rg::ripgrep")
-  for dep in "${deps[@]}"; do
+  for dep in "${__rust_deps[@]}"; do
     if ! command -v "${dep%%::*}" &>/dev/null; then
       __attempt_to_install_with_cargo "${dep##*::}"
     fi
