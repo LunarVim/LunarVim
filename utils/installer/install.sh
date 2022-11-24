@@ -47,8 +47,8 @@ declare -a __pip_deps=(
 )
 
 declare -a __rust_deps=(
-	"fd::fd-find"
-	"rg::ripgrep"
+  "fd::fd-find"
+  "rg::ripgrep"
 )
 
 function usage() {
@@ -131,7 +131,7 @@ function main() {
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     if [ "$INTERACTIVE_MODE" -eq 1 ]; then
-			if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array ${__npm_deps[@]})?"; then
+      if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array ${__npm_deps[@]})?"; then
 				install_nodejs_deps
       fi
       if confirm "Would you like to install LunarVim's Python dependencies: $(stringify_array ${__pip_deps[@]})?"; then
