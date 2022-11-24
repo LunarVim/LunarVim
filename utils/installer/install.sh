@@ -46,6 +46,11 @@ declare -a __pip_deps=(
   "pynvim"
 )
 
+declare -a __rust_deps=(
+	"fd::fd-find"
+	"rg::ripgrep"
+)
+
 function usage() {
   echo "Usage: install.sh [<options>]"
   echo ""
@@ -110,6 +115,10 @@ function confirm() {
   done
 }
 
+function stringify_array() {
+  echo -n "${@}" | sed 's/ /, /'
+}
+
 function main() {
   parse_arguments "$@"
 
@@ -122,14 +131,14 @@ function main() {
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     if [ "$INTERACTIVE_MODE" -eq 1 ]; then
-      if confirm "Would you like to install LunarVim's NodeJS dependencies?"; then
-        install_nodejs_deps
+			if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array ${__npm_deps[@]})?"; then
+				install_nodejs_deps
       fi
-      if confirm "Would you like to install LunarVim's Python dependencies?"; then
-        install_python_deps
+      if confirm "Would you like to install LunarVim's Python dependencies: $(stringify_array ${__pip_deps[@]})?"; then
+				install_python_deps
       fi
-      if confirm "Would you like to install LunarVim's Rust dependencies?"; then
-        install_rust_deps
+      if confirm "Would you like to install LunarVim's Rust dependencies: $(stringify_array ${__rust_deps[@]})?"; then
+				install_rust_deps
       fi
     else
       install_nodejs_deps
