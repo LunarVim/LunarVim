@@ -64,7 +64,7 @@ end
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
 ---@param dir number 1 for forward, -1 for backward; defaults to 1
----@return boolean true if a jumpable luasnip field is found while inside a snippet
+---@return boolean|nil true if a jumpable luasnip field is found while inside a snippet
 local function jumpable(dir)
   local luasnip_ok, luasnip = pcall(require, "luasnip")
   if not luasnip_ok then
@@ -110,7 +110,7 @@ local function jumpable(dir)
       local n_next = node.next
       local next_pos = n_next and n_next.mark:pos_begin()
       local candidate = n_next ~= snippet and next_pos and (pos[1] < next_pos[1])
-          or (pos[1] == next_pos[1] and pos[2] < next_pos[2])
+        or (pos[1] == next_pos[1] and pos[2] < next_pos[2])
 
       -- Past unmarked exit node, exit early
       if n_next == nil or n_next == snippet.next then
@@ -149,7 +149,8 @@ local function jumpable(dir)
   end
 
   if dir == -1 then
-    return luasnip.in_snippet() and luasnip.jumpable(-1) else
+    return luasnip.in_snippet() and luasnip.jumpable(-1)
+  else
     return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
   end
 end
