@@ -21,22 +21,20 @@ function M.config()
     },
     config = {
       history = false,
-      updateevents = "TextChanged,TextChangedI",
+      update_events = "InsertLeave",
+      enable_autosnippets = false,
       ext_opts = {
-        -- Will be populated within config function
-      },
-    },
-    ext_opts = {
-      -- Show virtual text to signal when you are inside an sippets
-      [types.insertNode] = {
-        active = {
-          virt_text = { { "<-- snip insert", "BufferInactiveIndex" } },
+        -- Show virtual text to signal when you are inside an sippets
+        [types.insertNode] = {
+          active = {
+            virt_text = { { "<-- snip insert", "BufferInactiveIndex" } },
+          },
         },
-      },
-      -- Helps to notice when you are within a choice node
-      [types.choiceNode] = {
-        active = {
-          virt_text = { { "<-- choice", "BufferInactiveIndex" } },
+        -- Helps to notice when you are within a choice node
+        [types.choiceNode] = {
+          active = {
+            virt_text = { { "<-- choice", "BufferInactiveIndex" } },
+          },
         },
       },
     },
