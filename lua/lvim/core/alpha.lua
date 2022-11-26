@@ -4,14 +4,24 @@ function M.config()
   local lvim_dashboard = require "lvim.core.alpha.dashboard"
   local lvim_startify = require "lvim.core.alpha.startify"
   lvim.builtin.alpha = {
-    dashboard = { config = {}, section = lvim_dashboard.get_sections(), opts = { autostart = true } },
-    startify = { config = {}, section = lvim_startify.get_sections(), opts = { autostart = true } },
+    dashboard = {
+      config = {},
+      section = lvim_dashboard.get_sections(),
+      default_button_opts = { hl_shortcut = "Include" },
+      opts = { autostart = true },
+    },
+    startify = {
+      config = {},
+      section = lvim_startify.get_sections(),
+      default_button_opts = {},
+      opts = { autostart = true },
+    },
     active = true,
     mode = "dashboard",
   }
 end
 
-local function resolve_buttons(theme_name, entries, opts)
+local function resolve_buttons(theme_name, entries)
   local selected_theme = require("alpha.themes." .. theme_name)
   local val = {}
   for _, entry in pairs(entries) do
@@ -23,9 +33,10 @@ local function resolve_buttons(theme_name, entries, opts)
     local button_element = selected_theme.button(entry[1], entry[2], entry[3])
     -- this became necessary after recent changes in alpha.nvim (06ade3a20ca9e79a7038b98d05a23d7b6c016174)
     button_element.on_press = on_press
-    if opts then
-      button_element.opts = vim.tbl_extend("force", button_element.opts, opts)
-    end
+
+    button_element.opts =
+      vim.tbl_extend("force", button_element.opts, entry[4] or lvim.builtin.alpha[theme_name].default_button_opts)
+
     table.insert(val, button_element)
   end
   return val
@@ -39,11 +50,13 @@ local function resolve_config(theme_name)
   for name, el in pairs(section) do
     for k, v in pairs(el) do
       if name:match "buttons" and k == "entries" then
-        resolved_section[name].val = resolve_buttons(theme_name, v, el.opts)
+        resolved_section[name].val = resolve_buttons(theme_name, v)
       elseif v then
         resolved_section[name][k] = v
       end
     end
+
+    resolved_section[name].opts = el.opts or {}
   end
 
   local opts = lvim.builtin.alpha[theme_name].opts or {}
