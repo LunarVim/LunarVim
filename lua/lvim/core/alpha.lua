@@ -4,8 +4,8 @@ function M.config()
   local lvim_dashboard = require "lvim.core.alpha.dashboard"
   local lvim_startify = require "lvim.core.alpha.startify"
   lvim.builtin.alpha = {
-    dashboard = { config = {}, section = lvim_dashboard.get_sections() },
-    startify = { config = {}, section = lvim_startify.get_sections() },
+    dashboard = { config = {}, section = lvim_dashboard.get_sections(), opts = {} },
+    startify = { config = {}, section = lvim_startify.get_sections(), opts = {} },
     active = true,
     mode = "dashboard",
   }
@@ -45,6 +45,9 @@ local function resolve_config(theme_name)
       end
     end
   end
+
+  local opts = lvim.builtin.alpha[theme_name].opts or {}
+  selected_theme.config.opts = vim.tbl_extend("force", selected_theme.config.opts, opts)
 
   return selected_theme.config
 end
