@@ -284,6 +284,12 @@ local core_plugins = {
 
   {
     "lunarvim/bigfile.nvim",
+    config = function()
+      pcall(function()
+        require("bigfile").config(lvim.builtin.bigfile.config)
+      end)
+    end,
+    disable = not lvim.builtin.bigfile.active,
   },
 }
 
