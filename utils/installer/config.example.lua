@@ -4,13 +4,17 @@
 ]]
 
 -- vim options
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 vim.opt.relativenumber = true
 
 -- general
 lvim.log.level = "info"
-lvim.format_on_save.enabled = false
+lvim.format_on_save = {
+  enabled = true,
+  pattern = "*.lua",
+  timeout = 1000,
+}
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -27,10 +31,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- -- Change theme settings
--- lvim.colorscheme = "tokyonight"
--- lvim.builtin.theme.name = "tokyonight"
--- lvim.builtin.theme.tokyonight.options.dim_inactive = true
--- lvim.builtin.theme.tokyonight.options.style = "storm"
+-- lvim.colorscheme = "lunar"
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerSync
 lvim.builtin.alpha.active = true
@@ -39,11 +40,8 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "lua",
-  "json",
-}
+-- Automatically install missing parsers when entering buffer
+lvim.builtin.treesitter.auto_install = true
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
@@ -77,7 +75,7 @@ lvim.builtin.treesitter.ensure_installed = {
 -- -- linters and formatters <https://www.lunarvim.org/docs/languages#lintingformatting>
 -- local formatters = require "lvim.lsp.null-ls.formatters"
 -- formatters.setup {
---   { name = "stylua" },
+--   { command = "stylua" },
 --   {
 --     command = "prettier",
 --     extra_args = { "--print-with", "100" },
@@ -86,7 +84,7 @@ lvim.builtin.treesitter.ensure_installed = {
 -- }
 -- local linters = require "lvim.lsp.null-ls.linters"
 -- linters.setup {
---   { name = "flake8" },
+--   { command = "flake8", filetypes = { "python" } },
 --   {
 --     command = "shellcheck",
 --     args = { "--severity", "warning" },
@@ -101,13 +99,11 @@ lvim.builtin.treesitter.ensure_installed = {
 --     },
 -- }
 
--- -- Autocommands (`:help autocmd`) <https://www.lunarvim.org/docs/configuration/autocommands>
--- lvim.autocommands = {
---   { --  enable wrap mode for json files only
---     "BufEnter",
---     {
---       pattern = { "*.json", "*.jsonc" },
---       command = "setlocal wrap",
---     },
---   }
--- }
+-- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "zsh",
+--   callback = function()
+--     -- let treesitter use bash highlight for zsh files as well
+--     require("nvim-treesitter.highlight").attach(0, "bash")
+--   end,
+-- })
