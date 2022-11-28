@@ -36,7 +36,7 @@ M.config = function()
       },
     },
     -- Add executables on the config.lua
-    -- { cmd, keymap, description, direction, size(fraction/integer)}
+    -- { cmd, keymap, description, direction, size }
     -- lvim.builtin.terminal.execs = {...} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     -- TODO: pls add mappings in which key and refactor this
