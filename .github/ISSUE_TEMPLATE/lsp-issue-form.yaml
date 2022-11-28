@@ -1,14 +1,13 @@
 name: LSP Issue
-description: File a LSP related bug report
-labels: [bug, lsp]
+description: File a LSP (language support, diagnostics) related bug report
+labels: [bug, LSP]
 
 body:
   - type: markdown
     attributes:
       value: |
-        _Before reporting:_ search [existing issues](https://github.com/lunarvim/lunarvim/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and check the [Troubleshooting guide](https://www.lunarvim.org/troubleshooting). 
+        _Before reporting:_ search [existing issues](https://github.com/LunarVim/LunarVim/issues?q=is%3Aissue) (both open and closed) and check the [Troubleshooting guide](https://www.lunarvim.org/docs/troubleshooting).
         If you need real-time help, join us on Discord. Thank you for helping us improve!
-
   - type: textarea
     id: problem-description
     attributes:
@@ -20,8 +19,9 @@ body:
     id: version
     attributes:
       label: LunarVim version
+      description: "output of `:LvimVersion` (hold shift when selecting and copy using the terminal's copy binding)"
       placeholder: |
-        output of :LvimVersion
+        branch-commit
     validations:
       required: true
   - type: input
@@ -86,10 +86,11 @@ body:
     id: lsp-logs
     attributes:
       label: logs
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      description: Please copy and paste any relevant log output (last lines form `<leader> L l L`). This will be automatically formatted into code, so no need for backticks.
       render: console
   - type: textarea
     id: screenshots
     attributes:
       label: Screenshots
       description: If applicable, add screenshots to help explain your problem
+      

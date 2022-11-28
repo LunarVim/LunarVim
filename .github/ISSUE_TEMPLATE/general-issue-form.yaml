@@ -1,12 +1,12 @@
 name: General Issue
-description: File a bug report
+description: File a bug report not related to LSP (language support, diagnostics)
 labels: [bug]
 
 body:
   - type: markdown
     attributes:
       value: |
-        _Before reporting:_ search [existing issues](https://github.com/lunarvim/lunarvim/issues?q=is%3Aissue+is%3Aopen+label%3Abug) and check the [Troubleshooting guide](https://www.lunarvim.org/troubleshooting). 
+        _Before reporting:_ search [existing issues](https://github.com/LunarVim/LunarVim/issues?q=is%3Aissue) (both open and closed) and check the [Troubleshooting guide](https://www.lunarvim.org/docs/troubleshooting).
         If you need real-time help, join us on Discord. Thank you for helping us improve!
 
   - type: textarea
@@ -26,8 +26,9 @@ body:
     id: version
     attributes:
       label: LunarVim version
+      description: "output of `:LvimVersion` (hold shift when selecting and copy using the terminal's copy binding)"
       placeholder: |
-        output of :LvimVersion
+        branch-commit
     validations:
       required: true
   - type: input
@@ -54,20 +55,6 @@ body:
       placeholder: |
         1. `nvim -u ~/.local/share/lunarvim/lvim/tests/minimal_lsp.lua`
         2. ...
-  - type: textarea
-    id: support-info
-    attributes:
-      label: support info
-      description: Information from LspInfo and LvimInfo
-      placeholder: |
-        ```console
-        # :LspInfo
-        ```
-        ```console
-        # :LvimInfo
-        ```
-    validations:
-      required: true
   - type: textarea
     id: screenshots
     attributes:
