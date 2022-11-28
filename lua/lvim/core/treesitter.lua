@@ -34,38 +34,8 @@ function M.config()
           return true
         end
 
-        local max_filesize = 1024 * 1024
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-          if lvim.builtin.illuminate.active then
-            pcall(require("illuminate").pause_buf)
-          end
-
-          vim.schedule(function()
-            vim.api.nvim_buf_call(buf, function()
-              vim.cmd "setlocal noswapfile noundofile"
-
-              if vim.tbl_contains({ "json" }, lang) then
-                vim.cmd "NoMatchParen"
-                vim.cmd "syntax off"
-                vim.cmd "syntax clear"
-                vim.cmd "setlocal nocursorline nolist bufhidden=unload"
-
-                vim.api.nvim_create_autocmd({ "BufDelete" }, {
-                  callback = function()
-                    vim.cmd "DoMatchParen"
-                    vim.cmd "syntax on"
-                  end,
-                  buffer = buf,
-                })
-              end
-            end)
-          end)
-
-          Log:info "File larger than 1MB, turned off treesitter for this buffer"
-
-          return true
-        end
+        local status_ok, big_file_detected = pcall(vim.api.nvim_buf_get_var, buf, "bigfile_disable_treesitter")
+        return status_ok and big_file_detected
       end,
     },
     context_commentstring = {

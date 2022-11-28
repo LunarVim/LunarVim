@@ -35,6 +35,11 @@ function M:init()
     },
   }
 
+  lvim.builtin.bigfile = {
+    active = true,
+    config = {},
+  }
+
   require("lvim.config._deprecated").handle()
 end
 

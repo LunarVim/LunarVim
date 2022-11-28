@@ -281,6 +281,16 @@ local core_plugins = {
     end,
     disable = lvim.colorscheme ~= "onedarker",
   },
+
+  {
+    "lunarvim/bigfile.nvim",
+    config = function()
+      pcall(function()
+        require("bigfile").config(lvim.builtin.bigfile.config)
+      end)
+    end,
+    disable = not lvim.builtin.bigfile.active,
+  },
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
