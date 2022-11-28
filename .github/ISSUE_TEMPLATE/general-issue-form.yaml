@@ -1,5 +1,5 @@
 name: General Issue
-description: File a bug report
+description: File a bug report not related to LSP (language support, diagnostics)
 labels: [bug]
 
 body:
