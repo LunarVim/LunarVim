@@ -20,6 +20,9 @@
   "cmp-path": {
     "commit": "91ff86c"
   },
+  "cmp-cmdline": {
+    "commit": "23c51b2"
+  },
   "cmp_luasnip": {
     "commit": "1809552"
   },
