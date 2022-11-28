@@ -7,13 +7,11 @@ function M.config()
     dashboard = {
       config = {},
       section = lvim_dashboard.get_sections(),
-      default_button_opts = { hl_shortcut = "Include" },
       opts = { autostart = true },
     },
     startify = {
       config = {},
       section = lvim_startify.get_sections(),
-      default_button_opts = {},
       opts = { autostart = true },
     },
     active = true,
@@ -35,7 +33,7 @@ local function resolve_buttons(theme_name, entries)
     button_element.on_press = on_press
 
     button_element.opts =
-      vim.tbl_extend("force", button_element.opts, entry[4] or lvim.builtin.alpha[theme_name].default_button_opts)
+      vim.tbl_extend("force", button_element.opts, entry[4] or lvim.builtin.alpha[theme_name].section.buttons.opts)
 
     table.insert(val, button_element)
   end
