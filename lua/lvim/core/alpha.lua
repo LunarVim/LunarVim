@@ -4,8 +4,16 @@ function M.config()
   local lvim_dashboard = require "lvim.core.alpha.dashboard"
   local lvim_startify = require "lvim.core.alpha.startify"
   lvim.builtin.alpha = {
-    dashboard = { config = {}, section = lvim_dashboard.get_sections() },
-    startify = { config = {}, section = lvim_startify.get_sections() },
+    dashboard = {
+      config = {},
+      section = lvim_dashboard.get_sections(),
+      opts = { autostart = true },
+    },
+    startify = {
+      config = {},
+      section = lvim_startify.get_sections(),
+      opts = { autostart = true },
+    },
     active = true,
     mode = "dashboard",
   }
@@ -23,6 +31,10 @@ local function resolve_buttons(theme_name, entries)
     local button_element = selected_theme.button(entry[1], entry[2], entry[3])
     -- this became necessary after recent changes in alpha.nvim (06ade3a20ca9e79a7038b98d05a23d7b6c016174)
     button_element.on_press = on_press
+
+    button_element.opts =
+      vim.tbl_extend("force", button_element.opts, entry[4] or lvim.builtin.alpha[theme_name].section.buttons.opts)
+
     table.insert(val, button_element)
   end
   return val
@@ -41,7 +53,12 @@ local function resolve_config(theme_name)
         resolved_section[name][k] = v
       end
     end
+
+    resolved_section[name].opts = el.opts or {}
   end
+
+  local opts = lvim.builtin.alpha[theme_name].opts or {}
+  selected_theme.config.opts = vim.tbl_extend("force", selected_theme.config.opts, opts)
 
   return selected_theme.config
 end
