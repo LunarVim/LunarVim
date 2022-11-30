@@ -33,7 +33,7 @@ local function resolve_buttons(theme_name, entries)
     button_element.on_press = on_press
 
     button_element.opts =
-      vim.tbl_extend("force", button_element.opts, entry[4] or lvim.builtin.alpha[theme_name].section.buttons.opts)
+      vim.tbl_extend("force", button_element.opts, entry[4] or (lvim.builtin.alpha[theme_name].section.buttons and  lvim.builtin.alpha[theme_name].section.buttons.opts or {}))
 
     table.insert(val, button_element)
   end
