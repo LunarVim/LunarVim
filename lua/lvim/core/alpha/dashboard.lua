@@ -87,7 +87,6 @@ function M.get_sections()
   local header = {
     type = "text",
     val = function()
-      vim.api.nvim_feedkeys("zb", "n", false)
       if vim.api.nvim_win_get_height(0) < 36 then
         return M.banner_small
       end
