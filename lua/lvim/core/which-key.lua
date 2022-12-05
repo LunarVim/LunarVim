@@ -95,7 +95,7 @@ M.config = function()
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
-        f = { "<cmd>Telescope buffers previewer false<cr>", "Find" },
+        f = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
         b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
         n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
         -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
