@@ -16,6 +16,7 @@ function M.config()
   lvim.builtin.telescope = {
     active = true,
     on_config_done = nil,
+    theme = "dropdown",
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
       selection_caret = lvim.icons.ui.Forward .. " ",
@@ -23,7 +24,6 @@ function M.config()
       initial_mode = "insert",
       selection_strategy = "reset",
       sorting_strategy = nil,
-      theme = "dropdown",
       layout_strategy = nil,
       layout_config = nil,
       vimgrep_arguments = {
@@ -118,9 +118,10 @@ function M.setup()
 
   local telescope = require "telescope"
 
-  local theme = require("telescope.themes")["get_" .. lvim.builtin.telescope.defaults.theme]
+  local theme = require("telescope.themes")["get_" .. lvim.builtin.telescope.theme]
   if theme then
     lvim.builtin.telescope.defaults = theme(lvim.builtin.telescope.defaults)
+    lvim.builtin.telescope.defaults.theme = nil
   end
 
   telescope.setup(lvim.builtin.telescope)
