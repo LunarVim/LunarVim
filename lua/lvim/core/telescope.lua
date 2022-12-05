@@ -23,10 +23,10 @@ function M.config()
       initial_mode = "insert",
       selection_strategy = "reset",
       sorting_strategy = "descending",
-      layout_strategy = "horizontal",
+      theme = "dropdown",
+      layout_strategy = "center",
       layout_config = {
-        width = 0.75,
-        preview_cutoff = 120,
+        prompt_position = "top",
         horizontal = {
           preview_width = function(_, cols, _)
             if cols < 120 then
@@ -70,28 +70,22 @@ function M.config()
       path_display = { "smart" },
       winblend = 0,
       border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      borderchars = nil,
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
     pickers = {
       find_files = {
-        theme = "dropdown",
         hidden = true,
-        previewer = false,
       },
       live_grep = {
         --@usage don't include the filename in the search results
         only_sort_text = true,
-        theme = "dropdown",
       },
       grep_string = {
         only_sort_text = true,
-        theme = "dropdown",
       },
       buffers = {
-        theme = "dropdown",
-        previewer = false,
         initial_mode = "normal",
         mappings = {
           i = {
@@ -107,26 +101,8 @@ function M.config()
         show_moon = true,
       },
       git_files = {
-        theme = "dropdown",
         hidden = true,
-        previewer = false,
         show_untracked = true,
-      },
-      lsp_references = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-      lsp_definitions = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-      lsp_declarations = {
-        theme = "dropdown",
-        initial_mode = "normal",
-      },
-      lsp_implementations = {
-        theme = "dropdown",
-        initial_mode = "normal",
       },
     },
     extensions = {
@@ -153,6 +129,12 @@ function M.setup()
   }, lvim.builtin.telescope)
 
   local telescope = require "telescope"
+
+  local theme = require("telescope.themes")["get_" .. lvim.builtin.telescope.defaults.theme]
+  if theme then
+    lvim.builtin.telescope.defaults = theme(lvim.builtin.telescope.defaults)
+  end
+
   telescope.setup(lvim.builtin.telescope)
 
   if lvim.builtin.project.active then
