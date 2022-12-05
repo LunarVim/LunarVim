@@ -26,18 +26,6 @@ function M.config()
       theme = "dropdown",
       layout_strategy = nil,
       layout_config = nil,
-        prompt_position = "top",
-        horizontal = {
-          preview_width = function(_, cols, _)
-            if cols < 120 then
-              return math.floor(cols * 0.5)
-            end
-            return math.floor(cols * 0.6)
-          end,
-          mirror = false,
-        },
-        vertical = { mirror = false },
-      },
       vimgrep_arguments = {
         "rg",
         "--color=never",
