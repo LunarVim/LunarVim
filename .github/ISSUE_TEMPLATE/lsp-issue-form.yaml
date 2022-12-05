@@ -1,5 +1,5 @@
 name: LSP Issue
-description: File a LSP (language support, diagnostics) related bug report
+description: File a bug report related to LSP (intellisense, completion, diagnostics, etc) 
 labels: [bug, LSP]
 
 body:

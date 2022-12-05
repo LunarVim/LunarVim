@@ -1,5 +1,5 @@
 name: General Issue
-description: File a bug report not related to LSP (language support, diagnostics)
+description: File a bug report not related to LSP (intellisense, completion, diagnostics, etc)
 labels: [bug]
 
 body:
