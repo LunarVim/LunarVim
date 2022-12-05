@@ -22,10 +22,10 @@ function M.config()
       entry_prefix = "  ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      sorting_strategy = "descending",
+      sorting_strategy = nil,
       theme = "dropdown",
-      layout_strategy = "center",
-      layout_config = {
+      layout_strategy = nil,
+      layout_config = nil,
         prompt_position = "top",
         horizontal = {
           preview_width = function(_, cols, _)
