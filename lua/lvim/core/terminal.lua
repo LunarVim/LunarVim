@@ -36,14 +36,14 @@ M.config = function()
       },
     },
     -- Add executables on the config.lua
-    -- { exec, keymap, name}
-    -- lvim.builtin.terminal.execs = {{}} to overwrite
+    -- { cmd, keymap, description, direction, size }
+    -- lvim.builtin.terminal.execs = {...} to overwrite
     -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
     -- TODO: pls add mappings in which key and refactor this
     execs = {
-      { vim.o.shell, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-      { vim.o.shell, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
-      { vim.o.shell, "<M-3>", "Float Terminal", "float", nil },
+      { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
+      { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
+      { nil, "<M-3>", "Float Terminal", "float", nil },
     },
   }
 end
@@ -63,7 +63,7 @@ end
 
 --- Get the dynamic terminal size in cells
 ---@param direction number
----@param size integer
+---@param size number
 ---@return integer
 local function get_dynamic_terminal_size(direction, size)
   size = size or lvim.builtin.terminal.size
@@ -85,7 +85,7 @@ M.setup = function()
     local direction = exec[4] or lvim.builtin.terminal.direction
 
     local opts = {
-      cmd = exec[1],
+      cmd = exec[1] or lvim.builtin.terminal.shell,
       keymap = exec[2],
       label = exec[3],
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
