@@ -1,5 +1,11 @@
 local M = {}
 
+---@alias telescope_themes
+---| "cursor"   # see `telescope.themes.get_cursor()`
+---| "dropdown" # see `telescope.themes.get_dropdown()`
+---| "ivy"      # see `telescope.themes.get_ivy()`
+---| "center"   # retain the default telescope theme
+
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
 
@@ -16,7 +22,7 @@ function M.config()
   lvim.builtin.telescope = {
     active = true,
     on_config_done = nil,
-    theme = "dropdown",
+    theme = "dropdown", ---@type telescope_themes
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
       selection_caret = lvim.icons.ui.Forward .. " ",
@@ -121,7 +127,6 @@ function M.setup()
   local theme = require("telescope.themes")["get_" .. lvim.builtin.telescope.theme]
   if theme then
     lvim.builtin.telescope.defaults = theme(lvim.builtin.telescope.defaults)
-    lvim.builtin.telescope.defaults.theme = nil
   end
 
   telescope.setup(lvim.builtin.telescope)
