@@ -1,62 +1,10 @@
 local M = {}
 
-local function get_pickers(actions)
-  return {
-    find_files = {
-      theme = "dropdown",
-      hidden = true,
-      previewer = false,
-    },
-    live_grep = {
-      --@usage don't include the filename in the search results
-      only_sort_text = true,
-      theme = "dropdown",
-    },
-    grep_string = {
-      only_sort_text = true,
-      theme = "dropdown",
-    },
-    buffers = {
-      theme = "dropdown",
-      previewer = false,
-      initial_mode = "normal",
-      mappings = {
-        i = {
-          ["<C-d>"] = actions.delete_buffer,
-        },
-        n = {
-          ["dd"] = actions.delete_buffer,
-        },
-      },
-    },
-    planets = {
-      show_pluto = true,
-      show_moon = true,
-    },
-    git_files = {
-      theme = "dropdown",
-      hidden = true,
-      previewer = false,
-      show_untracked = true,
-    },
-    lsp_references = {
-      theme = "dropdown",
-      initial_mode = "normal",
-    },
-    lsp_definitions = {
-      theme = "dropdown",
-      initial_mode = "normal",
-    },
-    lsp_declarations = {
-      theme = "dropdown",
-      initial_mode = "normal",
-    },
-    lsp_implementations = {
-      theme = "dropdown",
-      initial_mode = "normal",
-    },
-  }
-end
+---@alias telescope_themes
+---| "cursor"   # see `telescope.themes.get_cursor()`
+---| "dropdown" # see `telescope.themes.get_dropdown()`
+---| "ivy"      # see `telescope.themes.get_ivy()`
+---| "center"   # retain the default telescope theme
 
 function M.config()
   -- Define this minimal config so that it's available if telescope is not yet available.
@@ -71,29 +19,19 @@ function M.config()
   if not ok then
     return
   end
-  lvim.builtin.telescope = vim.tbl_extend("force", lvim.builtin.telescope, {
+  lvim.builtin.telescope = {
+    active = true,
+    on_config_done = nil,
+    theme = "dropdown", ---@type telescope_themes
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
       selection_caret = lvim.icons.ui.Forward .. " ",
       entry_prefix = "  ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      sorting_strategy = "descending",
-      layout_strategy = "horizontal",
-      layout_config = {
-        width = 0.75,
-        preview_cutoff = 120,
-        horizontal = {
-          preview_width = function(_, cols, _)
-            if cols < 120 then
-              return math.floor(cols * 0.5)
-            end
-            return math.floor(cols * 0.6)
-          end,
-          mirror = false,
-        },
-        vertical = { mirror = false },
-      },
+      sorting_strategy = nil,
+      layout_strategy = nil,
+      layout_config = nil,
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -122,16 +60,45 @@ function M.config()
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         },
       },
-      pickers = get_pickers(actions),
       file_ignore_patterns = {},
       path_display = { "smart" },
       winblend = 0,
       border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      borderchars = nil,
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
-    pickers = get_pickers(actions),
+    pickers = {
+      find_files = {
+        hidden = true,
+      },
+      live_grep = {
+        --@usage don't include the filename in the search results
+        only_sort_text = true,
+      },
+      grep_string = {
+        only_sort_text = true,
+      },
+      buffers = {
+        initial_mode = "normal",
+        mappings = {
+          i = {
+            ["<C-d>"] = actions.delete_buffer,
+          },
+          n = {
+            ["dd"] = actions.delete_buffer,
+          },
+        },
+      },
+      planets = {
+        show_pluto = true,
+        show_moon = true,
+      },
+      git_files = {
+        hidden = true,
+        show_untracked = true,
+      },
+    },
     extensions = {
       fzf = {
         fuzzy = true, -- false will only do exact matching
@@ -140,7 +107,7 @@ function M.config()
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
     },
-  })
+  }
 end
 
 function M.setup()
@@ -156,6 +123,12 @@ function M.setup()
   }, lvim.builtin.telescope)
 
   local telescope = require "telescope"
+
+  local theme = require("telescope.themes")["get_" .. lvim.builtin.telescope.theme]
+  if theme then
+    lvim.builtin.telescope.defaults = theme(lvim.builtin.telescope.defaults)
+  end
+
   telescope.setup(lvim.builtin.telescope)
 
   if lvim.builtin.project.active then
