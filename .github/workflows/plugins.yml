@@ -19,6 +19,7 @@ on:
 
 jobs:
   plugins-version-bump:
+    if: github.repository_owner == 'LunarVim'
     runs-on: ubuntu-latest
     continue-on-error: false
     permissions:
