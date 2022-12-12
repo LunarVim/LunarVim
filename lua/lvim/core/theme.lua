@@ -64,13 +64,16 @@ M.setup = function()
   end
 
   local selected_theme = lvim.builtin.theme.name
-  local status_ok, plugin = pcall(require, selected_theme)
-  if not status_ok then
-    return
+
+  if vim.startswith(lvim.colorscheme, selected_theme) then
+    local status_ok, plugin = pcall(require, selected_theme)
+    if not status_ok then
+      return
+    end
+    pcall(function()
+      plugin.setup(lvim.builtin.theme[selected_theme].options)
+    end)
   end
-  pcall(function()
-    plugin.setup(lvim.builtin.theme[selected_theme].options)
-  end)
 
   -- ref: https://github.com/neovim/neovim/issues/18201#issuecomment-1104754564
   local colors = vim.api.nvim_get_runtime_file(("colors/%s.*"):format(lvim.colorscheme), false)
