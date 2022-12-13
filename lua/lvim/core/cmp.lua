@@ -129,6 +129,7 @@ M.config = function()
 
   lvim.builtin.cmp = {
     active = true,
+    on_config_done = nil,
     enabled = function()
       local buftype = vim.api.nvim_buf_get_option(0, "buftype")
       if buftype == "prompt" then
@@ -366,6 +367,10 @@ function M.setup()
         sources = option.sources,
       })
     end
+  end
+  
+  if lvim.builtin.cmp.on_config_done then
+    lvim.builtin.cmp.on_config_done(cmp)
   end
 end
 
