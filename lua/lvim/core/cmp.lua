@@ -368,7 +368,7 @@ function M.setup()
       })
     end
   end
-  
+
   if lvim.builtin.cmp.on_config_done then
     lvim.builtin.cmp.on_config_done(cmp)
   end
