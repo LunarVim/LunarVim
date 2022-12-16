@@ -3,25 +3,6 @@ local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
 function M.load_defaults()
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = {
-      "Jaq",
-      "qf",
-      "help",
-      "man",
-      "lspinfo",
-      "spectre_panel",
-      "lir",
-      "DressingSelect",
-      "tsplayground",
-    },
-    callback = function()
-      vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR>
-      set nobuflisted
-    ]]
-    end,
-  })
   local definitions = {
     {
       "TextYankPost",
@@ -30,7 +11,7 @@ function M.load_defaults()
         pattern = "*",
         desc = "Highlight text on yank",
         callback = function()
-          require("vim.highlight").on_yank { higroup = "Search", timeout = 100 }
+          vim.highlight.on_yank { higroup = "Search", timeout = 100 }
         end,
       },
     },
@@ -66,8 +47,23 @@ function M.load_defaults()
       "FileType",
       {
         group = "_buffer_mappings",
-        pattern = { "qf", "help", "man", "floaterm", "lspinfo", "lsp-installer", "null-ls-info" },
-        command = "nnoremap <silent> <buffer> q :close<CR>",
+        pattern = {
+          "qf",
+          "help",
+          "man",
+          "floaterm",
+          "lspinfo",
+          "lir",
+          "lsp-installer",
+          "null-ls-info",
+          "tsplayground",
+          "DressingSelect",
+          "Jaq",
+        },
+        callback = function()
+          vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
+          vim.opt_local.buflisted = false
+        end,
       },
     },
     {
