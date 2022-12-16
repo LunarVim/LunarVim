@@ -46,8 +46,20 @@ function M.load_defaults()
       "FileType",
       {
         group = "_filetype_settings",
-        pattern = "qf",
-        command = "set nobuflisted",
+        pattern = { "lua" },
+        desc = "fix gf functionality inside .lua files",
+        callback = function()
+          ---@diagnostic disable: assign-type-mismatch
+          -- credit: https://github.com/sam4llis/nvim-lua-gf
+          vim.opt_local.include = [[\v<((do|load)file|require|reload)[^''"]*[''"]\zs[^''"]+]]
+          vim.opt_local.includeexpr = "substitute(v:fname,'\\.','/','g')"
+          vim.opt_local.suffixesadd:prepend ".lua"
+          vim.opt_local.suffixesadd:prepend "init.lua"
+
+          for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
+            vim.opt_local.path:append(path .. "/lua")
+          end
+        end,
       },
     },
     {
