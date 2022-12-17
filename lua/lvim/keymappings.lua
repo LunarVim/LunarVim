@@ -9,6 +9,7 @@ local generic_opts = {
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
   command_mode = generic_opts_any,
+  operator_pending_mode = generic_opts_any,
   term_mode = { silent = true },
 }
 
@@ -19,6 +20,7 @@ local mode_adapters = {
   visual_mode = "v",
   visual_block_mode = "x",
   command_mode = "c",
+  operator_pending_mode = "o",
 }
 
 ---@class Keys
@@ -28,6 +30,7 @@ local mode_adapters = {
 ---@field visual_mode table
 ---@field visual_block_mode table
 ---@field command_mode table
+---@field operator_pending_mode table
 
 local defaults = {
   insert_mode = {
