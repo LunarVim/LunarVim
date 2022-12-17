@@ -31,7 +31,7 @@ function M.config()
       selection_strategy = "reset",
       sorting_strategy = nil,
       layout_strategy = nil,
-      layout_config = nil,
+      layout_config = {},
       vimgrep_arguments = {
         "rg",
         "--color=never",
