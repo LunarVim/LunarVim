@@ -1,5 +1,8 @@
 #Requires -Version 7.1
 $ErrorActionPreference = "Stop" # exit when command fails
+if ($PSVersionTable.PSVersion -lt 7.1) {
+    Write-Error "Powershell version needs to be greater than 7.1!"
+}
 
 # set script variables
 $LV_BRANCH = $LV_BRANCH ?? "master"
