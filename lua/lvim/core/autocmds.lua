@@ -180,16 +180,23 @@ function M.toggle_format_on_save()
 end
 
 function M.enable_reload_config_on_save()
-  local user_config_file = require("lvim.config"):get_user_config_path()
+  local pattern = get_config_dir() .. "/*.lua"
+
+  -- add symlinked path to the pattern
+  local linked_config_lua = vim.fn.resolve(join_paths(get_config_dir(), "config.lua"))
+  if linked_config_lua ~= join_paths(get_config_dir(), "config.lua") then
+    local linked_config_dir = linked_config_lua:sub(1, #linked_config_lua - #"config.lua")
+    pattern = pattern .. "," .. linked_config_dir .. "*.lua"
+  end
 
   if vim.loop.os_uname().version:match "Windows" then
     -- autocmds require forward slashes even on windows
-    user_config_file = user_config_file:gsub("\\", "/")
+    pattern = pattern:gsub("\\", "/")
   end
   vim.api.nvim_create_augroup("lvim_reload_config_on_save", {})
   vim.api.nvim_create_autocmd("BufWritePost", {
     group = "lvim_reload_config_on_save",
-    pattern = user_config_file,
+    pattern = pattern,
     desc = "Trigger LvimReload on saving config.lua",
     callback = function()
       require("lvim.config"):reload()
