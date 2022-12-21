@@ -37,9 +37,10 @@ declare -a __lvim_dirs=(
   "$LUNARVIM_BASE_DIR"
 )
 
-declare -a __npm_deps=(
-  "neovim"
-  "tree-sitter-cli"
+# [npm_name]="binary name"
+declare -A __npm_deps=(
+  ["neovim"]=""
+  ["tree-sitter-cli"]="tree-sitter"
 )
 
 declare -a __pip_deps=(
@@ -131,13 +132,13 @@ function main() {
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     if [ "$INTERACTIVE_MODE" -eq 1 ]; then
-      if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array ${__npm_deps[@]})?"; then
+      if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array "${!__npm_deps[@]}")?"; then
         install_nodejs_deps
       fi
-      if confirm "Would you like to install LunarVim's Python dependencies: $(stringify_array ${__pip_deps[@]})?"; then
+      if confirm "Would you like to install LunarVim's Python dependencies: $(stringify_array "${__pip_deps[@]}")?"; then
         install_python_deps
       fi
-      if confirm "Would you like to install LunarVim's Rust dependencies: $(stringify_array ${__rust_deps[@]})?"; then
+      if confirm "Would you like to install LunarVim's Rust dependencies: $(stringify_array "${__rust_deps[@]}")?"; then
         install_rust_deps
       fi
     else
@@ -260,14 +261,14 @@ function check_system_deps() {
 
 function __install_nodejs_deps_pnpm() {
   echo "Installing node modules with pnpm.."
-  pnpm install -g "${__npm_deps[@]}"
+  pnpm install -g "${!__npm_deps[@]}"
   echo "All NodeJS dependencies are successfully installed"
 }
 
 function __install_nodejs_deps_npm() {
   echo "Installing node modules with npm.."
-  for dep in "${__npm_deps[@]}"; do
-    if ! npm ls -g "$dep" &>/dev/null; then
+  for dep in "${!__npm_deps[@]}"; do
+    if ! (command -v "${__npm_deps[$dep]}" &>/dev/null || npm ls -g "$dep" &>/dev/null); then
       printf "installing %s .." "$dep"
       npm install -g "$dep"
     fi
@@ -278,7 +279,7 @@ function __install_nodejs_deps_npm() {
 
 function __install_nodejs_deps_yarn() {
   echo "Installing node modules with yarn.."
-  yarn global add "${__npm_deps[@]}"
+  yarn global add "${!__npm_deps[@]}"
   echo "All NodeJS dependencies are successfully installed"
 }
 
