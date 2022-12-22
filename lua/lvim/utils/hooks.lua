@@ -12,6 +12,7 @@ function M.run_pre_reload()
   Log:debug "Starting pre-reload hook"
 end
 
+-- TODO: lazy hooks
 function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
   vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
