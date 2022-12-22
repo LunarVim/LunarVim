@@ -31,7 +31,7 @@ function M.run_post_reload()
   M._reload_triggered = true
 end
 
----Reset any startup cache files used by Packer and Impatient
+---Reset any startup cache files used by Packer
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()

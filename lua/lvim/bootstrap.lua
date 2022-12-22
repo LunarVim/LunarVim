@@ -95,10 +95,6 @@ function M:init(base_dir)
     vim.cmd [[let &packpath = &runtimepath]]
   end
 
-  if not vim.env.LVIM_TEST_ENV then
-    require "lvim.impatient"
-  end
-
   require("lvim.config"):init()
 
   require("lvim.plugin-loader").init {
