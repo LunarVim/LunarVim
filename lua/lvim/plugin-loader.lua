@@ -34,37 +34,42 @@ function plugin_loader.init(opts)
 
   remove_rtp_paths()
 
+  vim.opt.runtimepath:prepend(lazy_install_dir)
+
   -- Add plugins to rtp (needed for config:init)
   -- TODO: is there a better way to do this?
-  local handle = vim.loop.fs_scandir(plugins_dir)
-  if not handle then
-    return
-  end
-  while true do
-    local subdir, _ = vim.loop.fs_scandir_next(handle)
-    if not subdir then
-      break
+  require("lazy.core.util").ls(plugins_dir, function(path, name, type)
+    if type == "directory" and name ~= "lazy.nvim" then
+      vim.opt.rtp:append(path)
     end
-    subdir = join_paths(plugins_dir, subdir)
-
-    local subdir_stats = vim.loop.fs_stat(subdir)
-
-    if subdir_stats and subdir_stats.type == "directory" then
-      vim.opt.rtp:append(subdir)
-    end
-  end
+  end)
 end
 
-function plugin_loader.reload(configurations)
-  -- _G.packer_plugins = _G.packer_plugins or {}
-  -- for k, v in pairs(_G.packer_plugins) do
-  --   if k ~= "packer.nvim" then
-  --     _G.packer_plugins[v] = nil
-  --   end
-  -- end
-  -- plugin_loader.load(configurations)
+function plugin_loader.reload(spec)
+  local Config = require "lazy.core.config"
+  local lazy = require "lazy"
 
-  -- plugin_loader.ensure_plugins()
+  -- TODO: reset cache?
+
+  Config.spec = spec
+
+  require("lazy.core.plugin").load(true)
+  require("lazy.core.plugin").update_state()
+
+  local not_installed_plugins = vim.tbl_filter(function(plugin)
+    return not plugin._.installed
+  end, Config.plugins)
+
+  require("lazy.manage").clear()
+
+  if #not_installed_plugins > 0 then
+    lazy.install { wait = true }
+  end
+
+  if #Config.to_clean > 0 then
+    -- TODO: set show to true when lazy shows something useful on clean
+    lazy.clean { wait = true, show = false }
+  end
 end
 
 function plugin_loader.load(configurations)
@@ -75,8 +80,23 @@ function plugin_loader.load(configurations)
     return
   end
 
+  -- Close lazy.nvim after installing plugins the first time
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyDone",
+    callback = function()
+      if vim.opt.ft:get() == "lazy" then
+        require("lazy.view"):close()
+        vim.cmd "q"
+      end
+    end,
+  })
+
   local status_ok = xpcall(function()
     local opts = {
+      install = {
+        missing = true,
+        colorscheme = { lvim.colorscheme, "lunar", "habamax" },
+      },
       root = plugins_dir,
       git = {
         timeout = 120,
