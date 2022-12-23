@@ -296,7 +296,7 @@ local content = vim.fn.readfile(default_snapshot_path)
 local default_sha1 = vim.fn.json_decode(content)
 
 local get_default_sha1 = function(spec)
-  local short_name, _ = spec[1]:match "[^/]+$"
+  local short_name = require("lazy.core.plugin").Spec.get_name(spec[1])
   return default_sha1[short_name] and default_sha1[short_name].commit
 end
 

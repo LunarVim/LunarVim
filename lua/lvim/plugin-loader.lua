@@ -33,7 +33,6 @@ function plugin_loader.init(opts)
   end
 
   remove_rtp_paths()
-  vim.opt.rtp:prepend(lazy_install_dir)
 
   -- Add plugins to rtp (needed for config:init)
   -- TODO: is there a better way to do this?
@@ -82,9 +81,10 @@ function plugin_loader.load(configurations)
       git = {
         timeout = 120,
       },
+      lockfile = join_paths(get_config_dir(), "lazy-lock.json"),
       performance = {
         cache = {
-          enabled = false,
+          enabled = true,
           path = join_paths(get_cache_dir(), "lazy", "cache"),
         },
         rtp = {
@@ -117,25 +117,26 @@ function plugin_loader.load(configurations)
 end
 
 function plugin_loader.get_core_plugins()
-  -- local list = {}
-  -- local plugins = require "lvim.plugins"
-  -- for _, item in pairs(plugins) do
-  --   if item.enabled == true or item.enabled == nil then
-  --     table.insert(list, item[1]:match "/(%S*)")
-  --   end
-  -- end
-  -- return list
+  local names = {}
+  local plugins = require "lvim.plugins"
+  local get_name = require("lazy.core.plugin").Spec.get_name
+  for _, item in pairs(plugins) do
+    if item.enabled == true or item.enabled == nil then
+      table.insert(names, get_name(spec[1]))
+    end
+  end
+  return names
 end
 
-function plugin_loader.load_snapshot(snapshot_file)
-  -- snapshot_file = snapshot_file or default_snapshot
-  -- if not in_headless then
-  --   vim.notify("Syncing core plugins is in progress..", vim.log.levels.INFO, { title = "lvim" })
-  -- end
-  -- Log:debug(string.format("Using snapshot file [%s]", snapshot_file))
-  -- local core_plugins = plugin_loader.get_core_plugins()
-  -- require("packer").rollback(snapshot_file, unpack(core_plugins))
-end
+-- function plugin_loader.load_snapshot(snapshot_file)
+-- snapshot_file = snapshot_file or default_snapshot
+-- if not in_headless then
+--   vim.notify("Syncing core plugins is in progress..", vim.log.levels.INFO, { title = "lvim" })
+-- end
+-- Log:debug(string.format("Using snapshot file [%s]", snapshot_file))
+-- local core_plugins = plugin_loader.get_core_plugins()
+-- require("packer").rollback(snapshot_file, unpack(core_plugins))
+-- end
 
 function plugin_loader.sync_core_plugins()
   -- plugin_loader.cache_clear()
