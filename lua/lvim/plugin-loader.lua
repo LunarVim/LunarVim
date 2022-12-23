@@ -50,7 +50,7 @@ function plugin_loader.init(opts)
 
     local subdir_stats = vim.loop.fs_stat(subdir)
 
-    if subdir_stats.type == "directory" then
+    if subdir_stats and subdir_stats.type == "directory" then
       vim.opt.rtp:append(subdir)
     end
   end
