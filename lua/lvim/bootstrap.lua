@@ -59,7 +59,7 @@ function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_dir = get_cache_dir()
-  self.lazy_install_dir = join_paths(self.runtime_dir, "lazy", "lazy.nvim")
+  self.lazy_install_dir = join_paths(self.runtime_dir, "lazy", "plugins", "lazy.nvim")
 
   ---Overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
   ---NOTE: changes to "data" are currently unstable, see #2507
@@ -76,11 +76,11 @@ function M:init(base_dir)
     return base_dir
   end
 
-  require("lvim.config"):init()
-
   require("lvim.plugin-loader").init {
     install_path = self.lazy_install_dir,
   }
+
+  require("lvim.config"):init()
 
   require("lvim.core.mason").bootstrap()
 

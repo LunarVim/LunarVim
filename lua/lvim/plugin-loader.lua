@@ -4,6 +4,8 @@ local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 local join_paths = utils.join_paths
 
+local plugins_dir = join_paths(get_runtime_dir(), "lazy", "plugins")
+
 local function remove_rtp_paths()
   if os.getenv "LUNARVIM_RUNTIME_DIR" then
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
@@ -16,7 +18,7 @@ end
 function plugin_loader.init(opts)
   opts = opts or {}
 
-  local lazy_install_dir = opts.install_path or join_paths(vim.fn.stdpath "data", "lazy", "lazy.nvim")
+  local lazy_install_dir = opts.install_path or join_paths(vim.fn.stdpath "data", "lazy", "plugins", "lazy.nvim")
 
   if not utils.is_directory(lazy_install_dir) then
     print "Initializing first time setup"
@@ -32,6 +34,26 @@ function plugin_loader.init(opts)
 
   remove_rtp_paths()
   vim.opt.rtp:prepend(lazy_install_dir)
+
+  -- Add plugins to rtp (needed for config:init)
+  -- TODO: is there a better way to do this?
+  local handle = vim.loop.fs_scandir(plugins_dir)
+  if not handle then
+    return
+  end
+  while true do
+    local subdir, _ = vim.loop.fs_scandir_next(handle)
+    if not subdir then
+      break
+    end
+    subdir = join_paths(plugins_dir, subdir)
+
+    local subdir_stats = vim.loop.fs_stat(subdir)
+
+    if subdir_stats.type == "directory" then
+      vim.opt.rtp:append(subdir)
+    end
+  end
 end
 
 function plugin_loader.reload(configurations)
@@ -56,7 +78,7 @@ function plugin_loader.load(configurations)
 
   local status_ok = xpcall(function()
     local opts = {
-      root = join_paths(get_runtime_dir(), "lazy"),
+      root = plugins_dir,
       git = {
         timeout = 120,
       },
@@ -74,7 +96,7 @@ function plugin_loader.load(configurations)
         },
       },
       readme = {
-        root = join_paths(get_runtime_dir(), "lazy", "lazy-readme"),
+        root = join_paths(get_runtime_dir(), "lazy", "readme"),
       },
       display = {
         open_fn = function()
