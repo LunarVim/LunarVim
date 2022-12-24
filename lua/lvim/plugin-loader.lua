@@ -26,12 +26,7 @@ function plugin_loader.init(opts)
   vim.opt.runtimepath:prepend(lazy_install_dir)
 
   -- Add plugins to rtp (needed for config:init)
-  -- TODO: is there a better way to do this?
-  require("lazy.core.util").ls(plugins_dir, function(path, name, type)
-    if type == "directory" and name ~= "lazy.nvim" then
-      vim.opt.rtp:append(path)
-    end
-  end)
+  vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
 end
 
 function plugin_loader.reset_cache()
@@ -72,6 +67,9 @@ function plugin_loader.load(configurations)
     Log:warn "skipping loading plugins until lazy.nvim is installed"
     return
   end
+
+  -- remove plugins from rtp before setting up lazy
+  vim.opt.runtimepath:remove(join_paths(plugins_dir, "*"))
 
   -- Close lazy.nvim after installing plugins the first time
   vim.api.nvim_create_autocmd("User", {
