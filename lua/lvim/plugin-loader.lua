@@ -6,15 +6,6 @@ local join_paths = utils.join_paths
 
 local plugins_dir = join_paths(get_runtime_dir(), "lazy", "plugins")
 
-local function remove_rtp_paths()
-  if os.getenv "LUNARVIM_RUNTIME_DIR" then
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
-    vim.opt.rtp:remove(vim.call("stdpath", "config"))
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
-  end
-end
-
 function plugin_loader.init(opts)
   opts = opts or {}
 
@@ -31,8 +22,6 @@ function plugin_loader.init(opts)
       lazy_install_dir,
     }
   end
-
-  remove_rtp_paths()
 
   vim.opt.runtimepath:prepend(lazy_install_dir)
 
@@ -112,11 +101,7 @@ function plugin_loader.load(configurations)
           path = join_paths(get_cache_dir(), "lazy", "cache"),
         },
         rtp = {
-          paths = {
-            get_lvim_base_dir(),
-            get_runtime_dir(),
-            get_config_dir(),
-          },
+          reset = false,
         },
       },
       readme = {
@@ -131,8 +116,6 @@ function plugin_loader.load(configurations)
 
     lazy.setup(configurations, opts)
   end, debug.traceback)
-
-  remove_rtp_paths()
 
   if not status_ok then
     Log:warn "problems detected while loading plugins' configurations"

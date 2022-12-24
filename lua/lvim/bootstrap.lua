@@ -76,6 +76,14 @@ function M:init(base_dir)
     return base_dir
   end
 
+  vim.opt.rtp = {
+    vim.env.VIMRUNTIME,
+    vim.fn.fnamemodify(vim.v.progpath, ":p:h:h") .. "/lib/nvim",
+    get_lvim_base_dir(),
+    get_runtime_dir(),
+    get_config_dir(),
+  }
+
   require("lvim.plugin-loader").init {
     install_path = self.lazy_install_dir,
   }
