@@ -77,11 +77,14 @@ function M:init(base_dir)
   end
 
   vim.opt.rtp = {
+    self.config_dir,
+    join_paths(self.runtime_dir, "site"),
     vim.env.VIMRUNTIME,
     vim.fn.fnamemodify(vim.v.progpath, ":p:h:h") .. "/lib/nvim",
-    get_lvim_base_dir(),
-    get_runtime_dir(),
-    get_config_dir(),
+    base_dir,
+    join_paths(base_dir, "after"),
+    join_paths(self.runtime_dir, "site", "after"),
+    join_paths(self.config_dir, "after"),
   }
 
   require("lvim.plugin-loader").init {
