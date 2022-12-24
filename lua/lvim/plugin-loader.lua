@@ -105,11 +105,6 @@ function plugin_loader.load(configurations)
       readme = {
         root = join_paths(get_runtime_dir(), "lazy", "readme"),
       },
-      display = {
-        open_fn = function()
-          return require("packer.util").float { border = "rounded" }
-        end,
-      },
     }
 
     lazy.setup(configurations, opts)

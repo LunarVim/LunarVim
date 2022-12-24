@@ -92,9 +92,6 @@
   "onedarker.nvim": {
     "commit": "b00dd21"
   },
-  "packer.nvim": {
-    "commit": "64ae65f"
-  },
   "plenary.nvim": {
     "commit": "4b7e520"
   },
