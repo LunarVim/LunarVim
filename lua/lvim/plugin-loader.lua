@@ -140,41 +140,27 @@ function plugin_loader.get_core_plugins()
   local names = {}
   local plugins = require "lvim.plugins"
   local get_name = require("lazy.core.plugin").Spec.get_name
-  for _, item in pairs(plugins) do
-    if item.enabled == true or item.enabled == nil then
+  for _, spec in pairs(plugins) do
+    if spec.enabled == true or spec.enabled == nil then
       table.insert(names, get_name(spec[1]))
     end
   end
   return names
 end
 
--- function plugin_loader.load_snapshot(snapshot_file)
--- snapshot_file = snapshot_file or default_snapshot
--- if not in_headless then
---   vim.notify("Syncing core plugins is in progress..", vim.log.levels.INFO, { title = "lvim" })
--- end
--- Log:debug(string.format("Using snapshot file [%s]", snapshot_file))
--- local core_plugins = plugin_loader.get_core_plugins()
--- require("packer").rollback(snapshot_file, unpack(core_plugins))
--- end
+function plugin_loader.load_snapshot(snapshot_file)
+  error "plugin pinning not implemented"
+end
 
 function plugin_loader.sync_core_plugins()
-  -- plugin_loader.cache_clear()
-  -- local core_plugins = plugin_loader.get_core_plugins()
-  -- Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
-  -- pcall_packer_command("sync", core_plugins)
+  local core_plugins = plugin_loader.get_core_plugins()
+  Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
+  require("lazy").sync { wait = true, plugins = core_plugins }
 end
 
 function plugin_loader.ensure_plugins()
-  -- vim.api.nvim_create_autocmd("User", {
-  --   pattern = "PackerComplete",
-  --   once = true,
-  --   callback = function()
-  --     plugin_loader.compile()
-  --   end,
-  -- })
-  -- Log:debug "calling packer.install()"
-  -- pcall_packer_command "install"
+  Log:debug "calling lazy.install()"
+  require("lazy").install { wait = true }
 end
 
 return plugin_loader

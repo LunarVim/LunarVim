@@ -12,7 +12,7 @@ function M.run_pre_reload()
   Log:debug "Starting pre-reload hook"
 end
 
--- TODO: lazy hooks
+-- TODO: what to do with this?
 function M.run_on_packer_complete()
   Log:debug "Packer operation complete"
   vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
@@ -20,24 +20,17 @@ function M.run_on_packer_complete()
   -- -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
   -- vim.g.colors_name = lvim.colorscheme
   -- pcall(vim.cmd.colorscheme, lvim.colorscheme)
-
-  if M._reload_triggered then
-    Log:debug "Reloaded configuration"
-    M._reload_triggered = nil
-  end
 end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  M._reload_triggered = true
+  Log:debug "Reloaded configuration"
 end
 
----Reset any startup cache files used by Packer
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
   vim.cmd [[LuaCacheClear]]
-  plugin_loader.recompile()
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" or module:match "lvim.lsp" then
