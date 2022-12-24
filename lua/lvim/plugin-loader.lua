@@ -45,11 +45,15 @@ function plugin_loader.init(opts)
   end)
 end
 
+function plugin_loader.reset_cache()
+  os.remove(require("lazy.core.cache").config.path)
+end
+
 function plugin_loader.reload(spec)
   local Config = require "lazy.core.config"
   local lazy = require "lazy"
 
-  -- TODO: reset cache?
+  -- TODO: reset cache? and unload plugins?
 
   Config.spec = spec
 
