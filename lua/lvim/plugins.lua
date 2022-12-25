@@ -86,7 +86,6 @@ local core_plugins = {
   },
   {
     "folke/neodev.nvim",
-    module = "neodev",
   },
 
   -- Autopairs

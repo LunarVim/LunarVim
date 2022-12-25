@@ -175,7 +175,7 @@ function M.setup()
 
   treesitter_configs.setup(opts)
 
-  ensure_updated_bundled()
+  -- ensure_updated_bundled()
 
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)

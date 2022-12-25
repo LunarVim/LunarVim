@@ -23,7 +23,7 @@ _G.require_safe = require("lvim.utils.modules").require_safe
 _G.reload = require("lvim.utils.modules").reload
 
 ---Get the full path to `$LUNARVIM_RUNTIME_DIR`
----@return string
+---@return string|nil
 function _G.get_runtime_dir()
   local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
   if not lvim_runtime_dir then
@@ -34,7 +34,7 @@ function _G.get_runtime_dir()
 end
 
 ---Get the full path to `$LUNARVIM_CONFIG_DIR`
----@return string
+---@return string|nil
 function _G.get_config_dir()
   local lvim_config_dir = os.getenv "LUNARVIM_CONFIG_DIR"
   if not lvim_config_dir then
@@ -44,7 +44,7 @@ function _G.get_config_dir()
 end
 
 ---Get the full path to `$LUNARVIM_CACHE_DIR`
----@return string
+---@return string|nil
 function _G.get_cache_dir()
   local lvim_cache_dir = os.getenv "LUNARVIM_CACHE_DIR"
   if not lvim_cache_dir then
