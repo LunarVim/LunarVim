@@ -182,12 +182,6 @@ end
 function M.enable_reload_config_on_save()
   local pattern = get_config_dir() .. "/*.lua"
 
-  -- add symlinked path to the pattern
-  local linked_config_lua = vim.fn.resolve(join_paths(get_config_dir(), "config.lua"))
-  if linked_config_lua ~= join_paths(get_config_dir(), "config.lua") then
-    local linked_config_dir = linked_config_lua:sub(1, #linked_config_lua - #"config.lua")
-    pattern = pattern .. "," .. linked_config_dir .. "*.lua"
-  end
 
   if vim.loop.os_uname().version:match "Windows" then
     -- autocmds require forward slashes even on windows
