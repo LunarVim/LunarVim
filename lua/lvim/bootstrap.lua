@@ -3,6 +3,7 @@ local M = {}
 if vim.fn.has "nvim-0.8" ~= 1 then
   vim.notify("Please upgrade your Neovim base installation. Lunarvim requires v0.8+", vim.log.levels.WARN)
   vim.wait(5000, function()
+    ---@diagnostic disable-next-line: redundant-return-value
     return false
   end)
   vim.cmd "cquit"
@@ -59,10 +60,12 @@ function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_dir = get_cache_dir()
-  self.lazy_install_dir = join_paths(self.runtime_dir, "lazy", "plugins", "lazy.nvim")
+  self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
+  self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
 
-  ---Overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
+  ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
   ---NOTE: changes to "data" are currently unstable, see #2507
+  ---@diagnostic disable-next-line: duplicate-set-field
   vim.fn.stdpath = function(what)
     if what == "cache" then
       return _G.get_cache_dir()
@@ -76,22 +79,31 @@ function M:init(base_dir)
     return base_dir
   end
 
-  vim.opt.rtp = {
-    self.config_dir,
-    join_paths(self.runtime_dir, "site"),
-    vim.env.VIMRUNTIME,
-    vim.fn.fnamemodify(vim.v.progpath, ":p:h:h") .. "/lib/nvim",
-    base_dir,
-    join_paths(base_dir, "after"),
-    join_paths(self.runtime_dir, "site", "after"),
-    join_paths(self.config_dir, "after"),
-  }
+  if os.getenv "LUNARVIM_RUNTIME_DIR" then
+    -- vim.opt.rtp:append(os.getenv "LUNARVIM_RUNTIME_DIR" .. path_sep .. "lvim")
+    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
+    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
+    vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
+    vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
+    vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
 
-  require("lvim.plugin-loader").init {
-    install_path = self.lazy_install_dir,
-  }
+    vim.opt.rtp:remove(vim.call("stdpath", "config"))
+    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
+    vim.opt.rtp:prepend(self.config_dir)
+    vim.opt.rtp:append(join_paths(self.config_dir, "after"))
+    -- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
+
+    vim.cmd [[let &packpath = &runtimepath]]
+  end
+
+  vim.opt.runtimepath:append(join_paths(self.pack_dir, "lazy", "opt", "*"))
 
   require("lvim.config"):init()
+
+  require("lvim.plugin-loader").init {
+    package_root = self.pack_dir,
+    install_path = self.lazy_install_dir,
+  }
 
   require("lvim.core.mason").bootstrap()
 

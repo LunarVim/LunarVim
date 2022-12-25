@@ -4,12 +4,13 @@ local utils = require "lvim.utils"
 local Log = require "lvim.core.log"
 local join_paths = utils.join_paths
 
-local plugins_dir = join_paths(get_runtime_dir(), "lazy", "plugins")
+local plugins_dir = join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt")
 
 function plugin_loader.init(opts)
   opts = opts or {}
 
-  local lazy_install_dir = opts.install_path or join_paths(vim.fn.stdpath "data", "lazy", "plugins", "lazy.nvim")
+  local lazy_install_dir = opts.install_path
+    or join_paths(vim.fn.stdpath "data", "site", "pack", "lazy", "opt", "lazy.nvim")
 
   if not utils.is_directory(lazy_install_dir) then
     print "Initializing first time setup"
@@ -22,11 +23,6 @@ function plugin_loader.init(opts)
       lazy_install_dir,
     }
   end
-
-  vim.opt.runtimepath:prepend(lazy_install_dir)
-
-  -- Add plugins to rtp (needed for config:init)
-  vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
 end
 
 function plugin_loader.reset_cache()
@@ -68,19 +64,16 @@ function plugin_loader.load(configurations)
     return
   end
 
-  -- remove plugins from rtp before setting up lazy
-  vim.opt.runtimepath:remove(join_paths(plugins_dir, "*"))
-
   -- Close lazy.nvim after installing plugins the first time
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "LazyDone",
-    callback = function()
-      if vim.opt.ft:get() == "lazy" then
-        require("lazy.view"):close()
-        vim.cmd "q"
-      end
-    end,
-  })
+  -- vim.api.nvim_create_autocmd("User", {
+  --   pattern = "LazyDone",
+  --   callback = function()
+  --     if vim.opt.ft:get() == "lazy" then
+  --       require("lazy.view"):close()
+  --       vim.cmd "q"
+  --     end
+  --   end,
+  -- })
 
   local status_ok = xpcall(function()
     local opts = {

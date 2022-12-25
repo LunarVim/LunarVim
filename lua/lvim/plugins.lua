@@ -34,7 +34,7 @@ local core_plugins = {
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     requires = { "nvim-telescope/telescope.nvim" },
-    run = "make",
+    build = "make",
     enabled = lvim.builtin.telescope.active,
   },
   -- Install nvim-cmp, and buffer source as a dependency
@@ -295,8 +295,10 @@ local content = vim.fn.readfile(default_snapshot_path)
 local default_sha1 = vim.fn.json_decode(content)
 
 local get_default_sha1 = function(spec)
-  local short_name = require("lazy.core.plugin").Spec.get_name(spec[1])
-  return default_sha1[short_name] and default_sha1[short_name].commit
+  local _, short_name = pcall(function()
+    return require("lazy.core.plugin").Spec.get_name(spec[1])
+  end)
+  return short_name and default_sha1[short_name] and default_sha1[short_name].commit
 end
 
 -- TODO: use lazy lockfiles, if possible
