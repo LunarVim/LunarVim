@@ -59,7 +59,7 @@ local core_plugins = {
       local utils = require "lvim.utils"
       local paths = {}
       if lvim.builtin.luasnip.sources.friendly_snippets then
-        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "lazy", "plugins", "friendly-snippets")
+        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "friendly-snippets")
       end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
       if utils.is_directory(user_snippets) then
@@ -86,6 +86,7 @@ local core_plugins = {
   },
   {
     "folke/neodev.nvim",
+    lazy = true,
   },
 
   -- Autopairs
