@@ -180,7 +180,9 @@ function M.toggle_format_on_save()
 end
 
 function M.enable_reload_config_on_save()
-  local pattern = get_config_dir() .. "/*.lua"
+  local user_config_file = require("lvim.config"):get_user_config_path()
+  -- autocmds require forward slashes (even on windows)
+  local pattern = user_config_file:gsub("\\", "/") .. "/*.lua"
 
 
   if vim.loop.os_uname().version:match "Windows" then
