@@ -107,32 +107,32 @@ M.get_filename = function()
       if f.isempty(file_icon) then
         file_icon = lvim.icons.kind.File
       end
-
-      local buf_ft = vim.bo.filetype
-
-      if buf_ft == "dapui_breakpoints" then
-        file_icon = lvim.icons.ui.Bug
-      end
-
-      if buf_ft == "dapui_stacks" then
-        file_icon = lvim.icons.ui.Stacks
-      end
-
-      if buf_ft == "dapui_scopes" then
-        file_icon = lvim.icons.ui.Scopes
-      end
-
-      if buf_ft == "dapui_watches" then
-        file_icon = lvim.icons.ui.Watches
-      end
-
-      -- if buf_ft == "dapui_console" then
-      --   file_icon = lvim.icons.ui.DebugConsole
-      -- end
     else
       file_icon = ""
       hl_group = "Normal"
     end
+
+    local buf_ft = vim.bo.filetype
+
+    if buf_ft == "dapui_breakpoints" then
+      file_icon = lvim.icons.ui.Bug
+    end
+
+    if buf_ft == "dapui_stacks" then
+      file_icon = lvim.icons.ui.Stacks
+    end
+
+    if buf_ft == "dapui_scopes" then
+      file_icon = lvim.icons.ui.Scopes
+    end
+
+    if buf_ft == "dapui_watches" then
+      file_icon = lvim.icons.ui.Watches
+    end
+
+    -- if buf_ft == "dapui_console" then
+    --   file_icon = lvim.icons.ui.DebugConsole
+    -- end
 
     local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
     vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text.foreground })
