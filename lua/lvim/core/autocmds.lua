@@ -180,9 +180,8 @@ function M.toggle_format_on_save()
 end
 
 function M.enable_reload_config_on_save()
-  local user_config_file = require("lvim.config"):get_user_config_path()
   -- autocmds require forward slashes (even on windows)
-  local pattern = user_config_file:gsub("\\", "/") .. "/*.lua"
+  local pattern = get_config_dir():gsub("\\", "/") .. "/*.lua"
 
   vim.api.nvim_create_augroup("lvim_reload_config_on_save", {})
   vim.api.nvim_create_autocmd("BufWritePost", {
