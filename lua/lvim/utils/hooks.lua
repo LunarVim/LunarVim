@@ -27,6 +27,7 @@ function M.run_post_reload()
   Log:debug "Reloaded configuration"
 end
 
+---Reset any startup cache files used by lazy.nvim
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
