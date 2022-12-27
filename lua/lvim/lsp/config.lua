@@ -22,6 +22,7 @@ local skipped_servers = {
   "pylsp",
   "quick_lint_js",
   "reason_ls",
+  "rnix",
   "rome",
   "ruby_ls",
   "scry",
