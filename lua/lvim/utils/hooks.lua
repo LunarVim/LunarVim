@@ -12,19 +12,15 @@ function M.run_pre_reload()
   Log:debug "Starting pre-reload hook"
 end
 
--- TODO: what to do with this?
-function M.run_on_packer_complete()
-  Log:debug "Packer operation complete"
-  vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
-
-  -- -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
-  -- vim.g.colors_name = lvim.colorscheme
-  -- pcall(vim.cmd.colorscheme, lvim.colorscheme)
-end
+-- TODO: convert to lazy.nvim
+-- function M.run_on_packer_complete()
+-- -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
+-- vim.g.colors_name = lvim.colorscheme
+-- pcall(vim.cmd.colorscheme, lvim.colorscheme)
+-- end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  Log:debug "Reloaded configuration"
 end
 
 ---Reset any startup cache files used by lazy.nvim
@@ -52,9 +48,7 @@ function M.run_post_update()
       "Please upgrade your Neovim base installation. Newer version of Lunarvim requires v0.7+",
       vim.log.levels.WARN
     )
-    vim.wait(1000, function()
-      return false
-    end)
+    vim.wait(1000)
     local ret = reload("lvim.utils.git").switch_lvim_branch(compat_tag)
     if ret then
       vim.notify("Reverted to the last known compatible version: " .. compat_tag, vim.log.levels.WARN)

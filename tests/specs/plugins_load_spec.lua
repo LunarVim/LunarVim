@@ -6,7 +6,6 @@ a.describe("plugin-loader", function()
 
   pcall(function()
     lvim.log.level = "debug"
-    package.loaded["packer.log"] = nil
     package.loaded["lvim.core.log"] = nil
   end)
 

@@ -95,6 +95,8 @@ function M:reload()
 
     plugin_loader.reload { plugins, lvim.plugins }
     reload("lvim.core.theme").setup()
+
+    Log:debug "Reloaded configuration"
     reload("lvim.utils.hooks").run_post_reload()
   end)
 end
