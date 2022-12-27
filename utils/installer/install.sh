@@ -433,7 +433,7 @@ function setup_lvim() {
   echo "Preparing Lazy setup"
 
   "$INSTALL_PREFIX/bin/lvim" --headless \
-    -c 'autocmd User LazyDone quitall' \
+    -c 'autocmd User LazyDone quitall'
 
   echo "Lazy setup complete"
 
