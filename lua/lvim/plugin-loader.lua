@@ -121,10 +121,6 @@ function plugin_loader.get_core_plugins()
   return names
 end
 
-function plugin_loader.load_snapshot(snapshot_file)
-  error "plugin pinning not implemented"
-end
-
 function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
   Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))

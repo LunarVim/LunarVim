@@ -293,7 +293,7 @@ local core_plugins = {
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 local content = vim.fn.readfile(default_snapshot_path)
-local default_sha1 = vim.fn.json_decode(content)
+local default_sha1 = assert(vim.fn.json_decode(content))
 
 local get_default_sha1 = function(spec)
   local _, short_name = pcall(function()
@@ -302,10 +302,9 @@ local get_default_sha1 = function(spec)
   return short_name and default_sha1[short_name] and default_sha1[short_name].commit
 end
 
--- TODO: use lazy lockfiles, if possible
 if not vim.env.LVIM_DEV_MODE then
+  --  Manually lock the commit hashes of core plugins
   for _, spec in ipairs(core_plugins) do
-    -- Manually lock the commit hash since Packer's snapshots are unreliable in headless mode
     spec["commit"] = get_default_sha1(spec)
   end
 end
