@@ -15,7 +15,7 @@ a.describe("plugin-loader", function()
 
     -- TODO: maybe there's a way to avoid hard-coding the names of the modules?
     local startup_plugins = {
-      "packer",
+      "lazy",
     }
 
     for _, plugin in ipairs(startup_plugins) do
@@ -24,8 +24,6 @@ a.describe("plugin-loader", function()
   end)
 
   a.it("should be able to load lsp packages without errors", function()
-    loader.load { plugins, lvim.plugins }
-
     require("lvim.lsp").setup()
 
     local lsp_packages = {
