@@ -85,7 +85,6 @@ function M.post_load()
   local function convert_spec_to_lazy(spec)
     local alternatives = {
       setup = "init",
-      requires = "dependencies",
       as = "name",
       opt = "lazy",
       run = "build",
@@ -94,10 +93,10 @@ function M.post_load()
     }
 
     alternatives.requires = function()
-      if type(spec.require) == "string" then
-        spec.dependencies = { spec.require }
+      if type(spec.requires) == "string" then
+        spec.dependencies = { spec.requires }
       else
-        spec.dependencies = spec.require
+        spec.dependencies = spec.requires
       end
 
       return "Use `dependencies` instead"
@@ -141,6 +140,12 @@ function M.post_load()
           message .. " See https://github.com/folke/lazy.nvim#-migration-guide"
         )
       end
+    end
+
+    if spec[1]:match "^http" then
+      spec.url = spec[1]
+      spec[1] = nil
+      deprecate("{ 'http...' }` in `lvim.plugins", "Use { url = 'http...' } instead.")
     end
   end
 
