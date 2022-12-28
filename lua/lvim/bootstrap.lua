@@ -80,7 +80,6 @@ function M:init(base_dir)
   end
 
   if os.getenv "LUNARVIM_RUNTIME_DIR" then
-    -- vim.opt.rtp:append(os.getenv "LUNARVIM_RUNTIME_DIR" .. path_sep .. "lvim")
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
     vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
@@ -91,19 +90,16 @@ function M:init(base_dir)
     vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
     vim.opt.rtp:prepend(self.config_dir)
     vim.opt.rtp:append(join_paths(self.config_dir, "after"))
-    -- TODO: we need something like this: vim.opt.packpath = vim.opt.rtp
 
-    vim.cmd [[let &packpath = &runtimepath]]
+    vim.opt.packpath = vim.opt.rtp:get()
   end
-
-  vim.opt.runtimepath:append(join_paths(self.pack_dir, "lazy", "opt", "*"))
-
-  require("lvim.config"):init()
 
   require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
     install_path = self.lazy_install_dir,
   }
+
+  require("lvim.config"):init()
 
   require("lvim.core.mason").bootstrap()
 

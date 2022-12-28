@@ -23,6 +23,8 @@ function plugin_loader.init(opts)
       lazy_install_dir,
     }
   end
+
+  vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
 end
 
 function plugin_loader.reset_cache()
@@ -64,16 +66,16 @@ function plugin_loader.load(configurations)
     return
   end
 
-  -- Close lazy.nvim after installing plugins the first time
-  -- vim.api.nvim_create_autocmd("User", {
-  --   pattern = "LazyDone",
-  --   callback = function()
-  --     if vim.opt.ft:get() == "lazy" then
-  --       require("lazy.view"):close()
-  --       vim.cmd "q"
-  --     end
-  --   end,
-  -- })
+  -- Close lazy.nvim after installing plugins on startup
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyDone",
+    callback = function()
+      if vim.opt.ft:get() == "lazy" then
+        require("lazy.view"):close()
+        vim.cmd "q"
+      end
+    end,
+  })
 
   local status_ok = xpcall(function()
     local opts = {
