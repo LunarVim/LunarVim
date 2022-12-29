@@ -1,12 +1,12 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
   { "folke/lazy.nvim" },
-  { "neovim/nvim-lspconfig" },
-  { "tamago324/nlsp-settings.nvim" },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    dependencies = { "williamboman/mason-lspconfig.nvim", "tamago324/nlsp-settings.nvim" },
   },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "jose-elias-alvarez/null-ls.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
@@ -30,12 +30,9 @@ local core_plugins = {
     config = function()
       require("lvim.core.telescope").setup()
     end,
-    enabled = lvim.builtin.telescope.active,
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
-    build = "make",
+    dependencies = { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    lazy = true,
+    cmd = "Telescope",
     enabled = lvim.builtin.telescope.active,
   },
   -- Install nvim-cmp, and buffer source as a dependency
@@ -46,13 +43,13 @@ local core_plugins = {
         require("lvim.core.cmp").setup()
       end
     end,
-    requires = {
-      "L3MON4D3/LuaSnip",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
     },
-  },
-  {
-    "rafamadriz/friendly-snippets",
-    enabled = lvim.builtin.luasnip.sources.friendly_snippets,
   },
   {
     "L3MON4D3/LuaSnip",
@@ -72,18 +69,11 @@ local core_plugins = {
       }
       require("luasnip.loaders.from_snipmate").lazy_load()
     end,
-  },
-  {
-    "hrsh7th/cmp-nvim-lsp",
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-  },
-  {
-    "hrsh7th/cmp-buffer",
-  },
-  {
-    "hrsh7th/cmp-path",
+    event = "InsertEnter",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      enabled = lvim.builtin.luasnip.sources.friendly_snippets,
+    },
   },
   {
     "folke/neodev.nvim",
@@ -93,7 +83,7 @@ local core_plugins = {
   -- Autopairs
   {
     "windwp/nvim-autopairs",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     config = function()
       require("lvim.core.autopairs").setup()
     end,
@@ -110,7 +100,7 @@ local core_plugins = {
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "BufReadPost",
+    event = "VeryLazy",
   },
 
   -- NvimTree
@@ -129,12 +119,10 @@ local core_plugins = {
     config = function()
       require("lvim.core.lir").setup()
     end,
-    requires = { "kyazdani42/nvim-web-devicons" },
     enabled = lvim.builtin.lir.active,
   },
   {
     "lewis6991/gitsigns.nvim",
-
     config = function()
       require("lvim.core.gitsigns").setup()
     end,
@@ -148,7 +136,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.which-key").setup()
     end,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     enabled = lvim.builtin.which_key.active,
   },
 
@@ -194,6 +182,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.breadcrumbs").setup()
     end,
+    event = "VeryLazy",
     enabled = lvim.builtin.breadcrumbs.active,
   },
 
@@ -203,7 +192,7 @@ local core_plugins = {
       require("lvim.core.bufferline").setup()
     end,
     branch = "main",
-    event = "BufWinEnter",
+    event = "VeryLazy",
     enabled = lvim.builtin.bufferline.active,
   },
 
@@ -238,7 +227,7 @@ local core_plugins = {
   -- Terminal
   {
     "akinsho/toggleterm.nvim",
-    event = "BufWinEnter",
+    event = "VeryLazy",
     branch = "main",
     config = function()
       require("lvim.core.terminal").setup()
@@ -249,6 +238,7 @@ local core_plugins = {
   -- SchemaStore
   {
     "b0o/schemastore.nvim",
+    lazy = true,
   },
 
   {
@@ -256,6 +246,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.illuminate").setup()
     end,
+    event = "VeryLazy",
     enabled = lvim.builtin.illuminate.active,
   },
 
