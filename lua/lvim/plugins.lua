@@ -46,6 +46,7 @@ local core_plugins = {
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
+    event = "InsertEnter",
     config = function()
       if lvim.builtin.cmp then
         require("lvim.core.cmp").setup()
