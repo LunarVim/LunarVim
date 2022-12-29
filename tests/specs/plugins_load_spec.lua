@@ -10,6 +10,7 @@ a.describe("plugin-loader", function()
   end)
 
   a.it("should be able to load default packages without errors", function()
+    vim.go.loadplugins = true
     loader.load { plugins, lvim.plugins }
 
     -- TODO: maybe there's a way to avoid hard-coding the names of the modules?
