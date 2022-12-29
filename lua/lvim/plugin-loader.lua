@@ -31,6 +31,7 @@ function plugin_loader.init(opts)
     end
   end
 
+  vim.opt.runtimepath:append(lazy_install_dir)
   vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
 end
 
@@ -83,6 +84,9 @@ function plugin_loader.load(configurations)
       end
     end,
   })
+
+  -- remove plugins from rtp before loading lazy, so that all plugins won't be loaded on startup
+  vim.opt.runtimepath:remove(join_paths(plugins_dir, "*"))
 
   local status_ok = xpcall(function()
     local opts = {
