@@ -142,7 +142,7 @@ function M.post_load()
       end
     end
 
-    if spec[1]:match "^http" then
+    if spec[1] and spec[1]:match "^http" then
       spec.url = spec[1]
       spec[1] = nil
       deprecate("{ 'http...' }` in `lvim.plugins", "Use { url = 'http...' } instead.")
