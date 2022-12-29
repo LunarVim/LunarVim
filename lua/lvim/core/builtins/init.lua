@@ -20,7 +20,22 @@ local builtins = {
   "lvim.core.comment",
   "lvim.core.lualine",
   "lvim.core.alpha",
+  "lvim.core.noice",
   "lvim.core.mason",
+  "lvim.core.nvimsurround",
+  "lvim.core.harpoon",
+  "lvim.core.hop",
+  "lvim.core.neogit",
+  "lvim.core.neoscroll",
+  "lvim.core.neotree",
+  "lvim.core.numb",
+  "lvim.core.sessionmanager",
+  "lvim.core.symbolsoutline",
+  "lvim.core.trouble",
+  "lvim.core.undotree",
+  "lvim.core.harpoon",
+  "lvim.core.diffview"
+
 }
 
 function M.config(config)

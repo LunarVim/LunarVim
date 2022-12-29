@@ -130,6 +130,8 @@ function M.get_sections()
       { "p", lvim.icons.ui.Project .. "  Projects ", "<CMD>Telescope projects<CR>" },
       { "r", lvim.icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>" },
       { "t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>" },
+      { "l", lvim.icons.ui.Load .. "  Load Session", "<CMD>SessionManager load_session<CR>" },
+      { "o", lvim.icons.ui.Clock .. "  Open last session", "<CMD>SessionManager load_last_session<CR>" },
       {
         "c",
         lvim.icons.ui.Gear .. "  Configuration",

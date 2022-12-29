@@ -291,6 +291,126 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.bigfile.active,
   },
+
+  {
+    "kylechui/nvim-surround",
+    config = function()
+      require("lvim.core.nvimsurround").setup()
+    end,
+    disable = not lvim.builtin.nvimsurround.active,
+  },
+
+  {
+    "folke/noice.nvim",
+    config = function()
+      require("lvim.core.noice").setup()
+    end,
+    disable = not lvim.builtin.noice.active,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      module = "nui"
+
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+    }
+  },
+
+  { "phaazon/hop.nvim",
+    config = function()
+      require("lvim.core.hop").setup()
+    end
+  },
+
+  {
+    "p00f/nvim-ts-rainbow"
+  },
+
+  {
+    "windwp/nvim-ts-autotag"
+  },
+
+  { "ThePrimeagen/harpoon",
+    config = function() require("lvim.core.harpoon").setup() end
+  },
+
+  {
+    "drybalka/tree-climber.nvim"
+  },
+
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("lvim.core.neoscroll").setup()
+    end,
+    disable = not lvim.builtin.neoscroll.active
+  },
+
+  {
+    "nacro90/numb.nvim",
+    config = function()
+      require("lvim.core.numb").setup()
+    end,
+    disable = not lvim.builtin.numb.active
+  },
+
+  {
+    "Shatur/neovim-session-manager",
+    config = function() require('lvim.core.sessionmanager').setup() end,
+    disable = not lvim.builtin.sessionmanager.active
+  },
+
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function() require('lvim.core.symbolsoutline').setup() end,
+    disable = not lvim.builtin.sessionmanager.active
+  },
+
+  {
+    "TimUntersberger/neogit",
+    requires = {
+      "sindrets/diffview.nvim",
+      config = function() require("lvim.core.diffview").setup() end,
+      disable = not lvim.builtin.diffview.active
+    },
+    config = function() require("lvim.core.neogit").setup() end,
+    disable = not lvim.builtin.neogit.active
+  },
+
+  {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function() require("lvim.core.trouble").setup() end,
+    disable = not lvim.builtin.trouble.active
+  },
+
+  { -- Additional text objects via treesitter
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  },
+
+  { -- show and a navigate to an unde tree
+    "mbbill/undotree",
+    config = function() require('lvim.core.undotree').setup() end,
+    disable = not lvim.builtin.undotree.active
+  },
+
+  { -- Intercept ui select entries with telescope
+    "nvim-telescope/telescope-ui-select.nvim"
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    config = function() require('lvim.core.neotree').setup() end,
+    branch = "v2.x",
+    disable = not lvim.builtin.neotree.active,
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
+
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")

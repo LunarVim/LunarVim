@@ -22,6 +22,7 @@ M.config = function()
     mappings = {
       ["l"] = actions.edit,
       ["<CR>"] = actions.edit,
+      ["o"] = actions.edit,
       ["<C-s>"] = actions.split,
       ["v"] = actions.vsplit,
       ["<C-t>"] = actions.tabedit,

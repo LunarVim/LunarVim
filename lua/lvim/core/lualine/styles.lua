@@ -93,6 +93,7 @@ styles.lvim = {
     lualine_c = {
       components.diff,
       components.python_env,
+      components.filename
     },
     lualine_x = {
       components.diagnostics,
@@ -137,9 +138,9 @@ function M.get_style(style)
     local Log = require "lvim.core.log"
     Log:error(
       "Invalid lualine style"
-        .. string.format('"%s"', style)
-        .. "options are: "
-        .. string.format('"%s"', table.concat(style_keys, '", "'))
+      .. string.format('"%s"', style)
+      .. "options are: "
+      .. string.format('"%s"', table.concat(style_keys, '", "'))
     )
     Log:debug '"lvim" style is applied.'
     style = "lvim"

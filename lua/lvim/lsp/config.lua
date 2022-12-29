@@ -96,11 +96,33 @@ return {
   buffer_mappings = {
     normal_mode = {
       ["K"] = { vim.lsp.buf.hover, "Show hover" },
-      ["gd"] = { vim.lsp.buf.definition, "Goto Definition" },
-      ["gD"] = { vim.lsp.buf.declaration, "Goto declaration" },
-      ["gr"] = { vim.lsp.buf.references, "Goto references" },
+      ["gd"] = { function(...)
+        if (lvim.builtin.trouble.active) then
+          vim.cmd("Trouble lsp_definitions")
+        else
+          vim.lsp.buf.definition(...)
+        end
+      end, "Goto Definition" },
+      ["gD"] = {
+        function(...)
+          if (lvim.builtin.trouble.active) then
+            vim.cmd("Trouble lsp_type_definitions")
+          else
+            vim.lsp.buf.type_definition(...)
+          end
+        end, "Goto Type Definition"
+      },
+      ["gr"] = {
+        function(...)
+          if (lvim.builtin.trouble.active) then
+            vim.cmd("Trouble lsp_references")
+          else
+            vim.lsp.buf.references(...)
+          end
+        end, "Goto References"
+      },
       ["gI"] = { vim.lsp.buf.implementation, "Goto Implementation" },
-      ["gs"] = { vim.lsp.buf.signature_help, "show signature help" },
+      ["gs"] = { vim.lsp.buf.signature_help, "Show Signature Help" },
       ["gl"] = {
         function()
           local config = lvim.lsp.diagnostics.float

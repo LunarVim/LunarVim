@@ -91,7 +91,8 @@ M.config = function()
         "Find File",
       },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+      ["e"] = { "<CMD>Neotree left filesystem reveal toggle<cr>", "Explorer" }, --{ "<cmd>NvimTreeToggle<CR>", "Explorer" },
+      ['o'] = { "<CMD>SymbolsOutline<CR>", "Symbols Outline" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
@@ -177,6 +178,7 @@ M.config = function()
           "<cmd>Gitsigns diffthis HEAD<cr>",
           "Git Diff",
         },
+        n = { "<cmd>Neogit<cr>", "Neogit" },
       },
       l = {
         name = "LSP",
@@ -279,6 +281,15 @@ M.config = function()
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },
       },
+      t = {
+        name = "Trouble",
+        t = { "<cmd>TroubleToggle<cr>", "Toggle" },
+        q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+        l = { "<cmd>TroubleToggle loclist<cr>", "Loclist" },
+        w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
+        d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" }
+      },
+      u = { "<cmd>UndotreeToggle<cr>", "Undo Tree" }
     },
   }
 end

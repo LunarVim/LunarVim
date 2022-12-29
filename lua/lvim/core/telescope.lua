@@ -22,7 +22,7 @@ function M.config()
   lvim.builtin.telescope = {
     active = true,
     on_config_done = nil,
-    theme = "dropdown", ---@type telescope_themes
+    theme = "dropdown", --"dropdown", ---@type telescope_themes
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
       selection_caret = lvim.icons.ui.Forward .. " ",
@@ -106,6 +106,11 @@ function M.config()
         override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
+      ["ui-select"] = {
+        initial_mode = "normal",
+        case_mode = "ignore_case",
+        theme = "cursor"
+      },
     },
   }
 end
@@ -134,6 +139,11 @@ function M.setup()
   if lvim.builtin.project.active then
     pcall(function()
       require("telescope").load_extension "projects"
+    end)
+  end
+  if lvim.builtin.noice.active then
+    pcall(function()
+      require("telescope").load_extension "ui-select"
     end)
   end
 

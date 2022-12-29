@@ -30,4 +30,41 @@ function M.get_buf_option(opt)
   end
 end
 
+---Deep extend a table, and also perform a union on all sub-tables.
+---@param t table
+---@param ... table
+---@return table
+function M.tbl_union_extend(t, ...)
+  local res = M.tbl_clone(t)
+
+  local function recurse(ours, theirs)
+    -- Get the union of the two tables
+    local sub = M.vec_union(ours, theirs)
+
+    for k, v in pairs(ours) do
+      if type(k) ~= "number" then
+        sub[k] = v
+      end
+    end
+
+    for k, v in pairs(theirs) do
+      if type(k) ~= "number" then
+        if type(v) == "table" then
+          sub[k] = recurse(sub[k] or {}, v)
+        else
+          sub[k] = v
+        end
+      end
+    end
+
+    return sub
+  end
+
+  for _, theirs in ipairs({ ... }) do
+    res = recurse(res, theirs)
+  end
+
+  return res
+end
+
 return M

@@ -26,7 +26,7 @@ M.load_default_options = function()
     mouse = "a", -- allow the mouse to be used in neovim
     pumheight = 10, -- pop up menu height
     showmode = false, -- we don't need to see things like -- INSERT -- anymore
-    showtabline = 2, -- always show tabs
+    showtabline = 0, -- always show tabs
     smartcase = true, -- smart case
     splitbelow = true, -- force all horizontal splits to go below current window
     splitright = true, -- force all vertical splits to go to the right of current window
@@ -60,6 +60,19 @@ M.load_default_options = function()
   vim.opt.shortmess:append "c" -- don't show redundant messages from ins-completion-menu
   vim.opt.shortmess:append "I" -- don't show the default intro message
   vim.opt.whichwrap:append "<,>,[,],h,l"
+  vim.opt.iskeyword:append "-" -- Consider words separated by '-' as one word
+  vim.opt.fillchars:append "diff:╱"
+  vim.opt.formatoptions = vim.opt.formatoptions
+      - "a" -- turn off auto formatting of paragraphs
+      - "t" -- Auto-wrap text using 'textwidth': nope
+      + "c" -- Auto-wrap comments using 'textwidtAuto-wrap comments using 'textwidth': nope
+      + "r" -- keep the comments going on enter
+      - "o" -- Automatically insert the coment leader after hitting o: nope
+      + "n" -- Make ident lists great again
+      - "2" -- I could'n care less
+      + "1" -- Don't brake a line after a one-letter word
+      + "p" -- Don't break 'Mr.' and 'Feyman!'
+      + "q"
 
   for k, v in pairs(default_options) do
     vim.opt[k] = v

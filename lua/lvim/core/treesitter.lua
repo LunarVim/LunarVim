@@ -53,16 +53,50 @@ function M.config()
       },
     },
     indent = { enable = true, disable = { "yaml", "python" } },
-    autotag = { enable = false },
+    autotag = { enable = true },
     textobjects = {
-      swap = {
-        enable = false,
-        -- swap_next = textobj_swap_keymaps,
-      },
-      -- move = textobj_move_keymaps,
+
       select = {
-        enable = false,
-        -- keymaps = textobj_sel_keymaps,
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ['aa'] = '@parameter.outer',
+          ['ia'] = '@parameter.inner',
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          [']m'] = '@function.outer',
+          [']]'] = '@class.outer',
+        },
+        goto_next_end = {
+          [']M'] = '@function.outer',
+          [']['] = '@class.outer',
+        },
+        goto_previous_start = {
+          ['[m'] = '@function.outer',
+          ['[['] = '@class.outer',
+        },
+        goto_previous_end = {
+          ['[M'] = '@function.outer',
+          ['[]'] = '@class.outer',
+        },
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ['<leader>a'] = '@parameter.inner',
+        },
+        swap_previous = {
+          ['<leader>A'] = '@parameter.inner',
+        },
       },
     },
     textsubjects = {
@@ -88,9 +122,11 @@ function M.config()
       },
     },
     rainbow = {
-      enable = false,
-      extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-      max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+      enable = true,
+      extended_mode = false, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+      disable = { "jsx", "html", "typescriptreact" }, -- list of languages you want to disable the plugin for
+      max_file_lines = nil, -- Do not enable for files with more than n lines, int
+      colors = { "#ff0000", "#ffa500", "#ffff00", "#76ff03", "#0000ff", "#fa0786", "#ee82ee" }, -- table of hex strings
     },
   }
 end
