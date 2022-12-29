@@ -83,18 +83,23 @@ local core_plugins = {
   },
   {
     "hrsh7th/cmp-nvim-lsp",
+    event = "InsertEnter",
     lazy = true,
   },
   {
     "saadparwaiz1/cmp_luasnip",
+    event = "InsertEnter",
     lazy = true,
   },
   {
     "hrsh7th/cmp-buffer",
+    event = "InsertEnter",
     lazy = true,
   },
   {
     "hrsh7th/cmp-path",
+    event = "InsertEnter",
+    lazy = true,
   },
   {
     "folke/neodev.nvim",
