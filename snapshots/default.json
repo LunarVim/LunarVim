@@ -35,6 +35,9 @@
   "indent-blankline.nvim": {
     "commit": "c4c203c"
   },
+  "lazy.nvim": {
+    "commit": "c7122d6"
+  },
   "lir.nvim": {
     "commit": "7d8c6c4"
   },
