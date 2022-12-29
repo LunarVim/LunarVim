@@ -5,10 +5,12 @@ local core_plugins = {
   { "tamago324/nlsp-settings.nvim" },
   {
     "jose-elias-alvarez/null-ls.nvim",
+    lazy = true,
   },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
+    lazy = true,
     config = function()
       require("lvim.core.mason").setup()
     end,
@@ -22,10 +24,11 @@ local core_plugins = {
   { "Tastyep/structlog.nvim" },
 
   { "nvim-lua/popup.nvim" },
-  { "nvim-lua/plenary.nvim" },
+  { "nvim-lua/plenary.nvim", lazy = true },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
+    lazy = true,
     branch = "0.1.x",
     config = function()
       require("lvim.core.telescope").setup()
@@ -34,6 +37,7 @@ local core_plugins = {
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
     requires = { "nvim-telescope/telescope.nvim" },
     build = "make",
     enabled = lvim.builtin.telescope.active,
@@ -41,6 +45,7 @@ local core_plugins = {
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
+    lazy = true,
     config = function()
       if lvim.builtin.cmp then
         require("lvim.core.cmp").setup()
@@ -52,10 +57,12 @@ local core_plugins = {
   },
   {
     "rafamadriz/friendly-snippets",
+    lazy = true,
     enabled = lvim.builtin.luasnip.sources.friendly_snippets,
   },
   {
     "L3MON4D3/LuaSnip",
+    lazy = true,
     config = function()
       local utils = require "lvim.utils"
       local paths = {}
@@ -75,12 +82,15 @@ local core_plugins = {
   },
   {
     "hrsh7th/cmp-nvim-lsp",
+    lazy = true,
   },
   {
     "saadparwaiz1/cmp_luasnip",
+    lazy = true,
   },
   {
     "hrsh7th/cmp-buffer",
+    lazy = true,
   },
   {
     "hrsh7th/cmp-path",
@@ -93,6 +103,7 @@ local core_plugins = {
   -- Autopairs
   {
     "windwp/nvim-autopairs",
+    lazy = true,
     -- event = "InsertEnter",
     config = function()
       require("lvim.core.autopairs").setup()
@@ -103,6 +114,7 @@ local core_plugins = {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
     -- run = ":TSUpdate",
     config = function()
       require("lvim.core.treesitter").setup()
@@ -116,6 +128,7 @@ local core_plugins = {
   -- NvimTree
   {
     "kyazdani42/nvim-tree.lua",
+    lazy = true,
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     config = function()
@@ -126,6 +139,7 @@ local core_plugins = {
   -- Lir
   {
     "christianchiarulli/lir.nvim",
+    lazy = true,
     config = function()
       require("lvim.core.lir").setup()
     end,
@@ -134,7 +148,7 @@ local core_plugins = {
   },
   {
     "lewis6991/gitsigns.nvim",
-
+    lazy = true,
     config = function()
       require("lvim.core.gitsigns").setup()
     end,
@@ -145,6 +159,7 @@ local core_plugins = {
   -- Whichkey
   {
     "folke/which-key.nvim",
+    lazy = true,
     config = function()
       require("lvim.core.which-key").setup()
     end,
@@ -199,6 +214,7 @@ local core_plugins = {
 
   {
     "akinsho/bufferline.nvim",
+    lazy = true,
     config = function()
       require("lvim.core.bufferline").setup()
     end,
@@ -210,6 +226,7 @@ local core_plugins = {
   -- Debugging
   {
     "mfussenegger/nvim-dap",
+    lazy = true,
     -- event = "BufWinEnter",
     config = function()
       require("lvim.core.dap").setup()
@@ -220,6 +237,7 @@ local core_plugins = {
   -- Debugger user interface
   {
     "rcarriga/nvim-dap-ui",
+    lazy = true,
     config = function()
       require("lvim.core.dap").setup_ui()
     end,
@@ -238,6 +256,7 @@ local core_plugins = {
   -- Terminal
   {
     "akinsho/toggleterm.nvim",
+    lazy = true,
     event = "BufWinEnter",
     branch = "main",
     config = function()
@@ -249,6 +268,7 @@ local core_plugins = {
   -- SchemaStore
   {
     "b0o/schemastore.nvim",
+    lazy = true,
   },
 
   {
