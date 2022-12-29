@@ -43,7 +43,7 @@ local core_plugins = {
         require("lvim.core.cmp").setup()
       end
     end,
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
