@@ -287,11 +287,16 @@ local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "defa
 local content = vim.fn.readfile(default_snapshot_path)
 local default_sha1 = assert(vim.fn.json_decode(content))
 
+-- taken form <https://github.com/folke/lazy.nvim/blob/c7122d64cdf16766433588486adcee67571de6d0/lua/lazy/core/plugin.lua#L27>
+local get_short_name = function(long_name)
+  local name = long_name:sub(-4) == ".git" and long_name:sub(1, -5) or long_name
+  local slash = name:reverse():find("/", 1, true) --[[@as number?]]
+  return slash and name:sub(#name - slash + 2) or long_name:gsub("%W+", "_")
+end
+
 local get_default_sha1 = function(spec)
-  local _, short_name = pcall(function()
-    return require("lazy.core.plugin").Spec.get_name(spec[1])
-  end)
-  return short_name and default_sha1[short_name] and default_sha1[short_name].commit
+  local short_name = get_short_name(spec[1])
+  return default_sha1[short_name] and default_sha1[short_name].commit
 end
 
 if not vim.env.LVIM_DEV_MODE then
