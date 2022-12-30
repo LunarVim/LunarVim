@@ -116,6 +116,9 @@ function plugin_loader.load(configurations)
         missing = true,
         colorscheme = { lvim.colorscheme, "lunar", "habamax" },
       },
+      ui = {
+        border = "rounded",
+      },
       root = plugins_dir,
       git = {
         timeout = 120,
