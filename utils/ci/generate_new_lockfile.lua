@@ -91,7 +91,6 @@ local function write_lockfile(verbose)
         local dereferenced_commit = result:match("\n(.*)\trefs/tags/" .. entry.tag .. "%^{}\n")
         if dereferenced_commit then
           latest_sha = dereferenced_commit:sub(1, 7)
-          vim.pretty_print(latest_sha)
         end
       end
       plugins_list[entry.name] = {
