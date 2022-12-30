@@ -70,7 +70,7 @@ local function write_lockfile(verbose)
       name = name,
       url = url,
       commit = commit,
-      branch = plugin.branch or "HEAD",
+      branch = plugin.branch or plugin.tag or "HEAD",
     })
   end
 

@@ -24,7 +24,7 @@ function plugin_loader.init(opts)
         "git",
         "clone",
         "--filter=blob:none",
-        "--single-branch",
+        "--branch=stable",
         "https://github.com/folke/lazy.nvim.git",
         lazy_install_dir,
       }

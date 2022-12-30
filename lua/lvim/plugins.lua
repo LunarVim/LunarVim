@@ -1,11 +1,13 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
-  { "folke/lazy.nvim" },
+  { "folke/lazy.nvim", tag = "stable" },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
-    dependencies = { "williamboman/mason-lspconfig.nvim", "tamago324/nlsp-settings.nvim" },
+    dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
   },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
+  { "tamago324/nlsp-settings.nvim", lazy = true },
   { "jose-elias-alvarez/null-ls.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
@@ -30,11 +32,12 @@ local core_plugins = {
     config = function()
       require("lvim.core.telescope").setup()
     end,
-    dependencies = { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    dependencies = { "telescope-fzf-native.nvim" },
     lazy = true,
     cmd = "Telescope",
     enabled = lvim.builtin.telescope.active,
   },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true, enabled = lvim.builtin.telescope.active },
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
@@ -45,12 +48,16 @@ local core_plugins = {
     end,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
+      "cmp-nvim-lsp",
+      "cmp_luasnip",
+      "cmp-buffer",
+      "cmp-path",
     },
   },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "saadparwaiz1/cmp_luasnip", lazy = true },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
   {
     "L3MON4D3/LuaSnip",
     config = function()
@@ -71,10 +78,10 @@ local core_plugins = {
     end,
     event = "InsertEnter",
     dependencies = {
-      "rafamadriz/friendly-snippets",
-      enabled = lvim.builtin.luasnip.sources.friendly_snippets,
+      "friendly-snippets",
     },
   },
+  { "rafamadriz/friendly-snippets", lazy = true, cond = lvim.builtin.luasnip.sources.friendly_snippets },
   {
     "folke/neodev.nvim",
     lazy = true,
