@@ -43,6 +43,18 @@ function plugin_loader.init(opts)
 
   vim.opt.runtimepath:append(lazy_install_dir)
   vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
+
+  local lazy_cache = require "lazy.core.cache"
+  lazy_cache.setup {
+    performance = {
+      cache = {
+        enabled = true,
+        path = join_paths(get_cache_dir(), "lazy", "cache"),
+      },
+    },
+  }
+  -- HACK: Don't allow lazy to call setup second time
+  lazy_cache.setup = function() end
 end
 
 function plugin_loader.reset_cache()
@@ -110,10 +122,6 @@ function plugin_loader.load(configurations)
       },
       lockfile = join_paths(get_config_dir(), "lazy-lock.json"),
       performance = {
-        cache = {
-          enabled = true,
-          path = join_paths(get_cache_dir(), "lazy", "cache"),
-        },
         rtp = {
           reset = false,
         },
