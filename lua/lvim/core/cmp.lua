@@ -23,7 +23,7 @@ end
 M.methods.feedkeys = feedkeys
 
 ---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
----@param dir number 1 for forward, -1 for backward; defaults to 1
+---@param dir? number 1 for forward, -1 for backward; defaults to 1
 ---@return boolean true if a jumpable luasnip field is found while inside a snippet
 local function jumpable(dir)
   local luasnip_ok, luasnip = pcall(require, "luasnip")
@@ -58,10 +58,7 @@ local function jumpable(dir)
     if exit_node then
       local exit_pos_end = exit_node.mark:pos_end()
       if (pos[1] > exit_pos_end[1]) or (pos[1] == exit_pos_end[1] and pos[2] > exit_pos_end[2]) then
-        snippet:remove_from_jumplist()
-        luasnip.session.current_nodes[get_current_buf()] = nil
-
-        return false
+        return true
       end
     end
 
@@ -109,9 +106,9 @@ local function jumpable(dir)
   end
 
   if dir == -1 then
-    return luasnip.in_snippet() and luasnip.jumpable(-1)
+    return luasnip.in_snippet() == true and luasnip.jumpable(-1)
   else
-    return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
+    return luasnip.in_snippet() == true and seek_luasnip_cursor_node() and luasnip.jumpable(1)
   end
 end
 
@@ -329,10 +326,15 @@ M.config = function()
             confirm_opts.behavior = cmp.ConfirmBehavior.Insert
           end
           if cmp.confirm(confirm_opts) then
+            if jumpable() then
+              luasnip.jump(1)
+            end
             return -- success, exit early
           end
         end
-        fallback() -- if not exited early, always fallback
+        if not jumpable() or not luasnip.jump(1) then
+          fallback()
+        end
       end),
     },
     cmdline = {
