@@ -195,11 +195,9 @@ local core_plugins = {
   {
     "akinsho/bufferline.nvim",
     config = function()
-      vim.opt.showtabline = 2
       require("lvim.core.bufferline").setup()
     end,
     branch = "main",
-    event = "VeryLazy",
     enabled = lvim.builtin.bufferline.active,
   },
 
