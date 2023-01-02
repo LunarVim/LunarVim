@@ -189,7 +189,6 @@ local core_plugins = {
     config = function()
       require("lvim.core.breadcrumbs").setup()
     end,
-    event = "VeryLazy",
     enabled = lvim.builtin.breadcrumbs.active,
   },
 
