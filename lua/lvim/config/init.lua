@@ -56,9 +56,7 @@ function M:load(config_path)
       vim.notify_once(
         string.format("User-configuration not found. Creating an example configuration in %s", config_path)
       )
-      local config_name = vim.loop.os_uname().version:match "Windows" and "config_win" or "config"
-      local example_config = join_paths(get_lvim_base_dir(), "utils", "installer", config_name .. ".example.lua")
-      vim.fn.mkdir(user_config_dir, "p")
+      local example_config = join_paths(get_lvim_base_dir(), "utils", "installer", "config.example.lua")
       vim.loop.fs_copyfile(example_config, config_path)
     end
   end
@@ -97,8 +95,6 @@ function M:reload()
 
     plugin_loader.reload { plugins, lvim.plugins }
     reload("lvim.core.theme").setup()
-
-    Log:debug "Reloaded configuration"
     reload("lvim.utils.hooks").run_post_reload()
   end)
 end
