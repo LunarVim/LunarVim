@@ -20,7 +20,7 @@ function M.config()
     sync_install = false,
 
     -- Automatically install missing parsers when entering buffer
-    auto_install = false,
+    auto_install = true,
 
     matchup = {
       enable = false, -- mandatory, false will disable the whole extension
