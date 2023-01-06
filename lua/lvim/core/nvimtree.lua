@@ -230,7 +230,7 @@ function M.config()
         cmd = nil,
         args = {},
       },
-    }
+    },
   }
 end
 
