@@ -130,12 +130,12 @@ function M.config()
         severity = {
           min = vim.diagnostic.severity.HINT,
           max = vim.diagnostic.severity.ERROR,
-          icons = {
-            hint = lvim.icons.diagnostics.BoldHint,
-            info = lvim.icons.diagnostics.BoldInformation,
-            warning = lvim.icons.diagnostics.BoldWarning,
-            error = lvim.icons.diagnostics.BoldError,
-          },
+        },
+        icons = {
+          hint = lvim.icons.diagnostics.BoldHint,
+          info = lvim.icons.diagnostics.BoldInformation,
+          warning = lvim.icons.diagnostics.BoldWarning,
+          error = lvim.icons.diagnostics.BoldError,
         },
       },
       filters = {
