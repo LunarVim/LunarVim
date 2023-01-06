@@ -44,7 +44,7 @@ function M.config()
     -- * global (default)
     -- * tab
     -- * win
-    scope_chdir = 'global',
+    scope_chdir = "global",
 
     ---@type string
     ---@usage path to store the project history for use in telescope

@@ -10,7 +10,7 @@ M.config = function()
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
           enabled = true,
-          suggestions = 20
+          suggestions = 20,
         }, -- use which-key for spelling hints
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
