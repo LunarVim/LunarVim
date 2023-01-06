@@ -37,15 +37,14 @@ M.config = function()
           linehl = "GitSignsChangeLn",
         },
       },
+      signcolumn = true,
       numhl = false,
       linehl = false,
-      keymaps = {
-        -- Default keymap options
-        noremap = true,
-        buffer = true,
-      },
-      signcolumn = true,
       word_diff = false,
+      watch_gitdir = {
+        interval = 1000,
+        follow_files = true,
+      },
       attach_to_untracked = true,
       current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
       current_line_blame_opts = {
@@ -54,9 +53,10 @@ M.config = function()
         delay = 1000,
         ignore_whitespace = false,
       },
-      current_line_blame_formatter_opts = {
-        relative_time = false,
-      },
+      current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+      sign_priority = 6,
+      status_formatter = nil, -- Use default
+      update_debounce = 200,
       max_file_length = 40000,
       preview_config = {
         -- Options passed to nvim_open_win
@@ -66,13 +66,6 @@ M.config = function()
         row = 0,
         col = 1,
       },
-      watch_gitdir = {
-        interval = 1000,
-        follow_files = true,
-      },
-      sign_priority = 6,
-      update_debounce = 200,
-      status_formatter = nil, -- Use default
       yadm = { enable = false },
     },
   }
