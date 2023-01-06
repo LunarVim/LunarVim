@@ -17,7 +17,7 @@ function plugin_loader.init(opts)
     local core_plugins_dir = join_paths(get_lvim_base_dir(), "plugins")
     if utils.is_directory(core_plugins_dir) then
       vim.fn.mkdir(plugins_dir, "p")
-      os.remove(plugins_dir)
+      vim.loop.fs_rmdir(plugins_dir)
       require("lvim.utils").fs_copy(core_plugins_dir, plugins_dir)
     else
       vim.fn.system {
