@@ -364,10 +364,10 @@ function __backup_dir() {
   else
     case "$OS" in
       Darwin)
-        cp -R "$src/"* "$src.old/."
+        cp -R "$src/." "$src.old/."
         ;;
       *)
-        cp -r "$src/"* "$src.old/."
+        cp -r "$src/." "$src.old/."
         ;;
     esac
   fi
