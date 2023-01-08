@@ -21,18 +21,30 @@ function M.config()
     -- detection_methods = { "lsp", "pattern" }, -- NOTE: lsp detection will get annoying with multiple langs in one project
     detection_methods = { "pattern" },
 
-    ---@usage patterns used to detect root dir, when **"pattern"** is in detection_methods
+    -- All the patterns used to detect root dir, when **"pattern"** is in
+    -- detection_methods
     patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
 
-    ---@ Show hidden files in telescope when searching for files in a project
+    -- Table of lsp clients to ignore by name
+    -- eg: { "efm", ... }
+    ignore_lsp = {},
+
+    -- Don't calculate root dir on specific directories
+    -- Ex: { "~/.cargo/*", ... }
+    exclude_dirs = {},
+
+    -- Show hidden files in telescope
     show_hidden = false,
 
-    ---@usage When set to false, you will get a message when project.nvim changes your directory.
-    -- When set to false, you will get a message when project.nvim changes your directory.
+    -- When set to false, you will get a message when project.nvim changes your
+    -- directory.
     silent_chdir = true,
 
-    ---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
-    ignore_lsp = {},
+    -- What scope to change the directory, valid options are
+    -- * global (default)
+    -- * tab
+    -- * win
+    scope_chdir = "global",
 
     ---@type string
     ---@usage path to store the project history for use in telescope

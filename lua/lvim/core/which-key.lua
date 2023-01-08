@@ -8,6 +8,10 @@ M.config = function()
       plugins = {
         marks = false, -- shows a list of your marks on ' and `
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        spelling = {
+          enabled = true,
+          suggestions = 20,
+        }, -- use which-key for spelling hints
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
@@ -19,7 +23,16 @@ M.config = function()
           z = false, -- bindings for folds, spelling and others prefixed with z
           g = false, -- bindings for prefixed with g
         },
-        spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
+      },
+      -- add operators that will trigger motion and text object completion
+      -- to enable all native operators, set the preset / operators plugin above
+      operators = { gc = "Comments" },
+      key_labels = {
+        -- override the label used to display some keys. It doesn't effect WK in any other way.
+        -- For example:
+        -- ["<space>"] = "SPC",
+        -- ["<cr>"] = "RET",
+        -- ["<tab>"] = "TAB",
       },
       icons = {
         breadcrumb = lvim.icons.ui.DoubleChevronRight, -- symbol used in the command line area that shows your active key combo
@@ -43,9 +56,10 @@ M.config = function()
         spacing = 3, -- spacing between columns
         align = "left", -- align columns left, center or right
       },
-      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
       ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
+      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
       show_help = true, -- show help message on the command line when the popup is visible
+      show_keys = true, -- show the currently pressed key and its label as a message in the command line
       triggers = "auto", -- automatically setup triggers
       -- triggers = {"<leader>"} -- or specify a list manually
       triggers_blacklist = {
@@ -54,6 +68,12 @@ M.config = function()
         -- most people should not need to change this
         i = { "j", "k" },
         v = { "j", "k" },
+      },
+      -- disable the WhichKey popup for certain buf types and file types.
+      -- Disabled by deafult for Telescope
+      disable = {
+        buftypes = {},
+        filetypes = { "TelescopePrompt" },
       },
     },
 

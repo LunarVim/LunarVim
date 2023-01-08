@@ -18,6 +18,7 @@ M.config = function()
 
   lvim.builtin.lir = vim.tbl_extend("force", lvim.builtin.lir, {
     show_hidden_files = false,
+    ignore = {}, -- { ".DS_Store" "node_modules" } etc.
     devicons_enable = true,
     mappings = {
       ["l"] = actions.edit,
@@ -52,8 +53,8 @@ M.config = function()
         highlight_dirname = true,
       },
 
-      -- -- You can define a function that returns a table to be passed as the third
-      -- -- argument of nvim_open_win().
+      -- You can define a function that returns a table to be passed as the third
+      -- argument of nvim_open_win().
       win_opts = function()
         local width = math.floor(vim.o.columns * 0.7)
         local height = math.floor(vim.o.lines * 0.7)
@@ -61,8 +62,6 @@ M.config = function()
           border = "rounded",
           width = width,
           height = height,
-          -- row = 1,
-          -- col = math.floor((vim.o.columns - width) / 2),
         }
       end,
     },
@@ -76,9 +75,6 @@ M.config = function()
         ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
         { noremap = true, silent = true }
       )
-
-      -- echo cwd
-      -- vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
     end,
   })
 end
