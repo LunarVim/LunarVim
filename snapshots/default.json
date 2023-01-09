@@ -89,9 +89,6 @@
   "nvim-web-devicons": {
     "commit": "05e1072"
   },
-  "onedarker.nvim": {
-    "commit": "b00dd21"
-  },
   "packer.nvim": {
     "commit": "dac4088"
   },
@@ -118,9 +115,6 @@
   },
   "toggleterm.nvim": {
     "commit": "b02a167"
-  },
-  "tokyonight.nvim": {
-    "commit": "def9165"
   },
   "vim-illuminate": {
     "commit": "a6d0b28"
