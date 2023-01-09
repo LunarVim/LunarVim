@@ -98,6 +98,9 @@ function M.config()
         hidden = true,
         show_untracked = true,
       },
+      colorscheme = {
+        enable_preview = true,
+      },
     },
     extensions = {
       fzf = {
