@@ -12,31 +12,22 @@ function M.run_pre_reload()
   Log:debug "Starting pre-reload hook"
 end
 
-function M.run_on_packer_complete()
-  Log:debug "Packer operation complete"
-  vim.api.nvim_exec_autocmds("User", { pattern = "PackerComplete" })
-
-  -- -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
-  -- vim.g.colors_name = lvim.colorscheme
-  -- pcall(vim.cmd.colorscheme, lvim.colorscheme)
-
-  if M._reload_triggered then
-    Log:debug "Reloaded configuration"
-    M._reload_triggered = nil
-  end
-end
+-- TODO: convert to lazy.nvim
+-- function M.run_on_packer_complete()
+-- -- FIXME(kylo252): nvim-tree.lua/lua/nvim-tree/view.lua:442: Invalid window id
+-- vim.g.colors_name = lvim.colorscheme
+-- pcall(vim.cmd.colorscheme, lvim.colorscheme)
+-- end
 
 function M.run_post_reload()
   Log:debug "Starting post-reload hook"
-  M._reload_triggered = true
 end
 
----Reset any startup cache files used by Packer and Impatient
+---Reset any startup cache files used by lazy.nvim
 ---It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
-  vim.cmd [[LuaCacheClear]]
-  plugin_loader.recompile()
+  plugin_loader.reset_cache()
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
     if module:match "lvim.core" or module:match "lvim.lsp" then
@@ -57,9 +48,7 @@ function M.run_post_update()
       "Please upgrade your Neovim base installation. Newer version of Lunarvim requires v0.7+",
       vim.log.levels.WARN
     )
-    vim.wait(1000, function()
-      return false
-    end)
+    vim.wait(1000)
     local ret = reload("lvim.utils.git").switch_lvim_branch(compat_tag)
     if ret then
       vim.notify("Reverted to the last known compatible version: " .. compat_tag, vim.log.levels.WARN)

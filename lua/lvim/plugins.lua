@@ -1,13 +1,14 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
-  -- Packer can manage itself as an optional plugin
-  { "wbthomason/packer.nvim" },
-  { "neovim/nvim-lspconfig" },
-  { "tamago324/nlsp-settings.nvim" },
+  { "folke/lazy.nvim", tag = "stable" },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
   },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
+  { "tamago324/nlsp-settings.nvim", lazy = true },
+  { "jose-elias-alvarez/null-ls.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
@@ -31,14 +32,12 @@ local core_plugins = {
     config = function()
       require("lvim.core.telescope").setup()
     end,
-    disable = not lvim.builtin.telescope.active,
+    dependencies = { "telescope-fzf-native.nvim" },
+    lazy = true,
+    cmd = "Telescope",
+    enabled = lvim.builtin.telescope.active,
   },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
-    run = "make",
-    disable = not lvim.builtin.telescope.active,
-  },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true, enabled = lvim.builtin.telescope.active },
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
@@ -47,21 +46,25 @@ local core_plugins = {
         require("lvim.core.cmp").setup()
       end
     end,
-    requires = {
-      "L3MON4D3/LuaSnip",
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      "cmp-nvim-lsp",
+      "cmp_luasnip",
+      "cmp-buffer",
+      "cmp-path",
     },
   },
-  {
-    "rafamadriz/friendly-snippets",
-    disable = not lvim.builtin.luasnip.sources.friendly_snippets,
-  },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "saadparwaiz1/cmp_luasnip", lazy = true },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
   {
     "L3MON4D3/LuaSnip",
     config = function()
       local utils = require "lvim.utils"
       local paths = {}
       if lvim.builtin.luasnip.sources.friendly_snippets then
-        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets")
+        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "friendly-snippets")
       end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
       if utils.is_directory(user_snippets) then
@@ -73,32 +76,25 @@ local core_plugins = {
       }
       require("luasnip.loaders.from_snipmate").lazy_load()
     end,
+    event = "InsertEnter",
+    dependencies = {
+      "friendly-snippets",
+    },
   },
-  {
-    "hrsh7th/cmp-nvim-lsp",
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-  },
-  {
-    "hrsh7th/cmp-buffer",
-  },
-  {
-    "hrsh7th/cmp-path",
-  },
+  { "rafamadriz/friendly-snippets", lazy = true, cond = lvim.builtin.luasnip.sources.friendly_snippets },
   {
     "folke/neodev.nvim",
-    module = "neodev",
+    lazy = true,
   },
 
   -- Autopairs
   {
     "windwp/nvim-autopairs",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     config = function()
       require("lvim.core.autopairs").setup()
     end,
-    disable = not lvim.builtin.autopairs.active,
+    enabled = lvim.builtin.autopairs.active,
   },
 
   -- Treesitter
@@ -111,7 +107,7 @@ local core_plugins = {
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "BufReadPost",
+    event = "VeryLazy",
   },
 
   -- NvimTree
@@ -122,7 +118,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.nvimtree").setup()
     end,
-    disable = not lvim.builtin.nvimtree.active,
+    enabled = lvim.builtin.nvimtree.active,
   },
   -- Lir
   {
@@ -130,17 +126,15 @@ local core_plugins = {
     config = function()
       require("lvim.core.lir").setup()
     end,
-    requires = { "kyazdani42/nvim-web-devicons" },
-    disable = not lvim.builtin.lir.active,
+    enabled = lvim.builtin.lir.active,
   },
   {
     "lewis6991/gitsigns.nvim",
-
     config = function()
       require("lvim.core.gitsigns").setup()
     end,
     event = "BufRead",
-    disable = not lvim.builtin.gitsigns.active,
+    enabled = lvim.builtin.gitsigns.active,
   },
 
   -- Whichkey
@@ -149,8 +143,8 @@ local core_plugins = {
     config = function()
       require("lvim.core.which-key").setup()
     end,
-    event = "BufWinEnter",
-    disable = not lvim.builtin.which_key.active,
+    event = "VeryLazy",
+    enabled = lvim.builtin.which_key.active,
   },
 
   -- Comments
@@ -160,7 +154,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.comment").setup()
     end,
-    disable = not lvim.builtin.comment.active,
+    enabled = lvim.builtin.comment.active,
   },
 
   -- project.nvim
@@ -169,13 +163,13 @@ local core_plugins = {
     config = function()
       require("lvim.core.project").setup()
     end,
-    disable = not lvim.builtin.project.active,
+    enabled = lvim.builtin.project.active,
   },
 
   -- Icons
   {
     "kyazdani42/nvim-web-devicons",
-    disable = not lvim.use_icons,
+    enabled = lvim.use_icons,
   },
 
   -- Status Line and Bufferline
@@ -186,7 +180,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.lualine").setup()
     end,
-    disable = not lvim.builtin.lualine.active,
+    enabled = lvim.builtin.lualine.active,
   },
 
   -- breadcrumbs
@@ -195,7 +189,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.breadcrumbs").setup()
     end,
-    disable = not lvim.builtin.breadcrumbs.active,
+    enabled = lvim.builtin.breadcrumbs.active,
   },
 
   {
@@ -204,8 +198,7 @@ local core_plugins = {
       require("lvim.core.bufferline").setup()
     end,
     branch = "main",
-    event = "BufWinEnter",
-    disable = not lvim.builtin.bufferline.active,
+    enabled = lvim.builtin.bufferline.active,
   },
 
   -- Debugging
@@ -215,7 +208,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup()
     end,
-    disable = not lvim.builtin.dap.active,
+    enabled = lvim.builtin.dap.active,
   },
 
   -- Debugger user interface
@@ -224,7 +217,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup_ui()
     end,
-    disable = not lvim.builtin.dap.active,
+    enabled = lvim.builtin.dap.active,
   },
 
   -- alpha
@@ -233,23 +226,24 @@ local core_plugins = {
     config = function()
       require("lvim.core.alpha").setup()
     end,
-    disable = not lvim.builtin.alpha.active,
+    enabled = lvim.builtin.alpha.active,
   },
 
   -- Terminal
   {
     "akinsho/toggleterm.nvim",
-    event = "BufWinEnter",
+    event = "VeryLazy",
     branch = "main",
     config = function()
       require("lvim.core.terminal").setup()
     end,
-    disable = not lvim.builtin.terminal.active,
+    enabled = lvim.builtin.terminal.active,
   },
 
   -- SchemaStore
   {
     "b0o/schemastore.nvim",
+    lazy = true,
   },
 
   {
@@ -257,7 +251,8 @@ local core_plugins = {
     config = function()
       require("lvim.core.illuminate").setup()
     end,
-    disable = not lvim.builtin.illuminate.active,
+    event = "VeryLazy",
+    enabled = lvim.builtin.illuminate.active,
   },
 
   {
@@ -265,7 +260,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.indentlines").setup()
     end,
-    disable = not lvim.builtin.indentlines.active,
+    enabled = lvim.builtin.indentlines.active,
   },
 
   {
@@ -279,7 +274,7 @@ local core_plugins = {
         end
       end)
     end,
-    disable = lvim.colorscheme ~= "onedarker",
+    enabled = lvim.colorscheme == "onedarker",
   },
 
   {
@@ -289,22 +284,29 @@ local core_plugins = {
         require("bigfile").config(lvim.builtin.bigfile.config)
       end)
     end,
-    disable = not lvim.builtin.bigfile.active,
+    enabled = lvim.builtin.bigfile.active,
   },
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 local content = vim.fn.readfile(default_snapshot_path)
-local default_sha1 = vim.fn.json_decode(content)
+local default_sha1 = assert(vim.fn.json_decode(content))
+
+-- taken form <https://github.com/folke/lazy.nvim/blob/c7122d64cdf16766433588486adcee67571de6d0/lua/lazy/core/plugin.lua#L27>
+local get_short_name = function(long_name)
+  local name = long_name:sub(-4) == ".git" and long_name:sub(1, -5) or long_name
+  local slash = name:reverse():find("/", 1, true) --[[@as number?]]
+  return slash and name:sub(#name - slash + 2) or long_name:gsub("%W+", "_")
+end
 
 local get_default_sha1 = function(spec)
-  local short_name, _ = require("packer.util").get_plugin_short_name(spec)
+  local short_name = get_short_name(spec[1])
   return default_sha1[short_name] and default_sha1[short_name].commit
 end
 
 if not vim.env.LVIM_DEV_MODE then
+  --  Manually lock the commit hashes of core plugins
   for _, spec in ipairs(core_plugins) do
-    -- Manually lock the commit hash since Packer's snapshots are unreliable in headless mode
     spec["commit"] = get_default_sha1(spec)
   end
 end

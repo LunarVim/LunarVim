@@ -71,6 +71,7 @@ local function write_lockfile(verbose)
       url = url,
       commit = commit,
       branch = plugin.branch or "HEAD",
+      tag = plugin.tag,
     })
   end
 
@@ -86,12 +87,20 @@ local function write_lockfile(verbose)
         return
       end
       local latest_sha = result:gsub("\tHEAD\n", ""):sub(1, 7)
+      if entry.tag then
+        local dereferenced_commit = result:match("\n(.*)\trefs/tags/" .. entry.tag .. "%^{}\n")
+        if dereferenced_commit then
+          latest_sha = dereferenced_commit:sub(1, 7)
+        end
+      end
       plugins_list[entry.name] = {
         commit = latest_sha,
       }
     end
 
-    local handle = call_proc("git", { args = { "ls-remote", entry.url, entry.branch } }, on_done)
+    local handle = call_proc("git", {
+      args = { "ls-remote", entry.url, entry.tag and entry.tag .. "*" or entry.branch },
+    }, on_done)
     assert(handle)
     table.insert(active_jobs, handle)
   end

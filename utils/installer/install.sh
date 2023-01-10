@@ -222,7 +222,7 @@ function check_neovim_min_version() {
 function verify_core_plugins() {
   msg "Verifying core plugins"
   if ! bash "$LUNARVIM_BASE_DIR/utils/ci/verify_plugins.sh"; then
-    echo "[ERROR]: Unable to verify plugins, make sure to manually run ':PackerSync' when starting lvim for the first time."
+    echo "[ERROR]: Unable to verify plugins, make sure to manually run ':Lazy sync' when starting lvim for the first time."
     exit 1
   fi
   echo "Verification complete!"
@@ -412,15 +412,10 @@ function setup_shim() {
 }
 
 function remove_old_cache_files() {
-  local packer_cache="$LUNARVIM_CONFIG_DIR/plugin/packer_compiled.lua"
-  if [ -e "$packer_cache" ]; then
-    msg "Removing old packer cache file"
-    rm -f "$packer_cache"
-  fi
-
-  if [ -e "$LUNARVIM_CACHE_DIR/luacache" ] || [ -e "$LUNARVIM_CACHE_DIR/lvim_cache" ]; then
-    msg "Removing old startup cache file"
-    rm -f "$LUNARVIM_CACHE_DIR/{luacache,lvim_cache}"
+  local lazy_cache="$LUNARVIM_CACHE_DIR/lazy/cache"
+  if [ -e "$lazy_cache" ]; then
+    msg "Removing old lazy cache file"
+    rm -f "$lazy_cache"
   fi
 }
 
@@ -435,13 +430,11 @@ function setup_lvim() {
   [ ! -f "$LUNARVIM_CONFIG_DIR/config.lua" ] \
     && cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
-  echo "Preparing Packer setup"
+  echo "Preparing Lazy setup"
 
-  "$INSTALL_PREFIX/bin/lvim" --headless \
-    -c 'autocmd User PackerComplete quitall' \
-    -c 'PackerSync'
+  "$INSTALL_PREFIX/bin/lvim" --headless -c 'quitall'
 
-  echo "Packer setup complete"
+  echo "Lazy setup complete"
 
   verify_core_plugins
 }

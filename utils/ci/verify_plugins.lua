@@ -24,28 +24,23 @@ local get_default_sha1 = function(spec)
 end
 
 local is_directory = require("lvim.utils").is_directory
--- see packer.init()
-local packdir = join_paths(get_runtime_dir(), "site", "pack", "packer")
+local lazydir = join_paths(get_runtime_dir(), "site", "pack", "lazy")
 
-local verify_packer = function()
-  if not is_directory(packdir) then
-    io.write "Packer not installed!"
+local verify_lazy = function()
+  if not is_directory(lazydir) then
+    io.write "Lazy.nvim not installed!"
     os.exit(1)
   end
-  local status_ok, packer = pcall(require, "packer")
-  if status_ok and packer then
+  local status_ok, lazy = pcall(require, "lazy")
+  if status_ok and lazy then
     return
   end
-  io.write "Packer not installed!"
+  io.write "Lazy.nvim not installed!"
   os.exit(1)
 end
 
-local packer_config = { opt_dir = join_paths(packdir, "opt"), start_dir = join_paths(packdir, "start") }
-local is_optional = function(spec)
-  return spec.opt or spec.event or spec.cmd or spec.module
-end
 local get_install_path = function(spec)
-  local prefix = is_optional(spec) and packer_config.opt_dir or packer_config.start_dir
+  local prefix = join_paths(lazydir, "opt")
   local path = join_paths(prefix, get_short_name(spec))
   return is_directory(path) and path
 end
@@ -79,7 +74,9 @@ local function call_proc(process, opts, cb)
     { args = opts.args, cwd = opts.cwd or uv.cwd(), stdio = stdio },
     vim.schedule_wrap(function(code)
       if code ~= 0 then
+        ---@diagnostic disable-next-line: undefined-field
         stdout:read_stop()
+        ---@diagnostic disable-next-line: undefined-field
         stderr:read_stop()
       end
 
@@ -106,7 +103,7 @@ end
 local function verify_core_plugins(verbose)
   for _, spec in pairs(core_plugins) do
     local path = get_install_path(spec)
-    if not spec.disable and path then
+    if spec.enabled or spec.enabled == nil and path then
       table.insert(collection, {
         name = get_short_name(spec),
         commit = get_default_sha1(spec),
@@ -140,10 +137,11 @@ local function verify_core_plugins(verbose)
   end
 
   vim.wait(#active_jobs * 60 * 1000, function()
+    ---@diagnostic disable-next-line: redundant-return-value
     return completed == #active_jobs
   end)
 end
 
-verify_packer()
+verify_lazy()
 verify_core_plugins()
 vim.cmd "q"

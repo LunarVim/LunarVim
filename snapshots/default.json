@@ -35,6 +35,9 @@
   "indent-blankline.nvim": {
     "commit": "c4c203c"
   },
+  "lazy.nvim": {
+    "commit": "d211027"
+  },
   "lir.nvim": {
     "commit": "ae190c3"
   },
@@ -91,9 +94,6 @@
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
-  },
-  "packer.nvim": {
-    "commit": "dac4088"
   },
   "plenary.nvim": {
     "commit": "bb44479"

@@ -23,7 +23,7 @@ M.config = function()
         "fugitive",
         "alpha",
         "NvimTree",
-        "packer",
+        "lazy",
         "neogitstatus",
         "Trouble",
         "lir",

@@ -21,13 +21,6 @@ function Log:set_level(level)
       s.level = log_level
     end
   end
-
-  local packer_ok, _ = xpcall(function()
-    require("packer.log").cfg { log = { level = level } }
-  end, debug.traceback)
-  if not packer_ok then
-    vim.notify_once("Unable to set packer's log level to " .. level)
-  end
 end
 
 function Log:init()
