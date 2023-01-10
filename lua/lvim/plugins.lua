@@ -15,9 +15,6 @@ local core_plugins = {
     end,
   },
   {
-    "folke/tokyonight.nvim",
-  },
-  {
     "lunarvim/lunar.nvim",
   },
   { "Tastyep/structlog.nvim" },
@@ -266,20 +263,6 @@ local core_plugins = {
       require("lvim.core.indentlines").setup()
     end,
     disable = not lvim.builtin.indentlines.active,
-  },
-
-  {
-    "lunarvim/onedarker.nvim",
-    branch = "freeze",
-    config = function()
-      pcall(function()
-        if lvim and lvim.colorscheme == "onedarker" then
-          require("onedarker").setup()
-          lvim.builtin.lualine.options.theme = "onedarker"
-        end
-      end)
-    end,
-    disable = lvim.colorscheme ~= "onedarker",
   },
 
   {

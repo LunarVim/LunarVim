@@ -79,6 +79,22 @@ function M.handle()
   ---@deprecated
   lvim.lang = {}
   setmetatable(lvim.lang, mt)
+
+  ---@deprecated
+  lvim.builtin.theme.tokyonight = {}
+  local tokyonight_deprecation = function(t, k, v)
+    lvim.colorscheme = "lunar"
+    deprecate(
+      "lvim.builtin.theme.tokyonight." .. k,
+      "tokyonight was removed from core plugins, configure it like this <https://www.lunarvim.org/docs/master/plugins/extra-plugins#tokyonight>"
+    )
+    rawset(t, k, v ~= nil and v or {})
+    return t[k]
+  end
+  setmetatable(lvim.builtin.theme.tokyonight, {
+    __newindex = tokyonight_deprecation,
+    __index = tokyonight_deprecation,
+  })
 end
 
 return M
