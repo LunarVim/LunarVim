@@ -31,7 +31,7 @@ function M.config()
       selection_strategy = "reset",
       sorting_strategy = nil,
       layout_strategy = nil,
-      layout_config = nil,
+      layout_config = {},
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -97,6 +97,9 @@ function M.config()
       git_files = {
         hidden = true,
         show_untracked = true,
+      },
+      colorscheme = {
+        enable_preview = true,
       },
     },
     extensions = {
