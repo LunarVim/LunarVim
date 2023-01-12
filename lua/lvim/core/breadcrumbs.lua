@@ -95,12 +95,12 @@ end
 
 M.get_filename = function()
   local filename = vim.fn.expand "%:t"
-    
+
   local extension = vim.fn.expand "%:e"
   if string.find(extension, ":") then
-    extension = ""    
+    extension = ""
   end
-    
+
   local f = require "lvim.utils.functions"
 
   if not f.isempty(filename) then
