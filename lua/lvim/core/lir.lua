@@ -21,7 +21,7 @@ M.config = function()
     ignore = {}, -- { ".DS_Store" "node_modules" } etc.
     devicons = {
       enable = true,
-      highlight_dirname = true
+      highlight_dirname = true,
     },
     mappings = {
       ["l"] = actions.edit,
