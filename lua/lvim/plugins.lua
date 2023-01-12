@@ -122,7 +122,7 @@ local core_plugins = {
   },
   -- Lir
   {
-    "LunarVim/lir.nvim",
+    "tamago324/lir.nvim",
     config = function()
       require("lvim.core.lir").setup()
     end,
