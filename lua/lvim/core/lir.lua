@@ -19,7 +19,10 @@ M.config = function()
   lvim.builtin.lir = vim.tbl_extend("force", lvim.builtin.lir, {
     show_hidden_files = false,
     ignore = {}, -- { ".DS_Store" "node_modules" } etc.
-    devicons_enable = true,
+    devicons = {
+      enable = true,
+      highlight_dirname = true,
+    },
     mappings = {
       ["l"] = actions.edit,
       ["<CR>"] = actions.edit,
