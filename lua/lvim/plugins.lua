@@ -52,12 +52,18 @@ local core_plugins = {
       "cmp_luasnip",
       "cmp-buffer",
       "cmp-path",
+      "cmp-cmdline",
     },
   },
   { "hrsh7th/cmp-nvim-lsp", lazy = true },
   { "saadparwaiz1/cmp_luasnip", lazy = true },
   { "hrsh7th/cmp-buffer", lazy = true },
   { "hrsh7th/cmp-path", lazy = true },
+  {
+    "hrsh7th/cmp-cmdline",
+    lazy = true,
+    enabled = lvim.builtin.cmp and lvim.builtin.cmp.cmdline.enable or false,
+  },
   {
     "L3MON4D3/LuaSnip",
     config = function()
