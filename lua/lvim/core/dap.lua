@@ -31,7 +31,6 @@ M.config = function()
         threshold = vim.log.levels.INFO,
       },
       config = {
-        expand_lines = true,
         icons = { expanded = "", collapsed = "", circular = "" },
         mappings = {
           -- Use a table to apply multiple mappings
@@ -42,6 +41,9 @@ M.config = function()
           repl = "r",
           toggle = "t",
         },
+        -- Use this to override mappings for specific elements
+        element_mappings = {},
+        expand_lines = true,
         layouts = {
           {
             elements = {
@@ -62,6 +64,21 @@ M.config = function()
             position = "bottom",
           },
         },
+        controls = {
+          enabled = true,
+          -- Display controls in this element
+          element = "repl",
+          icons = {
+            pause = "",
+            play = "",
+            step_into = "",
+            step_over = "",
+            step_out = "",
+            step_back = "",
+            run_last = "",
+            terminate = "",
+          },
+        },
         floating = {
           max_height = 0.9,
           max_width = 0.5, -- Floats will be treated as percentage of your screen.
@@ -69,6 +86,11 @@ M.config = function()
           mappings = {
             close = { "q", "<Esc>" },
           },
+        },
+        windows = { indent = 1 },
+        render = {
+          max_type_length = nil, -- Can be integer or nil.
+          max_value_lines = 100, -- Can be integer or nil.
         },
       },
     },
