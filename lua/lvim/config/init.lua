@@ -58,9 +58,7 @@ function M:load(config_path)
       )
       local config_name = vim.loop.os_uname().version:match "Windows" and "config_win" or "config"
       local example_config = join_paths(get_lvim_base_dir(), "utils", "installer", config_name .. ".example.lua")
-      if not utils.is_directory(user_config_dir) then
-        vim.fn.mkdir(user_config_dir, "p")
-      end
+      vim.fn.mkdir(user_config_dir, "p")
       vim.loop.fs_copyfile(example_config, config_path)
     end
   end
