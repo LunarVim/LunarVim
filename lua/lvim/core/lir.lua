@@ -83,7 +83,8 @@ M.config = function()
 end
 
 function M.icon_setup()
-  if not (lvim.builtin.lir.devicons and lvim.builtin.lir.devicons.enable) then
+  local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
+  if not devicons_ok then
     return
   end
 
@@ -97,16 +98,13 @@ function M.icon_setup()
     icon_hl = "#42A5F5"
   end
 
-  local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
-  if devicons_ok then
-    devicons.set_icon {
-      lir_folder_icon = {
-        icon = lvim.builtin.lir.icon,
-        color = icon_hl,
-        name = "LirFolderNode",
-      },
-    }
-  end
+  devicons.set_icon {
+    lir_folder_icon = {
+      icon = lvim.builtin.lir.icon,
+      color = icon_hl,
+      name = "LirFolderNode",
+    },
+  }
 end
 
 function M.setup()
