@@ -83,7 +83,7 @@ M.config = function()
 end
 
 function M.icon_setup()
-  if not lvim.builtin.lir.devicons_enable then
+  if not lvim.builtin.lir.devicons.enable then
     return
   end
 
@@ -116,7 +116,7 @@ function M.setup()
   end
 
   if not lvim.use_icons then
-    lvim.builtin.lir.devicons_enable = false
+    lvim.builtin.lir.devicons.enable = false
   end
 
   lir.setup(lvim.builtin.lir)
