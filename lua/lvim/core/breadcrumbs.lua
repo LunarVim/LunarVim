@@ -99,10 +99,17 @@ M.get_filename = function()
   local f = require "lvim.utils.functions"
 
   if not f.isempty(filename) then
-    local file_icon, hl_group = require("nvim-web-devicons").get_icon(filename, extension, { default = true })
+    local file_icon, hl_group
+    local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
+    if lvim.use_icons and devicons_ok then
+      file_icon, hl_group = devicons.get_icon(filename, extension, { default = true })
 
-    if f.isempty(file_icon) then
-      file_icon = lvim.icons.kind.File
+      if f.isempty(file_icon) then
+        file_icon = lvim.icons.kind.File
+      end
+    else
+      file_icon = ""
+      hl_group = "Normal"
     end
 
     local buf_ft = vim.bo.filetype
