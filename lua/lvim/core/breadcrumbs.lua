@@ -217,20 +217,19 @@ M.create_winbar = function()
       "InsertEnter",
       "BufWritePost",
       "TabClosed",
-      "TabEnter"
-    },
-      {
-        group = "_winbar",
-        callback = function()
-          if lvim.builtin.breadcrumbs.active then
-            local status_ok, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
-            if not status_ok then
-              -- TODO:
-              require("lvim.core.breadcrumbs").get_winbar()
-            end
+      "TabEnter",
+    }, {
+      group = "_winbar",
+      callback = function()
+        if lvim.builtin.breadcrumbs.active then
+          local status_ok, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
+          if not status_ok then
+            -- TODO:
+            require("lvim.core.breadcrumbs").get_winbar()
           end
-        end,
-      })
+        end
+      end,
+    })
   end
 end
 
