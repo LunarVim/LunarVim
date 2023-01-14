@@ -27,6 +27,7 @@ M.config = function()
     },
     ui = {
       auto_open = true,
+      auto_open_layout = nil,
       notify = {
         threshold = vim.log.levels.INFO,
       },
@@ -126,7 +127,7 @@ M.setup_ui = function()
 
   if lvim.builtin.dap.ui.auto_open then
     dap.listeners.after.event_initialized["dapui_config"] = function()
-      dapui.open()
+      dapui.open { layout = lvim.builtin.dap.ui.auto_open_layout }
     end
     -- dap.listeners.before.event_terminated["dapui_config"] = function()
     --   dapui.close()
