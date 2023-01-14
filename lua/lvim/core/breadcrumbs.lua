@@ -209,17 +209,16 @@ end
 M.create_winbar = function()
   vim.api.nvim_create_augroup("_winbar", {})
   if vim.fn.has "nvim-0.8" == 1 then
-    vim.api.nvim_create_autocmd(
-      {
-        "CursorHoldI",
-        "CursorHold",
-        "BufWinEnter",
-        "BufFilePost",
-        "InsertEnter",
-        "BufWritePost",
-        "TabClosed",
-        "TabEnter"
-      },
+    vim.api.nvim_create_autocmd({
+      "CursorHoldI",
+      "CursorHold",
+      "BufWinEnter",
+      "BufFilePost",
+      "InsertEnter",
+      "BufWritePost",
+      "TabClosed",
+      "TabEnter"
+    },
       {
         group = "_winbar",
         callback = function()
@@ -231,8 +230,7 @@ M.create_winbar = function()
             end
           end
         end,
-      }
-    )
+      })
   end
 end
 
