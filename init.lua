@@ -25,3 +25,27 @@ local commands = require "lvim.core.commands"
 commands.load(commands.defaults)
 
 require("lvim.lsp").setup()
+
+vim.cmd("set foldmethod=indent")
+vim.cmd("set foldlevel=0")
+vim.cmd("set ai")
+
+--stop auto indent
+vim.cmd("set indentexpr=")
+
+--zoom in and out
+vim.cmd("noremap z2 <c-w>_ \\| <c-w>\\|")
+vim.cmd("noremap z1 <c-w>=")
+
+vim.cmd [[
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
+    set backspace=indent,eol,start
+    set expandtab
+    set autoindent
+    set smarttab
+    set encoding=utf-8
+    set incsearch 
+    set hlsearch
+]]
