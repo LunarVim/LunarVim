@@ -177,7 +177,7 @@ local core_plugins = {
 
   -- Icons
   {
-    "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
     enabled = lvim.use_icons,
   },
 
