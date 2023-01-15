@@ -138,7 +138,10 @@ function plugin_loader.get_core_plugins()
   local get_name = require("lazy.core.plugin").Spec.get_name
   for _, spec in pairs(plugins) do
     if spec.enabled == true or spec.enabled == nil then
-      table.insert(names, get_name(spec[1]))
+      local name = get_name(spec[1])
+      if name ~= "lazy.nvim" then
+        table.insert(names, name)
+      end
     end
   end
   return names
@@ -147,6 +150,7 @@ end
 function plugin_loader.sync_core_plugins()
   local core_plugins = plugin_loader.get_core_plugins()
   Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
+  require("lazy").update { wait = true, plugins = { "lazy.nvim" } }
   require("lazy").sync { wait = true, plugins = core_plugins }
 end
 
