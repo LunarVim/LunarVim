@@ -112,9 +112,10 @@ function M.setup()
 
   pcall(function()
     require("mason-lspconfig").setup(lvim.lsp.installer.setup)
-    local util = require "lspconfig.util"
+
     -- automatic_installation is handled by lsp-manager
-    util.on_setup = nil
+    local settings = require "mason-lspconfig.settings"
+    settings.current.automatic_installation = false
   end)
 
   require("lvim.lsp.null-ls").setup()
