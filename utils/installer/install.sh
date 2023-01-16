@@ -42,7 +42,7 @@ declare -a __npm_deps=(
 )
 # treesitter installed with brew causes conflicts #3738
 if ! command -v tree-sitter &>/dev/null; then
-	__npm_deps+=("tree-sitter-cli")
+  __npm_deps+=("tree-sitter-cli")
 fi
 
 declare -a __pip_deps=(
