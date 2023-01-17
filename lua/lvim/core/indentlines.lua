@@ -18,7 +18,7 @@ M.config = function()
         "text",
       },
       char = lvim.icons.ui.LineLeft,
-      indent_char = lvim.icons.ui.LineLeft,
+      context_char = lvim.icons.ui.LineLeft,
       show_trailing_blankline_indent = false,
       show_first_indent_level = true,
       use_treesitter = true,
