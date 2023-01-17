@@ -39,8 +39,11 @@ declare -a __lvim_dirs=(
 
 declare -a __npm_deps=(
   "neovim"
-  "tree-sitter-cli"
 )
+# treesitter installed with brew causes conflicts #3738
+if ! command -v tree-sitter &>/dev/null; then
+  __npm_deps+=("tree-sitter-cli")
+fi
 
 declare -a __pip_deps=(
   "pynvim"
