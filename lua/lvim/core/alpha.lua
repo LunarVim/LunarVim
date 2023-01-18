@@ -1,17 +1,18 @@
 local M = {}
 
 function M.config()
-  local lvim_dashboard = require "lvim.core.alpha.dashboard"
-  local lvim_startify = require "lvim.core.alpha.startify"
+  local utils = require "lvim.utils"
+  local lvim_dashboard = utils.lazy_set("lvim.core.alpha.dashboard", "get_sections")
+  local lvim_startify = utils.lazy_set("lvim.core.alpha.startify", "get_sections")
   lvim.builtin.alpha = {
     dashboard = {
       config = {},
-      section = lvim_dashboard.get_sections(),
+      section = lvim_dashboard,
       opts = { autostart = true },
     },
     startify = {
       config = {},
-      section = lvim_startify.get_sections(),
+      section = lvim_startify,
       opts = { autostart = true },
     },
     active = true,
