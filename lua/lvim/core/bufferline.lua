@@ -152,6 +152,8 @@ M.setup = function()
     return
   end
 
+  vim.opt.showtabline = 2
+
   bufferline.setup {
     options = lvim.builtin.bufferline.options,
     highlights = lvim.builtin.bufferline.highlights,

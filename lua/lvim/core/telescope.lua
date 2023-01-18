@@ -7,19 +7,20 @@ local M = {}
 ---| "center"   # retain the default telescope theme
 
 function M.config()
-  -- Define this minimal config so that it's available if telescope is not yet available.
+  local lazy_action = function(name)
+    return function(...)
+      if type(name) == "table" then
+        for _, n in ipairs(name) do
+          require("telescope.actions")[n](...)
+        end
+        return
+      end
+      require("telescope.actions")[name](...)
+    end
+  end
 
   lvim.builtin.telescope = {
     ---@usage disable telescope completely [not recommended]
-    active = true,
-    on_config_done = nil,
-  }
-
-  local ok, actions = pcall(require, "telescope.actions")
-  if not ok then
-    return
-  end
-  lvim.builtin.telescope = {
     active = true,
     on_config_done = nil,
     theme = "dropdown", ---@type telescope_themes
@@ -46,18 +47,18 @@ function M.config()
       ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
       mappings = {
         i = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-c>"] = actions.close,
-          ["<C-j>"] = actions.cycle_history_next,
-          ["<C-k>"] = actions.cycle_history_prev,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-          ["<CR>"] = actions.select_default,
+          ["<C-n>"] = lazy_action "move_selection_next",
+          ["<C-p>"] = lazy_action "move_selection_previous",
+          ["<C-c>"] = lazy_action "close",
+          ["<C-j>"] = lazy_action "cycle_history_next",
+          ["<C-k>"] = lazy_action "cycle_history_prev",
+          ["<C-q>"] = lazy_action { "smart_send_to_qflist", "open_qflist" },
+          ["<CR>"] = lazy_action "select_default",
         },
         n = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["<C-n>"] = lazy_action "move_selection_next",
+          ["<C-p>"] = lazy_action "move_selection_previous",
+          ["<C-q>"] = lazy_action { "smart_send_to_qflist", "open_qflist" },
         },
       },
       file_ignore_patterns = {},
@@ -83,10 +84,10 @@ function M.config()
         initial_mode = "normal",
         mappings = {
           i = {
-            ["<C-d>"] = actions.delete_buffer,
+            ["<C-d>"] = lazy_action "delete_buffer",
           },
           n = {
-            ["dd"] = actions.delete_buffer,
+            ["dd"] = lazy_action "delete_buffer",
           },
         },
       },

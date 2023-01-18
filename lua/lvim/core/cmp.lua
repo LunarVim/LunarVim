@@ -118,14 +118,15 @@ end
 M.methods.jumpable = jumpable
 
 M.config = function()
-  local status_cmp_ok, cmp = pcall(require, "cmp")
+  local status_cmp_ok, cmp_types = pcall(require, "cmp.types.cmp")
   if not status_cmp_ok then
     return
   end
-  local status_luasnip_ok, luasnip = pcall(require, "luasnip")
-  if not status_luasnip_ok then
-    return
-  end
+
+  local cmp = require("lvim.utils").require_on_index "cmp"
+  local luasnip = require("lvim.utils").require_on_index "luasnip"
+  local cmp_window_config = require "cmp.config.window"
+  local cmp_mapping = require "cmp.config.mapping"
 
   lvim.builtin.cmp = {
     active = true,
@@ -138,7 +139,7 @@ M.config = function()
       return lvim.builtin.cmp.active
     end,
     confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
+      behavior = cmp_types.ConfirmBehavior.Replace,
       select = false,
     },
     completion = {
@@ -218,8 +219,8 @@ M.config = function()
       end,
     },
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      completion = cmp_window_config.bordered(),
+      documentation = cmp_window_config.bordered(),
     },
     sources = {
       {
@@ -277,24 +278,24 @@ M.config = function()
       { name = "crates" },
       { name = "tmux" },
     },
-    mapping = cmp.mapping.preset.insert {
-      ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-      ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
-      ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-y>"] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+    mapping = cmp_mapping.preset.insert {
+      ["<C-k>"] = cmp_mapping(cmp_mapping.select_prev_item(), { "i", "c" }),
+      ["<C-j>"] = cmp_mapping(cmp_mapping.select_next_item(), { "i", "c" }),
+      ["<Down>"] = cmp_mapping(cmp_mapping.select_next_item { behavior = cmp_types.SelectBehavior.Select }, { "i" }),
+      ["<Up>"] = cmp_mapping(cmp_mapping.select_prev_item { behavior = cmp_types.SelectBehavior.Select }, { "i" }),
+      ["<C-d>"] = cmp_mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp_mapping.scroll_docs(4),
+      ["<C-y>"] = cmp_mapping {
+        i = cmp_mapping.confirm { behavior = cmp_types.ConfirmBehavior.Replace, select = false },
         c = function(fallback)
           if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+            cmp.confirm { behavior = cmp_types.ConfirmBehavior.Replace, select = false }
           else
             fallback()
           end
         end,
       },
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      ["<Tab>"] = cmp_mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_locally_jumpable() then
@@ -308,7 +309,7 @@ M.config = function()
           fallback()
         end
       end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
+      ["<S-Tab>"] = cmp_mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
@@ -317,16 +318,16 @@ M.config = function()
           fallback()
         end
       end, { "i", "s" }),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping(function(fallback)
+      ["<C-Space>"] = cmp_mapping.complete(),
+      ["<C-e>"] = cmp_mapping.abort(),
+      ["<CR>"] = cmp_mapping(function(fallback)
         if cmp.visible() then
           local confirm_opts = vim.deepcopy(lvim.builtin.cmp.confirm_opts) -- avoid mutating the original opts below
           local is_insert_mode = function()
             return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
           end
           if is_insert_mode() then -- prevent overwriting brackets
-            confirm_opts.behavior = cmp.ConfirmBehavior.Insert
+            confirm_opts.behavior = cmp_types.ConfirmBehavior.Insert
           end
           if cmp.confirm(confirm_opts) then
             return -- success, exit early
