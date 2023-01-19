@@ -96,12 +96,12 @@ return {
   },
   buffer_mappings = {
     normal_mode = {
-      ["K"] = { "<cmd>lua vim.lsp.buf.hover()", "Show hover" },
-      ["gd"] = { "<cmd>lua vim.lsp.buf.definition()", "Goto Definition" },
-      ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()", "Goto declaration" },
-      ["gr"] = { "<cmd>lua vim.lsp.buf.references()", "Goto references" },
-      ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()", "Goto Implementation" },
-      ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()", "show signature help" },
+      ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
+      ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition" },
+      ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto declaration" },
+      ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
+      ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
+      ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
       ["gl"] = {
         function()
           local config = lvim.lsp.diagnostics.float
