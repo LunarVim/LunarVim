@@ -7,18 +7,7 @@ local M = {}
 ---| "center"   # retain the default telescope theme
 
 function M.config()
-  local lazy_action = function(name)
-    return function(...)
-      if type(name) == "table" then
-        for _, n in ipairs(name) do
-          require("telescope.actions")[n](...)
-        end
-        return
-      end
-      require("telescope.actions")[name](...)
-    end
-  end
-
+  local actions = require("lvim.utils.modules").require_on_exported_call "telescope.actions"
   lvim.builtin.telescope = {
     ---@usage disable telescope completely [not recommended]
     active = true,
@@ -47,18 +36,24 @@ function M.config()
       ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
       mappings = {
         i = {
-          ["<C-n>"] = lazy_action "move_selection_next",
-          ["<C-p>"] = lazy_action "move_selection_previous",
-          ["<C-c>"] = lazy_action "close",
-          ["<C-j>"] = lazy_action "cycle_history_next",
-          ["<C-k>"] = lazy_action "cycle_history_prev",
-          ["<C-q>"] = lazy_action { "smart_send_to_qflist", "open_qflist" },
-          ["<CR>"] = lazy_action "select_default",
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
+          ["<C-c>"] = actions.close,
+          ["<C-j>"] = actions.cycle_history_next,
+          ["<C-k>"] = actions.cycle_history_prev,
+          ["<C-q>"] = function(...)
+            actions.smart_send_to_qflist(...)
+            actions.open_qflist(...)
+          end,
+          ["<CR>"] = actions.select_default,
         },
         n = {
-          ["<C-n>"] = lazy_action "move_selection_next",
-          ["<C-p>"] = lazy_action "move_selection_previous",
-          ["<C-q>"] = lazy_action { "smart_send_to_qflist", "open_qflist" },
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
+          ["<C-q>"] = function(...)
+            actions.smart_send_to_qflist(...)
+            actions.open_qflist(...)
+          end,
         },
       },
       file_ignore_patterns = {},
@@ -84,10 +79,10 @@ function M.config()
         initial_mode = "normal",
         mappings = {
           i = {
-            ["<C-d>"] = lazy_action "delete_buffer",
+            ["<C-d>"] = actions.delete_buffer,
           },
           n = {
-            ["dd"] = lazy_action "delete_buffer",
+            ["dd"] = actions.delete_buffer,
           },
         },
       },
