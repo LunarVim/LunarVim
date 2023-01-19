@@ -123,8 +123,8 @@ M.config = function()
     return
   end
 
-  local cmp = require("lvim.utils").require_on_index "cmp"
-  local luasnip = require("lvim.utils").require_on_index "luasnip"
+  local cmp = require("lvim.utils.modules").require_on_index "cmp"
+  local luasnip = require("lvim.utils.modules").require_on_index "luasnip"
   local cmp_window_config = require "cmp.config.window"
   local cmp_mapping = require "cmp.config.mapping"
 

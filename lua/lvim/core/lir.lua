@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = function()
-  local utils = require "lvim.utils"
+  local utils = require "lvim.utils.modules"
   local actions = utils.require_on_exported_call "lir.actions"
   local clipboard_actions = utils.require_on_exported_call "lir.clipboard.actions"
 

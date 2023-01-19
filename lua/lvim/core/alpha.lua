@@ -1,9 +1,9 @@
 local M = {}
 
 function M.config()
-  local utils = require "lvim.utils"
-  local lvim_dashboard = utils.lazy_set("lvim.core.alpha.dashboard", "get_sections")
-  local lvim_startify = utils.lazy_set("lvim.core.alpha.startify", "get_sections")
+  local lazy_set = require("lvim.utils.modules").lazy_set
+  local lvim_dashboard = lazy_set("lvim.core.alpha.dashboard", "get_sections")
+  local lvim_startify = lazy_set("lvim.core.alpha.startify", "get_sections")
   lvim.builtin.alpha = {
     dashboard = {
       config = {},
