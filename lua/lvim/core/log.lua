@@ -13,14 +13,20 @@ local notify_opts = {}
 local log_notify_as_notification = false
 
 function Log:set_level(level)
-  local logger_ok, logger = pcall(function()
-    return require("structlog").get_logger "lvim"
-  end)
-  local log_level = Log.levels[level:upper()]
-  if logger_ok and logger and log_level then
-    for _, pipeline in ipairs(logger.pipelines) do
-      pipeline.level = log_level
-    end
+  if
+    not pcall(function()
+      local logger_ok, logger = pcall(function()
+        return require("structlog").get_logger "lvim"
+      end)
+      local log_level = Log.levels[level:upper()]
+      if logger_ok and logger and log_level then
+        for _, pipeline in ipairs(logger.pipelines) do
+          pipeline.level = log_level
+        end
+      end
+    end)
+  then
+    vim.notify "structlog version too old, run `:Lazy sync`"
   end
 end
 
@@ -40,7 +46,7 @@ function Log:init()
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 0, stack_level = 2 }),
             structlog.processors.Timestamper "%H:%M:%S",
           },
-          formatter = structlog.formatters.FormatColorizer( --
+          formatter = structlog.formatters.FormatColorizer(
             "%s [%-5s] %s: %-30s",
             { "timestamp", "level", "logger_name", "msg" },
             { level = structlog.formatters.FormatColorizer.color_level() }
@@ -53,7 +59,7 @@ function Log:init()
             structlog.processors.StackWriter({ "line", "file" }, { max_parents = 3, stack_level = 2 }),
             structlog.processors.Timestamper "%F %H:%M:%S",
           },
-          formatter = structlog.formatters.Format( --
+          formatter = structlog.formatters.Format(
             "%s [%-5s] %s: %-30s",
             { "timestamp", "level", "logger_name", "msg" }
           ),
@@ -108,11 +114,7 @@ function Log:configure_notifications(nvim_notify)
   local notif_pipeline = structlog.Pipeline(
     structlog.level.INFO,
     {},
-    structlog.formatters.Format( --
-      "%s",
-      { "msg" },
-      { blacklist_all = true }
-    ),
+    structlog.formatters.Format("%s", { "msg" }, { blacklist_all = true }),
     structlog.sinks.Adapter(log_writer)
   )
   self.__handle:add_pipeline(notif_pipeline)
@@ -123,11 +125,17 @@ end
 ---@param msg any
 ---@param event any
 function Log:add_entry(level, msg, event)
-  local logger = self:get_logger()
-  if not logger then
-    return
+  if
+    not pcall(function()
+      local logger = self:get_logger()
+      if not logger then
+        return
+      end
+      logger:log(level, vim.inspect(msg), event)
+    end)
+  then
+    vim.notify "structlog version too old, run `:Lazy sync`"
   end
-  logger:log(level, vim.inspect(msg), event)
 end
 
 ---Retrieves the handle of the logger object
