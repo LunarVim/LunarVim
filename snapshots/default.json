@@ -51,19 +51,19 @@
     "commit": "29eedf7"
   },
   "mason-lspconfig.nvim": {
-    "commit": "e11264c"
+    "commit": "5b388c0"
   },
   "mason.nvim": {
-    "commit": "3d9ded5"
+    "commit": "41d6a88"
   },
   "neodev.nvim": {
-    "commit": "15e9e7c"
+    "commit": "e905fb7"
   },
   "nlsp-settings.nvim": {
-    "commit": "ac1e6f3"
+    "commit": "0681602"
   },
   "null-ls.nvim": {
-    "commit": "7bd74a8"
+    "commit": "ef3d4a4"
   },
   "nvim-autopairs": {
     "commit": "f00eb3b"
@@ -87,7 +87,7 @@
     "commit": "e8a89db"
   },
   "nvim-treesitter": {
-    "commit": "42c3a3c"
+    "commit": "c961595"
   },
   "nvim-ts-context-commentstring": {
     "commit": "a0f8956"
