@@ -56,7 +56,7 @@ return {
         { name = "DiagnosticSignError", text = lvim.icons.diagnostics.Error },
         { name = "DiagnosticSignWarn", text = lvim.icons.diagnostics.Warning },
         { name = "DiagnosticSignHint", text = lvim.icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = lvim.icons.diagnostics.Info },
+        { name = "DiagnosticSignInfo", text = lvim.icons.diagnostics.Information },
       },
     },
     virtual_text = true,
