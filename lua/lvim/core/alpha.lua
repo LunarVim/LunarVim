@@ -15,6 +15,7 @@ function M.config()
       opts = { autostart = true },
     },
     active = true,
+    esc_to_quit = true,
     mode = "dashboard",
   }
 end
