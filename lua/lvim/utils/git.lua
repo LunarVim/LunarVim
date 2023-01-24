@@ -126,7 +126,7 @@ function M.get_lvim_tag()
   return tag
 end
 
----Get the current Lunarvim development branch
+---Get the description of currently checked-out commit of Lunarvim
 ---@return string|nil
 function M.get_lvim_description()
   local _, results = git_cmd { args = { "describe", "--dirty", "--always" } }
