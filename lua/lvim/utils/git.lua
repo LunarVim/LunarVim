@@ -126,6 +126,15 @@ function M.get_lvim_tag()
   return tag
 end
 
+---Get the description of currently checked-out commit of Lunarvim
+---@return string|nil
+function M.get_lvim_description()
+  local _, results = git_cmd { args = { "describe", "--dirty", "--always" } }
+
+  local description = if_nil(results[1], M.get_lvim_branch())
+  return description
+end
+
 ---Get currently running version of Lunarvim
 ---@return string
 function M.get_lvim_version()
@@ -133,19 +142,11 @@ function M.get_lvim_version()
 
   local lvim_version
   if current_branch ~= "HEAD" or "" then
-    lvim_version = current_branch .. "-" .. M.get_lvim_current_sha()
+    lvim_version = current_branch .. "-" .. M.get_lvim_description()
   else
     lvim_version = "v" .. M.get_lvim_tag()
   end
   return lvim_version
-end
-
----Get the commit hash of currently checked-out commit of Lunarvim
----@return string|nil
-function M.get_lvim_current_sha()
-  local _, log_results = git_cmd { args = { "log", "--pretty=format:%h", "-1" } }
-  local abbrev_version = if_nil(log_results[1], "")
-  return abbrev_version
 end
 
 return M
