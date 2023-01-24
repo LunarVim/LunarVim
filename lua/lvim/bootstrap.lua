@@ -63,7 +63,7 @@ function M:init(base_dir)
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
 
-  ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
+  ---overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
   ---NOTE: changes to "data" are currently unstable, see #2507
   ---@diagnostic disable-next-line: duplicate-set-field
   vim.fn.stdpath = function(what)
