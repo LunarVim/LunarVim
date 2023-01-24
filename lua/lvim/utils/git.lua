@@ -149,12 +149,4 @@ function M.get_lvim_version()
   return lvim_version
 end
 
----Get the commit hash of currently checked-out commit of Lunarvim
----@return string|nil
-function M.get_lvim_current_sha()
-  local _, log_results = git_cmd { args = { "log", "--pretty=format:%h", "-1" } }
-  local abbrev_version = if_nil(log_results[1], "")
-  return abbrev_version
-end
-
 return M
