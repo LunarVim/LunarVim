@@ -137,6 +137,12 @@ function M.get_lvim_version()
   else
     lvim_version = "v" .. M.get_lvim_tag()
   end
+
+  local _, status = git_cmd { args = { "status", "--porcelain" } }
+  if status and #status > 0 then
+    lvim_version = lvim_version .. "-dirty"
+  end
+
   return lvim_version
 end
 
