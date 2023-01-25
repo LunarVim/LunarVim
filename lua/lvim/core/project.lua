@@ -45,6 +45,7 @@ function M.config()
     datapath = get_cache_dir(),
   }
   ---@cast config +LvimBuiltin
+  config = vim.tbl_extend("keep", config, require("lvim.core.builtins").defaults())
   lvim.builtin.project = config
 end
 

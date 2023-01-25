@@ -141,6 +141,7 @@ M.config = function()
     },
   }
   ---@cast config +LvimBuiltin
+  config = vim.tbl_extend("keep", config, require("lvim.core.builtins").defaults())
   lvim.builtin.bufferline = config
 end
 

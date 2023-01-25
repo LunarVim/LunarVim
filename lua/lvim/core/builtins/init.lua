@@ -28,9 +28,13 @@ local builtins = {
   "mason",
 }
 
+function M.defaults()
+  return { active = true }
+end
+
 function M.init()
   for _, name in ipairs(builtins) do
-    lvim.builtin[name] = { active = true }
+    lvim.builtin[name] = M.defaults()
   end
 
   reload("lvim.core.theme").config()

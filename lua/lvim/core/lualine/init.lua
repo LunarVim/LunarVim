@@ -32,6 +32,7 @@ M.config = function()
     extensions = nil,
   }
   ---@cast config +LvimBuiltin
+  config = vim.tbl_extend("keep", config, require("lvim.core.builtins").defaults())
   lvim.builtin.lualine = config
 end
 
