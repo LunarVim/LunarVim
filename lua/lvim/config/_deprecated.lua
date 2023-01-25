@@ -32,6 +32,15 @@ function M.pre_user_config()
       lvim.builtin.theme.tokyonight.options[k] = v
     end,
   })
+
+  for _, builtin in ipairs {
+    "indentlines",
+    "illuminate",
+    "breadcrumbs",
+  } do
+    lvim.builtin[builtin].options = {}
+  end
+  lvim.builtin.gitsigns.options = {}
 end
 
 function M.post_user_config()
@@ -132,28 +141,62 @@ function M.post_user_config()
   end
 end
 
-M.post_builtin = {
-  -- example:
-  cmp = function()
-    local builtin = "cmp"
-    local table = lvim.builtin[builtin]
-    local allowed_keys = { active = true, on_config = true, on_config_done = true, opts = true }
-    for key, value in pairs(table) do
-      if not allowed_keys[key] then
-        vim.schedule(function()
-          vim.notify(
-            string.format(
-              "`lvim.builtin.%s.%s` is deprecated, use `lvim.builtin.%s.opts.%s` instead",
-              builtin,
-              key,
-              builtin,
-              key
-            )
-          )
-        end)
+M.post_builtin = {}
+
+local function builtin_added_opts(builtin)
+  local table = lvim.builtin[builtin]
+  local allowed_keys = { active = true, on_config = true, on_config_done = true, opts = true }
+  local old_opts = { "options", "setup" }
+  for key, value in pairs(table) do
+    if not allowed_keys[key] then
+      local message
+      if vim.tbl_contains(old_opts, key) then
+        table.opts = value
+
+        message =
+          string.format("`lvim.builtin.%s.%s` is deprecated, use `lvim.builtin.%s.opts` instead", builtin, key, builtin)
+      else
+        table.opts[key] = value
+
+        message = string.format(
+          "`lvim.builtin.%s.%s` is deprecated, use `lvim.builtin.%s.opts.%s` instead",
+          builtin,
+          key,
+          builtin,
+          key
+        )
       end
+      vim.schedule(function()
+        vim.notify(message, vim.log.levels.WARN)
+      end)
     end
-  end,
-}
+  end
+end
+
+for _, builtin in ipairs {
+  "which_key",
+  "gitsigns",
+  "cmp",
+  "dap",
+  "terminal",
+  "telescope",
+  "treesitter",
+  "nvimtree",
+  "lir",
+  "illuminate",
+  "indentlines",
+  "breadcrumbs",
+  "project",
+  "bufferline",
+  "autopairs",
+  "comment",
+  "lualine",
+  "alpha",
+  "mason",
+} do
+  M.post_builtin[builtin] = function()
+    builtin_added_opts(builtin)
+  end
+end
 
 return M
