@@ -50,7 +50,9 @@ function M.init()
 
   lvim.builtin.bigfile = {
     active = true,
-    config = {},
+    config = {
+      configure_treesitter = false,
+    },
   }
 end
 

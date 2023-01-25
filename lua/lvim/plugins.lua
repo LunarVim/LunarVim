@@ -300,16 +300,16 @@ local core_plugins = {
     lazy = lvim.colorscheme ~= "onedarker",
   },
 
-  -- TODO: add option in bigfile to not require treesitter
-  -- {
-  --   "lunarvim/bigfile.nvim",
-  --   config = function()
-  --     pcall(function()
-  --       require("bigfile").config(lvim.builtin.bigfile.config)
-  --     end)
-  --   end,
-  --   enabled = lvim.builtin.bigfile.active,
-  -- },
+  {
+    "lunarvim/bigfile.nvim",
+    branch = "lazy-treesitter",
+    config = function()
+      pcall(function()
+        require("bigfile").config(lvim.builtin.bigfile.config)
+      end)
+    end,
+    enabled = lvim.builtin.bigfile.active,
+  },
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
