@@ -55,7 +55,6 @@ M.setup = function()
   if not status_ok then
     return
   end
-  local Rule = require "nvim-autopairs.rule"
 
   autopairs.setup {
     check_ts = lvim.builtin.autopairs.check_ts,
@@ -70,17 +69,6 @@ M.setup = function()
     map_bs = lvim.builtin.autopairs.map_bs,
     disable_in_visualblock = lvim.builtin.autopairs.disable_in_visualblock,
     fast_wrap = lvim.builtin.autopairs.fast_wrap,
-  }
-
-  require("nvim-treesitter.configs").setup { autopairs = { enable = true } }
-
-  local ts_conds = require "nvim-autopairs.ts-conds"
-
-  -- TODO: can these rules be safely added from "config.lua" ?
-  -- press % => %% is only inside comment or string
-  autopairs.add_rules {
-    Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node { "string", "comment" }),
-    Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
   }
 
   if lvim.builtin.autopairs.on_config_done then
