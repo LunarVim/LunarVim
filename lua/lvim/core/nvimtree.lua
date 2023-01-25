@@ -3,7 +3,7 @@ local Log = require "lvim.core.log"
 
 function M.config()
   local config = {
-    setup = {
+    opts = {
       auto_reload_on_write = false,
       disable_netrw = false,
       hijack_cursor = false,

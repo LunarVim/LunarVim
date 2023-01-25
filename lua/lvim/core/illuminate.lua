@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   local config = {
-    options = {
+    opts = {
       -- providers: provider used to get references in the buffer, ordered by priority
       providers = {
         "lsp",
@@ -60,10 +60,7 @@ M.setup = function()
     return
   end
 
-  local config_ok, _ = pcall(illuminate.configure, lvim.builtin.illuminate.options)
-  if not config_ok then
-    return
-  end
+  pcall(illuminate.configure, lvim.builtin.illuminate.opts)
 end
 
 return M

@@ -58,8 +58,8 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.opts.view.side = "left"
+lvim.builtin.nvimtree.opts.renderer.icons.show.git = false
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true

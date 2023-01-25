@@ -65,14 +65,14 @@ local core_plugins = {
   {
     "hrsh7th/cmp-cmdline",
     lazy = true,
-    enabled = lvim.builtin.cmp and lvim.builtin.cmp.cmdline.enable or false,
+    enabled = lvim.builtin.cmp and lvim.builtin.cmp.opts.cmdline.enable or false,
   },
   {
     "L3MON4D3/LuaSnip",
     config = function()
       local utils = require "lvim.utils"
       local paths = {}
-      if lvim.builtin.luasnip.sources.friendly_snippets then
+      if lvim.builtin.luasnip.opts.sources.friendly_snippets then
         paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "friendly-snippets")
       end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
@@ -90,7 +90,7 @@ local core_plugins = {
       "friendly-snippets",
     },
   },
-  { "rafamadriz/friendly-snippets", lazy = true, cond = lvim.builtin.luasnip.sources.friendly_snippets },
+  { "rafamadriz/friendly-snippets", lazy = true, cond = lvim.builtin.luasnip.opts.sources.friendly_snippets },
   {
     "folke/neodev.nvim",
     lazy = true,
@@ -305,7 +305,7 @@ local core_plugins = {
     branch = "lazy-treesitter",
     config = function()
       pcall(function()
-        require("bigfile").config(lvim.builtin.bigfile.config)
+        require("bigfile").config(lvim.builtin.bigfile.opts)
       end)
     end,
     enabled = lvim.builtin.bigfile.active,

@@ -1,7 +1,7 @@
 local M = {}
 M.config = function()
   local config = {
-    setup = {
+    opts = {
       plugins = {
         marks = false, -- shows a list of your marks on ' and `
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -303,7 +303,7 @@ end
 M.setup = function()
   local which_key = require "which-key"
 
-  which_key.setup(lvim.builtin.which_key.setup)
+  which_key.setup(lvim.builtin.which_key.opts)
 
   local opts = lvim.builtin.which_key.opts
   local vopts = lvim.builtin.which_key.vopts

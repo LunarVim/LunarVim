@@ -32,7 +32,7 @@ M.config = function()
       "noice",
       "",
     },
-    options = {
+    opts = {
       icons = {
         Array = icons.Array .. " ",
         Boolean = icons.Boolean,
@@ -87,7 +87,7 @@ M.setup = function()
   end
 
   M.create_winbar()
-  navic.setup(lvim.builtin.breadcrumbs.options)
+  navic.setup(lvim.builtin.breadcrumbs.opts)
 end
 
 M.get_filename = function()

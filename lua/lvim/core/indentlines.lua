@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
   local config = {
-    options = {
+    opts = {
       enabled = true,
       buftype_exclude = { "terminal", "nofile" },
       filetype_exclude = {
@@ -34,7 +34,7 @@ M.setup = function()
     return
   end
 
-  indent_blankline.setup(lvim.builtin.indentlines.options)
+  indent_blankline.setup(lvim.builtin.indentlines.opts)
 end
 
 return M

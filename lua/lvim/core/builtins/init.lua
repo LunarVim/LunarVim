@@ -25,7 +25,7 @@ local builtins = {
 function M.extend_defaults(config)
   ---@class LvimBuiltin
   ---@field active boolean is builtin enabled
-  ---@field setup table options passed to setup()
+  ---@field opts table options passed to setup()
   ---@field on_config function function called to configure the builtin
   ---@field on_config_done function function called to configure the builtin
 
@@ -40,17 +40,19 @@ function M.init()
 
   reload("lvim.core.theme").config()
 
-  lvim.builtin.cmp.cmdline = { enable = false }
+  lvim.builtin.cmp.opts = { cmdline = { enable = false } }
 
   lvim.builtin.luasnip = {
-    sources = {
-      friendly_snippets = true,
+    opts = {
+      sources = {
+        friendly_snippets = true,
+      },
     },
   }
 
   lvim.builtin.bigfile = {
     active = true,
-    config = {
+    opts = {
       configure_treesitter = false,
     },
   }
