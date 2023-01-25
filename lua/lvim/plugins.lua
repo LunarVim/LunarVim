@@ -12,7 +12,7 @@ local core_plugins = {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("lvim.core.mason").setup()
+      require("lvim.core.builtins").setup "mason"
     end,
     lazy = true,
   },
@@ -33,7 +33,7 @@ local core_plugins = {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function()
-      require("lvim.core.telescope").setup()
+      require("lvim.core.builtins").setup "telescope"
     end,
     dependencies = { "telescope-fzf-native.nvim" },
     lazy = true,
@@ -46,7 +46,7 @@ local core_plugins = {
     "hrsh7th/nvim-cmp",
     config = function()
       if lvim.builtin.cmp then
-        require("lvim.core.cmp").setup()
+        require("lvim.core.builtins").setup "cmp"
       end
     end,
     event = { "InsertEnter", "CmdlineEnter" },
@@ -101,7 +101,7 @@ local core_plugins = {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      require("lvim.core.autopairs").setup()
+      require("lvim.core.builtins").setup "autopairs"
     end,
     enabled = lvim.builtin.autopairs.active,
   },
@@ -114,7 +114,7 @@ local core_plugins = {
       local utils = require "lvim.utils"
       local path = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "nvim-treesitter")
       vim.opt.rtp:prepend(path) -- treesitter needs to be before nvim's runtime in rtp
-      require("lvim.core.treesitter").setup()
+      require("lvim.core.builtins").setup "treesitter"
     end,
     event = "User FileOpened",
     dependencies = "nvim-ts-context-commentstring",
@@ -128,7 +128,7 @@ local core_plugins = {
   {
     "kyazdani42/nvim-tree.lua",
     config = function()
-      require("lvim.core.nvimtree").setup()
+      require("lvim.core.builtins").setup "nvimtree"
     end,
     enabled = lvim.builtin.nvimtree.active,
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFileToggle" },
@@ -138,7 +138,7 @@ local core_plugins = {
   {
     "tamago324/lir.nvim",
     config = function()
-      require("lvim.core.lir").setup()
+      require("lvim.core.builtins").setup "lir"
     end,
     enabled = lvim.builtin.lir.active,
     event = "User DirOpened",
@@ -146,7 +146,7 @@ local core_plugins = {
   {
     "lewis6991/gitsigns.nvim",
     config = function()
-      require("lvim.core.gitsigns").setup()
+      require("lvim.core.builtins").setup "gitsigns"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.gitsigns.active,
@@ -156,7 +156,7 @@ local core_plugins = {
   {
     "folke/which-key.nvim",
     config = function()
-      require("lvim.core.which-key").setup()
+      require("lvim.core.builtins").setup "which-key"
     end,
     event = "VeryLazy",
     enabled = lvim.builtin.which_key.active,
@@ -166,7 +166,7 @@ local core_plugins = {
   {
     "numToStr/Comment.nvim",
     config = function()
-      require("lvim.core.comment").setup()
+      require("lvim.core.builtins").setup "comment"
     end,
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
     event = "User FileOpened",
@@ -176,8 +176,9 @@ local core_plugins = {
   -- project.nvim
   {
     "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
     config = function()
-      require("lvim.core.project").setup()
+      require("lvim.core.builtins").setup "project"
     end,
     enabled = lvim.builtin.project.active,
   },
@@ -195,9 +196,9 @@ local core_plugins = {
     "nvim-lualine/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
     config = function()
-      require("lvim.core.lualine").setup()
+      require("lvim.core.builtins").setup "lualine"
     end,
-    event = "VimEnter",
+    event = "User FileOpened",
     enabled = lvim.builtin.lualine.active,
   },
 
@@ -205,7 +206,7 @@ local core_plugins = {
   {
     "SmiteshP/nvim-navic",
     config = function()
-      require("lvim.core.breadcrumbs").setup()
+      require("lvim.core.builtins").setup "breadcrumbs"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.breadcrumbs.active,
@@ -214,7 +215,7 @@ local core_plugins = {
   {
     "akinsho/bufferline.nvim",
     config = function()
-      require("lvim.core.bufferline").setup()
+      require("lvim.core.builtins").setup "bufferline"
     end,
     branch = "main",
     event = "User FileOpened",
@@ -225,7 +226,7 @@ local core_plugins = {
   {
     "mfussenegger/nvim-dap",
     config = function()
-      require("lvim.core.dap").setup()
+      require("lvim.core.builtins").setup "dap"
     end,
     enabled = lvim.builtin.dap.active,
     event = "User FileOpened",
@@ -245,7 +246,7 @@ local core_plugins = {
   {
     "goolord/alpha-nvim",
     config = function()
-      require("lvim.core.alpha").setup()
+      require("lvim.core.builtins").setup "alpha"
     end,
     enabled = lvim.builtin.alpha.active,
   },
@@ -256,7 +257,7 @@ local core_plugins = {
     event = "VeryLazy",
     branch = "main",
     config = function()
-      require("lvim.core.terminal").setup()
+      require("lvim.core.builtins").setup "terminal"
     end,
     enabled = lvim.builtin.terminal.active,
   },
@@ -270,7 +271,7 @@ local core_plugins = {
   {
     "RRethy/vim-illuminate",
     config = function()
-      require("lvim.core.illuminate").setup()
+      require("lvim.core.builtins").setup "illuminate"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.illuminate.active,
@@ -279,7 +280,7 @@ local core_plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("lvim.core.indentlines").setup()
+      require("lvim.core.builtins").setup "indentlines"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.indentlines.active,
@@ -299,15 +300,16 @@ local core_plugins = {
     lazy = lvim.colorscheme ~= "onedarker",
   },
 
-  {
-    "lunarvim/bigfile.nvim",
-    config = function()
-      pcall(function()
-        require("bigfile").config(lvim.builtin.bigfile.config)
-      end)
-    end,
-    enabled = lvim.builtin.bigfile.active,
-  },
+  -- TODO: add option in bigfile to not require treesitter
+  -- {
+  --   "lunarvim/bigfile.nvim",
+  --   config = function()
+  --     pcall(function()
+  --       require("bigfile").config(lvim.builtin.bigfile.config)
+  --     end)
+  --   end,
+  --   enabled = lvim.builtin.bigfile.active,
+  -- },
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")

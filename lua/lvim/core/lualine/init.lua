@@ -1,14 +1,15 @@
 local M = {}
 M.config = function()
-  lvim.builtin.lualine = {
-    active = true,
+  local config = {
     style = "lvim",
     options = {
       icons_enabled = nil,
       component_separators = nil,
       section_separators = nil,
       theme = nil,
-      disabled_filetypes = nil,
+      disabled_filetypes = {
+        statusline = { "alpha" },
+      },
       globalstatus = true,
     },
     sections = {
@@ -29,8 +30,9 @@ M.config = function()
     },
     tabline = nil,
     extensions = nil,
-    on_config_done = nil,
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.lualine = config
 end
 
 M.setup = function()
@@ -47,11 +49,8 @@ M.setup = function()
 
   require("lvim.core.lualine.styles").update()
 
+  vim.opt.laststatus = 3
   lualine.setup(lvim.builtin.lualine)
-
-  if lvim.builtin.lualine.on_config_done then
-    lvim.builtin.lualine.on_config_done(lualine)
-  end
 end
 
 return M

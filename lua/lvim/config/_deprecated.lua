@@ -17,7 +17,7 @@ local function deprecate(name, alternative)
   end)
 end
 
-function M.handle()
+function M.pre_user_config()
   local mt = {
     __newindex = function(_, k, _)
       deprecate(k)
@@ -32,33 +32,9 @@ function M.handle()
       lvim.builtin.theme.tokyonight.options[k] = v
     end,
   })
-
-  ---@deprecated
-  lvim.builtin.notify = {}
-  setmetatable(lvim.builtin.notify, {
-    __newindex = function(_, k, _)
-      deprecate("lvim.builtin.notify." .. k, "See LunarVim#3294")
-    end,
-  })
-
-  ---@deprecated
-  lvim.builtin.dashboard = {}
-  setmetatable(lvim.builtin.dashboard, {
-    __newindex = function(_, k, _)
-      deprecate("lvim.builtin.dashboard." .. k, "Use `lvim.builtin.alpha` instead. See LunarVim#1906")
-    end,
-  })
-
-  ---@deprecated
-  lvim.lsp.popup_border = {}
-  setmetatable(lvim.lsp.popup_border, mt)
-
-  ---@deprecated
-  lvim.lang = {}
-  setmetatable(lvim.lang, mt)
 end
 
-function M.post_load()
+function M.post_user_config()
   if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
     deprecate("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
     vim.tbl_map(function(c)
@@ -155,5 +131,12 @@ function M.post_load()
     end
   end
 end
+
+M.post_builtin = {
+  -- example:
+  -- which_key = function ()
+  --
+  -- end
+}
 
 return M

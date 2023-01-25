@@ -1,9 +1,7 @@
 local M = {}
 
 function M.config()
-  lvim.builtin.autopairs = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     ---@usage  modifies the function or method delimiter by filetypes
     map_char = {
       all = "(",
@@ -44,6 +42,8 @@ function M.config()
       highlight_grey = "Comment",
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.autopairs = config
 end
 
 local function on_confirm_done(...)
@@ -71,9 +71,6 @@ M.setup = function()
     fast_wrap = lvim.builtin.autopairs.fast_wrap,
   }
 
-  if lvim.builtin.autopairs.on_config_done then
-    lvim.builtin.autopairs.on_config_done(autopairs)
-  end
   pcall(function()
     require "nvim-autopairs.completion.cmp"
     require("cmp").event:off("confirm_done", on_confirm_done)

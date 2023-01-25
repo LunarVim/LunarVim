@@ -1,9 +1,7 @@
 local M = {}
 
 function M.config()
-  lvim.builtin.comment = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     ---Add a space b/w comment and the line
     ---@type boolean
     padding = true,
@@ -72,15 +70,14 @@ function M.config()
     ---@type function|nil
     post_hook = nil,
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.comment = config
 end
 
 function M.setup()
   local nvim_comment = require "Comment"
 
   nvim_comment.setup(lvim.builtin.comment)
-  if lvim.builtin.comment.on_config_done then
-    lvim.builtin.comment.on_config_done(nvim_comment)
-  end
 end
 
 return M

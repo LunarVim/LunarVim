@@ -2,9 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 M.config = function()
-  lvim.builtin["terminal"] = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     -- size can be a number or function which is passed the current terminal
     size = 20,
     open_mapping = [[<c-\>]],
@@ -46,6 +44,8 @@ M.config = function()
       { nil, "<M-3>", "Float Terminal", "float", nil },
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.terminal = config
 end
 
 --- Get current buffer size
@@ -97,10 +97,6 @@ M.setup = function()
     }
 
     M.add_exec(opts)
-  end
-
-  if lvim.builtin.terminal.on_config_done then
-    lvim.builtin.terminal.on_config_done(terminal)
   end
 end
 

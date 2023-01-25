@@ -1,23 +1,21 @@
 local M = {}
 
 function M.config()
-  local lazy_set = require("lvim.utils.modules").lazy_set
-  local lvim_dashboard = lazy_set("lvim.core.alpha.dashboard", "get_sections")
-  local lvim_startify = lazy_set("lvim.core.alpha.startify", "get_sections")
-  lvim.builtin.alpha = {
+  local config = {
     dashboard = {
       config = {},
-      section = lvim_dashboard,
+      section = require("lvim.core.alpha.dashboard").get_sections(),
       opts = { autostart = true },
     },
     startify = {
       config = {},
-      section = lvim_startify,
+      section = require("lvim.core.alpha.startify").get_sections(),
       opts = { autostart = true },
     },
-    active = true,
     mode = "dashboard",
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.alpha = config
 end
 
 local function resolve_buttons(theme_name, button_section)
@@ -75,14 +73,6 @@ local function configure_additional_autocmds()
     pattern = "alpha",
     command = "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. vim.opt.showtabline._value,
   })
-  if not lvim.builtin.lualine.options.globalstatus then
-    -- https://github.com/goolord/alpha-nvim/issues/42
-    vim.api.nvim_create_autocmd("FileType", {
-      group = group,
-      pattern = "alpha",
-      command = "set laststatus=0 | autocmd BufUnload <buffer> set laststatus=" .. vim.opt.laststatus._value,
-    })
-  end
 end
 
 function M.setup()

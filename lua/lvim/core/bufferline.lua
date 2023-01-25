@@ -41,9 +41,7 @@ local function custom_filter(buf, buf_nums)
 end
 
 M.config = function()
-  lvim.builtin.bufferline = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     keymap = {
       normal_mode = {},
     },
@@ -142,6 +140,8 @@ M.config = function()
       sort_by = "id",
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.bufferline = config
 end
 
 M.setup = function()
@@ -158,10 +158,6 @@ M.setup = function()
     options = lvim.builtin.bufferline.options,
     highlights = lvim.builtin.bufferline.highlights,
   }
-
-  if lvim.builtin.bufferline.on_config_done then
-    lvim.builtin.bufferline.on_config_done()
-  end
 end
 
 --stylua: ignore

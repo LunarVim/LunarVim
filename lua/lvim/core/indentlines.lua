@@ -1,9 +1,7 @@
 local M = {}
 
 M.config = function()
-  lvim.builtin.indentlines = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     options = {
       enabled = true,
       buftype_exclude = { "terminal", "nofile" },
@@ -25,6 +23,8 @@ M.config = function()
       show_current_context = true,
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.indentlines = config
 end
 
 M.setup = function()
@@ -34,10 +34,6 @@ M.setup = function()
   end
 
   indent_blankline.setup(lvim.builtin.indentlines.options)
-
-  if lvim.builtin.indentlines.on_config_done then
-    lvim.builtin.indentlines.on_config_done()
-  end
 end
 
 return M

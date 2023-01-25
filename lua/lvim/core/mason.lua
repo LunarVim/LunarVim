@@ -3,7 +3,7 @@ local M = {}
 local join_paths = require("lvim.utils").join_paths
 
 function M.config()
-  lvim.builtin.mason = {
+  local config = {
     ui = {
       border = "rounded",
       keymaps = {
@@ -50,6 +50,8 @@ function M.config()
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.mason = config
 end
 
 function M.get_prefix()

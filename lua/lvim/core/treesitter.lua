@@ -2,9 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-  lvim.builtin.treesitter = {
-    on_config_done = nil,
-
+  local config = {
     -- A list of parser names, or "all"
     ensure_installed = {},
 
@@ -93,6 +91,8 @@ function M.config()
       max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.treesitter = config
 end
 
 function M.setup()
@@ -111,10 +111,6 @@ function M.setup()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
-
-  if lvim.builtin.treesitter.on_config_done then
-    lvim.builtin.treesitter.on_config_done(treesitter_configs)
-  end
 end
 
 return M

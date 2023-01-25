@@ -5,9 +5,7 @@ M.config = function()
   local actions = utils.require_on_exported_call "lir.actions"
   local clipboard_actions = utils.require_on_exported_call "lir.clipboard.actions"
 
-  lvim.builtin.lir = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     icon = "",
     show_hidden_files = false,
     ignore = {}, -- { ".DS_Store" "node_modules" } etc.
@@ -72,6 +70,8 @@ M.config = function()
       )
     end,
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.lir = config
 end
 
 function M.icon_setup()
@@ -111,10 +111,6 @@ function M.setup()
 
   lir.setup(lvim.builtin.lir)
   M.icon_setup()
-
-  if lvim.builtin.lir.on_config_done then
-    lvim.builtin.lir.on_config_done(lir)
-  end
 end
 
 return M

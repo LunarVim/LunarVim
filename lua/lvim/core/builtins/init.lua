@@ -1,33 +1,76 @@
 local M = {}
 
+---@class LvimBuiltin
+---@field active boolean is builtin enabled
+---@field setup table options passed to setup()
+---@field on_config function function called to configure the builtin
+---@field on_config_done function function called to configure the builtin
+
 local builtins = {
-  "lvim.core.theme",
-  "lvim.core.which-key",
-  "lvim.core.gitsigns",
-  "lvim.core.cmp",
-  "lvim.core.dap",
-  "lvim.core.terminal",
-  "lvim.core.telescope",
-  "lvim.core.treesitter",
-  "lvim.core.nvimtree",
-  "lvim.core.lir",
-  "lvim.core.illuminate",
-  "lvim.core.indentlines",
-  "lvim.core.breadcrumbs",
-  "lvim.core.project",
-  "lvim.core.bufferline",
-  "lvim.core.autopairs",
-  "lvim.core.comment",
-  "lvim.core.lualine",
-  "lvim.core.alpha",
-  "lvim.core.mason",
+  "which_key",
+  "gitsigns",
+  "cmp",
+  "dap",
+  "terminal",
+  "telescope",
+  "treesitter",
+  "nvimtree",
+  "lir",
+  "illuminate",
+  "indentlines",
+  "breadcrumbs",
+  "project",
+  "bufferline",
+  "autopairs",
+  "comment",
+  "lualine",
+  "alpha",
+  "mason",
 }
 
-function M.config(config)
-  for _, builtin_path in ipairs(builtins) do
-    local builtin = reload(builtin_path)
+function M.init()
+  for _, name in ipairs(builtins) do
+    lvim.builtin[name] = { active = true }
+  end
 
-    builtin.config(config)
+  reload("lvim.core.theme").config()
+
+  lvim.builtin.cmp.cmdline = { enable = false }
+
+  lvim.builtin.luasnip = {
+    sources = {
+      friendly_snippets = true,
+    },
+  }
+
+  lvim.builtin.bigfile = {
+    active = true,
+    config = {},
+  }
+end
+
+function M.setup(builtin_mod_name)
+  local builtin_name = builtin_mod_name:gsub("-", "_")
+  local mod = require("lvim.core." .. builtin_mod_name)
+
+  -- initialize config table
+  mod.config()
+  local builtin = lvim.builtin[builtin_name]
+
+  if type(builtin.on_config) == "function" then
+    builtin.on_config()
+
+    local deprecated = require "lvim.config._deprecated"
+    local deprecation_handler = deprecated.post_builtin[builtin_name]
+    if deprecation_handler then
+      deprecation_handler()
+    end
+  end
+
+  mod.setup()
+
+  if type(builtin.on_config_done) == "function" then
+    builtin.on_config_done()
   end
 end
 

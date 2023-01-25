@@ -5,9 +5,7 @@ local M = {}
 local icons = lvim.icons.kind
 
 M.config = function()
-  lvim.builtin.breadcrumbs = {
-    active = true,
-    on_config_done = nil,
+  local config = {
     winbar_filetype_exclude = {
       "help",
       "startify",
@@ -77,6 +75,8 @@ M.config = function()
       depth_limit_indicator = "..",
     },
   }
+  ---@cast config +LvimBuiltin
+  lvim.builtin.breadcrumbs = config
 end
 
 M.setup = function()
@@ -87,10 +87,6 @@ M.setup = function()
 
   M.create_winbar()
   navic.setup(lvim.builtin.breadcrumbs.options)
-
-  if lvim.builtin.breadcrumbs.on_config_done then
-    lvim.builtin.breadcrumbs.on_config_done()
-  end
 end
 
 M.get_filename = function()

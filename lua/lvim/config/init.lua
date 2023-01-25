@@ -18,7 +18,7 @@ function M:init()
   require("lvim.keymappings").load_defaults()
 
   local builtins = require "lvim.core.builtins"
-  builtins.config { user_config_file = user_config_file }
+  builtins.init()
 
   local settings = require "lvim.config.settings"
   settings.load_defaults()
@@ -26,21 +26,7 @@ function M:init()
   local autocmds = require "lvim.core.autocmds"
   autocmds.load_defaults()
 
-  local lvim_lsp_config = require "lvim.lsp.config"
-  lvim.lsp = vim.deepcopy(lvim_lsp_config)
-
-  lvim.builtin.luasnip = {
-    sources = {
-      friendly_snippets = true,
-    },
-  }
-
-  lvim.builtin.bigfile = {
-    active = true,
-    config = {},
-  }
-
-  require("lvim.config._deprecated").handle()
+  require("lvim.config._deprecated").pre_user_config()
 end
 
 --- Override the configuration with a user provided one
@@ -65,7 +51,7 @@ function M:load(config_path)
 
   Log:set_level(lvim.log.level)
 
-  require("lvim.config._deprecated").post_load()
+  -- require("lvim.config._deprecated").post_load()
 
   autocmds.define_autocmds(lvim.autocommands)
 
