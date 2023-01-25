@@ -80,9 +80,9 @@ function M.load_defaults()
         group = "_filetype_settings",
         pattern = "alpha",
         callback = function()
-          vim.opt.buflisted = false
-          if lvim.builtin.alpha.esc_to_quit then
-            vim.cmd [[
+          vim.cmd [[
+            set nobuflisted
+            nnoremap <silent> <buffer> q :qa<CR>
             nnoremap <silent> <buffer> <esc> :qa<CR>
           ]]
           end
