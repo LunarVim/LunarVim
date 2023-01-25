@@ -1,22 +1,18 @@
 local M = {}
 
 function M.config()
-  local config = {
-    dashboard = {
-      config = {},
-      section = require("lvim.core.alpha.dashboard").get_sections(),
-      opts = { autostart = true },
-    },
-    startify = {
-      config = {},
-      section = require("lvim.core.alpha.startify").get_sections(),
-      opts = { autostart = true },
-    },
-    mode = "dashboard",
+  lvim.builtin.alpha.dashboard = {
+    config = {},
+    section = require("lvim.core.alpha.dashboard").get_sections(),
+    opts = { autostart = true },
   }
-  ---@cast config +LvimBuiltin
-  require("lvim.core.builtins").extend_defaults(config)
-  lvim.builtin.alpha = config
+  lvim.builtin.alpha.startify = {
+    config = {},
+    section = require("lvim.core.alpha.startify").get_sections(),
+    opts = { autostart = true },
+  }
+  lvim.builtin.alpha.mode = "dashboard"
+  lvim.builtin.alpha = require("lvim.core.builtins").add_completion "alpha"
 end
 
 local function resolve_buttons(theme_name, button_section)

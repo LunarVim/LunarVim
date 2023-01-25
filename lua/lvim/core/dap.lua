@@ -1,101 +1,97 @@
 local M = {}
 
 M.config = function()
-  local config = {
-    breakpoint = {
-      text = lvim.icons.ui.Bug,
-      texthl = "DiagnosticSignError",
-      linehl = "",
-      numhl = "",
+  lvim.builtin.dap.breakpoint = {
+    text = lvim.icons.ui.Bug,
+    texthl = "DiagnosticSignError",
+    linehl = "",
+    numhl = "",
+  }
+  lvim.builtin.dap.breakpoint_rejected = {
+    text = lvim.icons.ui.Bug,
+    texthl = "DiagnosticSignError",
+    linehl = "",
+    numhl = "",
+  }
+  lvim.builtin.dap.stopped = {
+    text = lvim.icons.ui.BoldArrowRight,
+    texthl = "DiagnosticSignWarn",
+    linehl = "Visual",
+    numhl = "DiagnosticSignWarn",
+  }
+  lvim.builtin.dap.log = {
+    level = "info",
+  }
+  lvim.builtin.dap.ui = {
+    auto_open = true,
+    notify = {
+      threshold = vim.log.levels.INFO,
     },
-    breakpoint_rejected = {
-      text = lvim.icons.ui.Bug,
-      texthl = "DiagnosticSignError",
-      linehl = "",
-      numhl = "",
-    },
-    stopped = {
-      text = lvim.icons.ui.BoldArrowRight,
-      texthl = "DiagnosticSignWarn",
-      linehl = "Visual",
-      numhl = "DiagnosticSignWarn",
-    },
-    log = {
-      level = "info",
-    },
-    ui = {
-      auto_open = true,
-      notify = {
-        threshold = vim.log.levels.INFO,
+    config = {
+      icons = { expanded = "", collapsed = "", circular = "" },
+      mappings = {
+        -- Use a table to apply multiple mappings
+        expand = { "<CR>", "<2-LeftMouse>" },
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+        toggle = "t",
       },
-      config = {
-        icons = { expanded = "", collapsed = "", circular = "" },
+      -- Use this to override mappings for specific elements
+      element_mappings = {},
+      expand_lines = true,
+      layouts = {
+        {
+          elements = {
+            { id = "scopes", size = 0.33 },
+            { id = "breakpoints", size = 0.17 },
+            { id = "stacks", size = 0.25 },
+            { id = "watches", size = 0.25 },
+          },
+          size = 0.33,
+          position = "right",
+        },
+        {
+          elements = {
+            { id = "repl", size = 0.45 },
+            { id = "console", size = 0.55 },
+          },
+          size = 0.27,
+          position = "bottom",
+        },
+      },
+      controls = {
+        enabled = true,
+        -- Display controls in this element
+        element = "repl",
+        icons = {
+          pause = "",
+          play = "",
+          step_into = "",
+          step_over = "",
+          step_out = "",
+          step_back = "",
+          run_last = "",
+          terminate = "",
+        },
+      },
+      floating = {
+        max_height = 0.9,
+        max_width = 0.5, -- Floats will be treated as percentage of your screen.
+        border = vim.g.border_chars, -- Border style. Can be 'single', 'double' or 'rounded'
         mappings = {
-          -- Use a table to apply multiple mappings
-          expand = { "<CR>", "<2-LeftMouse>" },
-          open = "o",
-          remove = "d",
-          edit = "e",
-          repl = "r",
-          toggle = "t",
+          close = { "q", "<Esc>" },
         },
-        -- Use this to override mappings for specific elements
-        element_mappings = {},
-        expand_lines = true,
-        layouts = {
-          {
-            elements = {
-              { id = "scopes", size = 0.33 },
-              { id = "breakpoints", size = 0.17 },
-              { id = "stacks", size = 0.25 },
-              { id = "watches", size = 0.25 },
-            },
-            size = 0.33,
-            position = "right",
-          },
-          {
-            elements = {
-              { id = "repl", size = 0.45 },
-              { id = "console", size = 0.55 },
-            },
-            size = 0.27,
-            position = "bottom",
-          },
-        },
-        controls = {
-          enabled = true,
-          -- Display controls in this element
-          element = "repl",
-          icons = {
-            pause = "",
-            play = "",
-            step_into = "",
-            step_over = "",
-            step_out = "",
-            step_back = "",
-            run_last = "",
-            terminate = "",
-          },
-        },
-        floating = {
-          max_height = 0.9,
-          max_width = 0.5, -- Floats will be treated as percentage of your screen.
-          border = vim.g.border_chars, -- Border style. Can be 'single', 'double' or 'rounded'
-          mappings = {
-            close = { "q", "<Esc>" },
-          },
-        },
-        windows = { indent = 1 },
-        render = {
-          max_type_length = nil, -- Can be integer or nil.
-          max_value_lines = 100, -- Can be integer or nil.
-        },
+      },
+      windows = { indent = 1 },
+      render = {
+        max_type_length = nil, -- Can be integer or nil.
+        max_value_lines = 100, -- Can be integer or nil.
       },
     },
   }
-  ---@cast config +LvimBuiltin
-  require("lvim.core.builtins").extend_defaults(config)
-  lvim.builtin.dap = config
+  lvim.builtin.dap = require("lvim.core.builtins").add_completion "dap"
 end
 
 M.setup = function()

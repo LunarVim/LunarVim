@@ -149,16 +149,16 @@ function M.get_style(style)
 end
 
 function M.update()
-  local style = M.get_style(lvim.builtin.lualine.style)
+  local style = M.get_style(lvim.builtin.lualine.opts.style)
 
-  lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
+  lvim.builtin.lualine.opts = vim.tbl_deep_extend("keep", lvim.builtin.lualine.opts, style)
 
   local color_template = vim.g.colors_name or lvim.colorscheme
   local theme_supported, template = pcall(function()
     require("lualine.utils.loader").load_theme(color_template)
   end)
   if theme_supported and template then
-    lvim.builtin.lualine.options.theme = color_template
+    lvim.builtin.lualine.opts.options.theme = color_template
   end
 end
 

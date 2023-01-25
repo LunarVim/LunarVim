@@ -134,9 +134,26 @@ end
 
 M.post_builtin = {
   -- example:
-  -- which_key = function ()
-  --
-  -- end
+  cmp = function()
+    local builtin = "cmp"
+    local table = lvim.builtin[builtin]
+    local allowed_keys = { active = true, on_config = true, on_config_done = true, opts = true }
+    for key, value in pairs(table) do
+      if not allowed_keys[key] then
+        vim.schedule(function()
+          vim.notify(
+            string.format(
+              "`lvim.builtin.%s.%s` is deprecated, use `lvim.builtin.%s.opts.%s` instead",
+              builtin,
+              key,
+              builtin,
+              key
+            )
+          )
+        end)
+      end
+    end
+  end,
 }
 
 return M

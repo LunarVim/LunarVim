@@ -22,20 +22,21 @@ local builtins = {
   "mason",
 }
 
-function M.extend_defaults(config)
-  ---@class LvimBuiltin
-  ---@field active boolean is builtin enabled
-  ---@field opts table options passed to setup()
-  ---@field on_config function function called to configure the builtin
-  ---@field on_config_done function function called to configure the builtin
+---@class LvimBuiltin
+---@field active boolean is builtin enabled
+---@field opts table options passed to setup()
+---@field on_config function function called to configure the builtin
+---@field on_config_done function function called to configure the builtin
 
-  config.active = true
+function M.add_completion(builtin)
+  local table = lvim.builtin[builtin]
+  ---@cast table +LvimBuiltin
+  return table
 end
 
 function M.init()
   for _, name in ipairs(builtins) do
-    lvim.builtin[name] = {}
-    M.extend_defaults(lvim.builtin[name])
+    lvim.builtin[name] = { active = true }
   end
 
   reload("lvim.core.theme").config()

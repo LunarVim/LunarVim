@@ -1,6 +1,6 @@
 local M = {}
 M.config = function()
-  local config = {
+  lvim.builtin.lualine.opts = {
     style = "lvim",
     options = {
       icons_enabled = nil,
@@ -31,9 +31,7 @@ M.config = function()
     tabline = nil,
     extensions = nil,
   }
-  ---@cast config +LvimBuiltin
-  require("lvim.core.builtins").extend_defaults(config)
-  lvim.builtin.lualine = config
+  lvim.builtin.lualine = require("lvim.core.builtins").add_completion "lualine"
 end
 
 M.setup = function()
@@ -51,7 +49,7 @@ M.setup = function()
   require("lvim.core.lualine.styles").update()
 
   vim.opt.laststatus = 3
-  lualine.setup(lvim.builtin.lualine)
+  lualine.setup(lvim.builtin.lualine.opts)
 end
 
 return M
