@@ -1,11 +1,5 @@
 local M = {}
 
----@class LvimBuiltin
----@field active boolean is builtin enabled
----@field setup table options passed to setup()
----@field on_config function function called to configure the builtin
----@field on_config_done function function called to configure the builtin
-
 local builtins = {
   "which_key",
   "gitsigns",
@@ -29,6 +23,12 @@ local builtins = {
 }
 
 function M.extend_defaults(config)
+  ---@class LvimBuiltin
+  ---@field active boolean is builtin enabled
+  ---@field setup table options passed to setup()
+  ---@field on_config function function called to configure the builtin
+  ---@field on_config_done function function called to configure the builtin
+
   config.active = true
 end
 
