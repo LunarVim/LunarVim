@@ -156,7 +156,7 @@ local core_plugins = {
   {
     "folke/which-key.nvim",
     config = function()
-      require("lvim.core.builtins").setup "which-key"
+      require("lvim.core.builtins").setup "which_key"
     end,
     event = "VeryLazy",
     enabled = lvim.builtin.which_key.active,

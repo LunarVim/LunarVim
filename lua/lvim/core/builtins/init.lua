@@ -29,7 +29,14 @@ local builtins = {
 ---@field on_config_done function function called to configure the builtin
 
 function M.add_completion(builtin)
-  local table = lvim.builtin[builtin]
+  local table
+
+  if type(builtin) == "string" then
+    table = lvim.builtin[builtin]
+  else
+    table = builtin
+  end
+
   ---@cast table +LvimBuiltin
   return table
 end
@@ -57,21 +64,22 @@ function M.init()
       configure_treesitter = false,
     },
   }
+
+  lvim.lsp = {}
 end
 
-function M.setup(builtin_mod_name)
-  local builtin_name = builtin_mod_name:gsub("-", "_")
-  local mod = require("lvim.core." .. builtin_mod_name)
+-- Configure and set up a builtin
+function M.setup(name, mod_path, config_table)
+  local mod = require(mod_path or ("lvim.core." .. name:gsub("_", "-")))
 
-  -- initialize config table
   mod.config()
-  local builtin = lvim.builtin[builtin_name]
+  local builtin = config_table or lvim.builtin[name]
 
   if type(builtin.on_config) == "function" then
     builtin.on_config()
 
     local deprecated = require "lvim.config._deprecated"
-    local deprecation_handler = deprecated.post_builtin[builtin_name]
+    local deprecation_handler = deprecated.post_builtin[name]
     if deprecation_handler then
       deprecation_handler()
     end

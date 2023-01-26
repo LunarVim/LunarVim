@@ -51,7 +51,7 @@ function M:load(config_path)
 
   Log:set_level(lvim.log.level)
 
-  -- require("lvim.config._deprecated").post_load()
+  require("lvim.config._deprecated").post_user_config()
 
   autocmds.define_autocmds(lvim.autocommands)
 

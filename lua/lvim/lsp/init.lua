@@ -86,13 +86,12 @@ function M.get_common_opts()
   }
 end
 
+function M.config()
+  require("lvim.lsp.config").config()
+end
+
 function M.setup()
   Log:debug "Setting up LSP support"
-
-  require("lvim.lsp.config").config()
-  if type(lvim.lsp.config) == "function" then
-    lvim.lsp.config()
-  end
 
   local lsp_status_ok, _ = pcall(require, "lspconfig")
   if not lsp_status_ok then

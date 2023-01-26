@@ -145,7 +145,8 @@ function M.load_defaults()
           local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
           if not (vim.fn.expand "%" == "" or buftype == "nofile") then
             vim.cmd "do User FileOpened"
-            require("lvim.lsp").setup()
+
+            require("lvim.core.builtins").setup("lsp", "lvim.lsp", lvim.lsp)
           end
         end,
       },

@@ -44,26 +44,10 @@ function M.pre_user_config()
 end
 
 function M.post_user_config()
-  if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
-    deprecate("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
-    vim.tbl_map(function(c)
-      if not vim.tbl_contains(lvim.lsp.automatic_configuration.skipped_servers, c) then
-        table.insert(lvim.lsp.automatic_configuration.skipped_servers, c)
-      end
-    end, lvim.lsp.override)
-  end
-
   if lvim.autocommands.custom_groups then
     deprecate(
       "lvim.autocommands.custom_groups",
       "Use vim.api.nvim_create_autocmd instead or check LunarVim#2592 to learn about the new syntax"
-    )
-  end
-
-  if lvim.lsp.automatic_servers_installation then
-    deprecate(
-      "lvim.lsp.automatic_servers_installation",
-      "Use `lvim.lsp.installer.setup.automatic_installation` instead"
     )
   end
 

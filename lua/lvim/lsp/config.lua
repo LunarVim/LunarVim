@@ -50,9 +50,8 @@ local M = {}
 M.config = function()
   local join_paths = require("lvim.utils").join_paths
 
+  local users_config = lvim.lsp
   lvim.lsp = {
-    -- Function that gets called to configure lvim.lsp
-    config = nil,
     templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
     diagnostics = {
       signs = {
@@ -149,11 +148,9 @@ M.config = function()
       },
       config = {},
     },
-    ---@deprecated use lvim.lsp.automatic_configuration.skipped_servers instead
-    override = {},
-    ---@deprecated use lvim.lsp.installer.setup.automatic_installation instead
-    automatic_servers_installation = nil,
   }
+  local config = vim.tbl_deep_extend("force", lvim.lsp, users_config)
+  lvim.lsp = require("lvim.core.builtins").add_completion(config)
 end
 
 return M
