@@ -33,15 +33,15 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
 
-lvim.builtin.alpha.on_config = function()
-  lvim.builtin.alpha.opts.active = true
-  lvim.builtin.alpha.opts.mode = "dashboard"
-end
+-- lvim.builtin.alpha.opts.active = false
+-- lvim.builtin.alpha.on_config = function()
+--   lvim.builtin.alpha.opts.mode = "startify"
+-- end
 
-lvim.builtin.nvimtree.on_config = function()
-  lvim.builtin.nvimtree.opts.view.side = "left"
-  lvim.builtin.nvimtree.opts.renderer.icons.show.git = false
-end
+-- lvim.builtin.nvimtree.on_config = function()
+--   lvim.builtin.nvimtree.opts.view.side = "right"
+--   lvim.builtin.nvimtree.opts.renderer.icons.show.git = false
+-- end
 
 -- lvim.builtin.treesitter.on_config = function()
 --   lvim.builtin.treesitter.ignore_install = { "haskell" }
