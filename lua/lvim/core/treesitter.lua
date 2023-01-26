@@ -52,7 +52,7 @@ function M.config()
         json = "",
       },
     },
-    indent = { enable = true, disable = { "yaml", "python", "c", "cpp" } },
+    indent = { enable = true, disable = { "yaml", "python" } },
     autotag = { enable = false },
     textobjects = {
       swap = {
