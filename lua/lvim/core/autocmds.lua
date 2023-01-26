@@ -82,7 +82,6 @@ function M.load_defaults()
         callback = function()
           vim.cmd [[
             set nobuflisted
-            nnoremap <silent> <buffer> <esc> :qa<CR>
           ]]
         end,
       },
