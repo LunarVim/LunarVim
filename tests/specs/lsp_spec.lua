@@ -20,7 +20,10 @@ a.describe("lsp workflow", function()
     assert.True(vim.tbl_isempty(errors))
   end)
 
-  lvim.lsp.templates_dir = join_paths(get_cache_dir(), "artifacts")
+  lvim.lsp.on_config = function()
+    lvim.lsp.templates_dir = join_paths(get_cache_dir(), "artifacts")
+  end
+  require("lvim.core.builtins").setup("lsp", "lvim.lsp", lvim.lsp)
 
   a.it("should be able to delete ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
@@ -39,11 +42,9 @@ a.describe("lsp workflow", function()
     assert.True(utils.is_directory(lvim.lsp.templates_dir))
   end)
 
-  a.it("should not include blacklisted servers in the generated templates", function()
-    require("lvim.lsp").setup()
-
+  a.it("should not include skipped_servers in the generated templates", function()
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
-      for _, server_name in ipairs(lvim.lsp.override) do
+      for _, server_name in ipairs(lvim.lsp.automatic_configuration.skipped_servers) do
         local setup_cmd = string.format([[require("lvim.lsp.manager").setup(%q)]], server_name)
         assert.False(helpers.file_contains(file, setup_cmd))
       end
@@ -51,8 +52,6 @@ a.describe("lsp workflow", function()
   end)
 
   a.it("should only include one server per generated template", function()
-    require("lvim.lsp").setup()
-
     local allowed_dupes = { "tailwindcss" }
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
       local content = {}

@@ -24,7 +24,7 @@ a.describe("plugin-loader", function()
   end)
 
   a.it("should be able to load lsp packages without errors", function()
-    require("lvim.lsp").setup()
+    require("lvim.core.builtins").setup("lsp", "lvim.lsp", lvim.lsp)
 
     local lsp_packages = {
       "lspconfig",
