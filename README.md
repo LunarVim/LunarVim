@@ -1,3 +1,20 @@
+# f1lem0n's LunarVim fork
+
+## Installation
+
+If you are using WSL:
+
+```
+bash <(curl -s https://raw.githubusercontent.com/f1lem0n/lunarvim/master/utils/installer/wsl-install.sh)
+```
+
+If you are using Linux desktop:
+
+```
+bash <(curl -s https://raw.githubusercontent.com/f1lem0n/lunarvim/master/utils/installer/desktop-install.sh)
+```
+
+
 ![lunarvim_logo_dark](https://user-images.githubusercontent.com/59826753/159940098-54284f26-f1da-4481-8b03-1deb34c57533.png)
 
 <div align="center"><p>
