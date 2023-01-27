@@ -13,7 +13,7 @@ rm nvim-linux64.deb
 bash <(curl -s https://raw.githubusercontent.com/f1lem0n/lunarvim/master/utils/installer/install.sh)
 
 # add executable to path
-echo "export PATH=/home/f1lem0n/.local/bin:$PATH" >> $HOME/.bashrc
+echo "PATH=/home/f1lem0n/.local/bin:$PATH" >> $HOME/.bashrc
 
 echo "You are almost done..."
 echo "Do not forget to set your terminal font as Anonymice (which is in your ~/Downloads) or another nerd-font."
