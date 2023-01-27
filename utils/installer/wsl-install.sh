@@ -16,11 +16,7 @@ apt install -y \
 rm nvim-linux64.deb
 
 # install lvim
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-
-# copy my settings
-rm -rf $HOME/.config/lvim
-git clone git@github.com:f1lem0n/nvim.git $HOME/.config/lvim
+bash <(curl -s https://raw.githubusercontent.com/f1lem0n/lunarvim/master/utils/installer/install.sh)
 
 # add executable to path
 echo "export PATH=/home/f1lem0n/.local/bin:$PATH" >> $HOME/.bashrc
