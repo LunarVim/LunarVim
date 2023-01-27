@@ -99,7 +99,7 @@ M.config = function()
       ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
     },
     mappings = {
-      [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
+      ["<Esc>"] = { "<cmd>Alpha<CR>", "Dashboard" },
       ["w"] = { "<cmd>w!<CR>", "Save" },
       ["q"] = { "<cmd>confirm q<CR>", "Quit" },
       ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
@@ -111,7 +111,7 @@ M.config = function()
         "Find File",
       },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+      ["t"] = { "<cmd>NvimTreeToggle<CR>", "Tree" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
@@ -284,7 +284,7 @@ M.config = function()
         M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
         r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
         R = { "<cmd>Telescope registers<cr>", "Registers" },
-        t = { "<cmd>Telescope live_grep<cr>", "Text" },
+        g = { "<cmd>Telescope live_grep<cr>", "Grep" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
         p = {

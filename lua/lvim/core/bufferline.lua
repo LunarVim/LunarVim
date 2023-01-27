@@ -101,7 +101,7 @@ M.config = function()
         },
         {
           filetype = "NvimTree",
-          text = "Explorer",
+          text = "Tree",
           highlight = "PanelHeading",
           padding = 1,
         },

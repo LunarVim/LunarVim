@@ -129,7 +129,7 @@ function M.get_sections()
       { "n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>" },
       { "p", lvim.icons.ui.Project .. "  Projects ", "<CMD>Telescope projects<CR>" },
       { "r", lvim.icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>" },
-      { "t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>" },
+      { "g", lvim.icons.ui.FindText .. "  Live Grep", "<CMD>Telescope live_grep<CR>" },
       {
         "c",
         lvim.icons.ui.Gear .. "  Configuration",
