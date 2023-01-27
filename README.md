@@ -4,13 +4,13 @@
 
 If you are using WSL:
 
-```
+```bash
 bash <(curl -s https://raw.githubusercontent.com/f1lem0n/lunarvim/master/utils/installer/wsl-install.sh)
 ```
 
 If you are using Linux desktop:
 
-```
+```bash
 bash <(curl -s https://raw.githubusercontent.com/f1lem0n/lunarvim/master/utils/installer/desktop-install.sh)
 ```
 
