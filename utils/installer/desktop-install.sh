@@ -4,7 +4,7 @@ wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/AnonymousP
 # remove vim if installed and install neovim from source and dependencies
 apt remove vim -y
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
-apt install -y \
+sudo apt install -y \
   ./nvim-linux64.deb \
   ripgrep
 rm nvim-linux64.deb
