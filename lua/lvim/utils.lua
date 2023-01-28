@@ -1,6 +1,47 @@
 local M = {}
 local uv = vim.loop
 
+function M.r_inspect_settings(structure, base_structure_str, limit, separator)
+  limit = limit or 100 -- default item limit
+  separator = separator or "." -- indent string
+  local output = ""
+  if limit < 1 then
+    return "ERROR: Item limit reached."
+  end
+  if structure == nil then
+    output = output .. "-- O" .. separator:sub(2) .. " = nil\n"
+    return output
+  end
+  local ts = type(structure)
+
+  if ts == "table" then
+    for k, v in pairs(structure) do
+      -- replace non alpha keys with ["key"]
+      if tostring(k):match "[^%a_]" then
+        k = '["' .. tostring(k) .. '"]'
+      end
+      output = output .. M.r_inspect_settings(v, base_structure_str, limit, separator .. "." .. tostring(k))
+      if limit < 0 then
+        break
+      end
+    end
+    return output
+  end
+
+  if ts == "string" then
+    -- escape sequences
+    structure = string.format("%q", structure)
+  end
+  separator = separator:gsub("%.%[", "%[")
+  if type(structure) == "function" then
+    -- don't print functions
+    output = output .. "-- " .. base_structure_str .. separator:sub(2) .. " = function ()\n"
+  else
+    output = output .. base_structure_str .. separator:sub(2) .. " = " .. tostring(structure) .. "\n"
+  end
+  return output
+end
+
 -- recursive Print (structure, limit, separator)
 local function r_inspect_settings(structure, limit, separator)
   limit = limit or 100 -- default item limit
