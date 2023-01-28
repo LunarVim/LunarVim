@@ -2,17 +2,34 @@ local M = {}
 local utils = require "lvim.utils"
 local paths = {}
 
-function M.gen_setup_snips()
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LuasnipPreExpand",
+  callback = function()
+    local snippet = require("luasnip").session.event_node
+    local dscr = snippet.dscr[1]
+    local docstring = snippet.docstring[1]
+
+    if string.find(dscr, "lvim") and docstring == "" then
+      M.gen_setup_snip(dscr)
+    end
+  end,
+})
+
+function M.init_empty_setup_snips()
   local ls = require "luasnip"
-  local lua_snippets = {
-    -- ls.parser.parse_snippet("cmp", utils.r_inspect_settings(lvim.builtin.cmp, "lvim.builtin.cmp", 10000, ".")),
-    -- ls.parser.parse_snippet("lir", utils.r_inspect_settings(lvim.builtin.lir, "lvim.builtin.lir", 10000, ".")),
-  }
-  for i, v in pairs(lvim.builtin) do
-    lua_snippets[#lua_snippets + 1] =
-      ls.parser.parse_snippet("lvim.builtin." .. i, utils.r_inspect_settings(v, "lvim.builtin." .. i, 10000, "."))
+  for i, _ in pairs(lvim.builtin) do
+    local lua_snippet = { ls.parser.parse_snippet("lvim.builtin." .. i, "") }
+    ls.add_snippets("lua", lua_snippet, { key = "lvim.builtin." .. i })
   end
-  ls.add_snippets("lua", lua_snippets)
+end
+
+function M.gen_setup_snip(structure_str)
+  local ls = require "luasnip"
+  local structure_split = vim.split(structure_str, "%.")
+  local structure = lvim.builtin[structure_split[3]]
+  local lua_snippet =
+    ls.parser.parse_snippet(structure_str, utils.r_inspect_settings(structure, structure_str, 10000, "."))
+  ls.add_snippets("lua", { lua_snippet }, { key = structure_str })
 end
 
 function M.setup()
@@ -29,7 +46,7 @@ function M.setup()
   }
   require("luasnip.loaders.from_snipmate").lazy_load()
 
-  M.gen_setup_snips()
+  M.init_empty_setup_snips()
 end
 
 return M
