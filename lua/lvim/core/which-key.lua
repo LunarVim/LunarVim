@@ -99,8 +99,8 @@ M.config = function()
       ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
     },
     mappings = {
-      ["<Esc>"] = { "<cmd>Alpha<CR>", "Dashboard" },
-      ["w"] = { "<cmd>w!<CR>", "Save" },
+      ["<Esc>"] = { "<cmd>Alpha<CR>", "Toggle Dashboard" },
+      ["w"] = { "<cmd>w!<CR>", "Write" },
       ["q"] = { "<cmd>confirm q<CR>", "Quit" },
       ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
       ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
