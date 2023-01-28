@@ -119,6 +119,18 @@ function M.load_defaults()
         end,
       },
     },
+    {
+      "FileType",
+      {
+        group = "_auto_hide_tree",
+        pattern = "*",
+        callback = function()
+          if vim.bo.filetype ~= "NvimTree" then
+            vim.cmd [[ NvimTreeClose ]]
+          end
+        end
+      },
+    },
   }
 
   M.define_autocmds(definitions)
