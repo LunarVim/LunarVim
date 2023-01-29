@@ -10,7 +10,9 @@ vim.api.nvim_create_autocmd("User", {
     local docstring = snippet.docstring[1]
 
     if string.find(dscr, "lvim") and docstring == "" then
-      M.gen_setup_snip(dscr)
+      local snip_docstring = M.gen_setup_snip(dscr)
+      local docstring_lines = vim.split(snip_docstring, "\n")
+      vim.api.nvim_put(docstring_lines, "c", true, true)
     end
   end,
 })
@@ -27,9 +29,10 @@ function M.gen_setup_snip(structure_str)
   local ls = require "luasnip"
   local structure_split = vim.split(structure_str, "%.")
   local structure = lvim.builtin[structure_split[3]]
-  local lua_snippet =
-    ls.parser.parse_snippet(structure_str, utils.r_inspect_settings(structure, structure_str, 10000, "."))
+  local result = utils.r_inspect_settings(structure, structure_str, 10000, ".")
+  local lua_snippet = ls.parser.parse_snippet(structure_str, result)
   ls.add_snippets("lua", { lua_snippet }, { key = structure_str })
+  return result
 end
 
 function M.setup()
