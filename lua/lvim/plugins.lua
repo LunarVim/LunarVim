@@ -6,14 +6,20 @@ local core_plugins = {
     lazy = true,
     dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
   },
-  { "williamboman/mason-lspconfig.nvim", lazy = true, dependencies = "mason.nvim" },
-  { "tamago324/nlsp-settings.nvim", lazy = true },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    cmd = { "LspInstall", "LspUninstall" },
+    lazy = true,
+    dependencies = "mason.nvim",
+  },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
   { "jose-elias-alvarez/null-ls.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
       require("lvim.core.mason").setup()
     end,
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     lazy = true,
   },
   {
@@ -27,7 +33,7 @@ local core_plugins = {
   { "Tastyep/structlog.nvim", lazy = true },
 
   { "nvim-lua/popup.nvim", lazy = true },
-  { "nvim-lua/plenary.nvim", lazy = true },
+  { "nvim-lua/plenary.nvim", cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" }, lazy = true },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -116,6 +122,7 @@ local core_plugins = {
       vim.opt.rtp:prepend(path) -- treesitter needs to be before nvim's runtime in rtp
       require("lvim.core.treesitter").setup()
     end,
+    cmd = { "TSInstall", "TSUninstall", "TSUpdate", "TSInstallInfo", "TSInstallSync", "TSInstallFromGrammar" },
     event = "User FileOpened",
     dependencies = "nvim-ts-context-commentstring",
   },
@@ -149,6 +156,7 @@ local core_plugins = {
       require("lvim.core.gitsigns").setup()
     end,
     event = "User FileOpened",
+    cmd = "Gitsigns",
     enabled = lvim.builtin.gitsigns.active,
   },
 
@@ -158,6 +166,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.which-key").setup()
     end,
+    cmd = "WhichKey",
     event = "VeryLazy",
     enabled = lvim.builtin.which_key.active,
   },
