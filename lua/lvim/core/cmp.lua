@@ -122,6 +122,8 @@ M.config = function()
   if not status_cmp_ok then
     return
   end
+  local ConfirmBehavior = cmp_types.ConfirmBehavior
+  local SelectBehavior = cmp_types.SelectBehavior
 
   local cmp = require("lvim.utils.modules").require_on_index "cmp"
   local luasnip = require("lvim.utils.modules").require_on_index "luasnip"
@@ -139,7 +141,7 @@ M.config = function()
       return lvim.builtin.cmp.active
     end,
     confirm_opts = {
-      behavior = cmp_types.ConfirmBehavior.Replace,
+      behavior = ConfirmBehavior.Replace,
       select = false,
     },
     completion = {
@@ -215,7 +217,7 @@ M.config = function()
     },
     snippet = {
       expand = function(args)
-        require("luasnip").lsp_expand(args.body)
+        luasnip.lsp_expand(args.body)
       end,
     },
     window = {
@@ -256,7 +258,7 @@ M.config = function()
       {
         name = "nvim_lsp",
         entry_filter = function(entry, ctx)
-          local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+          local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
           if kind == "Snippet" and ctx.prev_context.filetype == "java" then
             return false
           end
@@ -281,15 +283,15 @@ M.config = function()
     mapping = cmp_mapping.preset.insert {
       ["<C-k>"] = cmp_mapping(cmp_mapping.select_prev_item(), { "i", "c" }),
       ["<C-j>"] = cmp_mapping(cmp_mapping.select_next_item(), { "i", "c" }),
-      ["<Down>"] = cmp_mapping(cmp_mapping.select_next_item { behavior = cmp_types.SelectBehavior.Select }, { "i" }),
-      ["<Up>"] = cmp_mapping(cmp_mapping.select_prev_item { behavior = cmp_types.SelectBehavior.Select }, { "i" }),
+      ["<Down>"] = cmp_mapping(cmp_mapping.select_next_item { behavior = SelectBehavior.Select }, { "i" }),
+      ["<Up>"] = cmp_mapping(cmp_mapping.select_prev_item { behavior = SelectBehavior.Select }, { "i" }),
       ["<C-d>"] = cmp_mapping.scroll_docs(-4),
       ["<C-f>"] = cmp_mapping.scroll_docs(4),
       ["<C-y>"] = cmp_mapping {
-        i = cmp_mapping.confirm { behavior = cmp_types.ConfirmBehavior.Replace, select = false },
+        i = cmp_mapping.confirm { behavior = ConfirmBehavior.Replace, select = false },
         c = function(fallback)
           if cmp.visible() then
-            cmp.confirm { behavior = cmp_types.ConfirmBehavior.Replace, select = false }
+            cmp.confirm { behavior = ConfirmBehavior.Replace, select = false }
           else
             fallback()
           end
@@ -327,7 +329,7 @@ M.config = function()
             return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
           end
           if is_insert_mode() then -- prevent overwriting brackets
-            confirm_opts.behavior = cmp_types.ConfirmBehavior.Insert
+            confirm_opts.behavior = ConfirmBehavior.Insert
           end
           if cmp.confirm(confirm_opts) then
             return -- success, exit early
