@@ -3,24 +3,21 @@ local core_plugins = {
   { "folke/lazy.nvim", tag = "stable" },
   {
     "neovim/nvim-lspconfig",
-    lazy = true,
     dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
   },
   {
     "williamboman/mason-lspconfig.nvim",
     cmd = { "LspInstall", "LspUninstall" },
-    lazy = true,
     dependencies = "mason.nvim",
   },
-  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-  { "jose-elias-alvarez/null-ls.nvim", lazy = true },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings" },
+  { "jose-elias-alvarez/null-ls.nvim" },
   {
     "williamboman/mason.nvim",
     config = function()
       require("lvim.core.mason").setup()
     end,
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    lazy = true,
   },
   {
     "folke/tokyonight.nvim",
@@ -30,10 +27,10 @@ local core_plugins = {
     "lunarvim/lunar.nvim",
     lazy = lvim.colorscheme ~= "lunar",
   },
-  { "Tastyep/structlog.nvim", lazy = true },
+  { "Tastyep/structlog.nvim" },
 
-  { "nvim-lua/popup.nvim", lazy = true },
-  { "nvim-lua/plenary.nvim", cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" }, lazy = true },
+  { "nvim-lua/popup.nvim" },
+  { "nvim-lua/plenary.nvim", cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" } },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -42,11 +39,10 @@ local core_plugins = {
       require("lvim.core.telescope").setup()
     end,
     dependencies = { "telescope-fzf-native.nvim" },
-    lazy = true,
     cmd = "Telescope",
     enabled = lvim.builtin.telescope.active,
   },
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true, enabled = lvim.builtin.telescope.active },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", enabled = lvim.builtin.telescope.active },
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
@@ -64,13 +60,12 @@ local core_plugins = {
       "cmp-cmdline",
     },
   },
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "saadparwaiz1/cmp_luasnip", lazy = true },
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
   {
     "hrsh7th/cmp-cmdline",
-    lazy = true,
     enabled = lvim.builtin.cmp and lvim.builtin.cmp.cmdline.enable or false,
   },
   {
@@ -96,10 +91,9 @@ local core_plugins = {
       "friendly-snippets",
     },
   },
-  { "rafamadriz/friendly-snippets", lazy = true, cond = lvim.builtin.luasnip.sources.friendly_snippets },
+  { "rafamadriz/friendly-snippets", cond = lvim.builtin.luasnip.sources.friendly_snippets },
   {
     "folke/neodev.nvim",
-    lazy = true,
   },
 
   -- Autopairs
@@ -128,7 +122,6 @@ local core_plugins = {
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true,
   },
 
   -- NvimTree
@@ -195,7 +188,6 @@ local core_plugins = {
   {
     "nvim-tree/nvim-web-devicons",
     enabled = lvim.use_icons,
-    lazy = true,
   },
 
   -- Status Line and Bufferline
@@ -257,6 +249,7 @@ local core_plugins = {
       require("lvim.core.alpha").setup()
     end,
     enabled = lvim.builtin.alpha.active,
+    lazy = false,
   },
 
   -- Terminal
@@ -273,7 +266,6 @@ local core_plugins = {
   -- SchemaStore
   {
     "b0o/schemastore.nvim",
-    lazy = true,
   },
 
   {
@@ -306,6 +298,7 @@ local core_plugins = {
       end)
     end,
     lazy = lvim.colorscheme ~= "onedarker",
+    enabled = lvim.colorscheme == "onedarker",
   },
 
   {

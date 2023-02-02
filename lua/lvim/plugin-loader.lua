@@ -122,6 +122,10 @@ function plugin_loader.load(configurations)
           reset = false,
         },
       },
+      defaults = {
+        lazy = true,
+        version = nil,
+      },
       readme = {
         root = join_paths(get_runtime_dir(), "lazy", "readme"),
       },
