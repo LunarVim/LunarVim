@@ -40,6 +40,7 @@ local skipped_servers = {
   "svlangserver",
   "tflint",
   "verible",
+  "vtsls",
   "vuels",
 }
 
