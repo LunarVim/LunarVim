@@ -119,35 +119,4 @@ function M.require_on_exported_call(require_path)
   })
 end
 
-function M.lazy_set(require_path, fn_name)
-  local function poputale_table(table)
-    setmetatable(table, {})
-    local source = require(require_path)[fn_name]()
-    for k, v in pairs(source) do
-      table[k] = v
-    end
-  end
-  return setmetatable({}, {
-    __index = function(me, index)
-      poputale_table(me)
-      return me[index]
-    end,
-
-    __newindex = function(me, key, value)
-      poputale_table(me)
-      me[key] = value
-    end,
-
-    __pairs = function(me)
-      poputale_table(me)
-      return pairs(me)
-    end,
-
-    __ipairs = function(me)
-      poputale_table(me)
-      return pairs(me)
-    end,
-  })
-end
-
 return M
