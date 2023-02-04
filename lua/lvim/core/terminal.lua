@@ -79,35 +79,26 @@ local function get_dynamic_terminal_size(direction, size)
 end
 
 M.init = function()
-  -- vim.pretty_print(lvim.builtin.terminal.execs)
   for i, exec in ipairs(lvim.builtin.terminal.execs) do
     if exec.size == 1 then
       exec.direction = "float"
     end
-    local direction = exec.direction or lvim.builtin.terminal.execs.defaults.direction
-    local size = exec.size or lvim.builtin.terminal.execs.defaults[direction .. "_size"]
-    size = get_dynamic_terminal_size(direction, size)
-    local cmd = exec.cmd or lvim.builtin.terminal.shell
-    local desc = exec.desc
-    if desc == nil then
+    exec.direction = exec.direction or lvim.builtin.terminal.execs.defaults.direction
+    exec.size = exec.size or lvim.builtin.terminal.execs.defaults[exec.direction .. "_size"]
+    exec.size = get_dynamic_terminal_size(exec.direction, exec.size)
+    exec.cmd = exec.cmd or lvim.builtin.terminal.shell
+    exec.desc = exec.desc
+    if exec.desc == nil then
       if exec.cmd == nil then
-        desc = "Toggle Terminal(" .. direction .. ")"
+        exec.desc = "Toggle Terminal(" .. exec.direction .. ")"
       else
-        desc = exec.cmd
+        exec.desc = exec.cmd
       end
     end
 
-    local opts = {
-      cmd = cmd,
-      keymap = exec.keymap,
-      desc = desc,
-      -- NOTE: unable to consistently bind id/count <= 9, see #2146
-      count = i + 100,
-      direction = direction,
-      size = size,
-    }
+    exec.count = i + 100
 
-    M.add_exec(opts)
+    M.add_exec(exec)
   end
 end
 
@@ -119,31 +110,28 @@ M.setup = function()
   end
 end
 
-M.add_exec = function(opts)
-  local binary = opts.cmd:match "(%S+)"
+M.add_exec = function(exec)
+  local binary = exec.cmd:match "(%S+)"
   if vim.fn.executable(binary) ~= 1 then
     Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
 
-  vim.keymap.set({ "n", "t" }, opts.keymap, function()
-    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size }
-  end, { desc = opts.desc, noremap = true, silent = true })
+  vim.keymap.set({ "n", "t" }, exec.keymap, function()
+    M._exec_toggle(exec)
+  end, { desc = exec.desc, noremap = true, silent = true })
 end
 
-M._exec_toggle = function(opts)
+M._exec_toggle = function(exec)
   local Terminal = require("toggleterm.terminal").Terminal
-  local term = Terminal:new {
-    cmd = opts.cmd,
-    count = opts.count,
-    direction = opts.direction,
-    float_opts = {
-      border = "none" and opts.size == 1,
-      width = opts.size == 1 and 100000,
-      height = opts.size == 1 and 100000,
-    },
+  exec.float_opts = {
+    border = "none" and exec.size == 1,
+    width = exec.size == 1 and 100000,
+    height = exec.size == 1 and 100000,
   }
-  term:toggle(opts.size, opts.direction)
+  vim.pretty_print(exec)
+  local term = Terminal:new(exec)
+  term:toggle(exec.size, exec.direction)
 end
 
 ---Toggles a log viewer according to log.viewer.layout_config
