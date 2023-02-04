@@ -124,9 +124,9 @@ local core_plugins = {
     end,
     cmd = { "TSInstall", "TSUninstall", "TSUpdate", "TSInstallInfo", "TSInstallSync", "TSInstallFromGrammar" },
     event = "User FileOpened",
-    dependencies = "nvim-ts-context-commentstring",
   },
   {
+    -- Lazy loaded by Comment.nvim pre_hook
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = true,
   },
