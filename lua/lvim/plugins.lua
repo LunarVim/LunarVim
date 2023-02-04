@@ -166,8 +166,8 @@ local core_plugins = {
     config = function()
       require("lvim.core.which-key").setup()
     end,
+    keys = "<leader>",
     cmd = "WhichKey",
-    event = "VeryLazy",
     enabled = lvim.builtin.which_key.active,
   },
 
