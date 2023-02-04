@@ -37,13 +37,10 @@ M.config = function()
     },
     execs = {
       defaults = {
-        -- default shell already set in toggleterm opts
-        -- size = 1 for full screen
         direction = "horizontal",
         horizontal_size = 0.3,
         vertical_size = 0.4,
       },
-      -- builtin, cmd defaults to shell
       { keymap = "<M-1>", direction = "horizontal" },
       { keymap = "<M-2>", direction = "vertical" },
       { keymap = "<M-3>", direction = "float" },
@@ -82,6 +79,7 @@ local function get_dynamic_terminal_size(direction, size)
 end
 
 M.init = function()
+  -- vim.pretty_print(lvim.builtin.terminal.execs)
   for i, exec in ipairs(lvim.builtin.terminal.execs) do
     if exec.size == 1 then
       exec.direction = "float"
@@ -93,7 +91,7 @@ M.init = function()
     local desc = exec.desc
     if desc == nil then
       if exec.cmd == nil then
-        desc = "Toggle Terminal(" .. exec.direction .. ")"
+        desc = "Toggle Terminal(" .. direction .. ")"
       else
         desc = exec.cmd
       end
