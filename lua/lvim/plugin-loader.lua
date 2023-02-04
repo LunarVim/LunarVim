@@ -123,7 +123,7 @@ function plugin_loader.load(configurations)
         },
       },
       defaults = {
-        lazy = true,
+        lazy = false,
         version = nil,
       },
       readme = {
