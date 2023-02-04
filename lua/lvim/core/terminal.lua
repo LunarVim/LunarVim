@@ -129,7 +129,6 @@ M._exec_toggle = function(exec)
     width = exec.size == 1 and 100000,
     height = exec.size == 1 and 100000,
   }
-  vim.pretty_print(exec)
   local term = Terminal:new(exec)
   term:toggle(exec.size, exec.direction)
 end
