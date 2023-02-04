@@ -8,7 +8,7 @@ M.config = function()
       component_separators = nil,
       section_separators = nil,
       theme = nil,
-      disabled_filetypes = nil,
+      disabled_filetypes = { statusline = { "alpha" } },
       globalstatus = true,
     },
     sections = {
