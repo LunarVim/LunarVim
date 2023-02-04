@@ -26,7 +26,6 @@ M.load_default_options = function()
     mouse = "a", -- allow the mouse to be used in neovim
     pumheight = 10, -- pop up menu height
     showmode = false, -- we don't need to see things like -- INSERT -- anymore
-    showtabline = 2, -- always show tabs
     smartcase = true, -- smart case
     splitbelow = true, -- force all horizontal splits to go below current window
     splitright = true, -- force all vertical splits to go to the right of current window

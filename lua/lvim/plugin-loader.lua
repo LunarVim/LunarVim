@@ -39,6 +39,10 @@ function plugin_loader.init(opts)
         snapshot["lazy.nvim"].commit,
       }
     end
+
+    vim.schedule(function()
+      require("lvim.lsp").setup()
+    end)
   end
 
   vim.opt.runtimepath:append(lazy_install_dir)
@@ -117,6 +121,10 @@ function plugin_loader.load(configurations)
         rtp = {
           reset = false,
         },
+      },
+      defaults = {
+        lazy = false,
+        version = nil,
       },
       readme = {
         root = join_paths(get_runtime_dir(), "lazy", "readme"),

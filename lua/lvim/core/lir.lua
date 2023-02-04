@@ -1,22 +1,14 @@
 local M = {}
 
 M.config = function()
+  local utils = require "lvim.utils.modules"
+  local actions = utils.require_on_exported_call "lir.actions"
+  local clipboard_actions = utils.require_on_exported_call "lir.clipboard.actions"
+
   lvim.builtin.lir = {
     active = true,
     on_config_done = nil,
     icon = "",
-  }
-
-  local status_ok, _ = pcall(require, "lir")
-  if not status_ok then
-    return
-  end
-
-  local actions = require "lir.actions"
-  local mark_actions = require "lir.mark.actions"
-  local clipboard_actions = require "lir.clipboard.actions"
-
-  lvim.builtin.lir = vim.tbl_extend("force", lvim.builtin.lir, {
     show_hidden_files = false,
     ignore = {}, -- { ".DS_Store" "node_modules" } etc.
     devicons = {
@@ -42,7 +34,7 @@ M.config = function()
       ["d"] = actions.delete,
 
       ["J"] = function()
-        mark_actions.toggle_mark()
+        require("lir.mark.actions").toggle_mark()
         vim.cmd "normal! j"
       end,
       ["c"] = clipboard_actions.copy,
@@ -79,7 +71,7 @@ M.config = function()
         { noremap = true, silent = true }
       )
     end,
-  })
+  }
 end
 
 function M.icon_setup()
@@ -118,6 +110,7 @@ function M.setup()
   end
 
   lir.setup(lvim.builtin.lir)
+  M.icon_setup()
 
   if lvim.builtin.lir.on_config_done then
     lvim.builtin.lir.on_config_done(lir)
