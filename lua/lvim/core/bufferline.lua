@@ -152,6 +152,7 @@ M.setup = function()
     return
   end
 
+  -- can't be set in settings.lua because default tabline would flash before bufferline is loaded
   vim.opt.showtabline = 2
 
   bufferline.setup {
