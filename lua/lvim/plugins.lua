@@ -238,8 +238,8 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup()
     end,
+    lazy = true,
     enabled = lvim.builtin.dap.active,
-    event = "User FileOpened",
   },
 
   -- Debugger user interface
@@ -248,8 +248,8 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup_ui()
     end,
+    lazy = true,
     enabled = lvim.builtin.dap.active,
-    event = "User FileOpened",
   },
 
   -- alpha
