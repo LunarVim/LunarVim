@@ -309,7 +309,6 @@ local core_plugins = {
       end)
     end,
     lazy = lvim.colorscheme ~= "onedarker",
-    enabled = lvim.colorscheme == "onedarker",
   },
 
   {
