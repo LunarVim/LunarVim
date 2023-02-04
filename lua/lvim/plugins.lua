@@ -317,6 +317,7 @@ local core_plugins = {
       end)
     end,
     enabled = lvim.builtin.bigfile.active,
+    event = { "FileReadPre", "BufReadPre", "User FileOpened" },
   },
 }
 
