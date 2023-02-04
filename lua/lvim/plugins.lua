@@ -189,6 +189,8 @@ local core_plugins = {
       require("lvim.core.project").setup()
     end,
     enabled = lvim.builtin.project.active,
+    event = "VimEnter",
+    cmd = "Telescope projects",
   },
 
   -- Icons
@@ -257,6 +259,7 @@ local core_plugins = {
       require("lvim.core.alpha").setup()
     end,
     enabled = lvim.builtin.alpha.active,
+    event = "VimEnter",
   },
 
   -- Terminal
