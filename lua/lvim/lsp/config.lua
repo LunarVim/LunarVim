@@ -20,6 +20,7 @@ local skipped_servers = {
   "phpactor",
   "psalm",
   "pylsp",
+  "pyre",
   "quick_lint_js",
   "reason_ls",
   "rnix",
@@ -40,6 +41,7 @@ local skipped_servers = {
   "svlangserver",
   "tflint",
   "verible",
+  "vtsls",
   "vuels",
 }
 
