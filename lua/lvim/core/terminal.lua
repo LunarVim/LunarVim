@@ -97,11 +97,9 @@ M.init = function()
   end
 end
 
-  M.setup = function()
-    local terminal = require "toggleterm"
-    terminal.setup(lvim.builtin.terminal)
-  end
-
+M.setup = function()
+  local terminal = require "toggleterm"
+  terminal.setup(lvim.builtin.terminal)
   if lvim.builtin.terminal.on_config_done then
     lvim.builtin.terminal.on_config_done(terminal)
   end
