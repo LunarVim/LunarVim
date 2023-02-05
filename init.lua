@@ -23,3 +23,5 @@ Log:debug "Starting LunarVim"
 
 local commands = require "lvim.core.commands"
 commands.load(commands.defaults)
+
+# it's for test sorry from me
