@@ -78,15 +78,43 @@ local function get_dynamic_terminal_size(direction, size)
   end
 end
 
+local function exec_toggle(exec)
+  local Terminal = require("toggleterm.terminal").Terminal
+  local term = Terminal:new(exec)
+  term:toggle(exec.size, exec.direction)
+end
+
+local function add_exec_keymap(exec)
+  local binary = exec.cmd:match "(%S+)"
+  if vim.fn.executable(binary) ~= 1 then
+    Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
+    return
+  end
+
+  vim.keymap.set({ "n", "t" }, exec.keymap, function()
+    exec_toggle(exec)
+  end, { desc = exec.desc, noremap = true, silent = true })
+end
+
+--- Setup the terminal execs
 M.init = function()
   for i, exec in ipairs(lvim.builtin.terminal.execs) do
+    -- size == 1 is a special case for full screen
     if exec.size == 1 then
       exec.direction = "float"
+      exec.float_opts = {
+        border = "none",
+        width = 100000,
+        height = 100000,
+      }
     end
+
     exec.direction = exec.direction or lvim.builtin.terminal.execs.defaults.direction
     exec.size = exec.size or lvim.builtin.terminal.execs.defaults[exec.direction .. "_size"]
+    -- size is calculated dynamically as a percentage of the current buffer
     exec.size = get_dynamic_terminal_size(exec.direction, exec.size)
     exec.cmd = exec.cmd or lvim.builtin.terminal.shell
+    -- desc is used for the keymap description
     exec.desc = exec.desc
     if exec.desc == nil then
       if exec.cmd == nil then
@@ -98,7 +126,8 @@ M.init = function()
 
     exec.count = i + 100
 
-    M.add_exec(exec)
+    -- the table is passed to toggleterm:new directly
+    add_exec_keymap(exec)
   end
 end
 
@@ -108,29 +137,6 @@ M.setup = function()
   if lvim.builtin.terminal.on_config_done then
     lvim.builtin.terminal.on_config_done(terminal)
   end
-end
-
-M.add_exec = function(exec)
-  local binary = exec.cmd:match "(%S+)"
-  if vim.fn.executable(binary) ~= 1 then
-    Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
-    return
-  end
-
-  vim.keymap.set({ "n", "t" }, exec.keymap, function()
-    M._exec_toggle(exec)
-  end, { desc = exec.desc, noremap = true, silent = true })
-end
-
-M._exec_toggle = function(exec)
-  local Terminal = require("toggleterm.terminal").Terminal
-  exec.float_opts = {
-    border = "none" and exec.size == 1,
-    width = exec.size == 1 and 100000,
-    height = exec.size == 1 and 100000,
-  }
-  local term = Terminal:new(exec)
-  term:toggle(exec.size, exec.direction)
 end
 
 ---Toggles a log viewer according to log.viewer.layout_config
