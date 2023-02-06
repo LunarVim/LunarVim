@@ -16,10 +16,11 @@ local types = {
 
 function M.config()
   lvim.builtin.luasnip = {
+    active = true,
     sources = {
       friendly_snippets = true,
     },
-    config = {
+    opts = {
       history = false,
       update_events = "InsertLeave",
       enable_autosnippets = false,
@@ -27,7 +28,7 @@ function M.config()
         -- Show virtual text to signal when you are inside an sippets
         [types.insertNode] = {
           active = {
-            virt_text = { { "<-- snip insert", "BufferInactiveIndex" } },
+            virt_text = { { "<-- insert", "BufferInactiveIndex" } },
           },
         },
         -- Helps to notice when you are within a choice node
@@ -45,7 +46,7 @@ function M.setup()
   local utils = require "lvim.utils"
   local paths = {}
   if lvim.builtin.luasnip.sources.friendly_snippets then
-    paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "packer", "start", "friendly-snippets")
+    paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "friendly-snippets")
   end
 
   local user_snippets = utils.join_paths(get_config_dir(), "snippets")
@@ -54,7 +55,7 @@ function M.setup()
   end
 
   local luasnip = require "luasnip"
-  luasnip.config.set_config(lvim.builtin.luasnip.config)
+  luasnip.config.set_config(lvim.builtin.luasnip.opts)
 
   -- When no paths are provided, luasnip will search in the runtimepath
   require("luasnip.loaders.from_lua").lazy_load()
