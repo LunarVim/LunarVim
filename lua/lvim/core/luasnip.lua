@@ -28,7 +28,7 @@ function M.config()
         -- Show virtual text to signal when you are inside an sippets
         [types.insertNode] = {
           active = {
-            virt_text = { { "<-- insert", "BufferInactiveIndex" } },
+            virt_text = { { "<-- snip", "BufferInactiveIndex" } },
           },
         },
         -- Helps to notice when you are within a choice node
