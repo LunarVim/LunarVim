@@ -57,16 +57,16 @@
     "commit": "4952a48"
   },
   "neodev.nvim": {
-    "commit": "70cab52"
+    "commit": "547ef44"
   },
   "nlsp-settings.nvim": {
-    "commit": "a56d916"
+    "commit": "b1e2c55"
   },
   "null-ls.nvim": {
     "commit": "8f5d730"
   },
   "nvim-autopairs": {
-    "commit": "5a3523d"
+    "commit": "0e065d4"
   },
   "nvim-cmp": {
     "commit": "cfafe0a"
@@ -78,16 +78,16 @@
     "commit": "885e958"
   },
   "nvim-lspconfig": {
-    "commit": "902d6aa"
+    "commit": "d3c82d2"
   },
   "nvim-navic": {
     "commit": "7e9d2b2"
   },
   "nvim-tree.lua": {
-    "commit": "59e65d8"
+    "commit": "02fdc26"
   },
   "nvim-treesitter": {
-    "commit": "720f75f"
+    "commit": "d3a6872"
   },
   "nvim-ts-context-commentstring": {
     "commit": "a0f8956"
