@@ -9,6 +9,13 @@ local core_plugins = {
   {
     "williamboman/mason-lspconfig.nvim",
     cmd = { "LspInstall", "LspUninstall" },
+    config = function()
+      require("mason-lspconfig").setup(lvim.lsp.installer.setup)
+
+      -- automatic_installation is handled by lsp-manager
+      local settings = require "mason-lspconfig.settings"
+      settings.current.automatic_installation = false
+    end,
     lazy = true,
     dependencies = "mason.nvim",
   },
@@ -122,7 +129,15 @@ local core_plugins = {
       vim.opt.rtp:prepend(path) -- treesitter needs to be before nvim's runtime in rtp
       require("lvim.core.treesitter").setup()
     end,
-    cmd = { "TSInstall", "TSUninstall", "TSUpdate", "TSInstallInfo", "TSInstallSync", "TSInstallFromGrammar" },
+    cmd = {
+      "TSInstall",
+      "TSUninstall",
+      "TSUpdate",
+      "TSUpdateSync",
+      "TSInstallInfo",
+      "TSInstallSync",
+      "TSInstallFromGrammar",
+    },
     event = "User FileOpened",
   },
   {
