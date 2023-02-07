@@ -17,7 +17,7 @@ local core_plugins = {
       settings.current.automatic_installation = false
     end,
     lazy = true,
-    dependencies = "mason.nvim",
+    dependencies = { "mason.nvim", "mason-null-ls.nvim", "mason-nvim-dap.nvim" },
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
   { "jose-elias-alvarez/null-ls.nvim", lazy = true },
@@ -29,6 +29,8 @@ local core_plugins = {
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     lazy = true,
   },
+  { "jay-babu/mason-null-ls.nvim", lazy = true },
+  { "jay-babu/mason-nvim-dap.nvim", lazy = true, enabled = lvim.builtin.dap.active },
   {
     "folke/tokyonight.nvim",
     lazy = not vim.startswith(lvim.colorscheme, "tokyonight"),

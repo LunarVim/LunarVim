@@ -50,6 +50,12 @@
   "lunar.nvim": {
     "commit": "29eedf7"
   },
+  "mason-nvim-dap": {
+    "commit": "4feb21a"
+  },
+  "mason-null-ls.nvim": {
+    "commit": "13c6ab4"
+  },
   "mason-lspconfig.nvim": {
     "commit": "53f3a8b"
   },
