@@ -287,6 +287,14 @@ local core_plugins = {
     config = function()
       require("lvim.core.terminal").setup()
     end,
+    cmd = {
+      "ToggleTerm",
+      "TermExec",
+      "ToggleTermToggleAll",
+      "ToggleTermSendCurrentLine",
+      "ToggleTermSendVisualLines",
+      "ToggleTermSendVisualSelection",
+    },
     keys = lvim.builtin.terminal.open_mapping,
     lazy = true,
     enabled = lvim.builtin.terminal.active,
