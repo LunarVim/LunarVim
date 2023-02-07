@@ -6,7 +6,7 @@
     "commit": "d404ec3"
   },
   "alpha-nvim": {
-    "commit": "21a0f25"
+    "commit": "d5fdeb2"
   },
   "bigfile.nvim": {
     "commit": "c1bad34"
@@ -21,7 +21,7 @@
     "commit": "23c51b2"
   },
   "cmp-nvim-lsp": {
-    "commit": "5922477"
+    "commit": "0e6b2ed"
   },
   "cmp-path": {
     "commit": "91ff86c"
@@ -54,19 +54,19 @@
     "commit": "53f3a8b"
   },
   "mason.nvim": {
-    "commit": "4952a48"
+    "commit": "357ef66"
   },
   "neodev.nvim": {
-    "commit": "547ef44"
+    "commit": "b3b22cf"
   },
   "nlsp-settings.nvim": {
-    "commit": "b1e2c55"
+    "commit": "d0b7caa"
   },
   "null-ls.nvim": {
-    "commit": "8f5d730"
+    "commit": "60b4a71"
   },
   "nvim-autopairs": {
-    "commit": "0e065d4"
+    "commit": "28f57e6"
   },
   "nvim-cmp": {
     "commit": "cfafe0a"
@@ -75,7 +75,7 @@
     "commit": "0e376f0"
   },
   "nvim-dap-ui": {
-    "commit": "885e958"
+    "commit": "6f18751"
   },
   "nvim-lspconfig": {
     "commit": "d3c82d2"
@@ -87,13 +87,13 @@
     "commit": "02fdc26"
   },
   "nvim-treesitter": {
-    "commit": "d3a6872"
+    "commit": "df6f322"
   },
   "nvim-ts-context-commentstring": {
     "commit": "a0f8956"
   },
   "nvim-web-devicons": {
-    "commit": "2b96193"
+    "commit": "ade34ca"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -108,7 +108,7 @@
     "commit": "685bc8e"
   },
   "schemastore.nvim": {
-    "commit": "5c5723b"
+    "commit": "fd5ddd8"
   },
   "structlog.nvim": {
     "commit": "45b26a2"
