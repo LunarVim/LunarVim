@@ -11,7 +11,6 @@ function M.config()
   lvim.builtin.telescope = {
     ---@usage disable telescope completely [not recommended]
     active = true,
-    on_config_done = nil,
     theme = "dropdown", ---@type telescope_themes
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
@@ -134,10 +133,6 @@ function M.setup()
     pcall(function()
       require("telescope").load_extension "projects"
     end)
-  end
-
-  if lvim.builtin.telescope.on_config_done then
-    lvim.builtin.telescope.on_config_done(telescope)
   end
 
   if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions.fzf then

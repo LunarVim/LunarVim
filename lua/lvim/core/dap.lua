@@ -3,7 +3,6 @@ local M = {}
 M.config = function()
   lvim.builtin.dap = {
     active = true,
-    on_config_done = nil,
     breakpoint = {
       text = lvim.icons.ui.Bug,
       texthl = "DiagnosticSignError",
@@ -110,10 +109,6 @@ M.setup = function()
   end
 
   dap.set_log_level(lvim.builtin.dap.log.level)
-
-  if lvim.builtin.dap.on_config_done then
-    lvim.builtin.dap.on_config_done(dap)
-  end
 end
 
 M.setup_ui = function()

@@ -29,7 +29,6 @@ M.config = function()
     },
     tabline = nil,
     extensions = nil,
-    on_config_done = nil,
   }
 end
 
@@ -48,10 +47,6 @@ M.setup = function()
   require("lvim.core.lualine.styles").update()
 
   lualine.setup(lvim.builtin.lualine)
-
-  if lvim.builtin.lualine.on_config_done then
-    lvim.builtin.lualine.on_config_done(lualine)
-  end
 end
 
 return M

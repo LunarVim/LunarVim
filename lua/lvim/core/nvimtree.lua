@@ -4,7 +4,6 @@ local Log = require "lvim.core.log"
 function M.config()
   lvim.builtin.nvimtree = {
     active = true,
-    on_config_done = nil,
     setup = {
       auto_reload_on_write = false,
       disable_netrw = false,
@@ -269,10 +268,6 @@ function M.setup()
   end
 
   nvim_tree.setup(lvim.builtin.nvimtree.setup)
-
-  if lvim.builtin.nvimtree.on_config_done then
-    lvim.builtin.nvimtree.on_config_done(nvim_tree)
-  end
 end
 
 function M.start_telescope(telescope_mode)

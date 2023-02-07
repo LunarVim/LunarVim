@@ -6,8 +6,6 @@ function M.config()
     --- This is on by default since it's currently the expected behavior.
     active = true,
 
-    on_config_done = nil,
-
     ---@usage set to true to disable setting the current-woriking directory
     --- Manual mode doesn't automatically change your root directory, so you have
     --- the option to manually do so using `:ProjectRoot` command.
@@ -59,9 +57,6 @@ function M.setup()
   end
 
   project.setup(lvim.builtin.project)
-  if lvim.builtin.project.on_config_done then
-    lvim.builtin.project.on_config_done(project)
-  end
 end
 
 return M

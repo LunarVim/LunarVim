@@ -43,7 +43,6 @@ end
 M.config = function()
   lvim.builtin.bufferline = {
     active = true,
-    on_config_done = nil,
     keymap = {
       normal_mode = {},
     },
@@ -159,10 +158,6 @@ M.setup = function()
     options = lvim.builtin.bufferline.options,
     highlights = lvim.builtin.bufferline.highlights,
   }
-
-  if lvim.builtin.bufferline.on_config_done then
-    lvim.builtin.bufferline.on_config_done()
-  end
 end
 
 --stylua: ignore

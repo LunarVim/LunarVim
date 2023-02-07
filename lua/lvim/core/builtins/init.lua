@@ -23,11 +23,27 @@ local builtins = {
   "lvim.core.mason",
 }
 
+---@class LvimBuiltin
+---@field active boolean is builtin enabled
+---@field on_config_done function function called after the builtin is set up
+
 function M.config(config)
+  ---@type {[string]: LvimBuiltin}
+  lvim.builtin = {}
+
   for _, builtin_path in ipairs(builtins) do
     local builtin = reload(builtin_path)
 
     builtin.config(config)
+  end
+end
+
+function M.setup_builtin(modname)
+  require("lvim.core." .. modname).setup()
+
+  local builtin_tbl = lvim.builtin[string.gsub(modname, "-", "_")]
+  if type(builtin_tbl.on_config_done) == "function" then
+    builtin_tbl.on_config_done()
   end
 end
 

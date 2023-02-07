@@ -3,8 +3,6 @@ local Log = require "lvim.core.log"
 
 function M.config()
   lvim.builtin.treesitter = {
-    on_config_done = nil,
-
     -- A list of parser names, or "all"
     ensure_installed = {},
 
@@ -111,10 +109,6 @@ function M.setup()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
-
-  if lvim.builtin.treesitter.on_config_done then
-    lvim.builtin.treesitter.on_config_done(treesitter_configs)
-  end
 end
 
 return M

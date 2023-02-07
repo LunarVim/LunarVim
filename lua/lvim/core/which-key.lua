@@ -3,7 +3,6 @@ M.config = function()
   lvim.builtin.which_key = {
     ---@usage disable which-key completely [not recommended]
     active = true,
-    on_config_done = nil,
     setup = {
       plugins = {
         marks = false, -- shows a list of your marks on ' and `
@@ -313,10 +312,6 @@ M.setup = function()
 
   which_key.register(mappings, opts)
   which_key.register(vmappings, vopts)
-
-  if lvim.builtin.which_key.on_config_done then
-    lvim.builtin.which_key.on_config_done(which_key)
-  end
 end
 
 return M

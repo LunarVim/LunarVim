@@ -7,7 +7,6 @@ M.config = function()
 
   lvim.builtin.lir = {
     active = true,
-    on_config_done = nil,
     icon = "",
     show_hidden_files = false,
     ignore = {}, -- { ".DS_Store" "node_modules" } etc.
@@ -111,10 +110,6 @@ function M.setup()
 
   lir.setup(lvim.builtin.lir)
   M.icon_setup()
-
-  if lvim.builtin.lir.on_config_done then
-    lvim.builtin.lir.on_config_done(lir)
-  end
 end
 
 return M
