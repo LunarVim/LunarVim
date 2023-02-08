@@ -287,6 +287,7 @@ M.config = function()
         t = { "<cmd>Telescope live_grep<cr>", "Text" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
+        l = { "<cmd>Telescope resume<cr>", "Resume last search" },
         p = {
           "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
           "Colorscheme with Preview",
