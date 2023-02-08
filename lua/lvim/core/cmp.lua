@@ -241,10 +241,14 @@ M.config = function()
           if is_insert_mode() then -- prevent overwriting brackets
             confirm_opts.behavior = cmp.ConfirmBehavior.Insert
           end
-          if cmp.confirm(confirm_opts) then
-            if luasnip.locally_jumpable() then
-              luasnip.jump()
-            end
+          local locally_jumpable = luasnip.locally_jumpable(1)
+          if
+            cmp.confirm(confirm_opts, function()
+              if locally_jumpable then
+                luasnip.jump(1)
+              end
+            end)
+          then
             return -- success, exit early
           end
         end
