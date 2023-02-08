@@ -117,8 +117,8 @@ M.config = function()
           highlight = "PanelHeading",
         },
         {
-          filetype = "packer",
-          text = "Packer",
+          filetype = "lazy",
+          text = "Lazy",
           highlight = "PanelHeading",
           padding = 1,
         },
@@ -151,6 +151,9 @@ M.setup = function()
   if not status_ok then
     return
   end
+
+  -- can't be set in settings.lua because default tabline would flash before bufferline is loaded
+  vim.opt.showtabline = 2
 
   bufferline.setup {
     options = lvim.builtin.bufferline.options,

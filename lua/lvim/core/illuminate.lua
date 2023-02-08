@@ -13,13 +13,17 @@ M.config = function()
       },
       -- delay: delay in milliseconds
       delay = 120,
+      -- filetype_overrides: filetype specific overrides.
+      -- The keys are strings to represent the filetype while the values are tables that
+      -- supports the same keys passed to .configure except for filetypes_denylist and filetypes_allowlist
+      filetype_overrides = {},
       -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
       filetypes_denylist = {
         "dirvish",
         "fugitive",
         "alpha",
         "NvimTree",
-        "packer",
+        "lazy",
         "neogitstatus",
         "Trouble",
         "lir",

@@ -81,8 +81,6 @@ function M.load_defaults()
         pattern = "alpha",
         callback = function()
           vim.cmd [[
-            nnoremap <silent> <buffer> q :qa<CR>
-            nnoremap <silent> <buffer> <esc> :qa<CR>
             set nobuflisted
           ]]
         end,
@@ -118,6 +116,35 @@ function M.load_defaults()
           vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
           vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
           vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = statusline_hl.background })
+        end,
+      },
+    },
+    { -- taken from AstroNvim
+      "BufEnter",
+      {
+        group = "_dir_opened",
+        once = true,
+        callback = function(args)
+          local bufname = vim.api.nvim_buf_get_name(args.buf)
+          if require("lvim.utils").is_directory(bufname) then
+            vim.api.nvim_del_augroup_by_name "_dir_opened"
+            vim.cmd "do User DirOpened"
+            vim.api.nvim_exec_autocmds("BufEnter", {})
+          end
+        end,
+      },
+    },
+    { -- taken from AstroNvim
+      { "BufRead", "BufWinEnter", "BufNewFile" },
+      {
+        group = "_file_opened",
+        once = true,
+        callback = function(args)
+          local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+          if not (vim.fn.expand "%" == "" or buftype == "nofile") then
+            vim.cmd "do User FileOpened"
+            require("lvim.lsp").setup()
+          end
         end,
       },
     },

@@ -23,5 +23,3 @@ Log:debug "Starting LunarVim"
 
 local commands = require "lvim.core.commands"
 commands.load(commands.defaults)
-
-require("lvim.lsp").setup()

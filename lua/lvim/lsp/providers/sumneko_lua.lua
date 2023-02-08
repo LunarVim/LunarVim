@@ -53,7 +53,7 @@ local opts = {
         },
       },
       diagnostics = {
-        globals = { "vim", "lvim", "packer_plugins", "reload" },
+        globals = { "vim", "lvim", "reload" },
       },
       workspace = default_workspace,
     },

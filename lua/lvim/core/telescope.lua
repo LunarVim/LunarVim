@@ -7,19 +7,9 @@ local M = {}
 ---| "center"   # retain the default telescope theme
 
 function M.config()
-  -- Define this minimal config so that it's available if telescope is not yet available.
-
+  local actions = require("lvim.utils.modules").require_on_exported_call "telescope.actions"
   lvim.builtin.telescope = {
     ---@usage disable telescope completely [not recommended]
-    active = true,
-    on_config_done = nil,
-  }
-
-  local ok, actions = pcall(require, "telescope.actions")
-  if not ok then
-    return
-  end
-  lvim.builtin.telescope = {
     active = true,
     on_config_done = nil,
     theme = "dropdown", ---@type telescope_themes
@@ -31,7 +21,7 @@ function M.config()
       selection_strategy = "reset",
       sorting_strategy = nil,
       layout_strategy = nil,
-      layout_config = nil,
+      layout_config = {},
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -51,13 +41,19 @@ function M.config()
           ["<C-c>"] = actions.close,
           ["<C-j>"] = actions.cycle_history_next,
           ["<C-k>"] = actions.cycle_history_prev,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["<C-q>"] = function(...)
+            actions.smart_send_to_qflist(...)
+            actions.open_qflist(...)
+          end,
           ["<CR>"] = actions.select_default,
         },
         n = {
           ["<C-n>"] = actions.move_selection_next,
           ["<C-p>"] = actions.move_selection_previous,
-          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          ["<C-q>"] = function(...)
+            actions.smart_send_to_qflist(...)
+            actions.open_qflist(...)
+          end,
         },
       },
       file_ignore_patterns = {},
@@ -98,6 +94,9 @@ function M.config()
         hidden = true,
         show_untracked = true,
       },
+      colorscheme = {
+        enable_preview = true,
+      },
     },
     extensions = {
       fzf = {
@@ -124,7 +123,7 @@ function M.setup()
 
   local telescope = require "telescope"
 
-  local theme = require("telescope.themes")["get_" .. lvim.builtin.telescope.theme]
+  local theme = require("telescope.themes")["get_" .. (lvim.builtin.telescope.theme or "")]
   if theme then
     lvim.builtin.telescope.defaults = theme(lvim.builtin.telescope.defaults)
   end

@@ -66,24 +66,6 @@ local function resolve_config(theme_name)
   return selected_theme.config
 end
 
-local function configure_additional_autocmds()
-  local group = "_dashboard_settings"
-  vim.api.nvim_create_augroup(group, {})
-  vim.api.nvim_create_autocmd("FileType", {
-    group = group,
-    pattern = "alpha",
-    command = "set showtabline=0 | autocmd BufLeave <buffer> set showtabline=" .. vim.opt.showtabline._value,
-  })
-  if not lvim.builtin.lualine.options.globalstatus then
-    -- https://github.com/goolord/alpha-nvim/issues/42
-    vim.api.nvim_create_autocmd("FileType", {
-      group = group,
-      pattern = "alpha",
-      command = "set laststatus=0 | autocmd BufUnload <buffer> set laststatus=" .. vim.opt.laststatus._value,
-    })
-  end
-end
-
 function M.setup()
   local status_ok, alpha = pcall(require, "alpha")
   if not status_ok then
@@ -98,7 +80,6 @@ function M.setup()
   end
 
   alpha.setup(config)
-  configure_additional_autocmds()
 end
 
 return M

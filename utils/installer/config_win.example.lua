@@ -55,7 +55,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
 
--- After changing plugin config exit and reopen LunarVim, Run :PackerSync
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
