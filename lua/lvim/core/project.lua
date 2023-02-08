@@ -57,6 +57,8 @@ function M.setup()
   end
 
   project.setup(lvim.builtin.project)
+
+  return project
 end
 
 return M

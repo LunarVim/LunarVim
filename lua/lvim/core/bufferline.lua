@@ -158,6 +158,8 @@ M.setup = function()
     options = lvim.builtin.bufferline.options,
     highlights = lvim.builtin.bufferline.highlights,
   }
+
+  return bufferline
 end
 
 --stylua: ignore

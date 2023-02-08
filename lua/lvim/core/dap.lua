@@ -109,6 +109,8 @@ M.setup = function()
   end
 
   dap.set_log_level(lvim.builtin.dap.log.level)
+
+  return dap
 end
 
 M.setup_ui = function()

@@ -312,6 +312,8 @@ M.setup = function()
 
   which_key.register(mappings, opts)
   which_key.register(vmappings, vopts)
+
+  return which_key
 end
 
 return M

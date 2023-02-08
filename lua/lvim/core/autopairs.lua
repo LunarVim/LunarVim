@@ -75,6 +75,8 @@ M.setup = function()
     require("cmp").event:off("confirm_done", on_confirm_done)
     require("cmp").event:on("confirm_done", on_confirm_done)
   end)
+
+  return autopairs
 end
 
 return M

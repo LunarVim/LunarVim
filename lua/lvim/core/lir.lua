@@ -110,6 +110,8 @@ function M.setup()
 
   lir.setup(lvim.builtin.lir)
   M.icon_setup()
+
+  return lir
 end
 
 return M

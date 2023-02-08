@@ -97,6 +97,8 @@ M.setup = function()
 
     M.add_exec(opts)
   end
+
+  return terminal
 end
 
 M.add_exec = function(opts)

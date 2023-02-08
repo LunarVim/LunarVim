@@ -86,6 +86,8 @@ M.setup = function()
 
   M.create_winbar()
   navic.setup(lvim.builtin.breadcrumbs.options)
+
+  return navic
 end
 
 M.get_filename = function()

@@ -80,6 +80,8 @@ function M.setup()
   end
 
   alpha.setup(config)
+
+  return alpha
 end
 
 return M

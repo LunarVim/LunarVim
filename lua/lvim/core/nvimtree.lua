@@ -268,6 +268,8 @@ function M.setup()
   end
 
   nvim_tree.setup(lvim.builtin.nvimtree.setup)
+
+  return nvim_tree
 end
 
 function M.start_telescope(telescope_mode)

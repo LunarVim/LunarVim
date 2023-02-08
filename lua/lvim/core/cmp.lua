@@ -370,6 +370,8 @@ function M.setup()
       })
     end
   end
+
+  return cmp
 end
 
 return M

@@ -47,6 +47,8 @@ M.setup = function()
   require("lvim.core.lualine.styles").update()
 
   lualine.setup(lvim.builtin.lualine)
+
+  return lualine
 end
 
 return M

@@ -77,6 +77,8 @@ function M.setup()
   local nvim_comment = require "Comment"
 
   nvim_comment.setup(lvim.builtin.comment)
+
+  return nvim_comment
 end
 
 return M

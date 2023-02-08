@@ -33,6 +33,8 @@ M.setup = function()
   end
 
   indent_blankline.setup(lvim.builtin.indentlines.options)
+
+  return indent_blankline
 end
 
 return M

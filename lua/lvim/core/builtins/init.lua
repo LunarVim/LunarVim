@@ -39,11 +39,11 @@ function M.config(config)
 end
 
 function M.setup_builtin(modname)
-  require("lvim.core." .. modname).setup()
+  local plugin = require("lvim.core." .. modname).setup()
 
   local builtin_tbl = lvim.builtin[string.gsub(modname, "-", "_")]
   if type(builtin_tbl.on_config_done) == "function" then
-    builtin_tbl.on_config_done()
+    builtin_tbl.on_config_done(plugin)
   end
 end
 

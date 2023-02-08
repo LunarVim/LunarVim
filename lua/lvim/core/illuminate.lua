@@ -62,6 +62,8 @@ M.setup = function()
   if not config_ok then
     return
   end
+
+  return illuminate
 end
 
 return M

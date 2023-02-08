@@ -74,6 +74,8 @@ M.setup = function()
   local gitsigns = reload "gitsigns"
 
   gitsigns.setup(lvim.builtin.gitsigns.opts)
+
+  return gitsigns
 end
 
 return M

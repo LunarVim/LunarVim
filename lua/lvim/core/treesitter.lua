@@ -109,6 +109,8 @@ function M.setup()
   local opts = vim.deepcopy(lvim.builtin.treesitter)
 
   treesitter_configs.setup(opts)
+
+  return require "treesitter"
 end
 
 return M
