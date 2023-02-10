@@ -44,6 +44,7 @@ function M.generate_ftplugin(server_name, dir)
   end
 
   for _, filetype in ipairs(filetypes) do
+    filetype = filetype:match "%.([^.]*)$" or filetype
     local filename = join_paths(dir, filetype .. ".lua")
     local setup_cmd = string.format([[require("lvim.lsp.manager").setup(%q)]], server_name)
     -- print("using setup_cmd: " .. setup_cmd)
