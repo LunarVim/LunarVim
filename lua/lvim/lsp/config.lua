@@ -40,6 +40,7 @@ local skipped_servers = {
   "stylelint_lsp",
   "svlangserver",
   "tflint",
+  "unocss",
   "verible",
   "vtsls",
   "vuels",
