@@ -296,7 +296,6 @@ local core_plugins = {
       "ToggleTermSendVisualSelection",
     },
     keys = lvim.builtin.terminal.open_mapping,
-    lazy = true,
     enabled = lvim.builtin.terminal.active,
   },
 
