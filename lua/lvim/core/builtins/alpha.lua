@@ -1,8 +1,8 @@
 local M = {}
 
 function M.config()
-  local lvim_dashboard = require "lvim.core.alpha.dashboard"
-  local lvim_startify = require "lvim.core.alpha.startify"
+  local lvim_dashboard = require "lvim.core.builtins.alpha.dashboard"
+  local lvim_startify = require "lvim.core.builtins.alpha.startify"
   lvim.builtin.alpha = {
     dashboard = {
       config = {},

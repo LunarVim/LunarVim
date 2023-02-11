@@ -110,7 +110,7 @@ function M.setup()
 
   treesitter_configs.setup(opts)
 
-  return require "treesitter"
+  return require "nvim-treesitter"
 end
 
 return M

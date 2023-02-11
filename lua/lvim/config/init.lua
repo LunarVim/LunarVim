@@ -20,6 +20,8 @@ function M:init()
   local builtins = require "lvim.core.builtins"
   builtins.init { user_config_file = user_config_file }
 
+  require("lvim.core.theme").config()
+
   local settings = require "lvim.config.settings"
   settings.load_defaults()
 

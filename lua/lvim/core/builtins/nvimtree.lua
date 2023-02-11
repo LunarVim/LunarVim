@@ -248,11 +248,11 @@ function M.setup()
   end
 
   local function telescope_find_files(_)
-    require("lvim.core.nvimtree").start_telescope "find_files"
+    require("lvim.core.builtin.nvimtree").start_telescope "find_files"
   end
 
   local function telescope_live_grep(_)
-    require("lvim.core.nvimtree").start_telescope "live_grep"
+    require("lvim.core.builtin.nvimtree").start_telescope "live_grep"
   end
 
   -- Add useful keymaps
