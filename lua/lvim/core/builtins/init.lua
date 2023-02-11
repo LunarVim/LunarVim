@@ -27,7 +27,7 @@ local builtins = {
 ---@field active boolean is builtin enabled
 ---@field on_config_done function function called after the builtin is set up
 
-function M.config(config)
+function M.init(config)
   ---@type {[string]: LvimBuiltin}
   lvim.builtin = {}
 
@@ -38,10 +38,10 @@ function M.config(config)
   end
 end
 
-function M.setup_builtin(modname)
+function M.setup(modname)
   local plugin = require("lvim.core." .. modname).setup()
 
-  local builtin_tbl = lvim.builtin[string.gsub(modname, "-", "_")]
+  local builtin_tbl = lvim.builtin[modname:gsub("-", "_")]
   if type(builtin_tbl.on_config_done) == "function" then
     builtin_tbl.on_config_done(plugin)
   end

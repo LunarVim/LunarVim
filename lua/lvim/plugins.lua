@@ -17,7 +17,7 @@ local core_plugins = {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "mason"
+      require("lvim.core.builtins").setup "mason"
     end,
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     lazy = true,
@@ -39,7 +39,7 @@ local core_plugins = {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function()
-      require("lvim.core.builtins").setup_builtin "telescope"
+      require("lvim.core.builtins").setup "telescope"
     end,
     dependencies = { "telescope-fzf-native.nvim" },
     lazy = true,
@@ -51,7 +51,7 @@ local core_plugins = {
   {
     "hrsh7th/nvim-cmp",
     config = function()
-      require("lvim.core.builtins").setup_builtin "cmp"
+      require("lvim.core.builtins").setup "cmp"
     end,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
@@ -105,7 +105,7 @@ local core_plugins = {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      require("lvim.core.builtins").setup_builtin "autopairs"
+      require("lvim.core.builtins").setup "autopairs"
     end,
     enabled = lvim.builtin.autopairs.active,
   },
@@ -118,7 +118,7 @@ local core_plugins = {
       local utils = require "lvim.utils"
       local path = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "nvim-treesitter")
       vim.opt.rtp:prepend(path) -- treesitter needs to be before nvim's runtime in rtp
-      require("lvim.core.builtins").setup_builtin "treesitter"
+      require("lvim.core.builtins").setup "treesitter"
     end,
     cmd = { "TSInstall", "TSUninstall", "TSUpdate", "TSInstallInfo", "TSInstallSync", "TSInstallFromGrammar" },
     event = "User FileOpened",
@@ -133,7 +133,7 @@ local core_plugins = {
   {
     "kyazdani42/nvim-tree.lua",
     config = function()
-      require("lvim.core.builtins").setup_builtin "nvimtree"
+      require("lvim.core.builtins").setup "nvimtree"
     end,
     enabled = lvim.builtin.nvimtree.active,
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFileToggle" },
@@ -143,7 +143,7 @@ local core_plugins = {
   {
     "tamago324/lir.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "lir"
+      require("lvim.core.builtins").setup "lir"
     end,
     enabled = lvim.builtin.lir.active,
     event = "User DirOpened",
@@ -151,7 +151,7 @@ local core_plugins = {
   {
     "lewis6991/gitsigns.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "gitsigns"
+      require("lvim.core.builtins").setup "gitsigns"
     end,
     event = "User FileOpened",
     cmd = "Gitsigns",
@@ -162,7 +162,7 @@ local core_plugins = {
   {
     "folke/which-key.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "which-key"
+      require("lvim.core.builtins").setup "which-key"
     end,
     cmd = "WhichKey",
     event = "VeryLazy",
@@ -173,7 +173,7 @@ local core_plugins = {
   {
     "numToStr/Comment.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "comment"
+      require("lvim.core.builtins").setup "comment"
     end,
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
     event = "User FileOpened",
@@ -184,7 +184,7 @@ local core_plugins = {
   {
     "ahmedkhalf/project.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "project"
+      require("lvim.core.builtins").setup "project"
     end,
     enabled = lvim.builtin.project.active,
     event = "VimEnter",
@@ -204,7 +204,7 @@ local core_plugins = {
     "nvim-lualine/lualine.nvim",
     -- "Lunarvim/lualine.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "lualine"
+      require("lvim.core.builtins").setup "lualine"
     end,
     event = "VimEnter",
     enabled = lvim.builtin.lualine.active,
@@ -214,7 +214,7 @@ local core_plugins = {
   {
     "SmiteshP/nvim-navic",
     config = function()
-      require("lvim.core.builtins").setup_builtin "breadcrumbs"
+      require("lvim.core.builtins").setup "breadcrumbs"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.breadcrumbs.active,
@@ -223,7 +223,7 @@ local core_plugins = {
   {
     "akinsho/bufferline.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "bufferline"
+      require("lvim.core.builtins").setup "bufferline"
     end,
     branch = "main",
     event = "User FileOpened",
@@ -234,7 +234,7 @@ local core_plugins = {
   {
     "mfussenegger/nvim-dap",
     config = function()
-      require("lvim.core.builtins").setup_builtin "dap"
+      require("lvim.core.builtins").setup "dap"
     end,
     lazy = true,
     enabled = lvim.builtin.dap.active,
@@ -254,7 +254,7 @@ local core_plugins = {
   {
     "goolord/alpha-nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "alpha"
+      require("lvim.core.builtins").setup "alpha"
     end,
     enabled = lvim.builtin.alpha.active,
     event = "VimEnter",
@@ -266,7 +266,7 @@ local core_plugins = {
     event = "VeryLazy",
     branch = "main",
     config = function()
-      require("lvim.core.builtins").setup_builtin "terminal"
+      require("lvim.core.builtins").setup "terminal"
     end,
     enabled = lvim.builtin.terminal.active,
   },
@@ -280,7 +280,7 @@ local core_plugins = {
   {
     "RRethy/vim-illuminate",
     config = function()
-      require("lvim.core.builtins").setup_builtin "illuminate"
+      require("lvim.core.builtins").setup "illuminate"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.illuminate.active,
@@ -289,7 +289,7 @@ local core_plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("lvim.core.builtins").setup_builtin "indentlines"
+      require("lvim.core.builtins").setup "indentlines"
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.indentlines.active,

@@ -18,7 +18,7 @@ function M:init()
   require("lvim.keymappings").load_defaults()
 
   local builtins = require "lvim.core.builtins"
-  builtins.config { user_config_file = user_config_file }
+  builtins.init { user_config_file = user_config_file }
 
   local settings = require "lvim.config.settings"
   settings.load_defaults()
