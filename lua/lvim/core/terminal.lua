@@ -77,10 +77,7 @@ local function get_dynamic_terminal_size(direction, size)
   end
 end
 
-M.setup = function()
-  local terminal = require "toggleterm"
-  terminal.setup(lvim.builtin.terminal)
-
+M.init = function()
   for i, exec in pairs(lvim.builtin.terminal.execs) do
     local direction = exec[4] or lvim.builtin.terminal.direction
 
@@ -98,7 +95,11 @@ M.setup = function()
 
     M.add_exec(opts)
   end
+end
 
+M.setup = function()
+  local terminal = require "toggleterm"
+  terminal.setup(lvim.builtin.terminal)
   if lvim.builtin.terminal.on_config_done then
     lvim.builtin.terminal.on_config_done(terminal)
   end
