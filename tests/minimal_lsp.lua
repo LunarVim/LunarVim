@@ -71,7 +71,7 @@ _G.load_config = function()
   end
 
   -- Add the server that troubles you here, e.g. "clangd", "pyright", "tsserver"
-  local name = "sumneko_lua"
+  local name = "lua_ls"
 
   local setup_opts = {
     on_attach = on_attach,
