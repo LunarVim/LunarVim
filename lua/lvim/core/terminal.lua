@@ -91,7 +91,11 @@ local function add_keybind_keymap(keybind)
     return
   end
 
-  vim.keymap.set({ "n", "t" }, keybind.keymap, function()
+  local modes = { "n" }
+  if not keybind.keymap:find "<leader>" then
+    table.insert(modes, "t")
+  end
+  vim.keymap.set(modes, keybind.keymap, function()
     keybind_toggle(keybind)
   end, { desc = keybind.desc, noremap = true, silent = true })
 end
