@@ -1,5 +1,8 @@
 #Requires -Version 7.1
 $ErrorActionPreference = "Stop" # exit when command fails
+if ($PSVersionTable.PSVersion -lt 7.1) {
+    Write-Error "Powershell version needs to be greater than 7.1!"
+}
 
 # set script variables
 $LV_BRANCH = $LV_BRANCH ?? "master"
@@ -231,7 +234,7 @@ function setup_lvim() {
 function validate_lunarvim_files() {
     Set-Alias lvim "$INSTALL_PREFIX\bin\lvim.ps1"
     try {
-        $verify_version_cmd="if v:errmsg != \`"\`" | cquit | else | quit | endif"
+        $verify_version_cmd="if v:errmsg != `"`" | cquit | else | quit | endif"
         Invoke-Command -ScriptBlock { lvim --headless -c 'LvimUpdate' -c "$verify_version_cmd" } -ErrorAction SilentlyContinue
     }
     catch {
