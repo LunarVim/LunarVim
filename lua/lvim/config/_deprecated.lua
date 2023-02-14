@@ -158,7 +158,7 @@ function M.post_load()
   if lvim.builtin.terminal.execs then
     deprecate(
       "lvim.builtin.terminal.execs",
-      "Use `lvim.builtin.terminal.commands` instead. See https://www.lunarvim.org/docs/configuration/keybindings#toggleterm-terminal-mappings"
+      "Use `lvim.builtin.terminal.terminals` instead. See https://www.lunarvim.org/docs/configuration/keybindings#toggleterm-terminal-mappings"
     )
     for _, v in ipairs(lvim.builtin.terminal.execs) do
       local keybind = {
@@ -168,7 +168,7 @@ function M.post_load()
         direction = v[4],
         size = v[5],
       }
-      lvim.builtin.terminal.keybinds[#lvim.builtin.terminal.keybinds + 1] = keybind
+      lvim.builtin.terminal.terminals[#lvim.builtin.terminal.terminals + 1] = keybind
     end
   end
 end

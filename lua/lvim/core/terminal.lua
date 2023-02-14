@@ -35,12 +35,12 @@ M.config = function()
         background = "Normal",
       },
     },
-    keybinds_defaults = {
+    terminals_defaults = {
       direction = "horizontal",
       horizontal_size = 0.3,
       vertical_size = 0.4,
     },
-    keybinds = {
+    terminals = {
       { keymap = "<M-1>", direction = "horizontal" },
       { keymap = "<M-2>", direction = "vertical" },
       { keymap = "<M-3>", direction = "float" },
@@ -78,60 +78,60 @@ local function get_dynamic_terminal_size(direction, size)
   end
 end
 
-local function keybind_toggle(keybind)
+local function term_toggle(term_opts)
   local Terminal = require("toggleterm.terminal").Terminal
-  local term = Terminal:new(keybind)
-  term:toggle(keybind.size, keybind.direction)
+  local term = Terminal:new(term_opts)
+  term:toggle(term_opts.size, term_opts.direction)
 end
 
-local function add_keybind_keymap(keybind)
-  local binary = keybind.cmd:match "(%S+)"
+local function add_term_keymap(term_opts)
+  local binary = term_opts.cmd:match "(%S+)"
   if vim.fn.executable(binary) ~= 1 then
     Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
     return
   end
 
   local modes = { "n" }
-  if not keybind.keymap:find "<leader>" then
+  if not term_opts.keymap:find "<leader>" then
     table.insert(modes, "t")
   end
-  vim.keymap.set(modes, keybind.keymap, function()
-    keybind_toggle(keybind)
-  end, { desc = keybind.desc, noremap = true, silent = true })
+  vim.keymap.set(modes, term_opts.keymap, function()
+    term_toggle(term_opts)
+  end, { desc = term_opts.desc, noremap = true, silent = true })
 end
 
 --- Setup the terminal cmds
 M.init = function()
-  for i, keybind in ipairs(lvim.builtin.terminal.keybinds) do
+  for i, term_opts in ipairs(lvim.builtin.terminal.terminals) do
     -- size == 1 is a special case for full screen
-    if keybind.size == 1 then
-      keybind.direction = "float"
-      keybind.float_opts = {
+    if term_opts.size == 1 then
+      term_opts.direction = "float"
+      term_opts.float_opts = {
         border = "none",
         width = 100000,
         height = 100000,
       }
     end
 
-    keybind.direction = keybind.direction or lvim.builtin.terminal.keybinds_defaults.direction
-    keybind.size = keybind.size or lvim.builtin.terminal.keybinds_defaults[keybind.direction .. "_size"]
+    term_opts.direction = term_opts.direction or lvim.builtin.terminal.terminals_defaults.direction
+    term_opts.size = term_opts.size or lvim.builtin.terminal.terminals_defaults[term_opts.direction .. "_size"]
     -- size is calculated dynamically as a percentage of the current buffer
-    keybind.size = get_dynamic_terminal_size(keybind.direction, keybind.size)
-    keybind.cmd = keybind.cmd or lvim.builtin.terminal.shell
+    term_opts.size = get_dynamic_terminal_size(term_opts.direction, term_opts.size)
+    term_opts.cmd = term_opts.cmd or lvim.builtin.terminal.shell
     -- desc is used for the keymap description
-    keybind.desc = keybind.desc
-    if keybind.desc == nil then
-      if keybind.cmd == nil then
-        keybind.desc = "Toggle Terminal(" .. keybind.direction .. ")"
+    term_opts.desc = term_opts.desc
+    if term_opts.desc == nil then
+      if term_opts.cmd == nil then
+        term_opts.desc = "Toggle Terminal(" .. term_opts.direction .. ")"
       else
-        keybind.desc = keybind.cmd
+        term_opts.desc = term_opts.cmd
       end
     end
 
-    keybind.count = i + 100
+    term_opts.count = i + 100
 
     -- the table is passed to toggleterm:new directly
-    add_keybind_keymap(keybind)
+    add_term_keymap(term_opts)
   end
 end
 
