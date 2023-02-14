@@ -59,6 +59,7 @@ function M.run_post_update()
   M.reset_cache()
 
   Log:debug "Syncing core plugins"
+  plugin_loader.reload { reload "lvim.plugins", lvim.plugins }
   plugin_loader.sync_core_plugins()
 
   if not in_headless then
