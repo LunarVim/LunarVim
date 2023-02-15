@@ -230,7 +230,7 @@ function M.enable_transparent_mode()
         "SignColumn",
         "NormalNC",
         "TelescopeBorder",
-        "NvimTreeNormal",        
+        "NvimTreeNormal",
         "NvimTreeNormalNC",
         "EndOfBuffer",
         "MsgArea",
