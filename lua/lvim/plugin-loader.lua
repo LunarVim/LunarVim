@@ -17,7 +17,7 @@ function plugin_loader.init(opts)
     local core_plugins_dir = join_paths(get_lvim_base_dir(), "plugins")
     if utils.is_directory(core_plugins_dir) then
       vim.fn.mkdir(plugins_dir, "p")
-      vim.loop.fs_rmdir(plugins_dir)
+      vim.fn.delete(plugins_dir, "rf")
       require("lvim.utils").fs_copy(core_plugins_dir, plugins_dir)
     else
       vim.fn.system {
@@ -53,7 +53,13 @@ function plugin_loader.init(opts)
 end
 
 function plugin_loader.reset_cache()
-  os.remove(require("lazy.core.cache").config.path)
+  -- TODO(kylo252): is this really necessary anymore?
+  local lazy_cache = require "lazy.core.cache"
+  local cache_path = lazy_cache.path
+  if utils.is_directory(cache_path) then
+    vim.fn.delete(cache_path, "rf")
+    vim.fn.mkdir(cache_path, "p")
+  end
 end
 
 function plugin_loader.reload(spec)
