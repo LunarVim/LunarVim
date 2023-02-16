@@ -73,6 +73,13 @@ function M:init(base_dir)
     return vim.call("stdpath", what)
   end
 
+  vim.api.nvim_call_function = function(fn, args)
+    if fn == "stdpath" then
+      return vim.fn.stdpath(args[1])
+    end
+    return vim.call(fn, unpack(args))
+  end
+
   ---Get the full path to LunarVim's base directory
   ---@return string
   function _G.get_lvim_base_dir()
