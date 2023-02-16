@@ -23,35 +23,22 @@ _G.require_clean = require("lvim.utils.modules").require_clean
 _G.require_safe = require("lvim.utils.modules").require_safe
 _G.reload = require("lvim.utils.modules").reload
 
----Get the full path to `$LUNARVIM_RUNTIME_DIR`
+---Get the full path to stdpath("data")
 ---@return string|nil
 function _G.get_runtime_dir()
-  local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
-  if not lvim_runtime_dir then
-    -- when nvim is used directly
-    return vim.call("stdpath", "data")
-  end
-  return lvim_runtime_dir
+  return vim.call("stdpath", "data")
 end
 
----Get the full path to `$LUNARVIM_CONFIG_DIR`
+---Get the full path to stdpath("config")
 ---@return string|nil
 function _G.get_config_dir()
-  local lvim_config_dir = os.getenv "LUNARVIM_CONFIG_DIR"
-  if not lvim_config_dir then
-    return vim.call("stdpath", "config")
-  end
-  return lvim_config_dir
+  return vim.call("stdpath", "config")
 end
 
----Get the full path to `$LUNARVIM_CACHE_DIR`
+---Get the full path to stdpath("cache")
 ---@return string|nil
 function _G.get_cache_dir()
-  local lvim_cache_dir = os.getenv "LUNARVIM_CACHE_DIR"
-  if not lvim_cache_dir then
-    return vim.call("stdpath", "cache")
-  end
-  return lvim_cache_dir
+  return vim.call("stdpath", "cache")
 end
 
 ---Initialize the `&runtimepath` variables and prepare for startup
@@ -66,12 +53,12 @@ function M:init(base_dir)
   ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
   ---NOTE: changes to "data" are currently unstable, see #2507
   ---@diagnostic disable-next-line: duplicate-set-field
-  vim.fn.stdpath = function(what)
-    if what == "cache" then
-      return _G.get_cache_dir()
-    end
-    return vim.call("stdpath", what)
-  end
+  -- vim.fn.stdpath = function(what)
+  --   if what == "cache" then
+  --     return _G.get_cache_dir()
+  --   end
+  --   return vim.call("stdpath", what)
+  -- end
 
   ---Get the full path to LunarVim's base directory
   ---@return string
@@ -79,20 +66,20 @@ function M:init(base_dir)
     return base_dir
   end
 
-  if os.getenv "LUNARVIM_RUNTIME_DIR" then
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
-    -- vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
-    vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
-    vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
+  -- if os.getenv "LUNARVIM_RUNTIME_DIR" then
+  --   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
+  --   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
+  --   -- vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
+  --   vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
+  --   vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
 
-    vim.opt.rtp:remove(vim.call("stdpath", "config"))
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
-    vim.opt.rtp:prepend(self.config_dir)
-    vim.opt.rtp:append(join_paths(self.config_dir, "after"))
+  --   vim.opt.rtp:remove(vim.call("stdpath", "config"))
+  --   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
+  --   vim.opt.rtp:prepend(self.config_dir)
+  --   vim.opt.rtp:append(join_paths(self.config_dir, "after"))
 
-    vim.opt.packpath = vim.opt.rtp:get()
-  end
+  --   vim.opt.packpath = vim.opt.rtp:get()
+  -- end
 
   require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
