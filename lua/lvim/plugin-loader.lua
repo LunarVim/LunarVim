@@ -47,9 +47,12 @@ function plugin_loader.init(opts)
   vim.opt.runtimepath:append(lazy_install_dir)
   vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
 
-  local lazy_cache = require "lazy.core.cache"
-  lazy_cache.path = join_paths(get_cache_dir(), "lazy", "luac")
-  lazy_cache.enable()
+  pcall(function()
+    -- set a custom path for lazy's cache and enable it
+    local lazy_cache = require "lazy.core.cache"
+    lazy_cache.path = join_paths(get_cache_dir(), "lazy", "luac")
+    lazy_cache.enable()
+  end)
 end
 
 function plugin_loader.reset_cache()
