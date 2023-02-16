@@ -10,13 +10,16 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/stale@v5
+      - uses: actions/stale@v7
         with:
-          days-before-issue-stale: 30
+          days-before-issue-stale: 50
           days-before-issue-close: 14
           stale-issue-label: 'stale'
-          stale-issue-message: 'This issue is stale because it has been open for 30 days with no activity.'
+          stale-issue-message: 'This issue is stale because it has been open for 50 days with no activity.'
           close-issue-message: 'This issue was closed because it has been inactive for 14 days since being marked as stale.'
+          remove-issue-stale-when-updated: true
+          exempt-all-milestones: true
+          exempt-all-issue-assignees: true
           days-before-pr-stale: -1
           days-before-pr-close: -1
           repo-token: ${{ secrets.GITHUB_TOKEN }}
