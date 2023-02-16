@@ -115,6 +115,11 @@ function M.setup()
   if lvim.builtin.treesitter.on_config_done then
     lvim.builtin.treesitter.on_config_done(treesitter_configs)
   end
+
+  -- handle deprecated API, https://github.com/windwp/nvim-autopairs/pull/324
+  local ts_utils = require "nvim-treesitter.ts_utils"
+  ts_utils.is_in_node_range = vim.treesitter.is_in_node_range
+  ts_utils.get_node_range = vim.treesitter.get_node_range
 end
 
 return M
