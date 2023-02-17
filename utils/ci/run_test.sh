@@ -1,21 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-export LUNARVIM_DATA_DIR="${LUNARVIM_DATA_DIR:-"$HOME/.local/share/lvim"}"
+export NVIM_APPNAME="${NVIM_APPNAME:-"lvim"}"
+
+export LUNARVIM_DATA_DIR="${LUNARVIM_DATA_DIR:-"$HOME/.local/share/$NVIM_APPNAME"}"
 export LUNARVIM_BASE_DIR="$LUNARVIM_DATA_DIR/core"
 
 export LVIM_TEST_ENV=true
 
-# we should start with an empty configuration
-LUNARVIM_CONFIG_DIR="$(mktemp -d)"
-LUNARVIM_CACHE_DIR="$(mktemp -d)"
-
-export LUNARVIM_CONFIG_DIR LUNARVIM_CACHE_DIR
-
-printf "cache_dir: %s\nconfig_dir: %s\n" "$LUNARVIM_CACHE_DIR" "$LUNARVIM_CONFIG_DIR"
-
 lvim() {
-  nvim -u "$LUNARVIM_BASE_DIR/tests/minimal_init.lua" --cmd "set runtimepath+=$LUNARVIM_BASE_DIR" "$@"
+  nvim -u "$LUNARVIM_BASE_DIR/tests/minimal_init.lua" "$@"
 }
 
 if [ -n "$1" ]; then
