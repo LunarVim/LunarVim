@@ -166,7 +166,7 @@ function main() {
 
   msg "$ADDITIONAL_WARNINGS"
   msg "Thank you for installing LunarVim!!"
-  echo "You can start it by running: $HOME/.local/bin/lvim"
+  echo "You can start it by running: $HOME/.local/bin/$NVIM_APPNAME"
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
@@ -437,7 +437,7 @@ function setup_lvim() {
 
   echo "Preparing Lazy setup"
 
-  "$HOME/.local/bin/lvim" --headless -c 'quitall'
+  "$HOME/.local/bin/$NVIM_APPNAME" --headless -c 'quitall'
 
   echo "Lazy setup complete"
 

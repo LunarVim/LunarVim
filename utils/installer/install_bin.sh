@@ -9,7 +9,7 @@ LUNARVIM_BASE_DIR="$LUNARVIM_DATA_DIR/core"
 
 function setup_shim() {
   local src="$LUNARVIM_BASE_DIR/utils/bin/lvim.template"
-  local dst="$HOME/.local/bin/lvim"
+  local dst="$HOME/.local/bin/$NVIM_APPNAME"
 
   [ ! -d "$HOME/.local/bin" ] && mkdir -p "$HOME/.local/bin"
 
@@ -27,4 +27,4 @@ function setup_shim() {
 
 setup_shim "$@"
 
-echo "You can start LunarVim by running: $HOME/.local/bin/lvim"
+echo "You can start LunarVim by running: $HOME/.local/bin/$NVIM_APPNAME"
