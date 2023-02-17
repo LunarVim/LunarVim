@@ -50,36 +50,11 @@ function M:init(base_dir)
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
 
-  ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
-  ---NOTE: changes to "data" are currently unstable, see #2507
-  ---@diagnostic disable-next-line: duplicate-set-field
-  -- vim.fn.stdpath = function(what)
-  --   if what == "cache" then
-  --     return _G.get_cache_dir()
-  --   end
-  --   return vim.call("stdpath", what)
-  -- end
-
   ---Get the full path to LunarVim's base directory
   ---@return string
   function _G.get_lvim_base_dir()
     return base_dir
   end
-
-  -- if os.getenv "LUNARVIM_RUNTIME_DIR" then
-  --   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
-  --   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
-  --   -- vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
-  --   vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
-  --   vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
-
-  --   vim.opt.rtp:remove(vim.call("stdpath", "config"))
-  --   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
-  --   vim.opt.rtp:prepend(self.config_dir)
-  --   vim.opt.rtp:append(join_paths(self.config_dir, "after"))
-
-  --   vim.opt.packpath = vim.opt.rtp:get()
-  -- end
 
   require("lvim.plugin-loader").init {
     package_root = self.pack_dir,
