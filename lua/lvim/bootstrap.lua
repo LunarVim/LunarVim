@@ -50,6 +50,11 @@ function M:init(base_dir)
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
 
+  -- for older installs. NVIM_APPNAME defaults to "lvim"
+  if not vim.env.NVIM_APPNAME then
+    vim.env.NVIM_APPNAME = "lvim"
+  end
+
   ---Get the full path to LunarVim's base directory
   ---@return string
   function _G.get_lvim_base_dir()
