@@ -3,19 +3,20 @@ set -eo pipefail
 
 OS="$(uname -s)"
 
-#Set branch to master unless specified by the user
+# Set branch to master unless specified by the user
 declare -x LV_BRANCH="${LV_BRANCH:-"master"}"
 declare -xr LV_REMOTE="${LV_REMOTE:-lunarvim/lunarvim.git}"
-declare -xr INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
+# declare -xr XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local"}"
 
 declare -xr XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
-declare -xr XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
-declare -xr XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
-declare -xr LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
-declare -xr LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
-declare -xr LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
-declare -xr LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
+declare -xr NVIM_APPNAME="${NVIM_APPNAME:-"lvim"}"
+
+declare LUNARVIM_DATA_DIR="$XDG_DATA_HOME/$NVIM_APPNAME"
+declare LUNARVIM_CONFIG_DIR="$XDG_CONFIG_HOME/$NVIM_APPNAME"
+declare LUNARVIM_CACHE_DIR="$XDG_CACHE_HOME/$NVIM_APPNAME"
+
+declare LUNARVIM_BASE_DIR="$LUNARVIM_DATA_DIR/core"
 
 declare -xr LUNARVIM_LOG_LEVEL="${LUNARVIM_LOG_LEVEL:-warn}"
 
@@ -31,8 +32,8 @@ declare INTERACTIVE_MODE=1
 declare ADDITIONAL_WARNINGS=""
 
 declare -a __lvim_dirs=(
+  "$LUNARVIM_DATA_DIR"
   "$LUNARVIM_CONFIG_DIR"
-  "$LUNARVIM_RUNTIME_DIR"
   "$LUNARVIM_CACHE_DIR"
   "$LUNARVIM_BASE_DIR"
 )
@@ -164,7 +165,7 @@ function main() {
 
   msg "$ADDITIONAL_WARNINGS"
   msg "Thank you for installing LunarVim!!"
-  echo "You can start it by running: $INSTALL_PREFIX/bin/lvim"
+  echo "You can start it by running: $XDG_DATA_HOME/bin/lvim"
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
@@ -248,7 +249,7 @@ function validate_install_prefix() {
 
 function check_system_deps() {
 
-  validate_install_prefix "$INSTALL_PREFIX"
+  validate_install_prefix "$XDG_DATA_HOME"
 
   if ! command -v git &>/dev/null; then
     print_missing_dep_msg "git"
@@ -435,7 +436,7 @@ function setup_lvim() {
 
   echo "Preparing Lazy setup"
 
-  "$INSTALL_PREFIX/bin/lvim" --headless -c 'quitall'
+  "$XDG_DATA_HOME/bin/lvim" --headless -c 'quitall'
 
   echo "Lazy setup complete"
 
@@ -443,7 +444,6 @@ function setup_lvim() {
 }
 
 function create_desktop_file() {
-  # TODO: Any other OSes that use desktop files?
   ([ "$OS" != "Linux" ] || ! command -v xdg-desktop-menu &>/dev/null) && return
   echo "Creating desktop file"
 
