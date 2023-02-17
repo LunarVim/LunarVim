@@ -44,16 +44,16 @@ end
 ---Initialize the `&runtimepath` variables and prepare for startup
 ---@return table
 function M:init(base_dir)
+  -- for older installs. NVIM_APPNAME defaults to "lvim"
+  if not vim.env.NVIM_APPNAME then
+    vim.env.NVIM_APPNAME = "lvim"
+  end
+
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_dir = get_cache_dir()
   self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
   self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
-
-  -- for older installs. NVIM_APPNAME defaults to "lvim"
-  if not vim.env.NVIM_APPNAME then
-    vim.env.NVIM_APPNAME = "lvim"
-  end
 
   ---Get the full path to LunarVim's base directory
   ---@return string
