@@ -9,9 +9,9 @@ LUNARVIM_BASE_DIR="$LUNARVIM_DATA_DIR/core"
 
 function setup_shim() {
   local src="$LUNARVIM_BASE_DIR/utils/bin/lvim.template"
-  local dst="$INSTALL_PREFIX/bin/lvim"
+  local dst="$HOME/.local/bin/lvim"
 
-  [ ! -d "$INSTALL_PREFIX/bin" ] && mkdir -p "$INSTALL_PREFIX/bin"
+  [ ! -d "$HOME/.local/bin" ] && mkdir -p "$HOME/.local/bin"
 
   # remove outdated installation so that `cp` doesn't complain
   rm -f "$dst"
@@ -19,7 +19,7 @@ function setup_shim() {
   cp "$src" "$dst"
 
   sed -e s"#NVIM_APPNAME_VAR#\"${NVIM_APPNAME}\"#"g \
-    -e s"#XDG_DATA_HOME_VAR#\"${XDG_DATA_HOME}\"#"g "$src" \
+    -e s"#XDG_DATA_HOME_VAR#${XDG_DATA_HOME}#"g "$src" \
     | tee "$dst" >/dev/null
 
   chmod u+x "$dst"
@@ -27,4 +27,4 @@ function setup_shim() {
 
 setup_shim "$@"
 
-echo "You can start LunarVim by running: $XDG_DATA_HOME/.local/bin/lvim"
+echo "You can start LunarVim by running: $HOME/.local/bin/lvim"

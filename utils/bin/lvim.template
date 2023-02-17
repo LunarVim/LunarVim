@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export NVIM_APPNAME="${NVIM_APPNAME:-"NVIM_APPNAME_VAR"}"
+export NVIM_APPNAME="${NVIM_APPNAME:-NVIM_APPNAME_VAR}"
 export LUNARVIM_BASE_DIR="XDG_DATA_HOME_VAR/$NVIM_APPNAME"
 
 exec -a lvim nvim -u "$LUNARVIM_BASE_DIR/init.lua" "$@"
