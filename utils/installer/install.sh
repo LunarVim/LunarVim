@@ -250,7 +250,7 @@ function validate_install_prefix() {
 
 function check_system_deps() {
 
-  validate_install_prefix "$XDG_DATA_HOME"
+  validate_install_prefix "$XDG_DATA_HOME/.local"
 
   if ! command -v git &>/dev/null; then
     print_missing_dep_msg "git"
