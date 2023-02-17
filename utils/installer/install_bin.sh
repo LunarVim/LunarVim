@@ -18,7 +18,7 @@ function setup_shim() {
 
   cp "$src" "$dst"
 
-  sed -e s"#NVIM_APPNAME_VAR#\"${NVIM_APPNAME}\"#"g \
+  sed -e s"#NVIM_APPNAME_VAR#${NVIM_APPNAME}#"g \
     -e s"#XDG_DATA_HOME_VAR#${XDG_DATA_HOME}#"g "$src" \
     | tee "$dst" >/dev/null
 
