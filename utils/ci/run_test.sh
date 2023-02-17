@@ -8,6 +8,14 @@ export LUNARVIM_BASE_DIR="$LUNARVIM_DATA_DIR/core"
 
 export LVIM_TEST_ENV=true
 
+# we should start with an empty configuration
+XDG_CACHE_HOME="$(mktemp -d)"
+XDG_CONFIG_HOME="$(mktemp -d)"
+
+export XDG_CACHE_HOME XDG_CONFIG_HOME
+
+printf "cache_dir: %s\nconfig_dir: %s\n" "$XDG_CACHE_HOME" "$XDG_CONFIG_HOME"
+
 lvim() {
   nvim -u "$LUNARVIM_BASE_DIR/tests/minimal_init.lua" "$@"
 }
