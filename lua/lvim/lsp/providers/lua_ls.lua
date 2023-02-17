@@ -30,7 +30,7 @@ local make_on_new_config = function(on_new_config, _)
   return lspconfig.util.add_hook_before(on_new_config, function(new_config, _)
     local server_name = new_config.name
 
-    if server_name ~= "sumneko_lua" then
+    if server_name ~= "lua_ls" then
       return
     end
     local plugins = { "plenary.nvim", "telescope.nvim", "nvim-treesitter", "LuaSnip" }
