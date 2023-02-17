@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
-export LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/lvim"}"
+export LUNARVIM_DATA_DIR="${LUNARVIM_DATA_DIR:-"$HOME/.local/share/lvim"}"
+export LUNARVIM_BASE_DIR="$LUNARVIM_DATA_DIR/core"
 
 export LVIM_TEST_ENV=true
 
