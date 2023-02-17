@@ -165,7 +165,7 @@ function main() {
 
   msg "$ADDITIONAL_WARNINGS"
   msg "Thank you for installing LunarVim!!"
-  echo "You can start it by running: $XDG_DATA_HOME/bin/lvim"
+  echo "You can start it by running: $XDG_DATA_HOME/.local/bin/lvim"
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
