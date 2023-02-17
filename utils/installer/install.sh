@@ -166,7 +166,7 @@ function main() {
 
   msg "$ADDITIONAL_WARNINGS"
   msg "Thank you for installing LunarVim!!"
-  echo "You can start it by running: $XDG_DATA_HOME/.local/bin/lvim"
+  echo "You can start it by running: $HOME/.local/bin/lvim"
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
@@ -250,7 +250,7 @@ function validate_install_prefix() {
 
 function check_system_deps() {
 
-  validate_install_prefix "$XDG_DATA_HOME/.local"
+  validate_install_prefix "$HOME/.local"
 
   if ! command -v git &>/dev/null; then
     print_missing_dep_msg "git"
