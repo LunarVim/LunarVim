@@ -436,7 +436,7 @@ function setup_lvim() {
 
   echo "Preparing Lazy setup"
 
-  "$XDG_DATA_HOME/bin/lvim" --headless -c 'quitall'
+  "$HOME/.local/bin/lvim" --headless -c 'quitall'
 
   echo "Lazy setup complete"
 
