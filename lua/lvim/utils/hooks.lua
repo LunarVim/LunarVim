@@ -61,6 +61,7 @@ function M.run_post_update()
   Log:debug "Syncing core plugins"
   plugin_loader.reload { reload "lvim.plugins", lvim.plugins }
   plugin_loader.sync_core_plugins()
+  require("lvim.lsp.templates").generate_templates()
 
   if not in_headless then
     vim.schedule(function()
