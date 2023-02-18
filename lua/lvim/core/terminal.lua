@@ -18,7 +18,7 @@ M.config = function()
     -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
     direction = "float",
     close_on_exit = true, -- close the terminal window when the process exits
-    shell = vim.o.shell, -- change the default shell
+    shell = nil, -- change the default shell
     -- This field is only relevant if direction is set to 'float'
     float_opts = {
       -- The border key is *almost* the same as 'nvim_win_open'
@@ -78,6 +78,8 @@ local function get_dynamic_terminal_size(direction, size)
 end
 
 M.init = function()
+  lvim.builtin.terminal.shell = lvim.builtin.terminal.shell or vim.o.shell
+
   for i, exec in pairs(lvim.builtin.terminal.execs) do
     local direction = exec[4] or lvim.builtin.terminal.direction
 
