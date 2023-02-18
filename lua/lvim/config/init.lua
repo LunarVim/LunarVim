@@ -51,7 +51,9 @@ function M:load(config_path)
   local ok, err = pcall(dofile, config_path)
   if not ok then
     if utils.is_file(user_config_file) then
-      Log:warn("Invalid configuration: " .. err)
+      vim.schedule(function()
+        Log:warn("Invalid configuration: " .. err)
+      end)
     else
       vim.notify_once(
         string.format("User-configuration not found. Creating an example configuration in %s", config_path)
