@@ -78,13 +78,11 @@ local function get_dynamic_terminal_size(direction, size)
 end
 
 M.init = function()
-  lvim.builtin.terminal.shell = lvim.builtin.terminal.shell or vim.o.shell
-
   for i, exec in pairs(lvim.builtin.terminal.execs) do
     local direction = exec[4] or lvim.builtin.terminal.direction
 
     local opts = {
-      cmd = exec[1] or lvim.builtin.terminal.shell,
+      cmd = exec[1] or lvim.builtin.terminal.shell or vim.o.shell,
       keymap = exec[2],
       label = exec[3],
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
