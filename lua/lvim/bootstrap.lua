@@ -101,7 +101,7 @@ function M:init(base_dir)
 
   require("lvim.config"):init()
 
-  require("lvim.core.builtins.mason").bootstrap()
+  require("lvim.builtin.mason").bootstrap()
 
   return self
 end

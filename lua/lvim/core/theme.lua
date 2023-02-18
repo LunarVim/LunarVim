@@ -86,10 +86,10 @@ M.setup = function()
   vim.cmd("colorscheme " .. lvim.colorscheme)
 
   if package.loaded.lualine then
-    require("lvim.core.builtins.lualine").setup()
+    require("lvim.builtin.lualine").setup()
   end
   if package.loaded.lir then
-    require("lvim.core.builtins.lir").icon_setup()
+    require("lvim.builtin.lir").icon_setup()
   end
 end
 

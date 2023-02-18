@@ -14,7 +14,7 @@ M.defaults = {
   {
     name = "BufferKill",
     fn = function()
-      require("lvim.core.builtins.bufferline").buf_kill "bd"
+      require("lvim.builtin.bufferline").buf_kill "bd"
     end,
   },
   {
