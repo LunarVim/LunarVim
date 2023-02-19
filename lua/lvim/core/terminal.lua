@@ -18,7 +18,7 @@ M.config = function()
     -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
     direction = "float",
     close_on_exit = true, -- close the terminal window when the process exits
-    shell = vim.o.shell, -- change the default shell
+    shell = nil, -- change the default shell
     -- This field is only relevant if direction is set to 'float'
     float_opts = {
       -- The border key is *almost* the same as 'nvim_win_open'
@@ -82,7 +82,7 @@ M.init = function()
     local direction = exec[4] or lvim.builtin.terminal.direction
 
     local opts = {
-      cmd = exec[1] or lvim.builtin.terminal.shell,
+      cmd = exec[1] or lvim.builtin.terminal.shell or vim.o.shell,
       keymap = exec[2],
       label = exec[3],
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
