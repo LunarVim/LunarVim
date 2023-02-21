@@ -118,7 +118,7 @@ return {
     SignOut = "",
     Tab = "",
     Table = "",
-    Target = "",
+    Target = "󰀘",
     Telescope = "",
     Text = "",
     Tree = "",
