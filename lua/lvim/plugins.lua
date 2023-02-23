@@ -49,8 +49,6 @@ local core_plugins = {
       require("lvim.core.telescope").setup()
     end,
     dependencies = { "telescope-fzf-native.nvim" },
-    lazy = true,
-    cmd = "Telescope",
     enabled = lvim.builtin.telescope.active,
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true, enabled = lvim.builtin.telescope.active },
