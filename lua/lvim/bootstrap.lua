@@ -70,8 +70,8 @@ function M:init(base_dir)
       return _G.get_cache_dir()
     elseif what == "config" then
       return _G.get_config_dir()
-    elseif what == "data" then
-      return _G.get_runtime_dir()
+      -- elseif what == "data" then
+      --   return _G.get_runtime_dir()
     end
     return vim.call("stdpath", what)
   end
