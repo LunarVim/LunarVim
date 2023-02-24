@@ -48,21 +48,10 @@ function plugin_loader.init(opts)
   vim.opt.runtimepath:append(join_paths(plugins_dir, "*"))
 
   pcall(function()
-    -- set a custom path for lazy's cache and enable it
+    -- set a custom path for lazy's cache
     local lazy_cache = require "lazy.core.cache"
     lazy_cache.path = join_paths(get_cache_dir(), "lazy", "luac")
-    lazy_cache.enable()
   end)
-end
-
-function plugin_loader.reset_cache()
-  -- TODO(kylo252): is this really necessary anymore?
-  local lazy_cache = require "lazy.core.cache"
-  local cache_path = lazy_cache.path
-  if utils.is_directory(cache_path) then
-    vim.fn.delete(cache_path, "rf")
-    vim.fn.mkdir(cache_path, "p")
-  end
 end
 
 function plugin_loader.reload(spec)
