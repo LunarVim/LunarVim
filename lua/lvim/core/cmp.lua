@@ -278,6 +278,9 @@ M.config = function()
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
+      { name = "commit" },
+      { name = "vim-dadbot-completion" },
+      { name = "cmp-tw2css" },
       { name = "tmux" },
     },
     mapping = cmp_mapping.preset.insert {
