@@ -74,9 +74,9 @@ function M.view_lunarvim_changelog()
       attach_mappings = function(_, map)
         map("i", "<enter>", copy_to_clipboard_action)
         map("n", "<enter>", copy_to_clipboard_action)
-        map("i", "<esc>", actions._close)
-        map("n", "<esc>", actions._close)
-        map("n", "q", actions._close)
+        map("i", "<esc>", actions.close)
+        map("n", "<esc>", actions.close)
+        map("n", "q", actions.close)
         return true
       end,
       sorter = sorters.generic_sorter,
