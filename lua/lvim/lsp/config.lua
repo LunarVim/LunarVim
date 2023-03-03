@@ -79,10 +79,12 @@ return {
   },
   document_highlight = false,
   code_lens_refresh = true,
-  float = {
-    focusable = true,
-    style = "minimal",
-    border = "rounded",
+  handlers = {
+    override_config = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+    },
   },
   on_attach_callback = nil,
   on_init_callback = nil,

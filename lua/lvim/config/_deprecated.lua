@@ -54,6 +54,14 @@ function M.handle()
   setmetatable(lvim.lsp.popup_border, mt)
 
   ---@deprecated
+  lvim.lsp.float = {}
+  setmetatable(lvim.lsp.float, {
+    __newindex = function(_, k, _)
+      deprecate("lvim.lsp.float." .. k, "Use `lvim.lsp.handlers.override_config instead.")
+    end,
+  })
+
+  ---@deprecated
   lvim.lang = {}
   setmetatable(lvim.lang, mt)
 end
