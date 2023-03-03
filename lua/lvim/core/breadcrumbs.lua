@@ -32,6 +32,7 @@ M.config = function()
       "lab",
       "notify",
       "noice",
+      "neotest-summary",
       "",
     },
     options = {
