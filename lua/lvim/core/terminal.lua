@@ -92,7 +92,7 @@ local function add_term_keymap(term_opts)
   end
 
   local modes = { "n" }
-  if not term_opts.keymap:find "<leader>" then
+  if not term_opts.keymap:find "<leader>" and not term_opts.keymap:find "<space>" then
     table.insert(modes, "t")
   end
   vim.keymap.set(modes, term_opts.keymap, function()
