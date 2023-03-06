@@ -106,7 +106,7 @@ M.init = function()
     -- size == 1 is a special case for full screen
     if term_opts.size == 1 then
       term_opts.direction = "float"
-      term_opts.float_opts = {
+      term_opts.float_opts = term_opts.float_opts or {
         border = "none",
         width = 100000,
         height = 100000,
