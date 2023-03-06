@@ -97,7 +97,7 @@ local function add_term_keymap(term_opts)
   end
   vim.keymap.set(modes, term_opts.keymap, function()
     term_toggle(term_opts)
-  end, { desc = term_opts.desc, noremap = true, silent = true })
+  end, { desc = term_opts.desc, silent = true })
 end
 
 --- Setup the terminal cmds
