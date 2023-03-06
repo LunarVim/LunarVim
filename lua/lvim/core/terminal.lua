@@ -41,10 +41,10 @@ M.config = function()
       vertical_size = 0.4,
     },
     terminals = {
-      { keymap = "<M-1>", direction = "horizontal" },
-      { keymap = "<M-2>", direction = "vertical" },
-      { keymap = "<M-3>", direction = "float" },
-      { keymap = "<leader>gg", cmd = "lazygit", size = 1 },
+      { keymap = "<M-1>", desc = "Horizontal Terminal", direction = "horizontal" },
+      { keymap = "<M-2>", desc = "Vertical Terminal", direction = "vertical" },
+      { keymap = "<M-3>", desc = "Float Terminal", direction = "float" },
+      { keymap = "<leader>gg", desc = "LazyGit", cmd = "lazygit", size = 1 },
     },
   }
 end
