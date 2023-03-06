@@ -35,15 +35,19 @@ M.config = function()
         background = "Normal",
       },
     },
-    -- Add executables on the config.lua
-    -- { cmd, keymap, description, direction, size }
-    -- lvim.builtin.terminal.execs = {...} to overwrite
-    -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
-    -- TODO: pls add mappings in which key and refactor this
     execs = {
-      { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-      { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
-      { nil, "<M-3>", "Float Terminal", "float", nil },
+      defaults = {
+        -- default shell already set in toggleterm opts
+        -- size = 1 for full screen
+        direction = "horizontal",
+        horizontal_size = 0.3,
+        vertical_size = 0.4,
+      },
+      -- builtin, cmd defaults to shell
+      { keymap = "<M-1>", direction = "horizontal" },
+      { keymap = "<M-2>", direction = "vertical" },
+      { keymap = "<M-3>", direction = "float" },
+      { keymap = "<leader>gg", cmd = "lazygit", size = 1 },
     },
   }
 end
@@ -78,19 +82,31 @@ local function get_dynamic_terminal_size(direction, size)
 end
 
 M.init = function()
-  for i, exec in pairs(lvim.builtin.terminal.execs) do
-    local direction = exec[4] or lvim.builtin.terminal.direction
+  for i, exec in ipairs(lvim.builtin.terminal.execs) do
+    if exec.size == 1 then
+      exec.direction = "float"
+    end
+    local direction = exec.direction or lvim.builtin.terminal.execs.defaults.direction
+    local size = exec.size or lvim.builtin.terminal.execs.defaults[direction .. "_size"]
+    size = get_dynamic_terminal_size(direction, size)
+    local cmd = exec.cmd or lvim.builtin.terminal.shell
+    local desc = exec.desc
+    if desc == nil then
+      if exec.cmd == nil then
+        desc = "Toggle Terminal(" .. exec.direction .. ")"
+      else
+        desc = exec.cmd
+      end
+    end
 
     local opts = {
-      cmd = exec[1] or lvim.builtin.terminal.shell or vim.o.shell,
-      keymap = exec[2],
-      label = exec[3],
+      cmd = cmd,
+      keymap = exec.keymap,
+      desc = desc,
       -- NOTE: unable to consistently bind id/count <= 9, see #2146
       count = i + 100,
       direction = direction,
-      size = function()
-        return get_dynamic_terminal_size(direction, exec[5])
-      end,
+      size = size,
     }
 
     M.add_exec(opts)
@@ -113,13 +129,22 @@ M.add_exec = function(opts)
   end
 
   vim.keymap.set({ "n", "t" }, opts.keymap, function()
-    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() }
-  end, { desc = opts.label, noremap = true, silent = true })
+    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size }
+  end, { desc = opts.desc, noremap = true, silent = true })
 end
 
 M._exec_toggle = function(opts)
   local Terminal = require("toggleterm.terminal").Terminal
-  local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
+  local term = Terminal:new {
+    cmd = opts.cmd,
+    count = opts.count,
+    direction = opts.direction,
+    float_opts = {
+      border = "none" and opts.size == 1,
+      width = opts.size == 1 and 100000,
+      height = opts.size == 1 and 100000,
+    },
+  }
   term:toggle(opts.size, opts.direction)
 end
 
@@ -144,26 +169,6 @@ M.toggle_log_view = function(logfile)
   local Terminal = require("toggleterm.terminal").Terminal
   local log_view = Terminal:new(term_opts)
   log_view:toggle()
-end
-
-M.lazygit_toggle = function()
-  local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new {
-    cmd = "lazygit",
-    hidden = true,
-    direction = "float",
-    float_opts = {
-      border = "none",
-      width = 100000,
-      height = 100000,
-    },
-    on_open = function(_)
-      vim.cmd "startinsert!"
-    end,
-    on_close = function(_) end,
-    count = 99,
-  }
-  lazygit:toggle()
 end
 
 return M
