@@ -60,6 +60,7 @@ function M.run_post_update()
   Log:debug "Syncing core plugins"
   plugin_loader.reload { reload "lvim.plugins", lvim.plugins }
   plugin_loader.sync_core_plugins()
+  M.reset_cache() -- force cache clear and templates regen once more
 
   if not in_headless then
     vim.schedule(function()
