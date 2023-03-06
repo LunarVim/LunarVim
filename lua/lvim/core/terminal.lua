@@ -119,14 +119,7 @@ M.init = function()
     term_opts.size = get_dynamic_terminal_size(term_opts.direction, term_opts.size)
     term_opts.cmd = term_opts.cmd or lvim.builtin.terminal.shell or vim.o.shell
     -- desc is used for the keymap description
-    term_opts.desc = term_opts.desc
-    if term_opts.desc == nil then
-      if term_opts.cmd == nil then
-        term_opts.desc = "Toggle Terminal(" .. term_opts.direction .. ")"
-      else
-        term_opts.desc = term_opts.cmd
-      end
-    end
+    term_opts.desc = term_opts.desc or term_opts.cmd
 
     term_opts.count = i + 100
 
