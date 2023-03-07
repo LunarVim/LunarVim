@@ -160,7 +160,13 @@ M.lazygit_toggle = function()
     on_open = function(_)
       vim.cmd "startinsert!"
     end,
-    on_close = function(_) end,
+    on_close = function(_)
+      local ok, neo_tree_events = pcall(require, "neo-tree.events")
+      if not ok then
+        return
+      end
+      neo_tree_events.fire_event "git_event"
+    end,
     count = 99,
   }
   lazygit:toggle()
