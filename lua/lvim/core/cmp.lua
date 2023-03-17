@@ -331,6 +331,12 @@ M.config = function()
           if is_insert_mode() then -- prevent overwriting brackets
             confirm_opts.behavior = ConfirmBehavior.Insert
           end
+          local entry = cmp.get_selected_entry()
+          local is_copilot = entry and entry.source.name == "copilot"
+          if is_copilot then
+            confirm_opts.behavior = ConfirmBehavior.Replace
+            confirm_opts.select = true
+          end
           if cmp.confirm(confirm_opts) then
             return -- success, exit early
           end
