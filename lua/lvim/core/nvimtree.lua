@@ -245,7 +245,8 @@ function M.setup()
   if lvim.builtin.project.active then
     lvim.builtin.nvimtree.setup.respect_buf_cwd = true
     lvim.builtin.nvimtree.setup.update_cwd = true
-    lvim.builtin.nvimtree.setup.update_focused_file = { enable = true, update_cwd = true }
+    lvim.builtin.nvimtree.setup.update_focused_file.enable = true
+    lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = true
   end
 
   local function telescope_find_files(_)
