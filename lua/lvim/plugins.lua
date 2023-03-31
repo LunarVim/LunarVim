@@ -28,10 +28,9 @@ local core_plugins = {
     end,
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     build = function()
-      local status_ok, registry = pcall(require, "mason-registry")
-      if status_ok then
-        registry.refresh()
-      end
+      pcall(function()
+        require("mason-registry").refresh()
+      end)
     end,
     lazy = true,
   },
