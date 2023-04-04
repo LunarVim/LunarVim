@@ -54,13 +54,13 @@
     "commit": "b64fded"
   },
   "mason.nvim": {
-    "commit": "698b282"
+    "commit": "5e059a0"
   },
   "neodev.nvim": {
     "commit": "7330427"
   },
   "nlsp-settings.nvim": {
-    "commit": "1986267"
+    "commit": "23705ee"
   },
   "null-ls.nvim": {
     "commit": "0180603"
@@ -78,7 +78,7 @@
     "commit": "bdb94e3"
   },
   "nvim-lspconfig": {
-    "commit": "e99d159"
+    "commit": "c345220"
   },
   "nvim-navic": {
     "commit": "59b997f"

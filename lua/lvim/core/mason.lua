@@ -5,6 +5,9 @@ local join_paths = require("lvim.utils").join_paths
 function M.config()
   lvim.builtin.mason = {
     ui = {
+      check_outdated_packages_on_open = true,
+      width = 0.8,
+      height = 0.9,
       border = "rounded",
       keymaps = {
         toggle_package_expand = "<CR>",
@@ -19,6 +22,12 @@ function M.config()
       },
     },
 
+    icons = {
+      package_installed = "◍",
+      package_pending = "◍",
+      package_uninstalled = "◍",
+    },
+
     -- NOTE: should be available in $PATH
     install_root_dir = join_paths(vim.fn.stdpath "data", "mason"),
 
@@ -26,6 +35,7 @@ function M.config()
     PATH = "skip",
 
     pip = {
+      upgrade_pip = false,
       -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
       -- and is not recommended.
       --
@@ -40,6 +50,21 @@ function M.config()
     -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
     -- packages that are requested to be installed will be put in a queue.
     max_concurrent_installers = 4,
+
+    -- [Advanced setting]
+    -- The registries to source packages from. Accepts multiple entries. Should a package with the same name exist in
+    -- multiple registries, the registry listed first will be used.
+    registries = {
+      "lua:mason-registry.index",
+      "github:mason-org/mason-registry",
+    },
+
+    -- The provider implementations to use for resolving supplementary package metadata (e.g., all available versions).
+    -- Accepts multiple entries, where later entries will be used as fallback should prior providers fail.
+    providers = {
+      "mason.providers.registry-api",
+      "mason.providers.client",
+    },
 
     github = {
       -- The template URL to use when downloading assets from GitHub.

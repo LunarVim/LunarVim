@@ -27,6 +27,11 @@ local core_plugins = {
       require("lvim.core.mason").setup()
     end,
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+    build = function()
+      pcall(function()
+        require("mason-registry").refresh()
+      end)
+    end,
     lazy = true,
   },
   {
