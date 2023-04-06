@@ -24,6 +24,10 @@ return {
     -- use config.lua for this not put here
   },
 
+  lazy = {
+    opts = {},
+  },
+
   autocommands = {},
   lang = {},
   log = {
