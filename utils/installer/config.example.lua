@@ -109,3 +109,34 @@ lvim.builtin.treesitter.auto_install = true
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+
+-- -- Change lazy.nvim settings <https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration>
+-- lvim.lazy.opts = {
+--   defaults = { lazy = true, version = "" },
+--   install = { missing = true, colorscheme = { "kanagawa" } },
+--   ui = {
+--     border = "rounded",
+--   },
+--   checker = {
+--     enabled = true,
+--     concurrency = 1,
+--   },
+--   performance = {
+--     cache = {
+--     enabled = true,
+--     },
+--     rtp = {
+--       disabled_plugins = {
+--         "gzip",
+--         "matchit",
+--         "matchparen",
+--         "netrwPlugin",
+--         "rplugin",
+--         "tarPlugin",
+--         "tohtml",
+--         "tutor",
+--         "zipPlugin",
+--       },
+--     }
+--   }
+-- }
