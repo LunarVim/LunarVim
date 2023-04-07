@@ -95,11 +95,11 @@ function plugin_loader.load(configurations)
   local status_ok = xpcall(function()
     local opts = {
       install = {
-        missing = true, 
-        colorscheme = { lvim.colorscheme, "lunar", "habamax" }, 
+        missing = true,
+        colorscheme = { lvim.colorscheme, "lunar", "habamax" },
       },
-      ui = { 
-        border = "rounded", 
+      ui = {
+        border = "rounded",
       },
       root = plugins_dir,
       git = {
@@ -118,11 +118,11 @@ function plugin_loader.load(configurations)
       readme = {
         root = join_paths(get_runtime_dir(), "lazy", "readme"),
       },
-    } 
-    
+    }
+
     if next(lvim.lazy.opts) ~= nil then
       opts = lvim.lazy.opts
-    end 
+    end
 
     lazy.setup(configurations, opts)
   end, debug.traceback)
