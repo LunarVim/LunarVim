@@ -101,9 +101,6 @@
   "plenary.nvim": {
     "commit": "253d348"
   },
-  "popup.nvim": {
-    "commit": "b7404d3"
-  },
   "project.nvim": {
     "commit": "1c2e9c9"
   },
