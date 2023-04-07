@@ -41,6 +41,15 @@ body:
     validations:
       required: true
   - type: input
+    id: terminal-name
+    attributes:
+      label: Terminal name
+      description: "Name of terminal you are using"
+      placeholder: |
+        iTerm2, Wezterm,...
+    validations:
+      required: true
+  - type: input
     id: system-version
     attributes:
       label: "Operating system/version"
