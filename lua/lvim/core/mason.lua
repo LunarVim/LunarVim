@@ -74,6 +74,8 @@ function M.config()
       -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
+
+    on_config_done = nil,
   }
 end
 
@@ -109,6 +111,10 @@ function M.setup()
   add_to_path(lvim.builtin.mason.PATH == "append")
 
   mason.setup(lvim.builtin.mason)
+
+  if lvim.builtin.mason.on_config_done then
+    lvim.builtin.mason.on_config_done(mason)
+  end
 end
 
 return M
