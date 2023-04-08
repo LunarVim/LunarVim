@@ -93,38 +93,7 @@ function plugin_loader.load(configurations)
   vim.opt.runtimepath:remove(join_paths(plugins_dir, "*"))
 
   local status_ok = xpcall(function()
-    local opts = {
-      install = {
-        missing = true,
-        colorscheme = { lvim.colorscheme, "lunar", "habamax" },
-      },
-      ui = {
-        border = "rounded",
-      },
-      root = plugins_dir,
-      git = {
-        timeout = 120,
-      },
-      lockfile = join_paths(get_config_dir(), "lazy-lock.json"),
-      performance = {
-        rtp = {
-          reset = false,
-        },
-      },
-      defaults = {
-        lazy = false,
-        version = nil,
-      },
-      readme = {
-        root = join_paths(get_runtime_dir(), "lazy", "readme"),
-      },
-    }
-
-    if next(lvim.lazy.opts) ~= nil then
-      opts = lvim.lazy.opts
-    end
-
-    lazy.setup(configurations, opts)
+    lazy.setup(configurations, lvim.lazy.opts)
   end, debug.traceback)
 
   if not status_ok then
