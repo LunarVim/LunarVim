@@ -79,13 +79,11 @@ return {
   },
   document_highlight = false,
   code_lens_refresh = true,
+  ---@usage list of the keys to override behavior of the handlers
   handlers = {
-    ---@usage list of the keys to override behavior of the handlers
-    override_config = {
-      focusable = true,
-      style = "minimal",
-      border = "rounded",
-    },
+    focusable = true,
+    style = "minimal",
+    border = "rounded",
   },
   on_attach_callback = nil,
   on_init_callback = nil,
@@ -105,7 +103,7 @@ return {
       ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
       ["gl"] = {
         function()
-          local config = lvim.lsp.diagnostics.float
+          local config = vim.diagnostic.config().float
           config.scope = "line"
           vim.diagnostic.open_float(0, config)
         end,

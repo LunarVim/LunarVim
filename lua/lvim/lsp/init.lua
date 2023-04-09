@@ -95,12 +95,10 @@ function M.setup()
   end
 
   if lvim.use_icons then
-    for _, sign in ipairs(lvim.lsp.diagnostics.signs.values) do
+    for _, sign in ipairs(vim.diagnostic.config().signs.values) do
       vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
     end
   end
-
-  require("lvim.lsp.handlers").setup()
 
   if not utils.is_directory(lvim.lsp.templates_dir) then
     require("lvim.lsp.templates").generate_templates()

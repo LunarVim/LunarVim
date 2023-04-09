@@ -62,6 +62,14 @@ function M.handle()
   })
 
   ---@deprecated
+  lvim.lsp.diagnostics = {}
+  setmetatable(lvim.lsp.diagnostics, {
+    __newindex = function(_, k, _)
+      deprecate("lvim.lsp.diagnostics." .. k, "Use `vim.diagnostic.config() instead.")
+    end,
+  })
+
+  ---@deprecated
   lvim.lang = {}
   setmetatable(lvim.lang, mt)
 end
