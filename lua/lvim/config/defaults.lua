@@ -28,7 +28,7 @@ return {
     opts = {
       install = {
         missing = true,
-        colorscheme = { colorscheme, "lunar", "habamax" },
+        colorscheme = { "lunar", "habamax" },
       },
       ui = {
         border = "rounded",
