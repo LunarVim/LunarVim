@@ -57,7 +57,7 @@ function M.handle()
   lvim.lsp.float = {}
   setmetatable(lvim.lsp.float, {
     __newindex = function(_, k, _)
-      deprecate("lvim.lsp.float." .. k, "Use `lvim.lsp.handlers.override_config instead.")
+      deprecate("lvim.lsp.float." .. k, "Use `lvim.lsp.handlers` instead.")
     end,
   })
 
@@ -65,7 +65,7 @@ function M.handle()
   lvim.lsp.diagnostics = {}
   setmetatable(lvim.lsp.diagnostics, {
     __newindex = function(_, k, _)
-      deprecate("lvim.lsp.diagnostics." .. k, "Use `vim.diagnostic.config() instead.")
+      deprecate("lvim.lsp.diagnostics." .. k, "Use `vim.diagnostic.config()` instead.")
     end,
   })
 
