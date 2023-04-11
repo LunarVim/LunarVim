@@ -100,7 +100,7 @@ M.config = function()
       l = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      }
+      },
     },
     mappings = {
       [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
