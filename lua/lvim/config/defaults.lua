@@ -24,6 +24,35 @@ return {
     -- use config.lua for this not put here
   },
 
+  lazy = {
+    opts = {
+      install = {
+        missing = true,
+        colorscheme = { "lunar", "habamax" },
+      },
+      ui = {
+        border = "rounded",
+      },
+      root = require("lvim.utils").join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt"),
+      git = {
+        timeout = 120,
+      },
+      lockfile = require("lvim.utils").join_paths(get_config_dir(), "lazy-lock.json"),
+      performance = {
+        rtp = {
+          reset = false,
+        },
+      },
+      defaults = {
+        lazy = false,
+        version = nil,
+      },
+      readme = {
+        root = require("lvim.utils").join_paths(get_runtime_dir(), "lazy", "readme"),
+      },
+    },
+  },
+
   autocommands = {},
   lang = {},
   log = {
