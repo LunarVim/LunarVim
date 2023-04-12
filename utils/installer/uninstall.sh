@@ -8,9 +8,12 @@ declare -r XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
 declare -r XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
 declare -r XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
-declare -r LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
-declare -r LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/lvim"}"
-declare -r LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/lvim"}"
+declare -xr NVIM_APPNAME="${NVIM_APPNAME:-"lvim"}"
+
+declare -xr LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$XDG_DATA_HOME/lunarvim"}"
+declare -xr LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/$NVIM_APPNAME"}"
+declare -xr LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$XDG_CACHE_HOME/$NVIM_APPNAME"}"
+declare -xr LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"$LUNARVIM_RUNTIME_DIR/$NVIM_APPNAME"}"
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_RUNTIME_DIR"
@@ -59,13 +62,7 @@ function remove_lvim_dirs() {
 }
 
 function remove_lvim_bin() {
-  local legacy_bin="/usr/local/bin/lvim "
-  if [ -x "$legacy_bin" ]; then
-    echo "Error! Unable to remove $legacy_bin without elevation. Please remove manually."
-    exit 1
-  fi
-
-  lvim_bin="$(command -v lvim 2>/dev/null)"
+  lvim_bin="$(command -v "$NVIM_APPNAME" 2>/dev/null)"
   rm -f "$lvim_bin"
 }
 
