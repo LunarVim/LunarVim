@@ -153,7 +153,7 @@ M.lazygit_toggle = function()
     hidden = true,
     direction = "float",
     float_opts = {
-      border = "none",
+      border = "single",
       width = 100000,
       height = 100000,
     },
