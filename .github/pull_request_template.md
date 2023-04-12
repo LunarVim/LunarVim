@@ -6,7 +6,7 @@ I prefixed the title with one of the following tags:
  - refactor: when moving code without adding any functionality
  - docs: on documentation updates
 
-Aditionally you can specify the scope of the PR in parenthesis, ex `fix(cmp):` or `feat(which-key):` or `docs(readme):`
+Additionally you can specify the scope of the PR in parenthesis, ex `fix(cmp):` or `feat(which-key):` or `docs(readme):`
 
 - I read the contributing guide [CONTRIBUTING.md](../CONTRIBUTING.md)
 - My code follows the style guidelines of this project
