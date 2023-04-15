@@ -49,6 +49,9 @@ local function resolve_config(theme_name)
   local section = lvim.builtin.alpha[theme_name].section
 
   for name, el in pairs(section) do
+    if type(el) == "function" then
+      el = el()
+    end
     for k, v in pairs(el) do
       if name:match "buttons" and k == "entries" then
         resolved_section[name].val = resolve_buttons(theme_name, el)

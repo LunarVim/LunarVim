@@ -104,20 +104,22 @@ function M.get_sections()
   }
 
   local text = require "lvim.interface.text"
-  local lvim_version = require("lvim.utils.git").get_lvim_version()
 
-  local footer = {
-    type = "text",
-    val = text.align_center({ width = 0 }, {
-      "",
-      "lunarvim.org",
-      lvim_version,
-    }, 0.5),
-    opts = {
-      position = "center",
-      hl = "Number",
-    },
-  }
+  local footer = function()
+    local lvim_version = require("lvim.utils.git").get_lvim_version()
+    return {
+      type = "text",
+      val = text.align_center({ width = 0 }, {
+        "",
+        "lunarvim.org",
+        lvim_version,
+      }, 0.5),
+      opts = {
+        position = "center",
+        hl = "Number",
+      },
+    }
+  end
 
   local buttons = {
     opts = {
