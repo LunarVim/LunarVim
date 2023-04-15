@@ -100,7 +100,7 @@ function M.icon_setup()
 end
 
 function M.setup()
-  local status_ok, lir = pcall(reload, "lir")
+  local status_ok, lir = pcall(require, "lir")
   if not status_ok then
     return
   end

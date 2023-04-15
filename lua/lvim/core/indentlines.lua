@@ -28,7 +28,7 @@ M.config = function()
 end
 
 M.setup = function()
-  local status_ok, indent_blankline = pcall(reload, "indent_blankline")
+  local status_ok, indent_blankline = pcall(require, "indent_blankline")
   if not status_ok then
     return
   end
