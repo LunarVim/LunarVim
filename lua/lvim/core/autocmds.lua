@@ -123,13 +123,13 @@ function M.load_defaults()
       "BufEnter",
       {
         group = "_dir_opened",
-        once = true,
+        nested = true,
         callback = function(args)
           local bufname = vim.api.nvim_buf_get_name(args.buf)
           if require("lvim.utils").is_directory(bufname) then
             vim.api.nvim_del_augroup_by_name "_dir_opened"
             vim.cmd "do User DirOpened"
-            vim.api.nvim_exec_autocmds("BufEnter", {})
+            vim.api.nvim_exec_autocmds(args.event, { buffer = args.buf, data = args.data })
           end
         end,
       },
@@ -138,10 +138,11 @@ function M.load_defaults()
       { "BufRead", "BufWinEnter", "BufNewFile" },
       {
         group = "_file_opened",
-        once = true,
+        nested = true,
         callback = function(args)
           local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
           if not (vim.fn.expand "%" == "" or buftype == "nofile") then
+            vim.api.nvim_del_augroup_by_name "_file_opened"
             vim.cmd "do User FileOpened"
             require("lvim.lsp").setup()
           end
