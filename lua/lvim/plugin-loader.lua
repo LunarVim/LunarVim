@@ -39,9 +39,7 @@ function plugin_loader.init(opts)
       }
     end
 
-    vim.schedule(function()
-      require("lvim.lsp").setup()
-    end)
+    vim.api.nvim_create_autocmd("User", { pattern = "LazyDone", callback = require("lvim.lsp").setup })
   end
 
   vim.opt.runtimepath:append(lazy_install_dir)
