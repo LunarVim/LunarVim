@@ -103,7 +103,12 @@ return {
       ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
       ["gl"] = {
         function()
-          local config = vim.diagnostic.config().float
+          local config = vim.tbl_get(vim.diagnostic.config(), "float")
+
+          if config then
+            return
+          end
+
           config.scope = "line"
           vim.diagnostic.open_float(0, config)
         end,
