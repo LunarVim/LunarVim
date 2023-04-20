@@ -29,8 +29,6 @@ function M:init()
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
-  require("lvim.lsp.handlers").load_defaults()
-
   lvim.builtin.luasnip = {
     sources = {
       friendly_snippets = true,

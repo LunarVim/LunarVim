@@ -57,15 +57,7 @@ function M.handle()
   lvim.lsp.float = {}
   setmetatable(lvim.lsp.float, {
     __newindex = function(_, k, _)
-      deprecate("lvim.lsp.float." .. k, "Use `lvim.lsp.handlers` instead.")
-    end,
-  })
-
-  ---@deprecated
-  lvim.lsp.diagnostics = {}
-  setmetatable(lvim.lsp.diagnostics, {
-    __newindex = function(_, k, _)
-      deprecate("lvim.lsp.diagnostics." .. k, "Use `vim.diagnostic.config()` instead.")
+      deprecate("lvim.lsp.float." .. k, "Use `float` option in `vim.diagnostic.config()` instead.")
     end,
   })
 
@@ -75,6 +67,10 @@ function M.handle()
 end
 
 function M.post_load()
+  if lvim.lsp.diagnostics and not vim.tbl_isempty(lvim.lsp.diagnostics) then
+    deprecate("lvim.lsp.diagnostics", "Use `vim.diagnostic.config()` instead")
+  end
+
   if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
     deprecate("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
     vim.tbl_map(function(c)
