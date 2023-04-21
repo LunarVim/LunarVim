@@ -97,7 +97,7 @@ function M.setup()
   require("lvim.lsp.handlers").setup()
 
   if lvim.use_icons then
-    for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values")) do
+    for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
       vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
     end
   end
