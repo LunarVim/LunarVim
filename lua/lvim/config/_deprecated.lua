@@ -57,7 +57,7 @@ function M.handle()
   lvim.lsp.float = {}
   setmetatable(lvim.lsp.float, {
     __newindex = function(_, k, _)
-      deprecate("lvim.lsp.float." .. k, "Use `float` option in `vim.diagnostic.config()` instead.")
+      deprecate("lvim.lsp.float." .. k, "Use options provided by the handler instead")
     end,
   })
 
