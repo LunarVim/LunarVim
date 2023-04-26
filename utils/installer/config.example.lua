@@ -74,7 +74,7 @@ lvim.builtin.treesitter.auto_install = true
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
--- -- linters and formatters <https://www.lunarvim.org/docs/languages#lintingformatting>
+-- -- linters, formatters and code actions <https://www.lunarvim.org/docs/languages#lintingformatting>
 -- local formatters = require "lvim.lsp.null-ls.formatters"
 -- formatters.setup {
 --   { command = "stylua" },
@@ -90,6 +90,13 @@ lvim.builtin.treesitter.auto_install = true
 --   {
 --     command = "shellcheck",
 --     args = { "--severity", "warning" },
+--   },
+-- }
+-- local code_actions = require "lvim.lsp.null-ls.code_actions"
+-- code_actions.setup {
+--   {
+--     exe = "eslint",
+--     filetypes = { "typescript", "typescriptreact" },
 --   },
 -- }
 
