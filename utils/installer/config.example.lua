@@ -94,7 +94,7 @@ lvim.builtin.treesitter.auto_install = true
 -- }
 -- local code_actions = require "lvim.lsp.null-ls.code_actions"
 -- code_actions.setup {
---   { 
+--   {
 --     exe = "eslint",
 --     filetypes = { "typescript", "typescriptreact" },
 --   },
