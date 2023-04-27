@@ -39,7 +39,7 @@ a.describe("lsp workflow", function()
 
     require("lvim.lsp").setup()
 
-    assert.True(utils.is_directory(lvim.lsp.templates_dir))
+    assert.True(#vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1) > 0)
   end)
 
   a.it("should not include blacklisted servers in the generated templates", function()
