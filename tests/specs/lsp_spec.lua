@@ -37,9 +37,6 @@ a.describe("lsp workflow", function()
       assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
     end
 
-    vim.print("supported servers:", require("lvim.lsp.utils").get_supported_servers())
-    require("mason-registry").refresh()
-    vim.print("supported servers after refresh:", require("lvim.lsp.utils").get_supported_servers())
     require("lvim.lsp").setup()
 
     assert.True(#vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1) > 0)
