@@ -54,7 +54,7 @@ local join_paths = require("lvim.utils").join_paths
 
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
-  ---@deprecated use vim.diagnostic.config() instead
+  ---@deprecated use vim.diagnostic.config({ ... }) instead
   diagnostics = {},
   document_highlight = false,
   code_lens_refresh = true,

@@ -62,13 +62,22 @@ function M.handle()
   })
 
   ---@deprecated
+  lvim.lsp.diagnostics = {}
+  setmetatable(lvim.lsp.diagnostics, {
+    __newindex = function(table, k, v)
+      deprecate("lvim.lsp.diagnostics." .. k, string.format("Use `vim.diagnostic.config({ %s = %s })` instead", k, v))
+      rawset(table, k, v)
+    end,
+  })
+
+  ---@deprecated
   lvim.lang = {}
   setmetatable(lvim.lang, mt)
 end
 
 function M.post_load()
   if lvim.lsp.diagnostics and not vim.tbl_isempty(lvim.lsp.diagnostics) then
-    deprecate("lvim.lsp.diagnostics", "Use `vim.diagnostic.config()` instead")
+    vim.diagnostic.config(lvim.lsp.diagnostics)
   end
 
   if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
