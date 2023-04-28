@@ -4,7 +4,7 @@ local skipped_servers = {
   "antlersls",
   "azure_pipelines_ls",
   "ccls",
-  "csharp_ls",
+  "omnisharp",
   "cssmodules_ls",
   "denols",
   "docker_compose_language_service",
