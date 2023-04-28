@@ -21,6 +21,9 @@ a.describe("lsp workflow", function()
   end)
 
   lvim.lsp.templates_dir = join_paths(get_cache_dir(), "artifacts")
+  vim.go.loadplugins = true
+  local plugins = require "lvim.plugins"
+  require("lvim.plugin-loader").load { plugins, lvim.plugins }
 
   a.it("should be able to delete ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
@@ -36,14 +39,14 @@ a.describe("lsp workflow", function()
 
     require("lvim.lsp").setup()
 
-    assert.True(utils.is_directory(lvim.lsp.templates_dir))
+    assert.True(#vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1) > 0)
   end)
 
   a.it("should not include blacklisted servers in the generated templates", function()
     require("lvim.lsp").setup()
 
     for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
-      for _, server_name in ipairs(lvim.lsp.override) do
+      for _, server_name in ipairs(lvim.lsp.automatic_configuration.skipped_servers) do
         local setup_cmd = string.format([[require("lvim.lsp.manager").setup(%q)]], server_name)
         assert.False(helpers.file_contains(file, setup_cmd))
       end
@@ -76,8 +79,6 @@ a.describe("lsp workflow", function()
 
   a.it("should not attempt to re-generate ftplugin templates", function()
     local s = spy.on(require "lvim.lsp.templates", "generate_templates")
-    local plugins = require "lvim.plugins"
-    require("lvim.plugin-loader").load { plugins, lvim.plugins }
 
     require("lvim.lsp").setup()
     assert.spy(s).was_not_called()
