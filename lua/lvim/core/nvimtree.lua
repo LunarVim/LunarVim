@@ -243,17 +243,21 @@ local function on_attach(bufnr)
     require("lvim.core.nvimtree").start_telescope "live_grep"
   end
 
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
   api.config.mappings.default_on_attach(bufnr)
 
   local useful_keys = {
-    ["l"] = api.node.open.edit,
-    ["o"] = api.node.open.edit,
-    ["<CR>"] = api.node.open.edit,
-    ["v"] = api.node.open.vertical,
-    ["h"] = api.node.navigate.parent_close,
-    ["C"] = api.tree.change_root_to_node,
-    ["gtg"] = telescope_live_grep,
-    ["gtf"] = telescope_find_files,
+    ["l"] = { api.node.open.edit, opts "Open" },
+    ["o"] = { api.node.open.edit, opts "Open" },
+    ["<CR>"] = { api.node.open.edit, opts "Open" },
+    ["v"] = { api.node.open.vertical, opts "Open: Vertical Split" },
+    ["h"] = { api.node.navigate.parent_close, opts "Close Directory" },
+    ["C"] = { api.tree.change_root_to_node, opts "CD" },
+    ["gtg"] = { telescope_live_grep, opts "Telescope Live Grep" },
+    ["gtf"] = { telescope_find_files, opts "Telescope Find File" },
   }
 
   require("lvim.keymappings").load_mode("n", useful_keys)
