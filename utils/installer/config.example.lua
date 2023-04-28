@@ -47,7 +47,7 @@ lvim.builtin.treesitter.auto_install = true
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
 
--- -- generic LSP settings <https://www.lunarvim.org/docs/languages#lsp-support>
+-- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>
 
 -- --- disable automatic installation of servers
 -- lvim.lsp.installer.setup.automatic_installation = false
@@ -74,7 +74,7 @@ lvim.builtin.treesitter.auto_install = true
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
--- -- linters, formatters and code actions <https://www.lunarvim.org/docs/languages#lintingformatting>
+-- -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
 -- local formatters = require "lvim.lsp.null-ls.formatters"
 -- formatters.setup {
 --   { command = "stylua" },
@@ -100,7 +100,7 @@ lvim.builtin.treesitter.auto_install = true
 --   },
 -- }
 
--- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
+-- -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 -- lvim.plugins = {
 --     {
 --       "folke/trouble.nvim",
