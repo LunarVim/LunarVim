@@ -16,6 +16,7 @@ local skipped_servers = {
   "golangci_lint_ls",
   "gradle_ls",
   "graphql",
+  "java_language_server",
   "jedi_language_server",
   "ltex",
   "neocmake",
