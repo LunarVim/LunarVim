@@ -37,6 +37,9 @@ a.describe("lsp workflow", function()
       assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
     end
 
+    vim.print(pcall(require, "mason-registry.sources"))
+    vim.print(pcall(require, "mason-registry"))
+    vim.print(pcall(require, "mason"))
     require("lvim.lsp").setup()
 
     assert.True(#vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1) > 0)
