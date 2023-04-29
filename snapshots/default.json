@@ -1,6 +1,6 @@
 {
   "Comment.nvim": {
-    "commit": "a89339f"
+    "commit": "38d3b7e"
   },
   "LuaSnip": {
     "commit": "e77fa9a"
@@ -33,13 +33,13 @@
     "commit": "631f79e"
   },
   "gitsigns.nvim": {
-    "commit": "7dfe4be"
+    "commit": "e5edefd"
   },
   "indent-blankline.nvim": {
     "commit": "018bd04"
   },
   "lazy.nvim": {
-    "commit": "903f0fe"
+    "commit": "d6a782c"
   },
   "lir.nvim": {
     "commit": "1aa871f"
@@ -54,10 +54,10 @@
     "commit": "7276fff"
   },
   "mason.nvim": {
-    "commit": "253961c"
+    "commit": "057ac5c"
   },
   "neodev.nvim": {
-    "commit": "fe48362"
+    "commit": "0043cf9"
   },
   "nlsp-settings.nvim": {
     "commit": "32aa12d"
@@ -87,7 +87,7 @@
     "commit": "bb375fb"
   },
   "nvim-treesitter": {
-    "commit": "08e8b2c"
+    "commit": "2ce3c90"
   },
   "nvim-ts-context-commentstring": {
     "commit": "0bf8fbc"
@@ -120,7 +120,7 @@
     "commit": "68fdf85"
   },
   "tokyonight.nvim": {
-    "commit": "ab0ac67"
+    "commit": "c5df636"
   },
   "vim-illuminate": {
     "commit": "a290727"
