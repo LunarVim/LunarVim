@@ -209,6 +209,9 @@ local core_plugins = {
   {
     "mfussenegger/nvim-dap",
     -- event = "BufWinEnter",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
     config = function()
       require("lvim.core.dap").setup()
     end,
