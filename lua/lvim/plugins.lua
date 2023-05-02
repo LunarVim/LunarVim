@@ -260,6 +260,9 @@ local core_plugins = {
       require("lvim.core.dap").setup()
     end,
     lazy = true,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
     enabled = lvim.builtin.dap.active,
   },
 
