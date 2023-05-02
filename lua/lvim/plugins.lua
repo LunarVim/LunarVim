@@ -17,6 +17,7 @@ local core_plugins = {
       settings.current.automatic_installation = false
     end,
     lazy = true,
+    event = "User FileOpened",
     dependencies = "mason.nvim",
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
@@ -32,6 +33,7 @@ local core_plugins = {
         require("mason-registry").refresh()
       end)
     end,
+    event = "User FileOpened",
     lazy = true,
   },
   {
