@@ -54,11 +54,32 @@ function M.handle()
   setmetatable(lvim.lsp.popup_border, mt)
 
   ---@deprecated
+  lvim.lsp.float = {}
+  setmetatable(lvim.lsp.float, {
+    __newindex = function(_, k, _)
+      deprecate("lvim.lsp.float." .. k, "Use options provided by the handler instead")
+    end,
+  })
+
+  ---@deprecated
+  lvim.lsp.diagnostics = {}
+  setmetatable(lvim.lsp.diagnostics, {
+    __newindex = function(table, k, v)
+      deprecate("lvim.lsp.diagnostics." .. k, string.format("Use `vim.diagnostic.config({ %s = %s })` instead", k, v))
+      rawset(table, k, v)
+    end,
+  })
+
+  ---@deprecated
   lvim.lang = {}
   setmetatable(lvim.lang, mt)
 end
 
 function M.post_load()
+  if lvim.lsp.diagnostics and not vim.tbl_isempty(lvim.lsp.diagnostics) then
+    vim.diagnostic.config(lvim.lsp.diagnostics)
+  end
+
   if lvim.lsp.override and not vim.tbl_isempty(lvim.lsp.override) then
     deprecate("lvim.lsp.override", "Use `lvim.lsp.automatic_configuration.skipped_servers` instead")
     vim.tbl_map(function(c)

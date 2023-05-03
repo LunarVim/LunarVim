@@ -74,6 +74,32 @@ M.load_default_options = function()
       ["[jt]sconfig.*.json"] = "jsonc",
     },
   }
+
+  local default_diagnostic_config = {
+    signs = {
+      active = true,
+      values = {
+        { name = "DiagnosticSignError", text = lvim.icons.diagnostics.Error },
+        { name = "DiagnosticSignWarn", text = lvim.icons.diagnostics.Warning },
+        { name = "DiagnosticSignHint", text = lvim.icons.diagnostics.Hint },
+        { name = "DiagnosticSignInfo", text = lvim.icons.diagnostics.Information },
+      },
+    },
+    virtual_text = true,
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  }
+
+  vim.diagnostic.config(default_diagnostic_config)
 end
 
 M.load_headless_options = function()
