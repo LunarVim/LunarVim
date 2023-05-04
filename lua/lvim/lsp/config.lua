@@ -77,20 +77,8 @@ return {
       ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
       ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
       ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
-      ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
-      ["gl"] = {
-        function()
-          local float = vim.diagnostic.config().float
-
-          if float then
-            local config = type(float) == "table" and float or {}
-            config.scope = "line"
-
-            vim.diagnostic.open_float(config)
-          end
-        end,
-        "Show line diagnostics",
-      },
+      ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
+      ["gl"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show line diagnostics"}
     },
     insert_mode = {},
     visual_mode = {},
