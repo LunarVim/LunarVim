@@ -37,7 +37,7 @@ local function resolve_buttons(theme_name, button_section)
     button_element.on_press = on_press
 
     -- account for different icon byte sizes in cursor offset
-    local _, icon_length = button_element.val:find("[\128-\255]*")
+    local _, icon_length = button_element.val:find "[\128-\255]*"
     button_element.opts.cursor = icon_length + 2
     button_element.opts = vim.tbl_extend("force", button_element.opts, entry[4] or button_section.opts or {})
 
