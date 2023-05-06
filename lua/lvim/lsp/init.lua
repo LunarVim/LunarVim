@@ -111,6 +111,15 @@ function M.setup()
   require("lvim.lsp.null-ls").setup()
 
   autocmds.configure_format_on_save()
+
+  local function set_handler_opts_if_not_set(name, handler, opts)
+    if debug.getinfo(vim.lsp.handlers[name], "S").source:match(vim.env.VIMRUNTIME) then
+      vim.lsp.handlers[name] = vim.lsp.with(handler, opts)
+    end
+  end
+
+  set_handler_opts_if_not_set("textDocument/hover", vim.lsp.handlers.hover, { border = "rounded" })
+  set_handler_opts_if_not_set("textDocument/signatureHelp", vim.lsp.handlers.signature_help, { border = "rounded" })
 end
 
 return M
