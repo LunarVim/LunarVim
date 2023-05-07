@@ -45,7 +45,7 @@ jobs:
       - name: Re-install LunarVim
         timeout-minutes: 4
         run: |
-          ./utils/installer/uninstall.sh --remove-backups
+          ./utils/installer/uninstall.sh --remove-backups --remove-config
           ./utils/installer/install.sh --local --no-install-dependencies
 
       - name: Run unit-tests
