@@ -92,16 +92,12 @@ return {
     cond = conditions.hide_in_width,
   },
   lsp = {
-    function(msg)
-      msg = msg or "LS Inactive"
-      local buf_clients = vim.lsp.buf_get_clients()
-      if next(buf_clients) == nil then
-        -- TODO: clean up this if statement
-        if type(msg) == "boolean" or #msg == 0 then
-          return "LS Inactive"
-        end
-        return msg
+    function()
+      local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+      if #buf_clients == 0 then
+        return "LSP Inactive"
       end
+
       local buf_ft = vim.bo.filetype
       local buf_client_names = {}
       local copilot_active = false
