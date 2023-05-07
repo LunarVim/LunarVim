@@ -37,10 +37,6 @@ local core_plugins = {
     lazy = true,
   },
   {
-    "folke/tokyonight.nvim",
-    lazy = not vim.startswith(lvim.colorscheme, "tokyonight"),
-  },
-  {
     "lunarvim/lunar.nvim",
     lazy = lvim.colorscheme ~= "lunar",
   },
@@ -330,20 +326,6 @@ local core_plugins = {
     end,
     event = "User FileOpened",
     enabled = lvim.builtin.indentlines.active,
-  },
-
-  {
-    "lunarvim/onedarker.nvim",
-    branch = "freeze",
-    config = function()
-      pcall(function()
-        if lvim and lvim.colorscheme == "onedarker" then
-          require("onedarker").setup()
-          lvim.builtin.lualine.options.theme = "onedarker"
-        end
-      end)
-    end,
-    lazy = lvim.colorscheme ~= "onedarker",
   },
 
   {

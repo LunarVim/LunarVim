@@ -25,15 +25,6 @@ function M.handle()
   }
 
   ---@deprecated
-  lvim.builtin.theme.options = {}
-  setmetatable(lvim.builtin.theme.options, {
-    __newindex = function(_, k, v)
-      deprecate("lvim.builtin.theme.options." .. k, "Use `lvim.builtin.theme.<theme>.options` instead")
-      lvim.builtin.theme.tokyonight.options[k] = v
-    end,
-  })
-
-  ---@deprecated
   lvim.builtin.notify = {}
   setmetatable(lvim.builtin.notify, {
     __newindex = function(_, k, _)
