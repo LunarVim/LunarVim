@@ -6,7 +6,7 @@ function M.config()
     on_config_done = nil,
 
     -- A list of parser names, or "all"
-    ensure_installed = {},
+    ensure_installed = { "comment", "markdown_inline", "regex" },
 
     -- List of parsers to ignore installing (for "all")
     ignore_install = {},
