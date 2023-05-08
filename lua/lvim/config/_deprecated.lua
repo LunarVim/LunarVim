@@ -86,7 +86,7 @@ function M.handle()
     lvim.colorscheme = "lunar"
     deprecate(
       "lvim.builtin.theme.tokyonight." .. k,
-      "tokyonight was removed from core plugins, configure it like this <https://www.lunarvim.org/docs/master/plugins/extra-plugins#tokyonight>"
+      "tokyonight was removed from core plugins, configure it like this <https://www.lunarvim.org/docs/master/configuration/plugins/example-configurations#tokyonight>"
     )
     rawset(t, k, v ~= nil and v or {})
     return t[k]
