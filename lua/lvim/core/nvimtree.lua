@@ -22,7 +22,7 @@ function M.config()
       select_prompts = false,
       view = {
         adaptive_size = false,
-        centralize_selection = false,
+        centralize_selection = true,
         width = 30,
         hide_root_folder = false,
         side = "left",
