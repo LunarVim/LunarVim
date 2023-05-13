@@ -32,7 +32,7 @@ jobs:
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: nightly
+          version: stable
 
       - name: Install LunarVim
         timeout-minutes: 4
