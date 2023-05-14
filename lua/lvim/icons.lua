@@ -1,7 +1,7 @@
 return {
   kind = {
     Array = "",
-    Boolean = "",
+    Boolean = " ",
     Class = "",
     Color = "",
     Constant = "",
