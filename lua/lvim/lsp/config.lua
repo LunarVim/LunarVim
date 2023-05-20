@@ -36,6 +36,7 @@ local skipped_servers = {
   "solang",
   "solc",
   "solidity_ls",
+  "solidity_ls_nomicfoundation",
   "sorbet",
   "sourcekit",
   "sourcery",
