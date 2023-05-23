@@ -392,7 +392,7 @@ function verify_lvim_dirs() {
 
 function clone_lvim() {
   msg "Cloning LunarVim configuration"
-  if ! git clone --branch "$LV_BRANCH" \
+  if ! git clone --progress --depth 1 --branch "$LV_BRANCH" \
     "https://github.com/${LV_REMOTE}" "$LUNARVIM_BASE_DIR"; then
     echo "Failed to clone repository. Installation failed."
     exit 1

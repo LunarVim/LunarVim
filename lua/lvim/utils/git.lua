@@ -21,7 +21,7 @@ local function git_cmd(opts)
     on_stderr = function(_, data)
       table.insert(stderr, data)
     end,
-  }):sync()
+  }):sync(10000)
 
   if not vim.tbl_isempty(stderr) then
     Log:debug(stderr)
