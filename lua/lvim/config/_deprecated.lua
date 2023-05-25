@@ -120,7 +120,7 @@ function M.post_load()
         spec.dependencies = spec.requires
       end
 
-      return "Use `dependencies` instead"
+      return "Use `{... dependencies = [value] ...}` instead"
     end
 
     alternatives.disable = function()
@@ -131,17 +131,17 @@ function M.post_load()
       else
         spec.enabled = not spec.disabled
       end
-      return "Use `enabled` instead"
+      return "Use `{... enabled = [value] ...}` instead"
     end
 
     alternatives.wants = function()
-      return "It's not needed in most cases, otherwise use `dependencies`."
+      return "It's not needed in most cases, otherwise use `{... dependencies = [value] ...}`."
     end
     alternatives.needs = alternatives.wants
 
     alternatives.module = function()
       spec.lazy = true
-      return "Use `lazy = true` instead."
+      return "Use `{... lazy = true ...}` instead."
     end
 
     for old_key, alternative in pairs(alternatives) do
@@ -155,9 +155,9 @@ function M.post_load()
         end
         spec[old_key] = nil
 
-        message = message or string.format("Use `%s` instead.", alternative)
+        message = message or string.format("Use `{... %s = [value] ...}` instead.", alternative)
         deprecate(
-          string.format("%s` in `lvim.plugins", old_key),
+          string.format("{... %s = [value] ...}` in `lvim.plugins = {...}", old_key),
           message .. " See https://github.com/folke/lazy.nvim#-migration-guide"
         )
       end
