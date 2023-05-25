@@ -178,7 +178,17 @@ See https://github.com/folke/lazy.nvim#-migration-guide"]],
     if spec[1] and spec[1]:match "^http" then
       spec.url = spec[1]
       spec[1] = nil
-      deprecate("{ 'http...' }` in `lvim.plugins", "Use { url = 'http...' } instead.")
+
+      vim.schedule(function()
+        vim.notify_once(
+          [[We switched from packer.nvim to lazy.nvim. `"http..."` in `lvim.plugins` is deprecated. Use `url = "http..."` instead.
+Example:
+`lvim.plugins = {... { "http..." ...} ...}` ->
+`lvim.plugins = {... { url = "http..." ...} ...}`
+See https://github.com/folke/lazy.nvim#-migration-guide"]],
+          vim.log.levels.WARN
+        )
+      end)
     end
   end
 
