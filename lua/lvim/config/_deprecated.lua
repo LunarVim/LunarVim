@@ -120,7 +120,7 @@ function M.post_load()
         spec.dependencies = spec.requires
       end
 
-      return "Use `{... dependencies = [value] ...}` instead"
+      return "*dependencies* = [value]"
     end
 
     alternatives.disable = function()
@@ -131,17 +131,17 @@ function M.post_load()
       else
         spec.enabled = not spec.disabled
       end
-      return "Use `{... enabled = [value] ...}` instead"
+      return "*enabled* = [value]"
     end
 
     alternatives.wants = function()
-      return "It's not needed in most cases, otherwise use `{... dependencies = [value] ...}`."
+      return "*dependencies* = [value]"
     end
     alternatives.needs = alternatives.wants
 
     alternatives.module = function()
       spec.lazy = true
-      return "Use `{... lazy = true ...}` instead."
+      return "*lazy* = true"
     end
 
     for old_key, alternative in pairs(alternatives) do
@@ -155,11 +155,23 @@ function M.post_load()
         end
         spec[old_key] = nil
 
-        message = message or string.format("Use `{... %s = [value] ...}` instead.", alternative)
-        deprecate(
-          string.format("{... %s = [value] ...}` in `lvim.plugins = {...}", old_key),
-          message .. " See https://github.com/folke/lazy.nvim#-migration-guide"
-        )
+        message = message or string.format("*%s* = [value]", alternative)
+        vim.schedule(function()
+          vim.notify_once(
+            string.format(
+              [[We switched from packer.nvim to lazy.nvim. `%s` in `lvim.plugins` is deprecated. Use `%s` instead.
+Example:
+`lvim.plugins = {... {... *%s* = [value] ...} ...}` ->
+`lvim.plugins = {... {... %s ...} ...}`
+See https://github.com/folke/lazy.nvim#-migration-guide"]],
+              old_key,
+              message,
+              old_key,
+              message
+            ),
+            vim.log.levels.WARN
+          )
+        end)
       end
     end
 
