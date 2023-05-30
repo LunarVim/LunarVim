@@ -4,6 +4,7 @@ local skipped_servers = {
   "antlersls",
   "azure_pipelines_ls",
   "ccls",
+  "custom_elements_ls",
   "omnisharp",
   "cssmodules_ls",
   "denols",
