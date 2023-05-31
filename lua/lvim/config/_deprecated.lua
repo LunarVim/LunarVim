@@ -111,17 +111,8 @@ function M.post_load()
       run = "build",
       lock = "pin",
       tag = "version",
+      requires = "dependencies",
     }
-
-    alternatives.requires = function()
-      if type(spec.requires) == "string" then
-        spec.dependencies = { spec.requires }
-      else
-        spec.dependencies = spec.requires
-      end
-
-      return "*dependencies* = [value]"
-    end
 
     alternatives.disable = function()
       if type(spec.disabled) == "function" then
@@ -131,17 +122,17 @@ function M.post_load()
       else
         spec.enabled = not spec.disabled
       end
-      return "*enabled* = [value]"
+      return "enabled = " .. vim.inspect(spec.enabled)
     end
 
     alternatives.wants = function()
-      return "*dependencies* = [value]"
+      return "dependencies = [value]"
     end
     alternatives.needs = alternatives.wants
 
     alternatives.module = function()
       spec.lazy = true
-      return "*lazy* = true"
+      return "lazy = true"
     end
 
     for old_key, alternative in pairs(alternatives) do
@@ -155,18 +146,21 @@ function M.post_load()
         end
         spec[old_key] = nil
 
-        message = message or string.format("*%s* = [value]", alternative)
+        local new_value = vim.inspect(spec[alternative] or "[value]")
+        message = message or string.format("%s = %s", alternative, new_value)
         vim.schedule(function()
           vim.notify_once(
             string.format(
               [[`%s` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `%s` instead.
 Example:
-`lvim.plugins = {... {... *%s* = [value] ...} ...}` ->
+`lvim.plugins = {... {... %s = %s ...} ...}`
+->
 `lvim.plugins = {... {... %s ...} ...}`
 See https://github.com/folke/lazy.nvim#-migration-guide"]],
               old_key,
               message,
               old_key,
+              new_value,
               message
             ),
             vim.log.levels.WARN
@@ -181,11 +175,18 @@ See https://github.com/folke/lazy.nvim#-migration-guide"]],
 
       vim.schedule(function()
         vim.notify_once(
-          [[`"http..."` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `url = "http..."` instead.
+
+          string.format(
+            [[`"http..."` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `url = "http..."` instead.
 Example:
-`lvim.plugins = {... { "http..." ...} ...}` ->
-`lvim.plugins = {... { url = "http..." ...} ...}`
+`lvim.plugins = {... { "%s" ...} ...}`
+->
+`lvim.plugins = {... { url = "%s" ...} ...}`
 See https://github.com/folke/lazy.nvim#-migration-guide"]],
+            spec.url,
+            spec.url
+          ),
+
           vim.log.levels.WARN
         )
       end)
