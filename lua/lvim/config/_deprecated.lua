@@ -159,7 +159,7 @@ function M.post_load()
         vim.schedule(function()
           vim.notify_once(
             string.format(
-              [[We switched from packer.nvim to lazy.nvim. `%s` in `lvim.plugins` is deprecated. Use `%s` instead.
+              [[`%s` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `%s` instead.
 Example:
 `lvim.plugins = {... {... *%s* = [value] ...} ...}` ->
 `lvim.plugins = {... {... %s ...} ...}`
@@ -181,7 +181,7 @@ See https://github.com/folke/lazy.nvim#-migration-guide"]],
 
       vim.schedule(function()
         vim.notify_once(
-          [[We switched from packer.nvim to lazy.nvim. `"http..."` in `lvim.plugins` is deprecated. Use `url = "http..."` instead.
+          [[`"http..."` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `url = "http..."` instead.
 Example:
 `lvim.plugins = {... { "http..." ...} ...}` ->
 `lvim.plugins = {... { url = "http..." ...} ...}`
