@@ -120,6 +120,9 @@ function M.setup()
 
   set_handler_opts_if_not_set("textDocument/hover", vim.lsp.handlers.hover, { border = "rounded" })
   set_handler_opts_if_not_set("textDocument/signatureHelp", vim.lsp.handlers.signature_help, { border = "rounded" })
+
+  -- Enable rounded borders in :LspInfo window.
+  require("lspconfig.ui.windows").default_options.border = "rounded"
 end
 
 return M
