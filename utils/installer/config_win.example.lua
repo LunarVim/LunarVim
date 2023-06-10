@@ -5,7 +5,7 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
 -- Enable powershell as your default shell
-vim.opt.shell = "pwsh.exe -NoLogo"
+vim.opt.shell = "pwsh.exe"
 vim.opt.shellcmdflag =
   "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 vim.cmd [[
