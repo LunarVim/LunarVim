@@ -92,9 +92,6 @@ M.config = function()
           ["<ESC>"] = close_all_menus,
           ["q"] = close_all_menus,
         },
-        win_configs = {
-          border = "rounded",
-        },
       },
     },
   }
