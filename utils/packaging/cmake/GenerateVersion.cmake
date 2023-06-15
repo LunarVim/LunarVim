@@ -1,8 +1,8 @@
 # If not in a git repo (e.g., a tarball) these tokens define the complete
 # version string, else they are combined with the result of `git describe`.
 set(LVIM_VERSION_MAJOR 1)
-set(LVIM_VERSION_MINOR 3)
-set(LVIM_VERSION_PATCH 1)
+set(LVIM_VERSION_MINOR 4)
+set(LVIM_VERSION_PATCH 0)
 set(LVIM_VERSION_PRERELEASE "-dev")
 
 set(LVIM_VERSION "${LVIM_VERSION_MAJOR}.${LVIM_VERSION_MINOR}.${LVIM_VERSION_PATCH}${LVIM_VERSION_PRERELEASE}")
