@@ -19,13 +19,13 @@ local function get_mason_packages_or_null_ls_sources(null_ls_builtins)
     local collection = {}
     for _, source in pairs(sources) do
       null_ls_utils
-        .resolve_null_ls_package_from_mason(source)
-        :if_present(function(package)
-          table.insert(collection, package)
-        end)
-        :or_else_get(function()
-          table.insert(collection, source)
-        end)
+          .resolve_null_ls_package_from_mason(source)
+          :if_present(function(package)
+            table.insert(collection, package)
+          end)
+          :or_else_get(function()
+            table.insert(collection, source)
+          end)
     end
     res[null_ls_methods[method]] = collection
   end
@@ -57,7 +57,7 @@ local function select_null_ls_sources(ft, ft_builtins)
   local selection = {}
 
   local ok_provided, provided = pcall(require, "lvim.lsp.null-ls.providers." .. ft .. ".lua")
-  if ok_provided and provided.methods then
+  if ok_provided and type(provided) == "table" then
     selection = get_mason_packages_or_null_ls_sources(provided.methods)
   end
 
