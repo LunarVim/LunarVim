@@ -37,15 +37,17 @@ local core_plugins = {
     event = "User FileOpened",
     lazy = true,
   },
-  { "jay-babu/mason-null-ls.nvim", lazy = true },
+  { "jay-babu/mason-null-ls.nvim",  lazy = true },
   { "jay-babu/mason-nvim-dap.nvim", lazy = true, enabled = lvim.builtin.dap.active },
   {
-    -- do not require a config here that sets up null-ls or mason-null-ls
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
     },
+    config = function()
+      -- do not require a config here that sets up null-ls or mason-null-ls
+    end
   },
   {
     "folke/tokyonight.nvim",
