@@ -18,7 +18,8 @@ local core_plugins = {
     end,
     lazy = true,
     event = "User FileOpened",
-    dependencies = "mason.nvim",
+    dependencies = { "mason.nvim", "mason-null-ls.nvim", "mason-nvim-dap.nvim" },
+
   },
   { "tamago324/nlsp-settings.nvim",    cmd = "LspSettings", lazy = true },
   { "jose-elias-alvarez/null-ls.nvim", lazy = true },
@@ -36,6 +37,8 @@ local core_plugins = {
     event = "User FileOpened",
     lazy = true,
   },
+  { "jay-babu/mason-null-ls.nvim", lazy = true },
+  { "jay-babu/mason-nvim-dap.nvim", lazy = true, enabled = lvim.builtin.dap.active },
   {
     -- do not require a config here that sets up null-ls or mason-null-ls
     "jay-babu/mason-null-ls.nvim",

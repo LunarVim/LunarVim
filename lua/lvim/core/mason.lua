@@ -75,7 +75,16 @@ function M.config()
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
 
-    on_config_done = nil,
+    null_ls = {
+      ensure_installed = {},
+      automatic_installation = false,
+      automatic_setup = true,
+    },
+    dap = {
+      ensure_installed = {},
+      automatic_installation = false,
+      automatic_setup = true,
+    },
   }
 end
 
@@ -107,14 +116,28 @@ function M.setup()
   if not status_ok then
     return
   end
+  local mason_null_ls_ok, mason_null_ls = pcall(reload, "mason-null-ls")
+  if not mason_null_ls_ok then
+    return
+  end
 
   add_to_path(lvim.builtin.mason.PATH == "append")
 
   mason.setup(lvim.builtin.mason)
 
-  if lvim.builtin.mason.on_config_done then
-    lvim.builtin.mason.on_config_done(mason)
+  mason_null_ls.setup(lvim.builtin.mason.null_ls)
+  if lvim.builtin.mason.null_ls.automatic_setup then
+    mason_null_ls.setup_handlers()
   end
+
+  -- local mason_dap_ok, mason_dap = pcall(reload, "mason-nvim-dap")
+  -- if mason_dap_ok then
+  --   mason_dap.setup()
+  --   if lvim.builtin.mason.dap.automatic_setup then
+  --     mason_dap.setup_handlers()
+  --   end
+  -- end
+
 end
 
 return M
