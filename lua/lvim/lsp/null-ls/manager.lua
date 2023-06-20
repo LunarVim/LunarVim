@@ -1,10 +1,9 @@
 local M = {}
 
-local _ = require('mason-core.functional')
-local null_ls_utils = require("lvim.lsp.null-ls.util")
+local _ = require "mason-core.functional"
+local null_ls_utils = require "lvim.lsp.null-ls.util"
 local Log = require "lvim.core.log"
 local fmt = string.format
-
 
 ---Takes a map of null-ls methods mapped to a table of sources and transforms supported
 ---sources into a functional mason package.
@@ -13,22 +12,25 @@ local fmt = string.format
 ---@param null_ls_builtins T<K,V>
 ---@return T<K,T<M>>
 local function get_mason_packages_or_null_ls_sources(null_ls_builtins)
-    local null_ls_methods = require("lvim.lsp.null-ls._meta").method_bridge()
-    local res = {}
+  local null_ls_methods = require("lvim.lsp.null-ls._meta").method_bridge()
+  local res = {}
 
-    for method, sources in pairs(null_ls_builtins) do
-        local collection = {}
-        for _, source in pairs(sources) do
-            null_ls_utils.resolve_null_ls_package_from_mason(source):if_present(function(package)
-                table.insert(collection, package)
-            end):or_else_get(function()
-                table.insert(collection, source)
-            end)
-        end
-        res[null_ls_methods[method]] = collection
+  for method, sources in pairs(null_ls_builtins) do
+    local collection = {}
+    for _, source in pairs(sources) do
+      null_ls_utils
+        .resolve_null_ls_package_from_mason(source)
+        :if_present(function(package)
+          table.insert(collection, package)
+        end)
+        :or_else_get(function()
+          table.insert(collection, source)
+        end)
     end
+    res[null_ls_methods[method]] = collection
+  end
 
-    return res
+  return res
 end
 
 ---Mason packages won't be rosolved in this function except packages that where defined by the user. So
@@ -50,46 +52,49 @@ end
 ---@param ft_builtins T<K,T<K,table<M>>>
 ---@return T<K,T<K,M>>
 local function select_null_ls_sources(ft, ft_builtins)
-    local _ = require('mason-core.functional')
-    local null_ls_methods = require("lvim.lsp.null-ls._meta").method_bridge()
-    local selection = {}
+  local _ = require "mason-core.functional"
+  local null_ls_methods = require("lvim.lsp.null-ls._meta").method_bridge()
+  local selection = {}
 
-    local ok_provided, provided = pcall(require, "lvim.lsp.null-ls.providers." .. ft .. ".lua")
-    if ok_provided and provided.methods then
-        selection = get_mason_packages_or_null_ls_sources(provided.methods)
-    end
+  local ok_provided, provided = pcall(require, "lvim.lsp.null-ls.providers." .. ft .. ".lua")
+  if ok_provided and provided.methods then
+    selection = get_mason_packages_or_null_ls_sources(provided.methods)
+  end
 
-    null_ls_utils.disassociate_selection_from_input(selection, ft_builtins)
+  null_ls_utils.disassociate_selection_from_input(selection, ft_builtins)
 
-    local sorted_selection = null_ls_utils.source_selection_sort(ft_builtins)
+  local sorted_selection = null_ls_utils.source_selection_sort(ft_builtins)
 
-    for method, sources in pairs(sorted_selection) do
-        selection[null_ls_methods[method]] = sources[1]
-    end
+  for method, sources in pairs(sorted_selection) do
+    selection[null_ls_methods[method]] = sources[1]
+  end
 
-    return selection
+  return selection
 end
 
 ---Register all available null-ls builtins for a given filetype and install their corresponding mason package.
 ---@param filetype any
 function M.setup(filetype, lsp_server)
-    vim.validate { name = { filetype, "string" } }
-    vim.validate { name = { lsp_server, "string" } }
+  vim.validate { name = { filetype, "string" } }
+  vim.validate { name = { lsp_server, "string" } }
 
-    local ft_map = require("lvim.lsp.null-ls._meta").ft_bridge()
-    local null_ls_builtins = ft_map[filetype]
+  local ft_map = require("lvim.lsp.null-ls._meta").ft_bridge()
+  local null_ls_builtins = ft_map[filetype]
 
-    local method_to_package_info = get_mason_packages_or_null_ls_sources(null_ls_builtins)
-    local selection = select_null_ls_sources(filetype, method_to_package_info)
+  local method_to_package_info = get_mason_packages_or_null_ls_sources(null_ls_builtins)
+  local selection = select_null_ls_sources(filetype, method_to_package_info)
 
-    for method, source in pairs(selection) do
-        null_ls_utils.register_sources_on_ft(method, null_ls_utils.try_install_mason_package(source))
-    end
+  for method, source in pairs(selection) do
+    null_ls_utils.register_sources_on_ft(method, null_ls_utils.try_install_mason_package(source))
+  end
 
-    Log:debug(fmt(
-        "Finished setting up null-ls sources for the filetype '%s'. Sources are attached to the lsp server '%s'.",
-        filetype,
-        lsp_server))
+  Log:debug(
+    fmt(
+      "Finished setting up null-ls sources for the filetype '%s'. Sources are attached to the lsp server '%s'.",
+      filetype,
+      lsp_server
+    )
+  )
 end
 
 return M
