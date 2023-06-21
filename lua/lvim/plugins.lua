@@ -144,7 +144,7 @@ local core_plugins = {
     config = function()
       local utils = require "lvim.utils"
       local path = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "nvim-treesitter")
-      vim.opt.rtp:prepend(path)   -- treesitter needs to be before nvim's runtime in rtp
+      vim.opt.rtp:prepend(path) -- treesitter needs to be before nvim's runtime in rtp
       require("lvim.core.treesitter").setup()
     end,
     cmd = {

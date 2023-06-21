@@ -74,7 +74,7 @@ function M.config()
       -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
-<<<<<<< HEAD
+
 
     null_ls = {
       ensure_installed = {},
@@ -125,7 +125,6 @@ function M.setup()
   add_to_path(lvim.builtin.mason.PATH == "append")
 
   mason.setup(lvim.builtin.mason)
-<<<<<<< HEAD
 
   mason_null_ls.setup(lvim.builtin.mason.null_ls)
   if lvim.builtin.mason.null_ls.automatic_setup then
@@ -139,10 +138,6 @@ function M.setup()
   --     mason_dap.setup_handlers()
   --   end
   -- end
-<<<<<<< HEAD
->>>>>>> a14e9e65 (feat: masonn null-ls dap)
-=======
->>>>>>> ba842788 (fix: sources are now properly registered after installation)
 end
 
 return M
