@@ -60,7 +60,7 @@ end
 ---@return boolean|nil
 function M.register_sources_on_ft(method, source)
   local null_ls_methods = require("lvim.lsp.null-ls._meta").method_bridge()
-  local mason_null_ls_mapping = require("mason-null-ls.mappings.source")
+  local mason_null_ls_mapping = require "mason-null-ls.mappings.source"
   local source_options = {}
   if not M.is_package(source) then
     local _, provided = pcall(require, "lvim.lsp.null-ls.sources." .. source)
@@ -103,22 +103,18 @@ function M.try_install_and_register_mason_package(method, source)
   local function install_package(package)
     if not package:is_installed() then
       Log:debug(fmt("Automatically installing '%s' by the mason package '%s'.", source, package.name))
-      package:install():once(
-        'closed',
-        function()
-          vim.schedule(function()
-            if package:is_installed() then
-              Log:info(fmt("Installed '%s' by the mason package '%s'.", source, package.name))
-              M.register_sources_on_ft(method, source)
-            else
-              Log:warn(fmt(
-                "Installation of '%s' by the mason package '%s' failed. Consult mason logs.",
-                source,
-                package.name))
-            end
-          end)
-        end
-      )
+      package:install():once("closed", function()
+        vim.schedule(function()
+          if package:is_installed() then
+            Log:info(fmt("Installed '%s' by the mason package '%s'.", source, package.name))
+            M.register_sources_on_ft(method, source)
+          else
+            Log:warn(
+              fmt("Installation of '%s' by the mason package '%s' failed. Consult mason logs.", source, package.name)
+            )
+          end
+        end)
+      end)
     else
       M.register_sources_on_ft(method, source)
     end
@@ -183,8 +179,8 @@ function M.invert_method_to_sources_map(ft_builtins)
         inverted[source] = { method }
       else
         if not _.any(function(e)
-              return method == e
-            end, inverted[source]) then
+          return method == e
+        end, inverted[source]) then
           table.insert(inverted[source], method)
         end
       end

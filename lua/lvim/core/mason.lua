@@ -137,7 +137,6 @@ function M.setup()
   --     mason_dap.setup_handlers()
   --   end
   -- end
-
 end
 
 return M

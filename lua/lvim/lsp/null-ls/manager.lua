@@ -19,13 +19,13 @@ local function get_mason_packages_or_null_ls_sources(null_ls_builtins)
     local collection = {}
     for _, source in pairs(sources) do
       null_ls_utils
-          .resolve_null_ls_package_from_mason(source)
-          :if_present(function(package)
-            table.insert(collection, package)
-          end)
-          :or_else_get(function()
-            table.insert(collection, source)
-          end)
+        .resolve_null_ls_package_from_mason(source)
+        :if_present(function(package)
+          table.insert(collection, package)
+        end)
+        :or_else_get(function()
+          table.insert(collection, source)
+        end)
     end
     res[null_ls_methods[method]] = collection
   end
