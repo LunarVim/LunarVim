@@ -50,7 +50,7 @@
   "lunar.nvim": {
     "commit": "08bbc93"
   },
-  "mason-nvim-dap": {
+  "mason-nvim-dap.nvim": {
     "commit": "4feb21a"
   },
   "mason-null-ls.nvim": {

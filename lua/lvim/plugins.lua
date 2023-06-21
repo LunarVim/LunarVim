@@ -1,7 +1,6 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
   { "folke/lazy.nvim", tag = "stable" },
-  { "folke/lazy.nvim", tag = "stable" },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -36,8 +35,11 @@ local core_plugins = {
     event = "User FileOpened",
     lazy = true,
   },
-  { "jay-babu/mason-null-ls.nvim", lazy = true },
-  { "jay-babu/mason-nvim-dap.nvim", lazy = true, enabled = lvim.builtin.dap.active },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    lazy = true,
+    enabled = lvim.builtin.dap.active,
+  },
   {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
