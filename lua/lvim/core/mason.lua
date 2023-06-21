@@ -131,6 +131,18 @@ function M.setup()
   if lvim.builtin.mason.null_ls.automatic_setup then
     mason_null_ls.setup_handlers()
   end
+
+  -- local mason_dap_ok, mason_dap = pcall(reload, "mason-nvim-dap")
+  -- if mason_dap_ok then
+  --   mason_dap.setup()
+  --   if lvim.builtin.mason.dap.automatic_setup then
+  --     mason_dap.setup_handlers()
+  --   end
+  -- end
+<<<<<<< HEAD
+>>>>>>> a14e9e65 (feat: masonn null-ls dap)
+=======
+>>>>>>> ba842788 (fix: sources are now properly registered after installation)
 end
 
 return M
