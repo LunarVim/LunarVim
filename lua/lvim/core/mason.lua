@@ -74,6 +74,7 @@ function M.config()
       -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
+<<<<<<< HEAD
 
     null_ls = {
       ensure_installed = {},
@@ -124,19 +125,12 @@ function M.setup()
   add_to_path(lvim.builtin.mason.PATH == "append")
 
   mason.setup(lvim.builtin.mason)
+<<<<<<< HEAD
 
   mason_null_ls.setup(lvim.builtin.mason.null_ls)
   if lvim.builtin.mason.null_ls.automatic_setup then
     mason_null_ls.setup_handlers()
   end
-
-  -- local mason_dap_ok, mason_dap = pcall(reload, "mason-nvim-dap")
-  -- if mason_dap_ok then
-  --   mason_dap.setup()
-  --   if lvim.builtin.mason.dap.automatic_setup then
-  --     mason_dap.setup_handlers()
-  --   end
-  -- end
 end
 
 return M
