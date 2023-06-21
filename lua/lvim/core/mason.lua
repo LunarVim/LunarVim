@@ -75,7 +75,6 @@ function M.config()
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
 
-
     null_ls = {
       ensure_installed = {},
       automatic_installation = false,
