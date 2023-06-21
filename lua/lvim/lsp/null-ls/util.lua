@@ -60,12 +60,13 @@ end
 ---@return boolean|nil
 function M.register_sources_on_ft(method, source)
   local null_ls_methods = require("lvim.lsp.null-ls._meta").method_bridge()
+  local mason_null_ls_mapping = require("mason-null-ls.mappings.source")
   local source_options = {}
   if not M.is_package(source) then
     local _, provided = pcall(require, "lvim.lsp.null-ls.sources." .. source)
     source_options = provided.settings or {}
   else
-    source = source.name
+    source = mason_null_ls_mapping.getNullLsFromPackage(source.name)
   end
 
   source_options["name"] = source
@@ -84,17 +85,16 @@ function M.register_sources_on_ft(method, source)
 
   -- we need to pase this as a table itself to stay compatible with the service.register_sources(configs, method)
   kind.setup { source_options }
+  Log:info(fmt("Source '%s' for method '%s' was registered.", source, method))
   return true
 end
 
 ---Attempts to install a mason package for a given `source`. If no mason package could be resolved the
----`source` will be returned. Otherwise returns a mason package.
+---`source` will be returned. Otherwise returns a mason package. Also registers the package in null-ls.
+---@param method string
 ---@param source Package|string
 ---@return Package|string
-function M.try_install_mason_package(source)
-  local null_ls_client = require "null-ls.client"
-  local registry = require "mason-registry"
-  local mason_null_ls_mapping = require "mason-null-ls.mappings.source"
+function M.try_install_and_register_mason_package(method, source)
   ---@class Package
   ---@field is_installed function
   ---@field install function
@@ -104,33 +104,32 @@ function M.try_install_mason_package(source)
     if not package:is_installed() then
       Log:debug(fmt("Automatically installing '%s' by the mason package '%s'.", source, package.name))
       package:install():once(
-        "closed",
-        vim.schedule_wrap(function()
-          if registry.is_installed(package.name) then
-            Log:info(fmt("Installed '%s' by the mason package '%s'.", source, package.name))
-            null_ls_client.retry_add()
-            Log:info(fmt("Reattached '%s' to lsp buffer.", package.name))
-          else
-            Log:warn(
-              fmt("Installation of '%s' by the mason package '%s' failed. Consult mason logs.", source, package.name)
-            )
-          end
-        end)
+        'closed',
+        function()
+          vim.schedule(function()
+            if package:is_installed() then
+              Log:info(fmt("Installed '%s' by the mason package '%s'.", source, package.name))
+              M.register_sources_on_ft(method, source)
+            else
+              Log:warn(fmt(
+                "Installation of '%s' by the mason package '%s' failed. Consult mason logs.",
+                source,
+                package.name))
+            end
+          end)
+        end
       )
+    else
+      M.register_sources_on_ft(method, source)
     end
   end
 
   if M.is_package(source) then
     ---@diagnostic disable-next-line: param-type-mismatch
     install_package(source)
-    return mason_null_ls_mapping.getNullLsFromPackage(source.name)
   end
 
-  return M.resolve_null_ls_package_from_mason(source)
-    :if_present(function(package)
-      install_package(package)
-    end)
-    :or_else(source)
+  return source
 end
 
 ---Register a custom mason package with a spec provided by the user.
@@ -184,8 +183,8 @@ function M.invert_method_to_sources_map(ft_builtins)
         inverted[source] = { method }
       else
         if not _.any(function(e)
-          return method == e
-        end, inverted[source]) then
+              return method == e
+            end, inverted[source]) then
           table.insert(inverted[source], method)
         end
       end
