@@ -158,24 +158,24 @@ M.config = function()
       kind_icons = lvim.icons.kind,
       source_settings = {
         copilot = {
-          menu_name = "(Copilot)",
-          icon = lvim.icons.git.Octoface,
-          hl_group = "CmpItemKindCopilot",
+          label = "(Copilot)",
+          kind = lvim.icons.git.Octoface,
+          kind_hl_group = "CmpItemKindCopilot",
         },
         emoji = {
-          menu_name = "(Emoji)",
-          icon = lvim.icons.misc.Smiley,
-          hl_group = "CmpItemKindEmoji",
+          label = "(Emoji)",
+          kind = lvim.icons.misc.Smiley,
+          kind_hl_group = "CmpItemKindEmoji",
         },
         cmp_tabnine = {
-          menu_name = "(Tabnine)",
-          icon = lvim.icons.misc.Robot,
-          hl_group = "CmpItemKindTabnine",
+          label = "(Tabnine)",
+          kind = lvim.icons.misc.Robot,
+          kind_hl_group = "CmpItemKindTabnine",
         },
         crates = {
-          menu_name = "(Crates)",
-          icon = lvim.icons.misc.Package,
-          hl_group = "CmpItemKindCrate",
+          label = "(Crates)",
+          kind = lvim.icons.misc.Package,
+          kind_hl_group = "CmpItemKindCrate",
         },
         ["lab.quick_data"] = {
           menu_name = "(QuickData)",
@@ -206,15 +206,15 @@ M.config = function()
       duplicates_default = 0,
       format = function(entry, vim_item)
         local max_width = lvim.builtin.cmp.formatting.max_width
-        local source_settings = lvim.builtin.cmp.formatting.source_settings[entry.source.name]
+        local source_settings = vim.tbl_get(lvim.builtin.cmp.formatting.source_settings, entry.source.name) or {}
         if max_width ~= 0 and #vim_item.abbr > max_width then
           vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. lvim.icons.ui.Ellipsis
         end
         if lvim.use_icons then
-          vim_item.kind = source_settings.icon or lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
+          vim_item.kind = source_settings.kind or lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
           vim_item.kind_hl_group = source_settings.hl_group
         end
-        vim_item.menu = source_settings.menu_name
+        vim_item.menu = source_settings.label or ("(" .. entry.source.name .. ")")
         vim_item.dup = source_settings.duplicates or lvim.builtin.cmp.formatting.duplicates_default
         return vim_item
       end,
