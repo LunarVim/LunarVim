@@ -2,7 +2,7 @@
 set -x
 set -e
 
-REPO_DIR=$(readlink -f "$(dirname "$(realpath "$0")")/..")
+REPO_DIR=$(readlink -f "$(dirname "$(realpath "$0")")/../../..")
 cd "$REPO_DIR"
 
 mkdir build/bin -p
