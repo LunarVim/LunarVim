@@ -20,4 +20,6 @@ if(EXIT_CODE EQUAL 0 )
   endif()
 endif()
 
+file(WRITE "${CMAKE_BINARY_DIR}/version.txt" "${LVIM_VERSION}")
+
 message(STATUS "Using LVIM_VERSION: ${LVIM_VERSION}")
