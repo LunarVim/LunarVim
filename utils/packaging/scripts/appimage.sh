@@ -14,12 +14,12 @@ make install DESTDIR=AppDir
 
 # Only downloads linuxdeploy if the remote file is different from local
 if [ -e linuxdeploy-x86_64.AppImage ]; then
-	curl -Lo linuxdeploy-x86_64.AppImage \
-		-z linuxdeploy-x86_64.AppImage \
-		https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+  curl -Lo linuxdeploy-x86_64.AppImage \
+    -z linuxdeploy-x86_64.AppImage \
+    https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
 else
-	curl -Lo linuxdeploy-x86_64.AppImage \
-		https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+  curl -Lo linuxdeploy-x86_64.AppImage \
+    https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
 fi
 chmod +x linuxdeploy-x86_64.AppImage
 
@@ -39,14 +39,14 @@ chmod 755 AppDir/AppRun
 # bundle NeoVim
 
 if [ -z "$NVIM_VERSION" ]; then
-	NVIM_VERSION="stable"
+  NVIM_VERSION="stable"
 fi
 NVIM_LINK="https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim.appimage"
 
 if [ -e nvim.AppImage ]; then
-	curl -Lo nvim.AppImage -z nvim.AppImage "$NVIM_LINK"
+  curl -Lo nvim.AppImage -z nvim.AppImage "$NVIM_LINK"
 else
-	curl -Lo nvim.AppImage "$NVIM_LINK"
+  curl -Lo nvim.AppImage "$NVIM_LINK"
 fi
 chmod +x nvim.AppImage
 ./nvim.AppImage --appimage-extract
@@ -56,8 +56,8 @@ cp -rn squashfs-root/* AppDir/
 # build AppImage
 
 if [ -z "$ARCH" ]; then
-	ARCH="$(arch)"
-	export ARCH
+  ARCH="$(arch)"
+  export ARCH
 fi
 
 export OUTPUT=lvim.AppImage
