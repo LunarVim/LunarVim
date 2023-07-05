@@ -113,7 +113,7 @@ function M.setup()
   autocmds.configure_format_on_save()
 
   local function set_handler_opts_if_not_set(name, handler, opts)
-    if debug.getinfo(vim.lsp.handlers[name], "S").source:match(vim.env.VIMRUNTIME) then
+    if debug.getinfo(vim.lsp.handlers[name], "S").source:find(vim.env.VIMRUNTIME, 1, true) then
       vim.lsp.handlers[name] = vim.lsp.with(handler, opts)
     end
   end
