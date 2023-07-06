@@ -437,7 +437,7 @@ function setup_lvim() {
 
   echo "Preparing Lazy setup"
 
-  LUNARVIM_CONFIG_DIR="$(mktemp -d)" "$INSTALL_PREFIX/bin/$NVIM_APPNAME" --headless -c 'quitall'
+  bash -c "LUNARVIM_CONFIG_DIR=\"\$(mktemp -d)\" \"$INSTALL_PREFIX/bin/$NVIM_APPNAME\" --headless -c 'quitall'"
 
   printf "\nLazy setup complete"
 
