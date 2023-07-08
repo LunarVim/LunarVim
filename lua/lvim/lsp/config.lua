@@ -32,6 +32,7 @@ local skipped_servers = {
   "rnix",
   "rome",
   "ruby_ls",
+  "rubocop",
   "ruff_lsp",
   "scry",
   "solang",
