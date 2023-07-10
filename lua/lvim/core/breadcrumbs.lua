@@ -2,18 +2,6 @@ local M = {}
 
 local icons = lvim.icons.kind
 
-local function select_menu_item()
-  local menu = require("dropbar.api").get_current_dropbar_menu()
-  if not menu then
-    return
-  end
-  local cursor = vim.api.nvim_win_get_cursor(menu.win)
-  local component = menu.entries[cursor[1]]:first_clickable(cursor[2])
-  if component then
-    menu:click_on(component, nil, 1, "l")
-  end
-end
-
 local function close_menu()
   local menu = require("dropbar.api").get_current_dropbar_menu()
   if not menu then
@@ -87,8 +75,6 @@ M.config = function()
       menu = {
         quick_navigation = true,
         keymaps = {
-          ["l"] = select_menu_item,
-          ["h"] = close_menu,
           ["<ESC>"] = close_all_menus,
           ["q"] = close_all_menus,
         },
