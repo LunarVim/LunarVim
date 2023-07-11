@@ -86,7 +86,11 @@ function print_missing_dep_msg($dep) {
 }
 
 $winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
-$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
+$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
+if ($LV_BRANCH -eq "master") {
+    $winget_package_matrix["nvim"] = "Neovim.Neovim.Nightly"
+    $scoop_package_matrix["nvim"] = "neovim-nightly"
+}
 
 function install_system_package($dep) {
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
