@@ -75,8 +75,8 @@ M.config = function()
       menu = {
         quick_navigation = true,
         keymaps = {
-          ["<ESC>"] = close_menu(),
-          ["q"] = close_all_menus(),
+          ["<ESC>"] = close_menu,
+          ["q"] = close_all_menus,
         },
         win_configs = {
           border = "rounded",
