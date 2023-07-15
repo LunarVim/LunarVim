@@ -10,6 +10,7 @@ local skipped_servers = {
   "denols",
   "docker_compose_language_service",
   "ember",
+  "emmet_language_server",
   "emmet_ls",
   "eslint",
   "eslintls",
