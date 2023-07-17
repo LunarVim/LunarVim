@@ -110,7 +110,6 @@ function M.post_load()
       opt = "lazy",
       run = "build",
       lock = "pin",
-      tag = "version",
       requires = "dependencies",
     }
 
