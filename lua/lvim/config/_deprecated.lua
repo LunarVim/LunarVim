@@ -152,6 +152,7 @@ function M.post_load()
           spec[alternative] = spec[old_key]
         end
 
+        -- not every function in alternatives returns a message (e.g. tag)
         if type(alternative) ~= "function" or message then
           spec[old_key] = nil
 
