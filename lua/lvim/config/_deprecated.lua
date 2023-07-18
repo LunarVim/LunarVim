@@ -110,9 +110,15 @@ function M.post_load()
       opt = "lazy",
       run = "build",
       lock = "pin",
-      tag = "version",
       requires = "dependencies",
     }
+
+    alternatives.tag = function()
+      if spec.tag == "*" then
+        spec.version = "*"
+        return [[version = "*"]]
+      end
+    end
 
     alternatives.disable = function()
       if type(spec.disabled) == "function" then
@@ -138,34 +144,40 @@ function M.post_load()
     for old_key, alternative in pairs(alternatives) do
       if spec[old_key] ~= nil then
         local message
+        local old_value = vim.inspect(spec[old_key]) or "value"
 
         if type(alternative) == "function" then
           message = alternative()
         else
           spec[alternative] = spec[old_key]
         end
-        spec[old_key] = nil
 
-        local new_value = vim.inspect(spec[alternative] or "[value]")
-        message = message or string.format("%s = %s", alternative, new_value)
-        vim.schedule(function()
-          vim.notify_once(
-            string.format(
-              [[`%s` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `%s` instead.
+        -- not every function in alternatives returns a message (e.g. tag)
+        if type(alternative) ~= "function" or message then
+          spec[old_key] = nil
+
+          local new_value = vim.inspect(spec[alternative] or "[value]")
+          message = message or string.format("%s = %s", alternative, new_value)
+          vim.schedule(function()
+            vim.notify_once(
+              string.format(
+                [[`%s = %s` in `lvim.plugins` has been deprecated since the migration to lazy.nvim. Use `%s` instead.
 Example:
 `lvim.plugins = {... {... %s = %s ...} ...}`
 ->
 `lvim.plugins = {... {... %s ...} ...}`
 See https://github.com/folke/lazy.nvim#-migration-guide"]],
-              old_key,
-              message,
-              old_key,
-              new_value,
-              message
-            ),
-            vim.log.levels.WARN
-          )
-        end)
+                old_key,
+                old_value,
+                message,
+                old_key,
+                old_value,
+                message
+              ),
+              vim.log.levels.WARN
+            )
+          end)
+        end
       end
     end
 
