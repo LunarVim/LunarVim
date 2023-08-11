@@ -5,6 +5,7 @@ set -e
 REPO_DIR=$(readlink -f "$(dirname "$(realpath "$0")")/../../..")
 cd "$REPO_DIR"
 
+make configure
 mkdir build/bin -p
 cd build
 
