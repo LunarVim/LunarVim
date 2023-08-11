@@ -24,6 +24,15 @@ local function add_lsp_buffer_keybindings(bufnr)
   end
 end
 
+local function filter_diagnostics(_, result, ctx, config)
+  for idx = 1, #result.diagnostics, 1 do
+    if vim.tbl_contains(lvim.lsp.ignored_diagnostic_codes, result.diagnostics[idx].code) then
+      table.remove(result.diagnostics, idx)
+    end
+  end
+  vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+end
+
 function M.common_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
@@ -39,6 +48,7 @@ function M.common_capabilities()
       "additionalTextEdits",
     },
   }
+  capabilities.textDocument.publishDiagnostics = filter_diagnostics
 
   return capabilities
 end
