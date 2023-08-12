@@ -34,6 +34,7 @@ jobs:
       - name: Build release
         id: build
         run: |
+          make configure
           cmake -B build -D BUNDLE_PLUGINS=1
           cd build
           cpack
@@ -65,6 +66,7 @@ jobs:
       - name: Build release
         id: build
         run: |
+          make configure
           cmake -B build -D BUNDLE_PLUGINS=1 -D PACKAGE_FOR_WINDOWS=1
           cd build
           cpack
@@ -124,6 +126,7 @@ jobs:
       - name: Build release
         id: build
         run: |
+          make configure
           cmake -B build -D BUNDLE_PLUGINS=1
           cd build
           cpack
