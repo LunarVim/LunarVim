@@ -36,7 +36,7 @@ set(DOWNLOAD_PLUGINS_CMD "nvim" "-u" "${INIT_LUA_PATH}" "--headless" "-c" "quita
 message("downloading plugins...")
 message("${DOWNLOAD_PLUGINS_CMD}")
 
-set(BUNDLE_PLUGINS_TIMEOUT 120 CACHE STRING "")
+set(BUNDLE_PLUGINS_TIMEOUT 240 CACHE STRING "")
 execute_process( 
   COMMAND ${DOWNLOAD_PLUGINS_CMD}
   TIMEOUT ${BUNDLE_PLUGINS_TIMEOUT}
