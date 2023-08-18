@@ -184,7 +184,8 @@ function setup_shim() {
         New-Item "$INSTALL_PREFIX\bin" -ItemType Directory | Out-Null
     }
 
-    Copy-Item -Force "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.ps1" "$INSTALL_PREFIX\bin\lvim.ps1"
+    ((Get-Content -path "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.ps1" -Raw) -replace '@BASE_DIR_VAR@','$env:LUNARVIM_RUNTIME_DIR\lvim') |
+    Set-Content -Force -Path "$INSTALL_PREFIX\bin\lvim.ps1"
 }
 
 function uninstall_lvim() {

@@ -37,17 +37,21 @@ message(STATUS "Using LVIM_VERSION: ${LVIM_VERSION}")
 include(GNUInstallDirs)
 
 # create and install lvim shim
-
 if(PACKAGE_FOR_WINDOWS OR WIN32)
+  set(LVIM_INPUT_BIN_NAME lvim.ps1)
   set(LVIM_BIN_NAME lvim.ps1)
+  set(BASE_DIR_VAR "\$(Resolve-Path \"\$PSScriptRoot\\..\\${CMAKE_INSTALL_DATAROOTDIR}\\lunarvim\")")
 else()
+  set(LVIM_INPUT_BIN_NAME lvim.template)
   set(LVIM_BIN_NAME lvim)
+  set(BASE_DIR_VAR "\$(readlink -f \"\$(dirname \"\$(realpath \"\$0\")\")/..\")/${CMAKE_INSTALL_DATAROOTDIR}/lunarvim")
 endif()
+set(NVIM_APPNAME_VAR "LVIM")
+set(RUNTIME_DIR_VAR "\$XDG_DATA_HOME/lunarvim")
+set(CONFIG_DIR_VAR "\$XDG_CONFIG_HOME/lvim")
+set(CACHE_DIR_VAR "\$XDG_CACHE_HOME/lvim")
 
-file(READ ${CMAKE_SOURCE_DIR}/utils/packaging/assets/${LVIM_BIN_NAME} FILE_CONTENTS)
-string(REPLACE "CMAKE_INSTALL_DATAROOTDIR" "${CMAKE_INSTALL_DATAROOTDIR}" FILE_CONTENTS "${FILE_CONTENTS}")
-file(WRITE ${CMAKE_BINARY_DIR}/bin/${LVIM_BIN_NAME} "${FILE_CONTENTS}")
-
+configure_file(${CMAKE_SOURCE_DIR}/utils/bin/${LVIM_INPUT_BIN_NAME} ${CMAKE_BINARY_DIR}/bin/${LVIM_BIN_NAME} @ONLY)
 install(PROGRAMS ${CMAKE_BINARY_DIR}/bin/${LVIM_BIN_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # install the rest of the files
