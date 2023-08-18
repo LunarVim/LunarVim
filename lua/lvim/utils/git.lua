@@ -140,7 +140,7 @@ end
 function M.get_lvim_version()
   -- lvim_version will be set by cmake packaging
   local lvim_version = "@LVIM_VERSION@"
-  if ~vim.startswith(lvim_version, "@") then
+  if not vim.startswith(lvim_version, "@") then
     return lvim_version
   end
 
