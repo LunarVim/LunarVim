@@ -32,7 +32,7 @@ function setup_shim() {
     -e s"#@BASE_DIR_VAR@#\"${LUNARVIM_BASE_DIR}\"#"g \
     -e s"#@EXTRA_EXEC_ARGS@#-a \"${NVIM_APPNAME}\"#"g "$src" \
     | tee "$dst" >/dev/null
- 
+
   chmod u+x "$dst"
 }
 
