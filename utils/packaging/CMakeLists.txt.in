@@ -89,7 +89,7 @@ install(FILES
 configure_file(${CMAKE_SOURCE_DIR}/lua/lvim/bootstrap.lua ${CMAKE_BINARY_DIR}/bootstrap.lua @ONLY)
 install(FILES 
   ${CMAKE_BINARY_DIR}/bootstrap.lua
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/lunarvim/lua/)
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/lunarvim/lua/lvim)
 
 option(BUNDLE_PLUGINS "Bundle core plugins during the build, requires nvim to be installed" OFF)
 if(BUNDLE_PLUGINS)
