@@ -47,9 +47,9 @@ a.describe("config-loader", function()
     config:load(user_config_path)
     assert.equal(vim.opt.undodir:get()[1], test_path)
     require("lvim.core.log"):set_level "error"
-    os.execute(string.format("echo 'invalid_function()' >> %s", user_config_path))
+    lvim.log.level = "error"
+    os.execute(string.format("echo 'ignore_me()' >> %s", user_config_path))
     config:load(user_config_path)
-    require("lvim.core.log"):set_level "error"
     assert.equal(vim.opt.undodir:get()[1], test_path)
   end)
 end)

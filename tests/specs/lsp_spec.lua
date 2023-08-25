@@ -45,11 +45,10 @@ a.describe("lsp workflow", function()
   a.it("should not include blacklisted servers in the generated templates", function()
     require("lvim.lsp").setup()
 
-    for _, file in ipairs(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)) do
-      for _, server_name in ipairs(lvim.lsp.automatic_configuration.skipped_servers) do
-        local setup_cmd = string.format([[require("lvim.lsp.manager").setup(%q)]], server_name)
-        assert.False(helpers.file_contains(file, setup_cmd))
-      end
+    for _, server_name in ipairs(lvim.lsp.automatic_configuration.skipped_servers) do
+      local setup_cmd = string.format([[require("lvim.lsp.manager").setup(%q)]], server_name)
+      local _, stdout, _ = helpers.search_file(lvim.lsp.templates_dir, setup_cmd)
+      assert.True(vim.tbl_isempty(stdout))
     end
   end)
 
@@ -81,7 +80,7 @@ a.describe("lsp workflow", function()
     local s = spy.on(require "lvim.lsp.templates", "generate_templates")
 
     require("lvim.lsp").setup()
-    assert.spy(s).was_not_called()
+    assert.spy(s):was_not_called()
     s:revert()
   end)
 end)

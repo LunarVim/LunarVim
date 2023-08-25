@@ -3,6 +3,22 @@ local uv = vim.loop
 local home_dir = uv.os_homedir()
 
 a.describe("initial start", function()
+  before_each(function()
+    vim.cmd [[
+     let v:errmsg = ""
+      let v:errors = []
+    ]]
+  end)
+
+  after_each(function()
+    local errmsg = vim.fn.eval "v:errmsg"
+    local exception = vim.fn.eval "v:exception"
+    local errors = vim.fn.eval "v:errors"
+    assert.equal("", errmsg)
+    assert.equal("", exception)
+    assert.True(vim.tbl_isempty(errors))
+  end)
+
   local lvim_config_path = get_config_dir()
   local lvim_runtime_path = get_runtime_dir()
   local lvim_cache_path = get_cache_dir()
@@ -33,7 +49,7 @@ a.describe("initial start", function()
 
   a.it("should be able to pass basic checkhealth without errors", function()
     vim.cmd "set cmdheight&"
-    vim.cmd "checkhealth nvim"
+    vim.cmd "silent checkhealth nvim"
     local errmsg = vim.fn.eval "v:errmsg"
     local exception = vim.fn.eval "v:exception"
     assert.equal("", errmsg) -- v:errmsg was not updated.
