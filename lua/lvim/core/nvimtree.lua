@@ -18,7 +18,6 @@ function M.config()
       reload_on_bufenter = false,
       respect_buf_cwd = false,
       on_attach = "default",
-      remove_keymaps = false,
       select_prompts = false,
       view = {
         adaptive_size = false,
