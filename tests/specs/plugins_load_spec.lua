@@ -1,6 +1,4 @@
-local a = require "plenary.async_lib.tests"
-
-a.describe("plugin-loader", function()
+describe("plugin-loader", function()
   local plugins = require "lvim.plugins"
   local loader = require "lvim.plugin-loader"
 
@@ -9,7 +7,7 @@ a.describe("plugin-loader", function()
     package.loaded["lvim.core.log"] = nil
   end)
 
-  a.it("should be able to load default packages without errors", function()
+  it("should be able to load default packages without errors", function()
     vim.go.loadplugins = true
     loader.load { plugins, lvim.plugins }
 
@@ -23,7 +21,7 @@ a.describe("plugin-loader", function()
     end
   end)
 
-  a.it("should be able to load lsp packages without errors", function()
+  it("should be able to load lsp packages without errors", function()
     require("lvim.lsp").setup()
 
     local lsp_packages = {
