@@ -6,7 +6,7 @@ function M.search_file(file, args)
   local stdout, ret = Job:new({
     command = "grep",
     args = { args, file },
-    cwd = vim.uv.cwd(),
+    cwd = vim.loop.cwd(),
     on_stderr = function(_, data)
       table.insert(stderr, data)
     end,
