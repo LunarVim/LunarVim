@@ -21,10 +21,10 @@ jobs:
         include:
           - runner: ubuntu-latest
             os: linux
-            neovim: v0.9.0
+            neovim: v0.9.1
           - runner: macos-latest
             os: osx
-            neovim: v0.9.0
+            neovim: v0.9.1
           - runner: ubuntu-22.04
             os: linux
             neovim: nightly
@@ -78,7 +78,7 @@ jobs:
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: v0.9.0
+          version: v0.9.1
 
       - name: Install LunarVim
         timeout-minutes: 4
