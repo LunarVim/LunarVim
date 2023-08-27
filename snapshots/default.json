@@ -1,18 +1,18 @@
 {
   "Comment.nvim": {
-    "commit": "d0cbbfb"
+    "commit": "0236521"
   },
   "LuaSnip": {
-    "commit": "99a94cc"
+    "commit": "c4d6298"
   },
   "alpha-nvim": {
-    "commit": "e4fc5e2"
+    "commit": "7a6b948"
   },
   "bigfile.nvim": {
     "commit": "9616b73"
   },
   "bufferline.nvim": {
-    "commit": "99f0932"
+    "commit": "417b303"
   },
   "cmp-buffer": {
     "commit": "3022dbc"
@@ -30,13 +30,13 @@
     "commit": "1809552"
   },
   "friendly-snippets": {
-    "commit": "bc38057"
+    "commit": "377d454"
   },
   "gitsigns.nvim": {
-    "commit": "5d73da7"
+    "commit": "749267a"
   },
   "indent-blankline.nvim": {
-    "commit": "4541d69"
+    "commit": "9637670"
   },
   "lazy.nvim": {
     "commit": "3ad55ae"
@@ -51,49 +51,49 @@
     "commit": "08bbc93"
   },
   "mason-lspconfig.nvim": {
-    "commit": "e86a4c8"
+    "commit": "2997f46"
   },
   "mason.nvim": {
-    "commit": "fe9e34a"
+    "commit": "a51c2d0"
   },
   "neodev.nvim": {
-    "commit": "9f0205a"
+    "commit": "3de41fe"
   },
   "nlsp-settings.nvim": {
-    "commit": "64976a5"
+    "commit": "2a52e79"
   },
   "null-ls.nvim": {
-    "commit": "db09b6c"
+    "commit": "0010ea9"
   },
   "nvim-autopairs": {
     "commit": "ae5b41c"
   },
   "nvim-cmp": {
-    "commit": "c4e491a"
+    "commit": "51f1e11"
   },
   "nvim-dap": {
-    "commit": "1c63f37"
+    "commit": "4377a05"
   },
   "nvim-dap-ui": {
     "commit": "85b16ac"
   },
   "nvim-lspconfig": {
-    "commit": "c0de180"
+    "commit": "f7922e5"
   },
   "nvim-navic": {
     "commit": "9c89730"
   },
   "nvim-tree.lua": {
-    "commit": "0a89dcb"
+    "commit": "920868d"
   },
   "nvim-treesitter": {
-    "commit": "8d5e5dc"
+    "commit": "31f608e"
   },
   "nvim-ts-context-commentstring": {
-    "commit": "e9062e2"
+    "commit": "9bff161"
   },
   "nvim-web-devicons": {
-    "commit": "efbfed0"
+    "commit": "cfc8824"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -105,7 +105,7 @@
     "commit": "8c6bad7"
   },
   "schemastore.nvim": {
-    "commit": "787ffac"
+    "commit": "c7c6353"
   },
   "structlog.nvim": {
     "commit": "45b26a2"
@@ -123,7 +123,7 @@
     "commit": "1ee1101"
   },
   "vim-illuminate": {
-    "commit": "5ed1758"
+    "commit": "76f28e8"
   },
   "which-key.nvim": {
     "commit": "7ccf476"
