@@ -1,8 +1,7 @@
-local a = require "plenary.async_lib.tests"
 local config = require "lvim.config"
 local fmt = string.format
 
-a.describe("config-loader", function()
+describe("config-loader", function()
   local user_config_path = join_paths(get_config_dir(), "config.lua")
   local default_config_path = join_paths(get_lvim_base_dir(), "utils", "installer", "config.example.lua")
 
@@ -23,15 +22,15 @@ a.describe("config-loader", function()
     assert.True(vim.tbl_isempty(errors))
   end)
 
-  a.it("should be able to find user-config", function()
+  it("should be able to find user-config", function()
     assert.equal(user_config_path, get_config_dir() .. "/config.lua")
   end)
 
-  a.it("should be able to load user-config without errors", function()
+  it("should be able to load user-config without errors", function()
     config:load(user_config_path)
   end)
 
-  a.it("should be able to reload user-config without errors", function()
+  it("should be able to reload user-config without errors", function()
     config:load(user_config_path)
     local test_path = "/tmp/lvim"
     os.execute(string.format([[echo "vim.opt.undodir = '%s'" >> %s]], test_path, user_config_path))
@@ -41,7 +40,7 @@ a.describe("config-loader", function()
     end)
   end)
 
-  a.it("should not get interrupted by errors in user-config", function()
+  it("should not get interrupted by errors in user-config", function()
     local test_path = "/tmp/lunarvim"
     os.execute(string.format([[echo "vim.opt.undodir = '%s'" >> %s]], test_path, user_config_path))
     config:load(user_config_path)

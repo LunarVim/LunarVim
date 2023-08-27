@@ -55,7 +55,10 @@ end
 ---@param filter { filetype: string | string[] }?: (optional) Used to filter the list of server names.
 ---@return string[] list of names of supported servers
 function M.get_supported_servers(filter)
+  -- force synchronous mode, see: |mason-registry.refresh()|
   require("mason-registry").refresh()
+  require("mason-registry").get_all_packages()
+
   local _, supported_servers = pcall(function()
     return require("mason-lspconfig").get_available_servers(filter)
   end)
