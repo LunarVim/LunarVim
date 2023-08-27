@@ -24,6 +24,9 @@ describe("lsp workflow", function()
   local plugins = require "lvim.plugins"
   require("lvim.plugin-loader").load { plugins, lvim.plugins }
 
+  -- trigger loading event manually for mason
+  vim.api.nvim_exec_autocmds("User", { pattern = "FileOpened" })
+
   it("should be able to delete ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
       assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
