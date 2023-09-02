@@ -52,7 +52,7 @@ end
 -- manually start the server and don't wait for the usual filetype trigger from lspconfig
 local function buf_try_add(server_name, bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  require("lspconfig")[server_name].manager.try_add_wrapper(bufnr)
+  require("lspconfig")[server_name].manager:try_add_wrapper(bufnr)
 end
 
 -- check if the manager autocomd has already been configured since some servers can take a while to initialize
