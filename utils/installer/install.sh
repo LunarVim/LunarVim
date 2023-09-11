@@ -135,7 +135,7 @@ function main() {
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     if [ "$INTERACTIVE_MODE" -eq 1 ]; then
-      if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array "${__npm_deps[@]}")?"; then
+      if confirm "Would you like to install LunarVim's NodeJS/BunJS dependencies: $(stringify_array "${__npm_deps[@]}")?"; then
         install_nodejs_deps
       fi
       if confirm "Would you like to install LunarVim's Python dependencies: $(stringify_array "${__pip_deps[@]}")?"; then
@@ -287,7 +287,7 @@ function __install_nodejs_deps_yarn() {
 }
 
 function __install_nodejs_deps_bun() {
-  echo "Installing node modules with bun..."
+  echo "Installing bunjs modules with bun..."
   bun install -g "${__npm_deps[@]}"
   echo "All BunJS dependencies are successfully installed"
 }
