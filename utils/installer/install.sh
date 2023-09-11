@@ -287,7 +287,7 @@ function __install_nodejs_deps_yarn() {
 }
 
 function __install_nodejs_deps_bun() {
-  echo "Installing bunjs modules with bun..."
+  echo "Installing node modules with bun..."
   bun install -g "${__npm_deps[@]}"
   echo "All BunJS dependencies are successfully installed"
 }
