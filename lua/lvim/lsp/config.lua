@@ -22,6 +22,7 @@ local skipped_servers = {
   "java_language_server",
   "jedi_language_server",
   "ltex",
+  "mdx_analyzer",
   "neocmake",
   "ocamlls",
   "phpactor",
