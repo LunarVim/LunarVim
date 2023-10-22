@@ -14,7 +14,7 @@ on:
         - debug
   schedule:
     # note: this will keep updating the existing branch
-    - cron: "*/15 10-14 * * 0,6"
+    - cron: "0 10-14 * * 0,6"
     - cron: "0 14 * * 1-5"
 
 jobs:
