@@ -62,8 +62,8 @@
   "nlsp-settings.nvim": {
     "commit": "2a52e79"
   },
-  "null-ls.nvim": {
-    "commit": "0010ea9"
+  "none-ls.nvim": {
+    "commit": "b8fd44e"
   },
   "nvim-autopairs": {
     "commit": "f6c7164"
