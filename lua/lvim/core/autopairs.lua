@@ -10,7 +10,7 @@ function M.config()
       tex = "{",
     },
     ---@usage check bracket in same line
-    enable_check_bracket_line = false,
+    enable_check_bracket_line = true,
     ---@usage check treesitter
     check_ts = true,
     ts_config = {
