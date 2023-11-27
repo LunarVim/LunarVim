@@ -26,6 +26,7 @@ local skipped_servers = {
   "ltex",
   "mdx_analyzer",
   "neocmake",
+  "nim_langserver",
   "ocamlls",
   "omnisharp",
   "phpactor",
