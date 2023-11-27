@@ -59,6 +59,7 @@ local skipped_servers = {
   "tflint",
   "unocss",
   "verible",
+  "v_analyzer",
   "vtsls",
   "vuels",
 }
