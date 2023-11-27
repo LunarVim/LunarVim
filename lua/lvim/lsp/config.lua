@@ -2,6 +2,7 @@ local skipped_servers = {
   "angularls",
   "ansiblels",
   "antlersls",
+  "ast_grep",
   "azure_pipelines_ls",
   "biome",
   "ccls",
