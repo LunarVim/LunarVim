@@ -78,10 +78,11 @@ M.setup = function()
   if err then
     local invalid_key = err:match "'(.*)'"
 
-    vim.notify(
+    vim.notify_once(
       "`lvim.builtin.indentlines.options."
         .. invalid_key
-        .. "` has been deprecated. Please take a look at `:h ibl.config` to learn about new config and update."
+        .. "` has been deprecated. Please take a look at `:h ibl.config` to learn about new config and update.",
+      vim.log.levels.WARN
     )
   end
 
