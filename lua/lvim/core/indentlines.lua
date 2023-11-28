@@ -76,12 +76,8 @@ M.setup = function()
   local _, err = pcall(indent_blankline.setup, lvim.builtin.indentlines.options)
 
   if err then
-    local invalid_key = err:match "'(.*)'"
-
     vim.notify_once(
-      "`lvim.builtin.indentlines.options."
-        .. invalid_key
-        .. "` has been deprecated. Please take a look at `:h ibl.config` to learn about new config and update.",
+      err .. ". Please take a look at `:h ibl.config` to learn about config and update.",
       vim.log.levels.WARN
     )
   end
