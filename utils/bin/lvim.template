@@ -8,4 +8,10 @@ export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-CACHE_DIR_VAR}"
 
 export LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-BASE_DIR_VAR}"
 
-exec -a "$NVIM_APPNAME" nvim -u "$LUNARVIM_BASE_DIR/init.lua" "$@"
+# Can't override the app name when using the snap version of neovim.
+# See https://github.com/LunarVim/LunarVim/issues/3612
+if which nvim | grep -qE "^/snap/"; then
+  nvim -u "$LUNARVIM_BASE_DIR/init.lua" "$@"
+else
+  exec -a "$NVIM_APPNAME" nvim -u "$LUNARVIM_BASE_DIR/init.lua" "$@"
+fi
