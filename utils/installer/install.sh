@@ -135,7 +135,7 @@ function main() {
 
   if [ "$ARGS_INSTALL_DEPENDENCIES" -eq 1 ]; then
     if [ "$INTERACTIVE_MODE" -eq 1 ]; then
-      if confirm "Would you like to install LunarVim's NodeJS dependencies: $(stringify_array "${__npm_deps[@]}")?"; then
+      if confirm "Would you like to install LunarVim's NodeJS/BunJS dependencies: $(stringify_array "${__npm_deps[@]}")?"; then
         install_nodejs_deps
       fi
       if confirm "Would you like to install LunarVim's Python dependencies: $(stringify_array "${__pip_deps[@]}")?"; then
@@ -286,6 +286,12 @@ function __install_nodejs_deps_yarn() {
   echo "All NodeJS dependencies are successfully installed"
 }
 
+function __install_nodejs_deps_bun() {
+  echo "Installing bun modules with bun..."
+  bun install -g "${__npm_deps[@]}"
+  echo "All BunJS dependencies are successfully installed"
+}
+
 function __validate_node_installation() {
   local pkg_manager="$1"
   local manager_home
@@ -296,6 +302,8 @@ function __validate_node_installation() {
 
   if [ "$pkg_manager" == "npm" ]; then
     manager_home="$(npm config get prefix 2>/dev/null)"
+  elif [ "$pkg_manager" == "bun" ]; then
+    manager_home="$BUN_INSTALL"
   elif [ "$pkg_manager" == "pnpm" ]; then
     manager_home="$(pnpm config get prefix 2>/dev/null)"
   else
@@ -310,7 +318,7 @@ function __validate_node_installation() {
 }
 
 function install_nodejs_deps() {
-  local -a pkg_managers=("pnpm" "yarn" "npm")
+  local -a pkg_managers=("pnpm" "bun" "yarn" "npm")
   for pkg_manager in "${pkg_managers[@]}"; do
     if __validate_node_installation "$pkg_manager"; then
       eval "__install_nodejs_deps_$pkg_manager"
