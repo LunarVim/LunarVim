@@ -303,7 +303,7 @@ function __validate_node_installation() {
   if [ "$pkg_manager" == "npm" ]; then
     manager_home="$(npm config get prefix 2>/dev/null)"
   elif [ "$pkg_manager" == "bun" ]; then
-    manager_home="$(echo "$BUN_INSTALL" 2>/dev/null)"
+    manager_home="$BUN_INSTALL"
   elif [ "$pkg_manager" == "pnpm" ]; then
     manager_home="$(pnpm config get prefix 2>/dev/null)"
   else
