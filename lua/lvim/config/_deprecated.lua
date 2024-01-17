@@ -73,6 +73,14 @@ function M.handle()
   ---@deprecated
   lvim.lang = {}
   setmetatable(lvim.lang, mt)
+
+  ---@deprecated
+  lvim.builtin.treesitter.context_commentstring = {}
+  setmetatable(lvim.builtin.treesitter.context_commentstring, {
+    __newindex = function(_, k, _)
+      deprecate("lvim.builtin.treesitter.context_commentstring." .. k, "See LunarVim#4468")
+    end,
+  })
 end
 
 function M.post_load()
