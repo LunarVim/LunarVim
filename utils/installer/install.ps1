@@ -62,7 +62,7 @@ function main($cliargs) {
     if ("$answer" -eq "y" -or "$answer" -eq "Y") {
 	if (Get-Command "bun.exe" -ErrorAction SilentlyContinue) { 
 	    install_bunjs_deps
-	} else if (Get-Command "npm.cmd" -ErrorAction SilentlyContinue) {
+	} elseif (Get-Command "npm.cmd" -ErrorAction SilentlyContinue) {
  	    install_nodejs_deps
 	}
     }
