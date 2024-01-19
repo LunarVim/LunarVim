@@ -58,9 +58,13 @@ function main($cliargs) {
     msg "Checking dependencies.."
     check_system_deps
 
-    $answer = Read-Host "Would you like to check lunarvim's NodeJS dependencies? [y]es or [n]o (default: no) "
+    $answer = Read-Host "Would you like to check lunarvim's NodeJS/BunJS dependencies? [y]es or [n]o (default: no) "
     if ("$answer" -eq "y" -or "$answer" -eq "Y") {
-        install_nodejs_deps
+	if (Get-Command "bun.exe" -ErrorAction SilentlyContinue) { 
+	    install_bunjs_deps
+	} else {
+ 	    install_nodejs_deps
+	}
     }
 
     $answer = Read-Host "Would you like to check lunarvim's Python dependencies? [y]es or [n]o (default: no) "
@@ -86,7 +90,7 @@ function print_missing_dep_msg($dep) {
 }
 
 $winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
-$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
+$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "bun" = "versions/bun-canary"; "pip" = "python3"}
 
 function install_system_package($dep) {
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
@@ -135,6 +139,17 @@ function install_nodejs_deps() {
     }
     catch {
         print_missing_dep_msg "$dep"
+    }
+}
+
+function install_bunjs_deps() {
+    $dep = "bun"
+    try {
+    	check_system_dep "$dep"
+     	Invoke-Command -ScriptBlock { bun install -g neovim tree-sitter-cli } -ErrorAction Break
+    }
+    catch {
+    	print_missing_dep_msg "$dep"
     }
 }
 
