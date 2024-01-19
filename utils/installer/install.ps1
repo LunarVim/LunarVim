@@ -60,7 +60,7 @@ function main($cliargs) {
 
     $answer = Read-Host "Would you like to check lunarvim's NodeJS/BunJS dependencies? [y]es or [n]o (default: no) "
     if ("$answer" -eq "y" -or "$answer" -eq "Y") {
-	if (Get-Command "bun.exe" -ErrorAction SilentlyContinue) { 
+	if (Get-Command "bun.exe") { 
 	    install_bunjs_deps
 	} else {
  	    install_nodejs_deps
