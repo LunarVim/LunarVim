@@ -110,6 +110,7 @@ function install_system_package($dep) {
         print_missing_dep_msg "$dep"
         exit 1
     }
+    # Or we could add general checking for installed dependencies here
 }
 
 function check_system_dep($dep) {
