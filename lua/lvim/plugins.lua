@@ -328,6 +328,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.indentlines").setup()
     end,
+    tag = "v2.20.8",
     event = "User FileOpened",
     enabled = lvim.builtin.indentlines.active,
   },
