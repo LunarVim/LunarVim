@@ -113,6 +113,7 @@ function install_system_package($dep) {
     }
 
     try {
+      Write-Output "DEBUG 2"
         & $install_cmd
     }
     catch {
