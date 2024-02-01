@@ -86,12 +86,19 @@ function print_missing_dep_msg($dep) {
 }
 
 $winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
+$winget_additional_arguments_matrix=@{"git" = "--source winget"; "nvim" = ""; "make" = ""; "node" = ""; "pip" = ""}
+
 $scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
 
 function install_system_package($dep) {
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with winget"
-        $install_cmd = "winget install --interactive $winget_package_matrix[$dep]"
+
+        # The make installer is faulty therefore the user will have to add make to PATH manually anyway
+        if  ("$dep" -eq "make") {
+            Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') will have to be added manually to the PATH"
+          }
+        $install_cmd = "winget install --interactive -e --id $winget_package_matrix[$dep] $winget_additional_arguments_matrix[$dep]"
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with scoop"
