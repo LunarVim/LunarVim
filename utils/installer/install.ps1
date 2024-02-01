@@ -93,6 +93,7 @@ $scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make
 function install_system_package($dep) {
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with winget"
+        Write-Output "DEBUG 1"
 
         # The make installer is faulty therefore the user will have to add make to PATH manually anyway
         if  ("$dep" -eq "make") {
