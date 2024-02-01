@@ -113,8 +113,7 @@ function install_system_package($dep) {
     }
 
     try {
-        $errorm=Invoke-Command $install_cmd -ErrorAction Stop
-        Write-Output "$errorm"
+        & $install_cmd
     }
     catch {
         print_missing_dep_msg "$dep"
