@@ -99,6 +99,7 @@ function install_system_package($dep) {
             Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') will have to be added manually to the PATH"
           }
         $install_cmd = "winget install --interactive -e --id $winget_package_matrix[$dep] $winget_additional_arguments_matrix[$dep]"
+        Write-Output "DEBUG: $install_cmd"
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with scoop"
