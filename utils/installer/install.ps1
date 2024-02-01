@@ -132,25 +132,6 @@ function check_system_deps() {
     check_system_dep "git"
     check_system_dep "nvim"
     check_system_dep "make"
-    # Makes installer on Windows has a problem with not adding itself to the PATH
-    try {
-        Get-Command -Name "make" -ErrorAction Stop | Out-Null
-    }
-    catch {
-      # Thats where the make executable should be places after installation
-      $makesPath = "C:\Program Files (x86)\GnuWin32\bin"
-
-      if (Test-Path $makesPath) {
-          Write-Host "After installing 'make' it is not available in the PATH. Add it to the path '$makesPath'."
-      } else {
-          # Im not sure what kind of a message to put here but if wingets
-          # installer did not install it properly the user just has to use
-          # the manual installer on their website
-          # https://gnuwin32.sourceforge.net/packages/make.htm
-          Write-Host "Make did not install succesfully. Install it manually."
-      }
-      exit 1 # Also Im not sure how to terminae the installer so that the user can see the error message
-    }
 }
 
 function install_nodejs_deps() {
