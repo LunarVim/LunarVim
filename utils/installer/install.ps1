@@ -114,12 +114,11 @@ function install_system_package($dep) {
 
     try {
       Write-Output "DEBUG 2"
-        & $install_cmd
-    }
-    catch {
-        print_missing_dep_msg "$dep"
-        exit 1
-    }
+    Invoke-Command -ScriptBlock { & $install_cmd } -ErrorAction Stop
+  } catch {
+    Write-Output "An error occurred: $_"
+    # Optionally, you can also write the error to a log file or perform additional error handling here
+}
 }
 
 function check_system_dep($dep) {
