@@ -100,15 +100,13 @@ function install_system_package($dep) {
             Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') will have to be added manually to the PATH"
         }
         $command="winget"
-        $command_arguments = "install --interactive -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])" -split ' '
-
-        # Execute the command
-        Write-Output "DEBUG: $install_cmd"
+        $command_arguments = "install --interactive -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with scoop"
         # TODO: check if it's fine to not run it with --global
-        $install_cmd = "scoop install $($scoop_package_matrix[$dep])"
+        $command = "scoop"
+        $command_arguments = "install $($scoop_package_matrix[$dep])".Trim() -split ' '
     }
     else {
         print_missing_dep_msg "$dep"
