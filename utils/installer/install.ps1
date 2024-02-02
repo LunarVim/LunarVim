@@ -97,7 +97,7 @@ function install_system_package($dep) {
 
         # The make installer is faulty therefore the user will have to add make to PATH manually anyway
         if  ("$dep" -eq "make") {
-            Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') will have to be added manually to the PATH"
+            Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') might not be added to the PATH by the installer, and you might have to manually to the PATH!"
         }
         $command="winget"
         $command_arguments = "install --interactive -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
