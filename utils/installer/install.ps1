@@ -99,7 +99,10 @@ function install_system_package($dep) {
         if  ("$dep" -eq "make") {
             Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') will have to be added manually to the PATH"
         }
-        $install_cmd = "winget install --interactive -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])"
+        $command="winget"
+        $command_arguments = "install --interactive -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])" -split ' '
+
+        # Execute the command
         Write-Output "DEBUG: $install_cmd"
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
@@ -114,11 +117,10 @@ function install_system_package($dep) {
 
     try {
       Write-Output "DEBUG 2"
-    Invoke-Command -ScriptBlock { & $install_cmd } -ErrorAction Stop
-  } catch {
-    Write-Output "An error occurred: $_"
-    # Optionally, you can also write the error to a log file or perform additional error handling here
-}
+      & $command $command_arguments
+     } catch {
+      Write-Output "An error occurred: $_"
+    }
 }
 
 function check_system_dep($dep) {
