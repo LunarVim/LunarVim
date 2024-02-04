@@ -118,6 +118,7 @@ function install_system_package($dep) {
       Write-Output "DEBUG 2"
       & $command $command_arguments
       # Refresh the path after installation
+      Write-Output "DEBUG: Env refresh"
       $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
      } catch {
       Write-Output "An error occurred: $_"
