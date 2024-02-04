@@ -86,7 +86,7 @@ function print_missing_dep_msg($dep) {
 }
 
 $winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "python"}
-$winget_additional_arguments_matrix=@{"git" = "--source winget"; "nvim" = ""; "make" = ""; "node" = ""; "pip" = ""}
+$winget_additional_arguments_matrix=@{"git" = "--source winget --interactive"; "nvim" = "--interactive"; "make" = "--interactive"; "node" = ""; "pip" = ""}
 
 $scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
 
@@ -99,8 +99,9 @@ function install_system_package($dep) {
         if  ("$dep" -eq "make") {
             Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') might not be added to the PATH by the installer, and you might have to manually to the PATH!"
         }
+        Write-Output "Without --interactive as default"
         $command="winget"
-        $command_arguments = "install --interactive -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
+        $command_arguments = "install -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with scoop"
