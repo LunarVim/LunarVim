@@ -88,7 +88,7 @@ function print_missing_dep_msg($dep) {
 $winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3.11"}
 $winget_additional_arguments_matrix=@{"git" = "--source winget --interactive"; "nvim" = "--interactive"; "make" = "--interactive"; "node" = ""; "pip" = ""}
 
-$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
+$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"}
 
 function install_system_package($dep) {
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
@@ -119,7 +119,7 @@ function install_system_package($dep) {
       & $command $command_arguments
       # Refresh the path after installation
       Write-Output "DEBUG: Env refresh"
-      $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+      $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
      } catch {
       Write-Output "An error occurred: $_"
     }
