@@ -101,13 +101,13 @@ function install_system_package($dep) {
         }
         Write-Output "Without --interactive as default"
         $command="winget"
-        $command_arguments = "install -e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
+        $command_arguments = "-e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with scoop"
         # TODO: check if it's fine to not run it with --global
         $command = "scoop"
-        $command_arguments = "install $($scoop_package_matrix[$dep])".Trim() -split ' '
+        $command_arguments = "$($scoop_package_matrix[$dep])".Trim() -split ' '
     }
     else {
         print_missing_dep_msg "$dep"
@@ -116,7 +116,7 @@ function install_system_package($dep) {
 
     try {
       Write-Output "DEBUG 2"
-      & $command $command_arguments
+      & $command install $command_arguments
       # Refresh the path after installation
       Write-Output "DEBUG: Env refresh"
       $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
