@@ -85,7 +85,7 @@ function print_missing_dep_msg($dep) {
     Write-Output "Please install it first and re-run the installer."
 }
 
-$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "python"}
+$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3.11"}
 $winget_additional_arguments_matrix=@{"git" = "--source winget --interactive"; "nvim" = "--interactive"; "make" = "--interactive"; "node" = ""; "pip" = ""}
 
 $scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}

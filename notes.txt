@@ -1,0 +1,4 @@
+
+$winget_additional_arguments_matrix=@{"git" = "--source winget"; "nvim" = ""; "make" = ""; "node" = ""; "pip" = ""}
+          # The make installer is faulty therefore the user will have to add make to PATH manually anyway
+          "make" { $install_cmd = "winget install -e --id GnuWin32.Make" ; msg "Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') will have to be added manually to the PATH" }
