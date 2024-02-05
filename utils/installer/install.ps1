@@ -116,6 +116,7 @@ function install_system_package($dep) {
       $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
      } catch {
       Write-Output "An error occurred: $_"
+      exit 1
     }
 }
 
