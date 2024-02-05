@@ -85,18 +85,25 @@ function print_missing_dep_msg($dep) {
     Write-Output "Please install it first and re-run the installer."
 }
 
-$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3"}
-$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim-nightly"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"}
+$winget_package_matrix=@{"git" = "Git.Git"; "nvim" = "Neovim.Neovim"; "make" = "GnuWin32.Make"; "node" = "OpenJS.NodeJS"; "pip" = "Python.Python.3.11"}
+$winget_additional_arguments_matrix=@{"git" = "--source winget --interactive"; "nvim" = "--interactive"; "make" = "--interactive"; "node" = ""; "pip" = ""}
+
+$scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"}
 
 function install_system_package($dep) {
+    # Make installers sometimes have a problem when adding make to path
+    Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') might not be added to the PATH by the installer, and you might have to manually to the PATH!"
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with winget"
-        $install_cmd = "winget install --interactive $winget_package_matrix[$dep]"
+
+        $command="winget"
+        $command_arguments = "-e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
     }
     elseif (Get-Command -Name "scoop" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with scoop"
         # TODO: check if it's fine to not run it with --global
-        $install_cmd = "scoop install $scoop_package_matrix[$dep]"
+        $command = "scoop"
+        $command_arguments = "$($scoop_package_matrix[$dep])".Trim() -split ' '
     }
     else {
         print_missing_dep_msg "$dep"
@@ -104,11 +111,12 @@ function install_system_package($dep) {
     }
 
     try {
-        Invoke-Command $install_cmd -ErrorAction Stop
-    }
-    catch {
-        print_missing_dep_msg "$dep"
-        exit 1
+      & $command install $command_arguments
+      # Refresh the path after installation
+      $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+     } catch {
+      Write-Output "An error occurred: $_"
+      exit 1
     }
 }
 
