@@ -182,6 +182,7 @@ function setup_shim() {
     }
 
     Copy-Item -Force "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.ps1" "$INSTALL_PREFIX\bin\lvim.ps1"
+    Copy-Item -Force "$env:LUNARVIM_BASE_DIR\utils\bin\lvim.bat" "$INSTALL_PREFIX\bin\lvim.bat"
 }
 
 function uninstall_lvim() {
