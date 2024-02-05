@@ -91,15 +91,11 @@ $winget_additional_arguments_matrix=@{"git" = "--source winget --interactive"; "
 $scoop_package_matrix=@{"git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"}
 
 function install_system_package($dep) {
+  # Make installers sometimes have a problem when adding make to path
+    Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') might not be added to the PATH by the installer, and you might have to manually to the PATH!"
     if (Get-Command -Name "winget" -ErrorAction SilentlyContinue) {
         Write-Output "Attempting to install dependency [$dep] with winget"
-        Write-Output "DEBUG 1"
 
-        # The make installer is faulty therefore the user will have to add make to PATH manually anyway
-        if  ("$dep" -eq "make") {
-            Write-Output "WARNING: Preparing 'make' installation. The make directory ('C:\Program Files (x86)\GnuWin32\bin') might not be added to the PATH by the installer, and you might have to manually to the PATH!"
-        }
-        Write-Output "Without --interactive as default"
         $command="winget"
         $command_arguments = "-e --id $($winget_package_matrix[$dep]) $($winget_additional_arguments_matrix[$dep])".Trim() -split ' '
     }
@@ -115,10 +111,8 @@ function install_system_package($dep) {
     }
 
     try {
-      Write-Output "DEBUG 2"
       & $command install $command_arguments
       # Refresh the path after installation
-      Write-Output "DEBUG: Env refresh"
       $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
      } catch {
       Write-Output "An error occurred: $_"
