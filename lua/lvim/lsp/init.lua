@@ -94,10 +94,10 @@ function M.setup()
     return
   end
 
-  if lvim.use_icons then
-    for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
-      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-    end
+  if not lvim.use_icons then
+    vim.diagnostic.config {
+      signs = {},
+    }
   end
 
   if not utils.is_directory(lvim.lsp.templates_dir) then
