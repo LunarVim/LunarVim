@@ -6,34 +6,81 @@ M.config = function()
     on_config_done = nil,
     options = {
       enabled = true,
-      buftype_exclude = { "terminal", "nofile" },
-      filetype_exclude = {
-        "help",
-        "startify",
-        "dashboard",
-        "lazy",
-        "neogitstatus",
-        "NvimTree",
-        "Trouble",
-        "text",
+      debounce = 200,
+      viewport_buffer = {
+        min = 30,
+        max = 500,
       },
-      char = lvim.icons.ui.LineLeft,
-      context_char = lvim.icons.ui.LineLeft,
-      show_trailing_blankline_indent = false,
-      show_first_indent_level = true,
-      use_treesitter = true,
-      show_current_context = true,
+      indent = {
+        char = lvim.icons.ui.LineLeft,
+        tab_char = nil,
+        highlight = "IblIndent",
+        smart_indent_cap = true,
+        priority = 1,
+      },
+      whitespace = {
+        highlight = "IblWhitespace",
+        remove_blankline_trail = true,
+      },
+      exclude = {
+        buftypes = { "terminal", "nofile", "quickfix", "prompt" },
+        filetypes = {
+          "NvimTree",
+          "Trouble",
+          "dashboard",
+          "help",
+          "lazy",
+          "neogitstatus",
+          "startify",
+          "text",
+        },
+      },
+      scope = {
+        enabled = true,
+        char = lvim.icons.ui.LineLeft,
+        show_start = true,
+        show_end = true,
+        show_exact_scope = false,
+        injected_languages = true,
+        highlight = "IblScope",
+        priority = 1024,
+        include = {
+          node_type = {},
+        },
+        exclude = {
+          language = {},
+          node_type = {
+            ["*"] = {
+              "source_file",
+              "program",
+            },
+            lua = {
+              "chunk",
+            },
+            python = {
+              "module",
+            },
+          },
+        },
+      },
     },
   }
 end
 
 M.setup = function()
-  local status_ok, indent_blankline = pcall(require, "indent_blankline")
+  local status_ok, indent_blankline = pcall(require, "ibl")
   if not status_ok then
     return
   end
 
-  indent_blankline.setup(lvim.builtin.indentlines.options)
+  local _, err = pcall(indent_blankline.setup, lvim.builtin.indentlines.options)
+
+  if err then
+    vim.notify_once(
+      err .. ". Please take a look at `:h ibl.config` to learn about config and update.",
+      vim.log.levels.WARN
+    )
+  end
 
   if lvim.builtin.indentlines.on_config_done then
     lvim.builtin.indentlines.on_config_done()
