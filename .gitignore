@@ -20,6 +20,7 @@ nv-settings.lua
 lv-settings.lua
 lua/lv-user/
 lua/lv-user-config/
+build/
 
 *.tmp
 *.temp
@@ -29,3 +30,5 @@ lua/lv-user-config/
 
 .luarc.json
 .luacheckcache
+
+CMakeLists.txt

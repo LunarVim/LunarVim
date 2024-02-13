@@ -1,0 +1,213 @@
+name: Release
+on:
+  schedule:
+    - cron: "5 5 * * *"
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Tag name for release"
+        required: false
+        default: nightly
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    outputs:
+      version: ${{ steps.build.outputs.version }}
+      sem_version: ${{ steps.build.outputs.sem_version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+      - name: Build release
+        id: build
+        run: |
+          make configure
+          cmake -B build -D BUNDLE_PLUGINS=1
+          cd build
+          cpack
+          printf 'version=%s\n' "$(cat version.txt)" >> $GITHUB_OUTPUT
+          printf 'sem_version=%s\n' "$(cat sem_version.txt)" >> $GITHUB_OUTPUT
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lvim-linux64
+          path: |
+            build/lvim-linux64.tar.gz
+            build/lvim-linux64.deb
+          retention-days: 1
+
+  windows:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake nsis
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+      - name: Build release
+        id: build
+        run: |
+          make configure
+          cmake -B build -D BUNDLE_PLUGINS=1 -D PACKAGE_FOR_WINDOWS=1
+          cd build
+          cpack
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lvim-win64
+          path: |
+            build/lvim-win64.exe
+            build/lvim-win64.zip
+          retention-days: 1
+
+  appimage:
+    runs-on: ubuntu-22.04
+    container:
+      image: ubuntu:22.04
+      options: --privileged # Privileged mode is needed to load fuse module.
+    steps:
+      - name: Prepare container
+        run: |
+          apt-get update
+          apt-get install -y software-properties-common git
+          apt-get install -y fuse libfuse2 # For linuxdeploy.
+          # Workaround for https://github.com/actions/checkout/issues/766.
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y cmake autoconf automake build-essential gettext libtool-bin pkg-config unzip wget tar curl
+          wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
+          tar -xzf nvim-linux64.tar.gz -C /usr/local --strip-components=1
+      - name: Build release
+        id: build
+        run: |
+          nvim --version
+          ./utils/packaging/scripts/appimage.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: appimage
+          path: |
+            build/bin/lvim.AppImage
+          retention-days: 1
+
+  macOS:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+      - name: Build release
+        id: build
+        run: |
+          make configure
+          cmake -B build -D BUNDLE_PLUGINS=1
+          cd build
+          cpack
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lvim-macos
+          path: build/lvim-macos.tar.gz
+          retention-days: 1
+
+  publish:
+    needs: [linux, windows, appimage, macOS]
+    runs-on: ubuntu-latest
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+    steps:
+      # Must perform checkout first, since it deletes the target directory
+      # before running, and would therefore delete the downloaded artifacts
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gettext-base
+
+      - if: github.event_name == 'workflow_dispatch'
+        run: echo "TAG_NAME=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
+      - if: github.event_name == 'schedule'
+        run: echo 'TAG_NAME=nightly' >> $GITHUB_ENV
+      - if: env.TAG_NAME == 'nightly'
+        run: |
+          (echo 'SUBJECT=Lvim development (prerelease) build';
+           echo 'PRERELEASE=--prerelease') >> $GITHUB_ENV
+          gh release delete nightly --yes || true
+          git push origin :nightly || true
+      - if: github.event_name == 'push'
+        run: |
+          TAG_NAME=${{ github.ref }}
+          echo "TAG_NAME=${TAG_NAME#refs/tags/}" >> $GITHUB_ENV
+      - if: env.TAG_NAME != 'nightly'
+        run: |
+          (echo 'SUBJECT=Lvim release build';
+           echo 'PRERELEASE=') >> $GITHUB_ENV
+          gh release delete stable --yes || true
+          git push origin :stable || true
+      # `sha256sum` outputs <sha> <path>, so we cd into each dir to drop the
+      # containing folder from the output.
+      - name: Generate Linux64 SHA256 checksums
+        run: |
+          cd ./lvim-linux64
+          sha256sum lvim-linux64.tar.gz > lvim-linux64.tar.gz.sha256sum
+          echo "SHA_LINUX_64_TAR=$(cat lvim-linux64.tar.gz.sha256sum)" >> $GITHUB_ENV
+          sha256sum lvim-linux64.deb > lvim-linux64.deb.sha256sum
+          echo "SHA_LINUX_64_DEB=$(cat lvim-linux64.deb.sha256sum)" >> $GITHUB_ENV
+      - name: Generate App Image SHA256 checksums
+        run: |
+          cd ./appimage
+          sha256sum lvim.AppImage > lvim.AppImage.sha256sum
+          echo "SHA_APP_IMAGE=$(cat lvim.AppImage.sha256sum)" >> $GITHUB_ENV
+      - name: Generate macOS SHA256 checksums
+        run: |
+          cd ./lvim-macos
+          sha256sum lvim-macos.tar.gz > lvim-macos.tar.gz.sha256sum
+          echo "SHA_MACOS=$(cat lvim-macos.tar.gz.sha256sum)" >> $GITHUB_ENV
+      - name: Generate Win64 SHA256 checksums
+        run: |
+          cd ./lvim-win64
+          sha256sum lvim-win64.zip > lvim-win64.zip.sha256sum
+          echo "SHA_WIN_64_ZIP=$(cat lvim-win64.zip.sha256sum)" >> $GITHUB_ENV
+          sha256sum lvim-win64.exe > lvim-win64.exe.sha256sum
+          echo "SHA_WIN_64_EXE=$(cat lvim-win64.exe.sha256sum)" >> $GITHUB_ENV
+      - name: Publish release
+        env:
+          LVIM_VERSION: ${{ needs.linux.outputs.version }}
+          DEBUG: api
+        run: |
+          envsubst < "$GITHUB_WORKSPACE/.github/workflows/notes.md" > "$RUNNER_TEMP/notes.md"
+          gh release create $TAG_NAME $PRERELEASE --notes-file "$RUNNER_TEMP/notes.md" --title "$SUBJECT" --target $GITHUB_SHA || true
+          gh release upload $TAG_NAME lvim-macos/* lvim-linux64/* appimage/* lvim-win64/*
+          if [ "$TAG_NAME" != "nightly" ]; then
+            gh release create stable $PRERELEASE --notes-file "$RUNNER_TEMP/notes.md" --title "$SUBJECT" --target $GITHUB_SHA lvim-macos/* lvim-linux64/* appimage/* lvim-win64/*
+          fi
