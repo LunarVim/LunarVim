@@ -235,7 +235,7 @@ local core_plugins = {
 
   -- breadcrumbs
   {
-    "SmiteshP/nvim-navic",
+    "Bekaboo/dropbar.nvim",
     config = function()
       require("lvim.core.breadcrumbs").setup()
     end,

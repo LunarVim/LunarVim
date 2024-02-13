@@ -29,6 +29,9 @@
   "cmp_luasnip": {
     "commit": "05a9ab2"
   },
+  "dropbar.nvim": {
+    "commit": "9405df5"
+  },
   "friendly-snippets": {
     "commit": "53d3df2"
   },
@@ -79,9 +82,6 @@
   },
   "nvim-lspconfig": {
     "commit": "fcf153f"
-  },
-  "nvim-navic": {
-    "commit": "8649f69"
   },
   "nvim-tree.lua": {
     "commit": "05f55c1"
