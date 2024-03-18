@@ -447,7 +447,7 @@ function setup_lvim() {
 
   "$INSTALL_PREFIX/bin/$NVIM_APPNAME" --headless -c 'quitall'
 
-  printf "\nLazy setup complete"
+  printf "\nLazy setup complete\n"
 
   verify_core_plugins
 }
