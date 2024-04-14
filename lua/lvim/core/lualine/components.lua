@@ -104,11 +104,11 @@ return {
 
       -- add client
       for _, client in pairs(buf_clients) do
-        if client.name ~= "null-ls" and client.name ~= "copilot" then
+        if client.name ~= "null-ls" and client.name ~= "GitHub Copilot" then
           table.insert(buf_client_names, client.name)
         end
 
-        if client.name == "copilot" then
+        if client.name == "GitHub Copilot" then
           copilot_active = true
         end
       end
