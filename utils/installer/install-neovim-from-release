@@ -15,9 +15,14 @@ if [ "$OS" == "Linux" ]; then
   ARCHIVE_NAME="nvim-linux64"
   RELEASE_NAME="nvim-linux64"
 elif [ "$OS" == "Darwin" ]; then
-  ARCHIVE_NAME="nvim-macos"
-  # for some reason the archive has a different name
-  RELEASE_NAME="nvim-osx64"
+  if [ "$RELEASE_VER" == "nightly" ]; then
+    ARCHIVE_NAME="nvim-macos-x86_64"
+    RELEASE_NAME="nvim-macos-x86_64"
+  else
+    ARCHIVE_NAME="nvim-macos"
+    # for some reason the archive has a different name
+    RELEASE_NAME="nvim-osx64"
+  fi
 else
   echo "$OS platform is not supported currently"
   exit 1
