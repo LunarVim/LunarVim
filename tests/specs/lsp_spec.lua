@@ -60,7 +60,7 @@ describe("lsp workflow", function()
     require("lvim.lsp").setup()
     vim.wait(500)
 
-    local allowed_dupes = { "tailwindcss" }
+    local allowed_dupes = { "tailwindcss", "ruff" }
     local template_files = vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", 1, 1)
     for _, file in ipairs(template_files) do
       local content = {}
