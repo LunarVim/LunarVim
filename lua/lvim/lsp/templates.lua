@@ -12,6 +12,7 @@ function M.remove_template_files()
   -- remove any outdated files
   for _, file in ipairs(vim.fn.glob(ftplugin_dir .. "/*.lua", 1, 1)) do
     vim.fn.delete(file)
+    vim.wait(10)
   end
 end
 

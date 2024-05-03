@@ -51,7 +51,7 @@ function parse_arguments() {
 
 function remove_lvim_dirs() {
   if [ "$ARGS_REMOVE_CONFIG" -eq 1 ]; then
-    __lvim_dirs+=($__lvim_config_dir)
+    __lvim_dirs+=("$__lvim_config_dir")
   fi
   for dir in "${__lvim_dirs[@]}"; do
     rm -rf "$dir"
