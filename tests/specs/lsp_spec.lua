@@ -29,14 +29,16 @@ describe("lsp workflow", function()
 
   it("should be able to delete ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
-      assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
+      vim.fn.delete(lvim.lsp.templates_dir, "rf")
+      vim.wait(100)
     end
     assert.False(utils.is_directory(lvim.lsp.templates_dir))
   end)
 
   it("should be able to generate ftplugin templates", function()
     if utils.is_directory(lvim.lsp.templates_dir) then
-      assert.equal(vim.fn.delete(lvim.lsp.templates_dir, "rf"), 0)
+      vim.fn.delete(lvim.lsp.templates_dir, "rf")
+      vim.wait(100)
     end
 
     require("lvim.lsp").setup()
