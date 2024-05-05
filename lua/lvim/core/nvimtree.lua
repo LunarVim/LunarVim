@@ -51,7 +51,7 @@ function M.config()
       renderer = {
         add_trailing = false,
         group_empty = false,
-        highlight_git = "none",
+        highlight_git = "name",
         highlight_opened_files = "none",
         root_folder_label = ":t",
         full_name = false,
