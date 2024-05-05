@@ -56,6 +56,14 @@ M.config = function()
       },
     },
     options = {
+      themable = true, -- whether or not bufferline highlights can be overridden externally
+      -- style_preset = preset,
+      get_element_icon = nil,
+      show_duplicate_prefix = true,
+      duplicates_across_groups = true,
+      auto_toggle_bufferline = true,
+      move_wraps_at_ends = false,
+      groups = { items = {}, options = { toggle_hidden_on_enter = true } },
       mode = "buffers", -- set to "tabs" to only show tabpages instead
       numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
       close_command = function(bufnr) -- can be a string | function, see "Mouse actions"
@@ -140,6 +148,7 @@ M.config = function()
         reveal = { "close" },
       },
       sort_by = "id",
+      debug = { logging = false },
     },
   }
 end

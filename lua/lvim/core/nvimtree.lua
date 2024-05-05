@@ -6,12 +6,17 @@ function M.config()
     active = true,
     on_config_done = nil,
     setup = {
+      experimental = {},
       auto_reload_on_write = false,
       disable_netrw = false,
       hijack_cursor = false,
       hijack_netrw = true,
       hijack_unnamed_buffer_when_opening = false,
-      sort_by = "name",
+      sort = {
+        sorter = "name",
+        folders_first = true,
+        files_first = false,
+      },
       root_dirs = {},
       prefer_startup_root = false,
       sync_root_with_cwd = true,
@@ -23,6 +28,8 @@ function M.config()
         adaptive_size = false,
         centralize_selection = true,
         width = 30,
+        cursorline = true,
+        debounce_delay = 15,
         side = "left",
         preserve_window_proportions = false,
         number = false,
@@ -44,11 +51,17 @@ function M.config()
       renderer = {
         add_trailing = false,
         group_empty = false,
-        highlight_git = true,
-        full_name = false,
+        highlight_git = "name",
         highlight_opened_files = "none",
         root_folder_label = ":t",
+        full_name = false,
         indent_width = 2,
+        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+        symlink_destination = true,
+        highlight_diagnostics = "none",
+        highlight_modified = "none",
+        highlight_bookmarks = "none",
+        highlight_clipboard = "name",
         indent_markers = {
           enable = false,
           inline_arrows = true,
@@ -56,24 +69,43 @@ function M.config()
             corner = "└",
             edge = "│",
             item = "│",
+            bottom = "─",
             none = " ",
           },
         },
         icons = {
           webdev_colors = lvim.use_icons,
+
+          web_devicons = {
+            file = {
+              enable = lvim.use_icons,
+              color = lvim.use_icons,
+            },
+            folder = {
+              enable = false,
+              color = lvim.use_icons,
+            },
+          },
           git_placement = "before",
           padding = " ",
           symlink_arrow = " ➛ ",
+          modified_placement = "after",
+          diagnostics_placement = "signcolumn",
+          bookmarks_placement = "signcolumn",
           show = {
             file = lvim.use_icons,
             folder = lvim.use_icons,
             folder_arrow = lvim.use_icons,
             git = lvim.use_icons,
+            modified = lvim.use_icons,
+            diagnostics = lvim.use_icons,
+            bookmarks = lvim.use_icons,
           },
           glyphs = {
             default = lvim.icons.ui.Text,
             symlink = lvim.icons.ui.FileSymlink,
             bookmark = lvim.icons.ui.BookMark,
+            modified = lvim.icons.ui.Circle,
             folder = {
               arrow_closed = lvim.icons.ui.TriangleShortArrowRight,
               arrow_open = lvim.icons.ui.TriangleShortArrowDown,
@@ -95,8 +127,6 @@ function M.config()
             },
           },
         },
-        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
-        symlink_destination = true,
       },
       hijack_directories = {
         enable = false,
@@ -104,9 +134,11 @@ function M.config()
       },
       update_focused_file = {
         enable = true,
-        debounce_delay = 15,
-        update_root = true,
-        ignore_list = {},
+        update_root = {
+          enable = true,
+          ignore_list = {},
+        },
+        exclude = false,
       },
       diagnostics = {
         enable = lvim.use_icons,
@@ -125,8 +157,11 @@ function M.config()
         },
       },
       filters = {
+        enable = true,
         dotfiles = false,
         git_clean = false,
+        git_ignored = false,
+        no_bookmark = false,
         no_buffer = false,
         custom = { "node_modules", "\\.cache" },
         exclude = {},
@@ -138,10 +173,11 @@ function M.config()
       },
       git = {
         enable = true,
-        ignore = false,
         show_on_dirs = true,
         show_on_open_dirs = true,
-        timeout = 200,
+        disable_for_dirs = {},
+        timeout = 400,
+        cygwin_support = false,
       },
       actions = {
         use_system_clipboard = true,
@@ -165,6 +201,7 @@ function M.config()
         },
         open_file = {
           quit_on_open = false,
+          eject = true,
           resize_window = false,
           window_picker = {
             enable = true,
@@ -181,8 +218,7 @@ function M.config()
         },
       },
       trash = {
-        cmd = "trash",
-        require_confirm = true,
+        cmd = "gio trash",
       },
       live_filter = {
         prefix = "[FILTER]: ",
@@ -197,6 +233,22 @@ function M.config()
       },
       notify = {
         threshold = vim.log.levels.INFO,
+        absolute_path = true,
+      },
+      ui = {
+        confirm = {
+          remove = true,
+          trash = true,
+          default_yes = false,
+        },
+      },
+      modified = {
+        enable = false,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+      },
+      help = {
+        sort_by = "key",
       },
       log = {
         enable = false,
