@@ -12,7 +12,7 @@
     "commit": "33eb067"
   },
   "bufferline.nvim": {
-    "commit": "1a33975"
+    "commit": "73540cb"
   },
   "cmp-buffer": {
     "commit": "3022dbc"
@@ -42,7 +42,7 @@
     "commit": "bef521a"
   },
   "lir.nvim": {
-    "commit": "969e95b"
+    "commit": "7a9d45d"
   },
   "lualine.nvim": {
     "commit": "0a5a668"
