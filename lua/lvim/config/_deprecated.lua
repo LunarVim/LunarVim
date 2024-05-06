@@ -210,6 +210,23 @@ See https://github.com/folke/lazy.nvim#-migration-guide"]],
       convert_spec_to_lazy(plugin)
     end
   end
+
+  if lvim.builtin.terminal.execs then
+    deprecate(
+      "lvim.builtin.terminal.execs",
+      "Use `lvim.builtin.terminal.terminals` instead. See https://www.lunarvim.org/docs/configuration/keybindings#toggleterm-terminal-mappings"
+    )
+    for _, v in ipairs(lvim.builtin.terminal.execs) do
+      local keybind = {
+        cmd = v[1],
+        keymap = v[2],
+        desc = v[3],
+        direction = v[4],
+        size = v[5],
+      }
+      lvim.builtin.terminal.terminals[#lvim.builtin.terminal.terminals + 1] = keybind
+    end
+  end
 end
 
 return M

@@ -2,7 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 M.config = function()
-  lvim.builtin["terminal"] = {
+  lvim.builtin.terminal = {
     active = true,
     on_config_done = nil,
     -- size can be a number or function which is passed the current terminal
@@ -35,15 +35,16 @@ M.config = function()
         background = "Normal",
       },
     },
-    -- Add executables on the config.lua
-    -- { cmd, keymap, description, direction, size }
-    -- lvim.builtin.terminal.execs = {...} to overwrite
-    -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
-    -- TODO: pls add mappings in which key and refactor this
-    execs = {
-      { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-      { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
-      { nil, "<M-3>", "Float Terminal", "float", nil },
+    terminals_defaults = {
+      direction = "horizontal",
+      horizontal_size = 0.3,
+      vertical_size = 0.4,
+    },
+    terminals = {
+      { keymap = "<M-1>", desc = "Horizontal Terminal", direction = "horizontal" },
+      { keymap = "<M-2>", desc = "Vertical Terminal", direction = "vertical" },
+      { keymap = "<M-3>", desc = "Float Terminal", direction = "float" },
+      { keymap = "<leader>gg", desc = "LazyGit", cmd = "lazygit", size = 1 },
     },
   }
 end
@@ -77,23 +78,53 @@ local function get_dynamic_terminal_size(direction, size)
   end
 end
 
+local function term_toggle(term_opts)
+  local Terminal = require("toggleterm.terminal").Terminal
+  local term = Terminal:new(term_opts)
+  term:toggle(term_opts.size, term_opts.direction)
+end
+
+local function add_term_keymap(term_opts)
+  local binary = term_opts.cmd:match "(%S+)"
+  if vim.fn.executable(binary) ~= 1 then
+    Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
+    return
+  end
+
+  local modes = { "n" }
+  if not term_opts.keymap:find "<leader>" and not term_opts.keymap:find "<space>" then
+    table.insert(modes, "t")
+  end
+  vim.keymap.set(modes, term_opts.keymap, function()
+    term_toggle(term_opts)
+  end, { desc = term_opts.desc, silent = true })
+end
+
+--- Setup the terminal cmds
 M.init = function()
-  for i, exec in pairs(lvim.builtin.terminal.execs) do
-    local direction = exec[4] or lvim.builtin.terminal.direction
+  for i, term_opts in ipairs(lvim.builtin.terminal.terminals) do
+    -- size == 1 is a special case for full screen
+    if term_opts.size == 1 then
+      term_opts.direction = "float"
+      term_opts.float_opts = {
+        border = "none",
+        width = 100000,
+        height = 100000,
+      }
+    end
 
-    local opts = {
-      cmd = exec[1] or lvim.builtin.terminal.shell or vim.o.shell,
-      keymap = exec[2],
-      label = exec[3],
-      -- NOTE: unable to consistently bind id/count <= 9, see #2146
-      count = i + 100,
-      direction = direction,
-      size = function()
-        return get_dynamic_terminal_size(direction, exec[5])
-      end,
-    }
+    term_opts.direction = term_opts.direction or lvim.builtin.terminal.terminals_defaults.direction
+    term_opts.size = term_opts.size or lvim.builtin.terminal.terminals_defaults[term_opts.direction .. "_size"]
+    -- size is calculated dynamically as a percentage of the current buffer
+    term_opts.size = get_dynamic_terminal_size(term_opts.direction, term_opts.size)
+    term_opts.cmd = term_opts.cmd or lvim.builtin.terminal.shell or vim.o.shell
+    -- desc is used for the keymap description
+    term_opts.desc = term_opts.desc or term_opts.cmd
 
-    M.add_exec(opts)
+    term_opts.count = i + 100
+
+    -- the table is passed to toggleterm:new directly
+    add_term_keymap(term_opts)
   end
 end
 
@@ -103,24 +134,6 @@ M.setup = function()
   if lvim.builtin.terminal.on_config_done then
     lvim.builtin.terminal.on_config_done(terminal)
   end
-end
-
-M.add_exec = function(opts)
-  local binary = opts.cmd:match "(%S+)"
-  if vim.fn.executable(binary) ~= 1 then
-    Log:debug("Skipping configuring executable " .. binary .. ". Please make sure it is installed properly.")
-    return
-  end
-
-  vim.keymap.set({ "n", "t" }, opts.keymap, function()
-    M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() }
-  end, { desc = opts.label, noremap = true, silent = true })
-end
-
-M._exec_toggle = function(opts)
-  local Terminal = require("toggleterm.terminal").Terminal
-  local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
-  term:toggle(opts.size, opts.direction)
 end
 
 ---Toggles a log viewer according to log.viewer.layout_config
@@ -144,26 +157,6 @@ M.toggle_log_view = function(logfile)
   local Terminal = require("toggleterm.terminal").Terminal
   local log_view = Terminal:new(term_opts)
   log_view:toggle()
-end
-
-M.lazygit_toggle = function()
-  local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new {
-    cmd = "lazygit",
-    hidden = true,
-    direction = "float",
-    float_opts = {
-      border = "none",
-      width = 100000,
-      height = 100000,
-    },
-    on_open = function(_)
-      vim.cmd "startinsert!"
-    end,
-    on_close = function(_) end,
-    count = 99,
-  }
-  lazygit:toggle()
 end
 
 return M
