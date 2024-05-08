@@ -18,6 +18,7 @@ M.config = function()
     -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
     direction = "float",
     close_on_exit = true, -- close the terminal window when the process exits
+    auto_scroll = true, -- automatically scroll to the bottom on terminal output
     shell = nil, -- change the default shell
     -- This field is only relevant if direction is set to 'float'
     float_opts = {
@@ -34,6 +35,9 @@ M.config = function()
         border = "Normal",
         background = "Normal",
       },
+    },
+    winbar = {
+      enabled = false,
     },
     -- Add executables on the config.lua
     -- { cmd, keymap, description, direction, size }
