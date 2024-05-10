@@ -152,14 +152,18 @@ end
 
 M.lazygit_toggle = function()
   local Terminal = require("toggleterm.terminal").Terminal
+
+  local columns = vim.o.columns
+  local lines = vim.o.lines
+
   local lazygit = Terminal:new {
     cmd = "lazygit",
     hidden = true,
     direction = "float",
     float_opts = {
       border = "none",
-      width = 100000,
-      height = 100000,
+      width = columns or 300,
+      height = lines or 200,
     },
     on_open = function(_)
       vim.cmd "startinsert!"
