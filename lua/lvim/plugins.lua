@@ -150,20 +150,6 @@ local core_plugins = {
     -- Lazy loaded by Comment.nvim pre_hook
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = true,
-    opts = {
-      enable_autocmd = false,
-      config = {
-        -- Languages that have a single comment style
-        typescript = "// %s",
-        css = "/* %s */",
-        scss = "/* %s */",
-        html = "<!-- %s -->",
-        svelte = "<!-- %s -->",
-        vue = "<!-- %s -->",
-        json = "",
-      },
-    },
-    enabled = lvim.builtin.comment.active,
   },
 
   -- NvimTree
