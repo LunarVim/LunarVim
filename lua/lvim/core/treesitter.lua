@@ -102,13 +102,23 @@ function M.setup()
     return
   end
 
-  local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-  if not status_ok then
+  local ts_status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+  if not ts_status_ok then
     Log:error "Failed to load nvim-treesitter.configs"
     return
   end
 
+  local status_ok, ts_context_commentstring = pcall(require, "ts_context_commentstring")
+  if not status_ok then
+    Log:error "Failed to load ts_context_commentstring"
+    return
+  end
+
   local opts = vim.deepcopy(lvim.builtin.treesitter)
+
+  -- handle deprecated API, https://github.com/JoosepAlviste/nvim-ts-context-commentstring/issues/82
+  ts_context_commentstring.setup(opts.context_commentstring)
+  opts.context_commentstring = nil
 
   treesitter_configs.setup(opts)
 

@@ -87,10 +87,10 @@
     "commit": "64f61e4"
   },
   "nvim-treesitter": {
-    "commit": "1e64838"
+    "commit": "d5a1c2b"
   },
   "nvim-ts-context-commentstring": {
-    "commit": "b8ff464"
+    "commit": "0bdccb9"
   },
   "nvim-web-devicons": {
     "commit": "5b90678"
