@@ -2,7 +2,72 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.4.0]
+
+### <!-- 1 --> Features
+
+- _(installer)_ added bun as a js package manager ([#4362](https://github.com/lunarvim/lunarvim/pull/4362))
+- _(lspconfig)_ add rounded borders to :LspInfo window ([#4208](https://github.com/lunarvim/lunarvim/pull/4208))
+- _(nvimtree)_ centralize selection ([#4160](https://github.com/lunarvim/lunarvim/pull/4160))
+- _(plugins)_ migrate from `null-ls` to `none-ls` ([#4392](https://github.com/lunarvim/lunarvim/pull/4392))
+- simplify example config, add links for user instead ([#4128](https://github.com/lunarvim/lunarvim/pull/4128))
+- don't move config on install ([#4129](https://github.com/lunarvim/lunarvim/pull/4129))
+- rounded border for hover and signatureHelp ([#4131](https://github.com/lunarvim/lunarvim/pull/4131))
+- lock new installations to nvim 0.9+ ([#3858](https://github.com/lunarvim/lunarvim/pull/3858))
+- use code chevrons ([#4184](https://github.com/lunarvim/lunarvim/pull/4184))
+- ignore missing keys for whichkey ([#4185](https://github.com/lunarvim/lunarvim/pull/4185))
+- [**breaking**] use prompts similar to `:confirm` in `buf_kill` ([#4186](https://github.com/lunarvim/lunarvim/pull/4186))
+- add starter.lvim link to config.example.lua ([#4200](https://github.com/lunarvim/lunarvim/pull/4200))
+- add example to the packer deprecation message ([#4201](https://github.com/lunarvim/lunarvim/pull/4201))
+
+### <!-- 2 --> Bugfix
+
+- _(alpha)_ account for different icon byte sizes ([#4130](https://github.com/lunarvim/lunarvim/pull/4130))
+- _(dap)_ ui opens when debugging ([#4116](https://github.com/lunarvim/lunarvim/pull/4116))
+- _(default-options)_ remove invalid guifont option ([#4447](https://github.com/lunarvim/lunarvim/pull/4447))
+- _(deprecation)_ only deprecate `tag == "*"` in lvim.plugins ([#4297](https://github.com/lunarvim/lunarvim/pull/4297))
+- _(icons)_ add some whitespace to the boolean icon ([#4163](https://github.com/lunarvim/lunarvim/pull/4163))
+- _(install)_ add newline after setup message ([#4533](https://github.com/lunarvim/lunarvim/pull/4533))
+- _(installer)_ dependency installation for Windows ([#4486](https://github.com/lunarvim/lunarvim/pull/4486))
+- _(lsp)_ add luv library by default to lua_ls ([#4067](https://github.com/lunarvim/lunarvim/pull/4067))
+- _(lsp)_ diagnostic codes already show by default ([#4070](https://github.com/lunarvim/lunarvim/pull/4070))
+- [**breaking**] _(lsp)_ switch to csharp_ls to avoid startup errors ([#4079](https://github.com/lunarvim/lunarvim/pull/4079))
+- _(lsp)_ lazy load mason on FileOpened ([#4100](https://github.com/lunarvim/lunarvim/pull/4100))
+- _(lsp)_ skip auto config server even if it's ensure installed ([#4243](https://github.com/lunarvim/lunarvim/pull/4243))
+- _(lsp)_ restore float border ([#4274](https://github.com/lunarvim/lunarvim/pull/4274))
+- _(lsp)_ adapt recent changes in `nvim-lspconfig` ([#4348](https://github.com/lunarvim/lunarvim/pull/4348))
+- _(lualine)_ use get_active_clients instead of deprecated function ([#4136](https://github.com/lunarvim/lunarvim/pull/4136))
+- _(nvim-tree)_ use local buffer keymaps ([#4090](https://github.com/lunarvim/lunarvim/pull/4090))
+- _(terminal)_ show lazygit bottom line ([#4548](https://github.com/lunarvim/lunarvim/pull/4548))
+- _(tests)_ set up lazy.nvim in the lsp test ([#4088](https://github.com/lunarvim/lunarvim/pull/4088))
+- _(treesitter)_ add a few parsers to `ensure_installed` ([#4121](https://github.com/lunarvim/lunarvim/pull/4121))
+- _(typo)_ `form` to `from` ([#4295](https://github.com/lunarvim/lunarvim/pull/4295))
+- _(user_command)_ update url in `LvimDocs` command ([#4081](https://github.com/lunarvim/lunarvim/pull/4081))
+- _(win)_ remove '-NoLogo' from vim.opt.shell ([#4232](https://github.com/lunarvim/lunarvim/pull/4232))
+- add missing LF to install script ([#4075](https://github.com/lunarvim/lunarvim/pull/4075))
+- replace obsolete icons ([#4111](https://github.com/lunarvim/lunarvim/pull/4111))
+- correct runtimepath order ([#4124](https://github.com/lunarvim/lunarvim/pull/4124))
+- support text if marksman lang server ([#4144](https://github.com/lunarvim/lunarvim/pull/4144))
+- circle icons was being cut off for some fonts
+- handle context-commentstring setup ([#4451](https://github.com/lunarvim/lunarvim/pull/4451))
+
+### <!-- 3 --> Refactor
+
+- [**breaking**] _(lsp)_ deprecate `lvim.lsp.diagnostics` ([#3916](https://github.com/lunarvim/lunarvim/pull/3916))
+- _(lualine)_ use `string.format` to return unique names ([#4193](https://github.com/lunarvim/lunarvim/pull/4193))
+
+### <!-- 4 --> Documentation
+
+- add code_actions to example config ([#4029](https://github.com/lunarvim/lunarvim/pull/4029))
+- update broken links in example configs ([#4097](https://github.com/lunarvim/lunarvim/pull/4097))
+- use `master` instead of `rolling` in contributing.md ([#4115](https://github.com/lunarvim/lunarvim/pull/4115))
+- use `master` instead of `rolling` in contributing.md ([#4115](https://github.com/lunarvim/lunarvim/pull/4115))
+
+### <!-- 6 --> Performance
+
+- _(installer)_ use a shallow clone of lunarvim ([#4197](https://github.com/lunarvim/lunarvim/pull/4197))
+
+## [1.3.0]
 
 ### <!-- 1 --> Features
 
