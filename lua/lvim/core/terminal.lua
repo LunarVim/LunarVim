@@ -160,6 +160,7 @@ M.lazygit_toggle = function()
       border = "none",
       width = 100000,
       height = 100000,
+      zindex = 200,
     },
     on_open = function(_)
       vim.cmd "startinsert!"
