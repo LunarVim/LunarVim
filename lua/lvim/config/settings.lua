@@ -51,6 +51,7 @@ M.load_default_options = function()
     showcmd = false,
     ruler = false,
     laststatus = 3,
+    mousemoveevent = true,
   }
 
   ---  SETTINGS  ---

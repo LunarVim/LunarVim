@@ -303,6 +303,7 @@ M.config = function()
           "Colorscheme with Preview",
         },
       },
+      t = { "<cmd>lua require('dropbar.api').pick()<cr>", "Dropbar Menu" },
       T = {
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },
