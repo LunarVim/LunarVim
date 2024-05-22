@@ -350,10 +350,11 @@ local core_plugins = {
     "lunarvim/bigfile.nvim",
     config = function()
       pcall(function()
-        require("bigfile").config(lvim.builtin.bigfile.config)
+        require("bigfile").setup(lvim.builtin.bigfile.config)
       end)
     end,
     enabled = lvim.builtin.bigfile.active,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "FileReadPre", "BufReadPre", "User FileOpened" },
   },
 }
