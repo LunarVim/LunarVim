@@ -41,8 +41,8 @@ _G.load_config = function()
   require("vim.lsp.log").set_format_func(vim.inspect)
   local nvim_lsp = require "lspconfig"
   local on_attach = function(_, bufnr)
-    local function buf_set_option(...)
-      vim.api.nvim_buf_set_option(bufnr, ...)
+    local function buf_set_option(k, v)
+      vim.api.nvim_set_option_value(k, v, { buf = bufnr })
     end
 
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")

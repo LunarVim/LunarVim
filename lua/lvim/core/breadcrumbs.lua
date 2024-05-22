@@ -1,7 +1,6 @@
 local M = {}
 
 -- local Log = require "lvim.core.log"
-
 local icons = lvim.icons.kind
 
 M.config = function()
@@ -94,18 +93,21 @@ M.setup = function()
   end
 end
 
+local function isempty(s)
+  return s == nil or s == ""
+end
+
 M.get_filename = function()
   local filename = vim.fn.expand "%:t"
   local extension = vim.fn.expand "%:e"
-  local f = require "lvim.utils.functions"
 
-  if not f.isempty(filename) then
+  if not isempty(filename) then
     local file_icon, hl_group
     local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
     if lvim.use_icons and devicons_ok then
       file_icon, hl_group = devicons.get_icon(filename, extension, { default = true })
 
-      if f.isempty(file_icon) then
+      if isempty(file_icon) then
         file_icon = lvim.icons.kind.File
       end
     else
@@ -135,8 +137,8 @@ M.get_filename = function()
     --   file_icon = lvim.icons.ui.DebugConsole
     -- end
 
-    local navic_text = vim.api.nvim_get_hl_by_name("Normal", true)
-    vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text.foreground })
+    local navic_text_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+    vim.api.nvim_set_hl(0, "Winbar", { fg = navic_text_hl.fg })
 
     return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#Winbar#" .. filename .. "%*"
   end
@@ -157,7 +159,7 @@ local get_gps = function()
     return ""
   end
 
-  if not require("lvim.utils.functions").isempty(gps_location) then
+  if not isempty(gps_location) then
     return "%#NavicSeparator#" .. lvim.icons.ui.ChevronRight .. "%* " .. gps_location
   else
     return ""
@@ -172,19 +174,18 @@ M.get_winbar = function()
   if excludes() then
     return
   end
-  local f = require "lvim.utils.functions"
   local value = M.get_filename()
 
   local gps_added = false
-  if not f.isempty(value) then
+  if not isempty(value) then
     local gps_value = get_gps()
     value = value .. " " .. gps_value
-    if not f.isempty(gps_value) then
+    if not isempty(gps_value) then
       gps_added = true
     end
   end
 
-  if not f.isempty(value) and f.get_buf_option "mod" then
+  if not isempty(value) and vim.api.nvim_get_option_value("mod", { buf = 0 }) then
     -- TODO: replace with circle
     local mod = "%#LspCodeLens#" .. lvim.icons.ui.Circle .. "%*"
     if gps_added then
@@ -196,7 +197,7 @@ M.get_winbar = function()
 
   local num_tabs = #vim.api.nvim_list_tabpages()
 
-  if num_tabs > 1 and not f.isempty(value) then
+  if num_tabs > 1 and not isempty(value) then
     local tabpage_number = tostring(vim.api.nvim_tabpage_get_number(0))
     value = value .. "%=" .. tabpage_number .. "/" .. tostring(num_tabs)
   end

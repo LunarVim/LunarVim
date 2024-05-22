@@ -126,7 +126,7 @@ local function make_auto_lsp_info(ft)
 end
 
 function M.toggle_popup(ft)
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
   local client_names = {}
   local bufnr = vim.api.nvim_get_current_buf()
   local ts_active_buffers = vim.tbl_keys(vim.treesitter.highlighter.active)

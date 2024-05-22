@@ -5,7 +5,7 @@ local autocmds = require "lvim.core.autocmds"
 
 local function add_lsp_buffer_options(bufnr)
   for k, v in pairs(lvim.lsp.buffer_options) do
-    vim.api.nvim_buf_set_option(bufnr, k, v)
+    vim.api.nvim_set_option_value(k, v, { buf = bufnr })
   end
 end
 

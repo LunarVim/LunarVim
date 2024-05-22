@@ -89,7 +89,7 @@ function M.get_sections()
     val = function()
       local alpha_wins = vim.tbl_filter(function(win)
         local buf = vim.api.nvim_win_get_buf(win)
-        return vim.api.nvim_buf_get_option(buf, "filetype") == "alpha"
+        return vim.api.nvim_get_option_value("filetype", { buf = buf }) == "alpha"
       end, vim.api.nvim_list_wins())
 
       if vim.api.nvim_win_get_height(alpha_wins[#alpha_wins]) < 36 then
