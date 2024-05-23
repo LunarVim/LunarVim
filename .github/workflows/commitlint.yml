@@ -17,7 +17,7 @@ jobs:
       PR_NUMBER: ${{ github.event.pull_request.number }}
       PR_TITLE: ${{ github.event.pull_request.title }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: install commitlint
         run: |
           npm install --save-dev @commitlint/cli
