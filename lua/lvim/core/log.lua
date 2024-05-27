@@ -7,7 +7,6 @@ Log.levels = {
   WARN = 4,
   ERROR = 5,
 }
-vim.tbl_add_reverse_lookup(Log.levels)
 
 local notify_opts = {}
 local log_notify_as_notification = false
