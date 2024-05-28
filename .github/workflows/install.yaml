@@ -21,10 +21,10 @@ jobs:
         include:
           - runner: ubuntu-latest
             os: linux
-            neovim: v0.9.5
+            neovim: v0.10.0
           - runner: macos-latest
             os: osx
-            neovim: v0.9.5
+            neovim: v0.10.0
           - runner: ubuntu-22.04
             os: linux
             neovim: nightly
@@ -33,14 +33,13 @@ jobs:
             neovim: nightly
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Install neovim binary from release
-        env:
-          RELEASE_VER: ${{ matrix.neovim }}
-        run: |
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          bash ./utils/installer/install-neovim-from-release
+      - name: Install neovim binary
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.neovim }}
 
       - name: Install LunarVim
         timeout-minutes: 4
@@ -72,13 +71,13 @@ jobs:
         shell: pwsh
     steps:
       # it's not currently possbile to run tests on windows, see nvim-lua/plenary.nvim#255
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install neovim binary
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
-          version: v0.9.1
+          version: v0.10.0
 
       - name: Install LunarVim
         timeout-minutes: 4

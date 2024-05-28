@@ -148,7 +148,7 @@ M.setup_ui = function()
       title = "dap-ui",
       icon = "",
       on_open = function(win)
-        vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
+        vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(win) })
       end,
     })
 

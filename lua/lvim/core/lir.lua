@@ -81,19 +81,19 @@ function M.icon_setup()
   end
 
   local function get_hl_by_name(name)
-    local ret = vim.api.nvim_get_hl_by_name(name.group, true)
+    local ret = vim.api.nvim_get_hl(0, { name = name.group })
     return string.format("#%06x", ret[name.property])
   end
 
-  local found, icon_hl = pcall(get_hl_by_name, { group = "NvimTreeFolderIcon", property = "foreground" })
+  local found, icon_color = pcall(get_hl_by_name, { group = "NvimTreeFolderIcon", property = "fg" })
   if not found then
-    icon_hl = "#42A5F5"
+    icon_color = "#42A5F5"
   end
 
   devicons.set_icon {
     lir_folder_icon = {
       icon = lvim.builtin.lir.icon,
-      color = icon_hl,
+      color = icon_color,
       name = "LirFolderNode",
     },
   }

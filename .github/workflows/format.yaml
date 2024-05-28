@@ -13,9 +13,9 @@ on:
 jobs:
   stylua-check:
     name: "Formatting check with Stylua"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Lint with stylua
         uses: JohnnyMorganz/stylua-action@v2
@@ -27,18 +27,18 @@ jobs:
 
   shfmt-check:
     name: "Formatting check with shfmt"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
-          go-version: "1.18"
+          go-version: '^1.21'
 
       - name: Use shfmt
         run: |
-          go install mvdan.cc/sh/v3/cmd/shfmt@v3.6
+          go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
       # https://google.github.io/styleguide/shellguide.html
       - name: Check formatting

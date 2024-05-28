@@ -6,23 +6,14 @@ declare -r LV_INSTALL_PREFIX="${INSTALL_PREFIX:-"$HOME/.local"}"
 declare -r RELEASE_VER="${RELEASE_VER:-latest}" # can be set to nightly
 
 declare ARCHIVE_NAME
-declare RELEASE_NAME
 declare OS
 
 OS="$(uname -s)"
 
 if [ "$OS" == "Linux" ]; then
   ARCHIVE_NAME="nvim-linux64"
-  RELEASE_NAME="nvim-linux64"
 elif [ "$OS" == "Darwin" ]; then
-  if [ "$RELEASE_VER" == "nightly" ]; then
-    ARCHIVE_NAME="nvim-macos-x86_64"
-    RELEASE_NAME="nvim-macos-x86_64"
-  else
-    ARCHIVE_NAME="nvim-macos"
-    # for some reason the archive has a different name
-    RELEASE_NAME="nvim-osx64"
-  fi
+  ARCHIVE_NAME="nvim-macos-x86_64"
 else
   echo "$OS platform is not supported currently"
   exit 1
@@ -77,12 +68,8 @@ function install_neovim() {
   pushd "$DOWNLOAD_DIR"
   tar -xzf "$DOWNLOAD_DIR/$ARCHIVE_NAME.tar.gz"
   popd
-  if [ ! -d "$DOWNLOAD_DIR/$RELEASE_NAME" ]; then
-    # fallback to archive name
-    RELEASE_NAME="$ARCHIVE_NAME"
-  fi
   # https://dev.to/ackshaey/macos-vs-linux-the-cp-command-will-trip-you-up-2p00
-  cp -r "$DOWNLOAD_DIR/$RELEASE_NAME/." "$LV_INSTALL_PREFIX"
+  cp -r "$DOWNLOAD_DIR/$ARCHIVE_NAME/." "$LV_INSTALL_PREFIX"
   echo "Installation complete!"
   echo "Now you can run $LV_INSTALL_PREFIX/bin/nvim"
 }

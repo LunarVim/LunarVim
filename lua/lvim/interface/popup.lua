@@ -52,12 +52,12 @@ function Popup:display(content_provider)
 
   -- window options
   for key, value in pairs(self.win_opts) do
-    vim.api.nvim_win_set_option(self.win_id or 0, key, value)
+    vim.api.nvim_set_option_value(key, value, { win = self.win_id or 0, scope = "local" })
   end
 
   -- buffer options
   for key, value in pairs(self.buf_opts) do
-    vim.api.nvim_buf_set_option(self.buffer, key, value)
+    vim.api.nvim_set_option_value(key, value, { buf = self.buffer })
   end
 end
 
