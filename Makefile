@@ -39,4 +39,9 @@ style-sh:
 test:
 	bash ./utils/ci/run_test.sh "$(TEST)"
 
-.PHONY: install install-neovim-binary uninstall lint style test
+CMakeLists.txt:
+	ln -s utils/packaging/CMakeLists.txt.in CMakeLists.txt
+
+configure: CMakeLists.txt
+
+.PHONY: install install-neovim-binary uninstall lint style test configure

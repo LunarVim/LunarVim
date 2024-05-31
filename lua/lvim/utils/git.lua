@@ -138,9 +138,14 @@ end
 ---Get currently running version of Lunarvim
 ---@return string
 function M.get_lvim_version()
+  -- lvim_version will be set by cmake packaging
+  local lvim_version = "@LVIM_VERSION@"
+  if not vim.startswith(lvim_version, "@") then
+    return lvim_version
+  end
+
   local current_branch = M.get_lvim_branch()
 
-  local lvim_version
   if current_branch ~= "HEAD" or "" then
     lvim_version = current_branch .. "-" .. M.get_lvim_description()
   else

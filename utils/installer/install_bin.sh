@@ -25,11 +25,12 @@ function setup_shim() {
 
   cp "$src" "$dst"
 
-  sed -e s"#NVIM_APPNAME_VAR#\"${NVIM_APPNAME}\"#"g \
-    -e s"#RUNTIME_DIR_VAR#\"${LUNARVIM_RUNTIME_DIR}\"#"g \
-    -e s"#CONFIG_DIR_VAR#\"${LUNARVIM_CONFIG_DIR}\"#"g \
-    -e s"#CACHE_DIR_VAR#\"${LUNARVIM_CACHE_DIR}\"#"g \
-    -e s"#BASE_DIR_VAR#\"${LUNARVIM_BASE_DIR}\"#"g "$src" \
+  sed -e s"#@NVIM_APPNAME_VAR@#\"${NVIM_APPNAME}\"#"g \
+    -e s"#@RUNTIME_DIR_VAR@#\"${LUNARVIM_RUNTIME_DIR}\"#"g \
+    -e s"#@CONFIG_DIR_VAR@#\"${LUNARVIM_CONFIG_DIR}\"#"g \
+    -e s"#@CACHE_DIR_VAR@#\"${LUNARVIM_CACHE_DIR}\"#"g \
+    -e s"#@BASE_DIR_VAR@#\"${LUNARVIM_BASE_DIR}\"#"g \
+    -e s"#@EXTRA_EXEC_ARGS@#-a \"${NVIM_APPNAME}\"#"g "$src" \
     | tee "$dst" >/dev/null
 
   chmod u+x "$dst"
