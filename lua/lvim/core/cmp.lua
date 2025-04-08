@@ -167,6 +167,7 @@ M.config = function()
         buffer = "(Buffer)",
         tmux = "(TMUX)",
         copilot = "(Copilot)",
+        codeium = "(Codeium)",
         treesitter = "(TreeSitter)",
       },
       duplicates = {
@@ -186,6 +187,11 @@ M.config = function()
 
           if entry.source.name == "copilot" then
             vim_item.kind = lvim.icons.git.Octoface
+            vim_item.kind_hl_group = "CmpItemKindCopilot"
+          end
+
+          if entry.source.name == "codeium" then
+            vim_item.kind = lvim.icons.misc.Watch
             vim_item.kind_hl_group = "CmpItemKindCopilot"
           end
 
@@ -266,6 +272,7 @@ M.config = function()
         end,
       },
 
+      { name = "codeium" }, -- for codeium completion
       { name = "path" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
