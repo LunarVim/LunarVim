@@ -67,30 +67,36 @@ function M.register_sources(configs, method)
 
   local sources, registered_names = {}, {}
 
+
   for _, config in ipairs(configs) do
     local cmd = config.exe or config.command
     local name = config.name or cmd:gsub("-", "_")
     local type = method == null_ls.methods.CODE_ACTION and "code_actions" or null_ls.methods[method]:lower()
     local source = type and null_ls.builtins[type][name]
     Log:debug(string.format("Received request to register [%s] as a %s source", name, type))
+
+    local command = M.find_command(source._opts.command) or source._opts.command
+
+    -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
+    local compat_opts = vim.deepcopy(config)
+    if config.args then
+      compat_opts.extra_args = config.args or config.extra_args
+      compat_opts.args = nil
+    end
+
+    local opts = vim.tbl_deep_extend("keep", { command = command }, compat_opts)
+    Log:trace(vim.inspect(opts))
+    source = source.with(opts)
+
+    method = source.method
+
     if not source then
       Log:error("Not a valid source: " .. name)
     elseif is_registered { name = source.name or name, method = method } then
       Log:trace(string.format("Skipping registering [%s] more than once", name))
     else
-      local command = M.find_command(source._opts.command) or source._opts.command
-
-      -- treat `args` as `extra_args` for backwards compatibility. Can otherwise use `generator_opts.args`
-      local compat_opts = vim.deepcopy(config)
-      if config.args then
-        compat_opts.extra_args = config.args or config.extra_args
-        compat_opts.args = nil
-      end
-
-      local opts = vim.tbl_deep_extend("keep", { command = command }, compat_opts)
       Log:debug("Registering source " .. name)
-      Log:trace(vim.inspect(opts))
-      table.insert(sources, source.with(opts))
+      table.insert(sources, source)
       vim.list_extend(registered_names, { source.name })
     end
   end
