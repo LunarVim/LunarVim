@@ -231,9 +231,30 @@ function validate_install_prefix() {
       return
       ;;
   esac
+
   local profile="$HOME/.profile"
-  test -z "$ZSH_VERSION" && profile="$HOME/.zshenv"
-  ADDITIONAL_WARNINGS="[WARN] the folder $prefix/bin is not on PATH, consider adding 'export PATH=$prefix/bin:\$PATH' to your $profile"
+  local user_shell="$(getent passwd $LOGNAME | cut -d: -f7)"
+  case "${user_shell}" in
+    *"zsh"*)
+      profile="$HOME/.zshenv"
+      ;;
+    *"fish"*)
+      profile="$HOME/.config/fish/config.fish"
+      ;;
+  esac
+
+  if [ "$INTERACTIVE_MODE" -eq 1 ]; then
+    if confirm "$prefix/bin is not on your path. would you like to add it to $profile?"; then
+      echo "appending $prefix/bin to path"
+      if [ "${user_shell##*/}" = "fish" ]; then
+        echo "fish_add_path $prefix/bin" >>$profile
+      else
+        echo "export PATH=\$PATH:$prefix/bin" >>$profile
+      fi
+    else
+      ADDITIONAL_WARNINGS="[WARN] the folder $prefix/bin is not on PATH, consider adding 'export PATH=$prefix/bin:\$PATH' to your $profile"
+    fi
+  fi
 
   # avoid problems when calling any verify_* function
   export PATH="$prefix/bin:$PATH"
