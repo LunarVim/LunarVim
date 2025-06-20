@@ -64,13 +64,23 @@ function M:init(base_dir)
   self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
 
   ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
-  ---NOTE: changes to "data" are currently unstable, see #2507
   ---@diagnostic disable-next-line: duplicate-set-field
   vim.fn.stdpath = function(what)
     if what == "cache" then
       return _G.get_cache_dir()
+    elseif what == "config" then
+      return _G.get_config_dir()
+      -- elseif what == "data" then
+      --   return _G.get_runtime_dir()
     end
     return vim.call("stdpath", what)
+  end
+
+  vim.api.nvim_call_function = function(fn, args)
+    if fn == "stdpath" then
+      return vim.fn.stdpath(args[1])
+    end
+    return vim.call(fn, unpack(args))
   end
 
   ---Get the full path to LunarVim's base directory
