@@ -37,4 +37,4 @@ function setup_shim() {
 
 setup_shim "$@"
 
-echo "You can start LunarVim by running: $INSTALL_PREFIX/bin/$NVIM_APPNAME"
+echo "LunarVim installed in $INSTALL_PREFIX/bin"

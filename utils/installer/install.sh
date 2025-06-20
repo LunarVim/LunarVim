@@ -31,6 +31,17 @@ declare ARGS_OVERWRITE=0
 declare ARGS_INSTALL_DEPENDENCIES=1
 declare INTERACTIVE_MODE=1
 declare ADDITIONAL_WARNINGS=""
+declare INSTALL_PREFIX_IN_PATH
+
+case $PATH in
+  *"$INSTALL_PREFIX/bin"*)
+    INSTALL_PREFIX_IN_PATH=1
+    ;;
+
+  *)
+    INSTALL_PREFIX_IN_PATH=0
+    ;;
+esac
 
 declare -a __lvim_dirs=(
   "$LUNARVIM_RUNTIME_DIR"
@@ -157,7 +168,9 @@ function main() {
 
   msg "$ADDITIONAL_WARNINGS"
   msg "Thank you for installing LunarVim!!"
-  echo "You can start it by running: $INSTALL_PREFIX/bin/$NVIM_APPNAME"
+
+  print_lvim_runnning_instructions
+
   echo "Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts]"
 }
 
@@ -226,11 +239,11 @@ function verify_core_plugins() {
 
 function validate_install_prefix() {
   local prefix="$1"
-  case $PATH in
-    *"$prefix/bin"*)
-      return
-      ;;
-  esac
+
+  if [ "$INSTALL_PREFIX_IN_PATH" -eq 1 ]; then
+    return
+  fi
+
   local profile="$HOME/.profile"
   test -z "$ZSH_VERSION" && profile="$HOME/.zshenv"
   ADDITIONAL_WARNINGS="[WARN] the folder $prefix/bin is not on PATH, consider adding 'export PATH=$prefix/bin:\$PATH' to your $profile"
@@ -441,6 +454,16 @@ function create_desktop_file() {
   done
 
   xdg-desktop-menu install --novendor "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop" || true
+}
+
+function print_lvim_running_instructions() {
+  local run_prefix=""
+
+  if [ "$INSTALL_PREFIX_IN_PATH" -eq 0 ]; then
+    run_prefix="$INSTALL_PREFIX/bin/"
+  fi
+
+  echo "You can start it by running: $run_prefix$NVIM_APPNAME"
 }
 
 function print_logo() {
