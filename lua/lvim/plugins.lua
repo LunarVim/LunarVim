@@ -262,6 +262,7 @@ local core_plugins = {
     lazy = true,
     dependencies = {
       "rcarriga/nvim-dap-ui",
+      "williamboman/mason-lspconfig.nvim",
     },
     enabled = lvim.builtin.dap.active,
   },
