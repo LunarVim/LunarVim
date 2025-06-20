@@ -109,6 +109,12 @@ end
 ---Update LunarVim
 ---pulls the latest changes from github and, resets the startup cache
 function M:update()
+  -- disable updating for cmake packaging
+  if not vim.startswith("@LVIM_VERSION@", "@") then
+    vim.notify("Update functionality is disabled in this lvim build.", vim.log.levels.WARN)
+    return
+  end
+
   require("lvim.core.log"):info "Trying to update LunarVim..."
 
   vim.schedule(function()
