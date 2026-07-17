@@ -1,6 +1,5 @@
 local M = {}
 local Log = require "lvim.core.log"
-local utils = require "lvim.utils"
 local autocmds = require "lvim.core.autocmds"
 
 local function add_lsp_buffer_options(bufnr)
@@ -100,7 +99,9 @@ function M.setup()
     end
   end
 
-  if not utils.is_directory(lvim.lsp.templates_dir) then
+  -- an empty templates_dir (e.g. left behind by an interrupted generation or a
+  -- manual cleanup) would otherwise disable automatic configuration forever
+  if vim.tbl_isempty(vim.fn.glob(lvim.lsp.templates_dir .. "/*.lua", true, true)) then
     require("lvim.lsp.templates").generate_templates()
   end
 
